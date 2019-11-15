@@ -31,50 +31,56 @@
       }
     ]
   },
-  "paths" : {
-    "/entities/recognition/general" : {
-      "post" : {
-        "summary" : "Named Entity Recognition",
-        "description" : "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://aka.ms/taner\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId" : "EntitiesRecognitionGeneral",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ 
-          {
-            "name" : "model-version",
-            "in" : "query",
-            "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-            "type" : "string",
-            "required": false
-          }, 
-          {
-            "name" : "showStats",
-            "in" : "query",
-            "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-            "type" : "boolean",
-            "required": false
-          }, 
-          {
-            "in" : "body",
-            "name" : "input",
-            "description" : "Collection of documents to analyze.",
-            "required": true,
-            "schema" : {
-              "$ref" : "#/definitions/MultiLanguageBatchInput"
-            }
-          } 
+  "paths": {
+    "/entities/recognition/general": {
+      "post": {
+        "summary": "Named Entity Recognition",
+        "description": "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://aka.ms/taner\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "EntitiesRecognitionGeneral",
+        "consumes": [
+          "application/json",
+          "text/json"
         ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful call results in a list of recognized entities returned for each valid document.",
-            "schema" : {
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean",
+            "required": false
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in a list of recognized entities returned for each valid document.",
+            "schema": {
               "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -86,43 +92,53 @@
         "deprecated": false
       }
     },
-    "/entities/recognition/pii" : {
-      "post" : {
-        "summary" : "Entities containing personal information",
-        "description" : "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
-        "operationId" : "EntitiesRecognitionPii",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string"
-        }, {
-          "name" : "showStats",
-          "in" : "query",
-          "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-          "type" : "boolean"
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze.",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/MultiLanguageBatchInput"
+    "/entities/recognition/pii": {
+      "post": {
+        "summary": "Entities containing personal information",
+        "description": "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "operationId": "EntitiesRecognitionPii",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful call results in a list of entities containing personal information returned for each valid document",
-            "schema" : {
-              "$ref" : "#/definitions/EntitiesResult"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in a list of entities containing personal information returned for each valid document",
+            "schema": {
+              "$ref": "#/definitions/EntitiesResult"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -134,43 +150,53 @@
         "deprecated": false
       }
     },
-    "/entities/linking" : {
-      "post" : {
-        "summary" : "Linked entities from a well-known knowledge base",
-        "description" : "The API returns a list of recognized entities with links to a well-known knowledge base. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId" : "EntitiesLinking",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string"
-        }, {
-          "name" : "showStats",
-          "in" : "query",
-          "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-          "type" : "boolean"
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze.",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/MultiLanguageBatchInput"
+    "/entities/linking": {
+      "post": {
+        "summary": "Linked entities from a well-known knowledge base",
+        "description": "The API returns a list of recognized entities with links to a well-known knowledge base. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "EntitiesLinking",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful call results in a list of recognized entities with links to a well-known knowledge base returned for each valid document",
-            "schema" : {
-              "$ref" : "#/definitions/EntityLinkingResult"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in a list of recognized entities with links to a well-known knowledge base returned for each valid document",
+            "schema": {
+              "$ref": "#/definitions/EntityLinkingResult"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -182,43 +208,53 @@
         "deprecated": false
       }
     },
-    "/keyPhrases" : {
-      "post" : {
-        "summary" : "Key Phrases",
-        "description" : "The API returns a list of strings denoting the key phrases in the input text. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId" : "KeyPhrases",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string"
-        }, {
-          "name" : "showStats",
-          "in" : "query",
-          "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-          "type" : "boolean"
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/MultiLanguageBatchInput"
+    "/keyPhrases": {
+      "post": {
+        "summary": "Key Phrases",
+        "description": "The API returns a list of strings denoting the key phrases in the input text. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "KeyPhrases",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful response results in 0 or more key phrases identified in each valid document",
-            "schema" : {
-              "$ref" : "#/definitions/KeyPhraseResult"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response results in 0 or more key phrases identified in each valid document",
+            "schema": {
+              "$ref": "#/definitions/KeyPhraseResult"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -230,43 +266,53 @@
         "deprecated": false
       }
     },
-    "/languages" : {
-      "post" : {
-        "summary" : "Detect Language",
-        "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId" : "Languages",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string"
-        }, {
-          "name" : "showStats",
-          "in" : "query",
-          "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-          "type" : "boolean"
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze.",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/LanguageBatchInput"
+    "/languages": {
+      "post": {
+        "summary": "Detect Language",
+        "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "Languages",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguageBatchInput"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful call results in the detected language with the highest probability for each valid document",
-            "schema" : {
-              "$ref" : "#/definitions/LanguageResult"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in the detected language with the highest probability for each valid document",
+            "schema": {
+              "$ref": "#/definitions/LanguageResult"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -278,43 +324,53 @@
         "deprecated": false
       }
     },
-    "/sentiment" : {
-      "post" : {
-        "summary" : "Sentiment",
-        "description" : "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
-        "operationId" : "Sentiment",
-        "consumes" : [ "application/json", "text/json" ],
-        "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string"
-        }, {
-          "name" : "showStats",
-          "in" : "query",
-          "description" : "(Optional) if set to true, response will contain input and document level statistics.",
-          "type" : "boolean"
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze.",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/MultiLanguageBatchInput"
+    "/sentiment": {
+      "post": {
+        "summary": "Sentiment",
+        "description": "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId": "Sentiment",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "model-version",
+            "in": "query",
+            "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type": "string"
+          },
+          {
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics.",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "input",
+            "description": "Collection of documents to analyze.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultiLanguageBatchInput"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
-            "schema" : {
-              "$ref" : "#/definitions/SentimentResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
+            "schema": {
+              "$ref": "#/definitions/SentimentResponse"
             }
           },
-          "default" : {
-            "description" : "Error Response",
-            "schema" : {
-              "$ref" : "#/definitions/Error"
+          "default": {
+            "description": "Error Response",
+            "schema": {
+              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -327,23 +383,23 @@
       }
     }
   },
-  "definitions" : {
-    "MultiLanguageBatchInput" : {
-      "type" : "object",
-      "required" : [
+  "definitions": {
+    "MultiLanguageBatchInput": {
+      "type": "object",
+      "required": [
         "documents"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "The set of documents to process as part of this batch.",
-          "items" : {
-            "$ref" : "#/definitions/MultiLanguageInput"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The set of documents to process as part of this batch.",
+          "items": {
+            "$ref": "#/definitions/MultiLanguageInput"
           }
         }
       },
-      "description" : "Contains a set of input documents to be analyzed by the service.",
-      "example" : {
+      "description": "Contains a set of input documents to be analyzed by the service.",
+      "example": {
         "documents": [
           {
             "language": "en",
@@ -363,89 +419,89 @@
         ]
       }
     },
-    "MultiLanguageInput" : {
-      "type" : "object",
-      "required" : [
+    "MultiLanguageInput": {
+      "type": "object",
+      "required": [
         "id",
         "text"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "A unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
         },
-        "text" : {
-          "type" : "string",
-          "description" : "The input text to process."
+        "text": {
+          "type": "string",
+          "description": "The input text to process."
         },
-        "language" : {
-          "type" : "string",
-          "description" : "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
-        }        
+        "language": {
+          "type": "string",
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+        }
       },
-      "description" : "Contains an input document to be analyzed by the service."
+      "description": "Contains an input document to be analyzed by the service."
     },
     "DocumentError": {
       "type": "object",
-      "required" : [
+      "required": [
         "id",
         "error"
       ],
       "properties": {
         "id": {
           "type": "string",
-          "description" : "Document Id."
+          "description": "Document Id."
         },
         "error": {
           "type": "object",
-          "description" : "Document Error.",
-          "items" : {
-            "$ref" : "#/definitions/Error"
-          }          
+          "description": "Document Error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
         }
       }
     },
     "Error": {
       "type": "object",
-      "required" : [
+      "required": [
         "code",
         "message"
       ],
       "properties": {
         "code": {
           "type": "string",
-          "enum":[  
+          "enum": [
             "invalidRequest",
             "invalidArgument",
             "internalServerError",
             "serviceUnavailable"
-          ],        
-          "description" : "Error code."
+          ],
+          "description": "Error code."
         },
         "message": {
           "type": "string",
-          "description" : "Error message."
+          "description": "Error message."
         },
         "target": {
           "type": "string",
-          "description" : "Error target."
+          "description": "Error target."
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description" : "Inner error contains more specific information."
+          "description": "Inner error contains more specific information."
         },
         "details": {
           "type": "array",
-          "description" : "Details about specific errors that led to this reported error.",
-          "items" : {
-            "$ref" : "#/definitions/Error"
+          "description": "Details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
           }
         }
       }
     },
     "InnerError": {
       "type": "object",
-      "required" : [
+      "required": [
         "code",
         "message"
       ],
@@ -463,491 +519,499 @@
             "unsupportedLanguageCode",
             "invalidCountryHint"
           ],
-          "description" : "Error code."
+          "description": "Error code."
         },
         "message": {
           "type": "string",
-          "description" : "Error message."
+          "description": "Error message."
         },
         "target": {
           "type": "string",
-          "description" : "Error target."
+          "description": "Error target."
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description" : "Inner error contains more specific information."
+          "description": "Inner error contains more specific information."
         }
       }
     },
-    "SentimentResponse" : {
-      "type" : "object",
-      "required" : [
+    "SentimentResponse": {
+      "type": "object",
+      "required": [
         "documents",
         "errors",
         "modelVersion"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "Sentiment analysis per document.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentSentiment"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Sentiment analysis per document.",
+          "items": {
+            "$ref": "#/definitions/DocumentSentiment"
           }
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Errors by document id.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentError"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
-        "statistics" : {
-          "$ref" : "#/definitions/RequestStatistics"
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
-          "type" : "string",
-          "description" : "This field indicates which model is used for scoring."
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
-    "DocumentSentiment" : {
-      "type" : "object",
-      "required" : [
+    "DocumentSentiment": {
+      "type": "object",
+      "required": [
         "id",
         "sentiment",
         "documentScores",
         "sentences"
-      ],      
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "sentiment" : {
-          "type" : "string",
-          "description" : "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
-          "enum" : [ "positive", "neutral", "negative", "mixed" ]
+        "sentiment": {
+          "type": "string",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "mixed"
+          ]
         },
-        "statistics" : {
-          "$ref" : "#/definitions/DocumentStatistics"
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics"
         },
-        "documentScores" : {
-          "description" : "Document level sentiment confidence scores between 0 and 1 for each sentiment class."
+        "documentScores": {
+          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class."
         },
-        "sentences" : {
-          "type" : "array",
-          "description" : "Sentence level sentiment analysis.",
-          "items" : {
-            "$ref" : "#/definitions/SentenceSentiment"
+        "sentences": {
+          "type": "array",
+          "description": "Sentence level sentiment analysis.",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
           }
         }
       }
     },
-    "RequestStatistics" : {
-      "type" : "object",
-      "required" : [
+    "RequestStatistics": {
+      "type": "object",
+      "required": [
         "documentsCount",
         "validDocumentsCount",
         "erroneousDocumentsCount",
         "transactionsCount"
       ],
-      "properties" : {
-        "documentsCount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Number of documents submitted in the request."
+      "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
         },
-        "validDocumentsCount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        "validDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
         },
-        "erroneousDocumentsCount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        "erroneousDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
         },
-        "transactionsCount" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Number of transactions for the request."
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
         }
       },
-      "description" : "if showStats=true was specified in the request this field will contain information about the request payload."
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
     },
-    "DocumentStatistics" : {
-      "type" : "object",
-      "required" : [
+    "DocumentStatistics": {
+      "type": "object",
+      "required": [
         "charactersCount",
         "transactionsCount"
       ],
-      "properties" : {
-        "charactersCount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Number of text elements recognized in the document."
+      "properties": {
+        "charactersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text elements recognized in the document."
         },
-        "transactionsCount" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Number of transactions for the document."
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of transactions for the document."
         }
       },
-      "description" : "if showStats=true was specified in the request this field will contain information about the document payload."
+      "description": "if showStats=true was specified in the request this field will contain information about the document payload."
     },
-    "SentimentConfidenceScorePerLabel" : {
-      "type" : "object",
-      "required" : [
+    "SentimentConfidenceScorePerLabel": {
+      "type": "object",
+      "required": [
         "positive",
         "neutral",
         "negative"
-      ],      
-      "properties" : {
-        "positive" : {
-          "type" : "number",
-          "format" : "double"
+      ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double"
         },
-        "neutral" : {
-          "type" : "number",
-          "format" : "double"
+        "neutral": {
+          "type": "number",
+          "format": "double"
         },
-        "negative" : {
-          "type" : "number",
-          "format" : "double"
+        "negative": {
+          "type": "number",
+          "format": "double"
         }
       },
-      "description" : "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
     },
-    "SentenceSentiment" : {
-      "type" : "object",
-      "required" : [
+    "SentenceSentiment": {
+      "type": "object",
+      "required": [
         "sentiment",
         "sentenceScores",
         "offset",
         "length"
-      ],      
-      "properties" : {
-        "sentiment" : {
-          "type" : "string",
-          "description" : "The predicted Sentiment for the sentence.",
-          "enum" : [ "positive", "neutral", "negative" ]
+      ],
+      "properties": {
+        "sentiment": {
+          "type": "string",
+          "description": "The predicted Sentiment for the sentence.",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative"
+          ]
         },
-        "sentenceScores" : {
-          "description" : "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        "sentenceScores": {
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
         },
-        "offset" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "The sentence offset from the start of the document."
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document."
         },
-        "length" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "The length of the sentence by Unicode standard."
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence by Unicode standard."
         },
-        "warnings" : {
-          "type" : "array",
-          "description" : "The warnings generated for the sentence.",
-          "items" : {
-            "type" : "string"
+        "warnings": {
+          "type": "array",
+          "description": "The warnings generated for the sentence.",
+          "items": {
+            "type": "string"
           }
         }
       }
     },
-    "EntitiesResult" : {
-      "type" : "object",
-      "required" : [
+    "EntitiesResult": {
+      "type": "object",
+      "required": [
         "documents",
         "errors",
         "modelVersion"
-      ],      
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "Response by document",
-          "items" : {
-            "$ref" : "#/definitions/DocumentEntities"
+      ],
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentEntities"
           }
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Errors by document id.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentError"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
-        "statistics" : {
-          "$ref" : "#/definitions/RequestStatistics"
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
-          "type" : "string",
-          "description" : "This field indicates which model is used for scoring."
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
-    "DocumentEntities" : {
-      "type" : "object",
-      "required" : [
+    "DocumentEntities": {
+      "type": "object",
+      "required": [
         "id",
         "entities"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "entities" : {
-          "type" : "array",
-          "description" : "Recognized entities in the document.",
-          "items" : {
-            "$ref" : "#/definitions/Entity"
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
           }
         },
-        "statistics" : {
-          "description" : "if showStats=true was specified in the request this field will contain information about the document payload.",
-          "$ref" : "#/definitions/DocumentStatistics"
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
         }
       }
     },
-    "Entity" : {
-      "type" : "object",
-      "required" : [
+    "Entity": {
+      "type": "object",
+      "required": [
         "text",
         "type",
         "offset",
         "length",
         "score"
       ],
-      "properties" : {
-        "text" : {
-          "type" : "string",
-          "description" : "Entity text as appears in the request."
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
         },
-        "type" : {
-          "type" : "string",
-          "description" : "Entity type, such as Person/Location/Org/SSN etc"
+        "type": {
+          "type": "string",
+          "description": "Entity type, such as Person/Location/Org/SSN etc"
         },
-        "subtype" : {
-          "type" : "string",
-          "description" : "Entity sub type, such as Age/Year/TimeRange etc"
+        "subtype": {
+          "type": "string",
+          "description": "Entity sub type, such as Age/Year/TimeRange etc"
         },
-        "offset" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Start position (in Unicode characters) for the entity text."
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position (in Unicode characters) for the entity text."
         },
-        "length" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Length (in Unicode characters) for the entity text."
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length (in Unicode characters) for the entity text."
         },
-        "score" : {
-          "type" : "number",
-          "format" : "double",
-          "description" : "Confidence score between 0 and 1 of the extracted entity."
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
         }
       }
     },
-    "EntityLinkingResult" : {
-      "type" : "object",
-      "required" : [
+    "EntityLinkingResult": {
+      "type": "object",
+      "required": [
         "documents",
         "errors",
         "modelVersion"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "Response by document",
-          "items" : {
-            "$ref" : "#/definitions/DocumentLinkedEntities"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentLinkedEntities"
           }
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Errors by document id.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentError"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
-        "statistics" : {
-          "$ref" : "#/definitions/RequestStatistics"
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
-          "type" : "string",
-          "description" : "This field indicates which model is used for scoring."
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
-    "DocumentLinkedEntities" : {
-      "type" : "object",
-      "required" : [
+    "DocumentLinkedEntities": {
+      "type": "object",
+      "required": [
         "id",
         "entities"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "entities" : {
-          "type" : "array",
-          "description" : "Recognized well-known entities in the document.",
-          "items" : {
-            "$ref" : "#/definitions/LinkedEntity"
+        "entities": {
+          "type": "array",
+          "description": "Recognized well-known entities in the document.",
+          "items": {
+            "$ref": "#/definitions/LinkedEntity"
           }
         },
-        "statistics" : {
-          "description" : "if showStats=true was specified in the request this field will contain information about the document payload.",
-          "$ref" : "#/definitions/DocumentStatistics"
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
         }
       }
     },
-    "LinkedEntity" : {
-      "type" : "object",
-      "required" : [
+    "LinkedEntity": {
+      "type": "object",
+      "required": [
         "name",
         "matches",
         "language",
         "url",
         "dataSource"
       ],
-      
-      "properties" : {
-        "name" : {
-          "type" : "string",
-          "description" : "Entity Linking formal name."
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Entity Linking formal name."
         },
-        "matches" : {
-          "type" : "array",
-          "description" : "List of instances this entity appears in the text.",
-          "items" : {
-            "$ref" : "#/definitions/Match"
+        "matches": {
+          "type": "array",
+          "description": "List of instances this entity appears in the text.",
+          "items": {
+            "$ref": "#/definitions/Match"
           }
         },
-        "language" : {
-          "type" : "string",
-          "description" : "Language used in the data source."
+        "language": {
+          "type": "string",
+          "description": "Language used in the data source."
         },
-        "id" : {
-          "type" : "string",
-          "description" : "Unique identifier of the recognized entity from the data source."
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the recognized entity from the data source."
         },
-        "url" : {
-          "type" : "string",
-          "description" : "URL for the entity's page from the data source."
+        "url": {
+          "type": "string",
+          "description": "URL for the entity's page from the data source."
         },
-        "dataSource" : {
-          "type" : "string",
-          "description" : "Data source used to extract entity linking, such as Wiki/Bing etc."
+        "dataSource": {
+          "type": "string",
+          "description": "Data source used to extract entity linking, such as Wiki/Bing etc."
         }
       }
     },
-    "Match" : {
-      "type" : "object",
-      "required" : [
+    "Match": {
+      "type": "object",
+      "required": [
         "score",
         "text",
         "offset",
         "length"
       ],
-      "properties" : {
-        "score" : {
-          "type" : "number",
-          "format" : "double",
-          "description" : "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
+      "properties": {
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
         },
-        "text" : {
-          "type" : "string",
-          "description" : "Entity text as appears in the request."
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
         },
-        "offset" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Start position (in Unicode characters) for the entity match text."
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position (in Unicode characters) for the entity match text."
         },
-        "length" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Length (in Unicode characters) for the entity match text."
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length (in Unicode characters) for the entity match text."
         }
       }
     },
-    "KeyPhraseResult" : {
-      "type" : "object",
-      "required" : [
+    "KeyPhraseResult": {
+      "type": "object",
+      "required": [
         "documents",
         "errors",
         "modelVersion"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "Response by document",
-          "items" : {
-            "$ref" : "#/definitions/DocumentKeyPhrases"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentKeyPhrases"
           }
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Errors by document id.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentError"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
-        "statistics" : {
-          "$ref" : "#/definitions/RequestStatistics"
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
-          "type" : "string",
-          "description" : "This field indicates which model is used for scoring."
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
-    "DocumentKeyPhrases" : {
-      "type" : "object",
-      "required" : [
+    "DocumentKeyPhrases": {
+      "type": "object",
+      "required": [
         "id",
         "keyPhrases"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "keyPhrases" : {
-          "type" : "array",
-          "description" : "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
-          "items" : {
-            "type" : "string"
+        "keyPhrases": {
+          "type": "array",
+          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+          "items": {
+            "type": "string"
           }
         },
-        "statistics" : {
-          "description" : "if showStats=true was specified in the request this field will contain information about the document payload.",
-          "$ref" : "#/definitions/DocumentStatistics"
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
         }
       }
     },
-    "LanguageBatchInput" : {
-      "type" : "object",
-      "required" : [
+    "LanguageBatchInput": {
+      "type": "object",
+      "required": [
         "documents"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/LanguageInput"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageInput"
           }
         }
       },
-      "example" : {
+      "example": {
         "documents": [
           {
             "id": "1",
             "text": "Hello world",
             "countryHint": "US"
-          },            
+          },
           {
             "id": "2",
             "text": "Bonjour tout le monde"
@@ -959,104 +1023,104 @@
         ]
       }
     },
-    "LanguageInput" : {
-      "type" : "object",
-      "required" : [
+    "LanguageInput": {
+      "type": "object",
+      "required": [
         "id",
         "text"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "text" : {
-          "type" : "string"
+        "text": {
+          "type": "string"
         },
-        "countryHint" : {
-          "type" : "string"
+        "countryHint": {
+          "type": "string"
         }
       }
     },
-   "LanguageResult" : {
-      "type" : "object",
-      "required" : [
+    "LanguageResult": {
+      "type": "object",
+      "required": [
         "documents",
         "errors",
         "modelVersion"
       ],
-      "properties" : {
-        "documents" : {
-          "type" : "array",
-          "description" : "Response by document",
-          "items" : {
-            "$ref" : "#/definitions/DocumentLanguage"
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/DocumentLanguage"
           }
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Errors by document id.",
-          "items" : {
-            "$ref" : "#/definitions/DocumentError"
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
-        "statistics" : {
-          "$ref" : "#/definitions/RequestStatistics"
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
-          "type" : "string",
-          "description" : "This field indicates which model is used for scoring."
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
         }
       }
     },
-    "DocumentLanguage" : {
-      "type" : "object",
-      "required" : [
+    "DocumentLanguage": {
+      "type": "object",
+      "required": [
         "id",
         "detectedLanguages"
       ],
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "Unique, non-empty document identifier."
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
         },
-        "detectedLanguages" : {
-          "type" : "array",
-          "description" : "A list of extracted languages.",
-          "items" : {
-            "$ref" : "#/definitions/DetectedLanguage"
+        "detectedLanguages": {
+          "type": "array",
+          "description": "A list of extracted languages.",
+          "items": {
+            "$ref": "#/definitions/DetectedLanguage"
           }
         },
-        "statistics" : {
-          "description" : "if showStats=true was specified in the request this field will contain information about the document payload.",
-          "$ref" : "#/definitions/DocumentStatistics"
+        "statistics": {
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref": "#/definitions/DocumentStatistics"
         }
       }
     },
-    "DetectedLanguage" : {
-      "type" : "object",
-      "required" : [
+    "DetectedLanguage": {
+      "type": "object",
+      "required": [
         "name",
         "iso6391Name",
         "score"
       ],
-      "properties" : {
-        "name" : {
-          "type" : "string",
-          "description" : "Long name of a detected language (e.g. English, French)."
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Long name of a detected language (e.g. English, French)."
         },
-        "iso6391Name" : {
-          "type" : "string",
-          "description" : "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
+        "iso6391Name": {
+          "type": "string",
+          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
         },
-        "score" : {
-          "type" : "number",
-          "format" : "double",
-          "description" : "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       }
     }
-   },
+  },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
@@ -1069,4 +1133,3 @@
     }
   }
 }
-
