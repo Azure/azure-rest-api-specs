@@ -5,7 +5,22 @@
         "description": "Describes the interface for the per-tenant enclave service.",
         "version": "2018-09-01-preview"
         
-    },   
+    },
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{tenantBaseUrl}",
+        "useSchemePrefix": false,
+        "parameters": [
+          {
+            "name": "tenantBaseUrl",
+            "x-ms-parameter-location": "client",
+            "description": "The tenant name, for example https://mytenant.attest.azure.net.",
+            "required": true,
+            "type": "string",
+            "in": "path",
+            "x-ms-skip-url-encoding": true
+          }
+        ]
+      },
   "consumes": [
     "application/json"
   ],
@@ -27,9 +42,8 @@
       "/operations/policy/update": {
             "post": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "policy"
+                  ],
                 "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
                 "operationId": "Policy_PrepareToSet",
                 "consumes": [ "text/plain" ],
@@ -37,9 +51,6 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AuthorizationParameter"
                     },
                     {
                         "$ref": "#/parameters/TeeKind"
@@ -91,17 +102,13 @@
         "/operations/policy/current": {
             "get": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "policy"
+                  ],
                 "summary": "Retrieves the current policy for a given kind of TEE.",
                 "operationId": "Policy_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AuthorizationParameter"
                     },
                     {
                         "$ref": "#/parameters/TeeKind"
@@ -141,18 +148,14 @@
             },
             "put": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "policy"
+                  ],
                 "summary": "Sets the policy for a given kind of TEE.",
                 "operationId": "Policy_Set",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                         {
                             "$ref": "#/parameters/ApiVersionParameter"
-                        },
-                        {
-                            "$ref": "#/parameters/AuthorizationParameter"
                         },
                         {
                             "$ref": "#/parameters/TeeKind"
@@ -199,18 +202,14 @@
             },
             "delete": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "policy"
+                  ],
                 "summary": "Deletes the attestation policy for the specified tenant and reverts to the default policy.",
                 "operationId": "Policy_Delete",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/AuthorizationParameter"
                     },
                     {
                         "$ref": "#/parameters/TeeKind"
@@ -327,14 +326,6 @@
                 "CyResComponent",
                 "AzureGuest"
             ]
-        },
-        "AuthorizationParameter": {
-            "name": "authorization",
-            "in": "header",
-            "description": "Authorization header containing AAD bearer token.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
         }
     }
 }
