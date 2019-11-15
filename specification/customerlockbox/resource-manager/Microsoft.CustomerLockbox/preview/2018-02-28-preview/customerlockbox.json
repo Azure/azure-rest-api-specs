@@ -71,7 +71,7 @@
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          {  
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -151,7 +151,7 @@
             "$ref": "./examples/Requests_List.json"
           },
           "List lockbox requests in a subscription with filter by request status (eg. $filter=properties/status eq 'Pending')": {
-              "$ref": "./examples/Requests_List_FilterByStatus.json"
+            "$ref": "./examples/Requests_List_FilterByStatus.json"
           }
         },
         "parameters": [
@@ -181,30 +181,30 @@
           }
         },
         "x-ms-pageable": {
-                "nextLinkName": "nextLink"
-            }
+          "nextLinkName": "nextLink"
+        }
       }
     }
   },
   "definitions": {
     "OperationListResult": {
-          "description": "Result of the request to list Customer Lockbox operations. It contains a list of operations.",
-          "properties": {
-            "value": {
-                "description": "List of Customer Lockbox operations supported by the Microsoft.StreamAnalytics resource provider.",
-                "type": "array",
-                "readOnly": true,
-                "items": {
-                  "$ref": "#/definitions/Operation"
-                }
-            },
-            "nextLink": {
-                "description": "URL to get the next set of operation list results if there are any.",
-                "type": "string",
-                "readOnly": true
-              }
+      "description": "Result of the request to list Customer Lockbox operations. It contains a list of operations.",
+      "properties": {
+        "value": {
+          "description": "List of Customer Lockbox operations supported by the Microsoft.StreamAnalytics resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
           }
-      },
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Operation": {
       "description": "Operation result model for ARM RP",
       "type": "object",
@@ -258,23 +258,23 @@
         }
       }
     },
-    "RequestListResult":{
+    "RequestListResult": {
       "description": "Object containing a list of streaming jobs.",
       "properties": {
-            "value": {
-                "type": "array",
-                "description": "A list of Lockbox requests. Populated by a 'List' operation.",
-                "items": {
-                  "$ref": "#/definitions/LockboxRequestResponse"
-                },
-                "readOnly": true
-            },
-            "nextLink": {
-                "type": "string",
-                "readOnly": true,
-                "description": "URL to get the next set of operation list results if there are any."
-            }
-          }
+        "value": {
+          "type": "array",
+          "description": "A list of Lockbox requests. Populated by a 'List' operation.",
+          "items": {
+            "$ref": "#/definitions/LockboxRequestResponse"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     },
     "LockboxRequestResponse": {
       "description": "A Lockbox request response object, containing all information associated with the request.",
@@ -339,7 +339,7 @@
         },
         "requestedResourceIds": {
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
           },
           "description": "A list of resource IDs associated with the Lockbox request separated by ','.",
@@ -367,8 +367,7 @@
         }
       }
     },
-    "LockboxRequestStatus":
-    {
+    "LockboxRequestStatus": {
       "enum": [
         "Initializing",
         "Pending",
@@ -451,11 +450,11 @@
       "x-ms-external": true,
       "description": "An error additional info for the Lockbox service.",
       "properties": {
-        "type":{
+        "type": {
           "type": "string",
           "description": "The type of error info."
         },
-        "info":{
+        "info": {
           "type": "object",
           "properties": {
             "currentStatus": {
