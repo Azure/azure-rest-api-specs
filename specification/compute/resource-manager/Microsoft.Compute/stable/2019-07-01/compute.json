@@ -519,6 +519,13 @@
             "description": "The name of the proximity placement group."
           },
           {
+            "name": "includeColocationStatus",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -9225,6 +9232,10 @@
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
           "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
