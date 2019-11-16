@@ -42,22 +42,24 @@
         "location": "West US",
         "tags": {},
         "properties": {
-          "id": "collectionName",
-          "indexes": [
-            {
-              "key": {
-                "keys": [
-                  "testKey"
-                ]
-              },
-              "options": {
-                "expireAfterSeconds": 100,
-                "unique": true
+          "resource": {
+            "id": "collectionName",
+            "indexes": [
+              {
+                "key": {
+                  "keys": [
+                    "testKey"
+                  ]
+                },
+                "options": {
+                  "expireAfterSeconds": 100,
+                  "unique": true
+                }
               }
+            ],
+            "shardKey": {
+              "testKey": "Hash"
             }
-          ],
-          "shardKey": {
-            "testKey": "Hash"
           }
         }
       }
