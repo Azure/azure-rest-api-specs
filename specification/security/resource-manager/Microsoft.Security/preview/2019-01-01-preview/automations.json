@@ -6,12 +6,14 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [{
-    "azure_auth": ["user_impersonation"]
-  }],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "security": [
+    {
+      "azure_auth": [ "user_impersonation" ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,10 +33,11 @@
             "$ref": "./examples/Automations/GetAutomationsSubscription_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "description": "Get all security automations in a subscription.",
         "operationId": "Automations_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -67,10 +70,11 @@
             "$ref": "./examples/Automations/GetAutomationsResourceGroup_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "description": "Get all security automations in a resource group.",
         "operationId": "Automations_ListByResourceGroup",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -106,10 +110,11 @@
             "$ref": "./examples/Automations/GetAutomationResourceGroup_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "description": "Get the details of a security automation.",
         "operationId": "Automations_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -143,10 +148,11 @@
             "$ref": "./examples/Automations/PutAutomation_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "description": "Create or update a security automation. If a security automation is already created and a subsequent create request is issued with different properties, the security automation properties will be updated.",
         "operationId": "Automations_CreateOrUpdate",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -189,10 +195,11 @@
             "$ref": "./examples/Automations/DeleteAutomation_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "operationId": "Automations_Delete",
         "description": "Delete a security automation.",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -225,10 +232,11 @@
             "$ref": "./examples/Automations/ValidateAutomation_example.json"
           }
         },
-        "tags": ["Automations"],
+        "tags": [ "Automations" ],
         "description": "Validate the security automation model before create or update. Any validation errors are returned to the client.",
         "operationId": "Automations_Validate",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -451,13 +459,35 @@
         "logicAppResourceId": {
           "type": "string",
           "description": "The triggered Logic App Azure Resource ID. This can also reside on other subscriptions, given that you have permissions to trigger the Logic App"
-        },
+        }
+      }
+    },
+    "AutomationActionLogicAppInput": {
+      "type": "object",
+      "description": "The logic app action that should be triggered.",
+      "x-ms-discriminator-value": "LogicApp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationActionLogicApp"
+        }
+      ],
+      "properties": {        
         "uri": {
           "type": "string",
-          "description": "The Logic App trigger URI endpoint (it will not be returned in GET).",
+          "description": "The Logic App trigger URI endpoint.",
           "format": "uri"
         }
       }
+    },
+    "AutomationActionLogicAppOutput": {
+      "type": "object",
+      "description": "The logic app action that should be triggered.",
+      "x-ms-discriminator-value": "LogicApp",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationActionLogicApp"
+        }
+      ]      
     },
     "AutomationActionEventHub": {
       "type": "object",
@@ -471,11 +501,39 @@
       "properties": {
         "eventHubResourceId": {
           "type": "string",
-          "description": "The Event Hub Azure Resource ID."
-        },
+          "description": "The target Event Hub Azure Resource ID."
+        }
+      }
+    },
+    "AutomationActionEventHubInput": {
+      "type": "object",
+      "description": "The target Event Hub to which event data will be exported.",
+      "x-ms-discriminator-value": "EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationActionEventHub"
+        }
+      ],
+      "properties": {
         "connectionString": {
           "type": "string",
-          "description": "The Event Hub connection string (it will not be returned in GET)."
+          "description": "The traget Event Hub connection string"
+        }
+      }
+    },
+    "AutomationActionEventHubOutput": {
+      "type": "object",
+      "description": "The target Event Hub to which event data will be exported.",
+      "x-ms-discriminator-value": "EventHub",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationActionEventHub"
+        }
+      ],
+      "properties": {
+        "sasPolicyName": {
+          "type": "string",
+          "description": "The target Event Hub SAS policy name."
         }
       }
     },
