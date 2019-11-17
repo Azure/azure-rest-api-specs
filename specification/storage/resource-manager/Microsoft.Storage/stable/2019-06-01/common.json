@@ -71,6 +71,66 @@
         "allowedHeaders"
       ],
       "description": "Specifies a CORS rule for the Blob service."
+    },
+    "DeleteRetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether DeleteRetentionPolicy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "description": "Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365."
+        }
+      },
+      "description": "The service properties for soft delete."
+    },
+    "Sku": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The SKU of the storage account."
+    },
+    "SkuName": {
+      "type": "string",
+      "description": "The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS",
+        "Premium_LRS",
+        "Premium_ZRS",
+        "Standard_GZRS",
+        "Standard_RAGZRS"
+      ],
+      "x-ms-enum": {
+        "name": "SkuName",
+        "modelAsString": true
+      }
+    },
+    "Tier": {
+      "readOnly": true,
+      "type": "string",
+      "description": "The SKU tier. This is based on the SKU name.",
+      "enum": [
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "SkuTier",
+        "modelAsString": false
+      }
     }
   }
 }

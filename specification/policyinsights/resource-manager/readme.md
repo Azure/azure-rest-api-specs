@@ -30,12 +30,6 @@ openapi-type: arm
 tag: package-2019-10
 ```
 
-``` yaml
-title: PolicyInsightsClient
-openapi-type: arm
-tag: package-2018-07
-```
-
 ### Validations
 Run validations when `--validate` is specified on command line
 
@@ -61,7 +55,19 @@ directive:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
 
+  - suppress: OperationIdNounConflictingModelNames
+    reason: Metadata is already in plural form.
+    where:
+      - $.paths["/providers/Microsoft.PolicyInsights/policyMetadata/{resourceName}"].get.operationId
+      - $.paths["/providers/Microsoft.PolicyInsights/policyMetadata"].get.operationId
+
+  - suppress: PageableOperation
+    reason: The operations API is not pagable.
+    where:
+      - $.paths["/providers/Microsoft.PolicyInsights/operations"].get
+
 ```
+
 ### Tag: package-2019-10
 
 These settings apply only when `--tag=package-2019-10` is specified on the command line.
@@ -69,10 +75,12 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-- Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+- Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
 - Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 ```
+
 
 ### Tag: package-2018-07
 
@@ -273,9 +281,11 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+  - $(this-folder)/Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
+  - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
+  - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json

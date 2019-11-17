@@ -12,7 +12,7 @@ go:
 
 ```yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2019-07-01
+  - tag: package-2019-07
   - tag: package-2019-03-01
   - tag: package-2018-10-01
   - tag: package-2018-06
@@ -29,12 +29,12 @@ batch:
   - tag: package-container-service-2015-11-preview
 ```
 
-### Tag: package-2019-07-01 and go
+### Tag: package-2019-07 and go
 
-These settings apply only when `--tag=package-2019-07-01 --go` is specified on the command line.
+These settings apply only when `--tag=package-2019-07 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag)=='package-2019-07-01' && $(go)
+```yaml $(tag)=='package-2019-07' && $(go)
 namespace: compute
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-07-01/$(namespace)
 ```

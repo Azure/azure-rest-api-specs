@@ -25,6 +25,7 @@ batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - tag: package-policy-2019-09
   - tag: package-policy-2019-06
   - tag: package-policy-2019-01
   - tag: package-policy-2018-05
@@ -47,6 +48,7 @@ batch:
   - tag: package-subscriptions-2016-06
   - tag: package-subscriptions-2015-11
   - tag: package-links-2016-09
+  - tag: package-managedapplications-2019-07
   - tag: package-managedapplications-2018-06
   - tag: package-managedapplications-2017-09
   - tag: package-managedapplications-2016-09
@@ -91,6 +93,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-locks-2015-01' && $(go)
 namespace: locks
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-01-01/locks
+```
+
+### Tag: package-policy-2019-09 and go
+
+These settings apply only when `--tag=package-policy-2019-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-09' && $(go)
+namespace: policy
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-09-01/policy
 ```
 
 ### Tag: package-policy-2019-06 and go
@@ -311,6 +323,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-links-2016-09' && $(go)
 namespace: links
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2016-09-01/links
+```
+
+### Tag: package-managedapplications-2019-07 and go
+
+These settings apply only when `--tag=package-managedapplications-2019-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07' && $(go)
+namespace: managedapplications
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-07-01/managedapplications
 ```
 
 ### Tag: package-managedapplications-2018-06 and go
