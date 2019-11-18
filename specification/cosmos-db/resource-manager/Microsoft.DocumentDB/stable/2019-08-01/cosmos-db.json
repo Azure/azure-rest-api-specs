@@ -4635,28 +4635,6 @@
       "type": "object",
       "properties": {
         "resource": {
-          "properties": {
-            "_docs": {
-              "type": "string",
-              "description": "A system generated property that specified the self-link for documents in a resource."
-            },
-            "_sprocs": {
-              "type": "string",
-              "description": "A system generated property that specifies the self-link for stored procedures in a resource."
-            },
-            "_triggers": {
-              "type": "string",
-              "description": "A system generated property that specifies the self-link for triggers in a resource."
-            },
-            "_udfs": {
-              "type": "string",
-              "description": "A system generated property that specifies the self-link for user defined functions in a resource."
-            },
-            "_conflicts": {
-              "type": "string",
-              "description": "A system generated property that specifies the self-link for conflicts in a resource."
-            }
-          },
           "allOf": [
             {
               "$ref": "#/definitions/SqlContainerResource"
@@ -5947,10 +5925,6 @@
         "defaultTtl": {
           "type": "integer",
           "description": "Default time to live"
-        },
-        "ttlPropertyPath": {
-          "type": "string",
-          "description": "This property should be only present when DefaultTimeToLive is set. When this property is present, time to live for a resource is decided based on the value of this property in the resource. By default, it is set to null meaning the time to live is based on the _ts property in resource"
         },
         "uniqueKeyPolicy": {
           "$ref": "#/definitions/UniqueKeyPolicy",
