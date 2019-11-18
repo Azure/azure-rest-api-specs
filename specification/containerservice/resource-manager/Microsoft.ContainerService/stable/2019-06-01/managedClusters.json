@@ -676,6 +676,9 @@
         "x-ms-examples": {
           "Create/Update Agent Pool": {
             "$ref": "./examples/AgentPoolsCreate_Update.json"
+          },
+          "Update Agent Pool": {
+            "$ref": "./examples/AgentPools_Update.json"
           }
         }
       },
@@ -1336,10 +1339,7 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "maximum": 100,
-          "minimum": 1,
-          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. ",
-          "default": 1
+          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1."
         },
         "vmSize": {
           "$ref": "#/definitions/ContainerServiceVMSize",
@@ -1416,10 +1416,6 @@
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
         }
       },
-      "required": [
-        "vmSize",
-        "count"
-      ],
       "description": "Properties for the container service agent pool profile."
     },
     "ManagedClusterAgentPoolProfile": {
