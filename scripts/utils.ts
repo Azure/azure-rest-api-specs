@@ -49,6 +49,7 @@ const internalCheck = async (checkOptions: CheckOptions) => {
   }
 
   const changedJsonFiles = (await pr.diff())
+    .filter(change => change.kind !== 'Deleted')
     .map(change => change.path)
     .filter(filePath => filePath.endsWith('.json') && filePath.startsWith('specification/'));
   if (changedJsonFiles.length === 0) {

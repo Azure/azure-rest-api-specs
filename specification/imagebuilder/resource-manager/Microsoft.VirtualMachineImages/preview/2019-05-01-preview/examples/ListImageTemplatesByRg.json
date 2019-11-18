@@ -36,7 +36,10 @@
                     "tagName": "value"
                   }
                 }
-              ]
+              ],
+              "vmProfile": {
+                "vmSize": "Standard_D2s_v3"
+              }
             }
           },
           {
@@ -69,17 +72,17 @@
                 {
                   "type": "SharedImage",
                   "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/gallery/baseimages/images/baseimage",
-                  "replicationRegions": [
-                    "eastus",
-                    "westus"
-                  ],
+                  "replicationRegions":[ "eastus", "westus"],
                   "runOutputName": "gallery"
                 }
-              ]
+              ],
+              "vmProfile": {
+                "vmSize": "Standard_D8s_v3"
+              }
             }
           }
         ],
-        "nextLink": "/subscriptions/{subscription-id}/resourceGroup/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2018-02-01-preview&skip-token=2"
+        "nextLink": "/subscriptions/{subscription-id}/resourceGroup/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates?api-version=2019-05-01-preview&skip-token=2"
       }
     }
   }
