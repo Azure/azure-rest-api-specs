@@ -1,0 +1,39 @@
+jobs:
+- job: "NetworkValidation"
+  condition: and(startsWith(variables['System.PullRequest.TargetBranch'], 'network-'), endsWith(variables['System.PullRequest.TargetBranch'], '-release'))
+  continueOnError: true
+  pool:
+    vmImage: vs2017-win2016
+  variables:
+    NRP_SWAGGER_VALIDATION_OVERRIDE_PS_BRANCH: 'true'
+    NRP_BUILD_TOOLS_SKIP_GENERATE_PS1: 'true'
+    NRP_BUILD_TOOLS_OUTPUT_PATH: '$(System.DefaultWorkingDirectory)\Out'
+  steps:
+  - powershell: |
+      & "C:/Program Files (x86)/Microsoft SDKs/Windows/v10.0A/bin/NETFX 4.6.1 Tools/sn.exe" -Vr *,31bf3856ad364e35
+    displayName: Bypass Strong Name validation
+  - task: NodeTool@0
+    inputs:
+      versionSpec: 10.x
+    displayName: Install Node.js
+  - script: npm install autorest -g
+    displayName: Install autorest
+  - script: git clone --depth 1 -- https://dev.azure.com/v-anevse/BuildScripts/_git/BuildScripts ..\BuildScripts
+    displayName: Clone build tools
+  - powershell: |
+      $swgrPath = (Get-Item ".\").FullName
+      $outputPath = $env:NRP_BUILD_TOOLS_OUTPUT_PATH
+      New-Item -Path $outputPath -ItemType "Directory" -Force | Out-Null
+      ..\BuildScripts\Test-SwaggerRelease.ps1 -Component Network -SwaggerRepoPath $swgrPath -OutputFolder $outputPath
+    failOnStderr: false
+    displayName: Test Swagger updates
+  - powershell: |
+      Copy-Item "..\BuildScripts\.azure-pipelines\.artifactignore" -Destination "$($env:NRP_BUILD_TOOLS_OUTPUT_PATH)\.artifactignore" -Force -ErrorAction "SilentlyContinue"
+    failOnStderr: false
+    condition: always()
+    displayName: Copy .artifactignore
+  - task: PublishPipelineArtifact@0
+    condition: always()
+    inputs:
+      artifactName: SwaggerTestOutput
+      targetPath: $(NRP_BUILD_TOOLS_OUTPUT_PATH)

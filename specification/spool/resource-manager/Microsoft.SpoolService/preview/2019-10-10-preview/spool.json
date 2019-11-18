@@ -1,0 +1,892 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Spool Management API",
+    "version": "2019-10-10-preview",
+    "description": "REST API for Azure Spool Service"
+  },
+  "schemes": [ "https" ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.SpoolService/operations": {
+      "get": {
+        "description": "Lists all of the available REST API operations of the Microsoft.SpoolService provider.",
+        "operationId": "Operations_List",
+        "summary": "List Operations",
+        "tags": [ "Common Azure REST API" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/checkNameAvailability": {
+      "post": {
+        "description": "Checks that the Spool name is valid and is not already in use.",
+        "operationId": "Spool_CheckNameAvailability",
+        "summary": "Check Name Availability",
+        "tags": [ "Spool" ],
+        "parameters": [
+          {
+            "name": "nameAvailabilityParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            },
+            "description": "Parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the name availability.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/spools": {
+      "get": {
+        "description": "Handles requests to list all resources in a subscription.",
+        "operationId": "Spool_ListBySubscription",
+        "summary": "List By Subscription",
+        "tags": [ "Common Azure REST API" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Spool services in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List by subscription": {
+            "$ref": "./examples/listBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools": {
+      "get": {
+        "description": "Handles requests to list all resources in a resource group.",
+        "operationId": "Spool_ListByResourceGroup",
+        "summary": "List By Resource Group",
+        "tags": [ "Common Azure REST API" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Spool services in a resourceGroup.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "List by resource group": {
+            "$ref": "./examples/listByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}": {
+      "patch": {
+        "description": "Operation to update an exiting Spool service.",
+        "operationId": "Spool_Update",
+        "summary": "Update",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a Spool service which is not up-to-date.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Update resource": {
+            "$ref": "./examples/update.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Get the Spool service and its properties.",
+        "operationId": "Spool_Get",
+        "summary": "Get",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding Spool service.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Get resource": {
+            "$ref": "./examples/get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new Spool service or update an existing Spool service.",
+        "operationId": "Spool_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "An existing resource was updated. The response describes the existing service and contains an Azure-AsyncOperation header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new service and contains an Azure-AsyncOperation header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or udate resource": {
+            "$ref": "./examples/createOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a Spool service.",
+        "operationId": "Spool_Delete",
+        "summary": "Delete",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been deleted successfully."
+          },
+          "202": {
+            "description": "The delete operation is being performed in the background."
+          },
+          "204": {
+            "description": "The resource did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete resource": {
+            "$ref": "./examples/delete.json"
+          }
+        }
+      }
+    },
+    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/listKeys": {
+      "post": {
+        "description": "Get the access keys of the Spool resource.",
+        "operationId": "Spool_ListKeys",
+        "summary": "List Keys",
+        "tags": [ "Spool Keys" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes Spool service access keys.",
+            "schema": {
+              "$ref": "#/definitions/SpoolKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "List keys": {
+            "$ref": "./examples/listKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/regenerateKey": {
+      "post": {
+        "description": "Regenerate Spool service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
+        "operationId": "Spool_RegenerateKey",
+        "summary": "Regenerate Key",
+        "tags": [ "Spool Keys" ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameter that describes the Regenerate Key Operation.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SpoolServiceName"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created and an async operation is executing in background to make the new key take effect. The response contains new keys and an Azure-AsyncOperation header to query the async operation result.",
+            "schema": {
+              "$ref": "#/definitions/SpoolKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Regenerate key": {
+            "$ref": "./examples/regenerateKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicating why the requested operation could not be performed.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "Result of the request to list REST API operations. It contains a list of operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation supported by Spool resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation with format: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that describes the operation."
+        },
+        "origin": {
+          "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Extra properties for the operation.",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that describes a operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Friendly name of the resource provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "The service specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "An object that describes a specification.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit that makes sense for the metric.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "The method for aggregating the metric.",
+          "type": "string",
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Total",
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": true
+          }
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. \r\nEx. a metric that returns the number of times a particular error code was emitted. The error code may not appear \r\noften, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.",
+          "type": "string"
+        },
+        "category": {
+          "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "The dimensions of the metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Specifications of the Dimension of metrics.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The public facing name of the dimension.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension.",
+          "type": "string"
+        },
+        "internalName": {
+          "description": "Name of the dimension as it appears in MDM.",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.",
+          "type": "boolean"
+        }
+      }
+    },  
+    "NameAvailabilityParameters": {
+      "description": "Data POST-ed to the nameAvailability action",
+      "required": [
+        "type",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type. Should be always \"Microsoft.SpoolService/spools\".",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Spool service name to validate. e.g.\"my-Spool-name-here\"",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailability": {
+      "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Indicates whether the name is available or not.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason of the availability. Required if name is not available.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "SpoolResourceList": {
+      "description": "Object that includes an array of Spool services and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Spool services",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpoolResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SpoolResource": {
+      "description": "A class representing a Spool service resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SpoolProperties",
+          "description": "The properties of the service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "description": "Tags of the service which is a list of key value pairs that describe the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource ID for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the service - e.g. \"Microsoft.SpoolService/spools\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The Azure location where the Spool service is running.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SpoolProperties": {
+      "description": "A class that describes the properties of the Spool service.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "hostNamePrefix": {
+          "description": "Prefix for the hostName of the Spool service. \r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.spool.azure.net.",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "FQDN of the Spool service instance. Format: xxx.service.Spool.net",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the Spool resource. Probably you need the same or higher version of client SDKs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "optionalFeatures": {
+          "description": "Features that may optionally be enabled on a Spool instance.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "PSTN"
+            ],
+            "x-ms-enum": {
+              "name": "OptionalFeature",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "required": [
+        "hostNamePrefix"
+      ]
+    },
+    "SpoolKeys": {
+      "description": "A class representing the access keys of Spool service.",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary access key.",
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "The secondary access key.",
+          "type": "string"
+        },
+        "primaryConnectionString": {
+          "description": "Spool connection string constructed via the primaryKey",
+          "type": "string"
+        },
+        "secondaryConnectionString": {
+          "description": "Spool connection string constructed via the secondaryKey",
+          "type": "string"
+        }
+      }
+    },
+    "RegenerateKeyParameters": {
+      "description": "Parameters describes the request to regenerate access keys",
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "description": "The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).",
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2019-10-10-preview"
+      ]
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Gets subscription ID which uniquely identifies the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SpoolServiceName": {
+      "name": "resourceName",
+      "in": "path",
+      "description": "The name of the Spool resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+  
+}

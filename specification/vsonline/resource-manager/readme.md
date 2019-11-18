@@ -39,6 +39,36 @@ input-file:
 ```
 
 ---
+```yaml
+openapi-type: arm
+tag: package-2019-07-01-alpha
+```
+
+### Tag: package-2019-07-01-alpha
+
+These settings apply only when `--tag=package-2019-07-01-alpha` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-01-alpha'
+input-file:
+  - Microsoft.VSOnline/preview/2019-07-01-alpha/vsonline.json
+```
+
+---
+```yaml
+openapi-type: arm
+tag: package-2019-07-01-beta
+```
+
+### Tag: package-2019-07-01-beta
+
+These settings apply only when `--tag=package-2019-07-01-beta` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-01-beta'
+input-file:
+  - Microsoft.VSOnline/preview/2019-07-01-beta/vsonline.json
+```
+
+---
 
 # Code Generation
 
