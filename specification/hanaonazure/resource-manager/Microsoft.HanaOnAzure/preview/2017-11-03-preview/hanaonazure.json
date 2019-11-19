@@ -485,52 +485,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring": {
-      "post": {
-        "tags": [
-          "HanaOnAzure"
-        ],
-        "operationId": "HanaInstances_EnableMonitoring",
-        "x-ms-long-running-operation": true,
-        "description": "The operation to add a monitor to an SAP HANA instance.",
-        "x-ms-examples": {
-          "Monitor a HANA instance": {
-            "$ref": "./examples/HanaInstances_EnableMonitoring.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HanaInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitoringParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
         "tags": [
@@ -928,6 +882,15 @@
             "S192m",
             "S192xm",
             "S96",
+            "S112",
+            "S224m",
+            "S224o",
+            "S224om",
+            "S224oo",
+            "S224oom",
+            "S224ooo",
+            "S224oxm",
+            "S224oxxm",
             "S384",
             "S384m",
             "S384xm",
@@ -937,12 +900,7 @@
             "S768",
             "S768m",
             "S768xm",
-            "S960m",
-            "S224o",
-            "S224m",
-            "S224om",
-            "S224oxm",
-            "S224oxxm"
+            "S960m"
           ],
           "x-ms-enum": {
             "name": "HanaInstanceSizeNamesEnum",
@@ -1212,6 +1170,18 @@
           "type": "string",
           "description": "Database password of the HANA instance."
         },
+        "hanaDbPasswordKeyVaultUrl": {
+          "type": "string",
+          "description": "KeyVault URL link to the password for the HANA database."
+        },
+        "hanaDbCredentialsMsiId": {
+          "type": "string",
+          "description": "MSI ID passed by customer which has access to customer's KeyVault and to be assigned to the Collector VM."
+        },
+        "keyVaultId": {
+          "type": "string",
+          "description": "Key Vault ID containing customer's HANA credentials."
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -1229,6 +1199,27 @@
             "modelAsString": true
           },
           "description": "State of provisioning of the HanaInstance"
+        },
+        "managedResourceGroupName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource group the SAP Monitor resources get deployed into."
+        },
+        "logAnalyticsWorkspaceArmId": {
+          "type": "string",
+          "description": "The ARM ID of the Log Analytics Workspace that is used for monitoring"
+        },
+        "enableCustomerAnalytics": {
+          "type": "boolean",
+          "description": "The value indicating whether to send analytics to Microsoft"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "The workspace ID of the log analytics workspace to be used for monitoring"
+        },
+        "logAnalyticsWorkspaceSharedKey": {
+          "type": "string",
+          "description": "The shared key of the log analytics workspace that is used for monitoring"
         }
       },
       "description": "Describes the properties of a SAP monitor."
