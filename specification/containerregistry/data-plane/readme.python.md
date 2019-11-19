@@ -14,6 +14,7 @@ python:
   package-name: azure-containerregistry
   package-version: 0.1.0
   clear-output-folder: true
+  add-credentials: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
