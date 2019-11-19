@@ -1,0 +1,496 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a Kafka Restproxy Api lists.",
+    "version" : "v1",
+    "title" : "Kafka Restproxy APIs",
+    "contact" : {
+      "name" : "HDInsight"
+    }
+  },
+  "host" : "clustername-kafkarest.azurehdinsight.net",
+  "basePath" : "/",
+  "tags" : [ {
+    "name" : "v1consumer",
+    "description" : "Consume messages"
+  }, {
+    "name" : "v1metadata",
+    "description" : "Get the metadata of topic and partition"
+  }, {
+    "name" : "v1producer",
+    "description" : "Produce messages"
+  }, {
+    "name" : "v1status",
+    "description" : "Get Kafka Restproxy status"
+  }, {
+    "name" : "v1topics",
+    "description" : "Manage Kafka topics"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/v1/consumer/topics/{topic}/partitions/{partition}/offsets/{offset}" : {
+      "get" : {
+        "tags" : [ "v1consumer" ],
+        "summary" : "Consume messages using a simple consumer",
+        "description" : "",
+        "operationId" : "consumeTopicInPartitionWithOffset",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "partition",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "offset",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "count",
+          "in" : "query",
+          "required" : false,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/ConsumeResponse"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/brokers" : {
+      "get" : {
+        "tags" : [ "v1metadata" ],
+        "summary" : "Get brokers",
+        "description" : "",
+        "operationId" : "getBrokers",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RESTBrokerResponse"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics" : {
+      "get" : {
+        "tags" : [ "v1metadata" ],
+        "summary" : "Get metadata of Kafka topics",
+        "description" : "",
+        "operationId" : "getTopics",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RESTTopicResponse"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics/{topic}/partitions" : {
+      "get" : {
+        "tags" : [ "v1metadata" ],
+        "summary" : "Get Kafka partitions",
+        "description" : "",
+        "operationId" : "getPartitions",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RESTTopicMetadaResponse"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/metadata/topics/{topic}/partitions/{partition}" : {
+      "get" : {
+        "tags" : [ "v1metadata" ],
+        "summary" : "Get metadata of Kafka partitions",
+        "description" : "",
+        "operationId" : "getPartitionMetadata",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "partition",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/RESTPartitionMetadataResponse"
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/producer/topics/{topic}" : {
+      "post" : {
+        "tags" : [ "v1producer" ],
+        "summary" : "Produce messages",
+        "description" : "",
+        "operationId" : "produceMessageToTopic",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/ProduceRecord"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/v1/status" : {
+      "get" : {
+        "tags" : [ "v1status" ],
+        "summary" : "Check the status of Kafka Rest proxy server",
+        "description" : "",
+        "operationId" : "checkRestproxyStatus",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
+    "/v1/topics/{topic}" : {
+      "put" : {
+        "tags" : [ "v1topics" ],
+        "summary" : "Create a topic",
+        "description" : "",
+        "operationId" : "putTopics",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "topic",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/TopicConfigFromBackend"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "405" : {
+            "description" : "Method Not Allowed"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ConsumeRecord" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "object"
+        },
+        "key" : {
+          "type" : "object"
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "partition" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "ConsumeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "records" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ConsumeRecord"
+          }
+        }
+      }
+    },
+    "ProduceRecord" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "object"
+        },
+        "key" : {
+          "type" : "object"
+        },
+        "partition" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "RESTBrokerResponse" : {
+      "type" : "object",
+      "properties" : {
+        "brokers" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "RESTPartitionMetadataResponse" : {
+      "type" : "object",
+      "properties" : {
+        "partition_id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "earliest_offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "latest_offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "leader" : {
+          "type" : "string"
+        },
+        "replicas" : {
+          "type" : "string"
+        },
+        "isr" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RESTTopicMetadaResponse" : {
+      "type" : "object",
+      "properties" : {
+        "topic" : {
+          "type" : "string"
+        },
+        "partitions" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/RESTPartitionMetadataResponse"
+          }
+        }
+      }
+    },
+    "RESTTopicResponse" : {
+      "type" : "object",
+      "properties" : {
+        "topics" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "TopicConfigFromBackend" : {
+      "type" : "object",
+      "properties" : {
+        "topic_name" : {
+          "type" : "string"
+        },
+        "partition_count" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "replication_factor" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "topic_properties" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        }
+      }
+    }
+  }
+}
