@@ -84,20 +84,20 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.Maintenance
-  package-name: azure-mgmt-Maintenance
+  namespace: azure.mgmt.maintenance
+  package-name: azure-mgmt-maintenance
   package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance/azure/mgmt/Maintenance
+  output-folder: $(python-sdks-folder)/azure-mgmt-maintenance/azure/mgmt/maintenance
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance
+  output-folder: $(python-sdks-folder)/azure-mgmt-maintenance
 ```
 
 ## Go
