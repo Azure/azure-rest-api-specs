@@ -323,7 +323,7 @@
           "$ref": "#/definitions/PolicySettings"
         },
         "customRules": {
-          "description": "The type of custom rules inside the policy.",
+          "description": "The custom rules inside the policy.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
@@ -411,14 +411,14 @@
           "items": {
             "$ref": "#/definitions/OwaspCrsExclusionEntry"
           },
-          "description": "The type of exclusions that are applied on the policy."
+          "description": "The Exclusions that are applied on the policy."
         },
         "managedRuleSets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
           },
-          "description": "The type of ruleSets that are associated with the policy."
+          "description": "The managed rule sets that are associated with the policy."
         }
       }
     },
@@ -426,7 +426,7 @@
       "description": "Defines contents of a web application firewall global configuration.",
       "properties": {
         "state": {
-          "description": "The type of state the policy is in enabled or disabled.",
+          "description": "The state of the policy.",
           "type": "string",
           "enum": [
             "Disabled",
@@ -438,7 +438,7 @@
           }
         },
         "mode": {
-          "description": "The type of mode if it is in detection or prevention at policy level.",
+          "description": "The mode of the policy.",
           "type": "string",
           "enum": [
             "Prevention",
@@ -491,11 +491,11 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "priority": {
-          "description": "The type of priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
+          "description": "Priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
           "type": "integer"
         },
         "ruleType": {
-          "description": "The type of rule.",
+          "description": "The rule type.",
           "type": "string",
           "enum": [
             "MatchRule",
@@ -529,7 +529,7 @@
       }
     },
     "Transform": {
-      "description": "Type of transforms applied before matching.",
+      "description": "Transforms applied before matching.",
       "type": "string",
       "enum": [
         "Lowercase",
@@ -569,7 +569,7 @@
           }
         },
         "selector": {
-          "description": "The type of MatchVariable collection.",
+          "description": "The selector of match variable.",
           "type": "string"
         }
       }
@@ -590,7 +590,7 @@
           }
         },
         "operator": {
-          "description": "The type of operator to be matched.",
+          "description": "The operator to be matched.",
           "type": "string",
           "enum": [
             "IPMatch",
@@ -611,7 +611,7 @@
           }
         },
         "negationConditon": {
-          "description": "Specifies negate condition or not.",
+          "description": "Whether this is negate condition or not.",
           "type": "boolean"
         },
         "matchValues": {
