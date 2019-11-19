@@ -6,21 +6,13 @@
   },
   "host": "management.azure.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scheduleRun": {
       "post": {
-        "tags": [
-          "Registries"
-        ],
+        "tags": ["Registries"],
         "description": "Schedules a new run based on the request parameters and add it to the run queue.",
         "operationId": "Registries_ScheduleRun",
         "parameters": [
@@ -88,9 +80,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listBuildSourceUploadUrl": {
       "post": {
-        "tags": [
-          "Registries"
-        ],
+        "tags": ["Registries"],
         "description": "Get the upload location for the user to be able to upload the source.",
         "operationId": "Registries_GetBuildSourceUploadUrl",
         "parameters": [
@@ -130,9 +120,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs": {
       "get": {
-        "tags": [
-          "Runs"
-        ],
+        "tags": ["Runs"],
         "description": "Gets all the runs for a registry.",
         "operationId": "Runs_List",
         "parameters": [
@@ -191,9 +179,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}": {
       "get": {
-        "tags": [
-          "Runs"
-        ],
+        "tags": ["Runs"],
         "description": "Gets the detailed information for a given run.",
         "operationId": "Runs_Get",
         "parameters": [
@@ -238,9 +224,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Runs"
-        ],
+        "tags": ["Runs"],
         "description": "Patch the run properties.",
         "operationId": "Runs_Update",
         "parameters": [
@@ -303,9 +287,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/listLogSasUrl": {
       "post": {
-        "tags": [
-          "Runs"
-        ],
+        "tags": ["Runs"],
         "description": "Gets a link to download the run logs.",
         "operationId": "Runs_GetLogSasUrl",
         "parameters": [
@@ -352,9 +334,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/runs/{runId}/cancel": {
       "post": {
-        "tags": [
-          "Runs"
-        ],
+        "tags": ["Runs"],
         "description": "Cancel an existing run.",
         "operationId": "Runs_Cancel",
         "parameters": [
@@ -402,9 +382,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}": {
       "get": {
-        "tags": [
-          "TaskRuns"
-        ],
+        "tags": ["TaskRuns"],
         "description": "Gets the detailed information for a given task run.",
         "operationId": "TaskRuns_Get",
         "parameters": [
@@ -449,9 +427,7 @@
         }
       },
       "put": {
-        "tags": [
-          "TaskRuns"
-        ],
+        "tags": ["TaskRuns"],
         "description": "Creates a task run for a container registry with the specified parameters.",
         "operationId": "TaskRuns_Create",
         "parameters": [
@@ -512,9 +488,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "TaskRuns"
-        ],
+        "tags": ["TaskRuns"],
         "description": "Deletes a specified task run resource.",
         "operationId": "TaskRuns_Delete",
         "parameters": [
@@ -563,9 +537,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "TaskRuns"
-        ],
+        "tags": ["TaskRuns"],
         "description": "Updates a task run with the specified parameters.",
         "operationId": "TaskRuns_Update",
         "parameters": [
@@ -628,9 +600,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns": {
       "get": {
-        "tags": [
-          "TaskRuns"
-        ],
+        "tags": ["TaskRuns"],
         "description": "Lists all the task runs for a specified container registry.",
         "operationId": "TaskRuns_List",
         "parameters": [
@@ -673,9 +643,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks": {
       "get": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Lists all the tasks for a specified container registry.",
         "operationId": "Tasks_List",
         "parameters": [
@@ -718,9 +686,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks/{taskName}": {
       "get": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Get the properties of a specified task.",
         "operationId": "Tasks_Get",
         "parameters": [
@@ -761,9 +727,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Creates a task for a container registry with the specified parameters.",
         "operationId": "Tasks_Create",
         "parameters": [
@@ -829,9 +793,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Deletes a specified task.",
         "operationId": "Tasks_Delete",
         "parameters": [
@@ -876,9 +838,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Updates a task with the specified parameters.",
         "operationId": "Tasks_Update",
         "parameters": [
@@ -946,9 +906,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks/{taskName}/listDetails": {
       "post": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "description": "Returns a task with extended information that includes all secrets.",
         "operationId": "Tasks_GetDetails",
         "parameters": [
@@ -993,9 +951,7 @@
   "definitions": {
     "RunRequest": {
       "description": "The request parameters for scheduling a run.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "properties": {
         "type": {
@@ -1059,12 +1015,7 @@
         },
         "runType": {
           "description": "The type of run.",
-          "enum": [
-            "QuickBuild",
-            "QuickRun",
-            "AutoBuild",
-            "AutoRun"
-          ],
+          "enum": ["QuickBuild", "QuickRun", "AutoBuild", "AutoRun"],
           "type": "string",
           "x-ms-enum": {
             "name": "RunType",
@@ -1253,17 +1204,12 @@
     },
     "PlatformProperties": {
       "description": "The platform properties against which the run has to happen.",
-      "required": [
-        "os"
-      ],
+      "required": ["os"],
       "type": "object",
       "properties": {
         "os": {
           "description": "The operating system type required for the run.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "x-ms-enum": {
             "name": "OS",
@@ -1272,13 +1218,7 @@
         },
         "architecture": {
           "description": "The OS architecture.",
-          "enum": [
-            "amd64",
-            "x86",
-            "386",
-            "arm",
-            "arm64"
-          ],
+          "enum": ["amd64", "x86", "386", "arm", "arm64"],
           "type": "string",
           "x-ms-enum": {
             "name": "Architecture",
@@ -1287,11 +1227,7 @@
         },
         "variant": {
           "description": "Variant of the CPU.",
-          "enum": [
-            "v6",
-            "v7",
-            "v8"
-          ],
+          "enum": ["v6", "v7", "v8"],
           "type": "string",
           "x-ms-enum": {
             "name": "Variant",
@@ -1352,12 +1288,7 @@
         },
         "runType": {
           "description": "The type of run.",
-          "enum": [
-            "QuickBuild",
-            "QuickRun",
-            "AutoBuild",
-            "AutoRun"
-          ],
+          "enum": ["QuickBuild", "QuickRun", "AutoBuild", "AutoRun"],
           "type": "string",
           "x-ms-enum": {
             "name": "RunType",
@@ -1622,10 +1553,7 @@
     },
     "TaskProperties": {
       "description": "The properties of a task.",
-      "required": [
-        "platform",
-        "step"
-      ],
+      "required": ["platform", "step"],
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1653,10 +1581,7 @@
         },
         "status": {
           "description": "The current status of task.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TaskStatus",
@@ -1695,18 +1620,12 @@
     },
     "TaskStepProperties": {
       "description": "Base properties for any task step.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of the step.",
-          "enum": [
-            "Docker",
-            "FileTask",
-            "EncodedTask"
-          ],
+          "enum": ["Docker", "FileTask", "EncodedTask"],
           "type": "string",
           "x-ms-enum": {
             "name": "StepType",
@@ -1779,10 +1698,7 @@
       "properties": {
         "type": {
           "description": "The type of the base image dependency.",
-          "enum": [
-            "BuildTime",
-            "RunTime"
-          ],
+          "enum": ["BuildTime", "RunTime"],
           "type": "string",
           "x-ms-enum": {
             "name": "BaseImageDependencyType",
@@ -1809,10 +1725,7 @@
     },
     "TimerTrigger": {
       "description": "The properties of a timer trigger.",
-      "required": [
-        "schedule",
-        "name"
-      ],
+      "required": ["schedule", "name"],
       "type": "object",
       "properties": {
         "schedule": {
@@ -1822,10 +1735,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -1840,11 +1750,7 @@
     },
     "SourceTrigger": {
       "description": "The properties of a source based trigger.",
-      "required": [
-        "sourceRepository",
-        "sourceTriggerEvents",
-        "name"
-      ],
+      "required": ["sourceRepository", "sourceTriggerEvents", "name"],
       "type": "object",
       "properties": {
         "sourceRepository": {
@@ -1855,10 +1761,7 @@
           "description": "The source event corresponding to the trigger.",
           "type": "array",
           "items": {
-            "enum": [
-              "commit",
-              "pullrequest"
-            ],
+            "enum": ["commit", "pullrequest"],
             "type": "string",
             "x-ms-enum": {
               "name": "SourceTriggerEvent",
@@ -1869,10 +1772,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -1887,18 +1787,12 @@
     },
     "BaseImageTrigger": {
       "description": "The trigger based on base image dependency.",
-      "required": [
-        "baseImageTriggerType",
-        "name"
-      ],
+      "required": ["baseImageTriggerType", "name"],
       "type": "object",
       "properties": {
         "baseImageTriggerType": {
           "description": "The type of the auto trigger for base image dependency updates.",
-          "enum": [
-            "All",
-            "Runtime"
-          ],
+          "enum": ["All", "Runtime"],
           "type": "string",
           "x-ms-enum": {
             "name": "BaseImageTriggerType",
@@ -1911,10 +1805,7 @@
         },
         "updateTriggerPayloadType": {
           "description": "Type of Payload body for Base image update triggers.",
-          "enum": [
-            "Default",
-            "Token"
-          ],
+          "enum": ["Default", "Token"],
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateTriggerPayloadType",
@@ -1924,10 +1815,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -1946,10 +1834,7 @@
       "properties": {
         "loginMode": {
           "description": "The authentication mode which determines the source registry login scope. The credentials for the source registry\r\nwill be generated using the given scope. These credentials will be used to login to\r\nthe source registry during the run.",
-          "enum": [
-            "None",
-            "Default"
-          ],
+          "enum": ["None", "Default"],
           "type": "string",
           "x-ms-enum": {
             "name": "SourceRegistryLoginMode",
@@ -1978,18 +1863,12 @@
     },
     "SourceProperties": {
       "description": "The properties of the source code repository.",
-      "required": [
-        "sourceControlType",
-        "repositoryUrl"
-      ],
+      "required": ["sourceControlType", "repositoryUrl"],
       "type": "object",
       "properties": {
         "sourceControlType": {
           "description": "The type of source control service.",
-          "enum": [
-            "Github",
-            "VisualStudioTeamService"
-          ],
+          "enum": ["Github", "VisualStudioTeamService"],
           "type": "string",
           "x-ms-enum": {
             "name": "SourceControlType",
@@ -2020,10 +1899,7 @@
         },
         "type": {
           "description": "The type of the secret object which determines how the value of the secret object has to be\r\ninterpreted.",
-          "enum": [
-            "Opaque",
-            "Vaultsecret"
-          ],
+          "enum": ["Opaque", "Vaultsecret"],
           "type": "string",
           "x-ms-enum": {
             "name": "SecretObjectType",
@@ -2034,18 +1910,12 @@
     },
     "AuthInfo": {
       "description": "The authorization properties for accessing the source code repository.",
-      "required": [
-        "tokenType",
-        "token"
-      ],
+      "required": ["tokenType", "token"],
       "type": "object",
       "properties": {
         "tokenType": {
           "description": "The type of Auth token.",
-          "enum": [
-            "PAT",
-            "OAuth"
-          ],
+          "enum": ["PAT", "OAuth"],
           "type": "string",
           "x-ms-enum": {
             "name": "TokenType",
@@ -2099,10 +1969,7 @@
       "properties": {
         "status": {
           "description": "The current status of task.",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TaskStatus",
@@ -2142,10 +2009,7 @@
       "properties": {
         "os": {
           "description": "The operating system type required for the run.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "type": "string",
           "x-ms-enum": {
             "name": "OS",
@@ -2154,13 +2018,7 @@
         },
         "architecture": {
           "description": "The OS architecture.",
-          "enum": [
-            "amd64",
-            "x86",
-            "386",
-            "arm",
-            "arm64"
-          ],
+          "enum": ["amd64", "x86", "386", "arm", "arm64"],
           "type": "string",
           "x-ms-enum": {
             "name": "Architecture",
@@ -2169,11 +2027,7 @@
         },
         "variant": {
           "description": "Variant of the CPU.",
-          "enum": [
-            "v6",
-            "v7",
-            "v8"
-          ],
+          "enum": ["v6", "v7", "v8"],
           "type": "string",
           "x-ms-enum": {
             "name": "Variant",
@@ -2184,18 +2038,12 @@
     },
     "TaskStepUpdateParameters": {
       "description": "Base properties for updating any task step.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of the step.",
-          "enum": [
-            "Docker",
-            "FileTask",
-            "EncodedTask"
-          ],
+          "enum": ["Docker", "FileTask", "EncodedTask"],
           "type": "string",
           "x-ms-enum": {
             "name": "StepType",
@@ -2239,9 +2087,7 @@
     },
     "TimerTriggerUpdateParameters": {
       "description": "The properties for updating a timer trigger.",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "schedule": {
@@ -2251,10 +2097,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -2269,9 +2112,7 @@
     },
     "SourceTriggerUpdateParameters": {
       "description": "The properties for updating a source based trigger.",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "sourceRepository": {
@@ -2282,10 +2123,7 @@
           "description": "The source event corresponding to the trigger.",
           "type": "array",
           "items": {
-            "enum": [
-              "commit",
-              "pullrequest"
-            ],
+            "enum": ["commit", "pullrequest"],
             "type": "string",
             "x-ms-enum": {
               "name": "SourceTriggerEvent",
@@ -2296,10 +2134,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -2314,17 +2149,12 @@
     },
     "BaseImageTriggerUpdateParameters": {
       "description": "The properties for updating base image dependency trigger.",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "type": "object",
       "properties": {
         "baseImageTriggerType": {
           "description": "The type of the auto trigger for base image dependency updates.",
-          "enum": [
-            "All",
-            "Runtime"
-          ],
+          "enum": ["All", "Runtime"],
           "type": "string",
           "x-ms-enum": {
             "name": "BaseImageTriggerType",
@@ -2337,10 +2167,7 @@
         },
         "updateTriggerPayloadType": {
           "description": "Type of Payload body for Base image update triggers.",
-          "enum": [
-            "Default",
-            "Token"
-          ],
+          "enum": ["Default", "Token"],
           "type": "string",
           "x-ms-enum": {
             "name": "UpdateTriggerPayloadType",
@@ -2350,10 +2177,7 @@
         "status": {
           "description": "The current status of trigger.",
           "default": "Enabled",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
+          "enum": ["Disabled", "Enabled"],
           "type": "string",
           "x-ms-enum": {
             "name": "TriggerStatus",
@@ -2372,10 +2196,7 @@
       "properties": {
         "sourceControlType": {
           "description": "The type of source control service.",
-          "enum": [
-            "Github",
-            "VisualStudioTeamService"
-          ],
+          "enum": ["Github", "VisualStudioTeamService"],
           "type": "string",
           "x-ms-enum": {
             "name": "SourceControlType",
@@ -2402,10 +2223,7 @@
       "properties": {
         "tokenType": {
           "description": "The type of Auth token.",
-          "enum": [
-            "PAT",
-            "OAuth"
-          ],
+          "enum": ["PAT", "OAuth"],
           "type": "string",
           "x-ms-enum": {
             "name": "TokenType",
@@ -2433,9 +2251,7 @@
     },
     "Resource": {
       "description": "An Azure resource.",
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "properties": {
         "id": {
           "description": "The resource ID.",
@@ -2455,10 +2271,7 @@
         "location": {
           "description": "The location of the resource. This cannot be changed after the resource is created.",
           "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "tags": {
           "description": "The tags of the resource.",
@@ -2493,10 +2306,7 @@
     },
     "Error": {
       "description": "An error response from the Azure Container Registry service.",
-      "required": [
-        "code",
-        "message"
-      ],
+      "required": ["code", "message"],
       "properties": {
         "code": {
           "description": "error code.",
@@ -2519,11 +2329,7 @@
     },
     "DockerBuildRequest": {
       "description": "The parameters for a docker quick build.",
-      "required": [
-        "type",
-        "dockerFilePath",
-        "platform"
-      ],
+      "required": ["type", "dockerFilePath", "platform"],
       "type": "object",
       "allOf": [
         {
@@ -2592,10 +2398,7 @@
     },
     "Argument": {
       "description": "The properties of a run argument.",
-      "required": [
-        "name",
-        "value"
-      ],
+      "required": ["name", "value"],
       "type": "object",
       "properties": {
         "name": {
@@ -2615,11 +2418,7 @@
     },
     "FileTaskRunRequest": {
       "description": "The request parameters for a scheduling run against a task file.",
-      "required": [
-        "type",
-        "taskFilePath",
-        "platform"
-      ],
+      "required": ["type", "taskFilePath", "platform"],
       "type": "object",
       "allOf": [
         {
@@ -2671,10 +2470,7 @@
     },
     "SetValue": {
       "description": "The properties of a overridable value that can be passed to a task template.",
-      "required": [
-        "name",
-        "value"
-      ],
+      "required": ["name", "value"],
       "type": "object",
       "properties": {
         "name": {
@@ -2694,10 +2490,7 @@
     },
     "TaskRunRequest": {
       "description": "The parameters for a task run request.",
-      "required": [
-        "type",
-        "taskId"
-      ],
+      "required": ["type", "taskId"],
       "type": "object",
       "allOf": [
         {
@@ -2753,11 +2546,7 @@
     },
     "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
-      "required": [
-        "type",
-        "encodedTaskContent",
-        "platform"
-      ],
+      "required": ["type", "encodedTaskContent", "platform"],
       "type": "object",
       "allOf": [
         {
@@ -2809,10 +2598,7 @@
     },
     "DockerBuildStep": {
       "description": "The Docker build step.",
-      "required": [
-        "dockerFilePath",
-        "type"
-      ],
+      "required": ["dockerFilePath", "type"],
       "type": "object",
       "allOf": [
         {
@@ -2857,10 +2643,7 @@
     },
     "FileTaskStep": {
       "description": "The properties of a task step.",
-      "required": [
-        "taskFilePath",
-        "type"
-      ],
+      "required": ["taskFilePath", "type"],
       "type": "object",
       "allOf": [
         {
@@ -2888,10 +2671,7 @@
     },
     "EncodedTaskStep": {
       "description": "The properties of a encoded task step.",
-      "required": [
-        "encodedTaskContent",
-        "type"
-      ],
+      "required": ["encodedTaskContent", "type"],
       "type": "object",
       "allOf": [
         {
@@ -2919,9 +2699,7 @@
     },
     "DockerBuildStepUpdateParameters": {
       "description": "The properties for updating a docker build step.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "allOf": [
         {
@@ -2964,9 +2742,7 @@
     },
     "FileTaskStepUpdateParameters": {
       "description": "The properties of updating a task step.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "allOf": [
         {
@@ -2994,9 +2770,7 @@
     },
     "EncodedTaskStepUpdateParameters": {
       "description": "The properties for updating encoded task step.",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "type": "object",
       "allOf": [
         {
@@ -3023,69 +2797,67 @@
       "x-ms-discriminator-value": "EncodedTask"
     }
   },
-    "parameters": {
-      "SubscriptionIdParameter": {
-        "name": "subscriptionId",
-        "in": "path",
-        "description": "The Microsoft Azure subscription ID.",
-        "required": true,
-        "type": "string"
-      },
-      "ResourceGroupNameParameter": {
-        "name": "resourceGroupName",
-        "in": "path",
-        "description": "The name of the resource group to which the container registry belongs.",
-        "required": true,
-        "type": "string",
-        "minLength": 1,
-        "x-ms-parameter-location": "method"
-      },
-      "RegistryNameParameter": {
-        "name": "registryName",
-        "in": "path",
-        "description": "The name of the container registry.",
-        "required": true,
-        "type": "string",
-        "maxLength": 50,
-        "minLength": 5,
-        "pattern": "^[a-zA-Z0-9]*$",
-        "x-ms-parameter-location": "method"
-      },
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "description": "The client API version.",
-        "required": true,
-        "type": "string"
-      },
-      "TaskNameParameter": {
-        "name": "taskName",
-        "in": "path",
-        "description": "The name of the container registry task.",
-        "required": true,
-        "type": "string",
-        "maxLength": 50,
-        "minLength": 5,
-        "pattern": "^[a-zA-Z0-9-_]*$",
-        "x-ms-parameter-location": "method"
-      }
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
     },
-    "securityDefinitions": {
-      "azure_auth": {
-        "flow": "implicit",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
-        },
-        "type": "oauth2",
-        "description": "Azure Active Directory OAuth2 Flow"
-      }
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the container registry belongs.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
     },
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ]
-  }
+    "RegistryNameParameter": {
+      "name": "registryName",
+      "in": "path",
+      "description": "The name of the container registry.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    },
+    "TaskNameParameter": {
+      "name": "taskName",
+      "in": "path",
+      "description": "The name of the container registry task.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-_]*$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ]
+}
