@@ -502,6 +502,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
  
 # Needed when there is more than one input file
 override-info:
