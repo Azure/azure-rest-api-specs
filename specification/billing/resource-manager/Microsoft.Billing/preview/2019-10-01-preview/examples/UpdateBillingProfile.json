@@ -3,13 +3,23 @@
     "api-version": "2019-10-01-preview",
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
-    "parameters": {
-      "properties": {
-        "displayName": "BillingProfile11",
-        "invoiceEmailOptIn": true,
-        "poNumber": "ABC12345"
+    "parameters": [
+      {
+        "op": "replace",
+        "path": "displayName",
+        "value": "New Billing Profile Name"
+      },
+      {
+        "op": "replace",
+        "path": "invoiceEmailOptIn",
+        "value": true
+      },
+      {
+        "op": "replace",
+        "path": "poNumber",
+        "value": "ABC12345"
       }
-    }
+    ]
   },
   "responses": {
     "202": {

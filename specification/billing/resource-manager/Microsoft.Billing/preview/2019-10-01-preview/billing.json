@@ -130,13 +130,17 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "patch",
             "in": "body",
+            "description": "The payload that is used to patch the billing account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingAccountUpdateRequest"
-            },
-            "description": "Request parameters supplied to the update billing account operation."
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JsonPatchOperation"
+              }
+            }
           }
         ],
         "responses": {
@@ -544,13 +548,17 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "patch",
             "in": "body",
+            "description": "The payload that is used to patch the billing profile.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingProfile"
-            },
-            "description": "Request parameters supplied to the update billing profile operation."
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JsonPatchOperation"
+              }
+            }
           }
         ],
         "responses": {
@@ -807,13 +815,17 @@
             "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "name": "parameters",
+            "name": "patch",
             "in": "body",
+            "description": "The payload that is used to patch an invoice section.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InvoiceSection"
-            },
-            "description": "Request parameters supplied to the Create InvoiceSection operation."
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JsonPatchOperation"
+              }
+            }
           }
         ],
         "responses": {
@@ -3149,7 +3161,7 @@
           "Transfers"
         ],
         "description": "Lists all transfer's details initiated from given invoice section.",
-        "operationId": "PartnerTransfersTransfers_List",
+        "operationId": "PartnerTransfers_List",
         "x-ms-examples": {
           "TransfersList": {
             "$ref": "./examples/PartnerListTransfers.json"
@@ -5703,6 +5715,28 @@
           "items": {
             "$ref": "#/definitions/AzurePlan"
           }
+        }
+      }
+    },
+    "JsonPatchOperation": {
+      "description": "The Json Patch definition.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value.",
+          "type": "object"
+        },
+        "path": {
+          "description": "The target location.",
+          "type": "string"
+        },
+        "op": {
+          "description": "The operation.",
+          "type": "string"
+        },
+        "from": {
+          "description": "The source location.",
+          "type": "string"
         }
       }
     },
