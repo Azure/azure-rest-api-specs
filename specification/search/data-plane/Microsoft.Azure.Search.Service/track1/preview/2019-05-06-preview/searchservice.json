@@ -642,6 +642,12 @@
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
             "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
@@ -688,6 +694,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -3768,7 +3780,8 @@
         "azuresql",
         "cosmosdb",
         "azureblob",
-        "azuretable"
+        "azuretable",
+        "mysql"
       ],
       "x-ms-enum": {
         "name": "DataSourceType",
@@ -3789,6 +3802,10 @@
           {
             "value": "azuretable",
             "name": "AzureTable"
+          },
+          {
+            "value": "mysql",
+            "name": "MySql"
           }
         ]
       },
