@@ -1619,6 +1619,19 @@
           "default": "172.17.0.1/16",
           "description": "A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range."
         },
+        "OutboundType": {
+          "type": "string",
+          "enum": [
+            "loadBalancer",
+            "userDefinedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "outboundType",
+            "modelAsString": true
+          },
+          "default": "loadBalancer",
+          "description": "The outbound (egress) routing method."
+        },
         "loadBalancerSku": {
           "type": "string",
           "enum": [
