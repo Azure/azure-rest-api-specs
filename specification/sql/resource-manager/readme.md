@@ -649,7 +649,7 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
  - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/restorePoints.json
-- ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
+ - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/servers.json
  - ./Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
