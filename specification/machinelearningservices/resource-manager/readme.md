@@ -143,7 +143,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-11-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_11_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/azure-mgmt-machinelearningservices/v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_11_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -156,7 +156,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/azure-mgmt-machinelearningservices/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -169,7 +169,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/azure-mgmt-machinelearningservices/v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -182,7 +182,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
-  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/azure-mgmt-machinelearningservices/v2018_11_19
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2018_11_19
 regenerate-manager: true
 generate-interface: true
 ```
@@ -195,7 +195,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/azure-mgmt-machinelearningservices/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

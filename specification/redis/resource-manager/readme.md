@@ -177,7 +177,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.redis.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/azure-mgmt-redis/v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2018_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -191,7 +191,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.redis.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/azure-mgmt-redis/v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2017_10_01
 regenerate-manager: true
 generate-interface: true
 ```

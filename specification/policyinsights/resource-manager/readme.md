@@ -235,7 +235,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-10' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/azure-mgmt-policyinsights/v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2019_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -249,7 +249,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/azure-mgmt-policyinsights/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -262,7 +262,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-04' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2018_04_04
-  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/azure-mgmt-policyinsights/v2018_04_04
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2018_04_04
 regenerate-manager: true
 generate-interface: true
 ```
