@@ -6,12 +6,20 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": [ "user_impersonation" ]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/Automations/GetAutomationsSubscription_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "description": "Get all security automations in a subscription.",
         "operationId": "Automations_List",
         "parameters": [
@@ -70,7 +80,9 @@
             "$ref": "./examples/Automations/GetAutomationsResourceGroup_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "description": "Get all security automations in a resource group.",
         "operationId": "Automations_ListByResourceGroup",
         "parameters": [
@@ -110,7 +122,9 @@
             "$ref": "./examples/Automations/GetAutomationResourceGroup_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "description": "Get the details of a security automation.",
         "operationId": "Automations_Get",
         "parameters": [
@@ -148,7 +162,9 @@
             "$ref": "./examples/Automations/PutAutomation_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "description": "Create or update a security automation. If a security automation is already created and a subsequent create request is issued with different properties, the security automation properties will be updated.",
         "operationId": "Automations_CreateOrUpdate",
         "parameters": [
@@ -195,7 +211,9 @@
             "$ref": "./examples/Automations/DeleteAutomation_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "operationId": "Automations_Delete",
         "description": "Delete a security automation.",
         "parameters": [
@@ -232,7 +250,9 @@
             "$ref": "./examples/Automations/ValidateAutomation_example.json"
           }
         },
-        "tags": [ "Automations" ],
+        "tags": [
+          "Automations"
+        ],
         "description": "Validate the security automation model before create or update. Any validation errors are returned to the client.",
         "operationId": "Automations_Validate",
         "parameters": [
@@ -269,10 +289,12 @@
       }
     }
   },
-  "definitions": {
+  "IoTSecuritySolutionModel\"definitions\"": {
     "AutomationList": {
       "description": "List of security automations response.",
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -379,7 +401,10 @@
         "eventSource": {
           "type": "string",
           "description": "A valid event source type.",
-          "enum": [ "Assessments", "Alerts" ],
+          "enum": [
+            "Assessments",
+            "Alerts"
+          ],
           "x-ms-enum": {
             "name": "EventSource",
             "modelAsString": true,
@@ -420,11 +445,17 @@
       "type": "object",
       "description": "The action that should be triggered.",
       "discriminator": "actionType",
+      "required": true,
       "properties": {
         "actionType": {
           "type": "string",
           "description": "The type of the action that will be triggered by the Automation",
-          "enum": [ "LogicApp", "EventHub", "SecurityEmail", "Workspace" ],
+          "enum": [
+            "LogicApp",
+            "EventHub",
+            "SecurityEmail",
+            "Workspace"
+          ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": true,
@@ -471,7 +502,7 @@
           "$ref": "#/definitions/AutomationActionLogicApp"
         }
       ],
-      "properties": {        
+      "properties": {
         "uri": {
           "type": "string",
           "description": "The Logic App trigger URI endpoint.",
@@ -487,7 +518,7 @@
         {
           "$ref": "#/definitions/AutomationActionLogicApp"
         }
-      ]      
+      ]
     },
     "AutomationActionEventHub": {
       "type": "object",
@@ -590,7 +621,7 @@
     },
     "AutomationActionWorkspace": {
       "type": "object",
-      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace.",
+      "description": "The┬áLog┬áAnalytics┬áWorkspace┬áto┬áwhich┬áevent data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace.",
       "x-ms-discriminator-value": "Workspace",
       "allOf": [
         {
