@@ -5302,9 +5302,48 @@
         }
       },
       "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition"
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-custom-entity-lookup"
       },
-      "description": "Text analytics entity recognition."
+      "description": "Given a user defined list of entities, find any occurences in some supplied text."
+    },
+    "DocumentExtractionSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "parsingMode": {
+          "type": "string",
+          "enum": [
+            "default",
+            "text",
+            "json"
+          ],
+          "description": "The mode with which to extract data from the document."
+        },
+        "dataToExtract": {
+          "type": "string",
+          "enum": [
+            "storageMetadata",
+            "allMetadata",
+            "contentAndMetadata"
+          ],
+          "description": "What information to extract from the document."
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A dictionary of other key value pair configurations."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
+      },
+      "description": "Extract content from a binary file."
     },
     "WebApiHttpHeaders": {
       "type": "object",
@@ -6608,6 +6647,11 @@
           "x-ms-client-name": "indexerCounter",
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of indexers."
+        },
+        "skillsetCount": {
+          "x-ms-client-name": "skillsetCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of skillsets."
         },
         "dataSourcesCount": {
           "x-ms-client-name": "dataSourceCounter",
