@@ -206,8 +206,7 @@
       "type": "string",
       "enum": [
         "Creating",
-        "Succeeded",
-        "Suspended"
+        "Succeeded"
       ],
       "x-ms-enum": {
         "name": "StorageAccountState",
@@ -254,36 +253,42 @@
         "modelAsString": true
       }
     },
-    "WacAccountPermissions": {
-      "description": "Current operation being performed on Storage Account",
+    "StorageAccountKind": {
+      "description": "The kind of storage account",
       "type": "string",
       "enum": [
-        "Empty",
-        "None",
-        "Read",
-        "Delete",
-        "Write",
-        "Full"
+        "Storage",
+        "StorageV2",
+        "BlobStorage"
       ],
       "x-ms-enum": {
-        "name": "WacAccountPermissions",
+        "name": "StorageAccountKind",
         "modelAsString": true
       }
     },
-    "WacAccountStates": {
-      "description": "Current operation being performed on Storage Account",
+    "StorageAccountAccessTier": {
+      "description": "Access tier for storage account",
       "type": "string",
       "enum": [
-        "None",
-        "Active",
-        "Deleted",
-        "AboveQuota",
-        "Suspended",
-        "All",
-        "GcReadyState"
+        "Hot",
+        "Cool"
       ],
       "x-ms-enum": {
-        "name": "WacAccountStates",
+        "name": "StorageAccountAccessTier",
+        "modelAsString": true
+      }
+    },
+    "StorageAccountHealthState": {
+      "description": "Health state for storage account",
+      "type": "string",
+      "enum": [
+        "Healthy",
+        "Suspended",
+        "OverQuota",
+        "SuspendedAndOverQuota"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountHealthState",
         "modelAsString": true
       }
     },
@@ -382,11 +387,6 @@
           "type": "string",
           "readOnly": true
         },
-        "alternateName": {
-          "description": "Alternative storage account name being used during undelete operation.",
-          "type": "string",
-          "readOnly": true
-        },
         "primaryLocation": {
           "description": "The primary location for the storage account.",
           "type": "string",
@@ -427,19 +427,9 @@
           "$ref": "#/definitions/StorageAccountStatus",
           "description": "The status of storage account."
         },
-        "permissions": {
-          "description": "The permissions on the storage account.",
-          "$ref": "#/definitions/WacAccountPermissions",
-          "readOnly": true
-        },
         "accountId": {
           "description": "Internal storage account ID, which is not visible to tenant.",
           "type": "string",
-          "readOnly": true
-        },
-        "wacInternalState": {
-          "description": "The internal state of storage account in WAC.",
-          "$ref": "#/definitions/WacAccountStates",
           "readOnly": true
         },
         "encryption": {
@@ -450,6 +440,16 @@
         "supportsHttpsTrafficOnly": {
           "description": "Storage account supports https traffic only or not",
           "type": "boolean",
+          "readOnly": true
+        },
+        "accessTier": {
+          "description": "Required for storage accounts where kind = BlobStorage.",
+          "$ref": "#/definitions/StorageAccountAccessTier",
+          "readOnly": true
+        },
+        "healthState": {
+          "description": "The internal health state for storage account.",
+          "$ref": "#/definitions/StorageAccountHealthState",
           "readOnly": true
         }
       }
@@ -462,6 +462,11 @@
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Indicates the type of storage account",
+          "$ref": "#/definitions/StorageAccountKind",
           "readOnly": true
         },
         "tags": {
