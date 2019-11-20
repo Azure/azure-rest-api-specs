@@ -4029,6 +4029,11 @@
           "default": false,
           "description": "A value indicating whether the indexer is disabled. Default is false."
         },
+        "cache": {
+          "$ref": "#/definitions/IndexerCache",
+          "x-nullable": true,
+          "description": "The optional cache to store intermediate skill outputs for incremental enrichment."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -4271,6 +4276,27 @@
           "description": "The maximum number of characters that will be extracted from a document picked up for indexing."
         }
       }
+    },
+    "IndexerCache" : {
+      "properties" : {
+        "ID" : {
+          "type" : "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "description" : "Server-assigned guid identifier for this cache."
+        },
+        "enableReprocessing" : {
+          "type" : "boolean",
+          "x-nullable": true,
+          "default": true,
+          "description" : "Flag asto wether skillset updates should reproecss old documents automatically."
+        },
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string to the blob storage account that will be used to store the cache information."
+        }
+      },
+      "description": "Represents a annotation cache used to store intermediate skill outputs to allow for incremental enrichment."
     },
     "Field": {
       "properties": {
