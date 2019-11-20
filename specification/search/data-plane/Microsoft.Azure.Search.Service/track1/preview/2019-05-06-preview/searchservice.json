@@ -4296,6 +4296,9 @@
           "description": "The connection string to the blob storage account that will be used to store the cache information."
         }
       },
+      "required": [
+        "storageConnectionString"
+      ],
       "description": "Represents a annotation cache used to store intermediate skill outputs to allow for incremental enrichment."
     },
     "Field": {
@@ -4855,6 +4858,10 @@
           "$ref": "#/definitions/CognitiveServices",
           "description": "Details about cognitive services to be used when running skills."
         },
+        "knowledgeStore": {
+          "$ref": "#/definitions/KnowledgeStore",
+          "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -4911,6 +4918,111 @@
       "required": [
         "key"
       ]
+    },
+    "KnowledgeStore" :
+    {
+      "properties" : {
+        "storageConnectionString": {
+          "type": "string",
+          "description": "The connection string additional projections will be stored in."
+        },
+        "projections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KowledgeStoreProjection",
+            "x-nullable": false
+          },
+          "description": "A list of additional projections to perform during indexing."
+        }
+      },
+      "required": [
+        "storageConnectionString",
+        "projections"
+      ]
+    },
+    "KowledgeStoreProjection" :
+    {
+      "properties" : {
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeStoreTableProjectionSelector",
+            "x-nullable": false
+          }
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeStoreObjectProjectionSelector",
+            "x-nullable": false
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeStoreFileProjectionSelector",
+            "x-nullable": false
+          }
+        }
+      }
+    },
+    "KnowledgeStoreProjectionSelector" : {
+      "properties" : {
+        "referenceKeyName" : {
+          "type" : "string"
+        },
+        "generatedKeyName" : {
+          "type" : "string"
+        },
+        "source" : {
+          "type" : "string"
+        },
+        "sourceContext" : {
+          "type" : "string"
+        },
+        "inputs" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          }
+        }
+      },
+      "required": [
+        "tableName",
+        "generatedKeyName"
+      ]
+    },
+    "KnowledgeStoreTableProjectionSelector" : {
+      "properties" : {
+        "tableName" : {
+          "type" : "string"
+        }
+      },
+      "required": [
+        "tableName"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Tables"
+    },
+    "KnowledgeStoreObjectProjectionSelector" : {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Blob"
+    },
+    "KnowledgeStoreFileProjectionSelector" : {
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
+        }
+      ],
+      "description": "Description for what data to store in Azure Files"
     },
     "Skill": {
       "discriminator": "@odata.type",
@@ -5366,6 +5478,10 @@
           "description": "A dictionary of other key value pair configurations."
         }
       },
+      "required": [
+        "parsingMode",
+        "dataToExtract"
+      ],
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-document-extraction"
       },
