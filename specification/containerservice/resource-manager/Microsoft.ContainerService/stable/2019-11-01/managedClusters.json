@@ -1685,6 +1685,22 @@
           "description": "The effective outbound IP resources of the cluster load balancer."
         }
       },
+      "allocatedPorts": {
+        "type": "integer",
+        "format": "int32",
+        "maximum": 64000,
+        "minimum": 0,
+        "description": "Desired number of allocated SNAT ports per VM. Allowed values must be in the range of 0 to 64000 (inclusive). The default value is 0 which results in Azure dynamically allocating ports. ",
+        "default": 0
+      },
+      "idleTimeoutInMinutes": {
+        "type": "integer",
+        "format": "int32",
+        "maximum": 120,
+        "minimum": 4,
+        "description": "Desired outbound flow idle timeout in minutes. Allowed values must be in the range of 4 to 120 (inclusive). The default value is 30 minutes. ",
+        "default": 30
+      },
       "description": "Profile of the managed cluster load balancer"
     },
     "ResourceReference": {
