@@ -57,6 +57,8 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
 
@@ -145,6 +147,8 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 
 ```
 

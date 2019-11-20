@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-iothub"
   output-folder: "$(typescript-sdks-folder)/sdk/iothub/arm-iothub"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

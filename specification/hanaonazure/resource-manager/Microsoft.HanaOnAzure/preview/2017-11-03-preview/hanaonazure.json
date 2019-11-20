@@ -882,6 +882,15 @@
             "S192m",
             "S192xm",
             "S96",
+            "S112",
+            "S224m",
+            "S224o",
+            "S224om",
+            "S224oo",
+            "S224oom",
+            "S224ooo",
+            "S224oxm",
+            "S224oxxm",
             "S384",
             "S384m",
             "S384xm",
@@ -891,12 +900,7 @@
             "S768",
             "S768m",
             "S768xm",
-            "S960m",
-            "S224o",
-            "S224m",
-            "S224om",
-            "S224oxm",
-            "S224oxxm"
+            "S960m"
           ],
           "x-ms-enum": {
             "name": "HanaInstanceSizeNamesEnum",
@@ -1202,9 +1206,20 @@
           "description": "The name of the resource group the SAP Monitor resources get deployed into."
         },
         "logAnalyticsWorkspaceArmId": {
-          "readOnly": true,
           "type": "string",
           "description": "The ARM ID of the Log Analytics Workspace that is used for monitoring"
+        },
+        "enableCustomerAnalytics": {
+          "type": "boolean",
+          "description": "The value indicating whether to send analytics to Microsoft"
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "description": "The workspace ID of the log analytics workspace to be used for monitoring"
+        },
+        "logAnalyticsWorkspaceSharedKey": {
+          "type": "string",
+          "description": "The shared key of the log analytics workspace that is used for monitoring"
         }
       },
       "description": "Describes the properties of a SAP monitor."

@@ -26,18 +26,27 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06
+tag: package-2019-10
 ```
 
 
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.Consumption/stable/2019-10-01/consumption.json
+```
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06'
+``` yaml $(tag) == 'package-2019-06'
 input-file:
   - Microsoft.Consumption/stable/2019-06-01/consumption.json
 ```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -407,6 +416,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Consumption/stable/2019-10-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-06-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-05-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
