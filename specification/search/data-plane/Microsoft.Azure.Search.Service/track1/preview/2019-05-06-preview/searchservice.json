@@ -5280,6 +5280,32 @@
       },
       "description": "A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code."
     },
+    "CustomEntityLookupSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "entitiesDefinitionUri": {
+          "type": "string",
+          "description": "The uri pointing to a hosted json or csv file containing which entities to lookup."
+        },
+        "defaultLanguageCode": {
+          "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
+          "description": "A value indicating which language code to use. Default is en."
+        },
+        "inlineEntitiesDefinition": {
+          "$ref": "#/definitions/CustomEntityLookupEntityDefinition",
+          "description": "An inline definition of entities to lookup."
+        }
+      },
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition"
+      },
+      "description": "Text analytics entity recognition."
+    },
     "WebApiHttpHeaders": {
       "type": "object",
       "additionalProperties": {
@@ -5875,6 +5901,133 @@
       },
       "description": "The language codes supported for input text by EntityRecognitionSkill."
     },
+    "CustomEntityLookupSkillLanguage": {
+      "type": "string",
+      "enum": [
+        "ar",
+        "cs",
+        "zh-Hans",
+        "zh-Hant",
+        "da",
+        "nl",
+        "en",
+        "fi",
+        "fr",
+        "de",
+        "el",
+        "hu",
+        "it",
+        "ja",
+        "ko",
+        "no",
+        "pl",
+        "pt-PT",
+        "pt-BR",
+        "ru",
+        "es",
+        "sv",
+        "tr"
+      ],
+      "x-ms-enum": {
+        "name": "CustomEntityLookupSkillLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
+          {
+            "value": "zh-Hans",
+            "description": "Chinese-Simplified"
+          },
+          {
+            "value": "zh-Hant",
+            "description": "Chinese-Traditional"
+          },
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian (Bokmaal)"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-BR",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          }
+        ]
+      },
+      "description": "The language codes supported for input text by CustomEntityLookupSkillLanguage."
+    },
     "TextTranslationSkillLanguage": {
       "type": "string",
       "enum": [
@@ -6224,7 +6377,103 @@
       },
       "description": "The language codes supported for input by ImageAnalysisSkill."
     },
-    "SynonymMap": {
+    "CustomEntityLookupSkillEntityDefinition" : {
+      "properties": {
+        "entityArray": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityLookupSkillEntity",
+            "x-nullable": false
+          },
+          "description": "A list entities for Custom Entity Lookup Skill to find."
+        }
+      },
+      "required": [
+        "entityArray"
+      ],
+      "description": "Represents the entity definition needed for Custom Entity Lookup Skill."
+    },
+    "CustomEntityLookupSkillEntity" : {
+      "properties": {
+        "name" : {
+          "type": "string"
+        },
+        "description" : {
+          "type": "string"
+        },
+        "type" : {
+          "type": "string"
+        },
+        "subtype" : {
+          "type": "string"
+        },
+        "id" : {
+          "type": "string"
+        },
+        "caseSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "accentSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "fuzzyEditDistance" : {
+          "type": "int32",
+          "default": 0,
+          "maximum": 5
+        },
+        "defaultCaseSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "defaultAccentSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "defaultFuzzyEditDistance" : {
+          "type": "int32",
+          "default": 0,
+          "maximum": 5
+        },
+        "aliases" : {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityLookupSkillAlias",
+            "x-nullable": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Represents a single Custom Entity Lookup Skill entity."
+    },
+    "CustomEntityLookupSkillAlias" : {
+      "properties": {
+        "text" : {
+          "type": "string"
+        },
+        "caseSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "accentSensitive" : {
+          "type": "boolean",
+          "default": false
+        },
+        "fuzzyEditDistance" : {
+          "type": "int32",
+          "default": 0,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "description": "Represents an alternative spelling of a Custom Entity Lookup Skill entity."
+    },
+    "SynonymMap" : {
       "properties": {
         "name": {
           "externalDocs": {
