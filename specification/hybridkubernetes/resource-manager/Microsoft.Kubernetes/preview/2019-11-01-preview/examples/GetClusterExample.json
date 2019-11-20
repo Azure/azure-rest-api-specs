@@ -1,15 +1,9 @@
 {
   "parameters": {
-    "api-version": "2019-11-01-preview",
     "subscriptionId": "1bfbb5d0-917e-4346-9026-1d3b344417f5",
     "resourceGroupName": "akkeshar-rg",
     "clusterName": "testCluster",
-    "ConnectedClusterPatch": {
-      "tags": {
-        "tag1": "value1",
-        "tag2": "value2"
-      }
-    }
+    "api-version": "2019-11-01-preview"
   },
   "responses": {
     "200": {
@@ -20,6 +14,8 @@
         "location": "East US",
         "tags": {},
         "identity": {
+          "principalId": "d8cd1fd9-154f-4da7-b348-595f283c13a3",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
           "type": "SystemAssigned"
         },
         "properties": {
@@ -29,9 +25,9 @@
             "clientAppId": "f8cd1fd9-154f-4da7-b348-595f283c13a3",
             "serverAppId": "45c27b16-e262-4c55-b572-b3b8f7788eb8"
           },
-          "kubernetesVersion": "1.0",
+          "kubernetesVersion": "1.17.0",
           "totalNodeCount": 2,
-          "agentVersion": "2019-11-01-preview"
+          "agentVersion": "0.1.0"
         }
       }
     }
