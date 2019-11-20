@@ -12,12 +12,8 @@
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall",
         "type": "Microsoft.Network/azureFirewalls",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "location": "West US 2",
-        "zones": [
-          "1",
-          "2",
-          "3"
-        ],
+        "location": "West US",
+        "zones": [],
         "tags": {
           "key1": "value1"
         },
@@ -66,9 +62,10 @@
                     "targetFqdns": [
                       "www.test.com"
                     ],
-                    "sourceAddresses": [
-                      "216.58.216.164",
-                      "10.0.0.0/24"
+                    "sourceIpGroups": [
+                        {
+                            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1"
+                        }
                     ]
                   }
                 ]
@@ -105,8 +102,10 @@
                   {
                     "name": "DNAT-HTTP-traffic-With-FQDN",
                     "description": "D-NAT all inbound web traffic for inspection",
-                    "sourceAddresses": [
-                      "*"
+                    "sourceIpGroups": [
+                        {
+                            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1"
+                        }
                     ],
                     "destinationAddresses": [
                       "1.2.3.4"
@@ -144,8 +143,10 @@
                       "443-444",
                       "8443"
                     ],
-                    "destinationAddresses": [
-                      "*"
+                    "destinationIpGroups": [
+                        {
+                            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups2"
+                        }
                     ],
                     "protocols": [
                       "TCP"
@@ -154,8 +155,10 @@
                   {
                     "name": "L4-traffic-with-FQDN",
                     "description": "Block traffic based on source IPs and ports to amazon",
-                    "sourceAddresses": [
-                      "10.2.4.12-10.2.4.255"
+                    "sourceIpGroups": [
+                        {
+                            "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups3"
+                        }
                     ],
                     "destinationPorts": [
                       "443-444",
@@ -172,7 +175,20 @@
               }
             }
           ],
-          "ipGroups": [],
+          "ipGroups": [
+            {
+                "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1",
+                "changeNumber": "5"
+            },
+            {
+                "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups2",
+                "changeNumber": "4"
+            },
+            {
+                "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups3",
+                "changeNumber": "1"
+            }
+          ],
           "additionalProperties": {}
         }
       }
