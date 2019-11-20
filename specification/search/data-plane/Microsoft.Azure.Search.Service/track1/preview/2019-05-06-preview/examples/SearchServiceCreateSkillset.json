@@ -109,8 +109,84 @@
             }
           ],
           "httpHeaders": {}
+        },
+        {
+          "@odata.type": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+          "name": "MyExtractionSkill",
+          "description": null,
+          "context": "/document",
+          "parsingMode": "default",
+          "dataToExtract": "contentAndMetadata",
+          "configuration": {
+            "imageAction": "generateNormalizedImages",
+            "normalizedImageMaxWidth": 2000,
+            "normalizedImageMaxHeight": 2000
+          },
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/file_data"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "content",
+              "targetName": "content"
+            },
+            {
+              "name": "normalized_images",
+              "targetName": "normalized_images"
+            }
+          ]
+        },
+        {
+          "@odata.type": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
+          "name": "MyCustomEntityLookup",
+          "context": "/document",
+          "entitiesDefinitionUri": "https://contoso.example.org/myEntityDefinition.json",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "entities",
+              "targetName": "myFoundEntities"
+            }
+          ]
         }
-      ]
+      ],
+      "knowledgeStore": { 
+        "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myStorage;AccountKey=myStorageKey;EndpointSuffix=core.windows.net", 
+        "projections": [ 
+                          { 
+                              "tables": [  
+                              { "tableName": "Reviews", "generatedKeyName": "ReviewId", "source": "/document/Review" , "sourceContext": null, "inputs": []}, 
+                              { "tableName": "Sentences", "generatedKeyName": "SentenceId", "source": "/document/Review/Sentences/*", "sourceContext": null, "inputs": []}, 
+                              { "tableName": "KeyPhrases", "generatedKeyName": "KeyPhraseId", "source": "/document/Review/Sentences/*/KeyPhrases", "sourceContext": null, "inputs": []}, 
+                              { "tableName": "Entities", "generatedKeyName": "EntityId", "source": "/document/Review/Sentences/*/Entities/*" ,"sourceContext": null, "inputs": []} 
+                  
+                              ], 
+                              "objects": [ 
+                                
+                              ]      
+                          },
+                          { 
+                              "tables": [ 
+                              ], 
+                              "objects": [ 
+                                  { 
+                                  "storageContainer": "Reviews", 
+                                  "format": "json", 
+                                  "source": "/document/Review", 
+                                  "key": "/document/Review/Id" 
+                                  } 
+                              ]      
+                          }        
+                      ]     
+        }
     }
   },
   "responses": {
@@ -236,8 +312,84 @@
               }
             ],
             "httpHeaders": {}
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentExtractionSkill",
+            "name": "MyExtractionSkill",
+            "description": null,
+            "context": "/document",
+            "parsingMode": "default",
+            "dataToExtract": "contentAndMetadata",
+            "configuration": {
+              "imageAction": "generateNormalizedImages",
+              "normalizedImageMaxWidth": 2000,
+              "normalizedImageMaxHeight": 2000
+            },
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/file_data"
+              }
+            ],
+            "outputs": [
+              {
+                "name": "content",
+                "targetName": "content"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.CustomEntityLookupSkill",
+            "name": "MyCustomEntityLookup",
+            "context": "/document",
+            "entitiesDefinitionUri": "https://contoso.example.org/myEntityDefinition.json",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content"
+              }
+            ],
+            "outputs": [
+              {
+                "name": "entities",
+                "targetName": "myFoundEntities"
+              }
+            ]
           }
-        ]
+        ],
+        "knowledgeStore": { 
+          "storageConnectionString": "DefaultEndpointsProtocol=https;AccountName=myStorage;AccountKey=myStorageKey;EndpointSuffix=core.windows.net", 
+          "projections": [ 
+                            { 
+                                "tables": [  
+                                { "tableName": "Reviews", "generatedKeyName": "ReviewId", "source": "/document/Review" , "sourceContext": null, "inputs": []}, 
+                                { "tableName": "Sentences", "generatedKeyName": "SentenceId", "source": "/document/Review/Sentences/*", "sourceContext": null, "inputs": []}, 
+                                { "tableName": "KeyPhrases", "generatedKeyName": "KeyPhraseId", "source": "/document/Review/Sentences/*/KeyPhrases", "sourceContext": null, "inputs": []}, 
+                                { "tableName": "Entities", "generatedKeyName": "EntityId", "source": "/document/Review/Sentences/*/Entities/*" ,"sourceContext": null, "inputs": []} 
+                    
+                                ], 
+                                "objects": [ 
+                                  
+                                ]      
+                            },
+                            { 
+                                "tables": [ 
+                                ], 
+                                "objects": [ 
+                                    { 
+                                    "storageContainer": "Reviews", 
+                                    "format": "json", 
+                                    "source": "/document/Review", 
+                                    "key": "/document/Review/Id" 
+                                    } 
+                                ]      
+                            }        
+                        ]     
+          }
       }
     }
   }
