@@ -4932,7 +4932,7 @@
         "projections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KowledgeStoreProjection",
+            "$ref": "#/definitions/KnowledgeStoreProjection",
             "x-nullable": false
           },
           "description": "A list of additional projections to perform during indexing."
@@ -4946,7 +4946,7 @@
         "url": "https://docs.microsoft.com/azure/search/knowledge-store-projection-overview"
       }
     },
-    "KowledgeStoreProjection" :
+    "KnowledgeStoreProjection" :
     {
       "properties" : {
         "tables": {
@@ -4992,10 +4992,16 @@
             "$ref": "#/definitions/InputFieldMappingEntry"
           }
         }
+      }
+    },
+    "KnowledgeStoreBlobProjectionSelector" : {
+      "properties" : {
+        "storageContainer" : {
+          "type" : "string"
+        }
       },
       "required": [
-        "referenceKeyName",
-        "generatedKeyName"
+        "storageContainer"
       ]
     },
     "KnowledgeStoreTableProjectionSelector" : {
@@ -5005,6 +5011,7 @@
         }
       },
       "required": [
+        "generatedKeyName",
         "tableName"
       ],
       "allOf": [
@@ -5017,7 +5024,7 @@
     "KnowledgeStoreObjectProjectionSelector" : {
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
+          "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
         }
       ],
       "description": "Description for what data to store in Azure Blob"
@@ -5025,7 +5032,7 @@
     "KnowledgeStoreFileProjectionSelector" : {
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
+          "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
         }
       ],
       "description": "Description for what data to store in Azure Files"
@@ -5479,7 +5486,7 @@
         "configuration": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "object"
           },
           "description": "A dictionary of other key value pair configurations."
         }
