@@ -37,7 +37,7 @@ batch:
 These settings apply only when `--tag=package-2019-08-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2019-08-only' && $(python)
+``` yaml $(tag) == 'package-2019-08' && $(python)
 python:
   namespace: azure.mgmt.web.v2019_08_01
   output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2019_08_01
@@ -48,7 +48,7 @@ python:
 These settings apply only when `--tag=package-2018-11-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2018-11-only' && $(python)
+``` yaml $(tag) == 'package-2018-11' && $(python)
 python:
   namespace: azure.mgmt.web.v2018_11_01
   output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2018_11_01
