@@ -263,7 +263,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_05_31
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/costmanagement/mgmt-v2018_05_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -276,7 +276,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/costmanagement/mgmt-v2018_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -289,7 +289,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_12_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/costmanagement/mgmt-v2018_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -302,7 +302,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/costmanagement/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -315,7 +315,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2019_09_01
-  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2019_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/costmanagement/mgmt-v2019_09_01
 regenerate-manager: true
 generate-interface: true
 ```

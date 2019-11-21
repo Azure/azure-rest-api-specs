@@ -1077,7 +1077,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2019_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -1090,7 +1090,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -1103,7 +1103,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-03-01-web' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2016_03_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2016_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -1116,7 +1116,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-08-01-web' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2016_08_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2016_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -1129,7 +1129,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-09-01-web' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.appservice.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2016_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/appservice/mgmt-v2016_09_01
 regenerate-manager: true
 generate-interface: true
 ```
