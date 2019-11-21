@@ -69,7 +69,7 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2020-01-01-privatepreview'
 input-file:
-- Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+- Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
 ---
