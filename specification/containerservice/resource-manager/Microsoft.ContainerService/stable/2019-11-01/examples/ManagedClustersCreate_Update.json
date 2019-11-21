@@ -123,23 +123,23 @@
             "podCidr": "10.244.0.0/16",
             "serviceCidr": "10.0.0.0/16",
             "dnsServiceIP": "10.0.0.10",
-            "dockerBridgeCidr": "172.17.0.1/16"
-          },
-          "outboundType": "loadBalancer",
-          "loadBalancerProfile": {
-            "managedOutboundIPs": {
-              "count": 2
-            },
-            "effectiveOutboundIPs": [
-              {
-                "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+            "dockerBridgeCidr": "172.17.0.1/16",
+            "outboundType": "loadBalancer",
+            "loadBalancerProfile": {
+              "managedOutboundIPs": {
+                "count": 2
               },
-              {
-                "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
-              }
-            ],
-            "allocatedPorts": 2000,
-            "idleTimeoutsInMinutes": 10
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "allocatedPorts": 2000,
+              "idleTimeoutsInMinutes": 10
+            }
           }
         }
       }
