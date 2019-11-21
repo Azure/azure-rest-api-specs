@@ -319,11 +319,11 @@
       ],
       "properties": {
         "policySettings": {
-          "description": "Describes policySettings for policy.",
+          "description": "The PolicySettings for policy.",
           "$ref": "#/definitions/PolicySettings"
         },
         "customRules": {
-          "description": "Describes custom rules inside the policy.",
+          "description": "The custom rules inside the policy.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
@@ -411,14 +411,14 @@
           "items": {
             "$ref": "#/definitions/OwaspCrsExclusionEntry"
           },
-          "description": "Describes the Exclusions that are applied on the policy."
+          "description": "The Exclusions that are applied on the policy."
         },
         "managedRuleSets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
           },
-          "description": "Describes the ruleSets that are associated with the policy."
+          "description": "The managed rule sets that are associated with the policy."
         }
       }
     },
@@ -426,7 +426,7 @@
       "description": "Defines contents of a web application firewall global configuration.",
       "properties": {
         "state": {
-          "description": "Describes if the policy is in enabled state or disabled state.",
+          "description": "The state of the policy.",
           "type": "string",
           "enum": [
             "Disabled",
@@ -438,7 +438,7 @@
           }
         },
         "mode": {
-          "description": "Describes if it is in detection mode or prevention mode at policy level.",
+          "description": "The mode of the policy.",
           "type": "string",
           "enum": [
             "Prevention",
@@ -491,11 +491,11 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "priority": {
-          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
+          "description": "Priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
           "type": "integer"
         },
         "ruleType": {
-          "description": "Describes type of rule.",
+          "description": "The rule type.",
           "type": "string",
           "enum": [
             "MatchRule",
@@ -529,7 +529,7 @@
       }
     },
     "Transform": {
-      "description": "Describes what transforms applied before matching.",
+      "description": "Transforms applied before matching.",
       "type": "string",
       "enum": [
         "Lowercase",
@@ -569,7 +569,7 @@
           }
         },
         "selector": {
-          "description": "Describes field of the matchVariable collection.",
+          "description": "The selector of match variable.",
           "type": "string"
         }
       }
@@ -590,7 +590,7 @@
           }
         },
         "operator": {
-          "description": "Describes operator to be matched.",
+          "description": "The operator to be matched.",
           "type": "string",
           "enum": [
             "IPMatch",
@@ -611,7 +611,7 @@
           }
         },
         "negationConditon": {
-          "description": "Describes if this is negate condition or not.",
+          "description": "Whether this is negate condition or not.",
           "type": "boolean"
         },
         "matchValues": {
@@ -662,7 +662,7 @@
       ],
       "properties": {
         "ruleGroupName": {
-          "description": "Describes the managed rule group to override.",
+          "description": "The managed rule group to override.",
           "type": "string"
         },
         "rules": {
@@ -685,7 +685,7 @@
           "type": "string"
         },
         "state": {
-          "description": "Describes the state of the managed rule. Defaults to Disabled if not specified.",
+          "description": "The state of the managed rule. Defaults to Disabled if not specified.",
           "type": "string",
           "enum": [
             "Disabled"
