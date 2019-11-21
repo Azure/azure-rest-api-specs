@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-automation"
   output-folder: "$(typescript-sdks-folder)/sdk/automation/arm-automation"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -245,6 +245,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation."
           }
         ],
         "responses": {
@@ -257,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -2906,7 +2918,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3129,6 +3141,9 @@
           },
           "Create a scale set with terminate scheduled events enabled.": {
             "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
+          },
+          "Create a scale set with automatic repairs enabled": {
+            "$ref": "./examples/CreateAScaleSetWithAutomaticRepairs.json"
           }
         }
       },
@@ -3906,7 +3921,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4980,7 +4995,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -6935,9 +6950,30 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine. <br><br>This may only be set to False when no extensions are present on the virtual machine."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Specifies whether the guest provision signal is required from the virtual machine."
         }
       },
       "description": "Specifies the operating system settings for the virtual machine."
+    },
+    "AutomaticRepairsPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The default value is 5 minutes (PT5M)."
+        },
+        "maxInstanceRepairsPercent": {
+          "type": "integer",
+          "description": "The percentage (capacity of scaleset) of virtual machines that will be simultaneously repaired. The default value is 20%."
+        }
+      },
+      "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
     },
     "NetworkInterfaceReferenceProperties": {
       "properties": {
@@ -6995,6 +7031,41 @@
         }
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+    },
+    "priority": {
+      "type": "string",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. <br><br> 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "enum": [
+        "Regular",
+        "Low",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachinePriorityTypes",
+        "modelAsString": true
+      }
+    },
+    "evictionPolicy": {
+      "type": "string",
+      "description": "Specifies the eviction policy for the Azure Spot VM/VMSS",
+      "enum": [
+        "Deallocate",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineEvictionPolicyTypes",
+        "modelAsString": true
+      }
+    },
+    "BillingProfile": {
+      "properties": {
+        "maxPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. <br><br> The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: 0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+        }
+      },
+      "description": "Specifies the billing related details of a Azure Spot VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
     },
     "VirtualMachineExtensionHandlerInstanceView": {
       "properties": {
@@ -7278,11 +7349,27 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+        },
+        "virtualMachineScaleSet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01"
         },
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "priority": {
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01"
+        },
+        "evictionPolicy": {
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01"
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01."
         },
         "host": {
           "$ref": "#/definitions/SubResource",
@@ -7481,6 +7568,27 @@
         }
       },
       "description": "The configuration parameters used while performing a rolling upgrade."
+    },
+    "ScaleInPolicy": {
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Default",
+              "OldestVM",
+              "NewestVM"
+            ],
+            "x-ms-enum": {
+              "name": "VirtualMachineScaleSetScaleInRules",
+              "modelAsString": true
+            }
+          },
+          "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>"
+        }
+      },
+      "description": "Describes a scale-in policy for a virtual machine scale set."
     },
     "ImageOSDisk": {
       "properties": {
@@ -8365,6 +8473,10 @@
     },
     "VirtualMachineScaleSetUpdateNetworkProfile": {
       "properties": {
+        "healthProbe": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+        },
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
@@ -8496,28 +8608,16 @@
           "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
         },
         "priority": {
-          "type": "string",
-          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Regular",
-            "Low"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachinePriorityTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
         },
         "evictionPolicy": {
-          "type": "string",
-          "description": "Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Deallocate",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineEvictionPolicyTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for virtual machines in a Azure Spot scale set. <br><br>Minimum api-version: 2017-10-30-preview"
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
         },
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
@@ -8552,6 +8652,10 @@
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
         },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+        },
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
@@ -8564,6 +8668,10 @@
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
+        },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
@@ -8607,6 +8715,10 @@
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
+        "scaleInPolicy": {
+          "$ref": "#/definitions/ScaleInPolicy",
+          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -8617,6 +8729,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
           "description": "The virtual machine profile."
@@ -8625,6 +8741,10 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
+        "doNotRunExtensionsOnOverprovisionedVMs": {
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
+        },
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
@@ -8632,6 +8752,14 @@
         "additionalCapabilities": {
           "$ref": "#/definitions/AdditionalCapabilities",
           "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
+        },
+        "scaleInPolicy": {
+          "$ref": "#/definitions/ScaleInPolicy",
+          "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."

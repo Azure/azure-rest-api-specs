@@ -54,6 +54,12 @@
           "AvailabilityGet": {
             "$ref": "./examples/AvailabilityGet.json"
           },
+          "ColdStoreAvailabilityGet": {
+            "$ref": "./examples/ColdStoreAvailabilityGet.json"
+          },
+          "WarmStoreAvailabilityGet": {
+            "$ref": "./examples/WarmStoreAvailabilityGet.json"
+          },
           "AvailabilityGetEmpty": {
             "$ref": "./examples/AvailabilityGetEmpty.json"
           }
@@ -61,6 +67,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ClientRequestId"
@@ -112,11 +121,20 @@
           },
           "EventSchemaGetEmpty": {
             "$ref": "./examples/EventSchemaGetEmpty.json"
+          },
+          "ColdStoreEventSchemaGet": {
+            "$ref": "./examples/ColdStoreEventSchemaGet.json"
+          },
+          "WarmStoreEventSchemaGet": {
+            "$ref": "./examples/WarmStoreEventSchemaGet.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "name": "parameters",
@@ -291,6 +309,24 @@
           "QueryAggregateSeriesPage2": {
             "$ref": "./examples/QueryAggregateSeriesPage2.json"
           },
+          "ColdStoreQueryAggregateSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage1.json"
+          },
+          "ColdStoreQueryAggregateSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryAggregateSeriesPage2.json"
+          },
+          "WarmStoreQueryAggregateSeriesPage": {
+            "$ref": "./examples/WarmStoreQueryAggregateSeriesPage.json"
+          },
+          "QueryAggregateSeriesWithSampleInterpolation": {
+            "$ref": "./examples/QueryAggregateSeriesWithSampleInterpolation.json"
+          },
+          "QueryAggregateSeriesWithCategoricalVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalVariable.json"
+          },
+          "QueryAggregateSeriesWithCategoricalInterpolatedVariable": {
+            "$ref": "./examples/QueryAggregateSeriesWithCategoricalInterpolatedVariable.json"
+          },
           "QueryGetEventsPage1": {
             "$ref": "./examples/QueryGetEventsPage1.json"
           },
@@ -302,6 +338,30 @@
           },
           "QueryGetEventsPage4": {
             "$ref": "./examples/QueryGetEventsPage4.json"
+          },
+          "ColdStoreQueryGetEventsPage1": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage1.json"
+          },
+          "ColdStoreQueryGetEventsPage2": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage2.json"
+          },
+          "ColdStoreQueryGetEventsPage3": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage3.json"
+          },
+          "ColdStoreQueryGetEventsPage4": {
+            "$ref": "./examples/ColdStoreQueryGetEventsPage4.json"
+          },
+          "WarmStoreQueryGetEventsPage1": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage1.json"
+          },
+          "WarmStoreQueryGetEventsPage2": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage2.json"
+          },
+          "WarmStoreQueryGetEventsPage3": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage3.json"
+          },
+          "WarmStoreQueryGetEventsPage4": {
+            "$ref": "./examples/WarmStoreQueryGetEventsPage4.json"
           },
           "QueryGetEventsWithTakePage1": {
             "$ref": "./examples/QueryGetEventsWithTakePage1.json"
@@ -323,11 +383,32 @@
           },
           "QueryGetSeriesWithTakePage2": {
             "$ref": "./examples/QueryGetSeriesWithTakePage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage1.json"
+          },
+          "ColdStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage2.json"
+          },
+          "ColdStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/ColdStoreQueryGetSeriesPage3.json"
+          },
+          "WarmStoreQueryGetSeriesPage1": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage1.json"
+          },
+          "WarmStoreQueryGetSeriesPage2": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage2.json"
+          },
+          "WarmStoreQueryGetSeriesPage3": {
+            "$ref": "./examples/WarmStoreQueryGetSeriesPage3.json"
           }
         },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/StoreType"
           },
           {
             "$ref": "#/parameters/ContinuationToken"
@@ -1158,6 +1239,34 @@
         "tsx"
       ]
     },
+    "Interpolation": {
+      "description": "The interpolation operation to be performed on the raw data points. Currently, only sampling of interpolated time series is allowed. Allowed aggregate function - eg: left($value). Can be null if no interpolation needs to be applied.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type of interpolation technique : \"Linear\" or \"Step\".",
+          "type": "string",
+          "enum": [
+            "Linear",
+            "Step"
+          ],
+          "x-ms-enum": {
+            "name": "InterpolationKind",
+            "modelAsString": true
+          }
+        },
+        "boundary": {
+          "description": "The time range to the left and right of the search span to be used for Interpolation. This is helpful in scenarios where the data points are missing close to the start or end of the input search span. Can be null.",
+          "type": "object",
+          "properties": {
+            "span": {
+              "type": "string",
+              "format": "duration"
+            }
+          }
+        }
+      }
+    },
     "DateTimeRange": {
       "description": "The range of time. Cannot be null or negative.",
       "type": "object",
@@ -1192,6 +1301,9 @@
               "description": "Value time series expression is used to represent the value of the signal that is going to be aggregated or interpolated. For example, temperature values from the event is represented like this: \"$event.Temperature.Double\".",
               "$ref": "#/definitions/Tsx"
             },
+            "interpolation": {
+              "$ref": "#/definitions/Interpolation"
+            },
             "aggregation": {
               "description": "Aggregation time series expression when kind is \"numeric\" is used to represent the aggregation that needs to be performed on the $value expression. This requires $value to be specified and can only use $value inside the aggregate functions. For example, aggregation for calculating minimum of the $value is written as: \"min($value)\".",
               "$ref": "#/definitions/Tsx"
@@ -1206,7 +1318,7 @@
       ]
     },
     "AggregateVariable": {
-      "description": "Aggregate variable represents any aggregation calculation.",
+      "description": "Aggregate variable represents any aggregation calculation. Aggregate Variables does not support interpolation.",
       "x-ms-discriminator-value": "aggregate",
       "allOf": [
         {
@@ -1225,6 +1337,76 @@
       "required": [
         "kind",
         "aggregation"
+      ]
+    },
+    "CategoricalVariable": {
+      "description": "Categorical variable represents signal that needs to be analyzed based on the count or duration of occurrence of limited set of defined values.",
+      "x-ms-discriminator-value": "categorical",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Variable"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "description": "Value time series expression is used to represent the value of the signal that is going to be categorized. It can evaluate to only 'String' or 'Long' type for categorical variables.",
+              "$ref": "#/definitions/Tsx"
+            },
+            "interpolation": {
+              "description": "Categorical variable supports only 'step' interpolation.",
+              "$ref": "#/definitions/Interpolation"
+            },
+            "categories": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TimeSeriesAggregateCategory"
+              }
+            },
+            "defaultCategory": {
+              "$ref": "#/definitions/TimeSeriesDefaultCategory"
+            }
+          }
+        }
+      ],
+      "required": [
+        "kind",
+        "value",
+        "defaultCategory"
+      ]
+    },
+    "TimeSeriesAggregateCategory": {
+      "description": "Category used in categorical variables. A category is defined by 'label' and the 'values' that are assigned this label.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the category which will be used in constructing the output variable names.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of values that a category maps to. Can be either a unique list of string or list of long.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "label",
+        "values"
+      ]
+    },
+    "TimeSeriesDefaultCategory": {
+      "description": "Represents the default category.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "The name of the default category which will be assigned to the values that does not match any of those that are defined in the 'categories'.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
       ]
     },
     "Variable": {
@@ -2216,7 +2398,8 @@
         "DateTime",
         "Double",
         "String",
-        "TimeSpan"
+        "TimeSpan",
+        "Long"
       ],
       "x-ms-enum": {
         "name": "PropertyTypes",
@@ -2296,6 +2479,14 @@
       "default": "2018-11-01-preview",
       "type": "string",
       "description": "Version of the API to be used with the client request. Currently supported version is \"2018-11-01-preview\"."
+    },
+    "StoreType": {
+      "name": "storeType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "For the environments with warm store enabled, the query can be executed either on the 'WarmStore' or 'ColdStore'. This parameter in the query defines which store the query should be executed on. If not defined, the query will be executed on the cold store."
     },
     "EnvironmentFqdn": {
       "name": "environmentFqdn",
