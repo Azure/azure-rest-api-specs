@@ -9,15 +9,6 @@ package-version: 2019-09-01-privatepreview
 azure-arm: true
 ```
 
-<<<<<<< HEAD
-  ### Ruby multi-api
-
-``` yaml $(ruby) && $(multiapi)
-batch:
-  - tag: package-2019-09-01-privatepreview
-```
-
-=======
 ### Ruby multi-api
 
 ``` yaml $(ruby) && $(multiapi)
@@ -35,7 +26,6 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 namespace: "Azure::Kubernetes::Mgmt::V2019_11_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_hybridkubernetes/lib
 ```
->>>>>>> 308e7c948... changes in readme.md file
 
 ### Tag: package-2019-09-01-privatepreview and ruby
 
