@@ -3278,6 +3278,9 @@
     },
     "DataSet": {
       "description": "A DataSet data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3333,6 +3336,9 @@
     },
     "DataSetMapping": {
       "description": "A data set mapping data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4018,6 +4024,11 @@
           "type": "string",
           "readOnly": true
         },
+        "providerEmail": {
+          "description": "Email of the provider who created the share",
+          "type": "string",
+          "readOnly": true
+        },
         "providerName": {
           "description": "Name of the provider who created the share",
           "type": "string",
@@ -4329,6 +4340,9 @@
     },
     "SourceShareSynchronizationSetting": {
       "description": "A view of synchronization setting added by the provider",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
@@ -4337,7 +4351,6 @@
             "ScheduleBased"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "kind",
             "modelAsString": true
@@ -4441,6 +4454,9 @@
     },
     "SynchronizationSetting": {
       "description": "A Synchronization Setting data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4485,6 +4501,9 @@
     },
     "Trigger": {
       "description": "A Trigger data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4530,7 +4549,8 @@
     "ScheduledSynchronizationSetting": {
       "description": "A type of synchronization setting based on schedule",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4604,7 +4624,8 @@
     "ScheduledTrigger": {
       "description": "A type of trigger based on schedule",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4704,7 +4725,8 @@
     "BlobDataSet": {
       "description": "An Azure storage blob data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4762,7 +4784,8 @@
     "BlobFolderDataSet": {
       "description": "An Azure storage blob folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4820,7 +4843,8 @@
     "BlobContainerDataSet": {
       "description": "An Azure storage blob container data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4873,7 +4897,8 @@
     "ADLSGen2FileDataSet": {
       "description": "An ADLS Gen 2 file data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4931,7 +4956,8 @@
     "ADLSGen2FolderDataSet": {
       "description": "An ADLS Gen 2 folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4989,7 +5015,8 @@
     "ADLSGen2FileSystemDataSet": {
       "description": "An ADLS Gen 2 file system data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5042,7 +5069,8 @@
     "ADLSGen1FolderDataSet": {
       "description": "An ADLS Gen 1 folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5095,7 +5123,8 @@
     "ADLSGen1FileDataSet": {
       "description": "An ADLS Gen 1 file data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5153,7 +5182,8 @@
     "KustoClusterDataSet": {
       "description": "A kusto cluster data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5212,7 +5242,8 @@
     "KustoDatabaseDataSet": {
       "description": "A kusto database data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5270,6 +5301,9 @@
     },
     "SqlDWTableDataSet": {
       "description": "A SQL DW table data set.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5320,6 +5354,9 @@
     },
     "SqlDBTableDataSet": {
       "description": "A SQL DB table data set.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5371,7 +5408,8 @@
     "BlobDataSetMapping": {
       "description": "A Blob data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5470,7 +5508,8 @@
     "BlobFolderDataSetMapping": {
       "description": "A Blob folder data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5557,7 +5596,8 @@
     "BlobContainerDataSetMapping": {
       "description": "A Blob container data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5639,7 +5679,8 @@
     "ADLSGen2FileDataSetMapping": {
       "description": "An ADLS Gen2 file data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5738,7 +5779,8 @@
     "ADLSGen2FolderDataSetMapping": {
       "description": "An ADLS Gen2 folder data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5825,7 +5867,8 @@
     "ADLSGen2FileSystemDataSetMapping": {
       "description": "An ADLS Gen2 file system data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5907,7 +5950,8 @@
     "KustoClusterDataSetMapping": {
       "description": "A Kusto cluster data set mapping",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5979,7 +6023,8 @@
     "KustoDatabaseDataSetMapping": {
       "description": "A Kusto database data set mapping",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -6051,7 +6096,8 @@
     "SqlDWTableDataSetMapping": {
       "description": "A SQL DW Table data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -6133,7 +6179,8 @@
     "SqlDBTableDataSetMapping": {
       "description": "A SQL DB Table data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -6214,6 +6261,9 @@
     },
     "ScheduledSourceSynchronizationSetting": {
       "description": "A type of synchronization setting based on schedule",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
