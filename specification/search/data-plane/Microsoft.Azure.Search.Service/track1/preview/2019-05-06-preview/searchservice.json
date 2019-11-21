@@ -4922,8 +4922,7 @@
         "key"
       ]
     },
-    "KnowledgeStore" :
-    {
+    "KnowledgeStore" : {
       "properties" : {
         "storageConnectionString": {
           "type": "string",
@@ -4944,53 +4943,62 @@
       ],
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/knowledge-store-projection-overview"
-      }
+      },
+      "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
     },
-    "KnowledgeStoreProjection" :
-    {
+    "KnowledgeStoreProjection" : {
       "properties" : {
         "tables": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/KnowledgeStoreTableProjectionSelector",
             "x-nullable": false
-          }
+          },
+          "description": "Projections to Azure Table storage."
         },
         "objects": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/KnowledgeStoreObjectProjectionSelector",
             "x-nullable": false
-          }
+          },
+          "description": "Projections to Azure Blob storage."
         },
         "files": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/KnowledgeStoreFileProjectionSelector",
             "x-nullable": false
-          }
+          },
+          "description": "Projections to Azure File storage."
         }
-      }
+      },
+      "description": "Container object for various projection selectors."
     },
     "KnowledgeStoreProjectionSelector" : {
       "properties" : {
         "referenceKeyName" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Name of reference key to different projection."
         },
         "generatedKeyName" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Name of generated key to store projection under."
         },
         "source" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Source data to project."
         },
         "sourceContext" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Source context for complex projections."
         },
         "inputs" : {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InputFieldMappingEntry"
-          }
+          },
+          "description": "Nested inputs for complex projections."
         }
       },
       "description" : "Abstract class to share properties between concrete selectors."
@@ -4998,7 +5006,8 @@
     "KnowledgeStoreBlobProjectionSelector" : {
       "properties" : {
         "storageContainer" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Blob container to store projections in."
         }
       },
       "allOf": [
@@ -5014,7 +5023,8 @@
     "KnowledgeStoreTableProjectionSelector" : {
       "properties" : {
         "tableName" : {
-          "type" : "string"
+          "type" : "string",
+          "description": "Name of the Azure table to store projected data in."
         }
       },
       "required": [
@@ -5026,7 +5036,7 @@
           "$ref": "#/definitions/KnowledgeStoreProjectionSelector"
         }
       ],
-      "description": "Description for what data to store in Azure Tables"
+      "description": "Description for what data to store in Azure Tables."
     },
     "KnowledgeStoreObjectProjectionSelector" : {
       "allOf": [
@@ -5034,7 +5044,7 @@
           "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
         }
       ],
-      "description": "Description for what data to store in Azure Blob"
+      "description": "Projection definition for what data to store in Azure Blob."
     },
     "KnowledgeStoreFileProjectionSelector" : {
       "allOf": [
@@ -5042,7 +5052,7 @@
           "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
         }
       ],
-      "description": "Description for what data to store in Azure Files"
+      "description": "Projection definition for what data to store in Azure Files."
     },
     "Skill": {
       "discriminator": "@odata.type",
@@ -6597,54 +6607,66 @@
     "CustomEntityLookupSkillEntity" : {
       "properties": {
         "name" : {
-          "type": "string"
+          "type": "string",
+          "description": "The top level name of this entity."
         },
         "description" : {
-          "type": "string"
+          "type": "string",
+          "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
         "type" : {
-          "type": "string"
+          "type": "string",
+          "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
         "subtype" : {
-          "type": "string"
+          "type": "string",
+          "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
         "id" : {
-          "type": "string"
+          "type": "string",
+          "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
         "caseSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this entity's name should be sensitive to character casing."
         },
         "accentSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this entity's name should be sensitive to character diacritics."
         },
         "fuzzyEditDistance" : {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "maximum": 5
+          "maximum": 5,
+          "description": "An optional field used to determine whether this entity's name should be sensitive to small spelling alterations."
         },
         "defaultCaseSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this entity's alias's should be sensitive to casing by default."
         },
         "defaultAccentSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this entity's alias's should be sensitive to diacritics by default."
         },
         "defaultFuzzyEditDistance" : {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "maximum": 5
+          "maximum": 5,
+          "description": "An optional field used to determine whether this entity's alias's should be sensitive to small spelling alterations by default."
         },
         "aliases" : {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomEntityLookupSkillAlias",
             "x-nullable": true
-          }
+          },
+          "description": "An array of alternative spellings or lookup terms for this entity."
         }
       },
       "required": [
@@ -6655,21 +6677,25 @@
     "CustomEntityLookupSkillAlias" : {
       "properties": {
         "text" : {
-          "type": "string"
+          "type": "string",
+          "description": "An alternative spelling or term to find. Matches of this text will be associated with its parent entity."
         },
         "caseSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this alias's text should be sensitive to character casing."
         },
         "accentSensitive" : {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "description": "An optional field used to determine whether this alias's text should be sensitive to character diacritics."
         },
         "fuzzyEditDistance" : {
           "type": "integer",
           "format": "int32",
           "default": 0,
-          "maximum": 5
+          "maximum": 5,
+          "description": "An optional field used to determine whether this alias's text should be sensitive to small spelling alterations."
         }
       },
       "required": [
