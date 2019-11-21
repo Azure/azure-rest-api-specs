@@ -315,8 +315,7 @@
           "200": {
             "description": "OK -- Update Share operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FileShare",
-              "description": "Properties of the updated file share."
+              "$ref": "#/definitions/FileShare"
             }
           },
           "default": {
@@ -558,77 +557,73 @@
     },
     "FileShareCreateParameters": {
       "properties": {
-        "properties": {
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "A name-value pair to associate with the share as metadata."
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "shareQuota": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 5120,
-            "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
+          "description": "A name-value pair to associate with the share as metadata."
+        },
+        "shareQuota": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5120,
+          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
+        },
+        "enabledProtocols": {
+          "type": "string",
+          "enum": [
+            "SMB",
+            "NFS"
+          ],
+          "x-ms-enum": {
+            "name": "EnabledProtocols",
+            "modelAsString": true
           },
-          "enabledProtocols": {
-            "type": "string",
-            "enum": [
-              "SMB",
-              "NFS"
-            ],
-            "x-ms-enum": {
-              "name": "EnabledProtocols",
-              "modelAsString": true
-            },
-            "description": "Protocols for file shares. It cannot be changed after file share creation."
+          "description": "Protocols for file shares. It cannot be changed after file share creation."
+        },
+        "rootSquash": {
+          "type": "string",
+          "enum": [
+            "NoRootSquash",
+            "RootSquash",
+            "AllSquash"
+          ],
+          "x-ms-enum": {
+            "name": "RootSquash",
+            "modelAsString": true
           },
-          "rootSquash": {
-            "type": "string",
-            "enum": [
-              "NoRootSquash",
-              "RootSquash",
-              "AllSquash"
-            ],
-            "x-ms-enum": {
-              "name": "RootSquash",
-              "modelAsString": true
-            },
-            "description": "Reduction of the access rights for the remote superuser."
-          }
+          "description": "Reduction of the access rights for the remote superuser."
         }
       }
     },
     "FileShareUpdateParameters": {
       "properties": {
-        "properties": {
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "A name-value pair to associate with the share as metadata."
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "shareQuota": {
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 5120,
-            "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
+          "description": "A name-value pair to associate with the share as metadata."
+        },
+        "shareQuota": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5120,
+          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
+        },
+        "rootSquash": {
+          "type": "string",
+          "enum": [
+            "NoRootSquash",
+            "RootSquash",
+            "AllSquash"
+          ],
+          "x-ms-enum": {
+            "name": "RootSquash",
+            "modelAsString": true
           },
-          "rootSquash": {
-            "type": "string",
-            "enum": [
-              "NoRootSquash",
-              "RootSquash",
-              "AllSquash"
-            ],
-            "x-ms-enum": {
-              "name": "RootSquash",
-              "modelAsString": true
-            },
-            "description": "Reduction of the access rights for the remote superuser."
-          }
+          "description": "Reduction of the access rights for the remote superuser."
         }
       }
     },
