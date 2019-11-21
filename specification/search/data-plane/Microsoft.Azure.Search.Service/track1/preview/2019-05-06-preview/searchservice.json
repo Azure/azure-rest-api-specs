@@ -4032,7 +4032,7 @@
         "cache": {
           "$ref": "#/definitions/IndexerCache",
           "x-nullable": true,
-          "description": "The optional cache to store intermediate skill outputs for incremental enrichment."
+          "description": "An optional cache to store intermediate skill outputs for incremental enrichment."
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
@@ -4299,7 +4299,7 @@
       "required": [
         "storageConnectionString"
       ],
-      "description": "Represents a indexer cache used to store intermediate skill outputs to allow for incremental enrichment.",
+      "description": "Represents an indexer cache used to store intermediate skill outputs to allow for incremental enrichment.",
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-incremental-indexing-conceptual"
       }
@@ -4992,7 +4992,8 @@
             "$ref": "#/definitions/InputFieldMappingEntry"
           }
         }
-      }
+      },
+      "description" : "Abstract class to share properties between concrete selectors."
     },
     "KnowledgeStoreBlobProjectionSelector" : {
       "properties" : {
@@ -5007,7 +5008,8 @@
       ],
       "required": [
         "storageContainer"
-      ]
+      ],
+      "description" : "Abstract class to share properties between concrete selectors."
     },
     "KnowledgeStoreTableProjectionSelector" : {
       "properties" : {
@@ -5446,7 +5448,7 @@
       "properties": {
         "entitiesDefinitionUri": {
           "type": "string",
-          "description": "The uri pointing to a hosted json or csv file containing which entities to lookup."
+          "description": "The uri pointing to a json or csv file containing which entities to lookup."
         },
         "defaultLanguageCode": {
           "$ref": "#/definitions/CustomEntityLookupSkillLanguage",
