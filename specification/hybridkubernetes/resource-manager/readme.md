@@ -27,12 +27,22 @@ These are the global settings for the Kubernetes Connect RP.
 
 ```yaml
 openapi-type: arm
+tag: package-2019-11-01-preview
 tag: package-2019-09-01-privatepreview
 ```
 
-### Tag: package-2019-09-01-preview
+### Tag: package-2019-11-01-preview
 
-These settings apply only when `--tag=package-2019-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-11-01-preview'
+input-file:
+- Microsoft.Kubernetes/preview/2019-11-01-preview/hybridkubernetes.json
+```
+
+### Tag: package-2019-09-01-privatepreview
+
+These settings apply only when `--tag=package-2019-09-01-privatepreview` is specified on the command line.
 
 ```yaml $(tag) == 'package-2019-09-01-privatepreview'
 input-file:
@@ -96,6 +106,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+- Microsoft.Kubernetes/preview/2019-11-01-preview/hybridkubernetes.json
 - Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/hybridkubernetes.json
 
 ```

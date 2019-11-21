@@ -11,7 +11,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.Kubernetes
   package-name: hybridkubernetes
-  package-version: 2019-09-01-privatepreview
+  package-version: 2019-11-01-preview
   clear-output-folder: true
 ```
 
