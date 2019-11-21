@@ -32,7 +32,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -45,7 +45,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -58,7 +58,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2018_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -71,7 +71,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2017_03_01
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2017_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2017_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -84,7 +84,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2016_10_10
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2016_10_10
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2016_10_10
 regenerate-manager: true
 generate-interface: true
 ```
@@ -97,7 +97,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.apimanagement.v2016_07_07
-  output-folder: $(azure-libraries-for-java-folder)/apimanagement/resource-manager/v2016_07_07
+  output-folder: $(azure-libraries-for-java-folder)/sdk/apimanagement/mgmt-v2016_07_07
 regenerate-manager: true
 generate-interface: true
 ```

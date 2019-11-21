@@ -32,7 +32,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-09-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.peering.v2019_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/peering/resource-manager/v2019_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/peering/mgmt-v2019_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -45,7 +45,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-08-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.peering.v2019_08_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/peering/resource-manager/v2019_08_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/peering/mgmt-v2019_08_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

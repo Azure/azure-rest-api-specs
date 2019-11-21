@@ -113,7 +113,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2018-09-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -126,7 +126,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag)=='package-2017-07-01-privatepreview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotcentral.v2017_07_01_privatepreview
-  output-folder: $(azure-libraries-for-java-folder)/iotcentral/resource-manager/v2017_07_01_privatepreview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2017_07_01_privatepreview
 regenerate-manager: true
 generate-interface: true
 ```

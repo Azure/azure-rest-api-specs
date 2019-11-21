@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.recoveryservices.backup.v2016_08_10
-  output-folder: $(azure-libraries-for-java-folder)/recoveryservices.backup/resource-manager/v2016_08_10
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices.backup/mgmt-v2016_08_10
 regenerate-manager: true
 generate-interface: true
 ```
@@ -41,7 +41,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.recoveryservices.backup.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/recoveryservices.backup/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices.backup/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
 ```

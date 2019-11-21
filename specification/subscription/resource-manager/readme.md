@@ -133,7 +133,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.subscription.v2017_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/subscription/resource-manager/v2017_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2017_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

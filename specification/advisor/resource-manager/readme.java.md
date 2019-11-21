@@ -29,7 +29,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.advisor.v2017_04_19
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2017_04_19
+  output-folder: $(azure-libraries-for-java-folder)/sdk/advisor/mgmt-v2017_04_19
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,7 +42,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.advisor.v2017_03_31
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2017_03_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/advisor/mgmt-v2017_03_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -55,7 +55,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-07-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.advisor.v2016_07_12_preview
-  output-folder: $(azure-libraries-for-java-folder)/advisor/resource-manager/v2016_07_12_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/advisor/mgmt-v2016_07_12_preview
 regenerate-manager: true
 generate-interface: true
 ```

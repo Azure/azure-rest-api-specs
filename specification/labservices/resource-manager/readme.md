@@ -136,7 +136,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.labservices.v2018_10_15
-  output-folder: $(azure-libraries-for-java-folder)/labservices/resource-manager/v2018_10_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/labservices/mgmt-v2018_10_15
 regenerate-manager: true
 generate-interface: true
 ```

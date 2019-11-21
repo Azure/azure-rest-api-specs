@@ -34,7 +34,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2020-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2020_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2020_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2020_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -48,7 +48,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -62,7 +62,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2019_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2019_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -75,7 +75,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -89,7 +89,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-09-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2018_09_15_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_09_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2018_09_15_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -102,7 +102,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2018_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2018_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -115,7 +115,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventgrid.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventgrid/mgmt-v2018_01_01
 regenerate-manager: true
 generate-interface: true
 ```

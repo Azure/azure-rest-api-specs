@@ -255,7 +255,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.automation.v2015_10_31
-  output-folder: $(azure-libraries-for-java-folder)/automation/resource-manager/v2015_10_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/automation/mgmt-v2015_10_31
 regenerate-manager: true
 generate-interface: true
 ```

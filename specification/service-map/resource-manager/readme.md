@@ -103,7 +103,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicemap.v2015_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicemap/resource-manager/v2015_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicemap/mgmt-v2015_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-02-14-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.keyvault.v2018_02_14_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/azure-mgmt-keyvault/v2018_02_14_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/mgmt-v2018_02_14_preview
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -45,7 +45,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.keyvault.v2016_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/azure-mgmt-keyvault/v2016_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/mgmt-v2016_10_01
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -62,7 +62,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.keyvault.v2016_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/azure-mgmt-keyvault/v2016_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/mgmt-v2016_10_01
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -79,7 +79,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2015-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.keyvault.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/azure-mgmt-keyvault/v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/keyvault/mgmt-v2015_06_01
 regenerate-manager: true
 generate-interface: true
 ```

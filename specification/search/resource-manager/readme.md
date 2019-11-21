@@ -119,8 +119,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2015-02' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_02_28
-  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_02_28
+  namespace: com.microsoft.azure.management.search.v2015_02_28
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-v2015_02_28
 regenerate-manager: true
 generate-interface: true
 ```
@@ -132,8 +132,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_08_19
-  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_08_19
+  namespace: com.microsoft.azure.management.search.v2015_08_19
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2015_08_19
 regenerate-manager: true
 generate-interface: true
 ```

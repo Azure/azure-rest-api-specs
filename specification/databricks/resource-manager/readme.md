@@ -23,7 +23,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databricks.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/databricks/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```

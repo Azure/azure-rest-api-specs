@@ -27,7 +27,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.maintenance.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/maintenance/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/maintenance/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

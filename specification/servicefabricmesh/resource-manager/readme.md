@@ -151,7 +151,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == '2018-09-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabricmesh.v2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabricmesh/mgmt-v2018_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -164,7 +164,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == '2018-07-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabricmesh.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabricmesh/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

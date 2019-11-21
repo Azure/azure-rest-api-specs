@@ -211,7 +211,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hybridcompute.v2019_03_18
-  output-folder: $(azure-libraries-for-java-folder)/hybridcompute/resource-manager/v2019_03_18
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_03_18
 
 regenerate-manager: true
 generate-interface: true

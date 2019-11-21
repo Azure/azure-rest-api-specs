@@ -125,7 +125,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.recoveryservices.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/recoveryservices/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/recoveryservices/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
 ```

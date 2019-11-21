@@ -204,7 +204,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2015_12_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -217,7 +217,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -230,7 +230,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -243,7 +243,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_05_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_05_01
 regenerate-manager: true
 generate-interface: true
 ```
