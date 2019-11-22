@@ -258,7 +258,7 @@
           },
           {
             "name": "detailType",
-            "description": "Specify details requested respective to the metro area as a comma separated list.",
+            "description": "Specify details requested respective to the metro area as a comma separated list. Supported values are:\n  * `agencies` - Return a list of all public transit agencies operating in the given metro area.\n  * `alerts` - Returns a list of all active service alerts, that are defined in the metro or agency level, and are not connected to a specific line or stop.\n  * `alertDetails` - Applicable only when alerts are requested. Returns details of the alerts.\n  * `transitTypes` - Returns a list of all supported transit types in the given metro area.",
             "in": "query",
             "required": true,
             "type": "array",
@@ -373,7 +373,7 @@
           },
           {
             "name": "objectType",
-            "description": "Comma separated list of transit object types. By default, objectType is set to stop.",
+            "description": "Comma separated list of transit object types. By default, objectType is set to `stop`. Supported values are:\n  * `stop` - Public transit stop\n  * `docklessBike` - Dockless bike\n  * `docklessElectricBike` - Dockless eletric bike\n  * `docklessScooter` - Dockless scooter\n  * `docklessElectricScooter` - Dockless electric scooter\n  * `docklessMoped` - Dockless moped\n  * `carShare` - Car share vehicle\n  * `docklessVehicle` - Dockless vehicle\n  * `bikeDock` - Bike dock",
             "in": "query",
             "required": false,
             "type": "array",
@@ -616,7 +616,7 @@
           },
           {
             "name": "detailType",
-            "description": "Specify additional details requested respective to the line group as a comma separated list. As a default service returns line basic info.",
+            "description": "Specify additional details requested respective to the line group as a comma separated list. As a default service returns line basic info. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `stops` - Return list of stops the line group goes through.\n  * `schedule` - Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day.\n  * `patterns` - Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line.",
             "in": "query",
             "required": false,
             "type": "array",
@@ -652,7 +652,7 @@
                   },
                   {
                     "value": "schedule",
-                    "description": "Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
+                    "description": "Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day."
                   },
                   {
                     "value": "patterns",
@@ -695,7 +695,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetTransitStopInfoPreview",
-        "description": "**Transit Stop Info API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Stop Info service allows you to request information for a given public transit stop. Basic information returned includes  details such as main transit type of most lines stopping for a given public and main transport agency. Additional details such as stop  lines, active service alerts for specified stop, photos and user reviews are also available, depending on the options selected.",
+        "description": "**Transit Stop Info API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Stop Info service allows you to request information for a given public transit stop. Basic information returned includes  details such as main transit type of most lines stopping for a given public and main transport agency. Additional details such as stop  lines and active service alerts for specified stop are also available, depending on the options selected.",
         "x-ms-examples": {
           "TransitStopInfo": {
             "$ref": "./examples/GetTransitStopInfo.json"
@@ -753,7 +753,7 @@
           },
           {
             "name": "detailType",
-            "description": "Specify additional details requested respective to the transit stop as a commma separated list.",
+            "description": "Specify additional details requested respective to the transit stop as a commma separated list. Supported values are:\n  * `alerts` - Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert.\n  * `alertDetails` - Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts.\n  * `lines` - Return transit lines that stops at the specified stop.\n  * `lineGroups` - Return line groups that stops at the specified stop.",
             "in": "query",
             "required": false,
             "type": "array",
@@ -924,7 +924,7 @@
           },
           {
             "name": "modeType",
-            "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned.",
+            "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned. Supported values are:\n  * `walk` - Walk (pedestrian)\n  * `bike` - Bike\n  * `publicTransit` - Public transit",
             "required": false,
             "in": "query",
             "type": "array",
@@ -958,7 +958,7 @@
           },
           {
             "name": "transitType",
-            "description": "Applicable only with modeType = publicTransit. Allow only a specific set of public transit types (as a comma separated list) to be returned for the route. Note that the requested transitType may not be available for the entire route. If not specified, all modes will be allowed.",
+            "description": "Applicable only with modeType = publicTransit. Allow only a specific set of public transit types (as a comma separated list) to be returned for the route.  Note that the requested transitType may not be available for the entire route. If not specified, all modes will be allowed. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
             "in": "query",
             "required": false,
             "type": "array",
@@ -1212,7 +1212,7 @@
           },
           {
             "name": "detailType",
-            "description": "Specify additional details returned in the transit route itinerary response, as a comma separated list.",
+            "description": "Specify additional details returned in the transit route itinerary response, as a comma separated list. Supported values are:\n  * `geometry` - Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data. \n  * `schedule` - Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day.",
             "required": false,
             "in": "query",
             "type": "array",
@@ -1232,7 +1232,7 @@
                   },
                   {
                     "value": "schedule",
-                    "description": "Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
+                    "description": "Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day."
                   }
                 ]
               }
@@ -1381,7 +1381,7 @@
           },
           {
             "name": "transitType",
-            "description": "Type of public transit user is requesting respective transit stop, as a comma separated list. If not specified, all will be allowed. This parameter can only be used in conjunction with queryType=stops. Supported transit types are Tram, Subway, Rail, Bus, Ferry, CableCar, Gondola, Funicular. For example, transitType=Bus,Subway.",
+            "description": "Type of public transit user is requesting respective transit stop, as a comma separated list. For example, transitType=Bus,Subway. If not specified, all will be allowed. This parameter can only be used in conjunction with queryType=stops. Supported values are:\n  * `bus` - Bus\n  * `cableCar` - Cable car\n  * `ferry` - Ferry\n  * `funicular` - Funicular\n  * `gondola` - Gondola\n  * `rail` - Rail\n  * `tram` - Tram\n  * `subway` - Subway/Metro",
             "in": "query",
             "required": false,
             "type": "array",
