@@ -244,6 +244,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cache/preview/2019-07-01-preview/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2018-03-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2017-10-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2017-02-01/redis.json
