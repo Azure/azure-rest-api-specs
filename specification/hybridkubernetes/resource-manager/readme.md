@@ -91,7 +91,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ## Java
 
-See configuration in [readme.csharp.md](./readme.java.md)
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
