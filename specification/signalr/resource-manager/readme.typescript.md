@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-signalr"
   output-folder: "$(typescript-sdks-folder)/sdk/signalr/arm-signalr"
+  clear-output-folder: true
   generate-metadata: true
 ```

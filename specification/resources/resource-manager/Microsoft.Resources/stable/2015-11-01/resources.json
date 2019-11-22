@@ -2066,6 +2066,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/calculateTemplateHash": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CalculateTemplateHash",
+        "description": "Calculate the hash of the given template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "template",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The template provided to calculate hash."
+          }
+        ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the hash.",
+            "schema": {
+              "$ref": "#/definitions/TemplateHashResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2258,6 +2300,15 @@
         }
       },
       "description": "Deployment operation parameters."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "ResourceManagementError": {
       "properties": {
@@ -2907,6 +2958,19 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "TemplateHashResult": {
+      "description": "Result of the request to calculate template hash. It contains a string of minified template and its hash.",
+      "properties": {
+        "minifiedTemplate": {
+          "type": "string",
+          "description": "The minified template string."
+        },
+        "templateHash": {
+          "type": "string",
+          "description": "The template hash."
+        }
+      }
     }
   },
   "parameters": {

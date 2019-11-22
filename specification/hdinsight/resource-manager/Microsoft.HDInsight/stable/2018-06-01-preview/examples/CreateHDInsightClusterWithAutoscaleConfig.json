@@ -1,123 +1,123 @@
 {
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "subid",
     "parameters": {
-        "clusterName": "cluster1",
-        "resourceGroupName": "rg1",
-        "api-version": "2018-06-01-preview",
-        "subscriptionId": "subid",
-        "parameters": {
-            "properties": {
-                "clusterVersion": "3.6",
-                "osType": "Linux",
-                "tier": "Standard",
-                "clusterDefinition": {
-                    "kind": "hadoop",
-                    "componentVersion": {
-                        "Hadoop": "2.7"
+      "properties": {
+        "clusterVersion": "3.6",
+        "osType": "Linux",
+        "tier": "Standard",
+        "clusterDefinition": {
+          "kind": "hadoop",
+          "componentVersion": {
+            "Hadoop": "2.7"
+          },
+          "configurations": {
+            "gateway": {
+              "restAuthCredential.isEnabled": true,
+              "restAuthCredential.username": "admin",
+              "restAuthCredential.password": "**********"
+            }
+          }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "isDefault": true,
+              "container": "hdinsight-autoscale-tes-2019-06-18t05-49-16-591z",
+              "key": "storagekey"
+            }
+          ]
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "autoscale": {
+                "capacity": null,
+                "recurrence": {
+                  "timeZone": "China Standard Time",
+                  "schedule": [
+                    {
+                      "days": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                      ],
+                      "timeAndCapacity": {
+                        "time": "09:00",
+                        "minInstanceCount": 3,
+                        "maxInstanceCount": 3
+                      }
                     },
-                    "configurations": {
-                        "gateway": {
-                            "restAuthCredential.isEnabled": true,
-                            "restAuthCredential.username": "admin",
-                            "restAuthCredential.password": "**********"
-                        }
+                    {
+                      "days": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                      ],
+                      "timeAndCapacity": {
+                        "time": "18:00",
+                        "minInstanceCount": 6,
+                        "maxInstanceCount": 6
+                      }
+                    },
+                    {
+                      "days": [
+                        "Saturday",
+                        "Sunday"
+                      ],
+                      "timeAndCapacity": {
+                        "time": "09:00",
+                        "minInstanceCount": 2,
+                        "maxInstanceCount": 2
+                      }
+                    },
+                    {
+                      "days": [
+                        "Saturday",
+                        "Sunday"
+                      ],
+                      "timeAndCapacity": {
+                        "time": "18:00",
+                        "minInstanceCount": 4,
+                        "maxInstanceCount": 4
+                      }
                     }
-                },
-                "storageProfile": {
-                    "storageaccounts": [
-                        {
-                            "name": "mystorage.blob.core.windows.net",
-                            "isDefault": true,
-                            "container": "hdinsight-autoscale-tes-2019-06-18t05-49-16-591z",
-                            "key": "storagekey"
-                        }
-                    ]
-                },
-                "computeProfile": {
-                    "roles": [
-                        {
-                            "autoscale": {
-                                "capacity": null,
-                                "recurrence": {
-                                    "timeZone": "China Standard Time",
-                                    "schedule": [
-                                        {
-                                            "days": [
-                                                "Monday",
-                                                "Tuesday",
-                                                "Wednesday",
-                                                "Thursday",
-                                                "Friday"
-                                            ],
-                                            "timeAndCapacity": {
-                                                "time": "09:00",
-                                                "minInstanceCount": 3,
-                                                "maxInstanceCount": 3
-                                            }
-                                        },
-                                        {
-                                            "days": [
-                                                "Monday",
-                                                "Tuesday",
-                                                "Wednesday",
-                                                "Thursday",
-                                                "Friday"
-                                            ],
-                                            "timeAndCapacity": {
-                                                "time": "18:00",
-                                                "minInstanceCount": 6,
-                                                "maxInstanceCount": 6
-                                            }
-                                        },
-                                        {
-                                            "days": [
-                                                "Saturday",
-                                                "Sunday"
-                                            ],
-                                            "timeAndCapacity": {
-                                                "time": "09:00",
-                                                "minInstanceCount": 2,
-                                                "maxInstanceCount": 2
-                                            }
-                                        },
-                                        {
-                                            "days": [
-                                                "Saturday",
-                                                "Sunday"
-                                            ],
-                                            "timeAndCapacity": {
-                                                "time": "18:00",
-                                                "minInstanceCount": 4,
-                                                "maxInstanceCount": 4
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            "name": "workernode",
-                            "targetInstanceCount": 4,
-                            "hardwareProfile": {
-                                "vmSize": "Standard_D4_V2"
-                            },
-                            "osProfile": {
-                                "linuxOperatingSystemProfile": {
-                                    "username": "sshuser",
-                                    "password": "**********"
-                                }
-                            },
-                            "virtualNetworkProfile": null,
-                            "scriptActions": [],
-                            "dataDisksGroups": null
-                        }
-                    ]
+                  ]
                 }
+              },
+              "name": "workernode",
+              "targetInstanceCount": 4,
+              "hardwareProfile": {
+                "vmSize": "Standard_D4_V2"
+              },
+              "osProfile": {
+                "linuxOperatingSystemProfile": {
+                  "username": "sshuser",
+                  "password": "**********"
+                }
+              },
+              "virtualNetworkProfile": null,
+              "scriptActions": [],
+              "dataDisksGroups": null
             }
+          ]
         }
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
-            }
-        }
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      }
+    }
+  }
 }

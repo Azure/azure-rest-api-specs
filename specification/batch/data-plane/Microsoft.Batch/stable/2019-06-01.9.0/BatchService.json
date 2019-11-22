@@ -185,7 +185,7 @@
           }
         },
         "summary": "Gets information about the specified Application.",
-        "description": "This operation returns only Applications and versions that are available for use on Compute Nodes; that is, that can be used in an Package reference. For administrator information about Applications and versions that are not yet available to Compute Compute Nodes, use the Azure portal or the Azure Resource Manager API.",
+        "description": "This operation returns only Applications and versions that are available for use on Compute Nodes; that is, that can be used in an Package reference. For administrator information about Applications and versions that are not yet available to Compute Nodes, use the Azure portal or the Azure Resource Manager API.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -11815,8 +11815,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "A list of Application Packages that the Batch service will deploy to the Compute Compute Node before running the command line.",
-          "description": "Application Packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced Application Package is already on the Compute Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Compute Node is used. If a referenced Application Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails."
+          "title": "A list of Application Packages that the Batch service will deploy to the Compute Node before running the command line.",
+          "description": "Application Packages are downloaded and deployed to a shared directory, not the Task working directory. Therefore, if a referenced Application Package is already on the Compute Node, and is up to date, then it is not re-downloaded; the existing copy on the Compute Node is used. If a referenced Application Package cannot be installed, for example because the package has been deleted or because download failed, the Task fails."
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the Task can use to perform Batch service operations.",
@@ -11953,7 +11953,7 @@
       "properties": {
         "nodeFillType": {
           "type": "string",
-          "title": "How Tasks are distributed across Compute Compute Nodes in a Pool.",
+          "title": "How Tasks are distributed across Compute Nodes in a Pool.",
           "description": "If not specified, the default is spread.",
           "enum": [
             "spread",
@@ -12159,7 +12159,7 @@
         },
         "taskSchedulingPolicy": {
           "$ref": "#/definitions/TaskSchedulingPolicy",
-          "title": "How Tasks are distributed across Compute Compute Nodes in a Pool.",
+          "title": "How Tasks are distributed across Compute Nodes in a Pool.",
           "description": "If not specified, the default is spread."
         },
         "resizeTimeout": {
@@ -15456,8 +15456,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of Application Packages to be installed on each Compute Compute Node in the Pool.",
-          "description": "The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool."
+          "title": "The list of Application Packages to be installed on each Compute Node in the Pool.",
+          "description": "The list replaces any existing Application Package references on the Pool. Changes to Application Package references affect all new Compute Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Application Package references on any given Pool. If omitted, or if you specify an empty collection, any existing Application Packages references are removed from the Pool. A maximum of 10 references may be specified on a given Pool."
         },
         "metadata": {
           "type": "array",

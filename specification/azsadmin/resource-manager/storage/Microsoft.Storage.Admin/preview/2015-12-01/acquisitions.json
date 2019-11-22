@@ -49,7 +49,7 @@
           "200": {
             "description": "OK -- The list of acquisitions has been returned.",
             "schema": {
-              "$ref": "acquisitions.json#/definitions/AcquisitionList"
+              "$ref": "#/definitions/AcquisitionList"
             }
           },
           "404": {
@@ -93,7 +93,7 @@
         },
         "status": {
           "description": "The status of the page BLOB acquisition.",
-          "$ref": "acquisitions.json#/definitions/AcquisitionStatus",
+          "$ref": "#/definitions/AcquisitionStatus",
           "readOnly": true
         },
         "susbcriptionid": {
@@ -130,7 +130,7 @@
         "properties": {
           "description": "The properties of the page blob acquisition.",
           "x-ms-client-flatten": true,
-          "$ref": "acquisitions.json#/definitions/AcquisitionProperties",
+          "$ref": "#/definitions/AcquisitionProperties",
           "readOnly": true
         }
       },
@@ -144,7 +144,7 @@
       "description": "The list of page BLOB acquisitions.",
       "type": "array",
       "items": {
-        "$ref": "acquisitions.json#/definitions/Acquisition"
+        "$ref": "#/definitions/Acquisition"
       }
     }
   },
