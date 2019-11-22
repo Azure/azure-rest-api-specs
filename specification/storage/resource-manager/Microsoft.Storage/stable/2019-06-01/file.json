@@ -242,7 +242,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FileShareCreateParameters"
+              "$ref": "#/definitions/FileShare"
             },
             "description": "Properties of the file share to create."
           },
@@ -300,7 +300,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FileShareUpdateParameters"
+              "$ref": "#/definitions/FileShare"
             },
             "description": "Properties to update for the file share."
           },
@@ -473,24 +473,6 @@
       ],
       "description": "Properties of the file share, including Id, resource name, resource type, Etag."
     },
-    "FileShareCreateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileSharePropertiesCreateParameters",
-          "description": "Properties of the file share to create the file share."
-        }
-      },
-      "description": "The parameters used to create the file share."
-    },
-    "FileShareUpdateParameters": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FileSharePropertiesUpdateParameters",
-          "description": "Properties of the file share to update the file share."
-        }
-      },
-      "description": "The parameters used to create the file share."
-    },
     "FileShareItem": {
       "properties": {
         "properties": {
@@ -572,78 +554,6 @@
         }
       },
       "description": "The properties of the file share."
-    },
-    "FileSharePropertiesCreateParameters": {
-      "properties": {
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "A name-value pair to associate with the share as metadata."
-        },
-        "shareQuota": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 5120,
-          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
-        },
-        "enabledProtocols": {
-          "type": "string",
-          "enum": [
-            "SMB",
-            "NFS"
-          ],
-          "x-ms-enum": {
-            "name": "EnabledProtocols",
-            "modelAsString": true
-          },
-          "description": "Protocols for file shares. It cannot be changed after file share creation."
-        },
-        "rootSquash": {
-          "type": "string",
-          "enum": [
-            "NoRootSquash",
-            "RootSquash",
-            "AllSquash"
-          ],
-          "x-ms-enum": {
-            "name": "RootSquash",
-            "modelAsString": true
-          },
-          "description": "Reduction of the access rights for the remote superuser."
-        }
-      }
-    },
-    "FileSharePropertiesUpdateParameters": {
-      "properties": {
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "A name-value pair to associate with the share as metadata."
-        },
-        "shareQuota": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 5120,
-          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
-        },
-        "rootSquash": {
-          "type": "string",
-          "enum": [
-            "NoRootSquash",
-            "RootSquash",
-            "AllSquash"
-          ],
-          "x-ms-enum": {
-            "name": "RootSquash",
-            "modelAsString": true
-          },
-          "description": "Reduction of the access rights for the remote superuser."
-        }
-      }
     },
     "CloudError": {
       "x-ms-external": true,
