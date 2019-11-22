@@ -1452,6 +1452,20 @@
           "$ref": "#/definitions/ScaleSetEvictionPolicy",
           "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for low priority virtual machine scale set. Default to Delete."
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool tags to be persisted on the agent pool virtual machine scale set."
+        },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool node labels to be persisted across all nodes in agent pool."
+        },
         "nodeTaints": {
           "type": "array",
           "items": {
