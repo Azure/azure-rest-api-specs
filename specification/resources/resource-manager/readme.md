@@ -618,6 +618,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-10-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-08-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-05-10/resources.json
