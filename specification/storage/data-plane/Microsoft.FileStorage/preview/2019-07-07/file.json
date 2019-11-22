@@ -341,6 +341,27 @@
                                 "x-ms-client-name": "Quota",
                                 "type": "integer",
                                 "description": "Returns the current share quota in GB."
+                            },
+                            "x-ms-share-provisioned-iops": {
+                                "x-ms-client-name": "ProvisionedIops",
+                                "type": "integer",
+                                "description": "Returns the current share provisioned ipos."
+                            },
+                            "x-ms-share-provisioned-ingress-mbps": {
+                                "x-ms-client-name": "ProvisionedIngressMBps",
+                                "type": "integer",
+                                "description": "Returns the current share provisioned ingress in megabytes per second."
+                            },
+                            "x-ms-share-provisioned-egress-mbps": {
+                                "x-ms-client-name": "ProvisionedEgressMBps",
+                                "type": "integer",
+                                "description": "Returns the current share provisioned egress in megabytes per second."
+                            },
+                            "x-ms-share-next-allowed-quota-downgrade-time": {
+                                "x-ms-client-name": "NextAllowedQuotaDowngradeTime",
+                                "type": "string",
+                                "format": "date-time-rfc1123",
+                                "description": "Returns the current share next allowed quota downgrade time."
                             }
                         }
                     },
@@ -3919,6 +3940,19 @@
                 },
                 "Quota": {
                     "type": "integer"
+                },
+                "ProvisionedIops": {
+                    "type": "integer"
+                },
+                "ProvisionedIngressMBps": {
+                    "type": "integer"
+                },
+                "ProvisionedEgressMBps": {
+                    "type": "integer"
+                },
+                "NextAllowedQuotaDowngradeTime": {
+                    "type": "string",
+                    "format": "date-time-rfc1123"
                 }
             }
         },
