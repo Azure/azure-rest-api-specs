@@ -372,7 +372,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.applicationinsights.v2015_05_01
-  output-folder: $(azure-libraries-for-java-folder)/applicationinsights/resource-manager/v2015_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/applicationinsights/mgmt-v2015_05_01
 regenerate-manager: true
 generate-interface: true
 ```
