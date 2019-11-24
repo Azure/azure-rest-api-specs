@@ -185,7 +185,7 @@
       },
       "put": {
         "x-ms-examples": {
-          "Get security assessment metadata for subscription": {
+          "Create security assessment metadata for subscription": {
             "$ref": "./examples/AssessmentsMetadata/CreateAssessmentsMetadata_subscription_example.json"
           }
         },
@@ -214,6 +214,40 @@
             "schema": {
               "$ref": "#/definitions/SecurityAssessmentMetadata"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security assessment metadata for subscription": {
+            "$ref": "./examples/AssessmentsMetadata/DeleteAssessmentsMetadata_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Assessments Metadata"
+        ],
+        "description": "Delete metadata information on an assessment type in a specific subscription, will cause the deletion of all the assessments of that type in that subscription",
+        "operationId": "AssessmentsMetadataSubscription_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -264,7 +298,6 @@
       "description": "Describes properties of an assessment metadata.",
       "properties": {
         "displayName": {
-          "readOnly": true,
           "type": "string",
           "description": "User friendly display name of the assessment"
         },
@@ -274,17 +307,14 @@
           "description": "Azure resource ID of the policy definition that turns this assessment calculation on"
         },
         "description": {
-          "readOnly": true,
           "type": "string",
           "description": "Human readable description of the assessment"
         },
         "remediationDescription": {
-          "readOnly": true,
           "type": "string",
           "description": "Human readable description of what you should do to mitigate this security issue"
         },
         "category": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string",
@@ -320,7 +350,6 @@
           }
         },
         "severity": {
-          "readOnly": true,
           "type": "string",
           "description": "The severity level of the assessment",
           "enum": [
@@ -345,12 +374,10 @@
           }
         },
         "preview": {
-          "readOnly": true,
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
         },
         "assessmentType": {
-          "readOnly": true,
           "type": "string",
           "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
           "enum": [
@@ -377,7 +404,12 @@
             ]
           }
         }
-      }
+      },
+      "required": [
+        "displayName",
+        "severity",
+        "assessmentType"
+      ]
     }
   },
   "parameters": {
