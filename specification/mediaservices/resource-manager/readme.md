@@ -130,6 +130,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+    autorest_options:
+      use: "@microsoft.azure/autorest.java@2.1.90"
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
