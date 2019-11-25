@@ -16,15 +16,15 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/OperationStatus/{Id}": {
       "get": {
-        "operationId": "GetPurchaseSupportStatus_Get",
+        "operationId": "GetOperationStatus_Get",
         "x-ms-examples": {
           "PurchaseSupportStatus": {
-            "$ref": "./examples/GetPurchaseSupportStatus.json"
+            "$ref": "./examples/GetOperationStatus.json"
           }
         },
-        "description": "The operation to find out the purchase support status",
+        "description": "The operation to find out the purchase Operation status",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -40,7 +40,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PurchaseSupportStatusResponseResult"
+              "$ref": "#/definitions/OperationStatusResponseResult"
             }
           },
           "202": {
@@ -73,7 +73,7 @@
             "$ref": "./examples/SupportPlan.json"
           }
         },
-        "description": "The operation to find out the purchase support status",
+        "description": "The operation to find out support plan list",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -98,6 +98,39 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan/default": {
+      "get": {
+        "operationId": "SupportPlanDefault_Get",
+        "x-ms-examples": {
+          "SupportPlan": {
+            "$ref": "./examples/SupportPlanDefault.json"
+          }
+        },
+        "description": "The operation to find out the support plan",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultSupportPlanResponseResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/PurchaseSupport": {
       "post": {
         "operationId": "PurchaseSupportPlan_Post",
@@ -106,7 +139,7 @@
             "$ref": "./examples/PurchaseSupport.json"
           }
         },
-        "description": "The operation to find out the purchase support status",
+        "description": "The operation to purchase/convert/cancel support plan.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -174,6 +207,16 @@
         }
       }
     },
+    "planTypeEnum": {
+      "type": "string",
+      "description": "the planType.",
+      "enum": [
+        "basic_support",
+        "developer_support",
+        "standard_support",
+        "prodirect_support"
+      ]
+    },
     "operationName": {
       "type": "object",
       "description": "The operation Name parameter.",
@@ -185,12 +228,49 @@
         }
       }
     },
+    "DefaultSupportPlanResponseResult": {
+      "description": "Default Support plan result.",
+      "$ref": "#/definitions/SupportPlan"
+    },
     "SupportPlanResponseResult": {
-      "description": "A list of containing support plan result.",
+      "description": "Support plan result.",
+      "properties": {
+        "value": {
+          "description": "The list of Support plan.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SupportPlan"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportPlan": {
+      "description": "A SupportPlan resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SupportPlanProperties",
+          "title": "SupportPlan properties"
+        }
+      }
+    },
+    "SupportPlanProperties": {
+      "description": "The properties of the support plan.",
       "properties": {
         "planType": {
-          "type": "string",
-          "description": "the support plan"
+          "$ref": "#/definitions/planTypeEnum"
         },
         "endDate": {
           "type": "string",
@@ -198,12 +278,32 @@
         }
       }
     },
-    "PurchaseSupportStatusResponseResult": {
-      "description": "A list of containing Purchase Records.",
+    "ProxyResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OperationStatusResponseResult": {
+      "description": "Purchase Record result.",
       "properties": {
         "planType": {
-          "type": "string",
-          "description": "the planType"
+          "$ref": "#/definitions/planTypeEnum"
         },
         "endDate": {
           "type": "string",
@@ -216,8 +316,7 @@
       "description": "The supportPlan Name.",
       "properties": {
         "planType": {
-          "type": "string",
-          "description": "the planType"
+          "$ref": "#/definitions/planTypeEnum"
         }
       }
     },
@@ -225,8 +324,7 @@
       "description": "A list of containing support plan result.",
       "properties": {
         "planType": {
-          "type": "string",
-          "description": "the planType"
+          "$ref": "#/definitions/planTypeEnum"
         },
         "endDate": {
           "type": "string",
