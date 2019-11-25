@@ -43,18 +43,10 @@
         "description": "Deletes the specified Bastion Host.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "bastionHostName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Bastion Host."
+            "$ref": "#/parameters/BastionHostName"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -98,18 +90,10 @@
         "description": "Gets the specified Bastion Host.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "bastionHostName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Bastion Host."
+            "$ref": "#/parameters/BastionHostName"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -146,18 +130,10 @@
         "description": "Creates or updates the specified Bastion Host.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "name": "bastionHostName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Bastion Host."
+            "$ref": "#/parameters/BastionHostName"
           },
           {
             "name": "parameters",
@@ -254,11 +230,7 @@
         "description": "Lists all Bastion Hosts in a resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -288,6 +260,209 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createbsl": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "BastionShareableLink"
+        ],
+        "operationId": "PutBastionShareableLink",
+        "description": "Creates a Bastion Shareable Links for all the VMs specified in the request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BastionShareableLinkRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of shareable links for the specified VMs, giving appropriate error messages as needed.",
+            "schema": {
+              "$ref": "#/definitions/BastionShareableLinkListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "Bad request. Check the message for details."
+          },
+          "404": {
+            "description": "No access to the bastion or one of the requested virtual machines."
+          }
+        },
+        "x-ms-examples": {
+          "Create Bastion Shareable Links for the request VMs": {
+            "$ref": "./examples/BastionShareableLinkCreate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deletebsl": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "BastionShareableLink"
+        ],
+        "operationId": "DeleteBastionShareableLink",
+        "description": "Deletes the Bastion Shareable Links for all the VMs specified in the request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BastionShareableLinkRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of shareable links for the specified VMs, giving appropriate error messages as needed."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "Bad request. Check the message for details."
+          },
+          "404": {
+            "description": "No access to the bastion or one of the requested virtual machines."
+          }
+        },
+        "x-ms-examples": {
+          "Delete Bastion Shareable Links for the request VMs": {
+            "$ref": "./examples/BastionShareableLinkDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getbsl": {
+      "post": {
+        "tags": [
+          "BastionHosts",
+          "BastionShareableLink"
+        ],
+        "operationId": "GetBastionShareableLink",
+        "description": "Return the Bastion Shareable Links for all the VMs specified in the request.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/BastionShareableLinkRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation deleted the BastionShareableLinks associated with the VMs, if they existed."
+          },
+          "400": {
+            "description": "Bad request. Check the message for details."
+          },
+          "404": {
+            "description": "No access to the bastion or one of the requested virtual machines."
+          }
+        },
+        "x-ms-examples": {
+          "Returns the Bastion Shareable Links for the request VMs": {
+            "$ref": "./examples/BastionShareableLinkGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getactivesessions": {
+      "post": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "GetActiveSessions",
+        "description": "Returns the list of currently active sessions on the Bastion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of active sessions on the Bastion.",
+            "schema": {
+              "$ref": "#/definitions/BastionActiveSessionListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/disconnectactivesessions": {
+      "post": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "DisconnectActiveSessions",
+        "description": "Returns the list of currently active sessions on the Bastion.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/BastionHostName"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SessionIdsParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of active sessions on the Bastion."
+          }
         }
       }
     }
@@ -404,6 +579,183 @@
         }
       },
       "description": "Response for ListBastionHosts API service call."
+    },
+    "BastionShareableLink": {
+      "properties": {
+        "vm": {
+          "$ref": "#/definitions/VM",
+          "description": "Reference of the virtual machine resource."
+        },
+        "bsl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique Bastion Shareable Link to the virtual machine."
+        },
+        "createdAt": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The time when the link was created."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional field indicating the warning or error message related to the vm in case of partial failure"
+        }
+      },
+      "required": [
+        "vm"
+      ],
+      "description": "Bastion Shareable Link."
+    },
+    "BastionShareableLinkListRequest": {
+      "properties": {
+        "vms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionShareableLink"
+          },
+          "description": "List of VM references."
+        }
+      },
+      "description": "Post request for all the Bastion Shareable Link endpoints."
+    },
+    "BastionShareableLinkListResult": {
+      "properties": {
+        "bsls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionShareableLink"
+          },
+          "description": "List of Bastion Shareable Links for the request."
+        }
+      },
+      "description": "Response for all the Bastion Shareable Link endpoints."
+    },
+    "BastionActiveSession": {
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique id for the session."
+        },
+        "startTime": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The time when the session started."
+        },
+        "targetSubscriptionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The unique Bastion Shareable Link to the virtual machine."
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "targetHostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The host name of the target."
+        },
+        "targetResourceGroup": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource group of the target."
+        },
+        "userName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user name who is active on this session."
+        },
+        "targetIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The IP Address of the target."
+        },
+        "protocol": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The protocol used to connect to the target."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id of the target."
+        },
+        "sessionDurationInMins": {
+          "type": "number",
+          "readOnly": true,
+          "description": "Duration in mins the session has been active."
+        }
+      },
+      "description": "The session detail for a target."
+    },
+    "BastionActiveSessionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionActiveSession"
+          },
+          "description": "List of active sessions on the bastion."
+        }
+      },
+      "description": "Response for GetActiveSessions."
+    },
+    "VM": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Virtual Machine."
+    },
+    "SessionIds": {
+      "properties": {
+        "sessionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of session ids"
+        }
+      },
+      "description": "List of session ids."
+    }
+  },
+  "parameters":{
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "BastionShareableLinkRequest": {
+      "name": "bslRequest",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BastionShareableLinkListRequest"
+      },
+      "description": "Post request for all the Bastion Shareable Link endpoints."
+    },
+    "BastionHostName": {
+      "name": "bastionHostName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Bastion Host."
+    },
+    "SessionIdsParameters": {
+      "name": "sessionIds",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SessionIds"
+      },
+      "description": "The list of sessionids to disconnect."
     }
   }
 }
