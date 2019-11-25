@@ -1176,7 +1176,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "$ref": "#/definitions/SkuInformation"
           },
           "description": "Get the list result of storage SKUs and their properties."
         }
@@ -1211,38 +1211,13 @@
       },
       "description": "The CheckNameAvailability operation response."
     },
-    "Sku": {
+    "SkuInformation": {
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Gets or sets the SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Standard_ZRS",
-            "Premium_LRS",
-            "Premium_ZRS",
-            "Standard_GZRS",
-            "Standard_RAGZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
+          "$ref": "./common.json#/definitions/SkuName"
         },
         "tier": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the SKU tier. This is based on the SKU name.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          }
+          "$ref": "./common.json#/definitions/Tier"
         },
         "resourceType": {
           "readOnly": true,
@@ -1292,7 +1267,7 @@
       "required": [
         "name"
       ],
-      "description": "The SKU of the storage account."
+      "description": "Storage SKU and its properties"
     },
     "CustomDomain": {
       "properties": {
@@ -1671,7 +1646,7 @@
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Required. Gets or sets the SKU name."
         },
         "kind": {
@@ -1749,12 +1724,12 @@
           "type": "string",
           "description": "Gets the dfs endpoint."
         },
-        "microsoftEndpoints":{
+        "microsoftEndpoints": {
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
           "description": "Gets the microsoft routing storage endpoints."
         },
-        "internetEndpoints":{
+        "internetEndpoints": {
           "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountInternetEndpoints",
           "description": "Gets the internet routing storage endpoints"
@@ -2037,7 +2012,7 @@
     "StorageAccount": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "readOnly": true,
           "description": "Gets the SKU."
         },
@@ -2204,7 +2179,7 @@
     "StorageAccountUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value."
         },
         "tags": {

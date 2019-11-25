@@ -455,6 +455,29 @@
         },
         "recommendationsConfiguration": {
           "$ref": "#/definitions/RecommendationConfigurationList"
+        },
+        "unmaskedIpLoggingStatus": {
+          "description": "Unmasked IP address logging status",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "default": "Disabled",
+          "x-ms-enum": {
+            "name": "UnmaskedIpLoggingStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Disabled",
+                "description": "Unmasked IP logging is disabled"
+              },
+              {
+                "value": "Enabled",
+                "description": "Unmasked IP logging is enabled"
+              }
+            ]
+          }
         }
       },
       "required": [
