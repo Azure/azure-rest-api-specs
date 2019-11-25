@@ -85,6 +85,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get locations with a subscription id": {
+            "$ref": "./examples/GetLocations.json"
+          }
         }
       }
     },
@@ -175,11 +180,30 @@
     }
   },
   "definitions": {
+    "PairedRegion": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the paired region."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified ID of the location. For example, /subscriptions/00000000-0000-0000-0000-000000000000/locations/westus."
+        },
+        "subscriptionId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription ID."
+        }
+      }
+    },
     "LocationMetadata": {
       "properties": {
-        "regionType":{
+        "regionType": {
           "readOnly": true,
-          "type":"string",
+          "type": "string",
           "description": "The type of the region.",
           "enum": [
             "Physical",
@@ -203,7 +227,7 @@
             "modelAsString": true
           }
         },
-        "geographyGroup":{
+        "geographyGroup": {
           "readOnly": true,
           "type": "string",
           "description": "The geography group of the location."
@@ -224,9 +248,11 @@
           "description": "The physical location of the Azure location."
         },
         "pairedRegion": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The region paired to this region."
+          "type": "array",
+          "description": "The regions paired to this region.",
+          "items": {
+            "$ref": "#/definitions/PairedRegion"
+          }
         }
       }
     },
@@ -252,12 +278,12 @@
           "type": "string",
           "description": "The display name of the location."
         },
-        "regionalDisplayName":{
+        "regionalDisplayName": {
           "readOnly": true,
           "type": "string",
           "description": "The display name of the location and its region."
         },
-        "metadata":{
+        "metadata": {
           "$ref": "#/definitions/LocationMetadata"
         }
       },
