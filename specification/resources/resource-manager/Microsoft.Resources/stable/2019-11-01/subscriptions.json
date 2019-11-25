@@ -180,12 +180,28 @@
         "regionType":{
           "readOnly": true,
           "type":"string",
-          "description": "The type of the region (Physical|Logical)."
+          "description": "The type of the region.",
+          "enum": [
+            "Physical",
+            "Logical"
+          ],
+          "x-ms-enum": {
+            "name": "RegionType",
+            "modelAsString": true
+          }
         },
         "regionCategory": {
           "readOnly": true,
           "type": "string",
-          "description": "The category of the region (Recommended|Other)."
+          "description": "The category of the region.",
+          "enum": [
+            "Recommended",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "RegionCategory",
+            "modelAsString": true
+          }
         },
         "geographyGroup":{
           "readOnly": true,
