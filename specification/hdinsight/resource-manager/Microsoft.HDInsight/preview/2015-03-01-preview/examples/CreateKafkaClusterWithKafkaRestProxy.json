@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "properties": {
+        "clusterVersion": "4.0",
+        "osType": "Linux",
+        "tier": "Standard",
+        "clusterDefinition": {
+          "kind": "kafka",
+          "componentVersion": {
+            "Kafka": "2.1"
+          },
+          "configurations": {
+              "gateway": {
+                  "restAuthCredential.isEnabled": "true",
+                  "restAuthCredential.username": "admin4031",
+                  "restAuthCredential.password": "Password1!9681"
+              }
+          }
+        },
+        "kafkaRestProperties": {
+          "clientGroupInfo": {
+              "groupName": "KafakaRestProperties123",
+              "groupId": "7bef90fa-0aa3-4bb4-b4d2-2ae7c14cfe41"
+          }
+        },
+        "computeProfile": {
+          "roles": [
+            {
+              "name": "headnode",
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                  "vmSize": "Large"
+              },
+              "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                      "username": "sshuser936",
+                      "password": "Password1!9640"
+                  }
+              }
+            },
+            {
+              "name": "workernode",
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                  "vmSize": "Large"
+              },
+              "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                      "username": "sshuser936",
+                      "password": "Password1!9640"
+                  }
+              },
+              "dataDisksGroups": [
+                  {
+                      "disksPerNode": 8
+                  }
+              ]
+            },
+            {
+              "name": "zookeepernode",
+              "targetInstanceCount": 3,
+              "hardwareProfile": {
+                  "vmSize": "Small"
+              },
+              "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                      "username": "sshuser936",
+                      "password": "Password1!9640"
+                  }
+              }
+            },
+            {
+              "name": "kafkamanagementnode",
+              "targetInstanceCount": 2,
+              "hardwareProfile": {
+                  "vmSize": "Standard_D4_v2"
+              },
+              "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                      "username": "kafkauser",
+                      "password": "Test123!"
+                  }
+              }
+            }
+          ]
+        },
+        "storageProfile": {
+          "storageaccounts": [
+              {
+                  "name": "hdicsharpstorage7236.blob.core.windows.net",
+                  "isDefault": true,
+                  "container": "default8689",
+                  "key": "4QAZ49utFF/WtrBMtnAZSdvrhmF+CKG5UXYUJLSSczYCZz0RX5wCWymqE8t0VxxkCt+ssBTWgte6q3hXBNNdrA=="
+              }
+          ]
+        }
+      }
+    }
+  },
+  "response": {
+    "200": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      }
+    }
+  }
+}
