@@ -22,12 +22,6 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-04
   - tag: package-2019-02
-  - tag: package-2018-12
-  - tag: package-2018-08
-  - tag: package-2018-07
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2017-10
 ```
 
 ### Tag: package-2019-09 and java
