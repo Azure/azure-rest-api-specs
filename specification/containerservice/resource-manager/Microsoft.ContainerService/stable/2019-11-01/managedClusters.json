@@ -1945,6 +1945,22 @@
       },
       "description": "Identity for the managed cluster."
     },
+    "UserAssignedIdentity": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the user assigned identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of the user assigned identity."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object id of the user assigned identity."
+        }
+      }
+    },
     "ManagedClusterAccessProfile": {
       "allOf": [
         {
@@ -2076,6 +2092,13 @@
             "type": "string"
           },
           "description": "Key-value pairs for configuring an add-on."
+        },
+        "identity": {
+          "readOnly": true,
+          "description": "Information of user assigned identity used by this add-on.",
+          "allOf": [
+            "$ref": "#/definitions/UserAssignedIdentity"
+          ]
         }
       },
       "required": [
