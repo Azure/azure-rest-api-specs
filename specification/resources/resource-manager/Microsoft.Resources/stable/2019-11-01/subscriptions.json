@@ -175,6 +175,45 @@
     }
   },
   "definitions": {
+    "LocationMetadata": {
+      "properties": {
+        "regionType":{
+          "readOnly": true,
+          "type":"string",
+          "description": "The type of the region (Physical|Logical)."
+        },
+        "regionCategory": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The category of the region (Recommended|Other)."
+        },
+        "geographyGroup":{
+          "readOnly": true,
+          "type": "string",
+          "description": "The geography group of the location."
+        },
+        "longitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The longitude of the location."
+        },
+        "latitude": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The latitude of the location."
+        },
+        "physicalLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The physical location of the Azure location."
+        },
+        "pairedRegion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The region paired to this region."
+        }
+      }
+    },
     "Location": {
       "properties": {
         "id": {
@@ -197,15 +236,13 @@
           "type": "string",
           "description": "The display name of the location."
         },
-        "latitude": {
+        "regionalDisplayName":{
           "readOnly": true,
           "type": "string",
-          "description": "The latitude of the location."
+          "description": "The display name of the location and its region."
         },
-        "longitude": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The longitude of the location."
+        "metadata":{
+          "$ref": "#/definitions/LocationMetadata"
         }
       },
       "description": "Location information."
