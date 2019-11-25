@@ -3139,6 +3139,30 @@
                     },
                     {
                         "$ref": "#/parameters/CopySource"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePermission"
+                    },
+                    {
+                        "$ref": "#/parameters/FilePermissionKey"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopyPermissionCopyMode"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopyIgnoreReadOnly"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopyFileAttributes"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopyFileCreationTime"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopyFileLastWriteTime"
+                    },
+                    {
+                        "$ref": "#/parameters/FileCopySetArchiveAttribute"
                     }
                 ],
                 "responses": {
@@ -4106,6 +4130,86 @@
             "x-ms-parameter-location": "method",
             "description": "Specifies the URL of the source file or blob, up to 2 KB in length. To copy a file to another file within the same storage account, you may use Shared Key to authenticate the source file. If you are copying a file from another storage account, or if you are copying a blob from the same storage account or another storage account, then you must authenticate the source file or blob using a shared access signature. If the source is a public blob, no authentication is required to perform the copy operation. A file in a share snapshot can also be specified as a copy source."
         },
+        "FileCopyPermissionCopyMode": {
+            "name": "x-ms-file-permission-copy-mode",
+            "x-ms-client-name": "filePermissionCopyMode",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+                "source",
+                "override"
+            ],
+            "x-ms-enum": {
+                "name": "PermissionCopyModeType",
+                "modelAsString": false
+            },
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies the option to copy file security descriptor from source file or to set it using the value which is defined by the header value of x-ms-file-permission or x-ms-file-permission-key."
+        },
+        "FileCopyIgnoreReadOnly": {
+            "name": "x-ms-file-copy-ignore-read-only",
+            "x-ms-client-name": "ignoreReadOnly",
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies the option to overwrite the target file if it already exists and has read-only attribute set."
+        },
+        "FileCopyFileAttributes": {
+            "name": "x-ms-file-attributes",
+            "x-ms-client-name": "fileAttributes",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies either the option to copy file attributes from a source file(source) to a target file or a list of attributes to set on a target file."
+        },
+        "FileCopyFileCreationTime": {
+            "name": "x-ms-file-creation-time",
+            "x-ms-client-name": "fileCreationTime",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies either the option to copy file creation time from a source file(source) to a target file or a time value in ISO 8601 format to set as creation time on a target file."
+        },
+        "FileCopyFileLastWriteTime": {
+            "name": "x-ms-file-last-write-time",
+            "x-ms-client-name": "fileLastWriteTime",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies either the option to copy file last write time from a source file(source) to a target file or a time value in ISO 8601 format to set as last write time on a target file."
+        },
+        "FileCopySetArchiveAttribute": {
+            "name": "x-ms-file-copy-set-archive",
+            "x-ms-client-name": "setArchiveAttribute",
+            "in": "header",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method",
+            "x-ms-parameter-grouping": {
+                "name": "copy-file-smb-info"
+            },
+            "description": "Specifies the option to set archive attribute on a target file. True means archive attribute will be set on a target file despite attribute overrides or a source file state."
+        },  
         "DeleteSnapshots": {
             "name": "x-ms-delete-snapshots",
             "x-ms-client-name": "deleteSnapshots",
