@@ -130,8 +130,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-    autorest_options:
-      use: "@microsoft.azure/autorest.java@2.1.90"
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -201,6 +199,8 @@ namespace: com.microsoft.azure.management.mediaservices
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mediaservices
+use-extension:
+  "@microsoft.azure/autorest.java": "2.1.90"
 ```
 
 ### Java multi-api
