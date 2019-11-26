@@ -26,7 +26,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderScope}/providers/Microsoft.ManagedIdentity/identities/default": {
+    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
       "get": {
         "operationId": "SystemAssignedIdentities_GetByScope",
         "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
@@ -37,13 +37,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderScopeParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -457,7 +451,7 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, then the clientSecretUrl will not be present in the response, otherwise it will be present."
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
         }
       }
     },
@@ -576,8 +570,8 @@
     }
   },
   "parameters": {
-    "ResourceProviderScopeParameter": {
-      "name": "resourceProviderScope",
+    "ScopeParameter": {
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",

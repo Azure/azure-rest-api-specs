@@ -26,7 +26,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderScope}/providers/Microsoft.ManagedIdentity/identities/default": {
+    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
       "get": {
         "operationId": "SystemAssignedIdentities_GetByScope",
         "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
@@ -37,13 +37,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderScopeParameter"
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -431,10 +425,10 @@
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
-    "IdentityProperties": {
-      "description": "The properties associated with the identity.",
+    "SystemAssignedIdentityProperties": {
+      "description": "The properties associated with the system assigned identity.",
       "type": "object",
-      "title": "Identity properties.",
+      "title": "System Assigned Identity properties.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -457,7 +451,32 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, then the clientSecretUrl will not be present in the response, otherwise it will be present."
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
+        }
+      }
+    },
+    "UserAssignedIdentityProperties": {
+      "description": "The properties associated with the user assigned identity.",
+      "type": "object",
+      "title": "User Assigned Identity properties.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the tenant which the identity belongs to."
+        },
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the service principal object associated with the created identity."
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
         }
       }
     },
@@ -576,8 +595,8 @@
     }
   },
   "parameters": {
-    "ResourceProviderScopeParameter": {
-      "name": "resourceProviderScope",
+    "ScopeParameter": {
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
