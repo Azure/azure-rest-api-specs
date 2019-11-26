@@ -409,6 +409,11 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -474,8 +479,8 @@
           "description": "IP configuration of the Azure Firewall resource."
         },
         "managementIpConfiguration": {
-            "$ref": "#/definitions/AzureFirewallIPConfiguration",
-            "description": "IP configuration of the Azure Firewall used for management traffic"
+          "$ref": "#/definitions/AzureFirewallIPConfiguration",
+          "description": "IP configuration of the Azure Firewall used for management traffic"
         },
         "provisioningState": {
           "readOnly": true,
