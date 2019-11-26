@@ -246,7 +246,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identity"
+              "$ref": "#/definitions/IdentityPatch"
             },
             "description": "Parameters to update the identity"
           }
@@ -389,6 +389,49 @@
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
+    "IdentityPatch": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the created identity."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the created identity."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the identity lives."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "enum": ["Microsoft.ManagedIdentity/userAssignedIdentities"],
+          "x-ms-enum": {
+            "name": "UserAssignedIdentities",
+            "modelAsString": true
+          },
+          "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "Describes an identity resource."
+    },
     "SystemAssignedIdentity": {
       "properties": {
         "id": {
@@ -429,7 +472,7 @@
         "location"
       ],
       "x-ms-azure-resource": true,
-      "description": "Describes an identity resource."
+      "description": "Describes a system assigned identity resource."
     },
     "SystemAssignedIdentityProperties": {
       "description": "The properties associated with the system assigned identity.",
