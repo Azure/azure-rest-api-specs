@@ -157,8 +157,11 @@
         },
         "deprecated": false,
         "x-ms-examples": {
-          "PutConfigurations": {
+          "PutExcludeConfiguration": {
             "$ref": "./examples/CreateConfiguration.json"
+          },
+          "PutDigestConfiguration": {
+            "$ref": "./examples/PutDigestConfiguration.json"
           }
         }
       }
@@ -815,7 +818,8 @@
         },
         "frequency": {
           "description": "Frequency that digest will be triggered. Value must conform to ISO 8601 standard and must be greater than equal to 1 day and less than or equal to 30 days.",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "categories": {
           "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
@@ -826,8 +830,16 @@
             "Performance",
             "Cost",
             "OperationalExcellence"],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "category",
+              "modelAsString": true
+            }
           }
+        },
+        "language": {
+          "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
+          "type": "string"
         }
       }
     },

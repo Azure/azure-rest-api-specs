@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroup": "resourceGroup",
+    "configContract": {
+      "properties": {
+        "digests": [
+          {
+            "actionGroupResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/exampleResourceGroup/providers/microsoft.insights/actionGroups/exampleActionGroup",
+            "frequency": "P30D",
+            "categories": [
+              "OperationalExcellence",
+              "Cost"
+            ],
+            "language": "en"
+          }
+        ]
+      }
+    },
+    "api-version": "2017-04-19"
+  },
+  "responses": {
+    "204": {},
+    "400": {
+      "body": {
+        "code": "ImproperScope",
+        "message": "localizedMessage"
+      }
+    }
+  }
+}
