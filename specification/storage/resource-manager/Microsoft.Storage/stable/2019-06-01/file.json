@@ -219,7 +219,7 @@
         ],
         "operationId": "FileShares_Create",
         "x-ms-examples": {
-          "Create Shares": {
+          "PutShares": {
             "$ref": "./examples/FileSharesPut.json"
           },
           "Create NFS Shares": {
@@ -315,7 +315,8 @@
           "200": {
             "description": "OK -- Update Share operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FileShare"
+              "$ref": "#/definitions/FileShare",
+              "description": "Properties of the updated file share."
             }
           },
           "default": {
