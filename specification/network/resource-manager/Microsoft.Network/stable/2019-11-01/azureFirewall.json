@@ -139,6 +139,9 @@
           "Get Azure Firewall With Zones": {
             "$ref": "./examples/AzureFirewallGetWithZones.json"
           },
+          "Get Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallGetWithMgmtSubnet.json"
+          },
           "Get Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
           }
@@ -207,6 +210,9 @@
           },
           "Create Azure Firewall With Zones": {
             "$ref": "./examples/AzureFirewallPutWithZones.json"
+          },
+          "Create Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallPutWithMgmtSubnet.json"
           },
           "Create Azure Firewall in virtual Hub": {
             "$ref": "./examples/AzureFirewallPutInHub.json"
@@ -374,11 +380,11 @@
         },
         "subnet": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet'."
+          "description": "Reference of the subnet resource. This resource must be named 'AzureFirewallSubnet' or 'AzureFirewallManagementSubnet'."
         },
         "publicIPAddress": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Reference to the PublicIP resource. This field is a mandatory input if subnet is not null."
+          "description": "Reference of the PublicIP resource. This field is a mandatory input if subnet is not null."
         },
         "provisioningState": {
           "readOnly": true,
@@ -466,6 +472,10 @@
             "$ref": "#/definitions/AzureFirewallIPConfiguration"
           },
           "description": "IP configuration of the Azure Firewall resource."
+        },
+        "managementIpConfiguration": {
+            "$ref": "#/definitions/AzureFirewallIPConfiguration",
+            "description": "IP configuration of the Azure Firewall used for management traffic"
         },
         "provisioningState": {
           "readOnly": true,
