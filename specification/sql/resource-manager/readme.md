@@ -861,6 +861,8 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
@@ -878,6 +880,8 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
