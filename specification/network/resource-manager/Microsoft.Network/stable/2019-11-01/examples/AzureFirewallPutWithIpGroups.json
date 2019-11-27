@@ -322,7 +322,6 @@
               }
             }
           ],
-          "ipGroups": [],
           "additionalProperties": {}
         }
       }
@@ -383,9 +382,8 @@
                     "targetFqdns": [
                       "www.test.com"
                     ],
-                    "sourceAddresses": [
-                      "216.58.216.164",
-                      "10.0.0.0/24"
+                    "sourceIpGroups": [
+                      "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1"
                     ]
                   }
                 ]
@@ -404,8 +402,8 @@
                   {
                     "name": "DNAT-HTTPS-traffic",
                     "description": "D-NAT all outbound web traffic for inspection",
-                    "sourceAddresses": [
-                      "*"
+                    "sourceIpGroups": [
+                      "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1"
                     ],
                     "destinationAddresses": [
                       "1.2.3.4"
@@ -478,8 +476,8 @@
                       "443-444",
                       "8443"
                     ],
-                    "destinationFqdns": [
-                      "www.amazon.com"
+                    "destinationIpGroups": [
+                      "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups2"
                     ],
                     "protocols": [
                       "TCP"
@@ -487,6 +485,16 @@
                   }
                 ]
               }
+            }
+          ],
+          "ipGroups": [
+            {
+              "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1",
+              "changeNumber": "5"
+            },
+            {
+              "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups2",
+              "changeNumber": "4"
             }
           ],
           "additionalProperties": {}

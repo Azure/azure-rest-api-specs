@@ -141,6 +141,9 @@
           },
           "Get Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
+          },
+          "Get Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallGetWithIpGroups.json"
           }
         }
       },
@@ -213,6 +216,9 @@
           },
           "Create Azure Firewall With Additional Properties": {
             "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
+          },
+          "Create Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallPutWithIpGroups.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -421,6 +427,21 @@
       },
       "description": "Public IP Address associated with azure firewall."
     },
+    "AzureFirewallIpGroups": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource ID."
+        },
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The iteration number."
+        }
+      },
+      "description": "IpGroups associated with azure firewall."
+    },
     "HubIPAddresses": {
       "properties": {
         "publicIPAddresses": {
@@ -436,6 +457,13 @@
         }
       },
       "description": "IP addresses associated with azure firewall."
+    },
+    "IpGroups": {
+      "type": "array",
+      "description": "List of IpGroups associated with azure firewall.",
+      "items": {
+        "$ref": "#/definitions/AzureFirewallIpGroups"
+      }
     },
     "AzureFirewallPropertiesFormat": {
       "properties": {
@@ -488,6 +516,11 @@
           "readOnly": true,
           "description": "IP addresses associated with AzureFirewall.",
           "$ref": "#/definitions/HubIPAddresses"
+        },
+        "ipGroups": {
+          "readOnly": true,
+          "description": "IpGroups associated with AzureFirewall.",
+          "$ref": "#/definitions/IpGroups"
         },
         "sku": {
           "description": "The Azure Firewall Resource SKU.",
