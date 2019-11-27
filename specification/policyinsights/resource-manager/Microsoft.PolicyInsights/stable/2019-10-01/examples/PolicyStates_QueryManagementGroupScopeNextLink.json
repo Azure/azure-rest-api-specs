@@ -3,19 +3,20 @@
     "policyStatesResource": "latest",
     "managementGroupsNamespace": "Microsoft.Management",
     "managementGroupName": "myManagementGroup",
-    "api-version": "2018-07-01-preview"
+    "api-version": "2019-10-01",
+    "$skipToken": "WpmWfBSvPhkAK6QD"
   },
   "responses": {
     "200": {
       "body": {
-        "@odata.nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/latest/queryResults?api-version=2018-07-01-preview&$skipToken=WpmWfBSvPhkAK6QD",
+        "@odata.nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/latest/queryResults?api-version=2019-10-01&$skipToken=WpmWfBSvPhkAK6QDWpmWfBSvPhkAK6QD",
         "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
         "@odata.count": 2,
         "value": [
           {
             "@odata.id": null,
             "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
-            "timestamp": "2018-02-09T17:41:47Z",
+            "timestamp": "2019-10-09T17:41:47Z",
             "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1",
             "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/1ef5d536aec743a0aa801c1a",
             "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d",
@@ -39,17 +40,21 @@
             "policySetDefinitionCategory": null,
             "policySetDefinitionParameters": null,
             "managementGroupIds": "myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47",
-            "policyDefinitionReferenceId": "15521232277412542086"
+            "policyDefinitionReferenceId": "15521232277412542086",
+            "complianceState": "NonCompliant",
+            "policyDefinitionGroupNames": [
+              "myGroup"
+            ]
           },
           {
             "@odata.id": null,
             "@odata.context": "https://management.azure.com/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
-            "timestamp": "2018-02-09T17:41:47Z",
+            "timestamp": "2019-10-09T17:41:47Z",
             "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/microsoft.insights/autoscalesettings/mytest1",
             "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyAssignments/186044306c044a1d8c0ff76c",
             "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/myManagementGroup/providers/Microsoft.Authorization/policyDefinitions/022d9357-5a90-46f7-9554-21d30ce4c32d",
             "effectiveParameters": null,
-            "isCompliant": false,
+            "isCompliant": true,
             "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
             "resourceType": "/microsoft.insights/autoscalesettings",
             "resourceLocation": "westus",
@@ -68,7 +73,11 @@
             "policySetDefinitionCategory": null,
             "policySetDefinitionParameters": null,
             "managementGroupIds": "myManagementGroup,fff988bf-fff1-ffff-fffb-fffcd011db47",
-            "policyDefinitionReferenceId": ""
+            "policyDefinitionReferenceId": "",
+            "complianceState": "Compliant",
+            "policyDefinitionGroupNames": [
+              "myGroup"
+            ]
           }
         ]
       }
