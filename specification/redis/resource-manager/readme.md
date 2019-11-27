@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Redis.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Redis, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Redis, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-preview-2019-07
 ```
 
+
+### Tag: package-preview-2019-07
+
+These settings apply only when `--tag=package-preview-2019-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-07'
+input-file:
+  - Microsoft.Cache/preview/2019-07-01-preview/redis.json
+```
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -37,7 +46,6 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 input-file:
 - Microsoft.Cache/stable/2018-03-01/redis.json
 ```
-
 
 ### Tag: package-2017-10
 
@@ -48,7 +56,6 @@ input-file:
 - Microsoft.Cache/stable/2017-10-01/redis.json
 ```
 
-
 ### Tag: package-2017-02
 
 These settings apply only when `--tag=package-2017-02` is specified on the command line.
@@ -57,7 +64,6 @@ These settings apply only when `--tag=package-2017-02` is specified on the comma
 input-file:
 - Microsoft.Cache/stable/2017-02-01/redis.json
 ```
-
 
 ### Tag: package-2016-04
 
@@ -77,10 +83,9 @@ input-file:
 - Microsoft.Cache/stable/2015-08-01/redis.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -99,7 +104,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
 ```
-
 
 ## C#
 
@@ -133,11 +137,13 @@ python:
   package-version: 5.0.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -163,6 +169,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
 ```
 
 ### Java multi-api
+
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-03
@@ -177,11 +184,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.redis.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/redis/resource-manager/v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2018_03_01
 regenerate-manager: true
 generate-interface: true
 ```
-
 
 ### Tag: package-2017-10 and java
 
@@ -191,11 +197,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.redis.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/redis/resource-manager/v2017_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2017_10_01
 regenerate-manager: true
 generate-interface: true
 ```
-
 
 # Validation
 
@@ -227,7 +232,7 @@ directive:
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -239,6 +244,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cache/preview/2019-07-01-preview/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2018-03-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2017-10-01/redis.json
   - $(this-folder)/Microsoft.Cache/stable/2017-02-01/redis.json
@@ -247,11 +253,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
