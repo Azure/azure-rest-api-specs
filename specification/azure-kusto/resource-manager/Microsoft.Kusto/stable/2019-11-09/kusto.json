@@ -363,7 +363,7 @@
         ],
         "operationId": "ClusterPrincipalAssignments_Get",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsGet": {
+          "KustoClusterPrincipalAssignmentsGet": {
             "$ref": "./examples/KustoClusterPrincipalAssignmentsGet.json"
           }
         },
@@ -406,7 +406,7 @@
         ],
         "operationId": "ClusterPrincipalAssignments_CreateOrUpdate",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsCreateOrUpdate": {
+          "KustoClusterPrincipalAssignmentsCreateOrUpdate": {
             "$ref": "./examples/KustoClusterPrincipalAssignmentsCreateOrUpdate.json"
           }
         },
@@ -465,7 +465,7 @@
         ],
         "operationId": "ClusterPrincipalAssignments_Delete",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsDelete": {
+          "KustoClusterPrincipalAssignmentsDelete": {
             "$ref": "./examples/KustoClusterPrincipalAssignmentsDelete.json"
           }
         },
@@ -1291,7 +1291,7 @@
         ],
         "operationId": "DatabasePrincipalAssignments_Get",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsGet": {
+          "KustoDatabasePrincipalAssignmentsGet": {
             "$ref": "./examples/KustoDatabasePrincipalAssignmentsGet.json"
           }
         },
@@ -1337,7 +1337,7 @@
         ],
         "operationId": "DatabasePrincipalAssignments_CreateOrUpdate",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsCreateOrUpdate": {
+          "KustoDatabasePrincipalAssignmentsCreateOrUpdate": {
             "$ref": "./examples/KustoDatabasePrincipalAssignmentsCreateOrUpdate.json"
           }
         },
@@ -1399,7 +1399,7 @@
         ],
         "operationId": "DatabasePrincipalAssignments_Delete",
         "x-ms-examples": {
-          "KustoPrincipalAssignmentsDelete": {
+          "KustoDatabasePrincipalAssignmentsDelete": {
             "$ref": "./examples/KustoDatabasePrincipalAssignmentsDelete.json"
           }
         },
@@ -3008,6 +3008,9 @@
       "description": "Class representing an attached database configuration."
     },
     "Database": {
+      "required": [
+        "kind"
+      ],
       "properties": {
         "location": {
           "type": "string",
