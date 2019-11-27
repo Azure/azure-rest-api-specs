@@ -642,6 +642,12 @@
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
             "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
@@ -688,6 +694,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1736,34 +1748,34 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "arabic_normalization", 
-            "name": "ArabicNormalization", 
+            "value": "arabic_normalization",
+            "name": "ArabicNormalization",
             "description": "A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
           },
           {
-            "value": "apostrophe", 
-            "name": "Apostrophe", 
-            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html" 
+            "value": "apostrophe",
+            "name": "Apostrophe",
+            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
           },
           {
-            "value": "asciifolding", 
-            "name": "AsciiFolding", 
-            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html" 
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
           },
           {
-            "value": "cjk_bigram", 
-            "name": "CjkBigram", 
-            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html" 
+            "value": "cjk_bigram",
+            "name": "CjkBigram",
+            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
           },
           {
-            "value": "cjk_width", 
-            "name": "CjkWidth", 
-            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html" 
+            "value": "cjk_width",
+            "name": "CjkWidth",
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
           },
           {
-            "value": "classic", 
-            "name": "Classic", 
-            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html" 
+            "value": "classic",
+            "name": "Classic",
+            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
           },
           {
             "value": "common_grams",
@@ -3768,7 +3780,8 @@
         "azuresql",
         "cosmosdb",
         "azureblob",
-        "azuretable"
+        "azuretable",
+        "mysql"
       ],
       "x-ms-enum": {
         "name": "DataSourceType",
@@ -3789,6 +3802,10 @@
           {
             "value": "azuretable",
             "name": "AzureTable"
+          },
+          {
+            "value": "mysql",
+            "name": "MySql"
           }
         ]
       },
@@ -6178,7 +6195,7 @@
             "description": "Welsh"
           },
           {
-            "value": "yua", 
+            "value": "yua",
             "description": "Yucatec Maya"
           }
         ]
