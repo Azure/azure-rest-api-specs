@@ -326,24 +326,25 @@
         "name": {
           "type": "string",
           "maxLength": 256,
-          "description": "A canonical name for the geographic or physical location."
+          "description": "A canonical name for the geographic or physical location.",
+          "required": 
         },
         "city": {
           "type": "string",
-          "maxLength": 256,
           "description": "The city or locality where the resource is located."
         },
         "district": {
           "type": "string",
-          "maxLength": 256,
           "description": "The district, state, or province where the resource is located."
         },
         "countryOrRegion": {
           "type": "string",
-          "maxLength": 256,
           "description": "The country or region where the resource is located"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
   },
   "parameters": {
     "SubscriptionIdParameter": {
