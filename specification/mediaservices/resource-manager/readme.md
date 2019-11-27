@@ -199,8 +199,6 @@ namespace: com.microsoft.azure.management.mediaservices
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mediaservices
-use-extension:
-  "@microsoft.azure/autorest.java": "2.1.90"
 ```
 
 ### Java multi-api
