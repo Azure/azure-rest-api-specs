@@ -458,7 +458,6 @@
           "enum": [
             "LogicApp",
             "EventHub",
-            "SecurityEmail",
             "Workspace"
           ],
           "x-ms-enum": {
@@ -470,9 +469,6 @@
               },
               {
                 "value": "EventHub"
-              },
-              {
-                "value": "SecurityEmail"
               },
               {
                 "value": "Workspace"
@@ -570,57 +566,6 @@
         "sasPolicyName": {
           "type": "string",
           "description": "The target Event Hub SAS policy name."
-        }
-      }
-    },
-    "AutomationActionSecurityEmail": {
-      "type": "object",
-      "description": "An action that triggers sending of Security emails. Emails can be sent to users with specific roles on the subscription (for example, subscription owners) or to user-provided emails.",
-      "x-ms-discriminator-value": "SecurityEmail",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationAction"
-        }
-      ],
-      "properties": {
-        "subscriptionRbacRoles": {
-          "type": "array",
-          "description": "A list of user roles which indicate the relevant users that will receive the event data via email.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "AccountAdmin",
-              "ServiceAdmin",
-              "Owner",
-              "Contributor"
-            ],
-            "x-ms-enum": {
-              "name": "SubscriptionRbacRoles",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "AccountAdmin"
-                },
-                {
-                  "value": "ServiceAdmin"
-                },
-                {
-                  "value": "Owner"
-                },
-                {
-                  "value": "Contributor"
-                }
-              ]
-            }
-          }
-        },
-        "emailAddresses": {
-          "type": "array",
-          "description": "A list of email addresses that should receive the event data.",
-          "items": {
-            "type": "string",
-            "format": "email"
-          }
         }
       }
     },
