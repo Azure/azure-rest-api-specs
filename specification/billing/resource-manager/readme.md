@@ -148,7 +148,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2019_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2019_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2019_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -161,7 +161,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -174,7 +174,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -187,7 +187,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -200,7 +200,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.billing.v2017_02_27_preview
-  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2017_02_27_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/billing/mgmt-v2017_02_27_preview
 regenerate-manager: true
 generate-interface: true
 ```

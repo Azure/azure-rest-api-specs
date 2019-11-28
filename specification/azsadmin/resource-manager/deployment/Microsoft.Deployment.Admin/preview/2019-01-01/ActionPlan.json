@@ -1,0 +1,204 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/actionPlans": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the list of action plans": {
+            "$ref": "./examples/ActionPlan/List.json"
+          }
+        },
+        "description": "Gets the list of action plans",
+        "tags": [
+          "ActionPlans"
+        ],
+        "operationId": "ActionPlans_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionPlanList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/actionPlans/{planId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the specified action plan": {
+            "$ref": "./examples/ActionPlan/Get.json"
+          }
+        },
+        "description": "Gets the specified action plan",
+        "tags": [
+          "ActionPlans"
+        ],
+        "operationId": "ActionPlans_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionPlanResourceEntity"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionPlanList": {
+      "description": "List of action plans",
+      "properties": {
+        "value": {
+          "description": "Array of action plans.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionPlanResourceEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    },
+    "ActionPlanResourceEntity": {
+      "type": "object",
+      "description": "Action Plan Resource Entity",
+      "properties": {
+        "properties": {
+          "description": "Action Plan Properties",
+          "$ref": "#/definitions/ActionPlanAdminProperties",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "Entity tag of the resource",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ActionPlanAdminProperties": {
+      "type": "object",
+      "description": "Action Plan Properties",
+      "properties": {
+        "actionPlanUri": {
+          "description": "Action plan uri",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "The target resource group name",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The target subscription identifier",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The deployment parameters in JToken format",
+          "type": "object",
+          "$ref": "Deployment.json#/definitions/JTokenString"
+        },
+        "startTime": {
+          "description": "The deployment start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The deployment end time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "error": {
+          "description": "Error Information",
+          "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "actionPlanInstanceId": {
+          "description": "Action plan instance identifier",
+          "type": "string"
+        },
+        "blobContainerName": {
+          "description": "Blob container name storing the deployment data",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PlanIdParameter": {
+      "description": "Identifier of the action plan.",
+      "name": "planId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
