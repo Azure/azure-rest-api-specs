@@ -801,7 +801,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/metrics.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -861,6 +860,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
@@ -870,6 +870,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
@@ -894,6 +895,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
