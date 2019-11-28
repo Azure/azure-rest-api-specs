@@ -4814,7 +4814,8 @@
           "description": "A list of skills in the skillset."
         },
         "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServices",
+          "x-ms-client-name": "CognitiveServicesAccount",
+          "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
         "@odata.etag": {
@@ -4833,7 +4834,7 @@
       },
       "description": "A list of skills."
     },
-    "CognitiveServices": {
+    "CognitiveServicesAccount": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -4848,21 +4849,21 @@
       ],
       "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
     },
-    "DefaultCognitiveServices": {
+    "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ]
     },
-    "CognitiveServicesByKey": {
+    "CognitiveServicesAccountKey": {
       "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ],
       "properties": {
