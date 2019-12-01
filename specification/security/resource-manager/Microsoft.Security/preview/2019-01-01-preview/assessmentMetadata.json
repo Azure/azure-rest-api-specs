@@ -373,6 +373,101 @@
             ]
           }
         },
+        "userImpact": {
+          "type": "string",
+          "description": "The user impact of the assessment",
+          "enum": [
+            "Low",
+            "Moderate",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "userImpact",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Moderate"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "implementationEffort": {
+          "type": "string",
+          "description": "The implementation effort required to remediate this assessment",
+          "enum": [
+            "Low",
+            "Moderate",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "implementationEffort",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Moderate"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "threats": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Threats impact of the assessment",
+            "enum": [
+              "AccountBreach",
+              "DataExfiltration",
+              "DataSpillage",
+              "MaliciousInsider",
+              "ElevationOfPrivilege",
+              "ThreatResistance",
+              "MissingCoverage",
+              "DenialOfService"
+            ],
+            "x-ms-enum": {
+              "name": "threats",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "AccountBreach"
+                },
+                {
+                  "value": "DataExfiltration"
+                },
+                {
+                  "value": "DataSpillage"
+                },
+                {
+                  "value": "MaliciousInsider"
+                },
+                {
+                  "value": "ElevationOfPrivilege"
+                },
+                {
+                  "value": "ThreatResistance"
+                },
+                {
+                  "value": "MissingCoverage"
+                },
+                {
+                  "value": "DenialOfService"
+                }
+              ]
+            }
+          }
+        },
         "preview": {
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
