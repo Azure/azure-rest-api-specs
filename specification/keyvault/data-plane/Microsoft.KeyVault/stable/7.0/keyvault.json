@@ -3773,7 +3773,33 @@
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
-              "modelAsString": true
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "encrypt",
+                  "description": "Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault"
+                },
+                {
+                  "value": "decrypt",
+                  "description": "Decrypts a single block of encrypted data"
+                },
+                {
+                  "value": "sign",
+                  "description": "Creates a signature from a digest using the specified key"
+                },
+                {
+                  "value": "verify",
+                  "description": "Verifies a signature using a specified key"
+                },
+                {
+                  "value": "wrapKey",
+                  "description": "Wraps a symmetric key using a specified key"
+                },
+                {
+                  "value": "unwrapKey",
+                  "description": "Unwraps a symmetric key using the specified key that was initially used for wrapping that key"
+                }
+              ]
             }
           },
           "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation."
