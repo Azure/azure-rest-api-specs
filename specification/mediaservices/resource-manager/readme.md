@@ -220,7 +220,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2015_10_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2015_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2015_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -233,7 +233,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_03_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_03_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_03_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -246,7 +246,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -259,7 +259,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -272,7 +272,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2019-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2019_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2019_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2019_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

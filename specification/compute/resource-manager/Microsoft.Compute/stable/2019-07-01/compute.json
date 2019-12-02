@@ -519,6 +519,13 @@
             "description": "The name of the proximity placement group."
           },
           {
+            "name": "includeColocationStatus",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -2666,7 +2673,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Generalize",
-        "description": "Sets the state of the virtual machine to generalized.",
+        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2693,7 +2700,13 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Generalize a Virtual Machine.": {
+            "$ref": "./examples/GeneralizeVirtualMachine.json"
+          }
         }
+
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
@@ -3565,6 +3578,66 @@
               "$ref": "#/definitions/VirtualMachineScaleSetExtension"
             },
             "description": "Parameters supplied to the Create VM scale set Extension operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtension"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineScaleSetExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetExtensions_Update",
+        "description": "The operation to update an extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set where the extension should be updated."
+          },
+          {
+            "name": "vmssExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetExtensionUpdate"
+            },
+            "description": "Parameters supplied to the Update VM scale set Extension operation."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -7490,15 +7563,40 @@
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
     },
+    "priority": {
+      "type": "string",
+      "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. <br><br> 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
+      "enum": [
+        "Regular",
+        "Low",
+        "Spot"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachinePriorityTypes",
+        "modelAsString": true
+      }
+    },
+    "evictionPolicy": {
+      "type": "string",
+      "description": "Specifies the eviction policy for the Azure Spot VM/VMSS",
+      "enum": [
+        "Deallocate",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualMachineEvictionPolicyTypes",
+        "modelAsString": true
+      }
+    },
     "BillingProfile": {
       "properties": {
         "maxPrice": {
           "type": "number",
           "format": "double",
-          "description": "Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current low priority price for the VM size. Also, the prices are compared at the time of create/update of low priority VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current low priority price. <br><br> The maxPrice will also be used for evicting a low priority VM/VMSS if the current low priority price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: $0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the low priority VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the maximum price you are willing to pay for a Azure Spot VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current Azure Spot price for the VM size. Also, the prices are compared at the time of create/update of Azure Spot VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current Azure Spot price. <br><br> The maxPrice will also be used for evicting a Azure Spot VM/VMSS if the current Azure Spot price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: 0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the Azure Spot VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
         }
       },
-      "description": "Specifies the billing related details of a low priority VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
+      "description": "Specifies the billing related details of a Azure Spot VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
     },
     "VirtualMachineExtensionHandlerInstanceView": {
       "properties": {
@@ -7793,32 +7891,16 @@
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         },
         "priority": {
-          "type": "string",
-          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01",
-          "enum": [
-            "Regular",
-            "Low"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachinePriorityTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01"
         },
         "evictionPolicy": {
-          "type": "string",
-          "description": "Specifies the eviction policy for the low priority virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01",
-          "enum": [
-            "Deallocate",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineEvictionPolicyTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01"
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a low priority virtual machine. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01."
         },
         "host": {
           "$ref": "#/definitions/SubResource",
@@ -8998,6 +9080,35 @@
           "type": "string",
           "description": "The name of the extension."
         },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceReadOnly"
+        }
+      ],
+      "description": "Describes a Virtual Machine Scale Set Extension."
+    },
+    "VirtualMachineScaleSetExtensionUpdate": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the extension."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties"
@@ -9068,32 +9179,16 @@
           "description": "Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. <br><br> Possible values are: <br><br> Windows_Client <br><br> Windows_Server <br><br> If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Minimum api-version: 2015-06-15"
         },
         "priority": {
-          "type": "string",
-          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Regular",
-            "Low"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachinePriorityTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/priority",
+          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
         },
         "evictionPolicy": {
-          "type": "string",
-          "description": "Specifies the eviction policy for virtual machines in a low priority scale set. <br><br>Minimum api-version: 2017-10-30-preview",
-          "enum": [
-            "Deallocate",
-            "Delete"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualMachineEvictionPolicyTypes",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for virtual machines in a Azure Spot scale set. <br><br>Minimum api-version: 2017-10-30-preview"
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
         },
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
@@ -9130,7 +9225,7 @@
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
         },
         "scheduledEventsProfile": {
           "$ref": "#/definitions/ScheduledEventsProfile",
@@ -9232,6 +9327,10 @@
         "scaleInPolicy": {
           "$ref": "#/definitions/ScaleInPolicy",
           "description": "Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
