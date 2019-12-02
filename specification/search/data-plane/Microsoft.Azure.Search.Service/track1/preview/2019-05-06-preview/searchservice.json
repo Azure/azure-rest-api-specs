@@ -1748,34 +1748,34 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "arabic_normalization", 
-            "name": "ArabicNormalization", 
+            "value": "arabic_normalization",
+            "name": "ArabicNormalization",
             "description": "A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
           },
           {
-            "value": "apostrophe", 
-            "name": "Apostrophe", 
-            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html" 
+            "value": "apostrophe",
+            "name": "Apostrophe",
+            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
           },
           {
-            "value": "asciifolding", 
-            "name": "AsciiFolding", 
-            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html" 
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
           },
           {
-            "value": "cjk_bigram", 
-            "name": "CjkBigram", 
-            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html" 
+            "value": "cjk_bigram",
+            "name": "CjkBigram",
+            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
           },
           {
-            "value": "cjk_width", 
-            "name": "CjkWidth", 
-            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html" 
+            "value": "cjk_width",
+            "name": "CjkWidth",
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
           },
           {
-            "value": "classic", 
-            "name": "Classic", 
-            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html" 
+            "value": "classic",
+            "name": "Classic",
+            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
           },
           {
             "value": "common_grams",
@@ -4277,19 +4277,19 @@
         }
       }
     },
-    "IndexerCache" : {
-      "properties" : {
-        "ID" : {
-          "type" : "string",
+    "IndexerCache": {
+      "properties": {
+        "ID": {
+          "type": "string",
           "readOnly": true,
           "x-nullable": true,
-          "description" : "Server-assigned guid identifier for this cache."
+          "description": "Server-assigned guid identifier for this cache."
         },
-        "enableReprocessing" : {
-          "type" : "boolean",
+        "enableReprocessing": {
+          "type": "boolean",
           "x-nullable": true,
           "default": true,
-          "description" : "Flag as to whether skillset updates should reprocess old documents automatically."
+          "description": "Flag as to whether skillset updates should reprocess old documents automatically."
         },
         "storageConnectionString": {
           "type": "string",
@@ -4922,8 +4922,8 @@
         "key"
       ]
     },
-    "KnowledgeStore" : {
-      "properties" : {
+    "KnowledgeStore": {
+      "properties": {
         "storageConnectionString": {
           "type": "string",
           "description": "The connection string to the storage account projections will be stored in."
@@ -4946,8 +4946,8 @@
       },
       "description": "Definition of additional projections to azure blob, table, or files, of enriched data."
     },
-    "KnowledgeStoreProjection" : {
-      "properties" : {
+    "KnowledgeStoreProjection": {
+      "properties": {
         "tables": {
           "type": "array",
           "items": {
@@ -4975,25 +4975,25 @@
       },
       "description": "Container object for various projection selectors."
     },
-    "KnowledgeStoreProjectionSelector" : {
-      "properties" : {
-        "referenceKeyName" : {
-          "type" : "string",
+    "KnowledgeStoreProjectionSelector": {
+      "properties": {
+        "referenceKeyName": {
+          "type": "string",
           "description": "Name of reference key to different projection."
         },
-        "generatedKeyName" : {
-          "type" : "string",
+        "generatedKeyName": {
+          "type": "string",
           "description": "Name of generated key to store projection under."
         },
-        "source" : {
-          "type" : "string",
+        "source": {
+          "type": "string",
           "description": "Source data to project."
         },
-        "sourceContext" : {
-          "type" : "string",
+        "sourceContext": {
+          "type": "string",
           "description": "Source context for complex projections."
         },
-        "inputs" : {
+        "inputs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/InputFieldMappingEntry"
@@ -5001,12 +5001,12 @@
           "description": "Nested inputs for complex projections."
         }
       },
-      "description" : "Abstract class to share properties between concrete selectors."
+      "description": "Abstract class to share properties between concrete selectors."
     },
-    "KnowledgeStoreBlobProjectionSelector" : {
-      "properties" : {
-        "storageContainer" : {
-          "type" : "string",
+    "KnowledgeStoreBlobProjectionSelector": {
+      "properties": {
+        "storageContainer": {
+          "type": "string",
           "description": "Blob container to store projections in."
         }
       },
@@ -5018,12 +5018,12 @@
       "required": [
         "storageContainer"
       ],
-      "description" : "Abstract class to share properties between concrete selectors."
+      "description": "Abstract class to share properties between concrete selectors."
     },
-    "KnowledgeStoreTableProjectionSelector" : {
-      "properties" : {
-        "tableName" : {
-          "type" : "string",
+    "KnowledgeStoreTableProjectionSelector": {
+      "properties": {
+        "tableName": {
+          "type": "string",
           "description": "Name of the Azure table to store projected data in."
         }
       },
@@ -5038,7 +5038,7 @@
       ],
       "description": "Description for what data to store in Azure Tables."
     },
-    "KnowledgeStoreObjectProjectionSelector" : {
+    "KnowledgeStoreObjectProjectionSelector": {
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
@@ -5046,7 +5046,7 @@
       ],
       "description": "Projection definition for what data to store in Azure Blob."
     },
-    "KnowledgeStoreFileProjectionSelector" : {
+    "KnowledgeStoreFileProjectionSelector": {
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeStoreBlobProjectionSelector"
@@ -6559,7 +6559,7 @@
             "description": "Welsh"
           },
           {
-            "value": "yua", 
+            "value": "yua",
             "description": "Yucatec Maya"
           }
         ]
@@ -6588,7 +6588,7 @@
       },
       "description": "The language codes supported for input by ImageAnalysisSkill."
     },
-    "CustomEntityLookupSkillEntityDefinition" : {
+    "CustomEntityLookupSkillEntityDefinition": {
       "properties": {
         "entityArray": {
           "type": "array",
@@ -6604,63 +6604,63 @@
       ],
       "description": "Represents the entity definition needed for Custom Entity Lookup Skill."
     },
-    "CustomEntityLookupSkillEntity" : {
+    "CustomEntityLookupSkillEntity": {
       "properties": {
-        "name" : {
+        "name": {
           "type": "string",
           "description": "The top level name of this entity."
         },
-        "description" : {
+        "description": {
           "type": "string",
           "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
-        "type" : {
+        "type": {
           "type": "string",
           "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
-        "subtype" : {
+        "subtype": {
           "type": "string",
           "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
-        "id" : {
+        "id": {
           "type": "string",
           "description": "An optional field to pass through user defined metadata to matches of this entity."
         },
-        "caseSensitive" : {
+        "caseSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this entity's name should be sensitive to character casing. Default value is false."
         },
-        "accentSensitive" : {
+        "accentSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this entity's name should be sensitive to character diacritics. Default value is false."
         },
-        "fuzzyEditDistance" : {
+        "fuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
           "default": 0,
           "maximum": 5,
           "description": "An optional field used to determine whether this entity's name should be sensitive to small spelling alterations. Default value is 0; exact matches only."
         },
-        "defaultCaseSensitive" : {
+        "defaultCaseSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this entity's alias's should be sensitive to casing by default. Default value is false."
         },
-        "defaultAccentSensitive" : {
+        "defaultAccentSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this entity's alias's should be sensitive to diacritics by default. Default value is false."
         },
-        "defaultFuzzyEditDistance" : {
+        "defaultFuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
           "default": 0,
           "maximum": 5,
           "description": "An optional field used to determine whether this entity's alias's should be sensitive to small spelling alterations by default. Default value is 0; exact matches only."
         },
-        "aliases" : {
+        "aliases": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomEntityLookupSkillAlias",
@@ -6674,23 +6674,23 @@
       ],
       "description": "Represents a single Custom Entity Lookup Skill entity."
     },
-    "CustomEntityLookupSkillAlias" : {
+    "CustomEntityLookupSkillAlias": {
       "properties": {
-        "text" : {
+        "text": {
           "type": "string",
           "description": "An alternative spelling or term to find. Matches of this text will be associated with its parent entity."
         },
-        "caseSensitive" : {
+        "caseSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this alias's text should be sensitive to character casing. Default value is false."
         },
-        "accentSensitive" : {
+        "accentSensitive": {
           "type": "boolean",
           "default": false,
           "description": "An optional field used to determine whether this alias's text should be sensitive to character diacritics. Default value is false."
         },
-        "fuzzyEditDistance" : {
+        "fuzzyEditDistance": {
           "type": "integer",
           "format": "int32",
           "default": 0,
@@ -6703,7 +6703,7 @@
       ],
       "description": "Represents an alternative spelling of a Custom Entity Lookup Skill entity."
     },
-    "SynonymMap" : {
+    "SynonymMap": {
       "properties": {
         "name": {
           "externalDocs": {
