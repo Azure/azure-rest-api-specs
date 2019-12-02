@@ -175,7 +175,7 @@ azure-arm: true
 fluent: true
 namespace: com.microsoft.azure.management.deploymentmanager
 license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
+payload-flattening-threshold: 2
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-deploymentmanager
 ```
 
