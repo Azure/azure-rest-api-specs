@@ -461,7 +461,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Additional parameters supplied to the operation."
           },
@@ -571,7 +571,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Parameters to validate."
           },
@@ -765,7 +765,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Additional parameters supplied to the operation."
           },
@@ -884,7 +884,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Parameters to validate."
           },
@@ -2135,7 +2135,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
+            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'. When you filter by a tag name and value, the tags for each resource are not returned in the results.<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
           },
           {
             "name": "$expand",
@@ -2633,7 +2633,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
+            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) or ne (not equals) are: location, resourceType, name, resourceGroup, identity, identity/principalId, plan, plan/publisher, plan/product, plan/name, plan/version, and plan/promotionCode.<br><br>For example, to filter by a resource type, use: $filter=resourceType eq 'Microsoft.Network/virtualNetworks'<br><br>You can use substringof(value, property) in the filter. The properties you can use for substring are: name and resourceGroup.<br><br>For example, to get all resources with 'demo' anywhere in the name, use: $filter=substringof('demo', name)<br><br>You can link more than one substringof together by adding and/or operators.<br><br>You can filter by tag names and values. For example, to filter for a tag name and value, use $filter=tagName eq 'tag1' and tagValue eq 'Value1'. When you filter by a tag name and value, the tags for each resource are not returned in the results.<br><br>You can use some properties together when filtering. The combinations you can use are: substringof and/or resourceType, plan and plan/publisher and plan/name, identity and identity/principalId."
           },
           {
             "name": "$expand",
@@ -2726,11 +2726,7 @@
             "description": "The name of the resource to check whether it exists."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2799,11 +2795,7 @@
             "description": "The name of the resource to delete."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2876,11 +2868,7 @@
             "description": "The name of the resource to create."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -2968,11 +2956,7 @@
             "description": "The name of the resource to update."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -3054,11 +3038,7 @@
             "description": "The name of the resource to get."
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -3097,11 +3077,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -3135,11 +3111,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -3177,11 +3149,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -3234,11 +3202,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -3285,11 +3249,7 @@
             "x-ms-skip-url-encoding": true
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -4142,6 +4102,23 @@
         }
       },
       "required": [
+        "properties"
+      ],
+      "description": "Deployment operation parameters."
+    },
+    "ScopedDeployment": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "location",
         "properties"
       ],
       "description": "Deployment operation parameters."

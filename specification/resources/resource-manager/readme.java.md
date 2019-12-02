@@ -20,6 +20,7 @@ Generate all API versions currently shipped for this package
 batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
+  - tag: package-policy-2019-09
   - tag: package-policy-2019-06
   - tag: package-policy-2019-01
   - tag: package-policy-2018-05
@@ -45,7 +46,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-features-2015-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.features.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/features/resource-manager/v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/features/mgmt-v2015_12_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Features"}'
@@ -59,10 +60,28 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-locks-2016-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.locks.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/locks/resource-manager/v2016_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/locks/mgmt-v2016_09_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Locks"}'
+```
+
+### Tag: package-policy-2019-09 and java
+
+These settings apply only when `--tag=package-policy-2019-09 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.policy.v2019_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2019_09_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-policy-2019-06 and java
@@ -73,7 +92,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-policy-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.policy.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Policy"}'
@@ -91,7 +110,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-policy-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.policy.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Policy"}'
@@ -109,7 +128,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-policy-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.policy.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2018_05_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Policy"}'
@@ -127,7 +146,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-policy-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.policy.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2018_03_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Policy"}'
@@ -145,7 +164,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-policy-2016-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.policy.v2016_12_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2016_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policy/mgmt-v2016_12_01
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Policy"}'
@@ -163,7 +182,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2019-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -176,7 +195,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2019-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -189,7 +208,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2019-0510' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_05_10
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_10
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_05_10
 regenerate-manager: true
 generate-interface: true
 ```
@@ -202,7 +221,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2019-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -215,7 +234,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2019-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -228,7 +247,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_02_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2018_02_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -241,7 +260,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-resources-2016-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2016_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -254,7 +273,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-subscriptions-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -267,7 +286,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-subscriptions-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -280,7 +299,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-subscriptions-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resources.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resources/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
 ```

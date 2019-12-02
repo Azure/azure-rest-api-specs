@@ -3326,6 +3326,11 @@
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
           "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
         }
       },
       "required": [
@@ -4966,7 +4971,8 @@
             "Microsoft Cloud App Security",
             "Azure Security Center",
             "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection"
+            "Azure Active Directory Identity Protection",
+            "Azure Security Center for IoT"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -6313,6 +6319,67 @@
       },
       "required": [
         "objectId"
+      ],
+      "type": "object"
+    },
+    "IncidentInfo": {
+      "description": "Describes related incident information for the bookmark",
+      "properties": {
+        "incidentId": {
+          "description": "Incident Id",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentSeverity",
+            "values": [
+              {
+                "description": "Critical severity",
+                "value": "Critical"
+              },
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        },
+        "relationName": {
+          "description": "Relation Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "incidentId",
+        "severity",
+        "title",
+        "relationName"
       ],
       "type": "object"
     }
