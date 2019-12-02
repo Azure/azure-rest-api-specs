@@ -168,6 +168,7 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.4/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/6.5/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
