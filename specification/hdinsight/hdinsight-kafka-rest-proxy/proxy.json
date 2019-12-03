@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a Kafka REST proxy Api lists.",
+    "description": "This is a Kafka Restproxy Api lists.",
     "version": "v1",
-    "title": "Kafka REST proxy APIs",
+    "title": "Kafka Restproxy APIs",
     "contact": {
       "name": "HDInsight"
     }
@@ -13,7 +13,7 @@
   "tags": [
     {
       "name": "v1consumer",
-      "description": "Consume messages"
+      "description": "Consume records"
     },
     {
       "name": "v1metadata",
@@ -21,11 +21,11 @@
     },
     {
       "name": "v1producer",
-      "description": "Produce messages"
+      "description": "Produce records"
     },
     {
       "name": "v1status",
-      "description": "Get Kafka REST proxy status"
+      "description": "Get Kafka Restproxy status"
     },
     {
       "name": "v1topics",
@@ -37,8 +37,8 @@
     "/v1/consumer/topics/{topic}/partitions/{partition}/offsets/{offset}": {
       "get": {
         "tags": [ "v1consumer" ],
-        "summary": "Consume messages using a simple consumer",
-        "description": "Consume messages from one partition of a topic beginning with a specific offset. By default count is 1. It can read maximum of 6 megabytes of data at once",
+        "summary": "Consume records using a simple consumer",
+        "description": "Consume records from one partition of a topic beginning with a specific offset. By default count is 1. It can read maximum of 6 megabytes of data at once",
         "operationId": "consumeTopicInPartitionWithOffset",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
@@ -118,7 +118,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/RESTBrokerResponse"
+              "$ref": "#/definitions/BrokerResponse"
             }
           },
           "400": {
@@ -154,7 +154,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/RESTTopicListResponse"
+              "$ref": "#/definitions/TopicListResponse"
             }
           },
           "400": {
@@ -182,7 +182,7 @@
       "get": {
         "tags": [ "v1metadata" ],
         "summary": "Get metadata about all partitions for a specific topic",
-        "description": "Get metadata about all partitions for a specific topic with partition ID, earliest offset, latest offset, leader, replicas, and ISR",
+        "description": "Get metadata about all partitions for a specific topic with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
         "operationId": "getPartitions",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
@@ -199,7 +199,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/RESTTopicMetadaResponse"
+              "$ref": "#/definitions/TopicMetadaResponse"
             }
           },
           "400": {
@@ -227,7 +227,7 @@
       "get": {
         "tags": [ "v1metadata" ],
         "summary": "Get metadata about a specific Kafka topic-partition",
-        "description": "Get metadata about a specific Kafka topic-partition with partition ID, earliest offset, latest offset, leader, replicas, and ISR",
+        "description": "Get metadata about a specific Kafka topic-partition with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
         "operationId": "getPartitionMetadata",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
@@ -252,7 +252,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/RESTPartitionMetadataResponse"
+              "$ref": "#/definitions/PartitionMetadataResponse"
             }
           },
           "400": {
@@ -465,20 +465,20 @@
       },
       "description": "A producer record"
     },
-    "RESTBrokerResponse": {
+    "BrokerResponse": {
       "type": "object",
       "properties": {
         "brokers": {
           "type": "array",
           "description": "List of Kafka broker endpoints",
           "items": {
-            "$ref": "#/definitions/RestProxyBrokerEndpoint"
+            "$ref": "#/definitions/BrokerEndpoint"
           }
         }
       },
       "description": "List of Kafka broker endpoints"
     },
-    "RESTPartitionMetadataResponse": {
+    "PartitionMetadataResponse": {
       "type": "object",
       "properties": {
         "partition_id": {
@@ -498,26 +498,26 @@
         },
         "leader": {
           "description": "Leader broker endpoint for the topic-partition",
-          "$ref": "#/definitions/RestProxyBrokerEndpoint"
+          "$ref": "#/definitions/BrokerEndpoint"
         },
         "replicas": {
           "type": "array",
           "description": "List of replica broker endpoints for the topic-partition",
           "items": {
-            "$ref": "#/definitions/RestProxyBrokerEndpoint"
+            "$ref": "#/definitions/BrokerEndpoint"
           }
         },
         "isr": {
           "type": "array",
-          "description": "List of broker endpoints in ISR for the topic-partition",
+          "description": "List of broker endpoints of in-sync replicas for the topic-partition",
           "items": {
-            "$ref": "#/definitions/RestProxyBrokerEndpoint"
+            "$ref": "#/definitions/BrokerEndpoint"
           }
         }
       },
       "description": "Metadata information about a topic-partition"
     },
-    "RESTTopicListResponse": {
+    "TopicListResponse": {
       "type": "object",
       "properties": {
         "topics": {
@@ -531,7 +531,7 @@
       },
       "description": "List of topics"
     },
-    "RESTTopicMetadaResponse": {
+    "TopicMetadaResponse": {
       "type": "object",
       "properties": {
         "topic": {
@@ -542,13 +542,13 @@
           "type": "array",
           "description": "List of partition metadata",
           "items": {
-            "$ref": "#/definitions/RESTPartitionMetadataResponse"
+            "$ref": "#/definitions/PartitionMetadataResponse"
           }
         }
       },
       "description": "Metadata about a specific topic"
     },
-    "RestProxyBrokerEndpoint": {
+    "BrokerEndpoint": {
       "type": "object",
       "properties": {
         "hostName": {
@@ -596,4 +596,4 @@
       "description": "A description for a topic to be created"
     }
   }
-} 
+}
