@@ -108,7 +108,7 @@
             }
           },
           "200": {
-            "description": "Successful request to create a subscriptiondiagnostic setting",
+            "description": "Successful request to create a subscription diagnostic setting",
             "schema": {
               "$ref": "#/definitions/SubscriptionDiagnosticSettingsResource"
             }
@@ -196,6 +196,27 @@
     }
   },
   "definitions": {
+    "SubscriptionProxyOnlyResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "A proxy only azure resource object"
+    },
     "SubscriptionLogSettings": {
       "properties": {
         "category": {
@@ -248,7 +269,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "#/definitions/SubscriptionProxyOnlyResource"
         }
       ],
       "properties": {
