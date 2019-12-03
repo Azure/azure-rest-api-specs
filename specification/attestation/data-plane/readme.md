@@ -18,10 +18,24 @@ To see additional help and options, run:
 ---
 
 ## Configuration
+Following are the settings for using this specification with [AutoRest](https://aka.ms/autorest) tool to validation and optionally generate SDK.
 
+### Azure Validator Suppressions
 
+Suppressed Rule | Reason
+----------------|--------
+R3023 OperationsAPIImplementation |  This is the data plane APIs, this rule is not applicable.
 
-### Basic Information 
+```yaml
+model-validator: true
+semantic-validator: true
+azure-validator: true
+directive:
+  suppress:
+    - R3023
+```
+
+### Basic Information
 These are the global settings for the Attestation API.
 
 ``` yaml
