@@ -156,6 +156,40 @@
             }
           }
         }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a security recommendation task on a resource": {
+            "$ref": "./examples/Assessments/DeleteAssessment_example.json"
+          }
+        },
+        "tags": [
+          "Assessments"
+        ],
+        "description": "Delete a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
+        "operationId": "Assessments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
