@@ -1462,6 +1462,33 @@
         "packetSize": {
           "type": "object",
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "SapHanaDynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "SapHanaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+          "$ref": "#/definitions/SapHanaPartitionSettings"
+        }
+      }
+    },
+    "SapHanaPartitionSettings": {
+      "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
