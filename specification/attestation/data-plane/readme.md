@@ -24,7 +24,7 @@ Following are the settings for using this specification with [AutoRest](https://
 
 Suppressed Rule | Reason
 ----------------|--------
-R3023 OperationsAPIImplementation |  This is the data plane APIs, this rule is not applicable.
+R3023 OperationsAPIImplementation |  This is the attestation data plane APIs, this rule is not applicable.
 
 ```yaml
 model-validator: true
