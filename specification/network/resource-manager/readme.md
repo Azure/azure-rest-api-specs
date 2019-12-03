@@ -1376,6 +1376,10 @@ directive:
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS
+    reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
 ## Go
