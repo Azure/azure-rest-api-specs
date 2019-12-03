@@ -2058,99 +2058,104 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "tags": [
-          "Images"
-        ],
-        "operationId": "Images_Delete",
-        "description": "Deletes an Image.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "imageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the image."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "No Content"
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "Images"
-        ],
-        "operationId": "Images_Get",
-        "description": "Gets an image.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "imageName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the image."
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The expand expression to apply on the operation."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Image"
-            }
-          }
-        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Get information about a virtual machine image.": {
-            "$ref": "./examples/GetInformationAboutAnImage.json"
+          "Updates tags of an Image.": {
+            "$ref": "./examples/UpdateImage.json"
           }
         }
-      }
-    },
+      },
+        "delete": {
+          "tags": [
+            "Images"
+          ],
+          "operationId": "Images_Delete",
+          "description": "Deletes an Image.",
+          "parameters": [
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the resource group."
+            },
+            {
+              "name": "imageName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the image."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "202": {
+              "description": "Accepted"
+            },
+            "204": {
+              "description": "No Content"
+            }
+          },
+          "x-ms-long-running-operation": true
+        },
+        "get": {
+          "tags": [
+            "Images"
+          ],
+          "operationId": "Images_Get",
+          "description": "Gets an image.",
+          "parameters": [
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the resource group."
+            },
+            {
+              "name": "imageName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the image."
+            },
+            {
+              "name": "$expand",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "The expand expression to apply on the operation."
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get information about a virtual machine image.": {
+              "$ref": "./examples/GetInformationAboutAnImage.json"
+            }
+          }
+        }
+      },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images": {
       "get": {
         "tags": [
@@ -6561,7 +6566,25 @@
       ],
       "x-ms-enum": {
         "name": "StorageAccountTypes",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Standard_LRS",
+            "description": "Standard_LRS for StorageAccountType."
+          },
+          {
+            "value": "Premium_LRS",
+            "description": "Premium_LRS for StorageAccountType."
+          },
+          {
+            "value": "StandardSSD_LRS",
+            "description": "StandardSSD_LRS for StorageAccountType."
+          },
+          {
+            "value": "UltraSSD_LRS",
+            "description": "UltraSSD_LRS for StorageAccountType."
+          }
+        ]
       }
     },
     "DiffDiskOption": {
@@ -7601,7 +7624,17 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Windows",
+                "description": "Windows OS Type"
+              },
+              {
+                "value": "Linux",
+                "description": "Linux OS Type"
+              }
+            ]
           }
         },
         "osState": {
@@ -7613,7 +7646,17 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemStateTypes",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Generalized",
+                "description": "Generalized image. Needs to be provisioned during deployment time."
+              },
+              {
+                "value": "Specialized",
+                "description": "Specialized image. Contains already provisioned OS Disk."
+              }
+            ]
           }
         },
         "snapshot": {
