@@ -105,40 +105,6 @@ input-file:
 - Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
 ```
 
-
-### Tag: package-2017-12
-
-These settings apply only when `--tag=package-2017-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-12'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
-```
-
-
-### Tag: package-2017-10
-
-These settings apply only when `--tag=package-2017-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-10'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
-```
-
-
-### Tag: package-2017-08
-
-These settings apply only when `--tag=package-2017-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-08'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
-```
-
-
 ---
 # Code Generation
 
@@ -288,12 +254,6 @@ input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
 
 ```
 
