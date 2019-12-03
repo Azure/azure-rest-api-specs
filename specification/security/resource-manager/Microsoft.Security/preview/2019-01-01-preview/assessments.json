@@ -127,7 +127,7 @@
           "Assessments"
         ],
         "description": "Create a security assessment on your resource. An assessment metadata that describes this assessment must be predefined with the same name before inserting the assessment result",
-        "operationId": "Assessments_Create",
+        "operationId": "Assessments_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -143,8 +143,14 @@
           }
         ],
         "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessment"
+            }
+          },
           "200": {
-            "description": "OK",
+            "description": "OK - Updated",
             "schema": {
               "$ref": "#/definitions/SecurityAssessment"
             }
@@ -181,7 +187,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - Assessment was deleted"
+          },
+          "204": {
+            "description": "No Content - Assessment does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -196,9 +205,10 @@
   "definitions": {
     "SecurityAssessmentList": {
       "type": "object",
-      "description": "List of security assessments",
+      "description": "Page of a security assessments list",
       "properties": {
         "value": {
+          "description": "Collection of security assessments in this page",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -263,7 +273,7 @@
       "description": "Links relevant to the assessment",
       "readOnly": true,
       "properties": {
-        "azurePortal": {
+        "azurePortalUri": {
           "type": "string",
           "description": "Link to assessment in Azure Portal",
           "readOnly": true
@@ -351,7 +361,7 @@
       "x-ms-parameter-location": "method"
     },
     "AssessmentBody": {
-      "name": "body",
+      "name": "assessment",
       "in": "body",
       "required": true,
       "schema": {

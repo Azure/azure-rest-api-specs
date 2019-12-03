@@ -249,7 +249,6 @@
       "discriminator": "assessedResourceType",
       "properties": {
         "assessedResourceType": {
-          "readOnly": true,
           "type": "string",
           "description": "Sub-assessment resource type",
           "enum": [
@@ -273,7 +272,10 @@
             ]
           }
         }
-      }
+      },
+      "required": [
+        "assessedResourceType"
+      ]
     },
     "SubAssessmentStatus": {
       "type": "object",
