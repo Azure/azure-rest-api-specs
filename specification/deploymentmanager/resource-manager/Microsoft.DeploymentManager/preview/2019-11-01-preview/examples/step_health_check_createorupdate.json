@@ -12,29 +12,29 @@
                 "attributes": {
                     "waitDuration": "PT15M",
                     "maxElasticDuration": "PT30M",
-                    "HealthyStateDuration": "PT2H",
+                    "healthyStateDuration": "PT2H",
                     "type": "REST",
                     "properties": {
-                        "HealthChecks": [
+                        "healthChecks": [
                             {
-                                "Name": "appHealth",
-                                "Request": {
-                                    "Method": "Get",
-                                    "Uri": "https://resthealth.healthservice.com/api/applications/contosoApp/healthStatus",
-                                    "Authentication": {
-                                        "Type": "ApiKey",
-                                        "Name": "Code",
-                                        "In": "Query",
-                                        "Value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
+                                "name": "appHealth",
+                                "request": {
+                                    "method": "GET",
+                                    "uri": "https://resthealth.healthservice.com/api/applications/contosoApp/healthStatus",
+                                    "authentication": {
+                                        "type": "ApiKey",
+                                        "name": "Code",
+                                        "in": "Query",
+                                        "value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
                                     }
                                 },
-                                "Response": {
-                                    "SuccessStatusCodes": [
+                                "response": {
+                                    "successStatusCodes": [
                                         "OK"
                                     ],
-                                    "Regex": {
-                                        "MatchQuantifier": "All",
-                                        "Matches": [
+                                    "regex": {
+                                        "matchQuantifier": "All",
+                                        "matches": [
                                             "(?i)Contoso-App",
                                             "(?i)\"health_status\":((.|\n)*)\"(green|yellow)\"",
                                             "(?mi)^(\"application_host\": 94781052)$"
@@ -43,24 +43,24 @@
                                 }
                             },
                             {
-                                "Name": "serviceHealth",
-                                "Request": {
-                                    "Method": "Get",
-                                    "Uri": "https://resthealth.healthservice.com/api/services/contosoService/healthStatus",
-                                    "Authentication": {
-                                        "Type": "ApiKey",
-                                        "Name": "code",
-                                        "In": "Header",
-                                        "Value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
+                                "name": "serviceHealth",
+                                "request": {
+                                    "method": "GET",
+                                    "uri": "https://resthealth.healthservice.com/api/services/contosoService/healthStatus",
+                                    "authentication": {
+                                        "type": "ApiKey",
+                                        "name": "code",
+                                        "in": "Header",
+                                        "value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
                                     }
                                 },
-                                "Response": {
-                                    "SuccessStatusCodes": [
+                                "response": {
+                                    "successStatusCodes": [
                                         "OK"
                                     ],
-                                    "Regex": {
-                                        "MatchQuantifier": "All",
-                                        "Matches": [
+                                    "regex": {
+                                        "matchQuantifier": "All",
+                                        "matches": [
                                             "(?i)Contoso-Service-EndToEnd",
                                             "(?i)\"health_status\":((.|\n)*)\"(green)\""
                                         ]
@@ -85,29 +85,29 @@
                     "attributes": {
                         "waitDuration": "PT15M",
                         "maxElasticDuration": "PT30M",
-                        "HealthyStateDuration": "PT2H",
+                        "healthyStateDuration": "PT2H",
                         "type": "REST",
                         "properties": {
-                            "HealthChecks": [
+                            "healthChecks": [
                                 {
-                                    "Name": "appHealth",
-                                    "Request": {
-                                        "Method": "Get",
-                                        "Uri": "https://resthealth.healthservice.com/api/applications/contosoApp/healthStatus",
-                                        "Authentication": {
-                                            "Type": "ApiKey",
-                                            "Name": "Code",
-                                            "In": "Query",
-                                            "Value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
+                                    "name": "appHealth",
+                                    "request": {
+                                        "method": "GET",
+                                        "uri": "https://resthealth.healthservice.com/api/applications/contosoApp/healthStatus",
+                                        "authentication": {
+                                            "type": "ApiKey",
+                                            "name": "Code",
+                                            "in": "Query",
+                                            "value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
                                         }
                                     },
-                                    "Response": {
-                                        "SuccessStatusCodes": [
+                                    "response": {
+                                        "successStatusCodes": [
                                             "OK"
                                         ],
-                                        "Regex": {
-                                            "MatchQuantifier": "All",
-                                            "Matches": [
+                                        "regex": {
+                                            "matchQuantifier": "All",
+                                            "matches": [
                                                 "(?i)Contoso-App",
                                                 "(?i)\"health_status\":((.|\n)*)\"(green|yellow)\"",
                                                 "(?mi)^(\"application_host\": 94781052)$"
@@ -116,24 +116,24 @@
                                     }
                                 },
                                 {
-                                    "Name": "serviceHealth",
-                                    "Request": {
-                                        "Method": "Get",
-                                        "Uri": "https://resthealth.healthservice.com/api/services/contosoService/healthStatus",
-                                        "Authentication": {
-                                            "Type": "ApiKey",
-                                            "Name": "code",
-                                            "In": "Header",
-                                            "Value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
+                                    "name": "serviceHealth",
+                                    "request": {
+                                        "method": "GET",
+                                        "uri": "https://resthealth.healthservice.com/api/services/contosoService/healthStatus",
+                                        "authentication": {
+                                            "type": "ApiKey",
+                                            "name": "code",
+                                            "in": "Header",
+                                            "value": "NBCapiMOBQyAAbCkeytoPadnvO0eGHmidwFz5rXpappznKp3Jt7LLg=="
                                         }
                                     },
-                                    "Response": {
-                                        "SuccessStatusCodes": [
+                                    "response": {
+                                        "successStatusCodes": [
                                             "OK"
                                         ],
-                                        "Regex": {
-                                            "MatchQuantifier": "All",
-                                            "Matches": [
+                                        "regex": {
+                                            "matchQuantifier": "All",
+                                            "matches": [
                                                 "(?i)Contoso-Service-EndToEnd",
                                                 "(?i)\"health_status\":((.|\n)*)\"(green)\""
                                             ]
