@@ -1438,7 +1438,7 @@
           "items": {
             "type": "string"
           },
-          "description": "(PREVIEW) Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
+          "description": "Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
         },
         "enableNodePublicIP": {
           "type": "boolean",
@@ -1451,6 +1451,20 @@
         "scaleSetEvictionPolicy": {
           "$ref": "#/definitions/ScaleSetEvictionPolicy",
           "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for low priority virtual machine scale set. Default to Delete."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool tags to be persisted on the agent pool virtual machine scale set."
+        },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool node labels to be persisted across all nodes in agent pool."
         },
         "nodeTaints": {
           "type": "array",
@@ -1496,7 +1510,7 @@
         "name": "AgentPoolType",
         "modelAsString": true
       },
-      "description": "AgentPoolType represents types of an agent pool. VirtualMachineScaleSets type is still in PREVIEW."
+      "description": "AgentPoolType represents types of an agent pool."
     },
     "AgentPoolListResult": {
       "properties": {
