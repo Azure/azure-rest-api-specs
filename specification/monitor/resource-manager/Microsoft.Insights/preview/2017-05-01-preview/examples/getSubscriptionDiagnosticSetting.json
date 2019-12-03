@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "1a66ce04-b633-4a0b-b2bc-a912ec8986a6",
+    "name": "mysetting",
+    "api-version": "2017-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/providers/AzureResourceManager/diagnosticSettings/ds4",
+        "type": "",
+        "name": "ds4",
+		"location": "global",
+        "properties": {
+          "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+          "workspaceId": "",
+          "eventHubAuthorizationRuleId": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/eventhubs/myeventhub/authorizationrules/myrule",
+          "logs": [
+            {
+				"category": "Security",
+				"enabled": true
+			},
+			{
+				"category": "Administrative",
+				"enabled": false
+			},
+			{
+				"category": "ServiceHealth",
+				"enabled": false
+			},
+			{
+				"category": "Alert",
+				"enabled": false
+			},
+			{
+				"category": "Recommendation",
+				"enabled": false
+			},
+			{
+				"category": "Policy",
+				"enabled": false
+			},
+			{
+				"category": "Autoscale",
+				"enabled": false
+			},
+			{
+				"category": "ResourceHealth",
+				"enabled": false
+			}
+          ]
+        }
+      }
+    }
+  }
+}
