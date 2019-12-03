@@ -339,7 +339,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The operation returns a list of shareable links for the specified VMs, giving appropriate error messages as needed."
+            "description": "Success. The operation deleted the BastionShareableLinks associated with the VMs, if they existed. No return body."
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
@@ -385,7 +385,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The operation deleted the BastionShareableLinks associated with the VMs, if they existed."
+            "description": "Success. The operation returns a list of shareable links for the specified VMs, giving appropriate error messages as needed.",
+            "schema": {
+              "$ref": "#/definitions/BastionShareableLinkListResult"
+            }
           },
           "400": {
             "description": "Bad request. Check the message for details."
