@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "0000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup",
+    "api-version": "2019-11-01-preview",
+    "guideName": "Guide1",
+    "guide": {
+      "location": "Central US",
+      "tags": {},
+      "properties": {
+        "title": "My First Guide",
+        "description": "this is a sample description",
+        "icon": "https://www.example.com/icons/logo25.jpg",
+        "content": [
+          {
+            "title": "Step 1",
+            "contentLocation":"external",
+            "path": "https://storagename.blob.core.windows.net/guides/step1.md"
+          },
+          {
+            "title": "Step 2",
+            "contentLocation":"external",
+            "path": "https://storagename.blob.core.windows.net/guides/step2.md"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KnowldegeBase/guide/guide1",
+        "name": "guide1",
+        "type": "microsoft.KnowledgeBase/guides",
+        "location": "North Central US",
+        "tags": {},
+        "properties": {
+          "title": "My First Guide",
+          "description": "this is a sample description",
+          "icon": "https://www.example.com/icons/logo25.jpg",
+          "content": [
+            {
+              "title": "Step 1",
+              "contentLocation":"inline",
+             "contents":"#This is markdown\r\n1.list\r\n2.numbered list"
+            },
+            {
+              "title": "Step 2",
+              "contentLocation":"external",
+              "path": "https://storagename.blob.core.windows.net/guides/step2.md"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.KnowldegeBase/guide/guide1",
+        "name": "guide1",
+        "type": "microsoft.KnowledgeBase/guides",
+        "location": "North Central US",
+        "tags": {},
+        "properties": {
+          "title": "My First Guide",
+          "description": "this is a sample description",
+          "icon": "https://www.example.com/icons/logo25.jpg",
+          "content": [
+            {
+              "title": "Step 1",
+              "contentLocation":"inline",
+             "contents":"#This is markdown\r\n1.list\r\n2.numbered list"
+            },
+            {
+              "title": "Step 2",
+              "contentLocation":"external",
+              "path": "https://storagename.blob.core.windows.net/guides/step2.md"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,666 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure KnowledgeBase",
+    "description": "Azure KnowledgeBase Resource Provider",
+    "version": "2019-07-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "AKBClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.KnowledgeBase/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Operations_List",
+        "description": "Gets the details of all operations possible on the Microsoft.KnowldegeBase resource provider.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the possible operations on the Microsoft.KnowldegeBase resource provider.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of operations for this resource provider": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KnowledgeBase/guides/{guideName}": {
+      "put": {
+        "operationId": "Guides_CreateOrUpdate",
+        "description": "Creates or updates an Azure Knowledge Base Guide.",
+        "tags": [
+          "Guide"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "guideName",
+            "description": "The name of the Azure resource in ARM.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "guide",
+            "description": "The request payload to create the Azure Guide.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Guide"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guide has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Guide"
+            }
+          },
+          "201": {
+            "description": "The Azure Guide has been created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Guide"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create an Azure Guide using an arm template ": {
+            "$ref": "./examples/CreateAzureGuide.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Guides_Get",
+        "description": "Gets an existing Azure Guides.",
+        "tags": [
+          "Guides"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "guideName",
+            "description": "The name of the Azure Guide resource in ARM.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guide has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/Guide"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure guide": {
+            "$ref": "./examples/GetAzureGuide.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Guides_Update",
+        "description": "Updates the properties of an Azure Guide. Currently, only tags can be updated.",
+        "tags": [
+          "Guides"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "guideName",
+            "description": "The name of the Azure Guide resource.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "guide",
+            "description": "The request payload containing the properties to update in the Azure guide.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuideUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guide has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Guide"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure guide": {
+            "$ref": "./examples/UpdateAzureGuide.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Guides_Delete",
+        "description": "Deletes an Azure Guide.",
+        "tags": [
+          "Guides"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "guideName",
+            "description": "The name of the Azure Guide resource.",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guide has been deleted successfully."
+          },
+          "204": {
+            "description": "The Azure Guide is not found or has been deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an existing Azure guide": {
+            "$ref": "./examples/DeleteAzureGuide.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KnowledgeBase/guides": {
+      "get": {
+        "operationId": "Guides_ListByResourceGroup",
+        "description": "Lists all Azure Guides under the specified resource group.",
+        "tags": [
+          "Guides"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guides have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuideListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure Guides under the specified resource group": {
+            "$ref": "./examples/ListAzureGuidesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KnowledgeBase/guides": {
+      "get": {
+        "operationId": "Guides_ListBySubscription",
+        "description": "Lists all Azure Guides under the specified subscription.",
+        "tags": [
+          "Guides"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Guides have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuideListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Azure guides under the specified subscription": {
+            "$ref": "./examples/ListAzureGuidesBySubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Details of the error from the Guides Resource Provider.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Guides Resource Provider."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error or the method where the error occurred."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Guides Resource Provider."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by Microsoft.KnowledgeBase resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of operations, if there are any."
+        }
+      },
+      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
+    },
+    "Guide": {
+      "type": "object",
+      "description": "Azure Guide used to configure add custom guide resources to the Azure Quick start center and Azure knowledgeBase",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GuideProperties",
+          "description": "Custom properties of the Guide.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "GuideProperties": {
+      "type": "object",
+      "description": "Custom properties of a Guide.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "the title of the guide."
+        },
+        "description": {
+          "type": "string",
+          "description": "the description of the guide, used to build the guide tile."
+        },
+        "icon": {
+          "type": "string",
+          "description": "a link to an image/icon to build the guide tile"
+        },
+        "featured":{
+          "type":"boolean",
+          "description":"shows guide in Quickstart Center"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/guideItem"
+          },
+          "description": "Reference to the Azure guide contents."
+        }
+      },
+      "required": [
+        "title",
+        "content"
+      ]
+    },
+    "guideItem": {
+      "type": "object",
+      "description": "Reference to an markdown file and its title.",
+      "properties": {
+        "contentLocation": {
+          "type": "string",
+          "description": "specifies if the guides content is external or inline",
+          "enum": [
+            "inline",
+            "external"
+          ],
+          "x-ms-enum": {
+            "name": "contentLocation",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "contentLocation"
+      ],
+      "discriminator": "contentLocation"
+    },
+    "ExternalGuideItem": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/guideItem"
+        }
+      ],
+      "x-ms-discriminator-value": "external",
+      "properties": {
+          "title": {
+            "type": "string",
+            "description": "Title of the step."
+          },
+          "path": {
+            "type": "string",
+            "description": "link to extenal markdown file"
+          }
+        
+      }
+    },
+    "InlineGuideItem": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/guideItem"
+        }
+      ],
+      "x-ms-discriminator-value": "inline",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the step."
+        },
+        "contents": {
+          "type": "string",
+          "description": "the contents of the markdown file"
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "An Azure Resource Manager (ARM) resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Name"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "GuideUpdateParameters": {
+      "type": "object",
+      "description": "Request payload used to update an existing Azure Guide.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GuideProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceUpdate"
+        }
+      ]
+    },
+    "ResourceUpdate": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "GuideListResult": {
+      "description": "Result of a request to list all Azure Guide under a given scope.",
+      "properties": {
+        "value": {
+          "description": "List of guides.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Guide"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of Guides, if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to be used with the HTTP request."
+    }
+  }
+}
