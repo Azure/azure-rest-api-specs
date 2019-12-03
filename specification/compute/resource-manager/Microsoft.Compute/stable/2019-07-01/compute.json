@@ -2673,7 +2673,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Generalize",
-        "description": "Sets the state of the virtual machine to generalized.",
+        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2700,7 +2700,13 @@
           "200": {
             "description": "OK"
           }
+        },
+        "x-ms-examples": {
+          "Generalize a Virtual Machine.": {
+            "$ref": "./examples/GeneralizeVirtualMachine.json"
+          }
         }
+
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {

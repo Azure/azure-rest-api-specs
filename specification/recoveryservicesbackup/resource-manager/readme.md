@@ -46,13 +46,24 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.RecoveryServices/stable/2019-05-13/bms.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+```
+
 ### Tag: package-2017-07
 
 These settings apply only when `--tag=package-2017-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.RecoveryServices/stable/2019-05-13/bms.json
 - Microsoft.RecoveryServices/stable/2017-07-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
@@ -141,7 +152,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -162,11 +173,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

@@ -1100,7 +1100,7 @@
       "properties": {
         "connectionString": {
           "description": "The connection string.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "type": "object"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1140,7 +1140,7 @@
       "properties": {
         "connectionString": {
           "description": "The connection string.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "type": "object"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -2265,6 +2265,10 @@
         "securityToken": {
           "description": "The security token is required to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
