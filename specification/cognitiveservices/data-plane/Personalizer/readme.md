@@ -59,11 +59,9 @@ directive:
   - from: source-file-csharp
     where: $
     transform: >-
-      if ($.includes("class Events"))
-        return $
-          .replace( /\"this.Endpoint\"/g, "\"this.Client.Endpoint\"" )
-          .replace( /this.Endpoint/g, "Client.Endpoint" );
-      return $;
+      return $
+        .replace( /\"this.Endpoint\"/g, "\"this.Client.Endpoint\"" )
+        .replace( /this.Endpoint/g, "Client.Endpoint" );
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
