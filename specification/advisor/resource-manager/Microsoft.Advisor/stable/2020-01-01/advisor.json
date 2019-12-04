@@ -798,23 +798,16 @@
     "ConfigData": {
       "description": "The Advisor configuration data structure.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConfigDataProperties",
           "description": "The configuration data properties",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "description": "The resource Id of the configuration resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the configuration resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the configuration resource.",
-          "type": "string"
         }
       }
     },
