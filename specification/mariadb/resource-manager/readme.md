@@ -159,6 +159,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 
 ```
 
