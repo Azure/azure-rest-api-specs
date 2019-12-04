@@ -34,7 +34,7 @@ tag: package-2020-01-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-01'
+```yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
 ```
