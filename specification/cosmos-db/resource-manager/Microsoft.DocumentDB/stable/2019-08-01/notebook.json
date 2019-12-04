@@ -70,12 +70,12 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/default": {
 			"get": {
 				"tags": [
 					"NotebookWorkspacesResource"
 				],
-				"description": "Gets the notework workspace for a Cosmos DB account.",
+				"description": "Gets the notebook workspace for a Cosmos DB account.",
 				"operationId": "NotebookWorkspaces_Get",
 				"parameters": [{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
@@ -88,9 +88,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					}
 				],
 				"responses": {
@@ -125,9 +122,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					},
 					{
 						"name": "createParameters",
@@ -171,9 +165,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					}
 				],
 				"responses": {
@@ -191,7 +182,7 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/getConnectionInfo": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/default/getConnectionInfo": {
 			"post": {
 				"tags": [
 					"NotebookWorkspacesResource"
@@ -214,9 +205,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					}
 				],
 				"responses": {
@@ -229,7 +217,7 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/regenerateAuthToken": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/default/regenerateAuthToken": {
 			"post": {
 				"tags": [
 					"NotebookWorkspacesResource"
@@ -252,9 +240,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					}
 				],
 				"responses": {
@@ -267,7 +252,7 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/start": {
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/default/start": {
 			"post": {
 				"tags": [
 					"NotebookWorkspacesResource"
@@ -290,9 +275,6 @@
 					},
 					{
 						"$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
-					},
-					{
-						"$ref": "#/parameters/NotebookWorkspaceNameParameter"
 					}
 				],
 				"responses": {
@@ -360,7 +342,7 @@
 		"NotebookWorkspaceConnectionInfoResult": {
 			"description": "The connection info for the given notebook workspace",
 			"properties": {
-				"authtoken": {
+				"authToken": {
 					"type": "string",
 					"description": "Specifies auth token used for connecting to Notebook server (uses token-based auth)."
 				},
@@ -372,13 +354,5 @@
 		}
 	},
 	"parameters": {
-		"NotebookWorkspaceNameParameter": {
-			"name": "notebookWorkspaceName",
-			"in": "path",
-			"description": "The name of the notebook workspace resource.",
-			"required": true,
-			"x-ms-parameter-location": "method",
-			"type": "string"
-		}
 	}
 }
