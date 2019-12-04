@@ -4566,11 +4566,18 @@
     "ThroughputSettingsGetProperties": {
       "description": "The properties of an Azure Cosmos DB resource throughput",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThroughputSettingsResource"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ThroughputSettingsResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlDatabaseGetResults": {
       "description": "An Azure Cosmos DB SQL database.",
