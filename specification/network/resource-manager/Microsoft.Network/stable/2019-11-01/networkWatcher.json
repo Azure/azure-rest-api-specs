@@ -1592,8 +1592,11 @@
           }
         },
         "x-ms-examples": {
-          "Create connection monitor": {
+          "Create connection monitor V1": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json"
+          },
+          "Create connection monitor V2": {
+            "$ref": "./examples/NetworkWatcherConnectionMonitorV2Create.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3835,7 +3838,7 @@
         },
         "path": {
           "type": "string",
-          "description": "The path component of the URI. For instance, \"/dir1/dir2\""
+          "description": "The path component of the URI. For instance, \"/dir1/dir2\"."
         },
         "requestHeaders": {
           "type": "array",
@@ -3849,7 +3852,7 @@
           "items": {
             "type": "string"
           },
-          "description": "HTTP status codes to consider successful. For instance, \"2xx,301-304,418\""
+          "description": "HTTP status codes to consider successful. For instance, \"2xx,301-304,418\"."
         },
         "preferHTTPS": {
           "type": "boolean",
@@ -3866,7 +3869,7 @@
         },
         "disableTraceRoute": {
           "type": "boolean",
-          "description": "Value indicating whether path evaluation with traceroute should be disabled."
+          "description": "Value indicating whether path evaluation with trace route should be disabled."
         }
       },
       "description": "Describes the TCP configuration."
@@ -3875,7 +3878,7 @@
       "properties": {
         "disableTraceRoute": {
           "type": "boolean",
-          "description": "Value indicating whether path evaluation with traceroute should be disabled."
+          "description": "Value indicating whether path evaluation with trace route should be disabled."
         }
       },
       "description": "Describes the ICMP configuration."
@@ -4017,8 +4020,8 @@
           "description": "ID of the connection monitor."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
-          "default": "A unique read-only string that changes whenever the resource is updated.",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
@@ -4048,6 +4051,7 @@
     "ConnectionMonitorResultProperties": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the connection monitor."
         },
