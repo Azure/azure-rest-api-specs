@@ -1832,7 +1832,8 @@
                 ],
                 "operationId": "File_Create",
                 "description": "Creates a new file or replaces a file. Note it only initializes the file with no content.",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -1885,6 +1886,9 @@
                     },
                     {
                         "$ref": "#/parameters/FileLastWriteTime"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -2545,6 +2549,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -2593,7 +2600,8 @@
                 ],
                 "operationId": "File_SetHTTPHeaders",
                 "description": "Sets HTTP headers on the file.",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -2640,6 +2648,9 @@
                     },
                     {
                         "$ref": "#/parameters/FileLastWriteTime"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -2747,7 +2758,8 @@
                 ],
                 "operationId": "File_SetMetadata",
                 "description": "Updates user-defined metadata for the specified file.",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -2755,6 +2767,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -3239,7 +3254,8 @@
                 "consumes": [
                     "application/octet-stream"
                 ],
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/OptionalBody"
                     },
                     {
@@ -3278,6 +3294,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -3382,6 +3401,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -3545,7 +3567,8 @@
                 ],
                 "operationId": "File_StartCopy",
                 "description": "Copies a blob or file to a destination file within the storage account.",
-                "parameters": [{
+                "parameters": [
+                {
                         "$ref": "#/parameters/Timeout"
                     },
                     {
@@ -3580,6 +3603,9 @@
                     },
                     {
                         "$ref": "#/parameters/FileCopySetArchiveAttribute"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -3658,7 +3684,8 @@
                 ],
                 "operationId": "File_AbortCopy",
                 "description": "Aborts a pending Copy File operation, and leaves a destination file with zero length and full metadata.",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/CopyId"
                     },
                     {
@@ -3669,6 +3696,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -5049,14 +5079,14 @@
             },
             "x-ms-parameter-location": "method"
         },
-      "TargetRange": {
-        "name": "x-ms-range",
-        "x-ms-client-name": "Range",
-        "in": "header",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method",
-        "description": "Writes data to the specified byte range in the file."
+        "TargetRange": {
+            "name": "x-ms-range",
+            "x-ms-client-name": "Range",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "description": "Writes data to the specified byte range in the file."
       },
         "Timeout": {
             "name": "timeout",
