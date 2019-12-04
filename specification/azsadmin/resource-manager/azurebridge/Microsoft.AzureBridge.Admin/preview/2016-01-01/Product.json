@@ -134,16 +134,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/DownloadedProductResource"
+            }
           },
           "404": {
             "description": "Not Found"
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "produces": [
           "application/json"
         ],
