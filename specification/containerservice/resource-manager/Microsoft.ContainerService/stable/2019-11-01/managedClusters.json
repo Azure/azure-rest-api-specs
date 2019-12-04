@@ -1912,6 +1912,17 @@
         "apiServerAccessProfile": {
           "$ref": "#/definitions/ManagedClusterAPIServerAccessProfile",
           "description": "Access profile for managed cluster API server."
+        },
+        "identityProfile": {
+          "additionalProperties": {
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/definitions/UserAssignedIdentity"
+              }
+            ]
+          },
+          "description": "Identities associated with the cluster.",
         }
       },
       "description": "Properties of the managed cluster."
@@ -2418,3 +2429,4 @@
     }
   }
 }
+
