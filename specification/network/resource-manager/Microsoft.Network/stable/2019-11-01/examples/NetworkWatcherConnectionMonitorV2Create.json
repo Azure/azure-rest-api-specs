@@ -10,60 +10,60 @@
       "properties": {
         "endpoints": [
           {
-              "name": "vm1",
-              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
+            "name": "vm1",
+            "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
           },
           {
-              "name": "CanaryWorkspaceVamshi",
-              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
-              "filter": {
-                  "type": "Include",
-                  "items": [
-                      {
-                          "type": "AgentAddress",
-                          "address": "npmuser"
-                      }
-                  ]
-              }
+            "name": "CanaryWorkspaceVamshi",
+            "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
+            "filter": {
+              "type": "Include",
+              "items": [
+                {
+                  "type": "AgentAddress",
+                  "address": "npmuser"
+                }
+              ]
+            }
           },
           {
-              "name": "bing",
-              "address": "bing.com"
+            "name": "bing",
+            "address": "bing.com"
           },
           {
-              "name": "google",
-              "address": "google.com"
+            "name": "google",
+            "address": "google.com"
           }
         ],
         "testConfigurations": [
           {
-              "name": "testConfig1",
-              "testFrequencySec": 60,
-              "protocol": "Tcp",
-              "tcpConfiguration": {
-                  "port": 80,
-                  "disableTraceRoute": false
-              }
+            "name": "testConfig1",
+            "testFrequencySec": 60,
+            "protocol": "Tcp",
+            "tcpConfiguration": {
+              "port": 80,
+              "disableTraceRoute": false
+            }
           }
         ],
-		"testGroups": [
+        "testGroups": [
           {
-              "name": "test1",
-              "disable": false,
-              "testConfigurations": [
-                  "testConfig1"
-              ],
-              "sources": [
-                  "vm1",
-                  "CanaryWorkspaceVamshi"
-              ],
-              "destinations": [
-                  "bing",
-                  "google"
-              ]
+            "name": "test1",
+            "disable": false,
+            "testConfigurations": [
+              "testConfig1"
+            ],
+            "sources": [
+              "vm1",
+              "CanaryWorkspaceVamshi"
+            ],
+            "destinations": [
+              "bing",
+              "google"
+            ]
           }
         ],
-        "outputs": []
+        "outputs": [ ]
       }
     }
   },
@@ -76,61 +76,61 @@
         "properties": {
           "endpoints": [
             {
-                "name": "vm1",
-                "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
+              "name": "vm1",
+              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
             },
             {
-                "name": "CanaryWorkspaceVamshi",
-                "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
-                "filter": {
-                    "type": "Include",
-                    "items": [
-                        {
-                            "type": "AgentAddress",
-                            "address": "npmuser"
-                        }
-                    ]
-                }
+              "name": "CanaryWorkspaceVamshi",
+              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
+              "filter": {
+                "type": "Include",
+                "items": [
+                  {
+                    "type": "AgentAddress",
+                    "address": "npmuser"
+                  }
+                ]
+              }
             },
             {
-                "name": "bing",
-                "address": "bing.com"
+              "name": "bing",
+              "address": "bing.com"
             },
             {
-                "name": "google",
-                "address": "google.com"
+              "name": "google",
+              "address": "google.com"
             }
           ],
           "testConfigurations": [
             {
-                "name": "testConfig1",
-                "testFrequencySec": 60,
-                "protocol": "Tcp",
-                "tcpConfiguration": {
-                    "port": 80,
-                    "disableTraceRoute": false
-                }
+              "name": "testConfig1",
+              "testFrequencySec": 60,
+              "protocol": "Tcp",
+              "tcpConfiguration": {
+                "port": 80,
+                "disableTraceRoute": false
+              }
             }
           ],
-		  "testGroups": [
+          "testGroups": [
             {
-                "name": "test1",
-                "disable": false,
-                "testConfigurations": [
-                    "testConfig1"
-                ],
-                "sources": [
-                    "vm1",
-                    "CanaryWorkspaceVamshi"
-                ],
-                "destinations": [
-                    "bing",
-                    "google"
-                ]
+              "name": "test1",
+              "disable": false,
+              "testConfigurations": [
+                "testConfig1"
+              ],
+              "sources": [
+                "vm1",
+                "CanaryWorkspaceVamshi"
+              ],
+              "destinations": [
+                "bing",
+                "google"
+              ]
             }
           ],
-          "outputs": []
-		},
+          "outputs": [ ]
+        },
         "location": "centraluseuap",
         "type": "Microsoft.Network/networkWatchers/connectionMonitors"
       }
@@ -143,61 +143,61 @@
         "properties": {
           "endpoints": [
             {
-                "name": "vm1",
-                "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
+              "name": "vm1",
+              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/NwRgIrinaCentralUSEUAP/providers/Microsoft.Compute/virtualMachines/vm1"
             },
             {
-                "name": "CanaryWorkspaceVamshi",
-                "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
-                "filter": {
-                    "type": "Include",
-                    "items": [
-                        {
-                            "type": "AgentAddress",
-                            "address": "npmuser"
-                        }
-                    ]
-                }
+              "name": "CanaryWorkspaceVamshi",
+              "resourceId": "/subscriptions/96e68903-0a56-4819-9987-8d08ad6a1f99/resourceGroups/vasamudrRG/providers/Microsoft.OperationalInsights/workspaces/vasamudrWorkspace",
+              "filter": {
+                "type": "Include",
+                "items": [
+                  {
+                    "type": "AgentAddress",
+                    "address": "npmuser"
+                  }
+                ]
+              }
             },
             {
-                "name": "bing",
-                "address": "bing.com"
+              "name": "bing",
+              "address": "bing.com"
             },
             {
-                "name": "google",
-                "address": "google.com"
+              "name": "google",
+              "address": "google.com"
             }
           ],
           "testConfigurations": [
             {
-                "name": "testConfig1",
-                "testFrequencySec": 60,
-                "protocol": "Tcp",
-                "tcpConfiguration": {
-                    "port": 80,
-                    "disableTraceRoute": false
-                }
+              "name": "testConfig1",
+              "testFrequencySec": 60,
+              "protocol": "Tcp",
+              "tcpConfiguration": {
+                "port": 80,
+                "disableTraceRoute": false
+              }
             }
           ],
-		  "testGroups": [
+          "testGroups": [
             {
-                "name": "test1",
-                "disable": false,
-                "testConfigurations": [
-                    "testConfig1"
-                ],
-                "sources": [
-                    "vm1",
-                    "CanaryWorkspaceVamshi"
-                ],
-                "destinations": [
-                    "bing",
-                    "google"
-                ]
+              "name": "test1",
+              "disable": false,
+              "testConfigurations": [
+                "testConfig1"
+              ],
+              "sources": [
+                "vm1",
+                "CanaryWorkspaceVamshi"
+              ],
+              "destinations": [
+                "bing",
+                "google"
+              ]
             }
           ],
-          "outputs": []
-		},
+          "outputs": [ ]
+        },
         "location": "centraluseuap",
         "type": "Microsoft.Network/networkWatchers/connectionMonitors"
       }
