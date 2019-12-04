@@ -257,6 +257,9 @@
         "x-ms-examples": {
           "StorageAccountUpdate": {
             "$ref": "./examples/StorageAccountUpdate.json"
+          },
+          "StorageAccountEnableAD": {
+            "$ref": "./examples/StorageAccountEnableAD.json"
           }
         },
         "parameters": [
@@ -1173,7 +1176,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "$ref": "#/definitions/SkuInformation"
           },
           "description": "Get the list result of storage SKUs and their properties."
         }
@@ -1208,38 +1211,13 @@
       },
       "description": "The CheckNameAvailability operation response."
     },
-    "Sku": {
+    "SkuInformation": {
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Gets or sets the SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Standard_ZRS",
-            "Premium_LRS",
-            "Premium_ZRS",
-            "Standard_GZRS",
-            "Standard_RAGZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
+          "$ref": "./common.json#/definitions/SkuName"
         },
         "tier": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the SKU tier. This is based on the SKU name.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          }
+          "$ref": "./common.json#/definitions/Tier"
         },
         "resourceType": {
           "readOnly": true,
@@ -1289,7 +1267,7 @@
       "required": [
         "name"
       ],
-      "description": "The SKU of the storage account."
+      "description": "Storage SKU and its properties"
     },
     "CustomDomain": {
       "properties": {
@@ -1627,6 +1605,11 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/RoutingPreference",
+          "x-ms-client-name": "RoutingPreference",
+          "description": "Maintains information about the network routing choice opted by the user for data transfer"
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1663,7 +1646,7 @@
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Required. Gets or sets the SKU name."
         },
         "kind": {
@@ -1740,9 +1723,79 @@
           "readOnly": true,
           "type": "string",
           "description": "Gets the dfs endpoint."
+        },
+        "microsoftEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
+          "description": "Gets the microsoft routing storage endpoints."
+        },
+        "internetEndpoints": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/StorageAccountInternetEndpoints",
+          "description": "Gets the internet routing storage endpoints"
         }
       },
       "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object."
+    },
+    "StorageAccountMicrosoftEndpoints": {
+      "properties": {
+        "blob": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the blob endpoint."
+        },
+        "queue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the queue endpoint."
+        },
+        "table": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the table endpoint."
+        },
+        "file": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via a microsoft routing endpoint."
+    },
+    "StorageAccountInternetEndpoints": {
+      "properties": {
+        "blob": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the blob endpoint."
+        },
+        "file": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the file endpoint."
+        },
+        "web": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the web endpoint."
+        },
+        "dfs": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the dfs endpoint."
+        }
+      },
+      "description": "The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint."
     },
     "GeoReplicationStats": {
       "properties": {
@@ -1773,6 +1826,31 @@
         }
       },
       "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account."
+    },
+    "RoutingPreference": {
+      "properties": {
+        "routingChoice": {
+          "type": "string",
+          "description": "Routing Choice defines the kind of network routing opted by the user.",
+          "enum": [
+            "MicrosoftRouting",
+            "InternetRouting"
+          ],
+          "x-ms-enum": {
+            "name": "RoutingChoice",
+            "modelAsString": true
+          }
+        },
+        "publishMicrosoftEndpoints": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether microsoft routing storage endpoints are to be published"
+        },
+        "publishInternetEndpoints": {
+          "type": "boolean",
+          "description": "A boolean flag which indicates whether internet routing storage endpoints are to be published"
+        }
+      },
+      "description": "Routing preference defines the type of network, either microsoft or internet routing to be used to deliver the user data, the default option is microsoft routing"
     },
     "StorageAccountProperties": {
       "properties": {
@@ -1922,6 +2000,11 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connection associated with the specified storage account"
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/RoutingPreference",
+          "x-ms-client-name": "RoutingPreference",
+          "description": "Maintains information about the network routing choice opted by the user for data transfer"
         }
       },
       "description": "Properties of the storage account."
@@ -1929,7 +2012,7 @@
     "StorageAccount": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "readOnly": true,
           "description": "Gets the SKU."
         },
@@ -2084,6 +2167,11 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "routingPreference": {
+          "$ref": "#/definitions/RoutingPreference",
+          "x-ms-client-name": "RoutingPreference",
+          "description": "Maintains information about the network routing choice opted by the user for data transfer"
         }
       },
       "description": "The parameters used when updating a storage account."
@@ -2091,7 +2179,7 @@
     "StorageAccountUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value."
         },
         "tags": {

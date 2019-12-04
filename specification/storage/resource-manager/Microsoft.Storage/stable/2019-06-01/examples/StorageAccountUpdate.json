@@ -10,16 +10,10 @@
         "networkAcls": {
           "defaultAction": "Allow"
         },
-        "azureFilesIdentityBasedAuthentication": {
-          "directoryServiceOptions": "AD",
-          "activeDirectoryProperties": {
-            "domainName": "adtest.com",
-            "netBiosDomainName": "adtest.com",
-            "forestName": "adtest.com",
-            "domainGuid": "aebfc118-9fa9-4732-a21f-d98e41a77ae1",
-            "domainSid": "S-1-5-21-2400535526-2334094090-2402026252",
-            "azureStorageSid": "S-1-5-21-2400535526-2334094090-2402026252-0012"
-          }
+        "routingPreference": {
+          "routingChoice": "MicrosoftRouting",
+          "publishMicrosoftEndpoints": true,
+          "publishInternetEndpoints": true
         }
       }
     }
@@ -40,27 +34,35 @@
             "ipRules": [],
             "virtualNetworkRules": []
           },
-          "azureFilesIdentityBasedAuthentication": {
-            "directoryServiceOptions": "AD",
-            "activeDirectoryProperties": {
-              "domainName": "adtest.com",
-              "netBiosDomainName": "adtest.com",
-              "forestName": "adtest.com",
-              "domainGuid": "aebfc118-9fa9-4732-a21f-d98e41a77ae1",
-              "domainSid": "S-1-5-21-2400535526-2334094090-2402026252",
-              "azureStorageSid": "S-1-5-21-2400535526-2334094090-2402026252-0012"
-            }
-          },
           "primaryEndpoints": {
             "web": "https://sto8596.web.core.windows.net/",
             "dfs": "https://sto8596.dfs.core.windows.net/",
             "blob": "https://sto8596.blob.core.windows.net/",
             "file": "https://sto8596.file.core.windows.net/",
             "queue": "https://sto8596.queue.core.windows.net/",
-            "table": "https://sto8596.table.core.windows.net/"
+            "table": "https://sto8596.table.core.windows.net/",
+            "microsoftEndpoints": {
+              "web": "https://sto8596-microsoftrouting.web.core.windows.net/",
+              "dfs": "https://sto8596-microsoftrouting.dfs.core.windows.net/",
+              "blob": "https://sto8596-microsoftrouting.blob.core.windows.net/",
+              "file": "https://sto8596-microsoftrouting.file.core.windows.net/",
+              "queue": "https://sto8596-microsoftrouting.queue.core.windows.net/",
+              "table": "https://sto8596-microsoftrouting.table.core.windows.net/"
+            },
+            "internetEndpoints": {
+              "web": "https://sto8596-internetrouting.web.core.windows.net/",
+              "dfs": "https://sto8596-internetrouting.dfs.core.windows.net/",
+              "blob": "https://sto8596-internetrouting.blob.core.windows.net/",
+              "file": "https://sto8596-internetrouting.file.core.windows.net/"
+            }
           },
           "primaryLocation": "eastus2(stage)",
           "provisioningState": "Succeeded",
+          "routingPreference": {
+            "routingChoice": "MicrosoftRouting",
+            "publishMicrosoftEndpoints": true,
+            "publishInternetEndpoints": true
+          },
           "secondaryLocation": "northcentralus(stage)",
           "statusOfPrimary": "available",
           "statusOfSecondary": "available",

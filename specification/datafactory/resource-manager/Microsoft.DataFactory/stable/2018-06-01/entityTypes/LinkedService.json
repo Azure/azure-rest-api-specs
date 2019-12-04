@@ -1100,7 +1100,7 @@
       "properties": {
         "connectionString": {
           "description": "The connection string.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "type": "object"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1140,7 +1140,7 @@
       "properties": {
         "connectionString": {
           "description": "The connection string.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+          "type": "object"
         },
         "password": {
           "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
@@ -1269,6 +1269,14 @@
         "password": {
           "description": "Password for authentication.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "packageCollection": {
+          "type": "object",
+          "description": "Under where packages are created when querying database. Type: string (or Expression with resultType string)."
+        },
+        "certificateCommonName": {
+          "type": "object",
+          "description": "Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",

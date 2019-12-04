@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "parameters": {
+    "appResource": {
       "properties": {
         "public": true,
         "activeDeploymentName": "mydeployment1",
@@ -10,11 +10,9 @@
         },
         "persistentDisk": {
           "sizeInGB": 2,
-          "usedInGB": 0,
           "mountPath": "mypersistentdisk"
         }
-      },
-      "type": "Microsoft.AppPlatform/Spring/apps"
+      }
     },
     "api-version": "2019-05-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -27,8 +25,30 @@
       "body": {
         "properties": {
           "public": true,
-          "url": "myapp.myservice.azureapps.io",
+          "url": "myapp.myservice.azuremicroservices.io",
           "provisioningState": "Succeeded",
+          "activeDeploymentName": "mydeployment1",
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "mytemporarydisk"
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "mypersistentdisk"
+          }
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Creating",
           "activeDeploymentName": "mydeployment1",
           "temporaryDisk": {
             "sizeInGB": 2,
