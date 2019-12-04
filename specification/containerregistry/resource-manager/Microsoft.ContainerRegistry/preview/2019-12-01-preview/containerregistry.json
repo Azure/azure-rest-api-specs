@@ -1322,6 +1322,10 @@
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
         },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the container registry."
+        },
         "properties": {
           "$ref": "#/definitions/RegistryProperties",
           "description": "The properties of the container registry.",
@@ -1363,6 +1367,41 @@
           "x-ms-enum": {
             "name": "SkuTier",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
           }
         }
       }
@@ -1420,6 +1459,23 @@
         "policies": {
           "$ref": "#/definitions/Policies",
           "description": "The policies for a container registry."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperty",
+          "description": "The encryption settings of container registry."
+        }
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -1509,6 +1565,27 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "The retention policy for a container registry."
+        }
+      }
+    },
+    "EncryptionProperty": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether or not the encryption is enabled for container registry.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties."
         }
       }
     },
@@ -1645,6 +1722,19 @@
         }
       }
     },
+    "KeyVaultProperties": {
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "description": "Key valult uri to access the encryption key.",
+          "type": "string"
+        },
+        "identityClientId": {
+          "description": "The client id of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      }
+    },
     "RegistryUpdateParameters": {
       "description": "The parameters for updating a container registry.",
       "type": "object",
@@ -1659,6 +1749,10 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU of the container registry."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the container registry."
         },
         "properties": {
           "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
@@ -1682,6 +1776,10 @@
         "policies": {
           "$ref": "#/definitions/Policies",
           "description": "The policies for a container registry."
+        },
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperty",
+          "description": "The encryption settings of container registry."
         }
       }
     },
