@@ -435,6 +435,11 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of currently active sessions on the Bastion": {
+            "$ref": "./examples/BastionSessionsList.json"
+          }
         }
       }
     },
@@ -464,7 +469,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The operation returns a list of active sessions on the Bastion."
+            "description": "Success. The operation returns a list of sessions with the state of deleted/failed/not found.",
+            "schema": {
+              "$ref": "#/definitions/BastionSessionDeleteResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the specified active session": {
+            "$ref": "./examples/BastionSessionsDelete.json"
           }
         }
       }
@@ -705,6 +718,38 @@
         }
       },
       "description": "Response for GetActiveSessions."
+    },
+    "BastionSessionState": {
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique id for the session."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Used for extra information."
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of the session. Disconnected/Failed/NotFound."
+        }
+      },
+      "description": "The session state detail for a target."
+    },
+    "BastionSessionDeleteResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BastionSessionState"
+          },
+          "description": "List of sessions with their corresponding state."
+        }
+      },
+      "description": "Response for DisconnectActiveSessions."
     },
     "VM": {
       "allOf": [
