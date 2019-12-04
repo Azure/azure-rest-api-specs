@@ -76,6 +76,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/stable/v1.0/Personalizer.json
   - $(this-folder)/preview/v1.0/Personalizer.json
 
 ```
