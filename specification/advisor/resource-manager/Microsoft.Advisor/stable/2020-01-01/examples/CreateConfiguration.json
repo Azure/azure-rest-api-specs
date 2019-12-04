@@ -2,15 +2,57 @@
   "parameters": {
     "subscriptionId": "subscriptionId",
     "resourceGroup": "resourceGroup",
+    "configurationName": "default",
     "configContract": {
       "properties": {
-        "exclude": false
+        "low_cpu_threshold": "5",
+        "exclude": true,
+        "digests": [
+          {
+            "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+            "frequency": "P30D",
+            "categories": [
+              "HighAvailability",
+              "Security",
+              "Performance",
+              "Cost",
+              "OperationalExcellence"
+            ],
+            "language": "en"
+          }
+        ]
       }
     },
     "api-version": "2020-01-01"
   },
   "responses": {
-    "204": {},
+    "200": {
+      "body": {
+        "properties": {
+          "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+          "type": "Microsoft.Advisor/configurations",
+          "name": "configurationName",
+          "properties": {
+            "low_cpu_threshold": "5",
+            "exclude": true,
+            "digests": [
+              {
+                "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                "frequency": "P30D",
+                "categories": [
+                  "HighAvailability",
+                  "Security",
+                  "Performance",
+                  "Cost",
+                  "OperationalExcellence"
+                ],
+                "language": "en"
+              }
+            ]
+          }
+        }
+      }
+    },
     "400": {
       "body": {
         "code": "ImproperScope",

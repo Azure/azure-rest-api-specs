@@ -119,7 +119,9 @@
             "$ref": "./examples/ListConfigurations.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -142,11 +144,26 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": ["default"],
+            "x-ms-enum": {
+              "name": "configurationName",
+              "modelAsString": true
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content. Successfully created/overwrote configuration."
+          "200": {
+            "description": "Successfully created/overwrote configuration.",
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
           },
           "400": {
             "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
@@ -202,7 +219,9 @@
             "$ref": "./examples/ListConfigurations.json"
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations/{configurationName}": {
       "put": {
         "tags": [
           "Configurations"
@@ -226,6 +245,18 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Advisor configuration name. Value must be 'default'",
+            "required": true,
+            "type": "string",
+            "enum": ["default"],
+            "x-ms-enum": {
+              "name": "configurationName",
+              "modelAsString": true
+            }
+          },
+          {
             "name": "resourceGroup",
             "in": "path",
             "description": "The name of the Azure resource group.",
@@ -234,8 +265,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No Content. Successfully created/overwrote configuration."
+          "200": {
+            "description": "Successfully created/overwrote configuration.",
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
           },
           "400": {
             "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
@@ -765,6 +799,11 @@
       "description": "The Advisor configuration data structure.",
       "type": "object",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigDataProperties",
+          "description": "The configuration data properties",
+          "x-ms-client-flatten": true
+        },
         "id": {
           "description": "The resource Id of the configuration resource.",
           "type": "string"
@@ -776,23 +815,70 @@
         "name": {
           "description": "The name of the configuration resource.",
           "type": "string"
+        }
+      }
+    },
+    "ConfigDataProperties": {
+      "description": "Configuration data properties",
+      "type": "object",
+      "properties": {
+        "exclude": {
+          "description": "Exclude the resource from Advisor evaluations. Valid values: False (default) or True.",
+          "type": "boolean"
         },
-        "properties": {
-          "description": "The list of property name/value pairs.",
-          "type": "object",
-          "properties": {
-            "exclude": {
-              "description": "Exclude the resource from Advisor evaluations. Valid values: False (default) or True.",
-              "type": "boolean"
-            },
-            "low_cpu_threshold": {
-              "description": "Minimum percentage threshold for Advisor low CPU utilization evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20.",
-              "type": "string"
-            }
-          },
-          "additionalProperties": {
-            "type": "object"
+        "low_cpu_threshold": {
+          "description": "Minimum percentage threshold for Advisor low CPU utilization evaluation. Valid only for subscriptions. Valid values: 5 (default), 10, 15 or 20.",
+          "enum": [
+            "5",
+            "10",
+            "15",
+            "20"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "cpuThreshold",
+            "modelAsString": true
           }
+        },
+        "digests": {
+          "description": "Advisor digest configuration. Valid only for subscriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DigestConfig"
+          }
+        }
+      }
+    },
+    "DigestConfig": {
+      "description": "Advisor Digest configuration entity",
+      "type": "object",
+      "properties": {
+        "actionGroupResourceId": {
+          "description": "Action group resource id used by digest.",
+          "type": "string"
+        },
+        "frequency": {
+          "format": "date-time",
+          "description": "Frequency that digest will be triggered. Value must conform to ISO 8601 standard and must be greater than equal to 7 day and less than or equal to 30 days.",
+          "type": "string"
+        },
+        "categories": {
+          "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "HighAvailability",
+              "Security",
+              "Performance",
+              "Cost",
+              "OperationalExcellence"
+            ],
+            "type": "string"
+          }
+        },
+        "language": {
+          "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
+          "type": "string"
         }
       }
     },
