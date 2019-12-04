@@ -1,7 +1,5 @@
 name: "Azure OpenAPI"
 
-trigger: none
-
 variables:
   TRAVIS: 'true'
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
@@ -19,6 +17,5 @@ jobs:
 - template: .azure-pipelines/ModelValidation.yml
 - template: .azure-pipelines/BreakingChange.yml
 - template: .azure-pipelines/LintDiff.yml
-- template: .azure-pipelines/SwaggerToSDK.yml
 - template: .azure-pipelines/NetworkValidation.yml
 - template: .azure-pipelines/Spellcheck.yml
