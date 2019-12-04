@@ -59,6 +59,9 @@
           },
           "Create HDInsight cluster with Autoscale configuration": {
             "$ref": "./examples/CreateHDInsightClusterWithAutoscaleConfig.json"
+          },
+          "Create Kafka cluster with Kafka Rest Proxy": {
+            "$ref": "./examples/CreateKafkaClusterWithKafkaRestProxy.json"
           }
         },
         "parameters": [
@@ -553,6 +556,28 @@
         }
       }
     },
+    "ClientGroupInfo": {
+      "description": "The information of AAD security group.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The AAD security group name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The AAD security group id."
+        }
+      }
+    },
+    "KafkaRestProperties": {
+      "description": "The kafka rest proxy configuration which contains AAD security group information.",
+      "properties": {
+        "clientGroupInfo": {
+          "$ref": "#/definitions/ClientGroupInfo",
+          "description": "The information of AAD security group."
+        }
+      }
+    },
     "SecurityProfile": {
       "description": "The security profile which contains Ssh public key for the HDInsight cluster.",
       "properties": {
@@ -931,6 +956,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -1065,6 +1094,10 @@
         "clusterDefinition": {
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
+        },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
