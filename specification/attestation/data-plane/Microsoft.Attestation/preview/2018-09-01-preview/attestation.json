@@ -200,12 +200,12 @@
                     }
                 }
             },
-            "delete": {
+            "post": {
                 "tags": [
                     "policy"
                   ],
-                "summary": "Deletes the attestation policy for the specified tenant and reverts to the default policy.",
-                "operationId": "Policy_Delete",
+                "summary": "Resets the attestation policy for the specified tenant and reverts to the default policy.",
+                "operationId": "Policy_Reset",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                     {
@@ -252,8 +252,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Delete Policy": {         
-                      "$ref": "./examples/Delete_Policy.json"         
+                    "Reset Policy": {         
+                      "$ref": "./examples/Reset_Policy.json"         
                     }
                 }
             }
