@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Security/assessmentMetadata/21300918-b2e3-0346-785f-c77ff57d243b",
+            "name": "21300918-b2e3-0346-785f-c77ff57d243b",
+            "type": "Microsoft.Security/assessmentMetadata",
+            "properties": {
+              "displayName": "Install endpoint protection solution on virtual machine scale sets",
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/26a828e1-e88f-464e-bbb3-c134a282b9de",
+              "description": "Install an endpoint protection solution on your virtual machines scale sets, to protect them from threats and vulnerabilities.",
+              "remediationDescription": "To install an endpoint protection solution: 1.  <a href=\"https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-faq#how-do-i-turn-on-antimalware-in-my-virtual-machine-scale-set\">Follow the instructions in How do I turn on antimalware in my virtual machine scale set</a>",
+              "category": [
+                "Compute"
+              ],
+              "severity": "Medium",
+              "userImpact": "Low",
+              "implementationEffort": "Low",
+              "threats": [
+                "dataExfiltration",
+                "dataSpillage",
+                "maliciousInsider"
+              ],
+              "assessmentType": "BuiltIn"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Security/assessmentMetadata/bc303248-3d14-44c2-96a0-55f5c326b5fe",
+            "name": "bc303248-3d14-44c2-96a0-55f5c326b5fe",
+            "type": "Microsoft.Security/assessmentMetadata",
+            "properties": {
+              "displayName": "Close management ports on your virtual machines",
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/22730e10-96f6-4aac-ad84-9383d35b5917",
+              "description": "Open remote management ports expose your VM to a high level of risk from internet-based attacks that attempt to brute force credentials to gain admin access to the machine.",
+              "remediationDescription": "We recommend that you edit the inbound rules of the below virtual machines to restrict access to specific source ranges.<br>To restrict the access to your virtual machines: 1. Click on a VM from the list below 2. At the 'Networking' blade, click on each of the rules that allow management ports (e.g. RDP-3389, WINRM-5985, SSH-22) 3. Change the 'Action' property to 'Deny' 4. Click 'Save'",
+              "category": [
+                "Networking"
+              ],
+              "severity": "Medium",
+              "userImpact": "High",
+              "implementationEffort": "Low",
+              "threats": [
+                "dataExfiltration",
+                "dataSpillage",
+                "maliciousInsider"
+              ],
+              "preview": true,
+              "assessmentType": "CustomPolicy"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Security/assessmentMetadata/ca039e75-a276-4175-aebc-bcd41e4b14b7",
+            "name": "ca039e75-a276-4175-aebc-bcd41e4b14b7",
+            "type": "Microsoft.Security/assessmentMetadata",
+            "properties": {
+              "displayName": "My organization security assessment",
+              "description": "Assessment that my organization created to view our security assessment in Azure Security Center",
+              "remediationDescription": "Fix it with these remediation instructions",
+              "category": [
+                "Compute"
+              ],
+              "severity": "Medium",
+              "userImpact": "Low",
+              "implementationEffort": "Low",
+              "threats": [],
+              "assessmentType": "CustomerManaged"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
