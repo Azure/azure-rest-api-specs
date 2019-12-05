@@ -17,6 +17,6 @@ runCheckOverChangedSpecFiles({
   },
 
   onFinalFailed: async () => {
-    logError('Code style issues found in the above file(s). Please run `npm install && npm run prettier -- --write "specification/<service>/**/*.json"` to fix.')
+    logError('Code style issues found in the above file(s). Please follow https://aka.ms/AA6h31t to fix the issue.')
   }
 })

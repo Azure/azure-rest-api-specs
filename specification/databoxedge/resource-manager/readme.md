@@ -150,7 +150,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -163,7 +163,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databoxedge.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_03_01
 regenerate-manager: true
 generate-interface: true
 ```
