@@ -1996,6 +1996,9 @@
                     },
                     {
                         "$ref": "#/parameters/GetRangeContentMD5"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -2160,6 +2163,48 @@
                                 "x-ms-client-name": "FileParentId",
                                 "type": "string",
                                 "description": "The parent fileId of the file."
+                            },
+                            "x-ms-lease-duration": {
+                                "x-ms-client-name": "LeaseDuration",
+                                "description": "When a file is leased, specifies whether the lease is of infinite or fixed duration.",
+                                "type": "string",
+                                "enum": [
+                                    "infinite",
+                                    "fixed"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseDurationType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-state": {
+                                "x-ms-client-name": "LeaseState",
+                                "description": "Lease state of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "available",
+                                    "leased",
+                                    "expired",
+                                    "breaking",
+                                    "broken"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStateType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-status": {
+                                "x-ms-client-name": "LeaseStatus",
+                                "description": "The current lease status of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "locked",
+                                    "unlocked"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStatusType",
+                                    "modelAsString": false
+                                }
                             }
                         },
                         "schema": {
@@ -2328,6 +2373,48 @@
                                 "x-ms-client-name": "FileParentId",
                                 "type": "string",
                                 "description": "The parent fileId of the file."
+                            },
+                            "x-ms-lease-duration": {
+                                "x-ms-client-name": "LeaseDuration",
+                                "description": "When a file is leased, specifies whether the lease is of infinite or fixed duration.",
+                                "type": "string",
+                                "enum": [
+                                    "infinite",
+                                    "fixed"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseDurationType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-state": {
+                                "x-ms-client-name": "LeaseState",
+                                "description": "Lease state of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "available",
+                                    "leased",
+                                    "expired",
+                                    "breaking",
+                                    "broken"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStateType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-status": {
+                                "x-ms-client-name": "LeaseStatus",
+                                "description": "The current lease status of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "locked",
+                                    "unlocked"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStatusType",
+                                    "modelAsString": false
+                                }
                             }
                         },
                         "schema": {
@@ -2355,7 +2442,8 @@
                 ],
                 "operationId": "File_GetProperties",
                 "description": "Returns all user-defined metadata, standard HTTP properties, and system properties for the file. It does not return the content of the file.",
-                "parameters": [{
+                "parameters": [
+                    {
                         "$ref": "#/parameters/ShareSnapshot"
                     },
                     {
@@ -2363,6 +2451,9 @@
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
@@ -2521,6 +2612,48 @@
                                 "x-ms-client-name": "FileParentId",
                                 "type": "string",
                                 "description": "The parent fileId of the file."
+                            },
+                            "x-ms-lease-duration": {
+                                "x-ms-client-name": "LeaseDuration",
+                                "description": "When a file is leased, specifies whether the lease is of infinite or fixed duration.",
+                                "type": "string",
+                                "enum": [
+                                    "infinite",
+                                    "fixed"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseDurationType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-state": {
+                                "x-ms-client-name": "LeaseState",
+                                "description": "Lease state of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "available",
+                                    "leased",
+                                    "expired",
+                                    "breaking",
+                                    "broken"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStateType",
+                                    "modelAsString": false
+                                }
+                            },
+                            "x-ms-lease-status": {
+                                "x-ms-client-name": "LeaseStatus",
+                                "description": "The current lease status of the file.",
+                                "type": "string",
+                                "enum": [
+                                    "locked",
+                                    "unlocked"
+                                ],
+                                "x-ms-enum": {
+                                    "name": "LeaseStatusType",
+                                    "modelAsString": false
+                                }
                             }
                         }
                     },
@@ -3494,6 +3627,9 @@
                         "description": "Specifies the range of bytes over which to list ranges, inclusively.",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/LeaseIdOptional"
                     }
                 ],
                 "responses": {
