@@ -1962,6 +1962,10 @@
             "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
           },
           "description": "Response Header Actions in the Action Set."
+        },
+        "urlConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayUrlConfiguration",
+          "description": "Url Configuration Action in the Action Set."
         }
       },
       "description": "Set of actions in the Rewrite Rule in Application Gateway."
@@ -1978,6 +1982,23 @@
         }
       },
       "description": "Header configuration of the Actions set in Application Gateway."
+    },
+	"ApplicationGatewayUrlConfiguration": {
+      "properties": {
+        "modifiedPath": {
+          "type": "string",
+          "description": "Url path which user has provided for url rewrite. Null means no path will be updated. Default value is null."
+        },
+        "modifiedQueryString": {
+          "type": "string",
+          "description": "Query string which user has provided for url rewrite. Null means no query string will be updated. Default value is null."
+        },
+        "reroute": {
+          "type": "boolean",
+          "description": "If set as true, it will re-evaluate the url path map provided in path based request routing rules using modified path. Default value is false."
+        }
+      },
+      "description": "Url configuration of the Actions set in Application Gateway."
     },
     "ApplicationGatewayRedirectConfigurationPropertiesFormat": {
       "properties": {
