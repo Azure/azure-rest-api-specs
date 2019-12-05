@@ -491,33 +491,14 @@
         "logicAppResourceId": {
           "type": "string",
           "description": "The triggered Logic App Azure Resource ID. This can also reside on other subscriptions, given that you have permissions to trigger the Logic App"
-        }
-      }
-    },
-    "AutomationActionLogicAppInput": {
-      "type": "object",
-      "description": "The logic app action that should be triggered.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionLogicApp"
-        }
-      ],
-      "properties": {
+        },
         "uri": {
           "type": "string",
+          "writeOnly": true,
           "description": "The Logic App trigger URI endpoint.",
           "format": "uri"
         }
       }
-    },
-    "AutomationActionLogicAppOutput": {
-      "type": "object",
-      "description": "The logic app action that should be triggered.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionLogicApp"
-        }
-      ]
     },
     "AutomationActionEventHub": {
       "type": "object",
@@ -532,36 +513,15 @@
         "eventHubResourceId": {
           "type": "string",
           "description": "The target Event Hub Azure Resource ID."
-        }
-      }
-    },
-    "AutomationActionEventHubInput": {
-      "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionEventHub"
-        }
-      ],
-      "properties": {
-        "connectionString": {
-          "type": "string",
-          "description": "The target Event Hub connection string"
-        }
-      }
-    },
-    "AutomationActionEventHubOutput": {
-      "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionEventHub"
-        }
-      ],
-      "properties": {
+        },
         "sasPolicyName": {
           "type": "string",
           "description": "The target Event Hub SAS policy name."
+        },
+        "connectionString": {
+          "type": "string",
+          "writeOnly": true,
+          "description": "The target Event Hub connection string"
         }
       }
     },
