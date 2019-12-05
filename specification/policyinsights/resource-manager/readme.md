@@ -105,40 +105,6 @@ input-file:
 - Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
 ```
 
-
-### Tag: package-2017-12
-
-These settings apply only when `--tag=package-2017-12` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-12'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
-```
-
-
-### Tag: package-2017-10
-
-These settings apply only when `--tag=package-2017-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-10'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
-```
-
-
-### Tag: package-2017-08
-
-These settings apply only when `--tag=package-2017-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-08'
-input-file:
-- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
-- Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
-```
-
-
 ---
 # Code Generation
 
@@ -235,7 +201,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-10' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2019_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -249,7 +215,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -262,7 +228,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-04' && $(java)
 java:
   namespace: com.microsoft.azure.management.policyinsights.v2018_04_04
-  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2018_04_04
+  output-folder: $(azure-libraries-for-java-folder)/sdk/policyinsights/mgmt-v2018_04_04
 regenerate-manager: true
 generate-interface: true
 ```
@@ -288,12 +254,6 @@ input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-10-17-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-10-17-preview/policyStates.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyEvents.json
-  - $(this-folder)/Microsoft.PolicyInsights/preview/2017-08-09-preview/policyStates.json
 
 ```
 
