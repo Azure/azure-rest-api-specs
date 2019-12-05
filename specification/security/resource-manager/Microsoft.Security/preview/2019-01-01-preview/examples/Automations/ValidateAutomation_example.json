@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "e4272367-5645-4c4e-9c67-3b74b59a6982",
+    "automationName": "exampleAutomation",
+    "resourceGroupName": "exampleResourceGroup",
+    "Automation": {
+      "location": "Central US",
+      "tags": {},
+      "properties": {
+        "description": "An example of a security automation that triggers two LogicApp resources (myTest1 and myTest2) on any security assessment of type customAssessment",
+        "isEnabled": true,
+        "metadata": {
+          "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
+          "createdBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72",
+          "lastUpdatedDateTimeUtc": "2019-03-28T08:43:54.5755094Z",
+          "lastUpdatedBy": "2c429ed8-089f-42aa-9bb9-92312b8c9f72"
+        },
+        "scopes": [
+          {
+            "description": "A description that helps to identify this scope - for example: security assessments that relate to the resource group myResourceGroup within the subscription 212f9889-769e-45ae-ab43-6da33674bd26",
+            "scopePath": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/myResourceGroup"
+          }
+        ],
+        "sources": [
+          {
+            "eventSource": "Assessments",
+            "ruleSets": [
+              {
+                "rules": [
+                  {
+                    "propertyJPath": "$.Entity.AssessmentType",
+                    "propertyType": "String",
+                    "expectedValue": "customAssessment",
+                    "operator": "Equals"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "actions": [
+          {
+            "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+            "actionType": "LogicApp",
+            "uri": "https://exampleTriggerUri1.com"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": true,
+        "message": "Validation Successful"
+      }
+    }
+  }
+}

@@ -240,36 +240,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.ResourceGraph/operations": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "description": "Lists all of the available REST API operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "OperationsList": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "resourcegraph.json#/definitions/OperationListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
