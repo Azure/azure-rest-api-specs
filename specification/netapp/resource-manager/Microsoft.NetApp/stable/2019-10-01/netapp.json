@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2019-08-01",
+    "version": "2019-10-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -68,6 +68,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkNameAvailability": {
       "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
         "summary": "Check resource name availability",
         "description": "Check if a resource name is available.",
         "operationId": "NetAppResource_CheckNameAvailability",
@@ -112,6 +115,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkFilePathAvailability": {
       "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
         "summary": "Check file path availability",
         "description": "Check if a file path is available.",
         "operationId": "NetAppResource_CheckFilePathAvailability",
@@ -873,6 +879,234 @@
         "x-ms-examples": {
           "Volumes_Delete": {
             "$ref": "examples/Volumes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Break volume replication",
+        "description": "Break the replication connection on the destination volume",
+        "operationId": "Volumes_BreakReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_BreakReplication": {
+            "$ref": "examples/Volumes_BreakReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/replicationStatus": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Get volume replication status",
+        "description": "Get the status of the replication",
+        "operationId": "Volumes_ReplicationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/replicationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Volumes_ReplicationStatus": {
+            "$ref": "examples/Volumes_ReplicationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/resyncReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Resync volume replication",
+        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.",
+        "operationId": "Volumes_ResyncReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ResyncReplication": {
+            "$ref": "examples/Volumes_ResyncReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/deleteReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Delete volume replication",
+        "description": "Delete the replication connection on the destination volume, and send release to the source replication",
+        "operationId": "Volumes_DeleteReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_DeleteReplication": {
+            "$ref": "examples/Volumes_DeleteReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/authorizeReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Authorize source volume replication",
+        "description": "Authorize the replication connection on the source volume",
+        "operationId": "Volumes_AuthorizeReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "authorize request object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_AuthorizeReplication": {
+            "$ref": "examples/Volumes_AuthorizeReplication.json"
           }
         }
       }
@@ -1933,9 +2167,15 @@
               "title": "Replication",
               "description": "Replication properties",
               "type": "object",
-              "$ref": "#/definitions/replicationObject"
+              "items": {
+                "$ref": "#/definitions/replicationObject"
+              }
             }
           }
+        },
+        "isRestoring": {
+          "type": "boolean",
+          "description": "Restoring"
         }
       }
     },
@@ -1977,32 +2217,61 @@
       "description": "Replication properties",
       "type": "object",
       "required": [
-        "endpointType",
-        "remoteVolumeResourceId",
-        "replicationSchedule"
+        "replicationSchedule",
+        "remoteVolumeResourceId"
       ],
       "properties": {
         "replicationId": {
-          "title": "replicationId",
           "type": "string",
           "description": "Id"
         },
         "endpointType": {
-          "title": "endpointType",
           "type": "string",
           "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
           "example": "src, dst"
         },
         "replicationSchedule": {
-          "title": "replicationSchedule",
           "type": "string",
           "description": "Schedule",
           "example": "10minutely, hourly, daily, weekly, monthly"
         },
+        "ownerId": {
+          "type": "string",
+          "description": "Id used to identify the owner of the resource"
+        },
         "remoteVolumeResourceId": {
-          "title": "remoteVolumeResourceId",
           "type": "string",
           "description": "The resource ID of the remote volume."
+        },
+        "remoteVolumeRegion": {
+          "type": "string",
+          "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "replicationStatus": {
+      "description": "Replication status",
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "type": "boolean",
+          "description": "Replication health check"
+        },
+        "relationshipStatus": {
+          "type": "string",
+          "description": "Status of the mirror relationship"
+        },
+        "mirrorState": {
+          "type": "string",
+          "description": "The status of the replication"
+        },
+        "totalProgress": {
+          "type": "string",
+          "description": "The progress of the replication"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Displays error message if the replication is in an error state"
         }
       }
     },
@@ -2334,6 +2603,17 @@
           "description": "Azure lifecycle management"
         }
       }
+    },
+    "authorizeRequest": {
+      "description": "Authorize request",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "remoteVolumeResourceId": {
+          "type": "string",
+          "description": "Resource id"
+        }
+      }
     }
   },
   "parameters": {
@@ -2409,7 +2689,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2019-08-01"
+      "default": "2019-10-01"
     }
   }
 }
