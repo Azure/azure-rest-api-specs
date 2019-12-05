@@ -171,6 +171,9 @@
           },
           "Get a dynamic alert rule for multiple resources": {
             "$ref": "./examples/getDynamicMetricAlertMultipleResource.json"
+          },
+          "Get a web test alert rule": {
+            "$ref": "./examples/getWebTestMetricAlert.json"
           }
         }
       },
@@ -235,6 +238,9 @@
           },
           "Create or update a dynamic alert rule for Multiple Resources": {
             "$ref": "./examples/createOrUpdateDynamicMetricAlertMultipleResource.json"
+          },
+          "Create or update a web test alert rule": {
+            "$ref": "./examples/createOrUpdateWebTestMetricAlert.json"
           }
         }
       },
@@ -308,11 +314,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content: the request was successful, but the response is empty"
-          },
           "200": {
             "description": "Successful request to delete an metric alert rule"
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty"
           }
         },
         "x-ms-examples": {
@@ -649,7 +655,8 @@
         "odata.type": {
           "enum": [
             "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -681,6 +688,30 @@
         }
       },
       "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
+    },
+    "WebtestLocationAvailabilityCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+      "type": "object",
+      "properties": {
+        "webTestId": {
+          "type": "string",
+          "description": "The web test Id."
+        },
+        "componentId": {
+          "type": "string",
+          "description": "The component Id."
+        },
+        "failedLocationCount": {
+          "type": "number",
+          "description": "Failed location count."
+        }
+      },
+      "required": [
+        "webTestId",
+        "componentId",
+        "failedLocationCount"
+      ],
+      "description": "Specifies the metric alert criteria for a web test resource."
     },
     "MetricCriteria": {
       "x-ms-discriminator-value": "StaticThresholdCriterion",
