@@ -569,6 +569,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - $(this-folder)/Microsoft.Insights/stable/2019-06-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
