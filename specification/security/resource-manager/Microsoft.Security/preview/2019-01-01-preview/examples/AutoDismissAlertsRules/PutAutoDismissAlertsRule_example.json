@@ -12,17 +12,23 @@
         "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
         "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
         "state": "Enabled",
-        "reason": "Detects a normal activity (False Positive)",
+        "reason": "FalsePositive",
         "comment": "Test VM",
         "autoDismissAlertsScope": {
           "allOf": [
             {
-              "field": "CompromisedEntities",
-              "in": [ "ContosoVM1", "demoAccount@microsoft.com" ]
+              "field": "CompromisedEntity",
+              "in": [
+                "contoso",
+                "demoAccount@microsoft.com"
+              ]
             },
             {
               "field": "entities.ip.address",
-              "in": [ "104.215.95.187", "52.164.206.56" ]
+              "in": [
+                "104.215.95.187",
+                "52.164.206.56"
+              ]
             },
             {
               "field": "entities.process.commandline",
@@ -44,17 +50,23 @@
           "lastModifiedUTC": "2019-07-31T19:50:47.083633Z",
           "expirationDateUTC": "2019-12-01T19:50:47.083633Z",
           "state": "Enabled",
-          "reason": "Detects a normal activity (False Positive)",
+          "reason": "FalsePositive",
           "comment": "Test VM",
           "autoDismissAlertsScope": {
             "allOf": [
               {
-                "field": "CompromisedEntities",
-                "in": [ "ContosoVM1", "demoAccount@microsoft.com" ]
+                "field": "CompromisedEntity",
+                "in": [
+                  "contoso",
+                  "demoAccount@microsoft.com"
+                ]
               },
               {
                 "field": "entities.ip.address",
-                "in": [ "104.215.95.187", "52.164.206.56" ]
+                "in": [
+                  "104.215.95.187",
+                  "52.164.206.56"
+                ]
               },
               {
                 "field": "entities.process.commandline",

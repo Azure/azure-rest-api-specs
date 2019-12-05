@@ -39,6 +39,9 @@
         "x-ms-examples": {
           "Get auto dismiss rules for subscription": {
             "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRules_example.json"
+          },
+          "Get auto dismiss alert rule for subscription, filtered by AlertType": {
+            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRulesWithAlertType_example.json"
           }
         },
         "tags": [
@@ -118,15 +121,12 @@
         "x-ms-examples": {
           "Update or create auto dismiss rule for subscription": {
             "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRule_example.json"
-          },
-          "Test a rule for subscription": {
-            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRuleTest_example.json"
           }
         },
         "tags": [
           "AutoDismissAlertsRules"
         ],
-        "description": "Update existing rule or create new rule if not exist",
+        "description": "Update existing rule or create new rule if it doesn't exist",
         "operationId": "AutoDismissAlertsRules_Update",
         "parameters": [
           {
@@ -140,9 +140,6 @@
           },
           {
             "$ref": "#/parameters/AutoDismissAlertsRule"
-          },
-          {
-            "$ref": "#/parameters/TestRule"
           }
         ],
         "responses": {
@@ -183,8 +180,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "204": {
+            "description": "OK, No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -210,7 +207,7 @@
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "The URI to fetch the next page."
+          "description": "URI to fetch the next page."
         }
       },
       "required": [
@@ -259,7 +256,7 @@
           "type": "string",
           "description": "Possible states of the rule",
           "x-ms-enum": {
-            "name": "State"
+            "name": "RuleState"
           },
           "enum": [
             "Enabled",
@@ -275,12 +272,6 @@
           "type": "object",
           "description": "The auto dismiss conditions",
           "$ref": "#/definitions/AutoDismissAlertsScope"
-        },
-        "ruleImpact": {
-          "type": "object",
-          "description": "The impact of the rule. Use for testing the rule and will be returned only when the test flag is set",
-          "readOnly": true,
-          "$ref": "#/definitions/RuleImpact"
         }
       },
       "required": [
@@ -301,21 +292,6 @@
       "required": [
         "allOf"
       ]
-    },
-    "RuleImpact": {
-      "type": "object",
-      "required": [
-        "scannedAlertsNumber",
-        "dismissedAlertsNumber"
-      ],
-      "properties": {
-        "scannedAlertsNumber" : {
-          "type": "integer"
-        },
-        "dismissedAlertsNumber" : {
-          "type": "integer"
-        }
-      }
     }
   },
   "parameters": {
@@ -323,23 +299,8 @@
       "name": "AlertType",
       "in": "query",
       "type": "string",
-      "description": "The type of the alert to get rules for",
+      "description": "Type of the alert to get rules for",
       "x-ms-parameter-location": "method"
-    },
-    "TestRule": {
-      "name": "TestRule",
-      "in": "query",
-      "type": "boolean",
-      "description": "The type of the alert to get rules for",
-      "x-ms-parameter-location": "method"
-    },
-    "AutoDismissAlertsRuleName": {
-      "name": "autoDismissAlertsRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The unique name of the auto dismiss alert rule",
-      "x-ms-parameter-location": "method" 
     },
     "AutoDismissAlertsRule": {
       "name": "autoDismissAlertsRule",
@@ -349,6 +310,14 @@
       "schema": {
         "$ref": "#/definitions/AutoDismissAlertsRule"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "AutoDismissAlertsRuleName": {
+      "name": "autoDismissAlertsRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique name of the auto dismiss alert rule",
       "x-ms-parameter-location": "method"
     }
   }

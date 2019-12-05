@@ -28,6 +28,10 @@ directive:
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
+  - suppress: ValidFormats
+    from: automations.json
+    where: $.definitions.AutomationActionLogicAppInput.properties.uri.format
+    reason: uri format is allowed
   - suppress: PageableOperation
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
@@ -55,7 +59,9 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -89,7 +95,9 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -150,6 +158,8 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 
 # Needed when there is more than one input file
@@ -325,7 +335,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -357,6 +369,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 
 ```
 
