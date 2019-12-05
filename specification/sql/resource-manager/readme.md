@@ -31,6 +31,7 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
@@ -133,7 +134,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
@@ -233,7 +234,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
@@ -324,7 +325,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
@@ -522,7 +523,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
- - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
  
 # Needed when there is more than one input file
 override-info:
