@@ -1,0 +1,212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-12-01",
+    "title": "Content Service API"
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/content/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/snapshots/{snapshotId}": {
+      "post": {
+        "tags": [
+          "Snapshot"
+        ],
+        "summary": "Point in time representation of the user's directory structure.",
+        "description": "Base + diffs are stored on the service to allow for restoration.\r\nThe snapshotId is then used by services to download the files and reproduce the directory structure.",
+        "operationId": "Runs_CreateSnapshot",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "snapshotId",
+            "in": "path",
+            "description": "Caller supplied ID for this snapshot. Expected to be globally unique.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentSnapshotId",
+            "in": "query",
+            "description": "Changes are compared against this parent snapshot.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Stream of bytes in multipart form representing each file to store on the service.",
+            "required": true,
+            "type": "file",
+            "items": {},
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "dirTree",
+            "in": "formData",
+            "description": "Flat array representation of the callers directory tree, including hashes of file contents.",
+            "required": true,
+            "type": "string",
+            "items": {},
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "201": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "The error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError",
+          "description": "The top level error that occurred."
+        },
+        "correlation": {
+          "description": "Dictionary containing correlation details for the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "description": "The hosting environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The Azure region.",
+          "type": "string"
+        },
+        "time": {
+          "format": "date-time",
+          "description": "The time in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "RootError": {
+      "description": "The root error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The service-defined error code. Supported error codes: ServiceError, UserError, ValidationError, AzureStorageError, TransientError, RequestThrottled.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "detailsUri": {
+          "description": "A URI which points to more details about the context of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error (e.g., the name of the property in error).",
+          "type": "string"
+        },
+        "details": {
+          "description": "The related errors that occurred during the request.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested \"innerErrors\" and choose the deepest one that they understand."
+        }
+      }
+    },
+    "InnerErrorResponse": {
+      "description": "A nested structure of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested \"innerErrors\" and choose the deepest one that they understand."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}
