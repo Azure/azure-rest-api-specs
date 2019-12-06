@@ -77,7 +77,7 @@
           "Services"
         ],
         "summary": "List all the Azure services available for support.",
-        "description": "List all the Azure services available for support. This includes **Billing**, **Subscription Management**, **Service and subscription limits (quotas)** and all **technical** services. User must provide the id of the Azure service when creating a support ticket. <br/>For Billing, the id is '/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc'. <br/>For Subscrption Management, the id is '/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6'. <br/>For Quota, the id is '/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89' and rest of the ids are for technical services.",
+        "description": "List all the Azure services available for support. This includes **Billing**, **Subscription Management**, **Service and subscription limits (quotas)** and all **technical** services. User must provide the id of the Azure service when creating a support ticket. <br/>For Billing, the id is '/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc'. <br/>For Subscription Management, the id is '/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6'. <br/>For Quota, the id is '/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89' and rest of the ids are for technical services.",
         "operationId": "Services_List",
         "parameters": [
           {
@@ -433,7 +433,7 @@
           "SupportTickets"
         ],
         "summary": "Creates a support ticket for a subscription.",
-        "description": "A paid support plan is required to use this API to create a support ticket. Users can create tickets for issues relating to Billing, Subscription Management, Quota or any of the supported Azure technical services as indicated by the 'serviceId' in the request. <br/><br/>**Billing tickets**<br/>For billing issues, user must set *serviceId* to *'/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc'*.<br/><br/>**Subscripton Management tickets**<br/> For issues relating to subscription management, *serviceId* should be set to *'/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6'*.<br/><br/>**Technical tickets**<br/>For technical support ticket, user must set *serviceId* to one of the technical service ids and must provide additional information in TechnicalScopingInformation. <br/>Users must also provide problemClassificationId when creating a support ticket.<br/>",
+        "description": "A paid support plan is required to use this API to create a support ticket. Users can create tickets for issues relating to Billing, Subscription Management, Quota or any of the supported Azure technical services as indicated by the 'serviceId' in the request. <br/><br/>**Billing tickets**<br/>For billing issues, user must set *serviceId* to *'/providers/Microsoft.Support/services/517f2da6-78fd-0498-4e22-ad26996b1dfc'*.<br/><br/>**Subscription Management tickets**<br/> For issues relating to subscription management, *serviceId* should be set to *'/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6'*.<br/><br/>**Technical tickets**<br/>For technical support ticket, user must set *serviceId* to one of the technical service ids and must provide additional information in TechnicalScopingInformation. <br/>Users must also provide problemClassificationId when creating a support ticket.<br/>",
         "operationId": "CreateSupportTicketForSubscription",
         "parameters": [
           {
@@ -1169,7 +1169,7 @@
       "description": "The error details."
     },
     "CreateSupportTicket": {
-      "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Serice and subscription limits(quotas) and Technical as determined by service id in the request payload.",
+      "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Service and subscription limits(quotas) and Technical as determined by service id in the request payload.",
       "required": [
         "properties"
       ],
@@ -1183,7 +1183,7 @@
       }
     },
     "CreateSupportTicketProperties": {
-      "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Serice and subscription limits(quotas) and Technical as determined by service id in the request payload.",
+      "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Service and subscription limits(quotas) and Technical as determined by service id in the request payload.",
       "required": [
         "serviceId",
         "title",
