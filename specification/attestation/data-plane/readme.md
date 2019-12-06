@@ -36,7 +36,7 @@ directive:
 ```
 
 ### Basic Information
-These are the global settings for the Attestation API.
+These are the global settings for the Attestation APIs.
 
 ``` yaml
 openapi-type: arm
