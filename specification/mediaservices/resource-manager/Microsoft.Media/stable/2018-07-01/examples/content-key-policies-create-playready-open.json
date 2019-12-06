@@ -7,11 +7,9 @@
     "api-version": "2018-07-01",
     "parameters": {
       "properties": {
-        "policyId": "00000000-0000-0000-0000-000000000000",
         "description": "ArmPolicyDescription",
         "options": [
           {
-            "policyOptionId": "00000000-0000-0000-0000-000000000000",
             "name": "ArmPolicyOptionName",
             "configuration": {
               "@odata.type": "#Microsoft.Media.ContentKeyPolicyPlayReadyConfiguration",
@@ -22,7 +20,9 @@
                   "playRight": {
                     "scmsRestriction": 2,
                     "imageConstraintForAnalogComponentVideoRestriction": true,
-                    "allowPassingVideoContentToUnknownOutput": "NotAllowed"
+                    "allowPassingVideoContentToUnknownOutput": "NotAllowed",
+                    "digitalVideoOnlyContentRestriction": false,
+                    "imageConstraintForAnalogComputerMonitorRestriction" :false
                   },
                   "licenseType": "Persistent",
                   "contentKeyLocation": {
