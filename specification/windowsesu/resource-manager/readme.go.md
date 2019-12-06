@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-09-16-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2019-09-16-preview' && $(go)
-namespace: Microsoft.WindowsESU
-output-folder: $(go-sdks-folder)/windowsesu/Generated
+namespace: windowsesu
+output-folder: $(go-sdk-folder)/services/preview/windowsesu/2019-09-16-preview/$(namespace)
 ```
