@@ -26,7 +26,7 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-07
+tag: package-2019-07-preview
 ```
 
 
