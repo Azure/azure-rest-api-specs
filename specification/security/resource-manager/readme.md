@@ -157,6 +157,7 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 
 # Needed when there is more than one input file
 override-info:
@@ -364,6 +365,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 
 ```
 
