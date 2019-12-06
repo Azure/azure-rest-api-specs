@@ -37,11 +37,11 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2019-06
+tag: package-policy-2019-09
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-08
+tag: package-resources-2019-10
 ```
 
 ``` yaml $(package-subscriptions)
@@ -93,6 +93,21 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2019-09
+
+These settings apply only when `--tag=package-policy-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2019-09'
+input-file:
+- Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
+- Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2019-06
@@ -214,6 +229,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2019-10
+
+These settings apply only when `--tag=package-resources-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-10'
+input-file:
+- Microsoft.Resources/stable/2019-10-01/resources.json
 ```
 
 ### Tag: package-resources-2019-08
@@ -367,6 +391,14 @@ These settings apply only when `--tag=package-links-2016-09` is specified on the
 ``` yaml $(tag) == 'package-links-2016-09'
 input-file:
 - Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### Tag: package-managedapplications-2019-07
+These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+input-file:
+- Microsoft.Solutions/stable/2019-07-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2018-06
@@ -565,6 +597,9 @@ input-file:
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-09-01/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policySetDefinitions.json
@@ -583,6 +618,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-10-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-08-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-05-10/resources.json
@@ -600,6 +636,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
+  - $(this-folder)/Microsoft.Solutions/stable/2019-07-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json
   - $(this-folder)/Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json

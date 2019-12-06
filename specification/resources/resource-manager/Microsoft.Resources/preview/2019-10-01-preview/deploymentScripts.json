@@ -291,7 +291,7 @@
           "200": {
             "description": "OK -- Returns deployment script logs if available.",
             "schema": {
-              "$ref": "#/definitions/ScriptLogsList" 
+              "$ref": "#/definitions/ScriptLogsList"
             }
           },
           "default": {
@@ -405,7 +405,10 @@
         },
         "location": {
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "The location of the ACI and the storage account for the deployment script."
         },
         "tags": {
@@ -614,7 +617,8 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Canceled"
+            "Canceled",
+            "Expiring"
           ],
           "x-ms-enum": {
             "name": "ScriptProvisioningState",

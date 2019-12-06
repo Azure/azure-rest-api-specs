@@ -22,10 +22,29 @@
                 "blob": "https://sto1125.blob.core.windows.net/",
                 "file": "https://sto1125.file.core.windows.net/",
                 "queue": "https://sto1125.queue.core.windows.net/",
-                "table": "https://sto1125.table.core.windows.net/"
+                "table": "https://sto1125.table.core.windows.net/",
+                "microsoftEndpoints": {
+                  "web": "https://sto1125-microsoftrouting.web.core.windows.net/",
+                  "dfs": "https://sto1125-microsoftrouting.dfs.core.windows.net/",
+                  "blob": "https://sto1125-microsoftrouting.blob.core.windows.net/",
+                  "file": "https://sto1125-microsoftrouting.file.core.windows.net/",
+                  "queue": "https://sto1125-microsoftrouting.queue.core.windows.net/",
+                  "table": "https://sto1125-microsoftrouting.table.core.windows.net/"
+                },
+                "internetEndpoints": {
+                  "web": "https://sto1125-internetrouting.web.core.windows.net/",
+                  "dfs": "https://sto1125-internetrouting.dfs.core.windows.net/",
+                  "blob": "https://sto1125-internetrouting.blob.core.windows.net/",
+                  "file": "https://sto1125-internetrouting.file.core.windows.net/"
+                }
               },
               "primaryLocation": "eastus2euap",
               "provisioningState": "Succeeded",
+              "routingPreference": {
+                "routingChoice": "MicrosoftRouting",
+                "publishMicrosoftEndpoints": true,
+                "publishInternetEndpoints": true
+              },
               "secondaryLocation": "centraluseuap",
               "statusOfPrimary": "available",
               "statusOfSecondary": "available",
