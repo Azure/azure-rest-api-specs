@@ -26,17 +26,17 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-07
+tag: package-2019-07
 ```
 
 
-### Tag: package-preview-2019-07
+### Tag: package-2019-07
 
-These settings apply only when `--tag=package-preview-2019-07` is specified on the command line.
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-07'
+```yaml $(tag) == 'package-2019-07'
 input-file:
-  - Microsoft.Cache/preview/2019-07-01-preview/redis.json
+  - Microsoft.Cache/stable/2019-07-01/redis.json
 ```
 ### Tag: package-2018-03
 
