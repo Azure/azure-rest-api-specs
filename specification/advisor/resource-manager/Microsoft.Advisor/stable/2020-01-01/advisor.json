@@ -108,6 +108,12 @@
             "schema": {
               "$ref": "#/definitions/ConfigurationListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
           }
         },
         "deprecated": false,
@@ -165,10 +171,10 @@
               "$ref": "#/definitions/ConfigData"
             }
           },
-          "400": {
-            "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ARMErrorResponseBody"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -207,6 +213,12 @@
             "description": "OK. Successfully retrieved zero or more configurations.",
             "schema": {
               "$ref": "#/definitions/ConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -271,10 +283,10 @@
               "$ref": "#/definitions/ConfigData"
             }
           },
-          "400": {
-            "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
+          "default": {
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ARMErrorResponseBody"
+              "$ref": "#/definitions/ArmErrorResponse"
             }
           }
         },
@@ -875,6 +887,14 @@
         "language": {
           "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
           "type": "string"
+        }
+      }
+    },
+    "ArmErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ARMErrorResponseBody"
         }
       }
     },
