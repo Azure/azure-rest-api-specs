@@ -1,0 +1,1630 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-07-19-preview",
+    "title": "Azure Token Service Resource Provider API",
+    "description": "REST API for Azure Blockchain Token Service",
+    "x-ms-code-generation-settings": {
+      "name": "DevOpsClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [{
+    "azure_auth": [
+      "user_impersonation"
+    ]
+  }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.BlockchainTokens/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists all the operations supported by Microsoft.BlockchainTokens resource provider.",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [{
+          "$ref": "#/parameters/ApiVersionParameter"
+        }],
+        "responses": {
+          "200": {
+            "description": "The list of supported operations has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get a list of operations supported by Microsoft.BlockchainTokens resource provider": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BlockchainTokens/skus": {
+      "get": {
+        "tags": [
+          "Sku"
+        ],
+        "description": "Lists the Skus of the resource type.",
+        "operationId": "Skus_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SkuCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Skus_List": {
+            "$ref": "./examples/ListSkus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BlockchainTokens/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NameAvailability"
+        ],
+        "description": "To check whether a resource name is available.",
+        "operationId": "CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "description": "Name availability request payload.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}": {
+      "put": {
+        "operationId": "TokenService_CreateOrUpdate",
+        "description": "Creates or updates an Azure Blockchain TokenService.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "name": "TokenServiceResourceParameter",
+            "description": "token service details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Token Service has been created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenService_CreateOrUpdate": {
+            "$ref": "./examples/CreateTokenService.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "TokenService_Get",
+        "description": "Gets an existing Azure Blockchain TokenService.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Blockchain TokenService has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenService_Get": {
+            "$ref": "./examples/GetTokenService.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TokenService_Delete",
+        "description": "Deletes an Azure Blockchain TokenService.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Token Service has been deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenService_Delete": {
+            "$ref": "./examples/DeleteTokenService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices": {
+      "get": {
+        "operationId": "TokenServices_ListByResourceGroup",
+        "description": "Lists all Azure Blockchain TokenServices under the specified resource group.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Blockchain TokenServices have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TokenService_ListByResourceGroup": {
+            "$ref": "./examples/ListTokenServicesByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BlockchainTokens/tokenServices": {
+      "get": {
+        "operationId": "TokenServices_ListBySubscription",
+        "description": "Lists all Azure Token Services under the specified subscription.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Pipelines have been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TokenService_ListBySubscription": {
+            "$ref": "./examples/ListTokenServicesBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/groups/{groupName}": {
+      "put": {
+        "operationId": "Group_CreateOrUpdate",
+        "description": "Creates or updates a group.",
+        "tags": [
+          "Group"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          },
+          {
+            "name": "GroupResourceParameter",
+            "description": "Group details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The group has been created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Group_CreateOrUpdate": {
+            "$ref": "./examples/CreateGroup.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Group_Get",
+        "description": "Gets a group that has been created.",
+        "tags": [
+          "Group"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The group has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Group_Get": {
+            "$ref": "./examples/GetGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Group_Delete",
+        "description": "Deletes an Azure Blockchain TokenService Group.",
+        "tags": [
+          "Group"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The group been deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Group_Delete": {
+            "$ref": "./examples/DeleteGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/groups": {
+      "get": {
+        "operationId": "Groups_List",
+        "description": "Lists all the groups on a TokenService",
+        "tags": [
+          "Group"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Groups that belong to a TokenService.",
+            "schema": {
+              "$ref": "#/definitions/GroupResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Group_List": {
+            "$ref": "./examples/ListGroupByTokenService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/groups/{groupName}/accounts/{accountName}": {
+      "put": {
+        "operationId": "Account_CreateOrUpdate",
+        "description": "Creates or updates a account.",
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "AccountResourceParameter",
+            "description": "Account details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The account has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "201": {
+            "description": "The account creation request has been accepted.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Account_CreateOrUpdate": {
+            "$ref": "./examples/CreateAccount.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Account_Get",
+        "description": "Gets a account that has been created.",
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The account has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Account_Get": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Account_Delete",
+        "description": "Deletes an Azure Blockchain TokenService Account.",
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The account been deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Account_Delete": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/groups/{groupName}/accounts": {
+      "get": {
+        "operationId": "Accounts_List",
+        "description": "Lists all the accounts on a TokenService",
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Accounts that belong to a group.",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Account_List": {
+            "$ref": "./examples/ListAccountByGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/blockchainNetworks/{blockchainNetworkName}": {
+      "put": {
+        "operationId": "BlockchainNetwork_CreateOrUpdate",
+        "description": "Creates or updates a blockchainNetwork.",
+        "tags": [
+          "BlockchainNetwork"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BlockchainNetworkNameParameter"
+          },
+          {
+            "name": "BlockchainNetworkResourceParameter",
+            "description": "BlockchainNetwork details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BlockchainNetworkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blockchainNetwork has been created or updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlockchainNetworkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlockchainNetwork_CreateOrUpdate": {
+            "$ref": "./examples/CreateBlockchainNetwork.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "BlockchainNetwork_Get",
+        "description": "Gets a blockchainNetwork that has been created.",
+        "tags": [
+          "BlockchainNetwork"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BlockchainNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blockchainNetwork has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlockchainNetworkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlockchainNetwork_Get": {
+            "$ref": "./examples/GetBlockchainNetwork.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BlockchainNetwork_Delete",
+        "description": "Deletes an Azure Blockchain TokenService BlockchainNetwork.",
+        "tags": [
+          "BlockchainNetwork"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BlockchainNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blockchainNetwork been deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BlockchainNetwork_Delete": {
+            "$ref": "./examples/DeleteBlockchainNetwork.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/blockchainNetworks": {
+      "get": {
+        "operationId": "BlockchainNetworks_List",
+        "description": "Lists all the blockchainNetwork on a TokenService",
+        "tags": [
+          "BlockchainNetwork"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "BlockchainNetworks that belong to a TokenService.",
+            "schema": {
+              "$ref": "#/definitions/BlockchainNetworkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BlockchainNetwork_List": {
+            "$ref": "./examples/ListBlockchainNetworkByTokenService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/tokenTemplates/{tokenTemplateName}": {
+      "put": {
+        "operationId": "TokenTemplate_CreateOrUpdate",
+        "description": "Creates or updates a tokenTemplate.",
+        "tags": [
+          "TokenTemplate"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenTemplateNameParameter"
+          },
+          {
+            "name": "TokenTemplateResourceParameter",
+            "description": "TokenTemplate details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenTemplateResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tokenTemplate has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenTemplateResource"
+            }
+          },
+          "201": {
+            "description": "The tokenTemplate creation request has been accepted.",
+            "schema": {
+              "$ref": "#/definitions/TokenTemplateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TokenTemplate_CreateOrUpdate": {
+            "$ref": "./examples/CreateTokenTemplate.json"
+          }
+        }
+      },
+      "get": {
+        "operationId": "TokenTemplate_Get",
+        "description": "Gets a tokenTemplate that has been created.",
+        "tags": [
+          "TokenTemplate"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenTemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tokenTemplate has been fetched successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenTemplateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenTemplate_Get": {
+            "$ref": "./examples/GetTokenTemplate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TokenTemplate_Delete",
+        "description": "Deletes an Azure Blockchain TokenService TokenTemplate.",
+        "tags": [
+          "TokenTemplate"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenTemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tokenTemplate been deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenTemplate_Delete": {
+            "$ref": "./examples/DeleteTokenTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BlockchainTokens/tokenServices/{tokenServiceName}/tokenTemplates": {
+      "get": {
+        "operationId": "TokenTemplates_List",
+        "description": "Lists all the tokenTemplate on a TokenService",
+        "tags": [
+          "TokenTemplate"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TokenTemplates that belong to a TokenService.",
+            "schema": {
+              "$ref": "#/definitions/TokenTemplateResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TokenTemplate_List": {
+            "$ref": "./examples/ListTokenTemplateByTokenService.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of the resources.",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource Location."
+        },
+        "sku": {
+          "type": "object",
+          "$ref": "#/definitions/Sku",
+          "description": "The sku of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a top level resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource Tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "Details of the error from the Pipelines Resource Provider.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Pipelines Resource Provider."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error or the method where the error occurred."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Pipelines Resource Provider."
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by Microsoft.DevOps resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of operations, if there are any."
+        }
+      },
+      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the operation."
+        },
+        "isDataAction": {
+          "type": "string",
+          "description": "Indicates whether the operation applies to data-plane."
+        },
+        "display": {
+          "description": "Display information of the operation.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OperationDisplayValue"
+        }
+      },
+      "description": "Properties of an Operation."
+    },
+    "OperationDisplayValue": {
+      "properties": {
+        "operation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the operation."
+        },
+        "resource": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource type the operation applies to."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly description of the operation."
+        },
+        "provider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Friendly name of the resource provider."
+        }
+      },
+      "description": "Display information of an operation."
+    },
+    "TokenServiceResource": {
+      "type": "object",
+      "description": "Employee details",
+      "allOf": [{
+        "$ref": "#/definitions/TrackedResource"
+      }],
+      "properties": {
+        "properties": {
+          "description": "Custom properties of token service resource",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "The description of the token service"
+            },
+            "tenantId": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The AAD Tenant where the token service belongs to"
+            },
+            "dnsName": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The DNS name for this token service"
+            }
+          }
+        }
+      }
+    },
+    "TokenServiceResourceListResult": {
+      "description": "Result of a request to list all Azure Token Services under a given scope.",
+      "properties": {
+        "value": {
+          "description": "List of token services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of TokenServices, if there are any."
+        }
+      }
+    },
+    "GroupResource": {
+      "type": "object",
+      "description": "Group is a collection of accounts in TokenService",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Custom properties of group resource",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of a group"
+            }
+          }
+        }
+      }
+    },
+    "GroupResourceListResult": {
+      "description": "List of groups in a TokenService",
+      "properties": {
+        "value": {
+          "description": "List of groups in a token services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of groups, if there are any."
+        }
+      }
+    },
+    "AccountResource": {
+      "type": "object",
+      "description": "Account is a blockchain account belonging to a group in a token service",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Custom properties of account resource",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of the account"
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Provisioning state of the account",
+              "readOnly": true
+            },
+            "blockchainNetworkName": {
+              "type": "string",
+              "description": "Resource name of the blockchain network the account is associated with."
+            },
+            "publicAddress": {
+              "type": "string",
+              "description": "Public account address."
+            }
+          }
+        }
+      }
+    },
+    "AccountResourceListResult": {
+      "description": "List of accounts in a group",
+      "properties": {
+        "value": {
+          "description": "List of accounts in a group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of accounts, if there are any."
+        }
+      }
+    },
+    "BlockchainNetworkResource": {
+      "type": "object",
+      "description": "BlockchainNetwork is a blockchain network connection in TokenService",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Custom properties of blockchain network resource",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of a blockchain network connection"
+            },
+            "blockchainPlatformType": {
+              "type": "string",
+              "enum": [
+                "EthereumFamily"
+              ],
+              "description": "Platform type of a blockchain network connection (EthereumFamily)"
+            },
+            "blockchainPlatformName": {
+              "type": "string",
+              "description": "Platform name of a blockchain network connection (Quorum | POA)"
+            },
+            "blockchainNode": {
+              "type": "string",
+              "description": "Connection string of a blockchain network"
+            }
+          }
+        }
+      }
+    },
+    "BlockchainNetworkResourceListResult": {
+      "description": "List of blockchainNetworks in a TokenService",
+      "properties": {
+        "value": {
+          "description": "List of blockchainNetworks in a token services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockchainNetworkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next blockchainNetwork, if there are any."
+        }
+      }
+    },
+    "TokenTemplateResource": {
+      "type": "object",
+      "description": "TokenTemplate is a template for token contracts in TokenService",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Custom properties of token template resource",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "description": {
+              "type": "string",
+              "description": "Description of a token template"
+            },
+            "ttfFormula": {
+              "type": "string",
+              "description": "TTF formula of the token template"
+            },
+            "openAPISpec": {
+              "type": "string",
+              "description": "OpenAPI specification of the token template"
+            },
+            "provisioningState": {
+              "type": "string",
+              "description": "Provisioning state of the token template",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "TokenTemplateResourceListResult": {
+      "description": "List of tokenTemplates in a TokenService",
+      "properties": {
+        "value": {
+          "description": "List of tokenTemplates in a token services.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenTemplateResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next tokenTemplate, if there are any."
+        }
+      }
+    },
+    "NameAvailabilityRequest": {
+      "description": "Name availability request payload which is exposed in the request of the resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name to check.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Gets or sets the type of the resource to check.",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailabilityResponse": {
+      "description": "Name availability payload which is exposed in the response of the resource provider.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Gets the value indicating whether the name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "Gets the name availability reason.",
+          "enum": [
+            "NotSpecified",
+            "AlreadyExists",
+            "Invalid"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NameAvailabilityReason",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuCollection": {
+      "description": "Collection of the resource type Sku.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets or sets the collection of resource type Sku.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next tokenTemplate, if there are any."
+        }
+      }
+    },
+    "Sku": {
+      "description": "Blockchain member Sku in payload",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets Sku name",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Gets or sets Sku tier",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Unique identifier of the Azure subscription. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to be used with the HTTP request."
+    },
+    "TokenServiceNameParameter": {
+      "name": "tokenServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name token service resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the group.",
+      "x-ms-parameter-location": "method"
+    },
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the account.",
+      "x-ms-parameter-location": "method"
+    },
+    "BlockchainNetworkNameParameter": {
+      "name": "blockchainNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the blockchainNetwork.",
+      "x-ms-parameter-location": "method"
+    },
+    "TokenTemplateNameParameter": {
+      "name": "tokenTemplateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the TokenTemplate.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

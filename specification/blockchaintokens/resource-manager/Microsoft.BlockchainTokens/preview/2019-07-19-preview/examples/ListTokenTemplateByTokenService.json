@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myTokens-rg",
+    "tokenServiceName": "myTokens",
+    "api-version": "2019-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "The token templates for given token service has been fetched successfully.",
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokenService/tokenServices/myTokens/tokenTemplates/myTokenTemplate",
+            "name": "myTokenTemplate",
+            "type": "Microsoft.Blockchains/tokenServices/tokenTemplates",
+            "location": "West US",
+            "properties": {
+              "description": "My tokenTemplate",
+              "ttfFormula": "tF{m,b,t}",
+              "openAPISpec": "",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
