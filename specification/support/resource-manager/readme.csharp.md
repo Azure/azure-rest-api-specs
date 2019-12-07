@@ -8,6 +8,6 @@ csharp:
   azure-arm: true
   namespace: Microsoft.Azure.Management.Support
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Support/Management.Support/Generated
+  output-folder: $(csharp-sdks-folder)/support/Microsoft.Azure.Management.Support/src/Generated
   clear-output-folder: true
 ```
