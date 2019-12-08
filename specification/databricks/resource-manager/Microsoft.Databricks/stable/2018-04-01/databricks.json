@@ -500,8 +500,26 @@
         "modelAsString": true
       }
     },
+    "WorkspaceCustomParameterType": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Bool",
+        "Object",
+        "String"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomParameterType",
+        "modelAsString": true
+      }
+    },
     "WorkspaceCustomBooleanParameter": {
       "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
         "value": {
           "type": "boolean",
           "description": "The value which should be used for this field."
@@ -514,12 +532,13 @@
     },
     "WorkspaceCustomObjectParameter": {
       "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
         "value": {
           "type": "object",
-          "description": "The value which should be used for this field.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The value which should be used for this field."
         }
       },
       "required": [
@@ -529,6 +548,10 @@
     },
     "WorkspaceCustomStringParameter": {
       "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
         "value": {
           "type": "string",
           "description": "The value which should be used for this field."
@@ -554,7 +577,7 @@
           "description": "The name of a Public Subnet within the Virtual Network"
         },
         "customPrivateSubnetName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The name of the Private Subnet within the Virtual Network"
         },
         "enableNoPublicIp": {
