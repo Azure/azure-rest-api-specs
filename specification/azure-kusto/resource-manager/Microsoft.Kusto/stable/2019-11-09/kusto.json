@@ -2791,7 +2791,7 @@
           "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
         },
         "dataFormat": {
-          "$ref": "#/definitions/DataFormat",
+          "$ref": "#/definitions/EventHubDataFormat",
           "description": "The data format of the message. Optionally the data format can be added to each message."
         },
         "eventSystemProperties": {
@@ -2800,6 +2800,10 @@
             "type": "string"
           },
           "description": "System properties of the event hub"
+        },
+        "compression": {
+          "$ref": "#/definitions/Compression",
+          "description": "The event hub messages compression type"
         }
       },
       "required": [
@@ -2827,7 +2831,7 @@
           "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
         },
         "dataFormat": {
-          "$ref": "#/definitions/DataFormat",
+          "$ref": "#/definitions/IotHubDataFormat",
           "description": "The data format of the message. Optionally the data format can be added to each message."
         },
         "eventSystemProperties": {
@@ -2849,7 +2853,7 @@
       ],
       "description": "Class representing the Kusto Iot hub connection properties."
     },
-    "DataFormat": {
+    "EventHubDataFormat": {
       "description": "The data format of the message. Optionally the data format can be added to each message.",
       "type": "string",
       "enum": [
@@ -2867,7 +2871,64 @@
         "TSVE"
       ],
       "x-ms-enum": {
-        "name": "dataFormat",
+        "name": "eventHubDataFormat",
+        "modelAsString": true
+      }
+    },
+    "IotHubDataFormat": {
+      "description": "The data format of the message. Optionally the data format can be added to each message.",
+      "type": "string",
+      "enum": [
+        "MULTIJSON",
+        "JSON",
+        "CSV",
+        "TSV",
+        "SCSV",
+        "SOHSV",
+        "PSV",
+        "TXT",
+        "RAW",
+        "SINGLEJSON",
+        "AVRO",
+        "TSVE"
+      ],
+      "x-ms-enum": {
+        "name": "iotHubDataFormat",
+        "modelAsString": true
+      }
+    },
+    "EventGridDataFormat": {
+      "description": "The data format of the message. Optionally the data format can be added to each message.",
+      "type": "string",
+      "enum": [
+        "MULTIJSON",
+        "JSON",
+        "CSV",
+        "TSV",
+        "SCSV",
+        "SOHSV",
+        "PSV",
+        "TXT",
+        "RAW",
+        "SINGLEJSON",
+        "AVRO",
+        "TSVE",
+        "PARQUET"
+      ],
+      "x-ms-enum": {
+        "name": "eventGridDataFormat",
+        "modelAsString": true
+      }
+    },
+    "Compression": {
+      "description": "The compression type",
+      "type": "string",
+      "enum": [
+        "None",
+        "GZip"
+      ],
+      "x-ms-enum": {
+        "name": "compression",
         "modelAsString": true
       }
     },
@@ -2894,7 +2955,7 @@
           "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
         },
         "dataFormat": {
-          "$ref": "#/definitions/DataFormat",
+          "$ref": "#/definitions/EventGridDataFormat",
           "description": "The data format of the message. Optionally the data format can be added to each message."
         }
       },
