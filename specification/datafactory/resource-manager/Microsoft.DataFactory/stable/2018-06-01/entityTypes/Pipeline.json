@@ -215,6 +215,7 @@
     },
     "StoreReadSettings": {
       "description": "Connector read setting.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -253,6 +254,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -685,6 +690,7 @@
     },
     "FormatReadSettings": {
       "description": "Format read settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -716,6 +722,7 @@
     },
     "FormatWriteSettings": {
       "description": "Format write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
