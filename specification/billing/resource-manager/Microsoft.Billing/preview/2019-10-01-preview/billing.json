@@ -1199,14 +1199,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "startDate",
+            "name": "periodStartDate",
             "in": "query",
             "description": "Start date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "periodEndDate",
             "in": "query",
             "description": "End date",
             "required": true,
@@ -2412,14 +2412,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "startDate",
+            "name": "periodStartDate",
             "in": "query",
             "description": "Start date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "periodEndDate",
             "in": "query",
             "description": "End date",
             "required": true,
@@ -2481,14 +2481,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "startDate",
+            "name": "periodStartDate",
             "in": "query",
             "description": "Start date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "periodEndDate",
             "in": "query",
             "description": "End date",
             "required": true,
@@ -2550,14 +2550,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "startDate",
+            "name": "periodStartDate",
             "in": "query",
             "description": "Start date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "periodEndDate",
             "in": "query",
             "description": "End date",
             "required": true,
@@ -2613,14 +2613,14 @@
             "$ref": "#/parameters/transactionNameParameter"
           },
           {
-            "name": "startDate",
+            "name": "periodStartDate",
             "in": "query",
             "description": "Start date",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
+            "name": "periodEndDate",
             "in": "query",
             "description": "End date",
             "required": true,
@@ -5207,7 +5207,8 @@
           "enum": [
             "MicrosoftCustomerAgreement",
             "EnterpriseAgreement",
-            "MicrosoftOnlineServicesProgram"
+            "MicrosoftOnlineServicesProgram",
+            "MicrosoftPartnerAgreement"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -6642,7 +6643,7 @@
           "type": "string",
           "enum": [
             "AllAllowed",
-            "FreeAllowed",
+            "OnlyFreeAllowed",
             "NotAllowed"
           ],
           "x-ms-enum": {
@@ -6666,8 +6667,8 @@
           "description": "Who can view charges.",
           "type": "string",
           "enum": [
-            "None",
-            "SubscriptionOwner"
+            "Allowed",
+            "NotAllowed"
           ],
           "x-ms-enum": {
             "name": "ViewChargesPolicy",
@@ -7003,8 +7004,10 @@
         },
         "permissions": {
           "description": "The billingPermissions the role has",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingPermissionsListResult"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingPermissionsProperties"
+          }
         },
         "roleName": {
           "description": "The name of the role",

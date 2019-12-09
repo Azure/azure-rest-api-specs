@@ -57,6 +57,50 @@
       },
       "x-ms-azure-resource": true
     },
+    "TrackedResource": {
+      "type": "object",
+      "description": "Describes an Azure tracked resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/Location"
+        },
+        {
+          "$ref": "#/definitions/Kind"
+        },
+        {
+          "$ref": "#/definitions/ETag"
+        },
+        {
+          "$ref": "#/definitions/Tags"
+        }
+      ]
+    },
+    "ETag": {
+      "type": "object",
+      "description": "Entity tag is used for comparing two or more entities from the same requested resource.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Entity tag is used for comparing two or more entities from the same requested resource."
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A list of key value pairs that describe the resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "A list of key value pairs that describe the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Kind": {
       "type": "object",
       "description": "Describes an Azure resource with kind",

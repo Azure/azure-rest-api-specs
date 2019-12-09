@@ -121,7 +121,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.relay.v2016_07_01
-  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2016_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/relay/mgmt-v2016_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -134,7 +134,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.relay.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/relay/resource-manager/v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/relay/mgmt-v2017_04_01
 regenerate-manager: true
 generate-interface: true
 ```

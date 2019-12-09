@@ -4566,11 +4566,18 @@
     "ThroughputSettingsGetProperties": {
       "description": "The properties of an Azure Cosmos DB resource throughput",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThroughputSettingsResource"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ThroughputSettingsResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlDatabaseGetResults": {
       "description": "An Azure Cosmos DB SQL database.",
@@ -4592,23 +4599,27 @@
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
       "properties": {
-        "_colls": {
-          "type": "string",
-          "description": "A system generated property that specified the addressable path of the collections resource."
-        },
-        "_users": {
-          "type": "string",
-          "description": "A system generated property that specifies the addressable path of the users resource."
+        "resource": {
+          "properties": {
+            "_colls": {
+              "type": "string",
+              "description": "A system generated property that specified the addressable path of the collections resource."
+            },
+            "_users": {
+              "type": "string",
+              "description": "A system generated property that specifies the addressable path of the users resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
-        }
-      ]
+      }
     },
     "SqlContainerGetResults": {
       "description": "An Azure Cosmos DB container.",
@@ -4629,14 +4640,18 @@
     "SqlContainerGetProperties": {
       "description": "The properties of an Azure Cosmos DB container",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlContainerResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlContainerResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlStoredProcedureGetResults": {
       "description": "An Azure Cosmos DB storedProcedure.",
@@ -4657,14 +4672,18 @@
     "SqlStoredProcedureGetProperties": {
       "description": "The properties of an Azure Cosmos DB StoredProcedure",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlStoredProcedureResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlStoredProcedureResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlUserDefinedFunctionGetResults": {
       "description": "An Azure Cosmos DB userDefinedFunction.",
@@ -4685,14 +4704,18 @@
     "SqlUserDefinedFunctionGetProperties": {
       "description": "The properties of an Azure Cosmos DB userDefinedFunction",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlUserDefinedFunctionResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlUserDefinedFunctionResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlTriggerGetResults": {
       "description": "An Azure Cosmos DB trigger.",
@@ -4713,14 +4736,18 @@
     "SqlTriggerGetProperties": {
       "description": "The properties of an Azure Cosmos DB trigger",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlTriggerResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlTriggerResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "MongoDBDatabaseGetResults": {
       "description": "An Azure Cosmos DB MongoDB database.",
@@ -4741,14 +4768,18 @@
     "MongoDBDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB database",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MongoDBDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MongoDBDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "MongoDBCollectionGetResults": {
       "description": "An Azure Cosmos DB MongoDB collection.",
@@ -4769,14 +4800,18 @@
     "MongoDBCollectionGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB collection",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MongoDBCollectionResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MongoDBCollectionResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "TableGetResults": {
       "description": "An Azure Cosmos DB Table.",
@@ -4797,14 +4832,18 @@
     "TableGetProperties": {
       "description": "The properties of an Azure Cosmos Table",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TableResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TableResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "CassandraKeyspaceGetResults": {
       "description": "An Azure Cosmos DB Cassandra keyspace.",
@@ -4825,14 +4864,18 @@
     "CassandraKeyspaceGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CassandraKeyspaceResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CassandraKeyspaceResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "CassandraTableGetResults": {
       "description": "An Azure Cosmos DB Cassandra table.",
@@ -4853,14 +4896,18 @@
     "CassandraTableGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra table",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CassandraTableResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CassandraTableResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "GremlinDatabaseGetResults": {
       "description": "An Azure Cosmos DB Gremlin database.",
@@ -4881,14 +4928,18 @@
     "GremlinDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GremlinDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GremlinDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "GremlinGraphGetResults": {
       "description": "An Azure Cosmos DB Gremlin graph.",
@@ -4909,14 +4960,18 @@
     "GremlinGraphGetProperties": {
       "description": "The properties of an Azure Cosmos DB Gremlin graph",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GremlinGraphResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GremlinGraphResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "ConsistencyPolicy": {
       "type": "object",
@@ -5904,6 +5959,20 @@
           "items": {
             "$ref": "#/definitions/ExcludedPath"
           }
+        },
+        "compositeIndexes": {
+          "description": "List of composite path list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositePathList"
+          }
+        },
+        "spatialIndexes": {
+          "description": "List of spatial specifics",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpatialSpec"
+          }
         }
       }
     },
@@ -5972,6 +6041,64 @@
             "modelAsString": true
           }
         }
+      }
+    },
+    "CompositePathList": {
+      "description": "List of composite path",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CompositePath"
+      }
+    },
+    "CompositePath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "order": {
+          "description": "Sort order for composite paths.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ],
+          "x-ms-enum": {
+            "name": "CompositePathSortOrder",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SpatialSpec": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "types": {
+          "description": "List of path's spatial type",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpatialType"
+          }
+        }
+      }
+    },
+    "SpatialType": {
+      "description": "Indicates the spatial type of index.",
+      "type": "string",
+      "enum": [
+        "Point",
+        "LineString",
+        "Polygon",
+        "MultiPolygon"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialType",
+        "modelAsString": true
       }
     },
     "ContainerPartitionKey": {
