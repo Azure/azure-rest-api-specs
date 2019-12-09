@@ -343,21 +343,21 @@
     }
   },
   "definitions": {
-    "Identity": {
+    "Resource": {
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The id of the created identity."
+          "description": "The id of the resource."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the created identity."
+          "description": "The name of the resource."
         },
         "location": {
           "type": "string",
-          "description": "The Azure region where the identity lives."
+          "description": "The Azure region where the resource lives."
         },
         "tags": {
           "type": "object",
@@ -365,7 +365,11 @@
             "type": "string"
           },
           "description": "Resource tags"
-        },
+        }
+      }
+    },
+    "Identity": {
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "readOnly": true,
@@ -386,32 +390,16 @@
       "required": [
         "location"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
     "SystemAssignedIdentity": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of the created identity."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the created identity."
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure region where the identity lives."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "readOnly": true,
@@ -427,6 +415,11 @@
       },
       "required": [
         "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
       ],
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
