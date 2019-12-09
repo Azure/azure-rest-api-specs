@@ -21,7 +21,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_02_02
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_02_02
 regenerate-manager: true
 generate-interface: true
 ```
@@ -59,6 +59,15 @@ input-file:
 - Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+- Microsoft.Migrate/stable/2019-10-01/migrate.json
+```
+
 # Code Generation
 
 ## Swagger to SDK
@@ -89,6 +98,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
+  - $(this-folder)/Microsoft.Migrate/stable/2019-10-01/migrate.json
 
 ```
 
