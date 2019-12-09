@@ -6674,6 +6674,40 @@
             "name": "ViewChargesPolicy",
             "modelAsString": true
           }
+        },
+        "enableMicrosoftAzurePlan": {
+          "description" : "Enable Microsoft azure plan",
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "description": "Specifies whether azure plan is enabled.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "budgetAmount": {
+              "description": "Budget amount for policy",
+              "readOnly": true,
+              "$ref": "#/definitions/Amount"
+            },
+            "startDate": {
+              "description" : "Start date of policy",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "endDate": {
+              "description" : "End date of policy",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "externalReferenceId": {
+              "description" : "External reference",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+
         }
       }
     },
