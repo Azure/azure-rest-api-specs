@@ -2209,19 +2209,46 @@
     "RestRequestAuthentication": {
       "type": "object",
       "description": "The authentication information required in the REST health check request to the health provider.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
-          "description": "The authentication type. ApiKey authentication gives a name and a value that can be included in either the request header or query parameters.",
+          "description": "The authentication type.",
           "example": "ApiKey",
           "enum": [
-            "ApiKey"
+            "ApiKey",
+            "RolloutIdentity"
           ],
           "x-ms-enum": {
             "name": "RestAuthType",
             "modelAsString": false
           }
-        },
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "RolloutIdentityAuthentication": {
+      "x-ms-discriminator-value": "RolloutIdentity",
+      "description": "RolloutIdentity uses the user-assigned managed identity authentication context specified in the Identity property during rollout creation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestRequestAuthentication"
+        }
+      ]
+    },
+    "ApiKeyAuthentication": {
+      "x-ms-discriminator-value": "ApiKey",
+      "description": "ApiKey authentication gives a name and a value that can be included in either the request header or query parameters.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestRequestAuthentication"
+        }
+      ],
+      "properties": {
         "name": {
           "type": "string",
           "description": "The key name of the authentication key/value pair."
@@ -2244,7 +2271,6 @@
         }
       },
       "required": [
-        "type",
         "name",
         "in",
         "value"
