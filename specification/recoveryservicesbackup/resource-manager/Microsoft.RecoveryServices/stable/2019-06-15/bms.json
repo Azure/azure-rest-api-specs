@@ -3141,17 +3141,6 @@
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
     },
-    "InstantRPAdditionalDetails": {
-      "type": "object",
-      "properties": {
-        "azureBackupRGNamePrefix": {
-          "type": "string"
-        },
-        "azureBackupRGNameSuffix": {
-          "type": "string"
-        }
-      }
-    },
     "GenericProtectedItem": {
       "description": "Base class for backup items.",
       "type": "object",
@@ -4095,9 +4084,6 @@
       "properties": {
         "protectedItemType": {
           "description": "backup item type.",
-          "required": [
-            "discriminator"
-          ],
           "type": "string"
         },
         "backupManagementType": {
