@@ -2960,6 +2960,11 @@
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key."
               },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
+              },
               "x-ms-blob-content-md5": {
                 "x-ms-client-name": "BlobContentMD5",
                 "type": "string",
@@ -3448,6 +3453,11 @@
                 "x-ms-client-name": "EncryptionKeySha256",
                 "type": "string",
                 "description": "The SHA-256 hash of the encryption key used to encrypt the metadata. This header is only returned when the metadata was encrypted with a customer-provided key."
+              },
+              "x-ms-encryption-scope": {
+                "x-ms-client-name": "EncryptionScope",
+                "type": "string",
+                "description": "Returns the name of the encryption scope used to encrypt the blob contents and application metadata.  Note that the absence of this header implies use of the default account encryption scope."
               },
               "x-ms-access-tier": {
                 "x-ms-client-name": "AccessTier",
