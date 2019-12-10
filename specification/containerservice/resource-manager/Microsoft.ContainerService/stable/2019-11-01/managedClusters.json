@@ -1438,7 +1438,7 @@
           "items": {
             "type": "string"
           },
-          "description": "(PREVIEW) Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
+          "description": "Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
         },
         "enableNodePublicIP": {
           "type": "boolean",
@@ -1451,6 +1451,20 @@
         "scaleSetEvictionPolicy": {
           "$ref": "#/definitions/ScaleSetEvictionPolicy",
           "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for low priority virtual machine scale set. Default to Delete."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool tags to be persisted on the agent pool virtual machine scale set."
+        },
+        "nodeLabels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Agent pool node labels to be persisted across all nodes in agent pool."
         },
         "nodeTaints": {
           "type": "array",
@@ -1496,7 +1510,7 @@
         "name": "AgentPoolType",
         "modelAsString": true
       },
-      "description": "AgentPoolType represents types of an agent pool. VirtualMachineScaleSets type is still in PREVIEW."
+      "description": "AgentPoolType represents types of an agent pool."
     },
     "AgentPoolListResult": {
       "properties": {
@@ -1619,6 +1633,19 @@
           "default": "172.17.0.1/16",
           "description": "A CIDR notation IP range assigned to the Docker bridge network. It must not overlap with any Subnet IP ranges or the Kubernetes service address range."
         },
+        "outboundType": {
+          "type": "string",
+          "enum": [
+            "loadBalancer",
+            "userDefinedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "outboundType",
+            "modelAsString": true
+          },
+          "default": "loadBalancer",
+          "description": "The outbound (egress) routing method."
+        },
         "loadBalancerSku": {
           "type": "string",
           "enum": [
@@ -1683,9 +1710,25 @@
             "$ref": "#/definitions/ResourceReference"
           },
           "description": "The effective outbound IP resources of the cluster load balancer."
+        },
+        "allocatedOutboundPorts": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 64000,
+          "minimum": 0,
+          "description": "Desired number of allocated SNAT ports per VM. Allowed values must be in the range of 0 to 64000 (inclusive). The default value is 0 which results in Azure dynamically allocating ports.",
+          "default": 0
+        },
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 120,
+          "minimum": 4,
+          "description": "Desired outbound flow idle timeout in minutes. Allowed values must be in the range of 4 to 120 (inclusive). The default value is 30 minutes.",
+          "default": 30
         }
       },
-      "description": "Profile of the managed cluster load balancer"
+      "description": "Profile of the managed cluster load balancer."
     },
     "ResourceReference": {
       "properties": {
@@ -1869,6 +1912,17 @@
         "apiServerAccessProfile": {
           "$ref": "#/definitions/ManagedClusterAPIServerAccessProfile",
           "description": "Access profile for managed cluster API server."
+        },
+        "identityProfile": {
+          "additionalProperties": {
+            "readOnly": true,
+            "allOf": [
+              {
+                "$ref": "#/definitions/UserAssignedIdentity"
+              }
+            ]
+          },
+          "description": "Identities associated with the cluster."
         }
       },
       "description": "Properties of the managed cluster."
@@ -1915,6 +1969,22 @@
         }
       },
       "description": "Identity for the managed cluster."
+    },
+    "UserAssignedIdentity": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The resource id of the user assigned identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of the user assigned identity."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "The object id of the user assigned identity."
+        }
+      }
     },
     "ManagedClusterAccessProfile": {
       "allOf": [
@@ -2047,6 +2117,15 @@
             "type": "string"
           },
           "description": "Key-value pairs for configuring an add-on."
+        },
+        "identity": {
+          "readOnly": true,
+          "description": "Information of user assigned identity used by this add-on.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserAssignedIdentity"
+            }
+          ]
         }
       },
       "required": [
