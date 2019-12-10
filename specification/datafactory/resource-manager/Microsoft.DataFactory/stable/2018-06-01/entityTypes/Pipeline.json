@@ -452,6 +452,21 @@
         }
       }
     },
+    "SftpWriteSettings": {
+      "description": "Sftp write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "operationTimeout": {
+          "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
+    },
     "GoogleCloudStorageReadSettings": {
       "description": "Google Cloud Storage read settings.",
       "type": "object",
