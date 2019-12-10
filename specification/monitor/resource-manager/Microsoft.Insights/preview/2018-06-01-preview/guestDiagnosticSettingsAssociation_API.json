@@ -1,444 +1,446 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Guest Diagnostic Settings Association API",
-      "description": "API to Add/Remove/List Guest Diagnostics Settings Association for Azure Resources",
-      "x-ms-code-generation-settings": {
-        "name": "MonitorManagementClient"
+  "swagger": "2.0",
+  "info": {
+    "title": "Guest Diagnostic Settings Association API",
+    "description": "API to Add/Remove/List Guest Diagnostics Settings Association for Azure Resources",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2018-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/guestDiagnosticSettingsAssociation/{associationName}": {
+      "put": {
+        "description": "Creates or updates guest diagnostics settings association.",
+        "tags": [
+          "GuestDiagnosticsSettingsAssociation"
+        ],
+        "operationId": "GuestDiagnosticsSettingsAssociation_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update an guest diagnostic settings association": {
+            "$ref": "./examples/createOrUpdateGuestDiagnosticSettingsAssociation.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diagnosticSettingsAssociation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+            },
+            "description": "The diagnostic settings association to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing guest diagnostic settings association was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+            }
+          },
+          "201": {
+            "description": "A new guest diagnostic settings association was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the guest diagnostic settings association could not be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       },
-      "version": "2018-06-01-preview"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-      "https"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "security": [
-      {
-        "azure_auth": [
-          "user_impersonation"
-        ]
-      }
-    ],
-    "securityDefinitions": {
-      "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-          "user_impersonation": "impersonate your user account"
+      "get": {
+        "description": "Gets guest diagnostics association settings.",
+        "tags": [
+          "GuestDiagnosticsSettingsAssociation"
+        ],
+        "operationId": "GuestDiagnosticsSettingsAssociation_Get",
+        "x-ms-examples": {
+          "Create or update an guest diagnostic settings association": {
+            "$ref": "./examples/getGuestDiagnosticSettingsAssociation.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the diagnostic settings association could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete guest diagnostics association settings.",
+        "tags": [
+          "GuestDiagnosticsSettingsAssociation"
+        ],
+        "x-ms-examples": {
+          "Create or update an guest diagnostic settings association": {
+            "$ref": "./examples/deleteGuestDiagnosticSettingsAssociation.json"
+          }
+        },
+        "operationId": "GuestDiagnosticsSettingsAssociation_Delete",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The diagnostic settings association was successfully deleted."
+          },
+          "204": {
+            "description": "The diagnostic settings association does not exist. It may have already been deleted."
+          },
+          "default": {
+            "description": "An error occurred and the diagnostic settings association could not be deleted.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing guestDiagnosticsSettingsAssociation Resource. To update other fields use the CreateOrUpdate method",
+        "operationId": "GuestDiagnosticsSettingsAssociation_Update",
+        "parameters": [
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The fully qualified ID of the resource, including the resource name and resource type.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResourcePatch"
+            },
+            "description": "Parameters supplied to the operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing guest diagnostics setting resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a service diagnostic setting": {
+            "$ref": "./examples/updateGuestDiagnosticSettingsAssociation.json"
+          }
         }
       }
     },
-    "paths": {
-        "/{resourceUri}/providers/microsoft.insights/guestDiagnosticSettingsAssociation/{associationName}": {
-            "put": {
-                "description": "Creates or updates guest diagnostics settings association.",
-                "tags": [
-                    "GuestDiagnosticsSettingsAssociation"
-                ],
-                "operationId": "guestDiagnosticsSettingsAssociation_CreateOrUpdate",
-                "x-ms-examples": {
-                    "Create or update an guest diagnostic settings association": {
-                        "$ref": "./examples/createOrUpdateGuestDiagnosticSettingsAssociation.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "resourceUri",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
-                        "x-ms-skip-url-encoding": true
-                    },
-                    {
-                        "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "name": "diagnosticSettingsAssociation",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                        },
-                        "description": "The diagnostic settings association to create or update."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "An existing guest diagnostic settings association was successfully updated.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                        }
-                    },
-                    "201": {
-                        "description": "A new guest diagnostic settings association was successfully created.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                        }
-                    },
-                    "default": {
-                        "description": "An error occurred and the guest diagnostic settings association could not be created or updated.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            },        
-            "get": {
-                "description": "Gets guest diagnostics association settings.",
-                "tags": [
-                    "GuestDiagnosticsSettingsAssociation"
-                 ],
-                "operationId": "guestDiagnosticsSettingsAssociation_Get",
-                "x-ms-examples": {
-                    "Create or update an guest diagnostic settings association": {
-                        "$ref": "./examples/getGuestDiagnosticSettingsAssociation.json"
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "resourceUri",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
-                        "x-ms-skip-url-encoding": true
-                    },
-                    {
-                        "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request succeeded.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                        }
-                    },
-                    "default": {
-                        "description": "An error occurred and the diagnostic settings association could not be retrieved.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "Delete guest diagnostics association settings.",
-                "tags": [
-                    "GuestDiagnosticsSettingsAssociation"
-                 ],
-                 "x-ms-examples": {
-                    "Create or update an guest diagnostic settings association": {
-                        "$ref": "./examples/deleteGuestDiagnosticSettingsAssociation.json"
-                    }
-                },
-                "operationId": "GuestDiagnosticsSettingsAssociation_Delete",                
-                "parameters": [
-                    {
-                        "name": "resourceUri",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
-                        "x-ms-skip-url-encoding": true
-                    },
-                    {
-                        "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The diagnostic settings association was successfully deleted."
-                    },
-                    "204": {
-                        "description": "The diagnostic settings association does not exist. It may have already been deleted."
-                    },
-                    "default": {
-                        "description": "An error occurred and the diagnostic settings association could not be deleted.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "description": "Updates an existing guestDiagnosticsSettingsAssociation Resource. To update other fields use the CreateOrUpdate method",
-                "operationId": "guestDiagnosticsSettingsAssociation_Update",
-                "parameters": [
-                    {
-                        "name": "resourceUri",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The fully qualified ID of the resource, including the resource name and resource type.",
-                        "x-ms-skip-url-encoding": true
-                    },
-                    {
-                      "$ref": "#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/DiagnosticSettingsAssociationNameParameter"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResourcePatch"
-                        },
-                        "description": "Parameters supplied to the operation."
-                    }
-                ],
-                "responses": {
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
-                    "200": {
-                        "description": "An existing guest diagnostics setting resource was successfully updated.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                  "Update a service diagnostic setting": { "$ref": "./examples/updateGuestDiagnosticSettingsAssociation.json" }
-                }
-              }
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
+      "get": {
+        "description": "Get a list of all guest diagnostic settings association in a subscription.",
+        "operationId": "GuestDiagnosticsSettingsAssociation_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
-        "/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
-            "get": {
-                "description": "Get a list of all guest diagnostic settings association in a subscription.",
-                "operationId": "guestDiagnosticsSettingsAssociation_List",                
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request succeeded.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationList"
-                        }
-                    },
-                    "default": {
-                        "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationList"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
-            "get": {
-                "description": "Get a list of all guest diagnostic settings association in a resource group.",
-                "operationId": "guestDiagnosticsSettingsAssociation_ListByResourceGroup",                
-                "x-ms-pageable": {
-                    "nextLinkName": null
-                },
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The request succeeded.",
-                        "schema": {
-                            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationList"
-                        }
-                    },
-                    "default": {
-                        "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    }
-                }
+          },
+          "default": {
+            "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
+          }
         }
-    },    
-    "definitions": {
-        "ErrorResponse": {
-            "description": "Describes the format of Error response.",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "Error code",
-                    "type": "string"
-                },
-                "message": {
-                    "description": "Error message indicating why the operation failed.",
-                    "type": "string"
-                }
-            }
-        },
-        "GuestDiagnosticSettingsAssociationList": {
-            "description": "A list of guest diagnostic settings association.",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
-                    },
-                    "description": "The list of guest diagnostic settings association."
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Provides the link to retrieve the next set of elements."
-                }
-            }
-        },
-        "GuestDiagnosticSettingsAssociationResourcePatch": {
-            "description": "Guest diagnostic setting resource for patch operations",
-            "properties": {
-              "tags": {
-                  "additionalProperties": {
-                      "type": "string"
-                  },
-                  "description": "Resource tags"
-              },
-              "properties": {
-                "x-ms-client-flatten": true,
-                "$ref": "#/definitions/GuestDiagnosticSettingsAssociation",
-                "description": "The service diagnostics settings for an update operation."
-              }
-            }
-        },
-        "GuestDiagnosticSettingsAssociation": {
-            "description": "A guest diagnostic settings association.",
-            "properties": {
-                "guestDiagnosticSettingsName": {
-                    "type": "string",                    
-                    "description": "The guest diagnostic settings name."
-                }                
-            },
-            "required": [             
-                "guestDiagnosticSettingsName"
-            ]
-        },
-        "GuestDiagnosticSettingsAssociationResource": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "required": [
-                "properties"
-            ],
-            "properties": {
-                "properties": {
-                  "x-ms-client-flatten": true,
-                  "$ref": "#/definitions/GuestDiagnosticSettingsAssociation",
-                  "description": "The diagnostics settings associations of the resource."
-                }
-              },
-            "description": "Virtual machine guest diagnostic settings resource."
-        },
-        "Resource": {
-            "properties": {
-              "id": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Azure resource Id"
-              },
-              "name": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Azure resource name"
-              },
-              "type": {
-                "type": "string",
-                "readOnly": true,
-                "description": "Azure resource type"
-              },
-              "location": {
-                "type": "string",
-                "description": "Resource location",
-                "x-ms-mutability": [
-                    "create",
-                    "read"
-                ]
-              },
-              "tags": {
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "description": "Resource tags"
-              }
-            },
-            "required": [
-              "location"
-            ],
-            "x-ms-azure-resource": true,
-            "description": "An azure resource object"
-        }      
+      }
     },
-    "parameters": {
-        "SubscriptionIdParameter": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The Azure subscription Id."
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
+      "get": {
+        "description": "Get a list of all guest diagnostic settings association in a resource group.",
+        "operationId": "GuestDiagnosticsSettingsAssociation_ListByResourceGroup",
+        "x-ms-pageable": {
+          "nextLinkName": null
         },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group.",
-            "x-ms-parameter-location": "method"
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsAssociationList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
         },
-        "DiagnosticSettingsAssociationNameParameter": {
-            "name": "associationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the diagnostic settings association.",
-            "x-ms-parameter-location": "method"
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "GuestDiagnosticSettingsAssociationList": {
+      "description": "A list of guest diagnostic settings association.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestDiagnosticSettingsAssociationResource"
+          },
+          "description": "The list of guest diagnostic settings association."
         },
-        "ApiVersionParameter": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "Client Api Version."
-        }      
+        "nextLink": {
+          "type": "string",
+          "description": "Provides the link to retrieve the next set of elements."
+        }
+      }
+    },
+    "GuestDiagnosticSettingsAssociationResourcePatch": {
+      "description": "Guest diagnostic setting resource for patch operations",
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GuestDiagnosticSettingsAssociation",
+          "description": "The service diagnostics settings for an update operation."
+        }
+      }
+    },
+    "GuestDiagnosticSettingsAssociation": {
+      "description": "A guest diagnostic settings association.",
+      "properties": {
+        "guestDiagnosticSettingsName": {
+          "type": "string",
+          "description": "The guest diagnostic settings name."
+        }
+      },
+      "required": [
+        "guestDiagnosticSettingsName"
+      ]
+    },
+    "GuestDiagnosticSettingsAssociationResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GuestDiagnosticSettingsAssociation",
+          "description": "The diagnostics settings associations of the resource."
+        }
+      },
+      "description": "Virtual machine guest diagnostic settings resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiagnosticSettingsAssociationNameParameter": {
+      "name": "associationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic settings association.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
     }
   }
+}

@@ -25,10 +25,30 @@ To see additional help and options, run:
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
+title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2015-04
+tag: package-2019-08-preview
 ```
 
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+```
+
+### Tag: package-2019-08-preview
+
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview'
+input-file:
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
 
 ### Tag: package-2015-04
 
@@ -37,6 +57,42 @@ These settings apply only when `--tag=package-2015-04` is specified on the comma
 ``` yaml $(tag) == 'package-2015-04'
 input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+```
+
+### Tag: package-2014-04
+
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04'
+input-file:
+- Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+```
+
+### Tag: package-2015-11
+
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-11'
+input-file:
+- Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+```
+
+### Tag: package-2016-03-19
+
+These settings apply only when `--tag=package-2016-03-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-19'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+```
+
+### Tag: package-2016-03-31
+
+These settings apply only when `--tag=package-2016-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-31'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 ```
 
 ## Suppression
@@ -50,42 +106,6 @@ directive:
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.SqlDatabase
-    reason: The SqlDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.Container
-    reason: The Container doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.MongoDBDatabase
-    reason: The MongoDBDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.MongoDBCollection
-    reason: The MongoDBCollection doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.Table
-    reason: The Table doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.CassandraKeyspace
-    reason: The CassandraKeyspace doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.CassandraTable
-    reason: The CassandraTable doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabase
-    reason: The GremlinDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.GremlinGraph
-    reason: The GremlinGraph doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
@@ -100,32 +120,16 @@ directive:
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.ExtendedResourceProperties.properties._self
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
     where: $.definitions.ExtendedResourceProperties.properties._etag
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.SqlDatabaseProperties.properties._colls
+    where: $.definitions.SqlDatabaseGetProperties.properties._colls
     reason: The database has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.SqlDatabaseProperties.properties._users
+    where: $.definitions.SqlDatabaseGetProperties.properties._users
     reason: The database has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._rid
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._ts
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._etag
-    reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P10
@@ -175,6 +179,20 @@ swagger-to-sdk:
 ```
 
 
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.CosmosDB
+  output-folder: $(csharp-sdks-folder)/cosmosdb/Microsoft.Azure.Management.CosmosDB/src/Generated
+  clear-output-folder: true
+```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -182,3 +200,34 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

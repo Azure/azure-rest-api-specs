@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "eaee6a92-e973-4922-9471-3a0a6abf81cd",
     "resourceGroupName": "myResourceGroup",
-    "api-version": "2018-05-01",
+    "api-version": "2019-03-01",
     "parameters": {
       "resources": [
         "*"
@@ -15,7 +15,7 @@
       "body": {
         "template": {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion":"1.0.0.0",
+          "contentVersion": "1.0.0.0",
           "parameters": {
             "myResourceType_myFirstResource_name": {
               "defaultValue": "myFirstResource",
@@ -30,8 +30,7 @@
               "type": "SecureString"
             }
           },
-          "variables":{
-          },
+          "variables": {},
           "resources": [
             {
               "type": "My.RP/myResourceType",
@@ -56,8 +55,7 @@
         "error": {
           "code": "ExportTemplateCompletedWithErrors",
           "message": "Export template operation completed with errors. Some resources were not exported. Please see details for more information.",
-          "details":[
-          ]
+          "details": []
         }
       }
     }

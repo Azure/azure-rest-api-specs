@@ -32,7 +32,7 @@
       }
     }
   },
-  "paths": {  
+  "paths": {
     "/providers/Microsoft.CostManagement/views": {
       "get": {
         "tags": [
@@ -378,10 +378,12 @@
           }
         }
       }
-    }, 
+    },
     "/{scope}/providers/Microsoft.CostManagement/budgets": {
       "get": {
-        "tags": ["Budgets"],
+        "tags": [
+          "Budgets"
+        ],
         "operationId": "Budgets_List",
         "description": "Lists all budgets for the defined scope.",
         "externalDocs": {
@@ -421,7 +423,9 @@
     },
     "/{scope}/providers/Microsoft.CostManagement/budgets/{budgetName}": {
       "get": {
-        "tags": ["Budgets"],
+        "tags": [
+          "Budgets"
+        ],
         "operationId": "Budget_Get",
         "description": "Gets the budget for the scope by budget name.",
         "externalDocs": {
@@ -459,7 +463,9 @@
         }
       },
       "put": {
-        "tags": ["Budgets"],
+        "tags": [
+          "Budgets"
+        ],
         "operationId": "Budget_CreateOrUpdate",
         "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
@@ -512,7 +518,9 @@
         }
       },
       "delete": {
-        "tags": ["Budgets"],
+        "tags": [
+          "Budgets"
+        ],
         "operationId": "Budget_Delete",
         "description": "The operation to delete a budget.",
         "externalDocs": {
@@ -1136,14 +1144,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/KpiProperties"
-          }          
+          }
         },
         "pivots": {
           "description": "Configuration of 3 sub-views in the Cost Analysis UI.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PivotProperties"
-          }         
+          }
         }
       }
     },
@@ -1234,7 +1242,10 @@
         "category": {
           "description": "The category of the budget, whether the budget tracks cost or usage.",
           "type": "string",
-          "enum": ["Cost", "Usage"],
+          "enum": [
+            "Cost",
+            "Usage"
+          ],
           "x-ms-enum": {
             "name": "CategoryType",
             "modelAsString": true
@@ -1248,7 +1259,11 @@
         "timeGrain": {
           "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
           "type": "string",
-          "enum": ["Monthly", "Quarterly", "Annually"],
+          "enum": [
+            "Monthly",
+            "Quarterly",
+            "Annually"
+          ],
           "x-ms-enum": {
             "name": "TimeGrainType",
             "modelAsString": true
@@ -1278,7 +1293,12 @@
           "maxItems": 5
         }
       },
-      "required": ["category", "amount", "timeGrain", "timePeriod"]
+      "required": [
+        "category",
+        "amount",
+        "timeGrain",
+        "timePeriod"
+      ]
     },
     "BudgetTimePeriod": {
       "description": "The start and end date for a budget.",
@@ -1294,7 +1314,9 @@
           "format": "date-time"
         }
       },
-      "required": ["startDate"]
+      "required": [
+        "startDate"
+      ]
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -1322,7 +1344,11 @@
         "operator": {
           "description": "The comparison operator.",
           "type": "string",
-          "enum": ["EqualTo", "GreaterThan", "GreaterThanOrEqualTo"],
+          "enum": [
+            "EqualTo",
+            "GreaterThan",
+            "GreaterThanOrEqualTo"
+          ],
           "x-ms-enum": {
             "name": "NotificationOperatorType",
             "modelAsString": true
@@ -1359,7 +1385,12 @@
           "maxItems": 50
         }
       },
-      "required": ["enabled", "operator", "threshold", "contactEmails"]
+      "required": [
+        "enabled",
+        "operator",
+        "threshold",
+        "contactEmails"
+      ]
     }
   },
   "parameters": {
