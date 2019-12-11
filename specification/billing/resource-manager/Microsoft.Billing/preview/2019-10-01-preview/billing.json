@@ -5615,6 +5615,10 @@
           "items": {
             "$ref": "#/definitions/AzurePlan"
           }
+        },
+        "budgetInformation": {
+          "description": "The budget information associated with the billing profile.",
+          "$ref": "#/definitions/BudgetInformation"
         }
       }
     },
@@ -5660,6 +5664,10 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
+        },
+        "budgetInformation": {
+          "description": "The budget information associated with the billing profile.",
+          "$ref": "#/definitions/BudgetInformation"
         }
       }
     },
@@ -5704,6 +5712,29 @@
         },
         "postalCode": {
           "description": "Address Postal Code.",
+          "type": "string"
+        }
+      }
+    },
+    "BudgetInformation": {
+      "description": "Budget information.",
+      "properties": {
+        "amount": {
+          "description": "The budget amount.",
+          "$ref": "#/definitions/Amount"
+        },
+        "startDate": {
+          "description": "Start Date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "End Date.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "externalReferenceId": {
+          "description": "Reference Id for this budget information.",
           "type": "string"
         }
       }
@@ -6741,8 +6772,7 @@
       "properties": {
         "currency": {
           "description": "The currency for the amount value.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "value": {
           "description": "Amount value.",
