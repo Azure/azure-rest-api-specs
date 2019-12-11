@@ -7244,7 +7244,7 @@
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Specifies the protocol of listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
+          "description": "Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
           "enum": [
             "Http",
             "Https"
@@ -7285,7 +7285,7 @@
         },
         "timeZone": {
           "type": "string",
-          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\""
+          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\". <br><br> Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones)."
         },
         "additionalUnattendContent": {
           "type": "array",
@@ -7411,10 +7411,10 @@
         },
         "requireGuestProvisionSignal": {
           "type": "boolean",
-          "description": "Specifies whether the guest provision signal is required from the virtual machine."
+          "description": "Specifies whether the guest provision signal is required to infer provision success of the virtual machine."
         }
       },
-      "description": "Specifies the operating system settings for the virtual machine."
+      "description": "Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned."
     },
     "AutomaticRepairsPolicy": {
       "properties": {
