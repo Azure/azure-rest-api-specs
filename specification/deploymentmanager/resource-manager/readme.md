@@ -211,6 +211,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DeploymentManager/preview/2019-11-01-preview/deploymentmanager.json
   - $(this-folder)/Microsoft.DeploymentManager/preview/2018-09-01-preview/deploymentmanager.json
 
 ```
