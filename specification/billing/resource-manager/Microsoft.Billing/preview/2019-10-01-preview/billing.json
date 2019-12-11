@@ -411,6 +411,63 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Create",
+        "x-ms-long-running-operation": true,
+        "description": "The operation to create a BillingProfile.",
+        "x-ms-examples": {
+          "CreateBillingProfile": {
+            "$ref": "./examples/CreateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfileCreationRequest"
+            },
+            "description": "Request parameters supplied to the Create BillingProfile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}": {
@@ -451,66 +508,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BillingProfile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "BillingProfiles"
-        ],
-        "operationId": "BillingProfiles_Create",
-        "x-ms-long-running-operation": true,
-        "description": "The operation to create a BillingProfile.",
-        "x-ms-examples": {
-          "CreateBillingProfile": {
-            "$ref": "./examples/CreateBillingProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingProfileCreationRequest"
-            },
-            "description": "Request parameters supplied to the Create BillingProfile operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingProfile"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "Location URI to poll for result",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Recommends the retryable time after receiving this.",
-                "type": "integer"
-              }
             }
           },
           "default": {
