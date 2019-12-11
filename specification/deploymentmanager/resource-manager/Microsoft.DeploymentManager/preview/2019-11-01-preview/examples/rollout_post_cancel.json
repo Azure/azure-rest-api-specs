@@ -1,0 +1,124 @@
+{
+    "parameters": {
+        "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+        "resourceGroupName": "myResourceGroup",
+        "rolloutName": "myRollout",
+        "api-version": "2019-11-01-preview"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "name": "myRollout",
+                "type": "Microsoft.DeploymentManager/rollouts",
+                "location": "centralus",
+                "tags": {},
+                "identity": {
+                    "type": "userAssigned",
+                    "identityIds": [
+                        "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                    ]
+                },
+                "properties": {
+                    "status": "Canceling",
+                    "operationInfo": {
+                        "startTime": "2018-08-28T03:33:56.386Z",
+                        "retryAttempt": 0
+                    },
+                    "totalRetryAttempts": 0,
+                    "buildVersion": "1.0.0.1",
+                    "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                    "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                    "stepGroups": [
+                        {
+                            "name": "FirstRegion",
+                            "preDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep1"
+                                },
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep2"
+                                }
+                            ],
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit1'",
+                            "postDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/postDeployStep1"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "SecondRegion",
+                            "preDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep3"
+                                },
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep4"
+                                }
+                            ],
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit2'",
+                            "postDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/postDeployStep5"
+                                }
+                            ],
+                            "dependsOnStepGroups": [
+                                "FirstRegion"
+                            ]
+                        }
+                    ],
+                    "services": [
+                        {
+                            "name": "myService1",
+                            "targetSubscriptionId": "600c95c5-3ee5-44fe-b190-ca38a19adcd7",
+                            "targetLocation": "centralus",
+                            "serviceUnits": [
+                                {
+                                    "name": "myTopologyUni1",
+                                    "targetResourceGroup": "myDeploymentResourceGroup",
+                                    "deploymentMode": "Incremental",
+                                    "steps": [
+                                        {
+                                            "name": "preDeploymentStep1",
+                                            "status": "succeeded",
+                                            "operationInfo": {
+                                                "startTime": "2018-08-28T03:33:56.386Z",
+                                                "endTime": "2018-08-28T03:35:28.556Z"
+                                            }
+                                        },
+                                        {
+                                            "name": "preDeploymentStep2",
+                                            "status": "succeeded",
+                                            "operationInfo": {
+                                                "startTime": "2018-08-28T03:36:56.386Z",
+                                                "endTime": "2018-08-28T03:37:28.556Z"
+                                            }
+                                        },
+                                        {
+                                            "name": "deploy",
+                                            "status": "running",
+                                            "operationInfo": {
+                                                "startTime": "2018-08-28T03:38:56.386Z",
+                                                "lastUpdatedTime": "2018-08-28T03:39:28.556Z"
+                                            },
+                                            "resourceOperations": [
+                                                {
+                                                    "resourceName": "keyVaultcentralus",
+                                                    "operationId": "20FC5A21382DA306",
+                                                    "resourceType": "Microsoft.KeyVault/vaults",
+                                                    "provisioningState": "Succeeded",
+                                                    "statusMessage": "",
+                                                    "statusCode": "OK"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
