@@ -808,7 +808,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "versions": {
@@ -829,7 +831,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "blueprintName": {
@@ -846,10 +850,11 @@
     "BlueprintStatus": {
       "description": "The status of the blueprint. This field is readonly.",
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "TemplateArtifactProperties": {
@@ -1028,9 +1033,13 @@
           "description": "actual value."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretReferenceParameterValue": {
@@ -1042,9 +1051,13 @@
           "$ref": "#/definitions/SecretValueReference"
         }
       },
-      "required": [ "reference" ],
+      "required": [
+        "reference"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretValueReference": {
@@ -1078,7 +1091,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "ParameterDefinitionCollection": {
       "description": "A dictionary hold parameter name and it's metadata.",

@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   package-name: "@azure/cognitiveservices-videosearch"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-videosearch"
+  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-videosearch"
   azure-arm: false
   generate-metadata: true
 ```

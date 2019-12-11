@@ -1035,7 +1035,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Unique name of the agent pool profile in the context of the subscription and resource group."
+          "description": "Unique name of the agent pool profile in the context of the subscription and resource group.",
+          "pattern": "^[a-z][a-z0-9]{0,11}$"
         },
         "count": {
           "type": "integer",
@@ -1315,13 +1316,6 @@
         "aadProfile": {
           "$ref": "#/definitions/ManagedClusterAADProfile",
           "description": "Profile of Azure Active Directory configuration."
-        },
-        "apiServerAuthorizedIPRanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Authorized IP Ranges to kubernetes API server."
         }
       },
       "description": "Properties of the managed cluster."

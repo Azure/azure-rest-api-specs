@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -23,6 +23,13 @@
           "$ref": "#/definitions/TriggerRuntimeState",
           "description": "Indicates if trigger is running or not. Updated when Start/Stop APIs are called on the Trigger.",
           "readOnly": true
+        },
+        "annotations": {
+          "description": "List of tags that can be used for describing the trigger.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         }
       },
       "additionalProperties": {
@@ -275,8 +282,7 @@
         "typeProperties"
       ]
     },
-    "BlobEventsTrigger":
-    {
+    "BlobEventsTrigger": {
       "description": "Trigger that runs every time a Blob event occurs.",
       "type": "object",
       "allOf": [
@@ -285,8 +291,7 @@
         }
       ],
       "properties": {
-        "typeProperties":
-        {
+        "typeProperties": {
           "description": "Blob Events Trigger properties.",
           "x-ms-client-flatten": true,
           "properties": {
@@ -297,6 +302,10 @@
             "blobPathEndsWith": {
               "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
               "type": "string"
+            },
+            "ignoreEmptyBlobs": {
+              "description": "If set to true, blobs with zero bytes will be ignored.",
+              "type": "boolean"
             },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
@@ -578,6 +587,46 @@
         }
       },
       "required": [
+        "typeProperties"
+      ]
+    },
+    "ChainingTrigger": {
+      "description": "Trigger that allows the referenced pipeline to depend on other pipeline runs based on runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and their runs should have the values for those runDimensions. The referenced pipeline run would be triggered if the values for the runDimension match for all upstream pipeline runs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "pipeline": {
+          "$ref": "../datafactory.json#/definitions/TriggerPipelineReference",
+          "description": "Pipeline for which runs are created when all upstream pipelines complete successfully."
+        },
+        "typeProperties": {
+          "description": "Chaining Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "dependsOn": {
+              "type": "array",
+              "items": {
+                "$ref": "../datafactory.json#/definitions/PipelineReference"
+              },
+              "description": "Upstream Pipelines."
+            },
+            "runDimension": {
+              "description": "Run Dimension property that needs to be emitted by upstream pipelines.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "runDimension",
+            "dependsOn"
+          ]
+        }
+      },
+      "required": [
+        "pipeline",
         "typeProperties"
       ]
     }

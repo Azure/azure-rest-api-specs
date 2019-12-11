@@ -168,7 +168,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
+            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelSourceNameNotSupported - The specified sensitivity label source is not valid\n\n * 400 InvalidSensitivityLabelResource - The specified sensitivity label resource is not valid\n\n * 400 SensitivityLabelLabelNameAndInfoTypeNotProvided - At least one of LabelName and InformationType must be specified\n\n * 400 LabelNameTooLong - Label name cannot exceed {0} characters\n\n * 400 InformationTypeTooLong - Information type cannot exceed {0} characters\n\n * 400 LabelIdMustBeGuid - Label ID must be a GUID\n\n * 400 InformationTypeIdMustBeGuid - Information type ID must be a GUID\n\n * 400 LabelMissing - Label is missing\n\n * 400 InformationTypeMissing - Information Type is missing\n\n * 404 SensitivityLabelsColumnNotFound - The specified schema/table/column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 SensitivityLabelsLabelNotFound - The specified sensitivity label could not be found\n\n * 501 SensitivityLabelRecommendedSourceNameNotSupported - 'Recommended' sensitivity label source is not supported yet"
           },
           "201": {
             "description": "Successfully created the sensitivity label.",
@@ -256,13 +256,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/sensitivityLabels": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/disable": {
+      "post": {
         "tags": [
           "ManagedDatabaseSensitivityLabels"
         ],
-        "description": "Gets the sensitivity labels of a given database",
-        "operationId": "ManagedDatabaseSensitivityLabels_ListByDatabase",
+        "description": "Disables sensitivity recommendations on a given column",
+        "operationId": "ManagedDatabaseSensitivityLabels_DisableRecommendation",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -274,11 +274,38 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that filters elements in the collection.",
-            "required": false,
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
             "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -289,22 +316,88 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the sensitivity labels.",
-            "schema": {
-              "$ref": "#/definitions/SensitivityLabelListResult"
-            }
+            "description": "Successfully disabled the sensitivity recommendations on the given column."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 DatawarehouseDatabaseIsDeactivated - Could not execute Data Classification operation because the database is paused. Please resume it.\n\n * 400 SensitivityLabelsInvalidODataQuery - The specified OData query is either not valid or not supported\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
           }
         },
-        "x-ms-odata": "#/definitions/SensitivityLabel",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-examples": {
+          "Disables the sensitivity recommendations on a given column": {
+            "$ref": "./examples/ManagedDatabaseRecommendedColumnSensitivityLabelDisable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/schemas/{schemaName}/tables/{tableName}/columns/{columnName}/sensitivityLabels/{sensitivityLabelSource}/enable": {
+      "post": {
+        "tags": [
+          "ManagedDatabaseSensitivityLabels"
+        ],
+        "description": "Enables sensitivity recommendations on a given column (recommendations are enabled by default on all columns)",
+        "operationId": "ManagedDatabaseSensitivityLabels_EnableRecommendation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableName",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "columnName",
+            "in": "path",
+            "description": "The name of the column.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sensitivityLabelSource",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "recommended"
+            ],
+            "x-ms-enum": {
+              "name": "SensitivityLabelSource",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully enabled the sensitivity recommendations on the given column."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 SensitivityLabelsColumnNotFound - The specified column could not be found\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance."
+          }
         },
         "x-ms-examples": {
-          "Gets the current and recommended sensitivity labels of a given database": {
-            "$ref": "./examples/ManagedDatabaseSensitivityLabelsListByDatabase.json"
+          "Enables the sensitivity recommendations on a given column": {
+            "$ref": "./examples/ManagedDatabaseRecommendedColumnSensitivityLabelEnable.json"
           }
         }
       }
@@ -380,6 +473,19 @@
             "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
+            "name": "includeDisabledRecommendations",
+            "in": "query",
+            "description": "Specifies whether to include disabled recommendations or not.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "$filter",
             "in": "query",
             "description": "An OData filter expression that filters elements in the collection.",
@@ -425,9 +531,22 @@
           "description": "The label name.",
           "type": "string"
         },
+        "labelId": {
+          "description": "The label ID.",
+          "type": "string"
+        },
         "informationType": {
           "description": "The information type.",
           "type": "string"
+        },
+        "informationTypeId": {
+          "description": "The information type ID.",
+          "type": "string"
+        },
+        "isDisabled": {
+          "description": "Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },

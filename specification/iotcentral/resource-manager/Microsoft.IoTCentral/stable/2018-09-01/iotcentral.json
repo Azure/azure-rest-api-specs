@@ -410,6 +410,46 @@
         "deprecated": false
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.IoTCentral/appTemplates": {
+      "post": {
+        "tags": [
+          "Apps"
+        ],
+        "description": "Get all available application templates.",
+        "operationId": "Apps_ListTemplates",
+        "x-ms-examples": {
+          "Apps_ListTemplates": {
+            "$ref": "./examples/Apps_Templates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains all the IoT Central application templates.",
+            "schema": {
+              "$ref": "#/definitions/AppTemplatesResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/providers/Microsoft.IoTCentral/operations": {
       "get": {
         "tags": [
@@ -486,7 +526,10 @@
           "description": "The name of the SKU.",
           "enum": [
             "F1",
-            "S1"
+            "S1",
+            "ST0",
+            "ST1",
+            "ST2"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -585,6 +628,7 @@
       "description": "Error details.",
       "properties": {
         "error": {
+          "description": "Error response body.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ErrorResponseBody"
         }
@@ -731,6 +775,60 @@
           "description": "The detailed reason message.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "AppTemplate": {
+      "description": "IoT Central Application Template.",
+      "type": "object",
+      "properties": {
+        "manifestId": {
+          "description": "The ID of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "manifestVersion": {
+          "description": "The version of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "appTemplateName": {
+          "description": "The name of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "title": {
+          "description": "The title of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "order": {
+          "description": "The order of the template in the templates list.",
+          "type": "number",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the template.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AppTemplatesResult": {
+      "description": "A list of IoT Central Application Templates with a next link.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of IoT Central application templates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "A list of IoT Central Application Templates.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AppTemplate"
+          }
         }
       }
     }

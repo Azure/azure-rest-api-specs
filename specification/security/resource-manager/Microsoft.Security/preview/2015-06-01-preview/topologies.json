@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/topologies": {
+      "get": {
+        "x-ms-examples": {
+          "Get topology on a subscription": {
+            "$ref": "./examples/Topology/GetTopologySubscription_example.json"
+          }
+        },
+        "tags": [
+          "Topology"
+        ],
+        "description": "Gets a list that allows to build a topology view of a subscription.",
+        "operationId": "Topology_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopologyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/topologies": {
+      "get": {
+        "x-ms-examples": {
+          "Get topology on a subscription from security data location": {
+            "$ref": "./examples/Topology/GetTopologySubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "Topology"
+        ],
+        "description": "Gets a list that allows to build a topology view of a subscription and location.",
+        "operationId": "Topology_ListByHomeRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopologyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/topologies/{topologyResourceName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get topology": {
+            "$ref": "./examples/Topology/GetTopology_example.json"
+          }
+        },
+        "tags": [
+          "Topology"
+        ],
+        "description": "Gets a specific topology component.",
+        "operationId": "Topology_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/TopologyResourceName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopologyResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TopologyList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TopologyResource"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "TopologyResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/TopologyResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "TopologyResourceProperties": {
+      "type": "object",
+      "properties": {
+        "calculatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The UTC time on which the topology was calculated"
+        },
+        "topologyResources": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Azure resources which are part of this topology resource",
+          "items": {
+            "$ref": "#/definitions/TopologySingleResource"
+          }
+        }
+      }
+    },
+    "TopologySingleResource": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource id"
+        },
+        "severity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The security severity of the resource"
+        },
+        "recommendationsExist": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates if the resource has security recommendations"
+        },
+        "networkZones": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Indicates the resource connectivity level to the Internet (InternetFacing, Internal ,etc.)"
+        },
+        "topologyScore": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Score of the resource based on its security severity"
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of this resource"
+        },
+        "parents": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Azure resources connected to this resource which are in higher level in the topology view",
+          "items": {
+            "$ref": "#/definitions/TopologySingleResourceParent"
+          }
+        },
+        "children": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Azure resources connected to this resource which are in lower level in the topology view",
+          "items": {
+            "$ref": "#/definitions/TopologySingleResourceChild"
+          }
+        }
+      }
+    },
+    "TopologySingleResourceParent": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource id which serves as parent resource in topology view"
+        }
+      }
+    },
+    "TopologySingleResourceChild": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource id which serves as child resource in topology view"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "TopologyResourceName": {
+      "name": "topologyResourceName",
+      "in": "path",
+      "description": "Name of a topology resources collection.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

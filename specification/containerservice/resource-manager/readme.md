@@ -8,7 +8,7 @@ The ContainerServices RPv2 consists of two similar services: ContainerServices a
 Each service has its own swagger spec.
 
 The two specs are united by running `autorest` in this directory, which will use this readme.md
-file for configuration options. It will generate a single *azure-mgmt-containerservices* client
+file for configuration options. It will generate a single *azure-mgmt-containerservice* client
 library.
 
 ---
@@ -32,9 +32,81 @@ To see additional help and options, run:
 
 These are the global settings for the ContainerServices API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2019-10
+```
+
+### Tag: package-2019-09-30-preview
+
+These settings apply only when `--tag=package-2019-09-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-30-preview'
+input-file:
+  - Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+```
+
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+```
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-06-01/location.json
+  - Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
+```
+
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02'
+input-file:
+- Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+- Microsoft.ContainerService/stable/2017-07-01/containerService.json
+- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+- Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
 
 ### Tag: package-2018-08-preview
@@ -102,6 +174,60 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
+### Tag: package-2019-10-01-only
+
+These settings apply only when `--tag=package-2019-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+```
+
+### Tag: package-2019-08-01-only
+
+These settings apply only when `--tag=package-2019-08-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+```
+
+### Tag: package-2019-06-01-only
+
+These settings apply only when `--tag=package-2019-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
+```
+
+### Tag: package-2019-04-30-only
+
+These settings apply only when `--tag=package-2019-04-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-30-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+```
+
+### Tag: package-2019-04-01-only
+
+These settings apply only when `--tag=package-2019-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+```
+
+### Tag: package-2019-02-only
+
+These settings apply only when `--tag=package-2019-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+```
+
 ### Tag: package-2018-08-preview-only
 
 These settings apply only when `--tag=package-2018-08-preview-only` is specified on the command line.
@@ -118,6 +244,15 @@ These settings apply only when `--tag=package-2018-09-preview-only` is specified
 ``` yaml $(tag) == 'package-2018-09-preview-only'
 input-file:
 - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+```
+
+### Tag: package-2019-09-preview-only
+
+These settings apply only when `--tag=package-2019-09-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-preview-only'
+input-file:
+- Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2018-03-only
@@ -140,7 +275,7 @@ multi-api operation group for now.
 ``` yaml $(tag) == 'package-2017-07-only-extended'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-- Microsoft.ContainerService/stable/2017-09-30/location.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2017-08-only
@@ -192,7 +327,6 @@ input-file:
 
 # Code Generation
 
-
 ## Swagger to SDK
 
 This section describes what SDK should be generated by the automatic system.
@@ -224,7 +358,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ContainerService
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/ContainerService/Management.ContainerService/Generated
+  output-folder: $(csharp-sdks-folder)/containerservice/Microsoft.Azure.Management.ContainerService/src/Generated
   clear-output-folder: true
 ```
 
@@ -234,67 +368,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.containerservice
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
-title: ContainerServiceManagementClient
-description: "Container Service Client"
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-09-only
-  - tag: package-2017-08-only
-  - tag: package-2017-07
-```
-
-### Tag: package-2017-09-only and java
-
-These settings apply only when `--tag=package-2017-09-only` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-09-only' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerservice.v2017_09_30
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_09_30
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-08-only and java
-
-These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-08-only' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerservice.v2017_08_31
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_08_31
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-07 and java
-
-These settings apply only when `--tag=package-2017-07` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.containerservice.v2017_07_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_07_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
@@ -306,4 +380,46 @@ directive:
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
+```
+
+## Multi-API/Profile support for AutoRest v3 generators
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2017-09-30/location.json
+  - $(this-folder)/Microsoft.ContainerService/preview/2018-08-01-preview/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2018-03-31/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2017-08-31/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2016-09-30/containerService.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2016-03-30/containerService.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set,
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```

@@ -72,31 +72,31 @@
             }
           },
           "202": {
-            "description":"Accepted",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Disk"
             }
           }
         },
         "x-ms-examples": {
-            "Create an empty managed disk.": {
-                "$ref": "./examples/CreateAnEmptyManagedDisk.json"
-            },
-            "Create a managed disk from a platform image.": {
-                "$ref": "./examples/CreateAManagedDiskFromAPlatformImage.json"
-            },
-            "Create a managed disk from an existing managed disk in the same or different subscription.": {
-                "$ref": "./examples/CreateAManagedDiskFromAnExistingManagedDisk.json"
-            },
-            "Create a managed disk by importing an unmanaged blob from the same subscription.": {
-                "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json"
-            },
-            "Create a managed disk by importing an unmanaged blob from a different subscription.": {
-                "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromADifferentSubscription.json"
-            },
-            "Create a managed disk by copying a snapshot.": {
-                "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
-            }
+          "Create an empty managed disk.": {
+            "$ref": "./examples/CreateAnEmptyManagedDisk.json"
+          },
+          "Create a managed disk from a platform image.": {
+            "$ref": "./examples/CreateAManagedDiskFromAPlatformImage.json"
+          },
+          "Create a managed disk from an existing managed disk in the same or different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskFromAnExistingManagedDisk.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from the same subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+          },
+          "Create a managed disk by importing an unmanaged blob from a different subscription.": {
+            "$ref": "./examples/CreateAManagedDiskByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a managed disk by copying a snapshot.": {
+            "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
+          }
         },
         "x-ms-long-running-operation": true
       },
@@ -175,7 +175,7 @@
         },
         "x-ms-examples": {
           "Get information about a managed disk.": {
-              "$ref": "./examples/GetInformationAboutAManagedDisk.json"
+            "$ref": "./examples/GetInformationAboutAManagedDisk.json"
           }
         }
       },
@@ -241,7 +241,7 @@
         },
         "x-ms-examples": {
           "List all managed disks in a resource group.": {
-              "$ref": "./examples/ListManagedDisksInAResourceGroup.json"
+            "$ref": "./examples/ListManagedDisksInAResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -274,7 +274,7 @@
         },
         "x-ms-examples": {
           "List all managed disks in a subscription.": {
-              "$ref": "./examples/ListManagedDisksInASubscription.json"
+            "$ref": "./examples/ListManagedDisksInASubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -410,13 +410,13 @@
         },
         "x-ms-examples": {
           "Create a snapshot from an existing snapshot in the same or a different subscription.": {
-              "$ref": "./examples/CreateASnapshotFromAnExistingSnapshot.json"
+            "$ref": "./examples/CreateASnapshotFromAnExistingSnapshot.json"
           },
           "Create a snapshot by importing an unmanaged blob from the same subscription.": {
-              "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromTheSameSubscription.json"
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromTheSameSubscription.json"
           },
           "Create a snapshot by importing an unmanaged blob from a different subscription.": {
-              "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+            "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -496,7 +496,7 @@
         },
         "x-ms-examples": {
           "Get information about a snapshot.": {
-              "$ref": "./examples/GetInformationAboutASnapshot.json"
+            "$ref": "./examples/GetInformationAboutASnapshot.json"
           }
         }
       },
@@ -562,7 +562,7 @@
         },
         "x-ms-examples": {
           "List all snapshots in a resource group.": {
-              "$ref": "./examples/ListSnapshotsInAResourceGroup.json"
+            "$ref": "./examples/ListSnapshotsInAResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -595,7 +595,7 @@
         },
         "x-ms-examples": {
           "List all snapshots in a subscription.": {
-              "$ref": "./examples/ListSnapshotsInASubscription.json"
+            "$ref": "./examples/ListSnapshotsInASubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -733,11 +733,11 @@
           "$ref": "#/definitions/DiskSku"
         },
         "zones": {
-            "type": "array",
-            "items": {
-                "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "description": "The Logical zone list for Disk." 
+          "description": "The Logical zone list for Disk."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -877,14 +877,14 @@
           "description": "The disk provisioning state."
         },
         "diskIOPSReadWrite": {
-            "type":"integer",
-            "format": "int64",
-            "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes. For a description of the range of values you can set, see [Ultra SSD Managed Disk Offerings](https://docs.microsoft.com/azure/virtual-machines/windows/disks-ultra-ssd#ultra-ssd-managed-disk-offerings)."
         },
         "diskMBpsReadWrite": {
-            "type":"integer",
-            "format": "int32",
-            "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+          "type": "integer",
+          "format": "int32",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10. For a description of the range of values you can set, see [Ultra SSD Managed Disk Offerings](https://docs.microsoft.com/azure/virtual-machines/windows/disks-ultra-ssd#ultra-ssd-managed-disk-offerings)."
         }
       },
       "required": [
@@ -1020,14 +1020,14 @@
           "description": "Encryption settings for disk or snapshot"
         },
         "diskIOPSReadWrite": {
-          "type":"integer",
+          "type": "integer",
           "format": "int64",
           "description": "The number of IOPS allowed for this disk; only settable for UltraSSD disks. One operation can transfer between 4k and 256k bytes."
         },
         "diskMBpsReadWrite": {
-            "type":"integer",
-            "format": "int32",
-            "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+          "type": "integer",
+          "format": "int32",
+          "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
         }
       },
       "description": "Disk resource update properties."

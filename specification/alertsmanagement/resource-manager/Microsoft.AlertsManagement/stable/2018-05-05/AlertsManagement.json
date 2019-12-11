@@ -5,6 +5,7 @@
     "title": "Azure Alerts Management Service Resource Provider",
     "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -388,6 +389,9 @@
               "$ref": "#/definitions/errorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List": {
@@ -911,7 +915,6 @@
     },
     "errorResponse": {
       "description": "An error response from the service.",
-      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -920,7 +923,6 @@
     },
     "errorResponseBody": {
       "description": "Details of error response.",
-      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",

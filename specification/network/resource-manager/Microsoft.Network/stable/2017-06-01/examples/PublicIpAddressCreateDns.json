@@ -1,7 +1,7 @@
 {
-  "parameters" : {
-    "api-version" : "2017-06-01",
-    "subscriptionId" : "subid",
+  "parameters": {
+    "api-version": "2017-06-01",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "publicIpAddressName": "test-ip",
     "parameters": {
@@ -9,50 +9,51 @@
         "dnsSettings": {
           "domainNameLabel": "dnslbl"
         }
-      }
+      },
+      "location": "eastus"
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
-        "name" : "testDNS-ip",
-        "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
-        "location" : "westus",
-        "properties" : {
-          "provisioningState" : "Succeeded",
-          "publicIPAddressVersion" : "IPv4",
-          "publicIPAllocationMethod" : "Dynamic",
-          "idleTimeoutInMinutes" : 4,
-          "dnsSettings" : {
-            "domainNameLabel" : "dnslbl",
-            "fqdn" : "dnslbl.westus.cloudapp.azure.com"
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testDNS-ip",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic",
+          "idleTimeoutInMinutes": 4,
+          "dnsSettings": {
+            "domainNameLabel": "dnslbl",
+            "fqdn": "dnslbl.westus.cloudapp.azure.com"
           },
-          "ipConfiguration" : {
-            "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
           }
         },
-        "type" : "Microsoft.Network/publicIPAddresses"
+        "type": "Microsoft.Network/publicIPAddresses"
       }
     },
-    "201" : {
-      "body" : {
-        "name" : "testDNS-ip",
-        "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
-        "location" : "westus",
-        "properties" : {
-          "provisioningState" : "Succeeded",
-          "publicIPAddressVersion" : "IPv4",
-          "publicIPAllocationMethod" : "Dynamic",
-          "idleTimeoutInMinutes" : 4,
-          "dnsSettings" : {
-            "domainNameLabel" : "dnslbl",
-            "fqdn" : "dnslbl.westus.cloudapp.azure.com"
+    "201": {
+      "body": {
+        "name": "testDNS-ip",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "publicIPAddressVersion": "IPv4",
+          "publicIPAllocationMethod": "Dynamic",
+          "idleTimeoutInMinutes": 4,
+          "dnsSettings": {
+            "domainNameLabel": "dnslbl",
+            "fqdn": "dnslbl.westus.cloudapp.azure.com"
           },
-          "ipConfiguration" : {
-            "id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
+          "ipConfiguration": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testDNS649/ipConfigurations/ipconfig1"
           }
         },
-        "type" : "Microsoft.Network/publicIPAddresses"
+        "type": "Microsoft.Network/publicIPAddresses"
       }
     }
   }

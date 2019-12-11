@@ -15,9 +15,9 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.WebSites
-output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
+output-folder: $(csharp-sdks-folder)/websites/Microsoft.Azure.Management.WebSites/src/Generated
 ```
 
 ## Batch settings
@@ -31,11 +31,28 @@ batch:
 #For WebSite 2016-08-01, you use the below tag
   - tag: package-2016-09
     ApiVersionName: Api2016_08_01
+  - tag: package-2019-08
+    ApiVersionName: Api2019_08_01
 ```
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).WebSites
-output-folder: $(csharp-sdks-folder)/$(profile)/Websites/Management.Websites/Generated
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).WebSites
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websites/Generated
 batch:
   - tag: package-2018-03-01-hybrid-csharp
+```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).WebSites
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Websites/Management.Websites/Generated
+batch:
+  - tag: profile-hybrid-2019-03-01
 ```

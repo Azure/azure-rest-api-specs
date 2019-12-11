@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -100,9 +100,44 @@
           "type": "integer",
           "minimum": 1
         },
+        "dataFlowProperties": {
+          "description": "Data flow properties for managed integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeDataFlowProperties"
+        },
         "vNetProperties": {
           "description": "VNet properties for managed integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeVNetProperties"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "IntegrationRuntimeDataFlowProperties": {
+      "description": "Data flow properties for managed integration runtime.",
+      "type": "object",
+      "properties": {
+        "computeType": {
+          "description": "Compute type of the cluster which will execute data flow job.",
+          "type": "string",
+          "enum": [
+            "General",
+            "MemoryOptimized",
+            "ComputeOptimized"
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowComputeType",
+            "modelAsString": true
+          }
+        },
+        "coreCount": {
+          "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
+          "type": "integer"
+        },
+        "timeToLive": {
+          "description": "Time to live (in minutes) setting of the cluster which will execute data flow job.",
+          "type": "integer",
+          "minimum": 0
         }
       },
       "additionalProperties": {
@@ -120,6 +155,14 @@
         "subnet": {
           "description": "The name of the subnet this integration runtime will join.",
           "type": "string"
+        },
+        "publicIPs": {
+          "description": "Resource IDs of the public IP addresses that this integration runtime will use.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The ID of the public IP address."
+          }
         }
       },
       "additionalProperties": {
@@ -150,6 +193,10 @@
           "description": "Custom setup script properties for a managed dedicated integration runtime.",
           "$ref": "#/definitions/IntegrationRuntimeCustomSetupScriptProperties"
         },
+        "dataProxyProperties": {
+          "description": "Data proxy properties for a managed dedicated integration runtime.",
+          "$ref": "#/definitions/IntegrationRuntimeDataProxyProperties"
+        },
         "edition": {
           "description": "The edition for the SSIS Integration Runtime",
           "type": "string",
@@ -160,6 +207,13 @@
           "x-ms-enum": {
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
+          }
+        },
+        "expressCustomSetupProperties": {
+          "description": "Custom setup without script properties for a SSIS integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSetupBase"
           }
         }
       },
@@ -215,6 +269,175 @@
         "sasToken": {
           "description": "The SAS token of the Azure blob container.",
           "$ref": "../datafactory.json#/definitions/SecureString"
+        }
+      }
+    },
+    "IntegrationRuntimeDataProxyProperties": {
+      "description": "Data proxy properties for a managed dedicated integration runtime.",
+      "type": "object",
+      "properties": {
+        "connectVia": {
+          "description": "The self-hosted integration runtime reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "stagingLinkedService": {
+          "description": "The staging linked service reference.",
+          "$ref": "#/definitions/EntityReference"
+        },
+        "path": {
+          "description": "The path to contain the staged data in the Blob storage.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomSetupBase": {
+      "description": "The base definition of the custom setup.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "The type of custom setup.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CmdkeySetup": {
+      "description": "The custom setup of running cmdkey commands.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Cmdkey command custom setup type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CmdkeySetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CmdkeySetupTypeProperties": {
+      "description": "Cmdkey command custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "targetName": {
+          "description": "The server name of data source access.",
+          "type": "object"
+        },
+        "userName": {
+          "description": "The user name of data source access.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password of data source access.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "targetName",
+        "userName",
+        "password"
+      ]
+    },
+    "EnvironmentVariableSetup": {
+      "description": "The custom setup of setting environment variable.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Add environment variable type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentVariableSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "EnvironmentVariableSetupTypeProperties": {
+      "description": "Environment variable custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "description": "The name of the environment variable.",
+          "type": "string"
+        },
+        "variableValue": {
+          "description": "The value of the environment variable.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "variableName",
+        "variableValue"
+      ]
+    },
+    "ComponentSetup": {
+      "description": "The custom setup of installing 3rd party components.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install 3rd party component type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LicensedComponentSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LicensedComponentSetupTypeProperties": {
+      "description": "Installation of licensed component setup type properties.",
+      "type": "object",
+      "properties": {
+        "componentName": {
+          "description": "The name of the 3rd party component.",
+          "type": "string"
+        },
+        "licenseKey": {
+          "description": "The license key to activate the component.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "componentName"
+      ]
+    },
+    "EntityReference": {
+      "description": "The entity reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of this referenced entity.",
+          "type": "string",
+          "enum": [
+            "IntegrationRuntimeReference",
+            "LinkedServiceReference"
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeEntityReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "The name of this referenced entity.",
+          "type": "string"
         }
       }
     },
@@ -318,7 +541,10 @@
       },
       "additionalProperties": {
         "type": "object"
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "IntegrationRuntimeState": {
       "description": "The state of integration runtime.",
@@ -637,7 +863,6 @@
     "IntegrationRuntimeAutoUpdate": {
       "description": "The state of integration runtime auto update.",
       "type": "string",
-      "readOnly": true,
       "enum": [
         "On",
         "Off"
@@ -996,7 +1221,10 @@
           "type": "string",
           "description": "Metadata description."
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "SsisObjectMetadataType": {
       "description": "The type of SSIS object metadata.",
@@ -1010,6 +1238,223 @@
       "x-ms-enum": {
         "name": "SsisObjectMetadataType",
         "modelAsString": true
+      }
+    },
+    "SsisFolder": {
+      "x-ms-discriminator-value": "Folder",
+      "type": "object",
+      "description": "Ssis folder.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ]
+    },
+    "SsisProject": {
+      "x-ms-discriminator-value": "Project",
+      "type": "object",
+      "description": "Ssis project.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains project."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project version."
+        },
+        "environmentRefs": {
+          "type": "array",
+          "description": "Environment reference in project",
+          "items": {
+            "$ref": "#/definitions/SsisEnvironmentReference"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in project",
+          "items": {
+            "$ref": "#/definitions/SsisParameter"
+          }
+        }
+      }
+    },
+    "SsisPackage": {
+      "x-ms-discriminator-value": "Package",
+      "type": "object",
+      "description": "Ssis Package.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains package."
+        },
+        "projectVersion": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project version which contains package."
+        },
+        "projectId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project id which contains package."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in package",
+          "items": {
+            "$ref": "#/definitions/SsisParameter"
+          }
+        }
+      }
+    },
+    "SsisEnvironment": {
+      "x-ms-discriminator-value": "Environment",
+      "type": "object",
+      "description": "Ssis environment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains environment."
+        },
+        "variables": {
+          "type": "array",
+          "description": "Variable in environment",
+          "items": {
+            "$ref": "#/definitions/SsisVariable"
+          }
+        }
+      }
+    },
+    "SsisParameter": {
+      "type": "object",
+      "description": "Ssis parameter.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Parameter id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Parameter description."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether parameter is required."
+        },
+        "sensitive": {
+          "type": "boolean",
+          "description": "Whether parameter is sensitive."
+        },
+        "designDefaultValue": {
+          "type": "string",
+          "description": "Design default value of parameter."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of parameter."
+        },
+        "sensitiveDefaultValue": {
+          "type": "string",
+          "description": "Default sensitive value of parameter."
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Parameter value type."
+        },
+        "valueSet": {
+          "type": "boolean",
+          "description": "Parameter value set."
+        },
+        "variable": {
+          "type": "string",
+          "description": "Parameter reference variable."
+        }
+      }
+    },
+    "SsisVariable": {
+      "type": "object",
+      "description": "Ssis variable.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Variable id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Variable name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Variable description."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Variable type."
+        },
+        "sensitive": {
+          "type": "boolean",
+          "description": "Whether variable is sensitive."
+        },
+        "value": {
+          "type": "string",
+          "description": "Variable value."
+        },
+        "sensitiveValue": {
+          "type": "string",
+          "description": "Variable sensitive value."
+        }
+      }
+    },
+    "SsisEnvironmentReference": {
+      "type": "object",
+      "description": "Ssis environment reference.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Environment reference id."
+        },
+        "environmentFolderName": {
+          "type": "string",
+          "description": "Environment folder name."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Environment name."
+        },
+        "referenceType": {
+          "type": "string",
+          "description": "Reference type"
+        }
       }
     }
   }

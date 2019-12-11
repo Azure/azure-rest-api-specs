@@ -27,6 +27,76 @@
     ]
   },
   "paths": {
+    "/endpointSettings": {
+      "get": {
+        "summary": "Gets endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_GetSettings",
+        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpoint settings info in it.",
+            "schema": {
+              "$ref": "#/definitions/EndpointSettingsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetEpSettings.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EndpointKeys"
+        ],
+        "summary": "Updates endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_UpdateSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointSettingsPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpointSettings update status.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetEpSettings.json"
+          }
+        }
+      }
+    },
     "/endpointkeys": {
       "get": {
         "summary": "Gets endpoint keys for an endpoint",
@@ -557,6 +627,16 @@
               "$ref": "#/definitions/UpdateKbContentsDTO"
             }
           ]
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. The value set during KB creation will be used if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
@@ -622,6 +702,14 @@
               "$ref": "#/definitions/UpdateMetadataDTO"
             }
           ]
+        },
+        "context": {
+          "description": "Context associated with Qna to be updated.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateContextDTO"
+            }
+          ]
         }
       }
     },
@@ -668,6 +756,31 @@
           "items": {
             "$ref": "#/definitions/MetadataDTO"
           }
+        }
+      }
+    },
+    "UpdateContextDTO": {
+      "type": "object",
+      "description": "Update Body schema to represent context to be updated",
+      "properties": {
+        "promptsToDelete": {
+          "type": "array",
+          "description": "List of prompts associated with qna to be deleted",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "promptsToAdd": {
+          "type": "array",
+          "description": "List of prompts to be added to the qna.",
+          "items": {
+            "$ref": "#/definitions/PromptDTO"
+          }
+        },
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not.\ntrue - Do not include this QnA as search result for queries without context\nfalse - ignores context and includes this QnA in search result"
         }
       }
     },
@@ -725,18 +838,6 @@
         }
       }
     },
-    "KnowledgebaseEnvironment": {
-      "type": "string",
-      "description": "Enumeration of knowledgebase environments.",
-      "x-ms-enum": {
-        "name": "KnowledgebaseEnvironmentType",
-        "modelAsString": true
-      },
-      "enum": [
-        "Prod",
-        "Test"
-      ]
-    },
     "QnADocumentsDTO": {
       "type": "object",
       "description": "List of QnADTO",
@@ -788,6 +889,16 @@
           "items": {
             "$ref": "#/definitions/FileDTO"
           }
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. Value to be considered False if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction":{
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
@@ -870,6 +981,61 @@
           "items": {
             "$ref": "#/definitions/MetadataDTO"
           }
+        },
+        "context": {
+          "description": "Context of a QnA",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ContextDTO"
+            }
+          ]
+        }
+      }
+    },
+    "ContextDTO": {
+      "type": "object",
+      "description": "Context associated with Qna.",
+      "properties": {
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not.\ntrue - Do not include this QnA as search result for queries without context\nfalse - ignores context and includes this QnA in search result"
+        },
+        "prompts": {
+          "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/PromptDTO"
+          }
+        }
+      }
+    },
+    "PromptDTO": {
+      "type": "object",
+      "description": "Prompt for an answer.",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "description": "Index of the prompt - used in ordering of the prompts",
+          "format": "int32"
+        },
+        "qnaId": {
+          "type": "integer",
+          "description": "Qna id corresponding to the prompt - if QnaId is present, QnADTO object is ignored.",
+          "format": "int32"
+        },
+        "qna": {
+          "description": "QnADTO - Either QnaId or QnADTO needs to be present in a PromptDTO object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QnADTO"
+            }
+          ]
+        },
+        "displayText": {
+          "type": "string",
+          "description": "Text displayed to represent a follow up question prompt",
+          "maxLength": 200
         }
       }
     },
@@ -1095,6 +1261,32 @@
         }
       }
     },
+    "EndpointSettingsDTO": {
+      "type": "object",
+      "description": "Endpoint settings.",
+      "additionalProperties": false,
+      "properties": {
+        "activeLearning": {
+          "description": "Active Learning settings of the endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ActiveLearningSettingsDTO"
+            }
+          ]
+        }
+      }
+    },
+    "ActiveLearningSettingsDTO": {
+      "type": "object",
+      "description": "Active Learning settings of the endpoint.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "string",
+          "description": "True/False string providing Active Learning"
+        }
+      }
+    },
     "WordAlterationsDTO": {
       "type": "object",
       "description": "Collection of word alterations.",
@@ -1162,9 +1354,6 @@
       "name": "environment",
       "in": "path",
       "required": true,
-      "x-schema": {
-        "$ref": "#/definitions/KnowledgebaseEnvironment"
-      },
       "x-nullable": false,
       "description": "Specifies whether environment is Test or Prod.",
       "x-ms-enum": {
@@ -1256,6 +1445,17 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "EndpointSettingsPayload": {
+      "name": "endpointSettingsPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EndpointSettingsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
     }
   }
 }

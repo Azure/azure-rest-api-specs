@@ -7,7 +7,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-storageimportexport"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-storageimportexport"
+  output-folder: "$(typescript-sdks-folder)/sdk/storageimportexport/arm-storageimportexport"
+  clear-output-folder: true
   override-client-name: StorageImportExportManagementClient
   generate-metadata: true
 ```

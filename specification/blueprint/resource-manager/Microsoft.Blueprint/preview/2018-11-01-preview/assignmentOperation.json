@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BlueprintClient",
-    "description": "Azure Blueprint Client.",
+    "description": "Azure Blueprints Client provides access to blueprint definitions, assignments, and artifacts, and related blueprint operations.",
     "version": "2018-11-01-preview"
   },
   "host": "management.azure.com",
@@ -40,7 +40,7 @@
           "AssignmentOperations"
         ],
         "operationId": "AssignmentOperations_List",
-        "description": "List Operations for given blueprint assignment within a subscription.",
+        "description": "List operations for given blueprint assignment within a subscription.",
         "x-ms-examples": {
           "Assignment": {
             "$ref": "./examples/BlueprintAssignmentOperation_List.json"
@@ -59,7 +59,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - all Blueprint assignment Operation retrieved.",
+            "description": "OK -- all blueprint assignment operations retrieved.",
             "schema": {
               "$ref": "#/definitions/AssignmentOperationList"
             }
@@ -76,7 +76,7 @@
           "AssignmentOperations"
         ],
         "operationId": "AssignmentOperations_Get",
-        "description": "Get a Blueprint assignment operation.",
+        "description": "Get a blueprint assignment operation.",
         "x-ms-examples": {
           "Assignment": {
             "$ref": "./examples/BlueprintAssignmentOperation_Get.json"
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Blueprint assignment retrieved.",
+            "description": "OK -- blueprint assignment operation retrieved.",
             "schema": {
               "$ref": "#/definitions/AssignmentOperation"
             }
@@ -110,19 +110,21 @@
   "definitions": {
     "AssignmentOperation": {
       "type": "object",
-      "description": "Represents underlying deployment detail for each update to the assignment.",
+      "description": "Represents underlying deployment detail for each update to the blueprint assignment.",
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ],
       "properties": {
         "properties": {
-          "description": "Properties for AssignmentOperation",
+          "description": "Properties for AssignmentOperation.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AssignmentOperationProperties"
         }
       }
     },
-    "AssignmentOperationList":{
+    "AssignmentOperationList": {
       "type": "object",
       "description": "List of AssignmentOperation.",
       "properties": {
@@ -139,7 +141,6 @@
           "description": "Link to the next page of results."
         }
       }
-
     },
     "AssignmentOperationProperties": {
       "type": "object",
@@ -147,15 +148,15 @@
       "properties": {
         "blueprintVersion": {
           "type": "string",
-          "description": "The blueprint version used for the assignment operation."
+          "description": "The published version of the blueprint definition used for the blueprint assignment operation."
         },
         "assignmentState": {
           "type": "string",
-          "description": "State of this assignment operation."
+          "description": "State of this blueprint assignment operation."
         },
         "timeCreated": {
           "type": "string",
-          "description": "Create time of this Assignment Operation."
+          "description": "Create time of this blueprint assignment operation."
         },
         "timeStarted": {
           "type": "string",
@@ -167,7 +168,7 @@
         },
         "deployments": {
           "type": "array",
-          "description": "List of jobs in this assignment operation.",
+          "description": "List of jobs in this blueprint assignment operation.",
           "items": {
             "$ref": "#/definitions/AssignmentDeploymentJob"
           }
@@ -176,11 +177,11 @@
     },
     "AssignmentDeploymentJob": {
       "type": "object",
-      "description": "Represents individual job in given assignment operation.",
+      "description": "Represents individual job in given blueprint assignment operation.",
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Kind of the job."
+          "description": "Kind of job."
         },
         "action": {
           "type": "string",
@@ -242,10 +243,11 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ]
     },
-
     "AzureResourceBase": {
       "description": "Common properties for all Azure resources.",
       "type": "object",
@@ -280,7 +282,6 @@
           "type": "string",
           "description": "Error message."
         }
-
       }
     }
   },
@@ -290,7 +291,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -300,7 +301,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "name of the assignment."
+      "description": "Name of the blueprint assignment."
     },
     "AssignmentOperationNameParameter": {
       "name": "assignmentOperationName",
@@ -308,7 +309,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Name of the assignment operation."
+      "description": "Name of the blueprint assignment operation."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -316,7 +317,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client",
-      "description": "Client Api Version."
+      "description": "Client API Version."
     }
   }
 }

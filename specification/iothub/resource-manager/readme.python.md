@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.iothub
   package-name: azure-mgmt-iothub
-  package-version: 0.6.0
+  package-version: 0.8.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothub/azure/mgmt/iothub
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothub
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub
 ```

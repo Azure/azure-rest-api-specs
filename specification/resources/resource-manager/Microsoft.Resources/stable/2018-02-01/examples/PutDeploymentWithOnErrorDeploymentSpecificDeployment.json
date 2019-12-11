@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
-    "deploymentName": "{deploymentName}",
+    "deploymentName": "exampleDeploymentName",
     "api-version": "2018-02-01",
     "parameters": {
       "properties": {
@@ -17,14 +17,30 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/{deploymentName}",
-        "name": "{deploymentName}",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName",
+        "name": "exampleDeploymentName",
         "properties": {
           "provisioningState": "Accepted",
           "correlationId": "{correlationId}",
-          "timeStamp": "{timeStamp}",
+          "timestamp": "2018-02-01T00:00:00.0000000Z",
+          "mode": "Complete",
+          "onErrorDeployment": {
+            "type": "SpecificDeployment",
+            "deploymentName": "{nameOfDeploymentToUse}"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/myResourceGroup/providers/Microsoft.Resources/deployments/exampleDeploymentName",
+        "name": "exampleDeploymentName",
+        "properties": {
+          "provisioningState": "Accepted",
+          "correlationId": "{correlationId}",
+          "timestamp": "2018-02-01T00:00:00.0000000Z",
           "mode": "Complete",
           "onErrorDeployment": {
             "type": "SpecificDeployment",
