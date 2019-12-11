@@ -3,6 +3,7 @@
     action: sendEmailToAssignee
     repoWhitelist:
       - Azure/azure-rest-api-specs
+    scope: pull_request
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||(DoNotMerge&&(ARMSignedOff||Approved)))"
       limit: 48h
@@ -15,6 +16,7 @@
     action: sendEmailToAssignee
     repoWhitelist:
       - Azure/azure-rest-api-specs-pr
+    scope: pull_request
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||Approved-OkToMerge||(DoNotMerge&&(ARMSignedOff||Approved)))"
       limit: 48h
@@ -27,6 +29,7 @@
     action: sendEmail
     repoWhitelist:
       - Azure/azure-rest-api-specs
+    scope: pull_request
     args:
       booleanFilterExpression: "(WaitForARMFeedback&&!ARMSignedOff&&!ARMChangesRequested&&!ARMReviewInProgress)"
       limit: 3d
