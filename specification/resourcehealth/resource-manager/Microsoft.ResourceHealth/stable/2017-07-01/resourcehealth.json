@@ -396,7 +396,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceHealth/emergingissues": {
+    "/providers/Microsoft.ResourceHealth/emergingIssues": {
       "get": {
         "tags": [
           "EmergingIssues"
@@ -412,7 +412,7 @@
           "200": {
             "description": "The body contains the list of azure emerging issues",
             "schema": {
-              "$ref": "#/definitions/emergingissuesGetResult"
+              "$ref": "#/definitions/emergingIssuesGetResult"
             }
           },
           "default": {
@@ -774,12 +774,12 @@
         }
       }
     },
-    "emergingissuesGetResult": {
+    "emergingIssuesGetResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/emergingissue"
+            "$ref": "#/definitions/emergingIssue"
           },
           "description": "The list of emerging issues."
         }
@@ -787,9 +787,9 @@
       "required": [
         "value"
       ],
-      "description": "The Get EmergingIssues operation response."
+      "description": "The Get Emerging Issues operation response."
     },
-    "emergingissue": {
+    "emergingIssue": {
       "type": "object",
       "description": "on going emerging issue from azure status",
       "properties": {
