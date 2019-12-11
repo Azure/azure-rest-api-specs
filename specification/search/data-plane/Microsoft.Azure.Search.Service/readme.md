@@ -209,16 +209,6 @@ directive:
     path: "$.definitions.CustomAnalyzer.properties.tokenFilters.items"
 - change-object-ref-to-string:
     path: "$.definitions.CustomAnalyzer.properties.charFilters.items"
-
-# Throw exception for language analyzers passed into setIndexAnalyzer and setSearchAnalyzer in Field
-- from: 
-  - Field.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(this.indexAnalyzer = indexAnalyzer;)/g, "if (indexAnalyzer != null && (indexAnalyzer.endsWith(\".lucene\") || indexAnalyzer.endsWith(\".microsoft\"))) {\n            throw new IllegalArgumentException(\"Only non-language analyzer can be used as index analyzer.\");\n        } \n        this.indexAnalyzer = indexAnalyzer;")
-    .replace(/(this.searchAnalyzer = searchAnalyzer;)/g, "if (searchAnalyzer != null && (searchAnalyzer.endsWith(\".lucene\") || searchAnalyzer.endsWith(\".microsoft\"))) {\n            throw new IllegalArgumentException(\"Only non-language analyzer can be used as search analyzer.\");\n        } \n        this.searchAnalyzer = searchAnalyzer;")
-  reason: Only non-language analyzers can be used as search analyzer and index analyzer.
 ```
 
 ## C# 
