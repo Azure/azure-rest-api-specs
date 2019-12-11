@@ -130,17 +130,13 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "name": "patch",
+            "name": "parameters",
             "in": "body",
-            "description": "The payload that is used to patch the billing account.",
             "required": true,
             "schema": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JsonPatchOperation"
-              }
-            }
+              "$ref": "#/definitions/BillingAccountUpdateRequest"
+            },
+            "description": "Request parameters supplied to the update billing account operation."
           }
         ],
         "responses": {
@@ -465,7 +461,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "BillingProfiles"
         ],
@@ -548,17 +544,13 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
-            "name": "patch",
+            "name": "parameters",
             "in": "body",
-            "description": "The payload that is used to patch the billing profile.",
             "required": true,
             "schema": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JsonPatchOperation"
-              }
-            }
+              "$ref": "#/definitions/BillingProfile"
+            },
+            "description": "Request parameters supplied to the update billing profile operation."
           }
         ],
         "responses": {
@@ -726,7 +718,7 @@
           }
         }
       },
-      "post": {
+      "put": {
         "tags": [
           "InvoiceSections"
         ],
@@ -815,17 +807,13 @@
             "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "name": "patch",
+            "name": "parameters",
             "in": "body",
-            "description": "The payload that is used to patch an invoice section.",
             "required": true,
             "schema": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JsonPatchOperation"
-              }
-            }
+              "$ref": "#/definitions/InvoiceSection"
+            },
+            "description": "Request parameters supplied to the Create InvoiceSection operation."
           }
         ],
         "responses": {
@@ -5822,28 +5810,6 @@
         }
       }
     },
-    "JsonPatchOperation": {
-      "description": "The Json Patch definition.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The value.",
-          "type": "object"
-        },
-        "path": {
-          "description": "The target location.",
-          "type": "string"
-        },
-        "op": {
-          "description": "The operation.",
-          "type": "string"
-        },
-        "from": {
-          "description": "The source location.",
-          "type": "string"
-        }
-      }
-    },
     "AzurePlan": {
       "description": "Details about the azure plan.",
       "properties": {
@@ -6026,7 +5992,7 @@
           "format": "date-time",
           "readOnly": true
         },
-        "invoiceType": {
+        "invoiceType" : {
           "description": "Invoice type.",
           "enum": [
             "AzureService",
