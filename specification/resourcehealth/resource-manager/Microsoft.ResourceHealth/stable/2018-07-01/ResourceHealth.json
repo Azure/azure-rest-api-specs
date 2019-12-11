@@ -343,6 +343,39 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingissues": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_Get",
+        "description": "Gets Azure services' emerging issues",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of azure emerging issues",
+            "schema": {
+              "$ref": "#/definitions/emergingissuesGetResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -907,6 +940,156 @@
               "description": "Type of Event."
             }
           }
+        }
+      }
+    },
+    "statusBanner": {
+      "description": "banner type of emerging issue",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "the banner title."
+        },
+        "message": {
+          "type": "string",
+          "description": "the details of banner."
+        },
+        "cloud": {
+          "type": "string",
+          "description": "the cloud type of this banner."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "the last time modified on this banner.",
+          "format": "date-time"
+        }
+      }
+    },
+    "impactedRegion": {
+      "description": "object of impacted region",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the impacted region slug id."
+        },
+        "name": {
+          "type": "string",
+          "description": "the impacted region name."
+        }
+      }
+    },
+    "emergingIssueImpact": {
+      "type": "object",
+      "description": "object of impacted region",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "the impacted region slug id."
+        },
+        "name": {
+          "type": "string",
+          "description": "the impacted region name."
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/impactedRegion"
+          },
+          "description": "The list of emerging issues impacted regions."
+        }
+      }
+    },
+    "statusActiveEvent": {
+      "description": "active event type of emerging issue",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "the active event title."
+        },
+        "description": {
+          "type": "string",
+          "description": "the details of active event."
+        },
+        "trackingId": {
+          "type": "string",
+          "description": "the tracking id of this active event."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "the start time modified on this active event.",
+          "format": "date-time"
+        },
+        "cloud": {
+          "type": "string",
+          "description": "the cloud type of this active event."
+        },
+        "severity": {
+          "type": "string",
+          "description": "the severity level of this active event."
+        },
+        "stage": {
+          "type": "string",
+          "description": "the stage of this active event."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "the boolean value of this active event if published or not."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "description": "the last time modified on this banner.",
+          "format": "date-time"
+        },
+        "impact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssueImpact"
+          },
+          "description": "The list of emerging issues impacts."
+        }
+      }
+    },
+    "emergingissuesGetResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingissue"
+          },
+          "description": "The list of emerging issues."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Get EmergingIssues operation response."
+    },
+    "emergingissue": {
+      "type": "object",
+      "description": "on going emerging issue from azure status",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Correlation id for emerging issue."
+        },
+        "refreshTimestamp": {
+          "type": "string",
+          "description": "Timestamp for when last time refreshed for ongoing emerging issue.",
+          "format": "date-time"
+        },
+        "statusBanners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusBanner"
+          },
+          "description": "The list of emerging issues of banner type."
+        },
+        "statusActiveEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/statusActiveEvent"
+          },
+          "description": "The list of emerging issues of active event type."
         }
       }
     },

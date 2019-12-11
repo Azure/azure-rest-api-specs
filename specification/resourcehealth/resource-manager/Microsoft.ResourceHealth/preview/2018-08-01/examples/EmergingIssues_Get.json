@@ -1,0 +1,84 @@
+{
+    "parameters": {
+      "api-version": "2018-07-01-preview"
+    },
+    "responses": {
+      "200": {
+        "body": {
+            "value": [
+                {
+                    "refreshTimestamp": "12/10/2019 6:40:27 PM",
+                    "id": "B06FAF47-49DB-4282-9EB3-4ECC755C4664",
+                    "statusBanners": [
+                        {
+                            "title": "Automatic updates to the dial tone page from ACM - banner",
+                            "message": "Testing backup site",
+                            "cloud": "Public",
+                            "lastModifiedTime": "12/05/2019 21:59:10"
+                        },
+                        {
+                            "title": "Storage - West Europe",
+                            "message": "<span style=\"color: #323237; font-family: &quot;Segoe UI&quot;, SegoeUI, &quot;Segoe WP&quot;, Tahoma, Arial, sans-serif; font-size: 16px; background-color: #ffffff\">A subset of customers using Storage in West Europe experienced service availability issues. In addition, resources with dependencies on the impacted storage scale units may have experienced downstream impact in the form of availability issues, connection failures, or high latency. Engineers are investigating the root cause.</span>",
+                            "cloud": "Public",
+                            "lastModifiedTime": "11/28/2019 00:21:39"
+                        }
+                    ],
+                    "statusActiveEvents": [
+                        {
+                            "title": "Automatic updates to the dial tone page from ACM - SHD event",
+                            "description": "Virtual Machines case",
+                            "trackingId": "KTTK-TZ8",
+                            "startTime": "10/15/2019 10:30:00",
+                            "cloud": "Public",
+                            "severity": "Information",
+                            "stage": "Active",
+                            "impact": [
+                                {
+                                    "id": "virtual-machines",
+                                    "name": "Virtual Machines",
+                                    "regions": [
+                                        {
+                                            "id": "us-central",
+                                            "name": "Central US"
+                                        },
+                                        {
+                                            "id": "us-east",
+                                            "name": "East US"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "published": true,
+                            "lastModifiedTime": "12/05/2019 21:58:32"
+                        },
+                        {
+                            "title": "Azure SQL Database - West Europe",
+                            "description": "All Azure SQL service management requests (create, update, delete, etc.) are serviced through the SQL Control Plane infrastructure. Engineers determined that during this issue, the control plane service became unhealthy after receiving a significant increase in internally generated operations and reaching an operational threshold. This led to service management requests becoming unable to complete, which in-turn resulted in timeouts and throttling. Subsequent investigation by engineers determined this issue was due service requests from an internal Azure group that triggered a bug which caused an excessive number of internally generated operations.",
+                            "trackingId": "4KHK-LS8",
+                            "startTime": "12/05/2019 00:00:00",
+                            "cloud": "Public",
+                            "severity": "Error",
+                            "stage": "Active",
+                            "impact": [
+                                {
+                                    "id": "sql-database",
+                                    "name": "SQL Database",
+                                    "regions": [
+                                        {
+                                            "id": "europe-west",
+                                            "name": "West Europe"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "published": true,
+                            "lastModifiedTime": "12/05/2019 23:56:45"
+                        }
+                    ]
+                }
+            ]
+        }
+      }
+    }
+  }
+  
