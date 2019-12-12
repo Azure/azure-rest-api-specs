@@ -109,7 +109,7 @@
           "EmergingIssues"
         ],
         "operationId": "EmergingIssues_Get",
-        "description": "Gets Azure services' emerging issues",
+        "description": "Gets Azure services' emerging issues.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -117,7 +117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of azure emerging issues",
+            "description": "The body contains the list of azure emerging issues.",
             "schema": {
               "$ref": "#/definitions/emergingIssuesGetResult"
             }
@@ -1129,100 +1129,100 @@
       }
     },
     "statusBanner": {
-      "description": "banner type of emerging issue",
+      "description": "Banner type of emerging issue.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "the banner title."
+          "description": "The banner title."
         },
         "message": {
           "type": "string",
-          "description": "the details of banner."
+          "description": "The details of banner."
         },
         "cloud": {
           "type": "string",
-          "description": "the cloud type of this banner."
+          "description": "The cloud type of this banner, eg. Public, Mooncake."
         },
         "lastModifiedTime": {
           "type": "string",
-          "description": "the last time modified on this banner.",
+          "description": "The last time modified on this banner.",
           "format": "date-time"
         }
       }
     },
     "impactedRegion": {
-      "description": "object of impacted region",
+      "description": "Object of impacted region.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "the impacted region slug id."
+          "description": "The impacted region slug id."
         },
         "name": {
           "type": "string",
-          "description": "the impacted region name."
+          "description": "The impacted region name."
         }
       }
     },
     "emergingIssueImpact": {
       "type": "object",
-      "description": "object of impacted region",
+      "description": "Object of impacted region.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "the impacted region slug id."
+          "description": "The impacted service slug id."
         },
         "name": {
           "type": "string",
-          "description": "the impacted region name."
+          "description": "The impacted service name."
         },
         "regions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/impactedRegion"
           },
-          "description": "The list of emerging issues impacted regions."
+          "description": "The list of impacted regions for corresponding emerging issues."
         }
       }
     },
     "statusActiveEvent": {
-      "description": "active event type of emerging issue",
+      "description": "Active event type of emerging issue.",
       "properties": {
         "title": {
           "type": "string",
-          "description": "the active event title."
+          "description": "The active event title."
         },
         "description": {
           "type": "string",
-          "description": "the details of active event."
+          "description": "The details of active event."
         },
         "trackingId": {
           "type": "string",
-          "description": "the tracking id of this active event."
+          "description": "The tracking id of this active event."
         },
         "startTime": {
           "type": "string",
-          "description": "the start time modified on this active event.",
+          "description": "The impact start time on this active event.",
           "format": "date-time"
         },
         "cloud": {
           "type": "string",
-          "description": "the cloud type of this active event."
+          "description": "The cloud type of this active event."
         },
         "severity": {
           "type": "string",
-          "description": "the severity level of this active event."
+          "description": "The severity level of this active event."
         },
         "stage": {
           "type": "string",
-          "description": "the stage of this active event."
+          "description": "The stage of this active event, eg. Active."
         },
         "published": {
           "type": "boolean",
-          "description": "the boolean value of this active event if published or not."
+          "description": "The boolean value of this active event if published or not."
         },
         "lastModifiedTime": {
           "type": "string",
-          "description": "the last time modified on this banner.",
+          "description": "The last time modified on this banner.",
           "format": "date-time"
         },
         "impact": {
@@ -1251,7 +1251,7 @@
     },
     "emergingIssue": {
       "type": "object",
-      "description": "on going emerging issue from azure status",
+      "description": "On-going emerging issue from azure status.",
       "properties": {
         "id": {
           "type": "string",
