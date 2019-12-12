@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
     "accountName": "contosomedia",
-    "contentKeyPolicyName": "PolicyCreatedWithWidevineOptionAndJwtTokenRestriction",
+    "contentKeyPolicyName": "PolicyWithWidevineOptionAndJwtTokenRestriction",
     "api-version": "2018-07-01",
     "parameters": {
       "properties": {
@@ -38,19 +38,19 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "name": "PolicyCreatedWithWidevineOptionAndJwtTokenRestriction",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyCreatedWithWidevineOptionAndJwtTokenRestriction",
+        "name": "PolicyWithWidevineOptionAndJwtTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithWidevineOptionAndJwtTokenRestriction",
         "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
         "properties": {
-          "policyId": "916d5512-6f90-49be-ad38-913814c14f14",
-          "created": "2019-12-11T23:41:34.157Z",
-          "lastModified": "2019-12-11T23:41:34.157Z",
+          "policyId": "77df112b-1314-4f2a-9d3b-b331093114f3",
+          "created": "2019-11-25T21:18:35.477Z",
+          "lastModified": "2019-11-25T21:18:35.477Z",
           "description": "ArmPolicyDescription",
           "options": [
             {
-              "policyOptionId": "338df655-57dd-4d9a-a355-6fab6d4a4b67",
+              "policyOptionId": "6af12a8f-1289-4410-b7bc-256f8f304544",
               "name": "widevineoption",
               "configuration": {
                 "@odata.type": "#Microsoft.Media.ContentKeyPolicyWidevineConfiguration",
@@ -61,14 +61,11 @@
                 "issuer": "urn:issuer",
                 "audience": "urn:audience",
                 "primaryVerificationKey": {
-                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey",
-                  "exponent": null,
-                  "modulus": null
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicyRsaTokenKey"
                 },
                 "alternateVerificationKeys": [
                   {
-                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                    "keyValue": null
+                    "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey"
                   }
                 ],
                 "requiredClaims": [],
