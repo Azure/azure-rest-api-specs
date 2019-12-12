@@ -319,6 +319,68 @@
             "description": "no content"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "modify a private cloud",
+        "operationId": "PrivateCloud_Modify",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudRequest"
+            },
+            "x-exportParamName": "Parameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
       }
     }
   },
