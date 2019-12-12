@@ -257,6 +257,82 @@
                     }
                 }
             }
+        },
+        "/certs": {
+            "get": {
+                "tags": [
+                    "attestation"
+                ],
+                "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
+                "description": "Retrieves attestation signing keys in use by the attestation service",
+                "operationId": "Certs_Get",
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Error processing the request",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Reset Policy": {         
+                      "$ref": "./examples/Get_Certs.json"         
+                    }
+                }
+            }
+        },
+        "/.well-known/openid-configuration": {
+            "get": {
+                "tags": [
+                    "attestation"
+                ],
+                "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
+                "description": "Retrieves metadata about the attestation signing keys in use by the  attestation service",
+                "operationId": "MetadataConfiguration_Get",
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Error processing the request",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Reset Policy": {         
+                      "$ref": "./examples/Get_MetadataConfiguration.json"         
+                    }
+                }
+            }
         }
     },
     "definitions": {
