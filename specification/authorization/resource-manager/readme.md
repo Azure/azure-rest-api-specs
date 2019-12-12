@@ -35,20 +35,21 @@ tag: package-preview-2018-10
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
-    #where:
-    #  -   $.paths["/providers/Microsoft.Authorization/operations"]
-
+  - suppress: EnumInsteadOfBoolean
+    from: authorization-RoleAssignmentsCalls.json
+    where: $.definitions.RoleAssignmentFilter.properties.canDelegate
+    reason: zzxcadv
 ```
-
 
 ### Tag: package-preview-2018-10
 
 These settings apply only when `--tag=package-preview-2018-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2018-10'
+``` yaml $(tag) == 'package-preview-2018-10'
 input-file:
   - Microsoft.Authorization/preview/2018-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
+
 ### Tag: package-2015-07-01
 
 These settings apply only when `--tag=package-2015-07-01` is specified on the command line.
