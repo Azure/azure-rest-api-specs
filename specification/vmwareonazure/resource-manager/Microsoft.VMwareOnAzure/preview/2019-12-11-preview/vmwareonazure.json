@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "description": "API for managing Azure VMware Private Clouds.",
-    "version": "2016-09-01-preview",
+    "version": "2019-12-11-preview",
     "title": "Azure VMware Solution Private Cloud Resource Provider API"
   },
   "tags": [
@@ -21,23 +21,13 @@
           "PrivateClouds"
         ],
         "summary": "list private clouds",
-        "operationId": "PrivateCloud_List",
+        "operationId": "PrivateClouds_List",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -59,31 +49,16 @@
           "PrivateClouds"
         ],
         "summary": "get a private cloud",
-        "operationId": "PrivateCloud_GetById",
+        "operationId": "PrivateClouds_GetById",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "The name of the private cloud.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "PrivateCloudName"
+            "$ref": "#/parameters/PrivateCloudNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -102,32 +77,16 @@
           "PrivateClouds"
         ],
         "summary": "list private clouds in a resource group",
-        "operationId": "PrivateCloud_ListInResourceGroup",
+        "operationId": "PrivateClouds_ListInResourceGroup",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-exportParamName": "ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -146,40 +105,19 @@
           "PrivateClouds"
         ],
         "summary": "get a private cloud in a resource group",
-        "operationId": "PrivateCloud_GetByIdInResourceGroup",
+        "operationId": "PrivateClouds_GetByIdInResourceGroup",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-exportParamName": "ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "The name of the private cloud.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "PrivateCloudName"
+            "$ref": "#/parameters/PrivateCloudNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -196,35 +134,19 @@
           "PrivateClouds"
         ],
         "summary": "create a private cloud",
-        "operationId": "PrivateCloud_Create",
+        "operationId": "PrivateClouds_Create",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-exportParamName": "ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "The name of the private cloud.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "PrivateCloudName"
+            "$ref": "#/parameters/PrivateCloudNameParameter"
           },
           {
             "in": "body",
@@ -236,12 +158,7 @@
             "x-exportParamName": "Parameters"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -275,40 +192,19 @@
           "PrivateClouds"
         ],
         "summary": "delete a private cloud",
-        "operationId": "PrivateCloud_Delete",
+        "operationId": "PrivateClouds_Delete",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-exportParamName": "ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "The name of the private cloud.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "PrivateCloudName"
+            "$ref": "#/parameters/PrivateCloudNameParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -324,36 +220,20 @@
         "tags": [
           "PrivateClouds"
         ],
+        "operationId": "PrivateClouds_Update",
         "summary": "modify a private cloud",
-        "operationId": "PrivateCloud_Modify",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The unique identifier for a Microsoft Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "SubscriptionId"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group within the Azure subscription.",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method",
-            "x-exportParamName": "ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "description": "The name of the private cloud.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "PrivateCloudName"
+            "$ref": "#/parameters/PrivateCloudNameParameter"
           },
           {
             "in": "body",
@@ -365,12 +245,7 @@
             "x-exportParamName": "Parameters"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The Version of the API to be used with the client request.",
-            "required": true,
-            "type": "string",
-            "x-exportParamName": "ApiVersion"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -551,7 +426,7 @@
     }
   },
   "parameters": {
-    "subscriptionId": {
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "The unique identifier for a Microsoft Azure subscription.",
@@ -559,7 +434,7 @@
       "type": "string",
       "x-exportParamName": "SubscriptionId"
     },
-    "resourceGroupName": {
+    "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "description": "The name of the resource group within the Azure subscription.",
@@ -568,13 +443,21 @@
       "x-ms-parameter-location": "method",
       "x-exportParamName": "ResourceGroupName"
     },
-    "apiVersion": {
+    "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "The Version of the API to be used with the client request.",
       "required": true,
       "type": "string",
       "x-exportParamName": "ApiVersion"
+    },
+    "PrivateCloudNameParameter": {
+      "name": "privateCloudName",
+      "in": "path",
+      "description": "The name of the private cloud.",
+      "required": true,
+      "type": "string",
+      "x-exportParamName": "PrivateCloudName"
     }
   }
 }
