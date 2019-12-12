@@ -1,21 +1,15 @@
 name: "Azure OpenAPI"
 
+resources:
+  repositories:
+    - repository: ref
+      type: github
+      name: Azure/openapi-platform-pipelines
+      ref: refs/heads/master
+      endpoint: Azure
+
 variables:
-  TRAVIS: 'true'
-  TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
-  TRAVIS_PULL_REQUEST: $(System.PullRequest.PullRequestNumber)
-  TRAVIS_REPO_SLUG: $(Build.Repository.Name)
-  TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
-  TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
-  PR_ONLY: 'true'
+  - template: .azure-pipelines/main-SwaggerSpecs-ProdVar.yml@ref
 
 jobs:
-- template: .azure-pipelines/BranchProtectionForPrivateRepo.yml
-- template: .azure-pipelines/Syntax.yml
-- template: .azure-pipelines/Semantic.yml
-- template: .azure-pipelines/Avocado.yml
-- template: .azure-pipelines/ModelValidation.yml
-- template: .azure-pipelines/BreakingChange.yml
-- template: .azure-pipelines/LintDiff.yml
-- template: .azure-pipelines/NetworkValidation.yml
-- template: .azure-pipelines/Spellcheck.yml
+  - template: .azure-pipelines/main-SwaggerSpecs-ProdJobs.yml@ref
