@@ -83,7 +83,7 @@
         "tags": [
           "QueryKeys"
         ],
-        "operationId": "QueryKeys_List",
+        "operationId": "QueryKeys_List_Get",
         "description": "Returns the list of query API keys for the given Azure Search service.",
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832701.aspx"
@@ -115,6 +115,55 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "QueryKeys"
+        ],
+        "x-mspageable": {
+          "nextLinkName": null
+        },
+        "operationId": "QueryKeys_List",
+        "x-ms-examples": {
+          "SearchListQueryKeysBySearchService": {
+            "$ref": "./examples/SearchListQueryKeysBySearchService.json"
+          }
+        },
+        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in teh Azure Cognitive Search Service REST API or SDK to perform read-only operations on you Search indexes such as querying and looking up documents by ID.",
+            "schema": {
+              "$ref": "#/definitions/ListQueryKeysResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled",
+            "schema": {
+              "$ref": ":#/definitions/CloudError"
             }
           }
         }
