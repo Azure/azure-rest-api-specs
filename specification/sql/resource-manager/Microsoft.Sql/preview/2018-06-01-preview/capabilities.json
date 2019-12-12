@@ -418,7 +418,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The sku.",
           "readOnly": true
         },
@@ -555,7 +555,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
           "description": "The sku.",
           "readOnly": true
         },
@@ -792,36 +792,6 @@
             "name": "PerformanceLevelUnit",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "Sku": {
-      "description": "An ARM Resource SKU.",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the SKU, typically, a letter + Number code, e.g. P3.",
-          "type": "string"
-        },
-        "tier": {
-          "description": "The tier or edition of the particular SKU, e.g. Basic, Premium.",
-          "type": "string"
-        },
-        "size": {
-          "description": "Size of the particular SKU",
-          "type": "string"
-        },
-        "family": {
-          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here.",
-          "type": "string"
-        },
-        "capacity": {
-          "format": "int32",
-          "description": "Capacity of the particular SKU.",
-          "type": "integer"
         }
       }
     },
