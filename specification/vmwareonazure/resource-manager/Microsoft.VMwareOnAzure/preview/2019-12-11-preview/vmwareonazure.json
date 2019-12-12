@@ -1,61 +1,383 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-12-11-preview",
-    "title": "vmwareonazure",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "vmwareonazureClient"
-    }
+    "description": "API for managing Azure VMware Private Clouds.",
+    "version": "2016-09-01-preview",
+    "title": "Azure VMware Solution Private Cloud Resource Provider API"
   },
-  "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
+  "tags": [
     {
-      "azure_auth": ["user_impersonation"]
+      "name": "PrivateClouds",
+      "description": ""
     }
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareOnAzure/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareOnAzure/privateClouds": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "list private clouds",
+        "operationId": "PrivateCloud_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrivateCloudList"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareOnAzure/privateClouds/{privateCloudName}": {
+      "get": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get a private cloud",
+        "operationId": "PrivateCloud_GetById",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareOnAzure/privateClouds": {
+      "get": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "list private clouds in a resource group",
+        "operationId": "PrivateCloud_ListInResourceGroup",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PrivateCloudList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareOnAzure/privateClouds/{privateCloudName}": {
+      "get": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get a private cloud in a resource group",
+        "operationId": "PrivateCloud_GetByIdInResourceGroup",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "create a private cloud",
+        "operationId": "PrivateCloud_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudRequest"
+            },
+            "x-exportParamName": "Parameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "202": {
+            "description": "accepted operation",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Url to poll for status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Url to poll for operation status."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "How long to wait before polling."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "delete a private cloud",
+        "operationId": "PrivateCloud_Delete",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "accepted operation"
+          },
+          "204": {
+            "description": "no content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "modify a private cloud",
+        "operationId": "PrivateCloud_Modify",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The unique identifier for a Microsoft Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "SubscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group within the Azure subscription.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method",
+            "x-exportParamName": "ResourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "description": "The name of the private cloud.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "PrivateCloudName"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AzurePrivateCloudRequest"
+            },
+            "x-exportParamName": "Parameters"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The Version of the API to be used with the client request.",
+            "required": true,
+            "type": "string",
+            "x-exportParamName": "ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
             }
           }
         }
@@ -63,70 +385,196 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "PrivateCloudRequest": {
       "properties": {
-        "sampleProperty": {
+        "clusterSize": {
+          "type": "integer",
+          "example": 4,
+          "description": "number of hosts in PrivateCloud cluster"
+        },
+        "sku": {
           "type": "string",
-          "description": "Sample property of type string"
+          "example": "avs28",
+          "description": "sku for the node/host"
+        },
+        "name": {
+          "type": "string",
+          "example": "FakePC",
+          "description": "name of the private cloud"
+        },
+        "vpc": {
+          "$ref": "#/definitions/Vpc"
         }
+      },
+      "example": {
+        "clusterSize": 4,
+        "sku": "avs28",
+        "name": "FakePC",
+        "vpc": "10.19.4.0/22"
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "Vpc": {
+      "type": "string",
+      "example": "10.19.4.0/22"
+    },
+    "PrivateCloud": {
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Deploying"
+          ]
+        },
+        "clusterSize": {
+          "type": "integer",
+          "example": 4,
+          "description": "number of hosts in PrivateCloud cluster"
+        },
+        "sku": {
+          "type": "string",
+          "example": "avs28",
+          "description": "sku for the node/host"
+        },
+        "name": {
+          "type": "string",
+          "example": "FakePC",
+          "description": "name of the private cloud"
+        },
+        "vpc": {
+          "$ref": "#/definitions/Vpc"
         }
+      },
+      "example": {
+        "clusterSize": 4,
+        "sku": "avs28",
+        "name": "FakePC",
+        "vpc": "10.19.4.0/22",
+        "provisioningState": "Succeeded"
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "PrivateCloudList": {
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
+        "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
+            "$ref": "#/definitions/AzurePrivateCloudResponse"
+          }
         }
+      },
+      "example": {
+        "value": [
+          {
+            "location": "West US",
+            "type": "Microsoft.VMwareOnAzure/privateClouds",
+            "properties": {
+              "clusterSize": 4,
+              "sku": "avs28",
+              "name": "FakePC",
+              "vpc": "10.19.4.0/22",
+              "provisioningState": "Succeeded"
+            },
+            "tags": "{}"
+          },
+          {
+            "location": "West US",
+            "type": "Microsoft.VMwareOnAzure/privateClouds",
+            "properties": {
+              "clusterSize": 4,
+              "sku": "avs28",
+              "name": "FakePC",
+              "vpc": "10.19.4.0/22",
+              "provisioningState": "Succeeded"
+            },
+            "tags": "{}"
+          }
+        ]
+      }
+    },
+    "AzurePrivateCloudRequest": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateCloudRequest"
+        },
+        "tags": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      "example": {
+        "location": "West US",
+        "properties": {
+          "clusterSize": 4,
+          "sku": "avs28",
+          "name": "FakePC",
+          "vpc": "10.19.4.0/22"
+        },
+        "tags": "{}"
+      }
+    },
+    "AzurePrivateCloudResponse": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateCloud"
+        },
+        "type": {
+          "type": "string",
+          "example": "Microsoft.VMwareOnAzure/privateClouds"
+        },
+        "tags": {
+          "type": "object",
+          "properties": {}
+        }
+      },
+      "example": {
+        "location": "West US",
+        "type": "Microsoft.VMwareOnAzure/privateClouds",
+        "properties": {
+          "clusterSize": 4,
+          "sku": "avs28",
+          "name": "FakePC",
+          "vpc": "10.19.4.0/22",
+          "provisioningState": "Succeeded"
+        },
+        "tags": "{}"
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "subscriptionId": {
       "name": "subscriptionId",
       "in": "path",
+      "description": "The unique identifier for a Microsoft Azure subscription.",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "x-exportParamName": "SubscriptionId"
     },
-    "ResourceGroupNameParameter": {
+    "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
+      "description": "The name of the resource group within the Azure subscription.",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-exportParamName": "ResourceGroupName"
     },
-    "ApiVersionParameter": {
+    "apiVersion": {
       "name": "api-version",
       "in": "query",
+      "description": "The Version of the API to be used with the client request.",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "x-exportParamName": "ApiVersion"
     }
   }
 }
