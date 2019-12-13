@@ -507,7 +507,7 @@
         "unit": {
           "description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
           "type": "string",
-          "readOnly": true
+          "readOnly": false
         },
         "name": {
           "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
@@ -515,7 +515,7 @@
             "value": {
               "description": "Resource name.",
               "type": "string",
-              "readOnly": true
+              "readOnly": false
             },
             "localizedValue": {
               "description": "Resource display name.",
@@ -527,7 +527,7 @@
         "resourceType": {
           "description": "The Resource Type Name.",
           "$ref": "#/definitions/ResourceTypesName",
-          "readOnly": true
+          "readOnly": false
         },
         "quotaPeriod": {
           "description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
