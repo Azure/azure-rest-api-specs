@@ -157,7 +157,7 @@
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
         "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
-        "operationId": "QuotaRequest_Patch",
+        "operationId": "QuotaRequest_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
             "$ref": "./examples/patchComputeQuotaRequest.json"
