@@ -3,56 +3,76 @@
 		"subscriptionId": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
 		"providerId": "Microsoft.Compute",
 		"location": "eastus",
-		"resourceName": "standardFSv2Family",
 		"api-version": "2019-07-19-preview",
-		"If-Match": "*",
-		"createQuotaRequest": {
-			"properties":{
-			"limit": 200,
-			"unit": "Count",
-			"name": {
-				"value": "standardFSv2Family",
-				"localizedValue": "Standard FSv2 Family vCPUs"
-			}
-		}
+		"If-Match": "F2E0FB94-7F6B-4852-8EE8-67A04BBA6520",
+		"createQuotaRequests": {
+			"value": [
+				{
+					"limit": 200,
+					"unit": "Count",
+					"name": {
+						"value": "standardFSv2Family",
+						"localizedValue": "Standard FSv2 Family vCPUs"
+					}
+				},
+				{
+					"limit": 50,
+					"unit": "Count",
+					"name": {
+						"value": "standardNDSFamily",
+						"localizedValue": "Standard NDS Family vCPUs"
+					}
+				}
+			]
 		}
 	},
 	"responses": {
 		"201": {
 			"body": {
-				"id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/Providers/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+				"id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.Compute/locations/eastus/serviceLimits/requests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
 				"name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
 				"type": "Microsoft.Capacity/ServiceLimits",
 				"properties": {
 					"provisioningState": "InProgress",
-					"message": "Quota request is accepted and being processed.",
-					"requestSubmitTime": "2019-08-19T19:23:17.904Z",
-					"limit": 200,
-					"unit": "Count",
-					"currentValue": 80,
-					"name": {
-						"value": "standardFSv2Family",
-						"localizedValue": "Standard FSv2 Family vCPUs"
-					}
+					"message": ""
 				}
 			}
 		},
 		"200": {
 			"body": {
-				"id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/Providers/Microsoft.Compute/locations/eastus/serviceLimitsRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
+				"id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/resourceProviders/Microsoft.Compute/locations/eastus/quotaRequests/2B5C8515-37D8-4B6A-879B-CD641A2CF605",
 				"name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-				"type": "Microsoft.Capacity/serviceLimits",
+				"type": "Microsoft.Capacity/ServiceLimits",
 				"properties": {
 					"provisioningState": "Succeeded",
-					"message": "Quota request successfully completed",
+					"message": "",
 					"requestSubmitTime": "2019-08-19T19:23:17.904Z",
-					"limit": 200,
-					"unit": "Count",
-					"currentValue": 80,
-					"name": {
-						"value": "standardFSv2Family",
-						"localizedValue": "Standard FSv2 Family vCPUs"
-					}
+					"value": [
+						{
+							"limit": 200,
+							"unit": "Count",
+							
+							"name": {
+								"value": "standardFSv2Family",
+								"localizedValue": "Standard FSv2 Family vCPUs"
+							},
+							"provisioningState": "Succeeded",
+							"message": "",
+							"subRequestId": "2B5C8515-37D8-4B6A-879B-CD641A2CF605"
+						},
+						{
+							"limit": 50,
+							"unit": "Count",
+						
+							"name": {
+								"value": "standardNDSFamily",
+								"localizedValue": "Standard NDS Family vCPUs"
+							},
+							"provisioningState": "Succeeded",
+							"message": "",
+							"subRequestId": "2B5C8515-37D8-4B6A-879B-CD641A2CF605"
+						}
+					]
 				}
 			}
 		}
