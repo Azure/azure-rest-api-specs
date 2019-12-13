@@ -306,7 +306,16 @@
     "AssignmentStatus": {
       "description": "The status of a blueprint assignment. This field is readonly.",
       "type": "object",
-      "properties": {},
+      "properties": {
+        "managedResources": {
+          "type": "array",
+          "description": "List of resources that were created by the blueprint assignment.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/BlueprintResourceStatusBase"
