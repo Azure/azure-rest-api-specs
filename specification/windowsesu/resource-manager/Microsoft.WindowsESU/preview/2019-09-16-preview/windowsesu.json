@@ -1,0 +1,524 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-09-16-preview",
+    "title": "windowsesu",
+    "description": "Manage Multi-Access Keys (MAK) that enable Windows Extended Security Updates (ESU).",
+    "x-ms-code-generation-settings": {
+      "name": "windowsesuClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.WindowsESU/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": { "$ref": "./examples/ListOperations.json" }
+        },
+        "description": "List all available Windows.ESU provider operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsESU/multipleActivationKeys": {
+      "get": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_List",
+        "x-ms-examples": {
+          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeys.json" }
+        },
+        "description": "List all Multiple Activation Keys (MAK) created for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKeyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsESU/multipleActivationKeys": {
+      "get": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeysByResourceGroup.json" }
+        },
+        "description": "List all Multiple Activation Keys (MAK) in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKeyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsESU/multipleActivationKeys/{multipleActivationKeyName}": {
+      "get": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Get",
+        "x-ms-examples": {
+          "GetMultipleActivationKey": { "$ref": "./examples/GetMultipleActivationKey.json" }
+        },
+        "description": "Get a MAK key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Create",
+        "x-ms-examples": {
+          "CreateMultipleActivationKey": { "$ref": "./examples/CreateMultipleActivationKey.json" }
+        },
+        "description": "Create a MAK key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          },
+          {
+            "name": "multipleActivationKey",
+            "in": "body",
+            "description": "Details of the MAK key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Update",
+        "x-ms-examples": {
+          "UpdateMultipleActivationKey": { "$ref": "./examples/UpdateMultipleActivationKey.json" }
+        },
+        "description": "Update a MAK key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          },
+          {
+            "name": "multipleActivationKey",
+            "in": "body",
+            "description": "Details of the MAK key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKeyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Delete",
+        "x-ms-examples": {
+          "DeleteMultipleActivationKey": { "$ref": "./examples/DeleteMultipleActivationKey.json" }
+        },
+        "description": "Delete a MAK key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MultipleActivationKey": {
+      "description": "MAK key details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "MAK key specific properties.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "multipleActivationKey": {
+              "description": "MAK 5x5 key.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "description": "End of support of security updates activated by the MAK key.",
+              "format": "date-time",
+              "type": "string",
+              "readOnly": true
+            },
+            "osType": {
+              "description": "Type of OS for which the key is requested.",
+              "type": "string",
+              "enum": [
+                "Windows7",
+                "WindowsServer2008",
+                "WindowsServer2008R2"
+              ],
+              "x-ms-enum": {
+                "name": "OsType",
+                "modelAsString": true
+              },
+              "x-ms-mutability": ["create", "read"]
+            },
+            "supportType": {
+              "description": "Type of support",
+              "type": "string",
+              "enum": [
+                "SupplementalServicing",
+                "PremiumAssurance"
+              ],
+              "default": "SupplementalServicing",
+              "x-ms-enum": {
+                "name": "SupportType",
+                "modelAsString": true
+              },
+              "x-ms-mutability": ["create", "read"]
+            },
+            "installedServerNumber": {
+              "description": "Number of activations/servers using the MAK key.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000,
+              "x-ms-mutability": ["create", "read"]
+            },
+            "agreementNumber": {
+              "description": "Agreement number under which the key is requested.",
+              "type": "string",
+              "x-ms-mutability": ["create", "read"]
+            },
+            "isEligible": {
+              "description": "<code> true </code> if user has eligible on-premises Windows physical or virtual machines, and that the requested key will only be used in their organization; <code> false </code> otherwise.",
+              "type": "boolean",
+              "x-ms-mutability": ["create", "read"]
+            },
+            "provisioningState": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Provisioning"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              },
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MultipleActivationKeyList": {
+      "description": "List of MAK keys.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of MAK keys.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultipleActivationKey"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MultipleActivationKeyUpdate": {
+      "description": "MAK key details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Meta data about operation used for display in portal.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of available REST API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MultipleActivationKeyNameParameter": {
+      "name": "multipleActivationKeyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the MAK key.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
