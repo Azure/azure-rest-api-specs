@@ -458,7 +458,7 @@
           "x-ms-enum": {
             "name": "ErrorCodeValue",
             "modelAsString": false
-          },    
+          },
           "description": "Error code."
         },
         "message": {
@@ -469,7 +469,7 @@
           "type": "string",
           "description": "Error target."
         },
-        "innererror": {
+        "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         },
@@ -505,7 +505,7 @@
           "x-ms-enum": {
             "name": "InnerErrorCodeValue",
             "modelAsString": false
-          }, 
+          },
           "description": "Error code."
         },
         "message": {
@@ -517,13 +517,13 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Error details."          
+          "description": "Error details."
         },
         "target": {
           "type": "string",
           "description": "Error target."
         },
-        "innererror": {
+        "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         }
@@ -591,6 +591,7 @@
           "$ref": "#/definitions/DocumentStatistics"
         },
         "documentScores": {
+          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "sentences": {
@@ -700,6 +701,7 @@
           }
         },
         "sentenceScores": {
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "offset": {
