@@ -70,7 +70,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
               "type": "array",
               "items": {
@@ -108,9 +108,9 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloud"
             }
           },
           "default": {
@@ -143,7 +143,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/PrivateCloudList"
             }
@@ -181,9 +181,9 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloud"
             }
           },
           "default": {
@@ -220,7 +220,7 @@
             "name": "parameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudRequest"
+              "$ref": "#/definitions/PrivateCloud"
             },
             "x-exportParamName": "Parameters"
           },
@@ -230,13 +230,13 @@
         ],
         "responses": {
           "201": {
-            "description": "created private cloud",
+            "description": "Created private cloud",
             "schema": {
               "$ref": "#/definitions/AzurePrivateCloudResponse"
             }
           },
           "202": {
-            "description": "creating private cloud",
+            "description": "Creating private cloud",
             "schema": {
               "$ref": "#/definitions/AzurePrivateCloudResponse"
             }
@@ -272,10 +272,10 @@
         ],
         "responses": {
           "202": {
-            "description": "accepted operation"
+            "description": "Accepted operation"
           },
           "204": {
-            "description": "no content"
+            "description": "No content"
           },
           "default": {
             "x-ms-error-response": true,
@@ -320,7 +320,7 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/AzurePrivateCloudResponse"
             }
@@ -337,39 +337,55 @@
     }
   },
   "definitions": {
-    "PrivateCloudRequest": {
+    "Resource": {
+      "description": "The resource model definition.",
       "properties": {
-        "clusterSize": {
-          "type": "integer",
-          "example": 4,
-          "description": "number of hosts in PrivateCloud cluster"
-        },
-        "sku": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "example": "avs28",
-          "description": "sku for the node/host"
+          "description": "Resource ID"
         },
         "name": {
+          "readOnly": true,
           "type": "string",
-          "example": "FakePC",
-          "description": "name of the private cloud"
+          "description": "Resource name"
         },
-        "vpc": {
-          "$ref": "#/definitions/Vpc"
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
-      "example": {
-        "clusterSize": 4,
-        "sku": "avs28",
-        "name": "FakePC",
-        "vpc": "10.19.4.0/22"
-      }
-    },
-    "Vpc": {
-      "type": "string",
-      "example": "10.19.4.0/22"
+      "x-ms-azure-resource": true
     },
     "PrivateCloud": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateCloudProperties",
+          "description": "Private cloud properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Private cloud info on Azure (ARM properties and private cloud properties)"
+    },
+    "PrivateCloudProperties": {
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -384,123 +400,25 @@
         },
         "clusterSize": {
           "type": "integer",
-          "example": 4,
-          "description": "number of hosts in PrivateCloud cluster"
+          "description": "Number of hosts in private cloud cluster"
         },
         "sku": {
-          "type": "string",
-          "example": "avs28",
-          "description": "sku for the node/host"
-        },
-        "name": {
-          "type": "string",
-          "example": "FakePC",
-          "description": "name of the private cloud"
+          "type": "string"
         },
         "vpc": {
-          "$ref": "#/definitions/Vpc"
+          "type": "string"
         }
       },
-      "example": {
-        "clusterSize": 4,
-        "sku": "avs28",
-        "name": "FakePC",
-        "vpc": "10.19.4.0/22",
-        "provisioningState": "Succeeded"
-      }
+      "description": "Describes the properties of the private cloud"
     },
     "PrivateCloudList": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzurePrivateCloudResponse"
+            "$ref": "#/definitions/PrivateCloud"
           }
         }
-      },
-      "example": {
-        "value": [
-          {
-            "location": "West US",
-            "type": "Microsoft.VMwareOnAzure/privateClouds",
-            "properties": {
-              "clusterSize": 4,
-              "sku": "avs28",
-              "name": "FakePC",
-              "vpc": "10.19.4.0/22",
-              "provisioningState": "Succeeded"
-            },
-            "tags": "{}"
-          },
-          {
-            "location": "West US",
-            "type": "Microsoft.VMwareOnAzure/privateClouds",
-            "properties": {
-              "clusterSize": 4,
-              "sku": "avs28",
-              "name": "FakePC",
-              "vpc": "10.19.4.0/22",
-              "provisioningState": "Succeeded"
-            },
-            "tags": "{}"
-          }
-        ]
-      }
-    },
-    "AzurePrivateCloudRequest": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "example": "West US"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateCloudRequest"
-        },
-        "tags": {
-          "type": "object",
-          "properties": {}
-        }
-      },
-      "example": {
-        "location": "West US",
-        "properties": {
-          "clusterSize": 4,
-          "sku": "avs28",
-          "name": "FakePC",
-          "vpc": "10.19.4.0/22"
-        },
-        "tags": "{}"
-      }
-    },
-    "AzurePrivateCloudResponse": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "example": "West US"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateCloud"
-        },
-        "type": {
-          "type": "string",
-          "example": "Microsoft.VMwareOnAzure/privateClouds"
-        },
-        "tags": {
-          "type": "object",
-          "properties": {}
-        }
-      },
-      "example": {
-        "location": "West US",
-        "type": "Microsoft.VMwareOnAzure/privateClouds",
-        "properties": {
-          "clusterSize": 4,
-          "sku": "avs28",
-          "name": "FakePC",
-          "vpc": "10.19.4.0/22",
-          "provisioningState": "Succeeded"
-        },
-        "tags": "{}"
       }
     },
     "OperationsList": {
