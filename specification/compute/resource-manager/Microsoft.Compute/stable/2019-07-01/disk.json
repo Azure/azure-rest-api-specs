@@ -1515,6 +1515,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
         }
       },
       "description": "Disk resource update properties."
@@ -1541,6 +1545,10 @@
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
           "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
         }
       },
       "description": "Snapshot resource update properties."
