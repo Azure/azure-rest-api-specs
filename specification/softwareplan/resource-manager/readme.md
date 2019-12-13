@@ -116,6 +116,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.SoftwarePlan/preview/2019-06-01-preview/softwareplan.json
+  - $(this-folder)/Microsoft.SoftwarePlan/stable/2019-12-01/softwareplan.json
 
 ```
 
