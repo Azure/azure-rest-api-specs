@@ -85,6 +85,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -155,6 +158,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -254,6 +260,7 @@
         "tags": [
           "PrivateClouds"
         ],
+        "x-ms-long-running-operation": true,
         "summary": "delete a private cloud",
         "operationId": "PrivateClouds_Delete",
         "parameters": [
@@ -396,7 +403,12 @@
             "Cancelled",
             "Deploying",
             "Updating"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PrivateCloudProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the private cloud"
         },
         "clusterSize": {
           "type": "integer",
