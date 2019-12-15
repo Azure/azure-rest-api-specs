@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 input-file:
 - Microsoft.KeyVault/stable/2019-09-01/keyvault.json
 - Microsoft.KeyVault/stable/2019-09-01/providers.json
-- Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
 
@@ -50,7 +49,6 @@ These settings apply only when `--tag=package-2018-02-14-preview` is specified o
 input-file:
 - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
 - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
-- Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
 ```
 
 
