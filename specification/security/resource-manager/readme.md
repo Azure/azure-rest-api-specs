@@ -221,6 +221,7 @@ These settings apply only when `--tag=package-2019-01-preview-only` is specified
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -337,7 +338,6 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/automations.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
