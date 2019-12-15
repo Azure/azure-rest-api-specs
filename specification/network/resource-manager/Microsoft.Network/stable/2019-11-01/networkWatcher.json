@@ -4063,6 +4063,19 @@
         "monitoringStatus": {
           "type": "string",
           "description": "The monitoring status of the connection monitor."
+        },
+        "connectionMonitorType": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "MultiEndpoint",
+            "SingleSourceDestination"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorType",
+            "modelAsString": true
+          },
+          "description": "Type of connection monitor."
         }
       },
       "allOf": [
