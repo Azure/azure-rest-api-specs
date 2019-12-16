@@ -837,7 +837,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databases.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -863,6 +862,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
