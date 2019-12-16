@@ -1073,53 +1073,21 @@
       "properties": {},
       "additionalProperties": {
         "description": "Key/Value pair of parameter fulfillment.",
-        "$ref": "#/definitions/ParameterValueBase"
-      }
-    },
-    "ParameterValueBase": {
-      "description": "Base class for ParameterValue.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Optional property. Establishes ParameterValueBase as a BaseClass.",
-          "type": "string"
-        }
+        "$ref": "#/definitions/ParameterValue"
       }
     },
     "ParameterValue": {
-      "description": "Value for the specified parameter.",
+      "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Actual value."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ParameterValueBase"
-        }
-      ]
-    },
-    "SecretReferenceParameterValue": {
-      "description": "The reference to a secret, if the parameter should be protected.",
-      "type": "object",
-      "properties": {
+          "description": "Parameter value as value type."
+        },
         "reference": {
-          "description": "Specifies the reference.",
+          "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }
-      },
-      "required": [
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ParameterValueBase"
-        }
-      ]
+      }
     },
     "SecretValueReference": {
       "description": "Reference to a Key Vault secret.",
