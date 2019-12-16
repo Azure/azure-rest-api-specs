@@ -292,7 +292,7 @@
           "200": {
             "description": "Response containing documents that match the search criteria.",
             "schema": {
-              "$ref": "#/definitions/DocumentSearchResult"
+              "$ref": "#/definitions/SearchDocumentsResult"
             }
           }
         }
@@ -336,7 +336,7 @@
           "200": {
             "description": "Response containing documents that match the search criteria.",
             "schema": {
-              "$ref": "#/definitions/DocumentSearchResult"
+              "$ref": "#/definitions/SearchDocumentsResult"
             }
           }
         }
@@ -530,7 +530,7 @@
           "200": {
             "description": "Response containing suggested documents that match the partial input.",
             "schema": {
-              "$ref": "#/definitions/DocumentSuggestResult"
+              "$ref": "#/definitions/SuggestDocumentsResult"
             }
           }
         }
@@ -573,7 +573,7 @@
           "200": {
             "description": "Response containing suggested documents that match the partial input.",
             "schema": {
-              "$ref": "#/definitions/DocumentSuggestResult"
+              "$ref": "#/definitions/SuggestDocumentsResult"
             }
           }
         }
@@ -616,13 +616,13 @@
           "200": {
             "description": "Response containing the status of operations for all actions in the batch.",
             "schema": {
-              "$ref": "#/definitions/DocumentIndexResult"
+              "$ref": "#/definitions/IndexDocumentsResult"
             }
           },
           "207": {
             "description": "Response containing the status of operations for all actions in the batch.",
             "schema": {
-              "$ref": "#/definitions/DocumentIndexResult"
+              "$ref": "#/definitions/IndexDocumentsResult"
             }
           }
         }
@@ -757,10 +757,9 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response containing suggested query terms that complete the partial input.",
             "schema": {
-              "$ref": "#/definitions/AutocompleteResult",
-              "description": "The result of Autocomplete query."
+              "$ref": "#/definitions/AutocompleteResult"
             }
           }
         }
@@ -801,10 +800,9 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response containing suggested query terms that complete the partial input.",
             "schema": {
-              "$ref": "#/definitions/AutocompleteResult",
-              "description": "The result of Autocomplete query."
+              "$ref": "#/definitions/AutocompleteResult"
             }
           }
         }
@@ -812,7 +810,7 @@
     }
   },
   "definitions": {
-    "DocumentSuggestResult": {
+    "SuggestDocumentsResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -857,7 +855,7 @@
       "additionalProperties": true,
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
     },
-    "DocumentSearchResult": {
+    "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
           "type": "integer",
@@ -1001,7 +999,7 @@
       },
       "description": "Status of an indexing operation for a single document."
     },
-    "DocumentIndexResult": {
+    "IndexDocumentsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Results",
@@ -1255,6 +1253,13 @@
     },
     "AutocompleteResult": {
       "properties": {
+        "@search.coverage": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Coverage",
+          "description": "A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request."
+        },
         "value": {
           "type": "array",
           "readOnly": true,
