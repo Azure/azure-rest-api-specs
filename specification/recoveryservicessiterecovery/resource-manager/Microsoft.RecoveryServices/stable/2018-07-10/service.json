@@ -9079,6 +9079,14 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
           }
+        },
+        "providerSpecificInput": {
+          "description": "The provider specific input.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
+          }
         }
       }
     },
@@ -14205,6 +14213,55 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+    "RecoveryPlanA2ADetails": {
+      "description": "Recovery plan A2A specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanA2ADetails"
+    },
+    "RecoveryPlanA2AInput": {
+      "description": "Recovery plan A2A input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
+        },
+        "canWrite": {
+          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "RecoveryPlanAction": {
       "description": "Recovery plan action details.",
       "required": [
@@ -14675,6 +14732,14 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
           }
+        },
+        "providerSpecificDetails": {
+          "description": "The provider id and provider specific details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+          }
         }
       }
     },
@@ -14691,6 +14756,39 @@
           "type": "string"
         }
       }
+    },
+    "RecoveryPlanProviderSpecificDetails": {
+      "description": "Recovery plan provider specific details.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "RecoveryPlanProviderSpecificInput": {
+      "description": "Recovery plan provider specific input base class.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "canWrite": {
+          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canRead": {
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryPlanProviderSpecificFailoverInput": {
       "description": "Recovery plan provider specific failover input base class.",
