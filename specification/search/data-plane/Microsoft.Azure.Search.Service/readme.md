@@ -125,7 +125,7 @@ Please also specify `--java-sdks-folder=<path to "SDKs" directory of your azure-
 
 ``` yaml $(java)
 title: SearchServiceRestClient
-output-folder: $(java-sdks-folder)/search/Microsoft.Azure.Search.Service/src/Generated
+output-folder: $(java-sdks-folder)/search
 namespace: com.azure.search
 java: true
 sync-methods: none
