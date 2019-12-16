@@ -164,6 +164,9 @@
         "x-ms-examples": {
           "ListShares": {
             "$ref": "./examples/FileSharesList.json"
+          },
+          "ListDeletedShares": {
+            "$ref": "./examples/DeletedFileSharesList.json"
           }
         },
         "description": "Lists all shares.",
@@ -191,6 +194,20 @@
             "in": "query",
             "type": "string",
             "description": "Optional. When specified, only share names starting with the filter will be listed."
+          },
+          {
+            "name": "$expand",
+            "description": "Optional, used to expand the properties within share's properties.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "deleted"
+            ],
+            "x-ms-enum": {
+              "name": "ListSharesExpand",
+              "modelAsString": false
+            }
           }
         ],
         "responses": {
@@ -410,6 +427,57 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/default/shares/{shareName}/restore": {
+      "post": {
+        "tags": [
+          "FileShares"
+        ],
+        "operationId": "FileShares_Restore",
+        "x-ms-examples": {
+          "PutShares": {
+            "$ref": "./examples/FileSharesRestore.json"
+          }
+        },
+        "description": "Restore a file share within a valid retention days if share soft delete is enabled",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/ShareName"
+          },
+          {
+            "name": "fileShare",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            },
+            "description": "Must contain the version of the file share to restore."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The Share is successfully restored."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -524,6 +592,26 @@
           "minimum": 1,
           "maximum": 102400,
           "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the share."
+        },
+        "deleted": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Indicates whether the share was deleted."
+        },
+        "deletedTime": {
+          "type": "boolean",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The deleted time if the share was deleted."
+        },
+        "remainingRetentionDays": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Remaning retention days for share that was soft deleted."
         }
       },
       "description": "The properties of the file share."
