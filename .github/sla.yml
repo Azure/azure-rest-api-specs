@@ -3,6 +3,7 @@
     action: sendEmailToAssignee
     repoWhitelist:
       - Azure/azure-rest-api-specs
+    scope: pull_request
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||(DoNotMerge&&(ARMSignedOff||Approved)))"
       limit: 48h
@@ -15,6 +16,7 @@
     action: sendEmailToAssignee
     repoWhitelist:
       - Azure/azure-rest-api-specs-pr
+    scope: pull_request
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||Approved-OkToMerge||(DoNotMerge&&(ARMSignedOff||Approved)))"
       limit: 48h
@@ -27,11 +29,12 @@
     action: sendEmail
     repoWhitelist:
       - Azure/azure-rest-api-specs
+    scope: pull_request
     args:
       booleanFilterExpression: "(WaitForARMFeedback&&!ARMSignedOff&&!ARMChangesRequested&&!ARMReviewInProgress)"
       limit: 3d
       subject: "Action Required: Please help to review PR ${PR_URL}"
       message: "<p> Dear ARM review board, <br> <br>Please review PR ${PR_URL}, the PR is waiting for ARM review over 3 days. Thanks.<br><hr /> <br>Quick info<ul><li>If you have feedback about the notification email, please contact us at vscswagger@microsoft.com.</li><li>After reviewing, please remove “WaitForARMFeedback” label from PR to avoid receiving notification on the same PR.</li><li>Please do not reply to this email, this is an automatic generated email.</li></ul>Best regards,<br> Azure Management Experience</p>"
-      to: yungez@microsoft.com
+      to: armapireview@microsoft.com
     description: "send email to ARM team for over 5 days PRs labelled with WaitForARMFeedback"
     name: "send email to ARM team"

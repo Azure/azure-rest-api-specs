@@ -215,6 +215,7 @@
     },
     "StoreReadSettings": {
       "description": "Connector read setting.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -253,6 +254,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -444,6 +449,21 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SftpWriteSettings": {
+      "description": "Sftp write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "operationTimeout": {
+          "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -685,6 +705,7 @@
     },
     "FormatReadSettings": {
       "description": "Format read settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -716,6 +737,7 @@
     },
     "FormatWriteSettings": {
       "description": "Format write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -1462,6 +1484,33 @@
         "packetSize": {
           "type": "object",
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "SapHanaDynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "SapHanaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+          "$ref": "#/definitions/SapHanaPartitionSettings"
+        }
+      }
+    },
+    "SapHanaPartitionSettings": {
+      "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },

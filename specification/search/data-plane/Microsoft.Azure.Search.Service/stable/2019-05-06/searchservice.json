@@ -642,6 +642,12 @@
             "$ref": "#/parameters/ClientRequestIdParameter"
           },
           {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          },
+          {
             "$ref": "#/parameters/PreferHeaderParameter"
           },
           {
@@ -688,6 +694,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1593,7 +1605,7 @@
       ],
       "x-ms-enum": {
         "name": "AnalyzerName",
-        "modelAsString": false
+        "modelAsString": true
       },
       "description": "Defines the names of all text analyzers supported by Azure Cognitive Search.",
       "externalDocs": {
@@ -1619,7 +1631,74 @@
       ],
       "x-ms-enum": {
         "name": "TokenizerName",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "classic",
+            "name": "Classic",
+            "description": "Grammar-based tokenizer that is suitable for processing most European-language documents. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicTokenizer.html"
+          },
+          {
+            "value": "edgeNGram",
+            "name": "EdgeNGram",
+            "description": "Tokenizes the input from an edge into n-grams of the given size(s). See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenizer.html"
+          },
+          {
+            "value": "keyword_v2",
+            "name": "Keyword",
+            "description": "Emits the entire input as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
+          },
+          {
+            "value": "letter",
+            "name": "Letter",
+            "description": "Divides text at non-letters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LetterTokenizer.html"
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Divides text at non-letters and converts them to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseTokenizer.html"
+          },
+          {
+            "value": "microsoft_language_tokenizer",
+            "name": "MicrosoftLanguageTokenizer",
+            "description": "Divides text using language-specific rules."
+          },
+          {
+            "value": "microsoft_language_stemming_tokenizer",
+            "name": "MicrosoftLanguageStemmingTokenizer",
+            "description": "Divides text using language-specific rules and reduces words to their base forms."
+          },
+          {
+            "value": "nGram",
+            "name": "NGram",
+            "description": "Tokenizes the input into n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html"
+          },
+          {
+            "value": "path_hierarchy_v2",
+            "name": "PathHierarchy",
+            "description": "Tokenizer for path-like hierarchies. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html"
+          },
+          {
+            "value": "pattern",
+            "name": "Pattern",
+            "description": "Tokenizer that uses regex pattern matching to construct distinct tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html"
+          },
+          {
+            "value": "standard_v2",
+            "name": "Standard",
+            "description": "Standard Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html"
+          },
+          {
+            "value": "uax_url_email",
+            "name": "UaxUrlEmail",
+            "description": "Tokenizes urls and emails as one token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/UAX29URLEmailTokenizer.html"
+          },
+          {
+            "value": "whitespace",
+            "name": "Whitespace",
+            "description": "Divides text at whitespace. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html"
+          }
+        ]
       },
       "description": "Defines the names of all tokenizers supported by Azure Cognitive Search.",
       "externalDocs": {
@@ -1666,7 +1745,179 @@
       ],
       "x-ms-enum": {
         "name": "TokenFilterName",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "arabic_normalization",
+            "name": "ArabicNormalization",
+            "description": "A token filter that applies the Arabic normalizer to normalize the orthography. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ar/ArabicNormalizationFilter.html"
+          },
+          {
+            "value": "apostrophe",
+            "name": "Apostrophe",
+            "description": "Strips all characters after an apostrophe (including the apostrophe itself). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/tr/ApostropheFilter.html"
+          },
+          {
+            "value": "asciifolding",
+            "name": "AsciiFolding",
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ASCIIFoldingFilter.html"
+          },
+          {
+            "value": "cjk_bigram",
+            "name": "CjkBigram",
+            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
+          },
+          {
+            "value": "cjk_width",
+            "name": "CjkWidth",
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKWidthFilter.html"
+          },
+          {
+            "value": "classic",
+            "name": "Classic",
+            "description": "Removes English possessives, and dots from acronyms. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/ClassicFilter.html"
+          },
+          {
+            "value": "common_grams",
+            "name": "CommonGram",
+            "description": "Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/commongrams/CommonGramsFilter.html"
+          },
+          {
+            "value": "edgeNGram_v2",
+            "name": "EdgeNGram",
+            "description": "Generates n-grams of the given size(s) starting from the front or the back of an input token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html"
+          },
+          {
+            "value": "elision",
+            "name": "Elision",
+            "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/util/ElisionFilter.html"
+          },
+          {
+            "value": "german_normalization",
+            "name": "GermanNormalization",
+            "description": "Normalizes German characters according to the heuristics of the German2 snowball algorithm. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/de/GermanNormalizationFilter.html"
+          },
+          {
+            "value": "hindi_normalization",
+            "name": "HindiNormalization",
+            "description": "Normalizes text in Hindi to remove some differences in spelling variations. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/hi/HindiNormalizationFilter.html"
+          },
+          {
+            "value": "indic_normalization",
+            "name": "IndicNormalization",
+            "description": "Normalizes the Unicode representation of text in Indian languages. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/in/IndicNormalizationFilter.html"
+          },
+          {
+            "value": "keyword_repeat",
+            "name": "KeywordRepeat",
+            "description": "Emits each incoming token twice, once as keyword and once as non-keyword. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/KeywordRepeatFilter.html"
+          },
+          {
+            "value": "kstem",
+            "name": "KStem",
+            "description": "A high-performance kstem filter for English. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/en/KStemFilter.html"
+          },
+          {
+            "value": "length",
+            "name": "Length",
+            "description": "Removes words that are too long or too short. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LengthFilter.html"
+          },
+          {
+            "value": "limit",
+            "name": "Limit",
+            "description": "Limits the number of tokens while indexing. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/LimitTokenCountFilter.html"
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Normalizes token text to lower case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/LowerCaseFilter.htm"
+          },
+          {
+            "value": "nGram_v2",
+            "name": "NGram",
+            "description": "Generates n-grams of the given size(s). See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html"
+          },
+          {
+            "value": "persian_normalization",
+            "name": "PersianNormalization",
+            "description": "Applies normalization for Persian. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizationFilter.html"
+          },
+          {
+            "value": "phonetic",
+            "name": "Phonetic",
+            "description": "Create tokens for phonetic matches. See https://lucene.apache.org/core/4_10_3/analyzers-phonetic/org/apache/lucene/analysis/phonetic/package-tree.html"
+          },
+          {
+            "value": "porter_stem",
+            "name": "PorterStem",
+            "description": "Uses the Porter stemming algorithm to transform the token stream. See http://tartarus.org/~martin/PorterStemmer"
+          },
+          {
+            "value": "reverse",
+            "name": "Reverse",
+            "description": "Reverses the token string. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/reverse/ReverseStringFilter.html"
+          },
+          {
+            "value": "scandinavian_normalization",
+            "name": "ScandinavianNormalization",
+            "description": "Normalizes use of the interchangeable Scandinavian characters. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.html"
+          },
+          {
+            "value": "scandinavian_folding",
+            "name": "ScandinavianFoldingNormalization",
+            "description": "Folds Scandinavian characters åÅäæÄÆ-&gt;a and öÖøØ-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/ScandinavianFoldingFilter.html"
+          },
+          {
+            "value": "shingle",
+            "name": "Shingle",
+            "description": "Creates combinations of tokens as a single token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/shingle/ShingleFilter.html"
+          },
+          {
+            "value": "snowball",
+            "name": "Snowball",
+            "description": "A filter that stems words using a Snowball-generated stemmer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/snowball/SnowballFilter.html"
+          },
+          {
+            "value": "sorani_normalization",
+            "name": "SoraniNormalization",
+            "description": "Normalizes the Unicode representation of Sorani text. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.html"
+          },
+          {
+            "value": "stemmer",
+            "name": "Stemmer",
+            "description": "Language specific stemming filter. See https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search#TokenFilters"
+          },
+          {
+            "value": "stopwords",
+            "name": "Stopwords",
+            "description": "Removes stop words from a token stream. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopFilter.html"
+          },
+          {
+            "value": "trim",
+            "name": "Trim",
+            "description": "Trims leading and trailing whitespace from tokens. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TrimFilter.html"
+          },
+          {
+            "value": "truncate",
+            "name": "Truncate",
+            "description": "Truncates the terms to a specific length. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/TruncateTokenFilter.html"
+          },
+          {
+            "value": "unique",
+            "name": "Unique",
+            "description": "Filters out tokens with same text as the previous token. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/RemoveDuplicatesTokenFilter.html"
+          },
+          {
+            "value": "uppercase",
+            "name": "Uppercase",
+            "description": "Normalizes token text to upper case. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/UpperCaseFilter.html"
+          },
+          {
+            "value": "word_delimiter",
+            "name": "WordDelimiter",
+            "description": "Splits words into subwords and performs optional transformations on subword groups."
+          }
+        ]
       },
       "description": "Defines the names of all token filters supported by Azure Cognitive Search.",
       "externalDocs": {
@@ -1680,7 +1931,14 @@
       ],
       "x-ms-enum": {
         "name": "CharFilterName",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "html_strip",
+            "name": "HtmlStrip",
+            "description": "A character filter that attempts to strip out HTML constructs. See https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/charfilter/HTMLStripCharFilter.html"
+          }
+        ]
       },
       "description": "Defines the names of all character filters supported by Azure Cognitive Search.",
       "externalDocs": {
@@ -1701,7 +1959,7 @@
       ],
       "x-ms-enum": {
         "name": "RegexFlags",
-        "modelAsString": false
+        "modelAsString": true
       },
       "description": "Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.",
       "externalDocs": {
@@ -1722,7 +1980,7 @@
       ],
       "x-ms-enum": {
         "name": "DataType",
-        "modelAsString": false
+        "modelAsString": true
       },
       "description": "Defines the data type of a field in a search index."
     },
@@ -3434,7 +3692,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed."
+          "description": "The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed."
         },
         "query": {
           "type": "string",
@@ -3444,7 +3702,7 @@
       "required": [
         "name"
       ],
-      "description": "Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed."
+      "description": "Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed."
     },
     "DataChangeDetectionPolicy": {
       "discriminator": "@odata.type",
@@ -3526,7 +3784,25 @@
       ],
       "x-ms-enum": {
         "name": "DataSourceType",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "azuresql",
+            "name": "AzureSql"
+          },
+          {
+            "value": "cosmosdb",
+            "name": "CosmosDb"
+          },
+          {
+            "value": "azureblob",
+            "name": "AzureBlob"
+          },
+          {
+            "value": "azuretable",
+            "name": "AzureTable"
+          }
+        ]
       },
       "description": "Defines the type of a datasource."
     },
@@ -4538,7 +4814,8 @@
           "description": "A list of skills in the skillset."
         },
         "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServices",
+          "x-ms-client-name": "CognitiveServicesAccount",
+          "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
         "@odata.etag": {
@@ -4557,7 +4834,7 @@
       },
       "description": "A list of skills."
     },
-    "CognitiveServices": {
+    "CognitiveServicesAccount": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -4572,21 +4849,21 @@
       ],
       "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
     },
-    "DefaultCognitiveServices": {
+    "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ]
     },
-    "CognitiveServicesByKey": {
+    "CognitiveServicesAccountKey": {
       "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ],
       "properties": {
@@ -4870,39 +5147,6 @@
       },
       "description": "Text analytics entity recognition."
     },
-    "NamedEntityRecognitionSkill": {
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Skill"
-        }
-      ],
-      "properties": {
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamedEntityCategory",
-            "x-nullable": false
-          },
-          "description": "A list of named entity categories."
-        },
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/NamedEntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
-        },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "x-nullable": true,
-          "description": "A value between 0 and 1 to indicate the confidence of the results."
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition"
-      },
-      "description": "Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.",
-      "x-ms-external": true
-    },
     "SentimentSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
       "allOf": [
@@ -5146,7 +5390,69 @@
       ],
       "x-ms-enum": {
         "name": "SentimentSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian (Bokmaal)"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          }
+        ]
       },
       "description": "The language codes supported for input text by SentimentSkill."
     },
@@ -5172,7 +5478,73 @@
       ],
       "x-ms-enum": {
         "name": "KeyPhraseExtractionSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian (Bokmaal)"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-BR",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          }
+        ]
       },
       "description": "The language codes supported for input text by KeyPhraseExtractionSkill."
     },
@@ -5208,7 +5580,113 @@
       ],
       "x-ms-enum": {
         "name": "OcrSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "zh-Hans",
+            "description": "Chinese-Simplified"
+          },
+          {
+            "value": "zh-Hant",
+            "description": "Chinese-Traditional"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian (Bokmaal)"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt",
+            "description": "Portuguese"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "ro",
+            "description": "Romanian"
+          },
+          {
+            "value": "sr-Cyrl",
+            "description": "Serbian (Cyrillic, Serbia)"
+          },
+          {
+            "value": "sr-Latn",
+            "description": "Serbian (Latin, Serbia)"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          }
+        ]
       },
       "description": "The language codes supported for input by OcrSkill."
     },
@@ -5227,48 +5705,174 @@
       ],
       "x-ms-enum": {
         "name": "SplitSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "pt",
+            "description": "Portuguese"
+          }
+        ]
       },
       "description": "The language codes supported for input text by SplitSkill."
     },
     "EntityRecognitionSkillLanguage": {
       "type": "string",
       "enum": [
-        "de",
+        "ar",
+        "cs",
+        "zh-Hans",
+        "zh-Hant",
+        "da",
+        "nl",
         "en",
-        "es",
+        "fi",
         "fr",
-        "it"
+        "de",
+        "el",
+        "hu",
+        "it",
+        "ja",
+        "ko",
+        "no",
+        "pl",
+        "pt-PT",
+        "pt-BR",
+        "ru",
+        "es",
+        "sv",
+        "tr"
       ],
       "x-ms-enum": {
         "name": "EntityRecognitionSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
+          {
+            "value": "zh-Hans",
+            "description": "Chinese-Simplified"
+          },
+          {
+            "value": "zh-Hant",
+            "description": "Chinese-Traditional"
+          },
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "no",
+            "description": "Norwegian (Bokmaal)"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt-PT",
+            "description": "Portuguese (Portugal)"
+          },
+          {
+            "value": "pt-BR",
+            "description": "Portuguese (Brazil)"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          }
+        ]
       },
       "description": "The language codes supported for input text by EntityRecognitionSkill."
-    },
-    "NamedEntityRecognitionSkillLanguage": {
-      "type": "string",
-      "enum": [
-        "ar",
-        "cs",
-        "da",
-        "de",
-        "en",
-        "es",
-        "fi",
-        "fr",
-        "he",
-        "hu",
-        "it",
-        "ko",
-        "pt-br",
-        "pt"
-      ],
-      "x-ms-enum": {
-        "name": "NamedEntityRecognitionSkillLanguage",
-        "modelAsString": false
-      },
-      "description": "The language codes supported for input text by NamedEntityRecognitionSkill."
     },
     "TextTranslationSkillLanguage": {
       "type": "string",
@@ -5339,7 +5943,261 @@
       ],
       "x-ms-enum": {
         "name": "TextTranslationSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "af",
+            "description": "Afrikaans"
+          },
+          {
+            "value": "ar",
+            "description": "Arabic"
+          },
+          {
+            "value": "bn",
+            "description": "Bangla"
+          },
+          {
+            "value": "bs",
+            "description": "Bosnian (Latin)"
+          },
+          {
+            "value": "bg",
+            "description": "Bulgarian"
+          },
+          {
+            "value": "yue",
+            "description": "Cantonese (Traditional)"
+          },
+          {
+            "value": "ca",
+            "description": "Catalan"
+          },
+          {
+            "value": "zh-Hans",
+            "description": "Chinese Simplified"
+          },
+          {
+            "value": "zh-Hant",
+            "description": "Chinese Traditional"
+          },
+          {
+            "value": "hr",
+            "description": "Croatian"
+          },
+          {
+            "value": "cs",
+            "description": "Czech"
+          },
+          {
+            "value": "da",
+            "description": "Danish"
+          },
+          {
+            "value": "nl",
+            "description": "Dutch"
+          },
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "et",
+            "description": "Estonian"
+          },
+          {
+            "value": "fj",
+            "description": "Fijian"
+          },
+          {
+            "value": "fil",
+            "description": "Filipino"
+          },
+          {
+            "value": "fi",
+            "description": "Finnish"
+          },
+          {
+            "value": "fr",
+            "description": "French"
+          },
+          {
+            "value": "de",
+            "description": "German"
+          },
+          {
+            "value": "el",
+            "description": "Greek"
+          },
+          {
+            "value": "ht",
+            "description": "Haitian Creole"
+          },
+          {
+            "value": "he",
+            "description": "Hebrew"
+          },
+          {
+            "value": "hi",
+            "description": "Hindi"
+          },
+          {
+            "value": "mww",
+            "description": "Hmong Daw"
+          },
+          {
+            "value": "hu",
+            "description": "Hungarian"
+          },
+          {
+            "value": "is",
+            "description": "Icelandic"
+          },
+          {
+            "value": "id",
+            "description": "Indonesian"
+          },
+          {
+            "value": "it",
+            "description": "Italian"
+          },
+          {
+            "value": "ja",
+            "description": "Japanese"
+          },
+          {
+            "value": "sw",
+            "description": "Kiswahili"
+          },
+          {
+            "value": "tlh",
+            "description": "Klingon"
+          },
+          {
+            "value": "ko",
+            "description": "Korean"
+          },
+          {
+            "value": "lv",
+            "description": "Latvian"
+          },
+          {
+            "value": "lt",
+            "description": "Lithuanian"
+          },
+          {
+            "value": "mg",
+            "description": "Malagasy"
+          },
+          {
+            "value": "ms",
+            "description": "Malay"
+          },
+          {
+            "value": "mt",
+            "description": "Maltese"
+          },
+          {
+            "value": "nb",
+            "description": "Norwegian"
+          },
+          {
+            "value": "fa",
+            "description": "Persian"
+          },
+          {
+            "value": "pl",
+            "description": "Polish"
+          },
+          {
+            "value": "pt",
+            "description": "Portuguese"
+          },
+          {
+            "value": "otq",
+            "description": "Queretaro Otomi"
+          },
+          {
+            "value": "ro",
+            "description": "Romanian"
+          },
+          {
+            "value": "ru",
+            "description": "Russian"
+          },
+          {
+            "value": "sm",
+            "description": "Samoan"
+          },
+          {
+            "value": "sr-Cyrl",
+            "description": "Serbian (Cyrillic)"
+          },
+          {
+            "value": "sr-Latn",
+            "description": "Serbian (Latin)"
+          },
+          {
+            "value": "sk",
+            "description": "Slovak"
+          },
+          {
+            "value": "sl",
+            "description": "Slovenian"
+          },
+          {
+            "value": "es",
+            "description": "Spanish"
+          },
+          {
+            "value": "sv",
+            "description": "Swedish"
+          },
+          {
+            "value": "ty",
+            "description": "Tahitian"
+          },
+          {
+            "value": "ta",
+            "description": "Tamil"
+          },
+          {
+            "value": "te",
+            "description": "Telugu"
+          },
+          {
+            "value": "th",
+            "description": "Thai"
+          },
+          {
+            "value": "to",
+            "description": "Tongan"
+          },
+          {
+            "value": "tr",
+            "description": "Turkish"
+          },
+          {
+            "value": "uk",
+            "description": "Ukrainian"
+          },
+          {
+            "value": "ur",
+            "description": "Urdu"
+          },
+          {
+            "value": "vi",
+            "description": "Vietnamese"
+          },
+          {
+            "value": "cy",
+            "description": "Welsh"
+          },
+          {
+            "value": "yua",
+            "description": "Yucatec Maya"
+          }
+        ]
       },
       "description": "The language codes supported for input text by TextTranslationSkill."
     },
@@ -5351,7 +6209,17 @@
       ],
       "x-ms-enum": {
         "name": "ImageAnalysisSkillLanguage",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "en",
+            "description": "English"
+          },
+          {
+            "value": "zh",
+            "description": "Chinese"
+          }
+        ]
       },
       "description": "The language codes supported for input by ImageAnalysisSkill."
     },

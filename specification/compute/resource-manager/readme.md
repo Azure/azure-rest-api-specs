@@ -650,7 +650,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-disks-2018-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.compute.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2018_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2018_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -663,7 +663,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-compute-only-2017-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.compute.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_12_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -676,7 +676,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-skus-2017-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.compute.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -689,7 +689,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-compute-2017-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.compute.v2017_03_30
-  output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_03_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/compute/mgmt-v2017_03_30
 regenerate-manager: true
 generate-interface: true
 ```

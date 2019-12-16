@@ -26,9 +26,18 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-2020-01-01
 ```
 
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
+```
 
 ### Tag: package-2019-11-01
 
@@ -38,6 +47,7 @@ These settings apply only when `--tag=package-2019-11` is specified on the comma
 input-file:
   - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
 ```
+
 ### Tag: package-2019-06-01
 
 These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
@@ -128,11 +138,25 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/ser
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-01-01
   - tag: package-2019-11-01
   - tag: package-2019-06-01
   - tag: package-2019-05-01
   - tag: package-2018-11-19
   - tag: package-2018-03-preview
+```
+
+### Tag: package-2020-01-01 and java
+
+These settings apply only when `--tag=package-2020-01-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-01-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_01_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-11-01 and java
@@ -143,7 +167,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-11-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_11_01
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_11_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -156,7 +180,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -169,7 +193,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2019_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -182,7 +206,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2018_11_19
 regenerate-manager: true
 generate-interface: true
 ```
@@ -195,7 +219,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningservices.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -212,6 +236,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
