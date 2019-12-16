@@ -117,7 +117,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.maps.v2017_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/maps/resource-manager/v2017_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/maps/mgmt-v2017_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -130,7 +130,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.maps.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/maps/resource-manager/v2018_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/maps/mgmt-v2018_05_01
 regenerate-manager: true
 generate-interface: true
 ```

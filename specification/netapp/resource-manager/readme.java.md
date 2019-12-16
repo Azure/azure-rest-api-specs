@@ -31,7 +31,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-netapp-2019-08-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.netapp.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2019_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -44,7 +44,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-netapp-2019-07-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.netapp.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2019_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -57,7 +57,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-netapp-2019-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.netapp.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -70,7 +70,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-netapp-2019-05-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.netapp.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2019_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -83,7 +83,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2017-08-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.netapp.v2017_08_15
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2017_08_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/netapp/mgmt-v2017_08_15
 regenerate-manager: true
 generate-interface: true
 ```

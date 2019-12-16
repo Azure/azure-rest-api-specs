@@ -26,7 +26,16 @@ These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-07
+tag: package-2019-08
+```
+
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
 ```
 
 ### Tag: package-2019-07
@@ -37,6 +46,7 @@ These settings apply only when `--tag=package-2019-07` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
 ```
+
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -139,7 +149,20 @@ java:
 batch:
   - tag: package-2019-03
   - tag: package-2019-07
+  - tag: package-2019-08
+```
 
+### Tag: package-2019-08 and java
+
+These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databoxedge.v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_08_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-07 and java
@@ -150,7 +173,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -163,7 +186,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databoxedge.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databoxedge/mgmt-v2019_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -180,6 +203,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-08-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 

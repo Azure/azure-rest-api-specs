@@ -61,6 +61,15 @@ input-file:
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
+### Tag: package-2020-01-01-privatepreview
+
+These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
 
 ---
 # Code Generation
@@ -149,6 +158,7 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 
 ```
 
