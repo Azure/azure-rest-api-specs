@@ -211,7 +211,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSourceListResult"
+              "$ref": "#/definitions/ListDataSourcesResult"
             }
           }
         }
@@ -518,7 +518,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexerListResult"
+              "$ref": "#/definitions/ListIndexersResult"
             }
           }
         }
@@ -790,7 +790,7 @@
           "200": {
             "description": "The list is successfully returned.",
             "schema": {
-              "$ref": "#/definitions/SkillsetListResult"
+              "$ref": "#/definitions/ListSkillsetsResult"
             }
           }
         }
@@ -1021,7 +1021,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/SynonymMapListResult"
+              "$ref": "#/definitions/ListSynonymMapsResult"
             }
           }
         }
@@ -1144,7 +1144,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexListResult"
+              "$ref": "#/definitions/ListIndexesResult"
             }
           }
         }
@@ -1341,7 +1341,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexGetStatisticsResult"
+              "$ref": "#/definitions/GetIndexStatisticsResult"
             }
           }
         }
@@ -3853,7 +3853,7 @@
       ],
       "description": "Represents a datasource definition, which can be used to configure an indexer."
     },
-    "DataSourceListResult": {
+    "ListDataSourcesResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "DataSources",
@@ -4040,7 +4040,7 @@
       },
       "description": "Represents an indexer."
     },
-    "IndexerListResult": {
+    "ListIndexersResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Indexers",
@@ -4763,7 +4763,7 @@
       ],
       "description": "Represents a search index definition, which describes the fields and search behavior of an index."
     },
-    "IndexGetStatisticsResult": {
+    "GetIndexStatisticsResult": {
       "properties": {
         "documentCount": {
           "type": "integer",
@@ -4782,7 +4782,7 @@
       },
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
-    "IndexListResult": {
+    "ListIndexesResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Indexes",
@@ -4814,7 +4814,8 @@
           "description": "A list of skills in the skillset."
         },
         "cognitiveServices": {
-          "$ref": "#/definitions/CognitiveServices",
+          "x-ms-client-name": "CognitiveServicesAccount",
+          "$ref": "#/definitions/CognitiveServicesAccount",
           "description": "Details about cognitive services to be used when running skills."
         },
         "@odata.etag": {
@@ -4833,7 +4834,7 @@
       },
       "description": "A list of skills."
     },
-    "CognitiveServices": {
+    "CognitiveServicesAccount": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -4848,21 +4849,21 @@
       ],
       "description": "Abstract base class for describing any cognitive service resource attached to the skillset."
     },
-    "DefaultCognitiveServices": {
+    "DefaultCognitiveServicesAccount": {
       "description": "An empty object that represents the default cognitive service resource for a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.DefaultCognitiveServices",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ]
     },
-    "CognitiveServicesByKey": {
+    "CognitiveServicesAccountKey": {
       "description": "A cognitive service resource provisioned with a key that is attached to a skillset.",
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CognitiveServicesByKey",
       "allOf": [
         {
-          "$ref": "#/definitions/CognitiveServices"
+          "$ref": "#/definitions/CognitiveServicesAccount"
         }
       ],
       "properties": {
@@ -5275,7 +5276,7 @@
       },
       "description": "A dictionary of http request headers."
     },
-    "SkillsetListResult": {
+    "ListSkillsetsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Skillsets",
@@ -6262,7 +6263,7 @@
       ],
       "description": "Represents a synonym map definition."
     },
-    "SynonymMapListResult": {
+    "ListSynonymMapsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "SynonymMaps",

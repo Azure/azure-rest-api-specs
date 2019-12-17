@@ -45,6 +45,9 @@
         "x-ms-examples": {
           "Create or update a policy definition": {
             "$ref": "./examples/createOrUpdatePolicyDefinition.json"
+          },
+          "Create or update a policy definition with advanced parameters": {
+            "$ref": "./examples/createOrUpdatePolicyDefinitionAdvancedParams.json"
           }
         },
         "parameters": [
@@ -520,58 +523,61 @@
       },
       "description": "The policy definition properties."
     },
+    "ParameterDefinitionsValue": {
+      "properties": {
+        "type": {
+          "description": "The data type of the parameter.",
+          "type": "string",
+          "enum": [
+            "String",
+            "Array",
+            "Object",
+            "Boolean",
+            "Integer",
+            "Float",
+            "DateTime"
+          ],
+          "x-ms-enum": {
+            "name": "parameterType",
+            "modelAsString": true
+          }
+        },
+        "allowedValues": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "The allowed values for the parameter."
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "The default value for the parameter if no value is provided."
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The display name for the parameter."
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the parameter."
+            }
+          },
+          "additionalProperties": {
+            "type": "object"
+          },
+          "description": "General metadata for the parameter."
+        }
+      },
+      "description": "The definition of a parameter that can be provided to the policy."
+    },
     "ParameterDefinitions": {
       "description": "The parameter definitions for parameters used in the policy. The keys are the parameter names.",
       "type": "object",
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "description": "The data type of the parameter.",
-            "type": "string",
-            "enum": [
-              "String",
-              "Array",
-              "Object",
-              "Boolean",
-              "Integer",
-              "Float",
-              "DateTime"
-            ],
-            "x-ms-enum": {
-              "name": "parameterType",
-              "modelAsString": true
-            }
-          },
-          "allowedValues": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            },
-            "description": "The allowed values for the parameter."
-          },
-          "defaultValue": {
-            "type": "object",
-            "description": "The default value for the parameter if no value is provided."
-          },
-          "metadata": {
-            "type": "object",
-            "properties": {
-              "displayName": {
-                "type": "string",
-                "description": "The display name for the parameter."
-              },
-              "description": {
-                "type": "string",
-                "description": "The description of the parameter."
-              }
-            },
-            "additionalProperties": {
-              "type": "object"
-            },
-            "description": "General metadata for the parameter."
-          }
-        }
+        "$ref": "#/definitions/ParameterDefinitionsValue"
       }
     },
     "PolicyDefinition": {
