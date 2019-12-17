@@ -688,10 +688,13 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully created communication.",
+                        "description": "OK - Communication created successfully.",
                         "schema": {
                             "$ref": "#/definitions/CommunicationDetails"
                         }
+                    },
+                    "202": {
+                        "description": "Accepted, Communication will be created asynchronously"
                     },
                     "default": {
                         "description": "Error response describing why the operation failed.",
@@ -699,6 +702,10 @@
                             "$ref": "#/definitions/ExceptionResponse"
                         }
                     }
+                },
+                "x-ms-long-running-operation": true,
+                "x-ms-long-running-operation-options": {
+                    "final-state-via": "azure-async-operation"
                 },
                 "x-ms-examples": {
                     "AddCommunicationToSubscriptionTicket": {
