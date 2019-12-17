@@ -38,3 +38,13 @@
       to: armapireview@microsoft.com
     description: "send email to ARM team for over 5 days PRs labelled with WaitForARMFeedback"
     name: "send email to ARM team"
+
+- scheduleTask:
+    action: sendEmailToAssignee
+    scope: issue
+    args:
+      booleanFilterExpression: "triage"
+      limit: 48h
+      message: "<p> Dear Swagger reviewer, <br> <br> Please response to the issue ${URL}. The issue isn't updated in 48 hours. <br> <hr /> <br> Quick info. <ul>  <li>If you have any question, please send email to Visual Studio China Swagger and Tool team vscswagger@microsoft.com.</li>  </ul> Best regards, <br> Azure Management Experience </p>"
+      subject: "Action Required: Please respond to issue ${URL}"
+      cc: Ankun.Ning@microsoft.com
