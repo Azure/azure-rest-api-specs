@@ -2231,7 +2231,17 @@
         "replicationSchedule": {
           "type": "string",
           "description": "Schedule",
-          "enum": ["_10minutely, hourly, daily, weekly, monthly"]
+          "enum": [
+            "_10minutely",
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationSchedule",
+            "modelAsString": true
+          }
         },
         "ownerId": {
           "type": "string",
