@@ -2167,9 +2167,7 @@
               "title": "Replication",
               "description": "Replication properties",
               "type": "object",
-              "items": {
-                "$ref": "#/definitions/replicationObject"
-              }
+              "$ref": "#/definitions/replicationObject"
             }
           }
         },
@@ -2233,7 +2231,7 @@
         "replicationSchedule": {
           "type": "string",
           "description": "Schedule",
-          "example": "10minutely, hourly, daily, weekly, monthly"
+          "enum": ["_10minutely, hourly, daily, weekly, monthly"]
         },
         "ownerId": {
           "type": "string",
