@@ -219,6 +219,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-12-01-preview/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
