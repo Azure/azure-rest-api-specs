@@ -3774,6 +3774,10 @@
           "type": "object",
           "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
         },
+        "mapComplexValuesToString": {
+          "type": "object",
+          "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
+        },
         "mappings": {
           "type": "object",
           "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
