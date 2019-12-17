@@ -388,7 +388,7 @@
                     {
                         "name": "supportTicketName",
                         "in": "path",
-                        "description": "Support ticket id.",
+                        "description": "Support ticket name.",
                         "required": true,
                         "type": "string"
                     },
@@ -439,7 +439,7 @@
                     {
                         "name": "supportTicketName",
                         "in": "path",
-                        "description": "Support ticket id.",
+                        "description": "Support ticket name.",
                         "required": true,
                         "type": "string"
                     },
@@ -449,7 +449,7 @@
                         "description": "Support ticket request payload.",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/CreateSupportTicket"
+                            "$ref": "#/definitions/SupportTicketDetails"
                         }
                     },
                     {
@@ -485,6 +485,58 @@
                     "Create a ticket for Subscription Management related issues": { "$ref": "./examples/CreateSubMgmtSupportTicketForSubscription.json" },
                     "Create a ticket for Technical issue related to a specific resource": { "$ref": "./examples/CreateTechnicalSupportTicketForSubscription.json" },
                     "Create a ticket to request Quota increase for cores": { "$ref": "./examples/CreateCoresQuotaTicketForSubscription.json" }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/checkNameAvailability": {
+            "post": {
+                "tags": [
+                    "CheckNameAvailabilityForSupportTicketCommunication"
+                ],
+                "description": "Check the availability of a resource name.",
+                "operationId": "CheckNameAvailabilityForSupportTicketCommunication",
+                "x-ms-examples": {
+                    "CheckNameAvailabilityWithSubscription": {
+                        "$ref": "./examples/CheckNameAvailabilityForSupportTicketCommunication.json"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "supportTicketName",
+                        "in": "path",
+                        "description": "Support ticket name.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "checkNameAvailabilityInput",
+                        "in": "body",
+                        "description": "Input to check.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CheckNameAvailabilityInput"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/CheckNameAvailabilityOutput"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ExceptionResponse"
+                        }
+                    }
                 }
             }
         },
@@ -559,14 +611,14 @@
                     {
                         "name": "supportTicketName",
                         "in": "path",
-                        "description": "Support ticket id.",
+                        "description": "Support ticket name.",
                         "required": true,
                         "type": "string"
                     },
                     {
                         "name": "communicationName",
                         "in": "path",
-                        "description": "Communication id.",
+                        "description": "Communication name.",
                         "required": true,
                         "type": "string"
                     },
@@ -596,30 +648,35 @@
                         "$ref": "./examples/GetCommunicationDetailsForSubscriptionSupportTicket.json"
                     }
                 }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Support/supportTickets/{supportTicketName}/addCommunication": {
-            "post": {
+            },
+            "put": {
                 "tags": [
                     "Communications"
                 ],
-                "description": "Adds a communication to a support ticket.",
-                "operationId": "AddCommunicationToSubscriptionTicket",
+                "description": "Creates a support ticket communication.",
+                "operationId": "CreateSupportTicketCommunication",
                 "parameters": [
                     {
                         "name": "supportTicketName",
                         "in": "path",
-                        "description": "Support ticket id.",
+                        "description": "Support ticket name.",
                         "required": true,
                         "type": "string"
                     },
                     {
-                        "name": "addCommunication",
+                        "name": "communicationName",
+                        "in": "path",
+                        "description": "Communication name.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "createCommunicationParameters",
                         "in": "body",
                         "description": "Communication object.",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AddCommunication"
+                            "$ref": "#/definitions/CommunicationDetails"
                         }
                     },
                     {
@@ -645,7 +702,7 @@
                 },
                 "x-ms-examples": {
                     "AddCommunicationToSubscriptionTicket": {
-                        "$ref": "./examples/AddCommunicationToSubscriptionTicket.json"
+                        "$ref": "./examples/CreateSupportTicketCommunication.json"
                     }
                 }
             }
@@ -812,12 +869,15 @@
                 },
                 "type": {
                     "type": "string",
-                    "enum": [ "Microsoft.Support/supportTickets" ],
+                    "enum": [
+                        "Microsoft.Support/supportTickets",
+                        "Microsoft.Support/communications"
+                    ],
                     "x-ms-enum": {
                         "name": "Type",
                         "modelAsString": false
                     },
-                    "description": "The type of resource, Microsoft.Support/supportTickets"
+                    "description": "The type of resource."
                 }
             }
         },
@@ -904,6 +964,7 @@
             }
         },
         "CommunicationDetails": {
+            "x-ms-azure-resource": true,
             "description": "Object that represents Communication resource",
             "type": "object",
             "properties": {
@@ -932,8 +993,8 @@
         "CommunicationDetailsProperties": {
             "description": "Describes the properties of a communication resource.",
             "required": [
-                "communicationType",
-                "communicationDirection"
+                "subject",
+                "body"
             ],
             "type": "object",
             "properties": {
@@ -947,7 +1008,8 @@
                     "x-ms-enum": {
                         "name": "CommunicationType",
                         "modelAsString": true
-                    }
+                    },
+                    "readOnly": true
                 },
                 "communicationDirection": {
                     "description": "Direction of communication.",
@@ -959,7 +1021,8 @@
                     "x-ms-enum": {
                         "name": "CommunicationDirection",
                         "modelAsString": true
-                    }
+                    },
+                    "readOnly": true
                 },
                 "sender": {
                     "description": "Sender of the communication.",
@@ -976,25 +1039,39 @@
                 "createdDate": {
                     "format": "date-time",
                     "description": "Time in UTC (ISO 8601 format) when the communication was created.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },
         "SupportTicketDetailsProperties": {
             "description": "Describes the properties of a support ticket.",
+            "required": [
+                "serviceId",
+                "title",
+                "description",
+                "problemClassificationId",
+                "severity",
+                "contactDetails"
+            ],
             "type": "object",
             "properties": {
                 "supportTicketId": {
-                    "description": "System generated support ticket id.",
+                    "description": "System generated support ticket name.",
                     "type": "string"
                 },
                 "description": {
                     "description": "Description of the support ticket.",
                     "type": "string"
                 },
-                "problemClassificationDetails": {
-                    "$ref": "#/definitions/ProblemClassificationDetails",
-                    "description": "This is the issue or the problem details that the support ticket is opened for."
+                "problemClassificationId": {
+                    "description": "This is the resource id of ProblemClassification resource associated with the support ticket. This is the issue or the problem that the support ticket is opened for.",
+                    "type": "string"
+                },
+                "problemClassificationDisplayName": {
+                    "type": "string",
+                    "description": "Localized name of problem classification.",
+                    "readOnly": true
                 },
                 "severity": {
                     "description": "Severity of the support ticket.",
@@ -1011,13 +1088,15 @@
                 },
                 "enrollmentId": {
                     "description": "Enrollment ID associated with the support ticket.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "productionOutage": {
                     "description": "Indicates if this is a production outage.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "readOnly": true
                 },
-                "is24X7Response": {
+                "require24X7Response": {
                     "description": "Indicates if this is a 24x7 support ticket.",
                     "type": "boolean"
                 },
@@ -1035,29 +1114,43 @@
                 },
                 "supportPlanType": {
                     "description": "Support plan type associated with the support ticket.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "title": {
                     "description": "Title of the support ticket.",
                     "type": "string"
                 },
-                "serviceDetails": {
-                    "$ref": "#/definitions/ServiceDetails",
-                    "description": "This is the Azure service details for which the support ticket was opened."
+                "problemStartTime": {
+                    "format": "date-time",
+                    "description": "Time in UTC (ISO 8601 format) when the problem started.",
+                    "type": "string"
+                },
+                "serviceId": {
+                    "description": "This is the resource id of Service resource associated with the support ticket. This is the Azure service for which the support ticket was opened.",
+                    "type": "string"
+                },
+                "serviceDisplayName": {
+                    "type": "string",
+                    "description": "Localized name of Azure service.",
+                    "readOnly": true
                 },
                 "status": {
                     "description": "Status of the support ticket.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "createdDate": {
                     "format": "date-time",
                     "description": "Time in UTC (ISO 8601 format) when support ticket was created.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "modifiedDate": {
                     "format": "date-time",
                     "description": "Time in UTC (ISO 8601 format) when support ticket was last modified.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "technicalTicketDetails": {
                     "$ref": "#/definitions/TechnicalTicketDetails",
@@ -1069,34 +1162,6 @@
                 }
             }
         },
-        "ServiceDetails": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "Id of the resource."
-                },
-                "displayName": {
-                    "type": "string",
-                    "description": "Localized name of Azure service."
-                }
-            },
-            "description": "The details of the Azure service for which this support ticket was created."
-        },
-        "ProblemClassificationDetails": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "Id of the resource."
-                },
-                "displayName": {
-                    "type": "string",
-                    "description": "Localized name of problem classification."
-                }
-            },
-            "description": "The details of the problem classification for which this support ticket was created."
-        },
         "ServiceLevelAgreement": {
             "description": "Service Level Agreement details for a support ticket.",
             "type": "object",
@@ -1104,16 +1169,19 @@
                 "startTime": {
                     "format": "date-time",
                     "description": "Time in UTC (ISO 8601 format) when SLA started.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "expirationTime": {
                     "format": "date-time",
                     "description": "Time in UTC (ISO 8601 format) when SLA expires.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 },
                 "slaMinutes": {
                     "description": "Service Level Agreement in minutes",
-                    "type": "integer"
+                    "type": "integer",
+                    "readOnly": true
                 }
             }
         },
@@ -1123,7 +1191,8 @@
             "properties": {
                 "emailAddress": {
                     "description": "Support engineer email address.",
-                    "type": "string"
+                    "type": "string",
+                    "readOnly": true
                 }
             }
         },
@@ -1182,99 +1251,6 @@
                 }
             },
             "description": "The error details."
-        },
-        "CreateSupportTicket": {
-            "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Service and subscription limits(quotas) and Technical as determined by service id in the request payload.",
-            "required": [
-                "properties"
-            ],
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "Id of the resource",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "name": {
-                    "description": "Name of the resource",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "type": {
-                    "description": "Type of the resource 'Microsoft.Support/supportTickets",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/CreateSupportTicketProperties",
-                    "description": "Properties of support ticket."
-                }
-            }
-        },
-        "CreateSupportTicketProperties": {
-            "description": "Describes the payload for creating a support ticket. Customers can create tickets for issues relating to Billing, Subscription Management, Service and subscription limits(quotas) and Technical as determined by service id in the request payload.",
-            "required": [
-                "serviceId",
-                "title",
-                "description",
-                "problemClassificationId",
-                "severity",
-                "contactDetails"
-            ],
-            "type": "object",
-            "properties": {
-                "serviceId": {
-                    "description": "Azure service for which the support ticket will be created.",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "Title of the support ticket.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "Description of the support ticket.",
-                    "type": "string"
-                },
-                "problemStartTime": {
-                    "format": "date-time",
-                    "description": "Time in UTC (ISO 8601 format) when the problem started.",
-                    "type": "string"
-                },
-                "problemClassificationId": {
-                    "description": "Problem classification id associated with the support ticket. This indicates the problem or the issue that the ticket is being opened for.",
-                    "type": "string"
-                },
-                "severity": {
-                    "description": "The severity associated with the support ticket.",
-                    "enum": [
-                        "minimal",
-                        "moderate",
-                        "critical"
-                    ],
-                    "type": "string",
-                    "x-ms-enum": {
-                        "name": "SeverityLevel",
-                        "modelAsString": true
-                    }
-                },
-                "require24X7Response": {
-                    "description": "Indicates if a 24x7 response is requested by the support ticket creator.",
-                    "type": "boolean"
-                },
-                "contactDetails": {
-                    "$ref": "#/definitions/ContactProfile",
-                    "description": "User contact details associated with the support ticket."
-                },
-                "technicalTicketDetails": {
-                    "$ref": "#/definitions/TechnicalTicketDetails",
-                    "description": "Additional ticket details associated with a technical support ticket request. "
-                },
-                "quotaTicketDetails": {
-                    "$ref": "#/definitions/QuotaTicketDetails",
-                    "description": "Additional ticket details associated with a quota support ticket request. "
-                }
-            }
         },
         "ContactProfile": {
             "description": "Contact information associated with support ticket.",
@@ -1436,28 +1412,6 @@
                 }
             }
 
-        },
-        "AddCommunication": {
-            "description": "Communication details.",
-            "required": [
-                "subject",
-                "body"
-            ],
-            "type": "object",
-            "properties": {
-                "sender": {
-                    "description": "Sender of the message. Defaulted to the UPN of the logged in user is this is not provided. ",
-                    "type": "string"
-                },
-                "subject": {
-                    "description": "Subject in plain text",
-                    "type": "string"
-                },
-                "body": {
-                    "description": "Body in plain text",
-                    "type": "string"
-                }
-            }
         },
         "UpdateSupportTicket": {
             "description": "Updates support ticket.",
