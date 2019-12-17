@@ -1453,9 +1453,9 @@
           "readOnly": true,
           "description": "The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning."
         },
-        "resourceCmkUri": {
-          "description": "The keyUri of the customer managed key to encrypt the data at rest.",
-          "type": "string"
+        "encryption": {
+          "$ref": "#/definitions/EncryptionProperty",
+          "description": "The encryption settings of Azure ML workspace."
         },
         "hbiWorkspace": {
           "type": "boolean",
@@ -3191,6 +3191,40 @@
         }
       },
       "description": "Properties of a private link resource."
-    }
+    },
+    "EncryptionProperty": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether or not the encryption is enabled for the workspace.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EncryptionStatus",
+            "modelAsString": true
+          }
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Customer Key vault properties."
+        }
+      }
+    },
+    "KeyVaultProperties": {
+     "type": "object",
+     "properties": {
+       "keyIdentifier": {
+         "description": "Key vault uri to access the encryption key.",
+         "type": "string"
+       },
+       "identityClientId": {
+         "description": "For future use - The client id of the identity which will be used to access key vault.",
+         "type": "string"
+       }
+     }
+   }
   }
 }
