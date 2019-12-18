@@ -396,7 +396,7 @@
         }
       }
     },
-    "/providers/Microsoft.ResourceHealth/emergingIssues": {
+    "/providers/Microsoft.ResourceHealth/emergingIssues/{issueName}": {
       "get": {
         "tags": [
           "EmergingIssues"
@@ -404,6 +404,9 @@
         "operationId": "EmergingIssues_Get",
         "description": "Gets Azure services' emerging issues.",
         "parameters": [
+          {
+            "$ref": "#/parameters/IssueNameParameter"
+          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           }
@@ -813,7 +816,8 @@
           "description": "The emerging issue entity properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "emergingIssue": {
       "type": "object",
@@ -907,6 +911,17 @@
       "required": true,
       "type": "string",
       "description": "Client Api Version."
+    },
+    "IssueNameParameter": {
+      "name": "issueName",
+      "in": "path",
+      "description": "The name of the emerging issue.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
