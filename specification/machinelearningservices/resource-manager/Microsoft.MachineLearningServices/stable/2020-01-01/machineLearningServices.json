@@ -3193,10 +3193,6 @@
       "description": "Properties of a private link resource."
     },
     "EncryptionProperty": {
-      "type": "object",
-      "required": [
-        "keyVaultProperties"
-      ],
       "properties": {
         "status": {
           "description": "Indicates whether or not the encryption is enabled for the workspace.",
@@ -3214,23 +3210,27 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Customer Key vault properties."
         }
-      }
+      },
+      "required": [
+        "keyVaultProperties"
+      ],
+      "type": "object"
     },
     "KeyVaultProperties": {
-      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "description": "Key vault uri to access the encryption key.",
+          "type": "string"
+        },
+        "identityClientId": {
+          "description": "For future use - The client id of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      },
       "required": [
         "keyIdentifier"
       ],
-     "properties": {
-       "keyIdentifier": {
-         "description": "Key vault uri to access the encryption key.",
-         "type": "string"
-       },
-       "identityClientId": {
-         "description": "For future use - The client id of the identity which will be used to access key vault.",
-         "type": "string"
-       }
-     }
-   }
+      "type": "object"
+    }
   }
 }
