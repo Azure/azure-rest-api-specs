@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policySnippets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyDescriptions": {
       "get": {
         "tags": [
-          "PolicySnippet"
+          "PolicyDescription"
         ],
-        "operationId": "PolicySnippet_ListByService",
-        "description": "Lists all policy snippets.",
+        "operationId": "PolicyDescription_ListByService",
+        "description": "Lists all policy descriptions.",
         "x-ms-examples": {
-          "ApiManagementListPolicySnippets": {
-            "$ref": "./examples/ApiManagementListPolicySnippets.json"
+          "ApiManagementListPolicyDescriptions": {
+            "$ref": "./examples/ApiManagementListPolicyDescriptions.json"
           }
         },
         "parameters": [
@@ -80,9 +80,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns an array of Policy Snippets.",
+            "description": "Returns an array of policy descriptions.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicySnippetsCollection"
+              "$ref": "./definitions.json#/definitions/PolicyDescriptionCollection"
             }
           },
           "default": {
