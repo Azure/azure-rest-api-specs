@@ -149,21 +149,12 @@ directive:
     from: "search-request-options"
     to: "request-options"
 
-# Add missing data types to DataType
-- from: swagger-document
-  where: $.definitions.DataType.enum
-  transform: |
-    if (!$.includes("Collection(Edm.String)")) {
-      $.push("Collection(Edm.String)",
-        "Collection(Edm.Int32)",
-        "Collection(Edm.Int64)",
-        "Collection(Edm.Double)",
-        "Collection(Edm.Boolean)",
-        "Collection(Edm.DateTimeOffset)",
-        "Collection(Edm.GeographyPoint)",
-        "Collection(Edm.ComplexType)"
-      );
-    }
+# Add static Collection<DataType> method to DataType
+- from: DataType.java
+  where: $
+  transform: >-
+    return $
+    .replace(/(public static final DataType EDM_COMPLEX_TYPE = fromString\("Edm.ComplexType"\);)/g, "$1\n\n    /**\n     * Returns a collection of a specific DataType\n     * @param dataType the corresponding DataType\n     * @return a Collection of the corresponding DataType\n     */\n    @JsonCreator\n    public static DataType Collection(DataType dataType) {\n        return fromString(String.format(\"Collection(%s)\", dataType.toString()));\n    }")
 
 # Workaround to fix bad host path parameters
 - from: 
