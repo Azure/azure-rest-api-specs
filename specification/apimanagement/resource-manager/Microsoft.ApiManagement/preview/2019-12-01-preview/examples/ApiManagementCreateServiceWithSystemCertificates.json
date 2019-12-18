@@ -34,8 +34,8 @@
         "location": "https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2019-12-01-preview"
       },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
-        "name": "apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/sasolankrpcertificate",
+        "name": "sasolankrpcertificate",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
           "tag1": "value1",
@@ -43,26 +43,34 @@
           "tag3": "value3"
         },
         "location": "Central US",
-        "etag": "AAAAAADauaY=",
+        "etag": "AAAAAAAp3TM=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
-          "createdAtUtc": "2018-02-19T16:42:47.362368Z",
-          "hostnameConfigurations": [],
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": true
+            }
+          ],
           "virtualNetworkType": "None",
           "certificates": [
             {
               "storeName": "CertificateAuthority",
               "certificate": {
-                "expiry": "2035-12-31T23:00:00-08:00",
-                "thumbprint": "8E989652XXXXXXXXXXXXXXXDB3A2",
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
                 "subject": "CN=*.msitesting.net"
               }
             }
-          ]
+          ],
+          "disableGateway": false,
+          "apiVersionConstraint": {}
         },
         "sku": {
           "name": "Basic",
@@ -72,8 +80,8 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
-        "name": "apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/sasolankrpcertificate",
+        "name": "sasolankrpcertificate",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
           "tag1": "value1",
@@ -81,29 +89,30 @@
           "tag3": "value3"
         },
         "location": "Central US",
-        "etag": "AAAAAAFzQXQ=",
+        "etag": "AAAAAAAp3UM=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2019-04-11T05:08:04.3228808Z",
-          "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
-          "portalUrl": "https://apimService1.portal.azure-api.net",
-          "managementApiUrl": "https://apimService1.management.azure-api.net",
-          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "createdAtUtc": "2019-12-18T06:33:28.0906918Z",
+          "gatewayUrl": "https://sasolankrpcertificate.azure-api.net",
+          "gatewayRegionalUrl": "https://sasolankrpcertificate-centralus-01.regional.azure-api.net",
+          "portalUrl": "https://sasolankrpcertificate.portal.azure-api.net",
+          "developerPortalUrl": "https://sasolankrpcertificate.developer.azure-api.net",
+          "managementApiUrl": "https://sasolankrpcertificate.management.azure-api.net",
+          "scmUrl": "https://sasolankrpcertificate.scm.azure-api.net",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
-              "hostName": "apimService1.azure-api.net",
+              "hostName": "sasolankrpcertificate.azure-api.net",
               "negotiateClientCertificate": false,
               "defaultSslBinding": true
             }
           ],
           "publicIPAddresses": [
-            "40.113.228.6"
+            "40.113.223.117"
           ],
           "customProperties": {
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
@@ -120,12 +129,14 @@
             {
               "storeName": "CertificateAuthority",
               "certificate": {
-                "expiry": "2035-12-31T23:00:00-08:00",
+                "expiry": "2036-01-01T07:00:00+00:00",
                 "thumbprint": "8E989652CABCF585ACBFCB9C2C91F1D174FDB3A2",
                 "subject": "CN=*.msitesting.net"
               }
             }
-          ]
+          ],
+          "disableGateway": false,
+          "apiVersionConstraint": {}
         },
         "sku": {
           "name": "Basic",
