@@ -801,6 +801,16 @@
                 "x-ms-client-name": "HasLegalHold",
                 "description": "Indicates whether the container has a legal hold.",
                 "type": "boolean"
+              },
+              "x-ms-default-encryption-scope": {
+                "x-ms-client-name": "DefaultEncryptionScope",
+                "description": "The default encryption scope for the container.",
+                "type": "string"
+              },
+              "x-ms-deny-encryption-scope-override": {
+                "x-ms-client-name": "DenyEncryptionScopeOverride",
+                "description": "Indicates whether the container's default encryption scope can be overriden.",
+                "type": "boolean"
               }
             }
           },
@@ -8628,6 +8638,12 @@
           "type": "boolean"
         },
         "HasLegalHold": {
+          "type": "boolean"
+        },
+        "DefaultEncryptionScope": {
+          "type": "string"
+        },
+        "DenyEncryptionScopeOverride": {
           "type": "boolean"
         }
       }
