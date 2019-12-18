@@ -1182,9 +1182,23 @@
               }
             ]
           }
+        },
+        "apiVersionConstraint" :{          
+          "$ref": "#/definitions/ApiVersionConstraint",
+          "description": "Control Plane Apis version constraint for the API Management service."
         }
       },
       "description": "Base Properties of an API Management service resource description."
+    },
+    "ApiVersionConstraint": {
+      "properties": {
+        "minApiVersion": {
+          "type": "string",          
+          "description": "Limit control plane API calls to API Management service with version equal to or newer than this value.",
+          "example": "2019-01-01"
+        }
+      },
+      "description": "Control Plane Apis version constraint for the API Management service."
     },
     "ApiManagementServiceSkuProperties": {
       "properties": {
