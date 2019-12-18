@@ -3,17 +3,15 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2020-01-01-privatepreview",
+    "api-version": "2020-01-01-preview",
     "parameters": {
-      "location": "eastus",
-      "tags": {},
+      "tags": {
+        "a": "b"
+      },
       "properties": {
-        "clusterCodeVersion": "7.1.168.9494",
-        "dnsName": "myCluster",
-        "vmAdminUser": "vmadmin",
-        "vmPassword": "{vm-password}",
-        "clientConnectionPort": 19000,
-        "httpGatewayConnectionPort": 19080,
+        "clusterCodeVersion": "7.0.457.9590",
+        "clientConnectionPort": 19001,
+        "httpGatewayConnectionPort": 19081,
         "loadBalancePorts": [
           {
             "frontendPort": 80,
@@ -43,7 +41,7 @@
             "parameters": [
               {
                 "name": "IsEnabled",
-                "value": "true"
+                "value": "false"
               }
             ]
           }
@@ -90,123 +88,16 @@
             }
           }
         },
-        "clusterUpgradeMode": "Manual",
-        "reverseProxyEndpointPort": 19081
+        "clusterUpgradeMode": "Automatic"
       }
     }
   },
   "responses": {
-    "201": {
-      "headers": {
-        "Retry-After": "10",
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview"
-      },
-      "body": {
-        "type": "Microsoft.ServiceFabric/managedClusters",
-        "location": "eastus",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
-        "name": "myCluster",
-        "tags": {},
-        "etag": "W/\"636462502169240745\"",
-        "properties": {
-          "provisioningState": "Succeeded",
-          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
-          "clusterCodeVersion": "7.1.168.9494",
-          "clusterState": "WaitingForNodes",
-          "dnsName": "myCluster",
-          "fqdn": "https://myCluster.eastus.cloudapp.azure.com",
-          "clusterCertificateCommonName": "abc.com",
-          "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
-          "clientConnectionPort": 19000,
-          "httpGatewayConnectionPort": 19080,
-          "loadBalancePorts": [
-            {
-              "frontendPort": 80,
-              "backendPort": 80,
-              "protocol": "http"
-            },
-            {
-              "frontendPort": 443,
-              "backendPort": 443,
-              "protocol": "http"
-            },
-            {
-              "frontendPort": 10000,
-              "backendPort": 10000,
-              "protocol": "tcp"
-            }
-          ],
-          "natPorts": [
-            {
-              "frontendStartPort": 50000,
-              "backendPort": 3389
-            }
-          ],
-          "vmAdminUser": "vmadmin",
-          "fabricSettings": [
-            {
-              "name": "ManagedIdentityTokenService",
-              "parameters": [
-                {
-                  "name": "IsEnabled",
-                  "value": "true"
-                }
-              ]
-            }
-          ],
-          "clusterUpgradeDescription": {
-            "forceRestart": false,
-            "upgradeReplicaSetCheckTimeout": "00:10:00",
-            "healthCheckWaitDuration": "00:00:30",
-            "healthCheckStableDuration": "00:00:30",
-            "healthCheckRetryTimeout": "00:05:00",
-            "upgradeTimeout": "01:00:00",
-            "upgradeDomainTimeout": "00:15:00",
-            "healthPolicy": {
-              "maxPercentUnhealthyNodes": 0,
-              "maxPercentUnhealthyApplications": 0,
-              "applicationHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeHealthPolicy": {
-                    "maxPercentUnhealthyServices": 0
-                  },
-                  "serviceTypeHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentUnhealthyServices": 100
-                    }
-                  }
-                }
-              }
-            },
-            "deltaHealthPolicy": {
-              "maxPercentDeltaUnhealthyNodes": 0,
-              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-              "maxPercentDeltaUnhealthyApplications": 0,
-              "applicationDeltaHealthPolicies": {
-                "fabric:/myApp1": {
-                  "defaultServiceTypeDeltaHealthPolicy": {
-                    "maxPercentDeltaUnhealthyServices": 0
-                  },
-                  "serviceTypeDeltaHealthPolicies": {
-                    "myServiceType1": {
-                      "maxPercentDeltaUnhealthyServices": 0
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "clusterUpgradeMode": "Manual",
-          "reverseProxyEndpointPort": 19081
-        }
-      }
-    },
     "202": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -224,8 +115,8 @@
           "fqdn": "https://myCluster.eastus.cloudapp.azure.com",
           "clusterCertificateCommonName": "abc.com",
           "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
-          "clientConnectionPort": 19000,
-          "httpGatewayConnectionPort": 19080,
+          "clientConnectionPort": 19001,
+          "httpGatewayConnectionPort": 19081,
           "loadBalancePorts": [
             {
               "frontendPort": 80,
@@ -256,7 +147,7 @@
               "parameters": [
                 {
                   "name": "IsEnabled",
-                  "value": "true"
+                  "value": "false"
                 }
               ]
             }
@@ -303,7 +194,7 @@
               }
             }
           },
-          "clusterUpgradeMode": "Manual",
+          "clusterUpgradeMode": "Automatic",
           "reverseProxyEndpointPort": 19081
         }
       }
@@ -311,8 +202,8 @@
     "200": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-privatepreview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2020-01-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters",
@@ -330,8 +221,8 @@
           "fqdn": "https://myCluster.eastus.cloudapp.azure.com",
           "clusterCertificateCommonName": "abc.com",
           "clusterCertificateThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622",
-          "clientConnectionPort": 19000,
-          "httpGatewayConnectionPort": 19080,
+          "clientConnectionPort": 19001,
+          "httpGatewayConnectionPort": 19081,
           "loadBalancePorts": [
             {
               "frontendPort": 80,
@@ -362,7 +253,7 @@
               "parameters": [
                 {
                   "name": "IsEnabled",
-                  "value": "true"
+                  "value": "false"
                 }
               ]
             }
@@ -409,7 +300,7 @@
               }
             }
           },
-          "clusterUpgradeMode": "Manual",
+          "clusterUpgradeMode": "Automatic",
           "reverseProxyEndpointPort": 19081
         }
       }
