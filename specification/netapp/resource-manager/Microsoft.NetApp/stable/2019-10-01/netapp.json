@@ -2226,7 +2226,14 @@
         "endpointType": {
           "type": "string",
           "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
-          "example": "src, dst"
+          "enum": [
+            "src",
+            "dst"
+          ],
+          "x-ms-enum": {
+            "name": "EndointType",
+            "modelAsString": true
+          }
         },
         "replicationSchedule": {
           "type": "string",
