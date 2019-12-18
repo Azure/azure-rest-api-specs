@@ -323,10 +323,12 @@
     "QueryTextProperties": {
       "properties": {
         "queryId": {
+          "readOnly": true,
           "type": "string",
           "description": "Query identifier unique to the server."
         },
         "queryText": {
+          "readOnly": true,
           "type": "string",
           "description": "Query text."
         }
@@ -370,29 +372,35 @@
     "TopQueryStatisticsInputProperties": {
       "properties": {
         "numberOfTopQueries": {
+          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "Max number of top queries to return."
         },
         "aggregationFunction": {
+          "readOnly": true,
           "type": "string",
           "description": "Aggregation function name."
         },
         "observedMetric": {
+          "readOnly": true,
           "type": "string",
           "description": "Observed metric name."
         },
         "observationStartTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation start time."
         },
         "observationEndTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation end time."
         },
         "aggregationWindow": {
+          "readOnly": true,
           "type": "string",
           "description": "Aggregation interval type in ISO 8601 format."
         }
@@ -423,24 +431,29 @@
     "QueryStatisticProperties": {
       "properties": {
         "queryId": {
+          "readOnly": true,
           "type": "string",
           "description": "Database query identifier."
         },
         "startTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation start time."
         },
         "endTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation end time."
         },
         "aggregationFunction": {
+          "readOnly": true,
           "type": "string",
           "description": "Aggregation function name."
         },
         "databaseNames": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string"
@@ -448,24 +461,29 @@
           "description": "The list of database names."
         },
         "queryExecutionCount": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "Number of query executions in this time interval."
         },
         "metricName": {
+          "readOnly": true,
           "type": "string",
           "description": "Metric name."
         },
         "metricDisplayName": {
+          "readOnly": true,
           "type": "string",
           "description": "Metric display name."
         },
         "metricValue": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "Metric value."
         },
         "metricValueUnit": {
+          "readOnly": true,
           "type": "string",
           "description": "Metric value unit."
         }
@@ -509,16 +527,19 @@
     "WaitStatisticsInputProperties": {
       "properties": {
         "observationStartTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation start time."
         },
         "observationEndTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation end time."
         },
         "aggregationWindow": {
+          "readOnly": true,
           "type": "string",
           "description": "Aggregation interval type in ISO 8601 format."
         }
@@ -546,43 +567,52 @@
     "WaitStatisticProperties": {
       "properties": {
         "startTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation start time."
         },
         "endTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Observation end time."
         },
         "eventName": {
+          "readOnly": true,
           "type": "string",
           "description": "Wait event name."
         },
         "eventTypeName": {
+          "readOnly": true,
           "type": "string",
           "description": "Wait event type name."
         },
         "queryId": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "Database query identifier."
         },
         "databaseName": {
+          "readOnly": true,
           "type": "string",
           "description": "Database Name."
         },
         "userId": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "Database user identifier."
         },
         "count": {
+          "readOnly": true,
           "type": "integer",
           "format": "int64",
           "description": "Wait event count observed in this time interval."
         },
         "totalTimeInMs": {
+          "readOnly": true,
           "type": "number",
           "format": "double",
           "description": "Total time of wait in milliseconds in this time interval."
