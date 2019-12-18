@@ -33,6 +33,11 @@ directive:
       - $.paths
     suppress:
       - UniqueResourcePaths
+
+directive:
+  - from: notRequiredDiscriminatorWithSuppression.json
+    suppress: OAV131 
+    reason: 
 	  
 ```
 
