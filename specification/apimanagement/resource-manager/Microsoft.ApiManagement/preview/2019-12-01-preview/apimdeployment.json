@@ -965,6 +965,11 @@
           "type": "string",
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
+        },
+        "disableGateway":{
+          "type": "boolean",
+          "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
+          "default": false
         }
       },
       "required": [
@@ -1143,6 +1148,11 @@
         "enableClientCertificate": {
           "type": "boolean",
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
+          "default": false
+        },
+        "disableGateway":{
+          "type": "boolean",
+          "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.",
           "default": false
         },
         "virtualNetworkType": {
