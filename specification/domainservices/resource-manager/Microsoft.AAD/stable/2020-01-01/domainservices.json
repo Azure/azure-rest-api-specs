@@ -1,0 +1,882 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Domain Services Resource Provider",
+    "description": "The AAD Domain Services API.",
+    "version": "2020-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.AAD/operations": {
+      "get": {
+        "tags": [
+          "DomainServices"
+        ],
+        "description": "Lists all the available Domain Services operations.",
+        "operationId": "DomainServiceOperations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices": {
+      "get": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_List",
+        "summary": "List Domain Services in Subscription",
+        "description": "The List Domain Services in Subscription operation lists all the domain services available under the given subscription (and across all resource groups within that subscription).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Domain Service": {
+            "$ref": "./examples/ListDomainServicesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices": {
+      "get": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_ListByResourceGroup",
+        "summary": "List Domain Services in Resource Group",
+        "description": "The List Domain Services in Resource Group operation lists all the domain services available under the given resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Domain Service": {
+            "$ref": "./examples/ListDomainServicesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}": {
+      "put": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_CreateOrUpdate",
+        "summary": "Create or Update Domain Service (PUT Resource)",
+        "description": "The Create Domain Service operation creates a new domain service with the specified parameters. If the specific service already exists, then any patchable properties will be updated and any immutable properties will remain unchanged.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          },
+          {
+            "name": "domainService",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            },
+            "description": "Properties supplied to the Create or Update a Domain Service operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "201": {
+            "description": "HTTP 201 (Created) if the operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create Domain Service": {
+            "$ref": "./examples/CreateDomainService.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Get",
+        "summary": "Get Domain Service",
+        "description": "The Get Domain Service operation retrieves a json representation of the Domain Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Domain Service": {
+            "$ref": "./examples/GetDomainService.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Delete",
+        "summary": "Delete Domain Service (DELETE Resource)",
+        "description": "The Delete Domain Service operation deletes an existing Domain Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+          },
+          "204": {
+            "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Domain Service": {
+            "$ref": "./examples/DeleteDomainService.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DomainServices"
+        ],
+        "operationId": "DomainServices_Update",
+        "summary": "Update Domain Service (PATCH Resource)",
+        "description": "The Update Domain Service operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DomainServiceNameParameter"
+          },
+          {
+            "name": "domainService",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            },
+            "description": "Properties supplied to the Update a Domain Service operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "HTTP 200 (OK) if the operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/DomainService"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update Domain Service": {
+            "$ref": "./examples/UpdateDomainService.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource etag"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DomainService": {
+      "description": "Domain service.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DomainServiceProperties",
+          "description": "Domain service properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "DomainServiceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DomainService"
+          },
+          "description": "the list of domain services."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from the List Domain Services operation."
+    },
+    "DomainServiceProperties": {
+      "description": "Properties of the Domain Service.",
+      "properties": {
+        "version": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Data Model Version"
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure Active Directory Tenant Id"
+        },
+        "domainName": {
+          "type": "string",
+          "description": "The name of the Azure domain that the user would like to deploy Domain Services to."
+        },
+        "deploymentId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Deployment Id"
+        },
+        "syncOwner": {
+          "readOnly": true,
+          "type": "string",
+          "description": "SyncOwner ReplicaSet Id"
+        },
+        "replicaSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicaSet",
+            "description": "ReplicaSet"
+          },
+          "description": "List of ReplicaSets"
+        },
+        "ldapsSettings": {
+          "$ref": "#/definitions/LdapsSettings",
+          "description": "Secure LDAP Settings"
+        },
+        "domainSecuritySettings": {
+          "$ref": "#/definitions/DomainSecuritySettings",
+          "description": "DomainSecurity Settings"
+        },
+        "filteredSync": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Enabled or Disabled flag to turn on Group-based filtered sync",
+          "x-ms-enum": {
+            "name": "FilteredSync",
+            "modelAsString": true
+          }
+        },
+        "notificationSettings": {
+          "$ref": "#/definitions/NotificationSettings",
+          "description": "Notification Settings"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the current deployment or provisioning state, which only appears in the response."
+        }
+      }
+    },
+    "ReplicaSet": {      
+      "description": "Replica Set Definition",
+      "properties": {
+        "replicaSetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ReplicaSet Id"
+        },
+        "location": {
+          "type": "string",
+          "description": "Virtual network location"
+        },
+        "vnetSiteId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Virtual network site id"
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The name of the virtual network that Domain Services will be deployed on. The id of the subnet that Domain Services will be deployed on. /virtualNetwork/vnetName/subnets/subnetName."
+        },
+        "domainControllerIpAddress": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Domain Controller IP Address"
+          },
+          "description": "List of Domain Controller IP Address"
+        },
+        "externalAccessIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "External access ip address."
+        },
+        "serviceStatus": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of Domain Service instance"
+        },
+        "healthLastEvaluated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Last domain evaluation run DateTime"
+        },
+        "healthMonitors": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthMonitor",
+            "description": "Domain Health Monitors"
+          },
+          "description": "List of Domain Health Monitors"
+        },
+        "healthAlerts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthAlert",
+            "description": "Domain Health Alerts"
+          },
+          "description": "List of Domain Health Alerts"
+        }
+      }
+    },
+    "LdapsSettings": {
+      "description": "Secure LDAP Settings",
+      "properties": {
+        "ldaps": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not Secure LDAP is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "Ldaps",
+            "modelAsString": true
+          }
+        },
+        "pfxCertificate": {
+          "type": "string",
+          "description": "The certificate required to configure Secure LDAP. The parameter passed here should be a base64encoded representation of the certificate pfx file."
+        },
+        "pfxCertificatePassword": {
+          "type": "string",
+          "description": "The password to decrypt the provided Secure LDAP certificate pfx file."
+        },
+        "publicCertificate": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Public certificate used to configure secure ldap."
+        },
+        "certificateThumbprint": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Thumbprint of configure ldaps certificate."
+        },
+        "certificateNotAfter": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "NotAfter DateTime of configure ldaps certificate."
+        },
+        "externalAccess": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not Secure LDAP access over the internet is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "ExternalAccess",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "HealthMonitor": {
+      "description": "Health Monitor Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Name"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Monitor Details"
+        }
+      }
+    },
+    "HealthAlert": {
+      "description": "Health Alert Description",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Name"
+        },
+        "issue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Issue"
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert Severity"
+        },
+        "raised": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Raised DateTime"
+        },
+        "lastDetected": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Health Alert Last Detected DateTime"
+        },
+        "resolutionUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Health Alert TSG Link"
+        }
+      }
+    },
+    "NotificationSettings": {
+      "description": "Settings for notification",
+      "properties": {
+        "notifyGlobalAdmins": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should global admins be notified",
+          "x-ms-enum": {
+            "name": "notifyGlobalAdmins",
+            "modelAsString": true
+          }
+        },
+        "notifyDcAdmins": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Should domain controller admins be notified",
+          "x-ms-enum": {
+            "name": "notifyDcAdmins",
+            "modelAsString": true
+          }
+        },
+        "additionalRecipients": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Email address for additional recipient"
+          },
+          "description": "The list of additional recipients"
+        }
+      }
+    },
+    "DomainSecuritySettings": {
+      "description": "Domain Security Settings",
+      "properties": {
+        "ntlmV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not NtlmV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "NtlmV1",
+            "modelAsString": true
+          }
+        },
+        "tlsV1": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not TlsV1 is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "TlsV1",
+            "modelAsString": true
+          }
+        },
+        "syncNtlmPasswords": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.",
+          "x-ms-enum": {
+            "name": "SyncNtlmPasswords",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "An error response from the Domain Services.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Domain Services."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Domain Services."
+    },
+    "OperationEntityListResult": {
+      "description": "The list of domain service operation response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operation supported by Domain Services.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Domain Services."
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Domain Services.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Domain Services.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the user's subscription. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "DomainServiceNameParameter": {
+      "name": "domainServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the domain service.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
