@@ -3194,6 +3194,9 @@
     },
     "EncryptionProperty": {
       "type": "object",
+      "required": [
+        "keyVaultProperties"
+      ],
       "properties": {
         "status": {
           "description": "Indicates whether or not the encryption is enabled for the workspace.",
@@ -3214,7 +3217,10 @@
       }
     },
     "KeyVaultProperties": {
-     "type": "object",
+      "type": "object",
+      "required": [
+        "keyIdentifier"
+      ],
      "properties": {
        "keyIdentifier": {
          "description": "Key vault uri to access the encryption key.",
