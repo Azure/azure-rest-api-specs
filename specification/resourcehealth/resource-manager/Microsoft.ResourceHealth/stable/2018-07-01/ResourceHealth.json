@@ -358,7 +358,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the list of azure emerging issues.",
+            "description": "The body contains properties of azure emerging issues, which includes a list of status banner and status active events.",
             "schema": {
               "$ref": "#/definitions/emergingIssuesGetResult"
             }
@@ -374,6 +374,9 @@
           "GetEmergingIssues": {
             "$ref": "./examples/EmergingIssues_Get.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -956,7 +959,17 @@
         },
         "cloud": {
           "type": "string",
-          "description": "The cloud type of this banner, eg. Public."
+          "description": "The cloud type of this banner.",
+          "enum": [
+            "Public",
+            "Mooncake",
+            "Blackforest",
+            "Fairfax"
+          ],
+          "x-ms-enum": {
+            "name": "CloudValues",
+            "modelAsString": true
+          }
         },
         "lastModifiedTime": {
           "type": "string",
@@ -970,7 +983,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The impacted region slug id."
+          "description": "The impacted region id."
         },
         "name": {
           "type": "string",
@@ -980,11 +993,11 @@
     },
     "emergingIssueImpact": {
       "type": "object",
-      "description": "Object of the emerging issue impact.",
+      "description": "Object of the emerging issue impact on services and regions.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The impacted service slug id."
+          "description": "The impacted service id."
         },
         "name": {
           "type": "string",
@@ -1021,15 +1034,43 @@
         },
         "cloud": {
           "type": "string",
-          "description": "The cloud type of this active event."
+          "description": "The cloud type of this active event.",
+          "enum": [
+            "Public",
+            "Mooncake",
+            "Blackforest",
+            "Fairfax"
+          ],
+          "x-ms-enum": {
+            "name": "CloudValues",
+            "modelAsString": true
+          }
         },
         "severity": {
           "type": "string",
-          "description": "The severity level of this active event."
+          "description": "The severity level of this active event.",
+          "enum": [
+            "Information",
+            "Warning",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "SeverityValues",
+            "modelAsString": true
+          }
         },
         "stage": {
           "type": "string",
-          "description": "The stage of this active event, eg. Active."
+          "description": "The stage of this active event.",
+          "enum": [
+            "Active",
+            "Resolve",
+            "Archived"
+          ],
+          "x-ms-enum": {
+            "name": "StageValues",
+            "modelAsString": true
+          }
         },
         "published": {
           "type": "boolean",
@@ -1040,7 +1081,7 @@
           "description": "The last time modified on this banner.",
           "format": "date-time"
         },
-        "impact": {
+        "impacts": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/emergingIssueImpact"
@@ -1050,28 +1091,32 @@
       }
     },
     "emergingIssuesGetResult": {
+      "description": "The Get EmergingIssues operation response.",
+      "type": "object",
       "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/emergingIssue"
-          },
-          "description": "The list of emerging issues."
+        "id": {
+          "type": "string",
+          "description": "Azure Resource Manager Identity for the emerging issues resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "emergingissues."
+        },
+        "type": {
+          "type": "string",
+          "description": "/providers/Microsoft.ResourceHealth/emergingissues."
+        },
+        "properties": {
+          "$ref": "#/definitions/emergingIssue",
+          "description": "The emerging issue entity properties.",
+          "x-ms-client-flatten": true
         }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The Get EmergingIssues operation response."
+      }
     },
     "emergingIssue": {
       "type": "object",
       "description": "On-going emerging issue from azure status.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Correlation id for emerging issue."
-        },
         "refreshTimestamp": {
           "type": "string",
           "description": "Timestamp for when last time refreshed for ongoing emerging issue.",
