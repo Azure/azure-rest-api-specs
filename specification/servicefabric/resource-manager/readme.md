@@ -28,7 +28,7 @@ These are the global settings for the ServiceFabricManagementClient API.
 title: ServiceFabricManagementClient
 description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2020-01-privatepreview
+tag: package-2020-01-preview
 
 directive:
   - suppress: ListInOperationName
@@ -62,12 +62,12 @@ directive:
 
 ### Tag: package-2020-01-preview
 
-These settings apply only when `--tag=package-2020-01-privatepreview` is specified on the command line.
+These settings apply only when `--tag=package-2020-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01-privatepreview'
+``` yaml $(tag) == 'package-2020-01-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/managedcluster.json
-- Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/nodetype.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 ```
 
 ### Tag: package-2019-06-preview
@@ -205,8 +205,8 @@ input-file:
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/managedcluster.json
-  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/nodetype.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
 
 ```
 
