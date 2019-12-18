@@ -966,7 +966,7 @@
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
         },
-        "disableGateway":{
+        "disableGateway": {
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
           "default": false
@@ -1150,7 +1150,7 @@
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
         },
-        "disableGateway":{
+        "disableGateway": {
           "type": "boolean",
           "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.",
           "default": false
@@ -1418,9 +1418,12 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ApimIdentityType",
@@ -1438,6 +1441,24 @@
           "format": "uuid",
           "readOnly": true,
           "description": "The client tenant id of the identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
         }
       },
       "required": [
