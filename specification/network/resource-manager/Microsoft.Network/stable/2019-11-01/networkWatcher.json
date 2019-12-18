@@ -3685,6 +3685,9 @@
           "description": "Filter for sub-items within the endpoint."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Describes the connection monitor endpoint."
     },
     "ConnectionMonitorEndpointFilter": {
@@ -3762,6 +3765,12 @@
           "description": "List of destination endpoint names."
         }
       },
+      "required": [
+        "name",
+        "testConfigurations",
+        "sources",
+        "destinations"
+      ],
       "description": "Describes the connection monitor test group."
     },
     "ConnectionMonitorTestConfiguration": {
@@ -4009,36 +4018,10 @@
     "ConnectionMonitorResult": {
       "x-ms-azure-resource": true,
       "properties": {
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the connection monitor."
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "ID of the connection monitor."
-        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Connection monitor type."
-        },
-        "location": {
-          "type": "string",
-          "description": "Connection monitor location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Connection monitor tags."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4046,6 +4029,11 @@
           "description": "Properties of the connection monitor result."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
       "description": "Information about the connection monitor."
     },
     "ConnectionMonitorResultProperties": {
@@ -4056,11 +4044,13 @@
           "description": "The provisioning state of the connection monitor."
         },
         "startTime": {
+          "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "The date and time when the connection monitor was started."
         },
         "monitoringStatus": {
+          "readOnly": true,
           "type": "string",
           "description": "The monitoring status of the connection monitor."
         },
