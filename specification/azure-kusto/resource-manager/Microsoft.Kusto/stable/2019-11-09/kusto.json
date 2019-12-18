@@ -3200,11 +3200,12 @@
       "type": "object",
       "required": [
         "principalId",
-        "role"
+        "role",
+        "principalType"
       ],
       "properties": {
         "principalId": {
-          "description": "The principal ID assigned to the database principal. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.",
+          "description": "The principal ID assigned to the database principal. It can be a user email, application ID, or security group name.",
           "type": "string"
         },
         "role": {
@@ -3226,6 +3227,29 @@
         "tenantId": {
           "type": "string",
           "description": "The tenant id of the principal"
+        },
+        "principalType": {
+          "description": "Principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal name"
         },
         "provisioningState": {
           "type": "string",
@@ -3251,11 +3275,12 @@
       "type": "object",
       "required": [
         "principalId",
-        "role"
+        "role",
+        "principalType"
       ],
       "properties": {
         "principalId": {
-          "description": "The principal ID assigned to the cluster principal. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.",
+          "description": "The principal ID assigned to the cluster principal. It can be a user email, application ID, or security group name.",
           "type": "string"
         },
         "role": {
@@ -3273,6 +3298,29 @@
         "tenantId": {
           "type": "string",
           "description": "The tenant id of the principal"
+        },
+        "principalType": {
+          "description": "Principal type.",
+          "type": "string",
+          "enum": [
+            "App",
+            "Group",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalType",
+            "modelAsString": true
+          }
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the principal"
+        },
+        "principalName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal name"
         },
         "provisioningState": {
           "type": "string",
