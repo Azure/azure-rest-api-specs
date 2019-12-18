@@ -11,6 +11,7 @@ This is the AutoRest configuration file for Azure Migrate.
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-02
+  - tag: package-2020-01
 ```
 
 ### Tag: package-2018-02 and java
@@ -26,15 +27,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2018-05-preview and java
+### Tag: package-2020-01 and java
 
-These settings apply only when `--tag=package-2018-05-preview --java` is specified on the command line.
+These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2018_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_05_01_preview
+  namespace: com.microsoft.azure.management.azuremigrate.v2020_01_01
+  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2020_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -59,6 +60,7 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-02
+tag: package-2020-01
 ```
 
 
@@ -71,13 +73,13 @@ input-file:
 - Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
-### Tag: package-2018-05-preview
+### Tag: package-2020-01
 
-These settings apply only when `--tag=package-2018-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-05-preview'
+``` yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.OffAzure/2018-05-01-preview/migrate.json
+- Microsoft.OffAzure/2020-01-01/migrate.json
 ```
 
 ---
