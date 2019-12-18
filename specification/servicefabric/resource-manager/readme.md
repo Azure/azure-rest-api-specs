@@ -28,7 +28,7 @@ These are the global settings for the ServiceFabricManagementClient API.
 title: ServiceFabricManagementClient
 description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2019-06-preview
+tag: package-2020-01-privatepreview
 
 directive:
   - suppress: ListInOperationName
@@ -59,6 +59,17 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 
 ```
+
+### Tag: package-2020-01-preview
+
+These settings apply only when `--tag=package-2020-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-privatepreview'
+input-file:
+- Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/managedcluster.json
+- Microsoft.ServiceFabric/preview/2020-01-01-privatepreview/nodeType.json
+```
+
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -204,4 +215,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
