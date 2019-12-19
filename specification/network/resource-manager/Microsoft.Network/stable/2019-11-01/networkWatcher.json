@@ -3825,6 +3825,10 @@
           "description": "The threshold for declaring a test successful."
         }
       },
+      "required": [
+        "name",
+        "protocol"
+      ],
       "description": "Describes a connection monitor test configuration."
     },
     "ConnectionMonitorHttpConfiguration": {
@@ -4018,10 +4022,36 @@
     "ConnectionMonitorResult": {
       "x-ms-azure-resource": true,
       "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the connection monitor."
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ID of the connection monitor."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Connection monitor type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Connection monitor location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Connection monitor tags."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -4029,11 +4059,6 @@
           "description": "Properties of the connection monitor result."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/Resource"
-        }
-      ],
       "description": "Information about the connection monitor."
     },
     "ConnectionMonitorResultProperties": {
