@@ -605,15 +605,18 @@
     "ParameterValues": {
       "type": "object",
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "The value of the parameter.",
-            "type": "object"
-          }
-        }
+        "$ref": "#/definitions/ParameterValuesValue"
       },
       "description": "The parameter values for the policy rule. The keys are the parameter names."
+    },
+    "ParameterValuesValue": {
+      "properties": {
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        }
+      },
+      "description": "The value of a parameter."
     },
     "PolicySku": {
       "properties": {
@@ -699,14 +702,24 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The identity type. This is the only required field when adding a system assigned identity to a resource.",
           "enum": [
             "SystemAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "SystemAssigned",
+                "description": "Indicates that a system assigned identity is associated with the resource."
+              },
+              {
+                "value": "None",
+                "description": "Indicates that no identity is associated with the resource or that the existing identity should be removed."
+              }
+            ]
           }
         }
       },
