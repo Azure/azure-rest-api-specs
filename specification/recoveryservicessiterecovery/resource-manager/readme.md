@@ -34,9 +34,9 @@ directive:
     suppress:
       - UniqueResourcePaths
 
-directive:
   - from: service.json
-    suppress: OAV131 
+    suppress: 
+      - OAV131 
     reason: 
 	  
 ```
