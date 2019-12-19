@@ -3,7 +3,7 @@
     "info": {
       "title": "SearchManagementClient",
       "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
-      "version": "2015-08-19"
+      "version": "2019-10-01-preview"
     },
     "host": "management.azure.com",
     "schemes": [
@@ -861,37 +861,37 @@
                     "id": {
                         "type": "string",
                         "description": "Resource id for the private endpoint from networking."
-                    },
-                    "privateLinkServiceConnectionState": {
-                        "type": "object",
-                        "properties": {
-                            "status":
-                            {
-                                "type": "string",
-                                "description": "Status of the the private link service connection. Can be Pending, Approved, Rejected, or Disconnected.",
-                                "enum": [
-                                    "Pending",
-                                    "Approved",
-                                    "Rejected",
-                                    "Disconnected"
-                                ],
-                                "x-ms-enum": {
-                                    "name": "PrivateLinkServiceConnectionStatus",
-                                    "modelAsString": false
-                                }
-                            },
-                            "description": {
-                                "type": "string",
-                                "description": "The description for the private link service connection state.",
-                                "readOnly": true
-                            },
-                            "actionsRequired": {
-                                "type": "string",
-                                "description": "A description of any extra actions that may be required.",
-                                "default": "None",
-                                "readOnly": true
-                            }
+                    }
+                }
+            },
+            "privateLinkServiceConnectionState": {
+                "type": "object",
+                "properties": {
+                    "status":
+                    {
+                        "type": "string",
+                        "description": "Status of the the private link service connection. Can be Pending, Approved, Rejected, or Disconnected.",
+                        "enum": [
+                            "Pending",
+                            "Approved",
+                            "Rejected",
+                            "Disconnected"
+                        ],
+                        "x-ms-enum": {
+                            "name": "PrivateLinkServiceConnectionStatus",
+                            "modelAsString": false
                         }
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description for the private link service connection state.",
+                        "readOnly": true
+                    },
+                    "actionsRequired": {
+                        "type": "string",
+                        "description": "A description of any extra actions that may be required.",
+                        "default": "None",
+                        "readOnly": true
                     }
                 }
             }
@@ -991,19 +991,36 @@
               "description": "Network specific rules that specify how the search service may be reached."
           },
           "privateEndpointConnections": {
+            "readOnly": true,
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "string",
+                        "description": "The ID of the resource. This can be used with the Azure Resource Manager to link resources together.",
+                        "externalDocs": {
+                            "url": "https://aka.ms/search-linked-resources"
+                        }
+                    },
+                    "name": {
+                        "readOnly": true,
+                        "type": "string",
+                        "description": "The name of the resource.",
+                        "externalDocs": {
+                            "url": "https://aka.ms/search-naming-rules"
+                        }
+                    },
+                    "type": {
+                        "readOnly": true,
+                        "type": "string",
+                        "description": "The resource type."
+                    },
                     "properties":{
                         "$ref": "#/definitions/PrivateEndpointConnectionProperties"
                     }
-                },
-                "allOf": [
-                    {
-                        "$ref": "#/definitions/Resource"
-                    }
-                ]
+                }
             }
           }
         },
