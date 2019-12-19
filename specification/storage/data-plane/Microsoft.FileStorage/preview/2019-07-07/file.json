@@ -1794,9 +1794,9 @@
                                 "description": "Contains count of number of handles closed."
                             },
                             "x-ms-number-of-handles-failed": {
-                                "x-ms-client-name": "numberOfHandlesFailedToClosed",
+                                "x-ms-client-name": "numberOfHandlesFailedToClose",
                                 "type": "integer",
-                                "description": "Contains count of number of handles that failed to closed."
+                                "description": "Contains count of number of handles that failed to close."
                             }
                         }
                     },
@@ -2996,12 +2996,12 @@
                             "Last-Modified": {
                                 "type": "string",
                                 "format": "date-time-rfc1123",
-                                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+                                "description": "Returns the date and time the file was last modified. Any operation that modifies the file, including an update of the file's metadata or properties, changes the last-modified time of the file."
                             },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
-                                "description": "Uniquely identifies a blobs's lease"
+                                "description": "Uniquely identifies a file's lease"
                             },
                             "x-ms-client-request-id": {
                                 "x-ms-client-name": "ClientRequestId",
@@ -3016,7 +3016,7 @@
                             "x-ms-version": {
                                 "x-ms-client-name": "Version",
                                 "type": "string",
-                                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+                                "description": "Indicates the version of the File service used to execute the request."
                             },
                             "Date": {
                                 "type": "string",
@@ -3100,7 +3100,7 @@
                             "Last-Modified": {
                                 "type": "string",
                                 "format": "date-time-rfc1123",
-                                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+                                "description": "Returns the date and time the file was last modified. Any operation that modifies the file, including an update of the file's metadata or properties, changes the last-modified time of the file."
                             },
                             "x-ms-client-request-id": {
                                 "x-ms-client-name": "ClientRequestId",
@@ -3115,7 +3115,7 @@
                             "x-ms-version": {
                                 "x-ms-client-name": "Version",
                                 "type": "string",
-                                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+                                "description": "Indicates the version of the File service used to execute the request."
                             },
                             "Date": {
                                 "type": "string",
@@ -3202,12 +3202,12 @@
                             "Last-Modified": {
                                 "type": "string",
                                 "format": "date-time-rfc1123",
-                                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+                                "description": "Returns the date and time the file was last modified. Any operation that modifies the file, including an update of the file's metadata or properties, changes the last-modified time of the file."
                             },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
-                                "description": "Uniquely identifies a blobs's lease"
+                                "description": "Uniquely identifies a file's lease"
                             },
                             "x-ms-client-request-id": {
                                 "x-ms-client-name": "ClientRequestId",
@@ -3222,7 +3222,7 @@
                             "x-ms-version": {
                                 "x-ms-client-name": "Version",
                                 "type": "string",
-                                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+                                "description": "Indicates the version of the File service used to execute the request."
                             },
                             "Date": {
                                 "type": "string",
@@ -3306,12 +3306,12 @@
                             "Last-Modified": {
                                 "type": "string",
                                 "format": "date-time-rfc1123",
-                                "description": "Returns the date and time the blob was last modified. Any operation that modifies the blob, including an update of the blob's metadata or properties, changes the last-modified time of the blob."
+                                "description": "Returns the date and time the file was last modified. Any operation that modifies the file, including an update of the file's metadata or properties, changes the last-modified time of the file."
                             },
                             "x-ms-lease-id": {
                                 "x-ms-client-name": "LeaseId",
                                 "type": "string",
-                                "description": "Uniquely identifies a blobs's lease"
+                                "description": "Uniquely identifies a file's lease"
                             },
                             "x-ms-client-request-id": {
                                 "x-ms-client-name": "ClientRequestId",
@@ -3326,7 +3326,7 @@
                             "x-ms-version": {
                                 "x-ms-client-name": "Version",
                                 "type": "string",
-                                "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+                                "description": "Indicates the version of the File service used to execute the request."
                             },
                             "Date": {
                                 "type": "string",
@@ -4051,9 +4051,9 @@
                                 "description": "Contains count of number of handles closed."
                             },
                             "x-ms-number-of-handles-failed": {
-                                "x-ms-client-name": "numberOfHandlesFailedToClosed",
+                                "x-ms-client-name": "numberOfHandlesFailedToClose",
                                 "type": "integer",
-                                "description": "Contains count of number of handles that failed to closed."
+                                "description": "Contains count of number of handles that failed to close."
                             }
                         }
                     },
@@ -5134,7 +5134,7 @@
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method",
-            "description": "Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
+            "description": "Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
         },
         "ProposedLeaseIdRequired": {
             "name": "x-ms-proposed-lease-id",
@@ -5143,7 +5143,7 @@
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method",
-            "description": "Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
+            "description": "Proposed lease ID, in a GUID string format. The File service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
         },
         "Range": {
             "name": "x-ms-range",
