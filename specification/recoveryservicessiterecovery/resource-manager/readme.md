@@ -37,22 +37,22 @@ directive:
   - where:
       - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
     suppress:
-      - 0AV131  
+      - DISCRIMINATOR_NOT_REQUIRED
 
   - where:
       - $.definitions.ReverseReplicationProviderSpecificInput
     suppress:
-      - 0AV131
+      - DISCRIMINATOR_NOT_REQUIRED
 	  
   - where:
       - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
     suppress:
-      - 0AV131	  
+      - DISCRIMINATOR_NOT_REQUIRED
 
   - where:
       - $.definitions.SwitchProtectionProviderSpecificInput
     suppress:
-      - 0AV131
+      - DISCRIMINATOR_NOT_REQUIRED
 	  
 ```
 
