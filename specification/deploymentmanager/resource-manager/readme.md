@@ -193,8 +193,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2019-11-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.deploymentmanager.v2019-11-01-preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/deploymentmanager/mgmt-v2019-11-01-preview
+  namespace: com.microsoft.azure.management.deploymentmanager.v2019_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deploymentmanager/mgmt-v2019_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
