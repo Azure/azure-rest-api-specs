@@ -2161,7 +2161,7 @@
         },
         "dataProtection": {
           "title": "DataProtection",
-          "description": "DataProtection volume, can have a replication object",
+          "description": "DataProtection type volumes include an object containing details of the replication",
           "properties": {
             "replication": {
               "title": "Replication",
@@ -2250,10 +2250,6 @@
             "modelAsString": true
           }
         },
-        "ownerId": {
-          "type": "string",
-          "description": "Id used to identify the owner of the resource"
-        },
         "remoteVolumeResourceId": {
           "type": "string",
           "description": "The resource ID of the remote volume."
@@ -2274,11 +2270,28 @@
         },
         "relationshipStatus": {
           "type": "string",
-          "description": "Status of the mirror relationship"
+          "description": "Status of the mirror relationship",
+          "enum": [
+            "Idle",
+            "Transferring"
+          ],
+          "x-ms-enum": {
+            "name": "relationshipStatus",
+            "modelAsString": true
+          }
         },
         "mirrorState": {
           "type": "string",
-          "description": "The status of the replication"
+          "description": "The status of the replication",
+          "enum": [
+            "Uninitialized",
+            "Mirrored",
+            "Broken"
+          ],
+          "x-ms-enum": {
+            "name": "relationshipStatus",
+            "modelAsString": true
+          } 
         },
         "totalProgress": {
           "type": "string",
@@ -2622,7 +2635,6 @@
     "authorizeRequest": {
       "description": "Authorize request",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "remoteVolumeResourceId": {
           "type": "string",
