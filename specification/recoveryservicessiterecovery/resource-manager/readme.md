@@ -33,12 +33,15 @@ directive:
       - $.paths
     suppress:
       - UniqueResourcePaths
-
-  - from: service.json
-    suppress: 
-      - OAV131 
-    reason: 
 	  
+```
+
+``` yaml
+directive:
+  - from: service.json
+    suppress: OAV131 
+    reason: Testing purpose.
+
 ```
 
 
