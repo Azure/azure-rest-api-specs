@@ -30,7 +30,7 @@ directive:
     reason: email format is allowed
   - suppress: ValidFormats
     from: automations.json
-    where: $.definitions.AutomationActionLogicAppInput.properties.uri.format
+    where: $.definitions.AutomationActionLogicApp.properties.uri.format
     reason: uri format is allowed
   - suppress: PageableOperation
     from: iotSecuritySolutionAnalytics.json
