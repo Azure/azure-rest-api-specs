@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "contoso",
     "accountName": "contosomedia",
-    "contentKeyPolicyName": "PolicyCreatedWithClearKeyOptionAndSwtTokenRestriction",
+    "contentKeyPolicyName": "PolicyWithClearKeyOptionAndSwtTokenRestriction",
     "api-version": "2018-07-01",
     "parameters": {
       "properties": {
@@ -30,19 +30,19 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "name": "PolicyCreatedWithClearKeyOptionAndSwtTokenRestriction",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyCreatedWithClearKeyOptionAndSwtTokenRestriction",
+        "name": "PolicyWithClearKeyOptionAndSwtTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithClearKeyOptionAndSwtTokenRestriction",
         "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
         "properties": {
-          "policyId": "d91a57d5-8e0a-41c8-88ba-4d2cc2a44158",
-          "created": "2019-12-11T23:41:34.297Z",
-          "lastModified": "2019-12-11T23:41:34.297Z",
+          "policyId": "2926c1bc-4dec-4a11-9d19-3f99006530a9",
+          "created": "2018-08-08T18:29:29.837Z",
+          "lastModified": "2018-08-08T18:29:29.837Z",
           "description": "ArmPolicyDescription",
           "options": [
             {
-              "policyOptionId": "5424629a-7158-4c0d-817e-0be81d065c69",
+              "policyOptionId": "e7d4d465-b6f7-4830-9a21-74a7326ef797",
               "name": "ClearKeyOption",
               "configuration": {
                 "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
@@ -53,7 +53,41 @@
                 "audience": "urn:audience",
                 "primaryVerificationKey": {
                   "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
-                  "keyValue": null
+                  "keyValue": ""
+                },
+                "alternateVerificationKeys": [],
+                "requiredClaims": [],
+                "restrictionTokenType": "Swt"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "PolicyWithClearKeyOptionAndSwtTokenRestriction",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Media/mediaservices/contosomedia/contentKeyPolicies/PolicyWithClearKeyOptionAndSwtTokenRestriction",
+        "type": "Microsoft.Media/mediaservices/contentKeyPolicies",
+        "properties": {
+          "policyId": "2926c1bc-4dec-4a11-9d19-3f99006530a9",
+          "created": "2018-08-08T18:29:29.837Z",
+          "lastModified": "2018-08-08T18:29:29.837Z",
+          "description": "ArmPolicyDescription",
+          "options": [
+            {
+              "policyOptionId": "e7d4d465-b6f7-4830-9a21-74a7326ef797",
+              "name": "ClearKeyOption",
+              "configuration": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyClearKeyConfiguration"
+              },
+              "restriction": {
+                "@odata.type": "#Microsoft.Media.ContentKeyPolicyTokenRestriction",
+                "issuer": "urn:issuer",
+                "audience": "urn:audience",
+                "primaryVerificationKey": {
+                  "@odata.type": "#Microsoft.Media.ContentKeyPolicySymmetricTokenKey",
+                  "keyValue": ""
                 },
                 "alternateVerificationKeys": [],
                 "requiredClaims": [],
