@@ -18,6 +18,15 @@ To see additional help and options, run:
 
 ---
 
+## Suppression
+
+``` yaml
+directive:
+  - from: service.json
+    suppress: OAV131 
+    reason: Testing purpose.
+```
+
 ## Configuration
 
 ### Basic Information
@@ -33,26 +42,6 @@ directive:
       - $.paths
     suppress:
       - UniqueResourcePaths
-
-  - where:
-      - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
-    suppress:
-      - DISCRIMINATOR_NOT_REQUIRED
-
-  - where:
-      - $.definitions.ReverseReplicationProviderSpecificInput
-    suppress:
-      - DISCRIMINATOR_NOT_REQUIRED
-	  
-  - where:
-      - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
-    suppress:
-      - DISCRIMINATOR_NOT_REQUIRED
-
-  - where:
-      - $.definitions.SwitchProtectionProviderSpecificInput
-    suppress:
-      - DISCRIMINATOR_NOT_REQUIRED
 	  
 ```
 
