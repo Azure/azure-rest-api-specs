@@ -2,50 +2,50 @@
   "parameters": {
     "api-version": "2019-10-01",
     "externalSubscriptionId": "123",
-    "scope": "providers/Microsoft.CostManagement/externalSubscriptions/123"
-  },
-  "parameters":{
-	"type": "Usage",
-	"timeframe": "MonthToDate",
-	"dataset": {
-		"granularity": "Daily",
-		"filter" : {
-		"and": [
-            {
-              "or": [
-                {
-                  "dimension": {
-                    "name": "ResourceLocation",
-                    "operator": "In",
-                    "values": [
-                      "East US",
-                      "West Europe"
-                    ]
-                  }
-                },
-                {
-                  "tag": {
-                    "name": "Environment",
-                    "operator": "In",
-                    "values": [
-                      "UAT",
-                      "Prod"
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "dimension": {
-                "name": "ResourceGroup",
-                "operator": "In",
-                "values": [
-                  "API"
-                ]
-              }
-            }
-          ]
-        }
+    "scope": "providers/Microsoft.CostManagement/externalSubscriptions/123",
+	"parameters":{
+		"type": "Usage",
+		"timeframe": "MonthToDate",
+		"dataset": {
+			"granularity": "Daily",
+			"filter" : {
+			"and": [
+				{
+				  "or": [
+					{
+					  "dimension": {
+						"name": "ResourceLocation",
+						"operator": "In",
+						"values": [
+						  "East US",
+						  "West Europe"
+						]
+					  }
+					},
+					{
+					  "tag": {
+						"name": "Environment",
+						"operator": "In",
+						"values": [
+						  "UAT",
+						  "Prod"
+						]
+					  }
+					}
+				  ]
+				},
+				{
+				  "dimension": {
+					"name": "ResourceGroup",
+					"operator": "In",
+					"values": [
+					  "API"
+					]
+				  }
+				}
+			  ]
+			}
+		}
 	}
   },
   "responses": {
