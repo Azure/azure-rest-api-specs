@@ -554,9 +554,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.HyperVMachinesController"
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVMachinesController"
         ],
-        "operationId": "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.HyperVMachinesController_GetAllMachinesInSite",
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVMachinesController_GetAllMachinesInSite",
         "consumes": [
           
         ],
@@ -598,7 +598,7 @@
             "type": "string"
           },
           {
-            "name": "pageSize",
+            "name": "top",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -1192,6 +1192,56 @@
           }
         },
         "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVSitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVSitesController_GetSiteHealthSummary",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/jobs/{jobName}": {
@@ -1423,9 +1473,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.MachinesController"
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.MachinesController"
         ],
-        "operationId": "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.MachinesController_GetAllMachinesInSite",
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.MachinesController_GetAllMachinesInSite",
         "consumes": [
           
         ],
@@ -1467,7 +1517,7 @@
             "type": "string"
           },
           {
-            "name": "pageSize",
+            "name": "top",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -2136,6 +2186,56 @@
           "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController"
         ],
         "operationId": "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_GetSiteHealthSummary",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_GetSiteHealthSummary",
         "consumes": [
           
         ],
@@ -3076,9 +3176,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ImportMachinesController"
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ImportMachinesController"
         ],
-        "operationId": "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ImportMachinesController_GetAllMachinesInImportSiteAsync",
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ImportMachinesController_GetAllMachinesInImportSiteAsync",
         "consumes": [
           
         ],
@@ -3120,7 +3220,7 @@
             "type": "string"
           },
           {
-            "name": "pageSize",
+            "name": "top",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -3983,9 +4083,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ServersController"
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServersController"
         ],
-        "operationId": "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ServersController_GetAllMachinesInSite",
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServersController_GetAllMachinesInSite",
         "consumes": [
           
         ],
@@ -4027,7 +4127,7 @@
             "type": "string"
           },
           {
-            "name": "pageSize",
+            "name": "top",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -4269,7 +4369,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImportSite"
+              "$ref": "#/definitions/ServerSite"
             }
           },
           {
@@ -4401,6 +4501,56 @@
           }
         },
         "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController_GetSiteUsage",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSiteUsage"
+            }
+          }
+        },
+        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/healthSummary": {
@@ -4409,6 +4559,56 @@
           "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ServerSitesController"
         ],
         "operationId": "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.ServerSitesController_GetSiteHealthSummary",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteHealthSummaryCollection"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController_GetSiteHealthSummary",
         "consumes": [
           
         ],
@@ -4511,6 +4711,110 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVSitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.HyperVSitesController_GetSiteUsage",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HyperVSiteUsage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_GetSiteUsage",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VMwareSiteUsage"
+            }
           }
         },
         "deprecated": false
@@ -4729,21 +5033,6 @@
           "$ref": "#/definitions/JobProperties",
           "description": "Gets nested properties.",
           "readOnly": true
-        },
-        "status": {
-          "description": "Gets operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "Gets operation start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "Gets operation end time.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -4751,6 +5040,18 @@
       "description": "Class for machine properties.",
       "type": "object",
       "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "readOnly": true
+        },
         "displayName": {
           "description": "Gets or sets the display name of the Job.",
           "type": "string",
@@ -5776,21 +6077,6 @@
         "properties": {
           "$ref": "#/definitions/JobProperties",
           "description": "Gets nested properties.",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Gets operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "Gets operation start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "Gets operation end time.",
-          "type": "string",
           "readOnly": true
         }
       }
@@ -7468,18 +7754,6 @@
         "properties": {
           "$ref": "#/definitions/ImportJobProperties",
           "readOnly": true
-        },
-        "status": {
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -7502,6 +7776,18 @@
         },
         "errorSummary": {
           "$ref": "#/definitions/JobErrorSummary"
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
@@ -7885,21 +8171,6 @@
           "$ref": "#/definitions/JobProperties",
           "description": "Gets nested properties.",
           "readOnly": true
-        },
-        "status": {
-          "description": "Gets operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "Gets operation start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "Gets operation end time.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -8155,12 +8426,6 @@
     "ServerSite": {
       "type": "object",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Object"
-          }
-        },
         "id": {
           "type": "string",
           "readOnly": true
