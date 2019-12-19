@@ -379,6 +379,42 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ResourceHealth/emergingIssues": {
+      "get": {
+        "tags": [
+          "EmergingIssues"
+        ],
+        "operationId": "EmergingIssues_List",
+        "description": "Lists Azure services' emerging issues.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains a list of azure emerging issues.",
+            "schema": {
+              "$ref": "#/definitions/emergingIssueListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEmergingIssues": {
+            "$ref": "./examples/EmergingIssues_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1074,25 +1110,17 @@
       "description": "The Get EmergingIssues operation response.",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Azure Resource Manager Identity for the emerging issues resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "emerging issues."
-        },
-        "type": {
-          "type": "string",
-          "description": "/providers/Microsoft.ResourceHealth/EmergingIssues."
-        },
         "properties": {
           "$ref": "#/definitions/emergingIssue",
           "description": "The emerging issue entity properties.",
           "x-ms-client-flatten": true
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "emergingIssue": {
       "type": "object",
@@ -1116,6 +1144,23 @@
             "$ref": "#/definitions/statusActiveEvent"
           },
           "description": "The list of emerging issues of active event type."
+        }
+      }
+    },
+    "emergingIssueListResult": {
+      "description": "The list of emerging issues.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of emerging issues.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emergingIssuesGetResult"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of emerging issues.",
+          "type": "string"
         }
       }
     },
