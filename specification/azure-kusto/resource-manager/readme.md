@@ -28,7 +28,7 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2019-09-07
+tag: package-preview-2020-01
 directive:
   - suppress: R2016
     from: kusto.json
@@ -36,6 +36,15 @@ directive:
     reason: Implements kind which is required also in patch
 ```
 
+
+### Tag: package-preview-2020-01
+
+These settings apply only when `--tag=package-preview-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-01'
+input-file:
+  - Microsoft.Kusto/preview/2020-01-01-preview/kusto.json
+```
 ### Tag: package-2019-09-07
 
 These settings apply only when `--tag=package-2019-09-07` is specified on the command line.
