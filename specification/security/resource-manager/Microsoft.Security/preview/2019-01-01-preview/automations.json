@@ -341,11 +341,6 @@
           "type": "boolean",
           "description": "Indicates whether the security automation is enabled."
         },
-        "metadata": {
-          "type": "object",
-          "description": "The metadata of the security automation resource.",
-          "$ref": "#/definitions/AutomationMetadata"
-        },
         "scopes": {
           "type": "array",
           "description": "A collection of scopes on which the security automations logic is applied. Supported scopes are the subscription itself or a resource group under that subscription. The automation will only apply on defined scopes.",
@@ -366,32 +361,6 @@
           "items": {
             "$ref": "#/definitions/AutomationAction"
           }
-        }
-      }
-    },
-    "AutomationMetadata": {
-      "type": "object",
-      "description": "The metadata of the security automation resource.",
-      "properties": {
-        "createdDateTimeUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The security automation creation date."
-        },
-        "createdBy": {
-          "type": "string",
-          "description": "The AAD object ID of the entity that created the security automation."
-        },
-        "lastUpdatedDateTimeUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The security automation last updated date."
-        },
-        "lastUpdatedBy": {
-          "type": "string",
-          "description": "The AAD object ID of the entity that last updated the security automation."
         }
       }
     },
