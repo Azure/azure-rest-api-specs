@@ -33,17 +33,28 @@ directive:
       - $.paths
     suppress:
       - UniqueResourcePaths
+
+  - where:
+      - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
+    suppress:
+      - 0AV131  
+
+  - where:
+      - $.definitions.ReverseReplicationProviderSpecificInput
+    suppress:
+      - 0AV131
+	  
+  - where:
+      - $.definitions.ReplicationProviderSpecificUpdateContainerMappingInput
+    suppress:
+      - 0AV131	  
+
+  - where:
+      - $.definitions.SwitchProtectionProviderSpecificInput
+    suppress:
+      - 0AV131
 	  
 ```
-
-``` yaml
-directive:
-  - from: service.json
-    suppress: OAV131 
-    reason: Testing purpose.
-
-```
-
 
 ### Tag: package-2018-07
 
