@@ -35,7 +35,7 @@ directive:
       - UniqueResourcePaths
 
 directive:
-  - from: notRequiredDiscriminatorWithSuppression.json
+  - from: service.json
     suppress: OAV131 
     reason: 
 	  
