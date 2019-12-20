@@ -62,7 +62,6 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/networkProfile.json
   - Microsoft.Network/stable/2019-11-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-11-01/networkWatcher.json
-  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-11-01/operation.json
   - Microsoft.Network/stable/2019-11-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-11-01/privateLinkService.json
@@ -1376,6 +1375,10 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
+    reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
