@@ -4501,56 +4501,6 @@
           }
         },
         "deprecated": false
-      },
-      "post": {
-        "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController"
-        ],
-        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController_GetSiteUsage",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerSiteUsage"
-            }
-          }
-        },
-        "deprecated": false
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/healthSummary": {
@@ -4814,6 +4764,58 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VMwareSiteUsage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController"
+        ],
+        "operationId": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.ServerSitesController_GetSiteUsage",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSiteUsage"
             }
           }
         },
@@ -5934,8 +5936,7 @@
           "description": "Gets or sets the AAD Authority URL which was used to request the token for the\r\n            service principal.",
           "type": "string"
         },
-        "rawCertData": {
-          "description": "Gets or sets the raw certificate data for building certificate expiry flows.",
+        "publicKey": {
           "type": "string"
         }
       }
