@@ -1335,7 +1335,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "The additional managed scopes outside of the normal managed resource group."
+          "description": "The additional managed scopes outside of the normal managed resource group. The key is the resource that manages the scope and the value is the fully qualified scope."
         },
         "JITAccessPolicy": {
           "$ref": "#/definitions/ApplicationJitAccessPolicy",
@@ -1366,7 +1366,7 @@
         },
         "supportUrls": {
           "$ref": "#/definitions/ApplicationPackageSupportUrls",
-          "description": "The  read-only support URLs property that is retrieved from the application package.",
+          "description": "The read-only support URLs property that is retrieved from the application package.",
           "readOnly": true
         },
         "artifacts": {
@@ -1442,7 +1442,7 @@
           "description": "The collection of managed application artifacts. The portal will use the files specified as artifacts to construct the user experience of creating a managed application from a managed application definition.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ApplicationArtifact"
+            "$ref": "#/definitions/ApplicationDefinitionArtifact"
           }
         },
         "description": {
@@ -1750,10 +1750,24 @@
         "modelAsString": false
       }
     },
+    "ApplicationArtifactName": {
+      "description": "The managed application artifact name.",
+      "enum": [
+        "NotSpecified",
+        "ViewDefinition",
+        "Authorizations",
+        "CustomRoleDefinition"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ApplicationArtifactName",
+        "modelAsString": false
+      }
+    },
     "ApplicationArtifact": {
       "properties": {
         "name": {
-          "$ref": "#/definitions/ApplicationDefinitionArtifactName",
+          "$ref": "#/definitions/ApplicationArtifactName",
           "description": "The managed application artifact name."
         },
         "uri": {
@@ -1771,6 +1785,28 @@
         "uri"
       ],
       "description": "Managed application artifact."
+    },
+    "ApplicationDefinitionArtifact": {
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/ApplicationDefinitionArtifactName",
+          "description": "The managed application definition artifact name."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The managed application definition artifact blob uri."
+        },
+        "type": {
+          "$ref": "#/definitions/ApplicationArtifactType",
+          "description": "The managed application definition artifact type."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "uri"
+      ],
+      "description": "Application definition artifact."
     },
     "ApplicationNotificationPolicy": {
       "properties": {
@@ -1845,10 +1881,6 @@
         "parameters": {
           "type": "string",
           "description": "The policy parameters."
-        },
-        "sku": {
-          "type": "string",
-          "description": "The policy sku."
         }
       },
       "description": "Managed application policy."
@@ -1916,7 +1948,7 @@
     "ApplicationJitAccessPolicy": {
       "properties": {
         "JITAccessEnabled": {
-          "type": "string",
+          "type": "boolean",
           "description": "Whether the JIT access is enabled."
         },
         "JITApprovalMode": {
@@ -1931,9 +1963,8 @@
           "description": "The JIT approvers"
         },
         "maximumJitAccessDuration": {
-          "readOnly": true,
           "type": "string",
-          "description": "The maximum duration JIT access is granted."
+          "description": "The maximum duration JIT access is granted. This is an ISO8601 time period value."
         }
       },
       "required": [
@@ -2108,7 +2139,7 @@
     },
     "JitApproverDefinition": {
       "properties": {
-        "id": {
+        "principalId": {
           "type": "string",
           "description": "The approver service principal Id."
         },
