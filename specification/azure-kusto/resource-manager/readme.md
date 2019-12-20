@@ -28,7 +28,7 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-preview-2020-01
+tag: package-2019-09-07
 directive:
   - suppress: R2016
     from: kusto.json
