@@ -653,6 +653,7 @@
       "discriminator": "odata.type",
       "properties": {
         "odata.type": {
+		  "type": "string",
           "enum": [
             "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
             "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
@@ -727,6 +728,7 @@
       ],
       "properties": {
         "operator": {
+		  "type": "string",
           "enum": [
             "Equals",
             "NotEquals",
@@ -801,6 +803,7 @@
       "discriminator": "criterionType",
       "properties": {
         "criterionType": {
+		  "type": "string",
           "enum": [
             "StaticThresholdCriterion",
             "DynamicThresholdCriterion"
@@ -824,6 +827,7 @@
           "description": "Namespace of the metric."
         },
         "timeAggregation": {
+		  "type": "string",
           "enum": [
             "Average",
             "Minimum",
@@ -867,6 +871,7 @@
       ],
       "properties": {
         "operator": {
+		  "type": "string",
           "enum": [
             "GreaterThan",
             "LessThan",
@@ -879,6 +884,7 @@
           "description": "The operator used to compare the metric value against the threshold."
         },
         "alertSensitivity": {
+		  "type": "string",
           "enum": [
             "Low",
             "Medium",
@@ -927,7 +933,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription Id."
+      "description": "The Azure subscription Id."
     },
     "ApiVersionParameter": {
       "name": "api-version",
