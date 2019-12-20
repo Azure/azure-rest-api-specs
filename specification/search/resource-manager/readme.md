@@ -50,7 +50,7 @@ input-file:
 
 ### Tag: package-2019-10-preview
 
-Tese settings apply only when `--tag=package-2019-10-preview` is specified on teh command line.
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
 ``` yaml $(tag) == 'package-2019-10-preview'
 input-file:
 - Microsoft.Search/preview/2019-10-01-preview/search.json
