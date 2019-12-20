@@ -358,13 +358,6 @@
         "location": {
           "type": "string",
           "description": "The Azure region where the resource lives."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "x-ms-azure-resource": true,
@@ -372,6 +365,13 @@
     },
     "Identity": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "readOnly": true,
@@ -400,6 +400,13 @@
     },
     "IdentityPatch": {
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "readOnly": true,
@@ -436,7 +443,6 @@
         "type": {
           "type": "string",
           "readOnly": true,
-
           "description": "The type of resource i.e. Microsoft.Compute/virtualMachineScaleSets"
         }
       },
