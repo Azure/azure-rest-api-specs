@@ -1,0 +1,2471 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WANDisco Fusion",
+    "description": "WANDisco Fusion",
+    "version": "2019-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Wandisco.Fusion/fusionGroups": {
+      "get": {
+        "tags": [
+          "fusionGroups"
+        ],
+        "description": "Returns list of fusionGroups under  subscription.",
+        "operationId": "FusionGroups_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "fusionGroups details.",
+            "schema": {
+              "$ref": "#/definitions/FusionGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get fusion groups list": {
+            "$ref": "./examples/FusionGroup/FusionGroupsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups": {
+      "get": {
+        "tags": [
+          "fusionGroups"
+        ],
+        "description": "Returns list of fusionGroups.",
+        "operationId": "FusionGroups_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "fusionGroups details.",
+            "schema": {
+              "$ref": "#/definitions/FusionGroupList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get fusion groups list": {
+            "$ref": "./examples/FusionGroup/FusionGroupsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}": {
+      "get": {
+        "tags": [
+          "fusionGroup"
+        ],
+        "description": "Returns a given FusionGroup.",
+        "operationId": "FusionGroups_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "fusionGroup details.",
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get fusionGroup details.": {
+            "$ref": "./examples/FusionGroup/FusionGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "fusionGroup"
+        ],
+        "description": "Create or update fusionGroup resource.",
+        "operationId": "FusionGroups_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "name": "fusionGroup",
+            "description": "fusionGroup details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create simple fusionGroup": {
+            "$ref": "./examples/FusionGroup/FusionGroupCreate.json"
+          },
+          "Create fusionGroup with label": {
+            "$ref": "./examples/FusionGroup/FusionGroupCreateWithLabel.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "fusionGroup"
+        ],
+        "description": "Delete a fusionGroup resource.",
+        "operationId": "FusionGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Fusion Group was successfully deleted"
+          },
+          "204": {
+            "description": "The Fusion Group was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/FusionGroupDelete.json"
+          }
+        }
+      },
+      "patch" : {
+        "tags": [
+          "fusionGroup"
+        ],
+        "description": "DePatches  a fusionGroup resource.",
+        "operationId": "FusionGroups_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "name": "fusionGroup",
+            "description": "fusionGroup details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Fusion Group was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/FusionGroupPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/azureZones": {
+      "get": {
+        "tags": [
+          "azureZones"
+        ],
+        "description": "Returns list of azureZones.",
+        "operationId": "AzureZones_ListByFusionGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "azureZones details.",
+            "schema": {
+              "$ref": "#/definitions/AzureZoneList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create Azure Zone": {
+            "$ref": "./examples/FusionGroup/AzureZoneList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/azureZones/{azureZoneName}": {
+      "get": {
+        "tags": [
+          "azureZone"
+        ],
+        "description": "Returns a given azureZone.",
+        "operationId": "AzureZones_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "azureZone details.",
+            "schema": {
+              "$ref": "#/definitions/AzureZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Zone by name": {
+            "$ref": "./examples/FusionGroup/AzureZoneGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "azureZone"
+        ],
+        "description": "Creates a given azureZone.",
+        "operationId": "AzureZones_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "name": "azureZone",
+            "description": "azureZone details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureZone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Azure Zone.",
+            "schema": {
+              "$ref": "#/definitions/AzureZone"
+            }
+          },
+          "201": {
+            "description": "Installing Fusion Azure Zone.",
+            "schema": {
+              "$ref": "#/definitions/AzureZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure Zone": {
+            "$ref": "./examples/FusionGroup/AzureZoneCreate.json"
+          },
+          "Create Azure Zone with Managed Identity": {
+            "$ref": "./examples/FusionGroup/AzureZoneCreateManagedIdentity.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "azureZone"
+        ],
+        "description": "Deletes a given azureZone.",
+        "operationId": "AzureZones_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Zone was successfully deleted"
+          },
+          "204": {
+            "description": "The Azure Zone was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/AzureZoneDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/azureZones/{azureZoneName}/plugins": {
+      "get": {
+        "tags": [
+          "Plugins"
+        ],
+        "description": "Returns a list of AzureZone Plugin",
+        "operationId": "Plugins_ListByAzureZone",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of PluginDetails",
+            "schema": {
+              "$ref": "#/definitions/PluginList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Plugin": {
+            "$ref": "./examples/FusionGroup/PluginList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/azureZones/{azureZoneName}/plugins/{pluginName}": {
+      "get": {
+        "tags": [
+          "Plugins"
+        ],
+        "description": "Returns an AzureZone Plugin",
+        "operationId": "Plugins_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/PluginsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PluginDetails",
+            "schema": {
+              "$ref": "#/definitions/Plugin"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Plugin": {
+            "$ref": "./examples/FusionGroup/PluginGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Plugins"
+        ],
+        "description": "Creates or updates a Plugin",
+        "operationId": "Plugins_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/PluginsParameter"
+          },
+          {
+            "name": "plugin",
+            "description": "plugin details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Plugin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Plugin.",
+            "schema": {
+              "$ref": "#/definitions/Plugin"
+            }
+          },
+          "201": {
+            "description": "Creating Plugin.",
+            "schema": {
+              "$ref": "#/definitions/Plugin"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creating Plugin": {
+            "$ref": "./examples/FusionGroup/PluginCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Plugins"
+        ],
+        "description": "Deletes a given Plugin.",
+        "operationId": "Plugins_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/PluginsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Plugin was successfully deleted"
+          },
+          "204": {
+            "description": "The Plugin was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/PluginDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules": {
+      "get": {
+        "tags": [
+          "replicationRules"
+        ],
+        "description": "List of replication rules",
+        "operationId": "ReplicationRules_ListByFusionGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "replicationRule details",
+            "schema": {
+              "$ref": "#/definitions/ReplicationRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Replication Rules": {
+            "$ref": "./examples/FusionGroup/ReplicationRulesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}": {
+      "get": {
+        "tags": [
+          "replicationRule"
+        ],
+        "description": "Return a given replicationRule",
+        "operationId": "ReplicationRules_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "replicationRule details",
+            "schema": {
+              "$ref": "#/definitions/ReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Replication Rule": {
+            "$ref": "./examples/FusionGroup/ReplicationRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "replicationRule"
+        ],
+        "description": "Update a replicationRule",
+        "operationId": "ReplicationRules_CreateAndUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "name": "replicationRule",
+            "description": "replicationRule details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationRule"
+            }
+          },
+          "201": {
+            "description": "Creating Fusion Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Replication Rule": {
+            "$ref": "./examples/FusionGroup/ReplicationRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "replicationRule"
+        ],
+        "description": "Update a replicationRule",
+        "operationId": "ReplicationRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Replication Rule was successfully deleted"
+          },
+          "204": {
+            "description": "The Replication Rule was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/ReplicationRuleDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/consistencyCheck": {
+      "post": {
+        "tags": [
+          "Consistency Check"
+        ],
+        "description": "Trigger a consistency check on a Replication Rule",
+        "operationId": "ConsistencyCheck_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "consistencyCheckOptions",
+            "description": "Consistency Check options",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsistencyCheckOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request to consistency check the path was accepted."
+          },
+          "204": {
+            "description": "The path to check is not mapped."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful start of Consistency Check": {
+            "$ref": "./examples/FusionGroup/ConsistencyCheckStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available RP operations.",
+        "operationId": "ListOperations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Wandisco.Fusion Operations": {
+            "$ref": "./examples/WandiscoFusionListOperations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/onPremZones": {
+      "get": {
+        "tags": [
+          "onPremZone"
+        ],
+        "description": "Returns list of OnPremZones.",
+        "operationId": "OnPremZones_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "onPremZone details.",
+            "schema": {
+              "$ref": "#/definitions/OnPremZoneList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get On Prem Zone list": {
+            "$ref": "./examples/FusionGroup/OnPremZoneList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/onPremZones/{onPremZoneName}": {
+      "get": {
+        "tags": [
+          "onPremZone"
+        ],
+        "description": "Returns a given OnPremZone.",
+        "operationId": "OnPremZones_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OnPremZoneParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "onPremZone details.",
+            "schema": {
+              "$ref": "#/definitions/OnPremZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get On Prem Zone by name": {
+            "$ref": "./examples/FusionGroup/OnPremZoneGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "onPremZone"
+        ],
+        "description": "Creates a given OnPremZone.",
+        "operationId": "OnPremZones_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OnPremZoneParameter"
+          },
+          {
+            "name": "OnPremZone",
+            "description": "onPremZone details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OnPremZone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating OnPrem Zone.",
+            "schema": {
+              "$ref": "#/definitions/OnPremZone"
+            }
+          },
+          "201": {
+            "description": "Creating Fusion OnPrem Zone.",
+            "schema": {
+              "$ref": "#/definitions/OnPremZone"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create On Prem Zone": {
+            "$ref": "./examples/FusionGroup/OnPremZoneCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "onPremZone"
+        ],
+        "description": "Deletes a given onPremZone.",
+        "operationId": "OnPremZones_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OnPremZoneParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The OnPrem Zone was successfully deleted"
+          },
+          "204": {
+            "description": "The OnPrem Zone was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/OnPremZoneDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations": {
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "List migrations in replication rule",
+        "operationId": "Migrations_ListByReplicationRule",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MigrationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Migration": {
+            "$ref": "./examples/FusionGroup/MigrationList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations/{migrationName}": {
+      "put": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Start a migration",
+        "operationId": "Migrations_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          },
+          {
+            "name": "migration",
+            "description": "migration details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Migration": {
+            "$ref": "./examples/FusionGroup/MigrationCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Delete a migration",
+        "operationId": "Migrations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pause Migration": {
+            "$ref": "./examples/FusionGroup/MigrationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations/{migrationName}/pause": {
+      "post": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Pause a migration",
+        "operationId": "Migrations_Pause",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pause Migration": {
+            "$ref": "./examples/FusionGroup/MigrationPause.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations/{migrationName}/resume": {
+      "post": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Resume a migration",
+        "operationId": "Migrations_Resume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pause Migration": {
+            "$ref": "./examples/FusionGroup/MigrationResume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations/{migrationName}/abort": {
+      "post": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Abort a migration",
+        "operationId": "Migrations_Abort",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pause Migration": {
+            "$ref": "./examples/FusionGroup/MigrationAbort.json"
+          }
+        }
+      }
+    },
+    "/providers/Wandisco.Fusion/locations/{locationName}/operationStatuses/{operationStatusId}": {
+      "patch": {
+        "tags": [
+          "operationStatus"
+        ],
+        "description": "Patches a given operationStatus.",
+        "operationId": "OperationStatuses_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationStatusIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "operationStatus",
+            "description": "operationStatus details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "operationStatus details.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful update": {
+            "$ref": "./examples/FusionGroup/OperationStatusPatch.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "title": "Proxy resource type",
+      "description": "An azure proxy resource",
+      "properties": {
+        "id": {
+          "description": "Azure resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Azure resource name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceList": {
+      "description": "The list of Resources.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Resource list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          }
+        }
+      }
+    },
+    "VirtualMachineIdentity": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the virtual machine.",
+          "enum": [
+            "UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the virtual machine."
+    },
+    "FusionGroup": {
+      "type": "object",
+      "description": "Fusion Group details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "title": "properties",
+          "description": "fusion group properties",
+          "x-ms-client-flatten": true,
+          "type": "object",
+          "properties": {
+            "label": {
+              "title": "Property Type",
+              "description": "Property type label",
+              "type": "string"
+            },
+            "provisioningState": {
+              "title": "ProvisioningState",
+              "description": "Provisioning State of resource",
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          }
+        }
+      }
+    },
+    "FusionGroupList": {
+      "description": "The list of Fusion Groups.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Fusion Groups list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of groups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FusionGroup"
+          }
+        }
+      }
+    },
+    "AzureZone": {
+      "description": "Azure Zone",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "azure zone resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureZoneProperties"
+        }
+      }
+    },
+    "AzureZoneProperties": {
+      "description": "azure zone properties",
+      "properties": {
+        "virtualNetworkId": {
+          "description": "Resource ID of virtual network to attach the VMs to",
+          "type": "string"
+        },
+        "subnet": {
+          "description": "Resource ID of Subnet to connect VMs to",
+          "type": "string"
+        },
+        "vmSize": {
+          "description": "Size of VM",
+          "type": "string"
+        },
+        "storageAccountId": {
+          "description": "Resource ID of ADLS Gen 2 account to replicate to",
+          "type": "string"
+        },
+        "storageContainer": {
+          "description": "Container to replicate",
+          "type": "string"
+        },
+        "storageManagedIdentity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "Managed identity of storage account (use either key or identity)"
+        },
+        "storageAccessKey": {
+          "description": "Access Key for storage (use either key or identity)",
+          "type": "string"
+        },
+        "storageSecured": {
+          "description": "Secure transfer required",
+          "type": "boolean"
+        },
+        "nodeCount": {
+          "description": "The number of nodes in the zone",
+          "type": "integer"
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "Plugin": {
+      "description": "Plugin AzureZone subresource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Plugin Representation",
+          "$ref": "#/definitions/PluginRepresentation"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PluginList": {
+      "description": "The list of Plugins.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Plugin list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Plugins.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Plugin"
+          }
+        }
+      }
+    },
+    "PluginRepresentation": {
+      "description": "Plugin Representation",
+      "discriminator": "pluginKind",
+      "properties": {
+        "pluginKind": {
+          "$ref": "#/definitions/PluginKind",
+          "description": "The kind of Plugin."
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      },
+      "required": [
+        "pluginKind"
+      ]
+    },
+    "PluginKind": {
+      "type": "string",
+      "description": "The kind of Plugin.",
+      "enum": [
+        "HdiFusionClient",
+        "LiveHiveFusionServer",
+        "LiveHiveHdiFusionClient"
+      ],
+      "x-ms-enum": {
+        "name": "PluginKind",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "HdiFusionClient"
+          },
+          {
+            "value": "LiveHiveFusionServer"
+          },
+          {
+            "value": "LiveHiveHdiFusionClient"
+          }
+        ]
+      }
+    },
+    "HdiFusionClient": {
+      "description": "HDI Fusion Client",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PluginRepresentation"
+        }
+      ],
+      "properties": {
+        "hdiClusterId": {
+          "description": "HDI Cluster resource ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "hdiClusterId"
+      ],
+      "x-ms-discriminator-value": "HdiFusionClient"
+    },
+    "LiveHiveFusionServer": {
+      "description": "Live Hive Proxy and Fusion Server Plugin",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PluginRepresentation"
+        }
+      ],
+      "properties": {
+        "hiveMetastore": {
+          "description": "Underlying Hive Metastore location",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "LiveHiveFusionServer"
+    },
+    "LiveHiveHdiFusionClient": {
+      "description": "Live Hive Attachment to HDI Cluster",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PluginRepresentation"
+        }
+      ],
+      "x-ms-discriminator-value": "LiveHiveHdiFusionClient"
+    },
+    "AzureZoneList": {
+      "description": "The list of Azure Zones.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Azure zones list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of zones.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureZone"
+          }
+        }
+      }
+    },
+    "OnPremZone": {
+      "description": "OnPrem Zone",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "on prem zone resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremZoneProperties"
+        }
+      }
+    },
+    "OnPremZoneProperties": {
+      "description": "on prem zone properties",
+      "properties": {
+        "inductionToken": {
+          "description": "induction token for on prem zone",
+          "type": "string"
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "OnPremZoneList": {
+      "description": "The list of On Prem Zones.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of on prem zones list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of zones.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OnPremZone"
+          }
+        }
+      }
+    },
+    "PathMapping": {
+      "description": "Replication Rule Mapping of a specific Zone",
+      "type": "object",
+      "properties": {
+        "zone": {
+          "description": "Zone name",
+          "type": "string"
+        },
+        "path": {
+          "description": "The Filesystem Path for which the zone defined by \\'zone\\' should replicate incoming Fusion requests to.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationRule": {
+      "description": "Replication Rule",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "replication rule properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReplicationRuleProperties"
+        }
+      }
+    },
+    "ReplicationRuleProperties": {
+      "description": "Properties of Created Rule Name",
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The Filesystem Path to be used if a PathMapping is not defined for a certain zone."
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "priorityZone": {
+          "type": "string",
+          "description": "The Zone that takes precedence for a quorum in a scenario where there is an even number of zones and an equivalent amount of nodes are down in each zone"
+        },
+        "pathMapping": {
+          "title": "PathMapping",
+          "description": "Path Mapping for a Replication Rule",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PathMapping"
+          }
+        },
+        "migration": {
+          "title": "Migration",
+          "description": "The most recent migration for the replication rule",
+          "$ref": "#/definitions/Migration",
+          "readOnly": true
+        },
+        "recentConsistencyReport": {
+          "description": "A report of the most recent consistency check completed for this path",
+          "type": "object",
+          "$ref": "#/definitions/ConsistencyReport",
+          "readOnly": true
+        },
+        "zoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of zones the replication rule applies to."
+        }
+      }
+    },
+    "ReplicationRulesList": {
+      "description": "The list of Replications Rules.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Replication Rules list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of replication rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationRule"
+          }
+        }
+      }
+    },
+    "ConsistencyCheckOptions" : {
+      "description" : "Consistency Check Options",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Consistency Check Options properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConsistencyCheckOptionsProperties"
+        }
+      }
+    },
+    "ConsistencyCheckOptionsProperties" : {
+      "description":  "Consistency Check Options Properties",
+      "type" : "object",
+      "properties": {
+        "nonBlocking" : {
+          "description" : "Enable a non-blocking consistency check",
+          "type": "boolean",
+          "default": true
+        },
+        "nonBlockingThreshold" : {
+          "description": "The threshold of dirty files which will cancel a non-blocking consistency check should it be met",
+          "type": "integer",
+          "default": 0
+        }
+      }
+    },
+    "ConsistencyReport": {
+      "description": "ConsistencyReport Results for path",
+      "type": "object",
+      "properties": {
+        "result": {
+          "description": "The result of the most recent consistency check available for this path",
+          "enum": [
+            "Consistent",
+            "Inconsistent"
+          ]
+        },
+        "lastCheck": {
+          "description": "The timestamp from when this consistency check was completed",
+          "type": "string",
+          "format": "date-time"
+        },
+        "inconsistencyCount" : {
+          "description": "The number of inconsistent files if the result of the consistency check is inconsistent",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ResourceProvider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Resource Provider resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationStatusError": {
+      "description": "operation status error",
+      "properties": {
+        "code": {
+          "description": "An invariant error code used for error troubleshooting, aggregation, and analysis.",
+          "type": "string"
+        },
+        "message": {
+          "description": "An actionable error message indicating what error occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "operation status object",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Operation Id",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation Status",
+          "type": "string"
+        },
+        "error": {
+          "description": "Hdi cluster with Fusion client installed",
+          "type": "object",
+          "$ref": "#/definitions/OperationStatusError"
+        }
+      }
+    },
+    "Migration": {
+      "description": "Instance of a fusion migration",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Migration properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MigrationProperties"
+        }
+      }
+    },
+    "MigrationList": {
+      "description": "The list of Migrations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Migrations list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of migrations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Migration"
+          }
+        }
+      }
+    },
+    "MigrationProperties": {
+      "description": "Properties of fusion migration",
+      "properties": {
+        "donor": {
+          "type": "string",
+          "description": "The donor zone for replication rule"
+        },
+        "beneficiary": {
+          "type": "string",
+          "description": "The beneficiary zone for replication rule"
+        },
+        "overwritePolicy": {
+          "type": "string",
+          "description": "The overwrite policy for migration CLOBBER|SKIP_IF_SIZE_MATCH|SKIP_IF_DATE_IS_EARLIER",
+          "enum": [
+            "CLOBBER",
+            "SKIP_IF_SIZE_MATCH",
+            "SKIP_IF_DATE_IS_EARLIER"
+          ]
+        },
+        "state": {
+          "description": "Running state of the migration",
+          "type": "string",
+          "enum": [
+            "Scheduled",
+            "Starting",
+            "WarmingUp",
+            "Running",
+            "Pausing",
+            "Paused",
+            "Aborted",
+            "Aborting",
+            "Finishing",
+            "Finished"
+          ],
+          "x-ms-enum": {
+            "name": "LiveMigrationState",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Scheduled"
+              },
+              {
+                "value": "Starting"
+              },
+              {
+                "value": "WarmingUp"
+              },
+              {
+                "value": "Running"
+              },
+              {
+                "value": "Pausing"
+              },
+              {
+                "value": "Paused"
+              },
+              {
+                "value": "Aborted"
+              },
+              {
+                "value": "Aborting"
+              },
+              {
+                "value": "Finishing"
+              },
+              {
+                "value": "Finished"
+              }
+            ]
+          }
+        },
+        "progress": {
+          "description": "Migration status",
+          "$ref": "#/definitions/MigrationProgress"
+        }
+      }
+    },
+    "MigrationProgress": {
+      "description": "Status of fusion migration",
+      "properties": {
+        "duration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Duration of migration"
+        },
+        "filesSeen": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of files scanned"
+        },
+        "dirsSeen": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of directories scanned"
+        },
+        "filesExcluded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of excluded files"
+        },
+        "dirsExcluded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of excluded directories"
+        },
+        "bytesExcluded": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of bytes excluded"
+        },
+        "sizeOfMigration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Size of the migration"
+        },
+        "filesToMigrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of files to migrate"
+        },
+        "dirsToMigrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of directories to migrate"
+        },
+        "bytesToMigrate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of bytes to migrate"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The possible Provisioning States",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "FusionGroupParameter": {
+      "name": "fusionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the fusionGroup resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "AzureZoneParameter": {
+      "name": "azureZoneName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the azureZone resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "OnPremZoneParameter": {
+      "name": "onPremZoneName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the onPremZone resource.",
+      "x-ms-parameter-location": "method"
+    },
+    "ReplicationRuleNameParameter": {
+      "name": "replicationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the replicationRule",
+      "x-ms-parameter-location": "method"
+    },
+    "PluginsParameter": {
+      "name": "pluginName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Plugin",
+      "x-ms-parameter-location": "method"
+    },
+    "MigrationNameParameter": {
+      "name": "migrationName",
+      "in": "path",
+      "required":  true,
+      "type": "string",
+      "description": "The id for migration",
+      "x-ms-parameter-location": "method"
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the location",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationStatusIdParameter": {
+      "name": "operationStatusId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id of the operationStatus",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
