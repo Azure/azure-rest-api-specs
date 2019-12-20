@@ -1337,7 +1337,7 @@
           },
           "description": "The additional managed scopes outside of the normal managed resource group. The key is the resource that manages the scope and the value is the fully qualified scope."
         },
-        "JITAccessPolicy": {
+        "jitAccessPolicy": {
           "$ref": "#/definitions/ApplicationJitAccessPolicy",
           "description": "The managed application Jit access policy."
         },
@@ -1947,15 +1947,15 @@
     },
     "ApplicationJitAccessPolicy": {
       "properties": {
-        "JITAccessEnabled": {
+        "jitAccessEnabled": {
           "type": "boolean",
           "description": "Whether the JIT access is enabled."
         },
-        "JITApprovalMode": {
+        "jitApprovalMode": {
           "$ref": "#/definitions/JitApprovalMode",
           "description": "JIT approval mode."
         },
-        "JITApprovers": {
+        "jitApprovers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/JitApproverDefinition"
@@ -1968,7 +1968,7 @@
         }
       },
       "required": [
-        "JITAccessEnabled"
+        "jitAccessEnabled"
       ],
       "description": "Managed application Jit access policy."
     },
