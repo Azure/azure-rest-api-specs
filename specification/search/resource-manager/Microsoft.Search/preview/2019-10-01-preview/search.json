@@ -610,6 +610,167 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Update",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionUpdate": {
+            "$ref": "./examples/UpdatePrivateEndpointConnection.json"
+          }
+        },
+        "description": "Updates a Private Endpoint connection to the Search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The definition of the private endpoint connection to update."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing private endpoint connection definition was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "HTTP 400 (Bad Request): The given private endpoint connection name or the private endpoint connection definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or private endpoint connection could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionGet": {
+            "$ref": "./examples/GetPrivateEndpointConnection.json"
+          }
+        },
+        "description": "Gets the details of the private endpoint connection to the Search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The definition of the private endpoint connection was successfully retrieved and is in the response.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, Search service or private endpoint connection could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/DeletePrivateEndpointConnection.json"
+          }
+        },
+        "description": "Disconnects the private endpoint connection and deletes it from the Search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The private endpoint connection was successfully disconnected and removed from the search service. The response will contain the updated definition of the private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "404": {
+            "description": "The subscription, resource group, Search service or private endpoint connection could not be found."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
       "get": {
         "tags": [
@@ -833,6 +994,34 @@
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
     },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the private endpoint connection. This can be used with the Azure Resource Manager to link resources together.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-linked-resources"
+          }
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the private endpoint connection.",
+          "externalDocs": {
+            "url": "https://aka.ms/search-naming-rules"
+          }
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
     "NetworkRuleSet": {
       "properties": {
         "endpointAccess": {
@@ -1023,34 +1212,9 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The ID of the resource. This can be used with the Azure Resource Manager to link resources together.",
-                "externalDocs": {
-                  "url": "https://aka.ms/search-linked-resources"
-                }
-              },
-              "name": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The name of the resource.",
-                "externalDocs": {
-                  "url": "https://aka.ms/search-naming-rules"
-                }
-              },
-              "type": {
-                "readOnly": true,
-                "type": "string",
-                "description": "The resource type."
-              },
-              "properties": {
-                "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-              }
-            }
-          }
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections to the Search service."
         }
       },
       "description": "Properties of the Search service."
@@ -1256,6 +1420,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection to the Azure Cognitive Search service with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "ClientRequestIdParameter": {
