@@ -262,13 +262,13 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in teh Azure Cognitive Search Service REST API or SDK to perform read-only operations on you Search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
           },
           "default": {
-            "description": "HTTP 404 (Not found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled",
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -837,11 +837,11 @@
       "properties": {
         "endpointAccess": {
           "type": "string",
-          "default": "public",
-          "description": "The level of access to search service endpoint. Public, the endpoint is reachable from the internet. Private, the endpoint may only be accessed via private endpoints.",
+          "default": "Public",
+          "description": "The level of access to the search service endpoint. Public, the search service endpoint is reachable from the internet. Private, the search service endpoint can only be accessed via private endpoints. Default is Public.",
           "enum": [
-            "public",
-            "private"
+            "Public",
+            "Private"
           ],
           "x-ms-enum": {
             "name": "EndpointAccess",
@@ -850,18 +850,37 @@
         },
         "ipRules": {
           "type": "array",
+          "description": "A list of rules that define inbound network access to the search service endpoint. By default, the search service endpoint is reachable from the internet.",
           "items": {
             "type": "object",
             "properties": {
               "value": {
                 "type": "string",
-                "description": "Ip address to be allowed."
+                "description": "Value corresponding to a single IP address (eg., 123.1.2.3) or a CIDR (eg., 123.1.2.3/24) which is/are to be allowed."
               }
             }
           }
         },
         "bypass": {
-          "type": "string"
+          "type": "string",
+          "default": "None",
+          "description": "Allows bypassing any IP rules or endpoint access definition, if the traffic originates from well-known source. By default, no bypass is allowed.",
+          "enum": [
+            "None",
+            "AzurePortal"
+          ],
+          "x-ms-enum": {
+            "name": "ByPass",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None"
+              },
+              {
+                "value": "AzurePortal"
+              }
+            ]
+          }
         }
       }
     },
