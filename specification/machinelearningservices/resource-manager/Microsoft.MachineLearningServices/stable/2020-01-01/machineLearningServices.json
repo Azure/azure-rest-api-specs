@@ -3218,6 +3218,10 @@
     },
     "KeyVaultProperties": {
       "properties": {
+        "keyVaultArmId": {
+          "description": "The ArmId of the keyVault where the customer owned encryption key is present.",
+          "type": "string"
+        },
         "keyIdentifier": {
           "description": "Key vault uri to access the encryption key.",
           "type": "string"
@@ -3228,7 +3232,8 @@
         }
       },
       "required": [
-        "keyIdentifier"
+        "keyIdentifier",
+        "keyVaultArmId"
       ],
       "type": "object"
     }
