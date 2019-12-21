@@ -22,20 +22,23 @@
         "location": "westus",
         "type": "Microsoft.Search/searchServices",
         "tags": {
-          "app-name": "My e-commerce app"
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
         },
         "sku": {
           "name": "standard"
         },
         "properties": {
-          "replicaCount": 3,
+          "replicaCount": 2,
           "partitionCount": 1,
           "status": "provisioning",
           "statusDetails": "",
           "hostingMode": "default",
           "provisioningState": "provisioning",
           "networkRuleSet": {
-            "endpointAccess": "public"
+            "endpointAccess": "Public",
+            "ipRules": [],
+            "bypass": "None"
           },
           "privateEndpointConnections": []
         }
