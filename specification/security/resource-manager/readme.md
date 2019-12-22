@@ -30,7 +30,7 @@ directive:
     reason: email format is allowed
   - suppress: ValidFormats
     from: automations.json
-    where: $.definitions.AutomationActionLogicAppInput.properties.uri.format
+    where: $.definitions.AutomationActionLogicApp.properties.uri.format
     reason: uri format is allowed
   - suppress: PageableOperation
     from: iotSecuritySolutionAnalytics.json
@@ -61,7 +61,6 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -83,6 +82,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 
 # Needed when there is more than one input file
 override-info:
@@ -97,7 +97,6 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
-- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -121,6 +120,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2019-01-01-preview/autoDismissAlertsRules.json
 
 # Needed when there is more than one input file
 override-info:
