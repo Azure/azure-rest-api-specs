@@ -416,8 +416,11 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceWithNetworkAccess": {
-            "$ref": "./examples/SearchUpdateServiceWithNetworkAccess.json"
+          "searchUpdateServiceToAllowAccessFromCustomIPsAndPortal": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPsAndPortal.json"
+          },
+          "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
           }
         },
         "description": "Updates an existing Search service in the given resource group.",
@@ -1047,7 +1050,7 @@
             "properties": {
               "value": {
                 "type": "string",
-                "description": "Value corresponding to a single IP address (eg., 123.1.2.3) or a CIDR (eg., 123.1.2.3/24) which is/are to be allowed."
+                "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
               }
             }
           }
@@ -1081,7 +1084,7 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Resource id for the private endpoint from networking."
+              "description": "Resource id for the private endpoint from Network resource."
             }
           }
         },
