@@ -33,7 +33,7 @@ These settings apply only when `--tag=package-2019-08-preview --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2019-08-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2019-08-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/cosmos-db/mgmt/2019-08-01-preview/$(namespace)
 ```
 
 ### Tag: package-2015-04 and go
@@ -43,4 +43,40 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2015-04' && $(go)
 output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-08/$(namespace)
+```
+
+### Tag: package-2014-04 and go
+
+These settings apply only when `--tag=package-2014-04 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2014-04' && $(go)
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2014-04/$(namespace)
+```
+
+### Tag: package-2015-11 and go
+
+These settings apply only when `--tag=package-2015-11 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2015-11' && $(go)
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-11-06/$(namespace)
+```
+
+### Tag: package-2016-03-19 and go
+
+These settings apply only when `--tag=package-2016-03-19 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-03-19' && $(go)
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2016-03-19/$(namespace)
+```
+
+### Tag: package-2016-03-31 and go
+
+These settings apply only when `--tag=package-2016-03-31 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2016-03-31' && $(go)
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2016-03-31/$(namespace)
 ```

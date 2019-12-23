@@ -17,6 +17,6 @@ runCheckOverChangedSpecFiles({
   },
 
   onFinalFailed: async () => {
-    logError('Code style issues found in the above file(s). Please follow https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md')
+    logError('Code style issues found in the above file(s). Please follow https://aka.ms/AA6h31t to fix the issue.')
   }
 })

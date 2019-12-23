@@ -187,7 +187,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.marketplaceagreementsapi.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/marketplaceagreementsapi/resource-manager/v2015_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/marketplaceagreementsapi/mgmt-v2015_06_01
 regenerate-manager: true
 generate-interface: true
 ```

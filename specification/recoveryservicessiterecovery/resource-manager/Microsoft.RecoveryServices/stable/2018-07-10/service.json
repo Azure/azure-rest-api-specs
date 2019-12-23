@@ -205,6 +205,96 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
+      "get": {
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "operationId": "ReplicationEligibilityResults_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_List.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
+      "get": {
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "operationId": "ReplicationEligibilityResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResults"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEvents": {
       "get": {
         "tags": [
@@ -7709,6 +7799,10 @@
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
         },
+        "recoveryDiskEncryptionSetId": {
+	  "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },                
         "diskName": {
           "description": "The disk name.",
           "type": "string"
@@ -8280,6 +8374,10 @@
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
         },
+        "recoveryDiskEncryptionSetId": {
+          "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
@@ -8743,6 +8841,10 @@
           "description": "The VHD id.",
           "type": "string"
         },
+        "diskId": {
+          "description": "The disk resource id.",
+          "type": "string"
+        },
         "vhdName": {
           "description": "VHD name.",
           "type": "string"
@@ -8761,6 +8863,10 @@
         },
         "lunId": {
           "description": "Ordinal\\LunId of the disk for the Azure VM.",
+          "type": "string"
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
         }
       }
@@ -10378,6 +10484,13 @@
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
           "type": "string"
+        },
+        "diskIdToDiskEncryptionMap": {
+          "description": "The dictionary of disk resource Id to disk encryption set ARM Id.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -11139,6 +11252,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
+          "type": "string"
         }
       }
     },
@@ -11222,6 +11339,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -15034,6 +15155,96 @@
         "renewCertificateType": {
           "description": "Renew certificate type.",
           "type": "string"
+        }
+      }
+    },
+    "ReplicationEligibilityResults": {
+      "description": "Replication eligibility results response model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets the name of this object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the object type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets Unique ARM identifier for this object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicationEligibilityResultsProperties",
+          "description": "Gets properties model for replication eligibility results API.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationEligibilityResultsCollection": {
+      "description": "Replication eligibility results collection response model.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The replication eligibility results details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationEligibilityResults"
+          }
+        }
+      }
+    },
+    "ReplicationEligibilityResultsErrorInfo": {
+      "description": "Error model that can be exposed to the user.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The error status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationEligibilityResultsProperties": {
+      "description": "Properties model for replication eligibility results API.",
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "description": "The client request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "The error details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationEligibilityResultsErrorInfo"
+          }
         }
       }
     },

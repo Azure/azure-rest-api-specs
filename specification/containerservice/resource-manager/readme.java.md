@@ -19,6 +19,20 @@ batch:
   - tag: package-2019-06
   - tag: package-2019-08
   - tag: package-2019-10
+  - tag: package-2019-11
+```
+
+### Tag: package-2019-11 and java
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_11_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-10 and java
@@ -29,7 +43,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_10_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -42,7 +56,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_08_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -55,7 +69,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -68,7 +82,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-04-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -81,7 +95,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-09-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_09_30
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_09_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_09_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -94,7 +108,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-08-only' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_08_31
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_08_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_08_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -107,7 +121,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.containerservice.v2017_07_01
-  output-folder: $(azure-libraries-for-java-folder)/containerservice/resource-manager/v2017_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2017_07_01
 regenerate-manager: true
 generate-interface: true
 ```
