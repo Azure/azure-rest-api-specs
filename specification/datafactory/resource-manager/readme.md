@@ -212,7 +212,11 @@ directive:
     reason:
       - toBeExportedForShoebox is property we send to Azure Monitor which requires the boolean type
       - The other properties are simple and self explanatory
-
+  - suppress: OAV131  # EnumInsteadOfBoolean
+    where:
+      - $(this-folder)/Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+    reason:
+      - DataFlow add type required  
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
