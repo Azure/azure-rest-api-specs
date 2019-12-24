@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-12-01",
+    "title": "Marketplace RP Service"
+  },
+  "host": "marketplacerp.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStoreClient/isPrivateClient": {
+      "get": {
+        "tags": [
+          "isPrivateClient"
+        ],
+        "description": "Check if client is private or not.",
+        "operationId": "privateStoreClient",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PrivateClientResponse"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the check for private client failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request."
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "properties": {
+            "code": {
+              "description": "Error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "PrivateClientResponse": {
+      "description": "Microsoft.Marketplace REST API private client check",
+      "type": "object",
+      "properties": {
+        "isPrivateClient": "boolean",
+        "subId": "string"
+      }
+    }
+  }
+}
