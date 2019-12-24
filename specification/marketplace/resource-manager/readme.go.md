@@ -13,7 +13,7 @@ go:
 These settings apply only when `--tag=package-2019-12-01 --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-2019-12-01 && $(go)
+```yaml $(tag) == 'package-2019-12-01' && $(go)
 namespace: Microsoft.Marketplace
-output-folder: $(go-sdks-folder)/stable/marketplace/Generated
+output-folder: $(go-sdks-folder)/preview/marketplace/Generated
 ```
