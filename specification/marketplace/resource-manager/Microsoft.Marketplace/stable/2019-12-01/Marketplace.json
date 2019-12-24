@@ -9,7 +9,7 @@
     "https"
   ],
   "paths": {
-    "/subscriptions/providers/Microsoft.Marketplace/privateStoreClient/isPrivateClient": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStoreClient/isPrivateClient": {
       "get": {
         "tags": [
           "isPrivateClient"
@@ -19,6 +19,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -51,6 +54,13 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for the request."
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
     }
   },
   "definitions": {
@@ -87,6 +97,17 @@
           "description": "The subscription Id.",
           "type": "string"
         }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
     }
   }
