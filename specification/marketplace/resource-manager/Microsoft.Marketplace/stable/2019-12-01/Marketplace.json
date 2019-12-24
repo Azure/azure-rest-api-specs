@@ -4,7 +4,7 @@
     "version": "2019-12-01",
     "title": "Marketplace RP Service"
   },
-  "host": "marketplacerp.azure.com",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -79,8 +79,14 @@
       "description": "Microsoft.Marketplace REST API private client check",
       "type": "object",
       "properties": {
-        "isPrivateClient": "boolean",
-        "subId": "string"
+        "isPrivateClient": {
+          "description": "Is private client boolean.",
+          "type": "boolean"
+        },
+        "subId": {
+          "description": "The subscription Id.",
+          "type": "string"
+        }
       }
     }
   }
