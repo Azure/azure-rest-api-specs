@@ -150,179 +150,158 @@ Use the below directives sparingly. Every modification we make in here, we poten
 
 ``` yaml $(java)
 directive:
-# Rename custom properties
-- rename-custom-property:
-    path: "$.paths.*.*.parameters[*]['x-ms-parameter-grouping']"
-    from: AutocompleteParameters
-    to: AutocompleteOptions
+    # Rename IndexBatch to IndexBatchImpl when processing the API spec
+    - rename-model:
+          from: IndexBatch
+          to: IndexBatchImpl
 
-- rename-custom-property:
-    path: "$.paths.*.*.parameters[*]['x-ms-parameter-grouping']"
-    from: SearchParameters
-    to: SearchOptions
+    # Use Document rather than Map<String, Object>
+    - from:
+          - DocumentsImpl.java
+          - SearchResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(package com.azure.search.models;)/g, "$1\nimport com.azure.search.Document;")
+          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.search.Document;")
+          .replace(/(Map<String, Object>)/g, "Document")
+          .replace(/(Object)/g, "Document")
 
-- rename-custom-property:
-    path: "$.paths.*.*.parameters[*]['x-ms-parameter-grouping']"
-    from: SuggestParameters
-    to: SuggestOptions
+    # Use Document rather than Map<String, Object>
+    - from: SuggestResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(import java.util.Map;\n)/g, "import com.azure.search.Document;")
+          .replace(/(Map<String, Object>)/g, "Document")
 
-- rename-custom-property:
-    path: "$.parameters.ClientRequestIdParameter['x-ms-parameter-grouping']"
-    from: "search-request-options"
-    to: "request-options"
+    # Enable configuration of RestProxy serializer
+    - from: DocumentsImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(import com.azure.core.util.serializer.JacksonAdapter;)/g, "$1\nimport com.azure.core.util.serializer.SerializerAdapter;")
+          .replace(/(@param client the instance of the service client containing this operation class.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
+          .replace(/(public DocumentsImpl\(SearchIndexRestClientImpl client\) {)/g, "public DocumentsImpl(SearchIndexRestClientImpl client, SerializerAdapter serializer) {")
+          .replace(/(this.service = RestProxy.create\(DocumentsService.class, client.getHttpPipeline\(\)\);)/g, "this.service = RestProxy.create(DocumentsService.class, client.getHttpPipeline(), serializer);")
 
-# Rename IndexBatch to IndexBatchImpl when processing the API spec
-- rename-model:
-    from: IndexBatch
-    to: IndexBatchImpl
+    # Enable public access to client setters
+    # Enable configuration of RestProxy serializer
+    - from: SearchIndexRestClientImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(void setApiVersion)/g, "public void setApiVersion")
+          .replace(/(void setIndexName)/g, "public void setIndexName")
+          .replace(/(void setSearchDnsSuffix)/g, "public void setSearchDnsSuffix")
+          .replace(/(void setSearchServiceName)/g, "public void setSearchServiceName")
+          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.util.serializer.SerializerAdapter;")
+          .replace(/(this\(RestProxy.createDefaultPipeline\(\)\);)/g, "this(RestProxy.createDefaultPipeline(), JacksonAdapter.createDefaultSerializerAdapter());")
+          .replace(/(@param httpPipeline The HTTP pipeline to send requests through.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
+          .replace(/(public SearchIndexRestClientImpl\(HttpPipeline httpPipeline\) {)/g, "public SearchIndexRestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializer) {")
+          .replace(/(this.documents = new DocumentsImpl\(this\);)/g, "this.documents = new DocumentsImpl(this, serializer);")
 
-# Use Document rather than Map<String, Object>
-- from: 
-  - DocumentsImpl.java
-  - SearchResult.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(package com.azure.search.models;)/g, "$1\nimport com.azure.search.Document;")
-    .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.search.Document;")
-    .replace(/(Map<String, Object>)/g, "Document")
-    .replace(/(Object)/g, "Document")
+    # Enable IndexAction to be used as a generic type
+    # Enable serialization of both POJOs and Maps
+    - from: IndexAction.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(import com.fasterxml.jackson.annotation.JsonProperty;)/g, "import com.fasterxml.jackson.annotation.JsonAnyGetter;\nimport com.fasterxml.jackson.annotation.JsonIgnore;\n$1\nimport com.fasterxml.jackson.annotation.JsonUnwrapped;\n")
+          .replace(/(class IndexAction)/g, "$1<T>")
+          .replace(/(Unmatched properties from the message are deserialized this collection)/g, "The document on which the action will be performed.")
+          .replace(/(@JsonProperty\(value = ""\))/g, "@JsonUnwrapped")
+          .replace(/(private Map<String, Object> additionalProperties);/g, "private T document;\n\n    @JsonIgnore\n    private Map<String, Object> properties;\n\n    @JsonAnyGetter\n    private Map<String, Object> getParamMap() {\n        return properties;\n    }")
+          .replace(/(Get the additionalProperties property: Unmatched properties from the\n\s+\* message are deserialized this collection.)/g, "Get the document on which the action will be performed; Fields other than the key are ignored for delete actions.")
+          .replace(/(@return the additionalProperties value.)/g, "@return the document value.")
+          .replace(/(public Map<String, Object> getAdditionalProperties\(\) {\s+return this.additionalProperties;\s+})/g, "public T getDocument() {\n        return this.document;\n    }")
+          .replace(/(Set the additionalProperties property: Unmatched properties from the\s+\* message are deserialized this collection.)/g, "Get the document on which the action will be performed; Fields other than the key are ignored for delete actions.")
+          .replace(/(@param additionalProperties the additionalProperties value to set.)/g, "@param document the document value to set.")
+          .replace(/(public IndexAction setAdditionalProperties\(Map<String, Object> additionalProperties\) {\s+this.additionalProperties = additionalProperties;\s+return this;\s+})/g, "@SuppressWarnings(\"unchecked\")\n    public IndexAction<T> setDocument(T document) {\n        if (document instanceof Map) {\n            this.properties = (Map<String, Object>) document;\n            this.document = null;\n        } else {\n            this.document = document;\n            this.properties = null;\n        }\n        return this;\n    }")
+          .replace(/(public IndexAction setActionType\(IndexActionType actionType\) {)/g, "public IndexAction<T> setActionType(IndexActionType actionType) {")
 
-# Use Document rather than Map<String, Object>
-- from: SuggestResult.java
-  where: $
-  transform: >-
-    return $ 
-    .replace(/(import java.util.Map;\n)/g, "import com.azure.search.Document;")
-    .replace(/(Map<String, Object>)/g, "Document")
+    # Enable configuration of RestProxy serializer
+    - from: SearchIndexRestClientBuilder.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.util.serializer.SerializerAdapter;")
+          .replace(/(\* The HTTP pipeline to send requests through)/g, "\* The serializer to use for requests\n     \*\/\n    private SerializerAdapter serializer;\n\n    \/\*\*\n     \* Sets The serializer to use for requests.\n     \*\n     \* @param serializer the serializer value.\n     \* @return the SearchIndexRestClientBuilder.\n     \*\/\n    public SearchIndexRestClientBuilder serializer\(SerializerAdapter serializer\) {\n        this.serializer = serializer;\n        return this;\n    }\n\n    \/\*\n     $1")
+          .replace(/(new SearchIndexRestClientImpl\(pipeline)/g, "$1, serializer")
+          .replace(/(this.pipeline = RestProxy.createDefaultPipeline\(\);\s+})/g, "$1\n        if \(serializer == null\) {\n            this.serializer = JacksonAdapter.createDefaultSerializerAdapter\(\);\n        }")
 
-# Enable configuration of RestProxy serializer
-- from: DocumentsImpl.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(import com.azure.core.implementation.serializer.jackson.JacksonAdapter;)/g, "$1\nimport com.azure.core.implementation.serializer.SerializerAdapter;")
-    .replace(/(@param client the instance of the service client containing this operation class.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
-    .replace(/(public DocumentsImpl\(SearchIndexRestClientImpl client\) {)/g, "public DocumentsImpl(SearchIndexRestClientImpl client, SerializerAdapter serializer) {")
-    .replace(/(this.service = RestProxy.create\(DocumentsService.class, client.getHttpPipeline\(\)\);)/g, "this.service = RestProxy.create(DocumentsService.class, client.getHttpPipeline(), serializer);")
+    # Enable IndexBatchImpl to be used as a generic type
+    - from: IndexBatchImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(public final class IndexBatchImpl)/g, "public class IndexBatchImpl<T>")
+          .replace(/(private List<IndexAction> actions;)/g, "private List<IndexAction<T>> actions;")
+          .replace(/(public List<IndexAction> getActions\(\) {)/g, "public List<IndexAction<T>> getActions() {")
+          .replace(/(public IndexBatchImpl setActions\(List<IndexAction> actions\) {)/g, "protected IndexBatchImpl<T> setActions(List<IndexAction<T>> actions) {")
 
-# Enable public access to client setters
-# Enable configuration of RestProxy serializer
-- from: SearchIndexRestClientImpl.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(void setApiVersion)/g, "public void setApiVersion")
-    .replace(/(void setIndexName)/g, "public void setIndexName")
-    .replace(/(void setSearchDnsSuffix)/g, "public void setSearchDnsSuffix")
-    .replace(/(void setSearchServiceName)/g, "public void setSearchServiceName")
-    .replace(/(import com.azure.core.implementation.RestProxy;)/g, "$1\nimport com.azure.core.implementation.serializer.jackson.JacksonAdapter;\nimport com.azure.core.implementation.serializer.SerializerAdapter;")
-    .replace(/(this\(RestProxy.createDefaultPipeline\(\)\);)/g, "this(RestProxy.createDefaultPipeline(), JacksonAdapter.createDefaultSerializerAdapter());")
-    .replace(/(@param httpPipeline The HTTP pipeline to send requests through.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
-    .replace(/(public SearchIndexRestClientImpl\(HttpPipeline httpPipeline\) {)/g, "public SearchIndexRestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializer) {")
-    .replace(/(this.documents = new DocumentsImpl\(this\);)/g, "this.documents = new DocumentsImpl(this, serializer);")
+    # Replace use of generated IndexBatchImpl with custom IndexBatch class
+    - from: DocumentsImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(IndexBatchImpl)/g, "IndexBatch")
+          .replace(/(IndexBatch )/g, "IndexBatch<T> ")
+          .replace(/(Mono<IndexDocumentsResult> indexAsync)/g, "<T> $1")
+          .replace(/(Mono<SimpleResponse<IndexDocumentsResult>> index)/g, "<T> $1")
+          .replace(/(import com.azure.search.implementation.models.IndexBatch)/g, "import com.azure.search.models.IndexBatch")
 
-# Enable IndexAction to be used as a generic type
-# Enable serialization of both POJOs and Maps
-- from: IndexAction.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(import com.fasterxml.jackson.annotation.JsonProperty;)/g, "import com.fasterxml.jackson.annotation.JsonAnyGetter;\nimport com.fasterxml.jackson.annotation.JsonIgnore;\n$1\nimport com.fasterxml.jackson.annotation.JsonUnwrapped;\n")
-    .replace(/(class IndexAction)/g, "$1<T>")
-    .replace(/(Unmatched properties from the message are deserialized this collection)/g, "The document on which the action will be performed.")
-    .replace(/(@JsonProperty\(value = ""\))/g, "@JsonUnwrapped")
-    .replace(/(private Map<String, Object> additionalProperties);/g, "private T document;\n\n    @JsonIgnore\n    private Map<String, Object> properties;\n\n    @JsonAnyGetter\n    private Map<String, Object> getParamMap() {\n        return properties;\n    }")
-    .replace(/(Get the additionalProperties property: Unmatched properties from the\n\s+\* message are deserialized this collection.)/g, "Get the document on which the action will be performed; Fields other than the key are ignored for delete actions.")
-    .replace(/(@return the additionalProperties value.)/g, "@return the document value.")
-    .replace(/(public Map<String, Object> getAdditionalProperties\(\) {\s+return this.additionalProperties;\s+})/g, "public T getDocument() {\n        return this.document;\n    }")
-    .replace(/(Set the additionalProperties property: Unmatched properties from the\s+\* message are deserialized this collection.)/g, "Get the document on which the action will be performed; Fields other than the key are ignored for delete actions.")
-    .replace(/(@param additionalProperties the additionalProperties value to set.)/g, "@param document the document value to set.")
-    .replace(/(public IndexAction setAdditionalProperties\(Map<String, Object> additionalProperties\) {\s+this.additionalProperties = additionalProperties;\s+return this;\s+})/g, "@SuppressWarnings(\"unchecked\")\n    public IndexAction<T> setDocument(T document) {\n        if (document instanceof Map) {\n            this.properties = (Map<String, Object>) document;\n            this.document = null;\n        } else {\n            this.document = document;\n            this.properties = null;\n        }\n        return this;\n    }")
-    .replace(/(public IndexAction setActionType\(IndexActionType actionType\) {)/g, "public IndexAction<T> setActionType(IndexActionType actionType) {")
+    # Change get to is
+    - from: DocumentsImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(get(IncludeTotalResultCount|UseFuzzyMatching))/g, "is$2")
 
-# Enable configuration of RestProxy serializer
-- from: SearchIndexRestClientBuilder.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(import com.azure.core.implementation.RestProxy;)/g, "$1\nimport com.azure.core.implementation.serializer.SerializerAdapter;\nimport com.azure.core.implementation.serializer.jackson.JacksonAdapter;")
-    .replace(/(\* The HTTP pipeline to send requests through)/g, "\* The serializer to use for requests\n     \*\/\n    private SerializerAdapter serializer;\n\n    \/\*\*\n     \* Sets The serializer to use for requests.\n     \*\n     \* @param serializer the serializer value.\n     \* @return the SearchIndexRestClientBuilder.\n     \*\/\n    public SearchIndexRestClientBuilder serializer\(SerializerAdapter serializer\) {\n        this.serializer = serializer;\n        return this;\n    }\n\n    \/\*\n     $1")
-    .replace(/(new SearchIndexRestClientImpl\(pipeline)/g, "$1, serializer")
-    .replace(/(this.pipeline = RestProxy.createDefaultPipeline\(\);\s+})/g, "$1\n        if \(serializer == null\) {\n            this.serializer = JacksonAdapter.createDefaultSerializerAdapter\(\);\n        }")
+    # Mark IndexingResult as Serializable, for use in IndexBatchException
+    - from: IndexingResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(import com.fasterxml.jackson.annotation.JsonProperty;)/g, "$1\n\nimport java.io.Serializable;")
+          .replace(/(class IndexingResult {)/g, "class IndexingResult implements Serializable {\n    private static final long serialVersionUID = -8604424005271188140L;")
 
-# Enable IndexBatchImpl to be used as a generic type
-- from: IndexBatchImpl.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(public final class IndexBatchImpl)/g, "class IndexBatchImpl<T>")
-    .replace(/(private List<IndexAction> actions;)/g, "private List<IndexAction<T>> actions;")
-    .replace(/(public List<IndexAction> getActions\(\) {)/g, "public List<IndexAction<T>> getActions() {")
-    .replace(/(public IndexBatchImpl setActions\(List<IndexAction> actions\) {)/g, "protected IndexBatchImpl<T> setActions(List<IndexAction<T>> actions) {")
+    - from:
+          - FacetResult.java
+      where: $
+      transform: >-
+          return $.replace(/(public FacetResult setAdditionalProperties)/g, "FacetResult setAdditionalProperties")
 
-# Replace use of generated IndexBatchImpl with custom IndexBatch class
-- from: DocumentsImpl.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(IndexBatchImpl)/g, "IndexBatch")
-    .replace(/(IndexBatch )/g, "IndexBatch<T> ")
-    .replace(/(Mono<DocumentIndexResult> indexAsync)/g, "<T> $1")
-    .replace(/(Mono<SimpleResponse<DocumentIndexResult>> index)/g, "<T> $1")
+    - from:
+          - SearchResult.java
+      where: $
+      transform: >-
+          return $.replace(/(public SearchResult setAdditionalProperties)/g, "SearchResult setAdditionalProperties")
 
-# Change get to is
-- from: DocumentsImpl.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(get(IncludeTotalResultCount|UseFuzzyMatching))/g, "is$2")
+    - from:
+          - SuggestResult.java
+      where: $
+      transform: >-
+          return $.replace(/(public SuggestResult setAdditionalProperties)/g, "SuggestResult setAdditionalProperties")
 
-# Mark IndexingResult as Serializable, for use in IndexBatchException
-- from: IndexingResult.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(import com.fasterxml.jackson.annotation.JsonProperty;)/g, "$1\n\nimport java.io.Serializable;")
-    .replace(/(class IndexingResult {)/g, "class IndexingResult implements Serializable {\n    private static final long serialVersionUID = -8604424005271188140L;")
+    - from:
+          - FacetResult.java
+          - SearchResult.java
+          - SuggestResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(getAdditionalProperties)/g, "getDocument")
+          .replace(/(setAdditionalProperties)/g, "setDocument")
+      reason: Provides a better description of the getter/setter for addtionalProperties
 
-- from:
-  - FacetResult.java
-  where: $
-  transform: >-
-    return $.replace(/(public FacetResult setAdditionalProperties)/g, "FacetResult setAdditionalProperties")
-
-- from:
-  - SearchResult.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(public SearchResult setAdditionalProperties)/g, "SearchResult setAdditionalProperties")
-
-- from:
-  - SuggestResult.java
-  where: $
-  transform: >-
-    return $.replace(/(public SuggestResult setAdditionalProperties)/g, "SuggestResult setAdditionalProperties")
-
-- from:
-  - FacetResult.java
-  - SearchResult.java
-  - SuggestResult.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(getAdditionalProperties)/g, "getDocument")
-    .replace(/(setAdditionalProperties)/g, "setDocument")
-  reason: Provides a better description of the getter/setter for addtionalProperties
-
-- from:
-  - SearchResult.java
-  where: $
-  transform: >-
-    return $
-    .replace(/(package com.azure.search.models;)/g, "$1\nimport com.fasterxml.jackson.annotation.JsonIgnore;")
-    .replace(/(public Document getDocument())/g, "@JsonIgnore\n$1")
+    - from:
+          - SearchResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(package com.azure.search.models;)/g, "$1\nimport com.fasterxml.jackson.annotation.JsonIgnore;")
+          .replace(/(public Document getDocument())/g, "@JsonIgnore\n$1")
 ```
 
 ## C# 
