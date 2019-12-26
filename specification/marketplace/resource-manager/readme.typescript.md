@@ -6,8 +6,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/marketplace"
+  package-name: "@azure/arm-marketplace"
   output-folder: "$(typescript-sdks-folder)/sdk/marketplace/arm-marketplace"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
