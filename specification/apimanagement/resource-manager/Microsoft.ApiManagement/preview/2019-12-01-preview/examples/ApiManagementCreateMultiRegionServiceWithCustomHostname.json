@@ -5,51 +5,54 @@
     "api-version": "2019-12-01-preview",
     "subscriptionId": "subid",
     "parameters": {
-      "location": "Central US",
-      "sku": {
-        "name": "Premium",
-        "capacity": 1
-      },
       "properties": {
-        "publisherEmail": "admin@live.com",
-        "publisherName": "contoso",
+        "hostnameConfigurations": [
+          {
+            "type": "Proxy",
+            "hostName": "gateway1.msitesting.net",
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "certificatePassword": "Password",
+            "defaultSslBinding": true
+          },
+          {
+            "type": "Management",
+            "hostName": "mgmt.msitesting.net",
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "certificatePassword": "Password"
+          },
+          {
+            "type": "Portal",
+            "hostName": "portal1.msitesting.net",
+            "encodedCertificate": "****** Base 64 Encoded Certificate ************",
+            "certificatePassword": "Password"
+          }
+        ],
+        "publisherEmail": "apim@autorestsdk.com",
+        "publisherName": "autorestsdk",
         "additionalLocations": [
           {
-            "location": "North Europe",
+            "location": "East US",
             "sku": {
               "name": "Premium",
               "capacity": 1
             },
-            "virtualNetworkConfiguration": {
-              "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
-            }
+            "disableGateway": true
           }
         ],
-        "hostnameConfigurations": [
-          {
-            "type": "Proxy",
-            "hostName": "proxyhostname1.contoso.com",
-            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
-            "certificatePassword": "**************Password of the Certificate************************************************"
-          },
-          {
-            "type": "Proxy",
-            "hostName": "proxyhostname2.contoso.com",
-            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
-            "certificatePassword": "**************Password of the Certificate************************************************",
-            "negotiateClientCertificate": true
-          },
-          {
-            "type": "Portal",
-            "hostName": "portalhostname1.contoso.com",
-            "encodedCertificate": "************Base 64 Encoded Pfx Certificate************************",
-            "certificatePassword": "**************Password of the Certificate************************************************"
-          }
-        ],
-        "virtualNetworkConfiguration": {
-          "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
-        },
-        "virtualNetworkType": "External"
+        "virtualNetworkType": "None",
+        "apiVersionConstraint": {
+          "minApiVersion": "2019-01-01"
+        }
+      },
+      "sku": {
+        "name": "Premium",
+        "capacity": 1
+      },
+      "location": "West US",
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2",
+        "tag3": "value3"
       }
     }
   },
@@ -62,71 +65,76 @@
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
-        "tags": {},
-        "location": "Central US",
-        "etag": "AAAAAAAXXpw=",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2",
+          "tag3": "value3"
+        },
+        "location": "West US",
+        "etag": "AAAAAAACXoo=",
         "properties": {
-          "publisherEmail": "admin@live.com",
-          "publisherName": "contoso",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
-          "createdAtUtc": "2019-04-11T08:25:38.5086594Z",
+          "createdAtUtc": "2019-12-18T08:04:26.9492661Z",
           "hostnameConfigurations": [
             {
-              "type": "Proxy",
+              "type": "Proxy",              
               "hostName": "apimService1.azure-api.net",
               "negotiateClientCertificate": false,
+              "defaultSslBinding": false
+            },
+            {
+              "type": "Proxy",
+              "hostName": "gateway1.msitesting.net",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
               "defaultSslBinding": true
             },
             {
-              "type": "Proxy",
-              "hostName": "proxyhostname1.contoso.com",
+              "type": "Management",
+              "hostName": "mgmt.msitesting.net",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=proxyhostname1.contoso.com"
-              }
-            },
-            {
-              "type": "Proxy",
-              "hostName": "proxyhostname2.contoso.com",
-              "negotiateClientCertificate": true,
-              "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=proxyhostname2.contoso.com"
-              }
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false
             },
             {
               "type": "Portal",
-              "hostName": "portalhostname1.contoso.com",
+              "hostName": "portal1.msitesting.net",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=portalhostname1.contoso.com"
-              }
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false
             }
           ],
-          "publicIPAddresses": [],
           "additionalLocations": [
             {
-              "location": "North Europe",
+              "location": "East US",
               "sku": {
                 "name": "Premium",
                 "capacity": 1
               },
-              "publicIPAddresses": [],
-              "virtualNetworkConfiguration": {
-                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
-              }
+              "disableGateway": true
             }
           ],
-          "virtualNetworkConfiguration": {
-            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
-          },
-          "virtualNetworkType": "External"
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          }
         },
         "sku": {
           "name": "Premium",
@@ -144,18 +152,19 @@
           "tag2": "value2",
           "tag3": "value3"
         },
-        "location": "Central US",
-        "etag": "AAAAAAFzTM0=",
+        "location": "West US",
+        "etag": "AAAAAAACXok=",
         "properties": {
-          "publisherEmail": "admin@live.com",
-          "publisherName": "contoso",
+          "publisherEmail": "apim@autorestsdk.com",
+          "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2019-04-11T08:25:38.5086594Z",
+          "createdAtUtc": "2019-12-18T06:26:20.3348609Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimService1.management.azure-api.net",
           "scmUrl": "https://apimService1.scm.azure-api.net",
           "hostnameConfigurations": [
@@ -163,57 +172,57 @@
               "type": "Proxy",
               "hostName": "apimService1.azure-api.net",
               "negotiateClientCertificate": false,
+              "defaultSslBinding": false
+            },
+            {
+              "type": "Proxy",
+              "hostName": "gateway1.msitesting.net",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
               "defaultSslBinding": true
             },
             {
-              "type": "Proxy",
-              "hostName": "proxyhostname1.contoso.com",
+              "type": "Management",
+              "hostName": "mgmt.msitesting.net",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=proxyhostname1.contoso.com"
-              }
-            },
-            {
-              "type": "Proxy",
-              "hostName": "proxyhostname2.contoso.com",
-              "negotiateClientCertificate": true,
-              "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=proxyhostname2.contoso.com"
-              }
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false
             },
             {
               "type": "Portal",
-              "hostName": "portalhostname1.contoso.com",
+              "hostName": "portal1.msitesting.net",
               "negotiateClientCertificate": false,
               "certificate": {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "918D7785B926AC5AEE66322778A147BCE7237CF3",
-                "subject": "CN=portalhostname1.contoso.com"
-              }
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E989XXXXXXXXXXXXXXXXF1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": false
             }
           ],
           "publicIPAddresses": [
-            "104.43.XXX.72"
+            "13.91.32.113"
           ],
-          "privateIPAddresses": null,
           "additionalLocations": [
             {
-              "location": "North Europe",
+              "location": "East US",
               "sku": {
                 "name": "Premium",
                 "capacity": 1
               },
               "publicIPAddresses": [
-                "52.XXX.197.222"
+                "23.101.138.153"
               ],
-              "gatewayRegionalUrl": "https://apimService1-northeurope-01.regional.azure-api.net",
-              "virtualNetworkConfiguration": {
-                "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet"
-              }
+              "gatewayRegionalUrl": "https://apimService1-eastus-01.regional.azure-api.net",
+              "disableGateway": true
             }
           ],
           "customProperties": {
@@ -226,10 +235,11 @@
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
           },
-          "virtualNetworkConfiguration": {
-            "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet"
-          },
-          "virtualNetworkType": "External"
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {
+            "minApiVersion": "2019-01-01"
+          }
         },
         "sku": {
           "name": "Premium",
