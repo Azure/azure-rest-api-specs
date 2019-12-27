@@ -13,4 +13,14 @@ There is no SDK for this endpoint, this is used internaly for calling markeplace
 
 ### Basic Information
 
-Make an HTTPs request from Ibiza to the endpoint is order to get the check if user is private or not
+Make an HTTPs request from Ibiza to the endpoint in order to get the check if user is private or not
+
+
+### Tag: package-2019-12-01
+
+These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-12-01'
+input-file:
+  - Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
+```
