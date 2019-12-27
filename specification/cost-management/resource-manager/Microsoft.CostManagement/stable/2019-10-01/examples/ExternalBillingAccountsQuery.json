@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "externalBillingAccountId": "100",
+    "scope": "providers/Microsoft.CostManagement/externalBillingAccounts/100",
+	"parameters": {
+		"type": "Usage",
+		"timeframe": "MonthToDate",
+		 "dataset": {
+			"granularity": "Daily",
+			"filter": {
+			  "and": [
+				{
+				  "or": [
+					{
+					  "dimension": {
+						"name": "ResourceLocation",
+						"operator": "In",
+						"values": [
+						  "East US",
+						  "West Europe"
+						]
+					  }
+					},
+					{
+					  "tag": {
+						"name": "Environment",
+						"operator": "In",
+						"values": [
+						  "UAT",
+						  "Prod"
+						]
+					  }
+					}
+				  ]
+				},
+				{
+				  "dimension": {
+					"name": "ResourceGroup",
+					"operator": "In",
+					"values": [
+					  "API"
+					]
+				  }
+				}
+			  ]
+			}
+		}
+    }
+  },
+  "responses": {
+	"200": {
+		"body": {
+					"id": "providers/Microsoft.CostManagement/externalBillingAccounts/100/query/6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+					"name": "6dc7b06a-d90a-4df5-b655-ce6cf1c0814d",
+					"type": "Microsoft.CostManagement/query",
+					"properties": {
+						"nextLink": null,
+						"columns": [{
+								"name": "PreTaxCost",
+								"type": "Number"
+							}, {
+								"name": "ServiceName",
+								"type": "String"
+							}, {
+								"name": "Currency",
+								"type": "String"
+							}
+						],
+					"rows": [
+					[0.0, "abc db", "USD"], 
+					[30.2572751438, "abc compute cloud", "USD"], 
+					[0.076757602000000022, "abc file system", "USD"], 		
+					[50.430964190400012, "abc elasticache", "USD"]
+					]}
+				}
+			}
+		}
+	}
