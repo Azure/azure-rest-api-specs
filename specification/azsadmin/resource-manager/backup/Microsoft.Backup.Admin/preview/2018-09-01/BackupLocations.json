@@ -135,7 +135,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
@@ -146,6 +149,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+            "final-state-via" : "location"
+        },
         "description": "Back up a specific location.",
         "tags": [
           "BackupLocations"
