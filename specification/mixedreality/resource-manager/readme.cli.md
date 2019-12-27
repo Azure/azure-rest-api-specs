@@ -18,11 +18,11 @@ cli:
     - name: Get remote rendering account
     - name: List remote rendering accounts by subscription
     - name: List spatial anchors accounts by subscription
-    - name: OperationPage
+    - name: List available operations
     - name: Regenerate remote rendering account keys
     - name: Regenerate spatial anchors account keys
-    - name: ResourceCreateOrUpdate
-    - name: ResourceCreateOrUpdate
+    - name: Update remote rendering account
+    - name: Update spatial anchors account
     - name: CheckLocalNameAvailability
     - name: Delete spatial anchors account
     - name: Delete remote rendering account
