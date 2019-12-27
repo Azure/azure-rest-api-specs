@@ -1046,13 +1046,7 @@
           "type": "array",
           "description": "A list of rules that define inbound network access to the search service endpoint. By default, the search service endpoint is reachable from the internet.",
           "items": {
-            "type": "object",
-            "properties": {
-              "value": {
-                "type": "string",
-                "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
-              }
-            }
+            "$ref": "#/definitions/IpRule"
           }
         },
         "bypass": {
@@ -1075,6 +1069,14 @@
               }
             ]
           }
+        }
+      }
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
         }
       }
     },
