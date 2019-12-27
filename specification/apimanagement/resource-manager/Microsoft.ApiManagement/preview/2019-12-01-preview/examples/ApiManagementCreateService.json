@@ -6,18 +6,17 @@
     "subscriptionId": "subid",
     "parameters": {
       "properties": {
-        "publisherEmail": "apim@autorestsdk.com",
-        "publisherName": "autorestsdk"
+        "publisherEmail": "foo@contoso.com",
+        "publisherName": "foo"
       },
       "sku": {
         "name": "Developer",
         "capacity": 1
       },
-      "location": "Central US",
+      "location": "South Central US",
       "tags": {
-        "tag1": "value1",
-        "tag2": "value2",
-        "tag3": "value3"
+        "Name": "Contoso",
+        "Test": "User"
       }
     }
   },
@@ -27,32 +26,33 @@
         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2019-12-01-preview"
       },
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/sdktestrg9348/providers/Microsoft.ApiManagement/service/apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-          "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
+          "Name": "Contoso",
+          "Test": "User"
         },
-        "location": "Central US",
-        "etag": "AAAAAAFzRiw=",
+        "location": "South Central US",
+        "etag": "AAAAAAAp3P0=",
         "properties": {
-          "publisherEmail": "apim@autorestsdk.com",
-          "publisherName": "autorestsdk",
+          "publisherEmail": "foo@contoso.com",
+          "publisherName": "foo",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
-          "createdAtUtc": "2019-04-11T07:02:18.8577084Z",
+          "createdAtUtc": "2019-12-18T06:10:56.0327105Z",
           "hostnameConfigurations": [
             {
-              "type": "Proxy",
+              "type": "Proxy",              
               "hostName": "apimService1.azure-api.net",
               "negotiateClientCertificate": false,
               "defaultSslBinding": true
             }
           ],
-          "virtualNetworkType": "None"
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {}
         },
         "sku": {
           "name": "Developer",
@@ -62,26 +62,26 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/sdktestrg9348/providers/Microsoft.ApiManagement/service/apimService1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-          "tag1": "value1",
-          "tag2": "value2",
-          "tag3": "value3"
+          "Name": "Contoso",
+          "Test": "User"
         },
-        "location": "Central US",
-        "etag": "AAAAAAFzSFg=",
+        "location": "South Central US",
+        "etag": "AAAAAAAp3T4=",
         "properties": {
-          "publisherEmail": "apim@autorestsdk.com",
-          "publisherName": "autorestsdk",
+          "publisherEmail": "foo@contoso.com",
+          "publisherName": "foo",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2019-04-11T07:02:18.8577084Z",
+          "createdAtUtc": "2019-12-18T06:10:56.0327105Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
-          "gatewayRegionalUrl": "https://apimService1-centralus-01.regional.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-southcentralus-01.regional.azure-api.net",
           "portalUrl": "https://apimService1.portal.azure-api.net",
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimService1.management.azure-api.net",
           "scmUrl": "https://apimService1.scm.azure-api.net",
           "hostnameConfigurations": [
@@ -93,7 +93,7 @@
             }
           ],
           "publicIPAddresses": [
-            "13.89.236.232"
+            "23.102.171.124"
           ],
           "customProperties": {
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
@@ -105,7 +105,9 @@
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
           },
-          "virtualNetworkType": "None"
+          "virtualNetworkType": "None",
+          "disableGateway": false,
+          "apiVersionConstraint": {}
         },
         "sku": {
           "name": "Developer",
@@ -115,7 +117,7 @@
     },
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/sdktestrg9348/providers/Microsoft.ApiManagement/service/apimService1/operationresults/c2RrdGVzdGFwaW0xNTkxX0FjdF9jZTkyMmNmOQ==?api-version=2019-12-01-preview"
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/c2RrdGVzdGFwaW0xNTkxX0FjdF9jZTkyMmNmOQ==?api-version=2019-12-01-preview"
       }
     }
   }

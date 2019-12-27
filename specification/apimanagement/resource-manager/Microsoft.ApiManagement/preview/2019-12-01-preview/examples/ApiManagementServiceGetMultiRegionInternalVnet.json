@@ -20,13 +20,20 @@
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2018-02-02T01:42:09.1268424Z",
+          "createdAtUtc": "2019-12-02T01:42:09.1268424Z",
           "gatewayUrl": "https://apimservice1.azure-api.net",
           "gatewayRegionalUrl": "https://apimservice1-westus-01.regional.azure-api.net",
-          "portalUrl": "https://apimservice1.portal.azure-api.net",
+          "portalUrl": "https://apimservice1.portal.azure-api.net",          
+          "developerPortalUrl": "https://apimService1.developer.azure-api.net",
           "managementApiUrl": "https://apimservice1.management.azure-api.net",
           "scmUrl": "https://apimservice1.scm.azure-api.net",
           "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "apimService1.azure-api.net",
+              "negotiateClientCertificate": false,
+              "defaultSslBinding": false
+            },
             {
               "type": "Proxy",
               "hostName": "apimgatewaytest.preview.net",
@@ -61,7 +68,8 @@
               "virtualNetworkConfiguration": {
                 "subnetResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/APIMVNet/subnets/apim-internal-sub"
               },
-              "gatewayRegionalUrl": "https://apimservice1-westus2-01.regional.azure-api.net"
+              "gatewayRegionalUrl": "https://apimservice1-westus2-01.regional.azure-api.net",
+              "disableGateway": false
             }
           ],
           "virtualNetworkConfiguration": {
@@ -76,7 +84,9 @@
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "True",
             "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False"
           },
-          "virtualNetworkType": "Internal"
+          "virtualNetworkType": "Internal",
+          "disableGateway": false,
+          "apiVersionConstraint": {}
         },
         "sku": {
           "name": "Premium",

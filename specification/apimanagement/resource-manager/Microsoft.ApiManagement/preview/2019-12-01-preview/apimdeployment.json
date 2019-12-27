@@ -100,6 +100,12 @@
             "schema": {
               "$ref": "#/definitions/ResourceSkuResults"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -151,6 +157,12 @@
           },
           "202": {
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -203,6 +215,12 @@
           },
           "202": {
             "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -270,6 +288,12 @@
           },
           "202": {
             "description": "Accepted the configuration change when updating the service."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -320,6 +344,12 @@
           },
           "202": {
             "description": "The service update request was Accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -361,6 +391,12 @@
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -401,6 +437,12 @@
           },
           "204": {
             "description": "The service does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -434,6 +476,12 @@
             "description": "The API Management service list.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -508,6 +556,12 @@
               "x-ms-client-flatten": true,
               "$ref": "#/definitions/ApiManagementServiceGetSsoTokenResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -546,6 +600,12 @@
             "description": "The result of check name availability.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -594,6 +654,12 @@
             "description": "Network configuration updates were successfully applied on the Api Management service.",
             "schema": {
               "$ref": "#/definitions/ApiManagementServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -899,6 +965,11 @@
           "type": "string",
           "description": "Gateway URL of the API Management service in the Region.",
           "readOnly": true
+        },
+        "disableGateway": {
+          "type": "boolean",
+          "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.",
+          "default": false
         }
       },
       "required": [
@@ -1026,6 +1097,11 @@
           "description": "SCM endpoint URL of the API Management service.",
           "readOnly": true
         },
+        "developerPortalUrl":{
+          "type": "string",
+          "description": "DEveloper Portal endpoint URL of the API Management service.",
+          "readOnly": true
+        },
         "hostnameConfigurations": {
           "type": "array",
           "items": {
@@ -1079,6 +1155,11 @@
           "description": "Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.",
           "default": false
         },
+        "disableGateway": {
+          "type": "boolean",
+          "description": "Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.",
+          "default": false
+        },
         "virtualNetworkType": {
           "type": "string",
           "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
@@ -1106,9 +1187,23 @@
               }
             ]
           }
+        },
+        "apiVersionConstraint" :{          
+          "$ref": "#/definitions/ApiVersionConstraint",
+          "description": "Control Plane Apis version constraint for the API Management service."
         }
       },
       "description": "Base Properties of an API Management service resource description."
+    },
+    "ApiVersionConstraint": {
+      "properties": {
+        "minApiVersion": {
+          "type": "string",          
+          "description": "Limit control plane API calls to API Management service with version equal to or newer than this value.",
+          "example": "2019-01-01"
+        }
+      },
+      "description": "Control Plane Apis version constraint for the API Management service."
     },
     "ApiManagementServiceSkuProperties": {
       "properties": {
@@ -1342,9 +1437,12 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The identity type. Currently the only supported type is 'SystemAssigned'.",
+          "description": "The type of identity used for the resource. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ApimIdentityType",
@@ -1362,6 +1460,24 @@
           "format": "uuid",
           "readOnly": true,
           "description": "The client tenant id of the identity."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
         }
       },
       "required": [
