@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-postgresql"
   output-folder: "$(typescript-sdks-folder)/sdk/postgresql/arm-postgresql"
+  clear-output-folder: true
   generate-metadata: true
 ```

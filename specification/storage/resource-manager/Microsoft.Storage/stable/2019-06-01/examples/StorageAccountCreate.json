@@ -11,7 +11,12 @@
       "kind": "Storage",
       "location": "eastus2euap",
       "properties": {
-        "isHnsEnabled": true
+        "isHnsEnabled": true,
+        "routingPreference": {
+          "routingChoice": "MicrosoftRouting",
+          "publishMicrosoftEndpoints": true,
+          "publishInternetEndpoints": true
+        }
       },
       "tags": {
         "key1": "value1",
@@ -35,10 +40,29 @@
             "blob": "https://sto4445.blob.core.windows.net/",
             "file": "https://sto4445.file.core.windows.net/",
             "queue": "https://sto4445.queue.core.windows.net/",
-            "table": "https://sto4445.table.core.windows.net/"
+            "table": "https://sto4445.table.core.windows.net/",
+            "microsoftEndpoints": {
+              "web": "https://sto4445-microsoftrouting.web.core.windows.net/",
+              "dfs": "https://sto4445-microsoftrouting.dfs.core.windows.net/",
+              "blob": "https://sto4445-microsoftrouting.blob.core.windows.net/",
+              "file": "https://sto4445-microsoftrouting.file.core.windows.net/",
+              "queue": "https://sto4445-microsoftrouting.queue.core.windows.net/",
+              "table": "https://sto4445-microsoftrouting.table.core.windows.net/"
+            },
+            "internetEndpoints": {
+              "web": "https://sto4445-internetrouting.web.core.windows.net/",
+              "dfs": "https://sto4445-internetrouting.dfs.core.windows.net/",
+              "blob": "https://sto4445-internetrouting.blob.core.windows.net/",
+              "file": "https://sto4445-internetrouting.file.core.windows.net/"
+            }
           },
           "primaryLocation": "eastus2euap",
           "provisioningState": "Succeeded",
+          "routingPreference": {
+            "routingChoice": "MicrosoftRouting",
+            "publishMicrosoftEndpoints": true,
+            "publishInternetEndpoints": true
+          },
           "secondaryLocation": "centraluseuap",
           "statusOfPrimary": "available",
           "statusOfSecondary": "available",

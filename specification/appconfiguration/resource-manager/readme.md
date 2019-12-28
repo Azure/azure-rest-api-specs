@@ -26,7 +26,7 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-02-01-preview
+tag: package-2019-10-01
 ```
 
 ### Tag: package-2019-02-01-preview
@@ -87,6 +87,10 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Suppression
 
