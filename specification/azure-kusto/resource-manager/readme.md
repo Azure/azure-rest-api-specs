@@ -40,15 +40,6 @@ input-file:
   - Microsoft.Kusto/stable/2019-12-17/kusto.json
 ```
 
-### Tag: package-2019-11-09
-
-These settings apply only when `--tag=package-2019-11-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-11-09'
-input-file:
-  - Microsoft.Kusto/stable/2019-11-09/kusto.json
-```
-
 ### Tag: package-2019-09-07
 
 These settings apply only when `--tag=package-2019-09-07` is specified on the command line.
