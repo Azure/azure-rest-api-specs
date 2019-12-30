@@ -7877,6 +7877,14 @@
         "kekKeyVaultArmId": {
           "description": "The KeyVault resource id for key (KEK).",
           "type": "string"
+        },
+        "failoverDiskName": {
+            "description": "The failover name for the managed disk.",
+            "type": "string"
+        },
+        "tfoDiskName": {
+            "description": "The test failover name for the managed disk.",
+            "type": "string"
         }
       }
     },
@@ -8081,6 +8089,10 @@
           "description": "The recovery virtual network.",
           "type": "string"
         },
+        "selectedTfoAzureNetworkId": {
+            "description": "The test failover virtual network.",
+            "type": "string"
+        },
         "vmNics": {
           "description": "The virtual machine nic details.",
           "type": "array",
@@ -8161,6 +8173,10 @@
             "name": "VmEncryptionType",
             "modelAsString": true
           }
+        },
+        "tfoAzureVMName": {
+            "description": "The test failover VM name.",
+            "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8328,6 +8344,10 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery os disk encryption information."
+        },
+        "tfoAzureVMName": {
+            "description": "The user given name for test failover VM.",
+            "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8403,6 +8423,14 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "failoverDiskName": {
+            "description": "The target disk name for unplanned failover operation.",
+            "type": "string"
+        },
+        "tfoDiskName": {
+            "description": "The target disk name for test failover operation.",
+            "type": "string"
         }
       }
     },
@@ -12586,6 +12614,27 @@
         }
       }
     },
+    "IPConfig": {
+      "description": "IP configuration details.",
+      "type": "object",
+      "properties": {
+        "staticIPAddress": {
+          "description": "The static IP address of the IP configuration.",
+          "type": "string"
+        },
+        "publicIpAddressId": {
+          "description": "The Id of the public IP address associated with the IP configuration.",
+          "type": "string"
+        },
+        "lBBackendAddressPoolIds": {
+          "description": "The backend address pools associated with the IP configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Job": {
       "description": "Job details.",
       "type": "object",
@@ -16423,6 +16472,10 @@
           "description": "Target Azure Network Id.",
           "type": "string"
         },
+        "selectedTfoAzureNetworkId": {
+            "description": "The Azure Network Id for test failover.",
+            "type": "string"
+        },
         "selectedSourceNicId": {
           "description": "The selected source nic Id which will be used as the primary nic during failover.",
           "type": "string"
@@ -16973,6 +17026,29 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "A value indicating whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMNetworkId": {
+            "description": "The network to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoVMSubnetName": {
+            "description": "The subnet to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+            "description": "The NSG to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+            "description": "Whether the test failover NIC has accelerated networking enabled.",
+            "type": "boolean"
+        },
+        "tfoIPConfigs": {
+            "description": "The IP configurations to be used by NIC during test failover.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IPConfig"
+            }
         }
       }
     },
@@ -17014,6 +17090,26 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "Whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMSubnetName": {
+            "description": "The subnet to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+            "description": "The NSG to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+            "description": "Whether the test NIC has accelerated networking enabled.",
+            "type": "boolean"
+        },
+        "tfoIPConfigs": {
+            "description": "The IP configurations to be used by NIC during test failover.",
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IPConfig"
+            }
         }
       }
     },
