@@ -19,11 +19,15 @@ cli:
     - name: List remote rendering accounts by subscription
     - name: List spatial anchors accounts by subscription
     - name: List available operations
+      disabled: true
     - name: Regenerate remote rendering account keys
     - name: Regenerate spatial anchors account keys
     - name: Update remote rendering account
+      disabled: true
     - name: Update spatial anchors account
+      disabled: true
     - name: CheckLocalNameAvailability
+      disabled: true
     - name: Delete spatial anchors account
     - name: Delete remote rendering account
 ```
