@@ -963,59 +963,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/moveDatabase": {
-      "post": {
-        "tags": [
-          "Clusters"
-        ],
-        "operationId": "Clusters_MoveDatabase",
-        "x-ms-examples": {
-          "KustoClusterMoveDatabase": {
-            "$ref": "./examples/KustoClusterMoveDatabase.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "description": "Moves the given database to this cluster.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "databaseMoveDefinition",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DatabaseMoveDefinition"
-            },
-            "description": "The database and owning-cluster names required to move the database.",
-            "x-ms-parameter-location": "method"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully moved the database."
-          },
-          "202": {
-            "description": "Accepted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases": {
       "get": {
         "tags": [
@@ -4009,24 +3956,6 @@
           "x-ms-client-name": "KeyVaultUri"
         }
       }
-    },
-    "DatabaseMoveDefinition": {
-      "type": "object",
-      "required": [
-        "databaseName",
-        "owningClusterName"
-      ],
-      "properties": {
-        "databaseName": {
-          "type": "string",
-          "description": "The database name to move between clusters"
-        },
-        "owningClusterName": {
-          "type": "string",
-          "description": "The cluster that currently holds the database"
-        }
-      },
-      "description": "A class representing database move request"
     }
   },
   "parameters": {
