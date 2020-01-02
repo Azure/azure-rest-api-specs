@@ -322,19 +322,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingInstructions": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions": {
       "get": {
         "tags": [
-          "BillingInstructions"
+          "Instructions"
         ],
-        "operationId": "BillingInstructions_ListByBillingProfile",
-        "description": "Lists the billing instructions by billing profile id.",
+        "operationId": "Instructions_ListByBillingProfile",
+        "description": "Lists the instructions by billing profile id.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "BillingInstructionsListByBillingProfile": {
-            "$ref": "./examples/BillingInstructionsListByBillingProfile.json"
+          "InstructionsListByBillingProfile": {
+            "$ref": "./examples/InstructionsListByBillingProfile.json"
           }
         },
         "parameters": [
@@ -352,7 +352,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingInstructionListResult"
+              "$ref": "#/definitions/InstructionListResult"
             }
           },
           "default": {
@@ -367,18 +367,18 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingInstructions/{billingInstructionName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}": {
       "get": {
         "tags": [
-          "BillingInstructions"
+          "Instructions"
         ],
         "x-ms-examples": {
-          "BillingInstruction": {
-            "$ref": "./examples/BillingInstruction.json"
+          "Instruction": {
+            "$ref": "./examples/Instruction.json"
           }
         },
-        "operationId": "BillingInstructions_Get",
-        "description": "Get the billing instruction by name.",
+        "operationId": "Instructions_Get",
+        "description": "Get the instruction by name.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -390,14 +390,14 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/billingInstructionNameParameter"
+            "$ref": "#/parameters/instructionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingInstruction"
+              "$ref": "#/definitions/Instruction"
             }
           },
           "default": {
@@ -410,13 +410,13 @@
       },
       "put": {
         "tags": [
-          "BillingInstructions"
+          "Instructions"
         ],
-        "operationId": "BillingInstructions_Put",
-        "description": "The operation to create or update a billing instruction.",
+        "operationId": "Instructions_Put",
+        "description": "The operation to create or update a instruction.",
         "x-ms-examples": {
-          "PutBillingInstruction": {
-            "$ref": "./examples/PutBillingInstruction.json"
+          "PutInstruction": {
+            "$ref": "./examples/PutInstruction.json"
           }
         },
         "parameters": [
@@ -430,23 +430,23 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
-            "$ref": "#/parameters/billingInstructionNameParameter"
+            "$ref": "#/parameters/instructionNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingInstruction"
+              "$ref": "#/definitions/Instruction"
             },
-            "description": "The new billing instruction."
+            "description": "The new instruction."
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BillingInstruction"
+              "$ref": "#/definitions/Instruction"
             }
           },
           "default": {
@@ -5692,15 +5692,15 @@
         }
       }
     },
-    "BillingInstructionListResult": {
-      "description": "Result of listing billing instructions.",
+    "InstructionListResult": {
+      "description": "Result of listing instructions.",
       "properties": {
         "value": {
-          "description": "The list of billing instructions.",
+          "description": "The list of instructions.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/BillingInstruction"
+            "$ref": "#/definitions/Instruction"
           }
         },
         "nextLink": {
@@ -5744,8 +5744,8 @@
         }
       }
     },
-    "BillingInstruction": {
-      "description": "A billing instruction resource.",
+    "Instruction": {
+      "description": "A instruction resource.",
       "type": "object",
       "allOf": [
         {
@@ -5756,11 +5756,11 @@
         "properties": {
           "description": "A billing instruction.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BillingInstructionProperties"
+          "$ref": "#/definitions/InstructionProperties"
         }
       }
     },
-    "BillingInstructionProperties": {
+    "InstructionProperties": {
       "description": "A billing instruction used during invoice generation.",
       "required": [
         "amount",
@@ -7507,10 +7507,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "billingInstructionNameParameter": {
-      "name": "billingInstructionName",
+    "instructionNameParameter": {
+      "name": "instructionName",
       "in": "path",
-      "description": "Billing Instruction Name.",
+      "description": "Instruction Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
