@@ -216,7 +216,7 @@
         "tags": [
           "StorageServices"
         ],
-        "operationId": "StorageServices_Put",
+        "operationId": "StorageServices_Create",
         "description": "Create the specified storage resource.",
         "parameters": [
           {
@@ -234,7 +234,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- The specified storage service has been created."
+            "description": "OK -- The specified storage service has been created.",
+            "schema": {
+              "$ref": "#/definitions/StorageService"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -299,10 +302,27 @@
         }
       }
     },
+    "ServiceNameProperties": {
+      "description": "The properties for service name.",
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "description": "Service Name for Storage Service.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "StorageService": {
       "description": "MDM storage service resource.",
       "type": "object",
       "properties": {
+        "properties": {
+          "description": "Properties for service name.",
+          "$ref": "#/definitions/ServiceNameProperties",
+          "x-ms-client-flatten": true,
+          "readOnly": true
+        }
       },
       "allOf": [
         {
