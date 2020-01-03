@@ -230,17 +230,11 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/StorageServiceObjectParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- The specified storage service has been created.",
-            "schema": {
-              "$ref": "#/definitions/StorageService"
-            }
+            "description": "OK -- The specified storage service has been created."
           },
           "default": {
             "description": "Error Response.",
@@ -309,11 +303,6 @@
       "description": "MDM storage service resource.",
       "type": "object",
       "properties": {
-        "serviceName": {
-          "description": "Service name for MDM storage service resource.",
-          "type": "string",
-          "readOnly": true
-        }
       },
       "allOf": [
         {
@@ -531,16 +520,6 @@
       "type": "string",
       "in": "path",
       "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "StorageServiceObjectParameter": {
-      "description": "Storage service object.",
-      "name": "storageServiceObject",
-      "in": "body",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/StorageService"
-      },
       "x-ms-parameter-location": "method"
     }
   },
