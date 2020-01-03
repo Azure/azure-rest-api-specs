@@ -49,7 +49,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/asyncoperations/{asyncOperationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/asyncOperations/{asyncOperationId}": {
       "get": {
         "x-ms-examples": {
           "Returns the async operation specified by asyncOperationId.": {
@@ -63,16 +63,16 @@
         "description": "Returns the async operation specified by asyncOperationId.",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/LocationParameter"
+            "$ref": "#/parameters/LocationParameter"
           },
           {
-            "$ref": "storage.json#/parameters/AsyncOperationIdParameter"
+            "$ref": "#/parameters/AsyncOperationIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -85,13 +85,13 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "storage.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage.Admin/storageservices": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage.Admin/storageServices": {
       "get": {
         "x-ms-examples": {
           "Returns the storage services list under the specified resource group and subscription.": {
@@ -101,17 +101,17 @@
         "tags": [
           "StorageServices"
         ],
-        "operationId": "StorageServices_List_RG",
+        "operationId": "StorageServices_ListRG",
         "description": "Returns the storage services list under the specified resource group and subscription.",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -124,13 +124,13 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "storage.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/storageservices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/storageServices": {
       "get": {
         "x-ms-examples": {
           "Returns the storage services list under the specified subscription.": {
@@ -140,14 +140,14 @@
         "tags": [
           "StorageServices"
         ],
-        "operationId": "StorageServices_List_Sub",
+        "operationId": "StorageServices_ListSub",
         "description": "Returns the storage services list under the specified subscription.",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -160,13 +160,13 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "storage.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}providers/Microsoft.Storage.Admin/storageservices/{serviceName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}providers/Microsoft.Storage.Admin/storageServices/{serviceName}": {
       "get": {
         "x-ms-examples": {
           "Returns the specified storage service.": {
@@ -180,16 +180,16 @@
         "description": "Returns the specified storage service.",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storage.json#/parameters/StorageServiceNameParameter"
+            "$ref": "#/parameters/StorageServiceNameParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -202,7 +202,7 @@
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "storage.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -220,29 +220,32 @@
         "description": "Create the specified storage resource.",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storage.json#/parameters/StorageServiceNameParameter"
+            "$ref": "#/parameters/StorageServiceNameParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageServiceObjectParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The specified storage service has been created.",
             "schema": {
-              "$ref": "#/definitions/StorageServices"
+              "$ref": "#/definitions/StorageService"
             }
           },
           "default": {
             "description": "Error Response.",
             "schema": {
-              "$ref": "storage.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -307,11 +310,16 @@
       "type": "object",
       "properties": {
         "serviceName": {
-          "description": "Serivce name for MDM storage service resource.",
+          "description": "Service name for MDM storage service resource.",
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "StorageServiceList": {
       "description": "List for storage services.",
@@ -498,28 +506,42 @@
       "name": "subscriptionId",
       "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "x-ms-parameter-location": "method"
     },
     "AsyncOperationIdParameter": {
       "description": "Async Operation Id.",
       "name": "asyncOperationId",
       "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "description": "Resource group name.",
       "name": "resourceGroup",
       "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "x-ms-parameter-location": "method"
     },
     "StorageServiceNameParameter": {
       "description": "Storage service name.",
       "name": "serviceName",
       "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "StorageServiceObjectParameter": {
+      "description": "Storage service object.",
+      "name": "storageServiceObject",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/StorageService"
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
