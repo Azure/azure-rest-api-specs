@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "managedApplicationName": "myManagedApplication",
+    "applicationName": "myManagedApplication",
     "api-version": "2018-06-01",
     "parameters": {
       "properties": {
@@ -15,6 +15,29 @@
     }
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "myManagedApplication",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+        "type": "Microsoft.Solutions/applications",
+        "location": "East US 2",
+        "managedBy": null,
+        "resourceGroupName": "rg",
+        "tags": null,
+        "plan": null,
+        "identity": null,
+        "kind": "ServiceCatalog",
+        "sku": null,
+        "properties": {
+          "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "outputs": null,
+          "parameters": null,
+          "provisioningState": "Created"
+        }
+      }
+    },
     "201": {
       "headers": {},
       "body": {
@@ -23,14 +46,14 @@
         "type": "Microsoft.Solutions/applications",
         "location": "East US 2",
         "managedBy": null,
-        "resourceGroup": "rg",
+        "resourceGroupName": "rg",
         "tags": null,
         "plan": null,
         "identity": null,
         "kind": "ServiceCatalog",
         "sku": null,
         "properties": {
-          "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "outputs": null,
           "parameters": null,
