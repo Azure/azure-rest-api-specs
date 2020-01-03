@@ -24,7 +24,7 @@ These are the global settings for the Fabric API.
 title: FabricAdminClient
 description: Fabric Admin Client
 openapi-type: arm
-tag: package-2016-05-01
+tag: package-2019-05-01
 ```
 
 ### Tag: package-2016-05-01
