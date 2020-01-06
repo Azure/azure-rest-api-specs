@@ -322,6 +322,142 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions": {
+      "get": {
+        "tags": [
+          "Instructions"
+        ],
+        "operationId": "Instructions_ListByBillingProfile",
+        "description": "Lists the instructions by billing profile id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-examples": {
+          "InstructionsListByBillingProfile": {
+            "$ref": "./examples/InstructionsListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InstructionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}": {
+      "get": {
+        "tags": [
+          "Instructions"
+        ],
+        "x-ms-examples": {
+          "Instruction": {
+            "$ref": "./examples/Instruction.json"
+          }
+        },
+        "operationId": "Instructions_Get",
+        "description": "Get the instruction by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instructionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Instruction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Instructions"
+        ],
+        "operationId": "Instructions_Put",
+        "description": "The operation to create or update a instruction.",
+        "x-ms-examples": {
+          "PutInstruction": {
+            "$ref": "./examples/PutInstruction.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/instructionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instruction"
+            },
+            "description": "The new instruction."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Instruction"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethods": {
       "get": {
         "tags": [
@@ -5556,6 +5692,24 @@
         }
       }
     },
+    "InstructionListResult": {
+      "description": "Result of listing instructions.",
+      "properties": {
+        "value": {
+          "description": "The list of instructions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Instruction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "BillingProfileListResult": {
       "description": "Result of listing billing profiles.",
       "properties": {
@@ -5587,6 +5741,46 @@
           "description": "A billing profile.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingProfileProperties"
+        }
+      }
+    },
+    "Instruction": {
+      "description": "A instruction resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A billing instruction.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InstructionProperties"
+        }
+      }
+    },
+    "InstructionProperties": {
+      "description": "A billing instruction used during invoice generation.",
+      "required": [
+        "amount",
+        "startDate",
+        "endDate"
+      ],
+      "properties": {
+        "amount": {
+          "description": "The amount budgeted for this billing instruction.",
+          "type": "number"
+        },
+        "startDate": {
+          "description": "The date this billing instruction goes into effect.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The date this billing instruction is no longer in effect.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -7309,6 +7503,14 @@
       "name": "departmentName",
       "in": "path",
       "description": "Department Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "instructionNameParameter": {
+      "name": "instructionName",
+      "in": "path",
+      "description": "Instruction Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
