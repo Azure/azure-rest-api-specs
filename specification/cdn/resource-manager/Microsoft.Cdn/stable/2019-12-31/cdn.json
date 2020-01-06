@@ -3763,7 +3763,7 @@
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
-			"UrlSigning"
+			      "UrlSigning"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3870,39 +3870,43 @@
       "description": "Defines the parameters for the Url Signing action.",
       "required": [
         "keys",
-        "hmacAlgorithm",
-        "queryStringParams",
-        "useIpInHash"
+        "algorithm",
+        "parameterNameOverride",
+        "ipSubnets"
       ],
-      "keys": {
-        "description": "Keys to be used for verifying the hash",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/UrlSigningKey"
-        }
-      },
-      "hmacAlgorithm": {
-        "description": "Algorithm to use for URL signing",
-        "type": "string",
-        "enum": [
-          "SHA256",
-          "SHA1"
-        ]
-      },
-      "queryStringParams": {
-        "description": "Defines which query string parameters in the url to be considered for expiry, key id etc. ",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/UrlSigningQueryStringParamIdentifier"
-        }
-      },
-      "useIpInHash": {
-        "description": "Indicates whether ip should be considered as part of the hash",
-        "type": "boolean"
+      "properties": {
+        "keys": {
+          "description": "Keys to be used for verifying the signature",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
+        },
+        "algorithm": {
+          "description": "Algorithm to use for URL signing",
+          "type": "string",
+          "enum": [
+            "SHA256"
+          ]
+        },
+        "parameterNameOverride": {
+          "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningQueryStringParamIdentifier"
+          }
+        },
+        "ipSubnets": {
+          "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6). <<TODO>>",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }  
       }
     },
     "UrlSigningKey": {
-      "description": "Url signing key properties",
+      "description": "Url signing key properties << TODO >>. Should they moved to end point level",
       "required": [
         "keyId",
         "keyVaultName",
@@ -3911,7 +3915,7 @@
       ],
       "properties": {
         "keyId": {
-          "description": "Logical reference to the key. Used in the URL to reference which key is used for producing the hash",
+          "description": "Logical reference to the key. Used in the URL to reference which key is used for producing the signature",
           "type": "string"
         },
         "keyVaultName": {
@@ -3929,7 +3933,7 @@
       }
     },
     "UrlSigningQueryStringParamIdentifier": {
-      "description": "Defines how to identify a query string parameter for a specific purpose e.g. expiry",
+      "description": "Defines how to identify a query string parameter for a specific purpose e.g. expires",
       "required": [
         "paramIndicator",
         "paramName"
@@ -3939,11 +3943,9 @@
           "description": "Indicates the purpose of the query string parameter",
           "type": "string",
           "enum": [
-            "expiry",
+            "expires",
             "keyId",
-            "hash",
-            "ip"
-          ]
+            "signature"          ]
         },
         "paramName": {
           "description": "Query string parameter name",
