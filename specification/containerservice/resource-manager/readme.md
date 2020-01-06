@@ -438,8 +438,8 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
