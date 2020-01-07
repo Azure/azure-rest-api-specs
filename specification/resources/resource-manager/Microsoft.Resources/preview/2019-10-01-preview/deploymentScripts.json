@@ -617,8 +617,7 @@
             "Running",
             "Succeeded",
             "Failed",
-            "Canceled",
-            "Expiring"
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ScriptProvisioningState",
@@ -673,6 +672,10 @@
           "format": "date-time",
           "readOnly": true,
           "description": "Time the deployment script resource will expire."
+        },
+        "error": {
+          "description": "Error that is relayed from the script execution.",
+          "$ref": "#/definitions/DefaultErrorResponse"
         }
       }
     },

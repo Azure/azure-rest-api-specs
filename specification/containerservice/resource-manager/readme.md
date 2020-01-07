@@ -34,9 +34,20 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11
+tag: package-2020-01
 ```
 
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
+  - Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
+```
 
 ### Tag: package-2019-11
 
@@ -184,6 +195,15 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
+### Tag: package-2020-01-01-only
+
+These settings apply only when `--tag=package-2020-01-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
 ```
 
 ### Tag: package-2019-11-01-only
@@ -418,6 +438,7 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
