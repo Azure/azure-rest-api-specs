@@ -258,6 +258,9 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "200": {
             "description": "Update successful. The operation returns the resulting AzureFirewall resource.",
             "schema": {
@@ -275,6 +278,10 @@
           "Update Azure Firewall Tags": {
             "$ref": "./examples/AzureFirewallUpdateTags.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
