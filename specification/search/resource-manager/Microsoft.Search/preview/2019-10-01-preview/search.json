@@ -1023,9 +1023,11 @@
           "description": "The resource type."
         },
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Describes the current state an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
-      }
+      },
+      "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "NetworkRuleSet": {
       "properties": {
@@ -1044,7 +1046,7 @@
         },
         "ipRules": {
           "type": "array",
-          "description": "A list of rules that define inbound network access to the search service endpoint. By default, the search service endpoint is reachable from the internet.",
+          "description": "A list of rules that define inbound network access to the search service endpoint. This property is set when specific IP access restriction rules are applied when EndpointAccess is in Public mode.",
           "items": {
             "$ref": "#/definitions/IpRule"
           }
@@ -1070,7 +1072,8 @@
             ]
           }
         }
-      }
+      },
+      "description": "Specific rules that determine how the Azure Cognitive Search service may be reached."
     },
     "IpRule": {
       "properties": {
@@ -1078,7 +1081,8 @@
           "type": "string",
           "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
         }
-      }
+      },
+      "description": "The IP access restriction rule of the Cognitive Search service."
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
@@ -1086,9 +1090,10 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Resource id for the private endpoint from Network resource."
+              "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
             }
-          }
+          },
+          "description": "The private endpoint resource from Microsoft.Network provider."
         },
         "privateLinkServiceConnectionState": {
           "type": "object",
@@ -1116,9 +1121,11 @@
               "description": "A description of any extra actions that may be required.",
               "default": "None"
             }
-          }
+          },
+          "description": "Describes the current status an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
-      }
+      },
+      "description": "Describes the current state an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "SearchService": {
       "properties": {
@@ -1211,7 +1218,7 @@
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network specific rules that specify how the search service may be reached."
+          "description": "Specific rules that determine how the Azure Cognitive Search service may be reached."
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -1461,7 +1468,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for each request. The current version is 2015-08-19."
+      "description": "The API version to use for each request. The current version is 2019-10-01-Preview."
     }
   }
 }
