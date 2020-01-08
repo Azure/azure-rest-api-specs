@@ -1821,6 +1821,7 @@
       }
     },
     "PrivateEndpointProperty": {
+      "description": "Private endpoint which the connection belongs to.",
       "type": "object",
       "properties": {
         "id": {
@@ -1831,11 +1832,12 @@
       "x-ms-azure-resource": true
     },
     "PrivateLinkServiceConnectionStateProperty": {
+      "description": "State of the private endpoint connection.",
+      "type": "object",
       "required": [
         "status",
         "description"
       ],
-      "type": "object",
       "properties": {
         "status": {
           "description": "The private link service connection status.",
@@ -1843,8 +1845,7 @@
         },
         "description": {
           "description": "The private link service connection description.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "actionsRequired": {
           "description": "The actions required for private link service connection.",
@@ -1855,6 +1856,7 @@
     },
     "PrivateEndpointConnection": {
       "description": "A private endpoint connection",
+      "x-ms-azure-resource": true,
       "type": "object",
       "allOf": [
         {
