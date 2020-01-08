@@ -1218,9 +1218,7 @@
             "$ref": "./examples/operationStatuses.json"
           }
         },
-        "tags": [
-          "OperationStatuses"
-        ],
+        "tags": ["OperationStatuses"],
         "operationId": "GetOperationStatus",
         "description": "Get the status of an azure operation.",
         "parameters": [
@@ -1858,6 +1856,20 @@
           "readOnly": true
         }
       }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -1922,20 +1934,6 @@
           "type": "object",
           "description": "The error detail of the operation if any.",
           "$ref": "#/definitions/ErrorResponse"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
         }
       }
     }
