@@ -2504,7 +2504,11 @@
         }
       ],
       "description": "AAD (Azure Active Directory) requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "AATPDataConnector": {
       "allOf": [
@@ -2545,7 +2549,11 @@
         }
       ],
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "ASCDataConnector": {
       "allOf": [
@@ -2592,7 +2600,11 @@
           "type": "string"
         }
       },
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "AccountEntity": {
       "allOf": [
@@ -3090,7 +3102,11 @@
         }
       ],
       "description": "Amazon Web Services CloudTrail requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "AzureResourceEntity": {
       "allOf": [
@@ -5156,7 +5172,11 @@
         }
       ],
       "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "MDATPDataConnector": {
       "allOf": [
@@ -5197,7 +5217,11 @@
         }
       ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "MalwareEntity": {
       "allOf": [
@@ -5504,7 +5528,11 @@
         }
       ],
       "description": "Office data requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "Operation": {
       "description": "Operation provided by provider",
@@ -6489,7 +6517,11 @@
         }
       ],
       "description": "TI (Threat Intelligence) requirements check properties.",
-      "type": "object"
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
