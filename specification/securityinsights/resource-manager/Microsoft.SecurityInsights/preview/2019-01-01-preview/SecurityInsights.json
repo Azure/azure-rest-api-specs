@@ -1840,9 +1840,6 @@
           "Check requirements for Mcas.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftCloudAppSecurity.json"
           },
-          "Check requirements for Office.": {
-            "$ref": "./examples/dataConnectors/CheckRequirementsOffice365.json"
-          },
           "Check requirements for Mdatp.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsMdatp.json"
           }
@@ -3991,7 +3988,8 @@
       "enum": [
         "GlobalAdmin",
         "SecurityAdmin",
-        "TenantOnboardedToWorkspace"
+        "TenantOnboardedToWorkspace",
+		"SecurityReader"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4003,9 +4001,6 @@
           },
           {
             "value": "SecurityAdmin"
-          },
-          {
-            "value": "TenantOnboardedToWorkspace"
           }
         ]
       }
@@ -4069,22 +4064,22 @@
             "value": "Unknown"
           },
           {
-            "value": "SubscriptionStandardTierLicenseRequired"
+            "value": "SubscriptionStandardTierLicense"
           },
           {
-            "value": "AADP1OrP2LicenseRequired"
+            "value": "AADP1OrP2License"
           },
           {
-            "value": "MicrosoftCloudAppSecurityLicenseRequired"
+            "value": "MicrosoftCloudAppSecurityLicense"
           },
           {
-            "value": "AzureAdvancedThreatProtectionLicenseRequired"
+            "value": "AzureAdvancedThreatProtectionLicense"
           },
           {
-            "value": "AzureInformationProtectionLicenseRequired"
+            "value": "AzureInformationProtectionLicense"
           },
           {
-            "value": "MicrosoftDefenderAdvancedThreatProtectionEnableRequired"
+            "value": "MicrosoftDefenderAdvancedThreatProtectionEnable"
           }
         ]
       }
@@ -5517,22 +5512,6 @@
         }
       },
       "type": "object"
-    },
-    "OfficeCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
-        {
-          "$ref": "#/definitions/DataConnectorTenantId"
-        }
-      ],
-      "description": "Office data requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
     },
     "Operation": {
       "description": "Operation provided by provider",
