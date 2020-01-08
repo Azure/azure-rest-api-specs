@@ -97,7 +97,7 @@
     },
     "SubscriptionKey": {
       "name": "subscription-key",
-      "description": "One of the Azure Maps keys provided from an Azure Map Account. Refer to the subscription-key security definition.",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -126,10 +126,10 @@
         "modelAsString": false,
         "values": [
           {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
+          "value": "json",
+          "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+        }
+      ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -207,10 +207,10 @@
         "modelAsString": false,
         "values": [
           {
-            "value": "geojson",
-            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
-          }
-        ]
+          "value": "geojson",
+          "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+        }
+      ]
       },
       "x-ms-parameter-location": "method"
     }
@@ -1153,7 +1153,7 @@
               "type": "string"
             },
             "coordinates": {
-              "description": "Contains a list of valid `GeoJSON` Polygon objects.",
+              "description": "Contains a list of valid `GeoJSON` Polygon objects. **Note** that coordinates in GeoJSON are in x, y order (longitude, latitude).",
               "type": "array",
               "items": {
                 "type": "array",
