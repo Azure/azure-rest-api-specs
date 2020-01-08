@@ -6,12 +6,20 @@
     "version": "2019-12-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/providers/Microsoft.ApiManagement/operations": {
       "get": {
-        "tags": ["ApiManagementOperations"],
+        "tags": [
+          "ApiManagementOperations"
+        ],
         "description": "Lists all of the available REST API operations of the Microsoft.ApiManagement provider.",
         "operationId": "ApiManagementOperations_List",
         "x-ms-examples": {
@@ -56,7 +66,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
       "get": {
-        "tags": ["ApiManagementServiceSkus"],
+        "tags": [
+          "ApiManagementServiceSkus"
+        ],
         "summary": "Gets available SKUs for API Management service",
         "description": "Gets all available SKU for a given API Management service",
         "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
@@ -103,7 +115,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore": {
       "post": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_Restore",
         "description": "Restores a backup of an API Management service created using the ApiManagementService_Backup operation on the current service. This is a long running operation and could take several minutes to complete.",
         "x-ms-examples": {
@@ -159,7 +173,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backup": {
       "post": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_Backup",
         "description": "Creates a backup of the API Management service to the given Azure Storage Account. This is long running operation and could take several minutes to complete.",
         "x-ms-examples": {
@@ -215,7 +231,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}": {
       "put": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_CreateOrUpdate",
         "description": "Creates or updates an API Management service. This is long running operation and could take several minutes to complete.",
         "x-ms-examples": {
@@ -281,7 +299,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_Update",
         "description": "Updates an existing API Management service.",
         "x-ms-examples": {
@@ -335,7 +355,9 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_Get",
         "description": "Gets an API Management service resource description.",
         "x-ms-examples": {
@@ -379,7 +401,9 @@
         }
       },
       "delete": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_Delete",
         "description": "Deletes an existing API Management service.",
         "x-ms-examples": {
@@ -426,7 +450,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
       "get": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_ListByResourceGroup",
         "description": "List all API Management services within a resource group.",
         "x-ms-examples": {
@@ -466,7 +492,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service": {
       "get": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_List",
         "description": "Lists all API Management services within an Azure subscription.",
         "x-ms-examples": {
@@ -497,7 +525,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/getssotoken": {
       "post": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_GetSsoToken",
         "description": "Gets the Single-Sign-On token for the API Management Service which is valid for 5 Minutes.",
         "x-ms-examples": {
@@ -538,7 +568,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/checkNameAvailability": {
       "post": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_CheckNameAvailability",
         "description": "Checks availability and correctness of a name for an API Management service.",
         "x-ms-examples": {
@@ -581,7 +613,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/applynetworkconfigurationupdates": {
       "post": {
-        "tags": ["ApiManagementService"],
+        "tags": [
+          "ApiManagementService"
+        ],
         "operationId": "ApiManagementService_ApplyNetworkConfigurationUpdates",
         "description": "Updates the Microsoft.ApiManagement resource running in the Virtual network to pick the updated network settings.",
         "x-ms-examples": {
@@ -651,7 +685,9 @@
           "description": "The uri to fetch the next page of API Management service Skus."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The API Management service SKUs operation response."
     },
     "ResourceSkuResult": {
@@ -698,7 +734,11 @@
           "type": "string",
           "readOnly": true,
           "description": "The scale type applicable to the sku.",
-          "enum": ["automatic", "manual", "none"],
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
           "x-ms-enum": {
             "name": "ResourceSkuCapacityScaleType",
             "modelAsString": true,
@@ -729,7 +769,13 @@
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
-          "enum": ["Developer", "Standard", "Premium", "Basic", "Consumption"],
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium",
+            "Basic",
+            "Consumption"
+          ],
           "x-ms-enum": {
             "name": "SkuType",
             "modelAsString": true,
@@ -776,7 +822,11 @@
           "description": "Subject of the certificate."
         }
       },
-      "required": ["expiry", "thumbprint", "subject"],
+      "required": [
+        "expiry",
+        "thumbprint",
+        "subject"
+      ],
       "description": "SSL certificate information."
     },
     "CertificateConfiguration": {
@@ -792,14 +842,19 @@
         "storeName": {
           "description": "The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only Root and CertificateAuthority are valid locations.",
           "type": "string",
-          "enum": ["CertificateAuthority", "Root"]
+          "enum": [
+            "CertificateAuthority",
+            "Root"
+          ]
         },
         "certificate": {
           "$ref": "#/definitions/CertificateInformation",
           "description": "Certificate information."
         }
       },
-      "required": ["storeName"],
+      "required": [
+        "storeName"
+      ],
       "description": "Certificate configuration which consist of non-trusted intermediates and root certificates."
     },
     "HostnameConfiguration": {
@@ -807,7 +862,13 @@
         "type": {
           "type": "string",
           "description": "Hostname type.",
-          "enum": ["Proxy", "Portal", "Management", "Scm", "DeveloperPortal"],
+          "enum": [
+            "Proxy",
+            "Portal",
+            "Management",
+            "Scm",
+            "DeveloperPortal"
+          ],
           "x-ms-enum": {
             "name": "HostnameType",
             "modelAsString": true
@@ -844,7 +905,10 @@
           "description": "Certificate information."
         }
       },
-      "required": ["type", "hostName"],
+      "required": [
+        "type",
+        "hostName"
+      ],
       "description": "Custom hostname configuration."
     },
     "VirtualNetworkConfiguration": {
@@ -908,7 +972,10 @@
           "default": false
         }
       },
-      "required": ["location", "sku"],
+      "required": [
+        "location",
+        "sku"
+      ],
       "description": "Description of an additional API Management resource location."
     },
     "ApiManagementServiceBackupRestoreParameters": {
@@ -956,7 +1023,10 @@
           "$ref": "#/definitions/ApiManagementServiceBaseProperties"
         }
       ],
-      "required": ["publisherEmail", "publisherName"],
+      "required": [
+        "publisherEmail",
+        "publisherName"
+      ],
       "description": "Properties of an API Management service resource description."
     },
     "ApiManagementServiceUpdateProperties": {
@@ -1094,7 +1164,11 @@
           "type": "string",
           "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
           "default": "None",
-          "enum": ["None", "External", "Internal"],
+          "enum": [
+            "None",
+            "External",
+            "Internal"
+          ],
           "x-ms-enum": {
             "name": "VirtualNetworkType",
             "modelAsString": true,
@@ -1139,7 +1213,13 @@
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
-          "enum": ["Developer", "Standard", "Premium", "Basic", "Consumption"],
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium",
+            "Basic",
+            "Consumption"
+          ],
           "x-ms-enum": {
             "name": "SkuType",
             "modelAsString": true,
@@ -1173,7 +1253,9 @@
           "description": "Capacity of the SKU (number of deployed units of the SKU)."
         }
       },
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "description": "API Management service resource SKU properties."
     },
     "ApiManagementServiceResource": {
@@ -1194,7 +1276,10 @@
         "location": {
           "type": "string",
           "description": "Resource location.",
-          "x-ms-mutability": ["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "etag": {
           "type": "string",
@@ -1207,7 +1292,11 @@
           "$ref": "#/definitions/ApimResource"
         }
       ],
-      "required": ["location", "sku", "properties"],
+      "required": [
+        "location",
+        "sku",
+        "properties"
+      ],
       "description": "A single API Management service resource in List or Get response."
     },
     "ApimResource": {
@@ -1280,7 +1369,9 @@
           "description": "Link to the next set of results. Not empty if Value contains incomplete list of API Management services."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response of the List API Management services operation."
     },
     "ApiManagementServiceGetSsoTokenResult": {
@@ -1299,7 +1390,9 @@
           "description": "The name to check for availability."
         }
       },
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "description": "Parameters supplied to the CheckNameAvailability operation."
     },
     "ApiManagementServiceNameAvailabilityResult": {
@@ -1317,7 +1410,11 @@
         "reason": {
           "type": "string",
           "description": "Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.",
-          "enum": ["Valid", "Invalid", "AlreadyExists"],
+          "enum": [
+            "Valid",
+            "Invalid",
+            "AlreadyExists"
+          ],
           "x-ms-enum": {
             "name": "NameAvailabilityReason",
             "modelAsString": false
@@ -1383,7 +1480,9 @@
           }
         }
       },
-      "required": ["type"]
+      "required": [
+        "type"
+      ]
     },
     "Operation": {
       "description": "REST API operation",
