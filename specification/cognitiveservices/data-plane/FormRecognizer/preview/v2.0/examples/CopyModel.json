@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "modelId": "{model Id}",
+    "body": {},
+    "copyRequest": {
+      "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}",
+      "authorizationClaim": {
+        "targetClaimResourceId": "{model Id}"
+      },
+      "moveModel": false
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "{endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}"
+      }
+    }
+  }
+}
