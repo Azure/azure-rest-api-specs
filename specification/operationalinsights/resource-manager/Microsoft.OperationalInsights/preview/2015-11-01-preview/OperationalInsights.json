@@ -1210,6 +1210,50 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/operationStatuses.json"
+          }
+        },
+        "tags": [
+          "OperationStatuses"
+        ],
+        "operationId": "GetOperationStatus",
+        "description": "Get the status of an azure operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name of operation."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Operation status.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1849,6 +1893,51 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
+    },
+    "OperationStatus": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
     }
   }
 }
