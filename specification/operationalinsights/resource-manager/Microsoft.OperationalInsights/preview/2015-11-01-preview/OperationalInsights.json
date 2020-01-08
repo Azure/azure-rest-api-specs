@@ -1173,8 +1173,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "tags": ["PrivateEndpointConnections"],
-        "description": "Gets all private endpoint connections on a server.",
-        "operationId": "PrivateEndpointConnections_ListByServer",
+        "description": "Gets all private endpoint connections on a workspace.",
+        "operationId": "PrivateEndpointConnections_ListByWorkspace",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1211,7 +1211,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/asyncOperations/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
       "get": {
         "x-ms-examples": {
           "Get specific operation status": {
@@ -1230,7 +1230,7 @@
             "description": "The region name of operation."
           },
           {
-            "name": "operationId",
+            "name": "asyncOperationId",
             "in": "path",
             "required": true,
             "type": "string",
