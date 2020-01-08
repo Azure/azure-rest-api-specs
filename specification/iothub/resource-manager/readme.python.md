@@ -5,7 +5,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -14,6 +13,7 @@ python:
   package-name: azure-mgmt-iothub
   package-version: 0.8.2
   clear-output-folder: true
+  no-namespace-folders: true
 ```
 
 ### Python multi-api
