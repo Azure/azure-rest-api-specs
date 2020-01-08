@@ -6,20 +6,12 @@
     "version": "2015-11-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices/{linkedServiceName}": {
       "put": {
-        "tags": [
-          "LinkedServices"
-        ],
+        "tags": ["LinkedServices"],
         "x-ms-examples": {
           "LinkedServicesCreate": {
             "$ref": "./examples/LinkedServicesCreate.json"
@@ -96,9 +86,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "LinkedServices"
-        ],
+        "tags": ["LinkedServices"],
         "x-ms-examples": {
           "LinkedServicesDelete": {
             "$ref": "./examples/LinkedServicesDelete.json"
@@ -141,9 +129,7 @@
         }
       },
       "get": {
-        "tags": [
-          "LinkedServices"
-        ],
+        "tags": ["LinkedServices"],
         "x-ms-examples": {
           "LinkedServicesGet": {
             "$ref": "./examples/LinkedServicesGet.json"
@@ -188,9 +174,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedServices": {
       "get": {
-        "tags": [
-          "LinkedServices"
-        ],
+        "tags": ["LinkedServices"],
         "x-ms-examples": {
           "LinkedServicesListByWorkspace": {
             "$ref": "./examples/LinkedServicesListByWorkspace.json"
@@ -231,9 +215,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources/{dataSourceName}": {
       "put": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "x-ms-examples": {
           "DataSourcesCreate": {
             "$ref": "./examples/DataSourcesCreate.json"
@@ -291,9 +273,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "x-ms-examples": {
           "DataSourcesDelete": {
             "$ref": "./examples/DataSourcesDelete.json"
@@ -336,9 +316,7 @@
         }
       },
       "get": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "x-ms-examples": {
           "DataSourcesGet": {
             "$ref": "./examples/DataSourcesGet.json"
@@ -383,9 +361,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/dataSources": {
       "get": {
-        "tags": [
-          "DataSources"
-        ],
+        "tags": ["DataSources"],
         "x-ms-examples": {
           "DataSourcesListByWorkspace": {
             "$ref": "./examples/DataSourcesListByWorkspace.json"
@@ -441,9 +417,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Disable": {
       "post": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "IntelligencePacksDisable": {
             "$ref": "./examples/WorkspacesDisableIntelligencePack.json"
@@ -485,9 +459,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks/{intelligencePackName}/Enable": {
       "post": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "IntelligencePacksEnable": {
             "$ref": "./examples/WorkspacesEnableIntelligencePack.json"
@@ -529,9 +501,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/intelligencePacks": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "IntelligencePacksList": {
             "$ref": "./examples/WorkspacesListIntelligencePacks.json"
@@ -572,9 +542,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/sharedKeys": {
       "post": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "SharedKeysList": {
             "$ref": "./examples/WorkspacesGetSharedKeys.json"
@@ -612,9 +580,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/usages": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "UsagesList": {
             "$ref": "./examples/WorkspacesListUsages.json"
@@ -655,9 +621,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/managementGroups": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesListManagementGroups": {
             "$ref": "./examples/WorkspacesListManagementGroups.json"
@@ -698,9 +662,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesGet": {
             "$ref": "./examples/WorkspacesListByResourceGroup.json"
@@ -734,9 +696,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/workspaces": {
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesSubscriptionList": {
             "$ref": "./examples/WorkspacesSubscriptionList.json"
@@ -767,9 +727,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}": {
       "put": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesCreate": {
             "$ref": "./examples/WorkspacesCreate.json"
@@ -828,9 +786,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesDelete": {
             "$ref": "./examples/WorkspacesDelete.json"
@@ -870,9 +826,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspaceGet": {
             "$ref": "./examples/WorkspacesGet.json"
@@ -912,9 +866,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Workspaces"
-        ],
+        "tags": ["Workspaces"],
         "x-ms-examples": {
           "WorkspacesPatch": {
             "$ref": "./examples/WorkspacesUpdate.json"
@@ -968,9 +920,7 @@
     },
     "/providers/Microsoft.OperationalInsights/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "operationId": "Operations_List",
         "description": "Lists all of the available OperationalInsights Rest API operations.",
         "parameters": [
@@ -993,9 +943,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/privateLinkResources": {
       "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
+        "tags": ["PrivateLinkResources"],
         "description": "Gets the private link resources that need to be created for a Log Analytics Workspace.",
         "operationId": "PrivateLinkResources_ListByDatabaseAccount",
         "x-ms-pageable": {
@@ -1036,9 +984,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/privateLinkResources/{groupName}": {
       "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
+        "tags": ["PrivateLinkResources"],
         "description": "Gets the private link resources that need to be created for a Log Analytics Workspace.",
         "operationId": "PrivateLinkResources_Get",
         "parameters": [
@@ -1079,9 +1025,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "description": "Gets a private endpoint connection.",
         "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
@@ -1124,9 +1068,7 @@
         }
       },
       "put": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "description": "Approve or reject a private endpoint connection with a given name.",
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "parameters": [
@@ -1181,9 +1123,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "description": "Deletes a private endpoint connection with a given name.",
         "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
@@ -1232,9 +1172,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
+        "tags": ["PrivateEndpointConnections"],
         "description": "Gets all private endpoint connections on a server.",
         "operationId": "PrivateEndpointConnections_ListByServer",
         "parameters": [
@@ -1262,7 +1200,6 @@
               "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           }
-
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1326,9 +1263,7 @@
           "description": "The resource id of the resource that will be linked to the workspace."
         }
       },
-      "required": [
-        "resourceId"
-      ],
+      "required": ["resourceId"],
       "description": "Linked service properties."
     },
     "LinkedService": {
@@ -1339,9 +1274,7 @@
           "description": "The properties of the linked service."
         }
       },
-      "required": [
-        "properties"
-      ],
+      "required": ["properties"],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1401,10 +1334,7 @@
           "$ref": "#/definitions/DataSourceKind"
         }
       },
-      "required": [
-        "kind",
-        "properties"
-      ],
+      "required": ["kind", "properties"],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1605,9 +1535,7 @@
           }
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "The SKU (tier) of a workspace."
     },
     "WorkspaceProperties": {
@@ -1834,10 +1762,7 @@
     "PrivateLinkServiceConnectionStateProperty": {
       "description": "State of the private endpoint connection.",
       "type": "object",
-      "required": [
-        "status",
-        "description"
-      ],
+      "required": ["status", "description"],
       "properties": {
         "status": {
           "description": "The private link service connection status.",
