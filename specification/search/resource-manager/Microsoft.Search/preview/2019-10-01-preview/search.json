@@ -1046,7 +1046,7 @@
         },
         "ipRules": {
           "type": "array",
-          "description": "A list of rules that define inbound network access to the search service endpoint. This property is set when specific IP restrictions are applied only if EndpointAccess is in Public mode.",
+          "description": "A list of IP restriction rules that defines the inbound network access to the search service endpoint. These restriction rules are applied only when the EndpointAccess of the search service is Public.",
           "items": {
             "$ref": "#/definitions/IpRule"
           }
@@ -1054,7 +1054,7 @@
         "bypass": {
           "type": "string",
           "default": "None",
-          "description": "Allows bypassing any IP rules or endpoint access definition, if the traffic originates from well-known source. By default, no bypass is allowed.",
+          "description": "Allows bypassing any IP rules or endpoint access definition, if the traffic originates from well-known source. By default, no bypass is allowed. Bypass rules are applied only when the EndpointAccess of the search service is Public.",
           "enum": [
             "None",
             "AzurePortal"
