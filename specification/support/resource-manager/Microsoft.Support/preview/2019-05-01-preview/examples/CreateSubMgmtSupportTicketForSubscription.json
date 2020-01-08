@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "76cb77fa-8b17-4eab-9493-b65dace99813",
+    "supportTicketName": "testticket",
+    "api-version": "2019-05-01-preview",
+    "createSupportTicketParameters": {
+      "properties": {
+        "serviceId": "/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6",
+        "title": "my title",
+        "description": "my description",
+        "problemClassificationId": "/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6/problemClassifications/eefb3e6a-0243-9fc2-9197-d2798d71a74c",
+        "severity": "moderate",
+        "contactDetails": {
+          "firstName": "abc",
+          "lastName": "xyz",
+          "primaryEmailAddress": "abc@contoso.com",
+          "preferredContactMethod": "email",
+          "preferredTimeZone": "Pacific Standard Time",
+          "preferredSupportLanguage": "en-US",
+          "country": "usa"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+        "headers": {
+            "location": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationResults/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview",
+            "azure-asyncoperation": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationsStatus/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview"
+        }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/supportTickets/testticket",
+        "name": "testticket",
+        "type": "Microsoft.Support/supportTickets",
+        "properties": {
+          "supportTicketId": "119120321001170",
+          "description": "my description",
+          "problemClassificationId": "/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6/problemClassifications/eefb3e6a-0243-9fc2-9197-d2798d71a74c",
+          "problemClassificationDisplayName": "Transfer ownership of my subscription",
+          "severity": "moderate",
+		  "productionOutage": false,
+          "require24X7Response": false,
+          "contactDetails": {
+            "firstName": "abc",
+            "lastName": "xyz",
+            "preferredContactMethod": "email",
+            "primaryEmailAddress": "abc@contoso.com",
+            "preferredTimeZone": "Pacific Standard Time",
+            "country": "usa",
+            "preferredSupportLanguage": "en-US"
+          },
+          "serviceLevelAgreement": {
+            "startTime": "2018-03-20T21:36:18Z",
+            "expirationTime": "2018-03-21T17:36:18Z",
+            "slaMinutes": 240
+          },
+          "supportPlanType": "Premier",
+          "title": "my title",
+          "serviceId": "/providers/Microsoft.Support/services/f3dc5421-79ef-1efa-41a5-42bf3cbb52c6",
+          "serviceDisplayName": "Subscription management",
+          "status": "Open",
+          "createdDate": "2018-03-20T21:36:18Z",
+          "modifiedDate": "2018-03-20T21:36:23Z"
+        }
+      }
+    }
+  }
+}
