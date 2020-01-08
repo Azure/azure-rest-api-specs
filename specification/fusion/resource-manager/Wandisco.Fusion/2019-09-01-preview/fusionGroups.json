@@ -373,7 +373,7 @@
           "200": {
             "description": "azureZone details.",
             "schema": {
-              "$ref": "#/definitions/AzureZone"
+              "$ref": "#/definitions/AzureZoneResponse"
             }
           },
           "default": {
@@ -425,13 +425,13 @@
           "200": {
             "description": "Updating Fusion Azure Zone.",
             "schema": {
-              "$ref": "#/definitions/AzureZone"
+              "$ref": "#/definitions/AzureZoneResponse"
             }
           },
           "201": {
             "description": "Installing Fusion Azure Zone.",
             "schema": {
-              "$ref": "#/definitions/AzureZone"
+              "$ref": "#/definitions/AzureZoneResponse"
             }
           },
           "default": {
@@ -449,7 +449,10 @@
             "$ref": "./examples/FusionGroup/AzureZoneCreateManagedIdentity.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -478,6 +481,9 @@
           "200": {
             "description": "The Azure Zone was successfully deleted"
           },
+          "202": {
+            "description": "The Azure Zone was accepted for deletion"
+          },
           "204": {
             "description": "The Azure Zone was not found"
           },
@@ -493,7 +499,10 @@
             "$ref": "./examples/FusionGroup/AzureZoneDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/azureZones/{azureZoneName}/plugins": {
@@ -652,7 +661,10 @@
             "$ref": "./examples/FusionGroup/PluginCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -684,6 +696,9 @@
           "200": {
             "description": "The Plugin was successfully deleted"
           },
+          "202": {
+            "description": "The Plugin was accepted for deletion"
+          },
           "204": {
             "description": "The Plugin was not found"
           },
@@ -699,7 +714,10 @@
             "$ref": "./examples/FusionGroup/PluginDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules": {
@@ -848,7 +866,10 @@
             "$ref": "./examples/FusionGroup/ReplicationRuleCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -877,6 +898,9 @@
           "200": {
             "description": "The Replication Rule was successfully deleted"
           },
+          "202": {
+            "description": "The Replication Rule was accepted for deletion"
+          },
           "204": {
             "description": "The Replication Rule was not found"
           },
@@ -891,6 +915,10 @@
           "Successful delete": {
             "$ref": "./examples/FusionGroup/ReplicationRuleDelete.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -945,8 +973,7 @@
           "Successful start of Consistency Check": {
             "$ref": "./examples/FusionGroup/ConsistencyCheckStart.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/operations": {
@@ -1065,7 +1092,7 @@
           "200": {
             "description": "onPremZone details.",
             "schema": {
-              "$ref": "#/definitions/OnPremZone"
+              "$ref": "#/definitions/OnPremZoneResponse"
             }
           },
           "default": {
@@ -1117,13 +1144,13 @@
           "200": {
             "description": "Updating OnPrem Zone.",
             "schema": {
-              "$ref": "#/definitions/OnPremZone"
+              "$ref": "#/definitions/OnPremZoneResponse"
             }
           },
           "201": {
             "description": "Creating Fusion OnPrem Zone.",
             "schema": {
-              "$ref": "#/definitions/OnPremZone"
+              "$ref": "#/definitions/OnPremZoneResponse"
             }
           },
           "default": {
@@ -1138,7 +1165,10 @@
             "$ref": "./examples/FusionGroup/OnPremZoneCreate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -1167,6 +1197,9 @@
           "200": {
             "description": "The OnPrem Zone was successfully deleted"
           },
+          "202": {
+            "description": "The OnPrem Zone was accepted for deletion"
+          },
           "204": {
             "description": "The OnPrem Zone was not found"
           },
@@ -1182,7 +1215,10 @@
             "$ref": "./examples/FusionGroup/OnPremZoneDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations": {
@@ -1712,10 +1748,41 @@
         }
       ],
       "properties": {
+          "properties": {
+            "description": "azure zone resource properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureZoneInputProperties"
+        }
+      }
+    },
+    "AzureZoneResponse": {
+      "description": "Azure Zone Response",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "properties": {
           "description": "azure zone resource properties",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureZoneProperties"
+        }
+      }
+    },
+    "AzureZoneInputProperties": {
+      "description": "Azure Zone",
+      "type": "object",
+      "allOf": [
+        {
+        "$ref": "#/definitions/AzureZoneProperties"
+        }
+      ],
+      "properties": {
+        "storageAccessKey": {
+          "description": "Access Key for storage (use either key or identity)",
+          "type": "string"
         }
       }
     },
@@ -1745,10 +1812,6 @@
         "storageManagedIdentity": {
           "$ref": "#/definitions/VirtualMachineIdentity",
           "description": "Managed identity of storage account (use either key or identity)"
-        },
-        "storageAccessKey": {
-          "description": "Access Key for storage (use either key or identity)",
-          "type": "string"
         },
         "storageSecured": {
           "description": "Secure transfer required",
@@ -1897,7 +1960,7 @@
           "description": "The list of zones.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureZone"
+            "$ref": "#/definitions/AzureZoneResponse"
           }
         }
       }
@@ -1914,17 +1977,43 @@
         "properties": {
           "description": "on prem zone resource properties",
           "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OnPremZoneInputProperties"
+        }
+      }
+    },
+    "OnPremZoneResponse": {
+      "description": "OnPrem Zone Response",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "on prem zone resource response properties",
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OnPremZoneProperties"
         }
       }
     },
-    "OnPremZoneProperties": {
+    "OnPremZoneInputProperties": {
       "description": "on prem zone properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnPremZoneProperties"
+        }
+      ],
       "properties": {
         "inductionToken": {
           "description": "induction token for on prem zone",
           "type": "string"
-        },
+        }
+      }
+    },
+    "OnPremZoneProperties": {
+      "description": "on prem zone response properties",
+      "properties": {
         "provisioningState": {
           "title": "ProvisioningState",
           "description": "Provisioning State of resource",
@@ -1944,7 +2033,7 @@
           "description": "The list of zones.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OnPremZone"
+            "$ref": "#/definitions/OnPremZoneResponse"
           }
         }
       }
@@ -2215,10 +2304,25 @@
           "type": "string",
           "description": "The overwrite policy for migration CLOBBER|SKIP_IF_SIZE_MATCH|SKIP_IF_DATE_IS_EARLIER",
           "enum": [
-            "CLOBBER",
-            "SKIP_IF_SIZE_MATCH",
-            "SKIP_IF_DATE_IS_EARLIER"
-          ]
+            "Clobber",
+            "SkipIfSizeMatch",
+            "SkipIfDateIsEarlier"
+          ],
+          "x-ms-enum": {
+            "name": "LiveMigrationOverwritePolicy",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Clobber"
+              },
+              {
+                "value": "SkipIfSizeMatch"
+              },
+              {
+                "value": "SkipIfDateIsEarlier"
+              }
+            ]
+          }
         },
         "state": {
           "description": "Running state of the migration",
