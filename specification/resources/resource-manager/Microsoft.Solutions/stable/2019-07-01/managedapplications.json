@@ -1330,13 +1330,6 @@
           "$ref": "#/definitions/ApplicationBillingDetailsDefinition",
           "description": "The managed application billing details."
         },
-        "additionalManagedScopes": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The additional managed scopes outside of the normal managed resource group. The key is the resource that manages the scope and the value is the fully qualified scope."
-        },
         "jitAccessPolicy": {
           "$ref": "#/definitions/ApplicationJitAccessPolicy",
           "description": "The managed application Jit access policy."
@@ -2139,13 +2132,17 @@
     },
     "JitApproverDefinition": {
       "properties": {
-        "principalId": {
+        "id": {
           "type": "string",
           "description": "The approver service principal Id."
         },
         "type": {
           "type": "string",
-          "description": "The approver type."
+          "description": "The approver type.",
+          "enum": [
+            "user",
+            "group"
+          ]
         },
         "displayName": {
           "type": "string",
