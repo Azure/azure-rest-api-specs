@@ -14,6 +14,7 @@ python:
   title: DataBoxEdgeManagementClient
   description: The DataBoxEdge Client.
   clear-output-folder: true
+  no-namespace-folders: true
 ```
 
 ### Python multi-api
@@ -34,7 +35,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-07' && $(python)
 python:
   namespace: azure.mgmt.databoxedge.v2019_07_01
-  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2019_07_01```
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2019_07_01
 ```
 
 ### Tag: package-2019-03 and python
@@ -45,5 +46,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-03' && $(python)
 python:
   namespace: azure.mgmt.databoxedge.v2019_03_01
-  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2019_03_01```
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2019_03_01
 ```
