@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-10-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.signalr.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/signalr/mgmt-v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -41,7 +41,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-03-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.signalr.v2018_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/signalr/mgmt-v2018_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

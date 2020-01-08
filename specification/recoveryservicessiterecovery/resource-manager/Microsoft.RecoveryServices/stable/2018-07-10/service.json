@@ -205,6 +205,96 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults": {
+      "get": {
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "operationId": "ReplicationEligibilityResults_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResultsCollection"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_List.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default": {
+      "get": {
+        "tags": [
+          "ReplicationEligibilityResults"
+        ],
+        "summary": "Gets the validation errors in case the VM is unsuitable for protection.",
+        "description": "Validates whether a given VM can be protected or not in which case returns list of errors.",
+        "operationId": "ReplicationEligibilityResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "virtualMachineName",
+            "in": "path",
+            "description": "Virtual Machine name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReplicationEligibilityResults"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Gets the validation errors in case the VM is unsuitable for protection.": {
+            "$ref": "./examples/ReplicationEligibilityResults_Get.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationEvents": {
       "get": {
         "tags": [
@@ -7709,6 +7799,10 @@
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
         },
+        "recoveryDiskEncryptionSetId": {
+	  "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },                
         "diskName": {
           "description": "The disk name.",
           "type": "string"
@@ -7783,6 +7877,14 @@
         "kekKeyVaultArmId": {
           "description": "The KeyVault resource id for key (KEK).",
           "type": "string"
+        },
+        "failoverDiskName": {
+            "description": "The failover name for the managed disk.",
+            "type": "string"
+        },
+        "tfoDiskName": {
+            "description": "The test failover name for the managed disk.",
+            "type": "string"
         }
       }
     },
@@ -7987,6 +8089,10 @@
           "description": "The recovery virtual network.",
           "type": "string"
         },
+        "selectedTfoAzureNetworkId": {
+            "description": "The test failover virtual network.",
+            "type": "string"
+        },
         "vmNics": {
           "description": "The virtual machine nic details.",
           "type": "array",
@@ -8067,6 +8173,10 @@
             "name": "VmEncryptionType",
             "modelAsString": true
           }
+        },
+        "tfoAzureVMName": {
+            "description": "The test failover VM name.",
+            "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8234,6 +8344,10 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery os disk encryption information."
+        },
+        "tfoAzureVMName": {
+            "description": "The user given name for test failover VM.",
+            "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8280,6 +8394,10 @@
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
         },
+        "recoveryDiskEncryptionSetId": {
+          "description": "The recovery disk encryption set Id.",
+          "type": "string"
+        },
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
@@ -8305,6 +8423,14 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "failoverDiskName": {
+            "description": "The target disk name for unplanned failover operation.",
+            "type": "string"
+        },
+        "tfoDiskName": {
+            "description": "The target disk name for test failover operation.",
+            "type": "string"
         }
       }
     },
@@ -8743,6 +8869,10 @@
           "description": "The VHD id.",
           "type": "string"
         },
+        "diskId": {
+          "description": "The disk resource id.",
+          "type": "string"
+        },
         "vhdName": {
           "description": "VHD name.",
           "type": "string"
@@ -8761,6 +8891,10 @@
         },
         "lunId": {
           "description": "Ordinal\\LunId of the disk for the Azure VM.",
+          "type": "string"
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
           "type": "string"
         }
       }
@@ -9613,8 +9747,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the class type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -10378,6 +10511,13 @@
         "useManagedDisks": {
           "description": "A value indicating whether managed disks should be used during failover.",
           "type": "string"
+        },
+        "diskIdToDiskEncryptionMap": {
+          "description": "The dictionary of disk resource Id to disk encryption set ARM Id.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
@@ -11139,6 +11279,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
+          "type": "string"
         }
       }
     },
@@ -11222,6 +11366,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM ID.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "InMageAzureV2"
@@ -12463,6 +12611,27 @@
         "protocol": {
           "description": "The input endpoint protocol.",
           "type": "string"
+        }
+      }
+    },
+    "IPConfig": {
+      "description": "IP configuration details.",
+      "type": "object",
+      "properties": {
+        "staticIPAddress": {
+          "description": "The static IP address of the IP configuration.",
+          "type": "string"
+        },
+        "publicIpAddressId": {
+          "description": "The Id of the public IP address associated with the IP configuration.",
+          "type": "string"
+        },
+        "lBBackendAddressPoolIds": {
+          "description": "The backend address pools associated with the IP configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -14349,9 +14518,6 @@
     },
     "RecoveryPlanHyperVReplicaAzureFailoverInput": {
       "description": "Recovery plan HVR Azure failover input.",
-      "required": [
-        "vaultLocation"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -15034,6 +15200,96 @@
         "renewCertificateType": {
           "description": "Renew certificate type.",
           "type": "string"
+        }
+      }
+    },
+    "ReplicationEligibilityResults": {
+      "description": "Replication eligibility results response model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets the name of this object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Gets the object type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Gets Unique ARM identifier for this object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ReplicationEligibilityResultsProperties",
+          "description": "Gets properties model for replication eligibility results API.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationEligibilityResultsCollection": {
+      "description": "Replication eligibility results collection response model.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The replication eligibility results details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationEligibilityResults"
+          }
+        }
+      }
+    },
+    "ReplicationEligibilityResultsErrorInfo": {
+      "description": "Error model that can be exposed to the user.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "possibleCauses": {
+          "description": "The possible causes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedAction": {
+          "description": "The recommended action.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The error status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationEligibilityResultsProperties": {
+      "description": "Properties model for replication eligibility results API.",
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "description": "The client request Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "The error details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicationEligibilityResultsErrorInfo"
+          }
         }
       }
     },
@@ -15756,8 +16012,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -16216,6 +16471,10 @@
         "selectedRecoveryAzureNetworkId": {
           "description": "Target Azure Network Id.",
           "type": "string"
+        },
+        "selectedTfoAzureNetworkId": {
+            "description": "The Azure Network Id for test failover.",
+            "type": "string"
         },
         "selectedSourceNicId": {
           "description": "The selected source nic Id which will be used as the primary nic during failover.",
@@ -16767,6 +17026,29 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "A value indicating whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMNetworkId": {
+            "description": "The network to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoVMSubnetName": {
+            "description": "The subnet to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+            "description": "The NSG to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+            "description": "Whether the test failover NIC has accelerated networking enabled.",
+            "type": "boolean"
+        },
+        "tfoIPConfigs": {
+            "description": "The IP configurations to be used by NIC during test failover.",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IPConfig"
+            }
         }
       }
     },
@@ -16808,6 +17090,26 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "Whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMSubnetName": {
+            "description": "The subnet to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+            "description": "The NSG to be used by NIC during test failover.",
+            "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+            "description": "Whether the test NIC has accelerated networking enabled.",
+            "type": "boolean"
+        },
+        "tfoIPConfigs": {
+            "description": "The IP configurations to be used by NIC during test failover.",
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/IPConfig"
+            }
         }
       }
     },
