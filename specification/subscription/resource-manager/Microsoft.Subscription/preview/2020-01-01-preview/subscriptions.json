@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-01-01-preview",
+    "version": "2019-10-01-preview",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -16,18 +16,21 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
-      "post": {
-        "operationId": "Subscriptions_Cancel",
+    "/providers/Microsoft.Subscription/OperationResults/PurchaseSupport_{subscriptionId}:{purchaseId}": {
+      "get": {
+        "operationId": "GetPurchaseSupportStatus_Get",
         "x-ms-examples": {
-          "cancelSubscription": {
-            "$ref": "./examples/cancelSubscription.json"
+          "PurchaseOperationSupportStatus": {
+            "$ref": "./examples/PurchaseOperationSupportStatus.json"
           }
         },
-        "description": "The operation to cancel a subscription",
+        "description": "The operation to find out the purchase Operation status",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/purchaseIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -37,7 +40,20 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CanceledSubscriptionId"
+              "$ref": "#/definitions/DefaultSupportPlanResponseResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Purchase support plan is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -49,21 +65,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/rename": {
-      "post": {
-        "operationId": "Subscriptions_Rename",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan": {
+      "get": {
+        "operationId": "SupportPlan_Get",
         "x-ms-examples": {
-          "renameSubscription": {
-            "$ref": "./examples/renameSubscription.json"
+          "SupportPlan": {
+            "$ref": "./examples/SupportPlanList.json"
           }
         },
-        "description": "The operation to rename a subscription",
+        "description": "The operation to find out support plan list",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -73,7 +86,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RenamedSubscriptionId"
+              "$ref": "#/definitions/SupportPlanResponseResult"
             }
           },
           "default": {
@@ -85,15 +98,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
-      "post": {
-        "operationId": "Subscriptions_Enable",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan/default": {
+      "get": {
+        "operationId": "SupportPlanDefault_Get",
         "x-ms-examples": {
-          "enableSubscription": {
-            "$ref": "./examples/enableSubscription.json"
+          "SupportPlan": {
+            "$ref": "./examples/SupportPlanDefault.json"
           }
         },
-        "description": "The operation to enable a subscription",
+        "description": "The operation to find out the support plan",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -106,7 +119,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EnabledSubscriptionId"
+              "$ref": "#/definitions/DefaultSupportPlanResponseResult"
             }
           },
           "default": {
@@ -116,6 +129,56 @@
             }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/supportplans/default": {
+      "put": {
+        "operationId": "PurchaseSupportPlan_Put",
+        "x-ms-examples": {
+          "PurchaseSupport": {
+            "$ref": "./examples/PurchaseSupportPlan.json"
+          }
+        },
+        "description": "The operation to purchase/convert/cancel support plan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/supportPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseSupportResponseResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Purchase support plan is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -134,36 +197,6 @@
         }
       }
     },
-    "CanceledSubscriptionId": {
-      "description": "The ID of the canceled subscription",
-      "properties": {
-        "value": {
-          "description": "The ID of the canceled subscription",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "RenamedSubscriptionId": {
-      "description": "The ID of the subscriptions that is being renamed",
-      "properties": {
-        "value": {
-          "description": "The ID of the subscriptions that is being renamed",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EnabledSubscriptionId": {
-      "description": "The ID of the subscriptions that is being enabled",
-      "properties": {
-        "value": {
-          "description": "The ID of the subscriptions that is being enabled",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "SubscriptionName": {
       "type": "object",
       "description": "The new name of the subscription.",
@@ -171,6 +204,131 @@
         "subscriptionName": {
           "type": "string",
           "description": "New subscription name"
+        }
+      }
+    },
+    "planTypeEnum": {
+      "type": "string",
+      "description": "the planType.",
+      "enum": [
+        "basic_support",
+        "developer_support",
+        "standard_support",
+        "prodirect_support"
+      ]
+    },
+    "operationName": {
+      "type": "object",
+      "description": "The operation Name parameter.",
+      "properties": {
+        "value": {
+          "description": "The operation Name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultSupportPlanResponseResult": {
+      "description": "Default Support plan result.",
+      "$ref": "#/definitions/SupportPlan"
+    },
+    "SupportPlanResponseResult": {
+      "description": "Support plan result.",
+      "properties": {
+        "value": {
+          "description": "The list of Support plan.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SupportPlan"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportPlan": {
+      "description": "A SupportPlan resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SupportPlanProperties",
+          "title": "SupportPlan properties"
+        }
+      }
+    },
+    "SupportPlanProperties": {
+      "description": "The properties of the support plan.",
+      "properties": {
+        "planType": {
+          "$ref": "#/definitions/planTypeEnum"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PurchaseOperationStatusResponseResult": {
+      "description": "Purchase Record result.",
+      "properties": {
+        "planType": {
+          "$ref": "#/definitions/planTypeEnum"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
+        }
+      }
+    },
+    "SupportPlanName": {
+      "type": "object",
+      "description": "The supportPlan Name.",
+      "properties": {
+        "planType": {
+          "$ref": "#/definitions/planTypeEnum"
+        }
+      }
+    },
+    "PurchaseSupportResponseResult": {
+      "description": "A list of containing support plan result.",
+      "properties": {
+        "planType": {
+          "$ref": "#/definitions/planTypeEnum"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
         }
       }
     },
@@ -224,7 +382,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2020-01-01-preview"
+      "description": "Version of the API to be used with the client request. Current version is 2019-10-01-preview"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
@@ -242,6 +400,42 @@
       "description": "Subscription Name",
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "planTypeParameter": {
+      "name": "planType",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the support planType"
+    },
+    "supportPlanNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "SupportPlan Name",
+      "schema": {
+        "$ref": "#/definitions/SupportPlanName"
+      }
+    },
+    "purchaseIdParameter": {
+      "name": "purchaseId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "purchase Id."
+    },
+    "operationNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "operationName",
+      "schema": {
+        "$ref": "#/definitions/operationName"
       }
     }
   },
