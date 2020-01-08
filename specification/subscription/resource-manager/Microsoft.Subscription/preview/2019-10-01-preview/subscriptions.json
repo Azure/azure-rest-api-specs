@@ -16,12 +16,12 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/OperationStatus/{Id}": {
+    "/providers/Microsoft.Subscription/OperationResults/PurchaseSupport_{subscriptionId}:{purchaseId}": {
       "get": {
-        "operationId": "GetOperationStatus_Get",
+        "operationId": "GetPurchaseSupportStatus_Get",
         "x-ms-examples": {
-          "PurchaseSupportStatus": {
-            "$ref": "./examples/GetOperationStatus.json"
+          "PurchaseOperationSupportStatus": {
+            "$ref": "./examples/PurchaseOperationSupportStatus.json"
           }
         },
         "description": "The operation to find out the purchase Operation status",
@@ -30,7 +30,7 @@
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/IdParameter"
+            "$ref": "#/parameters/purchaseIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -40,7 +40,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponseResult"
+              "$ref": "#/definitions/DefaultSupportPlanResponseResult"
             }
           },
           "202": {
@@ -131,12 +131,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/PurchaseSupport": {
-      "post": {
-        "operationId": "PurchaseSupportPlan_Post",
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/supportplans/default": {
+      "put": {
+        "operationId": "PurchaseSupportPlan_Put",
         "x-ms-examples": {
           "PurchaseSupport": {
-            "$ref": "./examples/PurchaseSupport.json"
+            "$ref": "./examples/PurchaseSupportPlan.json"
           }
         },
         "description": "The operation to purchase/convert/cancel support plan.",
@@ -299,7 +299,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "OperationStatusResponseResult": {
+    "PurchaseOperationStatusResponseResult": {
       "description": "Purchase Record result.",
       "properties": {
         "planType": {
@@ -420,13 +420,13 @@
         "$ref": "#/definitions/SupportPlanName"
       }
     },
-    "IdParameter": {
-      "name": "Id",
+    "purchaseIdParameter": {
+      "name": "purchaseId",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Id."
+      "description": "purchase Id."
     },
     "operationNameParameter": {
       "name": "body",
