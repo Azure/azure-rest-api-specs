@@ -92,7 +92,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hanaonazure.v2017_11_03_preview
-  output-folder: $(azure-libraries-for-java-folder)/hanaonazure/resource-manager/v2017_11_03_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hanaonazure/mgmt-v2017_11_03_preview
 regenerate-manager: true
 generate-interface: true
 ```

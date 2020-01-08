@@ -23,6 +23,7 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient.
 
 ``` yaml
+opt-in-extensible-enums: true
 openapi-type: data-plane
 tag: package-2019-05
 ```
@@ -90,13 +91,32 @@ input-file:
 - preview/2015-02-28/searchservice.json
 ```
 
+### Tag: track1-package-2019-05-preview
+
+These settings apply only when `--tag=track1-package-2019-05-preview` is specified on the command line.
+It is meant to be used for generating Track 1 .NET SDK only!
+
+``` yaml $(tag) == 'track1-package-2019-05-preview'
+input-file:
+- track1/preview/2019-05-06-preview/searchservice.json
+```
+
+### Tag: track1-package-2019-05
+
+These settings apply only when `--tag=track1-package-2019-05` is specified on the command line.
+It is meant to be used for generating Track 1 .NET SDK only!
+
+``` yaml $(tag) == 'track1-package-2019-05'
+input-file:
+- track1/stable/2019-05-06/searchservice.json
+```
+
 ---
 # Code Generation
 
 !!! READ THIS !!!
 This swagger is not yet ready for languages other than C#.
 !!! READ THIS !!!
-
 
 ## C# 
 
@@ -166,6 +186,8 @@ input-file:
   - $(this-folder)/preview/2016-09-01/searchservice.json
   - $(this-folder)/preview/2015-02-28-preview/searchservice.json
   - $(this-folder)/preview/2015-02-28/searchservice.json
+  - $(this-folder)/track1/preview/2019-05-06-preview/searchservice.json
+  - $(this-folder)/track1/stable/2019-05-06/searchservice.json
 
 ```
 
@@ -176,4 +198,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
