@@ -298,18 +298,16 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
-          "400": {
-            "description": "Bad request. Check the message for details."
-          },
-          "404": {
-            "description": "No access to the bastion or one of the requested virtual machines."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Create Bastion Shareable Links for the request VMs": {
@@ -350,18 +348,16 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
-          "400": {
-            "description": "Bad request. Check the message for details."
-          },
-          "404": {
-            "description": "No access to the bastion or one of the requested virtual machines."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete Bastion Shareable Links for the request VMs": {
@@ -401,12 +397,6 @@
             "schema": {
               "$ref": "#/definitions/BastionShareableLinkListResult"
             }
-          },
-          "400": {
-            "description": "Bad request. Check the message for details."
-          },
-          "404": {
-            "description": "No access to the bastion or one of the requested virtual machines."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -459,6 +449,10 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Returns a list of currently active sessions on the Bastion": {
@@ -692,7 +686,7 @@
         "targetSubscriptionId": {
           "type": "string",
           "readOnly": true,
-          "description": "The unique Bastion Shareable Link to the virtual machine."
+          "description": "The subscription id for the target virtual machine."
         },
         "resourceType": {
           "type": "string",
