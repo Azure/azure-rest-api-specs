@@ -1870,6 +1870,37 @@
           "type": "string"
         }
       }
+    },
+    "OperationStatus": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     }
   },
   "parameters": {
@@ -1905,37 +1936,6 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
-    },
-    "OperationStatus": {
-      "description": "The status of operation.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The operation Id."
-        },
-        "name": {
-          "type": "string",
-          "description": "The operation name."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the operation."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the operation."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the operation."
-        },
-        "error": {
-          "type": "object",
-          "description": "The error detail of the operation if any.",
-          "$ref": "#/definitions/ErrorResponse"
-        }
-      }
     }
   }
 }
