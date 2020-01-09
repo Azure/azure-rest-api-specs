@@ -14279,15 +14279,6 @@
         "recoveryZone": {
           "description": "The recovery zone.",
           "type": "string"
-        },
-        "canWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canRead": {
-          "type": "boolean",
-          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -14766,7 +14757,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -14802,17 +14794,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
-          "type": "string",
-          "readOnly": true
-        },
-        "canWrite": {
-          "description": "Gets a value indicating whether this Newtonsoft.Json.JsonConverter can write JSON.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canRead": {
-          "type": "boolean",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
