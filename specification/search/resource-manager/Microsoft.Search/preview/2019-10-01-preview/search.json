@@ -416,8 +416,8 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceToAllowAccessFromCustomIPsAndPortal": {
-            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPsAndPortal.json"
+          "searchUpdateServiceToAllowAccessFromCustomIPs": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPs.json"
           },
           "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
@@ -1049,27 +1049,6 @@
           "description": "A list of IP restriction rules that defines the inbound network access to the search service endpoint. These restriction rules are applied only when the EndpointAccess of the search service is Public.",
           "items": {
             "$ref": "#/definitions/IpRule"
-          }
-        },
-        "bypass": {
-          "type": "string",
-          "default": "None",
-          "description": "Allows bypassing any IP rules or endpoint access definition, if the traffic originates from well-known source. By default, no bypass is allowed. Bypass rules are applied only when the EndpointAccess of the search service is Public.",
-          "enum": [
-            "None",
-            "AzurePortal"
-          ],
-          "x-ms-enum": {
-            "name": "ByPass",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "None"
-              },
-              {
-                "value": "AzurePortal"
-              }
-            ]
           }
         }
       },
