@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "subscription-key": "[subscription-key]",
+    "feedbackFixOtherRequestBody": {
+      "location": [
+        140.3,
+        47.9
+      ],
+      "bbox": [
+        [
+          -77,
+          38
+        ],
+        [
+          -77,
+          38
+        ]
+      ],
+      "comments": "This is an incorrect address."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "formatVersion": "1.0.0",
+        "feedbackId": "7adad957-2fe6-4cc4-aa35-9897fa89f5af",
+        "status": "Approved",
+        "createDate": "11/5/2018",
+        "featureType": "Others",
+        "action": "Fix",
+        "request": {
+          "location": [
+            140.3,
+            47.9
+          ],
+          "bbox": [
+            [
+              -77,
+              38
+            ],
+            [
+              -77,
+              38
+            ]
+          ],
+          "comments": "This is an incorrect address."
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}
