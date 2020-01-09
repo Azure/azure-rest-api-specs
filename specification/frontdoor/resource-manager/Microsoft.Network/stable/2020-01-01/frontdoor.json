@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-05-01",
+    "version": "2020-01-01",
     "title": "FrontDoorManagementClient",
     "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -347,6 +347,211 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/routingRules": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the Routing Rules within a Front Door.",
+        "operationId": "RoutingRules_ListByFrontDoor",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoutingRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Routing Rules in a Front Door": {
+            "$ref": "./examples/FrontdoorRoutingRuleList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/routingRules/{routingRuleName}": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Gets a Routing Rule with the specified Rule name within the specified Front Door.",
+        "operationId": "RoutingRules_Get",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/routingRuleNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Forwarding Routing Rule": {
+            "$ref": "./examples/FrontdoorRoutingRuleGet.json"
+          },
+          "Get Redirect Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Creates a new Routing Rule with the specified Rule name within the specified Front Door.",
+        "operationId": "RoutingRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/routingRuleNameParameter"
+          },
+          {
+            "description": "Routing Rule properties needed to create a new Front Door.",
+            "in": "body",
+            "name": "routingRuleParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new RoutingRule has been created.",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/RoutingRule"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update specific Forwarding Routing Rule": {
+            "$ref": "./examples/FrontdoorRoutingRuleCreate.json"
+          },
+          "Create or update specific Redirect Routing Rule": {
+            "$ref": "./examples/FrontdoorRedirectRoutingRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Deletes an existing Routing Rule with the specified parameters.",
+        "operationId": "RoutingRules_Delete",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/routingRuleNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the Routing Rule was not found."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Routing Rule": {
+            "$ref": "./examples/FrontdoorRoutingRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints": {
       "get": {
         "tags": [
@@ -640,6 +845,205 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/rulesEngines": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Lists all of the Rules Engine Configurations within a Front Door.",
+        "operationId": "RulesEngines_ListByFrontDoor",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RulesEngineListResult"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Rules Engine Configurations in a Front Door": {
+            "$ref": "./examples/FrontdoorRulesEngineList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/rulesEngines/{rulesEngineName}": {
+      "get": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Gets a Rules Engine Configuration with the specified name within the specified Front Door.",
+        "operationId": "RulesEngines_Get",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rulesEngineNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RulesEngine"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Rules Engine Configuration": {
+            "$ref": "./examples/FrontdoorRulesEngineGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Creates a new Rules Engine Configuration with the specified name within the specified Front Door.",
+        "operationId": "RulesEngines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rulesEngineNameParameter"
+          },
+          {
+            "description": "Rules Engine Configuration properties needed to create a new Rules Engine Configuration.",
+            "in": "body",
+            "name": "rulesEngineParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RulesEngine"
+            }
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RulesEngine"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new RulesEngine has been created.",
+            "schema": {
+              "$ref": "#/definitions/RulesEngine"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/RulesEngine"
+            }
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a specific Rules Engine Configuration": {
+            "$ref": "./examples/FrontdoorRulesEngineCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "FrontDoors"
+        ],
+        "description": "Deletes an existing Rules Engine Configuration with the specified parameters.",
+        "operationId": "RulesEngines_Delete",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/frontDoorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/rulesEngineNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content. The request has been accepted but the Rules Engine Configuration was not found."
+          },
+          "default": {
+            "description": "Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Rules Engine Configuration": {
+            "$ref": "./examples/FrontdoorRulesEngineDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -703,6 +1107,15 @@
           "items": {
             "description": "A frontend endpoint",
             "$ref": "#/definitions/FrontendEndpoint"
+          }
+        },
+        "rulesEngines":
+        {
+          "description": "Rules Engine Configurations available to routing rules.",
+          "type": "array",
+          "items": {
+            "description": "A rules engine configuration.",
+            "$ref": "#/definitions/RulesEngine"
           }
         },
         "backendPoolsSettings": {
@@ -886,6 +1299,10 @@
         "routeConfiguration": {
           "description": "A reference to the routing configuration.",
           "$ref": "#/definitions/RouteConfiguration"
+        },
+        "rulesEngine": {
+          "description": "A reference to a specific Rules Engine Configuration to apply to this route.",
+          "$ref": "./network.json#/definitions/SubResource"
         }
       }
     },
@@ -1270,7 +1687,7 @@
       }
     },
     "BackendPoolProperties": {
-      "description": "The JSON object that contains the properties required to create a routing rule.",
+      "description": "The JSON object that contains the properties required to create a Backend Pool.",
       "allOf": [
         {
           "$ref": "#/definitions/BackendPoolUpdateParameters"
@@ -1585,6 +2002,111 @@
         }
       }
     },
+    "HeaderAction": {
+      "description": "An action that can manipulate an http header.",
+      "required": [
+        "headerActionType",
+        "headerName"
+      ],
+      "properties": {
+        "headerActionType": {
+          "description": "Which type of manipulation to apply to the header.",
+          "type": "string",
+          "enum": [
+            "Append",
+            "Delete",
+            "Overwrite"
+          ],
+          "x-ms-enum": {
+            "name": "headerActionType",
+            "modelAsString": true
+          }
+        },
+        "headerName": {
+          "description": "The name of the header this action will apply to.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value to update the given header name with. This value is not used if the actionType is Delete.",
+          "type": "string"
+        }
+      }
+    },
+    "RulesEngineMatchCondition": {
+      "description": "Define a match condition",
+      "required": [
+        "rulesEngineMatchVariable",
+        "rulesEngineOperator",
+        "rulesEngineMatchValue"
+      ],
+      "properties": {
+        "rulesEngineMatchVariable": {
+          "description": "Match Variable",
+          "type": "string",
+          "enum": [
+            "IsMobile",
+            "RemoteAddr",
+            "RequestMethod",
+            "QueryString",
+            "PostArgs",
+            "RequestUri",
+            "RequestPath",
+            "RequestFilename",
+            "RequestFilenameExtension",
+            "RequestHeader",
+            "RequestBody",
+            "RequestScheme"
+          ],
+          "x-ms-enum": {
+            "name": "RulesEngineMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "description": "Name of selector in RequestHeader or RequestBody to be matched",
+          "type": "string"
+        },
+        "rulesEngineOperator": {
+          "description": "Describes operator to apply to the match condition.",
+          "type": "string",
+          "enum": [
+            "Any",
+            "IPMatch",
+            "GeoMatch",
+            "Equal",
+            "Contains",
+            "LessThan",
+            "GreaterThan",
+            "LessThanOrEqual",
+            "GreaterThanOrEqual",
+            "BeginsWith",
+            "EndsWith"
+          ],
+          "x-ms-enum": {
+            "name": "RulesEngineOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "rulesEngineMatchValue": {
+          "description": "Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
     "ResourceState": {
       "title": "Resource status of the Front Door or Front Door SubResource.",
       "readOnly": true,
@@ -1599,6 +2121,156 @@
       "type": "string",
       "x-ms-enum": {
         "name": "FrontDoorResourceState",
+        "modelAsString": true
+      }
+    },
+    "RulesEngineAction": {
+      "description": "One or more actions that will execute, modifying the request and/or response.",
+      "properties": {
+        "requestHeaderActions": {
+          "description": "A list of header actions to apply from the request from AFD to the origin.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HeaderAction"
+          }
+        },
+        "responseHeaderActions": {
+          "description": "A list of header actions to apply from the response from AFD to the client.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HeaderAction"
+          }
+        },
+        "routeConfigurationOverride": {
+          "description": "Override the route configuration.",
+          "$ref": "#/definitions/RouteConfiguration"
+        }
+      }
+    },
+    "RulesEngine": {
+      "description": "A rules engine configuration containing a list of rules that will run to modify the runtime behavior of the request and response.",
+      "properties": {
+        "properties": {
+          "description": "Properties of the Rules Engine Configuration.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RulesEngineProperties"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource ID."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "RulesEngineListResult": {
+      "description": "Result of the request to list Rules Engine Configurations. It contains a list of RulesEngine objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RulesEngine"
+          },
+          "description": "List of rulesEngines within a Front Door."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of RulesEngine objects if there are any."
+        }
+      }
+    },
+    "RulesEngineProperties": {
+      "description": "The JSON object that contains the properties required to create a Rules Engine Configuration.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RulesEngineUpdateParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status.",
+          "$ref": "#/definitions/ResourceState"
+        }
+      }
+    },
+    "RulesEngineRule": {
+      "description": "Contains a list of match conditions, and an action on how to modify the request/response. If multiple rules match, the actions from one rule that conflict with a previous rule overwrite for a singular action, or append in the case of headers manipulation.",
+      "required": [
+        "action",
+        "name",
+        "priority"
+      ],
+      "properties": {
+        "name": {
+          "description": "A name to refer to this specific rule.",
+          "type": "string"
+        },
+        "priority": {
+          "description": "A priority assigned to this rule. ",
+          "type": "integer"
+        },
+        "action": {
+          "description": "Actions to perform on the request and response if all of the match conditions are met.",
+          "$ref": "#/definitions/RulesEngineAction"
+        },
+        "matchConditions": {
+          "description": "A list of match conditions that must meet in order for the actions of this rule to run. Having no match conditions means the actions will always run.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RulesEngineMatchCondition"
+          }
+        },
+        "matchProcessingBehavior": {
+          "description": "If this rule is a match should the rules engine continue running the remaining rules or stop. If not present, defaults to Continue.",
+          "type": "string",
+          "enum": [
+            "Continue",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "MatchProcessingBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RulesEngineUpdateParameters": {
+      "description": "Rules Engine Configuration to apply to a Routing Rule.",
+      "type": "object",
+      "properties": {
+        "rules": {
+          "description": "A list of rules that define a particular Rules Engine Configuration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RulesEngineRule"
+          }
+        }
+      }
+    },
+    "transform": {
+      "description": "Describes what transforms are applied before matching",
+      "type": "string",
+      "enum": [
+        "Lowercase",
+        "Uppercase",
+        "Trim",
+        "UrlDecode",
+        "UrlEncode",
+        "RemoveNulls"
+      ],
+      "x-ms-enum": {
+        "name": "transform",
         "modelAsString": true
       }
     },
@@ -1795,6 +2467,18 @@
       "maxLength": 255,
       "x-ms-parameter-location": "method",
       "description": "Name of the Frontend endpoint which is unique within the Front Door."
+    },
+    "rulesEngineNameParameter": {
+      "name": "rulesEngineName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$",
+      "x-previous-pattern": "^[-\\w\\d\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Rules Engine which is unique within the Front Door."
     }
   }
 }
