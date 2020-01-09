@@ -2074,6 +2074,54 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/locations/{locationName}/namespaceOperations/{operationResultId}": {
+      "get": {
+        "tags": [
+          "NamespaceOperations"
+        ],
+        "operationId": "NamespaceOperations_get",
+        "x-ms-examples": {
+          "NamespaceOperationsGet": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceOperationsIDGet.json"
+          }
+        },
+        "description": "Get the status of long running Namespace operation",
+        "externalDocs": {
+          "url": "https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationResultIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace long running operation successfully completed"
+          },
+          "202": {
+            "description": "Namespace long running operation successfully accepted."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "EventHub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2961,6 +3009,24 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "Name of the resource group within the azure subscription."
+    },
+	"ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "LocationNameParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Location within the Azure."
     },
     "NamespaceNameParameter": {
       "name": "namespaceName",
