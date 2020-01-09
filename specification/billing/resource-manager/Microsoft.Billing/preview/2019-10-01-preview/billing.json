@@ -5487,7 +5487,16 @@
           "description": "SKU description.",
           "type": "string",
           "readOnly": true
-        }
+        },
+        "suspensionReasons": [
+          {
+            "description": "Reasons for suspension.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SuspensionReasonDetails"
+            }
+          }
+        ]
       }
     },
     "Enrollment": {
@@ -6015,6 +6024,29 @@
           "description": "The sku description.",
           "type": "string",
           "readOnly": true
+        },
+        "suspensionReasons": [
+          {
+            "description": "Reasons for suspension.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SuspensionReasonDetails"
+            }
+          }
+        ]
+      }
+    },
+    "SuspensionReasonDetails": {
+      "description": "Details about the suspension.",
+      "properties": {
+        "effectiveDate": {
+          "description": "The suspension effective date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Reason for the suspension.",
+          "type": "string"
         }
       }
     },
@@ -6633,7 +6665,16 @@
           "description": "The sku description.",
           "type": "string",
           "readOnly": true
-        }
+        },
+        "suspensionReasons": [
+          {
+            "description": "Reasons for suspension.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SuspensionReasonDetails"
+            }
+          }
+        ]
       }
     },
     "EnrollmentAccountContext": {
