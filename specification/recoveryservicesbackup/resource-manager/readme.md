@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2017-07
+tag: package-2019-06
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -44,6 +44,17 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.RecoveryServices/stable/2019-06-15/bms.json
+- Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
 
 ### Tag: package-2019-05
@@ -164,10 +175,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.RecoveryServices/stable/2019-05-13/bms.json
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2019-06-15/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2017-07-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-12-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-08-10/operations.json
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2019-05-13/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-06-01/recoveryservicesbackup.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-06-01/registeredIdentities.json
 

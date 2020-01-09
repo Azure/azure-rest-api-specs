@@ -1,0 +1,122 @@
+{
+    "parameters": {
+        "subscriptionId": "caac1590-e859-444f-a9e0-62091c0f5929",
+        "resourceGroupName": "myResourceGroup",
+        "rolloutName": "myRollout",
+        "api-version": "2019-11-01-preview",
+        "rolloutRequest": {
+            "location": "centralus",
+            "tags": {},
+            "identity": {
+                "type": "userAssigned",
+                "identityIds": [
+                    "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                ]
+            },
+            "properties": {
+                "buildVersion": "1.0.0.1",
+                "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                "stepGroups": [
+                    {
+                        "name": "FirstRegion",
+                        "preDeploymentSteps": [
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/preDeployStep1"
+                            },
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/preDeployStep2"
+                            }
+                        ],
+                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit1'",
+                        "postDeploymentSteps": [
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/postDeployStep1"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "SecondRegion",
+                        "preDeploymentSteps": [
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/preDeployStep3"
+                            },
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/preDeployStep4"
+                            }
+                        ],
+                        "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit2'",
+                        "postDeploymentSteps": [
+                            {
+                                "stepId": "Microsoft.DeploymentManager/steps/postDeployStep5"
+                            }
+                        ],
+                        "dependsOnStepGroups": [
+                            "FirstRegion"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "responses": {
+        "201": {
+            "body": {
+                "name": "myRollout",
+                "type": "Microsoft.DeploymentManager/rollouts",
+                "location": "centralus",
+                "tags": {},
+                "identity": {
+                    "type": "userAssigned",
+                    "identityIds": [
+                        "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userassignedidentities/myuseridentity"
+                    ]
+                },
+                "properties": {
+                    "buildVersion": "1.0.0.1",
+                    "artifactSourceId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/artifactSources/myArtifactSource",
+                    "targetServiceTopologyId": "/subscriptions/caac1590-e859-444f-a9e0-62091c0f5929/resourceGroups/myResourceGroup/Microsoft.DeploymentManager/serviceTopologies/myTopology",
+                    "stepGroups": [
+                        {
+                            "name": "FirstRegion",
+                            "preDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep1"
+                                },
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep2"
+                                }
+                            ],
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit1'",
+                            "postDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/postDeployStep1"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "SecondRegion",
+                            "preDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep3"
+                                },
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/preDeployStep4"
+                                }
+                            ],
+                            "deploymentTargetId": "Microsoft.DeploymentManager/serviceTopologies/myTopology/services/myService/serviceUnits/myServiceUnit2'",
+                            "postDeploymentSteps": [
+                                {
+                                    "stepId": "Microsoft.DeploymentManager/steps/postDeployStep5"
+                                }
+                            ],
+                            "dependsOnStepGroups": [
+                                "FirstRegion"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
