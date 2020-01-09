@@ -158,6 +158,89 @@
     "AscLocationProperties": {
       "type": "object",
       "description": "An empty set of properties"
+    },
+    "ResourceDetails": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "discriminator": "source",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The platform where the assessed resource resides",
+          "enum": [
+            "Azure",
+            "OnPremise"
+          ],
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Azure",
+                "description": "Resource is in Azure"
+              },
+              {
+                "value": "OnPremise",
+                "description": "Resource in an on premise machine connected to Azure cloud"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "source"
+      ]
+    },
+    "AzureResourceDetails": {
+      "type": "object",
+      "description": "Details of the Azure resource that was assessed",
+      "x-ms-discriminator-value": "Azure",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id of the assessed resource"
+        }
+      }
+    },
+    "OnPremiseResourceDetails": {
+      "type": "object",
+      "description": "Details of the On Premise resource that was assessed",
+      "x-ms-discriminator-value": "OnPremise",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Azure resource Id of the workspace the machine is attached to"
+        },
+        "vmuuid": {
+          "type": "string",
+          "description": "The unique Id of the machine"
+        },
+        "sourceComputerId": {
+          "type": "string",
+          "description": "The oms agent Id installed on the machine"
+        },
+        "machineName": {
+          "type": "string",
+          "description": "The name of the machine"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "vmuuid",
+        "sourceComputerId",
+        "machineName"
+      ]
     }
   },
   "parameters": {

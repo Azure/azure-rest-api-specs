@@ -1914,6 +1914,9 @@
           },
           "Get a url entity.": {
             "$ref": "./examples/entities/GetUrlEntityById.json"
+          },
+          "Get an IoT device entity.": {
+            "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
           }
         },
         "tags": [
@@ -2674,6 +2677,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "AlertRule": {
@@ -2717,6 +2723,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "AlertRuleTemplate": {
@@ -3863,6 +3872,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "DataConnectorList": {
@@ -4073,6 +4085,7 @@
         "RegistryValue",
         "SecurityGroup",
         "Url",
+        "IoTDevice",
         "SecurityAlert",
         "Bookmark"
       ],
@@ -4138,6 +4151,10 @@
             "value": "Url"
           },
           {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
             "description": "Entity represents security alert in the system.",
             "value": "SecurityAlert"
           },
@@ -4165,6 +4182,7 @@
         "RegistryValue",
         "SecurityGroup",
         "URL",
+        "IoTDevice",
         "SecurityAlert",
         "HuntingBookmark"
       ],
@@ -4230,6 +4248,10 @@
             "value": "URL"
           },
           {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
             "description": "Entity represents security alert in the system.",
             "value": "SecurityAlert"
           },
@@ -4248,6 +4270,9 @@
           "description": "The kind of the entity."
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "EntityList": {
@@ -6098,6 +6123,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "TIDataConnector": {
@@ -6297,6 +6325,78 @@
       },
       "type": "object"
     },
+    "IoTDeviceEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an IoT device entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTDeviceEntityProperties",
+          "description": "IoTDevice entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IoTDevice"
+    },
+    "IoTDeviceEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "IoTDevice entity property bag.",
+      "properties": {
+        "deviceId": {
+          "description": "The ID of the IoT Device in the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotSecurityAgentId": {
+          "description": "The ID of the security agent running on the device",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "The type of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendor": {
+          "description": "The vendor of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "edgeId": {
+          "description": "The ID of the edge device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotHubEntityId": {
+          "description": "The AzureResource entity id of the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostEntityId": {
+          "description": "The Host entity id of this device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatIntelligence": {
+          "description": "A list of TI contexts attached to the IoTDevice entity.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "UserInfo": {
       "description": "User information that made some action",
       "properties": {
@@ -6317,9 +6417,6 @@
           "x-nullable": true
         }
       },
-      "required": [
-        "objectId"
-      ],
       "type": "object"
     },
     "IncidentInfo": {
