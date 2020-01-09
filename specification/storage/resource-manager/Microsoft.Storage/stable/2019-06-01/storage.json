@@ -1296,6 +1296,19 @@
           "type": "string",
           "format": "date-time",
           "description": "Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate."
+        },
+        "keyType": {
+          "type": "string",
+          "description": "Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used.",
+          "enum": [
+            "Service",
+            "Account"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          },
+          "x-ms-mutability": ["create","read"]
         }
       },
       "description": "A service that allows server-side encryption to be used."
@@ -1312,12 +1325,10 @@
         },
         "table": {
           "$ref": "#/definitions/EncryptionService",
-          "readOnly": true,
           "description": "The encryption function of the table storage service."
         },
         "queue": {
           "$ref": "#/definitions/EncryptionService",
-          "readOnly": true,
           "description": "The encryption function of the queue storage service."
         }
       },
