@@ -706,6 +706,9 @@
     },
     "OrchestratorSpecificConnectionDetails": {
       "description": "Base class for types that supply values used to connect to container orchestrators",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
@@ -738,6 +741,9 @@
     },
     "KubernetesConnectionDetails": {
       "description": "Contains information used to connect to a Kubernetes cluster",
+      "required": [
+        "instanceType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/OrchestratorSpecificConnectionDetails"
