@@ -1077,7 +1077,7 @@
          },
          "portReuse" : {
           "type": "string",
-          "description": "The protocol for the outbound rule in load balancer.",
+          "description": "Port Reuse policy for Dynamic SNAT, default: FirstAvailable",
            "enum": [
               "FirstAvailable"
            ]
@@ -1552,12 +1552,12 @@
           },
           "description": "The Frontend IP addresses of the load balancer."
         },
-        "LoadBalancerAllocationPolicy": {
+        "AllocationPolicy": {
           "type": "string",
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+            "$ref": "./network.json#/definitions/LoadBalancerAllocationPolicy"
           },
-          "description": "The Frontend IP addresses of the load balancer."
+          "description": "Outbound Rules allocation policy for dynamic snat"
         },
         "backendAddressPool": {
           "$ref": "./network.json#/definitions/SubResource",
