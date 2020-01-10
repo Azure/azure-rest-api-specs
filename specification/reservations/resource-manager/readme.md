@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2019-07-19` is specified o
 ```yaml $(tag) == 'package-preview-2019-07-19'
 input-file:
   - Microsoft.Capacity/preview/2019-07-19/quota.json
-  - Microsoft.Capacity/stable/2017-11-01/reservations.json
+   - Microsoft.Capacity/preview/2019-04-01/reservations.json
 ```
 
 ### Tag: package-preview-2019-04
