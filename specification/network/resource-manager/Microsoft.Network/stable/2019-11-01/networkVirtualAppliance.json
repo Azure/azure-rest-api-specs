@@ -76,7 +76,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -135,7 +135,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -149,7 +149,7 @@
         "tags": [
           "NetworkVirtualAppliances"
         ],
-        "operationId": "NetworkVirtualAppliances_Update",
+        "operationId": "NetworkVirtualAppliances_UpdateTags",
         "description": "Updates a Network Virtual Appliance",
         "parameters": [
           {
@@ -192,7 +192,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -255,7 +255,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -302,7 +302,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -341,7 +341,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./network.json#/definitions/Error"
+              "$ref": "./network.json#/definitions/CloudError"
             }
           }
         },
@@ -364,10 +364,14 @@
           "$ref": "#/definitions/NetworkVirtualAppliancePropertiesFormat",
           "description": "Properties of the Network Virtual Appliance"
         },
-        "virtualHub": {
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The service principal that has read access to cloud-init and config blob"
+        },
+        "Sku": {
           "readOnly": false,
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "The Virtual Hub where Network Virtual Appliance is being deployed"
+          "description": "Network Virtual Appliance SKU",
+          "$ref": "#/definitions/VirtualApplianceSkuProperties"
         },
         "etag": {
           "type": "string",
@@ -392,6 +396,11 @@
             "type": "string"
           }
         },
+        "virtualHub": {
+          "readOnly": false,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The Virtual Hub where Network Virtual Appliance is being deployed"
+        },
         "cloudInitConfigurationBlob": {
           "type": "array",
           "readOnly": false,
@@ -399,10 +408,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "identity": {
-          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
-          "description": "The service principal that has read access to cloud-init and config blob"
         },
         "virtualApplianceAsn": {
           "type": "integer",
@@ -435,11 +440,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "Sku": {
-          "readOnly": false,
-          "description": "Network Virtual Appliance SKU",
-          "$ref": "#/definitions/VirtualApplianceSkuProperties"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
