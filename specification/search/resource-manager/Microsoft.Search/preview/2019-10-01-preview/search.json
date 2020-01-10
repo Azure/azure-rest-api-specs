@@ -416,8 +416,8 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceToAllowAccessFromCustomIPsAndPortal": {
-            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPsAndPortal.json"
+          "searchUpdateServiceToAllowAccessFromCustomIPs": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPs.json"
           },
           "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
@@ -1023,9 +1023,11 @@
           "description": "The resource type."
         },
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Describes the current state of an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
-      }
+      },
+      "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "NetworkRuleSet": {
       "properties": {
@@ -1044,33 +1046,13 @@
         },
         "ipRules": {
           "type": "array",
-          "description": "A list of rules that define inbound network access to the search service endpoint. By default, the search service endpoint is reachable from the internet.",
+          "description": "A list of IP restriction rules that defines the inbound network access to the search service endpoint. These restriction rules are applied only when the EndpointAccess of the search service is Public.",
           "items": {
             "$ref": "#/definitions/IpRule"
           }
-        },
-        "bypass": {
-          "type": "string",
-          "default": "None",
-          "description": "Allows bypassing any IP rules or endpoint access definition, if the traffic originates from well-known source. By default, no bypass is allowed.",
-          "enum": [
-            "None",
-            "AzurePortal"
-          ],
-          "x-ms-enum": {
-            "name": "ByPass",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "None"
-              },
-              {
-                "value": "AzurePortal"
-              }
-            ]
-          }
         }
-      }
+      },
+      "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
     },
     "IpRule": {
       "properties": {
@@ -1078,7 +1060,8 @@
           "type": "string",
           "description": "Value corresponding to a single IPv4 address (eg., 123.1.2.3) or an IP range in CIDR format (eg., 123.1.2.3/24) to be allowed."
         }
-      }
+      },
+      "description": "The IP restriction rule of the Azure Cognitive Search service."
     },
     "PrivateEndpointConnectionProperties": {
       "properties": {
@@ -1086,9 +1069,10 @@
           "properties": {
             "id": {
               "type": "string",
-              "description": "Resource id for the private endpoint from Network resource."
+              "description": "The resource id of the private endpoint resource from Microsoft.Network provider."
             }
-          }
+          },
+          "description": "The private endpoint resource from Microsoft.Network provider."
         },
         "privateLinkServiceConnectionState": {
           "type": "object",
@@ -1116,9 +1100,11 @@
               "description": "A description of any extra actions that may be required.",
               "default": "None"
             }
-          }
+          },
+          "description": "Describes the current state of an existing Private Endpoint connection to the Azure Cognitive Search service."
         }
-      }
+      },
+      "description": "Describes an existing Private Endpoint connection to the Azure Cognitive Search service."
     },
     "SearchService": {
       "properties": {
@@ -1211,7 +1197,7 @@
         },
         "networkRuleSet": {
           "$ref": "#/definitions/NetworkRuleSet",
-          "description": "Network specific rules that specify how the search service may be reached."
+          "description": "Network specific rules that determine how the Azure Cognitive Search service may be reached."
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -1461,7 +1447,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for each request. The current version is 2015-08-19."
+      "description": "The API version to use for each request. The current version is 2019-10-01-Preview."
     }
   }
 }
