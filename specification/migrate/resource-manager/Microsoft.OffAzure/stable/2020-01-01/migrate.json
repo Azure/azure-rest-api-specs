@@ -662,9 +662,8 @@
             "type": "string"
           },
           {
-            "name": "top",
+            "name": "$top",
             "in": "query",
-            "description": "Optional parameter for page size. Gives number of records in single page.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1517,7 +1516,6 @@
           {
             "name": "top",
             "in": "query",
-            "description": "Optional parameter for page size. Gives number of records in single page.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -3431,7 +3429,8 @@
       "properties": {
         "osType": {
           "description": "Type of the operating system.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "osName": {
           "description": "Name of the operating system.",
@@ -3446,7 +3445,7 @@
       }
     },
     "GuestOSDetails": {
-      "description": "Third level object.\r\n            Data related to a machine's operating system.\r\n            Serialized and stored as part of Machine Rest object.",
+      "description": "Third level object. Data related to a machine's operating system. Serialized and stored as part of Machine Rest object.",
       "type": "object",
       "properties": {
         "osType": {
@@ -3733,7 +3732,7 @@
           "readOnly": true
         },
         "status": {
-          "description": "Status of the operation. ARM expects the terminal status to be one of\r\n            Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
+          "description": "Status of the operation. ARM expects the terminal status to be one of Succeeded/ Failed/ Canceled. All other values imply that the operation is still running.",
           "type": "string",
           "readOnly": true
         },
@@ -3894,7 +3893,7 @@
       "properties": {
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication\r\n            to the service."
+          "description": "Service principal identity details used by agent for communication to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
@@ -3920,15 +3919,15 @@
       "type": "object",
       "properties": {
         "tenantId": {
-          "description": "Tenant Id for the service principal with which the on-premise\r\n            management/data plane components would communicate with our Azure services.",
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "applicationId": {
-          "description": "Application/client Id for the service principal with which the\r\n            on-premise management/data plane components would communicate with our Azure \r\n            services.",
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "objectId": {
-          "description": "Object Id of the service principal with which the on-premise\r\n            management/data plane components would communicate with our Azure services.",
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "audience": {
@@ -3936,7 +3935,7 @@
           "type": "string"
         },
         "aadAuthority": {
-          "description": "AAD Authority URL which was used to request the token for the\r\n            service principal.",
+          "description": "AAD Authority URL which was used to request the token for the service principal.",
           "type": "string"
         },
         "rawCertData": {
@@ -4201,7 +4200,7 @@
         },
         "maxSnapshots": {
           "format": "int32",
-          "description": "Maximum number of snapshots for the VM.\r\n            Default value is -1.",
+          "description": "Maximum number of snapshots for the VM. Default value is -1.",
           "type": "integer",
           "readOnly": true
         },
@@ -4297,7 +4296,7 @@
         },
         "guestDetailsDiscoveryTimestamp": {
           "format": "date-time",
-          "description": "The last time at which the Guest Details was discoveredor the error while discovering guest details based discovery\r\n            of the machine.",
+          "description": "The last time at which the Guest Details was discoveredor the error while discovering guest details based discovery of the machine.",
           "type": "string",
           "readOnly": true
         },
@@ -4371,12 +4370,12 @@
           "readOnly": true
         },
         "diskProvisioningPolicy": {
-          "description": "The provisioning policy of the disk.\r\n            It is Thin or Thick or Unknown for the VMWare VMDK.",
+          "description": "The provisioning policy of the disk. It is Thin or Thick or Unknown for the VMWare VMDK.",
           "type": "string",
           "readOnly": true
         },
         "diskScrubbingPolicy": {
-          "description": "The scrubbing policy of disks which can be\r\n            eagerly zeroed or lazily zeroed.",
+          "description": "The scrubbing policy of disks which can be eagerly zeroed or lazily zeroed.",
           "type": "string",
           "readOnly": true
         },
