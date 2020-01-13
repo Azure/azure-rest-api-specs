@@ -2811,13 +2811,6 @@
               }
             ]
           }
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule template",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -4609,6 +4602,13 @@
             "severity": {
               "$ref": "#/definitions/AlertSeverity",
               "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -5038,13 +5038,6 @@
           "format": "date-time",
           "readOnly": true,
           "type": "string"
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "required": [
@@ -5705,6 +5698,15 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
+          "properties": {
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
           "required": [
             "displayName",
             "description",
