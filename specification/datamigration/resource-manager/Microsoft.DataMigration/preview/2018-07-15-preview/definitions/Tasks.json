@@ -20,7 +20,6 @@
     "ProjectTaskProperties": {
       "type": "object",
       "description": "Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "taskType": {
           "description": "Task type.",
@@ -660,7 +659,7 @@
       ]
     },
     "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties": {
-      "x-ms-discriminator-value": "Migrate.Oracle.Sql.Sync",
+      "x-ms-discriminator-value": "Migrate.Oracle.AzureDbForPostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that migrates Oracle to Azure Database for PostgreSQL for online migrations",
       "properties": {
@@ -815,6 +814,30 @@
           "type": "array",
           "items": {
             "$ref": "./GetTdeCertificatesSqlTask.json#/definitions/GetTdeCertificatesSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSsisTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.Ssis",
+      "type": "object",
+      "description": "Properties for task that migrates SSIS packages from SQL Server databases to Azure SQL Database Managed Instance.",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSsisTask.json#/definitions/MigrateSsisTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSsisTask.json#/definitions/MigrateSsisTaskOutput"
           },
           "readOnly": true
         }

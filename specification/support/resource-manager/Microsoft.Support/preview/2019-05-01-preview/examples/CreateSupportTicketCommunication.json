@@ -1,0 +1,38 @@
+{
+    "parameters": {
+        "subscriptionId": "76cb77fa-8b17-4eab-9493-b65dace99813",
+        "supportTicketName": "testticket",
+        "communicationName": "testcommunication",
+        "api-version": "2019-05-01-preview",
+        "createCommunicationParameters": {
+            "properties": {
+                "subject": "This is a test message from a customer!",
+                "body": "This is a test message from a customer!"
+            }
+        }
+    },
+    "responses": {
+        "202": {
+            "headers": {
+                "location": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationResults/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview",
+                "azure-asyncoperation": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationsStatus/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview"
+            }
+        },
+        "200": {
+            "body": {
+                "id": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/supportTickets/testticket/communications/testcommunication",
+                "name": "testcommunication",
+                "type": "Microsoft.Support/communications",
+                "properties": {
+                    "subject": "This is a test message from a customer!",
+                    "body": "This is a test message from a customer!",
+                    "communicationType": "web",
+                    "communicationDirection": "outbound",
+                    "createdDate": "2016-08-24T20:18:19Z",
+                    "sender": "user@contoso.com"
+                }
+            }
+        }
+    }
+}
+

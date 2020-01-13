@@ -27,7 +27,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.resourcegraph.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/resourcegraph/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/resourcegraph/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
 ```

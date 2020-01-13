@@ -14,7 +14,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
-output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
+output-folder: $(csharp-sdks-folder)/resources/Microsoft.Azure.Management.ResourceManager/src/Generated
 
 batch:
   - package-features: true
@@ -23,6 +23,7 @@ batch:
   - package-resources: true
   - package-subscriptions: true
   - package-links: true
+  - package-deploymentscripts: true
 #  - package-managedapplications: true
 ```
 
@@ -97,6 +98,45 @@ batch:
     ApiVersionName: Api2019_05_10
   - policyD-2016-12-01: true
     ApiVersionName: Api2019_05_10
+
+  - resources-2019-07-01: true
+    ApiVersionName: Api2019_07_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_07_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_07_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_07_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_07_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_07_01
+
+  - resources-2019-08-01: true
+    ApiVersionName: Api2019_08_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_08_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_08_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_08_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_08_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_08_01
+
+  - resources-2019-10-01: true
+    ApiVersionName: Api2019_10_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_10_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_10_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_10_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_10_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_10_01
 ```
 
 
@@ -419,6 +459,210 @@ input-file:
 
 ### 6) pkg-2019-0510-AzStk-polD
 ``` yaml $(tag) == 'pkg-2019-0510-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-07-01)
+tag: pkg-2019-07-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-07-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-07-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-07-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-07-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-07-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-07-AzStk-res
+``` yaml $(tag) == 'pkg-2019-07-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-07-01/resources.json
+```
+
+### 2) pkg-2019-07-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-07-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-07-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-07-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-07-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-07-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-07-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-07-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-07-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-07-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-08-01)
+tag: pkg-2019-08-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-08-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-08-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-08-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-08-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-08-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-08-AzStk-res
+``` yaml $(tag) == 'pkg-2019-08-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-08-01/resources.json
+```
+
+### 2) pkg-2019-08-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-08-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-08-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-08-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-08-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-08-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-08-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-08-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-08-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-08-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-10-01)
+tag: pkg-2019-10-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-10-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-10-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-10-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-10-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-10-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-10-AzStk-res
+``` yaml $(tag) == 'pkg-2019-10-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-10-01/resources.json
+```
+
+### 2) pkg-2019-10-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-10-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-10-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-10-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-10-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-10-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-10-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-10-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-10-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-10-Az-polD'
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```

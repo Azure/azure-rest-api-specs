@@ -1,0 +1,1863 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Container Registry",
+    "description": "Metadata API definition for the Azure Container Registry runtime",
+    "version": "2019-07-15-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{url}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "$ref": "#/parameters/Url"
+      }
+    ]
+  },
+  "securityDefinitions": {
+    "registry_auth": {
+      "type": "basic"
+    },
+    "registry_oauth2": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "security": [
+    {
+      "registry_auth": [],
+      "registry_oauth2": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "v2",
+      "description": "Root API"
+    },
+    {
+      "name": "Manifest",
+      "description": "Everything about manifests"
+    },
+    {
+      "name": "Tag",
+      "description": "Everything about tags"
+    },
+    {
+      "name": "Layer",
+      "description": "Everything about layers"
+    },
+    {
+      "name": "Repository",
+      "description": "Everything about repository"
+    },
+    {
+      "name": "AcrRepository",
+      "description": "ACR APIs related to repositories"
+    },
+    {
+      "name": "AcrManifest",
+      "description": "ACR APIs related to manifests"
+    },
+    {
+      "name": "AcrTag",
+      "description": "ACR APIs related to tags"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v2/": {
+      "get": {
+        "tags": [
+          "v2"
+        ],
+        "description": "Tells whether this Docker Registry instance supports Docker Registry HTTP API v2",
+        "x-ms-examples": {
+          "Check Docker Registry V2 Support": {
+            "$ref": "./examples/GetDockerRegistryV2Support.json"
+          }
+        },
+        "operationId": "GetDockerRegistryV2Support",
+        "responses": {
+          "200": {
+            "description": "Successful response. API v2 supported"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/tags/list": {
+      "get": {
+        "tags": [
+          "Tag"
+        ],
+        "description": "Fetch the tags under the repository identified by name",
+        "x-ms-examples": {
+          "List tags": {
+            "$ref": "./examples/GetTagList.json"
+          }
+        },
+        "operationId": "GetTagList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gives a list of tags for the names repository.",
+            "headers": {
+              "Link": {
+                "description": "next paginated result",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RepositoryTags"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/manifests/{reference}": {
+      "get": {
+        "tags": [
+          "Manifest"
+        ],
+        "description": "Pulls the image manifest file associated with the specified name and reference. Reference may be a tag or a digest",
+        "x-ms-examples": {
+          "Get manifest": {
+            "$ref": "./examples/GetManifest.json"
+          }
+        },
+        "operationId": "GetManifest",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ImageReference"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "description": "Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the requested manifest file",
+            "schema": {
+              "$ref": "#/definitions/Manifest"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manifest"
+        ],
+        "x-ms-long-running-operation": false,
+        "description": "Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.",
+        "x-ms-examples": {
+          "Put manifest": {
+            "$ref": "./examples/CreateManifest.json"
+          }
+        },
+        "consumes": [
+          "application/vnd.docker.distribution.manifest.v2+json"
+        ],
+        "operationId": "CreateManifest",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ImageReference"
+          },
+          {
+            "$ref": "#/parameters/ManifestBody"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The manifest is updated",
+            "schema": {},
+            "headers": {
+              "Docker-Content-Digest": {
+                "type": "string",
+                "description": "Identifies the docker upload uuid for the current request."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The canonical location url of the uploaded manifest."
+              },
+              "Content-Length": {
+                "type": "integer",
+                "description": "The canonical location url of the uploaded manifest."
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Manifest"
+        ],
+        "description": "Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.",
+        "x-ms-examples": {
+          "Delete manifest": {
+            "$ref": "./examples/DeleteManifest.json"
+          }
+        },
+        "operationId": "DeleteManifest",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ImageReference"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The manifest has been deleted"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/_catalog": {
+      "get": {
+        "tags": [
+          "Repository"
+        ],
+        "description": "List repositories",
+        "operationId": "GetRepositories",
+        "x-ms-examples": {
+          "Get repositories in a registry": {
+            "$ref": "./examples/GetRepositories.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryLast"
+          },
+          {
+            "$ref": "#/parameters/QueryNum"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of repositories",
+            "headers": {
+              "Link": {
+                "description": "next paginated result",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Repositories"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/_catalog": {
+      "get": {
+        "tags": [
+          "AcrRepository"
+        ],
+        "description": "List repositories",
+        "operationId": "GetAcrRepositories",
+        "x-ms-examples": {
+          "Get repositories in a registry": {
+            "$ref": "./examples/GetRepositories.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryLast"
+          },
+          {
+            "$ref": "#/parameters/QueryNum"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of repositories",
+            "schema": {
+              "$ref": "#/definitions/Repositories"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/{name}": {
+      "get": {
+        "tags": [
+          "AcrRepository",
+          "AcrMetadata"
+        ],
+        "description": "Get repository attributes",
+        "operationId": "GetAcrRepositoryAttributes",
+        "x-ms-examples": {
+          "Get details of repository": {
+            "$ref": "./examples/GetAcrRepositoryAttributes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of attributes",
+            "schema": {
+              "$ref": "#/definitions/RepositoryAttributes"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AcrRepository"
+        ],
+        "description": "Delete the repository identified by `name`",
+        "operationId": "DeleteAcrRepository",
+        "x-ms-examples": {
+          "Delete a repository": {
+            "$ref": "./examples/DeleteAcrRepository.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The repository is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeletedRepository"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AcrRepository",
+          "AcrMetadata"
+        ],
+        "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
+        "operationId": "UpdateAcrRepositoryAttributes",
+        "x-ms-examples": {
+          "Update repository attributes": {
+            "$ref": "./examples/UpdateAcrRepository.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "description": "Repository attribute value",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ChangeableAttributes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attributes is updated"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/{name}/_tags": {
+      "get": {
+        "tags": [
+          "AcrTag",
+          "AcrMetadata"
+        ],
+        "description": "List tags of a repository",
+        "operationId": "GetAcrTags",
+        "x-ms-examples": {
+          "Get tags of a repository": {
+            "$ref": "./examples/GetAcrTags.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/QueryLast"
+          },
+          {
+            "$ref": "#/parameters/QueryNum"
+          },
+          {
+            "$ref": "#/parameters/QueryOrderBy"
+          },
+          {
+            "$ref": "#/parameters/QueryDigest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag details of a repository",
+            "schema": {
+              "$ref": "#/definitions/AcrRepositoryTags"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/{name}/_tags/{reference}": {
+      "get": {
+        "tags": [
+          "AcrTag",
+          "AcrMetadata"
+        ],
+        "description": "Get tag attributes by tag",
+        "operationId": "GetAcrTagAttributes",
+        "x-ms-examples": {
+          "Get tag attributes": {
+            "$ref": "./examples/GetAcrTagAttributes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ManifestReference"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tag attributes",
+            "schema": {
+              "$ref": "#/definitions/AcrTagAttributes"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AcrTag",
+          "AcrMetadata"
+        ],
+        "description": "Update tag attributes",
+        "operationId": "UpdateAcrTagAttributes",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update attributes of a manifest": {
+            "$ref": "./examples/UpdateAcrTagAttributes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ManifestReference"
+          },
+          {
+            "$ref": "#/parameters/RepoValue"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attributes are updated"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AcrTag",
+          "AcrMetadata"
+        ],
+        "description": "Delete tag",
+        "operationId": "DeleteAcrTag",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update attributes of a manifest": {
+            "$ref": "./examples/DeleteAcrTag.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ManifestReference"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The tag is deleted"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/{name}/_manifests": {
+      "get": {
+        "tags": [
+          "AcrManifest",
+          "AcrMetadata"
+        ],
+        "description": "List manifests of a repository",
+        "operationId": "GetAcrManifests",
+        "x-ms-examples": {
+          "Get details of repository": {
+            "$ref": "./examples/GetAcrManifests.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/QueryLast"
+          },
+          {
+            "$ref": "#/parameters/QueryNum"
+          },
+          {
+            "$ref": "#/parameters/QueryOrderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of manifests",
+            "schema": {
+              "$ref": "#/definitions/AcrManifests"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/acr/v1/{name}/_manifests/{reference}": {
+      "get": {
+        "tags": [
+          "AcrManifest",
+          "AcrMetadata"
+        ],
+        "description": "Get manifest attributes",
+        "operationId": "GetAcrManifestAttributes",
+        "x-ms-examples": {
+          "Get manifest attributes": {
+            "$ref": "./examples/GetAcrManifestAttributes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ImageReference"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of attributes",
+            "schema": {
+              "$ref": "#/definitions/AcrManifestAttributes"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AcrManifest",
+          "AcrMetadata"
+        ],
+        "description": "Update attributes of a manifest",
+        "operationId": "UpdateAcrManifestAttributes",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update attributes of a manifest": {
+            "$ref": "./examples/UpdateAcrManifestAttributes.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/ImageReference"
+          },
+          {
+            "$ref": "#/parameters/RepoValue"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The attributes are updated"
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/oauth2/exchange": {
+      "post": {
+        "tags": [
+          "AcrToken",
+          "RefreshToken"
+        ],
+        "description": "Exchange AAD tokens for an ACR refresh Token",
+        "operationId": "GetAcrRefreshTokenFromExchange",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Grant_type"
+          },
+          {
+            "$ref": "#/parameters/Service"
+          },
+          {
+            "$ref": "#/parameters/Tenant"
+          },
+          {
+            "$ref": "#/parameters/RefreshToken"
+          },
+          {
+            "$ref": "#/parameters/AccessToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refresh token acquired",
+            "schema": {
+              "$ref": "#/definitions/RefreshToken"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "security": [],
+        "x-ms-examples": {
+          "Exchange AAD Token for ACR Refresh": {
+            "$ref": "./examples/PostRefreshToken.json"
+          }
+        }
+      }
+    },
+    "/oauth2/token": {
+      "post": {
+        "tags": [
+          "AcrToken",
+          "AccessToken"
+        ],
+        "description": "Exchange ACR Refresh token for an ACR Access Token",
+        "operationId": "GetAcrAccessToken",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "grant_type",
+            "in": "formData",
+            "description": "Grant type is expected to be refresh_token",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "refresh_token"
+            ]
+          },
+          {
+            "$ref": "#/parameters/Service"
+          },
+          {
+            "name": "scope",
+            "in": "formData",
+            "required": true,
+            "description": "Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.",
+            "type": "string"
+          },
+          {
+            "name": "refresh_token",
+            "in": "formData",
+            "required": true,
+            "description": "Must be a valid ACR refresh token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Access token acquired",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "security": [],
+        "x-ms-examples": {
+          "Get Access Token with Refresh Token": {
+            "$ref": "./examples/PostAccessToken.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AcrToken",
+          "AccessToken",
+          "userLogin"
+        ],
+        "description": "Exchange Username, Password and Scope an ACR Access Token",
+        "operationId": "GetAcrAccessTokenFromLogin",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "query",
+            "required": true,
+            "description": "Indicates the name of your Azure container registry.",
+            "type": "string"
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": true,
+            "description": "Expected to be a valid scope, and can be specified more than once for multiple scope requests. You can obtain this from the Www-Authenticate response header from the challenge.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Access token acquired",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        },
+        "security": [
+          {
+            "registry_auth": []
+          }
+        ],
+        "x-ms-examples": {
+          "Get Access Token with username and password": {
+            "$ref": "./examples/GetAccessToken.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RepositoryAttributes": {
+      "type": "object",
+      "description": "Repository attributes",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry name"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Image created time"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "Image last update time"
+        },
+        "manifestCount": {
+          "type": "integer",
+          "description": "Number of the manifests"
+        },
+        "tagCount": {
+          "type": "integer",
+          "description": "Number of the tags"
+        },
+        "changeableAttributes": {
+          "description": "Changeable attributes",
+          "$ref": "#/definitions/ChangeableAttributes"
+        }
+      },
+      "example": {
+        "registry": "registryname.azurecr.io",
+        "changeableAttributes": {
+          "readEnabled": true,
+          "listEnabled": true,
+          "deleteEnabled": true,
+          "writeEnabled": true
+        },
+        "imageName": "imageName",
+        "createdTime": "2018-09-07T16:30:46.6583219Z",
+        "tagCount": 6,
+        "manifestCount": 2,
+        "lastUpdateTime": "2018-09-07T16:30:46.6583219Z"
+      }
+    },
+    "AcrRepositoryTags": {
+      "description": "List of tag details",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry name"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tags": {
+          "type": "array",
+          "x-ms-client-name": "TagsAttributes",
+          "description": "List of tag attribute details",
+          "items": {
+            "$ref": "#/definitions/AcrTagAttributesBase"
+          }
+        }
+      },
+      "example": {
+        "registry": "registry",
+        "imageName": "imageName",
+        "tags": [
+          {
+            "changeableAttributes": {
+              "readEnabled": true,
+              "listEnabled": true,
+              "deleteEnabled": true,
+              "writeEnabled": true
+            },
+            "name": "name",
+            "digest": "digest",
+            "createdTime": "createdTime",
+            "signed": true,
+            "lastUpdateTime": "lastUpdateTime"
+          },
+          {
+            "changeableAttributes": {
+              "readEnabled": true,
+              "listEnabled": true,
+              "deleteEnabled": true,
+              "writeEnabled": true
+            },
+            "name": "name",
+            "digest": "digest",
+            "createdTime": "createdTime",
+            "signed": true,
+            "lastUpdateTime": "lastUpdateTime"
+          }
+        ]
+      }
+    },
+    "AcrTagAttributes": {
+      "description": "Tag attributes",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry name"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tag": {
+          "x-ms-client-name": "TagAttributes",
+          "description": "List of tag attribute details",
+          "$ref": "#/definitions/AcrTagAttributesBase"
+        }
+      },
+      "example": {
+        "registry": "registry",
+        "imageName": "imageName",
+        "tag": {
+          "changeableAttributes": {
+            "readEnabled": true,
+            "listEnabled": true,
+            "deleteEnabled": true,
+            "writeEnabled": true
+          },
+          "name": "name",
+          "digest": "digest",
+          "createdTime": "createdTime",
+          "signed": true,
+          "lastUpdateTime": "lastUpdateTime"
+        }
+      }
+    },
+    "TagAttributes": {
+      "description": "Tag attributes",
+      "properties": {
+        "registry": {
+          "description": "Registry name",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "Image name",
+          "type": "string"
+        },
+        "tag": {
+          "$ref": "#/definitions/TagAttributes_tag",
+          "description": "Tag attributes"
+        }
+      },
+      "example": {
+        "registry": "registry",
+        "imageName": "imageName",
+        "tag": {
+          "signatureRecord": "signatureRecord"
+        }
+      }
+    },
+    "AcrTagAttributesBase": {
+      "description": "Tag attribute details",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Tag name"
+        },
+        "digest": {
+          "type": "string",
+          "description": "Tag digest"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Tag created time"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "Tag last update time"
+        },
+        "signed": {
+          "type": "boolean",
+          "description": "Is signed"
+        },
+        "changeableAttributes": {
+          "$ref": "#/definitions/ChangeableAttributes",
+          "description": "Changeable attributes"
+        }
+      },
+      "example": {
+        "changeableAttributes": {
+          "readEnabled": true,
+          "listEnabled": true,
+          "deleteEnabled": true,
+          "writeEnabled": true
+        },
+        "name": "tagname",
+        "digest": "sha256:0873c923e00e0fd2ba78041bfb64a105e1ecb7678916d1f7776311e45bf5634b",
+        "createdTime": "2018-08-10T17:28:44.1082945Z",
+        "signed": true,
+        "lastUpdateTime": "2018-08-10T17:28:44.1082945Z"
+      }
+    },
+    "AcrManifests": {
+      "description": "Manifest attributes",
+      "properties": {
+        "registry": {
+          "type": "string",
+          "description": "Registry name"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "manifests": {
+          "x-ms-client-name": "ManifestsAttributes",
+          "type": "array",
+          "description": "List of manifests",
+          "items": {
+            "$ref": "#/definitions/AcrManifestAttributesBase",
+            "description": "Manifest details"
+          }
+        }
+      },
+      "example": {
+        "registry": "registry",
+        "imageName": "imageName",
+        "manifests": [
+          {
+            "changeableAttributes": {
+              "quarantineDetails": "quarantineDetails",
+              "readEnabled": true,
+              "quarantineState": "quarantineState",
+              "listEnabled": true,
+              "deleteEnabled": true,
+              "writeEnabled": true
+            },
+            "os": "os",
+            "digest": "digest",
+            "imageSize": 2401606,
+            "createdTime": "createdTime",
+            "mediaType": "mediaType",
+            "configMediaType": "configMediaType",
+            "lastUpdateTime": "lastUpdateTime",
+            "architecture": "architecture",
+            "tags": [
+              "tags",
+              "tags"
+            ]
+          },
+          {
+            "changeableAttributes": {
+              "quarantineDetails": "quarantineDetails",
+              "readEnabled": true,
+              "quarantineState": "quarantineState",
+              "listEnabled": true,
+              "deleteEnabled": true,
+              "writeEnabled": true
+            },
+            "os": "os",
+            "digest": "digest",
+            "imageSize": 2401606,
+            "createdTime": "createdTime",
+            "mediaType": "mediaType",
+            "configMediaType": "configMediaType",
+            "lastUpdateTime": "lastUpdateTime",
+            "architecture": "architecture",
+            "tags": [
+              "tags",
+              "tags"
+            ]
+          }
+        ]
+      }
+    },
+    "AcrManifestAttributes": {
+      "description": "Manifest attributes details",
+      "properties": {
+        "registry": {
+          "description": "Registry name",
+          "type": "string"
+        },
+        "imageName": {
+          "description": "Image name",
+          "type": "string"
+        },
+        "manifest": {
+          "x-ms-client-name": "ManifestAttributes",
+          "description": "Manifest attributes",
+          "$ref": "#/definitions/AcrManifestAttributesBase"
+        }
+      },
+      "example": {
+        "registry": "acrapi.azurecr-test.io",
+        "imageName": "nanoserver",
+        "manifest": {
+          "digest": "sha256:110d2b6c84592561338aa040b1b14b7ab81c2f9edbd564c2285dd7d70d777086",
+          "imageSize": 2401606,
+          "createdTime": "2018-09-06T06:17:20.9983915Z",
+          "lastUpdateTime": "2018-09-06T06:17:20.9983915Z",
+          "architecture": "amd64",
+          "os": "windows",
+          "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+          "configMediaType": "application/vnd.docker.container.image.v1+json",
+          "tags": [
+            "4.7.2-20180905-nanoserver-1803"
+          ],
+          "changeableAttributes": {
+            "deleteEnabled": true,
+            "writeEnabled": true,
+            "readEnabled": true,
+            "listEnabled": true
+          }
+        }
+      }
+    },
+    "AcrManifestAttributesBase": {
+      "type": "object",
+      "description": "Manifest details",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "Manifest"
+        },
+        "imageSize": {
+          "type": "integer",
+          "description": "Image size"
+        },
+        "createdTime": {
+          "type": "string",
+          "description": "Created time"
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "Last update time"
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture"
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system"
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "Media type"
+        },
+        "configMediaType": {
+          "type": "string",
+          "description": "Config blob media type"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags",
+          "items": {
+            "type": "string",
+            "description": "Tag name"
+          }
+        },
+        "changeableAttributes": {
+          "$ref": "#/definitions/ChangeableAttributes",
+          "description": "Changeable attributes"
+        }
+      },
+      "example": {
+        "changeableAttributes": {
+          "readEnabled": true,
+          "listEnabled": true,
+          "deleteEnabled": true,
+          "writeEnabled": true
+        },
+        "os": "os",
+        "digest": "digest",
+        "imageSize": 2401606,
+        "createdTime": "createdTime",
+        "mediaType": "mediaType",
+        "configMediaType": "configMediaType",
+        "lastUpdateTime": "lastUpdateTime",
+        "architecture": "architecture",
+        "tags": [
+          "tags",
+          "tags"
+        ]
+      }
+    },
+    "RefreshToken": {
+      "type": "object",
+      "properties": {
+        "refresh_token": {
+          "description": "The refresh token to be used for generating access tokens",
+          "type": "string"
+        }
+      }
+    },
+    "AccessToken": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "description": "The access token for performing authenticated requests",
+          "type": "string"
+        }
+      }
+    },
+    "AcrErrors": {
+      "description": "Acr error response describing why the operation failed",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Array of detailed error",
+          "items": {
+            "$ref": "#/definitions/AcrErrorInfo"
+          }
+        }
+      }
+    },
+    "RepositoryTags": {
+      "description": "Result of the request to list tags of the image",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the image"
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of tags",
+          "items": {
+            "type": "string",
+            "description": "Tag name"
+          }
+        }
+      },
+      "example": {
+        "name": "name",
+        "tags": [
+          "tags",
+          "tags"
+        ]
+      }
+    },
+    "Manifest": {
+      "description": "Returns the requested manifest file",
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "description": "Schema version"
+        },
+        "mediaType": {
+          "type": "string",
+          "description": "Media type usually application/vnd.docker.distribution.manifest.v2+json if this is in the accept header"
+        },
+        "config": {
+          "description": "V2 image config descriptor",
+          "$ref": "#/definitions/V2Descriptor"
+        },
+        "layers": {
+          "type": "array",
+          "description": "List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/V2Descriptor"
+          }
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture"
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Image tag"
+        },
+        "fsLayers": {
+          "type": "array",
+          "description": "List of layer information",
+          "items": {
+            "$ref": "#/definitions/FsLayer"
+          }
+        },
+        "history": {
+          "type": "array",
+          "description": "Image history",
+          "items": {
+            "$ref": "#/definitions/History"
+          }
+        },
+        "signatures": {
+          "type": "array",
+          "description": "Image signature",
+          "items": {
+            "$ref": "#/definitions/ImageSignature"
+          }
+        }
+      },
+      "example": {
+        "schemaVersion": 2,
+        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+        "config": {
+          "mediaType": "application/vnd.docker.container.image.v1+json",
+          "size": 1512,
+          "digest": "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f"
+        },
+        "layers": [
+          {
+            "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+            "size": 2107098,
+            "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
+          }
+        ]
+      }
+    },
+    "ImageSignature": {
+      "description": "Signature of a signed manifest",
+      "properties": {
+        "header": {
+          "description": "A JSON web signature",
+          "$ref": "#/definitions/JWK"
+        },
+        "signature": {
+          "type": "string",
+          "description": "A signature for the image manifest, signed by a libtrust private key"
+        },
+        "protected": {
+          "type": "string",
+          "description": "The signed protected header"
+        }
+      },
+      "example": {
+        "header": {
+          "jwk": {
+            "crv": "P-256",
+            "kid": "WGXM:EYWQ:DA53:LQUP:BCWG:5RDG:S3ZM:ETH7:VMQS:WWKZ:EWDG:V74Q",
+            "kty": "EC",
+            "x": "OxZ9k5BVjPZ7jb3BmBD4X0d8MVPJqfF4NeSe8reoqnY",
+            "y": "EaCqTe4-vYwhk7qU6Bs2-AeLGOVtCe_-IY2MdE0Vfyc"
+          },
+          "alg": "ES256"
+        },
+        "signature": "p73LfotMGD8nNXz2g9YX2XtSllb4GI5-b3vjqP5N0nkv8QXg-r5z_omGiVbOZE2BYG1X_4TIN23l1KSEqsXxOg",
+        "protected": "eyJmb3JtYXRMZW5ndGgiOjI5ODYsImZvcm1hdFRhaWwiOiJDbjAiLCJ0aW1lIjoiMjAxOC0wOS0yMFQyMzo0MTo1MloifQ"
+      }
+    },
+    "JWK": {
+      "description": "A JSON web signature",
+      "properties": {
+        "jwk": {
+          "$ref": "#/definitions/JWKHeader"
+        },
+        "alg": {
+          "type": "string",
+          "description": "The algorithm used to sign or encrypt the JWT"
+        }
+      }
+    },
+    "JWKHeader": {
+      "description": "JSON web key parameter",
+      "properties": {
+        "crv": {
+          "type": "string",
+          "description": "crv value"
+        },
+        "kid": {
+          "type": "string",
+          "description": "kid value"
+        },
+        "kty": {
+          "type": "string",
+          "description": "kty value"
+        },
+        "x": {
+          "type": "string",
+          "description": "x value"
+        },
+        "y": {
+          "type": "string",
+          "description": "y value"
+        }
+      }
+    },
+    "History": {
+      "description": "A list of unstructured historical data for v1 compatibility",
+      "properties": {
+        "v1Compatibility": {
+          "type": "string",
+          "description": "The raw v1 compatibility information"
+        }
+      },
+      "example": {
+        "v1Compatibility": "v1 compatibility info"
+      }
+    },
+    "Repositories": {
+      "description": "List of repositories",
+      "properties": {
+        "repositories": {
+          "type": "array",
+          "x-ms-client-name": "Names",
+          "description": "Repository names",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "example": {
+        "repositories": [
+          "production/alpine",
+          "testing/alpine"
+        ]
+      }
+    },
+    "DeletedRepository": {
+      "description": "Deleted repository",
+      "properties": {
+        "manifestsDeleted": {
+          "type": "array",
+          "description": "SHA of the deleted image",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tagsDeleted": {
+          "type": "array",
+          "description": "Tag of the deleted image",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcrErrorInfo": {
+      "description": "Error information",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "detail": {
+          "type": "object",
+          "description": "Error details"
+        }
+      }
+    },
+    "FsLayer": {
+      "description": "Image layer information",
+      "properties": {
+        "blobSum": {
+          "type": "string",
+          "description": "SHA of an image layer"
+        }
+      },
+      "example": {
+        "blobSum": "sha256:1f7d468f830cb0ed4beb8edc9438f18096e8c682e56a35242f60e6c61b718b30"
+      }
+    },
+    "V2Descriptor": {
+      "description": "Docker V2 image layer descriptor including config and layers",
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "description": "Layer media type"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Layer size"
+        },
+        "digest": {
+          "type": "string",
+          "description": "Layer digest"
+        }
+      },
+      "example": {
+        "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+        "size": 2107098,
+        "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
+      }
+    },
+    "ChangeableAttributes": {
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled"
+        }
+      },
+      "example": {
+        "readEnabled": true,
+        "listEnabled": true,
+        "deleteEnabled": true,
+        "writeEnabled": true
+      }
+    },
+    "TagAttributes_tag": {
+      "description": "Tag",
+      "properties": {
+        "signatureRecord": {
+          "description": "SignatureRecord value",
+          "type": "string"
+        }
+      },
+      "example": {
+        "signatureRecord": "signatureRecord"
+      }
+    },
+    "ManifestAttributes_manifest_references": {
+      "description": "Manifest attributes details",
+      "properties": {
+        "digest": {
+          "type": "string",
+          "description": "Manifest digest"
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture"
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system"
+        }
+      },
+      "example": {
+        "os": "os",
+        "digest": "digest",
+        "architecture": "architecture"
+      }
+    },
+    "ManifestAttributes_manifest": {
+      "description": "List of manifest attributes",
+      "properties": {
+        "references": {
+          "type": "array",
+          "description": "List of manifest attributes details",
+          "items": {
+            "$ref": "#/definitions/ManifestAttributes_manifest_references",
+            "description": "Manifest attributes details"
+          }
+        },
+        "quarantineTag": {
+          "type": "string",
+          "description": "Quarantine tag name"
+        }
+      },
+      "example": {
+        "quarantineTag": "quarantineTag",
+        "references": [
+          {
+            "os": "os",
+            "digest": "digest",
+            "architecture": "architecture"
+          },
+          {
+            "os": "os",
+            "digest": "digest",
+            "architecture": "architecture"
+          }
+        ]
+      }
+    },
+    "ManifestChangeableAttributes": {
+      "description": "Changeable attributes",
+      "properties": {
+        "deleteEnabled": {
+          "type": "boolean",
+          "description": "Delete enabled"
+        },
+        "writeEnabled": {
+          "type": "boolean",
+          "description": "Write enabled"
+        },
+        "listEnabled": {
+          "type": "boolean",
+          "description": "List enabled"
+        },
+        "readEnabled": {
+          "type": "boolean",
+          "description": "Read enabled"
+        },
+        "quarantineState": {
+          "type": "string",
+          "description": "Quarantine state"
+        },
+        "quarantineDetails": {
+          "type": "string",
+          "description": "Quarantine details"
+        }
+      },
+      "example": {
+        "quarantineDetails": "quarantineDetails",
+        "readEnabled": true,
+        "quarantineState": "quarantineState",
+        "listEnabled": true,
+        "deleteEnabled": true,
+        "writeEnabled": true
+      }
+    }
+  },
+  "parameters": {
+    "Url": {
+      "name": "url",
+      "x-ms-client-name": "loginUri",
+      "description": "Registry login URL",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "ImageReference": {
+      "name": "reference",
+      "in": "path",
+      "description": "A tag or a digest, pointing to a specific image",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManifestReference": {
+      "name": "reference",
+      "in": "path",
+      "description": "Tag or digest of the target manifest",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Digest": {
+      "name": "digest",
+      "in": "path",
+      "description": "Digest of a desired BLOB",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "metadata": {
+      "name": "metadata",
+      "in": "path",
+      "description": "Name of the metadata",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "property": {
+      "name": "property",
+      "in": "path",
+      "description": "Name of the property",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RepoValue": {
+      "name": "value",
+      "in": "body",
+      "description": "Repository attribute value",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/ChangeableAttributes"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "QueryOrderBy": {
+      "name": "orderby",
+      "in": "query",
+      "description": "orderby query parameter",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryNum": {
+      "name": "n",
+      "in": "query",
+      "description": "query parameter for max number of items",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryLast": {
+      "name": "last",
+      "in": "query",
+      "description": "Query parameter for the last item in previous query. Result set will include values lexically after last.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryDigest": {
+      "name": "digest",
+      "in": "query",
+      "description": "filter by digest",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Grant_type": {
+      "name": "grant_type",
+      "description": "Can take a value of access_token_refresh_token, or access_token, or refresh_token",
+      "type": "string",
+      "in": "formData",
+      "required": true,
+      "enum": [
+        "access_token_refresh_token",
+        "access_token",
+        "refresh_token"
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "Service": {
+      "name": "service",
+      "in": "formData",
+      "required": true,
+      "description": "Indicates the name of your Azure container registry.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Tenant": {
+      "name": "tenant",
+      "in": "formData",
+      "required": false,
+      "description": "AAD tenant associated to the AAD credentials.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "formData",
+      "required": true,
+      "description": "Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You can obtain this from the Www-Authenticate response header from the challenge.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "RefreshToken": {
+      "name": "refresh_token",
+      "in": "formData",
+      "required": false,
+      "description": "AAD refresh token, mandatory when grant_type is access_token_refresh_token or refresh_token",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AccessToken": {
+      "name": "access_token",
+      "in": "formData",
+      "required": false,
+      "description": "AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ImageName": {
+      "name": "name",
+      "in": "path",
+      "description": "Name of the image (including the namespace)",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManifestBody": {
+      "description": "Manifest body, can take v1 or v2 values depending on accept header",
+      "name": "payload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Manifest"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

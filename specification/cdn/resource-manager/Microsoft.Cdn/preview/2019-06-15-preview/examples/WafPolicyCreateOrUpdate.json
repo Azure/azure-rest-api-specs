@@ -29,6 +29,7 @@
                   "selector": null,
                   "operator": "IPMatch",
                   "negateCondition": false,
+                  "transforms": [],
                   "matchValue": [
                     "192.168.1.0/24",
                     "10.0.0.0/24"
@@ -51,6 +52,7 @@
                   "selector": null,
                   "operator": "GeoMatch",
                   "negateCondition": false,
+                  "transforms": [],
                   "matchValue": [
                     "CH"
                   ]
@@ -60,8 +62,23 @@
                   "selector": "UserAgent",
                   "operator": "Contains",
                   "negateCondition": false,
+                  "transforms": [],
                   "matchValue": [
                     "windows"
+                  ]
+                },
+                {
+                  "matchVariable": "QueryString",
+                  "selector": "search",
+                  "operator": "Contains",
+                  "negateCondition": false,
+                  "transforms": [
+                    "UrlDecode",
+                    "Lowercase"
+                  ],
+                  "matchValue": [
+                    "<?php",
+                    "?>"
                   ]
                 }
               ],
@@ -134,6 +151,7 @@
                     "selector": null,
                     "operator": "IPMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "192.168.1.0/24",
                       "10.0.0.0/24"
@@ -156,6 +174,7 @@
                     "selector": null,
                     "operator": "GeoMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "CH"
                     ]
@@ -165,8 +184,23 @@
                     "selector": "UserAgent",
                     "operator": "Contains",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
                     ]
                   }
                 ],
@@ -198,7 +232,7 @@
               }
             ]
           },
-          "cdnEndpointLinks": [
+          "endpointLinks": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
             },
@@ -246,6 +280,7 @@
                     "selector": null,
                     "operator": "IPMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "192.168.1.0/24",
                       "10.0.0.0/24"
@@ -268,6 +303,7 @@
                     "selector": null,
                     "operator": "GeoMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "CH"
                     ]
@@ -277,8 +313,23 @@
                     "selector": "UserAgent",
                     "operator": "Contains",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
                     ]
                   }
                 ],
@@ -310,7 +361,7 @@
               }
             ]
           },
-          "cdnEndpointLinks": [
+          "endpointLinks": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
             },
@@ -358,6 +409,7 @@
                     "selector": null,
                     "operator": "IPMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "192.168.1.0/24",
                       "10.0.0.0/24"
@@ -380,6 +432,7 @@
                     "selector": null,
                     "operator": "GeoMatch",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "CH"
                     ]
@@ -389,8 +442,23 @@
                     "selector": "UserAgent",
                     "operator": "Contains",
                     "negateCondition": false,
+                    "transforms": [],
                     "matchValue": [
                       "windows"
+                    ]
+                  },
+                  {
+                    "matchVariable": "QueryString",
+                    "selector": "search",
+                    "operator": "Contains",
+                    "negateCondition": false,
+                    "transforms": [
+                      "UrlDecode",
+                      "Lowercase"
+                    ],
+                    "matchValue": [
+                      "<?php",
+                      "?>"
                     ]
                   }
                 ],
@@ -422,7 +490,7 @@
               }
             ]
           },
-          "cdnEndpointLinks": [
+          "endpointLinks": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/profiles/profile1/endpoints/testEndpoint1"
             },

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "4.0",
-    "title": "QnAMaker Client",
+    "title": "QnAMaker Runtime Client",
     "description": "An API for QnAMaker runtime"
   },
   "securityDefinitions": {
@@ -356,6 +356,10 @@
               "$ref": "#/definitions/QueryContextDTO"
             }
           ]
+        },
+        "rankerType": {
+          "type": "string",
+          "description": "Optional field. Set to 'QuestionOnly' for using a question only Ranker."
         },
         "strictFilters": {
           "type": "array",

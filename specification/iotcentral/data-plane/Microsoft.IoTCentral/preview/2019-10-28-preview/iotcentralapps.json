@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Azure IoT Central",
+    "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale."
+  },
+  "host": "apps.azureiotcentral.com",
+  "basePath": "/api/preview",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the application.",
+          "type": "string"
+        },
+        "subdomain": {
+          "description": "The URL subdomain of the application.",
+          "type": "string"
+        },
+        "host": {
+          "description": "The URL host of the application.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subdomain",
+        "host"
+      ]
+    },
+    "ApplicationCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of applications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "paths": {
+    "/applications": {
+      "get": {
+        "operationId": "Applications_List",
+        "summary": "Get the list of applications accessible to the signed-in user",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ApplicationCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "List applications": {
+            "$ref": "./examples/application_list.json"
+          }
+        }
+      }
+    },
+    "/applications/{application_id}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "summary": "Get an application by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "application_id",
+            "description": "Unique ID of the application.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get application": {
+            "$ref": "./examples/application_get.json"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Subdomain": {
+      "in": "path",
+      "name": "subdomain",
+      "description": "Application subdomain.",
+      "x-ms-parameter-location": "client",
+      "type": "string",
+      "required": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
