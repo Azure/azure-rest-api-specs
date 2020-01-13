@@ -38,6 +38,15 @@ input-file:
 - Microsoft.DataBox/stable/2018-01-01/databox.json
 ```
 
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.DataBox/stable/2019-09-01/databox.json
+```
+
 ---
 # Code Generation
 
@@ -132,6 +141,7 @@ java:
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-01
+  - tag: package-2019-09
 ```
 
 ### Tag: package-2018-01 and java
@@ -142,7 +152,20 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2018_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-09 and java
+
+These settings apply only when `--tag=package-2019-09-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2019_09-01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2019_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -160,6 +183,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
+  - $(this-folder)/Microsoft.DataBox/stable/2019-09-01/databox.json
 
 ```
 

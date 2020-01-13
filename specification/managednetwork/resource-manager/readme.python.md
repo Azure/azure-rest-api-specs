@@ -7,18 +7,17 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  package-name: azure-mgmt-network
+  package-name: azure-mgmt-managednetwork
   clear-output-folder: true
-  no-namespace-folders: true
 ```
 
-### Tag: package-2019-06-01-preview and python
-
-These settings apply only when `--tag=package-2019-06-01-preview --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-06-01-preview' && $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 python:
-  namespace: azure.mgmt.managednetwork.v2019_06_01_preview
+  no-namespace-folders: true
   output-folder: $(python-sdks-folder)/managednetwork/azure-mgmt-managednetwork/azure/mgmt/managednetwork
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/managednetwork/azure-mgmt-managednetwork
 ```

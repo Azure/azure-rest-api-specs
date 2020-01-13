@@ -63,6 +63,7 @@
     },
     "DatasetLocation": {
       "description": "Dataset location.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -151,6 +152,34 @@
           "$ref": "#/definitions/DatasetLocation"
         }
       ]
+    },
+    "AzureFileStorageLocation": {
+      "description": "The location of file server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "GoogleCloudStorageLocation": {
+      "description": "The location of Google Cloud Storage dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of Google Cloud Storage. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of Google Cloud Storage. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "FtpServerLocation": {
       "description": "The location of ftp server dataset.",
@@ -742,6 +771,18 @@
         "location": {
           "$ref": "#/definitions/DatasetLocation",
           "description": "The location of the ORC data storage."
+        },
+        "orcCompressionCodec": {
+          "type": "string",
+          "enum": [
+            "none",
+            "zlib",
+            "snappy"
+          ],
+          "x-ms-enum": {
+            "name": "orcCompressionCodec",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -1528,6 +1569,10 @@
         "tableName": {
           "type": "object",
           "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The name of Azure MySQL database table. Type: string (or Expression with resultType string)."
         }
       }
     },

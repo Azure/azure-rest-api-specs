@@ -197,7 +197,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-09-07-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2018_09_07_preview
-  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2018_09_07_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2018_09_07_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -210,7 +210,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01-21' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_01_21
-  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_01_21
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_01_21
 regenerate-manager: true
 generate-interface: true
 ```
@@ -223,7 +223,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-05-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_05_15
-  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_05_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -236,7 +236,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-09-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_09_07
-  output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_09_07
+  output-folder: $(azure-libraries-for-java-folder)/sdk/kusto/mgmt-v2019_09_07
 regenerate-manager: true
 generate-interface: true
 ```
@@ -281,6 +281,10 @@ directive:
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals"].post.operationId'
     reason: 'Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: kusto.json
+    where: $.definitions.Database
+    reason: 'Action is expected to receive a subclass of Database'
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
     where: $.definitions.EventHubDataConnection

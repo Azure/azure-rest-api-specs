@@ -58,11 +58,11 @@
             "description": "The name of Cognitive Services account."
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountCreateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
@@ -82,6 +82,12 @@
           },
           "201": {
             "description": "If resource is created successfully, the service should return 201 (OK).",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -124,12 +130,11 @@
             "description": "The name of Cognitive Services account."
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountUpdateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
@@ -143,6 +148,12 @@
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -194,6 +205,9 @@
         "responses": {
           "200": {
             "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
@@ -638,7 +652,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "operationId": "CheckSkuAvailability_List",
+        "operationId": "CheckSkuAvailability",
         "description": "Check available SKUs.",
         "x-ms-examples": {
           "Check SKU Availability": {
@@ -718,63 +732,9 @@
     }
   },
   "definitions": {
-    "CognitiveServicesAccountCreateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Required. Gets or sets the SKU of the resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/CognitiveServicesAccountKind",
-          "description": "Required. Gets or sets the Kind of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Must exist in the request. Must be an empty object. Must not be null."
-        }
-      },
-      "required": [
-        "sku",
-        "kind",
-        "location",
-        "properties"
-      ],
-      "description": "The parameters to provide for the account."
-    },
     "CognitiveServicesAccountKind": {
       "type": "string",
       "description": "Required. Indicates the type of cognitive service account."
-    },
-    "CognitiveServicesAccountUpdateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Additional properties for Account. Only provided fields will be updated."
-        }
-      },
-      "description": "The parameters to provide for the account."
     },
     "Sku": {
       "properties": {
@@ -812,7 +772,8 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "Entity Tag"
+          "description": "Entity Tag",
+          "readOnly": true
         },
         "id": {
           "type": "string",
@@ -820,8 +781,8 @@
           "readOnly": true
         },
         "kind": {
-          "type": "string",
-          "description": "Type of cognitive service account."
+          "$ref": "#/definitions/CognitiveServicesAccountKind",
+          "description": "The Kind of the resource."
         },
         "location": {
           "type": "string",
@@ -833,7 +794,6 @@
           "readOnly": true
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountProperties",
           "description": "Properties of Cognitive Services account."
         },
@@ -894,11 +854,13 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "Endpoint of the created account."
+          "description": "Endpoint of the created account.",
+          "readOnly": true
         },
         "internalId": {
           "type": "string",
-          "description": "The internal identifier."
+          "description": "The internal identifier.",
+          "readOnly": true
         },
         "customSubDomainName": {
           "type": "string",
@@ -907,9 +869,38 @@
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
+          "description": "The api properties for special APIs."
         }
       },
       "description": "Properties of Cognitive Services account."
+    },
+    "CognitiveServicesAccountApiProperties": {
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
+        },
+        "eventHubConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "maxLength": 1000
+        },
+        "storageAccountConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The storage account connection string.",
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "maxLength": 1000
+        }
+      },
+      "description": "The api properties for special APIs."
     },
     "CognitiveServicesAccountKeys": {
       "properties": {
@@ -1383,18 +1374,6 @@
     },
     "NetworkRuleSet": {
       "properties": {
-        "bypass": {
-          "type": "string",
-          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
-          "enum": [
-            "AzureServices",
-            "None"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkRuleBypassOptions",
-            "modelAsString": true
-          }
-        },
         "defaultAction": {
           "type": "string",
           "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
