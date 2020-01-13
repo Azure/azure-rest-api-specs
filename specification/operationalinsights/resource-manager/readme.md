@@ -161,7 +161,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
-  
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
