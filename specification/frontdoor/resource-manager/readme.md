@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.Network/stable/2019-11-01/network.json
+- Microsoft.Network/stable/2020-01-01/network.json
 - Microsoft.Network/stable/2019-11-01/networkexperiment.json
 - Microsoft.Network/stable/2020-01-01/frontdoor.json
 - Microsoft.Network/stable/2019-10-01/webapplicationfirewall.json
