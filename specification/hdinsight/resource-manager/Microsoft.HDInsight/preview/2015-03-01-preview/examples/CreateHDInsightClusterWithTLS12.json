@@ -2,14 +2,11 @@
   "parameters": {
     "clusterName": "cluster1",
     "resourceGroupName": "rg1",
-    "api-version": "2018-06-01-preview",
+    "api-version": "2015-03-01-preview",
     "subscriptionId": "subid",
     "parameters": {
-      "tags": {
-        "key1": "val1"
-      },
       "properties": {
-        "clusterVersion": "3.5",
+        "clusterVersion": "3.6",
         "osType": "Linux",
         "tier": "Standard",
         "clusterDefinition": {
@@ -22,44 +19,26 @@
             }
           }
         },
-        "storageProfile": {
-          "storageaccounts": [
-            {
-              "name": "mystorage.blob.core.windows.net",
-              "isDefault": true,
-              "container": "containername",
-              "key": "storagekey"
-            }
-          ]
-        },
         "computeProfile": {
           "roles": [
             {
               "name": "headnode",
-              "minInstanceCount": 1,
               "targetInstanceCount": 2,
               "hardwareProfile": {
-                "vmSize": "Standard_D3_V2"
+                "vmSize": "Large"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
                   "username": "sshuser",
-                  "sshProfile": {
-                    "publicKeys": [
-                      {
-                        "certificateData": "**********"
-                      }
-                    ]
-                  }
+                  "password": "**********"
                 }
               }
             },
             {
               "name": "workernode",
-              "minInstanceCount": 1,
-              "targetInstanceCount": 4,
+              "targetInstanceCount": 3,
               "hardwareProfile": {
-                "vmSize": "Standard_D3_V2"
+                "vmSize": "Large"
               },
               "osProfile": {
                 "linuxOperatingSystemProfile": {
@@ -70,7 +49,6 @@
             },
             {
               "name": "zookeepernode",
-              "minInstanceCount": 1,
               "targetInstanceCount": 3,
               "hardwareProfile": {
                 "vmSize": "Small"
@@ -83,7 +61,18 @@
               }
             }
           ]
-        }
+        },
+        "storageProfile": {
+          "storageaccounts": [
+            {
+              "name": "mystorage.blob.core.windows.net",
+              "isDefault": true,
+              "container": "default8525",
+              "key": "storagekey"
+            }
+          ]
+        },
+        "minSupportedTlsVersion": "1.2"
       }
     }
   },
@@ -96,16 +85,17 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
         "name": "cluster1",
         "type": "Microsoft.HDInsight/clusters",
-        "location": "East US",
-        "etag": "fdf2a6e8-ce83-42cc-8c2d-0ceb11a370ff",
+        "location": "South Central US",
+        "etag": "3b76ce3d-892c-4036-9d8b-8ade18ba7a4b",
+        "tags": null,
         "properties": {
-          "clusterVersion": "4.0.1000.1",
+          "clusterVersion": "3.6.1000.67",
           "osType": "Linux",
           "clusterDefinition": {
-            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.1000.1.1910270459.json",
-            "kind": "HADOOP",
+            "blueprint": "https://blueprints.azurehdinsight.net/hadoop-3.6.1000.67.2001080246.json",
+            "kind": "Hadoop",
             "componentVersion": {
-              "Hadoop": "3.1"
+              "Hadoop": "2.7"
             }
           },
           "computeProfile": {
@@ -114,7 +104,7 @@
                 "name": "headnode",
                 "targetInstanceCount": 2,
                 "hardwareProfile": {
-                  "vmSize": "standard_d12_v2"
+                  "vmSize": "standard_a4_v2"
                 },
                 "osProfile": {
                   "linuxOperatingSystemProfile": {
@@ -124,9 +114,9 @@
               },
               {
                 "name": "workernode",
-                "targetInstanceCount": 4,
+                "targetInstanceCount": 3,
                 "hardwareProfile": {
-                  "vmSize": "standard_d4_v2"
+                  "vmSize": "standard_a4_v2"
                 },
                 "osProfile": {
                   "linuxOperatingSystemProfile": {
@@ -150,9 +140,9 @@
           },
           "provisioningState": "Succeeded",
           "clusterState": "Running",
-          "createdDate": "2019-11-18T12:25:43.48",
+          "createdDate": "2020-01-10T08:36:39.153",
           "quotaInfo": {
-            "coresUsed": 40
+            "coresUsed": 20
           },
           "connectivityEndpoints": [
             {
@@ -168,7 +158,8 @@
               "port": 443
             }
           ],
-          "tier": "Standard"
+          "tier": "Standard",
+          "minSupportedTlsVersion": "1.2"
         }
       }
     }
