@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-03-01-preview --go` is specif
 Please also specify `--go-sdks-folder=digitaltwins`.
 
 ```yaml $(tag) == 'package-2020-03-01-preview' && $(go)
-namespace: Microsoft.DigitalTwins
+namespace: digitaltwins
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-03-01-preview/$(namespace)
 ```
