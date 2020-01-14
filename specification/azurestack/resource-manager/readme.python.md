@@ -10,8 +10,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.attestation
-  package-name: azure-mgmt-attestation
+  namespace: azure.mgmt.azurestack
+  package-name: azure-mgmt-azurestack
   package-version: 0.1.0
   clear-output-folder: true
 ```
