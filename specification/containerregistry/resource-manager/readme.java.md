@@ -16,6 +16,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerregistry
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-12-preview
   - tag: package-2019-06-preview-only
   - tag: package-2019-04-only
   - tag: package-2019-04
@@ -25,6 +26,19 @@ batch:
   - tag: package-2017-06-preview
   - tag: package-2017-03
   - tag: package-2016-06-preview
+```
+
+### Tag: package-2019-12-preview and java
+
+These settings apply only when `--tag=package-2019-12-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-12-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerregistry.v2019_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerregistry/mgmt-v2019_12_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-06-preview-only and java
