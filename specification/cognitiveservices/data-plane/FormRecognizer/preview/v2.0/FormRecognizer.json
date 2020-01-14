@@ -609,18 +609,18 @@
     "AuthorizationClaim": {
       "description": "Request parameter that contains claims for authorizing an operation such as Copy.",
       "required": [
-        "claimResourceId",
-        "claimResourceRegion"
+        "resourceId",
+        "resourceRegion"
       ],
       "type": "object",
       "properties": {
-        "claimResourceId": {
-          "description": "A target artifact identifier, such as 'modelId' that will be used as a claim to authorize a request.",
+        "resourceId": {
+          "description": "Form Recognizer model identifier in the target subscription that will be used as a claim to authorize the request.",
           "type": "string",
           "format": "uuid"
         },
-        "claimResourceRegion": {
-          "description": "Azure Region where the claim resource is present. ",
+        "resourceRegion": {
+          "description": "Azure region where the claim resource is present.",
           "type": "string"
         }
       }
@@ -634,9 +634,8 @@
       "type": "object",
       "properties": {
         "targetResourceId": {
-          "description": "Azure resource identifier of the target to which the model is copied to.",
+          "description": "Azure resource identifier of the target where the model is copied.",
           "maxLength": 2048,
-          "minLength": 0,
           "type": "string",
           "x-ms-azure-resource": true
         },

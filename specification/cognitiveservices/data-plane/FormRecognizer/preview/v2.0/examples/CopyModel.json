@@ -3,14 +3,14 @@
     "endpoint": "{endpoint}",
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "modelId": "{model Id}",
+    "modelId": "{modelId}",
     "body": {},
     "copyRequest": {
       "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}",
       "authorizationClaim": {
-        "targetClaimResourceId": "{model Id}"
-      },
-      "moveModel": false
+        "resourceId": "{modelId}",
+        "resourceRegion": "{region}"
+      }
     }
   },
   "responses": {
