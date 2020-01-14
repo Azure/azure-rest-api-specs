@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+  },
+  "responses": {
+    "200": {
+      "body": {
+	"value": [
+	  {
+            "name": "TestDevice1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.VnfManager/devices/TestDevice1",
+            "type": "Microsoft.VnfManager/devices",
+            "location": "eastus",
+            "tags": {},
+            "properties": { 
+              "provisioningState": "Succeeded", 
+              "databoxEdgeDevice": { 
+                 "id" : "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName" 
+              }, 
+              "mecVNFs" : [], 
+              "sku": "", 
+              "mecRegistrationKey": "" 
+            }
+          } 
+	  {
+            "name": "TestDevice2",
+            "id": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.VnfManager/devices/TestDevice2",
+            "type": "Microsoft.VnfManager/devices",
+            "location": "eastus",
+            "tags": {},
+            "properties": { 
+              "provisioningState": "Succeeded", 
+              "databoxEdgeDevice": { 
+              "id" : "/subscriptions/subid/resourcegroups/rg2/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName" 
+            },  
+            "mecVNFs" : [], 
+            "sku": "", 
+            "mecRegistrationKey": "" 
+          }
+        ]
+      }
+    }
+  }
+}

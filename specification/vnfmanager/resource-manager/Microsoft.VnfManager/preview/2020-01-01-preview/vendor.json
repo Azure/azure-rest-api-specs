@@ -1,0 +1,738 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VNFManagementClient",
+    "description": "The resources in this swagger specification will be used by VNF vendors to onboard skus and manage VNFs",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/vendors/{vendorName}": {
+      "delete": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "Vendor_Delete",
+        "description": "Deletes the specified vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "Vendor_Get",
+        "description": "Gets information about the specified vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of vendor."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "Vendor_CreateorUpdate",
+        "description": "Creates or updates a Vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Vendor."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            },
+            "description": "Parameters supplied to the create or update sku."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/vendors": {
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "Vendors_ListAllBySubscription",
+        "description": "Gets all the vendors in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vendor resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/vendors/{vendorName}/skus/{skuName}": {
+      "delete": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorSku_Delete",
+        "description": "Deletes the specified SKU.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorSku_Get",
+        "description": "Gets information about the specified SKU.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorSku_CreateorUpdate",
+        "description": "Create or update a SKU",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the sku."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            },
+            "description": "Parameters supplied to the create or update sku."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Vendor Sku subresource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Vendor Sku subresource.",
+            "schema": {
+              "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/vendors/{vendorName}/skus": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "operationId": "VendorSkus_List",
+        "description": "Gets all the skus in a Vendor.",
+        "parameters": [
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vnf Manager Vendor resources.",
+            "schema": {
+              "$ref": "#/definitions/VendorSkuListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/locations/{locationName}/vendors/{vendorName}/vnfs/{vnfServiceKey}": {
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorVnf_Get",
+        "description": "Gets information about the specified Vnf.",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The azure region where the Vnf resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "vnfServiceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique GUID for the VNF."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting MEC vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorVnf"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorVnf_Update",
+        "description": "Update a VNF",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The azure region where the Vnf resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "vnfServiceKey",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The unique GUID for the VNF."
+          },
+          {
+            "name": "Parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VendorVnf"
+            },
+            "description": "Parameters supplied to the create or update sku."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Vendor Vnf subresource.",
+            "schema": {
+              "$ref": "#/definitions/VendorVnf"
+            }
+          },
+          "x-ms-long-running-operation": true,
+          "x-ms-long-running-operation-options": {
+            "final-state-via": "azure-async-operation"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/locations/{locationName}/vendors/{vendorName}/vnfs": {
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "operationId": "VendorVnfs_List",
+        "description": "List all the VNFs in an azure region. Filter by skuType, skuName, vendorProvisioningState",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The azure region where the Vnf resource was created by customer."
+          },
+          {
+            "name": "vendorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the vendor."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation.<br><br>The properties you can use for eq (equals) are: skuType, skuName."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting MEC vendor resource.",
+            "schema": {
+              "$ref": "#/definitions/VendorVnfListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Vendor": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorPropertiesFormat",
+          "description": "Vendor Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/Resource"
+        }
+      ],
+      "description": "Vendor resource."
+    },
+    "VendorPropertiesFormat": {
+      "description": "Vendor properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the vendor resource."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorSku"
+          },
+          "description": "A list of SKU details offered by the vendor."
+        }
+      }
+    },
+    "VendorSku": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorSkuPropertiesFormat",
+          "description": "SKU Details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Sku subresource."
+    },
+    "VendorSkuPropertiesFormat": {
+      "description": "Sku  properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Sku subresource."
+        },
+        "skuType": {
+          "type": "string",
+          "description": "SkuType.",
+          "enum": [
+            "Packetcore"
+          ],
+          "x-ms-enum": {
+            "name": "VendorSkuType",
+            "modelAsString": true
+          }
+        },
+        "preview": {
+          "type": "boolean",
+          "description": "Preview mode or generally available."
+        },
+        "previewSubscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of customer subscriptions enrolled for the preview."
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Azure regions supported by the Sku. If All is specified then all the regions will be available for the customer to deploy the VNF"
+        },
+        "deploymentMode": {
+          "type": "string",
+          "description": "sku deployment mode",
+          "enum": [
+            "Azure",
+            "Edgedevice"
+          ],
+          "x-ms-enum": {
+            "name": "VendorSkuDeploymentMode",
+            "modelAsString": true
+          }
+        },
+        "managedAppParameters": {
+          "type": "object",
+          "description": "The parameters template for the managed app."
+        },
+        "managedAppTemplate": {
+          "type": "object",
+          "description": "The template for the managed app deployment."
+        },
+        "vnfTemplate": {
+          "type": "object",
+          "description": "The vm template for edgedevice deployment."
+        },
+        "customDataParameters": {
+          "type": "object",
+          "description": "The template to collect cloud init  parameters from the user"
+        }
+      }
+    },
+    "VendorSKUListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorSku"
+          },
+          "description": "A list of Skus offered by the vendor."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for list vendor sku api service call."
+    },
+    "VendorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vendor"
+          },
+          "description": "A list of Vendors ."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Vendors API service call."
+    },
+    "VendorVnf": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VendorVnfPropertiesFormat",
+          "description": "Vnf Details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Sku subresource."
+    },
+    "VendorVnfPropertiesFormat": {
+      "description": "Vnf  properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Sku subresource."
+        },
+        "vendorProvisioningState": {
+          "type": "string",
+          "description": "SkuType.",
+          "enum": [
+            "Not Provisioned",
+            "Provisioning",
+            "Provisioned"
+          ],
+          "x-ms-enum": {
+            "name": "vendorProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "serviceKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique guid for the VNF."
+        },
+        "sku": {
+          "readOnly": true,
+          "$ref": "#/definitions/VendorSku",
+          "description": "The  sku details for the vnf."
+        },
+        "customDataParameters": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The cloud init parameters from the user."
+        },
+        "customData": {
+          "type": "string",
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+        },
+        "managedApp": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/SubResource",
+          "description": "The  reference to the managed app."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VnfManagerManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed in a Vnf Manager vnf",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VnfManager/vnfs/{vnfName}": {
+      "delete": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VnfManagerVnf_Delete",
+        "description": "Deletes the specified Vnf Manager vnf.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vnfName",
+            "description": "The name of the Vnf Manager Vnf.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VnfManagerVnf_Get",
+        "description": "Gets information about the specified Vnf Manager vnf.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vnfName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Vnf Manager Vnf."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful. The operation returns the resulting Vnf Manager Vnf resource.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerVnf"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VnfMangerVnf_CreateOrUpdate",
+        "description": "Creates or updates a Vnf Manager Vnf.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vnfName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource Name for the Vnf Manager Vnf resource."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnfManagerVnf"
+            },
+            "description": "Parameters supplied in the body to create or update Vnf Managervnf operation."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The header also contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerVnf"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header also contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerVnf"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VnfManagetVnf_Update",
+        "description": "Creates or updates a Vnf Manager Vnf.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vnfName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource Name for the vnf resource."
+          },
+          {
+            "name": "mecDeviceParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update Vnf Manager Vnf tags."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Vnf Manager vnf resource.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerVnf"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/vnfs": {
+      "get": {
+        "description": "Gets all the Vnf Manager vnfs in a subscription.",
+        "operationId": "VnfManagerVnf_ListAll",
+        "parameters": [
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vnf Manager vnf resources.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "tags": [
+          "VirtualNetworkFunctions"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VnfManager/vnfs": {
+      "get": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VnfManagerVnf_ListByResourceGroup",
+        "description": "Gets all the Vnf Manager Vnfs in a resource Group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vnf Manager vnf resources.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkFunctionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VnfManagerVnf": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VnfManagerVnfFormat",
+          "description": "Vnf Manager vnf Properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/Resource"
+        }
+      ],
+      "description": "Vnf Manager vnf resource response."
+    },
+    "VnfManagerVnfFormat": {
+      "description": "Vnf Manager Vnf response properties.",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Vnf Manager Vnf resource."
+        },
+        "mecDevice": {
+          "$ref": "#/definitions/MecDevice",
+          "description": "The reference to the Vnf Manager Device."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku for the Vnf Manager Vnf."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "The vendor for the Vnf Manager Vnf."
+        },
+        "vnfServiceKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service key for the VNF vendor."
+        },
+        "vendorProvisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The vendor provisioning state for the VNF."
+        },
+        "managedApp": {
+          "readOnly": true,
+          "$ref": "#/definitions/ManagedApp",
+          "description": "The reference to the Managed App."
+        }
+      }
+    },
+    "MecDevice": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The reference to the Vnf Manager Device."
+        }
+      }
+    },
+    "ManagedApp": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource URI of the managed App."
+        }
+      }
+    },
+    "VirtualNetworkFunctionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnfManagerVnf"
+          },
+          "description": "A list of Vnf Manager Vnfs in a resource group or in a subscription."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Vnf Manager Vnfs API service call."
+    }
+  }
+}
