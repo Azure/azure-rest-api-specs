@@ -2589,15 +2589,26 @@
       },
       "type": "object"
     },
+    "ActionPropertiesBase": {
+      "description": "Action property bag base.",
+      "properties": {
+        "logicAppResourceId": {
+          "description": "Logic App Resource Id, providers/Microsoft.Logic/workflows/{WorkflowID}.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ActionRequestProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase" 
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "triggerUri": {
           "description": "Logic App Callback URL for this specific workflow.",
-          "type": "string"
-        },
-        "logicAppResourceId": {
-          "description": "Logic App Resource Id, providers/Microsoft.Logic/workflows/{WorkflowID}.",
           "type": "string"
         }
       },
@@ -2624,14 +2635,15 @@
       "type": "object"
     },
     "ActionResponseProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "workflowId": {
           "description": "The name of the logic app's workflow.",
-          "type": "string"
-        },
-        "logicAppResourceId": {
-          "description": "The logic app's resource id.",
           "type": "string"
         }
       },
