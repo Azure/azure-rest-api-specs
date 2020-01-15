@@ -13,8 +13,5 @@ variables:
   PREPRODUCTION_PIPELINE: 'true'
 
 jobs:
-- template: .azure-pipelines/BranchProtectionForPrivateRepo.yml
 - template: .azure-pipelines/BreakingChange.yml
 - template: .azure-pipelines/ModelValidation.yml
-- template: .azure-pipelines/PrettierCheck.yml
-- template: .azure-pipelines/Avocado.yml
