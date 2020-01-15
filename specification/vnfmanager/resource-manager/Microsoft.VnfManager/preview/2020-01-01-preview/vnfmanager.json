@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "NetworkManagementClient",
-    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed in a Vnf Manager device",
-    "version": "2020-01-01-preview"
+    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed using Vnf manager",
+    "version": "2019-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -83,26 +83,14 @@
       "description": "Common resource representation.",
       "x-ms-azure-resource": true
     },
-    "GlobalResource": {
+    "SubResource": {
       "properties": {
         "id": {
           "type": "string",
           "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
         }
       },
-      "description": "Common resource representation.",
+      "description": "Reference to another subresource.",
       "x-ms-azure-resource": true
     },
     "ProvisioningState": {
