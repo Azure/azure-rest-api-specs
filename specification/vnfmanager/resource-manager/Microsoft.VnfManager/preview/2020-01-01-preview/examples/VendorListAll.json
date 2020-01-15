@@ -1,0 +1,68 @@
+﻿{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "TestVendor",
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor",
+            "type": "Microsoft.VnfManager/vendor",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "skus": [
+                {
+                  "name": "MetaSwitch_Small",
+                  "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+                  "tags": {},
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "preview": false,
+                    "skuType": "Packetcore",
+                    "deploymentMode": "Edgedevice",
+                    "managedApp": {
+                      "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+                    },
+                    "vnfTemplate": "SaS URI",
+                    "previewSubscriptions": [],
+                    "regions": []
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "TestVendor2",
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor2",
+            "type": "Microsoft.VnfManager/vendor",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "skus": [
+                {
+                  "name": "Packetcore",
+                  "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+                  "tags": {},
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "preview": false,
+                    "skuType": "Packetcore",
+                    "deploymentMode": "Edgedevice",
+                    "managedApp": {
+                      "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+                    },
+                    "vnfTemplate": "SaS URI",
+                    "previewSubscriptions": [],
+                    "regions": []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

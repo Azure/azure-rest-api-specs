@@ -242,6 +242,12 @@
           },
           "204": {
             "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -282,6 +288,12 @@
             "description": "Request successful. The operation returns the resulting vendor resource.",
             "schema": {
               "$ref": "#/definitions/VendorSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
         }
@@ -334,6 +346,12 @@
             "description": "Create successful. The operation returns the resulting Vendor Sku subresource.",
             "schema": {
               "$ref": "#/definitions/VendorSku"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+              }
             }
           },
           "x-ms-long-running-operation": true,
@@ -370,6 +388,12 @@
             "description": "Request successful. The operation returns a list of Vnf Manager Vendor resources.",
             "schema": {
               "$ref": "#/definitions/VendorSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
         },
@@ -419,6 +443,12 @@
             "description": "Request successful. The operation returns the resulting MEC vendor resource.",
             "schema": {
               "$ref": "#/definitions/VendorVnf"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
         }
@@ -474,6 +504,18 @@
               "$ref": "#/definitions/VendorVnf"
             }
           },
+          "201": {
+            "description": "Update successful. The operation returns the resulting Vendor Vnf subresource.",
+            "schema": {
+              "$ref": "#/definitions/VendorVnf"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+              }
+            }
+          },
           "x-ms-long-running-operation": true,
           "x-ms-long-running-operation-options": {
             "final-state-via": "azure-async-operation"
@@ -522,6 +564,12 @@
             "description": "Request successful. The operation returns the resulting MEC vendor resource.",
             "schema": {
               "$ref": "#/definitions/VendorVnfListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
         }
@@ -668,6 +716,23 @@
             "$ref": "#/definitions/Vendor"
           },
           "description": "A list of Vendors ."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Vendors API service call."
+    },
+    "VendorVnfListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VendorVnf"
+          },
+          "description": "A list of Vendor Vnfs ."
         },
         "nextLink": {
           "readOnly": true,
