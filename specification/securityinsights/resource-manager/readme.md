@@ -36,6 +36,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 ```
 
 ---
@@ -100,7 +101,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
-
+  - $(this-folder)/Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
