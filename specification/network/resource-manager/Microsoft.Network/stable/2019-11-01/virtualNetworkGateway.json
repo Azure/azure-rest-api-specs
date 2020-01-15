@@ -2240,6 +2240,11 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the public IP resource."
         },
+        "privateIPAddress":{
+          "readOnly": true,
+          "type": "string",
+          "description": "Private IP Address for this gateway."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -2322,7 +2327,7 @@
           "type": "boolean",
           "description": "Whether BGP is enabled for this virtual network gateway or not."
         },
-		"enablePrivateIpAddress": {
+        "enablePrivateIpAddress": {
           "type": "boolean",
           "description": "Whether private IP needs to be enabled on this gateway for connections or not."
         },
@@ -2902,7 +2907,7 @@
           "type": "boolean",
           "description": "EnableBgp flag."
         },
-		"useLocalAzureIpAddress": {
+        "useLocalAzureIpAddress": {
           "type": "boolean",
           "description": "Use private local azure IP for the connection."
         },
