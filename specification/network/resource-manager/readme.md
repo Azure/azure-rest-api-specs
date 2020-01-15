@@ -28,15 +28,65 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2019-09
+tag: package-2019-11
 ```
 
 
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Network/stable/2019-11-01/applicationGateway.json
+  - Microsoft.Network/stable/2019-11-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2019-11-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-11-01/availableServiceAliases.json
+  - Microsoft.Network/stable/2019-11-01/azureFirewall.json
+  - Microsoft.Network/stable/2019-11-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-11-01/bastionHost.json
+  - Microsoft.Network/stable/2019-11-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2019-11-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2019-11-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2019-11-01/endpointService.json
+  - Microsoft.Network/stable/2019-11-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2019-11-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2019-11-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2019-11-01/expressRoutePort.json
+  - Microsoft.Network/stable/2019-11-01/firewallPolicy.json
+  - Microsoft.Network/stable/2019-11-01/ipGroups.json
+  - Microsoft.Network/stable/2019-11-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-11-01/natGateway.json
+  - Microsoft.Network/stable/2019-11-01/network.json
+  - Microsoft.Network/stable/2019-11-01/networkInterface.json
+  - Microsoft.Network/stable/2019-11-01/networkProfile.json
+  - Microsoft.Network/stable/2019-11-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-11-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-11-01/operation.json
+  - Microsoft.Network/stable/2019-11-01/privateEndpoint.json
+  - Microsoft.Network/stable/2019-11-01/privateLinkService.json
+  - Microsoft.Network/stable/2019-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-11-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2019-11-01/routeFilter.json
+  - Microsoft.Network/stable/2019-11-01/routeTable.json
+  - Microsoft.Network/stable/2019-11-01/serviceCommunity.json
+  - Microsoft.Network/stable/2019-11-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-11-01/serviceTags.json
+  - Microsoft.Network/stable/2019-11-01/usage.json
+  - Microsoft.Network/stable/2019-11-01/virtualNetwork.json
+  - Microsoft.Network/stable/2019-11-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2019-11-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-11-01/virtualRouter.json
+  - Microsoft.Network/stable/2019-11-01/virtualWan.json
+  - Microsoft.Network/stable/2019-11-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2019-11-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2019-11-01/webapplicationfirewall.json
+```
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09'
+``` yaml $(tag) == 'package-2019-09'
 input-file:
   - Microsoft.Network/stable/2019-09-01/applicationGateway.json
   - Microsoft.Network/stable/2019-09-01/applicationSecurityGroup.json
@@ -83,6 +133,7 @@ input-file:
   - Microsoft.Network/stable/2019-09-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-09-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
@@ -1324,6 +1375,10 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: networkwatcher.json
     where: $.definitions.ProtocolConfiguration.properties.HTTPConfiguration
+    reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: networkwatcher.json
+    where: $.definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
 ```
 
