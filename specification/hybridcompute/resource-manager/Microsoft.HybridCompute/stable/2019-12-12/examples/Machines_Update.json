@@ -5,12 +5,13 @@
     "name": "myMachine",
     "api-version": "2019-12-12",
     "location": "eastus2euap",
-    "parameters": "string",
-    "properties": {
-      "physicalLocation": "newLocation"
-    },
-    "identity": {
-      "Type": "SystemAssigned"
+    "parameters": {
+      "properties": {
+        "physicalLocation": "newLocation"
+      },
+      "identity": {
+        "Type": "SystemAssigned"
+      }
     }
   },
   "responses": {
@@ -40,7 +41,7 @@
             "computerName": null
           },
           "vmId": "string",
-          "physicalLocation": "string",
+          "locationData": null,
           "clientPublicKey": "string"
         }
       }

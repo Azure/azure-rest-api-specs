@@ -4,15 +4,11 @@
     "resourceGroupName": "myResourceGroup",
     "name": "myMachine",
     "api-version": "2019-12-12",
-    "location": "eastus2euap",
-    "parameters": "string",
-    "properties": {
-      "vmId": "string",
-      "physicalLocation": "redmond",
-      "clientPublicKey": "string"
-    },
-    "identity": {
-      "Type": "SystemAssigned"
+    "parameters": {
+      "properties": {
+        "vmId": "string",      
+        "clientPublicKey": "string"
+      }
     }
   },
   "responses": {
@@ -42,7 +38,7 @@
             "computerName": null
           },
           "vmId": "string",
-          "physicalLocation": "string",
+          "locationData": null,
           "clientPublicKey": "string"
         }
       }
