@@ -6,12 +6,20 @@
     "version": "2019-12-12"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}": {
       "put": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_CreateOrUpdate",
         "description": "The operation to create or update a hybrid machine resource identity in Azure.",
         "parameters": [
@@ -83,7 +93,9 @@
         }
       },
       "patch": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_Update",
         "description": "The operation to update a hybrid machine.",
         "parameters": [
@@ -138,7 +150,9 @@
         }
       },
       "delete": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_Delete",
         "description": "The operation to remove a hybrid machine identity in Azure.",
         "parameters": [
@@ -184,7 +198,9 @@
         }
       },
       "get": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_Get",
         "description": "Retrieves information about the model view or the instance view of a hybrid machine.",
         "parameters": [
@@ -214,7 +230,9 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation.",
-            "enum": ["instanceView"],
+            "enum": [
+              "instanceView"
+            ],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
               "modelAsString": true
@@ -244,7 +262,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/reconnect": {
       "post": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_Reconnect",
         "description": "The operation to reconnect a hybrid machine resource to its identity in Azure.",
         "parameters": [
@@ -301,7 +321,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines": {
       "get": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_ListByResourceGroup",
         "description": "Lists all the hybrid machines in the specified resource group. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
@@ -345,7 +367,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/machines": {
       "get": {
-        "tags": ["machines"],
+        "tags": [
+          "machines"
+        ],
         "operationId": "Machines_ListBySubscription",
         "description": "Lists all the hybrid machines in the specified subscription. Use the nextLink property in the response to get the next page of hybrid machines.",
         "parameters": [
@@ -382,7 +406,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/extensions/{extensionName}": {
       "put": {
-        "tags": ["MachineExtensions"],
+        "tags": [
+          "MachineExtensions"
+        ],
         "operationId": "MachineExtensions_CreateOrUpdate",
         "description": "The operation to create or update the extension.",
         "parameters": [
@@ -442,7 +468,9 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": ["MachineExtensions"],
+        "tags": [
+          "MachineExtensions"
+        ],
         "operationId": "MachineExtensions_Update",
         "description": "The operation to create or update the extension.",
         "parameters": [
@@ -502,7 +530,9 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": ["MachineExtensions"],
+        "tags": [
+          "MachineExtensions"
+        ],
         "operationId": "MachineExtensions_Delete",
         "description": "The operation to delete the extension.",
         "parameters": [
@@ -553,7 +583,9 @@
         }
       },
       "get": {
-        "tags": ["MachineExtensions"],
+        "tags": [
+          "MachineExtensions"
+        ],
         "operationId": "MachineExtensions_Get",
         "description": "The operation to get the extension.",
         "parameters": [
@@ -602,7 +634,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{name}/extensions": {
       "get": {
-        "tags": ["MachineExtensions"],
+        "tags": [
+          "MachineExtensions"
+        ],
         "operationId": "MachineExtensions_List",
         "description": "The operation to get all extensions of a non-Azure machine",
         "parameters": [
@@ -654,7 +688,9 @@
     },
     "/providers/Microsoft.HybridCompute/operations": {
       "get": {
-        "tags": ["operations"],
+        "tags": [
+          "operations"
+        ],
         "operationId": "Operations_List",
         "description": "Gets a list of hybrid compute operations.",
         "parameters": [
@@ -778,7 +814,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The status of the hybrid machine agent.",
-          "enum": ["Connected", "Disconnected", "Error"],
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
           "x-ms-enum": {
             "name": "StatusTypes",
             "modelAsString": true
@@ -805,7 +845,10 @@
         },
         "vmId": {
           "type": "string",
-          "x-ms-mutability": ["read", "create"],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "Specifies the hybrid machine unique ID."
         },
         "displayName": {
@@ -945,7 +988,9 @@
           "description": "The URI to fetch the next page of Machines. Call ListNext() with this URI to fetch the next page of hybrid machines."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The List hybrid machine operation response."
     },
     "UpdateResource": {
@@ -984,7 +1029,10 @@
           }
         }
       },
-      "required": ["code", "message"]
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "MachineExtension": {
       "properties": {
@@ -1126,7 +1174,11 @@
             "level": {
               "type": "string",
               "description": "The level code.",
-              "enum": ["Info", "Warning", "Error"],
+              "enum": [
+                "Info",
+                "Warning",
+                "Error"
+              ],
               "x-ms-enum": {
                 "name": "StatusLevelTypes",
                 "modelAsString": true
