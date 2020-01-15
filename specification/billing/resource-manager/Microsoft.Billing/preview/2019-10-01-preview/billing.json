@@ -5453,6 +5453,44 @@
           "type": "string",
           "readOnly": true
         },
+        "billingProfileStatus": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatus",
+            "modelAsString": true
+          }
+        },
+        "billingProfileStatusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatusReasonCode",
+            "modelAsString": true
+          }
+        },
+        "billingProfileSpendingLimit": {
+          "description": "The Billing Profile Spending Limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileSpendingLimit",
+            "modelAsString": true
+          }
+        },
         "costCenter": {
           "description": "Cost center name.",
           "type": "string",
@@ -5854,6 +5892,44 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
+        },
+        "status": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatus",
+            "modelAsString": true
+          }
+        },
+        "statusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "StatusReasonCode",
+            "modelAsString": true
+          }
+        },
+        "spendingLimit": {
+          "description": "The Billing Profile Spending Limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SpendingLimit",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -5994,6 +6070,44 @@
           "description": "Billing profile display name.",
           "type": "string",
           "readOnly": true
+        },
+        "billingProfileStatus": {
+          "description": "The status of the billing profile.",
+          "enum": [
+            "Active",
+            "Disabled",
+            "Warned"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatus",
+            "modelAsString": true
+          }
+        },
+        "billingProfileStatusReasonCode": {
+          "description": "Reason for the specified billing profile status.",
+          "enum": [
+            "PastDue",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileStatusReasonCode",
+            "modelAsString": true
+          }
+        },
+        "billingProfileSpendingLimit": {
+          "description": "The Billing Profile Spending Limit.",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BillingProfileSpendingLimit",
+            "modelAsString": true
+          }
         },
         "enabledAzurePlans": {
           "description": "Enabled azure plans for the associated billing profile.",
