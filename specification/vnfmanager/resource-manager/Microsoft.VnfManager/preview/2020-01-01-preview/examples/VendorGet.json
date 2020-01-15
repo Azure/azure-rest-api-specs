@@ -2,18 +2,21 @@
   "parameters": {
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
-    "mecVendorName": "TestVendor"
+    "vendorName": "TestVendor"
   },
   "responses": {
     "200": {
-      "body": { 
-  	    "id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor", 
-  	    "type": "Microsoft.VnfManager/vendor", 
-  	    "properties": { 
-    	    "provisioningState": "Succeeded",
+      "body": {
+        "name": "TestVnf1",
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor",
+        "type": "Microsoft.VnfManager/vendors",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
           "skus": [
             {
-  	          "id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku", 
+              "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
               "properties": {
                 "provisioningState": "Succeeded",
                 "preview": false,

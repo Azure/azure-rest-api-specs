@@ -2,23 +2,24 @@
   "parameters": {
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
-    "mecVendorName": "TestVendor",
-    "mecVendorSkuName": "TestVendorSku" 
+    "vendorName": "TestVendor",
+    "skuName": "TestSku"
   },
   "responses": {
     "200": {
       "body": {
-  	    "id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku", 
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestSku",
         "properties": {
           "provisioningState": "Succeeded",
           "preview": false,
           "skuType": "Packetcore",
-          "deploymentType": "Edgedevice",
+          "deploymentMode": "Edgedevice",
           "managedApp": {
-            "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+            "properties": {
+              "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+            }
           },
-          "vnfTemplate": "SaS URI",
-          "previewSubscriptions": []
+          "vnfTemplate": "SaS URI"
         }
       }
     }

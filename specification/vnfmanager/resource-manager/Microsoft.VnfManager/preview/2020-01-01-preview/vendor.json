@@ -7,8 +7,7 @@
   },
   "host": "management.azure.com",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -40,7 +39,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "Vendor_Delete",
+        "operationId": "Vendors_Delete",
         "description": "Deletes the specified vendor.",
         "parameters": [
           {
@@ -85,7 +84,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "Vendor_Get",
+        "operationId": "Vendors_Get",
         "description": "Gets information about the specified vendor.",
         "parameters": [
           {
@@ -115,13 +114,18 @@
               "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Vendor resource": {
+            "$ref": "./examples/VendorGet.json"
+          }
         }
       },
       "put": {
         "tags": [
           "Vendor"
         ],
-        "operationId": "Vendor_CreateorUpdate",
+        "operationId": "Vendors_CreateorUpdate",
         "description": "Creates or updates a Vendor.",
         "parameters": [
           {
@@ -167,6 +171,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update Vendor resource": {
+            "$ref": "./examples/VendorCreate.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -202,6 +211,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all Vendor resources in subscription": {
+            "$ref": "./examples/VendorListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -212,7 +226,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "VendorSku_Delete",
+        "operationId": "VendorSkus_Delete",
         "description": "Deletes the specified SKU.",
         "parameters": [
           {
@@ -250,6 +264,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete the sku of Vendor resource": {
+            "$ref": "./examples/VendorSkuDelete.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -259,7 +278,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "VendorSku_Get",
+        "operationId": "VendorSkus_Get",
         "description": "Gets information about the specified SKU.",
         "parameters": [
           {
@@ -296,13 +315,18 @@
               "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get the sku of Vendor resource": {
+            "$ref": "./examples/VendorSkuGet.json"
+          }
         }
       },
       "put": {
         "tags": [
           "Vendor"
         ],
-        "operationId": "VendorSku_CreateorUpdate",
+        "operationId": "VendorSkus_CreateorUpdate",
         "description": "Create or update a SKU",
         "parameters": [
           {
@@ -355,6 +379,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update the sku of Vendor resource": {
+            "$ref": "./examples/VendorSkuCreate.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -397,6 +426,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get all the skus of Vendor resource": {
+            "$ref": "./examples/VendorSkuListAll.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -407,7 +441,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "VendorVnf_Get",
+        "operationId": "VendorVnfs_Get",
         "description": "Gets information about the specified Vnf.",
         "parameters": [
           {
@@ -451,13 +485,18 @@
               "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get vnf service key of Vendor resource": {
+            "$ref": "./examples/VendorGetVnfServiceKey.json"
+          }
         }
       },
       "put": {
         "tags": [
           "Vendor"
         ],
-        "operationId": "VendorVnf_Update",
+        "operationId": "VendorVnfs_CreateOrUpdate",
         "description": "Update a VNF",
         "parameters": [
           {
@@ -517,6 +556,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or update vnf of Vendor resource": {
+            "$ref": "./examples/VendorCreateVnfServiceKey.json"
+          }
+        },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -572,6 +616,14 @@
               "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get all vnf of Vendor resource": {
+            "$ref": "./examples/VendorListAllVnfs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }

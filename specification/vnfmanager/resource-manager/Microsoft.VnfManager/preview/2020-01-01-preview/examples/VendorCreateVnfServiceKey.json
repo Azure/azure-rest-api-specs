@@ -3,78 +3,67 @@
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
     "locationName": "eastus",
-    "mecVendorName": "TestVendor",
+    "vendorName": "TestVendor",
     "vnfServiceKey": "TestVnfServiceKey",
     "parameters": {
-      "api-version": "2020-01-01-preview",
-      "subscriptionId": "subid",
-      "mecVendorName": "TestVendor",
-      "mecVendorSkuName": "TestVendorSku",
       "properties": {
-        "preview": false,
-        "skuType": "Packetcore",
-        "deploymentType": "Edgedevice",
-        "managedApp": {
-          "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
-        },
-        "vnfTemplate": "SaS URI",
-        "previewSubscriptions": []
+        "vendorProvisioningState": "Provisioned"
       }
-    },
-    "responses": {
-      "200": {
-        "body": {
-          "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
-          "properties": {
-            "provisioningState": "Accepted",
-            "vendorProvisioningState": "Not Provisioned",
-            "serviceKey": "ServiceKey",
-            "sku": {
-              "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
-              "properties": {
-                "provisioningState": "Succeeded",
-                "preview": false,
-                "skuType": "Packetcore",
-                "deploymentType": "Edgedevice",
-                "managedApp": {
-                  "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
-                },
-                "vnfTemplate": "SaS URI",
-                "previewSubscriptions": []
-              }
-            },
-            "managedApp": {
-              "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
+        "properties": {
+          "provisioningState": "Accepted",
+          "vendorProvisioningState": "Not Provisioned",
+          "serviceKey": "ServiceKey",
+          "sku": {
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "preview": false,
+              "skuType": "Packetcore",
+              "deploymentType": "Edgedevice",
+              "managedApp": {
+                "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+              },
+              "vnfTemplate": "SaS URI"
             }
+          },
+          "managedApp": {
+            "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
           }
         }
-      },
-      "201": {
-        "body": {
-          "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
-          "properties": {
-            "provisioningState": "Accepted",
-            "vendorProvisioningState": "Not Provisioned",
-            "serviceKey": "ServiceKey",
-            "sku": {
-              "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
-              "properties": {
-                "provisioningState": "Succeeded",
-                "preview": false,
-                "skuType": "Packetcore",
-                "deploymentType": "Edgedevice",
-                "managedApp": {
-                  "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
-                },
-                "vnfTemplate": "SaS URI",
-                "previewSubscriptions": []
-              }
-            },
-            "managedApp": {
-              "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/locations/eastus/vendors/TestVendor/vnfs/TestVnfServiceKey",
+        "properties": {
+          "provisioningState": "Accepted",
+          "vendorProvisioningState": "Not Provisioned",
+          "serviceKey": "ServiceKey",
+          "sku": {
+            "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "preview": false,
+              "skuType": "Packetcore",
+              "deploymentType": "Edgedevice",
+              "managedApp": {
+                "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+              },
+              "vnfTemplate": "SaS URI"
             }
+          },
+          "managedApp": {
+            "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
           }
         }
       }
     }
   }
+}
+

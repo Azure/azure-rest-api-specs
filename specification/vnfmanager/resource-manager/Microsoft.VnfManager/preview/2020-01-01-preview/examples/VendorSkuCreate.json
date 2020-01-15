@@ -2,8 +2,8 @@
   "parameters": {
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
-    "mecVendorName": "TestVendor",
-    "mecVendorSkuName": "TestVendorSku",
+    "vendorName": "TestVendor",
+    "skuName": "TestSku",
     "properties": {
       "preview": false,
       "skuType": "Packetcore",
@@ -11,17 +11,13 @@
       "managedApp": {
         "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
       },
-      "vnfTemplate": "SaS URI",
-      "previewSubscriptions": []
-    } 
+      "vnfTemplate": "SaS URI"
+    }
   },
   "responses": {
     "201": {
       "body": {
-        "name": "TestVendorSku", 
-  	"id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku", 
-  	"type": "Microsoft.VnfManager/vendor", 
-  	"tags": {},
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestSku",
         "properties": {
           "provisioningState": "Accepted",
           "preview": false,
@@ -30,17 +26,13 @@
           "managedApp": {
             "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
           },
-          "vnfTemplate": "SaS URI",
-          "previewSubscriptions": []
+          "vnfTemplate": "SaS URI"
         }
       }
     },
     "202": {
       "body": {
-        "name": "TestVendorSku", 
-  	"id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku", 
-  	"type": "Microsoft.VnfManager/vendor", 
-  	"tags": {},
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestSku",
         "properties": {
           "provisioningState": "Accepted",
           "preview": false,
@@ -49,8 +41,7 @@
           "managedApp": {
             "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
           },
-          "vnfTemplate": "SaS URI",
-          "previewSubscriptions": []
+          "vnfTemplate": "SaS URI"
         }
       }
     }
