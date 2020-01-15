@@ -76,7 +76,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-01'
+```yaml $(tag) == 'package-2019-01'
 input-file:
   - Microsoft.ApiManagement/stable/2019-01-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2019-01-01/apimapis.json
