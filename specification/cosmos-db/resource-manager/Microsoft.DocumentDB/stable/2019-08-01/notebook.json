@@ -147,7 +147,7 @@
             "$ref": "#/parameters/NotebookWorkspaceNameParameter"
           },
           {
-            "name": "createParameters",
+            "name": "notebookCreateParameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -221,15 +221,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/getConnectionInfo": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/notebookWorkspaces/{notebookWorkspaceName}/listConnectionInfo": {
       "post": {
         "tags": [
           "NotebookWorkspacesResource"
         ],
-        "operationId": "NotebookWorkspaces_GetConnectionInfo",
+        "operationId": "NotebookWorkspaces_ListConnectionInfo",
         "x-ms-examples": {
-          "CosmosDBNotebookWorkspaceGetConnectionInfo": {
-            "$ref": "./examples/CosmosDBNotebookWorkspaceGetConnectionInfo.json"
+          "CosmosDBNotebookWorkspaceListConnectionInfo": {
+            "$ref": "./examples/CosmosDBNotebookWorkspaceListConnectionInfo.json"
           }
         },
         "description": "Retrieves the connection info for the notebook workspace",
