@@ -1,0 +1,6412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01",
+    "title": "DataShareManagementClient",
+    "description": "Creates a Microsoft.DataShare management client."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get an account under a resource group",
+        "description": "Get an account",
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "./examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Create an account in the given resource group",
+        "description": "Create an account",
+        "operationId": "Accounts_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "account",
+            "in": "body",
+            "description": "The account payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Accounts_Create": {
+            "$ref": "./examples/Accounts_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Delete an account",
+        "description": "DeleteAccount",
+        "operationId": "Accounts_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Accounts_Delete": {
+            "$ref": "./examples/Accounts_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Patch a given account",
+        "description": "Patch an account",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "accountUpdateParameters",
+            "in": "body",
+            "description": "The account update parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "./examples/Accounts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataShare/accounts": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "List Accounts in a subscription",
+        "description": "List Accounts in Subscription",
+        "operationId": "Accounts_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Accounts_ListBySubscription": {
+            "$ref": "./examples/Accounts_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "List Accounts in a resource group",
+        "description": "List Accounts in ResourceGroup",
+        "operationId": "Accounts_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Accounts_ListByResourceGroup": {
+            "$ref": "./examples/Accounts_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataShare/locations/{location}/RejectInvitation": {
+      "post": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "Rejects the invitation identified by invitationId",
+        "description": "Reject an invitation",
+        "operationId": "ConsumerInvitations_RejectInvitation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the invitation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitation",
+            "in": "body",
+            "description": "An invitation payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_RejectInvitation": {
+            "$ref": "./examples/ConsumerInvitations_RejectInvitation.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataShare/locations/{location}/consumerInvitations/{invitationId}": {
+      "get": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "Gets the invitation identified by invitationId",
+        "description": "Get an invitation",
+        "operationId": "ConsumerInvitations_Get",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Location of the invitation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationId",
+            "in": "path",
+            "description": "An invitation id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_Get": {
+            "$ref": "./examples/ConsumerInvitations_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataShare/ListInvitations": {
+      "get": {
+        "tags": [
+          "ConsumerInvitation"
+        ],
+        "summary": "List the invitations",
+        "description": "Lists invitations",
+        "operationId": "ConsumerInvitations_ListInvitations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerInvitationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConsumerInvitations_ListInvitations": {
+            "$ref": "./examples/ConsumerInvitations_ListInvitations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/dataSets/{dataSetName}": {
+      "get": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Get DataSet in a share.",
+        "description": "Get a DataSet in a share",
+        "operationId": "DataSets_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetName",
+            "in": "path",
+            "description": "The name of the dataSet.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSets_Get": {
+            "$ref": "./examples/DataSets_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Adds a new data set to an existing share or updates it if existing.",
+        "description": "Create a DataSet ",
+        "operationId": "DataSets_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share to add the data set to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetName",
+            "in": "path",
+            "description": "The name of the dataSet.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSet",
+            "in": "body",
+            "description": "The new data set information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSet"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSets_Create": {
+            "$ref": "./examples/DataSets_Create.json"
+          },
+          "DataSets_KustoCluster_Create": {
+            "$ref": "./examples/DataSets_KustoCluster_Create.json"
+          },
+          "DataSets_KustoDatabase_Create": {
+            "$ref": "./examples/DataSets_KustoDatabase_Create.json"
+          },
+          "DataSets_SqlDWTable_Create": {
+            "$ref": "./examples/DataSets_SqlDWTable_Create.json"
+          },
+          "DataSets_SqlDBTable_Create": {
+            "$ref": "./examples/DataSets_SqlDBTable_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "Delete DataSet in a share.",
+        "description": "Delete a DataSet in a share",
+        "operationId": "DataSets_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetName",
+            "in": "path",
+            "description": "The name of the dataSet.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DataSets_Delete": {
+            "$ref": "./examples/DataSets_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/dataSets": {
+      "get": {
+        "tags": [
+          "DataSet"
+        ],
+        "summary": "List DataSets in a share.",
+        "description": "List DataSets in a share",
+        "operationId": "DataSets_ListByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataSets_ListByShare": {
+            "$ref": "./examples/DataSets_ListByShare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/dataSetMappings/{dataSetMappingName}": {
+      "get": {
+        "tags": [
+          "DataSetMapping"
+        ],
+        "summary": "Get DataSetMapping in a shareSubscription.",
+        "description": "Get a DataSetMapping in a shareSubscription",
+        "operationId": "DataSetMappings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetMappingName",
+            "in": "path",
+            "description": "The name of the dataSetMapping.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetMapping"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSetMappings_Get": {
+            "$ref": "./examples/DataSetMappings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataSetMapping"
+        ],
+        "summary": "Maps a source data set in the source share to a sink data set in the share subscription.\r\nEnables copying the data set from source to destination.",
+        "description": "Create a DataSetMapping ",
+        "operationId": "DataSetMappings_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription which will hold the data set sink.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetMappingName",
+            "in": "path",
+            "description": "The name of the data set mapping to be created.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetMapping",
+            "in": "body",
+            "description": "Destination data set configuration details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSetMapping"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetMapping"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetMapping"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSetMappings_Create": {
+            "$ref": "./examples/DataSetMappings_Create.json"
+          },
+          "DataSetMappings_SqlDW_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDW_Create.json"
+          },
+          "DataSetMappings_SqlDB_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDB_Create.json"
+          },
+          "DataSetMappings_SqlDWDataSetToAdlsGen2File_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDWDataSetToAdlsGen2File_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataSetMapping"
+        ],
+        "summary": "Delete DataSetMapping in a shareSubscription.",
+        "description": "Delete a DataSetMapping in a shareSubscription",
+        "operationId": "DataSetMappings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSetMappingName",
+            "in": "path",
+            "description": "The name of the dataSetMapping.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSetMappings_Delete": {
+            "$ref": "./examples/DataSetMappings_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/dataSetMappings": {
+      "get": {
+        "tags": [
+          "DataSetMapping"
+        ],
+        "summary": "List DataSetMappings in a share subscription.",
+        "description": "List DataSetMappings in a share subscription",
+        "operationId": "DataSetMappings_ListByShareSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSetMappingList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataSetMappings_ListByShareSubscription": {
+            "$ref": "./examples/DataSetMappings_ListByShareSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/invitations/{invitationName}": {
+      "get": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Get Invitation in a share.",
+        "description": "Get an invitation in a share",
+        "operationId": "Invitations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Get": {
+            "$ref": "./examples/Invitations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Sends a new invitation to a recipient to access a share.",
+        "description": "Create an invitation ",
+        "operationId": "Invitations_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share to send the invitation for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitation",
+            "in": "body",
+            "description": "Invitation details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Invitation"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Create": {
+            "$ref": "./examples/Invitations_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "Delete Invitation in a share.",
+        "description": "Delete an invitation in a share",
+        "operationId": "Invitations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invitationName",
+            "in": "path",
+            "description": "The name of the invitation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Invitations_Delete": {
+            "$ref": "./examples/Invitations_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/invitations": {
+      "get": {
+        "tags": [
+          "Invitation"
+        ],
+        "summary": "List all Invitations in a share.",
+        "description": "List invitations in a share",
+        "operationId": "Invitations_ListByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "The continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/InvitationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Invitations_ListByShare": {
+            "$ref": "./examples/Invitations_ListByShare.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DataShare/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "summary": "Lists the available operations",
+        "description": "List of available operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Get a specified share",
+        "description": "Get a share ",
+        "operationId": "Shares_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Shares_Get": {
+            "$ref": "./examples/Shares_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Create a share in the given account.",
+        "description": "Create a share ",
+        "operationId": "Shares_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "share",
+            "in": "body",
+            "description": "The share payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Share"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Shares_Create": {
+            "$ref": "./examples/Shares_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Deletes a share",
+        "description": "Delete a share ",
+        "operationId": "Shares_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Shares_Delete": {
+            "$ref": "./examples/Shares_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List of available shares under an account.",
+        "description": "List shares in an account",
+        "operationId": "Shares_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Shares_ListByAccount": {
+            "$ref": "./examples/Shares_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizations": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List Synchronizations in a share",
+        "description": "List synchronizations of a share",
+        "operationId": "Shares_ListSynchronizations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSynchronizationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Shares_ListSynchronizations": {
+            "$ref": "./examples/Shares_ListSynchronizations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/listSynchronizationDetails": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List data set level details for a share synchronization",
+        "description": "List synchronization details",
+        "operationId": "Shares_ListSynchronizationDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSynchronization",
+            "in": "body",
+            "description": "Share Synchronization payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSynchronization"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationDetailsList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Shares_ListSynchronizationDetails": {
+            "$ref": "./examples/Shares_ListSynchronizationDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Get share subscription in a provider share.",
+        "description": "Get share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_GetByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_GetByShare": {
+            "$ref": "./examples/ProviderShareSubscriptions_GetByShare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions": {
+      "get": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "List of available share subscriptions to a provider share.",
+        "description": "List share subscriptions in a provider share",
+        "operationId": "ProviderShareSubscriptions_ListByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscriptionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_ListByShare": {
+            "$ref": "./examples/ProviderShareSubscriptions_ListByShare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/revoke": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Revoke share subscription in a provider share.",
+        "description": "Revoke share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_Revoke",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_Revoke": {
+            "$ref": "./examples/ProviderShareSubscriptions_Revoke.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/providerShareSubscriptions/{providerShareSubscriptionId}/reinstate": {
+      "post": {
+        "tags": [
+          "Share"
+        ],
+        "summary": "Reinstate share subscription in a provider share.",
+        "description": "Reinstate share subscription in a provider share",
+        "operationId": "ProviderShareSubscriptions_Reinstate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "providerShareSubscriptionId",
+            "in": "path",
+            "description": "To locate shareSubscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProviderShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ProviderShareSubscriptions_Reinstate": {
+            "$ref": "./examples/ProviderShareSubscriptions_Reinstate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}": {
+      "get": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Get shareSubscription in an account.",
+        "description": "Get a shareSubscription in an account",
+        "operationId": "ShareSubscriptions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_Get": {
+            "$ref": "./examples/ShareSubscriptions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Create shareSubscription in an account.",
+        "description": "Create a shareSubscription in an account",
+        "operationId": "ShareSubscriptions_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSubscription",
+            "in": "body",
+            "description": "create parameters for shareSubscription",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSubscription"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscription"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscription"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_Create": {
+            "$ref": "./examples/ShareSubscriptions_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Delete shareSubscription in an account.",
+        "description": "Delete a shareSubscription in an account",
+        "operationId": "ShareSubscriptions_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ShareSubscriptions_Delete": {
+            "$ref": "./examples/ShareSubscriptions_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions": {
+      "get": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "List of available share subscriptions under an account.",
+        "description": "List share subscriptions in an account",
+        "operationId": "ShareSubscriptions_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListByAccount": {
+            "$ref": "./examples/ShareSubscriptions_ListByAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
+      "get": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Get source dataSets of a shareSubscription.",
+        "description": "Get source dataSets of a shareSubscription",
+        "operationId": "ConsumerSourceDataSets_ListByShareSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConsumerSourceDataSetList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConsumerSourceDataSets_ListByShareSubscription": {
+            "$ref": "./examples/ConsumerSourceDataSets_ListByShareSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSourceShareSynchronizationSettings": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Get source share synchronization settings for a shareSubscription.",
+        "description": "Get synchronization settings set on a share",
+        "operationId": "ShareSubscriptions_ListSourceShareSynchronizationSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SourceShareSynchronizationSettingList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListSourceShareSynchronizationSettings": {
+            "$ref": "./examples/ShareSubscriptions_ListSourceShareSynchronizationSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizations": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "List Synchronizations in a share subscription.",
+        "description": "List synchronizations of a share subscription",
+        "operationId": "ShareSubscriptions_ListSynchronizations",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronizationList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListSynchronizations": {
+            "$ref": "./examples/ShareSubscriptions_ListSynchronizations.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/listSynchronizationDetails": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "List data set level details for a share subscription synchronization",
+        "description": "List synchronization details",
+        "operationId": "ShareSubscriptions_ListSynchronizationDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSubscriptionSynchronization",
+            "in": "body",
+            "description": "Share Subscription Synchronization payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationDetailsList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListSynchronizationDetails": {
+            "$ref": "./examples/ShareSubscriptions_ListSynchronizationDetails.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/Synchronize": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Initiate an asynchronous data share job",
+        "description": "Initiate a copy",
+        "operationId": "ShareSubscriptions_Synchronize",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of share subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "synchronize",
+            "in": "body",
+            "description": "Synchronize payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Synchronize"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_Synchronize": {
+            "$ref": "./examples/ShareSubscriptions_Synchronize.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/cancelSynchronization": {
+      "post": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "Request cancellation of a data share snapshot",
+        "description": "Request to cancel a synchronization.",
+        "operationId": "ShareSubscriptions_CancelSynchronization",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shareSubscriptionSynchronization",
+            "in": "body",
+            "description": "Share Subscription Synchronization payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionSynchronization"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_CancelSynchronization": {
+            "$ref": "./examples/ShareSubscriptions_CancelSynchronization.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/synchronizationSettings/{synchronizationSettingName}": {
+      "get": {
+        "tags": [
+          "SynchronizationSetting"
+        ],
+        "summary": "Get synchronizationSetting in a share.",
+        "description": "Get a synchronizationSetting in a share",
+        "operationId": "SynchronizationSettings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "synchronizationSettingName",
+            "in": "path",
+            "description": "The name of the synchronizationSetting.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationSetting"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SynchronizationSettings_Get": {
+            "$ref": "./examples/SynchronizationSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SynchronizationSetting"
+        ],
+        "summary": "Adds a new synchronization setting to an existing share or updates it if existing.",
+        "description": "Create or update a synchronizationSetting ",
+        "operationId": "SynchronizationSettings_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share to add the synchronization setting to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "synchronizationSettingName",
+            "in": "path",
+            "description": "The name of the synchronizationSetting.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "synchronizationSetting",
+            "in": "body",
+            "description": "The new synchronization setting information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SynchronizationSetting"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationSetting"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationSetting"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SynchronizationSettings_Create": {
+            "$ref": "./examples/SynchronizationSettings_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SynchronizationSetting"
+        ],
+        "summary": "Delete synchronizationSetting in a share.",
+        "description": "Delete a synchronizationSetting in a share",
+        "operationId": "SynchronizationSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "synchronizationSettingName",
+            "in": "path",
+            "description": "The name of the synchronizationSetting .",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SynchronizationSettings_Delete": {
+            "$ref": "./examples/SynchronizationSettings_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shares/{shareName}/synchronizationSettings": {
+      "get": {
+        "tags": [
+          "SynchronizationSetting"
+        ],
+        "summary": "List synchronizationSettings in a share.",
+        "description": "List synchronizationSettings in a share",
+        "operationId": "SynchronizationSettings_ListByShare",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareName",
+            "in": "path",
+            "description": "The name of the share.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SynchronizationSettingList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SynchronizationSettings_ListByShare": {
+            "$ref": "./examples/SynchronizationSettings_ListByShare.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/triggers/{triggerName}": {
+      "get": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "Get Trigger in a shareSubscription.",
+        "description": "Get a Trigger in a shareSubscription",
+        "operationId": "Triggers_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Triggers_Get": {
+            "$ref": "./examples/Triggers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "This method creates a trigger for a share subscription",
+        "description": "Create a Trigger ",
+        "operationId": "Triggers_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription which will hold the data set sink.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trigger",
+            "in": "body",
+            "description": "Trigger details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Triggers_Create": {
+            "$ref": "./examples/Triggers_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "Delete Trigger in a shareSubscription.",
+        "description": "Delete a Trigger in a shareSubscription",
+        "operationId": "Triggers_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the shareSubscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "triggerName",
+            "in": "path",
+            "description": "The name of the trigger.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Triggers_Delete": {
+            "$ref": "./examples/Triggers_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/triggers": {
+      "get": {
+        "tags": [
+          "Trigger"
+        ],
+        "summary": "List Triggers in a share subscription.",
+        "description": "List Triggers in a share subscription",
+        "operationId": "Triggers_ListByShareSubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "name": "shareSubscriptionName",
+            "in": "path",
+            "description": "The name of the share subscription.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TriggerList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Triggers_ListByShareSubscription": {
+            "$ref": "./examples/Triggers_ListByShareSubscription.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "description": "An account data transfer object.",
+      "required": [
+        "identity"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DefaultDto"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity Info on the Account"
+        },
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "Properties on the account",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Identity": {
+      "description": "Identity of resource",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "service principal Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Tenant Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Identity Type",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccountProperties": {
+      "description": "Account property bag.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the account was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Account",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataShareError": {
+      "description": "The data share error model.",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DataShareErrorInfo",
+          "description": "The data share error body"
+        }
+      }
+    },
+    "DataShareErrorInfo": {
+      "description": "The data share error body model.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code of the error",
+          "type": "string"
+        },
+        "details": {
+          "description": "Nested details of the error model",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataShareErrorInfo"
+          }
+        },
+        "message": {
+          "description": "Message of the error",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error",
+          "type": "string"
+        }
+      }
+    },
+    "AccountUpdateParameters": {
+      "description": "Update parameters for accounts",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationResponse": {
+      "description": "Response for long running operation",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/DataShareErrorInfo",
+          "description": "The error property when status is failed."
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation state of the long running operation.",
+          "enum": [
+            "Accepted",
+            "InProgress",
+            "TransientFailure",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AccountList": {
+      "description": "List response for get Accounts.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        }
+      }
+    },
+    "ConsumerInvitation": {
+      "description": "A consumer Invitation data transfer object.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConsumerInvitationProperties",
+          "description": "Properties on the account",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConsumerInvitationProperties": {
+      "description": "Properties of consumer invitation",
+      "required": [
+        "invitationId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetCount": {
+          "format": "int32",
+          "description": "Number of data sets in a share",
+          "type": "integer",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Description shared when the invitation was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationId": {
+          "description": "Unique id of the invitation.",
+          "type": "string"
+        },
+        "invitationStatus": {
+          "description": "The status of the invitation.",
+          "enum": [
+            "Pending",
+            "Accepted",
+            "Rejected",
+            "Withdrawn"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "invitationStatus",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "description": "invitation location",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "respondedAt": {
+          "format": "date-time",
+          "description": "The time the recipient responded to the invitation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareName": {
+          "description": "Gets the source share Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "termsOfUse": {
+          "description": "Terms of use shared when the invitation was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConsumerInvitationList": {
+      "description": "List response for get InvitationList",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumerInvitation"
+          }
+        }
+      }
+    },
+    "DataSet": {
+      "description": "A DataSet data transfer object.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of data set.",
+          "enum": [
+            "Blob",
+            "Container",
+            "BlobFolder",
+            "AdlsGen2FileSystem",
+            "AdlsGen2Folder",
+            "AdlsGen2File",
+            "AdlsGen1Folder",
+            "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
+            "SqlDBTable",
+            "SqlDWTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataSetList": {
+      "description": "List response for get DataSets",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSet"
+          }
+        }
+      }
+    },
+    "DataSetMapping": {
+      "description": "A data set mapping data transfer object.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of data set mapping.",
+          "enum": [
+            "Blob",
+            "Container",
+            "BlobFolder",
+            "AdlsGen2FileSystem",
+            "AdlsGen2Folder",
+            "AdlsGen2File",
+            "KustoCluster",
+            "KustoDatabase",
+            "SqlDBTable",
+            "SqlDWTable"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "DataSetMappingList": {
+      "description": "List response for get DataSetMappings",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetMapping"
+          }
+        }
+      }
+    },
+    "Invitation": {
+      "description": "A Invitation data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InvitationProperties",
+          "description": "Properties on the Invitation",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InvitationProperties": {
+      "description": "Invitation property bag.",
+      "type": "object",
+      "properties": {
+        "invitationId": {
+          "description": "unique invitation id",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationStatus": {
+          "description": "The status of the invitation.",
+          "enum": [
+            "Pending",
+            "Accepted",
+            "Rejected",
+            "Withdrawn"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "invitationStatus",
+            "modelAsString": true
+          }
+        },
+        "respondedAt": {
+          "format": "date-time",
+          "description": "The time the recipient responded to the invitation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetActiveDirectoryId": {
+          "description": "The target Azure AD Id. Can't be combined with email.",
+          "type": "string"
+        },
+        "targetEmail": {
+          "description": "The email the invitation is directed to.",
+          "type": "string"
+        },
+        "targetObjectId": {
+          "description": "The target user or application Id that invitation is being sent to.\r\nMust be specified along TargetActiveDirectoryId. This enables sending\r\ninvitations to specific users or applications in an AD tenant.",
+          "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvitationList": {
+      "description": "List response for get InvitationList",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Invitation"
+          }
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List response for get operations.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationModel"
+          }
+        }
+      }
+    },
+    "OperationModel": {
+      "description": "The response model for get operations",
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationModelProperties",
+          "description": "Properties on the operation"
+        },
+        "name": {
+          "description": "Operation name for display purposes",
+          "type": "string"
+        },
+        "origin": {
+          "description": "origin of the operation",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationMetaPropertyInfo",
+          "description": "properties for the operation meta info",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationModelProperties": {
+      "description": "Properties on operations",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetaPropertyInfo": {
+      "description": "properties on meta info",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationMetaServiceSpecification",
+          "description": "meta service specification"
+        }
+      }
+    },
+    "OperationMetaServiceSpecification": {
+      "description": "The operation meta service specification",
+      "type": "object",
+      "properties": {
+        "logSpecifications": {
+          "description": "log specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaLogSpecification"
+          }
+        },
+        "metricSpecifications": {
+          "description": "metric specifications for the operation",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetaMetricSpecification"
+          }
+        }
+      }
+    },
+    "OperationMetaMetricSpecification": {
+      "description": "metric specifications for the operation",
+      "type": "object",
+      "properties": {
+        "aggregationType": {
+          "description": "aggregation type of metric",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "properties for dimension",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionProperties"
+          }
+        },
+        "displayDescription": {
+          "description": "description of the metric",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the metric",
+          "type": "string"
+        },
+        "enableRegionalMdmAccount": {
+          "description": "enable regional mdm account",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "internal metric name",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the metric",
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "description": "dimension name use to replace resource id if specified",
+          "type": "string"
+        },
+        "supportedAggregationTypes": {
+          "description": "supported aggregation types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedTimeGrainTypes": {
+          "description": "supported time grain types",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unit": {
+          "description": "units for the metric",
+          "type": "string"
+        }
+      }
+    },
+    "OperationMetaLogSpecification": {
+      "description": "log specifications for operation api",
+      "type": "object",
+      "properties": {
+        "blobDuration": {
+          "description": "blob duration of the log",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "localized name of the log category",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the log category",
+          "type": "string"
+        }
+      }
+    },
+    "DimensionProperties": {
+      "description": "properties for dimension",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "localized display name of the dimension to customer",
+          "type": "string"
+        },
+        "name": {
+          "description": "dimension name",
+          "type": "string"
+        }
+      }
+    },
+    "Share": {
+      "description": "A share data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ShareProperties",
+          "description": "Properties on the share",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ShareProperties": {
+      "description": "Share property bag.",
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the share was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Share description.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "shareKind": {
+          "description": "Share kind.",
+          "enum": [
+            "CopyBased",
+            "InPlace"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "shareKind",
+            "modelAsString": true
+          }
+        },
+        "terms": {
+          "description": "Share terms.",
+          "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ShareList": {
+      "description": "List response for get Shares.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Share"
+          }
+        }
+      }
+    },
+    "ShareSynchronizationList": {
+      "description": "List response for get ShareSynchronization.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSynchronization"
+          }
+        }
+      }
+    },
+    "ShareSynchronization": {
+      "description": "A ShareSynchronization data transfer object.",
+      "type": "object",
+      "properties": {
+        "consumerEmail": {
+          "description": "Email of the user who created the synchronization",
+          "type": "string"
+        },
+        "consumerName": {
+          "description": "Name of the user who created the synchronization",
+          "type": "string"
+        },
+        "consumerTenantName": {
+          "description": "Tenant name of the consumer who created the synchronization",
+          "type": "string"
+        },
+        "durationMs": {
+          "format": "int32",
+          "description": "synchronization duration",
+          "type": "integer"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of synchronization",
+          "type": "string"
+        },
+        "message": {
+          "description": "message of synchronization",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time of synchronization",
+          "type": "string"
+        },
+        "status": {
+          "description": "Raw Status",
+          "type": "string"
+        },
+        "synchronizationId": {
+          "description": "Synchronization id",
+          "type": "string"
+        },
+        "synchronizationMode": {
+          "description": "Synchronization mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SynchronizationDetailsList": {
+      "description": "details of synchronization",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SynchronizationDetails"
+          }
+        }
+      }
+    },
+    "SynchronizationDetails": {
+      "description": "Synchronization details at data set level",
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Id of data set",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetType": {
+          "description": "Type of the data set",
+          "enum": [
+            "Blob",
+            "Container",
+            "BlobFolder",
+            "AdlsGen2FileSystem",
+            "AdlsGen2Folder",
+            "AdlsGen2File",
+            "AdlsGen1Folder",
+            "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
+            "SqlDBTable",
+            "SqlDWTable"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetType",
+            "modelAsString": true
+          }
+        },
+        "durationMs": {
+          "format": "int32",
+          "description": "Duration of data set level copy",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of data set level copy",
+          "type": "string",
+          "readOnly": true
+        },
+        "filesRead": {
+          "format": "int64",
+          "description": "The number of files read from the source data set",
+          "type": "integer",
+          "readOnly": true
+        },
+        "filesWritten": {
+          "format": "int64",
+          "description": "The number of files written into the sink data set",
+          "type": "integer",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the data set",
+          "type": "string",
+          "readOnly": true
+        },
+        "rowsCopied": {
+          "format": "int64",
+          "description": "The number of files copied into the sink data set",
+          "type": "integer",
+          "readOnly": true
+        },
+        "rowsRead": {
+          "format": "int64",
+          "description": "The number of rows read from the source data set.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sizeRead": {
+          "format": "int64",
+          "description": "The size of the data read from the source data set in bytes",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sizeWritten": {
+          "format": "int64",
+          "description": "The size of the data written into the sink data set in bytes",
+          "type": "integer",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of data set level copy",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Raw Status",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCore": {
+          "format": "int64",
+          "description": "The vCore units consumed for the data set synchronization",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ProviderShareSubscription": {
+      "description": "A provider side share subscription data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProviderShareSubscriptionProperties",
+          "description": "properties of providerShareSubscription",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProviderShareSubscriptionProperties": {
+      "description": "Provider share subscription properties",
+      "type": "object",
+      "properties": {
+        "consumerEmail": {
+          "description": "Email of the consumer who created the share subscription",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumerName": {
+          "description": "Name of the consumer who created the share subscription",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumerTenantName": {
+          "description": "Tenant name of the consumer who created the share subscription",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "created at",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the share",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the share",
+          "type": "string",
+          "readOnly": true
+        },
+        "sharedAt": {
+          "format": "date-time",
+          "description": "Shared at",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareSubscriptionObjectId": {
+          "description": "share Subscription Object Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareSubscriptionStatus": {
+          "description": "Gets the status of share subscription",
+          "enum": [
+            "Active",
+            "Revoked",
+            "SourceDeleted",
+            "Revoking"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "shareSubscriptionStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProviderShareSubscriptionList": {
+      "description": "List response for get ShareSubscription.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderShareSubscription"
+          }
+        }
+      }
+    },
+    "ShareSubscription": {
+      "description": "A share subscription data transfer object.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ShareSubscriptionProperties",
+          "description": "Properties on the share subscription",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ShareSubscriptionProperties": {
+      "description": "Share subscription property bag.",
+      "required": [
+        "invitationId",
+        "sourceShareLocation"
+      ],
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the share subscription was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invitationId": {
+          "description": "The invitation id.",
+          "type": "string"
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the share subscription",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "shareDescription": {
+          "description": "Description of share",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareKind": {
+          "description": "Kind of share",
+          "enum": [
+            "CopyBased",
+            "InPlace"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "shareKind",
+            "modelAsString": true
+          }
+        },
+        "shareName": {
+          "description": "Name of the share",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareSubscriptionStatus": {
+          "description": "Gets the current status of share subscription.",
+          "enum": [
+            "Active",
+            "Revoked",
+            "SourceDeleted",
+            "Revoking"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "shareSubscriptionStatus",
+            "modelAsString": true
+          }
+        },
+        "shareTerms": {
+          "description": "Terms of a share",
+          "type": "string",
+          "readOnly": true
+        },
+        "sourceShareLocation": {
+          "description": "Source share location.",
+          "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ShareSubscriptionList": {
+      "description": "List response for get ShareSubscription.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSubscription"
+          }
+        }
+      }
+    },
+    "ConsumerSourceDataSetList": {
+      "description": "A consumer side list of source dataSets",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumerSourceDataSet"
+          }
+        }
+      }
+    },
+    "ConsumerSourceDataSet": {
+      "description": "A consumer side dataSet data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConsumerSourceDataSetProperties",
+          "description": "source dataSet properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConsumerSourceDataSetProperties": {
+      "description": "Properties of consumer source dataSet",
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "DataSet Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetLocation": {
+          "description": "Location of the data set.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetName": {
+          "description": "DataSet name",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetPath": {
+          "description": "DataSet path",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSetType": {
+          "description": "Type of data set",
+          "enum": [
+            "Blob",
+            "Container",
+            "BlobFolder",
+            "AdlsGen2FileSystem",
+            "AdlsGen2Folder",
+            "AdlsGen2File",
+            "AdlsGen1Folder",
+            "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
+            "SqlDBTable",
+            "SqlDWTable"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SourceShareSynchronizationSettingList": {
+      "description": "List response for get source share Synchronization settings",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceShareSynchronizationSetting"
+          }
+        }
+      }
+    },
+    "SourceShareSynchronizationSetting": {
+      "description": "A view of synchronization setting added by the provider",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of synchronization",
+          "enum": [
+            "ScheduleBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ShareSubscriptionSynchronizationList": {
+      "description": "A consumer side list of share subscription synchronizations",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSubscriptionSynchronization"
+          }
+        }
+      }
+    },
+    "ShareSubscriptionSynchronization": {
+      "description": "A ShareSubscriptionSynchronization data transfer object.",
+      "required": [
+        "synchronizationId"
+      ],
+      "type": "object",
+      "properties": {
+        "durationMs": {
+          "format": "int32",
+          "description": "Synchronization duration",
+          "type": "integer",
+          "readOnly": true
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "message of Synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time of synchronization",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Raw Status",
+          "type": "string",
+          "readOnly": true
+        },
+        "synchronizationId": {
+          "description": "Synchronization id",
+          "type": "string"
+        },
+        "synchronizationMode": {
+          "description": "Synchronization Mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Synchronize": {
+      "description": "Payload for the synchronizing the data.",
+      "type": "object",
+      "properties": {
+        "synchronizationMode": {
+          "description": "Mode of synchronization used in triggers and snapshot sync. Incremental by default",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SynchronizationSetting": {
+      "description": "A Synchronization Setting data transfer object.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of synchronization",
+          "enum": [
+            "ScheduleBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "SynchronizationSettingList": {
+      "description": "List response for get Synchronization settings",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SynchronizationSetting"
+          }
+        }
+      }
+    },
+    "Trigger": {
+      "description": "A Trigger data transfer object.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyDto"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of synchronization",
+          "enum": [
+            "ScheduleBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "kind"
+    },
+    "TriggerList": {
+      "description": "List response for get triggers",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          }
+        }
+      }
+    },
+    "ScheduledSynchronizationSetting": {
+      "description": "A type of synchronization setting based on schedule",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SynchronizationSetting"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledSynchronizationSettingProperties",
+          "description": "Properties of scheduled synchronization",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ScheduleBased"
+    },
+    "ScheduledSynchronizationSettingProperties": {
+      "description": "A Scheduled synchronization setting data transfer object.",
+      "required": [
+        "recurrenceInterval",
+        "synchronizationTime"
+      ],
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the synchronization setting was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "recurrenceInterval": {
+          "description": "Recurrence Interval",
+          "enum": [
+            "Hour",
+            "Day"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "recurrenceInterval",
+            "modelAsString": true
+          }
+        },
+        "synchronizationTime": {
+          "format": "date-time",
+          "description": "Synchronization time",
+          "type": "string"
+        },
+        "userName": {
+          "description": "Name of the user who created the synchronization setting.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScheduledTrigger": {
+      "description": "A type of trigger based on schedule",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledTriggerProperties",
+          "description": "Properties of scheduled synchronization",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ScheduleBased"
+    },
+    "ScheduledTriggerProperties": {
+      "description": "A Scheduled trigger data transfer object.",
+      "required": [
+        "recurrenceInterval",
+        "synchronizationTime"
+      ],
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the trigger was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Gets the provisioning state",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "recurrenceInterval": {
+          "description": "Recurrence Interval",
+          "enum": [
+            "Hour",
+            "Day"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "recurrenceInterval",
+            "modelAsString": true
+          }
+        },
+        "synchronizationMode": {
+          "description": "Synchronization mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
+        },
+        "synchronizationTime": {
+          "format": "date-time",
+          "description": "Synchronization time",
+          "type": "string"
+        },
+        "triggerStatus": {
+          "description": "Gets the trigger state",
+          "enum": [
+            "Active",
+            "Inactive",
+            "SourceSynchronizationSettingDeleted"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "triggerStatus",
+            "modelAsString": true
+          }
+        },
+        "userName": {
+          "description": "Name of the user who created the trigger.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BlobDataSet": {
+      "description": "An Azure storage blob data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobProperties",
+          "description": "Blob data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Blob"
+    },
+    "BlobProperties": {
+      "description": "Properties of the blob data set.",
+      "required": [
+        "containerName",
+        "filePath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePath": {
+          "description": "File path within the source data set",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "BlobFolderDataSet": {
+      "description": "An Azure storage blob folder data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobFolderProperties",
+          "description": "Blob folder data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobFolder"
+    },
+    "BlobFolderProperties": {
+      "description": "Properties of the blob folder data set.",
+      "required": [
+        "containerName",
+        "prefix",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "prefix": {
+          "description": "Prefix for blob folder",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "BlobContainerDataSet": {
+      "description": "An Azure storage blob container data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobContainerProperties",
+          "description": "Blob container data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Container"
+    },
+    "BlobContainerProperties": {
+      "description": "Properties of the BLOB container data set.",
+      "required": [
+        "containerName",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "BLOB Container name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FileDataSet": {
+      "description": "An ADLS Gen 2 file data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileProperties",
+          "description": "ADLS Gen 2 file data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2File"
+    },
+    "ADLSGen2FileProperties": {
+      "description": "Properties of the ADLS Gen2 file data set.",
+      "required": [
+        "fileSystem",
+        "filePath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePath": {
+          "description": "File path within the file system.",
+          "type": "string"
+        },
+        "fileSystem": {
+          "description": "File system to which the file belongs.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FolderDataSet": {
+      "description": "An ADLS Gen 2 folder data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FolderProperties",
+          "description": "ADLS Gen 2 folder data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Folder"
+    },
+    "ADLSGen2FolderProperties": {
+      "description": "Properties of the ADLS Gen2 folder data set.",
+      "required": [
+        "fileSystem",
+        "folderPath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileSystem": {
+          "description": "File system to which the folder belongs.",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "Folder path within the file system.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FileSystemDataSet": {
+      "description": "An ADLS Gen 2 file system data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileSystemProperties",
+          "description": "ADLS Gen 2 file system data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2FileSystem"
+    },
+    "ADLSGen2FileSystemProperties": {
+      "description": "Properties of the ADLS Gen2 file system data set.",
+      "required": [
+        "fileSystem",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileSystem": {
+          "description": "The file system name.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen1FolderDataSet": {
+      "description": "An ADLS Gen 1 folder data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen1FolderProperties",
+          "description": "ADLS Gen 1 folder data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1Folder"
+    },
+    "ADLSGen1FolderProperties": {
+      "description": "Properties of the ADLS Gen1 folder data set.",
+      "required": [
+        "subscriptionId",
+        "resourceGroup",
+        "accountName",
+        "folderPath"
+      ],
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "The ADLS account name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "The folder path within the ADLS account.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of ADLS account.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of ADLS account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen1FileDataSet": {
+      "description": "An ADLS Gen 1 file data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen1FileProperties",
+          "description": "ADLS Gen 1 file data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen1File"
+    },
+    "ADLSGen1FileProperties": {
+      "description": "Properties of the ADLS Gen1 file data set.",
+      "required": [
+        "subscriptionId",
+        "resourceGroup",
+        "accountName",
+        "folderPath",
+        "fileName"
+      ],
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "The ADLS account name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "fileName": {
+          "description": "The file name in the ADLS account.",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "The folder path within the ADLS account.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group of ADLS account.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of ADLS account.",
+          "type": "string"
+        }
+      }
+    },
+    "KustoClusterDataSet": {
+      "description": "A kusto cluster data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoClusterDataSetProperties",
+          "description": "Kusto cluster data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoCluster"
+    },
+    "KustoClusterDataSetProperties": {
+      "description": "Properties of the kusto cluster data set.",
+      "required": [
+        "kustoClusterResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the kusto cluster data set.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KustoDatabaseDataSet": {
+      "description": "A kusto database data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoDatabaseDataSetProperties",
+          "description": "Kusto database data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoDatabase"
+    },
+    "KustoDatabaseDataSetProperties": {
+      "description": "Properties of the kusto database data set.",
+      "required": [
+        "kustoDatabaseResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "kustoDatabaseResourceId": {
+          "description": "Resource id of the kusto database.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the kusto database data set.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlDWTableDataSet": {
+      "description": "A SQL DW table data set.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDWTableProperties",
+          "description": "SQL DW table data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDWTable"
+    },
+    "SqlDWTableProperties": {
+      "description": "Properties of the SQL DW table data set.",
+      "required": [
+        "dataWarehouseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataWarehouseName": {
+          "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DW table name.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDBTableDataSet": {
+      "description": "A SQL DB table data set.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDBTableProperties",
+          "description": "SQL DB table data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDBTable"
+    },
+    "SqlDBTableProperties": {
+      "description": "Properties of the SQL DB table data set.",
+      "required": [
+        "databaseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Database name of the source data set",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DB table name.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobDataSetMapping": {
+      "description": "A Blob data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobMappingProperties",
+          "description": "Blob data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Blob"
+    },
+    "BlobMappingProperties": {
+      "description": "Azure storage Blob data set mapping property bag.",
+      "required": [
+        "containerName",
+        "filePath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "filePath": {
+          "description": "File path within the source data set",
+          "type": "string"
+        },
+        "outputType": {
+          "description": "File output type",
+          "enum": [
+            "Csv",
+            "Parquet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "outputType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobFolderDataSetMapping": {
+      "description": "A Blob folder data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobFolderMappingProperties",
+          "description": "Blob folder data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobFolder"
+    },
+    "BlobFolderMappingProperties": {
+      "description": "Azure storage Blob folder data set mapping property bag.",
+      "required": [
+        "containerName",
+        "prefix",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "prefix": {
+          "description": "Prefix for blob folder",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "BlobContainerDataSetMapping": {
+      "description": "A Blob container data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobContainerMappingProperties",
+          "description": "Blob container data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Container"
+    },
+    "BlobContainerMappingProperties": {
+      "description": "Azure storage Blob container data set mapping property bag.",
+      "required": [
+        "containerName",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "BLOB Container name.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FileDataSetMapping": {
+      "description": "An ADLS Gen2 file data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileDataSetMappingProperties",
+          "description": "ADLS Gen2 file data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2File"
+    },
+    "ADLSGen2FileDataSetMappingProperties": {
+      "description": "ADLS Gen 2 file data set mapping property bag.",
+      "required": [
+        "fileSystem",
+        "filePath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "filePath": {
+          "description": "File path within the file system.",
+          "type": "string"
+        },
+        "fileSystem": {
+          "description": "File system to which the file belongs.",
+          "type": "string"
+        },
+        "outputType": {
+          "description": "Type of output file",
+          "enum": [
+            "Csv",
+            "Parquet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "outputType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FolderDataSetMapping": {
+      "description": "An ADLS Gen2 folder data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FolderDataSetMappingProperties",
+          "description": "ADLS Gen2 folder data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Folder"
+    },
+    "ADLSGen2FolderDataSetMappingProperties": {
+      "description": "ADLS Gen 2 folder data set mapping property bag.",
+      "required": [
+        "fileSystem",
+        "folderPath",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "fileSystem": {
+          "description": "File system to which the folder belongs.",
+          "type": "string"
+        },
+        "folderPath": {
+          "description": "Folder path within the file system.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "ADLSGen2FileSystemDataSetMapping": {
+      "description": "An ADLS Gen2 file system data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2FileSystemDataSetMappingProperties",
+          "description": "ADLS Gen2 file system data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2FileSystem"
+    },
+    "ADLSGen2FileSystemDataSetMappingProperties": {
+      "description": "ADLS Gen 2 file system data set mapping property bag.",
+      "required": [
+        "fileSystem",
+        "subscriptionId",
+        "resourceGroup",
+        "storageAccountName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "fileSystem": {
+          "description": "The file system name.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group of storage account.",
+          "type": "string"
+        },
+        "storageAccountName": {
+          "description": "Storage account name of the source data set.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "KustoClusterDataSetMapping": {
+      "description": "A Kusto cluster data set mapping",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoClusterDataSetMappingProperties",
+          "description": "Kusto cluster data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoCluster"
+    },
+    "KustoClusterDataSetMappingProperties": {
+      "description": "Properties of the Kusto cluster data set mapping",
+      "required": [
+        "kustoClusterResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the sink kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KustoDatabaseDataSetMapping": {
+      "description": "A Kusto database data set mapping",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoDatabaseDataSetMappingProperties",
+          "description": "Kusto database data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoDatabase"
+    },
+    "KustoDatabaseDataSetMappingProperties": {
+      "description": "Properties of the Kusto database data set mapping",
+      "required": [
+        "kustoClusterResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the sink kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlDWTableDataSetMapping": {
+      "description": "A SQL DW Table data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDWTableDataSetMappingProperties",
+          "description": "Sql DW data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDWTable"
+    },
+    "SqlDWTableDataSetMappingProperties": {
+      "description": "Properties of the SQL DW table data set mapping.",
+      "required": [
+        "dataWarehouseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "dataWarehouseName": {
+          "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DW table name.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDBTableDataSetMapping": {
+      "description": "A SQL DB Table data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDBTableDataSetMappingProperties",
+          "description": "Sql DB data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDBTable"
+    },
+    "SqlDBTableDataSetMappingProperties": {
+      "description": "Properties of the SQL DB table data set mapping.",
+      "required": [
+        "databaseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "DatabaseName name of the sink data set",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DB table name.",
+          "type": "string"
+        }
+      }
+    },
+    "ScheduledSourceSynchronizationSetting": {
+      "description": "A type of synchronization setting based on schedule",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SourceShareSynchronizationSetting"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScheduledSourceShareSynchronizationSettingProperties",
+          "description": "Properties of scheduled synchronization",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "ScheduleBased"
+    },
+    "ScheduledSourceShareSynchronizationSettingProperties": {
+      "description": "A Scheduled source synchronization setting data transfer object.",
+      "type": "object",
+      "properties": {
+        "recurrenceInterval": {
+          "description": "Recurrence Interval",
+          "enum": [
+            "Hour",
+            "Day"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "recurrenceInterval",
+            "modelAsString": true
+          }
+        },
+        "synchronizationTime": {
+          "format": "date-time",
+          "description": "Synchronization time",
+          "type": "string"
+        }
+      }
+    },
+    "DefaultDto": {
+      "description": "Base data transfer object implementation for default resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the azure resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Tags on the azure resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "description": "Type of the azure resource",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyDto": {
+      "description": "Base data transfer object implementation for proxy resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the azure resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the azure resource",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "accountName": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the share account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The api version to use.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The resource group name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": []
+}

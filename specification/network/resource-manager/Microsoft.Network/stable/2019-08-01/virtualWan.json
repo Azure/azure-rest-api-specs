@@ -1032,7 +1032,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }		
+        }
       },
       "delete": {
         "operationId": "VpnServerConfigurations_Delete",
@@ -1166,7 +1166,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
         "operationId": "VirtualHubs_Get",
         "x-ms-examples": {
@@ -1847,7 +1847,7 @@
             "schema": {
               "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
             }
-          }	  
+          }
         },
         "x-ms-examples": {
           "ResetVpnGateway": {
@@ -2650,7 +2650,7 @@
             "schema": {
               "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
             }
-          }		  
+          }
         },
         "x-ms-examples": {
           "GenerateP2SVpnGatewayVPNProfile": {
@@ -2730,7 +2730,7 @@
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },		
+          },
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -2753,7 +2753,7 @@
               "$ref": "#/definitions/P2SVpnConnectionHealthRequest"
             },
             "description": "Request parameters supplied to get p2s vpn connections detailed health."
-          },		  
+          },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
@@ -2823,7 +2823,7 @@
             "schema": {
               "$ref": "#/definitions/VpnServerConfigurationsResponse"
             }
-          },  
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously. Follow the location header for list of associated VpnServerConfigurations list."
           },
@@ -2875,7 +2875,7 @@
               "$ref": "#/definitions/VirtualWanVpnProfileParameters"
             },
             "description": "Parameters supplied to the generate VirtualWan VPN profile generation operation."
-          },		  
+          },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
@@ -2886,7 +2886,7 @@
             "schema": {
               "$ref": "#/definitions/VpnProfileResponse"
             }
-          },  
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -2902,7 +2902,7 @@
           "final-state-via": "location"
         }
       }
-    }	
+    }
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -3738,7 +3738,7 @@
         "name": "HubVirtualNetworkConnectionStatus",
         "modelAsString": true
       }
-    }, 
+    },
     "OfficeTrafficCategory": {
       "type": "string",
       "description": "The office traffic category.",
@@ -3766,13 +3766,13 @@
         "name": "VirtualWanSecurityProviderType",
         "modelAsString": true
       }
-    },	
-	"VpnServerConfigVpnClientRootCertificate": {
+    },
+    "VpnServerConfigVpnClientRootCertificate": {
       "properties": {
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },  
+        },
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
@@ -3785,7 +3785,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },	  
+        },
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
@@ -3798,7 +3798,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },		  
+        },
         "thumbprint": {
           "type": "string",
           "description": "The revoked VPN client certificate thumbprint."
@@ -3811,7 +3811,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },	  
+        },
         "thumbprint": {
           "type": "string",
           "description": "The Radius client root certificate thumbprint."
@@ -3866,7 +3866,7 @@
             "enum": [
               "Certificate",
               "Radius",
-              "AAD"			  
+              "AAD"
             ],
             "x-ms-enum": {
               "name": "VpnAuthenticationType",
@@ -3875,28 +3875,28 @@
           },
           "description": "VPN authentication types for the VpnServerConfiguration."
         },
-        "vpnServerConfigVpnClientRootCertificates": {
+        "vpnClientRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificate"
           },
           "description": "VPN client root certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigVpnClientRevokedCertificates": {
+        "vpnClientRevokedCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificate"
           },
           "description": "VPN client revoked certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigRadiusServerRootCertificates": {
+        "radiusServerRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificate"
           },
           "description": "Radius Server root certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigRadiusClientRootCertificates": {
+        "radiusClientRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificate"
@@ -3931,7 +3931,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-		    "$ref": "#/definitions/P2SVpnGateway"
+            "$ref": "#/definitions/P2SVpnGateway"
           },
           "description": "List of references to P2SVpnGateways."
         },
@@ -4017,13 +4017,13 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The VirtualHub to which the gateway belongs."
         },
-        "p2sConnectionConfigurations": {
+        "p2SConnectionConfigurations": {
           "type": "array",
           "description": "List of all p2s connection configurations of the gateway.",
           "items": {
             "$ref": "#/definitions/P2SConnectionConfiguration"
           }
-        },		
+        },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the P2S VPN gateway resource."
@@ -4034,7 +4034,7 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "vpnServerConfiguration": {
-		  "$ref": "#/definitions/VpnServerConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
@@ -4136,7 +4136,7 @@
           "type": "array",
           "items": {
             "type": "string",
-			"description": "VpnServerConfiguration partial resource uri."
+            "description": "VpnServerConfiguration partial resource uri."
           },
           "description": "List of VpnServerConfigurations associated with VirtualWan."
         }
@@ -4152,7 +4152,7 @@
         "authenticationMethod": {
           "$ref": "./network.json#/definitions/AuthenticationMethod",
           "description": "VPN client authentication method."
-        }	
+        }
       },
       "description": "Virtual Wan Vpn profile parameters Vpn profile generation."
     },
@@ -4162,14 +4162,14 @@
           "type": "array",
           "items": {
             "type": "string",
-			"description": "P2S vpn user name."
+            "description": "P2S vpn user name."
           },
           "description": "The list of p2s vpn user names whose p2s vpn connection detailed health to retrieve for."
         },
         "outputBlobSasUrl": {
           "type": "string",
           "description": "The sas-url to download the P2S Vpn connection health detail."
-        }	
+        }
       },
       "description": "List of P2S Vpn connection health request."
     },

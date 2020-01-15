@@ -63,6 +63,7 @@
     },
     "DatasetLocation": {
       "description": "Dataset location.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -770,6 +771,18 @@
         "location": {
           "$ref": "#/definitions/DatasetLocation",
           "description": "The location of the ORC data storage."
+        },
+        "orcCompressionCodec": {
+          "type": "string",
+          "enum": [
+            "none",
+            "zlib",
+            "snappy"
+          ],
+          "x-ms-enum": {
+            "name": "orcCompressionCodec",
+            "modelAsString": true
+          }
         }
       },
       "required": [

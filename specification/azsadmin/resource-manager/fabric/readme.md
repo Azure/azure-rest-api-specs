@@ -116,6 +116,19 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress01      
+    reason: externalDNSIPAddress01 is a customized name, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress02      
+    reason: externalDNSIPAddress02 is a customized name, no camel case restriction needed.
+```
+
 ---
 # Code Generation
 

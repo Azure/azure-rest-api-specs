@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "resourceGroup": "resourceGroup",
+    "api-version": "2020-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/Microsoft.Advisor/configurations/default",
+            "type": "Microsoft.Advisor/configurations",
+            "name": "default",
+            "properties": {
+              "lowCpuThreshold": "5",
+              "exclude": false,
+              "digests": [
+                {
+                  "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                  "frequency": "P30D",
+                  "categories": [
+                    "HighAvailability",
+                    "Security",
+                    "Performance",
+                    "Cost",
+                    "OperationalExcellence"
+                  ],
+                  "language": "en"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "string"
+      }
+    }
+  }
+}
