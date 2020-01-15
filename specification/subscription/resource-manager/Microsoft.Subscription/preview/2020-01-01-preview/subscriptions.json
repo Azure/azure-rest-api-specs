@@ -18,7 +18,7 @@
   "paths": {
     "/providers/Microsoft.Subscription/OperationResults/PurchaseSupport_{subscriptionId}:{purchaseId}": {
       "get": {
-        "operationId": "GetPurchaseSupportStatus_Get",
+        "operationId": "PurchaseSupportStatus_Get",
         "x-ms-examples": {
           "PurchaseOperationSupportStatus": {
             "$ref": "./examples/PurchaseOperationSupportStatus.json"
@@ -211,7 +211,11 @@
         "developer_support",
         "standard_support",
         "prodirect_support"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "supportPlanType",
+        "modelAsString": false
+      }
     },
     "DefaultSupportPlanResponseResult": {
       "description": "Default Support plan result.",
