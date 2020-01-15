@@ -96,6 +96,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -107,7 +110,7 @@
             "$ref": "./examples/SupportPlanDefault.json"
           }
         },
-        "description": "The operation to find out the support plan",
+        "description": "returns the support plan for given subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -179,7 +182,9 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
