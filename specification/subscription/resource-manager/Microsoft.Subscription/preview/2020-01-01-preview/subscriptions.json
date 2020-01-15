@@ -68,13 +68,13 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan": {
       "get": {
-        "operationId": "SupportPlans_list",
+        "operationId": "SupportPlans_listBySubscription",
         "x-ms-examples": {
           "SupportPlan": {
             "$ref": "./examples/SupportPlanList.json"
           }
         },
-        "description": "The operation to find out support plan list",
+        "description": "The operation lists support plans under the given subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -134,13 +134,13 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/supportplans/default": {
       "put": {
-        "operationId": "PurchaseSupportPlan_Create",
+        "operationId": "PurchaseSupportPlan_CreateOrUpdate",
         "x-ms-examples": {
           "PurchaseSupport": {
             "$ref": "./examples/PurchaseSupportPlan.json"
           }
         },
-        "description": "The operation to purchase/convert/cancel support plan.",
+        "description": "The operation to purchase/convert support plan.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -198,7 +198,7 @@
         }
       }
     },
-    "SubscriptionName": {
+    "subscriptionName": {
       "type": "object",
       "description": "The new name of the subscription.",
       "properties": {
@@ -400,16 +400,6 @@
       "required": true,
       "type": "string",
       "description": "Subscription Id."
-    },
-    "subscriptionNameParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Subscription Name",
-      "schema": {
-        "$ref": "#/definitions/SubscriptionName"
-      }
     },
     "planTypeParameter": {
       "name": "planType",
