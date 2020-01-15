@@ -49,7 +49,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Checks that the Spool name is valid and is not already in use.",
         "operationId": "Spool_CheckNameAvailability",
@@ -69,6 +69,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "Region in which the name must be available.",
+            "required": true,
+            "type": "string"
           }
         ],
         "consumes": [ "application/json" ],
@@ -297,12 +304,6 @@
         "responses": {
           "200": {
             "description": "An existing resource was updated. The response describes the existing service and contains an Azure-AsyncOperation header to query the operation result.",
-            "schema": {
-              "$ref": "#/definitions/SpoolResource"
-            }
-          },
-          "201": {
-            "description": "Created. The response describes the new service and contains an Azure-AsyncOperation header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/SpoolResource"
             }
@@ -778,12 +779,8 @@
             "modelAsString": true
           }
         },
-        "hostNamePrefix": {
-          "description": "Prefix for the hostName of the Spool service. \r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.spool.azure.net.",
-          "type": "string"
-        },
         "hostName": {
-          "description": "FQDN of the Spool service instance. Format: xxx.service.Spool.net",
+          "description": "FQDN of the Spool service instance. Format: xxx.westus2.service.Spool.net",
           "type": "string",
           "readOnly": true
         },
@@ -807,10 +804,7 @@
             }
           }
         }
-      },
-      "required": [
-        "hostNamePrefix"
-      ]
+      }
     },
     "SpoolKeys": {
       "description": "A class representing the access keys of Spool service.",
@@ -888,5 +882,4 @@
       "x-ms-parameter-location": "method"
     }
   }
-  
 }
