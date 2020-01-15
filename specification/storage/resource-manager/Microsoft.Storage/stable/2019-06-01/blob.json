@@ -1146,7 +1146,7 @@
             "restorePolicy": {
               "$ref": "#/definitions/RestorePolicyProperties",
               "description": "The blob service properties for blob restore policy."
-             }
+            }
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "BlobServiceProperties",
@@ -1199,7 +1199,9 @@
           "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days."
         }
       },
-      "required": ["enabled"],
+      "required": [
+        "enabled"
+      ],
       "description": "The blob service properties for blob restore policy"
     },
     "LeaseContainerRequest": {
