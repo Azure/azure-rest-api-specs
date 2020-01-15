@@ -3,11 +3,11 @@
     "api-version": "2020-01-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "mecDeviceName": "TestDevice"
-    "properties": { 
-      "sku": “Mec_DataboxEdge”, 
-      "databoxEdgeDevice": { 
-        "id" : "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName" 
+    "mecDeviceName": "TestDevice",
+    "properties": {
+      "sku": "Mec_DataboxEdge",
+      "databoxEdgeDevice": {
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
       }
     }
   },
@@ -19,16 +19,18 @@
         "type": "Microsoft.VnfManager/devices",
         "location": "eastus",
         "tags": {},
-        "properties": { 
-          "provisioningState": "Accepted", 
-          "databoxEdgeDevice": { 
-            "id" : "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName" 
-          },  
-          "mecVNFs" : [], 
-          "sku": "Mec_DataboxEdge", 
-          "mecRegistrationKey": "" 
-        } 
-     }
+        "properties": {
+          "provisioningState": "Accepted",
+          "databoxEdgeDevice": {
+            "properties": {
+              "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+            }
+          },
+          "sku": "Mec_DataboxEdge",
+          "mecRegistrationKey": ""
+        }
+      }
+    },
     "202": {
       "body": {
         "name": "TestDevice",
@@ -36,15 +38,17 @@
         "type": "Microsoft.VnfManager/devices",
         "location": "eastus",
         "tags": {},
-        "properties": { 
-          "provisioningState": "Accepted", 
-          "databoxEdgeDevice": { 
-            "id" : "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName" 
-          }, 
-          "mecVNFs" : [], 
-          "sku": "Mec_DataboxEdge", 
-          "mecRegistrationKey": "" 
-        } 
-     }
-   }
+        "properties": {
+          "provisioningState": "Accepted",
+          "databoxEdgeDevice": {
+            "properties": {
+              "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.DataboxEdge/DataboxEdgeDevices/TestDataboxEdgeDeviceName"
+            }
+          },
+          "sku": "Mec_DataboxEdge",
+          "mecRegistrationKey": ""
+        }
+      } 
+    }
+  }
 }

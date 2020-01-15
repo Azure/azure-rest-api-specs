@@ -6,28 +6,25 @@
   },
   "responses": {
     "200": {
-      "body": {
-        "name": "TestVendor", 
+      "body": { 
   	    "id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor", 
   	    "type": "Microsoft.VnfManager/vendor", 
   	    "properties": { 
     	    "provisioningState": "Succeeded",
           "skus": [
             {
-              "name": "MetaSwitch_Small", 
   	          "id":  "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku", 
-  	          "tags": {},
               "properties": {
                 "provisioningState": "Succeeded",
                 "preview": false,
                 "skuType": "Packetcore",
                 "deploymentMode": "Edgedevice",
                 "managedApp": {
-                  "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+                  "properties": {
+                    "id": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Solutions/applicationDefinitions/managedAppDefinition"
+                  }
                 },
-                "vnfTemplate": "SaS URI",
-                "previewSubscriptions": [],
-                "regions": []
+                "vnfTemplate": "SaS URI"
               }
             }
           ]

@@ -346,18 +346,18 @@
             "description": "Create successful. The operation returns the resulting Vendor Sku subresource.",
             "schema": {
               "$ref": "#/definitions/VendorSku"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
-              }
             }
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -498,28 +498,28 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting Vendor Vnf subresource.",
-            "schema": {
-              "$ref": "#/definitions/VendorVnf"
-            }
-          },
           "201": {
             "description": "Update successful. The operation returns the resulting Vendor Vnf subresource.",
             "schema": {
               "$ref": "#/definitions/VendorVnf"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
-              }
             }
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
+          "202": {
+            "description": "Update successful. The operation returns the resulting Vendor Vnf subresource.",
+            "schema": {
+              "$ref": "#/definitions/VendorVnf"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -634,7 +634,7 @@
         },
         "skuType": {
           "type": "string",
-          "description": "SkuType.",
+          "description": "sku Type",
           "enum": [
             "Packetcore"
           ],
@@ -691,7 +691,7 @@
         }
       }
     },
-    "VendorSKUListResult": {
+    "VendorSkuListResult": {
       "properties": {
         "value": {
           "type": "array",
