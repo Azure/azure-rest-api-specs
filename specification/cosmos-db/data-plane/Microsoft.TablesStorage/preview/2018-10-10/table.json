@@ -29,10 +29,10 @@
     "https"
   ],
   "consumes": [
-    "application/json"
+    "application/json;odata=fullmetadata"
   ],
   "produces": [
-    "application/json"
+    "application/json;odata=fullmetadata"
   ],
   "paths": {
     "/?restype=service&comp=properties": {
@@ -291,6 +291,12 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
+          },
+          {
             "$ref": "#/parameters/topParameter"
           },
           {
@@ -352,6 +358,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
           },
           {
             "$ref": "#/parameters/TableProperties"
@@ -665,6 +677,12 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
+          },
+          {
             "$ref": "#/parameters/topParameter"
           },
           {
@@ -746,6 +764,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
           },
           {
             "$ref": "#/parameters/selectParameter"
@@ -832,6 +856,12 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
+          },
+          {
             "$ref": "#/parameters/TableEntityProperties"
           },
           {
@@ -906,6 +936,12 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
+          },
+          {
             "$ref": "#/parameters/tableNameParameter"
           },
           {
@@ -977,6 +1013,12 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/DataServiceVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/formatParameter"
           },
           {
             "$ref": "#/parameters/TableEntityProperties"
@@ -1408,6 +1450,17 @@
       "x-ms-parameter-location": "method",
       "description": "Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled."
     },
+    "DataServiceVersionParameter": {
+      "name": "DataServiceVersion",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the data service version",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "3.0"
+      ]
+    },
     "TableProperties": {
       "name": "tableProperties",
       "in": "body",
@@ -1417,6 +1470,23 @@
       },
       "x-ms-parameter-location": "method",
       "description": "The Table properties."
+    },
+    "formatParameter": {
+      "name": "$format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Specifies the media type for the response",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Format",
+      "enum": [
+        "application/json;odata=nometadata",
+        "application/json;odata=minimalmetadata",
+        "application/json;odata=fullmetadata"
+      ]
     },
     "topParameter": {
       "name": "$top",
