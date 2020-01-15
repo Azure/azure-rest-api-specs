@@ -198,16 +198,6 @@
         }
       }
     },
-    "subscriptionName": {
-      "type": "object",
-      "description": "The new name of the subscription.",
-      "properties": {
-        "subscriptionName": {
-          "type": "string",
-          "description": "New subscription name"
-        }
-      }
-    },
     "planTypeEnum": {
       "type": "string",
       "description": "the planType.",
@@ -217,17 +207,6 @@
         "standard_support",
         "prodirect_support"
       ]
-    },
-    "operationName": {
-      "type": "object",
-      "description": "The operation Name parameter.",
-      "properties": {
-        "value": {
-          "description": "The operation Name",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "DefaultSupportPlanResponseResult": {
       "description": "Default Support plan result.",
@@ -301,20 +280,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "PurchaseOperationStatusResponseResult": {
-      "description": "Purchase Record result.",
-      "properties": {
-        "planType": {
-          "description": "SupportPlan Type",
-          "type": "object",
-          "$ref": "#/definitions/planTypeEnum"
-        },
-        "endDate": {
-          "type": "string",
-          "description": "the end date"
-        }
-      }
     },
     "SupportPlanName": {
       "type": "object",
@@ -426,16 +391,6 @@
       "required": true,
       "type": "string",
       "description": "purchase Id."
-    },
-    "operationNameParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "operationName",
-      "schema": {
-        "$ref": "#/definitions/operationName"
-      }
     }
   },
   "security": [
