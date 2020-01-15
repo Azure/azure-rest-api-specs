@@ -41,6 +41,17 @@ input-file:
 
 ---
 
+### Tag: package-2019-01-preview-only
+
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-composite-v1'
+input-file:
+- Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -100,7 +111,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
   - $(this-folder)/Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 ```
 
