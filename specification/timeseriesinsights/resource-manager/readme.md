@@ -112,6 +112,10 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-timeseriesinsights
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
