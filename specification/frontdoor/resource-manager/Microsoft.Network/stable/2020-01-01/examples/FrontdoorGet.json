@@ -77,6 +77,8 @@
               "properties": {
                 "backends": [
                   {
+                    "type": "Public",
+                    "location": "westus",
                     "address": "w3.contoso.com",
                     "httpPort": 80,
                     "httpsPort": 443,
@@ -85,6 +87,7 @@
                     "priority": 2
                   },
                   {
+                    "type": "Public",
                     "address": "contoso.com.website-us-west-2.othercloud.net",
                     "httpPort": 80,
                     "httpsPort": 443,
@@ -93,13 +96,14 @@
                     "priority": 1
                   },
                   {
+                    "type": "Public",
                     "address": "contoso1.azurewebsites.net",
                     "httpPort": 80,
                     "httpsPort": 443,
                     "enabledState": "Enabled",
                     "weight": 1,
                     "priority": 1
-                  }
+                  } 
                 ],
                 "loadBalancingSettings": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1"

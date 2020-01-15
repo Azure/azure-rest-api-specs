@@ -1204,8 +1204,25 @@
       "type": "object",
       "properties": {
         "address": {
-          "description": "Location of the backend (IP address or FQDN)",
+          "description": "Location of the backend (IP address or FQDN) if type is 'Public', or private link resource Id if type is 'Private'",
           "type": "string"
+        },
+        "type" : {
+          "description": "Whether this backend is Public or Private",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackendType",
+            "modelAsString": true
+          },
+          "default": "Public"
+        },
+        "location": {
+          "description": "Region of the backend if it is in Azure. Mandatory field if backend is 'Private'",
+          "type:": "string"
         },
         "httpPort": {
           "description": "The HTTP TCP port number. Must be between 1 and 65535.",
