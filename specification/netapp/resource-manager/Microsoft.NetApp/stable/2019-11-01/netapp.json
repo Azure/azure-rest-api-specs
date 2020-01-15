@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2019-10-01",
+    "version": "2019-11-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -1087,7 +1087,7 @@
           },
           {
             "name": "body",
-            "description": "authorize request object supplied in the body of the operation.",
+            "description": "Authorize request object supplied in the body of the operation.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1106,55 +1106,6 @@
         "x-ms-examples": {
           "Volumes_AuthorizeReplication": {
             "$ref": "examples/Volumes_AuthorizeReplication.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
-      "get": {
-        "tags": [
-          "MountTargets"
-        ],
-        "operationId": "MountTargets_List",
-        "summary": "Describe all mount targets",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "description": "List all mount targets associated with the volume",
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mountTargetList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
-          }
-        },
-        "x-ms-examples": {
-          "MountTargets_List": {
-            "$ref": "examples/MountTargets_List.json"
           }
         }
       }
@@ -1761,6 +1712,10 @@
         "organizationalUnit": {
           "type": "string",
           "description": "The Organizational Unit (OU) within the Windows Active Directory"
+        },
+        "site": {
+          "type": "string",
+          "description": "The Active Directory site the service will limit Domain Controller discovery to"
         }
       }
     },
@@ -2049,8 +2004,9 @@
           "title": "Creation Token or File Path",
           "type": "string",
           "description": "A unique file path for the volume. Used when creating mount targets",
-          "minimum": 16,
-          "maximum": 40,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$",
+          "minLength": 1,
+          "maxLength": 80,
           "example": "some-amazing-filepath"
         },
         "serviceLevel": {
@@ -2482,46 +2438,11 @@
           "readOnly": true,
           "example": "1.2.3.4"
         },
-        "subnet": {
-          "title": "subnet",
-          "type": "string",
-          "description": "The subnet",
-          "example": "1.2.3.4"
-        },
-        "startIp": {
-          "title": "startIp",
-          "description": "The start of IPv4 address range to use when creating a new mount target",
-          "type": "string",
-          "example": "1.2.3.4"
-        },
-        "endIp": {
-          "title": "endIp",
-          "description": "The end of IPv4 address range to use when creating a new mount target",
-          "type": "string",
-          "example": "1.2.3.4"
-        },
-        "gateway": {
-          "title": "gateway",
-          "description": "The gateway of the IPv4 address range to use when creating a new mount target",
-          "type": "string",
-          "example": "1.2.3.4"
-        },
-        "netmask": {
-          "title": "netmask",
-          "description": "The netmask of the IPv4 address range to use when creating a new mount target",
-          "type": "string",
-          "example": "255.255.255.0"
-        },
         "smbServerFqdn": {
           "title": "smbServerFQDN",
           "description": "The SMB server's Fully Qualified Domain Name, FQDN",
           "type": "string",
           "example": "fullyqualified.domainname.com"
-        },
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure lifecycle management"
         }
       }
     },
@@ -2569,11 +2490,6 @@
           "readOnly": true,
           "description": "Resource type"
         },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags",
-          "x-ms-client-flatten": true
-        },
         "properties": {
           "description": "Snapshot Properties",
           "$ref": "#/definitions/snapshotProperties",
@@ -2586,11 +2502,6 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags",
-          "x-ms-client-flatten": true
-        }
       }
     },
     "snapshotProperties": {
@@ -2682,6 +2593,9 @@
       "type": "string",
       "in": "path",
       "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
       "description": "The name of the capacity pool",
       "x-ms-parameter-location": "method"
     },
@@ -2690,6 +2604,9 @@
       "type": "string",
       "in": "path",
       "required": true,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$",
+      "minLength": 1,
+      "maxLength": 64,
       "description": "The name of the volume",
       "x-ms-parameter-location": "method"
     },
@@ -2715,7 +2632,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2019-10-01"
+      "default": "2019-11-01"
     }
   }
 }
