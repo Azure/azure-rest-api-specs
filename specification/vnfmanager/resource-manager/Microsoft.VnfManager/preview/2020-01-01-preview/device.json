@@ -431,7 +431,7 @@
         },
         "dataBoxEdgeDevice": {
           "readOnly": true,
-          "$ref": "#/definitions/DataBoxEdgeDevice",
+          "$ref": "./vnfmanager.json#/definitions/SubResource",
           "description": "The reference to the databox edge device"
         },
         "sku": {
@@ -451,16 +451,14 @@
         }
       }
     },
-    "DataBoxEdgeDevice": {
-      "description": "dataBoxEdge device Id.",
-      "$ref": "./vnfmanager.json#/definitions/SubResource"
-    },
     "DeviceRegistrationKey": {
       "description": "Vnf Manager Device registration key",
+      "properties": {
         "registrationKey": {
           "type": "string",
           "description": "The registration key for Vnf Manager Device."
         }
+      }
     },
     "VNFRef": {
       "description": "VNF ref",
