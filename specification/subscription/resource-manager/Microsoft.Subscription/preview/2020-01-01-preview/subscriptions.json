@@ -56,7 +56,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/errorResponseBody"
             }
           }
         },
@@ -90,7 +90,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/errorResponseBody"
             }
           }
         },
@@ -126,7 +126,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/errorResponseBody"
             }
           }
         }
@@ -175,7 +175,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/errorResponseBody"
             }
           }
         },
@@ -186,17 +186,28 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
+    "errorResponseBody": {
+      "description": "Details of error response.",
+      "x-ms-external": true,
       "properties": {
         "code": {
-          "description": "Error code",
-          "type": "string"
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
         },
         "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/errorResponseBody"
+          }
         }
       }
     },
