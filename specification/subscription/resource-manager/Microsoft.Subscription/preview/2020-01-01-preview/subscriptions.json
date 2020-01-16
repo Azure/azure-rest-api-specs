@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/OperationResults/{OperationId}": {
+    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
       "get": {
         "operationId": "PurchaseSupportStatus_Get",
         "x-ms-examples": {
@@ -27,7 +27,7 @@
         "description": "The operation to find out the purchase Operation status",
         "parameters": [
           {
-            "$ref": "#/parameters/OperationIdParameter"
+            "$ref": "#/parameters/operationIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -372,8 +372,8 @@
       "type": "string",
       "description": "the subscription Id."
     },
-    "OperationIdParameter": {
-      "name": "OperationId",
+    "operationIdParameter": {
+      "name": "operationId",
       "x-ms-parameter-location": "method",
       "in": "path",
       "required": true,
