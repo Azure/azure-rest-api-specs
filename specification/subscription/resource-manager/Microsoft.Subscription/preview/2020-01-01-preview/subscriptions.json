@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/OperationResults/PurchaseSupport_{subscriptionId}:{purchaseId}": {
+    "/providers/Microsoft.Subscription/OperationResults/OperationId": {
       "get": {
         "operationId": "PurchaseSupportStatus_Get",
         "x-ms-examples": {
@@ -27,10 +27,7 @@
         "description": "The operation to find out the purchase Operation status",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/purchaseIdParameter"
+            "$ref": "#/parameters/OperationIdIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -375,6 +372,14 @@
       "type": "string",
       "description": "Subscription Id."
     },
+    "OperationIdIdParameter": {
+      "name": "OperationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Operation Id."
+    },
     "planTypeParameter": {
       "name": "planType",
       "x-ms-parameter-location": "method",
@@ -392,14 +397,6 @@
       "schema": {
         "$ref": "#/definitions/SupportPlanName"
       }
-    },
-    "purchaseIdParameter": {
-      "name": "purchaseId",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "purchase Id."
     }
   },
   "security": [
