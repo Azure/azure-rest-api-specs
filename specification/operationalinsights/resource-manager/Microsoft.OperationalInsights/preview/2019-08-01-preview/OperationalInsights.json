@@ -66,6 +66,12 @@
             "schema": {
               "$ref": "#/definitions/DataExportListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -138,7 +144,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "get": {
         "tags": [
@@ -292,7 +301,7 @@
         },
         "enable": {
           "type": "boolean",
-          "description": "The data export rule creation time."
+          "description": "Active when enabled."
         },
         "createdDate": {
           "type": "string",
@@ -313,7 +322,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the resource",
+          "description": "The type of the destination resource",
           "enum": [
             "StorageAccount",
             "EventHub"
@@ -335,7 +344,7 @@
       "properties": {
         "eventHubName": {
           "type": "string",
-          "description": "event hub name."
+          "description": "Optional. Allows to define an Event Hub name. Not applicable when destination is Storage Account."
         }
       },
       "description": "Destination meta data."
