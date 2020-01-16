@@ -1204,21 +1204,12 @@
       "type": "object",
       "properties": {
         "address": {
-          "description": "Location of the backend (IP address or FQDN) if type is 'Public', or private link resource Id if type is 'Private'",
+          "description": "Location of the backend (IP address or FQDN)",
           "type": "string"
         },
-        "type" : {
-          "description": "Whether this backend is Public or Private",
-          "enum": [
-            "Public",
-            "Private"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackendType",
-            "modelAsString": true
-          },
-          "default": "Public"
+        "privateLinkId" : {
+          "description": "If this backend is private, provide the private link resource Id. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
         },
         "location": {
           "description": "Region of the backend if it is in Azure. Mandatory field if backend is 'Private'",
