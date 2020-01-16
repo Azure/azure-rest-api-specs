@@ -263,7 +263,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createbsl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createShareableLinks": {
       "post": {
         "tags": [
           "BastionHosts",
@@ -309,6 +309,9 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Create Bastion Shareable Links for the request VMs": {
             "$ref": "./examples/BastionShareableLinkCreate.json"
@@ -316,7 +319,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deletebsl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinks": {
       "post": {
         "tags": [
           "BastionHosts",
@@ -359,6 +362,9 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Delete Bastion Shareable Links for the request VMs": {
             "$ref": "./examples/BastionShareableLinkDelete.json"
@@ -366,7 +372,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getbsl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getShareableLinks": {
       "post": {
         "tags": [
           "BastionHosts",
@@ -405,6 +411,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Returns the Bastion Shareable Links for the request VMs": {
             "$ref": "./examples/BastionShareableLinkGet.json"
@@ -412,7 +421,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getactivesessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getActiveSessions": {
       "post": {
         "tags": [
           "BastionHosts"
@@ -454,6 +463,9 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "Returns a list of currently active sessions on the Bastion": {
             "$ref": "./examples/BastionSessionsList.json"
@@ -461,7 +473,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/disconnectactivesessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/disconnectActiveSessions": {
       "post": {
         "tags": [
           "BastionHosts"
@@ -498,6 +510,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Deletes the specified active session": {
@@ -661,13 +676,17 @@
     },
     "BastionShareableLinkListResult": {
       "properties": {
-        "bsls": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BastionShareableLink"
           },
           "description": "List of Bastion Shareable Links for the request."
         }
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the URL to get the next set of results."
       },
       "description": "Response for all the Bastion Shareable Link endpoints."
     },
@@ -716,7 +735,15 @@
         "protocol": {
           "type": "string",
           "readOnly": true,
-          "description": "The protocol used to connect to the target."
+          "description": "The protocol used to connect to the target.",
+          "enum": [
+            "SSH",
+            "RDP"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
         },
         "targetResourceId": {
           "type": "string",
@@ -740,6 +767,10 @@
           },
           "description": "List of active sessions on the bastion."
         }
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the URL to get the next set of results."
       },
       "description": "Response for GetActiveSessions."
     },
@@ -772,6 +803,10 @@
           },
           "description": "List of sessions with their corresponding state."
         }
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "Gets or sets the URL to get the next set of results."
       },
       "description": "Response for DisconnectActiveSessions."
     },
