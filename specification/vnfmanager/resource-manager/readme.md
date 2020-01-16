@@ -36,6 +36,35 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
   - Microsoft.VnfManager/preview/2020-01-01-preview/vnfmanager.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/vnf.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/device.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/operations.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/vendor.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceCreate.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceDelete.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceGet.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceGetRegistrationKey.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceList.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceListAll.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/DeviceUpdateTags.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/GetOperations.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorCreate.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorCreateVnfServiceKey.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorDelete.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorGet.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorGetVnfServiceKey.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorListAll.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorListAllVnfs.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorSkuCreate.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorSkuDelete.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorSkuGet.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VendorSkuListAll.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfCreate.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfDelete.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfGet.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfList.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfListAll.json
+  - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfUpdateTags.json
 ```
 
 ---

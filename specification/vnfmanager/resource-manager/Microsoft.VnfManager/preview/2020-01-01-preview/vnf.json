@@ -206,7 +206,7 @@
         "tags": [
           "VnfManagerVnf"
         ],
-        "operationId": "VnfManagetVnf_Update",
+        "operationId": "VnfManagerVnf_Update",
         "description": "Creates or updates a Vnf Manager Vnf.",
         "parameters": [
           {
@@ -224,7 +224,7 @@
             "description": "Resource Name for the vnf resource."
           },
           {
-            "name": "mecDeviceParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -404,22 +404,12 @@
       }
     },
     "MecDevice": {
-      "description": "Mec Device properties.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The reference to the Vnf Manager Device."
-        }
-      }
+      "description": "The reference to the Vnf Manager Device.",
+      "$ref": "./vnfmanager.json#/definitions/SubResource"
     },
     "ManagedApp": {
-      "description": "Manged app properties.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The resource URI of the managed App."
-        }
-      }
+      "description": "The resource URI of the managed App.",
+      "$ref": "./vnfmanager.json#/definitions/SubResource"
     },
     "VirtualNetworkFunctionListResult": {
       "properties": {

@@ -163,7 +163,7 @@
             "schema": {
               "$ref": "#/definitions/VnfManagerDevice"
             },
-            "description": "Parameters supplied to the create or update VnfManagerdevice operation."
+            "description": "Parameters supplied to the create or update Vnf Manager device operation."
           },
           {
             "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
@@ -224,7 +224,7 @@
             "description": "The name of the VnfManager device."
           },
           {
-            "name": "mecDeviceParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -376,7 +376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Registration Key information for the Vnf Manager deviece.",
+            "description": "The Registration Key information for the Vnf Manager device.",
             "schema": {
               "$ref": "#/definitions/DeviceRegistrationKey"
             }
@@ -417,7 +417,7 @@
       "description": "VnfManager device  resource."
     },
     "VnfManagerDevicePropertiesFormat": {
-      "description": "VnfManagerdevice properties.",
+      "description": "Vnf Manager device properties.",
       "properties": {
         "resourceGuid": {
           "type": "string",
@@ -452,13 +452,8 @@
       }
     },
     "DataBoxEdgeDevice": {
-      "description": "Reference to the dataBoxEdge device",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "dataBoxEdge device Id."
-        }
-      }
+      "description": "dataBoxEdge device Id.",
+      "$ref": "./vnfmanager.json#/definitions/SubResource"
     },
     "DeviceRegistrationKey": {
       "description": "Vnf Manager Device registration key",
