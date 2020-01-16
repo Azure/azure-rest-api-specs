@@ -15,8 +15,8 @@ To see additional help and options, run:
 > `autorest --help`
 
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
-
 ---
+
 
 ## Configuration
 
@@ -66,8 +66,6 @@ input-file:
   - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfListAll.json
   - Microsoft.VnfManager/preview/2020-01-01-preview/examples/VnfUpdateTags.json
 ```
-
----
 
 # Code Generation
 
