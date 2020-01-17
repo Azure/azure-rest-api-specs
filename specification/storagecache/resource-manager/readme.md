@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for storagecache RP.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for storagecache, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,22 +15,31 @@ To build the SDK for storagecache, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-11-01
+tag: package-preview-2020-02
 add-credentials: true
 title: StorageCacheManagementClient
 ```
 
+
+### Tag: package-preview-2020-02
+
+These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-02'
+input-file:
+  - Microsoft.StorageCache/preview/2020-02-01-preview/storagecache.json
+```
 ### Tag: package-2019-11-01
 
 These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
@@ -90,8 +99,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -108,11 +116,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
