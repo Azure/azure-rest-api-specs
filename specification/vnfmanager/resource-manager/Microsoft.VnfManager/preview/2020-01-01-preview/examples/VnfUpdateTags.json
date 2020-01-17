@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "vnfName": "TestVnf",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestVnf",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.VnfManager/vnfs/TestVnf",
+        "type": "Microsoft.VnfManager/devices",
+        "location": "eastus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "mecDevice": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.VnfManager/devices/mecDeviceName"
+          },
+          "vendor": "mecVendor",
+          "sku": "mecVendorSku",
+          "vendorProvisioningState": "Succeeded",
+          "managedApp": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Solutions/applications/managedAppName"
+          },
+          "vnfServiceKey": ""
+        }
+      }
+    }
+  }
+}
