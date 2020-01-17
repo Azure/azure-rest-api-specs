@@ -1,13 +1,13 @@
 # Addons
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Addons RP.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Addons, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Addons, simply [Install AutoRest](https://aka.ms/autorest/i
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Addons API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-2020-01
 ```
 
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Addons/stable/2020-01-17/addons-swagger.json
+```
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -48,11 +57,12 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
-
 ---
-## C# 
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -65,7 +75,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/addons/Microsoft.Azure.Management.Addons/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Python
 
@@ -83,11 +92,13 @@ python:
   package-name: azure-mgmt-addons
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-addons/azure/mgmt/addons
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -104,7 +115,6 @@ go:
   clear-output-folder: true
   namespace: addons
 ```
-
 
 ### Go multi-api
 
@@ -180,9 +190,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
-
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -199,11 +207,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
