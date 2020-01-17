@@ -225,6 +225,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Domain update request accepted.",
             "schema": {
@@ -1871,6 +1874,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Topic update request accepted.",
             "schema": {
@@ -2259,8 +2265,8 @@
         "tags": [
           "TopicTypes"
         ],
-        "summary": "List event types",
-        "description": "List event types for a topic type",
+        "summary": "List event types.",
+        "description": "List event types for a topic type.",
         "operationId": "TopicTypes_ListEventTypes",
         "consumes": [],
         "produces": [
@@ -2270,7 +2276,7 @@
           {
             "name": "topicTypeName",
             "in": "path",
-            "description": "Name of the topic type",
+            "description": "Name of the topic type.",
             "required": true,
             "type": "string"
           },
@@ -2347,10 +2353,11 @@
         },
         "metricResourceId": {
           "description": "Metric resource id for the domain.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
+          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaulate and will allow traffic from all IPs.",
           "type": "boolean"
         },
         "inboundIpRules": {
@@ -2550,6 +2557,17 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "allowTrafficFromAllIPs": {
+          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaulate and will allow traffic from all IPs.",
+          "type": "boolean"
+        },
+        "inboundIpRules": {
+          "description": "This determines the IP filtering rules that ought be applied when events are received on this domain.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
           }
         }
       }
@@ -3526,10 +3544,11 @@
         },
         "metricResourceId": {
           "description": "Metric resource id for the topic.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "allowTrafficFromAllIPs": {
-          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaluate and will allow traffic from all IPs.",
+          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaulate and will allow traffic from all IPs.",
           "type": "boolean"
         },
         "inboundIpRules": {
@@ -3566,6 +3585,17 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "allowTrafficFromAllIPs": {
+          "description": "This determines if IP filtering rules ought to be evaluated or not. By default it will not evaulate and will allow traffic from all IPs.",
+          "type": "boolean"
+        },
+        "inboundIpRules": {
+          "description": "This determines the IP filtering rules that ought be applied when events are received on this domain.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InboundIpRule"
           }
         }
       }
@@ -3730,7 +3760,7 @@
           }
         },
         "sourceResourceFormat": {
-          "description": "Source resource format.",
+          "description": "Source resource formart.",
           "type": "string"
         }
       }
