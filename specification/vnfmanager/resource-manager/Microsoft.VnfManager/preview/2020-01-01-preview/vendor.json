@@ -186,7 +186,7 @@
         "tags": [
           "Vendor"
         ],
-        "operationId": "Vendors_ListAllBySubscription",
+        "operationId": "Vendors_ListBySubscription",
         "description": "Gets all the vendors in a subscription.",
         "parameters": [
           {
@@ -666,11 +666,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorSkuPropertiesFormat",
           "description": "SKU Details."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the sku resource."
         }
       },
       "allOf": [
         {
-          "$ref": "./vnfmanager.json#/definitions/Resource"
+          "$ref": "./vnfmanager.json#/definitions/SubResource"
         }
       ],
       "description": "Sku subresource."
@@ -799,11 +803,15 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/VendorVnfPropertiesFormat",
           "description": "Vnf Details."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the vnf resource."
         }
       },
       "allOf": [
         {
-          "$ref": "./vnfmanager.json#/definitions/Resource"
+          "$ref": "./vnfmanager.json#/definitions/SubResource"
         }
       ],
       "description": "Sku subresource."
