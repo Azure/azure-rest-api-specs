@@ -28,50 +28,10 @@ These are the global settings for the ApiManagement API.
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
-tag: package-preview-2019-12
+tag: package-2019-01
 ```
 
 
-### Tag: package-preview-2019-12
-
-These settings apply only when `--tag=package-preview-2019-12` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2019-12'
-input-file:
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapisByTags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimapiversionsets.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimauthorizationservers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimbackends.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcaches.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimcertificates.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimloggers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnetworkstatus.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnotifications.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimopenidconnectproviders.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicies.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicydescriptions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimportalsettings.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproducts.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproductsByTags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnamedvalues.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimquotas.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimregions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimreports.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimsubscriptions.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtagresources.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimtenant.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimusers.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/definitions.json
-```
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -112,7 +72,6 @@ input-file:
   - Microsoft.ApiManagement/stable/2019-01-01/apimusers.json
   - Microsoft.ApiManagement/stable/2019-01-01/definitions.json
 ```
-
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
@@ -329,7 +288,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators
+## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -513,10 +472,11 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set,
+If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+
