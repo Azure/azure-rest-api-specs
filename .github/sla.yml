@@ -27,8 +27,6 @@
 
 - scheduleTask:
     action: sendEmail
-    repoWhitelist:
-      - Azure/azure-rest-api-specs
     scope: pull_request
     args:
       booleanFilterExpression: "(WaitForARMFeedback&&!ARMSignedOff&&!ARMChangesRequested&&!ARMReviewInProgress)"
