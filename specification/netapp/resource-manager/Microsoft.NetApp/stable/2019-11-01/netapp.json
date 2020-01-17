@@ -883,6 +883,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/revert": {
+      "post": {
+        "tags": [
+          "Volumes Revert"
+        ],
+        "summary": "Revert a volume to one of its snapshots",
+        "description": "Revert a volume to the snapshot specified in the body",
+        "operationId": "Volumes_Revert",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Object for snapshot to revert supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumeRevert"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Revert": {
+            "$ref": "examples/Volumes_Revert.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
       "post": {
         "tags": [
@@ -2541,13 +2593,23 @@
         }
       }
     },
+    "volumeRevert": {
+      "description": "revert a volume to the snapshot",
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "type": "string",
+          "description": "Resource id of the snapshot"
+        }
+      }
+    },
     "authorizeRequest": {
       "description": "Authorize request",
       "type": "object",
       "properties": {
         "remoteVolumeResourceId": {
           "type": "string",
-          "description": "Resource id"
+          "description": "Resource id of the remote volume"
         }
       }
     }
