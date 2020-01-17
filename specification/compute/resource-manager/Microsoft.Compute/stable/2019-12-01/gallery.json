@@ -2160,12 +2160,92 @@
             "name": "StorageAccountType",
             "modelAsString": true
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption"
         }
       },
       "required": [
         "name"
       ],
       "description": "Describes the target region information."
+    },
+    "Encryption": {
+      "properties": {
+        "osDiskImage": {
+          "$ref": "#/definitions/OSDiskImageEncryption"
+        },
+        "dataDiskImages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDiskImageEncryption"
+          },
+          "description": "A list of encryption specifications for data disk images."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiskImageEncryption"
+        }
+      ],
+      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact. The encryption type specified in this parent object is used as the default for all contained disks."
+    },
+    "OSDiskImageEncryption": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiskImageEncryption"
+        }
+      ],
+      "description": "Contains encryption settings for an OS disk image."
+    },
+    "DataDiskImageEncryption": {
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiskImageEncryption"
+        }
+      ],
+      "required": [
+        "lun"
+      ],
+      "description": "Contains encryption settings for a data disk image."
+    },
+    "DiskImageEncryption": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The encryption type to use to encrypt the galery disk.",
+          "enum": [
+            "EncryptionAtRestWithPlatformKey",
+            "EncryptionAtRestWithCustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EncryptionAtRestWithPlatformKey",
+                "description": "Disk is encrypted with a platform managed key at rest. It is the default encryption type."
+              },
+              {
+                "value": "EncryptionAtRestWithCustomerKey",
+                "description": "Disk is encrypted with a customer managed key at rest."
+              }
+            ]
+          }
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "A relative URI containing the resource ID of the disk encryption set. Can only be specified if encryption type is EncryptionAtRestWithCustomerKey."
+        }
+      },
+      "description": "This is the disk image encryption base class."
     },
     "GalleryArtifactSource": {
       "properties": {
