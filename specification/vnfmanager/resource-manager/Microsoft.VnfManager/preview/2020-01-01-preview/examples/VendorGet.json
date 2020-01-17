@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "vendorName": "TestVendor"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestVnf1",
+        "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor",
+        "type": "Microsoft.VnfManager/vendors",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "skus": [
+            {
+              "id": "/subscriptions/subid/providers/Microsoft.VnfManager/vendors/TestVendor/skus/TestVendorSku",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "preview": false,
+                "skuType": "Packetcore",
+                "deploymentMode": "Edgedevice",
+                "vnfTemplate": "SaS URI"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "vnfName": "TestVnf",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "vendor": "",
+        "sku": "",
+        "mecDevice": {
+          "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.VnfManager/devices/mecDevice"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "TestVnf",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.VnfManager/vnfs/TestVnf",
+        "type": "Microsoft.VnfManager/vnfs",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Accepted",
+          "mecDevice": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.VnfManager/devices/mecDevice"
+          },
+          "vendor": "mecVendor",
+          "sku": "mecVendorSku",
+          "vendorProvisioningState": "Not Provisioned",
+          "managedApp": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Solutions/applications/managedApp"
+          },
+          "vnfServiceKey": ""
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "TestVnf",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.VnfManager/vnfs/TestVnf",
+        "type": "Microsoft.VnfManager/vnfs",
+        "location": "eastus",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Accepted",
+          "mecDevice": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.VnfManager/devices/mecDevice"
+          },
+          "vendor": "mecVendor",
+          "sku": "mecVendorSku",
+          "vendorProvisioningState": "Not Provisioned",
+          "managedApp": {
+            "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Solutions/applications/managedApp"
+          },
+          "vnfServiceKey": ""
+        }
+      }
+    }
+  }
+}

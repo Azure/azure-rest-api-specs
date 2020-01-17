@@ -1,0 +1,489 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "VnfManagerManagementClient",
+    "description": "The resources in this swagger specification will be used to manage the virtual network functions deployed in a Vnf Manager device",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VnfManager/devices/{deviceName}": {
+      "delete": {
+        "tags": [
+          "VnfManagerDevice"
+        ],
+        "operationId": "VnfManagerDevices_Delete",
+        "description": "Deletes the specified Vnf Manager device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Vnf Manager Device."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation."
+          },
+          "204": {
+            "description": "Request successful. Resource with specified name does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Vnf Manager Device resource": {
+            "$ref": "./examples/DeviceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "VnfManagerDevice"
+        ],
+        "operationId": "VnfManagerDevices_Get",
+        "description": "Gets information about the specified VnfManager device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Vnf Manager device."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Vnf Manager device resource.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Vnf Manager device": {
+            "$ref": "./examples/DeviceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VnfManagerDevice"
+        ],
+        "operationId": "VnfManagerDevices_CreateOrUpdate",
+        "description": "Creates or updates a VnfManagerDevice.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Resource Name for the device resource ."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            },
+            "description": "Parameters supplied to the create or update Vnf Manager device operation."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            }
+          },
+          "202": {
+            "description": "Accepted. The header contains ‘Azure-AsyncOperation’ header pointing to an operations resource. The operation URI can be queried to find the current state of the operation.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Vnf Manager device": {
+            "$ref": "./examples/DeviceCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VnfManagerDevice"
+        ],
+        "operationId": "VnfManagerDevices_UpdateTagsAndInternalMetadata",
+        "description": "Updates a VnfManagerDevice update tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VnfManager device."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update Vnf Manager Device tags."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Vnf Manager device resource.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDevice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vnf Manager device tags": {
+            "$ref": "./examples/DeviceUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/devices": {
+      "get": {
+        "tags": [
+          "VnfManagerDevices"
+        ],
+        "operationId": "VnfManagerDevices_ListBySubscription",
+        "description": "Gets all the VnfManager devices in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vnf Manager device resources.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Vnf Manager devices": {
+            "$ref": "./examples/DeviceListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VnfManager/devices": {
+      "get": {
+        "tags": [
+          "VnfManagerDevices"
+        ],
+        "operationId": "VnfManagerDevices_ListByResourceGroup",
+        "description": "Gets all the VnfManagerDevices in a subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Vnf Manager device resources.",
+            "schema": {
+              "$ref": "#/definitions/VnfManagerDeviceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VnfManager devices in resource group": {
+            "$ref": "./examples/DeviceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VnfManager/devices/{deviceName}/registrationKey": {
+      "post": {
+        "tags": [
+          "VnfManagerDevices"
+        ],
+        "operationId": "VnfManagerDevices_GetRegistrationKey",
+        "description": "Get the registration key for the Vnf Manager Device.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Vnf Manager device."
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Registration Key information for the Vnf Manager device.",
+            "schema": {
+              "$ref": "#/definitions/DeviceRegistrationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VnfManager devices Registration Key": {
+            "$ref": "./examples/DeviceGetRegistrationKey.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "VnfManagerDevice": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VnfManagerDevicePropertiesFormat",
+          "description": "Vnf Manager device Properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/Resource"
+        }
+      ],
+      "description": "VnfManager device  resource."
+    },
+    "VnfManagerDevicePropertiesFormat": {
+      "description": "Vnf Manager device properties.",
+      "properties": {
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource GUID property of the VnfManagerDevice resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the VnfManager device resource."
+        },
+        "dataBoxEdgeDevice": {
+          "readOnly": true,
+          "$ref": "./vnfmanager.json#/definitions/SubResource",
+          "description": "The reference to the databox edge device"
+        },
+        "sku": {
+          "type": "string",
+          "description": "The sku of the Vnf Manager device"
+        },
+        "mecVNFs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VNFRef"
+          },
+          "description": "The list of VNFs deployed on the Vnf Manager device."
+        },
+        "mecRegistrationKey": {
+          "type": "string",
+          "description": "The registration key for the Vnf Manager device resource"
+        }
+      }
+    },
+    "DeviceRegistrationKey": {
+      "description": "Vnf Manager Device registration key",
+      "properties": {
+        "mecRegistrationKey": {
+          "type": "string",
+          "description": "The registration key for Vnf Manager Device."
+        }
+      }
+    },
+    "VNFRef": {
+      "description": "VNF ref",
+      "properties": {
+        "vnfRef": {
+          "type": "string",
+          "description": "The reference to to VNF deployed on the Vnf Manager device."
+        }
+      }
+    },
+    "VnfManagerDeviceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VnfManagerDevice"
+          },
+          "description": "A list of VnfManagerDevices in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for VnfManagerDevices API service call."
+    }
+  }
+}
