@@ -35,242 +35,6 @@
     "application/json;odata=fullmetadata"
   ],
   "paths": {
-    "/?restype=service&comp=properties": {
-      "put": {
-        "tags": [
-          "service"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml"
-        ],
-        "operationId": "Service_SetProperties",
-        "description": "Sets properties for a storage account's Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
-        "parameters": [
-          {
-            "$ref": "#/parameters/StorageServiceProperties"
-          },
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success (Accepted)",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "service"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml"
-        ],
-        "operationId": "Service_GetProperties",
-        "description": "gets the properties of a storage account's Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageServiceProperties"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "restype",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "service"
-          ],
-          "description": "Required query string to set the storage service properties"
-        },
-        {
-          "name": "comp",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "properties"
-          ],
-          "description": "Required query string to set the storage service properties"
-        }
-      ]
-    },
-    "/?restype=service&comp=stats": {
-      "get": {
-        "tags": [
-          "service"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml"
-        ],
-        "operationId": "Service_GetStatistics",
-        "description": "Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageServiceStats"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "restype",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "service"
-          ],
-          "description": "Required query string to get storage service stats"
-        },
-        {
-          "name": "comp",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "stats"
-          ],
-          "description": "Required query string to get storage service stats"
-        }
-      ]
-    },
     "/Tables": {
       "get": {
         "tags": [
@@ -501,158 +265,6 @@
           }
         }
       }
-    },
-    "/{table}?comp=acl": {
-      "get": {
-        "tags": [
-          "table"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml"
-        ],
-        "operationId": "Table_GetAccessPolicy",
-        "description": "Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/tableNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/SignedIdentifiers"
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "table"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "produces": [
-          "application/xml"
-        ],
-        "operationId": "Table_SetAccessPolicy",
-        "description": "sets stored access policies for the table that may be used with Shared Access Signatures",
-        "parameters": [
-          {
-            "$ref": "#/parameters/TableAcl"
-          },
-          {
-            "$ref": "#/parameters/Timeout"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestId"
-          },
-          {
-            "$ref": "#/parameters/tableNameParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "headers": {
-              "x-ms-client-request-id": {
-                "x-ms-client-name": "ClientRequestId",
-                "type": "string",
-                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
-              },
-              "x-ms-request-id": {
-                "x-ms-client-name": "RequestId",
-                "type": "string",
-                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
-              },
-              "x-ms-version": {
-                "x-ms-client-name": "Version",
-                "type": "string",
-                "description": "Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
-              },
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc1123",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              }
-            }
-          },
-          "default": {
-            "description": "Failure",
-            "headers": {
-              "x-ms-error-code": {
-                "x-ms-client-name": "ErrorCode",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            }
-          }
-        }
-      },
-      "parameters": [
-        {
-          "name": "comp",
-          "in": "query",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "acl"
-          ],
-          "description": "Required query string to handle stored access policies for the table that may be used with Shared Access Signatures"
-        }
-      ]
     },
     "/{table}()": {
       "get": {
@@ -1054,6 +666,388 @@
             },
             "schema": {
               "$ref": "#/definitions/TableEntityProperties"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "table"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "operationId": "Table_GetAccessPolicy",
+        "description": "Retrieves details about any stored access policies specified on the table that may be used wit Shared Access Signatures.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/compAclParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SignedIdentifiers"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "table"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "operationId": "Table_SetAccessPolicy",
+        "description": "sets stored access policies for the table that may be used with Shared Access Signatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/TableAcl"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/tableNameParameter"
+          },
+          {
+            "$ref": "#/parameters/compAclParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Queue service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/?ServiceProperties": {
+      "parameters": [
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "service"
+          ],
+          "description": "Required query string to set the storage service properties"
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "properties"
+          ],
+          "description": "Required query string to set the storage service properties"
+        }
+      ],
+      "put": {
+        "tags": [
+          "service"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "operationId": "Service_SetProperties",
+        "description": "Sets properties for a storage account's Table service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
+        "parameters": [
+          {
+            "$ref": "#/parameters/StorageServiceProperties"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success (Accepted)",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "operationId": "Service_GetProperties",
+        "description": "gets the properties of a storage account's Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageServiceProperties"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      }
+    },
+    "/?ServiceStats": {
+      "parameters": [
+        {
+          "name": "restype",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "service"
+          ],
+          "description": "Required query string to get storage service stats"
+        },
+        {
+          "name": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "stats"
+          ],
+          "description": "Required query string to get storage service stats"
+        }
+      ],
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "operationId": "Service_GetStatistics",
+        "description": "Retrieves statistics related to replication for the Table service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the Table service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageServiceStats"
             }
           },
           "default": {
@@ -1525,6 +1519,17 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Filter"
+    },
+    "compAclParameter": {
+      "name": "comp",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "acl"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "Required query string to handle stored access policies for the table that may be used with Shared Access Signatures"
     },
     "TableAcl": {
       "name": "tableAcl",

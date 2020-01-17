@@ -54,19 +54,19 @@ input-file:
 ``` yaml
 directive:
   - suppress: D5001
-    where: $.paths["/?restype=service&comp=properties"].put
+    where: $["x-ms-paths"]["/?ServiceProperties"].put
     reason: The path only supports XML input/outputm which is not supported
   - suppress: D5001
-    where: $.paths["/?restype=service&comp=properties"].get
+    where: $["x-ms-paths"]["/?ServiceProperties"].get
     reason: The path only supports XML input/outputm which is not supported
   - suppress: D5001
-    where: $.paths["/?restype=service&comp=stats"].get
+    where: $["x-ms-paths"]["/?ServiceStats"].get
     reason: The path only supports XML input/outputm which is not supported
   - suppress: D5001
-    where: $.paths["/{table}?comp=acl"].get
+    where: $.paths["/{table}"].get
     reason: The path only supports XML input/outputm which is not supported
   - suppress: D5001
-    where: $.paths["/{table}?comp=acl"].put
+    where: $.paths["/{table}"].put
     reason: The path only supports XML input/outputm which is not supported
   - suppress: R3016
     where: $.definitions.StorageError.properties.Message
@@ -179,6 +179,12 @@ directive:
   - suppress: R3016
     where: $.definitions.TableEntityQueryResponse.properties["odata.metadata"]
     reason: Response from service is not camel case
+  - suppress: R2058
+    where: $["x-ms-paths"]["/?ServiceStats"]
+    reason: Cannot provide operation in "paths"
+  - suppress: R2058
+    where: $["x-ms-paths"]["/?ServiceProperties"]
+    reason: Cannot provide operation in "paths"
 ```
 
 ---
