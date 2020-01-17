@@ -206,6 +206,16 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+
+### Tag: package-2019-12-01
+
+These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12-01'
+input-file:
+- Microsoft.Compute/stable/2019-12-01/gallery.json
+```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
@@ -717,6 +727,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
