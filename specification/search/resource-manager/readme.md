@@ -48,6 +48,14 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Search/preview/2019-10-01-preview/search.json
+```
+
 
 ---
 # Code Generation
@@ -154,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
+  - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
 
 ```
 
