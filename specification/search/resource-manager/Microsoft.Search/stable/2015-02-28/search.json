@@ -83,14 +83,8 @@
         "tags": [
           "QueryKeys"
         ],
-        "operationId": "QueryKeys_List_Get",
-        "x-ms-examples": {
-          "SearchListQueryKeysBySearchService": {
-            "$ref": "./examples/SearchListQueryKeysBySearchService.json"
-          }
-        },
+        "operationId": "QueryKeys_List",
         "description": "Returns the list of query API keys for the given Azure Search service.",
-        "deprecated": true,
         "externalDocs": {
           "url": "https://msdn.microsoft.com/library/azure/dn832701.aspx"
         },
@@ -119,54 +113,6 @@
         "responses": {
           "200": {
             "description": "",
-            "schema": {
-              "$ref": "#/definitions/ListQueryKeysResult"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "QueryKeys"
-        ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
-        "operationId": "QueryKeys_List",
-        "x-ms-examples": {
-          "SearchListQueryKeysBySearchService": {
-            "$ref": "./examples/SearchListQueryKeysBySearchService.json"
-          }
-        },
-        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
-        "externalDocs": {
-          "url": "https://aka.ms/search-manage"
-        },
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the current subscription."
-          },
-          {
-            "name": "serviceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Search service for which to list admin keys."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in teh Azure Cognitive Search Service REST API or SDK to perform read-only operations on you Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
