@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-10-01-preview",
+    "version": "2020-01-01-preview",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -16,9 +16,9 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
+    "/providers/Microsoft.Subscription/operationResults/{operationId}": {
       "get": {
-        "operationId": "PurchaseSupportStatus_Get",
+        "operationId": "OperationResults_Get",
         "x-ms-examples": {
           "PurchaseOperationSupportStatus": {
             "$ref": "./examples/PurchaseOperationSupportStatus.json"
@@ -40,27 +40,13 @@
               "$ref": "#/definitions/SupportPlan"
             }
           },
-          "202": {
-            "description": "Accepted. Purchase support plan is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "#/definitions/errorResponseBody"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan": {
@@ -84,7 +70,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportPlanResponseResult"
+              "$ref": "#/definitions/SupportPlanResponseListResult"
             }
           },
           "default": {
@@ -180,7 +166,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "x-ms-long-running-operation": true
         }
       }
     }
@@ -229,7 +216,7 @@
       "description": "Default Support plan result.",
       "$ref": "#/definitions/SupportPlan"
     },
-    "SupportPlanResponseResult": {
+    "SupportPlanResponseListResult": {
       "description": "Support plan result.",
       "properties": {
         "value": {
@@ -308,63 +295,6 @@
           "$ref": "#/definitions/planTypeEnum"
         }
       }
-    },
-    "PurchaseSupportResponseResult": {
-      "description": "A list of containing support plan result.",
-      "properties": {
-        "planType": {
-          "description": "SupportPlan Type",
-          "type": "object",
-          "$ref": "#/definitions/planTypeEnum"
-        },
-        "endDate": {
-          "type": "string",
-          "description": "the end date"
-        }
-      }
-    },
-    "OperationListResult": {
-      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
-        }
-      }
-    },
-    "Operation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
-        },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Subscription",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
-          }
-        }
-      }
     }
   },
   "parameters": {
@@ -390,14 +320,6 @@
       "required": true,
       "type": "string",
       "description": "the operation Id."
-    },
-    "planTypeParameter": {
-      "name": "planType",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "the support planType"
     },
     "supportPlanNameParameter": {
       "name": "body",
