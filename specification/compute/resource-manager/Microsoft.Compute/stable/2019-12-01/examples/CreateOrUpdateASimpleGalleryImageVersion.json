@@ -13,7 +13,24 @@
           "targetRegions": [
             {
               "name": "West US",
-              "regionalReplicaCount": 1
+              "regionalReplicaCount": 1,
+              "encryption": {
+                "type": "EncryptionAtRestWithCustomerKey",
+                "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                "osDiskImage": {
+                  "type": "EncryptionAtRestWithPlatformKey"
+                },
+                "dataDiskImages": [
+                  {
+                    "lun": 0,
+                    "type": "EncryptionAtRestWithCustomerKey",
+                    "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                  },
+                  {
+                    "lun": 1
+                  }
+                ]
+              }
             },
             {
               "name": "East US",
@@ -39,7 +56,26 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "type": "EncryptionAtRestWithCustomerKey",
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                  "osDiskImage": {
+                    "type": "EncryptionAtRestWithPlatformKey"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    },
+                    {
+                      "lun": 1,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                    }
+                  ]
+                }
               },
               {
                 "name": "East US",
@@ -81,7 +117,26 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "type": "EncryptionAtRestWithCustomerKey",
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                  "osDiskImage": {
+                    "type": "EncryptionAtRestWithPlatformKey"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    },
+                    {
+                      "lun": 1,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                    }
+                  ]
+                }
               },
               {
                 "name": "East US",
@@ -123,7 +178,26 @@
               {
                 "name": "West US",
                 "regionalReplicaCount": 1,
-                "storageAccountType": "Standard_LRS"
+                "storageAccountType": "Standard_LRS",
+                "encryption": {
+                  "type": "EncryptionAtRestWithCustomerKey",
+                  "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet",
+                  "osDiskImage": {
+                    "type": "EncryptionAtRestWithPlatformKey"
+                  },
+                  "dataDiskImages": [
+                    {
+                      "lun": 0,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myOtherDiskEncryptionSet"
+                    },
+                    {
+                      "lun": 1,
+                      "type": "EncryptionAtRestWithCustomerKey",
+                      "diskEncryptionSetId": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSet/myDiskEncryptionSet"
+                    }
+                  ]
+                }
               },
               {
                 "name": "East US",
