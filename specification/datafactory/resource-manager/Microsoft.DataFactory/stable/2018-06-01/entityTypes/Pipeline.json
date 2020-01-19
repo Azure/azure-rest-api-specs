@@ -259,6 +259,10 @@
           "type": "object",
           "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -294,6 +298,10 @@
           "type": "object",
           "description": "Azure blobFS wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -328,6 +336,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "ADLS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -368,6 +380,10 @@
           "type": "object",
           "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -403,6 +419,10 @@
           "type": "object",
           "description": "FileServer wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -437,6 +457,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -492,6 +516,10 @@
           "type": "object",
           "description": "The prefix filter for the Google Cloud Storage object name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -527,6 +555,10 @@
           "type": "object",
           "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
@@ -553,6 +585,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -611,6 +647,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "HDFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -692,7 +732,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "expiryDateTime": {
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "FileServerWriteSettings": {
       "description": "File server write settings.",
