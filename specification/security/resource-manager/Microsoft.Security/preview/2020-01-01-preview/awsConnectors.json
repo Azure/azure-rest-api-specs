@@ -171,7 +171,8 @@
           },
           {
             "$ref": "#/parameters/AwsConnectorName"
-          }        ],
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -221,9 +222,37 @@
           "readOnly": true
         },
         "state": {
-          "description": "Aws connector state description",
-          "type": "string",
-          "readOnly": true
+          "description": "Aws connector state",
+          "type": "number",
+          "readOnly": true,
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": 0,
+                "description": "Valid connector"
+              },
+              {
+                "value": 1,
+                "description": "Invalid connector"
+              },
+              {
+                "value": 2,
+                "description": "the connection is expired"
+              },
+              {
+                "value": 1,
+                "description": "Incorrect policy of the connector"
+              }
+            ]
+          }
         },
         "credentials": {
           "description": "Aws connector setting data, write only",
