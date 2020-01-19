@@ -35,7 +35,6 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
-- Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
 - Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
 ```
 
@@ -45,7 +44,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-composite-v1'
+```yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
 ```
