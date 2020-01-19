@@ -27,6 +27,11 @@
           "404": {
             "description": "No private store enabled"
           }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffers": {
+            "$ref": "./examples/GetPrivateStoreOffers.json"
+          }
         }
       }
     },
@@ -58,6 +63,11 @@
             "schema": {
               "$ref": "#/definitions/CatalogItemSlim"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffer": {
+            "$ref": "./examples/GetPrivateStoreOffer.json"
           }
         }
       },
@@ -94,6 +104,11 @@
               "$ref": "#/definitions/PrivateStoreProperties"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetPrivateStores": {
+            "$ref": "./examples/GetPrivateStores.json"
+          }
         }
       }
     },
@@ -114,6 +129,11 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreProperties"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreByName": {
+            "$ref": "./examples/GetPrivateStoreByName.json"
           }
         }
       },
@@ -152,89 +172,6 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/PrivateStores/{PrivateStoreId}/Offers/{OfferId}/Skus/{SkuId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/OfferIdPathParameter"
-        },
-        {
-          "$ref": "#/parameters/SkuIdPathParameter"
-        },
-        {
-          "$ref": "#/parameters/PrivateStoreIdParameter"
-        }
-      ],
-    "get": {
-        "description": "Checks for eligibility for installation of a given offer",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Call successful.",
-            "schema": {
-              "$ref": "#/definitions/offerSkuObject"
-            }
-          },
-          "404": {
-            "description": "Entity not found"
-          }
-        }
-      },
-      "put": {
-        "description": "Changes the properties on a given sku",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "skuObject",
-            "schema": {
-              "$ref": "#/definitions/offerSkuObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Call successful."
-          },
-          "404": {
-            "description": "Entity not found"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Marketplace/privateStoreClient/isPrivateClient": {
-      "get": {
-        "tags": [
-          "isPrivateClient"
-        ],
-        "description": "Check if client is private or not.",
-        "operationId": "PrivateStoreClient_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          }
-        },
-        "x-ms-examples": {
-          "GetPrivateStoreClient": {
-            "$ref": "./examples/GetPrivateStoreClient.json"
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
-      }
-    },
     "/providers/Microsoft.Marketplace/operations": {
       "get": {
         "tags": [
@@ -266,8 +203,8 @@
   },
   "parameters": {
     "PrivateStoreIdParameter":{
-      "name": "privateStoreId",
-      "in": "query",
+      "name": "PrivateStoreId",
+      "in": "path",
       "required": true,
       "type": "string",
       "description": "The store ID - must use the tenant ID"
@@ -388,15 +325,6 @@
         }
       }
     },
-    "EligibilityResponse": {
-      "description": "Eligibility response for a given offer",
-      "type": "object",
-      "properties": {
-        "isEligible": {
-          "type": "boolean"
-        }
-      }
-    },
     "PrivateStoreList": {
       "description": "Describes the json payload for the list of available private stores (between zero and one, inclusive)",
       "type": "object",
@@ -461,6 +389,9 @@
           "type": "string"
         },
         "offerType": {
+          "type": "string"
+        },
+        "eTag":{
           "type": "string"
         },
         "plans": {
