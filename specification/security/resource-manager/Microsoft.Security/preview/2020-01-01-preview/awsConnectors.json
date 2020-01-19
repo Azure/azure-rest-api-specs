@@ -255,12 +255,12 @@
           }
         },
         "credentials": {
-          "description": "Aws connector setting data, write only",
+          "description": "Aws connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsCredentialsSettingProperties"
         },
         "assumeRole": {
-          "description": "Aws connector setting data, write only",
+          "description": "Aws connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
         },
@@ -299,11 +299,11 @@
       "properties": {
         "awsAccessKeyId": {
           "type": "string",
-          "description": "Describes aws connector"
+          "description": "Aws access key where this is the public key part"
         },
         "awsSecretKey": {
           "type": "string",
-          "description": "Describes aws connector"
+          "description": "Aws access key where this is the secret key part"
         }
       }
     },
@@ -313,11 +313,11 @@
       "properties": {
         "awsAssumeRoleArn": {
           "type": "string",
-          "description": "Describes aws connector"
+          "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
         },
         "awsExtraId": {
           "type": "string",
-          "description": "Describes aws connector"
+          "description": "A unique identifier that is required when you assume a role in another account."
         }
       }
     }
