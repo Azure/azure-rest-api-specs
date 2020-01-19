@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-12-01",
+    "version": "2020-01-01",
     "title": "Marketplace RP Service"
   },
   "host": "management.azure.com",
@@ -13,10 +13,13 @@
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
-        "description": "Get a list of all private offers in the default collection",
+        "description": "Get a list of all private offers in the given private store",
         "responses": {
           "200": {
             "description": "OK",
@@ -42,10 +45,13 @@
         },
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
       "delete": {
-        "description": "Deletes an offer from the default collection of the private store. TBD: Do we need this if we can also update to available: false through the PUT api?",
+        "description": "Deletes an offer from the given private store.",
         "responses": {
           "200": {
             "description": "OK - offer deleted"
@@ -61,7 +67,7 @@
           "200": {
             "description": "Offer information retrieved",
             "schema": {
-              "$ref": "#/definitions/CatalogItemSlim"
+              "$ref": "#/definitions/Offer"
             }
           }
         },
@@ -79,6 +85,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/offerObjectParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -92,6 +101,11 @@
       }
     },
     "/providers/Microsoft.Marketplace/PrivateStores": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "description": "Gets the list of available private stores",
         "produces": [
@@ -116,6 +130,9 @@
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
         }
       ],
       "get": {
@@ -216,44 +233,9 @@
       "type": "string",
       "description": "The API version to use for the request."
     },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "tenantIdInHeader": {
-      "in": "header",
-      "name": "X-TenantId",
-      "type": "string",
-      "required": true,
-      "description": "TBD: We must have existing headers for this. Use those."
-    },
     "OfferIdPathParameter": {
       "in": "path",
       "name": "OfferId",
-      "type": "string",
-      "required": true,
-      "description": "The offer ID to update or delete"
-    },
-    "offerTypePathParameter": {
-      "in": "path",
-      "name": "offerType",
-      "type": "string",
-      "required": true,
-      "description": "The offer type being accessed"
-    },
-    "publisherIdPathParameter": {
-      "in": "path",
-      "name": "publisherId",
-      "type": "string",
-      "required": true,
-      "description": "The publisher ID being accessed"
-    },
-    "SkuIdPathParameter": {
-      "in": "path",
-      "name": "SkuId",
       "type": "string",
       "required": true,
       "description": "The offer ID to update or delete"
@@ -275,7 +257,7 @@
   },
   "responses": {
     "PrivateStoreAddOffer422": {
-      "description": "[TBD: Is this needed? Can we update the content?] Offer with given id already exists in the collection"
+      "description": "Offer with given id already exists in the collection"
     },
     "PrivateStoreOffer404": {
       "description": "The offer id is could not be found in this private store collection"
@@ -359,7 +341,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CatalogItemSlim"
+            "$ref": "#/definitions/Offer"
           }
         },
         "nextLink": {
@@ -367,13 +349,10 @@
         }
       }
     },
-    "CatalogItemSlim": {
+    "Offer": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "isAvailable": {
           "type": "string"
         },
         "displayName": {
@@ -391,21 +370,18 @@
         "description": {
           "type": "string"
         },
-        "offerType": {
-          "type": "string"
-        },
         "eTag": {
           "type": "string"
         },
         "plans": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CatalogPlanSlim"
+            "$ref": "#/definitions/Plan"
           }
         }
       }
     },
-    "CatalogPlanSlim": {
+    "Plan": {
       "type": "object",
       "properties": {
         "planId": {
