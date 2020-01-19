@@ -54,6 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
 ```
 
 ## C#
@@ -87,6 +88,10 @@ license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-powerbidedicated
 ```
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ### Java multi-api
 
