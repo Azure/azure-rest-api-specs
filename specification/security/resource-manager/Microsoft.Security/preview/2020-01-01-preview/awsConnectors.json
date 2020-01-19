@@ -120,48 +120,8 @@
         "tags": [
           "AwsConnectors"
         ],
-        "description": "Create an aws connector, there are two options to onboard: (1) using credentials; (2) role based",
+        "description": "Create an aws connector, there are two options to onboard: (1) using credentials; (2) role based; Or update existing connector",
         "operationId": "AwsConnectors_Create",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/AwsConnectorName"
-          },
-          {
-            "$ref": "#/parameters/AwsConnectorSetting"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AwsConnectorSetting"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "post": {
-        "x-ms-examples": {
-          "Update an aws connector subscribed to the subscription": {
-            "$ref": "./examples/AwsConnectors/UpdateAwsConnectorSubscription_example.json"
-          }
-        },
-        "tags": [
-          "AwsConnectors"
-        ],
-        "description": "Update an aws connector subscribed to the subscription",
-        "operationId": "AwsConnectors_Update",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
