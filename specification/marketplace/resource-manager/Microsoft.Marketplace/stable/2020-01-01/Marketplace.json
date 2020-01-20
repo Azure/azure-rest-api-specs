@@ -24,6 +24,9 @@
         ],
         "operationId": "PrivateStoreOffers_List",
         "description": "Get a list of all private offers in the given private store",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -89,6 +92,9 @@
         ],
         "operationId": "PrivateStoreOffer_Get",
         "description": "Gets information about a specific offer.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Offer information retrieved",
@@ -160,12 +166,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreList"
             }
-          },
-          "default": {
-            "description": "Microsoft.Marketplace error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
@@ -201,12 +201,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PrivateStoreProperties"
-            },
-            "default": {
-              "description": "Microsoft.Marketplace error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
             }
           }
         },
