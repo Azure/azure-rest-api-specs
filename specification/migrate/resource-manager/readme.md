@@ -89,6 +89,7 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 ``` yaml $(tag) == 'package-2020-01'
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
+```
 
 # Code Generation
 
