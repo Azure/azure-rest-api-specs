@@ -9,7 +9,7 @@
     "https"
   ],
   "paths": {
-    "/providers/Microsoft.Marketplace/PrivateStores/{PrivateStoreId}/Offers": {
+    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/offers": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -51,7 +51,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/PrivateStores/{PrivateStoreId}/Offers/{OfferId}": {
+    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/offers/{OfferId}": {
       "parameters": [
         {
           "$ref": "#/parameters/OfferIdPathParameter"
@@ -70,7 +70,7 @@
         "operationId": "PrivateStoreOffer_Delete",
         "description": "Deletes an offer from the given private store.",
         "responses": {
-          "204": {
+          "200": {
             "description": "Offer was deleted successfully"
           },
           "default": {
@@ -100,6 +100,12 @@
             "description": "Offer information retrieved",
             "schema": {
               "$ref": "#/definitions/Offer"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -178,7 +184,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/PrivateStores/{PrivateStoreId}": {
+    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -202,6 +208,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateStoreProperties"
             }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -220,7 +232,7 @@
           "application/json"
         ],
         "responses": {
-          "204": {
+          "200": {
             "description": "Private store was deleted successfully ."
           },
           "default": {
