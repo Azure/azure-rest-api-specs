@@ -1011,6 +1011,14 @@
           "type": "string",
           "description": "A relative URI containing the ID of the VM that has the disk attached."
         },
+        "managedByExtended": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of relative URIs containing the IDs of the VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
+        },
         "sku": {
           "$ref": "#/definitions/DiskSku"
         },
@@ -1267,6 +1275,19 @@
         "encryption": {
           "$ref": "#/definitions/Encryption",
           "description": "Encryption property can be used to encrypt data at rest with customer managed keys or platform managed keys."
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
+        },
+        "shareInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareInfoElement"
+          },
+          "description": "Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
         }
       },
       "required": [
@@ -1348,6 +1369,15 @@
         "creationData"
       ],
       "description": "Snapshot resource properties."
+    },
+    "ShareInfoElement": {
+      "properties": {
+        "vmUri": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A relative URI containing the ID of the VM that has the disk attached."
+        }
+      }
     },
     "EncryptionSetProperties": {
       "properties": {
@@ -1515,6 +1545,11 @@
           "type": "integer",
           "format": "int32",
           "description": "The bandwidth allowed for this disk; only settable for UltraSSD disks. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
         },
         "encryption": {
           "$ref": "#/definitions/Encryption",
