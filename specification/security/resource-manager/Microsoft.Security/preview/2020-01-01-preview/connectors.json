@@ -1,0 +1,345 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/awsConnectors": {
+      "get": {
+        "x-ms-examples": {
+          "Get all aws connectors subscribed to the subscription": {
+            "$ref": "./examples/AwsConnectors/GetAwsConnectorsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectors"
+        ],
+        "description": "Details of all subscribed aws connectors",
+        "operationId": "AwsConnectors_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/awsConnectors/{connectorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an aws connector subscribed to the subscription": {
+            "$ref": "./examples/AwsConnectors/GetAwsConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectors"
+        ],
+        "description": "Details of a specific aws connector",
+        "operationId": "AwsConnectors_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create an aws connector and subscribe it to the subscription": {
+            "$ref": "./examples/AwsConnectors/CreateAwsConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectors"
+        ],
+        "description": "Create an aws connector, there are two options to onboard: (1) using credentials; (2) role based; Or update existing connector",
+        "operationId": "AwsConnectors_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorName"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an aws connector subscribed to the subscription": {
+            "$ref": "./examples/AwsConnectors/DeleteAwsConnectorSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectors"
+        ],
+        "description": "Delete an aws connector subscribed to the subscription",
+        "operationId": "AwsConnectors_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSetting"
+            }
+          },
+          "404": {
+            "description": "Aws connector is not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AwsConnectorSettingList": {
+      "type": "object",
+      "description": "List of all the aws connector subscribed to subscription response",
+      "properties": {
+        "value": {
+          "description": "List of all the aws connector settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AwsConnectorSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AwsConnectorSetting": {
+      "type": "object",
+      "description": "Aws connector setting",
+      "properties": {
+        "awsAccountId": {
+          "description": "Aws account id",
+          "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "description": "Aws connector state",
+          "type": "number",
+          "readOnly": true,
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": 0,
+                "description": "Valid connector"
+              },
+              {
+                "value": 1,
+                "description": "Invalid connector"
+              },
+              {
+                "value": 2,
+                "description": "the connection is expired"
+              },
+              {
+                "value": 1,
+                "description": "Incorrect policy of the connector"
+              }
+            ]
+          }
+        },
+        "credentials": {
+          "description": "Aws connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+          "type": "object",
+          "$ref": "#/definitions/AwsCredentialsSettingProperties"
+        },
+        "assumeRole": {
+          "description": "Aws connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
+          "type": "object",
+          "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
+        },
+        "arcAutoProvision": {
+          "type": "string",
+          "description": "Describes what kind of Azure Arc agent provisioning action to take",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "arcAutoProvision",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "On",
+                "description": "Install missing Azure Arc agent on aws ec2's automatically"
+              },
+              {
+                "value": "Off",
+                "description": "Do not install Azure Arc agent on the ec2's automatically"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AwsCredentialsSettingProperties": {
+      "type": "object",
+      "description": "Describes properties of an aws connector setting",
+      "properties": {
+        "awsAccessKeyId": {
+          "type": "string",
+          "description": "Aws access key where this is the public key part"
+        },
+        "awsSecretKey": {
+          "type": "string",
+          "description": "Aws access key where this is the secret key part"
+        }
+      }
+    },
+    "AwsAssumeRolesSettingProperties": {
+      "type": "object",
+      "description": "Describes properties of an aws connector setting",
+      "properties": {
+        "awsAssumeRoleArn": {
+          "type": "string",
+          "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
+        },
+        "awsExtraId": {
+          "type": "string",
+          "description": "A unique identifier that is required when you assume a role in another account."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AwsConnectorName": {
+      "name": "connectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the aws connector",
+      "x-ms-parameter-location": "method"
+    },
+    "AwsConnectorSetting": {
+      "name": "connectorSetting",
+      "in": "body",
+      "required": true,
+      "description": "Aws connector setting to connect to an aws account",
+      "schema": {
+        "$ref": "#/definitions/AwsConnectorSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
