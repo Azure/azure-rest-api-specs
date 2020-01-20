@@ -31,8 +31,11 @@
               "$ref": "#/definitions/OfferListResponse"
             }
           },
-          "404": {
-            "description": "No private store enabled"
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -75,7 +78,7 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreOffer": {
+          "DeletePrivateStoreOffer": {
             "$ref": "./examples/DeletePrivateStoreOffer.json"
           }
         }
@@ -130,7 +133,7 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreOffer": {
+          "UpdatePrivateStoreOffer": {
             "$ref": "./examples/UpdatePrivateStoreOffer.json"
           }
         }
@@ -222,7 +225,7 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStores": {
+          "DeletePrivateStores": {
             "$ref": "./examples/DeletePrivateStore.json"
           }
         }
@@ -251,7 +254,7 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStores": {
+          "UpdatePrivateStores": {
             "$ref": "./examples/UpdatePrivateStore.json"
           }
         }
