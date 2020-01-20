@@ -24,7 +24,9 @@
         "operationId": "Databases_ListMetrics",
         "description": "Returns database metrics.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseMetricsListWithFilter.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseMetricsListWithFilter.json"
+          }
         },
         "parameters": [
           {
@@ -75,7 +77,9 @@
         "operationId": "Databases_ListMetricDefinitions",
         "description": "Returns database metric definitions.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/DatabaseMetricsDefinitionsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/DatabaseMetricsDefinitionsList.json"
+          }
         },
         "parameters": [
           {
@@ -119,7 +123,9 @@
         "operationId": "ElasticPools_ListMetrics",
         "description": "Returns elastic pool  metrics.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/ElasticPoolMetricsListWithFilter.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/ElasticPoolMetricsListWithFilter.json"
+          }
         },
         "parameters": [
           {
@@ -170,7 +176,9 @@
         "operationId": "ElasticPools_ListMetricDefinitions",
         "description": "Returns elastic pool metric definitions.",
         "x-ms-examples": {
-          "List database usage metrics": { "$ref": "./examples/ElasticPoolMetricsDefinitionsList.json" }
+          "List database usage metrics": {
+            "$ref": "./examples/ElasticPoolMetricsDefinitionsList.json"
+          }
         },
         "parameters": [
           {
@@ -287,7 +295,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The unit of the metric.",
-          "enum": ["count", "bytes", "seconds", "percent", "countPerSecond", "bytesPerSecond"],
+          "enum": [
+            "count",
+            "bytes",
+            "seconds",
+            "percent",
+            "countPerSecond",
+            "bytesPerSecond"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "UnitType"
@@ -319,7 +334,9 @@
           "description": "The list of metrics for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metrics request."
     },
     "MetricAvailability": {
@@ -348,7 +365,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The primary aggregation type defining how metric values are displayed.",
-          "enum": ["None", "Average", "Count", "Minimum", "Maximum", "Total"],
+          "enum": [
+            "None",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "PrimaryAggregationType"
@@ -363,7 +387,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The unit of the metric.",
-          "enum": ["Count", "Bytes", "Seconds", "Percent", "CountPerSecond", "BytesPerSecond"],
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
           "x-ms-enum": {
             "modelAsString": true,
             "name": "UnitDefinitionType"
@@ -390,7 +421,9 @@
           "description": "The list of metric definitions for the database."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "The response to a list database metric definitions request."
     }
   },

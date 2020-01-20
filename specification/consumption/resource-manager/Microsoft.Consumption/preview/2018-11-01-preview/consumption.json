@@ -508,208 +508,210 @@
   },
   "definitions": {
     "Enrollment": {
-			"description": "Current entity level details",
-			"properties": {
-				"startDate": {
-					"description": "Enrollment Start Date",
-					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
-				},
-				"endDate": {
-					"description": "Enrollment End Date",
-					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
-				},
-				"currency": {
-					"description": "The currency associated with enrollment",
-					"type": "string",
-					"readOnly": true
-				},
-				"channel": {
-					"description": "The channel for Enrollment",
-					"type": "string",
-					"readOnly": true
-				},
-				"policies": {
-					"description": "The attributes associated with legacy enrollment.",
-					"$ref": "#/definitions/EnrollmentPolicies",
-					"readOnly": true
-				},
-				"language": {
-					"description": "The language for Enrollment",
-					"type": "string",
-					"readOnly": true
-				},
-				"countryCode": {
-					"description": "The countryCode for Enrollment",
-					"type": "string",
-					"readOnly": true
-				},
-				"status": {
-					"description": "Enrollment status",
-					"type": "string",
-					"readOnly": true
-				},
-				"billingCycle": {
-					"description": "Enrollment billing cycle",
-					"type": "string",
-					"readOnly": true
-				}
-			}
+      "description": "Current entity level details",
+      "properties": {
+        "startDate": {
+          "description": "Enrollment Start Date",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Enrollment End Date",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
+        "currency": {
+          "description": "The currency associated with enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "channel": {
+          "description": "The channel for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "policies": {
+          "description": "The attributes associated with legacy enrollment.",
+          "$ref": "#/definitions/EnrollmentPolicies",
+          "readOnly": true
+        },
+        "language": {
+          "description": "The language for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The countryCode for Enrollment",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Enrollment status",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCycle": {
+          "description": "Enrollment billing cycle",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "EnrollmentPolicies": {
-			"description": "The attributes associated with legacy enrollment",
-			"properties": {
-				"accountOwnerViewCharges": {
-					"description": "The accountOwnerViewCharges flag for Enrollment",
-					"type": "boolean",
-					"readOnly": true
-				},
-				"departmentAdminViewCharges": {
-					"description": "The departmentAdminViewCharges flag for Enrollment",
-					"type": "boolean",
-					"readOnly": true
-				},
-				"marketplacesEnabled": {
-					"description": "The marketplaces flag for Enrollment",
-					"type": "boolean",
-					"readOnly": true
-				},
-				"reservedInstancesEnabled": {
-					"description": "The reserved instances flag for Enrollment",
-					"type": "boolean",
-					"readOnly": true
-				}
-			}
-		},
-		"EnrollmentAccount": {
-			"description": "An account resource.",
-			"type": "object",
-			"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}
-			],
-			"properties": {
-				"properties": {
-					"description": "An account.",
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/EnrollmentAccountProperties"
-				}
-			}
-		},
-		"EnrollmentAccountProperties": {
-			"description": "The properties of the account.",
-			"properties": {
-				"accountName": {
-					"description": "The account name.",
-					"type": "string"
-				},
-				"costCenter": {
-					"description": "The cost center name.",
-					"type": "string"
-				},
-				"accountOwner": {
-					"description": "The account owner",
-					"type": "string"
-				},
-				"status": {
-					"description": "The status for account.",
-					"type": "string"
-				},
-				"startDate": {
-					"description": "Account Start Date",
-					"type": "string",
-					"format": "date-time"
-				},
-				"endDate": {
-					"description": "Account End Date",
-					"type": "string",
-					"format": "date-time"
-				},
-				"department": {
-					"description": "Associated department. By default this is not populated, unless it's specified in $expand.",
-					"$ref": "#/definitions/Department"
-				}
-			}
-		},
+      "description": "The attributes associated with legacy enrollment",
+      "properties": {
+        "accountOwnerViewCharges": {
+          "description": "The accountOwnerViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "departmentAdminViewCharges": {
+          "description": "The departmentAdminViewCharges flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "marketplacesEnabled": {
+          "description": "The marketplaces flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reservedInstancesEnabled": {
+          "description": "The reserved instances flag for Enrollment",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrollmentAccount": {
+      "description": "An account resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "An account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnrollmentAccountProperties"
+        }
+      }
+    },
+    "EnrollmentAccountProperties": {
+      "description": "The properties of the account.",
+      "properties": {
+        "accountName": {
+          "description": "The account name.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "accountOwner": {
+          "description": "The account owner",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for account.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Account Start Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "Account End Date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "department": {
+          "description": "Associated department. By default this is not populated, unless it's specified in $expand.",
+          "$ref": "#/definitions/Department"
+        }
+      }
+    },
     "Address": {
-			"description": "Address details.",
-			"properties": {
-				"addressLine1": {
-					"description": "Address Line1.",
-					"type": "string"
-				},
-				"addressLine2": {
-					"description": "Address Line2.",
-					"type": "string"
-				},
-				"addressLine3": {
-					"description": "Address Line3.",
-					"type": "string"
-				},
-				"city": {
-					"description": "Address City.",
-					"type": "string"
-				},
-				"region": {
-					"description": "Address Region.",
-					"type": "string"
-				},
-				"country": {
-					"description": "Country code uses ISO2, 2-digit format..",
-					"type": "string"
-				},
-				"postalCode": {
-					"description": "Postal Code.",
-					"type": "string"
-				},
-				"phoneNumber": {
-					"description": "Phone Number.",
-					"type": "string"
-				}
-			}
+      "description": "Address details.",
+      "properties": {
+        "addressLine1": {
+          "description": "Address Line1.",
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address Line2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address Line3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address City.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address Region.",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses ISO2, 2-digit format..",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal Code.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone Number.",
+          "type": "string"
+        }
+      }
     },
     "Department": {
-			"description": "A department resource.",
-			"type": "object",
-			"allOf": [{
-					"$ref": "#/definitions/Resource"
-				}
-			],
-			"properties": {
-				"properties": {
-					"description": "A department.",
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/DepartmentProperties"
-				}
-			}
-		},
-		"DepartmentProperties": {
-			"description": "The properties of the department.",
-			"properties": {
-				"departmentName": {
-					"description": "The name for department.",
-					"type": "string"
-				},
-				"costCenter": {
-					"description": "The cost center name.",
-					"type": "string"
-				},
-				"status": {
-					"description": "The status for department.",
-					"type": "string"
-				},
-				"enrollmentAccounts": {
-					"description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/EnrollmentAccount"
-					}
-				}
-			}
-		},
+      "description": "A department resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A department.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DepartmentProperties"
+        }
+      }
+    },
+    "DepartmentProperties": {
+      "description": "The properties of the department.",
+      "properties": {
+        "departmentName": {
+          "description": "The name for department.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "The cost center name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status for department.",
+          "type": "string"
+        },
+        "enrollmentAccounts": {
+          "description": "Associated enrollment accounts. By default this is not populated, unless it's specified in $expand.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrollmentAccount"
+          }
+        }
+      }
+    },
     "BillingAccount": {
       "description": "A billing account resource.",
       "type": "object",
@@ -1425,51 +1427,51 @@
       "description": "Version of the API to be used with the client request. The current version is 2018-11-01-preview."
     },
     "billingAccountIdParameter": {
-			"name": "billingAccountId",
-			"in": "path",
-			"description": "BillingAccount ID",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-    },
-    "invoiceSectionIdParameter": {
-			"name": "invoiceSectionId",
-			"in": "path",
-			"description": "Invoice Section Id.",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"billingProfileIdParameter": {
-			"name": "billingProfileId",
-			"in": "path",
-			"description": "Billing Profile Id.",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"invoiceNameParameter": {
-			"name": "invoiceName",
-			"in": "path",
-			"description": "Invoice name.",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-    },
-    "startDateParameter": {
-			"name": "startDate",
-			"in": "query",
-			"description": "Start date",
-			"required": true,
+      "name": "billingAccountId",
+      "in": "path",
+      "description": "BillingAccount ID",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-		},
-		"endDateParameter": {
-			"name": "endDate",
-			"in": "query",
-			"description": "End date",
-			"required": true,
-			"type": "string",
+    },
+    "invoiceSectionIdParameter": {
+      "name": "invoiceSectionId",
+      "in": "path",
+      "description": "Invoice Section Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "billingProfileIdParameter": {
+      "name": "billingProfileId",
+      "in": "path",
+      "description": "Billing Profile Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "invoiceNameParameter": {
+      "name": "invoiceName",
+      "in": "path",
+      "description": "Invoice name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "startDateParameter": {
+      "name": "startDate",
+      "in": "query",
+      "description": "Start date",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "endDateParameter": {
+      "name": "endDate",
+      "in": "query",
+      "description": "End date",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

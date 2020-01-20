@@ -158,7 +158,7 @@
           "type": "string",
           "description": "Error message"
         },
-		"actionableMessage": {
+        "actionableMessage": {
           "type": "string",
           "description": "Actionable steps for this exception"
         },
@@ -241,7 +241,6 @@
     "ConnectionInfo": {
       "type": "object",
       "description": "Defines the connection properties of a server",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "type": {
           "type": "string",
@@ -257,7 +256,7 @@
         }
       },
       "required": [
-		"type"
+        "type"
       ],
       "discriminator": "type"
     },
@@ -308,15 +307,15 @@
           "description": "Whether to trust the server certificate",
           "default": false
         },
-		"platform": {
+        "platform": {
           "$ref": "#/definitions/SqlServerSourcePlatform",
           "description": "Server platform type for connection"
         }
       },
       "required": [
-		"dataSource"
-	  ]
-	},
+        "dataSource"
+      ]
+    },
     "SqlServerSourcePlatform": {
       "type": "string",
       "description": "An enumeration of source platform types",
@@ -384,7 +383,7 @@
       "type": "string",
       "description": "An enumeration of possible target types when migrating from MySQL",
       "enum": [
-		"SqlServer",
+        "SqlServer",
         "AzureDbForMySQL"
       ],
       "x-ms-enum": {

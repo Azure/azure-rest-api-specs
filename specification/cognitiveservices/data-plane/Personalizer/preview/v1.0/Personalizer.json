@@ -17,9 +17,7 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "eventId",
@@ -64,12 +62,8 @@
         ],
         "summary": "Report that the specified event was actually displayed to the user and a reward should be expected for it.",
         "operationId": "Events_Activate",
-        "consumes": [
-          
-        ],
-        "produces": [
-          
-        ],
+        "consumes": [],
+        "produces": [],
         "parameters": [
           {
             "name": "eventId",
@@ -178,17 +172,17 @@
             "name": "ErrorCode",
             "modelAsString": true,
             "values": [
-              { 
-                "value" : "BadRequest",
-                "description" : "Request could not be understood by the server."
+              {
+                "value": "BadRequest",
+                "description": "Request could not be understood by the server."
               },
-              { 
-                "value" : "ResourceNotFound",
-                "description" : "Requested resource does not exist on the server."
+              {
+                "value": "ResourceNotFound",
+                "description": "Requested resource does not exist on the server."
               },
-              { 
-                "value" : "InternalServerError",
-                "description" : "A generic error has occurred on the server."
+              {
+                "value": "InternalServerError",
+                "description": "A generic error has occurred on the server."
               }
             ]
           }
@@ -283,7 +277,7 @@
       }
     },
     "RankableAction": {
-      "description": "An action with it\u0027s associated features used for ranking.",
+      "description": "An action with it's associated features used for ranking.",
       "required": [
         "id",
         "features"
@@ -323,7 +317,7 @@
           "readOnly": true
         },
         "rewardActionId": {
-          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
+          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in 'ranking' if an action in the request in first position was part of the excluded ids.",
           "maxLength": 256,
           "type": "string",
           "readOnly": true
@@ -372,9 +366,7 @@
   },
   "security": [
     {
-      "apim_key": [
-        
-      ]
+      "apim_key": []
     }
   ],
   "tags": [

@@ -1,510 +1,828 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "2017-06-01",
-        "title": "AzureStack Azure Bridge Client"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns a list of products.": {
-                        "$ref": "examples/Product/List.json"
-                    }
-                },
-                "tags": [
-                    "Product"
-                ],
-                "description": "Returns a list of products.",
-                "operationId": "Products_List",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ProductList"
-                        }
-                    },
-                    "default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-06-01",
+    "title": "AzureStack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of products.": {
+            "$ref": "examples/Product/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the specified product.": {
-                        "$ref": "examples/Product/Get.json"
-                    }
-                },
-                "tags": [
-                    "Product"
-                ],
-                "description": "Returns the specified product.",
-                "operationId": "Products_Get",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/Product"
-                        }
-                    },
-                    "default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-						  "$ref": "AzureStack.json#/definitions/ErrorResponse"
-						}
-					}
-                }
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns a list of products.",
+        "operationId": "Products_List",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/listDetails": {
-            "post": {
-                "x-ms-examples": {
-                    "Returns the extended properties of a product.": {
-                        "$ref": "examples/Product/Post.json"
-                    }
-                },
-                "tags": [
-                    "Product"
-                ],
-                "description": "Returns the extended properties of a product.",
-                "operationId": "Products_ListDetails",
-                "parameters": [
-                    {
-                        "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ProductNameParameter"
-                    },
-                    {
-                        "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ExtendedProduct"
-                        }
-                    }
-                }
-            }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
     },
-    "definitions": {
-        "ComputeRole": {
-            "description": "Compute role type (IaaS or PaaS).",
-            "type": "string",
-            "enum": [
-                "None",
-                "IaaS",
-                "PaaS"
-            ],
-            "x-ms-enum": {
-                "name": "ComputeRole",
-                "modelAsString": true
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the specified product.": {
+            "$ref": "examples/Product/Get.json"
+          }
+        },
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns the specified product.",
+        "operationId": "Products_Get",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
             }
-        },
-        "OperatingSystem": {
-            "description": "Operating system type (Windows or Linux).",
-            "type": "string",
-            "enum": [
-                "None",
-                "Windows",
-                "Linux"
-            ],
-            "x-ms-enum": {
-                "name": "OperatingSystem",
-                "modelAsString": true
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
             }
-        },
-        "Uri": {
-            "description": "The URI.",
-            "type": "object",
-            "properties": {
-                "uri": {
-                    "description": "The URI.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "ExtendedProduct": {
-            "description": "Extended description about the product required for installing it into Azure Stack.",
-            "type": "object",
-            "properties": {
-                "galleryPackageBlobSasUri": {
-                    "description": "The URI to the .azpkg file that provides information required for showing product in the gallery.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "productKind": {
-                    "description": "Specifies the kind of the product (virtualMachine or virtualMachineExtension).",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "properties": {
-                    "description": "Specifies additional properties describing the product.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ExtendedProductProperties",
-                    "readOnly": true
-                }
-            }
-        },
-        "ExtendedProductProperties": {
-            "description": "Product information.",
-            "type": "object",
-            "properties": {},
-            "allOf": [
-                {
-                    "$ref": "#/definitions/VirtualMachineExtensionProductProperties"
-                },
-                {
-                    "$ref": "#/definitions/VirtualMachineProductProperties"
-                }
-            ]
-        },
-        "VirtualMachineExtensionProductProperties": {
-            "description": "Product information.",
-            "type": "object",
-            "properties": {
-                "computeRole": {
-                    "description": "Specifies kind of compute role included in the package.",
-                    "$ref": "#/definitions/ComputeRole",
-                    "readOnly": true
-                },
-                "isSystemExtension": {
-                    "description": "Specifies if product is a Virtual Machine Extension.",
-                    "type": "boolean",
-                    "readOnly": true
-                },
-                "sourceBlob": {
-                    "description": "Specifies a download location where content can be downloaded from.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/Uri",
-                    "readOnly": true
-                },
-                "supportMultipleExtensions": {
-                    "description": "Indicates if specified product supports multiple extensions.",
-                    "type": "boolean",
-                    "readOnly": true
-                },
-                "version": {
-                    "description": "Specifies product version.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "vmOsType": {
-                    "description": "Specifies operating system used by the product.",
-                    "$ref": "#/definitions/OperatingSystem",
-                    "readOnly": true
-                },
-                "vmScaleSetEnabled": {
-                    "description": "Indicates if virtual machine Scale Set is enabled in the specified product.",
-                    "type": "boolean",
-                    "readOnly": true
-                }
-            }
-        },
-        "VirtualMachineProductProperties": {
-            "description": "Product information.",
-            "type": "object",
-            "properties": {
-                "version": {
-                    "description": "Specifies product version.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "osDiskImage": {
-                    "description": "OS disk image used by product.",
-                    "$ref": "#/definitions/OsDiskImage",
-                    "readOnly": true
-                },
-                "dataDiskImages": {
-                    "description": "List of attached data disks.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/DataDiskImage"
-                    },
-                    "readOnly": true
-                }
-            }
-        },
-        "OsDiskImage": {
-            "description": "OS disk image.",
-            "type": "object",
-            "properties": {
-                "operatingSystem": {
-                    "description": "OS operating system type.",
-                    "$ref": "#/definitions/OperatingSystem",
-                    "readOnly": true
-                },
-                "sourceBlobSasUri": {
-                    "description": "SAS key for source blob.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "DataDiskImage": {
-            "description": "Data disk image.",
-            "type": "object",
-            "properties": {
-                "lun": {
-                    "description": "The LUN.",
-                    "type": "integer",
-                    "format": "int32",
-                    "readOnly": true
-                },
-                "sourceBlobSasUri": {
-                    "description": "SAS key for source blob.",
-                    "type": "string",
-                    "readOnly": true
-                }
-            }
-        },
-        "Product": {
-            "description": "Product information.",
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "description": "Properties of the product resource.",
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ProductNestedProperties"
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "AzureStack.json#/definitions/Resource"
-                }
-            ]
-        },
-        "ProductNestedProperties": {
-            "description": "Properties portion of the product resource.",
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "The display name of the product.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "The description of the product.",
-                    "type": "string"
-                },
-                "publisherDisplayName": {
-                    "description": "The user-friendly name of the product publisher.",
-                    "type": "string"
-                },
-                "publisherIdentifier": {
-                    "description": "Publisher identifier.",
-                    "type": "string"
-                },
-                "offer": {
-                    "description": "The offer representing the product.",
-                    "type": "string"
-                },
-                "offerVersion": {
-                    "description": "The version of the product offer.",
-                    "type": "string"
-                },
-                "sku": {
-                    "description": "The product SKU.",
-                    "type": "string"
-                },
-                "billingPartNumber": {
-                    "description": "The part number used for billing purposes.",
-                    "type": "string"
-                },
-                "vmExtensionType": {
-                    "description": "The type of the Virtual Machine Extension.",
-                    "type": "string"
-                },
-                "galleryItemIdentity": {
-                    "description": "The identifier of the gallery item corresponding to the product.",
-                    "type": "string"
-                },
-                "iconUris": {
-                    "description": "Additional links available for this product.",
-                    "$ref": "#/definitions/IconUris"
-                },
-                "links": {
-                    "description": "Additional links available for this product.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ProductLink"
-                    }
-                },
-                "legalTerms": {
-                    "description": "The legal terms.",
-                    "type": "string"
-                },
-                "privacyPolicy": {
-                    "description": "The privacy policy.",
-                    "type": "string"
-                },
-                "payloadLength": {
-                    "description": "The length of product content.",
-                    "type": "integer",
-                    "format" : "int64"
-                },
-                "productKind": {
-                    "description": "The kind of the product (virtualMachine or virtualMachineExtension)",
-                    "type": "string"
-                },
-                "productProperties": {
-                    "description": "Additional properties for the product.",
-                    "$ref": "#/definitions/ProductProperties"
-                }
-            }
-        },
-        "IconUris": {
-            "description": "Links to product icons.",
-            "type": "object",
-            "properties": {
-                "large": {
-                    "description": "URI to large icon.",
-                    "type": "string"
-                },
-                "wide": {
-                    "description": "URI to wide icon.",
-                    "type": "string"
-                },
-                "medium": {
-                    "description": "URI to medium icon.",
-                    "type": "string"
-                },
-                "small": {
-                    "description": "URI to small icon.",
-                    "type": "string"
-                },
-                "hero": {
-                    "description": "URI to hero icon.",
-                    "type": "string"
-                }
-            }
-        },
-        "ProductProperties": {
-            "description": "Additional properties of the product",
-            "type": "object",
-            "properties": {
-                "version": {
-                    "description": "The version.",
-                    "type": "string"
-                }
-            }
-        },
-        "ProductLink": {
-            "description": "Link with additional information about a product.",
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "description": "The description of the link.",
-                    "type": "string"
-                },
-                "uri": {
-                    "description": "The URI corresponding to the link.",
-                    "type": "string"
-                }
-            }
-        },
-        "ProductList": {
-            "description": "Pageable list of products.",
-            "type": "object",
-            "properties": {
-                "nextLink": {
-                    "description": "URI to the next page.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "List of products.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Product"
-                    }
-                }
-            }
+          }
         }
+      }
     },
-    "parameters": {
-        "ProductNameParameter": {
-            "description": "Name of the product.",
-            "name": "productName",
-            "type": "string",
-            "in": "path",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        }
-    },
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/listDetails": {
+      "post": {
+        "x-ms-examples": {
+          "Returns the extended properties of a product.": {
+            "$ref": "examples/Product/Post.json"
+          }
+        },
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns the extended properties of a product.",
+        "operationId": "Products_ListDetails",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtendedProduct"
             }
+          }
         }
+      }
     },
-    "security": [
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/_all/GetProducts": {
+      "post": {
+        "x-ms-examples": {
+          "Returns a list of products.": {
+            "$ref": "examples/Product/ListPost.json"
+          }
+        },
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns a list of products.",
+        "operationId": "Products_GetProducts",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceConfigurationParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/GetProduct": {
+      "post": {
+        "x-ms-examples": {
+          "Returns the specified product.": {
+            "$ref": "examples/Product/GetPost.json"
+          }
+        },
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns the specified product.",
+        "operationId": "Products_GetProduct",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceConfigurationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AzureStack/registrations/{registrationName}/products/{productName}/uploadProductLog": {
+      "post": {
+        "x-ms-examples": {
+          "Returns the specified product.": {
+            "$ref": "examples/Product/UploadLog.json"
+          }
+        },
+        "tags": [
+          "Product"
+        ],
+        "description": "Returns the specified product.",
+        "operationId": "Products_UploadLog",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/RegistrationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketplaceProductLogUpdateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductLog"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComputeRole": {
+      "description": "Compute role type (IaaS or PaaS).",
+      "type": "string",
+      "enum": [
+        "None",
+        "IaaS",
+        "PaaS"
+      ],
+      "x-ms-enum": {
+        "name": "ComputeRole",
+        "modelAsString": true
+      }
+    },
+    "OperatingSystem": {
+      "description": "Operating system type (Windows or Linux).",
+      "type": "string",
+      "enum": [
+        "None",
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystem",
+        "modelAsString": true
+      }
+    },
+    "Uri": {
+      "description": "The URI.",
+      "type": "object",
+      "properties": {
+        "uri": {
+          "description": "The URI.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedProduct": {
+      "description": "Extended description about the product required for installing it into Azure Stack.",
+      "type": "object",
+      "properties": {
+        "galleryPackageBlobSasUri": {
+          "description": "The URI to the .azpkg file that provides information required for showing product in the gallery.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productKind": {
+          "description": "Specifies the kind of the product (virtualMachine or virtualMachineExtension).",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Specifies additional properties describing the product.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExtendedProductProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtendedProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {},
+      "allOf": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+          "$ref": "#/definitions/VirtualMachineExtensionProductProperties"
+        },
+        {
+          "$ref": "#/definitions/VirtualMachineProductProperties"
         }
-    ]
+      ]
+    },
+    "VirtualMachineExtensionProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "computeRole": {
+          "description": "Specifies kind of compute role included in the package.",
+          "$ref": "#/definitions/ComputeRole",
+          "readOnly": true
+        },
+        "isSystemExtension": {
+          "description": "Specifies if product is a Virtual Machine Extension.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "sourceBlob": {
+          "description": "Specifies a download location where content can be downloaded from.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Uri",
+          "readOnly": true
+        },
+        "supportMultipleExtensions": {
+          "description": "Indicates if specified product supports multiple extensions.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmOsType": {
+          "description": "Specifies operating system used by the product.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "vmScaleSetEnabled": {
+          "description": "Indicates if virtual machine Scale Set is enabled in the specified product.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineProductProperties": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "Specifies product version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "osDiskImage": {
+          "description": "OS disk image used by product.",
+          "$ref": "#/definitions/OsDiskImage",
+          "readOnly": true
+        },
+        "dataDiskImages": {
+          "description": "List of attached data disks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDiskImage"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OsDiskImage": {
+      "description": "OS disk image.",
+      "type": "object",
+      "properties": {
+        "operatingSystem": {
+          "description": "OS operating system type.",
+          "$ref": "#/definitions/OperatingSystem",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DataDiskImage": {
+      "description": "Data disk image.",
+      "type": "object",
+      "properties": {
+        "lun": {
+          "description": "The LUN.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "sourceBlobSasUri": {
+          "description": "SAS key for source blob.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Product": {
+      "description": "Product information.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the product resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductNestedProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "AzureStack.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ProductNestedProperties": {
+      "description": "Properties portion of the product resource.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the product.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the product.",
+          "type": "string"
+        },
+        "publisherDisplayName": {
+          "description": "The user-friendly name of the product publisher.",
+          "type": "string"
+        },
+        "publisherIdentifier": {
+          "description": "Publisher identifier.",
+          "type": "string"
+        },
+        "offer": {
+          "description": "The offer representing the product.",
+          "type": "string"
+        },
+        "offerVersion": {
+          "description": "The version of the product offer.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The product SKU.",
+          "type": "string"
+        },
+        "billingPartNumber": {
+          "description": "The part number used for billing purposes.",
+          "type": "string"
+        },
+        "vmExtensionType": {
+          "description": "The type of the Virtual Machine Extension.",
+          "type": "string"
+        },
+        "galleryItemIdentity": {
+          "description": "The identifier of the gallery item corresponding to the product.",
+          "type": "string"
+        },
+        "iconUris": {
+          "description": "Additional links available for this product.",
+          "$ref": "#/definitions/IconUris"
+        },
+        "links": {
+          "description": "Additional links available for this product.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductLink"
+          }
+        },
+        "legalTerms": {
+          "description": "The legal terms.",
+          "type": "string"
+        },
+        "privacyPolicy": {
+          "description": "The privacy policy.",
+          "type": "string"
+        },
+        "payloadLength": {
+          "description": "The length of product content.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "productKind": {
+          "description": "The kind of the product (virtualMachine or virtualMachineExtension)",
+          "type": "string"
+        },
+        "productProperties": {
+          "description": "Additional properties for the product.",
+          "$ref": "#/definitions/ProductProperties"
+        },
+        "compatibility": {
+          "description": "Product compatibility with current device.",
+          "$ref": "#/definitions/Compatibility"
+        }
+      }
+    },
+    "Compatibility": {
+      "description": "Product compatibility",
+      "type": "object",
+      "properties": {
+        "isCompatible": {
+          "description": "Tells if product is compatible with current device",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Short error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "description": {
+          "description": "Full error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "issues": {
+          "description": "List of all issues found",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompatibilityIssue"
+          }
+        }
+      }
+    },
+    "CompatibilityIssue": {
+      "description": "Compatibility issue",
+      "type": "string",
+      "enum": [
+        "HigherDeviceVersionRequired",
+        "LowerDeviceVersionRequired",
+        "CapacityBillingModelRequired",
+        "PayAsYouGoBillingModelRequired",
+        "DevelopmentBillingModelRequired",
+        "AzureADIdentitySystemRequired",
+        "ADFSIdentitySystemRequired",
+        "ConnectionToInternetRequired",
+        "ConnectionToAzureRequired",
+        "DisconnectedEnvironmentRequired"
+      ],
+      "x-ms-enum": {
+        "name": "CompatibilityIssue",
+        "modelAsString": true
+      }
+    },
+    "IconUris": {
+      "description": "Links to product icons.",
+      "type": "object",
+      "properties": {
+        "large": {
+          "description": "URI to large icon.",
+          "type": "string"
+        },
+        "wide": {
+          "description": "URI to wide icon.",
+          "type": "string"
+        },
+        "medium": {
+          "description": "URI to medium icon.",
+          "type": "string"
+        },
+        "small": {
+          "description": "URI to small icon.",
+          "type": "string"
+        },
+        "hero": {
+          "description": "URI to hero icon.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductProperties": {
+      "description": "Additional properties of the product",
+      "type": "object",
+      "properties": {
+        "version": {
+          "description": "The version.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductLink": {
+      "description": "Link with additional information about a product.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The description of the link.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "The URI corresponding to the link.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductList": {
+      "description": "Pageable list of products.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of products.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        }
+      }
+    },
+    "DeviceConfiguration": {
+      "description": "Device Configuration.",
+      "properties": {
+        "deviceVersion": {
+          "description": "Version of the device.",
+          "type": "string",
+          "readOnly": true
+        },
+        "identitySystem": {
+          "description": "Identity system of the device.",
+          "enum": [
+            "AzureAD",
+            "ADFS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MarketplaceProductLogUpdate": {
+      "description": "Update details for product log.",
+      "properties": {
+        "operation": {
+          "description": "Operation to log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status to log.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Error related to the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Error details related to operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProductLog": {
+      "description": "Product action log.",
+      "properties": {
+        "id": {
+          "description": "Log ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productId": {
+          "description": "Logged product ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "description": "Logged subscription ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "registrationName": {
+          "description": "Logged registration name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroupName": {
+          "description": "Logged resource group name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Logged operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDate": {
+          "description": "Operation start datetime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "Operation end datetime.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Operation error data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Operation error details.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ProductNameParameter": {
+      "description": "Name of the product.",
+      "name": "productName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceConfigurationParameter": {
+      "description": "Device configuration.",
+      "name": "deviceConfiguration",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/DeviceConfiguration"
+      }
+    },
+    "MarketplaceProductLogUpdateParameter": {
+      "description": "Update details for product log.",
+      "name": "marketplaceProductLogUpdate",
+      "in": "body",
+      "required": false,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/MarketplaceProductLogUpdate"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

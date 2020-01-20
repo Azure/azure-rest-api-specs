@@ -6,12 +6,20 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -26,14 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards": {
       "get": {
         "x-ms-examples": {
           "Get all supported regulatory compliance standards details and state": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandardList_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "Supported regulatory compliance standards details and state",
         "operationId": "RegulatoryComplianceStandards_List",
         "parameters": [
@@ -44,9 +54,6 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-		  {
             "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
           }
         ],
@@ -64,19 +71,21 @@
             }
           }
         },
-		"x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		}
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}": {
       "get": {
         "x-ms-examples": {
           "Get selected regulatory compliance standard details and state": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceStandard_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "Supported regulatory compliance details state for selected standard",
         "operationId": "RegulatoryComplianceStandards_Get",
         "parameters": [
@@ -85,9 +94,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/RegulatoryComplianceStandardName"
@@ -104,19 +110,21 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-}
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls": {
       "get": {
         "x-ms-examples": {
           "Get all regulatory compliance controls details and state for selected standard": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControlList_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "All supported regulatory compliance controls details and state for selected standard",
         "operationId": "RegulatoryComplianceControls_List",
         "parameters": [
@@ -127,12 +135,9 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
             "$ref": "#/parameters/RegulatoryComplianceStandardName"
           },
-		  {
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
           }
         ],
@@ -150,19 +155,21 @@
             }
           }
         },
-		"x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		}
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}": {
       "get": {
         "x-ms-examples": {
           "Get selected regulatory compliance control details and state": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceControl_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "Selected regulatory compliance control details and state",
         "operationId": "RegulatoryComplianceControls_Get",
         "parameters": [
@@ -171,9 +178,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/RegulatoryComplianceStandardName"
@@ -198,14 +202,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments": {
       "get": {
         "x-ms-examples": {
           "Get all assessments mapped to selected regulatory compliance control": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessmentList_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "Details and state of assessments mapped to selected regulatory compliance control",
         "operationId": "RegulatoryComplianceAssessments_List",
         "parameters": [
@@ -216,15 +222,12 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
             "$ref": "#/parameters/RegulatoryComplianceStandardName"
           },
           {
             "$ref": "#/parameters/RegulatoryComplianceControlName"
           },
-		  {
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
           }
         ],
@@ -242,19 +245,21 @@
             }
           }
         },
-		"x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		}
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments/{regulatoryComplianceAssessmentName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/regulatoryComplianceStandards/{regulatoryComplianceStandardName}/regulatoryComplianceControls/{regulatoryComplianceControlName}/regulatoryComplianceAssessments/{regulatoryComplianceAssessmentName}": {
       "get": {
         "x-ms-examples": {
           "Get selected regulatory compliance assessment details and state": {
             "$ref": "./examples/RegulatoryCompliance/getRegulatoryComplianceAssessment_example.json"
           }
         },
-        "tags": ["RegulatoryCompliance"],
+        "tags": [
+          "RegulatoryCompliance"
+        ],
         "description": "Supported regulatory compliance details and state for selected assessment",
         "operationId": "RegulatoryComplianceAssessments_Get",
         "parameters": [
@@ -263,9 +268,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/RegulatoryComplianceStandardName"
@@ -297,7 +299,9 @@
   "definitions": {
     "RegulatoryComplianceStandardList": {
       "description": "List of regulatory compliance standards response",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -335,7 +339,12 @@
         "state": {
           "type": "string",
           "description": "Aggregative state based on the standard's supported controls states",
-          "enum": ["Passed", "Failed", "Skipped", "Unsupported"],
+          "enum": [
+            "Passed",
+            "Failed",
+            "Skipped",
+            "Unsupported"
+          ],
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true,
@@ -383,7 +392,9 @@
     },
     "RegulatoryComplianceControlList": {
       "description": "List of regulatory compliance controls response",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -427,7 +438,12 @@
         "state": {
           "type": "string",
           "description": "Aggregative state based on the control's supported assessments states",
-          "enum": ["Passed", "Failed", "Skipped", "Unsupported"],
+          "enum": [
+            "Passed",
+            "Failed",
+            "Skipped",
+            "Unsupported"
+          ],
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true,
@@ -470,7 +486,9 @@
     },
     "RegulatoryComplianceAssessmentList": {
       "description": "List of regulatory compliance assessment response",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -523,7 +541,12 @@
         "state": {
           "type": "string",
           "description": "Aggregative state based on the assessment's scanned resources states",
-          "enum": ["Passed", "Failed", "Skipped", "Unsupported"],
+          "enum": [
+            "Passed",
+            "Failed",
+            "Skipped",
+            "Unsupported"
+          ],
           "x-ms-enum": {
             "name": "state",
             "modelAsString": true,

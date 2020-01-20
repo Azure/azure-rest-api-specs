@@ -14,8 +14,6 @@
             "location": "eastus",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
             "name": "myCluster",
-            "tags": {},
-            "etag": "W/\"636462502169240745\"",
             "properties": {
               "provisioningState": "Succeeded",
               "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
@@ -53,7 +51,6 @@
                 }
               ],
               "upgradeDescription": {
-                "overrideUserUpgradePolicy": false,
                 "forceRestart": true,
                 "upgradeReplicaSetCheckTimeout": "00:10:00",
                 "healthCheckWaitDuration": "00:00:30",
@@ -63,31 +60,7 @@
                 "upgradeDomainTimeout": "00:15:00",
                 "healthPolicy": {
                   "maxPercentUnhealthyNodes": 100,
-                  "maxPercentUnhealthyApplications": 100,
-                  "applicationHealthPolicies": {
-                    "myAppHealthPolicy": {
-                      "defaultServiceTypeHealthPolicy": {
-                        "maxPercentUnhealthyServices": 100
-                      }
-                    }
-                  }
-                },
-                "deltaHealthPolicy": {
-                  "maxPercentDeltaUnhealthyNodes": 0,
-                  "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
-                  "maxPercentDeltaUnhealthyApplications": 0,
-                  "applicationDeltaHealthPolicies": {
-                    "myAppDeltaHealthPolicy": {
-                      "defaultServiceTypeDeltaHealthPolicy": {
-                        "maxPercentDeltaUnhealthyServices": 100
-                      },
-                      "serivceTypeDeltaHealthPolicies": {
-                        "mySvcTypeDeltaHealthPolicy": {
-                          "maxPercentDeltaUnhealthyServices": 100
-                        }
-                      }
-                    }
-                  }
+                  "maxPercentUnhealthyApplications": 100
                 }
               },
               "diagnosticsStorageAccountConfig": {
@@ -135,7 +108,7 @@
                   "environment": "Windows"
                 }
               ],
-              "addonFeatures": [
+              "addOnFeatures": [
                 "RepairManager",
                 "DnsService"
               ]
@@ -146,8 +119,6 @@
             "location": "eastus",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster2",
             "name": "myCluster2",
-            "tags": {},
-            "etag": "W/\"636462502164040075\"",
             "properties": {
               "provisioningState": "Succeeded",
               "clusterId": "2747e469-b24e-4039-8a0a-46151419523f",
@@ -169,7 +140,6 @@
                 }
               ],
               "upgradeDescription": {
-                "overrideUserUpgradePolicy": false,
                 "forceRestart": false,
                 "upgradeReplicaSetCheckTimeout": "10675199.02:48:05.4775807",
                 "healthCheckWaitDuration": "00:05:00",
@@ -222,13 +192,12 @@
                   "environment": "Linux"
                 }
               ],
-              "addonFeatures": [
+              "addOnFeatures": [
                 "RepairManager"
               ]
             }
           }
-        ],
-        "nextLink": ""
+        ]
       }
     }
   }

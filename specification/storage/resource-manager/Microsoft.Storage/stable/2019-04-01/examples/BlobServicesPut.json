@@ -9,7 +9,8 @@
     "parameters": {
       "properties": {
         "cors": {
-          "corsRules": [{
+          "corsRules": [
+            {
               "allowedOrigins": [
                 "http://www.contoso.com",
                 "http://www.fabrikam.com"
@@ -73,7 +74,10 @@
           "enabled": true,
           "days": 300
         },
-        "automaticSnapshotPolicyEnabled": true
+        "automaticSnapshotPolicyEnabled": true,
+        "changeFeed": {
+          "enabled": true
+        }
       }
     }
   },
@@ -85,7 +89,8 @@
         "type": "Microsoft.Storage/storageAccounts/blobServices",
         "properties": {
           "cors": {
-            "corsRules": [{
+            "corsRules": [
+              {
                 "allowedOrigins": [
                   "http://www.contoso.com",
                   "http://www.fabrikam.com"
@@ -149,7 +154,10 @@
             "enabled": true,
             "days": 300
           },
-          "automaticSnapshotPolicyEnabled": true
+          "automaticSnapshotPolicyEnabled": true,
+          "changeFeed": {
+            "enabled": true
+          }
         }
       }
     }

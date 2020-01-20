@@ -32,7 +32,7 @@ These settings apply only when `--tag=package-2018-02 --python` is specified on 
 ``` yaml $(tag) == 'package-2018-02' && $(python)
 python:
   namespace: azure.mgmt.keyvault.v2018_02_14
-  output-folder: $(python-sdks-folder)/azure-mgmt-keyvault/azure/mgmt/keyvault/v2018_02_14
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2018_02_14
 ```
 
 ### Tag: package-2016-10 and python
@@ -42,5 +42,5 @@ These settings apply only when `--tag=package-2016-10 --python` is specified on 
 ``` yaml $(tag) == 'package-2016-10' && $(python)
 python:
   namespace: azure.mgmt.keyvault.v2016_10_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
+  output-folder: $(python-sdks-folder/keyvault)/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
 ```

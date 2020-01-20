@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-mixedreality"
   output-folder: "$(typescript-sdks-folder)/sdk/mixedreality/arm-mixedreality"
+  clear-output-folder: true
   generate-metadata: true
 ```

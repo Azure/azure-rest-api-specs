@@ -305,7 +305,7 @@
         "projectLocation"
       ]
     },
-	"SqlServerSqlMISyncTaskInput": {
+    "SqlServerSqlMISyncTaskInput": {
       "type": "object",
       "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
       "properties": {
@@ -325,16 +325,16 @@
           "description": "Fully qualified resourceId of storage"
         },
         "sourceConnectionInfo": {
-            "$ref": "./Common.json#/definitions/SqlConnectionInfo",
-            "description": "Connection information for source SQL Server"
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Connection information for source SQL Server"
         },
         "targetConnectionInfo": {
-            "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
-            "description": "Connection information for Azure SQL Database Managed Instance"
+          "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+          "description": "Connection information for Azure SQL Database Managed Instance"
         },
-        "azureApp":{
-            "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
-            "description" : "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+        "azureApp": {
+          "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
+          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
         }
       },
       "required": [
@@ -806,7 +806,7 @@
     },
     "ConnectToSourceNonSqlTaskOutput": {
       "type": "object",
-      "description": "Output for connect to Oracle, MySQL type source",
+      "description": "Output for connect to MySQL type source",
       "properties": {
         "id": {
           "type": "string",
@@ -843,7 +843,7 @@
     },
     "ServerProperties": {
       "type": "object",
-      "description": "Server properties for Oracle, MySQL type source",
+      "description": "Server properties for MySQL type source",
       "properties": {
         "serverPlatform": {
           "type": "string",
@@ -1011,7 +1011,7 @@
       "type": "object",
       "description": "Information about migration eligibility of a server object",
       "properties": {
-        "isEligibileForMigration": {
+        "isEligibleForMigration": {
           "type": "boolean",
           "description": "Whether object is eligible for migration or not.",
           "readOnly": true
@@ -1162,7 +1162,7 @@
         "name": "BackupType",
         "modelAsString": true
       }
-	},
+    },
     "DatabaseMigrationState": {
       "type": "string",
       "description": "Database level migration state.",
@@ -1180,6 +1180,61 @@
       ],
       "x-ms-enum": {
         "name": "DatabaseMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationInfo": {
+      "type": "object",
+      "description": "SSIS migration info with SSIS store type, overwrite policy.",
+      "properties": {
+        "ssisStoreType": {
+          "$ref": "#/definitions/SsisStoreType",
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+        },
+        "projectOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS project migration"
+        },
+        "environmentOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS environment migration"
+        }
+      }
+    },
+    "SsisStoreType": {
+      "type": "string",
+      "description": "An enumeration of supported source SSIS store type in DMS",
+      "enum": [
+        "SsisCatalog"
+      ],
+      "x-ms-enum": {
+        "name": "SsisStoreType",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationOverwriteOption": {
+      "type": "string",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "enum": [
+        "Ignore",
+        "Overwrite"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationOverwriteOption",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationStage": {
+      "type": "string",
+      "description": "Current stage of SSIS migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationStage",
         "modelAsString": true
       }
     }

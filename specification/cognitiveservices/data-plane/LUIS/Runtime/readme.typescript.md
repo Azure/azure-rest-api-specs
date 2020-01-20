@@ -9,4 +9,6 @@ typescript:
   output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-luis-runtime"
   azure-arm: false
   generate-metadata: true
+  test: true
+  test-dependencies: "nock@10.0.0"
 ```

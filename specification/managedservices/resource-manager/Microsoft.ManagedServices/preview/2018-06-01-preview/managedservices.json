@@ -91,10 +91,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - The registration definition is deleted.",
-            "schema": {
-              "$ref": "#/definitions/RegistrationDefinition"
-            }
+            "description": "OK - The registration definition is deleted."
           },
           "204": {
             "description": "No Content- The registration definition does not exist."
@@ -225,10 +222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - The registration assignment is deleted.",
-            "schema": {
-              "$ref": "#/definitions/RegistrationAssignment"
-            }
+            "description": "OK - The registration assignment is deleted."
           },
           "204": {
             "description": "No Content- The registration assignment does not exist."
@@ -447,53 +441,53 @@
     },
     "RegistrationDefinitionProperties": {
       "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description of the registration definition."
+        "description": {
+          "type": "string",
+          "description": "Description of the registration definition."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
           },
-          "authorizations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Authorization"
-            },
-            "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
-          },
-          "registrationDefinitionName": {
-            "type": "string",
-            "description": "Name of the registration definition."
-          },
-          "managedByTenantId": {
-            "type": "string",
-            "description": "Id of the managedBy tenant."
-          },
-          "provisioningState": {
-            "type": "string",
-            "readOnly": true,
-            "description": "Current state of the registration definition.",
-            "enum": [
-              "NotSpecified",
-              "Accepted",
-              "Running",
-              "Ready",
-              "Creating",
-              "Created",
-              "Deleting",
-              "Deleted",
-              "Canceled",
-              "Failed",
-              "Succeeded",
-              "Updating"
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": false
-            }
-          },
-          "managedByTenantName": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Name of the managedBy tenant."
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "registrationDefinitionName": {
+          "type": "string",
+          "description": "Name of the registration definition."
+        },
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current state of the registration definition.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
           }
+        },
+        "managedByTenantName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the managedBy tenant."
+        }
       },
       "required": [
         "managedByTenantId",
@@ -503,7 +497,7 @@
       "description": "Properties of a registration definition."
     },
     "RegistrationDefinitionList": {
-     "properties": {
+      "properties": {
         "value": {
           "type": "array",
           "readOnly": true,
@@ -557,23 +551,23 @@
           "type": "string",
           "description": "Current state of the registration assignment.",
           "enum": [
-              "NotSpecified",
-              "Accepted",
-              "Running",
-              "Ready",
-              "Creating",
-              "Created",
-              "Deleting",
-              "Deleted",
-              "Canceled",
-              "Failed",
-              "Succeeded",
-              "Updating"
-            ],
-            "x-ms-enum": {
-              "name": "ProvisioningState",
-              "modelAsString": false
-            }
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
         },
         "registrationDefinition": {
           "readOnly": true,
@@ -660,7 +654,9 @@
           "description": "Registration definition inside registration assignment."
         }
       },
-      "required":["registrationDefinitionId"],
+      "required": [
+        "registrationDefinitionId"
+      ],
       "type": "object",
       "description": "Properties of a registration assignment."
     },

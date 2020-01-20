@@ -1,32 +1,34 @@
 {
   "parameters": {
-      "api-version": "2016-11-01",
-      "accountName": "contosoadla",
-      "adlaCatalogDnsSuffix": "azuredatalakeanalytics.net",
-      "databaseName": "master",
-      "schemaName": "dbo",
-      "tableName": "test_table_name",
-      "$filter": "test_filter",
-      "$top": 1,
-      "$skip": 1,
-      "$select": "test_select",
-      "$orderby": "test_orderby",
-      "$count": false
+    "api-version": "2016-11-01",
+    "accountName": "contosoadla",
+    "adlaCatalogDnsSuffix": "azuredatalakeanalytics.net",
+    "databaseName": "master",
+    "schemaName": "dbo",
+    "tableName": "test_table_name",
+    "$filter": "test_filter",
+    "$top": 1,
+    "$skip": 1,
+    "$select": "test_select",
+    "$orderby": "test_orderby",
+    "$count": false
   },
   "responses": {
-      "200": {
-          "body": {
-              "nextLink":"https://contosoadla.datalakeanalytics.net/catalog/usql/databases/master/schema/dbo/tables/test_table_name/tablefragments?api-version=2016-11-01&%24skiptoken=<token>",
-              "value": [{
-                  "parentId": "9d2d7abd-c641-4ddb-88ab-90cafdfe1c1b",
-                  "fragmentId": "797d2643-eed9-4900-8090-0f8ddd9e8ba7",
-                  "indexId": 1,
-                  "size": 33786,
-                  "rowCount": 1,
-                  "createDate": "2017-10-11T06:38:31.567-07:00",
-                  "streamPath":"catalog/database/86bf2a20-b511-48c8-91c5-1f73c4c0ec74/schema/b83d3be1-9e11-40b7-85f9-ad823efe2414/table/1e666ab1-d6f0-4990-8180-1a6160caf405/91193f18-06dd-47a2-96fa-2cca3b4777e1.ss"
-              }]
+    "200": {
+      "body": {
+        "nextLink": "https://contosoadla.datalakeanalytics.net/catalog/usql/databases/master/schema/dbo/tables/test_table_name/tablefragments?api-version=2016-11-01&%24skiptoken=<token>",
+        "value": [
+          {
+            "parentId": "9d2d7abd-c641-4ddb-88ab-90cafdfe1c1b",
+            "fragmentId": "797d2643-eed9-4900-8090-0f8ddd9e8ba7",
+            "indexId": 1,
+            "size": 33786,
+            "rowCount": 1,
+            "createDate": "2017-10-11T06:38:31.567-07:00",
+            "streamPath": "catalog/database/86bf2a20-b511-48c8-91c5-1f73c4c0ec74/schema/b83d3be1-9e11-40b7-85f9-ad823efe2414/table/1e666ab1-d6f0-4990-8180-1a6160caf405/91193f18-06dd-47a2-96fa-2cca3b4777e1.ss"
           }
+        ]
       }
+    }
   }
 }

@@ -99,6 +99,9 @@
         "x-ms-examples": {
           "Restore a backup.": {
             "$ref": "./examples/Backups/Restore.json"
+          },
+          "Restore a single role from backup.": {
+            "$ref": "./examples/Backups/SingleRepoRestore.json"
           }
         },
         "description": "Restore a backup.",
@@ -210,6 +213,11 @@
           "type": "string",
           "readOnly": true
         },
+        "isCloudRecoveryReady": {
+          "description": "True if the backup can be used for cloud recovery scenario.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "encryptionCertThumbprint": {
           "description": "The thumbprint of the certificate used to encrypt the backup encryption key.",
           "type": "string",
@@ -275,6 +283,10 @@
     "RestoreOptions": {
       "description": "Properties for restore options.",
       "properties": {
+        "roleName": {
+          "description": "The Azure Stack role name for restore, set it to empty for all infrastructure role",
+          "type": "string"
+        },
         "decryptionCertBase64": {
           "description": "The certificate file raw data in Base64 string. This should be the .pfx file with the private key.",
           "type": "string"

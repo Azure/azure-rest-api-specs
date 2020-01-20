@@ -6,12 +6,20 @@
     "version": "2017-08-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/Settings/GetSettings_example.json"
           }
         },
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "description": "Settings about different configurations in security center",
         "operationId": "Settings_List",
         "parameters": [
@@ -70,7 +80,9 @@
             "$ref": "./examples/Settings/GetSetting_example.json"
           }
         },
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "description": "Settings of different configurations in security center",
         "operationId": "Settings_Get",
         "parameters": [
@@ -105,7 +117,9 @@
             "$ref": "./examples/Settings/UpdateSetting_example.json"
           }
         },
-        "tags": ["Settings"],
+        "tags": [
+          "Settings"
+        ],
         "description": "updating settings about different configurations in security center",
         "operationId": "Settings_Update",
         "parameters": [
@@ -193,7 +207,10 @@
         "kind": {
           "type": "string",
           "description": "the kind of the settings string (DataExportSetting)",
-          "enum": ["DataExportSetting", "AlertSuppressionSetting"],
+          "enum": [
+            "DataExportSetting",
+            "AlertSuppressionSetting"
+          ],
           "x-ms-enum": {
             "name": "SettingKind",
             "modelAsString": true,
@@ -208,7 +225,9 @@
           }
         }
       },
-      "required": ["kind"],
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
@@ -224,7 +243,9 @@
           "description": "Is the data export setting is enabled"
         }
       },
-      "required": ["enabled"]
+      "required": [
+        "enabled"
+      ]
     }
   },
   "parameters": {
@@ -234,7 +255,10 @@
       "required": true,
       "type": "string",
       "description": "Name of setting: (MCAS/WDATP)",
-      "enum": ["MCAS", "WDATP"],
+      "enum": [
+        "MCAS",
+        "WDATP"
+      ],
       "x-ms-parameter-location": "method"
     },
     "Setting": {
