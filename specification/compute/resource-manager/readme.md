@@ -211,7 +211,7 @@ directive:
 
 These settings apply only when `--package-2019-11-01-Disks` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-07'
+``` yaml $(tag) == 'package-2019-11-01-Disks'
 input-file:
 - Microsoft.Compute/stable/2019-07-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/runCommands.json
