@@ -1,0 +1,233 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-01-01",
+    "title": "DeploymentAdminClient",
+    "description": "Deployment Admin Client."
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/actionPlans/{planId}/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Lists the action plan operations": {
+            "$ref": "./examples/ActionPlanOperations/List.json"
+          }
+        },
+        "description": "Lists the action plan operations",
+        "tags": [
+          "ActionPlanOperations"
+        ],
+        "operationId": "ActionPlanOperations_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionPlanOperationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/actionPlans/{planId}/operations/{operationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the specified action plan operation": {
+            "$ref": "./examples/ActionPlanOperations/Get.json"
+          }
+        },
+        "description": "Gets the specified action plan operation",
+        "tags": [
+          "ActionPlanOperations"
+        ],
+        "operationId": "ActionPlanOperations_Get",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActionPlanOperationResourceEntity"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionPlanOperationsList": {
+      "description": "List of action plan operations",
+      "properties": {
+        "value": {
+          "description": "Array of action plan operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionPlanOperationResourceEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    },
+    "ActionPlanOperationResourceEntity": {
+      "type": "object",
+      "description": "Action Plan Operation Resource Entity",
+      "properties": {
+        "properties": {
+          "description": "Action Plan Properties",
+          "$ref": "#/definitions/ActionPlanOperationAdminProperties",
+          "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "Entity tag of the resource",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ActionPlanOperationAdminProperties": {
+      "description": "Action Plan Operation Properties",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "The operation title",
+          "type": "string"
+        },
+        "description": {
+          "description": "The operation description",
+          "type": "string"
+        },
+        "type": {
+          "description": "The action plan operation type",
+          "$ref": "#/definitions/ActionType"
+        },
+        "subscriptionId": {
+          "description": "The target subscription identifier",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "The deployment parameters in JToken format",
+          "type": "object"
+        },
+        "startTime": {
+          "description": "The deployment start time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "description": "The deployment end time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "outputs": {
+          "description": "The action plan operation outputs in JToken format",
+          "type": "object"
+        },
+        "error": {
+          "description": "Error Information",
+          "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+        },
+        "provisioningState": {
+          "description": "The provisioning state",
+          "type": "string"
+        },
+        "actionPlanInstanceId": {
+          "description": "Action plan instance identifier",
+          "type": "string"
+        },
+        "actionPlanOperationId": {
+          "description": "Action plan operation identifier",
+          "type": "string"
+        },
+        "blobContainerName": {
+          "description": "Blob container name storing the deployment data",
+          "type": "string"
+        }
+      }
+    },
+    "ActionType": {
+      "description": "Action plan operation type",
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "PlanIdParameter": {
+      "description": "Identifier of the action plan.",
+      "name": "planId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "description": "Identifier of the action plan operation.",
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

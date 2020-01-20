@@ -1,55 +1,73 @@
 {
-    "parameters": {
-        "resourceUri": "subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
-        "timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z",
-        "metricName": "Percentage Cpu",
-        "aggregation": "average",
-        "interval": "PT1H",
-        "sensitivities": "Low,Medium",
-        "api-version": "2019-03-01"
-    },
-    "responses": {
-        "200": {
-            "body": {
-				"value": [{
-					"id": "/subscriptions/11aeb0ed-456b-4ca0-8df5-b9fbdc63d0d3/resourceGroups/SmartAnalytics-DEV-VM/providers/Microsoft.Compute/virtualMachines/DemoVM1/providers/microsoft.insights/metricBaselines/Percentage CPU",
-					"type": "microsoft.insights/metricBaselines",
-					"name": "Percentage CPU",
-					"properties": {
-						"interval": "PT1H",
-						"timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z",
-						"namespace": "microsoft.compute/virtualmachines",
-						"baselines": [{
-							"aggregation": "average",
-							"dimensions": [],
-							"metadata": [{
-								"name": "ErrorType",
-								"value": "TooManyAnomalies"
-							},
-							{
-								"name": "SeasonalityFrequency",
-								"value": "288"
-							}],
-							"timestamps": ["2019-03-12T11:00:00.000Z",
-							"2019-03-12T12:00:00.000Z"],
-							"data": [{
-								"sensitivity": "Low",
-								"lowThresholds": [30.0,
-								31.1],
-								"highThresholds": [90.3453,
-								91.3453]
-							},
-							{
-								"sensitivity": "Medium",
-								"lowThresholds": [50.0,
-								51.1],
-								"highThresholds": [70.3453,
-								71.3453]
-							}]
-						}]
-					}
-				}]
-			}        
-        }
+  "parameters": {
+    "resourceUri": "subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
+    "timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z",
+    "metricName": "Percentage Cpu",
+    "aggregation": "average",
+    "interval": "PT1H",
+    "sensitivities": "Low,Medium",
+    "api-version": "2019-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11aeb0ed-456b-4ca0-8df5-b9fbdc63d0d3/resourceGroups/SmartAnalytics-DEV-VM/providers/Microsoft.Compute/virtualMachines/DemoVM1/providers/microsoft.insights/metricBaselines/Percentage CPU",
+            "type": "microsoft.insights/metricBaselines",
+            "name": "Percentage CPU",
+            "properties": {
+              "interval": "PT1H",
+              "timespan": "2019-03-12T11:00:00.000Z/2019-03-12T12:00:00.000Z",
+              "namespace": "microsoft.compute/virtualmachines",
+              "baselines": [
+                {
+                  "aggregation": "average",
+                  "dimensions": [],
+                  "metadata": [
+                    {
+                      "name": "ErrorType",
+                      "value": "TooManyAnomalies"
+                    },
+                    {
+                      "name": "SeasonalityFrequency",
+                      "value": "288"
+                    }
+                  ],
+                  "timestamps": [
+                    "2019-03-12T11:00:00.000Z",
+                    "2019-03-12T12:00:00.000Z"
+                  ],
+                  "data": [
+                    {
+                      "sensitivity": "Low",
+                      "lowThresholds": [
+                        30.0,
+                        31.1
+                      ],
+                      "highThresholds": [
+                        90.3453,
+                        91.3453
+                      ]
+                    },
+                    {
+                      "sensitivity": "Medium",
+                      "lowThresholds": [
+                        50.0,
+                        51.1
+                      ],
+                      "highThresholds": [
+                        70.3453,
+                        71.3453
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
+  }
 }

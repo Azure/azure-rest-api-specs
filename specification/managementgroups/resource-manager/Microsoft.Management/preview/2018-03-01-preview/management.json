@@ -272,6 +272,51 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
+      "get": {
+        "tags": [
+          "ManagementGroups_Descendants"
+        ],
+        "operationId": "ManagementGroups_GetDescendants",
+        "description": "List all entities that descend from a management group.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DescendantListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetDescendants": {
+            "$ref": "./examples/GetDescendants.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}": {
       "put": {
         "tags": [
@@ -942,6 +987,76 @@
               "$ref": "#/definitions/ProvisioningState"
             }
           }
+        }
+      }
+    },
+    "DescendantListResult": {
+      "description": "Describes the result of the request to view descendants.",
+      "properties": {
+        "value": {
+          "description": "The list of descendants.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DescendantInfo"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DescendantInfo": {
+      "description": "The descendant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, /providers/Microsoft.Management/managementGroups or /subscriptions",
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the descendant. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "x-nullable": true,
+          "$ref": "#/definitions/DescendantInfoProperties"
+        }
+      }
+    },
+    "DescendantInfoProperties": {
+      "description": "The generic properties of an descendant.",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
+        },
+        "parent": {
+          "title": "Parent",
+          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "x-nullable": true
+        }
+      }
+    },
+    "DescendantParentGroupInfo": {
+      "description": "The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
         }
       }
     },

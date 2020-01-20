@@ -33,7 +33,7 @@
       }
     }
   },
-  "paths" : {
+  "paths": {
     "/providers/Microsoft.MixedReality/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -42,7 +42,9 @@
         ],
         "description": "Exposing Available Operations",
         "x-ms-examples": {
-          "OperationList": { "$ref": "./examples/GetOperationList.json" }
+          "OperationList": {
+            "$ref": "./examples/GetOperationList.json"
+          }
         },
         "parameters": [
           {
@@ -76,7 +78,9 @@
         ],
         "description": "Check Name Availability for global uniqueness",
         "x-ms-examples": {
-          "CheckLocalNameAvailability": { "$ref": "./examples/CheckLocalNameAvailability.json" }
+          "CheckLocalNameAvailability": {
+            "$ref": "./examples/CheckLocalNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -108,15 +112,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts" : {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_ListBySubscription",
         "tags": [
-          "Resource", "Proxy"
+          "Resource",
+          "Proxy"
         ],
         "description": "List Spatial Anchors Accounts by Subscription",
         "x-ms-examples": {
-          "SpatialAnchorsAccountListBySubscription": { "$ref": "./examples/SpatialAnchorsAccount/GetBySubscription.json" }
+          "SpatialAnchorsAccountListBySubscription": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetBySubscription.json"
+          }
         },
         "parameters": [
           {
@@ -145,7 +152,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_ListByResourceGroup",
         "tags": [
@@ -153,7 +160,9 @@
         ],
         "description": "List Resources by Resource Group",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/SpatialAnchorsAccount/GetByResourceGroup.json" }
+          "ResourceGet": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -185,7 +194,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}": {
       "delete": {
         "operationId": "SpatialAnchorsAccounts_Delete",
         "tags": [
@@ -193,7 +202,9 @@
         ],
         "description": "Delete a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceDelete": { "$ref": "./examples/SpatialAnchorsAccount/Delete.json" }
+          "ResourceDelete": {
+            "$ref": "./examples/SpatialAnchorsAccount/Delete.json"
+          }
         },
         "parameters": [
           {
@@ -231,7 +242,9 @@
         ],
         "description": "Retrieve a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/SpatialAnchorsAccount/Get.json" }
+          "ResourceGet": {
+            "$ref": "./examples/SpatialAnchorsAccount/Get.json"
+          }
         },
         "parameters": [
           {
@@ -269,7 +282,9 @@
         ],
         "description": "Updating a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceCreateOrUpdate": { "$ref": "./examples/SpatialAnchorsAccount/Patch.json" }
+          "Update spatial anchors account": {
+            "$ref": "./examples/SpatialAnchorsAccount/Patch.json"
+          }
         },
         "parameters": [
           {
@@ -310,7 +325,9 @@
         ],
         "description": "Creating or Updating a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceCreate": { "$ref": "./examples/SpatialAnchorsAccount/Put.json" }
+          "ResourceCreate": {
+            "$ref": "./examples/SpatialAnchorsAccount/Put.json"
+          }
         },
         "parameters": [
           {
@@ -351,7 +368,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}/keys" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}/keys": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_GetKeys",
         "tags": [
@@ -359,7 +376,9 @@
         ],
         "description": "Get Both of the 2 Keys of a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceRegenerateKey": { "$ref": "./examples/SpatialAnchorsAccount/GetKeys.json" }
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetKeys.json"
+          }
         },
         "parameters": [
           {
@@ -397,7 +416,9 @@
         ],
         "description": "Regenerate 1 Key of a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceRegenerateKey": { "$ref": "./examples/SpatialAnchorsAccount/RegenerateKey.json" }
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/SpatialAnchorsAccount/RegenerateKey.json"
+          }
         },
         "parameters": [
           {
@@ -433,11 +454,14 @@
       }
     }
   },
-  "definitions" : {
-    "CheckNameAvailabilityRequest" : {
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
       "description": "Check Name Availability Request",
       "type": "object",
-      "required" : ["name", "type"],
+      "required": [
+        "name",
+        "type"
+      ],
       "properties": {
         "name": {
           "description": "Resource Name To Verify",
@@ -449,18 +473,20 @@
         }
       }
     },
-    "CheckNameAvailabilityResponse" : {
+    "CheckNameAvailabilityResponse": {
       "description": "Check Name Availability Response",
       "type": "object",
-      "required" : ["nameAvailable"],
+      "required": [
+        "nameAvailable"
+      ],
       "properties": {
         "nameAvailable": {
           "description": "if name Available",
-          "$ref" : "#/definitions/NameAvailability"
+          "$ref": "#/definitions/NameAvailability"
         },
         "reason": {
           "description": "Resource Name To Verify",
-          "$ref" : "#/definitions/NameUnavailableReason"
+          "$ref": "#/definitions/NameUnavailableReason"
         },
         "message": {
           "description": "detail message",
@@ -471,7 +497,10 @@
     "ErrorResponse": {
       "description": "Response on Error",
       "type": "object",
-      "required" : ["message", "code"],
+      "required": [
+        "message",
+        "code"
+      ],
       "properties": {
         "message": {
           "description": "Describes the error in detail and provides debugging information",
@@ -508,7 +537,12 @@
     "OperationDisplay": {
       "description": "The object that represents the operation.",
       "type": "object",
-      "required" : ["provider", "resource", "operation", "description"],
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
       "properties": {
         "provider": {
           "description": "Service provider: Microsoft.ResourceProvider",
@@ -532,24 +566,24 @@
       "description": "Whether or not the name is available.",
       "type": "string",
       "enum": [
-          "true",
-          "false"
+        "true",
+        "false"
       ],
       "x-ms-enum": {
-          "name": "NameAvailability",
-          "modelAsString": true
+        "name": "NameAvailability",
+        "modelAsString": true
       }
     },
     "NameUnavailableReason": {
       "description": "reason of name unavailable.",
       "type": "string",
       "enum": [
-          "Invalid",
-          "AlreadyExists"
+        "Invalid",
+        "AlreadyExists"
       ],
       "x-ms-enum": {
-          "name": "NameUnavailableReason",
-          "modelAsString": true
+        "name": "NameUnavailableReason",
+        "modelAsString": true
       }
     },
     "OperationList": {
@@ -568,11 +602,15 @@
         }
       }
     },
-    "SpatialAnchorsAccount" : {
-      "allOf" : [{ "$ref" : "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"}],
+    "SpatialAnchorsAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "SpatialAnchorsAccount Response.",
       "type": "object",
-      "properties" :{     
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Property bag.",
@@ -580,40 +618,51 @@
         }
       }
     },
-    "SpatialAnchorsAccountKeys" : {
+    "SpatialAnchorsAccountKeys": {
       "description": "Spatial Anchors Account Keys",
       "type": "object",
       "properties": {
-        "primaryKey" : {
+        "primaryKey": {
           "description": "value of primary key.",
           "readOnly": true,
           "type": "string"
         },
-        "secondaryKey" : {
+        "secondaryKey": {
           "description": "value of secondary key.",
           "readOnly": true,
           "type": "string"
         }
-      } 
+      }
     },
-    "SpatialAnchorsAccountKeyRegenerateRequest" : {
+    "SpatialAnchorsAccountKeyRegenerateRequest": {
       "description": "Spatial Anchors Account Regenerate Key",
       "type": "object",
       "properties": {
-        "serial" : {
-          "type" : "integer",
-          "enum": [1, 2],
-          "default" : 1,
-          "x-ms-enum" : {
-            "name" : "Serial",
-            "values" : [
-              {"value": 1, "description": "The Primary Key", "name": "Primary"},
-              {"value": 2, "description": "The Secondary Key", "name": "Secondary"}
+        "serial": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "default": 1,
+          "x-ms-enum": {
+            "name": "Serial",
+            "values": [
+              {
+                "value": 1,
+                "description": "The Primary Key",
+                "name": "Primary"
+              },
+              {
+                "value": 2,
+                "description": "The Secondary Key",
+                "name": "Secondary"
+              }
             ]
           },
           "description": "serial of key to be regenerated"
         }
-      } 
+      }
     },
     "SpatialAnchorsAccountProperties": {
       "description": "Spatial Anchors Account Customize Properties",
@@ -657,12 +706,12 @@
       "required": true,
       "type": "string"
     },
-    "checkNameAvailabilityParameter" : {
+    "checkNameAvailabilityParameter": {
       "name": "checkNameAvailability",
       "description": "Check Name Availability Request.",
       "in": "body",
       "schema": {
-          "$ref": "#/definitions/CheckNameAvailabilityRequest"
+        "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
       "required": true,
       "x-ms-parameter-location": "method"
@@ -695,7 +744,7 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/SpatialAnchorsAccountKeyRegenerateRequest"
-    },
+      },
       "x-ms-parameter-location": "method",
       "description": "Specifying which key to be regenerated."
     },
@@ -715,7 +764,7 @@
       "description": "Spatial Anchors Account parameter.",
       "in": "body",
       "schema": {
-          "$ref": "#/definitions/SpatialAnchorsAccount"
+        "$ref": "#/definitions/SpatialAnchorsAccount"
       },
       "required": true,
       "x-ms-parameter-location": "method"

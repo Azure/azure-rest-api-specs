@@ -176,6 +176,9 @@
         "x-ms-examples": {
           "Runs_List": {
             "$ref": "./examples/RunsList.json"
+          },
+          "Runs_List_WithTimerTrigger": {
+            "$ref": "./examples/RunsList_WithTimerTrigger.json"
           }
         }
       }
@@ -222,6 +225,9 @@
         "x-ms-examples": {
           "Runs_Get": {
             "$ref": "./examples/RunsGet.json"
+          },
+          "Runs_Get_WithTimerTrigger": {
+            "$ref": "./examples/RunsGet_WithTimerTrigger.json"
           }
         }
       },
@@ -837,6 +843,10 @@
           "description": "The value that indicates whether archiving is enabled or not.",
           "default": false,
           "type": "boolean"
+        },
+        "timerTrigger": {
+          "$ref": "#/definitions/TimerTriggerDescriptor",
+          "description": "The timer trigger that caused the run."
         }
       }
     },
@@ -914,6 +924,19 @@
         },
         "providerType": {
           "description": "The source control provider type.",
+          "type": "string"
+        }
+      }
+    },
+    "TimerTriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "timerTriggerName": {
+          "description": "The timer trigger name that caused the run.",
+          "type": "string"
+        },
+        "scheduleOccurrence": {
+          "description": "The occurrence that triggered the run.",
           "type": "string"
         }
       }

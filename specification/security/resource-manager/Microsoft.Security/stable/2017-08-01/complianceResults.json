@@ -6,12 +6,22 @@
     "version": "2017-08-01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [{
-    "azure_auth": ["user_impersonation"]
-  }],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,10 +41,13 @@
             "$ref": "./examples/ComplianceResults/ListComplianceResults_example.json"
           }
         },
-        "tags": ["Compliance Results"],
+        "tags": [
+          "Compliance Results"
+        ],
         "description": "Security compliance results in the subscription",
         "operationId": "ComplianceResults_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -67,10 +80,13 @@
             "$ref": "./examples/ComplianceResults/GetComplianceResults_example.json"
           }
         },
-        "tags": ["Compliance Results"],
+        "tags": [
+          "Compliance Results"
+        ],
         "description": "Security Compliance Result",
         "operationId": "ComplianceResults_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -100,7 +116,9 @@
   "definitions": {
     "ComplianceResultList": {
       "description": "List of compliance results response",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -126,9 +144,11 @@
           "$ref": "#/definitions/ComplianceResultProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "ComplianceResultProperties": {
       "type": "object",
@@ -138,11 +158,17 @@
           "type": "string",
           "readOnly": true,
           "description": "The status of the resource regarding a single assessment",
-          "enum": ["Healthy", "NotApplicable", "OffByPolicy", "NotHealthy"],
+          "enum": [
+            "Healthy",
+            "NotApplicable",
+            "OffByPolicy",
+            "NotHealthy"
+          ],
           "x-ms-enum": {
             "name": "resourceStatus",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "Healthy",
                 "description": "This assessment on the resource is healthy"
               },

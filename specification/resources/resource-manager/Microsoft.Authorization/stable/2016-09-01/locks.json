@@ -116,7 +116,7 @@
           }
         }
       },
-	  "delete": {
+      "delete": {
         "tags": [
           "ManagementLocks"
         ],
@@ -157,7 +157,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "ManagementLocks"
         ],
@@ -234,7 +234,7 @@
           }
         ],
         "responses": {
-           "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ManagementLockObject"
@@ -840,7 +840,7 @@
           }
         ],
         "responses": {
-           "200": {
+          "200": {
             "description": "OK - Returns an array of resource locks.",
             "schema": {
               "$ref": "#/definitions/ManagementLockListResult"
@@ -891,7 +891,9 @@
           "description": "The owners of the lock."
         }
       },
-      "required": [ "level" ],
+      "required": [
+        "level"
+      ],
       "description": "The lock properties."
     },
     "ManagementLockObject": {
@@ -917,7 +919,9 @@
           "description": "The name of the lock."
         }
       },
-      "required": [ "properties" ],
+      "required": [
+        "properties"
+      ],
       "description": "The lock information.",
       "x-ms-azure-resource": true
     },

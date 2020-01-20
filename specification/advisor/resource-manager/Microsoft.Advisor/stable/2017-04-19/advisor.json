@@ -707,6 +707,20 @@
             "type": "string"
           }
         },
+        "applicableScenarios": {
+          "description": "The list of scenarios applicable to this metadata entity.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Alerts"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "Scenario",
+              "modelAsString": true
+            }
+          }
+        },
         "supportedValues": {
           "description": "The list of supported values.",
           "type": "array",
@@ -839,7 +853,8 @@
             "HighAvailability",
             "Security",
             "Performance",
-            "Cost"
+            "Cost",
+            "OperationalExcellence"
           ],
           "type": "string",
           "x-ms-enum": {

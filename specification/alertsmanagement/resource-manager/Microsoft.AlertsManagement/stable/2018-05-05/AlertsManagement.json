@@ -390,6 +390,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List": {
             "$ref": "./examples/SmartGroups_List.json"
@@ -912,7 +915,6 @@
     },
     "errorResponse": {
       "description": "An error response from the service.",
-      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -921,7 +923,6 @@
     },
     "errorResponseBody": {
       "description": "Details of error response.",
-      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",

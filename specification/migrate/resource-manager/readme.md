@@ -90,7 +90,6 @@ These settings apply only when `--tag=package-2020-01` is specified on the comma
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
 ```
-
 # Code Generation
 
 ## Swagger to SDK
@@ -133,3 +132,4 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+

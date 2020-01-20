@@ -1,0 +1,2495 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-05-01",
+    "title": "ContainerRegistryManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Copies an image to this container registry from the specified container registry.",
+        "operationId": "Registries_ImportImage",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters specifying the image to copy and the source container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportImageParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "ImportImageByTag": {
+            "$ref": "./examples/ImportImageByTag.json"
+          },
+          "ImportImageByManifestDigest": {
+            "$ref": "./examples/ImportImageByManifestDigest.json"
+          },
+          "ImportImageFromPublicRegistry": {
+            "$ref": "./examples/ImportImageFromPublicRegistry.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Checks whether the container registry name is available for use. The name must contain only alphanumeric characters, be globally unique, and between 5 and 50 characters in length.",
+        "operationId": "Registries_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "registryNameCheckRequest",
+            "in": "body",
+            "description": "The object containing information for the availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryNameCheckRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryNameStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryCheckNameAvailable": {
+            "$ref": "./examples/RegistryCheckNameAvailable.json"
+          },
+          "RegistryCheckNameNotAvailable": {
+            "$ref": "./examples/RegistryCheckNameNotAvailable.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ContainerRegistry/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Container Registry REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets the properties of the specified container registry.",
+        "operationId": "Registries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryGet": {
+            "$ref": "./examples/RegistryGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Creates a container registry with the specified parameters.",
+        "operationId": "Registries_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "registry",
+            "in": "body",
+            "description": "The parameters for creating a container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryCreate": {
+            "$ref": "./examples/RegistryCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Deletes a container registry.",
+        "operationId": "Registries_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The container registry does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "RegistryDelete": {
+            "$ref": "./examples/RegistryDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Updates a container registry with the specified parameters.",
+        "operationId": "Registries_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "registryUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a container registry.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Registry"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryUpdate": {
+            "$ref": "./examples/RegistryUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists all the container registries under the specified resource group.",
+        "operationId": "Registries_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListByResourceGroup": {
+            "$ref": "./examples/RegistryListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/registries": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists all the container registries under the specified subscription.",
+        "operationId": "Registries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RegistryListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryList": {
+            "$ref": "./examples/RegistryList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listCredentials": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists the login credentials for the specified container registry.",
+        "operationId": "Registries_ListCredentials",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the list of credentials retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryListCredentialsResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListCredentials": {
+            "$ref": "./examples/RegistryListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/regenerateCredential": {
+      "post": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Regenerates one of the login credentials for the specified container registry.",
+        "operationId": "Registries_RegenerateCredential",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "regenerateCredentialParameters",
+            "in": "body",
+            "description": "Specifies name of the password which should be regenerated -- password or password2.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateCredentialParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the specified credential regenerated successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryListCredentialsResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryRegenerateCredential": {
+            "$ref": "./examples/RegistryRegenerateCredential.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/listUsages": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Gets the quota usages for the specified container registry.",
+        "operationId": "Registries_ListUsages",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the registry usages retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegistryUsageListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListUsages": {
+            "$ref": "./examples/RegistryListUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications/{replicationName}": {
+      "get": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Gets the properties of the specified replication.",
+        "operationId": "Replications_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationGet": {
+            "$ref": "./examples/ReplicationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Creates a replication for a container registry with the specified parameters.",
+        "operationId": "Replications_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationNameParameter"
+          },
+          {
+            "name": "replication",
+            "in": "body",
+            "description": "The parameters for creating a replication.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationCreate": {
+            "$ref": "./examples/ReplicationCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Deletes a replication from a container registry.",
+        "operationId": "Replications_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The replication does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationDelete": {
+            "$ref": "./examples/ReplicationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Updates a replication for a container registry with the specified parameters.",
+        "operationId": "Replications_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationNameParameter"
+          },
+          {
+            "name": "replicationUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a replication.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReplicationUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Replication"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationUpdate": {
+            "$ref": "./examples/ReplicationUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/replications": {
+      "get": {
+        "tags": [
+          "Replications"
+        ],
+        "description": "Lists all the replications for the specified container registry.",
+        "operationId": "Replications_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReplicationList": {
+            "$ref": "./examples/ReplicationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Gets the properties of the specified webhook.",
+        "operationId": "Webhooks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookGet": {
+            "$ref": "./examples/WebhookGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Creates a webhook for a container registry with the specified parameters.",
+        "operationId": "Webhooks_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          },
+          {
+            "name": "webhookCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a webhook.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebhookCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookCreate": {
+            "$ref": "./examples/WebhookCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Deletes a webhook from a container registry.",
+        "operationId": "Webhooks_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The webhook does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "WebhookDelete": {
+            "$ref": "./examples/WebhookDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Updates a webhook with the specified parameters.",
+        "operationId": "Webhooks_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          },
+          {
+            "name": "webhookUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a webhook.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebhookUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Webhook"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookUpdate": {
+            "$ref": "./examples/WebhookUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks": {
+      "get": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Lists all the webhooks for the specified container registry.",
+        "operationId": "Webhooks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WebhookListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookList": {
+            "$ref": "./examples/WebhookList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/ping": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Triggers a ping event to be sent to the webhook.",
+        "operationId": "Webhooks_Ping",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventInfo"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookPing": {
+            "$ref": "./examples/WebhookPing.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/getCallbackConfig": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Gets the configuration of service URI and custom headers for the webhook.",
+        "operationId": "Webhooks_GetCallbackConfig",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/CallbackConfig"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookGetCallbackConfig": {
+            "$ref": "./examples/WebhookGetCallbackConfig.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/webhooks/{webhookName}/listEvents": {
+      "post": {
+        "tags": [
+          "Webhooks"
+        ],
+        "description": "Lists recent events for the specified webhook.",
+        "operationId": "Webhooks_ListEvents",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WebhookNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EventListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebhookListEvents": {
+            "$ref": "./examples/WebhookListEvents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ImportImageParameters": {
+      "required": [
+        "source"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ImportSource",
+          "description": "The source of the image."
+        },
+        "targetTags": {
+          "description": "List of strings of the form repo[:tag]. When tag is omitted the source will be used (or 'latest' if source tag is also omitted).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "untaggedTargetRepositories": {
+          "description": "List of strings of repository names to do a manifest only copy. No tag will be created.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mode": {
+          "description": "When Force, any existing target tags will be overwritten. When NoForce, any existing target tags will fail the operation before any copying begins.",
+          "default": "NoForce",
+          "enum": [
+            "NoForce",
+            "Force"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ImportMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ImportSource": {
+      "required": [
+        "sourceImage"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource identifier of the source Azure Container Registry.",
+          "type": "string"
+        },
+        "registryUri": {
+          "description": "The address of the source registry (e.g. 'mcr.microsoft.com').",
+          "type": "string"
+        },
+        "credentials": {
+          "$ref": "#/definitions/ImportSourceCredentials",
+          "description": "Credentials used when importing from a registry uri."
+        },
+        "sourceImage": {
+          "description": "Repository name of the source image.\r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "string"
+        }
+      }
+    },
+    "ImportSourceCredentials": {
+      "required": [
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username to authenticate with the source registry.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password used to authenticate with the source registry.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryNameCheckRequest": {
+      "description": "A request to check whether a container registry name is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the container registry.",
+          "maxLength": 50,
+          "minLength": 5,
+          "pattern": "^[a-zA-Z0-9]*$",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource type of the container registry. This field must be set to 'Microsoft.ContainerRegistry/registries'.",
+          "enum": [
+            "Microsoft.ContainerRegistry/registries"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerRegistryResourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "RegistryNameStatus": {
+      "description": "The result of a request to check the availability of a container registry name.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value that indicates whether the name is available.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "If any, the reason that the name is not available.",
+          "type": "string"
+        },
+        "message": {
+          "description": "If any, the error message that provides more detail for the reason that the name is not available.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "The result of a request to list container registry operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of container registry operations. Since this list may be incomplete, the nextLink field should be used to request the next list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationDefinition"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of container registry operations.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDefinition": {
+      "description": "The definition of a container registry operation.",
+      "type": "object",
+      "properties": {
+        "origin": {
+          "description": "The origin information of the container registry operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayDefinition",
+          "description": "The display information for the container registry operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesDefinition",
+          "description": "The properties information for the container registry operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDisplayDefinition": {
+      "description": "The display information for a container registry operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The resource provider name: Microsoft.ContainerRegistry.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The operation that users can perform.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description for the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationPropertiesDefinition": {
+      "description": "The definition of Azure Monitoring properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/OperationServiceSpecificationDefinition",
+          "description": "The definition of Azure Monitoring service."
+        }
+      }
+    },
+    "OperationServiceSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring list.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "A list of Azure Monitoring metrics definition.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationMetricSpecificationDefinition"
+          }
+        }
+      }
+    },
+    "OperationMetricSpecificationDefinition": {
+      "description": "The definition of Azure Monitoring metric.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Metric name.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Metric display name.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Metric description.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Metric unit.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Metric aggregation type.",
+          "type": "string"
+        },
+        "internalMetricName": {
+          "description": "Internal metric name.",
+          "type": "string"
+        }
+      }
+    },
+    "Registry": {
+      "description": "An object that represents a container registry.",
+      "required": [
+        "sku"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the container registry."
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistryProperties",
+          "description": "The properties of the container registry.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Sku": {
+      "description": "The SKU of a container registry.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The SKU name of the container registry. Required for registry creation.",
+          "enum": [
+            "Classic",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "description": "The SKU tier based on the SKU name.",
+          "enum": [
+            "Classic",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RegistryProperties": {
+      "description": "The properties of a container registry.",
+      "type": "object",
+      "properties": {
+        "loginServer": {
+          "description": "The URL that can be used to log into the container registry.",
+          "type": "string",
+          "readOnly": true
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "The creation date of the container registry in ISO8601 format.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the container registry at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the container registry at the time the operation was called.",
+          "readOnly": true
+        },
+        "adminUserEnabled": {
+          "description": "The value that indicates whether the admin user is enabled.",
+          "default": false,
+          "type": "boolean"
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/StorageAccountProperties",
+          "description": "The properties of the storage account for the container registry. Only applicable to Classic SKU."
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "The policies for a container registry."
+        }
+      }
+    },
+    "Status": {
+      "description": "The status of an Azure resource at the time the operation was called.",
+      "type": "object",
+      "properties": {
+        "displayStatus": {
+          "description": "The short label for the status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The detailed message for the status, including alerts and error messages.",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp when the status was changed to the current value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageAccountProperties": {
+      "description": "The properties of a storage account for a container registry. Only applicable to Classic SKU.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource ID of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkRuleSet": {
+      "description": "The network rule set for a container registry.",
+      "required": [
+        "defaultAction"
+      ],
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "The default action of allow or deny when no other rules match.",
+          "default": "Allow",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DefaultAction",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkRules": {
+          "description": "The virtual network rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "ipRules": {
+          "description": "The IP ACL rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          }
+        }
+      }
+    },
+    "Policies": {
+      "description": "The policies for a container registry.",
+      "type": "object",
+      "properties": {
+        "quarantinePolicy": {
+          "$ref": "#/definitions/QuarantinePolicy",
+          "description": "The quarantine policy for a container registry."
+        },
+        "trustPolicy": {
+          "$ref": "#/definitions/TrustPolicy",
+          "description": "The content trust policy for a container registry."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "The retention policy for a container registry."
+        }
+      }
+    },
+    "VirtualNetworkRule": {
+      "description": "Virtual network rule.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of virtual network rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.",
+          "type": "string",
+          "x-ms-client-name": "VirtualNetworkResourceId"
+        }
+      }
+    },
+    "IPRule": {
+      "description": "IP rule with specific IP or IP range in CIDR format.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "description": "The action of IP ACL rule.",
+          "default": "Allow",
+          "enum": [
+            "Allow"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Action",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.",
+          "type": "string",
+          "x-ms-client-name": "IPAddressOrRange"
+        }
+      }
+    },
+    "QuarantinePolicy": {
+      "description": "The quarantine policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TrustPolicy": {
+      "description": "The content trust policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of trust policy.",
+          "default": "Notary",
+          "enum": [
+            "Notary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrustPolicyType",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RetentionPolicy": {
+      "description": "The retention policy for a container registry.",
+      "type": "object",
+      "properties": {
+        "days": {
+          "format": "int32",
+          "description": "The number of days to retain an untagged manifest after which it gets purged.",
+          "default": 7,
+          "type": "integer"
+        },
+        "lastUpdatedTime": {
+          "format": "date-time",
+          "description": "The timestamp when the policy was last updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The value that indicates whether the policy is enabled or not.",
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RegistryUpdateParameters": {
+      "description": "The parameters for updating a container registry.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags for the container registry.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The SKU of the container registry."
+        },
+        "properties": {
+          "$ref": "#/definitions/RegistryPropertiesUpdateParameters",
+          "description": "The properties that the container registry will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "RegistryPropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a container registry.",
+      "type": "object",
+      "properties": {
+        "adminUserEnabled": {
+          "description": "The value that indicates whether the admin user is enabled.",
+          "type": "boolean"
+        },
+        "networkRuleSet": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "The network rule set for a container registry."
+        },
+        "policies": {
+          "$ref": "#/definitions/Policies",
+          "description": "The policies for a container registry."
+        }
+      }
+    },
+    "RegistryListResult": {
+      "description": "The result of a request to list container registries.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of container registries. Since this list may be incomplete, the nextLink field should be used to request the next list of container registries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Registry"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of container registries.",
+          "type": "string"
+        }
+      }
+    },
+    "RegistryListCredentialsResult": {
+      "description": "The response from the ListCredentials operation.",
+      "type": "object",
+      "properties": {
+        "username": {
+          "description": "The username for a container registry.",
+          "type": "string"
+        },
+        "passwords": {
+          "description": "The list of passwords for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryPassword"
+          }
+        }
+      }
+    },
+    "RegistryPassword": {
+      "description": "The login password for the container registry.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The password name.",
+          "enum": [
+            "password",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PasswordName",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "description": "The password value.",
+          "type": "string"
+        }
+      }
+    },
+    "RegenerateCredentialParameters": {
+      "description": "The parameters used to regenerate the login credential.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Specifies name of the password which should be regenerated -- password or password2.",
+          "enum": [
+            "password",
+            "password2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PasswordName",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "RegistryUsageListResult": {
+      "description": "The result of a request to get container registry quota usages.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of container registry quota usages.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistryUsage"
+          }
+        }
+      }
+    },
+    "RegistryUsage": {
+      "description": "The quota usage for a container registry.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the usage.",
+          "type": "string"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The limit of the usage.",
+          "type": "integer"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "The current value of the usage.",
+          "type": "integer"
+        },
+        "unit": {
+          "description": "The unit of measurement.",
+          "enum": [
+            "Count",
+            "Bytes"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RegistryUsageUnit",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Replication": {
+      "description": "An object that represents a replication for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReplicationProperties",
+          "description": "The properties of the replication.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ReplicationProperties": {
+      "description": "The properties of a replication.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the replication at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the replication at the time the operation was called.",
+          "readOnly": true
+        }
+      }
+    },
+    "ReplicationUpdateParameters": {
+      "description": "The parameters for updating a replication.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags for the replication.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ReplicationListResult": {
+      "description": "The result of a request to list replications for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of replications. Since this list may be incomplete, the nextLink field should be used to request the next list of replications.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replication"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of replications.",
+          "type": "string"
+        }
+      }
+    },
+    "Webhook": {
+      "description": "An object that represents a webhook for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebhookProperties",
+          "description": "The properties of the webhook.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebhookProperties": {
+      "description": "The properties of a webhook.",
+      "required": [
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of actions that trigger the webhook to post notifications.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "push",
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookAction",
+              "modelAsString": true
+            }
+          }
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the webhook at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WebhookCreateParameters": {
+      "description": "The parameters for creating a webhook.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags for the webhook.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "The location of the webhook. This cannot be changed after the resource is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/WebhookPropertiesCreateParameters",
+          "description": "The properties that the webhook will be created with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebhookPropertiesCreateParameters": {
+      "description": "The parameters for creating the properties of a webhook.",
+      "required": [
+        "serviceUri",
+        "actions"
+      ],
+      "type": "object",
+      "properties": {
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of actions that trigger the webhook to post notifications.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "push",
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookAction",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "WebhookUpdateParameters": {
+      "description": "The parameters for updating a webhook.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "The tags for the webhook.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/WebhookPropertiesUpdateParameters",
+          "description": "The properties that the webhook will be updated with.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "WebhookPropertiesUpdateParameters": {
+      "description": "The parameters for updating the properties of a webhook.",
+      "type": "object",
+      "properties": {
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "The status of the webhook at the time the operation was called.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WebhookStatus",
+            "modelAsString": true
+          }
+        },
+        "scope": {
+          "description": "The scope of repositories where the event can be triggered. For example, 'foo:*' means events for all tags under repository 'foo'. 'foo:bar' means events for 'foo:bar' only. 'foo' is equivalent to 'foo:latest'. Empty means all events.",
+          "type": "string"
+        },
+        "actions": {
+          "description": "The list of actions that trigger the webhook to post notifications.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "push",
+              "delete",
+              "quarantine",
+              "chart_push",
+              "chart_delete"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WebhookAction",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "WebhookListResult": {
+      "description": "The result of a request to list webhooks for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of webhooks. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Webhook"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of webhooks.",
+          "type": "string"
+        }
+      }
+    },
+    "EventInfo": {
+      "description": "The basic information of an event.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        }
+      }
+    },
+    "CallbackConfig": {
+      "description": "The configuration of service URI and custom headers for the webhook.",
+      "required": [
+        "serviceUri"
+      ],
+      "type": "object",
+      "properties": {
+        "serviceUri": {
+          "description": "The service URI for the webhook to post notifications.",
+          "type": "string"
+        },
+        "customHeaders": {
+          "description": "Custom headers that will be added to the webhook notifications.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EventListResult": {
+      "description": "The result of a request to list events for a webhook.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of events. Since this list may be incomplete, the nextLink field should be used to request the next list of events.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of events.",
+          "type": "string"
+        }
+      }
+    },
+    "Event": {
+      "description": "The event for a webhook.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventInfo"
+        }
+      ],
+      "properties": {
+        "eventRequestMessage": {
+          "$ref": "#/definitions/EventRequestMessage",
+          "description": "The event request message sent to the service URI."
+        },
+        "eventResponseMessage": {
+          "$ref": "#/definitions/EventResponseMessage",
+          "description": "The event response message received from the service URI."
+        }
+      }
+    },
+    "EventRequestMessage": {
+      "description": "The event request message sent to the service URI.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/EventContent",
+          "description": "The content of the event request message."
+        },
+        "headers": {
+          "description": "The headers of the event request message.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "method": {
+          "description": "The HTTP method used to send the event request message.",
+          "type": "string"
+        },
+        "requestUri": {
+          "description": "The URI used to send the event request message.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The HTTP message version.",
+          "type": "string"
+        }
+      }
+    },
+    "EventResponseMessage": {
+      "description": "The event response message received from the service URI.",
+      "type": "object",
+      "properties": {
+        "content": {
+          "description": "The content of the event response message.",
+          "type": "string"
+        },
+        "headers": {
+          "description": "The headers of the event response message.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reasonPhrase": {
+          "description": "The reason phrase of the event response message.",
+          "type": "string"
+        },
+        "statusCode": {
+          "description": "The status code of the event response message.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The HTTP message version.",
+          "type": "string"
+        }
+      }
+    },
+    "EventContent": {
+      "description": "The content of the event request message.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The time at which the event occurred.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action that encompasses the provided event.",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/Target",
+          "description": "The target of the event."
+        },
+        "request": {
+          "$ref": "#/definitions/Request",
+          "description": "The request that generated the event."
+        },
+        "actor": {
+          "$ref": "#/definitions/Actor",
+          "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
+        },
+        "source": {
+          "$ref": "#/definitions/Source",
+          "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
+        }
+      }
+    },
+    "Target": {
+      "description": "The target of the event.",
+      "type": "object",
+      "properties": {
+        "mediaType": {
+          "description": "The MIME type of the referenced object.",
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "description": "The number of bytes of the content. Same as Length field.",
+          "type": "integer"
+        },
+        "digest": {
+          "description": "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
+          "type": "string"
+        },
+        "length": {
+          "format": "int64",
+          "description": "The number of bytes of the content. Same as Size field.",
+          "type": "integer"
+        },
+        "repository": {
+          "description": "The repository name.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The direct URL to the content.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the artifact.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the artifact.",
+          "type": "string"
+        }
+      }
+    },
+    "Request": {
+      "description": "The request that generated the event.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the request that initiated the event.",
+          "type": "string"
+        },
+        "addr": {
+          "description": "The IP or hostname and possibly port of the client connection that initiated the event. This is the RemoteAddr from the standard http request.",
+          "type": "string"
+        },
+        "host": {
+          "description": "The externally accessible hostname of the registry instance, as specified by the http host header on incoming requests.",
+          "type": "string"
+        },
+        "method": {
+          "description": "The request method that generated the event.",
+          "type": "string"
+        },
+        "useragent": {
+          "description": "The user agent header of the request.",
+          "type": "string"
+        }
+      }
+    },
+    "Actor": {
+      "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The subject or username associated with the request context that generated the event.",
+          "type": "string"
+        }
+      }
+    },
+    "Source": {
+      "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
+      "type": "object",
+      "properties": {
+        "addr": {
+          "description": "The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.",
+          "type": "string"
+        },
+        "instanceID": {
+          "description": "The running instance of an application. Changes after each restart.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group to which the container registry belongs.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "RegistryNameParameter": {
+      "name": "registryName",
+      "in": "path",
+      "description": "The name of the container registry.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "WebhookNameParameter": {
+      "name": "webhookName",
+      "in": "path",
+      "description": "The name of the webhook.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ReplicationNameParameter": {
+      "name": "replicationName",
+      "in": "path",
+      "description": "The name of the replication.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

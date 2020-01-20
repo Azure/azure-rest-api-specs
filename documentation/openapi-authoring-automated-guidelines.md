@@ -32,34 +32,34 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R3012](#r3012)	| [APIVersionPattern](#r3012)	| ARM OpenAPI(swagger) specs |
-| [R3019](#r3019)	| [ARMResourcePropertiesBag](#r3019)	| ARM and Data plane OpenAPI(swagger) specs |
-| [R3014](#r3014)	| [BodyPropertiesNamesCamelCase](#r3014) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3016](#r3016)	| [DefinitionsPropertiesNamesCamelCase](#r3016)  | ARM and Data plane OpenAPI(swagger) specs |
-| [R3006](#r3006)	| [BodyTopLevelProperties](#r3006) | ARM OpenAPI(swagger) specs |
-| [R3008](#r3008)	| [CollectionObjectPropertiesNaming](#r3008) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2044](#r2044)	| [InvalidVerbUsed](#r2044) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3023](#r3023)	| [OperationsAPIImplementation](#r3023) | ARM OpenAPI(swagger) specs |
-| [R3007](#r3007)	| [PutGetPatchResponseSchema](#r3007) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3025](#r3025)	| [TrackedResourceGetOperation](#r3025) | ARM OpenAPI(swagger) specs |
-| [R3026](#r3026)	| [TrackedResourcePatchOperation](#r3026) | ARM OpenAPI(swagger) specs |
-| [R2059](#r2059)	| [UniqueResourcePaths](#r2059) | ARM OpenAPI(swagger) specs |
-| [R2016](#r2016)	| [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2062](#r2062)	| [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs |
-| [R3027](#r3027)	| [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
-| [R3028](#r3028)	| [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
-| [R3011](#r3011)	| [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3012](#r3012) | [APIVersionPattern](#r3012) | ARM OpenAPI(swagger) specs |
+| [R3019](#r3019) | [ARMResourcePropertiesBag](#r3019) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3014](#r3014) | [BodyPropertiesNamesCamelCase](#r3014) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3016](#r3016) | [DefinitionsPropertiesNamesCamelCase](#r3016)  | ARM and Data plane OpenAPI(swagger) specs |
+| [R3006](#r3006) | [BodyTopLevelProperties](#r3006) | ARM OpenAPI(swagger) specs |
+| [R3008](#r3008) | [CollectionObjectPropertiesNaming](#r3008) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2044](#r2044) | [InvalidVerbUsed](#r2044) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3023](#r3023) | [OperationsAPIImplementation](#r3023) | ARM OpenAPI(swagger) specs |
+| [R3007](#r3007) | [PutGetPatchResponseSchema](#r3007) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3025](#r3025) | [TrackedResourceGetOperation](#r3025) | ARM OpenAPI(swagger) specs |
+| [R3026](#r3026) | [TrackedResourcePatchOperation](#r3026) | ARM OpenAPI(swagger) specs |
+| [R2059](#r2059) | [UniqueResourcePaths](#r2059) | ARM OpenAPI(swagger) specs |
+| [R2016](#r2016) | [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2062](#r2062) | [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs |
+| [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
+| [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
+| [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
 | Id | Rule Name | Applies to |
 | --- | --- | --- |
-| [R3018](#r3018)	| [EnumInsteadOfBoolean](#r3018) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3017](#r3017)	| [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2057](#r2057)	| [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
-| [R3010](#r3010)	| [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
-| [R2004](#r2004)	| [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R3018](#r3018) | [EnumInsteadOfBoolean](#r3018) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3017](#r3017) | [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
+| [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
+| [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -69,26 +69,26 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- |
 | [R2024](#r2024) | [AnonymousBodyParameter](#r2024) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2026](#r2026) | [AvoidAnonymousTypes](#r2026) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2014](#r2014)	| [SubscriptionIdParameterInOperations](#r2014)	| ARM and Data plane OpenAPI(swagger) specs |
-| [R2027](#r2027)	| [DefaultMustBeInEnum](#r2027) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1001](#r1001)	| [OperationIdNounInVerb](#r1001)	| ARM and Data plane OpenAPI(swagger) specs |
-| [R2055](#r2055)	| [OneUnderscoreInOperationId](#r2055) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2003](#r2003)	| [ValidFormats](#r2003)	 | ARM and Data plane OpenAPI(swagger) specs |
-| [R2005](#r2005)	| [LongRunningResponseStatusCode](#r2005) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2008](#r2008)	| [MutabilityWithReadOnlyRule](#r2008) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2025](#r2025)	| [NextLinkPropertyMustExist](#r2025)	| ARM and Data plane OpenAPI(swagger) specs |
+| [R2014](#r2014) | [SubscriptionIdParameterInOperations](#r2014) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2027](#r2027) | [DefaultMustBeInEnum](#r2027) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1001](#r1001) | [OperationIdNounInVerb](#r1001) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2055](#r2055) | [OneUnderscoreInOperationId](#r2055) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2003](#r2003) | [ValidFormats](#r2003)  | ARM and Data plane OpenAPI(swagger) specs |
+| [R2005](#r2005) | [LongRunningResponseStatusCode](#r2005) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2008](#r2008) | [MutabilityWithReadOnlyRule](#r2008) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2025](#r2025) | [NextLinkPropertyMustExist](#r2025) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2028](#r2028) | [NonEmptyClientName](#r2028) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2060](#r2060) | [PageableRequires200Response](#r2060) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2019](#r2019)	| [ResourceHasXMsResourceEnabled](#r2019) | ARM OpenAPI(swagger) specs |
+| [R2019](#r2019) | [ResourceHasXMsResourceEnabled](#r2019) | ARM OpenAPI(swagger) specs |
 | [R2058](#r2058) | [XmsPathsMustOverloadPaths](#r2058) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2012](#r2012)	| [XmsClientNameParameter](#r2012) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2013](#r2013)	| [XmsClientNameProperty](#r2013) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2047](#r2047)	| [NamePropertyDefinitionInParameter](#r2047) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2056](#r2056)	| [RequiredReadOnlyProperties](#r2056) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2054](#r2054)	| [SecurityDefinitionsStructure](#r2054) | ARM OpenAPI(swagger) specs |
-| [R2006](#r2006)	| [ControlCharactersNotAllowed](#r2006) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2009](#r2009)	| [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs |
-| [R3013](#r3013)	| [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2012](#r2012) | [XmsClientNameParameter](#r2012) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2013](#r2013) | [XmsClientNameProperty](#r2013) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2047](#r2047) | [NamePropertyDefinitionInParameter](#r2047) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2056](#r2056) | [RequiredReadOnlyProperties](#r2056) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2054](#r2054) | [SecurityDefinitionsStructure](#r2054) | ARM OpenAPI(swagger) specs |
+| [R2006](#r2006) | [ControlCharactersNotAllowed](#r2006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs |
+| [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs |
 
 #### SDK Warnings
@@ -99,16 +99,16 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4000](#r4000-3) | [DescriptiveDescriptionRequired](#r4000-3) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4000](#r4000-4) | [DescriptionAndTitleMissing](#r4000-4) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4000](#r4000-5) | [OperationDescriptionOrSummaryRequired](#r4000-5)  | ARM and Data plane OpenAPI(swagger) specs |
-| [R2001](#r2001)	| [AvoidNestedProperties](#r2001) | ARM and Data plane OpenAPI(swagger) specs |
-| [R4002](#r4002)	| [LocationMustHaveXmsMutability](#r4002) | ARM OpenAPI(swagger) specs |
-| [R2066](#r2066)	| [PostOperationIdContainsUrlVerb](#r2066) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2001](#r2001) | [AvoidNestedProperties](#r2001) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4002](#r4002) | [LocationMustHaveXmsMutability](#r4002) | ARM OpenAPI(swagger) specs |
+| [R2066](#r2066) | [PostOperationIdContainsUrlVerb](#r2066) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2015](#r2015) | [ParameterNotDefinedInGlobalParameters](#r2015) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1010](#r1010) | [AvoidMSDNReferences](#r1010) | ARM and Data plane OpenAPI(swagger) specs |
-| [R2017](#r2017)	| [PutRequestResponseScheme](#r2017) | ARM and Data plane OpenAPI(swagger) specs |
+| [R2017](#r2017) | [PutRequestResponseScheme](#r2017) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1009](#r1009) | [DeleteInOperationName](#r1009) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1005](#r1005) | [GetInOperationName](#r1005) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1003](#r1003) | [ListInOperationName](#r1003) | ARM and Data plane OpenAPI(swagger) specs |
-| [R1006](#r1006)	| [PutInOperationName](#r1006) | ARM and Data plane OpenAPI(swagger) specs |
+| [R1006](#r1006) | [PutInOperationName](#r1006) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1007](#r1007) | [PatchInOperationName](#r1007) | ARM and Data plane OpenAPI(swagger) specs |
 | [R1011](#r1011) | [HttpsSupportedScheme](#r1011) | ARM OpenAPI(swagger) specs |
 | [R2065](#r2065) | [LicenseHeaderMustNotBeSpecified](#r2065) | ARM and Data plane OpenAPI(swagger) specs |
@@ -331,7 +331,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r4002" />R4002	LocationMustHaveXmsMutability
+### <a name="r4002" />R4002 LocationMustHaveXmsMutability
 **Category** : SDK Warning
 
 **Applies to** : ARM OpenAPI(swagger) specs
@@ -378,7 +378,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r2066" />R2066	PostOperationIdContainsUrlVerb
+### <a name="r2066" />R2066 PostOperationIdContainsUrlVerb
 **Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs

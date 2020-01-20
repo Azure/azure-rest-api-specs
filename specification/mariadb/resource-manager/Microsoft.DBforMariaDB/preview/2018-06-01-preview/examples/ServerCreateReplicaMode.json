@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "serverName": "targetserver",
+    "resourceGroupName": "TargetResourceGroup",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "createMode": "Replica",
+        "sourceServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5_2",
+          "tier": "GeneralPurpose",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 14,
+            "geoRedundantBackup": "Enabled"
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mariadb.database.azure.com",
+          "earliestRestoreDate": "2018-03-14T18:02:41.577+00:00",
+          "replicationRole": "Replica",
+          "masterServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver",
+          "replicaCapacity": 0
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMariaDB/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMariaDB/servers"
+      }
+    },
+    "200": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen5_2",
+          "tier": "GeneralPurpose",
+          "family": "Gen5",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 14,
+            "geoRedundantBackup": "Enabled"
+          },
+          "version": "5.7",
+          "sslEnforcement": "Enabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "targetserver.mariadb.database.azure.com",
+          "earliestRestoreDate": "2018-03-14T18:02:41.577+00:00",
+          "replicationRole": "Replica",
+          "masterServerId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/MasterResourceGroup/providers/Microsoft.DBforMariaDB/servers/masterserver",
+          "replicaCapacity": 0
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TargetResourceGroup/providers/Microsoft.DBforMariaDB/servers/targetserver",
+        "name": "targetserver",
+        "type": "Microsoft.DBforMariaDB/servers"
+      }
+    },
+    "202": {}
+  }
+}

@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.Portal
   package-name: portal
-  package-version: 2015-11-01-preview
+  package-version: 2015-08-01-preview
   clear-output-folder: true
 ```
 

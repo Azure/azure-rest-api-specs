@@ -245,6 +245,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation."
           }
         ],
         "responses": {
@@ -257,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -2238,6 +2250,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
+          }
         }
       }
     },
@@ -2367,7 +2384,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2423,13 +2440,13 @@
             "type": "string",
             "description": "The name of the virtual machine."
           },
-          { 
+          {
             "name": "parameters",
             "in": "body",
             "required": false,
             "schema": {
               "$ref": "#/definitions/VirtualMachineReimageParameters"
-             },
+            },
             "description": "Parameters supplied to the Reimage Virtual Machine operation."
           },
           {
@@ -3356,7 +3373,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4366,7 +4383,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4698,10 +4715,10 @@
         "Aligned"
       ],
       "x-ms-enum": {
-        "name": "AvailabilitySetSkuTypes",        
+        "name": "AvailabilitySetSkuTypes",
         "modelAsString": true
       }
-    },    
+    },
     "AvailabilitySet": {
       "properties": {
         "properties": {
@@ -4761,7 +4778,7 @@
       "properties": {
         "proximityPlacementGroupType": {
           "type": "string",
-          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
           "enum": [
             "Standard",
             "Ultra"
@@ -5269,10 +5286,10 @@
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false."
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
         }
       },
-      "description": "Parameters for Reimaging Virtual Machine. Default value for OSDisk : true."
+      "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
     },
     "VirtualMachineCaptureParameters": {
       "properties": {
@@ -5731,7 +5748,7 @@
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         },
         "diffDiskSettings": {
-         "$ref": "#/definitions/DiffDiskSettings",
+          "$ref": "#/definitions/DiffDiskSettings",
           "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
         },
         "createOption": {
@@ -6906,7 +6923,7 @@
           "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diffDiskSettings": {
-         "$ref": "#/definitions/DiffDiskSettings",
+          "$ref": "#/definitions/DiffDiskSettings",
           "description": "Specifies the ephemeral disk Settings for the operating system disk used by the virtual machine scale set."
         },
         "diskSizeGB": {
@@ -7701,6 +7718,10 @@
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."

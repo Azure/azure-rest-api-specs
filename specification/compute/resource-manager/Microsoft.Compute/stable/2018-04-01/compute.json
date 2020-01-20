@@ -245,6 +245,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation."
           }
         ],
         "responses": {
@@ -257,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -1742,7 +1754,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"location"
+          "final-state-via": "location"
         }
       }
     },
@@ -2364,7 +2376,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3296,7 +3308,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4252,7 +4264,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4390,7 +4402,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4444,7 +4456,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -4635,7 +4647,7 @@
       "properties": {
         "proximityPlacementGroupType": {
           "type": "string",
-          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
           "enum": [
             "Standard",
             "Ultra"
@@ -6507,7 +6519,7 @@
         },
         "zoneResilient": {
           "type": "boolean",
-          "description":  "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
+          "description": "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
         }
       },
       "description": "Describes a storage profile."
@@ -7463,6 +7475,10 @@
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        },
+        "proximityPlacementGroup": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7739,20 +7755,20 @@
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "RollbackStatusInfo": {
-      "properties":{
-        "successfullyRolledbackInstanceCount" : {
+      "properties": {
+        "successfullyRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which have been successfully rolled back."
         },
-        "failedRolledbackInstanceCount" : {
+        "failedRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which failed to rollback."
         },
-        "rollbackError" : {
+        "rollbackError": {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
           "description": "Error details if OS rollback failed."

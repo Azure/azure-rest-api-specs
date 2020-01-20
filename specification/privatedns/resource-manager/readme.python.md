@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-privatedns/azure/mgmt/privatedns
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-privatedns/azure/mgmt/privatedns
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-privatedns
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-privatedns
 ```
