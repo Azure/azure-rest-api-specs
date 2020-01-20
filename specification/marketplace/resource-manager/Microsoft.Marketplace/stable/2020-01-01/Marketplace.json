@@ -19,6 +19,10 @@
         }
       ],
       "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffers_List",
         "description": "Get a list of all private offers in the given private store",
         "responses": {
           "200": {
@@ -30,6 +34,9 @@
           "404": {
             "description": "No private store enabled"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GetPrivateStoreOffers": {
@@ -51,17 +58,33 @@
         }
       ],
       "delete": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Delete",
         "description": "Deletes an offer from the given private store.",
         "responses": {
-          "200": {
-            "description": "OK - offer deleted"
+          "204": {
+            "description": "Offer was deleted successfully"
           },
-          "404": {
-            "$ref": "#/responses/PrivateStoreOffer404"
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffer": {
+            "$ref": "./examples/DeletePrivateStoreOffer.json"
           }
         }
       },
       "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_Get",
         "description": "Gets information about a specific offer.",
         "responses": {
           "200": {
@@ -78,24 +101,37 @@
         }
       },
       "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreOffer_CreateOrUpdate",
         "description": "Update or add an offer to the default collection of the private store.",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/offerObjectParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/OfferUpdateProperties"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "422": {
-            "$ref": "#/responses/PrivateStoreAddOffer422"
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffer": {
+            "$ref": "./examples/UpdatePrivateStoreOffer.json"
           }
         }
       }
@@ -107,6 +143,10 @@
         }
       ],
       "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_List",
         "description": "Gets the list of available private stores",
         "produces": [
           "application/json"
@@ -118,6 +158,9 @@
               "$ref": "#/definitions/PrivateStoreProperties"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "GetPrivateStores": {
@@ -136,6 +179,10 @@
         }
       ],
       "get": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_Get",
         "description": "Get information about the private store",
         "produces": [
           "application/json"
@@ -155,20 +202,36 @@
         }
       },
       "delete": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_Delete",
         "description": "Deletes the private store. All that is not saved will be lost.",
         "produces": [
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
+          "204": {
+            "description": "Private store was deleted successfully ."
           },
-          "404": {
-            "description": "Could not find the store"
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStores": {
+            "$ref": "./examples/DeletePrivateStore.json"
           }
         }
       },
       "put": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStore_CreateOrUpdate",
         "description": "Changes private store properties",
         "consumes": [
           "application/json"
@@ -185,6 +248,11 @@
         "responses": {
           "200": {
             "description": "Change successful"
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStores": {
+            "$ref": "./examples/UpdatePrivateStore.json"
           }
         }
       }
@@ -246,21 +314,6 @@
       "schema": {
         "$ref": "#/definitions/offerSkuObject"
       }
-    },
-    "offerSkuObjectParameter": {
-      "in": "body",
-      "name": "skuObject",
-      "schema": {
-        "$ref": "#/definitions/offerSkuObject"
-      }
-    }
-  },
-  "responses": {
-    "PrivateStoreAddOffer422": {
-      "description": "Offer with given id already exists in the collection"
-    },
-    "PrivateStoreOffer404": {
-      "description": "The offer id is could not be found in this private store collection"
     }
   },
   "definitions": {
@@ -316,6 +369,10 @@
           "items": {
             "$ref": "#/definitions/PrivateStoreProperties"
           }
+        },
+        "nextLink": {
+          "description": "URL to get the next set of PrivateStore list results if there are any.",
+          "type": "string"
         }
       }
     },
@@ -324,13 +381,19 @@
       "type": "object",
       "properties": {
         "availability": {
+          "description": "Indicates private store availability",
           "type": "string",
           "enum": [
             "enabled",
             "disabled"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Availability",
+            "modelAsString": true
+          }
         },
         "name": {
+          "description": "Private Store name",
           "type": "string"
         }
       }
@@ -345,6 +408,7 @@
           }
         },
         "nextLink": {
+          "description": "URL to get the next set of offer list results if there are any.",
           "type": "string"
         }
       }
@@ -353,25 +417,39 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "description": "Offer's unique id",
+          "type": "string",
+          "readOnly": true
         },
         "displayName": {
-          "type": "string"
+          "description": "It will be displayed prominently in the marketplace",
+          "type": "string",
+          "readOnly": true
         },
         "publisherDisplayName": {
-          "type": "string"
+          "description": "Publisher name that will be displayed prominently in the marketplace",
+          "type": "string",
+          "readOnly": true
         },
         "summary": {
-          "type": "string"
+          "description": "Brief purpose or function of offer",
+          "type": "string",
+          "readOnly": true
         },
         "longSummary": {
-          "type": "string"
+          "description": "Purpose or function of offer",
+          "type": "string",
+          "readOnly": true
         },
         "description": {
-          "type": "string"
+          "description": "Description of offer",
+          "type": "string",
+          "readOnly": true
         },
         "eTag": {
-          "type": "string"
+          "description": "Indefier for purposes of race condition",
+          "type": "string",
+          "readOnly": true
         },
         "plans": {
           "type": "array",
@@ -385,9 +463,23 @@
       "type": "object",
       "properties": {
         "planId": {
-          "type": "string"
+          "description": "Identifier for this plan",
+          "type": "string",
+          "readOnly": true
         },
         "displayName": {
+          "description": "Friendly name for the plan for display in the marketplace",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OfferUpdateProperties": {
+      "description": "The object that represents the upsert operation.",
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "description": "Indefier for purposes of race condition",
           "type": "string"
         }
       }
