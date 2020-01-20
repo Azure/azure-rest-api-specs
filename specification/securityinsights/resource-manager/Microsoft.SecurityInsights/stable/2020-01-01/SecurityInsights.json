@@ -803,7 +803,25 @@
       },
       "type": "object"
     },
+    "ActionPropertiesBase": {
+      "description": "Action property bag base.",
+      "properties": {
+        "logicAppResourceId": {
+          "description": "Logic App Resource Id, providers/Microsoft.Logic/workflows/{WorkflowID}.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "logicAppResourceId"
+      ],
+      "type": "object"
+    },
     "ActionRequestProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "triggerUri": {
@@ -834,6 +852,11 @@
       "type": "object"
     },
     "ActionResponseProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "workflowId": {
@@ -874,7 +897,7 @@
       ],
       "description": "Alert rule.",
       "discriminator": "kind",
-	  "required": [
+      "required": [
         "kind"
       ],
       "type": "object"
@@ -923,7 +946,7 @@
       ],
       "description": "Alert rule template.",
       "discriminator": "kind",
-	  "required": [
+      "required": [
         "kind"
       ],
       "type": "object"
@@ -1182,7 +1205,7 @@
       ],
       "description": "Data connector.",
       "discriminator": "kind",
-	  "required": [
+      "required": [
         "kind"
       ],
       "type": "object"
@@ -1995,7 +2018,7 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-	  "required": [
+      "required": [
         "kind"
       ],
       "type": "object"
