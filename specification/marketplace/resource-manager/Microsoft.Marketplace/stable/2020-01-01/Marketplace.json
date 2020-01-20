@@ -135,7 +135,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Offer"
+            }
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -268,7 +271,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Change successful"
+            "description": "Change successful",
+            "schema": {
+              "$ref": "#/definitions/PrivateStoreProperties"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -469,8 +481,7 @@
         },
         "eTag": {
           "description": "Identifier for purposes of race condition",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "plans": {
           "type": "array",
