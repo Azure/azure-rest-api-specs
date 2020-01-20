@@ -120,7 +120,7 @@
         "tags": [
           "Connectors"
         ],
-        "description": "Create a connector rr update existing connector. When onboarding or updating a connector, there is a correlation between the connector type and type of onboarding. Right now, only aws connector is supported with two options to onboard: (1) using credentials; (2) role based.",
+        "description": "Create a connector or update existing connector. When onboarding or updating a connector, there is a correlation between the connector type and type of onboarding. Right now, only aws connector is supported with two options to onboard: (1) using credentials; (2) role based.",
         "operationId": "Connectors_CreateOrUpdate",
         "parameters": [
           {
@@ -217,7 +217,7 @@
       "description": "The connector setting",
       "properties": {
         "ConnectorType": {
-          "description": "Connector type to onboard, right now, only aws is supported",
+          "description": "the connector type to onboard, right now, only aws is supported",
           "type": "string",
           "enum": [
             "AwsUser",
@@ -239,7 +239,7 @@
           }
         },
         "AccountId": {
-          "description": "The account id of the cloud connector",
+          "description": "The account id of the connector",
           "type": "string",
           "readOnly": true
         },
