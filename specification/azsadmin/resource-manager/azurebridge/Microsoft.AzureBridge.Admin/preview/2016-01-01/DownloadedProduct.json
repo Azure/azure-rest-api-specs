@@ -5,12 +5,12 @@
     "title": "AzureBridgeAdminClient",
     "description": "AzureBridge Admin Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts": {
       "get": {
         "x-ms-examples": {
           "Get a list of downloaded products.": {
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts/{productName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/downloadedProducts/{productName}": {
       "get": {
         "x-ms-examples": {
           "Gets the specified downloaded product.": {
