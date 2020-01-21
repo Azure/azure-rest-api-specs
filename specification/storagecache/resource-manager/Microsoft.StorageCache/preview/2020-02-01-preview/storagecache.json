@@ -549,6 +549,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -610,6 +613,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -671,6 +677,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -996,6 +1005,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -1441,8 +1453,6 @@
     "StorageTarget": {
       "description": "A storage system being cached by a Cache.",
       "type": "object",
-      "discriminator": "targetType",
-      "required": [ "targetType" ],
       "properties": {
         "name": {
           "description": "Name of the Storage Target.",
@@ -1463,6 +1473,8 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
+          "discriminator": "targetType",
+          "required": [ "targetType" ],
           "properties": {
             "junctions": {
               "description": "List of Cache namespace junctions to target for namespace associations.",
