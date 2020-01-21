@@ -287,7 +287,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound(Azure Dev Spaces Controller doesn't exist.), 400 - BadRequest(One or more update parameters are invalid.)",
+            "description": "Error response describing the reason for operation failure. 404 - NotFound(Azure Dev Spaces Controller doesn't exist.), 400 - BadRequest(One or more update parameters are invalid.), 409 - Conflict(Target container host is not in a supported state.)",
             "schema": {
               "$ref": "#/definitions/DevSpacesErrorResponse"
             }
@@ -706,9 +706,6 @@
     },
     "OrchestratorSpecificConnectionDetails": {
       "description": "Base class for types that supply values used to connect to container orchestrators",
-      "required": [
-        "instanceType"
-      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
@@ -741,9 +738,6 @@
     },
     "KubernetesConnectionDetails": {
       "description": "Contains information used to connect to a Kubernetes cluster",
-      "required": [
-        "instanceType"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/OrchestratorSpecificConnectionDetails"
