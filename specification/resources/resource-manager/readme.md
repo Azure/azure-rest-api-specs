@@ -451,6 +451,10 @@ directive:
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyAssignments.json
+    where: $.paths
+    reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
