@@ -5,7 +5,9 @@
     "title": "Marketplace RP Service"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/offers": {
       "parameters": [
@@ -17,10 +19,14 @@
         }
       ],
       "get": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStoreOffers_List",
         "description": "Get a list of all private offers in the given private store",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -58,7 +64,9 @@
         }
       ],
       "delete": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStoreOffer_Delete",
         "description": "Deletes an offer from the given private store.",
         "responses": {
@@ -79,10 +87,14 @@
         }
       },
       "get": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStoreOffer_Get",
         "description": "Gets information about a specific offer.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Offer information retrieved",
@@ -104,11 +116,17 @@
         }
       },
       "put": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStoreOffer_CreateOrUpdate",
         "description": "Update or add an offer to the default collection of the private store.",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -146,10 +164,14 @@
         }
       ],
       "get": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStore_List",
         "description": "Gets the list of available private stores",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -178,10 +200,14 @@
         }
       ],
       "get": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStore_Get",
         "description": "Get information about the private store",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -203,10 +229,14 @@
         }
       },
       "delete": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStore_Delete",
         "description": "Deletes the private store. All that is not saved will be lost.",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Private store was deleted successfully ."
@@ -225,11 +255,17 @@
         }
       },
       "put": {
-        "tags": ["PrivateStores"],
+        "tags": [
+          "PrivateStores"
+        ],
         "operationId": "PrivateStore_CreateOrUpdate",
         "description": "Changes private store properties",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -262,7 +298,9 @@
     },
     "/providers/Microsoft.Marketplace/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
         "operationId": "Operations_List",
         "parameters": [
@@ -320,7 +358,9 @@
   "definitions": {
     "offerSkuObject": {
       "type": "object",
-      "required": ["isAvailable"],
+      "required": [
+        "isAvailable"
+      ],
       "properties": {
         "isAvailable": {
           "type": "boolean"
@@ -329,7 +369,9 @@
     },
     "offerObject": {
       "type": "object",
-      "required": ["isAvailable"],
+      "required": [
+        "isAvailable"
+      ],
       "properties": {
         "isAvailable": {
           "type": "boolean"
@@ -380,7 +422,10 @@
         "availability": {
           "description": "Indicates private store availability",
           "type": "string",
-          "enum": ["enabled", "disabled"],
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
           "x-ms-enum": {
             "name": "Availability",
             "modelAsString": true
