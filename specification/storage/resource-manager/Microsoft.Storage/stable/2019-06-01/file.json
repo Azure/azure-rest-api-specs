@@ -451,13 +451,12 @@
             "$ref": "#/parameters/ShareName"
           },
           {
-            "name": "fileShare",
+            "name": "deletedShare",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FileShare"
-            },
-            "description": "Must contain the version of the file share to restore."
+              "$ref": "#/definitions/DeletedShare"
+            }
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -538,6 +537,19 @@
         }
       ],
       "description": "Properties of the file share, including Id, resource name, resource type, Etag."
+    },
+    "DeletedShare":{
+      "properties": {
+        "deletedShareName": {
+          "type": "string",
+          "description": "Required. Identify the name of the deleted share that will be restored."
+        },
+        "deletedShareVersion": {
+          "type": "string",
+          "description": "Required. Identify the version of the deleted share that will be restored."
+        }
+      },
+      "description": "The deleted share to be restored."
     },
     "FileShareItem": {
       "properties": {
