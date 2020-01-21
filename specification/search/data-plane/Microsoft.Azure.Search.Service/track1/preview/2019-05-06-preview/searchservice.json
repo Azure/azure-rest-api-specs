@@ -5465,7 +5465,11 @@
           "description": "A value indicating which language code to use. Default is en."
         },
         "inlineEntitiesDefinition": {
-          "$ref": "#/definitions/CustomEntityLookupSkillEntityDefinition",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomEntityLookupSkillEntity",
+            "x-nullable": true
+          },
           "description": "An inline definition of entities to lookup."
         }
       },
@@ -6587,22 +6591,6 @@
         ]
       },
       "description": "The language codes supported for input by ImageAnalysisSkill."
-    },
-    "CustomEntityLookupSkillEntityDefinition": {
-      "properties": {
-        "entityArray": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomEntityLookupSkillEntity",
-            "x-nullable": false
-          },
-          "description": "A list entities for Custom Entity Lookup Skill to find."
-        }
-      },
-      "required": [
-        "entityArray"
-      ],
-      "description": "Represents the entity definition needed for Custom Entity Lookup Skill."
     },
     "CustomEntityLookupSkillEntity": {
       "properties": {
