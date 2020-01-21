@@ -4,16 +4,7 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "computeName": "compute123",
-    "api-version": "2020-01-01",
-    "parameters": {
-      "properties": {
-        "scaleSettings": {
-          "maxNodeCount": 4,
-          "minNodeCount": 4,
-          "nodeIdleTimeBeforeScaleDown": "PT5M"
-        }
-      }
-    }
+    "api-version": "2020-02-01"
   },
   "responses": {
     "200": {
@@ -21,15 +12,13 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
         "name": "compute123",
-        "location": "eastus2",
+        "location": "eastus",
         "properties": {
           "description": "some compute",
-          "computeType": "AmlCompute",
-          "provisioningState": "Updating"
+          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
+          "computeType": "AKS",
+          "provisioningState": "Succeeded"
         }
-      },
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/...pathToOperationStatus..."
       }
     }
   }

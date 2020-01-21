@@ -4,45 +4,35 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "computeName": "compute123",
-    "api-version": "2020-01-01",
+    "api-version": "2020-02-01",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "computeType": "AmlCompute",
-        "properties": {
-          "vmSize": "STANDARD_NC6",
-          "vmPriority": "Dedicated",
-          "scaleSettings": {
-            "maxNodeCount": 1,
-            "minNodeCount": 0,
-            "nodeIdleTimeBeforeScaleDown": "PT5M"
-          },
-          "remoteLoginPortPublicAccess": "NotSpecified"
-        }
+        "computeType": "AKS"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
         "name": "compute123",
         "location": "eastus",
         "properties": {
-          "computeType": "AmlCompute",
+          "computeType": "AKS",
           "provisioningState": "Creating"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
+        "id": "subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
         "name": "compute123",
         "location": "eastus",
         "properties": {
-          "computeType": "AmlCompute",
+          "computeType": "AKS",
           "provisioningState": "Creating"
         }
       },

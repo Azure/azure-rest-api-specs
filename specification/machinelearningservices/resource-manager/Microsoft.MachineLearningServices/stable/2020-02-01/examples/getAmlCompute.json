@@ -4,7 +4,7 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "computeName": "compute123",
-    "api-version": "2020-01-01"
+    "api-version": "2020-02-01"
   },
   "responses": {
     "200": {
@@ -40,6 +40,17 @@
               "unusableNodeCount": 0,
               "leavingNodeCount": 0,
               "preemptedNodeCount": 0
+            }
+          }
+        },
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "type": "SystemAssigned, UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/f9d7ebed-adbd-4cb4-b973-aaf82c136138/resourcegroups/myResourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
             }
           }
         }

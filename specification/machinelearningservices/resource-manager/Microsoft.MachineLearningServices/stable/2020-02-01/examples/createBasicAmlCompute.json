@@ -4,21 +4,26 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "computeName": "compute123",
-    "api-version": "2020-01-01",
+    "api-version": "2020-02-01",
     "parameters": {
       "location": "eastus",
       "properties": {
         "computeType": "AmlCompute",
         "properties": {
-          "description": "some compute",
-          "computeType": "AmlCompute",
-          "properties": {
-            "scaleSettings": {
-              "maxNodeCount": 4,
-              "minNodeCount": 4,
-              "nodeIdleTimeBeforeScaleDown": "PT5M"
-            }
-          }
+          "vmSize": "STANDARD_NC6",
+          "vmPriority": "Dedicated",
+          "scaleSettings": {
+            "maxNodeCount": 1,
+            "minNodeCount": 0,
+            "nodeIdleTimeBeforeScaleDown": "PT5M"
+          },
+          "remoteLoginPortPublicAccess": "NotSpecified"
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned, UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {}
         }
       }
     }
@@ -29,11 +34,10 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
         "name": "compute123",
-        "location": "eastus2",
+        "location": "eastus",
         "properties": {
-          "description": "some compute",
           "computeType": "AmlCompute",
-          "provisioningState": "Updating"
+          "provisioningState": "Creating"
         }
       }
     },
@@ -42,11 +46,10 @@
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123",
         "type": "Microsoft.MachineLearningServices/workspaces/computes",
         "name": "compute123",
-        "location": "eastus2",
+        "location": "eastus",
         "properties": {
-          "description": "some compute",
           "computeType": "AmlCompute",
-          "provisioningState": "Updating"
+          "provisioningState": "Creating"
         }
       },
       "headers": {
