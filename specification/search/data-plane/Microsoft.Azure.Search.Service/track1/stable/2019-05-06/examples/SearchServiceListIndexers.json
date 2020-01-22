@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
+    "api-version": "2019-05-06"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myindexer",
+            "description": "a cool indexer",
+            "dataSourceName": "mydocdbdatasource",
+            "targetIndexName": "orders",
+            "schedule": {
+              "interval": "PT1H",
+              "startTime": "2015-01-01T00:00:00Z"
+            },
+            "parameters": {
+              "maxFailedItems": 10,
+              "maxFailedItemsPerBatch": 5
+            },
+            "fieldMappings": [],
+            "disabled": false
+          },
+          {
+            "name": "myotherindexer",
+            "description": "another cool indexer",
+            "dataSourceName": "myblobdatasource",
+            "targetIndexName": "orders",
+            "parameters": {
+              "maxFailedItems": 10,
+              "maxFailedItemsPerBatch": 5,
+              "batchSize": 15
+            },
+            "fieldMappings": [
+              {
+                "sourceFieldName": "PersonName",
+                "targetFieldName": "FirstName",
+                "mappingFunction": {
+                  "name": "extractTokenAtPosition",
+                  "parameters": {
+                    "delimiter": " ",
+                    "position": 0
+                  }
+                }
+              },
+              {
+                "sourceFieldName": "PersonName",
+                "targetFieldName": "LastName",
+                "mappingFunction": {
+                  "name": "extractTokenAtPosition",
+                  "parameters": {
+                    "delimiter": " ",
+                    "position": 1
+                  }
+                }
+              }
+            ],
+            "disabled": false
+          }
+        ]
+      }
+    }
+  }
+}
