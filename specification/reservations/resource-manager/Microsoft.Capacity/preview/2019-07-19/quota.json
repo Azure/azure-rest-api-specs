@@ -6,12 +6,20 @@
     "description": "Microsoft Azure Quota Resource Provider."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -28,7 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/resourceProviders/{providerId}/locations/{location}/serviceLimits/{resourceName}": {
       "get": {
-        "tags": ["QuotaInformation"],
+        "tags": [
+          "QuotaInformation"
+        ],
         "summary": "Gets the current quota limit and usages for the resource provider for the specified location for the specific resource in the parameter.",
         "description": "This API gets the current quota limit and usages for the specific resource for resource provider for the specified location. This response can be used to submit quotaRequests.",
         "operationId": "Quota_listStatus",
@@ -76,7 +86,9 @@
         }
       },
       "put": {
-        "tags": ["QuotaRequests"],
+        "tags": [
+          "QuotaRequests"
+        ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
         "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Create",
@@ -140,7 +152,9 @@
         }
       },
       "patch": {
-        "tags": ["QuotaRequests"],
+        "tags": [
+          "QuotaRequests"
+        ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
         "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Update",
@@ -206,7 +220,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/resourceProviders/{providerId}/locations/{location}/serviceLimits": {
       "get": {
-        "tags": ["QuotaInformation"],
+        "tags": [
+          "QuotaInformation"
+        ],
         "summary": "Gets the current quota limit and usages for all the resources by the resource provider at the specified location.",
         "description": "This API gets the current quota limits and usages for the resource provider for the specified location. This response can be used to submit quotaRequests.",
         "operationId": "Quotas_listStatus",
@@ -262,7 +278,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/resourceProviders/{providerId}/locations/{location}/serviceLimitsRequests/{id}": {
       "get": {
-        "tags": ["QuotaRequests"],
+        "tags": [
+          "QuotaRequests"
+        ],
         "x-ms-examples": {
           "QuotaRequestStatus": {
             "$ref": "./examples/getQuotaRequestStatusById.json"
@@ -312,7 +330,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/resourceProviders/{providerId}/locations/{location}/serviceLimitsRequests": {
       "get": {
-        "tags": ["QuotaRequests"],
+        "tags": [
+          "QuotaRequests"
+        ],
         "x-ms-examples": {
           "QuotaRequestHistory": {
             "$ref": "./examples/getQuotaRequestsHistory.json"
@@ -369,7 +389,9 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/autoQuotaIncrease": {
       "get": {
-        "tags": ["AutoQuotaIncrease"],
+        "tags": [
+          "AutoQuotaIncrease"
+        ],
         "summary": "For the specified subscription, gets the Auto Quota Increase enrollment status.",
         "description": "Gets the Auto Quota Increase enrollment details for the specified subscription.",
         "operationId": "AutoQuotaIncrease_GetProperties",
@@ -402,7 +424,9 @@
         }
       },
       "put": {
-        "tags": ["AutoQuotaIncrease"],
+        "tags": [
+          "AutoQuotaIncrease"
+        ],
         "summary": "For the specified subscription, sets the Auto Quota Increase enrollment properties.",
         "description": "Sets the Auto Quota Increase enrollment properties for the specified subscription.",
         "operationId": "AutoQuotaIncrease_Create",
@@ -807,7 +831,13 @@
     },
     "QuotaRequestState": {
       "description": "The quota request status.",
-      "enum": ["Accepted", "Invalid", "Succeeded", "Failed", "InProgress"],
+      "enum": [
+        "Accepted",
+        "Invalid",
+        "Succeeded",
+        "Failed",
+        "InProgress"
+      ],
       "x-ms-enum": {
         "name": "QuotaRequestState",
         "modelAsString": true
@@ -815,7 +845,12 @@
     },
     "ResourceTypesName": {
       "description": "The resource types.",
-      "enum": ["standard", "dedicated", "shared", "serviceSpecific"],
+      "enum": [
+        "standard",
+        "dedicated",
+        "shared",
+        "serviceSpecific"
+      ],
       "x-ms-enum": {
         "name": "ResourceType",
         "modelAsString": true
@@ -882,7 +917,11 @@
     },
     "SupportContactTypes": {
       "description": "The support contact types.",
-      "enum": ["email", "phone", "chat"],
+      "enum": [
+        "email",
+        "phone",
+        "chat"
+      ],
       "x-ms-enum": {
         "name": "SupportContactType",
         "modelAsString": true
@@ -953,7 +992,11 @@
     },
     "SeverityTypes": {
       "description": "The Severity types.",
-      "enum": ["Critical", "Moderate", "Minimal"],
+      "enum": [
+        "Critical",
+        "Moderate",
+        "Minimal"
+      ],
       "x-ms-enum": {
         "name": "SeverityType",
         "modelAsString": true
@@ -961,7 +1004,10 @@
     },
     "ContactMethod": {
       "description": "The contact method.",
-      "enum": ["Email", "Phone"],
+      "enum": [
+        "Email",
+        "Phone"
+      ],
       "x-ms-enum": {
         "name": "ContactMethodType",
         "modelAsString": true
@@ -969,7 +1015,10 @@
     },
     "AqiState": {
       "description": "The Auto quota increase state.",
-      "enum": ["enabled", "disabled"],
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
       "x-ms-enum": {
         "name": "AqiStateType",
         "modelAsString": true
