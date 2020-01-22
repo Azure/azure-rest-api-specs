@@ -48,6 +48,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
   - $(this-folder)/Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
