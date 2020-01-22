@@ -863,8 +863,9 @@
           "type": "string"
         },
         "frequency": {
-          "description": "Frequency that digest will be triggered. Value must conform to ISO 8601 standard and must be greater than equal to 7 day and less than or equal to 30 days.",
-          "type": "string"
+          "format": "int32",
+					"description": "Frequency that digest will be triggered, in days. Value must be greater than equal to 7 day and less than or equal to 30 days.",
+					"type": "integer"
         },
         "categories": {
           "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
@@ -887,7 +888,11 @@
         "language": {
           "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
           "type": "string"
-        }
+        },
+				"disabled": {
+					"description": "Flag that determines if this digest configuration is disabled or not.",
+					"type": "boolean"
+				}
       }
     },
     "ArmErrorResponse": {
