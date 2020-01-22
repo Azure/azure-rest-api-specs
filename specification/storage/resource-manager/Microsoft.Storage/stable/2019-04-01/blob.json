@@ -1144,6 +1144,10 @@
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
               "description": "Automatic Snapshot is enabled if set to true."
+            },
+            "changeFeed": {
+              "$ref": "#/definitions/ChangeFeed",
+              "description": "The blob service properties for change feed events."
             }
           },
           "x-ms-client-flatten": true,
@@ -1169,6 +1173,15 @@
           "readOnly": true
         }
       }
+    },
+    "ChangeFeed": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether change feed event logging is enabled for the Blob service."
+        }
+      },
+      "description": "The blob service properties for change feed events."
     },
     "DeleteRetentionPolicy": {
       "properties": {

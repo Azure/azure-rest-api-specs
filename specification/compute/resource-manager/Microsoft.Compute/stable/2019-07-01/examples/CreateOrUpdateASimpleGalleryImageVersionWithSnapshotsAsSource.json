@@ -24,12 +24,16 @@
         },
         "storageProfile": {
           "osDiskImage": {
-            "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}"
+            },
             "hostCaching": "ReadOnly"
           },
           "dataDiskImages": [
             {
-              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+              },
               "lun": 1,
               "hostCaching": "None"
             }
@@ -61,13 +65,17 @@
           },
           "storageProfile": {
             "osDiskImage": {
-              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -102,13 +110,17 @@
           },
           "storageProfile": {
             "osDiskImage": {
-              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
@@ -143,13 +155,17 @@
           },
           "storageProfile": {
             "osDiskImage": {
-              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+              "source": {
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{osSnapshotName}"
+              },
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
-                "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+                "source": {
+                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}"
+                },
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
