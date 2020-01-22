@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-06-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mariadb.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/mariadb/resource-manager/v2018_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mariadb/mgmt-v2018_06_01
 regenerate-manager: true
 generate-interface: true
 ```
