@@ -3947,22 +3947,6 @@
       ],
       "description": "Data connector requirements properties."
     },
-    "DataConnectorAuthorizationModel": {
-      "description": "A model describing the authorization state and requirements missing (if there are any) for this connector",
-      "properties": {
-        "state": {
-          "description": "Describes the state of user's authorization for a connector kind.",
-          "$ref": "#/definitions/DataConnectorAuthorizationState"
-        },
-        "missing": {
-          "description": "A list indicating which authorizations are needed for this connector (at least one), if there's no proper authorization.",
-          "items": {
-            "$ref": "#/definitions/DataConnectorAuthorizationType"
-          },
-          "type": "array"
-        }
-      }
-    },
     "DataConnectorAuthorizationState": {
       "description": "Describes the state of user's authorization for a connector kind.",
       "enum": [
@@ -3983,54 +3967,6 @@
         ]
       }
     },
-    "DataConnectorAuthorizationType": {
-      "description": "Describes the types of user's authorizations.",
-      "enum": [
-        "GlobalAdmin",
-        "SecurityAdmin",
-        "TenantOnboardedToWorkspace",
-        "SecurityReader",
-        "ReadSubscriptionSecurityData"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "DataConnectorAuthorizationType",
-        "values": [
-          {
-            "value": "GlobalAdmin"
-          },
-          {
-            "value": "SecurityAdmin"
-          },
-          {
-            "value": "TenantOnboardedToWorkspace"
-          },
-          {
-            "value": "SecurityReader"
-          },
-          {
-            "value": "ReadSubscriptionSecurityData"
-          }
-        ]
-      }
-    },
-    "DataConnectorLicenseModel": {
-      "description": "A model describing the license state and requirements missing (if there are any) for this connector",
-      "properties": {
-        "state": {
-          "description": "Describes the state of user's authorization for a connector kind.",
-          "$ref": "#/definitions/DataConnectorAuthorizationState"
-        },
-        "missing": {
-          "description": "A list indicating which licenses are missing for this connector if any. All licenses are required.",
-          "items": {
-            "$ref": "#/definitions/DataConnectorLicenseType"
-          },
-          "type": "array"
-        }
-      }
-    },
     "DataConnectorLicenseState": {
       "description": "Describes the state of user's license for a connector kind.",
       "enum": [
@@ -4048,46 +3984,6 @@
           },
           {
             "value": "Invalid"
-          }
-        ]
-      }
-    },
-    "DataConnectorLicenseType": {
-      "description": "Describes the state of user's license for a connector kind.",
-      "enum": [
-        "SubscriptionStandardTierLicense",
-        "AADP1License",
-        "AADP2License",
-        "MicrosoftCloudAppSecurityLicense",
-        "AzureAdvancedThreatProtectionLicense",
-        "AzureInformationProtectionLicense",
-        "MicrosoftDefenderAdvancedThreatProtectionEnable"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "DataConnectorLicenseType",
-        "values": [
-          {
-            "value": "SubscriptionStandardTierLicense"
-          },
-          {
-            "value": "MicrosoftCloudAppSecurityLicense"
-          },
-          {
-            "value": "AzureAdvancedThreatProtectionLicense"
-          },
-          {
-            "value": "AzureInformationProtectionLicense"
-          },
-          {
-            "value": "MicrosoftDefenderAdvancedThreatProtectionEnable"
-          },
-          {
-            "value": "AADP1License"
-          },
-          {
-            "value": "AADP2License"
           }
         ]
       }
@@ -4208,13 +4104,13 @@
     "DataConnectorRequirementsState": {
       "description": "Data connector requirements status.",
       "properties": {
-        "authorization": {
-          "description": "A model describing the authorization state and requirements missing (if there are any) for this connector",
-          "$ref": "#/definitions/DataConnectorAuthorizationModel"
+        "authorizationState": {
+          "description": "Authorization state for this connector",
+          "$ref": "#/definitions/DataConnectorAuthorizationState"
         },
-        "license": {
-          "description": "A model describing the license state and requirements missing (if there are any) for this connector",
-          "$ref": "#/definitions/DataConnectorLicenseModel"
+        "licenseState": {
+          "description": "License state for this connector",
+          "$ref": "#/definitions/DataConnectorLicenseState"
         }
       },
       "type": "object"
