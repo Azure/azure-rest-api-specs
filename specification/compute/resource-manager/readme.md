@@ -207,7 +207,7 @@ directive:
 
 ```
 
-### Tag: package-2019-11-01-Disks
+### Tag: package-2019-11-01
 
 These settings apply only when `--package-2019-11-01-Disks` is specified on the command line.
 
