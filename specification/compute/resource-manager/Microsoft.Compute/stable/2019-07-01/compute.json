@@ -2074,7 +2074,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Updates tags of an Image.": {
+            "$ref": "./examples/UpdateImage.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2301,7 +2306,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_CreateOrUpdate",
-        "description": "The operation to create or update a virtual machine.",
+        "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2673,7 +2678,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Generalize",
-        "description": "Sets the state of the virtual machine to generalized.",
+        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. <br>For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource).<br>For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/capture-image).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2699,6 +2704,11 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "x-ms-examples": {
+          "Generalize a Virtual Machine.": {
+            "$ref": "./examples/GeneralizeVirtualMachine.json"
           }
         }
       }
@@ -5899,6 +5909,19 @@
       ],
       "description": "The List Availability Set operation response."
     },
+    "SubResourceWithColocationStatus": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "colocationStatus": {
+          "$ref": "#/definitions/InstanceViewStatus",
+          "description": "Describes colocation status of a resource in the Proximity Placement Group."
+        }
+      }
+    },
     "ProximityPlacementGroupProperties": {
       "properties": {
         "proximityPlacementGroupType": {
@@ -5917,7 +5940,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/SubResourceWithColocationStatus"
           },
           "description": "A list of references to all virtual machines in the proximity placement group."
         },
@@ -5925,7 +5948,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/SubResourceWithColocationStatus"
           },
           "description": "A list of references to all virtual machine scale sets in the proximity placement group."
         },
@@ -5933,9 +5956,13 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SubResource"
+            "$ref": "#/definitions/SubResourceWithColocationStatus"
           },
           "description": "A list of references to all availability sets in the proximity placement group."
+        },
+        "colocationStatus": {
+          "$ref": "#/definitions/InstanceViewStatus",
+          "description": "Describes colocation status of the Proximity Placement Group."
         }
       },
       "description": "Describes the properties of a Proximity Placement Group."
@@ -6956,6 +6983,11 @@
         "version": {
           "type": "string",
           "description": "Specifies the version of the platform image or marketplace image used to create the virtual machine. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor, and Build are decimal numbers. Specify 'latest' to use the latest version of an image available at deploy time. Even if you use 'latest', the VM image will not automatically update after deploy time even if a new version becomes available."
+        },
+        "exactVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'."
         }
       },
       "allOf": [
@@ -7061,7 +7093,7 @@
     },
     "StorageAccountType": {
       "type": "string",
-      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.",
+      "description": "Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks. It cannot be used with OS Disk. Standard_LRS uses Standard HDD. StandardSSD_LRS uses Standard SSD. Premium_LRS uses Premium SSD. UltraSSD_LRS uses Ultra disk. For more information regarding disks supported for Windows Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disks-types and, for Linux Virtual Machines, refer to https://docs.microsoft.com/en-us/azure/virtual-machines/linux/disks-types",
       "enum": [
         "Standard_LRS",
         "Premium_LRS",
@@ -7311,7 +7343,7 @@
       "properties": {
         "protocol": {
           "type": "string",
-          "description": "Specifies the protocol of listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
+          "description": "Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
           "enum": [
             "Http",
             "Https"
@@ -7352,7 +7384,7 @@
         },
         "timeZone": {
           "type": "string",
-          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\""
+          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\". <br><br> Possible values can be [TimeZoneInfo.Id](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.id?#System_TimeZoneInfo_Id) value from time zones returned by [TimeZoneInfo.GetSystemTimeZones](https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.getsystemtimezones)."
         },
         "additionalUnattendContent": {
           "type": "array",
@@ -7447,7 +7479,7 @@
         },
         "adminUsername": {
           "type": "string",
-          "description": "Specifies the name of the administrator account. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies the name of the administrator account. <br><br> This property cannot be updated after the VM is created. <br><br> **Windows-only restriction:** Cannot end in \".\" <br><br> **Disallowed values:** \"administrator\", \"admin\", \"user\", \"user1\", \"test\", \"user2\", \"test1\", \"user3\", \"admin1\", \"1\", \"123\", \"a\", \"actuser\", \"adm\", \"admin2\", \"aspnet\", \"backup\", \"console\", \"david\", \"guest\", \"john\", \"owner\", \"root\", \"server\", \"sql\", \"support\", \"support_388945a0\", \"sys\", \"test2\", \"test3\", \"user4\", \"user5\". <br><br> **Minimum-length (Linux):** 1  character <br><br> **Max-length (Linux):** 64 characters <br><br> **Max-length (Windows):** 20 characters  <br><br><li> For root access to the Linux VM, see [Using root privileges on Linux virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-use-root-privileges?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)<br><li> For a list of built-in system users on Linux that should not be used in this field, see [Selecting User Names for Linux on Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-usernames?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
         },
         "adminPassword": {
           "type": "string",
@@ -7455,7 +7487,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/en-us/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-using-cloud-init?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)"
         },
         "windowsConfiguration": {
           "$ref": "#/definitions/WindowsConfiguration",
@@ -7478,10 +7510,10 @@
         },
         "requireGuestProvisionSignal": {
           "type": "boolean",
-          "description": "Specifies whether the guest provision signal is required from the virtual machine."
+          "description": "Specifies whether the guest provision signal is required to infer provision success of the virtual machine."
         }
       },
-      "description": "Specifies the operating system settings for the virtual machine."
+      "description": "Specifies the operating system settings for the virtual machine. Some of the settings cannot be changed once VM is provisioned."
     },
     "AutomaticRepairsPolicy": {
       "properties": {
@@ -7491,11 +7523,7 @@
         },
         "gracePeriod": {
           "type": "string",
-          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The default value is 5 minutes (PT5M)."
-        },
-        "maxInstanceRepairsPercent": {
-          "type": "integer",
-          "description": "The percentage (capacity of scaleset) of virtual machines that will be simultaneously repaired. The default value is 20%."
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value."
         }
       },
       "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
@@ -7862,7 +7890,7 @@
         },
         "osProfile": {
           "$ref": "#/definitions/OSProfile",
-          "description": "Specifies the operating system settings for the virtual machine."
+          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
@@ -7874,7 +7902,7 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
         },
         "virtualMachineScaleSet": {
           "$ref": "#/definitions/SubResource",
@@ -7890,7 +7918,7 @@
         },
         "evictionPolicy": {
           "$ref": "#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01"
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, the only supported value is 'Deallocate' and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
@@ -8138,7 +8166,17 @@
           ],
           "x-ms-enum": {
             "name": "OperatingSystemStateTypes",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Generalized",
+                "description": "Generalized image. Needs to be provisioned during deployment time."
+              },
+              {
+                "value": "Specialized",
+                "description": "Specialized image. Contains already provisioned OS Disk."
+              }
+            ]
           }
         }
       },
@@ -9178,7 +9216,7 @@
         },
         "evictionPolicy": {
           "$ref": "#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for virtual machines in a Azure Spot scale set. <br><br>Minimum api-version: 2017-10-30-preview"
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, the only supported value is 'Deallocate' and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "#/definitions/BillingProfile",
