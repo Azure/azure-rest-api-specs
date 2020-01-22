@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "frontDoorName": "frontDoor1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/rulesEngines/rulesEngine1",
+            "name": "rulesEngine1",
+            "properties": {
+              "rules": [
+                {
+                  "name": "Rule1",
+                  "priority": 1,
+                  "action": {
+                    "routeConfigurationOverride": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                      "redirectType": "Moved",
+                      "redirectProtocol": "HttpsOnly",
+                      "customHost": "www.bing.com",
+                      "customPath": "/api",
+                      "customFragment": "fragment",
+                      "customQueryString": "a=b"
+                    }
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchVariable": "RemoteAddr",
+                      "rulesEngineOperator": "GeoMatch",
+                      "rulesEngineMatchValue": [
+                        "CH"
+                      ]
+                    }
+                  ],
+                  "matchProcessingBehavior": "Stop"
+                },
+                {
+                  "name": "Rule2",
+                  "priority": 2,
+                  "action": {
+                    "responseHeaderActions": [
+                      {
+                        "headerActionType": "Overwrite",
+                        "headerName": "Cache-Control",
+                        "value": "public, max-age=31536000"
+                      }
+                    ]
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchVariable": "RequestFilenameExtension",
+                      "rulesEngineOperator": "Equal",
+                      "rulesEngineMatchValue": [
+                        "jpg"
+                      ],
+                      "transforms": [
+                        "Lowercase"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

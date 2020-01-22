@@ -22,7 +22,7 @@ These are the global settings for the Sql API.
 
 ``` yaml
 title: SqlManagementClient
-description: The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
+description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
 tag: package-composite-v3
 ```
@@ -39,18 +39,29 @@ This section contains the "composite-v3" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 Differences in v3 (compared to v2):
- - Decoupled database and recommended elastic pool APIs
-   - `-2014-04-01/recommendedElasticPools.json`
-   - `+2014-04-01/recommendedElasticPoolsDecoupled.json`
- - Updated to new Sku-based API for databases and elastic pools
-   - `-2014-04-01/capabilities.json`
-   - `-2014-04-01/databases.json`
-   - `-2014-04-01/elasticPools.json`
-   - `+2017-10-01-preview/capabilities.json`
-   - `+2017-10-01-preview/databases.json`
-   - `+2017-10-01-preview/elasticPools.json`
+
+* Decoupled database and recommended elastic pool APIs
+
+  * `-2014-04-01/recommendedElasticPools.json`
+
+  * `+2014-04-01/recommendedElasticPoolsDecoupled.json`
+
+* Updated to new Sku-based API for databases and elastic pools
+
+  * `-2014-04-01/capabilities.json`
+
+  * `-2014-04-01/databases.json`
+
+  * `-2014-04-01/elasticPools.json`
+
+  * `+2017-10-01-preview/capabilities.json`
+
+  * `+2017-10-01-preview/databases.json`
+
+  * `+2017-10-01-preview/elasticPools.json`
+
+  * `+2018-06-01-preview/capabilities.json`
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -64,7 +75,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -98,7 +108,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-- Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
 - Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -124,6 +133,10 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -140,10 +153,13 @@ APIs must only be added to this section when the API is publicly available in at
 
 Differences in v2 (compared to v1):
 
-- Updated to LTRv2
-  - `-201 4-04-01/backupLongTermRetentionPolicies.json`
-  - `-2014-04-01/backupLongTermRetentionVaults.json`
-  - `+2017-03-01-preview/longTermRetention.json`
+* Updated to LTRv2
+
+  * `-201 4-04-01/backupLongTermRetentionPolicies.json`
+
+  * `-2014-04-01/backupLongTermRetentionVaults.json`
+
+  * `+2017-03-01-preview/longTermRetention.json`
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
@@ -160,7 +176,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -218,6 +233,9 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -249,7 +267,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -306,6 +323,9 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -470,6 +490,8 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/servers.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -500,11 +522,12 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
-
+ - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+ 
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
-  ```
+```
 
 ### Tag: package-pure-2017-10-preview
 
@@ -661,6 +684,7 @@ override-info:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation
@@ -669,6 +693,7 @@ directive:
 ```
 
 ---
+
 ## Code Generation
 
 ### Swagger to SDK
@@ -753,7 +778,7 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -775,7 +800,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/metrics.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -809,7 +833,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databases.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -834,6 +857,10 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
@@ -841,6 +868,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
@@ -852,6 +880,8 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/servers.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
@@ -864,6 +894,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -947,11 +978,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
