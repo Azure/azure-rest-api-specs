@@ -1,0 +1,641 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-06-01",
+    "title": "MySQLManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/queryTexts/{queryId}": {
+      "get": {
+        "tags": [
+          "QueryTexts"
+        ],
+        "operationId": "QueryTexts_Get",
+        "x-ms-examples": {
+          "QueryTextsGet": {
+            "$ref": "./examples/QueryTextsGet.json"
+          }
+        },
+        "description": "Retrieve the Query-Store query texts for the queryId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryText"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/queryTexts": {
+      "get": {
+        "tags": [
+          "QueryTexts"
+        ],
+        "operationId": "QueryTexts_ListByServer",
+        "x-ms-examples": {
+          "QueryTextsListByServer": {
+            "$ref": "./examples/QueryTextsListByServer.json"
+          }
+        },
+        "description": "Retrieve the Query-Store query texts for specified queryIds.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "queryIds",
+            "in": "query",
+            "required": true,
+            "type": "array",
+            "collectionFormat": "multi",
+            "items": {
+              "type": "string"
+            },
+            "description": "The query identifiers"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryTextsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/topQueryStatistics/{queryStatisticId}": {
+      "get": {
+        "tags": [
+          "TopQueryStatistics"
+        ],
+        "operationId": "TopQueryStatistics_Get",
+        "x-ms-examples": {
+          "TopQueryStatisticsGet": {
+            "$ref": "./examples/TopQueryStatisticsGet.json"
+          }
+        },
+        "description": "Retrieve the query statistic for specified identifier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/QueryStatisticIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QueryStatistic"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/topQueryStatistics": {
+      "get": {
+        "tags": [
+          "TopQueryStatistics"
+        ],
+        "operationId": "TopQueryStatistics_ListByServer",
+        "x-ms-examples": {
+          "TopQueryStatisticsListByServer": {
+            "$ref": "./examples/TopQueryStatisticsListByServer.json"
+          }
+        },
+        "description": "Retrieve the Query-Store top queries for specified metric and aggregation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TopQueryStatisticsInput"
+            },
+            "description": "The required parameters for retrieving top query statistics."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopQueryStatisticsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/waitStatistics/{waitStatisticsId}": {
+      "get": {
+        "tags": [
+          "WaitStatistics"
+        ],
+        "operationId": "WaitStatistics_Get",
+        "x-ms-examples": {
+          "WaitStatisticsGet": {
+            "$ref": "./examples/WaitStatisticsGet.json"
+          }
+        },
+        "description": "Retrieve wait statistics for specified identifier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WaitStatisticsIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WaitStatistic"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/waitStatistics": {
+      "get": {
+        "tags": [
+          "WaitStatistics"
+        ],
+        "operationId": "WaitStatistics_ListByServer",
+        "x-ms-examples": {
+          "WaitStatisticsListByServer": {
+            "$ref": "./examples/WaitStatisticsListByServer.json"
+          }
+        },
+        "description": "Retrieve wait statistics for specified aggregation window.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WaitStatisticsInput"
+            },
+            "description": "The required parameters for retrieving wait statistics."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WaitStatisticsResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "QueryTextProperties": {
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Query identifier unique to the server."
+        },
+        "queryText": {
+          "type": "string",
+          "description": "Query text."
+        }
+      },
+      "description": "The properties of a query text."
+    },
+    "QueryText": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryTextProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a query text."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Query Text."
+    },
+    "QueryTextsResultList": {
+      "description": "A list of query texts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of query texts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryText"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TopQueryStatisticsInputProperties": {
+      "properties": {
+        "numberOfTopQueries": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of top queries to return."
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function name."
+        },
+        "observedMetric": {
+          "type": "string",
+          "description": "Observed metric name."
+        },
+        "observationStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "observationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationWindow": {
+          "type": "string",
+          "description": "Aggregation interval type in ISO 8601 format."
+        }
+      },
+      "required": [
+        "numberOfTopQueries",
+        "aggregationFunction",
+        "observedMetric",
+        "observationStartTime",
+        "observationEndTime",
+        "aggregationWindow"
+      ],
+      "description": "The properties for input to get top query statistics"
+    },
+    "TopQueryStatisticsInput": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TopQueryStatisticsInputProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistics input."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Input to get top query statistics"
+    },
+    "QueryStatisticProperties": {
+      "properties": {
+        "queryId": {
+          "type": "string",
+          "description": "Database query identifier."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationFunction": {
+          "type": "string",
+          "description": "Aggregation function name."
+        },
+        "databaseNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of database names."
+        },
+        "queryExecutionCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of query executions in this time interval."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Metric name."
+        },
+        "metricDisplayName": {
+          "type": "string",
+          "description": "Metric display name."
+        },
+        "metricValue": {
+          "type": "number",
+          "format": "double",
+          "description": "Metric value."
+        },
+        "metricValueUnit": {
+          "type": "string",
+          "description": "Metric value unit."
+        }
+      },
+      "description": "The properties of a query statistic."
+    },
+    "QueryStatistic": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryStatisticProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a query statistic."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Query Statistic."
+    },
+    "TopQueryStatisticsResultList": {
+      "description": "A list of query statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of top query statistics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryStatistic"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WaitStatisticsInputProperties": {
+      "properties": {
+        "observationStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "observationEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "aggregationWindow": {
+          "type": "string",
+          "description": "Aggregation interval type in ISO 8601 format."
+        }
+      },
+      "required": [
+        "observationStartTime",
+        "observationEndTime",
+        "aggregationWindow"
+      ],
+      "description": "The properties for input to get wait statistics"
+    },
+    "WaitStatisticsInput": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WaitStatisticsInputProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistics input."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Input to get wait statistics"
+    },
+    "WaitStatisticProperties": {
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation start time."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Observation end time."
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Wait event name."
+        },
+        "eventTypeName": {
+          "type": "string",
+          "description": "Wait event type name."
+        },
+        "queryId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Database query identifier."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database Name."
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Database user identifier."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Wait event count observed in this time interval."
+        },
+        "totalTimeInMs": {
+          "type": "number",
+          "format": "double",
+          "description": "Total time of wait in milliseconds in this time interval."
+        }
+      },
+      "description": "The properties of a wait statistic."
+    },
+    "WaitStatistic": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WaitStatisticProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a wait statistic."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a Wait Statistic."
+    },
+    "WaitStatisticsResultList": {
+      "description": "A list of wait statistics.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of wait statistics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WaitStatistic"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryIdParameter": {
+      "name": "queryId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query-Store query identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryStatisticIdParameter": {
+      "name": "queryStatisticId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Query Statistic identifier.",
+      "x-ms-parameter-location": "method"
+    },
+    "WaitStatisticsIdParameter": {
+      "name": "waitStatisticsId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Wait Statistic identifier.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

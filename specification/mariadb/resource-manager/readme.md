@@ -48,6 +48,10 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
 - Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
 ```
 
 
@@ -142,7 +146,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -160,14 +164,16 @@ input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
