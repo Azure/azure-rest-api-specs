@@ -653,6 +653,10 @@
           "description": "Text content of this creative work.",
           "readOnly": true,
           "type": "string"
+        },
+        "mainEntity": {
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
         }
       }
     },
@@ -961,7 +965,19 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "ImageEntityAction"
+      "x-ms-discriminator-value": "ImageEntityAction",
+      "properties": {
+        "data": {
+          "description": "Information about the entity",
+          "$ref": "#/definitions/Thing",
+          "readOnly": true
+        },
+        "isTranslated": {
+          "description": "Indicates whether entity name or description is translated or not. Only set to true when translated.",
+          "readOnly": true,
+          "type": "boolean"
+        }
+      }
     },
     "ImageModuleAction": {
       "description": "Defines an image list action.",
@@ -1082,6 +1098,15 @@
           "readOnly": true
         }
       }
+    },
+    "License": {
+      "description": "Defines the license under which the text or photo may be used.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
+      "type": "object"
     },
     "Recipe": {
       "description": "Defines a cooking recipe.",
