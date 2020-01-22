@@ -889,10 +889,18 @@
           "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
           "type": "string"
         },
-				"disabled": {
-					"description": "Flag that determines if this digest configuration is disabled or not.",
-					"type": "boolean"
-				}
+        "state": {
+          "description": "State of digest configuration.",
+          "enum": [
+            "Active",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DigestConfigState",
+            "modelAsString": true
+          }
+        }
       }
     },
     "ArmErrorResponse": {
