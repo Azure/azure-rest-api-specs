@@ -160,14 +160,15 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-preview/mariadb.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/mariadb.json
-  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
-  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
-  - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/QueryPerformanceInsights.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PerformanceRecommendations.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMariaDB/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMariaDB/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
