@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for KeyVault.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.0
+tag: package-preview-7.1
 ```
 
+
+### Tag: package-preview-7.1
+
+These settings apply only when `--tag=package-preview-7.1` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-7.1'
+input-file:
+  - Microsoft.KeyVault/preview/7.1/keyvault.json
+```
 ### Tag: package-7.0
 
 These settings apply only when `--tag=package-7.0` is specified on the command line.
@@ -56,10 +65,9 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -70,7 +78,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
-
 
 ## C#
 
@@ -86,7 +93,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/keyvault/Microsoft.Azure.KeyVault/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
@@ -106,7 +112,8 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-keyvault
   override-client-name: KeyVaultClientBase
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -124,11 +131,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
