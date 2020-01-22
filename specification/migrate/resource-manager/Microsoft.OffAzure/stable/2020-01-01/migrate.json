@@ -3753,6 +3753,18 @@
         },
         "credentialType": {
           "description": "Credential type of the run as account.",
+		  "enum": [
+            "VMwareFabric",
+            "HyperVFabric",
+            "LinuxGuest",
+			"WindowsGuest",
+			"LinuxServer",
+			"WindowsServer"
+          ],
+          "x-ms-enum": {
+            "name": "CredentialType",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
@@ -4319,6 +4331,18 @@
         },
         "diskMode": {
           "description": "Disk mode property used for identifying independent disks.",
+          "enum": [
+            "persistent",
+            "independent_persistent",
+            "independent_nonpersistent",
+			"nonpersistent",
+			"undoable",
+			"append"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualDiskMode",
+            "modelAsString": true
+          },
           "type": "string",
           "readOnly": true
         },
