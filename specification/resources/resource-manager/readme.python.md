@@ -33,6 +33,7 @@ batch:
   - tag: package-policy-2016-12
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
+  - tag: package-resources-2019-07
   - tag: package-resources-2019-0510
   - tag: package-resources-2019-05
   - tag: package-resources-2019-03
@@ -186,6 +187,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.policy.v2015_10_01_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2019-07 and python
+
+These settings apply only when `--tag=package-resources-2019-07 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-07' && $(python)
+python:
+  namespace: azure.mgmt.resource.resources.v2019_07_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2019_07_01
 ```
 
 ### Tag: package-resources-2019-0510 and python
