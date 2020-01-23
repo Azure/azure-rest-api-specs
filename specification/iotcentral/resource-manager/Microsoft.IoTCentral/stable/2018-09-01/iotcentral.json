@@ -127,6 +127,12 @@
           "202": {
             "description": "Accepted - Put request accepted; the operation will complete asynchronously."
           },
+          "400": {
+            "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
+            "schema": {
+              "$ref": "#/definitions/ARMErrorResponseBody"
+            }
+          },
           "default": {
             "description": "DefaultErrorResponse",
             "schema": {
@@ -180,6 +186,12 @@
           },
           "202": {
             "description": "Accepted - Put request accepted; the operation will complete asynchronously."
+          },
+          "400": {
+            "description": "Bad Request. Client sent invalid configuration scope, properties or values.",
+            "schema": {
+              "$ref": "#/definitions/ARMErrorResponseBody"
+            }
           },
           "default": {
             "description": "DefaultErrorResponse",
@@ -623,6 +635,20 @@
       "required": [
         "location"
       ]
+    },
+    "ARMErrorResponseBody": {
+      "description": "ARM error response body.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Gets or sets the string that describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Gets or sets the string that can be used to programmatically identify the error.",
+          "type": "string"
+        }
+      }
     },
     "ErrorDetails": {
       "description": "Error details.",
