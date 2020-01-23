@@ -42,7 +42,7 @@
 					}
 				},
 				"tags": [
-					"secure Scores"
+					"Secure Scores"
 				],
 				"description": "Get secure scores on all your initiatives inside a scope",
 				"operationId": "SecureScores_List",
@@ -58,7 +58,49 @@
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/SecureScoreInitiativesList"
+							"$ref": "#/definitions/SecureScoresList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}": {
+			"get": {
+				"x-ms-examples": {
+					"List secure scores": {
+						"$ref": "./examples/secureScores/GetSecureScoresSingle_example.json"
+					}
+				},
+				"tags": [
+					"Secure Scores"
+				],
+				"description": "Get secure score for a specific initiatives inside a scope",
+				"operationId": "SecureScores_Single",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+						"$ref": "#/parameters/secureScoreName"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SecureScoresItem"
 						}
 					},
 					"default": {
@@ -76,23 +118,23 @@
 		"/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/controls": {
 			"get": {
 				"x-ms-examples": {
-					"List secure score's controls level for the specified name (builtin initiative)": {
+					"List secure score's controls level for the specified name (builtin)": {
 						"$ref": "./examples/secureScores/ListSecureScoreControlsForName_builtin_example.json"
 					},
-					"List secure score's controls level for the specified name (custom initiative)": {
+					"List secure score's controls level for the specified name (custom)": {
 						"$ref": "./examples/secureScores/ListSecureScoreControlsForName_custom_example.json"
 					},
-					"Get secure score's controls level for the specified name with expand parameter (builtin initiative)": {
+					"Get secure score's controls level for the specified name with expand parameter (builtin)": {
 						"$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_builtin_example.json"
 					},
-					"Get secure score's controls level for the specified name with expand parameter (custom initiative)": {
+					"Get secure score's controls level for the specified name with expand parameter (custom)": {
 						"$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_custom_example.json"
 					}
 				},
 				"tags": [
 					"Secure Scores"
 				],
-				"description": "Get secure scores' controls on specific initiatives inside a scope",
+				"description": "Get all secure score controls on specific initiatives inside a scope",
 				"operationId": "SecureScoreControls_List",
 				"parameters": [
 					{
@@ -105,7 +147,7 @@
 						"$ref": "#/parameters/secureScoreName"
 					},
 					{
-						"$ref": "#/parameters/ExpandControlsMetadata"
+						"$ref": "#/parameters/ExpandControlsDefinition"
 					}
 				],
 				"responses": {
@@ -127,31 +169,31 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsMetadata": {
+		"/{scope}/providers/Microsoft.Security/secureScoreControlsDefinition": {
 			"get": {
 				"x-ms-examples": {
-					"List secure score controls metadata": {
-						"$ref": "./examples/secureScoreControlsMetadata/ListSecureScoreControlsMetadata_example.json"
+					"List secure score controls definition": {
+						"$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_example.json"
 					}
 				},
 				"tags": [
-					"Secure Score Controls Metadata"
+					"Secure Score Controls Definition"
 				],
-				"description": "Get metadata information on all built in secure score controls",
-				"operationId": "SecureScoreControlsMetadata_List",
+				"description": "Get definition information on all secure score controls",
+				"operationId": "SecureScoreControlsDefinition_List",
 				"parameters": [
 					{
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
 					},
 					{
-						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+						"$ref": "../../../common/v1/types.json#/parameters/Scope"
 					}
 				],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"$ref": "#/definitions/SecureScoreControlsMetadataList"
+							"$ref": "#/definitions/SecureScoreControlsDefinitionList"
 						}
 					},
 					"default": {
@@ -168,7 +210,7 @@
 		}
 	},
 	"definitions": {
-		"SecureScoreInitiativesList": {
+		"SecureScoresList": {
 			"type": "object",
 			"description": "Page of a secure scores list",
 			"properties": {
@@ -177,7 +219,7 @@
 					"readOnly": true,
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/SecureScoreInitiativeDetails"
+						"$ref": "#/definitions/SecureScoresItem"
 					}
 				},
 				"nextLink": {
@@ -187,13 +229,13 @@
 				}
 			}
 		},
-		"SecureScoreInitiativeDetails": {
+		"SecureScoresItem": {
 			"type": "object",
-			"description": "Secure score for initiative",
+			"description": "Secure score item",
 			"properties": {
 				"properties": {
 					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/SecureScoreInitiativeProperties"
+					"$ref": "#/definitions/SecureScoreItemProperties"
 				}
 			},
 			"allOf": [
@@ -202,53 +244,64 @@
 				}
 			]
 		},
-		"SecureScoreInitiativeProperties": {
+		"SecureScoreItemProperties": {
 			"type": "object",
 			"description": "Describes properties of a calculated secure score.",
 			"properties": {
 				"displayName": {
 					"readOnly": true,
 					"type": "string",
-					"description": "User friendly display name of the secure score initiative"
+					"description": "User friendly display name of the secure score item"
 				},
 				"score": {
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreScoreDetails"
 				}
-			},
-			"required": [
-				"score"
-			]
+			}
 		},
 		"SecureScoreScoreDetails": {
 			"type": "object",
 			"description": "Calculation result data",
 			"properties": {
-				"maxScore": {
-					"description": "Maximum score applicable for the control",
+				"max": {
+					"readOnly": true,
+					"description": "Maximum score applicable",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
 				"current": {
+					"readOnly": true,
 					"type": "number",
 					"format": "double",
-					"description": "Actual score for the control"
+					"description": "Actual score"
 				}
-			},
-			"required": [
-				"maxScore",
-				"current"
-			]
-		},
+			}
+    },
+		"SecureScoreControlScoreObject": {
+			"type": "object",
+			"description": "Calculation result data",
+			"properties": {
+        "max": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum control score (0..10)"
+        },
+        "current": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00"
+        }
+			}
+    },    
 		"SecureScoreControlsList": {
 			"type": "object",
 			"description": "Page of a secure score controls list",
 			"properties": {
 				"value": {
-					"description": "Collection of secure score controls in this page",
 					"readOnly": true,
+					"description": "Collection of secure score controls in this page",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/SecureScoreControlDetails"
@@ -266,16 +319,17 @@
 			"description": "List of security sub-assessments",
 			"properties": {
 				"displayName": {
+					"readOnly": true,
 					"type": "string",
 					"description": "User friendly display name of the control"
-				}
+        },
+        "properties": {
+          "$ref": "#/definitions/SecureScoreControlScoreDetails"
+        }
 			},
 			"allOf": [
 				{
 					"$ref": "../../../common/v1/types.json#/definitions/Resource"
-				},
-				{
-					"$ref": "#/definitions/SecureScoreControlScoreDetails"
 				}
 			]
 		},
@@ -283,74 +337,58 @@
 			"type": "object",
 			"description": "Calculation result data in control level",
 			"properties": {
-				"maxScore": {
-					"readOnly": true,
-					"type": "integer",
-					"format": "int32",
-					"description": "Maximum control score (0..10)",
-					"minimum": 0,
-					"maximum": 10,
-					"exclusiveMinimum": false
-				},
-				"current": {
-					"type": "number",
-					"format": "double",
-					"description": "Actual score for the control"
-				},
+        "score": {
+					"x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreControlScoreObject"
+        },
 				"healthyResources": {
+					"readOnly": true,
 					"description": "Number of healthy resources in the control",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
 				"unhealthyResources": {
+					"readOnly": true,
 					"description": "Number of unhealthy resources in the control",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
 				"notApplicableResources": {
+					"readOnly": true,
 					"description": "Number of not applicable resources in the control",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
 				"disabledResources": {
+					"readOnly": true,
 					"description": "Number of not resources that are disabled by policy in the control",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
-				"achievedResourcesPoints": {
+				"achievedPoints": {
+					"readOnly": true,
 					"description": "Number of points achieved for the controls",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				},
-				"totalResourcesPoints": {
+				"totalPoints": {
+					"readOnly": true,
 					"description": "Total Number of points available in the control",
 					"type": "integer",
-					"format": "int32",
-					"minimum": 0,
-					"exclusiveMinimum": false
+					"format": "int32"
 				}
 			}
 		},
-		"SecureScoreControlsMetadataList": {
+		"SecureScoreControlsDefinitionList": {
 			"type": "object",
-			"description": "Page of a secure score controls metadata list",
+			"description": "Page of a secure score controls definition list",
 			"properties": {
 				"value": {
-					"description": "Collection of secure score controls metadata in this page",
+					"description": "Collection of secure score controls definition in this page",
 					"readOnly": true,
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/SecureScoreControlMetadataDetails"
+						"$ref": "#/definitions/SecureScoreControlDefinitionItem"
 					}
 				},
 				"nextLink": {
@@ -360,13 +398,12 @@
 				}
 			}
 		},
-		"SecureScoreControlMetadataDetails": {
+		"SecureScoreControlDefinitionItem": {
 			"type": "object",
-			"description": "Secure Score Control's Metadata information",
+			"description": "Secure Score Control's Definition information",
 			"properties": {
 				"properties": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/SecureScoreControlMetadataProperties"
+					"$ref": "#/definitions/SecureScoreControlDefinitionItemProperties"
 				}
 			},
 			"allOf": [
@@ -375,9 +412,9 @@
 				}
 			]
 		},
-		"SecureScoreControlMetadataProperties": {
+		"SecureScoreControlDefinitionItemProperties": {
 			"type": "object",
-			"description": "Secure Score Control Metadata Properties",
+			"description": "Secure Score Control Definition Properties",
 			"properties": {
 				"displayName": {
 					"readOnly": true,
@@ -400,27 +437,27 @@
 					"exclusiveMinimum": false
 				},
 				"source": {
-					"$ref": "#/definitions/SecureScoreControlMetadataSource"
+					"$ref": "#/definitions/SecureScoreControlDefinitionSource"
 				},
-				"assessmentsMetadata": {
+				"assessmentsDefinition": {
 					"type": "array",
 					"items": {
-						"$ref": "#/definitions/SecureScoreControlMetadataAssessmentsId"
+						"$ref": "#/definitions/SecureScoreControlDefinitionAssessmentsId"
 					}
 				}
 			}
 		},
-		"SecureScoreControlMetadataAssessmentsId": {
+		"SecureScoreControlDefinitionAssessmentsId": {
 			"type": "object",
-			"description": "Secure Score Control Metadata Properties",
+			"description": "Secure Score Control Definition Properties",
 			"properties": {
 				"id": {
 					"type": "string",
-					"description": "Full assessment metadata uris that build the control"
+					"description": "Full assessment metadata azure ids that build the control"
 				}
 			}
 		},
-		"SecureScoreControlMetadataSource": {
+		"SecureScoreControlDefinitionSource": {
 			"type": "object",
 			"description": "representing the source of the control",
 			"properties": {
@@ -451,14 +488,17 @@
 						]
 					}
 				},
-				"initiativeId": {
+				"PolicySetDefinitionId": {
+					"type": "string"
+        },
+        "GroupName": {
 					"type": "string"
 				}
 			}
 		}
 	},
 	"parameters": {
-		"ExpandControlsMetadata": {
+		"ExpandControlsDefinition": {
 			"name": "$expand",
 			"in": "query",
 			"required": false,
@@ -466,15 +506,15 @@
 			"description": "OData expand. Optional.",
 			"x-ms-parameter-location": "method",
 			"enum": [
-				"metadata"
+				"definition"
 			],
 			"x-ms-enum": {
 				"name": "ExpandEnum",
 				"modelAsString": true,
 				"values": [
 					{
-						"value": "metadata",
-						"description": "Add metadata object for each control"
+						"value": "definition",
+						"description": "Add definition object for each control"
 					}
 				]
 			}
