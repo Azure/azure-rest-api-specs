@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-02-14-preview",
+    "version": "2020-01-23",
     "title": "KeyVaultManagementClient",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault."
   },
@@ -855,7 +855,7 @@
           "items": {
             "$ref": "#/definitions/AccessPolicyEntry"
           },
-          "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID."
+          "description": "An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required."
         },
         "vaultUri": {
           "type": "string",
@@ -875,7 +875,12 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once it's been set to true value, it can NOT be reverted to false."
+        },
+        "softDeleteRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "softDelete data retention days. It accepts >=7 and <=90."
         },
         "createMode": {
           "type": "string",
@@ -936,7 +941,12 @@
         },
         "enableSoftDelete": {
           "type": "boolean",
-          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. It does not accept false value."
+          "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once it's been set to true value, it can NOT be reverted to false."
+        },
+        "softDeleteRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "softDelete data retention days. It accepts >=7 and <=90."
         },
         "createMode": {
           "type": "string",
