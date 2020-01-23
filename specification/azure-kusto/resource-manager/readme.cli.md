@@ -41,4 +41,10 @@ cli:
     - name: KustoDataConnectionsDelete
     - name: KustoDatabasesDelete
     - name: KustoClustersDelete
+    - name: KustoDatabasePrincipalAssignmentsGet
+    - name: KustoDatabasePrincipalAssignmentsCreateOrUpdate
+    - name: KustoDatabasePrincipalAssignmentsDelete
+    - name: KustoClusterPrincipalAssignmentsGet
+    - name: KustoClusterPrincipalAssignmentsCreateOrUpdate
+    - name: KustoClusterPrincipalAssignmentsDelete
 ```
