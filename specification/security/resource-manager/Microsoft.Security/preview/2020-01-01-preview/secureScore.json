@@ -72,6 +72,99 @@
 					"nextLinkName": "nextLink"
 				}
 			}
+		},
+		"/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/controls": {
+			"get": {
+				"x-ms-examples": {
+					"List secure score's controls level for the specified name (builtin initiative)": {
+						"$ref": "./examples/secureScores/ListSecureScoreControlsForName_builtin_example.json"
+					},
+					"List secure score's controls level for the specified name (custom initiative)": {
+						"$ref": "./examples/secureScores/ListSecureScoreControlsForName_custom_example.json"
+					},
+					"Get secure score's controls level for the specified name with expand parameter (builtin initiative)": {
+						"$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_builtin_example.json"
+					},
+					"Get secure score's controls level for the specified name with expand parameter (custom initiative)": {
+						"$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_custom_example.json"
+					}
+				},
+				"tags": [
+					"Secure Scores"
+				],
+				"description": "Get secure scores' controls on specific initiatives inside a scope",
+				"operationId": "SecureScoreControls_List",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/Scope"
+					},
+					{
+						"$ref": "#/parameters/secureScoreName"
+					},
+					{
+						"$ref": "#/parameters/ExpandControlsMetadata"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SecureScoreControlsList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsMetadata": {
+			"get": {
+				"x-ms-examples": {
+					"List secure score controls metadata": {
+						"$ref": "./examples/secureScoreControlsMetadata/ListSecureScoreControlsMetadata_example.json"
+					}
+				},
+				"tags": [
+					"Secure Score Controls Metadata"
+				],
+				"description": "Get metadata information on all built in secure score controls",
+				"operationId": "SecureScoreControlsMetadata_List",
+				"parameters": [
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+					},
+					{
+						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/SecureScoreControlsMetadataList"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+						}
+					}
+				},
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -130,18 +223,20 @@
 		"SecureScoreScoreDetails": {
 			"type": "object",
 			"description": "Calculation result data",
-			"maxScore": {
-				"description": "Maximum score applicable for the control",
-				"type": "integer",
-				"format": "int32",
-				"minimum": 0,
-				"maximum": 10,
-				"exclusiveMinimum": false
-			},
-			"current": {
-				"type": "number",
-				"format": "double",
-				"description": "Actual score for the control"
+			"properties": {
+				"maxScore": {
+					"description": "Maximum score applicable for the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
+				},
+				"current": {
+					"type": "number",
+					"format": "double",
+					"description": "Actual score for the control"
+				}
 			},
 			"required": [
 				"maxScore",
@@ -168,17 +263,20 @@
 			}
 		},
 		"SecureScoreControlDetails": {
-			"displayName": {
-				"type": "string",
-				"description": "User friendly display name of the control"
-			},
-			"data": {
-				"description": "Control's score object",
-				"ref": "#/definitions/SecureScoreControlScoreDetails"
+			"type": "object",
+			"description": "List of security sub-assessments",
+			"properties": {
+				"displayName": {
+					"type": "string",
+					"description": "User friendly display name of the control"
+				}
 			},
 			"allOf": [
 				{
 					"$ref": "../../../common/v1/types.json#/definitions/Resource"
+				},
+				{
+					"$ref": "#/definitions/SecureScoreControlScoreDetails"
 				}
 			]
 		},
@@ -260,8 +358,9 @@
 			}
 		},
 		"SecureScoreControlMetadataDetails": {
+			"type": "object",
+			"description": "Secure Score Control's Metadata information",
 			"properties": {
-				"description": "Control's metadata object",
 				"properties": {
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreControlMetadataProperties"
@@ -274,69 +373,84 @@
 			]
 		},
 		"SecureScoreControlMetadataProperties": {
-			"displayName": {
-				"type": "string",
-				"description": "User friendly display name of the control"
-			},
-			"description": {
-				"type": "string",
-				"description": "User friendly display name of the control",
-				"maxLength": 256
-			},
-			"maxScore": {
-				"type": "integer",
-				"format": "int32",
-				"description": "Maximum control score (0..10)",
-				"minimum": 0,
-				"maximum": 10,
-				"exclusiveMinimum": false
-			},
-			"source": {
-				"$ref": "#/definitions/SecureScoreControlMetadataSource"
-			},
-			"assessmentsMetadata": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/SecureScoreControlMetadataAssessmentsId"
+			"type": "object",
+			"description": "Secure Score Control Metadata Properties",
+			"properties": {
+				"displayName": {
+					"readOnly": true,
+					"type": "string",
+					"description": "User friendly display name of the control"
+				},
+				"description": {
+					"readOnly": true,
+					"type": "string",
+					"description": "User friendly display name of the control",
+					"maxLength": 256
+				},
+				"maxScore": {
+					"readOnly": true,
+					"type": "integer",
+					"format": "int32",
+					"description": "Maximum control score (0..10)",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
+				},
+				"source": {
+					"$ref": "#/definitions/SecureScoreControlMetadataSource"
+				},
+				"assessmentsMetadata": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SecureScoreControlMetadataAssessmentsId"
+					}
 				}
 			}
 		},
 		"SecureScoreControlMetadataAssessmentsId": {
-			"id": {
-				"type": "string",
-				"description": "Full assessment metadata uris that build the control"
+			"type": "object",
+			"description": "Secure Score Control Metadata Properties",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": "Full assessment metadata uris that build the control"
+				}
 			}
 		},
 		"SecureScoreControlMetadataSource": {
-			"sourceType": {
-				"type": "string",
-				"description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom if the assessment based on custom Azure Policy definition, CustomerManaged for customers who build their own controls",
-				"enum": [
-					"BuiltIn",
-					"CustomPolicy",
-					"CustomerManaged"
-				],
-				"x-ms-enum": {
-					"name": "controlType",
-					"modelAsString": true,
-					"values": [
-						{
-							"value": "BuiltIn",
-							"description": "Azure Security Center managed assessments"
-						},
-						{
-							"value": "CustomPolicy",
-							"description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
-						},
-						{
-							"value": "CustomerManaged",
-							"description": "User controls pushed directly by the user or other third party to Azure Security Center"
-						}
-					]
+			"type": "object",
+			"description": "representing the source of the control",
+			"properties": {
+				"sourceType": {
+					"type": "string",
+					"description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom if the assessment based on custom Azure Policy definition, CustomerManaged for customers who build their own controls",
+					"enum": [
+						"BuiltIn",
+						"CustomPolicy",
+						"CustomerManaged"
+					],
+					"x-ms-enum": {
+						"name": "controlType",
+						"modelAsString": true,
+						"values": [
+							{
+								"value": "BuiltIn",
+								"description": "Azure Security Center managed assessments"
+							},
+							{
+								"value": "CustomPolicy",
+								"description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
+							},
+							{
+								"value": "CustomerManaged",
+								"description": "User controls pushed directly by the user or other third party to Azure Security Center"
+							}
+						]
+					}
+				},
+				"initiativeId": {
+					"type": "string"
 				}
-			},
-			"initiativeId": {
-				"type": "string"
 			}
 		}
 	},
