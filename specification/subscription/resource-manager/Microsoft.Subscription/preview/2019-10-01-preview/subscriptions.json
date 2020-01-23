@@ -393,132 +393,132 @@
         ]
       }
     },
-	"/providers/Microsoft.Subscription/subscriptions/{subscriptionId}": {
-		"put": {
-			"description": "The operation to create a new subscription.",
-			"operationId": "Subscription_CreateSubscription",
-			"x-ms-examples": {
-				"createSubscription": {
-					"$ref": "./examples/putSubscription.json"
-				}
-			},
-			"x-ms-long-running-operation": true,
-			"responses": {
-				"200": {
-					"description": "Normal response for a successful query.",
-					"schema": {
-						"$ref": "#/definitions/PutSubscriptionCreationResult"
-					}
-				},
-				"202": {
-					"description": "Accepted. Subscription creation is in progress.",
-					"headers": {
-						"Location": {
-							"description": "GET this URL to retrieve the status of the asynchronous operation.",
-							"type": "string"
-						},
-						"Retry-After": {
-							"description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-							"type": "string"
-						}
-					}
-				},
-				"default": {
-					"description": "Error response describing why the operation failed.",
-					"schema": {
-						"$ref": "#/definitions/ErrorResponse"
-					}
-				}
-			},
-			"parameters": [
-				{
-					"$ref": "#/parameters/subscriptionIdParameter"
-				},
-				{
-					"name": "requestBody",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"$ref": "#/definitions/PutSubscriptionRequest"
-					}
-				},
-				{
-					"$ref": "#/parameters/apiVersionParameter"
-				}
-			]
-		},
-		"get": {
-			"description": "Get Subscription.",
-			"operationId": "Subscription_GetSubscription",
-			"x-ms-examples": {
-				"getSubscription": {
-					"$ref": "./examples/getSubscription.json"
-				}
-			},
-			"responses": {
-				"200": {
-					"description": "Subscription details.",
-					"schema": {
-						"$ref": "#/definitions/PutSubscriptionCreationResult"
-					}
-				},
-				"default": {
-					"description": "Error response describing why the operation failed.",
-					"schema": {
-						"$ref": "#/definitions/ErrorResponse"
-					}
-				}
-			},
-			"parameters": [
-				{
-					"$ref": "#/parameters/subscriptionIdParameter"
-				},
-				{
-					"$ref": "#/parameters/apiVersionParameter"
-				}
-			]
-		}
-	},
-	"/providers/Microsoft.Subscription/OperationResults/Subscription_{subscriptionId}": {
-		"get": {
-			"description": "Get the status of the pending Microsoft.Subscription API operations.",
-			"operationId": "SubscriptionOperationResult_Get",
-			"x-ms-examples": {
-				"getPendingSubscriptionOperations": {
-					"$ref": "./examples/getSubscriptionOperationResult.json"
-				}
-			},
-			"responses": {
-				"200": {
-					"description": "Successful completion of the asynchronous operation",
-					"schema": {
-						"$ref": "#/definitions/PutSubscriptionCreationResult"
-					}
-				},
-				"202": {
-					"description": "Accepted. Subscription update is in progress.",
-					"headers": {
-						"Location": {
-							"description": "The URL where the status of the asynchronous operation can be checked.",
-							"type": "string"
-						},
-						"Retry-After": {
-							"description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-							"type": "integer"
-						}
-					}
-				}
-			},
-			"parameters": [
-				{
-					"$ref": "#/parameters/subscriptionIdParameter"
-				},
-				{
-					"$ref": "#/parameters/apiVersionParameter"
-				}
-			]
-		}
-	}
+    "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}": {
+      "put": {
+        "description": "The operation to create a new subscription.",
+        "operationId": "Subscription_CreateSubscription",
+        "x-ms-examples": {
+          "createSubscription": {
+            "$ref": "./examples/putSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get Subscription.",
+        "operationId": "Subscription_GetSubscription",
+        "x-ms-examples": {
+          "getSubscription": {
+            "$ref": "./examples/getSubscription.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription details.",
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionCreationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    },
+    "/providers/Microsoft.Subscription/OperationResults/Subscription_{subscriptionId}": {
+      "get": {
+        "description": "Get the status of the pending Microsoft.Subscription API operations.",
+        "operationId": "SubscriptionOperationResult_Get",
+        "x-ms-examples": {
+          "getPendingSubscriptionOperations": {
+            "$ref": "./examples/getSubscriptionOperationResult.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful completion of the asynchronous operation",
+            "schema": {
+              "$ref": "#/definitions/PutSubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the asynchronous operation can be checked.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ]
+      }
+    }
   },
   "definitions": {
     "ErrorResponse": {
@@ -744,169 +744,169 @@
         }
       }
     },
-	"PutSubscriptionRequest": {
-		"description": "The parameters required to create a new subscription.",
-		"type": "object",
-		"properties": {
-			"properties": {
-				"$ref": "#/definitions/PutSubscriptionRequestProperties",
-				"description": "Put subscription request properties."
-			}
-		}
-	},
-	"PutSubscriptionRequestProperties": {
-		"description": "Put subscription properties.",
-		"required": [
-			"displayName",
-			"skuId",
-			"scope"
-		],
-		"properties": {
-			"displayName": {
-				"description": "The friendly name of the subscription.",
-				"type": "string"
-			},
-			"skuId": {
-				"description": "The SKU ID of the Azure plan.",
-				"type": "string"
-			},
-			"scope": {
-				"description": "Determines customerLe / fieldLed, partnerLed, legacy.",
-				"type": "string"
-			},
-			"owners": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/AdPrincipal"
-				},
-				"description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
-			},
-			"managementGroupId": {
-				"description": "The Management Group Id.",
-				"type": "string"
-			},
-			"costCenter": {
-				"description": "If set, the cost center will show up on the Azure usage and charges file.",
-				"type": "string"
-			},
-			"resellerId": {
-				"description": "Reseller ID, basically MPN Id.",
-				"type": "string"
-			},
-			"additionalParameters": {
-				"description": "Additional, untyped parameters to support custom subscription creation scenarios.",
-				"type": "object",
-				"additionalProperties": {
-					"type": "object"
-				}
-			},
-			"state": {
-				"type": "string",
-				"description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
-				"enum": [
-					"Enabled",
-					"Warned",
-					"PastDue",
-					"Disabled",
-					"Deleted"
-				],
-				"x-ms-enum": {
-					"name": "SubscriptionState",
-					"modelAsString": false
-				}
-			}
-		}
-	},
-	"PutSubscriptionCreationResult": {
-		"description": "Subscription information (same as Microsoft.Resources/subscription).",
-		"properties": {
-			"id": {
-				"description": "Fully qualified ID for the subscription.",
-				"type": "string"
-			},
-			"subscriptionId": {
-				"description": "Subscription ID.",
-				"type": "string"
-			},
-			"displayName": {
-				"description": "Subscription display name.",
-				"type": "string"
-			},
-			"tenantId": {
-				"description": "Subscription tenant id.",
-				"type": "string"
-			},
-			"state": {
-				"type": "string",
-				"description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
-				"enum": [
-					"Enabled",
-					"Warned",
-					"PastDue",
-					"Disabled",
-					"Deleted"
-				],
-				"x-ms-enum": {
-					"name": "SubscriptionState",
-					"modelAsString": false
-				}
-			},
-			"subscriptionPolicies": {
-				"$ref": "#/definitions/SubscriptionPolicies",
-				"description": "The subscription policies."
-			},
-			"authorizationSource": {
-				"type": "string",
-				"description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
-			},
-			"managedByTenants": {
-				"type": "array",
-				"items": {
-					"$ref": "#/definitions/ManagedByTenant"
-				},
-				"description": "An array containing the tenants managing the subscription."
-			}
-		}
-	},
-	"SubscriptionPolicies": {
-		"properties": {
-			"locationPlacementId": {
-				"readOnly": true,
-				"type": "string",
-				"description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
-			},
-			"quotaId": {
-				"readOnly": true,
-				"type": "string",
-				"description": "The subscription quota ID."
-			},
-			"spendingLimit": {
-				"readOnly": true,
-				"type": "string",
-				"description": "The subscription spending limit.",
-				"enum": [
-					"On",
-					"Off",
-					"CurrentPeriodOff"
-				],
-				"x-ms-enum": {
-					"name": "spendingLimit",
-					"modelAsString": false
-				}
-			}
-		},
-		"description": "Subscription policies."
-	},
-	"ManagedByTenant": {
-		"properties": {
-			"tenantId": {
-				"readOnly": true,
-				"type": "string",
-				"description": "The tenant ID of the managing tenant. This is a GUID."
-			}
-		},
-		"description": "Information about a tenant managing the subscription."
-	}
+    "PutSubscriptionRequest": {
+      "description": "The parameters required to create a new subscription.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PutSubscriptionRequestProperties",
+          "description": "Put subscription request properties."
+        }
+      }
+    },
+    "PutSubscriptionRequestProperties": {
+      "description": "Put subscription properties.",
+      "required": [
+        "displayName",
+        "skuId",
+        "scope"
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Determines customerLe / fieldLed, partnerLed, legacy.",
+          "type": "string"
+        },
+        "owners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdPrincipal"
+          },
+          "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
+        },
+        "managementGroupId": {
+          "description": "The Management Group Id.",
+          "type": "string"
+        },
+        "costCenter": {
+          "description": "If set, the cost center will show up on the Azure usage and charges file.",
+          "type": "string"
+        },
+        "resellerId": {
+          "description": "Reseller ID, basically MPN Id.",
+          "type": "string"
+        },
+        "additionalParameters": {
+          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
+          "enum": [
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "PutSubscriptionCreationResult": {
+      "description": "Subscription information (same as Microsoft.Resources/subscription).",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the subscription.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription ID.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Subscription display name.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Subscription tenant id.",
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
+          "enum": [
+            "Enabled",
+            "Warned",
+            "PastDue",
+            "Disabled",
+            "Deleted"
+          ],
+          "x-ms-enum": {
+            "name": "SubscriptionState",
+            "modelAsString": false
+          }
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "The subscription policies."
+        },
+        "authorizationSource": {
+          "type": "string",
+          "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
+        },
+        "managedByTenants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedByTenant"
+          },
+          "description": "An array containing the tenants managing the subscription."
+        }
+      }
+    },
+    "SubscriptionPolicies": {
+      "properties": {
+        "locationPlacementId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
+        },
+        "quotaId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription quota ID."
+        },
+        "spendingLimit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The subscription spending limit.",
+          "enum": [
+            "On",
+            "Off",
+            "CurrentPeriodOff"
+          ],
+          "x-ms-enum": {
+            "name": "spendingLimit",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Subscription policies."
+    },
+    "ManagedByTenant": {
+      "properties": {
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of the managing tenant. This is a GUID."
+        }
+      },
+      "description": "Information about a tenant managing the subscription."
+    }
   },
   "parameters": {
     "apiVersionParameter": {
