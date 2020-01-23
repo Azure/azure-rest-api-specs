@@ -452,6 +452,21 @@
         }
       }
     },
+    "SftpWriteSettings": {
+      "description": "Sftp write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "operationTimeout": {
+          "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
+    },
     "GoogleCloudStorageReadSettings": {
       "description": "Google Cloud Storage read settings.",
       "type": "object",
@@ -3759,6 +3774,10 @@
           "type": "object",
           "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
         },
+        "mapComplexValuesToString": {
+          "type": "object",
+          "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
+        },
         "mappings": {
           "type": "object",
           "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
@@ -5784,6 +5803,29 @@
         "integrationRuntime": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "compute": {
+          "description": "Compute properties for data flow activity.",
+          "type": "object",
+          "properties": {
+            "computeType": {
+              "description": "Compute type of the cluster which will execute data flow job.",
+              "type": "string",
+              "enum": [
+                "General",
+                "MemoryOptimized",
+                "ComputeOptimized"
+              ],
+              "x-ms-enum": {
+                "name": "DataFlowComputeType",
+                "modelAsString": true
+              }
+            },
+            "coreCount": {
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
+              "type": "integer"
+            }
+          }
         }
       },
       "required": [
