@@ -1142,6 +1142,10 @@
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",
               "description": "The blob service properties for change feed events."
+            },
+            "restorePolicy": {
+              "$ref": "#/definitions/RestorePolicyProperties",
+              "description": "The blob service properties for blob restore policy."
             }
           },
           "x-ms-client-flatten": true,
@@ -1181,6 +1185,24 @@
         }
       },
       "description": "The blob service properties for change feed events."
+    },
+    "RestorePolicyProperties": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Blob restore is enabled if set to true."
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "The blob service properties for blob restore policy"
     },
     "LeaseContainerRequest": {
       "properties": {
