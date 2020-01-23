@@ -75,12 +75,6 @@
 		}
 	},
 	"definitions": {
-		"nonNegativeInteger": {
-			"type": "integer",
-			"format": "int32",
-			"minimum": 0,
-			"exclusiveMinimum": false
-		},
 		"SecureScoreInitiativesList": {
 			"type": "object",
 			"description": "Page of a secure scores list",
@@ -137,8 +131,12 @@
 			"type": "object",
 			"description": "Calculation result data",
 			"maxScore": {
-				"$ref": "#/definitions/nonNegativeInteger",
-				"description": "Maximum score applicable for the control"
+				"description": "Maximum score applicable for the control",
+				"type": "integer",
+				"format": "int32",
+				"minimum": 0,
+				"maximum": 10,
+				"exclusiveMinimum": false
 			},
 			"current": {
 				"type": "number",
@@ -193,28 +191,52 @@
 					"$ref": "#/definitions/SecureScoreScoreDetails"
 				},
 				"healthyResources": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Number of healthy resources in the control"
+					"description": "Number of healthy resources in the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				},
 				"unhealthyResources": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Number of unhealthy resources in the control"
+					"description": "Number of unhealthy resources in the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				},
 				"notApplicableResources": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Number of not applicable resources in the control"
+					"description": "Number of not applicable resources in the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				},
 				"disabledResources": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Number of not resources that are disabled by policy in the control"
+					"description": "Number of not resources that are disabled by policy in the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				},
 				"achievedResourcesPoints": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Number of points achieved for the controls"
+					"description": "Number of points achieved for the controls",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				},
 				"totalResourcesPoints": {
-					"$ref": "#/definitions/nonNegativeInteger",
-					"description": "Total Number of points available in the control"
+					"description": "Total Number of points available in the control",
+					"type": "integer",
+					"format": "int32",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
 				}
 			}
 		},
@@ -262,10 +284,12 @@
 				"maxLength": 256
 			},
 			"maxScore": {
-				"$ref": "#/definitions/nonNegativeInteger",
+				"type": "integer",
+				"format": "int32",
 				"description": "Maximum control score (0..10)",
 				"minimum": 0,
-				"maximum": 10
+				"maximum": 10,
+				"exclusiveMinimum": false
 			},
 			"source": {
 				"$ref": "#/definitions/SecureScoreControlMetadataSource"
