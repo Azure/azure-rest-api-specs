@@ -72,93 +72,6 @@
 					"nextLinkName": "nextLink"
 				}
 			}
-		},
-		"/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/controls": {
-			"get": {
-				"x-ms-examples": {
-					"List secure score's controls for the specified name": {
-						"$ref": "./examples/secureScores/ListSecureScoreControlsForName_example.json"
-					},
-					"Get security recommendation task from security data location with expand parameter": {
-						"$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_example.json"
-					}
-				},
-				"tags": [
-					"Secure Scores"
-				],
-				"description": "Get secure scores' controls on specific initiatives inside a scope",
-				"operationId": "SecureScoreControls_List",
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/Scope"
-					},
-					{
-						"$ref": "#/parameters/secureScoreName"
-					},
-					{
-						"$ref": "#/parameters/ExpandControlsMetadata"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/SecureScoreControlsList"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsMetadata": {
-			"get": {
-				"x-ms-examples": {
-					"List secure score controls metadata": {
-						"$ref": "./examples/secureScoreControlsMetadata/ListSecureScoreControlsMetadata_example.json"
-					}
-				},
-				"tags": [
-					"Secure Score Controls Metadata"
-				],
-				"description": "Get metadata information on all built in secure score controls",
-				"operationId": "SecureScoreControlsMetadata_List",
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/SecureScoreControlsMetadataList"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
-				}
-			}
 		}
 	},
 	"definitions": {
@@ -167,12 +80,6 @@
 			"format": "int32",
 			"minimum": 0,
 			"exclusiveMinimum": false
-		},
-		"positiveInteger": {
-			"type": "integer",
-			"format": "int32",
-			"minimum": 0,
-			"exclusiveMinimum": true
 		},
 		"SecureScoreInitiativesList": {
 			"type": "object",
