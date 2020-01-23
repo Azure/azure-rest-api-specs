@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+    "api-version": "2019-07-19-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
+        "type": "Microsoft.Capacity/autoQuotaIncrease",
+        "name": "Automatic Quota Increase",
+        "properties": {
+          "settings": {
+            "autoQuotaIncreaseState": "enabled"
+          },
+          "onSuccess": {
+            "emailActions": {
+              "value": [
+                {
+                  "emailAddress": "itsupport@contoso.com"
+                },
+                {
+                  "emailAddress": "admin2@contoso.com"
+                }
+              ]
+            }
+          },
+          "onFailure": {
+            "emailActions": {
+              "value": [
+                {
+                  "emailAddress": "itsupport@contoso.com"
+                },
+                {
+                  "emailAddress": "admin2@contoso.com"
+                }
+              ]
+            }
+          },
+          "supportTicketAction": {
+            "autoQuotaIncreaseState": "enabled",
+            "severity": "Minimal",
+            "firstName": "FN",
+            "lastName": "LN",
+            "country": "US",
+            "phoneNumber": "123-456-7890",
+            "supportLanguage": "en-US",
+            "primaryEmailAddress": "admin3@contoso.com",
+            "alternateEmailAddresses": [
+              "admin@contoso.com",
+              "admin3@contoso.com"
+            ],
+            "preferredContactMethod": "Phone"
+          }
+        }
+      }
+    }
+  }
+}
