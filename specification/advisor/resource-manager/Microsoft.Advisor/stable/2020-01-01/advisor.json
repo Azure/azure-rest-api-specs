@@ -157,7 +157,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -262,7 +264,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -868,8 +872,8 @@
         },
         "frequency": {
           "format": "int32",
-					"description": "Frequency that digest will be triggered, in days. Value must be greater than equal to 7 day and less than or equal to 30 days.",
-					"type": "integer"
+          "description": "Frequency that digest will be triggered, in days. Value must be between 7 and 30 days inclusive.",
+          "type": "integer"
         },
         "categories": {
           "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
