@@ -229,7 +229,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"current": {
@@ -284,16 +283,25 @@
 			"type": "object",
 			"description": "Calculation result data in control level",
 			"properties": {
-				"score": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/SecureScoreScoreDetails"
+				"maxScore": {
+					"readOnly": true,
+					"type": "integer",
+					"format": "int32",
+					"description": "Maximum control score (0..10)",
+					"minimum": 0,
+					"maximum": 10,
+					"exclusiveMinimum": false
+				},
+				"current": {
+					"type": "number",
+					"format": "double",
+					"description": "Actual score for the control"
 				},
 				"healthyResources": {
 					"description": "Number of healthy resources in the control",
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"unhealthyResources": {
@@ -301,7 +309,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"notApplicableResources": {
@@ -309,7 +316,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"disabledResources": {
@@ -317,7 +323,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"achievedResourcesPoints": {
@@ -325,7 +330,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"totalResourcesPoints": {
@@ -333,7 +337,6 @@
 					"type": "integer",
 					"format": "int32",
 					"minimum": 0,
-					"maximum": 10,
 					"exclusiveMinimum": false
 				}
 			}
