@@ -392,6 +392,161 @@
           }
         ]
       }
+    },
+    "/providers/Microsoft.Subscription/operationResults/{operationId}": {
+      "get": {
+        "operationId": "OperationResults_Get",
+        "x-ms-examples": {
+          "PurchaseOperationSupportStatus": {
+            "$ref": "./examples/PurchaseOperationSupportStatus.json"
+          }
+        },
+        "description": "The operation to find out the purchase Operation status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportPlan"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/errorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan": {
+      "get": {
+        "operationId": "SupportPlans_listBySubscription",
+        "x-ms-examples": {
+          "SupportPlan": {
+            "$ref": "./examples/SupportPlanList.json"
+          }
+        },
+        "description": "The operation lists support plans under the given subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportPlanResponseListResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/errorResponseBody"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/SupportPlan/default": {
+      "get": {
+        "operationId": "SupportPlanDefault_Get",
+        "x-ms-examples": {
+          "SupportPlan": {
+            "$ref": "./examples/SupportPlanDefault.json"
+          }
+        },
+        "description": "returns the support plan for given subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultSupportPlanResponseResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/errorResponseBody"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/supportplans/default": {
+      "put": {
+        "operationId": "PurchaseSupportPlan_CreateOrUpdate",
+        "x-ms-examples": {
+          "PurchaseSupport": {
+            "$ref": "./examples/PurchaseSupportPlan.json"
+          }
+        },
+        "description": "The operation to purchase/convert support plan.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/supportPlanNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/SupportPlan"
+            }
+          },
+          "202": {
+            "description": "Accepted. Purchase support plan is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/errorResponseBody"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "x-ms-long-running-operation": true
+        }
+      }
     }
   },
   "definitions": {
@@ -406,6 +561,31 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "errorResponseBody": {
+      "description": "Details of error response.",
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code, intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error, intended for display in user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the particular error, for example name of the property."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/errorResponseBody"
+          }
         }
       }
     },
@@ -617,6 +797,104 @@
           "type": "string"
         }
       }
+    },
+    "planTypeEnum": {
+      "type": "string",
+      "description": "the planType.",
+      "enum": [
+        "basic_support",
+        "developer_support",
+        "standard_support",
+        "prodirect_support"
+      ],
+      "x-ms-enum": {
+        "name": "supportPlanType",
+        "modelAsString": false
+      }
+    },
+    "DefaultSupportPlanResponseResult": {
+      "description": "Default Support plan result.",
+      "$ref": "#/definitions/SupportPlan"
+    },
+    "SupportPlanResponseListResult": {
+      "description": "Support plan result.",
+      "properties": {
+        "value": {
+          "description": "The list of Support plan.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SupportPlan"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SupportPlan": {
+      "description": "A SupportPlan resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SupportPlanProperties",
+          "title": "SupportPlan properties"
+        }
+      }
+    },
+    "SupportPlanProperties": {
+      "description": "The properties of the support plan.",
+      "properties": {
+        "planType": {
+          "description": "SupportPlan Type",
+          "type": "object",
+          "$ref": "#/definitions/planTypeEnum"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SupportPlanName": {
+      "type": "object",
+      "description": "The supportPlan Name.",
+      "properties": {
+        "planType": {
+          "description": "SupportPlan Type",
+          "type": "object",
+          "$ref": "#/definitions/planTypeEnum"
+        }
+      }
     }
   },
   "parameters": {
@@ -643,6 +921,24 @@
       "description": "Subscription Name",
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "operationIdParameter": {
+      "name": "operationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the operation Id."
+    },
+    "supportPlanNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "SupportPlan Name",
+      "schema": {
+        "$ref": "#/definitions/SupportPlanName"
       }
     }
   },
