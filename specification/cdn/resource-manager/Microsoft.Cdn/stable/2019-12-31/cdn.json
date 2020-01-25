@@ -4372,7 +4372,7 @@
 	    }	  
 	  },
     "KeyVaultSigningKeyParameters": {
-      "description": "Describes the parameters for using a user's KeyVault certificate for URL Signing Key.",
+      "description": "Describes the parameters for using a user's KeyVault for URL Signing Key.",
       "required": [
         "@odata.type",
         "subscriptionId",
@@ -4391,27 +4391,27 @@
           ]
         },
         "subscriptionId": {
-          "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
+          "description": "Subscription Id of the user's Key Vault containing the secret",
           "type": "string"
         },
         "resourceGroupName": {
-          "description": "Resource group of the user's Key Vault containing the SSL certificate",
+          "description": "Resource group of the user's Key Vault containing the secret",
           "type": "string"
         },
         "vaultName": {
-          "description": "The name of the user's Key Vault containing the SSL certificate",
+          "description": "The name of the user's Key Vault containing the secret",
           "type": "string"
         },
         "secretName": {
-          "description": "The name of Key Vault Secret (representing the full certificate PFX) in Key Vault.",
+          "description": "The name of secret in Key Vault.",
           "type": "string"
         },
         "secretVersion": {
-          "description": "The version(GUID) of Key Vault Secret in Key Vault.",
+          "description": "The version(GUID) of secret in Key Vault.",
           "type": "string"
         },
         "updateRule": {
-          "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
+          "description": "Describes the action that shall be taken when the secret is updated in Key Vault.",
           "type": "string",
           "enum": [
             "NoAction"
@@ -4422,7 +4422,7 @@
           }
         },
         "deleteRule": {
-          "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
+          "description": "Describes the action that shall be taken when the secret is removed from Key Vault.",
           "type": "string",
           "enum": [
             "NoAction"
