@@ -2695,6 +2695,11 @@
           "type": "object",
           "$ref": "#/definitions/ResourceReference"
         },
+        "urlSigningKeys":{
+          "description": "List of keys used to validate the signed URL hashes.",
+          "type": "array",
+          "$ref": "#/definitions/UrlSigningKey"
+        },		
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
           "type": "object",
@@ -3869,18 +3874,15 @@
     "UrlSigningParameters": {
       "description": "Defines the parameters for the Url Signing action.",
       "required": [
-        "keys",
+        "keyId",
         "algorithm",
         "parameterNameOverride",
         "ipSubnets"
       ],
       "properties": {
-        "keys": {
-          "description": "Keys to be used for verifying the signature",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UrlSigningKey"
-          }
+        "keyId": {
+          "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
+          "type": "string"
         },
         "algorithm": {
           "description": "Algorithm to use for URL signing",
@@ -3903,33 +3905,6 @@
             "type": "string"
           }
         }  
-      }
-    },
-    "UrlSigningKey": {
-      "description": "Url signing key properties << TODO >>. Should they moved to end point level",
-      "required": [
-        "keyId",
-        "keyVaultName",
-        "keyName",
-        "keyVersion"
-      ],
-      "properties": {
-        "keyId": {
-          "description": "Logical reference to the key. Used in the URL to reference which key is used for producing the signature",
-          "type": "string"
-        },
-        "keyVaultName": {
-          "description": "Name of the key vault where the key is stored",
-          "type": "string"
-        },
-        "keyName": {
-          "description": "Name of the key",
-          "type": "string"
-        },
-        "keyVersion": {
-          "description": "Version of the key",
-          "type": "string"
-        }
       }
     },
     "UrlSigningQueryStringParamIdentifier": {
@@ -4379,6 +4354,86 @@
         }
       }
     },
+	  "UrlSigningKey": {
+	    "description": "Url signing key",
+	      "required": [
+		    "keyId",
+		    "keySourceParameters"
+	    ],
+	    "properties": {
+		    "keyId": {
+		      "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
+		      "type": "string"		  
+		    },
+		    "keySourceParameters" : {
+		      "description": "Defines the parameters for using customer key vault for Url Signing Key.",
+		      "$ref": "#/definitions/KeyVaultSigningKeyParameters"
+		    }
+	    }	  
+	  },
+    "KeyVaultSigningKeyParameters": {
+      "description": "Describes the parameters for using a user's KeyVault certificate for URL Signing Key.",
+      "required": [
+        "@odata.type",
+        "subscriptionId",
+        "resourceGroupName",
+        "vaultName",
+        "secretName",
+        "secretVersion",
+        "updateRule",
+        "deleteRule"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
+          ]
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Resource group of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "vaultName": {
+          "description": "The name of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of Key Vault Secret (representing the full certificate PFX) in Key Vault.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version(GUID) of Key Vault Secret in Key Vault.",
+          "type": "string"
+        },
+        "updateRule": {
+          "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateRule",
+            "modelAsString": true
+          }
+        },
+        "deleteRule": {
+          "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteRule",
+            "modelAsString": true
+          }
+        }
+      }
+    },	
     "LoadParameters": {
       "type": "object",
       "description": "Parameters required for content load.",
