@@ -57,12 +57,22 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10-preview
+tag: package-2019-11
 ```
 
+
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-11'
+input-file:
+  - Microsoft.Resources/stable/2019-11-01/subscriptions.json
+```
 ### Tag: package-resources-2019-10-preview
+
 These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
- 
+
 ``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
 input-file:
 - Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
@@ -394,6 +404,7 @@ input-file:
 ```
 
 ### Tag: package-managedapplications-2019-07
+
 These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-managedapplications-2019-07'
@@ -440,6 +451,10 @@ directive:
     from: policyDefinitions.json
     where: $.paths
     reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: policyAssignments.json
+    where: $.paths
+    reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: OperationsAPIImplementation
     from: policyAssignments.json
     where: $.paths
@@ -581,7 +596,7 @@ input-file:
 - Microsoft.Resources/stable/2018-05-01/resources.json
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -593,6 +608,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2019-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
@@ -643,11 +659,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

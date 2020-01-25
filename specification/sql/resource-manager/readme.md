@@ -61,6 +61,8 @@ Differences in v3 (compared to v2):
 
   * `+2017-10-01-preview/elasticPools.json`
 
+  * `+2018-06-01-preview/capabilities.json`
+
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
@@ -108,7 +110,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-- Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
 - Microsoft.Sql/preview/2017-10-01-preview/databases.json
 - Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -134,6 +135,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
@@ -835,7 +837,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databases.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/elasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -861,6 +862,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json

@@ -1,0 +1,212 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1",
+            "name": "frontDoor1",
+            "type": "Microsoft.Network/frontDoor",
+            "location": "westus",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "routingRules": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/routingRule1",
+                  "name": "routingRule1",
+                  "properties": {
+                    "frontendEndpoints": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1"
+                      },
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default"
+                      }
+                    ],
+                    "acceptedProtocols": [
+                      "Http"
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ],
+                    "routeConfiguration": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "customForwardingPath": "",
+                      "forwardingProtocol": "MatchRequest",
+                      "backendPool": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                      }
+                    },
+                    "rulesEngine": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/rulesEngines/rulesEngine1"
+                    },
+                    "enabledState": "Enabled"
+                  }
+                }
+              ],
+              "healthProbeSettings": [
+                {
+                  "name": "healthProbeSettings1",
+                  "properties": {
+                    "path": "/",
+                    "protocol": "Http",
+                    "intervalInSeconds": 120,
+                    "enabledState": "Enabled",
+                    "healthProbeMethod": "HEAD"
+                  }
+                }
+              ],
+              "loadBalancingSettings": [
+                {
+                  "name": "loadBalancingSettings1",
+                  "properties": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 2
+                  }
+                }
+              ],
+              "backendPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1",
+                  "name": "backendPool1",
+                  "properties": {
+                    "backends": [
+                      {
+                        "location": "westus",
+                        "address": "w3.contoso.com",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "enabledState": "Enabled",
+                        "weight": 1,
+                        "priority": 2
+                      },
+                      {
+                        "address": "contoso.com.website-us-west-2.othercloud.net",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "enabledState": "Enabled",
+                        "weight": 2,
+                        "priority": 1
+                      },
+                      {
+                        "privateLinkId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
+                        "location": "westus",
+                        "address": "10.0.1.5",
+                        "httpPort": 80,
+                        "httpsPort": 443,
+                        "enabledState": "Enabled",
+                        "weight": 1,
+                        "priority": 1
+                      }      
+                    ],
+                    "loadBalancingSettings": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1"
+                    },
+                    "healthProbeSettings": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/healthProbeSettings/healthProbeSettings1"
+                    }
+                  }
+                }
+              ],
+              "frontendEndpoints": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1",
+                  "name": "frontendEndpoint1",
+                  "properties": {
+                    "hostName": "www.contoso.com",
+                    "sessionAffinityEnabledState": "Enabled",
+                    "sessionAffinityTtlSeconds": 60,
+                    "webApplicationFirewallPolicyLink": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1"
+                    }
+                  }
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default",
+                  "name": "default",
+                  "properties": {
+                    "hostName": "frontDoor1.azurefd.net"
+                  }
+                }
+              ],
+              "rulesEngines": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
+                  "name": "rulesEngine1",
+                  "properties": {
+                   "rules": [
+                     {
+                       "name": "Rule1",
+                       "priority": 1,
+                       "action": {
+                         "routeConfigurationOverride": {
+                           "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                           "redirectType": "Moved",
+                           "redirectProtocol": "HttpsOnly",
+                           "customHost": "www.bing.com",
+                           "customPath": "/api",
+                           "customFragment": "fragment",
+                           "customQueryString": "a=b"
+                         }
+                       },
+                       "matchConditions": [
+                         {
+                           "rulesEngineMatchVariable": "RemoteAddr",
+                           "rulesEngineOperator": "GeoMatch",
+                           "rulesEngineMatchValue": [
+                             "CH"
+                           ]
+                         }
+                       ],
+                       "matchProcessingBehavior": "Stop"
+                     },
+                     {
+                       "name": "Rule2",
+                       "priority": 2,
+                       "action": {
+                         "responseHeaderActions": [
+                           {
+                             "headerActionType": "Overwrite",
+                             "headerName": "Cache-Control",
+                             "value": "public, max-age=31536000"
+                           }
+                         ]
+                       },
+                       "matchConditions": [
+                         {
+                           "rulesEngineMatchVariable": "FilenameExtension",
+                           "rulesEngineOperator": "Equal",
+                           "rulesEngineMatchValue": [
+                             "jpg"
+                           ],
+                           "transforms": [
+                             "Lowercase"
+                           ]
+                         }
+                       ]
+                     }
+                   ]
+                  }
+                }
+              ],
+              "backendPoolsSettings": {
+                "enforceCertificateNameCheck": "Enabled"
+              },
+              "enabledState": "Enabled",
+              "resourceState": "Enabled",
+              "provisioningState": "Succeeded",
+              "cname": "frontDoor1.azurefd.net"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
