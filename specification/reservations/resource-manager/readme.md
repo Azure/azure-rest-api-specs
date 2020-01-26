@@ -26,9 +26,18 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-04
+tag: package-preview-2019-07-19
 ```
 
+### Tag: package-preview-2019-07-19
+
+These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-07-19'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
 
 ### Tag: package-preview-2019-04
 
@@ -134,6 +143,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Capacity/preview/2019-07-19/quota.json
   - $(this-folder)/Microsoft.Capacity/preview/2019-04-01/reservations.json
   - $(this-folder)/Microsoft.Capacity/preview/2018-06-01/reservations.json
   - $(this-folder)/Microsoft.Capacity/stable/2017-11-01/reservations.json
