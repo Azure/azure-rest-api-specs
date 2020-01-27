@@ -286,15 +286,15 @@
           "type": "object",
           "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
         },
-        "arcAutoProvision": {
+        "hybridComputeAutoProvision": {
           "type": "string",
-          "description": "Describes what kind of Azure Arc agent provisioning action to take",
+          "description": "Describes what kind of Azure Arc (Hybrid compute) agent provisioning action to take",
           "enum": [
             "On",
             "Off"
           ],
           "x-ms-enum": {
-            "name": "arcAutoProvision",
+            "name": "hybridComputeAutoProvision",
             "modelAsString": true,
             "values": [
               {
@@ -307,10 +307,15 @@
               }
             ]
           }
+        },
+        "hybridComputeSettings": {
+          "description": "Settings for hybrid compute management, these settings are relevant only arcAutoProvision is 'On'.",
+          "type": "object",
+          "$ref": "#/definitions/HybridComputeSettingsProperties"
         }
       },
       "required": [
-        "arcAutoProvision",
+        "hybridComputeAutoProvision",
         "ConnectorType"
       ],
       "allOf": [
@@ -318,6 +323,50 @@
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         }
       ]
+    },
+    "HybridComputeSettingsProperties": {
+      "type": "object",
+      "description": "Settings for hybrid compute management",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "proxyServer": {
+          "type": "object",
+          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+          "$ref": "#/definitions/ProxyServerProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ProxyServerProperties": {
+      "type": "object",
+      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "Proxy server IP"
+        },
+        "port": {
+          "type": "string",
+          "description": "Proxy server port"
+        }
+      }
     },
     "AwsCredentialsSettingProperties": {
       "type": "object",
