@@ -2706,7 +2706,22 @@
       },
       "type": "object"
     },
+    "ActionPropertiesBase": {
+      "description": "Action property bag base.",
+      "properties": {
+        "logicAppResourceId": {
+          "description": "Logic App Resource Id, /subscriptions/{my-subscription}/resourceGroups/{my-resource-group}/providers/Microsoft.Logic/workflows/{my-workflow-id}.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ActionRequestProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "triggerUri": {
@@ -2737,6 +2752,11 @@
       "type": "object"
     },
     "ActionResponseProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "workflowId": {
