@@ -1,0 +1,53 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2017-06-01",
+    "title": "Azure Stack Azure Bridge Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureStack/cloudmanifestfile": {
+      "get": {
+        "tags": [
+          "CloudManifestFile"
+        ],
+        "description": "Returns a cloud specific manifest JSON file.",
+        "operationId": "CloudManifestFile_Get",
+        "parameters": [
+          {
+            "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "AzureStack.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CloudManifestFileResponse": {
+      "description": "Cloud specific manifest JSON file.",
+      "type": "string",
+      "format": "binary"
+    }
+}
