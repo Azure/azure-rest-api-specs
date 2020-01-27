@@ -49,7 +49,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
+    "/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Checks that the Spool name is valid and is not already in use.",
         "operationId": "Spool_CheckNameAvailability",
@@ -68,14 +68,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "Region in which the name must be available.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/LocationParameter"
           }
         ],
         "consumes": [ "application/json" ],
@@ -95,8 +88,11 @@
         },
         "produces": [ "application/json" ],
         "x-ms-examples": {
-          "Check name availability": {
-            "$ref": "./examples/checkNameAvailability.json"
+          "Check name availability available": {
+            "$ref": "./examples/checkNameAvailabilityAvailable.json"
+          },
+          "Check name availability unavailable": {
+            "$ref": "./examples/checkNameAvailabilityUnavailable.json"
           }
         }
       }
@@ -880,6 +876,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "The Azure region",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
+
