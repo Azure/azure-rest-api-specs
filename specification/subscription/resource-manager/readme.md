@@ -33,11 +33,11 @@ These are the global settings for the Subscription API.
 openapi-type: arm
 tag: package-2019-03-preview
 ```
-### Tag: package-2019-10-preview
+### Tag: package-2019-10-01-preview
 
-These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10-preview'
+``` yaml $(tag) == 'package-2019-10-01-preview'
 input-file:
 - Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
 title: SubscriptionClient
