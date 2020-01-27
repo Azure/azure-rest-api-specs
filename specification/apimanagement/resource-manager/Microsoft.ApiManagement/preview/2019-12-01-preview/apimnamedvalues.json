@@ -320,7 +320,16 @@
             "description": "NamedValue was successfully updated."
           },
           "200": {
-            "description": "NamedValue was successfully updated."
+            "description": "NamedValue was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/NamedValueContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
