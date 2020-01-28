@@ -84,7 +84,7 @@
 					"Secure Scores"
 				],
 				"description": "Get secure score for a specific initiatives inside a scope",
-				"operationId": "SecureScores_Single",
+				"operationId": "GetSecureScores_Single",
 				"parameters": [
 					{
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -109,9 +109,6 @@
 							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
 						}
 					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
 				}
 			}
 		},
@@ -231,9 +228,10 @@
 		},
 		"SecureScoresItem": {
 			"type": "object",
-			"description": "Secure score item",
+			"description": "Secure score item data model",
 			"properties": {
 				"properties": {
+					"description": "Secure score item",
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreItemProperties"
 				}
@@ -254,6 +252,7 @@
 					"description": "User friendly display name of the secure score item"
 				},
 				"score": {
+					"description": "score object",
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreScoreDetails"
 				}
@@ -318,14 +317,10 @@
 			"type": "object",
 			"description": "List of security sub-assessments",
 			"properties": {
-				"displayName": {
-					"readOnly": true,
-					"type": "string",
-					"description": "User friendly display name of the control"
-        },
-        "properties": {
-          "$ref": "#/definitions/SecureScoreControlScoreDetails"
-        }
+				"properties":{
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/SecureScoreControlScoreDetails"
+				}
 			},
 			"allOf": [
 				{
@@ -337,10 +332,16 @@
 			"type": "object",
 			"description": "Calculation result data in control level",
 			"properties": {
-        "score": {
+				"displayName": {
+					"readOnly": true,
+					"type": "string",
+					"description": "User friendly display name of the control"
+				},
+				"score": {
+					"description": "Actual score object for the control",
 					"x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecureScoreControlScoreObject"
-        },
+					"$ref": "#/definitions/SecureScoreControlScoreObject"
+				},
 				"healthyResources": {
 					"readOnly": true,
 					"description": "Number of healthy resources in the control",
@@ -403,6 +404,7 @@
 			"description": "Secure Score Control's Definition information",
 			"properties": {
 				"properties": {
+					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreControlDefinitionItemProperties"
 				}
 			},
@@ -437,9 +439,11 @@
 					"exclusiveMinimum": false
 				},
 				"source": {
+					"description": "Source object from which the control was created",
 					"$ref": "#/definitions/SecureScoreControlDefinitionSource"
 				},
 				"assessmentsDefinition": {
+					"description": "array of assessments metadata ids",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/SecureScoreControlDefinitionAssessmentsId"
@@ -488,10 +492,12 @@
 						]
 					}
 				},
-				"PolicySetDefinitionId": {
+				"policySetDefinitionId": {
+					"description": "id of the policy set definition id from which the control was generated",
 					"type": "string"
-        },
-        "GroupName": {
+				},
+				"groupName": {
+					"description": "represents the GroupName within the specific policy set definition",
 					"type": "string"
 				}
 			}
