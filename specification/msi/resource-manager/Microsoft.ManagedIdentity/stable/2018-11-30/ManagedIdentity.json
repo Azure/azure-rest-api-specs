@@ -6,12 +6,20 @@
     "description": "The Managed Service Identity Client."
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -381,7 +389,9 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "enum": ["Microsoft.ManagedIdentity/userAssignedIdentities"],
+          "enum": [
+            "Microsoft.ManagedIdentity/userAssignedIdentities"
+          ],
           "x-ms-enum": {
             "name": "UserAssignedIdentities",
             "modelAsString": true
@@ -389,7 +399,9 @@
           "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
         }
       },
-      "required": ["location"],
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -416,7 +428,9 @@
         "type": {
           "type": "string",
           "readOnly": true,
-          "enum": ["Microsoft.ManagedIdentity/userAssignedIdentities"],
+          "enum": [
+            "Microsoft.ManagedIdentity/userAssignedIdentities"
+          ],
           "x-ms-enum": {
             "name": "UserAssignedIdentities",
             "modelAsString": true
@@ -446,7 +460,9 @@
           "description": "The type of resource i.e. Microsoft.Compute/virtualMachineScaleSets"
         }
       },
-      "required": ["location"],
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
