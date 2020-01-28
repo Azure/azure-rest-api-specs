@@ -1,59 +1,61 @@
 {
-	"parameters": {
-		"api-version": "2020-01-01-preview",
-		"scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-		"secureScoreName": "ascDefault",
-		"$expand": "definition"
-	},
-	"responses": {
-		"200": {
-			"parameters": {
-				"secureScoreName": "CustomA"
-			},
-			"body": {
-				"value": [
-					{
-						"id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securescores/CustomA/a9909064-42b4-4d34-8143-275477afe18b",
-						"name": "a9909064-42b4-4d34-8143-275477afe18b",
-						"type": "Microsoft.Security/securescorescontrol",
-						"properties": {
-							"displayName": "Protect applications against DDoS attacks",
-							"data": {
-								"healthyResources": 0,
-								"unhealthyResources": 10,
-								"notApplicableResources": 0,
-								"disabledResources": 50,
-								"achievedResourcesPoints": 0,
-								"totalResourcesPoints": 10,
-								"score": {"max": 3,
-								"current": 0}
-							},
-							"definition": {
-								"id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/secureScoreControlsDefinition/a9909064-42b4-4d34-8143-275477afe18b",
-								"name": "a9909064-42b4-4d34-8143-275477afe18b",
-								"type": "Microsoft.Security/SecureScoresControlMetadata",
-								"properties": {
-									"source": {
-										"sourceType": "CustomPolicy",
-										"initiativeId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Authorization/policySetDefinitions/1203fdf9-eeee-ffff-847f-89da613eabcd"
-									},
-									"displayName": "Apply adaptive application control",
-									"description": "",
-									"maxScore": 3,
-									"assessmentsMetadata": [
-										{
-											"id": "/providers/Microsoft.Security/assessmentMetadata/e3de1cc0-f4dd-3b34-e496-8b5381ba2d70"
-										},
-										{
-											"id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/assessmentMetadata/4c8a64c9-9b0f-0da9-2d2e-1d11ad316f4e"
-										}
-									]
-								}
-							}
-						}
-					}
-				]
-			}
-		}
-	}
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "secureScoreName": "ascDefault",
+    "$expand": "definition"
+  },
+  "responses": {
+    "200": {
+      "parameters": {
+        "secureScoreName": "CustomA"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securescores/CustomA/a9909064-42b4-4d34-8143-275477afe18b",
+            "name": "a9909064-42b4-4d34-8143-275477afe18b",
+            "type": "Microsoft.Security/securescorescontrol",
+            "properties": {
+              "displayName": "Protect applications against DDoS attacks",
+              "data": {
+                "healthyResources": 0,
+                "unhealthyResources": 10,
+                "notApplicableResources": 0,
+                "disabledResources": 50,
+                "achievedResourcesPoints": 0,
+                "totalResourcesPoints": 10,
+                "score": {
+                  "max": 3,
+                  "current": 0
+                }
+              },
+              "definition": {
+                "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/secureScoreControlsDefinition/a9909064-42b4-4d34-8143-275477afe18b",
+                "name": "a9909064-42b4-4d34-8143-275477afe18b",
+                "type": "Microsoft.Security/SecureScoresControlMetadata",
+                "properties": {
+                  "source": {
+                    "sourceType": "CustomPolicy",
+                    "initiativeId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Authorization/policySetDefinitions/1203fdf9-eeee-ffff-847f-89da613eabcd"
+                  },
+                  "displayName": "Apply adaptive application control",
+                  "description": "",
+                  "maxScore": 3,
+                  "assessmentsMetadata": [
+                    {
+                      "id": "/providers/Microsoft.Security/assessmentMetadata/e3de1cc0-f4dd-3b34-e496-8b5381ba2d70"
+                    },
+                    {
+                      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/assessmentMetadata/4c8a64c9-9b0f-0da9-2d2e-1d11ad316f4e"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
 }
