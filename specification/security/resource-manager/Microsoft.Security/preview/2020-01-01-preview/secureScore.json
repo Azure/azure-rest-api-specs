@@ -220,18 +220,20 @@
 					}
 				},
 				"nextLink": {
+					"description": "The URI to fetch the next page.",
 					"readOnly": true,
-					"type": "string",
-					"description": "The URI to fetch the next page."
+					"type": "string"
 				}
 			}
 		},
 		"SecureScoresItem": {
-			"type": "object",
 			"description": "Secure score item data model",
+			"readOnly": true,
+			"type": "object",
 			"properties": {
 				"properties": {
 					"description": "Secure score item",
+					"readOnly": true,
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreItemProperties"
 				}
@@ -243,79 +245,82 @@
 			]
 		},
 		"SecureScoreItemProperties": {
-			"type": "object",
 			"description": "Describes properties of a calculated secure score.",
+			"readOnly": true,
+			"type": "object",
 			"properties": {
 				"displayName": {
+					"description": "User friendly display name of the secure score item",
 					"readOnly": true,
-					"type": "string",
-					"description": "User friendly display name of the secure score item"
+					"type": "string"
 				},
 				"score": {
 					"description": "score object",
+					"readOnly": true,
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/SecureScoreScoreDetails"
 				}
 			}
 		},
 		"SecureScoreScoreDetails": {
-			"type": "object",
 			"description": "Calculation result data",
+			"readOnly": true,
+			"type": "object",
 			"properties": {
 				"max": {
-					"readOnly": true,
 					"description": "Maximum score applicable",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"current": {
+					"description": "Actual score",
 					"readOnly": true,
 					"type": "number",
-					"format": "double",
-					"description": "Actual score"
+					"format": "double"
 				}
 			}
     },
 		"SecureScoreControlScoreObject": {
-			"type": "object",
 			"description": "Calculation result data",
+			"type": "object",
 			"properties": {
         "max": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum control score (0..10)"
+			"description": "Maximum control score (0..10)",
+			"readOnly": true,
+			"type": "integer",
+			"format": "int32"
         },
         "current": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00"
+			"description": "Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00",
+			"readOnly": true,
+			"type": "number",
+			"format": "double"
         }
 			}
     },    
 		"SecureScoreControlsList": {
-			"type": "object",
 			"description": "Page of a secure score controls list",
+			"type": "object",
 			"properties": {
 				"value": {
-					"readOnly": true,
 					"description": "Collection of secure score controls in this page",
+					"readOnly": true,
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/SecureScoreControlDetails"
 					}
 				},
 				"nextLink": {
+					"description": "The URI to fetch the next page.",
 					"readOnly": true,
-					"type": "string",
-					"description": "The URI to fetch the next page."
+					"type": "string"
 				}
 			}
 		},
 		"SecureScoreControlDetails": {
-			"type": "object",
 			"description": "List of security sub-assessments",
+			"type": "object",
 			"properties": {
 				"properties":{
 					"x-ms-client-flatten": true,
@@ -329,13 +334,13 @@
 			]
 		},
 		"SecureScoreControlScoreDetails": {
-			"type": "object",
 			"description": "Calculation result data in control level",
+			"type": "object",
 			"properties": {
 				"displayName": {
+					"description": "User friendly display name of the control",
 					"readOnly": true,
-					"type": "string",
-					"description": "User friendly display name of the control"
+					"type": "string"
 				},
 				"score": {
 					"description": "Actual score object for the control",
@@ -343,46 +348,46 @@
 					"$ref": "#/definitions/SecureScoreControlScoreObject"
 				},
 				"healthyResources": {
-					"readOnly": true,
 					"description": "Number of healthy resources in the control",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"unhealthyResources": {
-					"readOnly": true,
 					"description": "Number of unhealthy resources in the control",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"notApplicableResources": {
-					"readOnly": true,
 					"description": "Number of not applicable resources in the control",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"disabledResources": {
-					"readOnly": true,
 					"description": "Number of not resources that are disabled by policy in the control",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"achievedPoints": {
-					"readOnly": true,
 					"description": "Number of points achieved for the controls",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				},
 				"totalPoints": {
-					"readOnly": true,
 					"description": "Total Number of points available in the control",
+					"readOnly": true,
 					"type": "integer",
 					"format": "int32"
 				}
 			}
 		},
 		"SecureScoreControlsDefinitionList": {
-			"type": "object",
 			"description": "Page of a secure score controls definition list",
+			"type": "object",
 			"properties": {
 				"value": {
 					"description": "Collection of secure score controls definition in this page",
@@ -393,15 +398,15 @@
 					}
 				},
 				"nextLink": {
+					"description": "The URI to fetch the next page.",
 					"readOnly": true,
-					"type": "string",
-					"description": "The URI to fetch the next page."
+					"type": "string"
 				}
 			}
 		},
 		"SecureScoreControlDefinitionItem": {
-			"type": "object",
 			"description": "Secure Score Control's Definition information",
+			"type": "object",
 			"properties": {
 				"properties": {
 					"x-ms-client-flatten": true,
@@ -415,35 +420,37 @@
 			]
 		},
 		"SecureScoreControlDefinitionItemProperties": {
-			"type": "object",
 			"description": "Secure Score Control Definition Properties",
+			"type": "object",
 			"properties": {
 				"displayName": {
+					"description": "User friendly display name of the control",
 					"readOnly": true,
-					"type": "string",
-					"description": "User friendly display name of the control"
+					"type": "string"
 				},
 				"description": {
+					"description": "User friendly display name of the control",
 					"readOnly": true,
 					"type": "string",
-					"description": "User friendly display name of the control",
 					"maxLength": 256
 				},
 				"maxScore": {
+					"description": "Maximum control score (0..10)",
 					"readOnly": true,
 					"type": "integer",
 					"format": "int32",
-					"description": "Maximum control score (0..10)",
 					"minimum": 0,
 					"maximum": 10,
 					"exclusiveMinimum": false
 				},
 				"source": {
 					"description": "Source object from which the control was created",
+					"readOnly": true,
 					"$ref": "#/definitions/SecureScoreControlDefinitionSource"
 				},
 				"assessmentsDefinition": {
 					"description": "array of assessments metadata ids",
+					"readOnly": true,
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/SecureScoreControlDefinitionAssessmentsId"
@@ -456,18 +463,20 @@
 			"description": "Secure Score Control Definition Properties",
 			"properties": {
 				"id": {
-					"type": "string",
-					"description": "Full assessment metadata azure ids that build the control"
+					"description": "Full assessment metadata azure ids that build the control",
+					"readOnly": true,
+					"type": "string"
 				}
 			}
 		},
 		"SecureScoreControlDefinitionSource": {
-			"type": "object",
 			"description": "representing the source of the control",
+			"readOnly": true,
+			"type": "object",
 			"properties": {
 				"sourceType": {
-					"type": "string",
 					"description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom if the assessment based on custom Azure Policy definition, CustomerManaged for customers who build their own controls",
+					"type": "string",
 					"enum": [
 						"BuiltIn",
 						"CustomPolicy",
