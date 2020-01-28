@@ -5,10 +5,10 @@
     "api-version": "2019-05-01-preview",
     "createSupportTicketParameters": {
       "properties": {
-        "serviceId": "/providers/Microsoft.Support/services/subscription_management_service_guid",
+        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
         "title": "my title",
         "description": "my description",
-        "problemClassificationId": "/providers/Microsoft.Support/services/subscription_management_service_guid/problemClassifications/subscription_management_problemClassification_guid",
+        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/sql_database_problemClassification_guid",
         "severity": "moderate",
         "contactDetails": {
           "firstName": "abc",
@@ -18,6 +18,16 @@
           "preferredTimeZone": "Pacific Standard Time",
           "preferredSupportLanguage": "en-US",
           "country": "usa"
+        },
+        "quotaTicketDetails": {
+          "quotaChangeRequestVersion": "1.0",
+          "quotaChangeRequestSubType": "DTUs",
+          "quotaChangeRequests": [
+            {
+              "region": "EastUS",
+              "payload": "{\"ServerName\":\"testserver\",\"NewLimit\":54000}"
+            }
+          ]
         }
       }
     }
@@ -37,8 +47,8 @@
         "properties": {
           "supportTicketId": "119120321001170",
           "description": "my description",
-          "problemClassificationId": "/providers/Microsoft.Support/services/subscription_management_service_guid/problemClassifications/subscription_management_problemClassification_guid",
-          "problemClassificationDisplayName": "Transfer ownership of my subscription",
+          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/sql_database_problemClassification_guid",
+          "problemClassificationDisplayName": "SQL database",
           "severity": "moderate",
           "productionOutage": false,
           "require24X7Response": false,
@@ -51,6 +61,16 @@
             "country": "usa",
             "preferredSupportLanguage": "en-US"
           },
+          "quotaTicketDetails": {
+            "quotaChangeRequestVersion": "1.0",
+            "quotaChangeRequestSubType": "DTUs",
+            "quotaChangeRequests": [
+              {
+                "region": "EastUS",
+                "payload": "{\"ServerName\":\"testserver\",\"NewLimit\":54000}"
+              }
+            ]
+          },
           "serviceLevelAgreement": {
             "startTime": "2018-03-20T21:36:18Z",
             "expirationTime": "2018-03-21T17:36:18Z",
@@ -58,8 +78,8 @@
           },
           "supportPlanType": "Premier",
           "title": "my title",
-          "serviceId": "/providers/Microsoft.Support/services/subscription_management_service_guid",
-          "serviceDisplayName": "Subscription management",
+          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
+          "serviceDisplayName": "Service and subscription limits (quotas)",
           "status": "Open",
           "createdDate": "2018-03-20T21:36:18Z",
           "modifiedDate": "2018-03-20T21:36:23Z"
