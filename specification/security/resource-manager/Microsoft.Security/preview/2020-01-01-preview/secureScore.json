@@ -166,7 +166,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/secureScoreControlsDefinition": {
+    "/providers/Microsoft.Security/secureScoreControlsDefinition": {
       "get": {
         "x-ms-examples": {
           "List secure score controls definition": {
@@ -181,9 +181,6 @@
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           }
         ],
         "responses": {
@@ -204,7 +201,46 @@
           "nextLinkName": "nextLink"
         }
       }
-    }
+	},
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsDefinition": {
+		"get": {
+		  "x-ms-examples": {
+			"List secure score controls definition": {
+			  "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_subscription_example.json"
+			}
+		  },
+		  "tags": [
+			"Secure Score Controls Definition"
+		  ],
+		  "description": "Get definition information on all secure score controls in subscription level",
+		  "operationId": "SecureScoreControlsDefinitionSubscription_List",
+		  "parameters": [
+			{
+			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+			},
+			{
+				"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+			}
+		  ],
+		  "responses": {
+			"200": {
+			  "description": "OK",
+			  "schema": {
+				"$ref": "#/definitions/SecureScoreControlsDefinitionList"
+			  }
+			},
+			"default": {
+			  "description": "Error response describing why the operation failed.",
+			  "schema": {
+				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+			  }
+			}
+		  },
+		  "x-ms-pageable": {
+			"nextLinkName": "nextLink"
+		  }
+		}
+	}
   },
   "definitions": {
     "SecureScoresList": {
