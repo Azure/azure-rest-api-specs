@@ -1300,9 +1300,18 @@
         {
           "type": "object",
           "properties": {
-            "TopicEndpoint": {
-              "description": "EventGrid Topic Endpoint",
+            "endpoint": {
+              "description": "EventGrid Endpoint",
               "type": "string"
+            },
+            "eventGridType": {
+              "description" : "Type of EventGrid endpoint",
+              "enum" : [ "Domain", "Topic"],
+              "type" : "string",
+              "x-ms-enum" : {
+                 "name" : "EventGridType",
+                 "modelAsString" : true
+              }
             },
             "accessKey1": {
               "description": "EventGrid secondary accesskey. Will be obfuscated during read",
