@@ -35,9 +35,9 @@ tag: package-2020-02-15
 
 These settings apply only when `--tag=package-2020-02-15` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-12-17'
+``` yaml $(tag) == 'package-2020-02-15'
 input-file:
-  - Microsoft.Kusto/stable/2019-12-17/kusto.json
+  - Microsoft.Kusto/stable/2020-02-15/kusto.json
 ```
 
 ### Tag: package-2019-09-07
