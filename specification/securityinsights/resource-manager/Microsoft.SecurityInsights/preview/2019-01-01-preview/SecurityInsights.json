@@ -358,7 +358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "default": {
@@ -410,13 +410,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "default": {
@@ -1153,6 +1153,454 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case relations.": {
+            "$ref": "./examples/cases/relations/GetAllCaseRelations.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets all case relations.",
+        "deprecated": true,
+        "operationId": "CaseRelations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseRelation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case relation.": {
+            "$ref": "./examples/cases/relations/GetCaseRelationByName.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets a case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case relation.": {
+            "$ref": "./examples/cases/relations/CreateCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Creates or updates the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/RelationInputModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the case relation.": {
+            "$ref": "./examples/cases/relations/DeleteCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Delete the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all bookmark relations.": {
+            "$ref": "./examples/bookmarks/relations/GetAllBookmarkRelations.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets all bookmark relations.",
+        "operationId": "BookmarkRelations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/BookmarkRelation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/GetBookmarkRelationByName.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets a bookmark relation.",
+        "operationId": "BookmarkRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/CreateBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Creates the bookmark relation.",
+        "operationId": "BookmarkRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/RelationInputModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/DeleteBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Delete the bookmark relation.",
+        "operationId": "BookmarkRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
       "get": {
         "x-ms-examples": {
@@ -1371,6 +1819,72 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorsCheckRequirements": {
+      "post": {
+        "x-ms-examples": {
+          "Check requirements for TI.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligence.json"
+          },
+          "Check requirements for AAD.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectory.json"
+          },
+          "Check requirements for AAD - no license.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoLicense.json"
+          },
+          "Check requirements for AAD - no authorization.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoAuthorization.json"
+          },
+          "Check requirements for ASC.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsAzureSecurityCenter.json"
+          },
+          "Check requirements for Mcas.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftCloudAppSecurity.json"
+          },
+          "Check requirements for Mdatp.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMdatp.json"
+          }
+        },
+        "tags": [
+          "Check Data Connector Requirements"
+        ],
+        "description": "Get requirements state for a data connector type.",
+        "operationId": "listDataConnectorRequirements",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/DataConnectorsCheckRequirementsBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorRequirementsState"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities": {
       "get": {
         "x-ms-examples": {
@@ -1466,6 +1980,9 @@
           },
           "Get a url entity.": {
             "$ref": "./examples/entities/GetUrlEntityById.json"
+          },
+          "Get an IoT device entity.": {
+            "$ref": "./examples/entities/GetIoTDeviceEntityById.json"
           }
         },
         "tags": [
@@ -1977,6 +2494,22 @@
       "description": "AAD (Azure Active Directory) data connector properties.",
       "type": "object"
     },
+    "AADCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "AAD (Azure Active Directory) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "AATPDataConnector": {
       "allOf": [
         {
@@ -2006,6 +2539,22 @@
       "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
       "type": "object"
     },
+    "AATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "ASCDataConnector": {
       "allOf": [
         {
@@ -2029,7 +2578,7 @@
           "$ref": "#/definitions/DataConnectorWithAlertsProperties"
         }
       ],
-      "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "description": "ASC (Azure Security Center) data connector properties.",
       "properties": {
         "subscriptionId": {
           "description": "The subscription id to connect to, and get the data from.",
@@ -2037,6 +2586,25 @@
         }
       },
       "type": "object"
+    },
+    "ASCCheckRequirements": {
+      "description": "ASC (Azure Security Center) requirements check properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "properties": {
+        "subscriptionId": {
+          "description": "The subscription id to connect to, and get the data from.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "AccountEntity": {
       "allOf": [
@@ -2122,7 +2690,7 @@
       },
       "type": "object"
     },
-    "Action": {
+    "ActionRequest": {
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
@@ -2131,18 +2699,68 @@
       "description": "Action for alert rule.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ActionProperties",
-          "description": "Action properties",
+          "$ref": "#/definitions/ActionRequestProperties",
+          "description": "Action properties for put request",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "ActionProperties": {
+    "ActionPropertiesBase": {
+      "description": "Action property bag base.",
+      "properties": {
+        "logicAppResourceId": {
+          "description": "Logic App Resource Id, /subscriptions/{my-subscription}/resourceGroups/{my-resource-group}/providers/Microsoft.Logic/workflows/{my-workflow-id}.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ActionRequestProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
       "description": "Action property bag.",
       "properties": {
         "triggerUri": {
-          "description": "The uri for the action to trigger.",
+          "description": "Logic App Callback URL for this specific workflow.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ActionResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Action for alert rule.",
+      "properties": {
+        "etag": {
+          "description": "Etag of the action.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ActionResponseProperties",
+          "description": "Action properties for get request",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ActionResponseProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionPropertiesBase"
+        }
+      ],
+      "description": "Action property bag.",
+      "properties": {
+        "workflowId": {
+          "description": "The name of the logic app's workflow.",
           "type": "string"
         }
       },
@@ -2159,7 +2777,7 @@
         "value": {
           "description": "Array of actions.",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/ActionResponse"
           },
           "type": "array"
         }
@@ -2179,7 +2797,10 @@
       ],
       "description": "The aggregation.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "AggregationsKind": {
       "description": "Describes an Azure resource with kind.",
@@ -2196,6 +2817,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "AlertRule": {
@@ -2209,7 +2833,10 @@
       ],
       "description": "Alert rule.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "AlertRuleKind": {
       "description": "Describes an Azure resource with kind.",
@@ -2239,6 +2866,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "AlertRuleTemplate": {
@@ -2252,7 +2882,10 @@
       ],
       "description": "Alert rule template.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "AlertRuleTemplatePropertiesBase": {
       "description": "Base alert rule template property bag.",
@@ -2488,6 +3121,19 @@
       },
       "type": "object"
     },
+    "AwsCloudTrailCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Amazon Web Services CloudTrail requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "AzureResourceEntity": {
       "allOf": [
         {
@@ -2520,6 +3166,252 @@
         }
       },
       "type": "object"
+    },
+    "RelationBase": {
+      "type": "object",
+      "description": "Represents a relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of relation node",
+              "readOnly": true,
+              "enum": [
+                "CasesToBookmarks"
+              ],
+              "x-ms-enum": {
+                "name": "RelationTypes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "CasesToBookmarks",
+                    "description": "Relations between cases and bookmarks"
+                  }
+                ]
+              }
+            },
+            "etag": {
+              "type": "string",
+              "description": "ETag for relation"
+            }
+          }
+        }
+      ]
+    },
+    "CaseRelationList": {
+      "description": "List of case relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseRelation": {
+      "type": "object",
+      "description": "Represents a case relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case relation properties",
+          "$ref": "#/definitions/CaseRelationProperties"
+        }
+      }
+    },
+    "CaseRelationProperties": {
+      "type": "object",
+      "description": "Case relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "bookmarkName": {
+          "type": "string",
+          "description": "The case related bookmark name"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "BookmarkRelationList": {
+      "description": "List of bookmark relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BookmarkRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BookmarkRelation": {
+      "type": "object",
+      "description": "Represents a bookmark relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Bookmark relation properties",
+          "$ref": "#/definitions/BookmarkRelationProperties"
+        }
+      }
+    },
+    "BookmarkRelationProperties": {
+      "type": "object",
+      "description": "Bookmark relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "caseTitle": {
+          "type": "string",
+          "description": "The case title"
+        },
+        "caseSeverity": {
+          "type": "string",
+          "description": "The case severity"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "RelationsModelInput": {
+      "type": "object",
+      "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "sourceRelationNode": {
+          "type": "object",
+          "description": "Relation source node",
+          "$ref": "#/definitions/RelationNode"
+        },
+        "targetRelationNode": {
+          "type": "object",
+          "description": "Relation target node",
+          "$ref": "#/definitions/RelationNode"
+        }
+      }
+    },
+    "RelationNode": {
+      "type": "object",
+      "description": "Relation node",
+      "properties": {
+        "relationNodeId": {
+          "type": "string",
+          "description": "Relation Node Id"
+        },
+        "relationNodeKind": {
+          "type": "string",
+          "description": "The type of relation node",
+          "readOnly": true,
+          "enum": [
+            "Case",
+            "Bookmark"
+          ],
+          "x-ms-enum": {
+            "name": "RelationNodeKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Case",
+                "description": "Case node part of the relation"
+              },
+              {
+                "value": "Bookmark",
+                "description": "Bookmark node part of the relation"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag for relation node"
+        },
+        "relationAdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional set of properties"
+        }
+      }
     },
     "Bookmark": {
       "allOf": [
@@ -2601,6 +3493,11 @@
         "updatedBy": {
           "$ref": "#/definitions/UserInfo",
           "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
           "type": "object"
         }
       },
@@ -3066,7 +3963,62 @@
       ],
       "description": "Data connector.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
+    "DataConnectorsCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorKind"
+        }
+      ],
+      "description": "Data connector requirements properties."
+    },
+    "DataConnectorAuthorizationState": {
+      "description": "Describes the state of user's authorization for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorAuthorizationState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          }
+        ]
+      }
+    },
+    "DataConnectorLicenseState": {
+      "description": "Describes the state of user's license for a connector kind.",
+      "enum": [
+        "Valid",
+        "Invalid",
+        "Unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "DataConnectorLicenseState",
+        "values": [
+          {
+            "value": "Valid"
+          },
+          {
+            "value": "Invalid"
+          },
+          {
+            "value": "Unknown"
+          }
+        ]
+      }
     },
     "DataConnectorDataTypeCommon": {
       "description": "Common field for data type in data connectors.",
@@ -3134,6 +4086,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "DataConnectorList": {
@@ -3177,6 +4132,20 @@
           },
           "description": "The data types availability map",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "DataConnectorRequirementsState": {
+      "description": "Data connector requirements status.",
+      "properties": {
+        "authorizationState": {
+          "description": "Authorization state for this connector",
+          "$ref": "#/definitions/DataConnectorAuthorizationState"
+        },
+        "licenseState": {
+          "description": "License state for this connector",
+          "$ref": "#/definitions/DataConnectorLicenseState"
         }
       },
       "type": "object"
@@ -3264,7 +4233,10 @@
       ],
       "description": "Specific entity.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "EntityCommonProperties": {
       "description": "Entity common property bag.",
@@ -3344,6 +4316,7 @@
         "RegistryValue",
         "SecurityGroup",
         "Url",
+        "IoTDevice",
         "SecurityAlert",
         "Bookmark"
       ],
@@ -3409,6 +4382,10 @@
             "value": "Url"
           },
           {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
             "description": "Entity represents security alert in the system.",
             "value": "SecurityAlert"
           },
@@ -3436,6 +4413,7 @@
         "RegistryValue",
         "SecurityGroup",
         "URL",
+        "IoTDevice",
         "SecurityAlert",
         "HuntingBookmark"
       ],
@@ -3501,6 +4479,10 @@
             "value": "URL"
           },
           {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
             "description": "Entity represents security alert in the system.",
             "value": "SecurityAlert"
           },
@@ -3519,6 +4501,9 @@
           "description": "The kind of the entity."
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "EntityList": {
@@ -4124,6 +5109,22 @@
       },
       "type": "object"
     },
+    "MCASCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
     "MDATPDataConnector": {
       "allOf": [
         {
@@ -4152,6 +5153,22 @@
       ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
       "type": "object"
+    },
+    "MDATPCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "MalwareEntity": {
       "allOf": [
@@ -4242,7 +5259,8 @@
             "Microsoft Cloud App Security",
             "Azure Security Center",
             "Azure Advanced Threat Protection",
-            "Azure Active Directory Identity Protection"
+            "Azure Active Directory Identity Protection",
+            "Azure Security Center for IoT"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -4807,18 +5825,29 @@
       "x-ms-azure-resource": true
     },
     "ResourceWithEtag": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "description": "An azure resource object with an Etag property",
       "properties": {
+        "id": {
+          "description": "Azure resource Id",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Azure resource name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Azure resource type",
+          "readOnly": true,
+          "type": "string"
+        },
         "etag": {
           "description": "Etag of the azure resource",
           "type": "string"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ScheduledAlertRule": {
       "allOf": [
@@ -5339,7 +6368,10 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-      "type": "object"
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "SettingsKind": {
       "description": "Describes an Azure resource with kind.",
@@ -5357,6 +6389,9 @@
           }
         }
       },
+      "required": [
+        "kind"
+      ],
       "type": "object"
     },
     "TIDataConnector": {
@@ -5405,6 +6440,22 @@
         }
       },
       "type": "object"
+    },
+    "TICheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "TI (Threat Intelligence) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
     },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
@@ -5556,6 +6607,78 @@
       },
       "type": "object"
     },
+    "IoTDeviceEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an IoT device entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IoTDeviceEntityProperties",
+          "description": "IoTDevice entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "IoTDevice"
+    },
+    "IoTDeviceEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "IoTDevice entity property bag.",
+      "properties": {
+        "deviceId": {
+          "description": "The ID of the IoT Device in the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotSecurityAgentId": {
+          "description": "The ID of the security agent running on the device",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "deviceType": {
+          "description": "The type of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendor": {
+          "description": "The vendor of the device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "edgeId": {
+          "description": "The ID of the edge device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "iotHubEntityId": {
+          "description": "The AzureResource entity id of the IoT Hub",
+          "readOnly": true,
+          "type": "string"
+        },
+        "hostEntityId": {
+          "description": "The Host entity id of this device",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatIntelligence": {
+          "description": "A list of TI contexts attached to the IoTDevice entity.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "UserInfo": {
       "description": "User information that made some action",
       "properties": {
@@ -5576,8 +6699,66 @@
           "x-nullable": true
         }
       },
+      "type": "object"
+    },
+    "IncidentInfo": {
+      "description": "Describes related incident information for the bookmark",
+      "properties": {
+        "incidentId": {
+          "description": "Incident Id",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentSeverity",
+            "values": [
+              {
+                "description": "Critical severity",
+                "value": "Critical"
+              },
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        },
+        "relationName": {
+          "description": "Relation Name",
+          "type": "string"
+        }
+      },
       "required": [
-        "objectId"
+        "incidentId",
+        "severity",
+        "title",
+        "relationName"
       ],
       "type": "object"
     }
@@ -5589,7 +6770,7 @@
       "name": "action",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/Action"
+        "$ref": "#/definitions/ActionRequest"
       },
       "x-ms-parameter-location": "method"
     },
@@ -5644,6 +6825,24 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Bookmark"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
       },
       "x-ms-parameter-location": "method"
     },
@@ -5715,6 +6914,16 @@
       "name": "dataConnectorId",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataConnectorsCheckRequirementsBody": {
+      "description": "The parameters for requirements check message",
+      "in": "body",
+      "name": "DataConnectorsCheckRequirements",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/DataConnectorsCheckRequirements"
+      },
       "x-ms-parameter-location": "method"
     },
     "EntityExpandRequestBody": {

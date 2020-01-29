@@ -48,6 +48,14 @@ input-file:
 - Microsoft.Search/stable/2015-02-28/search.json
 ```
 
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Search/preview/2019-10-01-preview/search.json
+```
+
 
 ---
 # Code Generation
@@ -119,8 +127,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2015-02' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_02_28
-  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_02_28
+  namespace: com.microsoft.azure.management.search.v2015_02_28
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-v2015_02_28
 regenerate-manager: true
 generate-interface: true
 ```
@@ -132,8 +140,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.searchmanagementclient.v2015_08_19
-  output-folder: $(azure-libraries-for-java-folder)/searchmanagementclient/resource-manager/v2015_08_19
+  namespace: com.microsoft.azure.management.search.v2015_08_19
+  output-folder: $(azure-libraries-for-java-folder)/sdk/search/mgmt-resource-manager/v2015_08_19
 regenerate-manager: true
 generate-interface: true
 ```
@@ -154,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
+  - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
 
 ```
 
