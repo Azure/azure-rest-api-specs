@@ -4058,7 +4058,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_PatchTagsOnObject",
+        "operationId": "Tags_UpdateTagsOnObject",
         "summary": "Selectively updates the set of tags on an object.",
         "description": "This operation allows replacing, merging or selectively deleting tags on the specified object. The object can be a resource or a subscription. An object can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
@@ -5559,7 +5559,8 @@
           "$ref": "#/definitions/Tags",
           "description": "The set of tags."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
