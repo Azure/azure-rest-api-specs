@@ -5833,6 +5833,11 @@
           "description": "The date this billing instruction is no longer in effect.",
           "type": "string",
           "format": "date-time"
+        },
+        "creationDate": {
+          "description": "The date this billing instruction was created.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -6281,10 +6286,9 @@
           "description": "Invoice status.",
           "type": "string",
           "enum": [
-            "PastDue",
             "Due",
-            "Paid",
-            "Void"
+            "OverDue",
+            "Paid"
           ],
           "readOnly": true,
           "x-ms-enum": {
@@ -6357,6 +6361,11 @@
           "items": {
             "$ref": "#/definitions/PaymentProperties"
           }
+        },
+        "subscriptionId": {
+          "description": "The subscription id this invoice belongs to.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -6409,7 +6418,7 @@
           "enum": [
             "Invoice",
             "VoidNote",
-            "Receipt",
+            "TaxReceipt",
             "CreditNote"
           ],
           "readOnly": true,
