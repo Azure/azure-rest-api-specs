@@ -101,6 +101,52 @@
             "$ref": "./examples/Common/BackupResourceVaultConfigs_Patch.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "BackupResourceVaultConfigs"
+        ],
+        "description": "Updates vault security config.",
+        "operationId": "BackupResourceVaultConfigs_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource config request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupResourceVaultConfigResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Vault Security Config": {
+            "$ref": "./examples/Common/BackupResourceVaultConfigs_Put.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
