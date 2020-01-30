@@ -2605,14 +2605,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querytriggers": {
       "post": {
         "tags": [
           "triggers"
         ],
         "operationId": "Triggers_QueryByFactory",
         "x-ms-examples": {
-          "Triggers_ListByFactory": {
+          "Triggers_QueryByFactory": {
             "$ref": "./examples/Triggers_QueryByFactory.json"
           }
         },
@@ -2644,7 +2644,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/TriggerListResponse"
+              "$ref": "#/definitions/TriggerQueryResponse"
             }
           },
           "default": {
@@ -2653,9 +2653,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3391,6 +3388,26 @@
         }
       }
     },
+    "TriggerQueryResponse": {
+      "description": "A query of triggers.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of triggers.",
+          "items": {
+            "$ref": "#/definitions/TriggerResource"
+          }
+        },
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results, if any remaining results exist, null otherwise.",
+          "type": "string"
+        }
+      }
+    },
     "TriggerListResponse": {
       "description": "A list of trigger resources.",
       "type": "object",
@@ -3960,6 +3977,20 @@
       "required": [
         "properties"
       ]
+    },
+    "TriggerFilterParameters": {
+      "description": "Query parameters for triggers.",
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "description": "The continuation token for getting the next page of results. Null for first page.",
+          "type": "string"
+        },
+        "parentTriggerName": {
+          "description": "The name of the parent TumblingWindowTrigger to get the child rerun triggers",
+          "type": "string"
+        }
+      }
     },
     "RunFilterParameters": {
       "description": "Query parameters for listing runs.",
