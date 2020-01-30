@@ -16,6 +16,64 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/managedDatabaseRestoreAzureAsyncOperation/{operationId}/completeRestore": {
+      "post": {
+        "tags": [
+          "ManagedDatabases"
+        ],
+        "description": "Completes the restore operation on a managed database.",
+        "operationId": "ManagedDatabases_CompleteRestore",
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Management operation id that this request tries to complete.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The definition for completing the restore of this managed database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CompleteDatabaseRestoreDefinition"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully issued complete restore request."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidDatabaseCompleteRestoreRequest - The complete database restore request is invalid\n\n * 400 InvalidDatabaseCompleteRestoreRequestLastBackupName - The last backup name is invalid\n\n * 400 InvalidIdentifier - The identifier contains NULL or an invalid unicode character.\n\n * 400 SourceDatabaseNotFound - The source database does not exist.\n\n * 400 TokenTooLong - The provided token is too long.\n\n * 400 UnsupportedServiceName - The specified name is an invalid name because it contains one or more unsupported unicode characters.\n\n * 400 RequiredBackupIsNotLastRestored - Migration cannot be completed because provided backup file name is not the name of the last backup file that is restored.\n\n * 400 IncompatiblePhysicalLayoutTooFewDataFiles - Database backup contains incompatible physical layout. No data files are found in the backup.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineDataFilesExist - Database backup contains incompatible physical layout. Non-online data files exist.\n\n * 400 IncompatiblePhysicalLayoutWrongNumberOfLogFiles - Database backup contains incompatible physical layout. Multiple log files are not supported.\n\n * 400 IncompatiblePhysicalLayoutNonOnlineLogFilesExist - Database backup contains incompatible physical layout. Non-online log files exist.\n\n * 400 IncompatiblePhysicalLayoutTooManyNonDataLogFiles - Database backup contains incompatible physical layout. Too many non-data/log files.\n\n * 400 BackupSetNotFound - \"No backups were found to restore the database. Please contact support to restore the database.\n\n * 400 FullBackupNotFound - Full backup can not be found.\n\n * 400 RestoreFromStripedBackupsNotEnabled - Restoring from striped backups is not supported.\n\n * 400 BrokenRestorePlanNoFullBackup - The restore plan is broken because there is no full backup.\n\n * 400 BrokenRestorePlanWrongLogBackupLSN - The restore plan is broken because firstLsn of current log backup is not <= lastLsn of next log backup.\n\n * 400 BrokenRestorePlanWrongDiffBackupLSN - The restore plan is broken because firstLsn of diff backup is not >= firstLsn of full backup.\n\n * 400 BrokenRestorePlanGapInLogBackups - The restore plan is broken because firstLsn of current log backup is not equal to lastLsn of prev log backup.\n\n * 400 ManagedInstanceStorageLimitHit - The managed instance has reached its storage limit."
+          },
+          "202": {
+            "description": "Completing migration is in progress."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Completes a managed database restore": {
+            "$ref": "./examples/CompleteManagedRestore.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases": {
       "get": {
         "tags": [
@@ -276,6 +334,19 @@
     }
   },
   "definitions": {
+    "CompleteDatabaseRestoreDefinition": {
+      "description": "Contains the information necessary to perform a complete database restore operation.",
+      "required": [
+        "lastBackupName"
+      ],
+      "type": "object",
+      "properties": {
+        "lastBackupName": {
+          "description": "The last backup name to apply",
+          "type": "string"
+        }
+      }
+    },
     "ManagedDatabaseListResult": {
       "description": "A list of managed databases.",
       "type": "object",
