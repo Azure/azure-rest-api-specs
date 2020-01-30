@@ -6940,7 +6940,7 @@
           "readOnly": true
         },
         "azureCreditApplied": {
-          "description": "The amount of azure credits that are automatically applied to this transaction.",
+          "description": "The amount of any Azure credits automatically applied to this transaction.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -6950,7 +6950,7 @@
           "readOnly": true
         },
         "discount": {
-          "description": "The percentage of discount (if any) applied to this transaction.",
+          "description": "The percentage discount, if any, applied to this transaction.",
           "type": "number",
           "readOnly": true
         },
@@ -6960,12 +6960,12 @@
           "$ref": "#/definitions/Amount"
         },
         "exchangeRate": {
-          "description": "The exchange rate used to convert the amounts in billing currency.",
+          "description": "The exchange rate used to convert charged amount to billing currency, if applicable.",
           "type": "number",
           "readOnly": true
         },
         "marketPrice": {
-          "description": "The price of the product before applying any discounts.",
+          "description": "The retail price of the product.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -6975,39 +6975,39 @@
           "readOnly": true
         },
         "servicePeriodStartDate": {
-          "description": "The service period start date.",
+          "description": "The date of the purchase of the product, or the start date of the month in which usage started.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "servicePeriodEndDate": {
-          "description": "The service period end date.",
+          "description": "The end date of the product term, or the end date of the month in which usage ended.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "subTotal": {
-          "description": "The pre-tax amount for the transaction.",
+          "description": "The pre-tax charged amount for the transaction.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "tax": {
-          "description": "The tax applied to the transaction.",
+          "description": "The tax amount applied to the transaction.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "unitOfMeasure": {
-          "description": "The unit of measure used to bill for the service. For example, compute services are billed per hour.",
+          "description": "The unit of measure used to bill for the product. For example, compute services are billed per hour.",
           "type": "string",
           "readOnly": true
         },
         "units": {
-          "description": "The number of units used.",
+          "description": "The number of units used for a given product.",
           "type": "number",
           "readOnly": true
         },
         "unitType": {
-          "description": "The description for the unit of measure.",
+          "description": "The description for the unit of measure for a given product.",
           "type": "string",
           "readOnly": true
         }
