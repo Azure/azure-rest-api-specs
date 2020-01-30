@@ -34,6 +34,7 @@ These settings apply only when `--tag=package-2019-09 --python` is specified on 
 python:
   namespace: azure.mgmt.keyvault.v2019_09_01
   output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2019_09_01
+```
 
 ### Tag: package-2018-02 and python
 
