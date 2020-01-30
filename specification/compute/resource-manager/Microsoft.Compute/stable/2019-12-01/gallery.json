@@ -2188,7 +2188,7 @@
           "$ref": "#/definitions/DiskImageEncryption"
         }
       ],
-      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact. The encryption type specified in this parent object is used as the default for all contained disks."
+      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact. Users can also specify a default disk encryption set ID to use for all disks."
     },
     "OSDiskImageEncryption": {
       "allOf": [
@@ -2218,31 +2218,9 @@
     },
     "DiskImageEncryption": {
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The encryption type to use to encrypt the gallery disk.",
-          "enum": [
-            "EncryptionAtRestWithPlatformKey",
-            "EncryptionAtRestWithCustomerKey"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "EncryptionAtRestWithPlatformKey",
-                "description": "Disk is encrypted with a platform managed key at rest. It is the default encryption type."
-              },
-              {
-                "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted with a customer managed key at rest."
-              }
-            ]
-          }
-        },
         "diskEncryptionSetId": {
           "type": "string",
-          "description": "A relative URI containing the resource ID of the disk encryption set. Can only be specified if encryption type is EncryptionAtRestWithCustomerKey."
+          "description": "A relative URI containing the resource ID of the disk encryption set."
         }
       },
       "description": "This is the disk image encryption base class."
