@@ -61,6 +61,7 @@ input-file:
   - Microsoft.Network/stable/2019-12-01/networkInterface.json
   - Microsoft.Network/stable/2019-12-01/networkProfile.json
   - Microsoft.Network/stable/2019-12-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-11-01/networkVirtualAppliance.json
   - Microsoft.Network/stable/2019-12-01/networkWatcher.json
   - Microsoft.Network/stable/2019-12-01/operation.json
   - Microsoft.Network/stable/2019-12-01/privateEndpoint.json
@@ -1245,6 +1246,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkSecurityGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkVirtualAppliance.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkWatcher.json
