@@ -179,6 +179,17 @@
       "maximum": 100,
       "x-ms-parameter-location": "method"
     },
+    "Offset": {
+      "name": "ofs",
+      "in": "query",
+      "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
+      "required": false,
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 1900,
+      "x-ms-parameter-location": "method"
+    },
     "OptionalBiasLat": {
       "name": "lat",
       "in": "query",
@@ -572,14 +583,7 @@
             "$ref": "#/parameters/Limit"
           },
           {
-            "name": "ofs",
-            "in": "query",
-            "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
-            "required": false,
-            "type": "integer",
-            "default": 0,
-            "minimum": 0,
-            "maximum": 1900
+            "$ref": "#/parameters/Offset"
           },
           {
             "$ref": "#/parameters/CountrySet"
@@ -704,14 +708,7 @@
             "$ref": "#/parameters/Limit"
           },
           {
-            "name": "ofs",
-            "in": "query",
-            "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
-            "required": false,
-            "type": "integer",
-            "default": 0,
-            "minimum": 0,
-            "maximum": 1900
+            "$ref": "#/parameters/Offset"
           },
           {
             "$ref": "#/parameters/CountrySet"
@@ -808,14 +805,7 @@
             "$ref": "#/parameters/Limit"
           },
           {
-            "name": "ofs",
-            "in": "query",
-            "description": "Starting offset of returned results. Max value is 1900.",
-            "required": false,
-            "type": "integer",
-            "default": 0,
-            "minimum": 0,
-            "maximum": 1900
+            "$ref": "#/parameters/Offset"
           },
           {
             "$ref": "#/parameters/CountrySet"
@@ -904,6 +894,9 @@
           },
           {
             "$ref": "#/parameters/Limit"
+          },
+          {
+            "$ref": "#/parameters/Offset"
           },
           {
             "$ref": "#/parameters/CountrySet"
@@ -1005,13 +998,7 @@
             "$ref": "#/parameters/Limit"
           },
           {
-            "name": "ofs",
-            "in": "query",
-            "description": "Starting offset of the returned results within the full result set.",
-            "required": false,
-            "type": "integer",
-            "minimum": 0,
-            "default": 0
+            "$ref": "#/parameters/Offset"
           },
           {
             "$ref": "#/parameters/CountrySet"
@@ -1263,6 +1250,9 @@
             "$ref": "#/parameters/Position"
           },
           {
+            "$ref": "#/parameters/Limit"
+          },
+          {
             "name": "heading",
             "in": "query",
             "description": "The directional heading of the vehicle in degrees, for travel along a segment of roadway. 0 is North, 90 is East and so on, values range from -360 to 360. The precision can include upto one decimal place",
@@ -1341,20 +1331,10 @@
             "type": "string"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "description": "Maximum number of responses that will be returned",
-            "required": false,
-            "type": "integer",
-            "default": 10
+            "$ref": "#/parameters/Limit"
           },
           {
-            "name": "ofs",
-            "in": "query",
-            "description": "Starting offset of the returned results within the full result set",
-            "required": false,
-            "type": "integer",
-            "default": 0
+            "$ref": "#/parameters/Offset"
           },
           {
             "name": "streetNumber",
