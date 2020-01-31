@@ -5556,16 +5556,27 @@
         "properties"
       ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the tags wrapper resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the tags wrapper resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the tags wrapper resource."
+        },
         "properties": {
           "$ref": "#/definitions/Tags",
           "description": "tags property."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
