@@ -21,8 +21,19 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-09
   - tag: package-2018-02
   - tag: package-2016-10
+```
+
+### Tag: package-2019-09 and python
+
+These settings apply only when `--tag=package-2019-09 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09' && $(python)
+python:
+  namespace: azure.mgmt.keyvault.v2019_09_01
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2019_09_01
 ```
 
 ### Tag: package-2018-02 and python
