@@ -359,6 +359,7 @@
         "type": {
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
           "enum": [
+            "None",
             "SystemAssigned"
           ],
           "type": "string",
@@ -471,8 +472,19 @@
         },
         "provisioningState": {
           "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -495,7 +507,17 @@
       "properties": {
         "status": {
           "description": "The private link service connection status.",
-          "type": "string"
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
         },
         "description": {
           "description": "The private link service connection description.",
@@ -503,8 +525,15 @@
         },
         "actionsRequired": {
           "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
         }
       }
     },
