@@ -1,0 +1,206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerServiceClient",
+    "description": "The Container Service Client.",
+    "version": "2019-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/orchestrators": {
+      "get": {
+        "tags": [
+          "ContainerServices"
+        ],
+        "operationId": "ContainerServices_ListOrchestrators",
+        "summary": "Gets a list of supported orchestrators in the specified subscription.",
+        "description": "Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including version, available upgrades and whether that version or upgrades are in preview.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OrchestratorVersionProfileListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Container Service Orchestrators": {
+            "$ref": "./examples/ContainerServiceListOrchestrators.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OrchestratorProfile": {
+      "properties": {
+        "orchestratorType": {
+          "type": "string",
+          "description": "Orchestrator type."
+        },
+        "orchestratorVersion": {
+          "type": "string",
+          "description": "Orchestrator version (major, minor, patch)."
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Whether Kubernetes version is currently in preview."
+        }
+      },
+      "required": [
+        "orchestratorVersion"
+      ],
+      "description": "Contains information about orchestrator."
+    },
+    "OrchestratorVersionProfile": {
+      "properties": {
+        "orchestratorType": {
+          "type": "string",
+          "description": "Orchestrator type."
+        },
+        "orchestratorVersion": {
+          "type": "string",
+          "description": "Orchestrator version (major, minor, patch)."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Installed by default if version is not specified."
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Whether Kubernetes version is currently in preview."
+        },
+        "upgrades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrchestratorProfile"
+          },
+          "description": "The list of available upgrade versions."
+        }
+      },
+      "required": [
+        "orchestratorVersion",
+        "orchestratorType"
+      ],
+      "description": "The profile of an orchestrator and its available versions."
+    },
+    "OrchestratorVersionProfileProperties": {
+      "properties": {
+        "orchestrators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrchestratorVersionProfile"
+          },
+          "description": "List of orchestrator version profiles."
+        }
+      },
+      "required": [
+        "orchestrators"
+      ],
+      "description": "The properties of an orchestrator version profile."
+    },
+    "OrchestratorVersionProfileListResult": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the orchestrator version profile list result."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the orchestrator version profile list result."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the orchestrator version profile list result."
+        },
+        "properties": {
+          "$ref": "#/definitions/OrchestratorVersionProfileProperties",
+          "description": "The properties of an orchestrator version profile.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The list of versions for supported orchestrators."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
+    },
+    "LocationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of a supported Azure region.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceTypeParameter": {
+      "name": "resource-type",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "resource type for which the list of orchestrators needs to be returned",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

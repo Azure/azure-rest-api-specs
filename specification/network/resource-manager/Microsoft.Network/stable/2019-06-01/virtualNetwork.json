@@ -593,6 +593,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/UnprepareNetworkPolicies": {
+      "post": {
+        "operationId": "Subnets_UnprepareNetworkPolicies",
+        "description": "Unprepares a subnet by removing network intent policies.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "name": "unprepareNetworkPoliciesRequestParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnprepareNetworkPoliciesRequest"
+            },
+            "description": "Parameters supplied to unprepare subnet to remove network intent policies."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unpreparing subnet by removing network intent policies is successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Unprepare Network Policies": {
+            "$ref": "./examples/SubnetUnprepareNetworkPolicies.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ResourceNavigationLinks": {
       "get": {
         "operationId": "ResourceNavigationLinks_List",
@@ -1691,6 +1752,15 @@
         }
       },
       "description": "Details of PrepareNetworkPolicies for Subnet."
+    },
+    "UnprepareNetworkPoliciesRequest": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service for which subnet is being unprepared for."
+        }
+      },
+      "description": "Details of UnprepareNetworkPolicies for Subnet."
     },
     "NetworkIntentPolicyConfiguration": {
       "properties": {

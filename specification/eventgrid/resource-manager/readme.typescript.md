@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-eventgrid"
   output-folder: "$(typescript-sdks-folder)/sdk/eventgrid/arm-eventgrid"
+  clear-output-folder: true
   generate-metadata: true
 ```

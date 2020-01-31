@@ -44,9 +44,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "responses": {
           "200": {
             "description": "List all the operations.",
@@ -235,9 +232,6 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -277,10 +271,6 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": null,
-          "itemName": "keys"
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -433,6 +423,10 @@
         "attestationPolicy": {
           "type": "string",
           "description": "Name of attestation policy."
+        },
+        "policySigningCertificates": {
+          "description": "JSON Web Key Set defining a set of X.509 Certificates that will represent the parent certificate for the signing certificate used for policy operations",
+          "$ref": "../../../../../common-types/rfcs/rfc7517.json#/definitions/JSONWebKeySet"
         }
       }
     }
