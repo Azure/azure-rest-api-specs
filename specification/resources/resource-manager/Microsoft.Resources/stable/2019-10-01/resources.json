@@ -4012,9 +4012,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_CreateOrUpdateTagsOnObject",
-        "summary": "Creates or updates the entire set of tags on an object.",
-        "description": "This operation allows adding or replacing the entire set of tags on the specified object. The object can be a resource or a subscription. An object can have a maximum of 50 tags.",
+        "operationId": "Tags_CreateOrUpdateAtScope",
+        "summary": "Creates or updates the entire set of tags on a resource or subscription.",
+        "description": "This operation allows adding or replacing the entire set of tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4058,9 +4058,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_UpdateTagsOnObject",
-        "summary": "Selectively updates the set of tags on an object.",
-        "description": "This operation allows replacing, merging or selectively deleting tags on the specified object. The object can be a resource or a subscription. An object can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
+        "operationId": "Tags_UpdateAtScope",
+        "summary": "Selectively updates the set of tags on a resource or subscription.",
+        "description": "This operation allows replacing, merging or selectively deleting tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4096,9 +4096,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_GetTagsOnObject",
-        "summary": "Gets the entire set of tags on an object.",
-        "description": "This operation allows retrieving all tags on the specified object. The object can be a resource or a subscription.",
+        "operationId": "Tags_GetAtScope",
+        "summary": "Gets the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4134,9 +4133,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_DeleteTagsOnObject",
-        "summary": "Deletes the entire set of tags on an object.",
-        "description": "This operation allows deleting all tags on the specified object. The object can be a resource or a subscription.",
+        "operationId": "Tags_DeleteAtScope",
+        "summary": "Deletes the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
