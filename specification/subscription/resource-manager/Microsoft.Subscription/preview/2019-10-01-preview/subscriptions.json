@@ -794,11 +794,8 @@
           "type": "string"
         },
         "additionalParameters": {
-          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "description": "Additional, untyped parameters to support internal subscription creation scenarios.",
+          "$ref": "#/definitions/AdditionalInternalProperties"
         },
         "state": {
           "type": "string",
@@ -896,6 +893,27 @@
         }
       },
       "description": "Subscription policies."
+    },
+    "AdditionalInternalProperties": {
+      "description": "Information about a tenant managing the subscription.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the subscription (ex:- AME tenant for internal subs). This is a GUID."
+        },
+        "pcCode": {
+          "type": "string",
+          "description": "PcCode for the internal subscriptions"
+        },
+        "costCategory": {
+          "type": "string",
+          "description": "cost Category of the internal subscriptions"
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Service tree id of team."
+        }
+      }
     },
     "ManagedByTenant": {
       "properties": {
