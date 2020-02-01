@@ -1658,6 +1658,9 @@
           "Get a TI data connector.": {
             "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
           },
+          "Get a TI Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/GetThreatIntelligenceTaxiiById.json"
+          },
           "Get a MCAS data connector.": {
             "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
           },
@@ -1824,6 +1827,9 @@
         "x-ms-examples": {
           "Check requirements for TI.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligence.json"
+          },
+          "Check requirements for TI Taxii.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligenceTaxii.json"
           },
           "Check requirements for AAD.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectory.json"
@@ -4784,6 +4790,7 @@
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
+            "ThreatIntelligenceTaxii",
             "Office365",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
@@ -4805,6 +4812,9 @@
               },
               {
                 "value": "ThreatIntelligence"
+              },
+              {
+                "value": "ThreatIntelligenceTaxii"
               },
               {
                 "value": "Office365"
@@ -7586,6 +7596,93 @@
         }
       ],
       "description": "TI (Threat Intelligence) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TiTaxiiDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents threat intelligence taxii data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
+          "description": "Threat intelligence taxii client data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiDataConnectorDataTypes": {
+      "description": "The available data types for Threat Intelligence taxii client data connector.",
+      "properties": {
+        "taxiiClient": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for taxii client.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TiTaxiiDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Threat Intelligence taxii client data connector properties.",
+      "properties": {
+        "workspaceId": {
+          "description": "The workspace id.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for taxii client connector.",
+          "type": "string"
+        },
+        "taxiiServer": {
+          "description": "The API root server for taxii client.",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "The taxii collection id.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The taxii server user name.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The taxii server password.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "TiTaxiiCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
       "type": "object",
       "discriminator": "kind",
       "required": [
