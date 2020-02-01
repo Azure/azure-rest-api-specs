@@ -626,8 +626,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Entity exists"
+          "200": {
+            "description": "Specified Gateway entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -887,8 +893,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Entity exists"
+          "200": {
+            "description": "Specified Gateway entity exists and current entity state version is present in the ETag header.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -931,10 +943,16 @@
         ],
         "responses": {
           "201": {
-            "description": "The API was successfully added to the Gateway."
+            "description": "The API was successfully added to the Gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ApiContract"
+            }
           },
           "200": {
-            "description": "The specified API is already added to the Gateway."
+            "description": "The specified API is already added to the Gateway.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ApiContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
