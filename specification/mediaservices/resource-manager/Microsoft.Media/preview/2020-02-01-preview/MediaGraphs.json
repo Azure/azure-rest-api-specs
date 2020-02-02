@@ -258,7 +258,6 @@
       "type": "object",
       "required": [
         "@odata.type",
-        "credentials",
         "url"
       ],
       "description": "Base class for endpoints"
@@ -783,14 +782,11 @@
         "description": "Get the operation result of a Media Graph in the Media Services account.",
         "operationId": "OperationResults_Get",
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MediaGraphOperationResult"
-            }
-          },
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
           },
           "default": {
             "description": "Detailed error information.",
