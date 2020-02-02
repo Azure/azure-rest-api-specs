@@ -466,6 +466,253 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas/{privateAtlasName}": {
+      "put": {
+        "description": "Create or update a Private Atlas resource. Private Atlas resource will enable the usage of Azure resources to build a custom set of mapping data. It requires an account to exist before it can be created.",
+        "operationId": "PrivateAtlas_CreateOrUpdate",
+        "x-ms-examples": {
+          "CreateAccount": {
+            "$ref": "./examples/CreatePrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          },
+          {
+            "name": "PrivateAtlasCreateParameters",
+            "in": "body",
+            "description": "The new or updated parameters for the Private Atlas resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "201": {
+            "description": "The Private Atlas was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "202": {
+            "description": "The Private Atlas was accepted for creation",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates the Private Atlas resource. Only a subset of the parameters may be updated after creation, such as Tags.",
+        "operationId": "PrivateAtlas_Update",
+        "x-ms-examples": {
+          "UpdateAccount": {
+            "$ref": "./examples/UpdatePrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          },
+          {
+            "name": "PrivateAtlasUpdateParameters",
+            "in": "body",
+            "description": "The updated parameters for the Private Atlas.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "202": {
+            "description": "The Private Atlas was accepted for update",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "404": {
+            "description": "The specified Private Atlas was not found. Nothing was updated."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a Maps Account.",
+        "operationId": "PrivateAtlas_Delete",
+        "x-ms-examples": {
+          "DeleteAccount": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was deleted successfully."
+          },
+          "204": {
+            "description": "The specified Private Atlas was not found. Nothing was deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a Private Atlas resource.",
+        "operationId": "PrivateAtlas_Get",
+        "x-ms-examples": {
+          "GetAccount": {
+            "$ref": "./examples/GetPrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "404": {
+            "description": "The specified Account does not exist."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas": {
+    "get": {
+      "description": "Get all Private Atlas instances for an Azure Map Account",
+      "operationId": "PrivateAtlas_ListByAccount",
+      "x-ms-examples": {
+        "ListPrivateAtlasByAccount": {
+          "$ref": "./examples/ListPrivateAtlasByAccount.json"
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": null,
+        "itemName": "value"
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/AccountNameParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "The request was successful.",
+          "schema": {
+            "$ref": "#/definitions/PrivateAtlasList"
+          }
+        },
+        "default": {
+          "description": "An unexpected error occurred.",
+          "schema": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -495,6 +742,14 @@
       "name": "accountName",
       "in": "path",
       "description": "The name of the Maps Account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateAtlasNameParameter": {
+      "name": "privateAtlasName",
+      "in": "path",
+      "description": "The name of the Private Atlas instance.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -553,12 +808,12 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The fully qualified Maps Account resource identifier."
+          "description": "The fully qualified resource identifier."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the Maps Account, which is unique within a Resource Group."
+          "description": "The name of the Maps resource, which is unique within a Resource Group."
         },
         "type": {
           "readOnly": true,
@@ -567,6 +822,34 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "PrivateAtlas": {
+      "description": "An Azure resource which represents which will provision the ability to create private location data.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "properties": {
+          "description": "The Private Atlas resource properties.",
+          "$ref": "#/definitions/PrivateAtlasProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "MapsAccount": {
       "description": "An Azure resource which represents access to a suite of Maps REST APIs.",
@@ -627,6 +910,26 @@
         "sku"
       ]
     },
+    "PrivateAtlasCreateParameters": {
+      "description": "Parameters used to create a new Private Atlas resource.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "MapsAccountUpdateParameters": {
       "description": "Parameters used to update an existing Maps Account.",
       "type": "object",
@@ -644,6 +947,19 @@
         }
       }
     },
+    "PrivateAtlasUpdateParameters": {
+      "description": "Parameters used to update an existing Private Atlas resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        }
+      }
+    },
     "MapsAccounts": {
       "description": "A list of Maps Accounts.",
       "type": "object",
@@ -654,6 +970,20 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/MapsAccount"
+          }
+        }
+      }
+    },
+    "PrivateAtlasList": {
+      "description": "A list of Private Atlas resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "a Private Atlas.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateAtlas"
           }
         }
       }
@@ -797,6 +1127,15 @@
           "description": "A unique identifier for the maps account",
           "type": "string"
         }
+      }
+    }
+  },
+  "PrivateAtlasProperties": {
+    "description": "Private Atlas resource properties",
+    "properties": {
+      "provisioningState": {
+        "description": "The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled",
+        "type": "string"
       }
     }
   }
