@@ -1,0 +1,423 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Private Link Scopes",
+    "description": "Azure Monitor API reference for Private Links Scopes management.",
+    "version": "2019-10-17-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/privateLinkScopes": {
+      "get": {
+        "description": "Gets a list of all Log Analytics PrivateLinkScopes within a subscription.",
+        "operationId": "PrivateLinkScopes_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "A list containing 0 or more Log Analytics PrivateLinkScope definitions.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesList.json": {
+            "$ref": "./examples/PrivateLinkScopesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/privateLinkScopes": {
+      "get": {
+        "description": "Gets a list of Log Analytics PrivateLinkScopes within a resource group.",
+        "operationId": "PrivateLinkScopes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "A list containing 0 or more Log Analytics PrivateLinkScope definitions.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeListByResourceGroup": {
+            "$ref": "./examples/PrivateLinkScopesListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/privateLinkScopes/{scopeName}": {
+      "delete": {
+        "description": "Deletes a Log Analytics PrivateLinkScope.",
+        "operationId": "PrivateLinkScopes_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request when deleting a Log Analytics PrivateLinkScope."
+          },
+          "204": {
+            "description": "The specified PrivateLinkScope does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesDelete": {
+            "$ref": "./examples/PrivateLinkScopesDelete.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Returns a Log Analytics PrivateLinkScope.",
+        "operationId": "PrivateLinkScopes_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An Log Analytics PrivateLinkScope definition.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeGet": {
+            "$ref": "./examples/PrivateLinkScopesGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates (or updates) a Log Analytics PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
+        "operationId": "PrivateLinkScopes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "LogAnalyticsPrivateLinkScopePayload",
+            "description": "Properties that need to be specified to create or update a Log Analytics PrivateLinkScope.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request when creating or updating a Log Analytics PrivateLinkScope. The updated PrivateLinkScope is returned.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeCreate": {
+            "$ref": "./examples/PrivateLinkScopesCreate.json"
+          },
+          "PrivateLinkScopeUpdate": {
+            "$ref": "./examples/PrivateLinkScopesUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.",
+        "operationId": "PrivateLinkScopes_UpdateTags",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "PrivateLinkScopeTags",
+            "description": "Updated tag information to set into the PrivateLinkScope instance.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Updating the Log Analytics PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
+            "schema": {
+              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopeUpdateTagsOnly": {
+            "$ref": "./examples/PrivateLinkScopesUpdateTagsOnly.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describe the format of an Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkScopesResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
+    },
+    "LogAnalyticsPrivateLinkScope": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties that define a Log Analytics PrivateLinkScope resource.",
+          "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrivateLinkScopesResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "An Log Analytics PrivateLinkScope definition."
+    },
+    "LogAnalyticsPrivateLinkScopeProperties": {
+      "description": "Properties that define a Log Analytics PrivateLinkScope resource.",
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "description": "The unique ID of your application. This field cannot be changed.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Log Analytics PrivateLinkScope, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "timeModified": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last modified date of the Log Analytics PrivateLinkScope, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Deploying, Canceled, Ready and Failed.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogAnalyticsPrivateLinkScopeListResult": {
+      "description": "Describes the list of Log Analytics PrivateLinkScope resources.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Log Analytics PrivateLinkScope definitions.",
+          "items": {
+            "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to get the next set of Log Analytics PrivateLinkScope definitions if too many PrivateLinkScopes where returned in the result set."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceNameParameter": {
+      "name": "scopeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Log Analytics PrivateLinkScope resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
