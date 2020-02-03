@@ -348,7 +348,7 @@
             "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/GroupNameParameter"
           }
         ],
         "responses": {
@@ -615,6 +615,14 @@
       ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
+    },
+    "GroupNameParameter": {
+      "name": "groupName",
+      "in": "path",
+      "description": "The name of the private link resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
     },
     "TagsResource": {
       "properties": {
