@@ -46,13 +46,24 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2020-02
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2020-02
+
+These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-02'
+input-file:
+  - Microsoft.Security/preview/2020-02-01-preview/deviceSecurityGroups.json
+  - Microsoft.Security/preview/2020-02-01-preview/iotSecuritySolutionAnalytics.json
+  - Microsoft.Security/preview/2020-02-01-preview/iotSecuritySolutions.json
+```
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
