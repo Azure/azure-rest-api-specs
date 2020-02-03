@@ -17,6 +17,11 @@
   "paths": {
     "/providers/Microsoft.AzureStack/cloudmanifestfile": {
       "get": {
+        "x-ms-examples": {
+          "Returns the properties of a cloud specific manifest file.": {
+            "$ref": "examples/CloudManifestFile/Get.json"
+          }
+        },
         "tags": [
           "CloudManifestFile"
         ],
@@ -25,6 +30,13 @@
         "parameters": [
           {
             "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "verificationVersion",
+            "in": "query",
+            "description": "Signing verification key version.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -47,7 +59,55 @@
   "definitions": {
     "CloudManifestFileResponse": {
       "description": "Cloud specific manifest JSON file.",
-      "type": "string",
-      "format": "binary"
+      "type": "object",
+      "properties": {
+        "deploymentData": {
+          "description": "Cloud specific manifest data.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudManifestFileDeploymentData"
+        },
+        "signature": {
+          "description": "Signature of the cloud specific manifest data.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudManifestFileDeploymentData": {
+      "description": "Cloud specific manifest data for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "cloudName": {
+          "description": "Cloud identifier.",
+          "type": "string"
+        },
+        "externalDSMSCertificates": {
+          "description": "DSMS external certificates.",
+          "type": "string"
+        },
+        "customCloudVerificationKey": {
+          "description": "Signing verification public key.",
+          "type": "string"
+        },
+        "customEnvironmentEndpoints": {
+          "description": "Environment endpoints.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudManifestFileEnvironmentEndpoints"
+        }
+      }
+    },
+    "CloudManifestFileEnvironmentEndpoints": {
+      "description": "Cloud specific environment endpoints for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "customCloudARMEndpoint": {
+          "description": "ARM endpoint.",
+          "type": "string"
+        },
+        "externalDSMSEndpoint": {
+          "description": "DSMS endpoint.",
+          "type": "string"
+        }
+      }
     }
+  }
 }
