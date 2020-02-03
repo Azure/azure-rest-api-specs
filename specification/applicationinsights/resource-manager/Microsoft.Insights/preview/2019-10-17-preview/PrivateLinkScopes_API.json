@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/privateLinkScopes": {
       "get": {
-        "description": "Gets a list of all Log Analytics PrivateLinkScopes within a subscription.",
+        "description": "Gets a list of all Azure Monitor PrivateLinkScopes within a subscription.",
         "operationId": "PrivateLinkScopes_List",
         "parameters": [
           {
@@ -54,9 +54,9 @@
             }
           },
           "200": {
-            "description": "A list containing 0 or more Log Analytics PrivateLinkScope definitions.",
+            "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeListResult"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
             }
           }
         },
@@ -72,7 +72,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/privateLinkScopes": {
       "get": {
-        "description": "Gets a list of Log Analytics PrivateLinkScopes within a resource group.",
+        "description": "Gets a list of Azure Monitor PrivateLinkScopes within a resource group.",
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
         "parameters": [
           {
@@ -93,9 +93,9 @@
             }
           },
           "200": {
-            "description": "A list containing 0 or more Log Analytics PrivateLinkScope definitions.",
+            "description": "A list containing 0 or more Azure Monitor PrivateLinkScope definitions.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeListResult"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScopeListResult"
             }
           }
         },
@@ -111,7 +111,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/privateLinkScopes/{scopeName}": {
       "delete": {
-        "description": "Deletes a Log Analytics PrivateLinkScope.",
+        "description": "Deletes a Azure Monitor PrivateLinkScope.",
         "operationId": "PrivateLinkScopes_Delete",
         "parameters": [
           {
@@ -135,7 +135,7 @@
             }
           },
           "200": {
-            "description": "Successful request when deleting a Log Analytics PrivateLinkScope."
+            "description": "Successful request when deleting a Azure Monitor PrivateLinkScope."
           },
           "204": {
             "description": "The specified PrivateLinkScope does not exist."
@@ -148,7 +148,7 @@
         }
       },
       "get": {
-        "description": "Returns a Log Analytics PrivateLinkScope.",
+        "description": "Returns a Azure Monitor PrivateLinkScope.",
         "operationId": "PrivateLinkScopes_Get",
         "parameters": [
           {
@@ -172,9 +172,9 @@
             }
           },
           "200": {
-            "description": "An Log Analytics PrivateLinkScope definition.",
+            "description": "An Azure Monitor PrivateLinkScope definition.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
           }
         },
@@ -185,7 +185,7 @@
         }
       },
       "put": {
-        "description": "Creates (or updates) a Log Analytics PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
+        "description": "Creates (or updates) a Azure Monitor PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
         "parameters": [
           {
@@ -201,12 +201,12 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "LogAnalyticsPrivateLinkScopePayload",
-            "description": "Properties that need to be specified to create or update a Log Analytics PrivateLinkScope.",
+            "name": "AzureMonitorPrivateLinkScopePayload",
+            "description": "Properties that need to be specified to create or update a Azure Monitor PrivateLinkScope.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
           }
         ],
@@ -218,9 +218,9 @@
             }
           },
           "200": {
-            "description": "Successful request when creating or updating a Log Analytics PrivateLinkScope. The updated PrivateLinkScope is returned.",
+            "description": "Successful request when creating or updating a Azure Monitor PrivateLinkScope. The updated PrivateLinkScope is returned.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
           }
         },
@@ -267,15 +267,297 @@
             }
           },
           "200": {
-            "description": "Updating the Log Analytics PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
+            "description": "Updating the Azure Monitor PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
             "schema": {
-              "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
           }
         },
         "x-ms-examples": {
           "PrivateLinkScopeUpdateTagsOnly": {
             "$ref": "./examples/PrivateLinkScopesUpdateTagsOnly.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
+        "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateLinkScopePrivateLinkResourceListGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/privateLinkResources/{groupName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
+        "operationId": "PrivateLinkResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "$ref": "#/parameters/GroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private link resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateLinkScopePrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted private endpoint connection."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a private link scope.",
+        "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a private link scope.": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
           }
         }
       }
@@ -345,12 +627,12 @@
       },
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
     },
-    "LogAnalyticsPrivateLinkScope": {
+    "AzureMonitorPrivateLinkScope": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties that define a Log Analytics PrivateLinkScope resource.",
-          "$ref": "#/definitions/LogAnalyticsPrivateLinkScopeProperties"
+          "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
+          "$ref": "#/definitions/AzureMonitorPrivateLinkScopeProperties"
         }
       },
       "allOf": [
@@ -361,10 +643,10 @@
       "required": [
         "properties"
       ],
-      "description": "An Log Analytics PrivateLinkScope definition."
+      "description": "An Azure Monitor PrivateLinkScope definition."
     },
-    "LogAnalyticsPrivateLinkScopeProperties": {
-      "description": "Properties that define a Log Analytics PrivateLinkScope resource.",
+    "AzureMonitorPrivateLinkScopeProperties": {
+      "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
       "properties": {
         "scopeId": {
           "type": "string",
@@ -374,40 +656,210 @@
         "timeCreated": {
           "type": "string",
           "readOnly": true,
-          "description": "Creation Date for the Log Analytics PrivateLinkScope, in ISO 8601 format.",
+          "description": "Creation Date for the Azure Monitor PrivateLinkScope, in ISO 8601 format.",
           "format": "date-time"
         },
         "timeModified": {
           "type": "string",
           "readOnly": true,
-          "description": "Last modified date of the Log Analytics PrivateLinkScope, in ISO 8601 format.",
+          "description": "Last modified date of the Azure Monitor PrivateLinkScope, in ISO 8601 format.",
           "format": "date-time"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Deploying, Canceled, Ready and Failed.",
+          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
           "readOnly": true
         }
       }
     },
-    "LogAnalyticsPrivateLinkScopeListResult": {
-      "description": "Describes the list of Log Analytics PrivateLinkScope resources.",
+    "AzureMonitorPrivateLinkScopeListResult": {
+      "description": "Describes the list of Azure Monitor PrivateLinkScope resources.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Log Analytics PrivateLinkScope definitions.",
+          "description": "List of Azure Monitor PrivateLinkScope definitions.",
           "items": {
-            "$ref": "#/definitions/LogAnalyticsPrivateLinkScope"
+            "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to get the next set of Log Analytics PrivateLinkScope definitions if too many PrivateLinkScopes where returned in the result set."
+          "description": "The URI to get the next set of Azure Monitor PrivateLinkScope definitions if too many PrivateLinkScopes where returned in the result set."
         }
       }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "A list of private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A private link resource",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "description": "Private endpoint which the connection belongs to.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "description": "State of the private endpoint connection.",
+      "type": "object",
+      "required": [
+        "status",
+        "description"
+      ],
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "A list of private endpoint connections.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Common properties of proxy resource."
     }
   },
   "parameters": {
@@ -416,7 +868,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Log Analytics PrivateLinkScope resource.",
+      "description": "The name of the Azure Monitor PrivateLinkScope resource.",
       "x-ms-parameter-location": "method"
     }
   }
