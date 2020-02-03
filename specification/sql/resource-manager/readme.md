@@ -982,8 +982,8 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/sql.core.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/tableAuditing.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/usages.json
-  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01/LongTermRetentionManagedInstanceBackups.json
-  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01/ManagedInstanceLongTermRetentionPolicies.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
