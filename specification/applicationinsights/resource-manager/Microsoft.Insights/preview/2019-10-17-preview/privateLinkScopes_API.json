@@ -591,17 +591,17 @@
     },
     "AzureMonitorPrivateLinkScope": {
       "properties": {
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          }
+        ],
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
           "$ref": "#/definitions/AzureMonitorPrivateLinkScopeProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
-        }
-      ],
       "required": [
         "properties"
       ],
@@ -667,7 +667,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -748,7 +748,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -777,33 +777,6 @@
           "readOnly": true
         }
       }
-    },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Common properties of proxy resource."
     }
   },
   "parameters": {
