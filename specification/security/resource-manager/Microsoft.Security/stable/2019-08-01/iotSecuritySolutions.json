@@ -378,9 +378,6 @@
           "type": "string",
           "description": "Workspace resource ID"
         },
-        "additionalWorkspaces": {
-          "$ref": "#/definitions/AdditionalWorkspacesList"
-        },
         "displayName": {
           "type": "string",
           "description": "Resource display name."
@@ -638,48 +635,6 @@
       "items": {
         "$ref": "#/definitions/RecommendationConfigurationProperties"
       }
-    },
-    "AdditionalWorkspaceProperties": {
-    "type": "object",
-    "description": "The properties of an additional workspace",
-    "properties": {
-      "workspace": {
-        "type": "string",
-        "description": "The ARM ID of the workspace"
-      },
-      "region": {
-        "type": "string",
-        "description": "The region that the workspace resides in"
-      },
-      "type": {
-        "type": "string",
-        "description": "The type of the workspace",
-        "enum": [
-          "Sentinel"
-        ]
-      },
-      "dataTypes": {
-        "type": "array",
-        "description": "The data types to send to the workspace",
-        "items": {
-          "type": "string",
-          "enum": ["Alerts", "RawEvents"]
-        }
-      }
-    },
-    "required": [
-      "workspace",
-      "region",
-      "type",
-      "dataTypes"
-    ]
-    },
-    "AdditionalWorkspacesList": {
-        "type": "array",
-        "description": "List of additional workspaces.",
-        "items": {
-          "$ref": "#/definitions/AdditionalWorkspaceProperties"
-        }
     },
     "UpdateIotSecuritySolutionData": {
       "type": "object",
