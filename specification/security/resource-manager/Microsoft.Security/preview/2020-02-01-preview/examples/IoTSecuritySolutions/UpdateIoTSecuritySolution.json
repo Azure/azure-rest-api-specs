@@ -40,6 +40,23 @@
         },
         "properties": {
           "workspace": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1",
+          "additionalWorkspaces": [
+            {
+                "workspace": "subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace2",
+                "type": "Sentinel",
+                "dataTypes": [
+                    "Alerts"
+                ]
+            },
+            {
+                "workspace": "subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace3",
+                "type": "Sentinel",
+                "dataTypes": [
+                    "Alerts",
+                    "RawEvents"
+                ]
+            }
+          ],          
           "status": "Enabled",
           "export": [
             "RawEvents"

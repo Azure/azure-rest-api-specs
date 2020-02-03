@@ -378,6 +378,9 @@
           "type": "string",
           "description": "Workspace resource ID"
         },
+        "additionalWorkspaces": {
+          "$ref": "#/definitions/AdditionalWorkspacesList"
+        },
         "displayName": {
           "type": "string",
           "description": "Resource display name."
@@ -636,8 +639,46 @@
         "$ref": "#/definitions/RecommendationConfigurationProperties"
       }
     },
+    "AdditionalWorkspaceProperties": {
+    "type": "object",
+    "description": "The properties of an additional workspace",
+    "properties": {
+      "workspace": {
+        "type": "string",
+        "description": "The ARM ID of the workspace"
+      },
+      "type": {
+        "type": "string",
+        "description": "The type of the workspace",
+        "enum": [
+          "Sentinel"
+        ]
+      },
+      "dataTypes": {
+        "type": "array",
+        "description": "The data types to send to the workspace",
+        "items": {
+          "type": "string",
+          "enum": ["Alerts", "RawEvents"]
+        }
+      }
+    },
+    "required": [
+      "workspace",
+      "type",
+      "dataTypes"
+    ]
+    },
+    "AdditionalWorkspacesList": {
+        "type": "array",
+        "description": "List of additional workspaces.",
+        "items": {
+          "$ref": "#/definitions/AdditionalWorkspaceProperties"
+        }
+    },
     "UpdateIotSecuritySolutionData": {
       "type": "object",
+      "description": "Security Solution data",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
