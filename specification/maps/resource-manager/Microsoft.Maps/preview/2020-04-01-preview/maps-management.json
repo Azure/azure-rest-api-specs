@@ -670,46 +670,46 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas": {
-    "get": {
-      "description": "Get all Private Atlas instances for an Azure Map Account",
-      "operationId": "PrivateAtlas_ListByAccount",
-      "x-ms-examples": {
-        "ListPrivateAtlasByAccount": {
-          "$ref": "./examples/ListPrivateAtlasByAccount.json"
-        }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": null,
-        "itemName": "value"
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/AccountNameParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "The request was successful.",
-          "schema": {
-            "$ref": "#/definitions/PrivateAtlasList"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas": {
+      "get": {
+        "description": "Get all Private Atlas instances for an Azure Map Account",
+        "operationId": "PrivateAtlas_ListByAccount",
+        "x-ms-examples": {
+          "ListPrivateAtlasByAccount": {
+            "$ref": "./examples/ListPrivateAtlasByAccount.json"
           }
         },
-        "default": {
-          "description": "An unexpected error occurred.",
-          "schema": {
-            "$ref": "#/definitions/Error"
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
           }
         }
       }
@@ -1128,14 +1128,14 @@
           "type": "string"
         }
       }
-    }
-  },
-  "PrivateAtlasProperties": {
-    "description": "Private Atlas resource properties",
-    "properties": {
-      "provisioningState": {
-        "description": "The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled",
-        "type": "string"
+    },
+    "PrivateAtlasProperties": {
+      "description": "Private Atlas resource properties",
+      "properties": {
+        "provisioningState": {
+          "description": "The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled",
+          "type": "string"
+        }
       }
     }
   }
