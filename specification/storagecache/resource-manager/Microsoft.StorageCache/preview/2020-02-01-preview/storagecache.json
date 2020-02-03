@@ -1473,7 +1473,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
-          "discriminator": "targetType",
           "properties": {
             "junctions": {
               "description": "List of Cache namespace junctions to target for namespace associations.",
@@ -1523,10 +1522,7 @@
               "description": "Properties when targetType is unknown.",
               "$ref": "#/definitions/UnknownTarget"
             }
-          },
-          "required": [
-            "targetType"
-          ]
+          }
         }
       },
       "x-ms-azure-resource": true
