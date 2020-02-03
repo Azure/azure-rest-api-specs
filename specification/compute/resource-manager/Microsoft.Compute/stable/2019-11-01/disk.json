@@ -1662,7 +1662,7 @@
               },
               {
                 "value": "FromImage",
-                "description": "Create a new disk from a platform image specified by the given imageReference."
+                "description": "Create a new disk from a platform image specified by the given imageReference or galleryImageReference."
               },
               {
                 "value": "Import",
@@ -1691,6 +1691,10 @@
         "imageReference": {
           "$ref": "#/definitions/ImageDiskReference",
           "description": "Disk source information."
+        },
+        "galleryImageReference": {
+          "$ref": "#/definitions/ImageDiskReference",
+          "description": "Required if creating from a Gallery Image"
         },
         "sourceUri": {
           "type": "string",
