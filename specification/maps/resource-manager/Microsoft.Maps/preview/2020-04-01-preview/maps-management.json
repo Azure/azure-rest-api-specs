@@ -297,7 +297,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
       "post": {
         "description": "Moves Maps Accounts from one ResourceGroup (or Subscription) to another",
-        "operationId": "Accounts_Move",
+        "operationId": "Accounts_MoveResources",
         "x-ms-examples": {
           "MoveAccounts": {
             "$ref": "./examples/MoveAccounts.json"
@@ -470,7 +470,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas/{privateAtlasName}": {
       "put": {
         "description": "Create or update a Private Atlas resource. Private Atlas resource will enable the usage of Azure resources to build a custom set of mapping data. It requires an account to exist before it can be created.",
-        "operationId": "PrivateAtlas_CreateOrUpdate",
+        "operationId": "PrivateAtlasCollection_CreateOrUpdate",
         "x-ms-examples": {
           "CreateAccount": {
             "$ref": "./examples/CreatePrivateAtlas.json"
@@ -527,11 +527,12 @@
               "$ref": "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "description": "Updates the Private Atlas resource. Only a subset of the parameters may be updated after creation, such as Tags.",
-        "operationId": "PrivateAtlas_Update",
+        "operationId": "PrivateAtlasCollection_Update",
         "x-ms-examples": {
           "UpdateAccount": {
             "$ref": "./examples/UpdatePrivateAtlas.json"
@@ -588,11 +589,11 @@
         }
       },
       "delete": {
-        "description": "Delete a Maps Account.",
-        "operationId": "PrivateAtlas_Delete",
+        "description": "Delete a Private Atlas resource.",
+        "operationId": "PrivateAtlasCollection_Delete",
         "x-ms-examples": {
-          "DeleteAccount": {
-            "$ref": "./examples/DeleteAccount.json"
+          "DeletePrivateAtlas": {
+            "$ref": "./examples/DeletePrivateAtlas.json"
           }
         },
         "parameters": [
@@ -629,9 +630,9 @@
       },
       "get": {
         "description": "Get a Private Atlas resource.",
-        "operationId": "PrivateAtlas_Get",
+        "operationId": "PrivateAtlasCollection_Get",
         "x-ms-examples": {
-          "GetAccount": {
+          "GetPrivateAtlas": {
             "$ref": "./examples/GetPrivateAtlas.json"
           }
         },
@@ -656,7 +657,7 @@
           "200": {
             "description": "The request was successful.",
             "schema": {
-              "$ref": "#/definitions/MapsAccount"
+              "$ref": "#/definitions/PrivateAtlas"
             }
           },
           "404": {
@@ -674,7 +675,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlas": {
       "get": {
         "description": "Get all Private Atlas instances for an Azure Map Account",
-        "operationId": "PrivateAtlas_ListByAccount",
+        "operationId": "PrivateAtlasCollection_ListByAccount",
         "x-ms-examples": {
           "ListPrivateAtlasByAccount": {
             "$ref": "./examples/ListPrivateAtlasByAccount.json"
