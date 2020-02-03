@@ -1453,6 +1453,7 @@
     "StorageTarget": {
       "description": "A storage system being cached by a Cache.",
       "type": "object",
+      "discriminator": "targetType",
       "properties": {
         "name": {
           "description": "Name of the Storage Target.",
@@ -1473,7 +1474,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
-          "discriminator": "targetType",
           "required": [
             "targetType"
           ],
@@ -1494,21 +1494,7 @@
               ],
               "x-ms-enum": {
                 "name": "StorageTargetType",
-                "modelAsString": true,
-                "values": [
-                  {
-                    "value": "nfs3",
-                    "description": "Storage target backed by an NFSv3 file server"
-                  },
-                  {
-                    "value": "clfs",
-                    "description": "Storage target backed by blobs in a storage account container"
-                  },
-                  {
-                    "value": "unknown",
-                    "description": "Unknown Storage target"
-                  }
-                ]
+                "modelAsString": true
               },
               "type": "string"
             },
