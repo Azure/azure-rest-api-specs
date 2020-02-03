@@ -1473,6 +1473,10 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
+          "discriminator": "targetType",
+          "required": [
+            "targetType"
+          ],
           "properties": {
             "junctions": {
               "description": "List of Cache namespace junctions to target for namespace associations.",
@@ -1484,9 +1488,9 @@
             "targetType": {
               "description": "Type of the Storage Target.",
               "enum": [
-                "nfs3",
-                "clfs",
-                "unknown"
+                {"$ref": "#/definitions/Nfs3Target"},
+                {"$ref": "#/definitions/ClfsTarget"},
+                {"$ref": "#/definitions/UnknownTarget"}
               ],
               "x-ms-enum": {
                 "name": "StorageTargetType",
