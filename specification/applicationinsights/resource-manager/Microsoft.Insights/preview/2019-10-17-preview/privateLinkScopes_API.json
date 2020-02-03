@@ -578,6 +578,44 @@
         }
       }
     },
+    "PrivateLinkScopesResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
     "TagsResource": {
       "properties": {
         "tags": {
@@ -599,7 +637,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/PrivateLinkScopesResource"
         }
       ],
       "required": [
@@ -610,6 +648,23 @@
     "AzureMonitorPrivateLinkScopeProperties": {
       "description": "Properties that define a Azure Monitor PrivateLinkScope resource.",
       "properties": {
+        "scopeId": {
+          "type": "string",
+          "description": "The unique ID of your application. This field cannot be changed.",
+          "readOnly": true
+        },
+        "timeCreated": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Creation Date for the Azure Monitor PrivateLinkScope, in ISO 8601 format.",
+          "format": "date-time"
+        },
+        "timeModified": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Last modified date of the Azure Monitor PrivateLinkScope, in ISO 8601 format.",
+          "format": "date-time"
+        },
         "provisioningState": {
           "type": "string",
           "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
@@ -717,7 +772,8 @@
           "description": "Resource id of the private endpoint.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "PrivateLinkServiceConnectionStateProperty": {
       "description": "State of the private endpoint connection.",
