@@ -258,6 +258,149 @@
                 }
             }
         },
+        "/operations/policy/certificates": {
+            "get": {
+                "tags": [
+                         "attestation",
+                         "policy"
+                        ],
+                "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
+                "operationId": "PolicyCertificates_Get",
+                "consumes": [ "application/json" ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation was successful",
+                        "schema": {
+                            "type": "string",
+                            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    },
+                    "401": {
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                         "attestation",
+                         "policy"
+                        ],
+                "summary": "Adds a new attestation policy certificate to the set of policy management certificates.",
+                "operationId": "PolicyCertificate_Add",
+                "consumes": [ "application/json" ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "updatedPolicyCertificate",
+                        "in": "body",
+                        "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation was successful",
+                        "schema": {
+                            "type": "string",
+                            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    },
+                    "401": {
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                         "attestation",
+                         "policy"
+                        ],
+                "summary": "Removes the specified policy management certificate. Note that the final policy management certificate cannot be removed.",
+                "operationId": "PolicyCertificate_Remove",
+                "consumes": [ "application/json" ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "policyCertificateToRemove",
+                        "in": "body",
+                        "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Operation was successful",
+                        "schema": {
+                            "type": "string",
+                            "description": "An RFC7519 JSON Web Token structure containing an RFC7517 JsonWebKeySet which contains the certificates used to validate policy changes"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    },
+                    "401": {
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
+        },
         "/certs": {
             "get": {
                 "tags": [
