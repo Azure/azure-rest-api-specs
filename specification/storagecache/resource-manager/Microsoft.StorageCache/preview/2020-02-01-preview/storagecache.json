@@ -1488,9 +1488,9 @@
             "targetType": {
               "description": "Type of the Storage Target.",
               "enum": [
-                {"$ref": "#/definitions/Nfs3Target"},
-                {"$ref": "#/definitions/ClfsTarget"},
-                {"$ref": "#/definitions/UnknownTarget"}
+                "nfs3",
+                "clfs",
+                "unknown"
               ],
               "x-ms-enum": {
                 "name": "StorageTargetType",
@@ -1514,15 +1514,15 @@
               },
               "type": "string"
             },
-            "nfs3": {
+            "nfs3Target": {
               "description": "Properties when targetType is nfs3.",
               "$ref": "#/definitions/Nfs3Target"
             },
-            "clfs": {
+            "clfsTarget": {
               "description": "Properties when targetType is clfs.",
               "$ref": "#/definitions/ClfsTarget"
             },
-            "unknown": {
+            "unknownTarget": {
               "description": "Properties when targetType is unknown.",
               "$ref": "#/definitions/UnknownTarget"
             }
