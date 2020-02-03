@@ -521,6 +521,200 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/readAllEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan read environments access token.",
+        "description": "Get VS Online Plan access token which allows listing all environments in the Plan.",
+        "operationId": "Plan_ReadAllEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_ReadAllEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/writeEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan write environments access token.",
+        "description": "Get VS Online Plan access token which allows creating, updating, deleting and connecting to environments owned by the user.",
+        "operationId": "Plan_WriteEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_WriteEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/deleteAllEnvironments": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan read and delete environments access token.",
+        "description": "Get VS Online Plan access token which allows reading and deleting all environments in the Plan.",
+        "operationId": "Plan_DeleteAllEnvironmentsAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanAccessTokenExpirationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_DeleteAllEnvironments": {
+            "$ref": "./examples/VSOPlanActions_AccessToken_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/{planName}/writeDelegates": {
+      "post": {
+        "tags": [
+          "VSOnlinePlan"
+        ],
+        "summary": "Get VS Online Plan delegated write environments access token.",
+        "description": "Get VS Online Plan delegated access token which allows creating, updating, deleting and connecting to environments owned by the user.",
+        "operationId": "Plan_WriteDelegatesAction",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PlanNameParameter"
+          },
+          {
+            "name": "delegateRequest",
+            "in": "body",
+            "description": "VS Online Plan delegate access token parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VSOnlineDelegateAccessTokenRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; response contains the access token.",
+            "schema": {
+              "$ref": "#/definitions/VSOnlinePlanAccessToken",
+              "x-ms-azure-resource": false
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound (VS Online Plan does not exist.)",
+            "schema": {
+              "$ref": "#/definitions/VSOPlanErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VSOPlanActions_WriteEnvironmentsDelegate": {
+            "$ref": "./examples/VSOPlanActions_DelegatedAccessToken_example.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VSOnline/plans/": {
       "get": {
         "tags": [
@@ -919,6 +1113,70 @@
           "type": "string"
         }
       }
+    },
+    "VSOnlinePlanAccessToken": {
+      "description": "Object that includes a VS Online Plans access token.",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The VS Online Plan access token."
+        }
+      }
+    },
+    "VSOnlineDelegateAccessTokenRequestBody": {
+      "description": "Object that includes a VS Online Plans delegate access token request parameters.",
+      "type": "object",
+      "required": [
+        "scope",
+        "identity"
+      ],
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The requested scopes for the VS Online Plan access token."
+        },
+        "expiration": {
+          "type": "integer",
+          "description": "The requested expiration timestamp for the VS Online Plan access token."
+        },
+        "identity": {
+          "$ref": "#/definitions/VSOnlineDelegateIdentity",
+          "description": "The identity of the user of the VS Online Plan access token."
+        },
+        "environmentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "An environment Id."
+          },
+          "description": "A subset of environments within the VS Online Plan which the returned token will grant access to.  If not provided the token will be applicable for all environments."
+        }
+      }
+    },
+    "VSOnlineDelegateIdentity": {
+      "description": "Object that includes the identity of the user of a delegated access token.",
+      "type": "object",
+      "required": [
+        "username",
+        "displayName",
+        "id"
+      ],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "The user's user name."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The user's unique identifier which should never change."
+        }
+      }
     }
   },
   "parameters": {
@@ -962,6 +1220,14 @@
       "type": "string",
       "description": "Name of the VS Online Plan",
       "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "PlanAccessTokenExpirationParameter": {
+      "name": "expiration",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "The requested expiration of a VS Online Plan access token.",
       "x-ms-parameter-location": "method"
     }
   }
