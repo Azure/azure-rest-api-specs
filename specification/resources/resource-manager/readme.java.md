@@ -20,6 +20,7 @@ Generate all API versions currently shipped for this package
 batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
+  - tag: package-managedapplications-2019-07
   - tag: package-policy-2019-09
   - tag: package-policy-2019-06
   - tag: package-policy-2019-01
@@ -36,6 +37,7 @@ batch:
   - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
+```
 ```
 
 ### Tag: package-features-2015-12 and java
@@ -64,6 +66,20 @@ java:
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Locks"}'
+```
+
+### Tag: package-managedapplications-2019-07 and java
+
+These settings apply only when `--tag=package-managedapplications-2019-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managedapplications.v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedapplications/mgmt-v2019_07_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "ManagedApplications"}'
 ```
 
 ### Tag: package-policy-2019-09 and java
