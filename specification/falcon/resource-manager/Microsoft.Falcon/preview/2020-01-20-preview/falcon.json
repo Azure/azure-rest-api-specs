@@ -1,0 +1,554 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-01-20-preview",
+    "title": "Falcon ResourceProvider",
+    "description": "Falcon resource provider",
+    "x-ms-code-generation-settings": {
+      "name": "falconClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/namespaces/{namespace}" : {
+      "get" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Returns Namespace resource for a given name.",
+        "operationId" : "Namespaces_Get",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "resourceGroupName",
+          "in" : "path",
+          "description" : "The name of the resource group.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "The Falcon namespace resource.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Namespace details.",
+            "schema" : {
+              "$ref" : "#/definitions/Namespace"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "NamespaceGet" : {
+            "$ref" : "./examples/NamespaceGet.json"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Create or update Namespace resource.",
+        "operationId" : "Namespaces_CreateAndUpdate",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "resourceGroupName",
+          "in" : "path",
+          "description" : "The name of the resource group.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "The Falcon namespace resource.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "namespaceParameters",
+          "description" : "Namespace details.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Namespace"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Namespace"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "NamespacePut" : {
+            "$ref" : "./examples/NamespacePut.json"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Deletes an existing Azure Namespace resource",
+        "operationId" : "Namespaces_Delete",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "resourceGroupName",
+          "in" : "path",
+          "description" : "The name of the resource group.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "The Falcon namespace resource.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful"
+          },
+          "202" : {
+            "description" : "Namespace delete operation will complete asynchronously"
+          },
+          "204" : {
+            "description" : "The specified Namespace resource does not exist in the subscription."
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+		},
+        "x-ms-examples" : {
+          "NamespaceDelete" : {
+            "$ref" : "./examples/NamespaceDelete.json"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Updates the specified resource tags.",
+        "operationId" : "Namespaces_UpdateTags",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "resourceGroupName",
+          "in" : "path",
+          "description" : "The name of the resource group.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "namespace",
+          "in" : "path",
+          "description" : "The Falcon namespace resource.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "parameters",
+          "description" : "Parameters supplied to update resource tags.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/TagsObject"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Update successful.",
+            "schema" : {
+              "$ref" : "#/definitions/Namespace"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "Update resource tags" : {
+            "$ref" : "./examples/NamespaceUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Falcon/namespaces" : {
+      "get" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Lists all the namespaces under the given resource.",
+        "operationId" : "Namespaces_ListByResourceGroup",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "resourceGroupName",
+          "in" : "path",
+          "description" : "The name of the resource group.",
+          "required" : true,
+          "type" : "string",
+          "x-ms-parameter-location" : "method"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/NamespaceListResult"
+            }
+          },
+          "default" : {
+            "description" : "Error response describing why the operation has failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List resources in a resource group" : {
+            "$ref" : "./examples/ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Falcon/namespaces" : {
+      "get" : {
+        "tags" : [ "Namespaces" ],
+        "description" : "Lists all of the Namespaces under the given subscription.",
+        "operationId" : "Namespaces_ListBySubscription",
+        "parameters" : [ {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+        }, {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/NamespaceListResult"
+            }
+          },
+          "default" : {
+            "description" : "Error response describing why the operation has failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List resources in a subscription" : {
+            "$ref" : "./examples/ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Falcon/operations" : {
+      "get" : {
+        "tags" : [ "Operations" ],
+        "description" : "Lists all of the available API operations for Namespace resources.",
+        "operationId" : "Operations_List",
+        "parameters" : [ {
+          "name" : "api-version",
+          "in" : "query",
+          "description" : "Client Api Version.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. The request has succeeded.",
+            "schema" : {
+              "$ref" : "#/definitions/OperationListResult"
+            }
+          },
+          "default" : {
+            "description" : "Resource Provider error response describing why the operation failed.",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples" : {
+          "List Falcon operations" : {
+            "$ref" : "./examples/ListFalconOperations.json"
+          }
+        },
+        "x-ms-pageable" : {
+          "nextLinkName" : "nextLink"
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Resource" : {
+      "description" : "An Azure resource.",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Azure resource Id.",
+          "readOnly" : true
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "Azure resource name. Preferably the name of namespace",
+          "readOnly" : true
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Azure resource type.",
+          "readOnly" : true
+        },
+        "location" : {
+          "type" : "string",
+          "description" : "Location of the resource."
+        },
+        "tags" : {
+          "type" : "object",
+          "description" : "resource tags.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      },
+      "x-ms-azure-resource" : true
+    },
+    "Namespace": {
+      "type": "object",
+      "description": "Namespace details",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "required": [
+            "namespaceName"
+          ],
+          "properties": {
+            "namespaceName": {
+              "type": "string",
+              "description": "Namespace in Falcon"
+            }
+          }
+        }
+      }
+    },
+    "NamespaceListResult" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "array",
+          "description" : "The list of Namespaces",
+          "items" : {
+            "$ref" : "#/definitions/Namespace"
+          }
+        },
+        "nextLink" : {
+          "type" : "string",
+          "description" : "The link to fetch the next page of Namespaces"
+        }
+      },
+      "description" : "The paginated list of Namespaces"
+    },
+    "TagsObject" : {
+      "properties" : {
+        "tags" : {
+          "type" : "object",
+          "description" : "Resource tags.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "Tags object for patch operations."
+    },
+    "Operation" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Operation name: {Microsoft.Falcon}/{resource}/{operation}",
+          "readOnly" : true
+        },
+        "display" : {
+          "$ref" : "#/definitions/Operation_display"
+        }
+      },
+      "description" : "The Falcon API operation"
+    },
+    "OperationListResult" : {
+      "properties" : {
+        "value" : {
+          "type" : "array",
+          "description" : "The list of Falcon API operations.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/Operation"
+          }
+        },
+        "nextLink" : {
+          "type" : "string",
+          "description" : "The link to fetch the next page of Falcon API operations."
+        }
+      },
+      "description" : "The paginated list of Falcon API operations."
+    },
+    "ErrorResponse" : {
+      "type" : "object",
+      "properties" : {
+		"error" : {
+		  "type" : "object",
+		  "properties" : {
+			"code" : {
+			  "type" : "string",
+			  "description" : "The error code.",
+			  "readOnly" : true
+			},
+			"message" : {
+			  "type" : "string",
+			  "description" : "The error message.",
+			  "readOnly" : true
+			}
+		  }
+		}
+      },
+      "description" : "The error response that indicates why an operation has failed."
+    },
+    "Operation_display" : {
+      "type" : "object",
+      "properties" : {
+        "provider" : {
+          "type" : "string",
+          "description" : "Service provider: Microsoft.Falcon"
+        },
+        "resource" : {
+          "type" : "string",
+          "description" : "Namespace Resource on which the operation is performed"
+        },
+        "operation" : {
+          "type" : "string",
+          "description" : "Operation type: Read, write, delete, etc."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the operation."
+        }
+      },
+      "description" : "The object that represents the operation."
+    }
+  },
+  "parameters" : {
+    "SubscriptionIdParameter" : {
+      "name" : "subscriptionId",
+      "in" : "path",
+      "description" : "The Azure subscription ID.",
+      "required" : true,
+      "type" : "string"
+    },
+    "ApiVersionParameter" : {
+      "name" : "api-version",
+      "in" : "query",
+      "description" : "Client Api Version.",
+      "required" : true,
+      "type" : "string"
+    },
+    "ResourceGroupNameParameter" : {
+      "name" : "resourceGroupName",
+      "in" : "path",
+      "description" : "The name of the resource group.",
+      "required" : true,
+      "type" : "string",
+      "x-ms-parameter-location" : "method"
+    },
+    "NamespaceParameter" : {
+      "name" : "namespace",
+      "in" : "path",
+      "description" : "The Falcon namespace resource.",
+      "required" : true,
+      "type" : "string",
+      "x-ms-parameter-location" : "method"
+    }
+  }
+}
