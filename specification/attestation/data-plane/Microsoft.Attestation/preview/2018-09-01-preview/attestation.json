@@ -45,7 +45,7 @@
                     "Policy"
                   ],
                 "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
-                "operationId": "Prepare To Set Policy by TeeKind",
+                "operationId": "Policy_PrepareToSet",
                 "consumes": [ "text/plain" ],
                 "produces": [ "text/plain", "application/json" ],
                 "parameters": [
@@ -105,7 +105,7 @@
                     "Policy"
                   ],
                 "summary": "Retrieves the current policy for a given kind of TEE.",
-                "operationId": "Get Policy by TeeKind",
+                "operationId": "Policy_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -151,7 +151,7 @@
                     "Policy"
                   ],
                 "summary": "Sets the policy for a given kind of TEE.",
-                "operationId": "Set Policy by TeeKind",
+                "operationId": "Policy_Set",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                         {
@@ -205,7 +205,7 @@
                     "Policy"
                   ],
                 "summary": "Resets the attestation policy for the specified tenant and reverts to the default policy.",
-                "operationId": "Reset Policy by TeeKind",
+                "operationId": "Policy_Reset",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                     {
@@ -264,7 +264,7 @@
                          "Policy Management Certificates"
                         ],
                 "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
-                "operationId": "Get Policy Certificates",
+                "operationId": "PolicyCertificates_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -307,7 +307,7 @@
                     "Policy Management Certificates"
                 ],
                 "summary": "Adds a new attestation policy certificate to the set of policy management certificates.",
-                "operationId": "Add Policy Certificate",
+                "operationId": "PolicyCertificates_Add",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -359,7 +359,7 @@
                     "Policy Management Certificates"
                 ],
                 "summary": "Removes the specified policy management certificate. Note that the final policy management certificate cannot be removed.",
-                "operationId": "Remove Policy Certificate",
+                "operationId": "PolicyCertificates_Remove",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -414,7 +414,7 @@
                 ],
                 "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
                 "description": "Retrieves attestation signing keys in use by the attestation service",
-                "operationId": "Get Signing Certificates",
+                "operationId": "SigningCertificates_Get",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -449,7 +449,7 @@
                 ],
                 "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
                 "description": "Retrieves metadata about the attestation signing keys in use by the  attestation service",
-                "operationId": "Get Metadata Configuration",
+                "operationId": "MetadataConfiguration_Get",
                 "responses": {
                     "200": {
                         "description": "Success",
