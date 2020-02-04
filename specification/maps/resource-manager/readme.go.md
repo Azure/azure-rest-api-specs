@@ -24,7 +24,7 @@ These settings apply only when `--tag=package-preview-2020-02 --go` is specified
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-preview-2020-02' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2020-02-01-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-02-01-preview/$(namespace)
 ```
 
 ### Tag: package-2018-05 and go
