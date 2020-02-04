@@ -67,13 +67,13 @@
         }
       },
       "patch": {
-        "operationId": "DatabaseAccounts_Patch",
+        "operationId": "DatabaseAccounts_Update",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountPatch": {
             "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
           }
         },
-        "description": "Patches the properties of an existing Azure Cosmos DB database account.",
+        "description": "Updates the properties of an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -93,14 +93,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountPatchParameters"
+              "$ref": "#/definitions/DatabaseAccountUpdateParameters"
             },
-            "description": "The tags parameter to patch for the current database account."
+            "description": "The parameters to provide for the current database account."
           }
         ],
         "responses": {
           "200": {
-            "description": "The properties of the database account were patched successfully.",
+            "description": "The database account update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
             }
@@ -117,7 +117,7 @@
             "$ref": "./examples/CosmosDBDatabaseAccountCreateMax.json"
           }
         },
-        "description": "Creates or updates an Azure Cosmos DB database account.",
+        "description": "Creates or updates an Azure Cosmos DB database account. The \"Update\" method is preferred when performing updates on an account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -1935,6 +1935,540 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures": {
+      "get": {
+        "operationId": "SqlResources_ListSqlStoredProcedures",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureList": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureList.json"
+          }
+        },
+        "description": "Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL stored procedure properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures/{storedProcedureName}": {
+      "get": {
+        "operationId": "SqlResources_GetSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureGet": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureGet.json"
+          }
+        },
+        "description": "Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL storedProcedure property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlResources_CreateUpdateSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL storedProcedure",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlStoredProcedureParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL storedProcedure."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL storedProcedure create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL storedProcedure create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureGetResults"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlResources_DeleteSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureDelete": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL storedProcedure.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL storedProcedure delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL storedProcedure delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions": {
+      "get": {
+        "operationId": "SqlResources_ListSqlUserDefinedFunctions",
+        "x-ms-examples": {
+          "CosmosDBSqlUserDefinedFunctionList": {
+            "$ref": "./examples/CosmosDBSqlUserDefinedFunctionList.json"
+          }
+        },
+        "description": "Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL userDefinedFunction properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlUserDefinedFunctionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions/{userDefinedFunctionName}": {
+      "get": {
+        "operationId": "SqlResources_GetSqlUserDefinedFunction",
+        "x-ms-examples": {
+          "CosmosDBSqlUserDefinedFunctionGet": {
+            "$ref": "./examples/CosmosDBSqlUserDefinedFunctionGet.json"
+          }
+        },
+        "description": "Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/userDefinedFunctionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL userDefinedFunction property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlUserDefinedFunctionGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlResources_CreateUpdateSqlUserDefinedFunction",
+        "x-ms-examples": {
+          "CosmosDBSqlUserDefinedFunctionCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlUserDefinedFunctionCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL userDefinedFunction",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/userDefinedFunctionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlUserDefinedFunctionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlUserDefinedFunctionCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL userDefinedFunction."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL userDefinedFunction create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL userDefinedFunction create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlUserDefinedFunctionGetResults"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlResources_DeleteSqlUserDefinedFunction",
+        "x-ms-examples": {
+          "CosmosDBSqlUserDefinedFunctionDelete": {
+            "$ref": "./examples/CosmosDBSqlUserDefinedFunctionDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL userDefinedFunction.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/userDefinedFunctionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL userDefinedFunction delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL userDefinedFunction delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers": {
+      "get": {
+        "operationId": "SqlResources_ListSqlTriggers",
+        "x-ms-examples": {
+          "CosmosDBSqlTriggerList": {
+            "$ref": "./examples/CosmosDBSqlTriggerList.json"
+          }
+        },
+        "description": "Lists the SQL trigger under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL trigger properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlTriggerListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers/{triggerName}": {
+      "get": {
+        "operationId": "SqlResources_GetSqlTrigger",
+        "x-ms-examples": {
+          "CosmosDBSqlTriggerGet": {
+            "$ref": "./examples/CosmosDBSqlTriggerGet.json"
+          }
+        },
+        "description": "Gets the SQL trigger under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/triggerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL trigger property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlTriggerGetResults"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqlResources_CreateUpdateSqlTrigger",
+        "x-ms-examples": {
+          "CosmosDBSqlTriggerCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlTriggerCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL trigger",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/triggerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlTriggerParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlTriggerCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL trigger."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL trigger create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL trigger create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlTriggerGetResults"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SqlResources_DeleteSqlTrigger",
+        "x-ms-examples": {
+          "CosmosDBSqlTriggerDelete": {
+            "$ref": "./examples/CosmosDBSqlTriggerDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL trigger.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/triggerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL trigger delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL trigger delete operation was completed successfully."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases": {
       "get": {
         "operationId": "MongoDBResources_ListMongoDBDatabases",
@@ -3689,6 +4223,45 @@
       },
       "description": "The List operation response, that contains the containers and their properties."
     },
+    "SqlStoredProcedureListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlStoredProcedureGetResults"
+          },
+          "description": "List of storedProcedures and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the storedProcedures and their properties."
+    },
+    "SqlUserDefinedFunctionListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlUserDefinedFunctionGetResults"
+          },
+          "description": "List of userDefinedFunctions and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the userDefinedFunctions and their properties."
+    },
+    "SqlTriggerListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlTriggerGetResults"
+          },
+          "description": "List of triggers and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the triggers and their properties."
+    },
     "MongoDBDatabaseListResult": {
       "properties": {
         "value": {
@@ -3903,6 +4476,28 @@
       },
       "x-ms-azure-resource": true
     },
+    "ARMProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the database account."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the database account."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "DatabaseAccountGetResults": {
       "description": "An Azure Cosmos DB database account.",
       "type": "object",
@@ -3971,11 +4566,18 @@
     "ThroughputSettingsGetProperties": {
       "description": "The properties of an Azure Cosmos DB resource throughput",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ThroughputSettingsResource"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ThroughputSettingsResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "SqlDatabaseGetResults": {
       "description": "An Azure Cosmos DB SQL database.",
@@ -3997,23 +4599,27 @@
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
       "properties": {
-        "_colls": {
-          "type": "string",
-          "description": "A system generated property that specified the addressable path of the collections resource."
-        },
-        "_users": {
-          "type": "string",
-          "description": "A system generated property that specifies the addressable path of the users resource."
+        "resource": {
+          "properties": {
+            "_colls": {
+              "type": "string",
+              "description": "A system generated property that specified the addressable path of the collections resource."
+            },
+            "_users": {
+              "type": "string",
+              "description": "A system generated property that specifies the addressable path of the users resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SqlDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
-        }
-      ]
+      }
     },
     "SqlContainerGetResults": {
       "description": "An Azure Cosmos DB container.",
@@ -4034,14 +4640,114 @@
     "SqlContainerGetProperties": {
       "description": "The properties of an Azure Cosmos DB container",
       "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlContainerResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        }
+      }
+    },
+    "SqlStoredProcedureGetResults": {
+      "description": "An Azure Cosmos DB storedProcedure.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB storedProcedure",
+          "$ref": "#/definitions/SqlStoredProcedureGetProperties"
+        }
+      },
       "allOf": [
         {
-          "$ref": "#/definitions/SqlContainerResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
+    },
+    "SqlStoredProcedureGetProperties": {
+      "description": "The properties of an Azure Cosmos DB StoredProcedure",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlStoredProcedureResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        }
+      }
+    },
+    "SqlUserDefinedFunctionGetResults": {
+      "description": "An Azure Cosmos DB userDefinedFunction.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB userDefinedFunction",
+          "$ref": "#/definitions/SqlUserDefinedFunctionGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "SqlUserDefinedFunctionGetProperties": {
+      "description": "The properties of an Azure Cosmos DB userDefinedFunction",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlUserDefinedFunctionResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        }
+      }
+    },
+    "SqlTriggerGetResults": {
+      "description": "An Azure Cosmos DB trigger.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB trigger",
+          "$ref": "#/definitions/SqlTriggerGetProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ]
+    },
+    "SqlTriggerGetProperties": {
+      "description": "The properties of an Azure Cosmos DB trigger",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SqlTriggerResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        }
+      }
     },
     "MongoDBDatabaseGetResults": {
       "description": "An Azure Cosmos DB MongoDB database.",
@@ -4062,14 +4768,18 @@
     "MongoDBDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB database",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MongoDBDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MongoDBDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "MongoDBCollectionGetResults": {
       "description": "An Azure Cosmos DB MongoDB collection.",
@@ -4090,14 +4800,18 @@
     "MongoDBCollectionGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB collection",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MongoDBCollectionResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/MongoDBCollectionResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "TableGetResults": {
       "description": "An Azure Cosmos DB Table.",
@@ -4118,14 +4832,18 @@
     "TableGetProperties": {
       "description": "The properties of an Azure Cosmos Table",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TableResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/TableResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "CassandraKeyspaceGetResults": {
       "description": "An Azure Cosmos DB Cassandra keyspace.",
@@ -4146,14 +4864,18 @@
     "CassandraKeyspaceGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CassandraKeyspaceResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CassandraKeyspaceResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "CassandraTableGetResults": {
       "description": "An Azure Cosmos DB Cassandra table.",
@@ -4174,14 +4896,18 @@
     "CassandraTableGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra table",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CassandraTableResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/CassandraTableResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "GremlinDatabaseGetResults": {
       "description": "An Azure Cosmos DB Gremlin database.",
@@ -4202,14 +4928,18 @@
     "GremlinDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GremlinDatabaseResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GremlinDatabaseResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "GremlinGraphGetResults": {
       "description": "An Azure Cosmos DB Gremlin graph.",
@@ -4230,14 +4960,18 @@
     "GremlinGraphGetProperties": {
       "description": "The properties of an Azure Cosmos DB Gremlin graph",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GremlinGraphResource"
-        },
-        {
-          "$ref": "#/definitions/ExtendedResourceProperties"
+      "properties": {
+        "resource": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GremlinGraphResource"
+            },
+            {
+              "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
         }
-      ]
+      }
     },
     "ConsistencyPolicy": {
       "type": "object",
@@ -4333,6 +5067,14 @@
             "$ref": "#/definitions/Location"
           }
         },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
         "failoverPolicies": {
           "type": "array",
           "readOnly": true,
@@ -4359,19 +5101,10 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
-        }
-      }
-    },
-    "DatabaseAccountPatchProperties": {
-      "description": "Properties to update Azure Cosmos DB database accounts.",
-      "type": "object",
-      "properties": {
-        "capabilities": {
-          "type": "array",
-          "description": "List of Cosmos DB capabilities for the account",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          }
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
+          "type": "boolean"
         }
       }
     },
@@ -4431,6 +5164,10 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
+          "type": "boolean"
         }
       },
       "required": [
@@ -4470,16 +5207,79 @@
         "properties"
       ]
     },
-    "DatabaseAccountPatchParameters": {
+    "DatabaseAccountUpdateProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "consistencyPolicy": {
+          "description": "The consistency policy for the Cosmos DB account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "locations": {
+          "type": "array",
+          "description": "An array that contains the georeplication locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "ipRangeFilter": {
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
+        },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
+        "enableAutomaticFailover": {
+          "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatabaseAccountUpdateParameters": {
       "description": "Parameters for patching Azure Cosmos DB database account properties.",
       "type": "object",
       "properties": {
         "tags": {
           "$ref": "#/definitions/Tags"
         },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountPatchProperties"
+          "$ref": "#/definitions/DatabaseAccountUpdateProperties"
         }
       }
     },
@@ -4674,6 +5474,117 @@
         "resource": {
           "description": "The standard JSON format of a container",
           "$ref": "#/definitions/SqlContainerResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "SqlStoredProcedureCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB storedProcedure.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB storedProcedure.",
+          "$ref": "#/definitions/SqlStoredProcedureCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlStoredProcedureCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB storedProcedure.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a storedProcedure",
+          "$ref": "#/definitions/SqlStoredProcedureResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "SqlUserDefinedFunctionCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB userDefinedFunction.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB userDefinedFunction.",
+          "$ref": "#/definitions/SqlUserDefinedFunctionCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlUserDefinedFunctionCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB userDefinedFunction.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a userDefinedFunction",
+          "$ref": "#/definitions/SqlUserDefinedFunctionResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
+    "SqlTriggerCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB trigger.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB trigger.",
+          "$ref": "#/definitions/SqlTriggerCreateUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlTriggerCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB trigger.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a trigger",
+          "$ref": "#/definitions/SqlTriggerResource"
         },
         "options": {
           "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
@@ -5048,6 +5959,20 @@
           "items": {
             "$ref": "#/definitions/ExcludedPath"
           }
+        },
+        "compositeIndexes": {
+          "description": "List of composite path list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositePathList"
+          }
+        },
+        "spatialIndexes": {
+          "description": "List of spatial specifics",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpatialSpec"
+          }
         }
       }
     },
@@ -5118,6 +6043,64 @@
         }
       }
     },
+    "CompositePathList": {
+      "description": "List of composite path",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CompositePath"
+      }
+    },
+    "CompositePath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "order": {
+          "description": "Sort order for composite paths.",
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ],
+          "x-ms-enum": {
+            "name": "CompositePathSortOrder",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SpatialSpec": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)"
+        },
+        "types": {
+          "description": "List of path's spatial type",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpatialType"
+          }
+        }
+      }
+    },
+    "SpatialType": {
+      "description": "Indicates the spatial type of index.",
+      "type": "string",
+      "enum": [
+        "Point",
+        "LineString",
+        "Polygon",
+        "MultiPolygon"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialType",
+        "modelAsString": true
+      }
+    },
     "ContainerPartitionKey": {
       "type": "object",
       "description": "The configuration of the partition key to be used for partitioning data into multiple partitions",
@@ -5141,6 +6124,13 @@
             "name": "PartitionKind",
             "modelAsString": true
           }
+        },
+        "version": {
+          "description": "Indicates the version of the partition key definition",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2,
+          "format": "int32"
         }
       }
     },
@@ -5200,6 +6190,84 @@
           "description": "The procedure to resolve conflicts in the case of custom mode."
         }
       }
+    },
+    "SqlStoredProcedureResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL storedProcedure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL storedProcedure"
+        },
+        "body": {
+          "type": "string",
+          "description": "Body of the Stored Procedure"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SqlUserDefinedFunctionResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL userDefinedFunction resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL userDefinedFunction"
+        },
+        "body": {
+          "type": "string",
+          "description": "Body of the User Defined Function"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "SqlTriggerResource": {
+      "type": "object",
+      "description": "Cosmos DB SQL trigger resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB SQL trigger"
+        },
+        "body": {
+          "type": "string",
+          "description": "Body of the Trigger"
+        },
+        "triggerType": {
+          "type": "string",
+          "enum": [
+            "Pre",
+            "Post"
+          ],
+          "description": "Type of the Trigger",
+          "x-ms-enum": {
+            "name": "triggerType",
+            "modelAsString": true
+          }
+        },
+        "triggerOperation": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Create",
+            "Update",
+            "Delete",
+            "Replace"
+          ],
+          "description": "The operation the trigger is associated with",
+          "x-ms-enum": {
+            "name": "triggerOperation",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "MongoDBDatabaseResource": {
       "type": "object",
@@ -6050,6 +7118,30 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB container name."
+    },
+    "storedProcedureNameParameter": {
+      "name": "storedProcedureName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB storedProcedure name."
+    },
+    "userDefinedFunctionNameParameter": {
+      "name": "userDefinedFunctionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB userDefinedFunction name."
+    },
+    "triggerNameParameter": {
+      "name": "triggerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB trigger name."
     },
     "tableNameParameter": {
       "name": "tableName",

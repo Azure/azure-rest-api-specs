@@ -71,6 +71,15 @@ input-file:
 - Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
 ```
 
+### Tag: package-2019-06-04
+
+These settings apply only when `--tag=package-2019-06-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06-04'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-06-04/imds.json
+```
+
 ### Tag: package-2019-08-01
 
 These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
@@ -89,116 +98,168 @@ input-file:
 - Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
 ```
 
-## Suppression
+### Tag: package-2019-11-01
 
-``` yaml
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
+These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
 
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
-
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
-
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
-
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
-
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
-
-  - suppress: HttpsSupportedScheme
-    reason: IMDS does not require HTTPS to query it
-
-  - suppress: SecurityDefinitionsStructure
-    reason: IMDS does not support any authentication
-
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    reason: The following properties follow the Oath2 spec, which does not use camelCase.
-    from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
-    where:
-      - $.definitions.IdentityTokenResponse.properties.access_token
-      - $.definitions.IdentityTokenResponse.properties.expires_in
-      - $.definitions.IdentityTokenResponse.properties.expires_on
-      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-      - $.definitions.IdentityTokenResponse.properties.not_before
-      - $.definitions.IdentityTokenResponse.properties.resource
-      - $.definitions.IdentityTokenResponse.properties.token_type
-      - $.definitions.IdentityTokenResponse.properties.client_id
-      - $.definitions.IdentityTokenResponse.properties.object_id
-      - $.definitions.IdentityTokenResponse.properties.msi_res_id
-      - $.definitions.IdentityErrorResponse.properties.error_description
+```yaml $(tag) == 'package-2019-11-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 ```
+
+## Suppression
+ ``` yaml
+ directive:
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-06-04/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+
+   - suppress: HttpsSupportedScheme
+     reason: IMDS does not require HTTPS to query it
+
+   - suppress: SecurityDefinitionsStructure
+     reason: IMDS does not support any authentication
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+	   
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
+     where:
+       - $.definitions.IdentityTokenResponse.properties.access_token
+       - $.definitions.IdentityTokenResponse.properties.expires_in
+       - $.definitions.IdentityTokenResponse.properties.expires_on
+       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+       - $.definitions.IdentityTokenResponse.properties.not_before
+       - $.definitions.IdentityTokenResponse.properties.resource
+       - $.definitions.IdentityTokenResponse.properties.token_type
+       - $.definitions.IdentityTokenResponse.properties.client_id
+       - $.definitions.IdentityTokenResponse.properties.object_id
+       - $.definitions.IdentityTokenResponse.properties.msi_res_id
+       - $.definitions.IdentityErrorResponse.properties.error_description
+ ```
 
 ---
 # Code Generation
@@ -214,6 +275,20 @@ csharp:
   clear-output-folder: true
 ```
 
+## Java
+
+These settings apply only when --java is specified on the command line. Please also specify --azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  fluent: true
+  namespace: com.microsoft.azure.imds
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/azure-imds
+```
+
 ## Swagger to SDK
 
 This section describes what SDK should be generated by the automatic system.
@@ -222,6 +297,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
@@ -241,8 +321,10 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-06-04/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-11-01/imds.json
 
 ```
 

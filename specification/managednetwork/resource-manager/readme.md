@@ -65,8 +65,13 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagedNetwork
+  output-folder: $(csharp-sdks-folder)/managednetwork/Microsoft.Azure.Management.ManagedNetwork/src/generated
   clear-output-folder: true
 ```
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.

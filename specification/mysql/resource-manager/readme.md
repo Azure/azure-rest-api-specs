@@ -57,8 +57,33 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
+
+### Tag: package-2018-06-01
+
+These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+```
+
+
+### Tag: package-2020-01-01-privatepreview
+
+These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
 
 ---
 # Code Generation
@@ -130,7 +155,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -145,14 +170,20 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2017-12-01-preview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

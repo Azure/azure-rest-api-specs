@@ -572,7 +572,7 @@
           }
         },
         "actions": {
-          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
+          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
           "type": "array",
           "items": {
             "type": "string"
@@ -757,7 +757,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The password name \"password\" or \"password2\"",
+          "description": "The password name \"password1\" or \"password2\"",
           "enum": [
             "password1",
             "password2"
@@ -802,7 +802,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Status",
+            "name": "TokenStatus",
             "modelAsString": true
           }
         },
@@ -840,11 +840,10 @@
         "expiry": {
           "format": "date-time",
           "description": "The expiry date of the generated credentials after which the credentials become invalid.",
-          "default": "9999-12-31T15:59:59.9999999-08:00",
           "type": "string"
         },
         "name": {
-          "description": "Specifies name of the password which should be regenerated if any -- password or password2.",
+          "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
           "enum": [
             "password1",
             "password2"
@@ -939,7 +938,7 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
+      "pattern": "^[a-zA-Z0-9-_]*$",
       "x-ms-parameter-location": "method"
     },
     "TokenNameParameter": {

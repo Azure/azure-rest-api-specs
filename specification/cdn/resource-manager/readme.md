@@ -31,6 +31,15 @@ openapi-type: arm
 tag: package-2019-04
 ```
 
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.Cdn/stable/2019-12-31/cdn.json
+```
+
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
@@ -158,6 +167,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cdn/stable/2019-12-31/cdn.json
   - $(this-folder)/Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
   - $(this-folder)/Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-04-15/cdn.json
