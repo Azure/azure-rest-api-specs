@@ -42,10 +42,10 @@
       "/operations/policy/updatepolicy": {
             "post": {
                 "tags": [
-                    "policy"
+                    "Policy"
                   ],
                 "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
-                "operationId": "Policy_PrepareToSet",
+                "operationId": "Prepare To Set Policy by TeeKind",
                 "consumes": [ "text/plain" ],
                 "produces": [ "text/plain", "application/json" ],
                 "parameters": [
@@ -102,10 +102,10 @@
         "/operations/policy/current": {
             "get": {
                 "tags": [
-                    "policy"
+                    "Policy"
                   ],
                 "summary": "Retrieves the current policy for a given kind of TEE.",
-                "operationId": "Policy_Get",
+                "operationId": "Get Policy by TeeKind",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -148,10 +148,10 @@
             },
             "put": {
                 "tags": [
-                    "policy"
+                    "Policy"
                   ],
                 "summary": "Sets the policy for a given kind of TEE.",
-                "operationId": "Policy_Set",
+                "operationId": "Set Policy by TeeKind",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                         {
@@ -202,10 +202,10 @@
             },
             "post": {
                 "tags": [
-                    "policy"
+                    "Policy"
                   ],
                 "summary": "Resets the attestation policy for the specified tenant and reverts to the default policy.",
-                "operationId": "Policy_Reset",
+                "operationId": "Reset Policy by TeeKind",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                     {
@@ -261,12 +261,10 @@
         "/operations/policy/certificates": {
             "get": {
                 "tags": [
-                         "attestation",
-                         "policy"
+                         "Policy Management Certificates"
                         ],
                 "summary": "Retrieves the set of certificates used to express policy for the current tenant.",
-                "operationId": "PolicyCertificates_Get",
-                "consumes": [ "application/json" ],
+                "operationId": "Get Policy Certificates",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -306,12 +304,10 @@
             },
             "put": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "Policy Management Certificates"
+                ],
                 "summary": "Adds a new attestation policy certificate to the set of policy management certificates.",
-                "operationId": "PolicyCertificate_Add",
-                "consumes": [ "application/json" ],
+                "operationId": "Add Policy Certificate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -360,12 +356,10 @@
             },
             "post": {
                 "tags": [
-                         "attestation",
-                         "policy"
-                        ],
+                    "Policy Management Certificates"
+                ],
                 "summary": "Removes the specified policy management certificate. Note that the final policy management certificate cannot be removed.",
-                "operationId": "PolicyCertificate_Remove",
-                "consumes": [ "application/json" ],
+                "operationId": "Remove Policy Certificate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -416,14 +410,11 @@
         "/certs": {
             "get": {
                 "tags": [
-                    "attestation"
+                    "Attestation Provider"
                 ],
                 "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
                 "description": "Retrieves attestation signing keys in use by the attestation service",
-                "operationId": "Certs_Get",
-                "consumes": [
-                    "application/json"
-                ],
+                "operationId": "Get Signing Certificates",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -454,14 +445,11 @@
         "/.well-known/openid-configuration": {
             "get": {
                 "tags": [
-                    "attestation"
+                    "Attestation Provider"
                 ],
                 "summary": "Retrieves the OpenID Configuration data for the Azure Attestation Service",
                 "description": "Retrieves metadata about the attestation signing keys in use by the  attestation service",
-                "operationId": "MetadataConfiguration_Get",
-                "consumes": [
-                    "application/json"
-                ],
+                "operationId": "Get Metadata Configuration",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -548,14 +536,14 @@
                     { "value": "SgxEnclave", "description": "Intel Software Guard eXtensions" },
                     { "value": "OpenEnclave", "description": "OpenEnclave extensions to SGX" },
                     { "value": "CyResComponent", "description": "IoT Edge validation" },
-                    { "value": "AzureGuest", "description": "Azure Guest Attestation" }
+                    { "value": "VSMEnclave", "description": "VSM Enclave Attestation" }
                 ]
             },
             "enum": [
                 "SgxEnclave",
                 "OpenEnclave",
                 "CyResComponent",
-                "AzureGuest"
+                "VSMEnclave"
             ]
         }
     }
