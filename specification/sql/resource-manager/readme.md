@@ -857,6 +857,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
@@ -868,8 +869,10 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
+  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
+  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/servers.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
@@ -941,6 +944,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/operations.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
+  - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -952,6 +956,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backups.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/capabilities.json
+  - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
