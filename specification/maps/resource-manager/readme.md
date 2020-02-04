@@ -165,9 +165,11 @@ directive:
   - suppress: R2017  # PutRequestResponseScheme
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlases/{privateAtlasName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}"].put
     from: maps-management.json
     reason:
       - Common type models are inherited.
+      - ClientId property will be ignored by requests
   - suppress: R2001  # AvoidNestedProperties
     where:
       - $.definitions.PrivateAtlas.properties.properties
@@ -182,6 +184,16 @@ directive:
       - $.definitions
     reason:
       - Pipeline runs are not listable. The operation PrivateAtlases_ListByAccount serves this purpose.
+  - suppress: R3027  # TrackedResourceListByResourceGroup
+    where:
+      - $.definitions.PrivateAtlas
+    reason:
+      - This is a nested tracked resource.
+  - suppress: R3028  # TrackedResourceListBySubscription
+    where:
+      - $.definitions.PrivateAtlas
+    reason:
+      - This is a nested tracked resource.
   - suppress: R4000  # DescriptionAndTitleMissing
     where:
       - $.definitions.Resource

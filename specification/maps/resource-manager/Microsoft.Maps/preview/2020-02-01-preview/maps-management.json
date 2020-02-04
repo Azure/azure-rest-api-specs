@@ -306,55 +306,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
-      "post": {
-        "tags": [
-          "Accounts"
-        ],
-        "description": "Moves Maps Accounts from one ResourceGroup (or Subscription) to another",
-        "operationId": "Accounts_MoveResources",
-        "x-ms-examples": {
-          "MoveAccounts": {
-            "$ref": "./examples/MoveAccounts.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group that contains Maps Account to move.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "moveRequest",
-            "in": "body",
-            "description": "The details of the Maps Account move.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MapsAccountsMoveRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The Accounts were successfully moved."
-          },
-          "default": {
-            "description": "An unexpected error occurred.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
       "post": {
         "tags": [
@@ -798,7 +749,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
         },
         "sku": {
           "description": "The SKU of this account.",
@@ -904,27 +855,6 @@
       "required": [
         "name"
       ]
-    },
-    "MapsAccountsMoveRequest": {
-      "description": "The description of what resources to move between resource groups.",
-      "type": "object",
-      "required": [
-        "targetResourceGroup",
-        "resourceIds"
-      ],
-      "properties": {
-        "targetResourceGroup": {
-          "type": "string",
-          "description": "The name of the destination resource group."
-        },
-        "resourceIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of resource names to move from the source resource group."
-        }
-      }
     },
     "MapsKeySpecification": {
       "description": "Whether the operation refers to the primary or secondary key.",
