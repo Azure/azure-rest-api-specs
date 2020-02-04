@@ -298,6 +298,11 @@
                             "$ref": "#/definitions/CloudError"
                         }
                     }
+                },
+                "x-ms-examples": {
+                    "Get PolicyCertificates": {
+                      "$ref": "./examples/Get_PolicyCertificates.json"
+                    }
                 }
             },
             "put": {
@@ -313,9 +318,9 @@
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
-                        "name": "updatedPolicyCertificate",
+                        "name": "policyCertificateToAdd",
                         "in": "body",
-                        "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to update. The RFC7519 JWT must be signed with one of the existing signing certificates",
+                        "description": "An RFC7519 JSON Web Token containing a claim named \"aas-policyCertificate\" whose value is an RFC7517 JSON Web Key which specifies a new key to add. The RFC7519 JWT must be signed with one of the existing signing certificates",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -347,6 +352,11 @@
                         "schema": {
                             "$ref": "#/definitions/CloudError"
                         }
+                    }
+                },
+                "x-ms-examples": {
+                    "Add PolicyCertificate": {
+                      "$ref": "./examples/Add_PolicyCertificate.json"
                     }
                 }
             },
@@ -397,6 +407,11 @@
                         "schema": {
                             "$ref": "#/definitions/CloudError"
                         }
+                    }
+                },
+                "x-ms-examples": {
+                    "Remove PolicyCertificate": {
+                      "$ref": "./examples/Remove_PolicyCertificate.json"
                     }
                 }
             }
