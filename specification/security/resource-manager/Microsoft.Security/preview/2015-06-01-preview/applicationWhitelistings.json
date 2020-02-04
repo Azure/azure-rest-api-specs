@@ -168,6 +168,43 @@
             }
           }
         }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an application control VM/server group": {
+            "$ref": "./examples/ApplicationWhitelistings/DeleteApplicationWhitelistings_example.json"
+          }
+        },
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "description": "Delete an application control VM/server group",
+        "operationId": "AdaptiveApplicationControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/GroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
