@@ -112,7 +112,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/controls": {
+    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
       "get": {
         "x-ms-examples": {
           "List secure score's controls level for the specified name (builtin)": {
@@ -165,7 +165,49 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
+	},
+    "/{scope}/providers/Microsoft.Security/secureScoreControls": {
+	  "get": {
+		"x-ms-examples": {
+		"List all secure scores controls": {
+			"$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
+		}
+		},
+		"tags": [
+		"Secure Scores"
+		],
+		"description": "Get all secure score controls on specific initiatives inside a scope",
+		"operationId": "SecureScoreControls_List",
+		"parameters": [
+		{
+			"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+		},
+		{
+			"$ref": "../../../common/v1/types.json#/parameters/Scope"
+		},
+		{
+			"$ref": "#/parameters/ExpandControlsDefinition"
+		}
+		],
+		"responses": {
+		"200": {
+			"description": "OK",
+			"schema": {
+			"$ref": "#/definitions/SecureScoreControlsList"
+			}
+		},
+		"default": {
+			"description": "Error response describing why the operation failed.",
+			"schema": {
+			"$ref": "../../../common/v1/types.json#/definitions/CloudError"
+			}
+		}
+		},
+		"x-ms-pageable": {
+		"nextLinkName": "nextLink"
+		}
+	  }
+	},
     "/providers/Microsoft.Security/secureScoreControlsDefinition": {
       "get": {
         "x-ms-examples": {
@@ -205,7 +247,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsDefinition": {
       "get": {
         "x-ms-examples": {
-          "List secure score controls definition": {
+          "List secure score controls definition by subscription": {
             "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_subscription_example.json"
           }
         },
@@ -403,18 +445,6 @@
         },
         "disabledResources": {
           "description": "Number of not resources that are disabled by policy in the control",
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "achievedPoints": {
-          "description": "Number of points achieved for the controls",
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32"
-        },
-        "totalPoints": {
-          "description": "Total Number of points available in the control",
           "readOnly": true,
           "type": "integer",
           "format": "int32"
