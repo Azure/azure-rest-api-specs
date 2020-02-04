@@ -158,6 +158,38 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: R2017  # PutRequestResponseScheme
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlases/{privateAtlasName}"].put
+    from: maps-management.json
+    reason:
+      - Common type models are inherited.
+  - suppress: R2001  # AvoidNestedProperties
+    where:
+      - $.definitions.PrivateAtlas.properties.properties
+      - $.definitions.MapsAccount.properties.properties
+    from: maps-management.json
+    reason:
+      - Flattening does not work well with polymorphic models.
+      - PrivateAtlas.properties is an arbitrary dictionary and cannot be flattened.  
+      - MapsAccount.properties is an arbitrary dictionary and cannot be flattened.  
+  - suppress: R3010  # TrackedResourceListByImmediateParent
+    where:
+      - $.definitions
+    reason:
+      - Pipeline runs are not listable. The operation PrivateAtlases_ListByAccount serves this purpose.
+  - suppress: R4000  # DescriptionAndTitleMissing
+    where:
+      - $.definitions.Resource
+    from: types.json
+    reason:
+      - Common type models are inherited.
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
