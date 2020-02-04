@@ -606,6 +606,20 @@
       },
       "x-nullable": false
     },
+    "AuthorizationClaim": {
+      "description": "Request parameter that contains claims for authorizing an operation.",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "modelResourceId": {
+          "description": "Form Recognizer model identifier that will be used as a claim token to authorize the request.",
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
     "CopyRequest": {
       "description": "Request parameter to copy an existing custom model.",
       "required": [
@@ -624,6 +638,10 @@
         "targetResourceRegion": {
           "description": "Location of the target Azure resource.",
           "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+        },
+        "authorizationClaim": {
+          "description": "Entity that encodes claims to authorize the copy request.",
+          "$ref": "#/definitions/AuthorizationClaim"
         }
       }
     },
