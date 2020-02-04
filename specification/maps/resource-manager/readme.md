@@ -172,7 +172,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Maps/stable/2017-01-01-preview/maps-management.json
   - $(this-folder)/Microsoft.Maps/stable/2018-05-01/maps-management.json
-  - $(this-folder)/Microsoft.Maps/private/2020-02-01-preview/maps-management.json
+  - $(this-folder)/Microsoft.Maps/preview/2020-02-01-preview/maps-management.json
 
 ```
 
