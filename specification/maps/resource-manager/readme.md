@@ -26,18 +26,18 @@ These are the global settings for the Maps API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2020-04
+tag: package-preview-2020-02
 ```
 
+### Tag: package-preview-2020-02
 
-### Tag: package-preview-2020-04
+These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2020-04'
+```yaml $(tag) == 'package-preview-2020-02'
 input-file:
-  - Microsoft.Maps/preview/2020-04-01-preview/maps-management.json
+  - Microsoft.Maps/preview/2020-02-01-preview/maps-management.json
 ```
+
 ### Tag: package-2017-01
 
 These settings apply only when `--tag=package-2017-01` is specified on the command line.
@@ -116,6 +116,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-maps
 batch:
   - tag: package-2017-01
   - tag: package-2018-05
+  - tag: package-2020-02
+```
+
+### Tag: package-2020-02 and java
+
+These settings apply only when `--tag=package-2020-02 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-02' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.maps.v2020_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/maps/mgmt-v2020_02_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2017-01 and java
@@ -158,6 +172,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Maps/stable/2017-01-01-preview/maps-management.json
   - $(this-folder)/Microsoft.Maps/stable/2018-05-01/maps-management.json
+  - $(this-folder)/Microsoft.Maps/private/2020-02-01-preview/maps-management.json
 
 ```
 
