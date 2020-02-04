@@ -1453,6 +1453,7 @@
     "StorageTarget": {
       "description": "A storage system being cached by a Cache.",
       "type": "object",
+      "discriminator": "targetType",
       "properties": {
         "name": {
           "description": "Name of the Storage Target.",
@@ -1473,10 +1474,6 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the Storage Target.",
           "type": "object",
-          "discriminator": "targetType",
-          "required": [
-            "targetType"
-          ],
           "properties": {
             "junctions": {
               "description": "List of Cache namespace junctions to target for namespace associations.",
@@ -1514,15 +1511,15 @@
               },
               "type": "string"
             },
-            "nfs3Target": {
+            "nfs3": {
               "description": "Properties when targetType is nfs3.",
               "$ref": "#/definitions/Nfs3Target"
             },
-            "clfsTarget": {
+            "clfs": {
               "description": "Properties when targetType is clfs.",
               "$ref": "#/definitions/ClfsTarget"
             },
-            "unknownTarget": {
+            "unknown": {
               "description": "Properties when targetType is unknown.",
               "$ref": "#/definitions/UnknownTarget"
             }
