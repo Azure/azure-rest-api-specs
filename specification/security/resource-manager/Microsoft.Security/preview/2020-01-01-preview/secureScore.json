@@ -132,7 +132,7 @@
           "Secure Scores"
         ],
         "description": "Get all secure score controls on specific initiatives inside a scope",
-        "operationId": "SecureScoreControls_List",
+        "operationId": "SecureScoreControlsByName_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -165,49 +165,49 @@
           "nextLinkName": "nextLink"
         }
       }
-	},
+    },
     "/{scope}/providers/Microsoft.Security/secureScoreControls": {
-	  "get": {
-		"x-ms-examples": {
-		"List all secure scores controls": {
-			"$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
-		}
-		},
-		"tags": [
-		"Secure Scores"
-		],
-		"description": "Get all secure score controls on specific initiatives inside a scope",
-		"operationId": "SecureScoreControls_List",
-		"parameters": [
-		{
-			"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-		},
-		{
-			"$ref": "../../../common/v1/types.json#/parameters/Scope"
-		},
-		{
-			"$ref": "#/parameters/ExpandControlsDefinition"
-		}
-		],
-		"responses": {
-		"200": {
-			"description": "OK",
-			"schema": {
-			"$ref": "#/definitions/SecureScoreControlsList"
-			}
-		},
-		"default": {
-			"description": "Error response describing why the operation failed.",
-			"schema": {
-			"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			}
-		}
-		},
-		"x-ms-pageable": {
-		"nextLinkName": "nextLink"
-		}
-	  }
-	},
+      "get": {
+        "x-ms-examples": {
+          "List all secure scores controls": {
+            "$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
+          }
+        },
+        "tags": [
+          "Secure Scores"
+        ],
+        "description": "Get all secure score controls on specific initiatives inside a scope",
+        "operationId": "SecureScoreControls_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/ExpandControlsDefinition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoreControlsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Security/secureScoreControlsDefinition": {
       "get": {
         "x-ms-examples": {
