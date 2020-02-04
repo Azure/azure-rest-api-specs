@@ -66,7 +66,6 @@ Differences in v3 (compared to v2):
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
@@ -85,7 +84,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -134,6 +132,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
@@ -166,7 +165,6 @@ Differences in v2 (compared to v1):
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -187,7 +185,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -235,6 +232,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
@@ -258,7 +256,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -279,7 +276,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -326,6 +322,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/servers.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
@@ -492,6 +489,7 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/databases.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/servers.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 
@@ -793,7 +791,6 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backups.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/dataMasking.json
@@ -812,7 +809,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/operations.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-  - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/servers.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -883,6 +879,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
@@ -944,7 +941,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/operations.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-  - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -956,7 +952,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backups.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/capabilities.json
-  - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
