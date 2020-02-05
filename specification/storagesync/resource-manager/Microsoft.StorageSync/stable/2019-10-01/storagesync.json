@@ -4134,15 +4134,21 @@
       "type": "object",
       "description": "Server endpoint cloud tiering status object.",
       "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
         "health": {
           "$ref": "#/definitions/ServerEndpointCloudTieringHealthState",
           "description": "Cloud tiering health state.",
           "readOnly": true
         },
-        "lastUpdatedTimestamp": {
+        "healthLastUpdatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Last updated timestamp",
+          "description": "The last updated timestamp of health state",
           "readOnly": true
         },
         "lastCloudTieringResult": {
@@ -4156,6 +4162,31 @@
           "format": "date-time",
           "description": "Last cloud tiering success timestamp",
           "readOnly": true
+        },
+        "spaceSavings": {
+          "$ref": "#/definitions/CloudTieringSpaceSavings",
+          "description": "Information regarding how much local space cloud tiering is saving.",
+          "readOnly": true
+        },
+        "cachePerformance": {
+          "$ref": "#/definitions/CloudTieringCachePerformance",
+          "description": "Information regarding how well the local cache on the server is performing.",
+          "readOnly": true
+        },
+        "filesNotTiering": {
+          "$ref": "#/definitions/CloudTieringFilesNotTiering",
+          "description": "Information regarding files that failed to be tiered",
+          "readOnly": true
+        },
+        "volumeFreeSpacePolicyStatus": {
+          "$ref": "#/definitions/CloudTieringVolumeFreeSpacePolicyStatus",
+          "description": "Status of the volume free space policy",
+          "readOnly": true
+        },
+        "datePolicyStatus": {
+          "$ref": "#/definitions/CloudTieringDatePolicyStatus",
+          "description": "Status of the date policy",
+          "readOnly": true
         }
       }
     },
@@ -4166,6 +4197,180 @@
         "Healthy",
         "Error"
       ]
+    },
+    "CloudTieringSpaceSavings": {
+      "type": "object",
+      "description": "Server endpoint cloud tiering status object.",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "volumeSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Volume size",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "totalSizeCloudBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total size of content in the azure file share",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "cachedSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Cached content size on the server",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "spaceSavingsPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percentage of cached size over total size",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "spaceSavingsBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of bytes saved on the server",
+          "readOnly": true,
+          "minimum": 0
+        }
+      }
+    },
+    "CloudTieringCachePerformance": {
+      "type": "object",
+      "description": "Server endpoint cloud tiering status object.",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "cacheHitBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of bytes that were served from the local server",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "cacheMissBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Count of bytes that were served from the cloud",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "cacheHitBytesPercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Percentage of total bytes (hit + miss) that were served from the local server",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "CloudTieringFilesNotTiering": {
+      "type": "object",
+      "description": "Server endpoint cloud tiering status object.",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "totalFileCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Last cloud tiering result (HResult)",
+          "readOnly": true,
+          "minimum": 0
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilesNotTieringError"
+          },
+          "description": "Array of tiering errors",
+          "readOnly": true
+        }
+      }
+    },
+    "FilesNotTieringError": {
+      "type": "object",
+      "description": "Files not tiering error object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code (HResult)",
+          "readOnly": true
+        },
+        "fileCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of files with this error",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudTieringVolumeFreeSpacePolicyStatus": {
+      "type": "object",
+      "description": "Status of the volume free space policy",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "effectiveVolumeFreeSpacePolicy": {
+          "type": "integer",
+          "format": "int32",
+          "description": "In the case where multiple server endpoints are present in a volume, an effective free space policy is applied.",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "currentVolumeFreeSpacePercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current volume free space percentage.",
+          "readOnly": true,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "CloudTieringDatePolicyStatus": {
+      "type": "object",
+      "description": "Status of the date policy",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "tieredFilesMostRecentAccessTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent access time of tiered files",
+          "readOnly": true
+        }
+      }
     },
     "ServerEndpointRecallStatus": {
       "type": "object",

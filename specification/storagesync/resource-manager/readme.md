@@ -26,15 +26,15 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10
+tag: package-2019-10-01
 ```
 
 
-### Tag: package-2019-10
+### Tag: package-2019-10-01
 
-These settings apply only when `--tag=package-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-2019-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10'
+```yaml $(tag) == 'package-2019-10-01'
 input-file:
   - Microsoft.StorageSync/stable/2019-10-01/storagesync.json
 ```
@@ -185,6 +185,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageSync/stable/2019-10-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-06-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-03-01/storagesync.json
   - $(this-folder)/Microsoft.StorageSync/stable/2019-02-01/storagesync.json
