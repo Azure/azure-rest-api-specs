@@ -404,7 +404,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
-  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/components_API.j
+  - $(this-folder)/Microsoft.Insights/stable/2015-05-01/components_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/favorites_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
