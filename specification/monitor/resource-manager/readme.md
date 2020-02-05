@@ -601,7 +601,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
-
+  - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
