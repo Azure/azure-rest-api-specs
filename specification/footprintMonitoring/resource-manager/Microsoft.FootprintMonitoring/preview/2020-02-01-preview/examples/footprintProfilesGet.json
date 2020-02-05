@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01-preview",
+    "subscriptionId": "subscriptionId",
+    "resourceGroupName": "rgName",
+    "footprintProfileName": "fpProfile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/footprintProfiles/fpProfile1",
+        "location": "westus",
+        "name": "fpProfile1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "profileId": "7242119c753249d79dbbe22921d8c5fa",
+          "description": "Footprint profile test 1",
+          "version": 1580158121912,
+          "startDelayMilliseconds": 5000,
+          "measurementCount": 3,
+          "coldPathSamplingPercentageRate": 100,
+          "measurementEndpoints": [
+            {
+              "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/footprintProfiles/fpProfile1/measurementEndpoints/endpoint1",
+              "name": "endpoint1",
+              "properties": {
+                "endpointId": "d075a93bd13e491b91cde7f3a8ecfe16",
+                "endpoint": "wst.contoso.com",
+                "measurementType": 2,
+                "weight": 10,
+                "experimentId": null,
+                "objectPath": "/trans.gif",
+                "startTimeUTC": null,
+                "endTimeUTC": null,
+                "hotPathSamplingPercentageRate": 0,
+                "warmPathSamplingPercentageRate": 100,
+                "coldPathSamplingPercentageRateOverride": 100,
+                "metadata": "",
+                "conditions": [
+                  {
+                    "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/footprintProfiles/fpProfile1/measurementEndpoints/endpoint1/conditions/condition0",
+                    "name": "condition0",
+                    "properties": {
+                      "conditionId": "2c7eb7b01cff483bb605cba717dc0b7f",
+                      "type": "RequestHeader",
+                      "variable": "X-FD-EdgeEnvironment",
+                      "operator": "MatchValueIgnoreCasing",
+                      "constant": "Edge-Prod-WST"
+                    },
+                    "type": "Microsoft.FootprintMonitoring/footprintProfiles/measurementEndpoints/conditions"
+                  }
+                ]
+              },
+              "type": "Microsoft.FootprintMonitoring/footprintProfiles/measurementEndpoints"
+            },
+            {
+              "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/footprintProfiles/fpProfile1/measurementEndpoints/endpoint2",
+              "name": "endpoint2",
+              "properties": {
+                "endpointId": "d075a93bd13e491b91cde7f3a8ecfe16",
+                "endpoint": "www.contoso.com",
+                "measurementType": 2,
+                "weight": 10,
+                "experimentId": "664cdec4f07d4e1083c9b3969ee2c49b",
+                "objectPath": "/trans.gif",
+                "startTimeUTC": null,
+                "endTimeUTC": null,
+                "hotPathSamplingPercentageRate": 0,
+                "warmPathSamplingPercentageRate": 100,
+                "coldPathSamplingPercentageRateOverride": 100,
+                "metadata": "",
+                "conditions": []
+              },
+              "type": "Microsoft.FootprintMonitoring/footprintProfiles/measurementEndpoints"
+            }
+          ],
+          "reportingEndpoints": [
+            "fp.msedge.net/r.gif",
+            "odinvzc.azureedge.net/apc/trans.gif"
+          ],
+          "experiments": [
+            {
+              "id": "/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.FootprintMonitoring/footprintProfiles/fpProfile1/experiments/fpExp1",
+              "name": "fpExp1",
+              "properties": {
+                "experimentId": "664cdec4f07d4e1083c9b3969ee2c49b",
+                "description": "An experiment description.",
+                "status": "Running"
+              },
+              "type": "Microsoft.FootprintMonitoring/footprintProfiles/experiments"
+            }
+          ]
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "type": "Microsoft.FootprintMonitoring/footprintProfiles"
+      }
+    }
+  }
+}
