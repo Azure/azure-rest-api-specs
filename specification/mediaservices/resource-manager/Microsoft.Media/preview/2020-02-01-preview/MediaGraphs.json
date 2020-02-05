@@ -1,7 +1,4 @@
 {
-  "schemes": [
-    "https"
-  ],
   "swagger": "2.0",
   "info": {
     "title": "Azure Media Services",
@@ -9,6 +6,9 @@
     "version": "2020-02-01-preview"
   },
   "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],
@@ -47,7 +47,7 @@
             "values": [
               {
                 "value": "Creating",
-                "description": "Media Graph is Creating."
+                "description": "Media Graph is being created."
               },
               {
                 "value": "Running",
@@ -403,7 +403,7 @@
     "MediaGraph": {
       "allOf": [
         {
-          "$ref": "./Common.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
