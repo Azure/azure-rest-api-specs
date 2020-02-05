@@ -565,6 +565,202 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/scopedResources/{name}": {
+      "get": {
+        "tags": [
+          "PrivateLinkScopedResources"
+        ],
+        "description": "Gets a scoped resource in a private link scope.",
+        "operationId": "PrivateLinkScopedResources_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the scoped resource object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a scoped resource in a private link scope.",
+            "schema": {
+              "$ref": "#/definitions/ScopedResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private link scoped resource.": {
+            "$ref": "./examples/PrivateLinkScopedResourceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateLinkScopedResources"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "operationId": "PrivateLinkScopedResources_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the scoped resource object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully scoped azure monitor resource in a private link scope.",
+            "schema": {
+              "$ref": "#/definitions/ScopedResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a scoped resource in a private link scope.": {
+            "$ref": "./examples/PrivateLinkScopedResourceUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateLinkScopedResources"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "operationId": "PrivateLinkScopedResources_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the scoped resource object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted scoped resource."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "Scoped resource does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a scoped resource with a given name.": {
+            "$ref": "./examples/PrivateLinkScopedResourceDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/privateLinkScopes/{scopeName}/scopedResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkScopedResources"
+        ],
+        "description": "Gets all private endpoint connections on a private link scope.",
+        "operationId": "PrivateLinkScopedResources_ListByPrivateLinkScope",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Azure Monitor PrivateLinkScope that will contain the datasource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved scoped resources in a private link scope.",
+            "schema": {
+              "$ref": "#/definitions/ScopedResourceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets list of scoped resources in a private link scope.": {
+            "$ref": "./examples/PrivateLinkScopedResourceList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -815,6 +1011,57 @@
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScopedResourceListResult": {
+      "description": "A list of scoped resources in a private link scope.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopedResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ScopedResource": {
+      "description": "A private link scoped resource",
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopedResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ScopedResourceProperties": {
+      "description": "Properties of a private link scoped resource.",
+      "type": "object",
+      "properties": {
+        "linkedResourceId": {
+          "description": "The resource id of the scoped Azure monitor resource.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
           "type": "string",
           "readOnly": true
         }
