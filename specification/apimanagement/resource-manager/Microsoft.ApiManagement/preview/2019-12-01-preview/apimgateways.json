@@ -351,16 +351,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/keys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/listKeys": {
       "post": {
         "tags": [
-          "GatewayKey"
+          "GatewayListKeys"
         ],
-        "operationId": "Gateway_Keys",
+        "operationId": "Gateway_ListKeys",
         "description": "Retrieves gateway keys.",
         "x-ms-examples": {
           "ApiManagementGatewayKeys": {
-            "$ref": "./examples/ApiManagementGatewayKeys.json"
+            "$ref": "./examples/ApiManagementGatewayListKeys.json"
           }
         },
         "parameters": [
@@ -402,13 +402,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/regeneratePrimaryKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/regenerateKey": {
       "post": {
         "tags": [
-          "GatewayRegeneratePrimaryKey"
+          "GatewayRegenerateKey"
         ],
-        "operationId": "Gateway_RegeneratePrimaryKey",
-        "description": "Regenerates primary gateway key invalidating any tokens created with it.",
+        "operationId": "Gateway_RegenerateKey",
+        "description": "Regenerates specified gateway key invalidating any tokens created with it.",
         "x-ms-examples": {
           "ApiManagementGatewayRegeneratePrimaryKey": {
             "$ref": "./examples/ApiManagementGatewayRegenerateKey.json"
@@ -429,6 +429,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayKeyRegenerationRequestContract"
+            }
           }
         ],
         "responses": {
@@ -444,58 +452,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/regenerateSecondaryKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/generateToken": {
       "post": {
         "tags": [
-          "GatewayRegenerateSecondaryKey"
+          "GatewayGenerateToken"
         ],
-        "operationId": "Gateway_RegenerateSecondaryKey",
-        "description": "Regenerates secondary gateway key invalidating any tokens created with it.",
-        "x-ms-examples": {
-          "ApiManagementGatewayRegenerateSecondaryKey": {
-            "$ref": "./examples/ApiManagementGatewayRegenerateKey.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/GatewayIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Key successfully regenerated"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/gateways/{gatewayId}/token": {
-      "post": {
-        "tags": [
-          "GatewayToken"
-        ],
-        "operationId": "Gateway_Token",
+        "operationId": "Gateway_GenerateToken",
         "description": "Gets the Shared Access Authorization Token for the gateway.",
         "x-ms-examples": {
           "ApiManagementGatewayToken": {
-            "$ref": "./examples/ApiManagementGatewayToken.json"
+            "$ref": "./examples/ApiManagementGatewayGenerateToken.json"
           }
         },
         "parameters": [

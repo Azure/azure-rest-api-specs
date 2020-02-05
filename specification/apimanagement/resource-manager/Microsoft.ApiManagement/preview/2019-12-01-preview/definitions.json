@@ -5215,16 +5215,6 @@
     },
     "GatewayTokenRequestContract": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GatewayTokenRequestContractProperties",
-          "description": "Gateway token request contract properties."
-        }
-      },
-      "description": "Gateway token request contract properties."
-    },
-    "GatewayTokenRequestContractProperties": {
-      "properties": {
         "keyType": {
           "type": "string",
           "description": "The Key to be used to generate gateway token.",
@@ -5248,7 +5238,7 @@
         "keyType",
         "expiry"
       ],
-      "description": "Parameters supplied to get Gateway token."
+      "description": "Gateway token request contract properties."
     },
     "GatewayTokenContract": {
       "properties": {
@@ -5258,6 +5248,26 @@
         }
       },
       "description": "Gateway access token."
+    },
+    "GatewayKeyRegenerationRequestContract": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The Key being regenerated.",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Gateway key regeneration request contract properties."
     },
     "GatewayHostnameConfigurationCollection": {
       "properties": {
