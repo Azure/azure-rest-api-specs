@@ -508,11 +508,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The scan is done."
+          },
           "202": {
-            "description": "The scan was successfully triggered.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationResults"
-            }
+            "description": "The scan was successfully triggered."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -521,14 +521,14 @@
             }
           }
         },
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Trigger evaluations for all resources in a subscription": {
             "$ref": "./examples/PolicyStates_TriggerSubscriptionEvaluation.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -548,11 +548,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The scan is done."
+          },
           "202": {
-            "description": "The scan was successfully triggered.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationResults"
-            }
+            "description": "The scan was successfully triggered."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -561,14 +561,14 @@
             }
           }
         },
-        "x-ms-examples":{
+        "x-ms-examples": {
           "Trigger evaluations for all resources in a resource group": {
             "$ref": "./examples/PolicyStates_TriggerResourceGroupEvaluation.json"
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-          "final-state-via" : "location"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1078,9 +1078,6 @@
     }
   },
   "definitions": {
-    "TriggerEvaluationResults": {
-      "description": "The scan was successfully triggered.  The status of that scan can be found in the link referenced om the Location header."
-    },
     "PolicyStatesQueryResults": {
       "description": "Query results.",
       "properties": {
