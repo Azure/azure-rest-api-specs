@@ -60,6 +60,7 @@ input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2018-11-27-preview/privateLinkScopes_API.json
 ```
 
 
