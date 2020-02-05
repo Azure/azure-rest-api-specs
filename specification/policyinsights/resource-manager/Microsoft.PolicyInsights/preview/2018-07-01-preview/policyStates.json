@@ -492,75 +492,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation": {
-      "post": {
-        "operationId": "PolicyStates_TriggerSubscriptionEvaluation",
-        "description": "Triggers a policy evaluation scan for all the resources under the subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The scan was successfully triggered.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationFailure"
-            }
-          }
-        },
-        "x-ms-examples":{
-          "Trigger evaluations for all resources in a subscription": {
-            "$ref": "./examples/PolicyStates_TriggerSubscriptionEvaluation.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation": {
-      "post": {
-        "operationId": "PolicyStates_TriggerResourceGroupEvaluation",
-        "description": "Triggers a policy evaluation scan for all the resources under the subscription",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The scan was successfully triggered.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationResults"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/TriggerEvaluationFailure"
-            }
-          }
-        },
-        "x-ms-examples":{
-          "Trigger evaluations for all resources in a resource group": {
-            "$ref": "./examples/PolicyStates_TriggerResourceGroupEvaluation.json.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyStates/{policyStatesResource}/queryResults": {
       "post": {
         "operationId": "PolicyStates_ListQueryResultsForPolicySetDefinition",
@@ -1103,12 +1034,6 @@
     }
   },
   "definitions": {
-    "TriggerEvaluationResults": {
-      "description": "The scan was successfully triggered.  The status of that scan can be found in the link referenced om the Location header."
-    },
-    "TriggerEvaluationFailure": {
-      "description": "The scan failed to be triggered."
-    },
     "PolicyStatesQueryResults": {
       "description": "Query results.",
       "properties": {

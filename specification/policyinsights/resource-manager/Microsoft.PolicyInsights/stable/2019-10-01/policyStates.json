@@ -517,7 +517,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/TriggerEvaluationFailure"
+              "$ref": "#/definitions/QueryFailure"
             }
           }
         },
@@ -525,13 +525,17 @@
           "Trigger evaluations for all resources in a subscription": {
             "$ref": "./examples/PolicyStates_TriggerSubscriptionEvaluation.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyStates/latest/triggerEvaluation": {
       "post": {
         "operationId": "PolicyStates_TriggerResourceGroupEvaluation",
-        "description": "Triggers a policy evaluation scan for all the resources under the subscription",
+        "description": "Triggers a policy evaluation scan for all the resources under the resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -553,14 +557,18 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/TriggerEvaluationFailure"
+              "$ref": "#/definitions/QueryFailure"
             }
           }
         },
         "x-ms-examples":{
           "Trigger evaluations for all resources in a resource group": {
-            "$ref": "./examples/PolicyStates_TriggerResourceGroupEvaluation.json.json"
+            "$ref": "./examples/PolicyStates_TriggerResourceGroupEvaluation.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
         }
       }
     },
@@ -1072,9 +1080,6 @@
   "definitions": {
     "TriggerEvaluationResults": {
       "description": "The scan was successfully triggered.  The status of that scan can be found in the link referenced om the Location header."
-    },
-    "TriggerEvaluationFailure": {
-      "description": "The scan failed to be triggered."
     },
     "PolicyStatesQueryResults": {
       "description": "Query results.",
