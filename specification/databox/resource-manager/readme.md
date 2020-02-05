@@ -105,12 +105,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox/azure/mgmt/databox
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox
 ```
 
 ## Ruby
