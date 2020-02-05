@@ -577,6 +577,12 @@
           "DataSets_Create": {
             "$ref": "./examples/DataSets_Create.json"
           },
+          "DataSets_KustoCluster_Create": {
+            "$ref": "./examples/DataSets_KustoCluster_Create.json"
+          },
+          "DataSets_KustoDatabase_Create": {
+            "$ref": "./examples/DataSets_KustoDatabase_Create.json"
+          },
           "DataSets_SqlDWTable_Create": {
             "$ref": "./examples/DataSets_SqlDWTable_Create.json"
           },
@@ -624,6 +630,9 @@
           "200": {
             "description": "Success"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "204": {
             "description": "Success"
           },
@@ -634,6 +643,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DataSets_Delete": {
             "$ref": "./examples/DataSets_Delete.json"
@@ -784,7 +794,7 @@
           {
             "name": "dataSetMappingName",
             "in": "path",
-            "description": "The Id of the source data set being mapped.",
+            "description": "The name of the data set mapping to be created.",
             "required": true,
             "type": "string"
           },
@@ -831,8 +841,8 @@
           "DataSetMappings_SqlDB_Create": {
             "$ref": "./examples/DataSetMappings_SqlDB_Create.json"
           },
-          "DataSetMappings_AdlsGen2File_Create": {
-            "$ref": "./examples/DataSetMappings_AdlsGen2File_Create.json"
+          "DataSetMappings_SqlDWDataSetToAdlsGen2File_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDWDataSetToAdlsGen2File_Create.json"
           }
         }
       },
@@ -2991,11 +3001,6 @@
           "type": "string",
           "readOnly": true
         },
-        "createdBy": {
-          "description": "Name of the user who created the account.",
-          "type": "string",
-          "readOnly": true
-        },
         "provisioningState": {
           "description": "Provisioning state of the Account",
           "enum": [
@@ -3011,6 +3016,16 @@
             "name": "provisioningState",
             "modelAsString": true
           }
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3191,19 +3206,24 @@
           "type": "string",
           "readOnly": true
         },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
         "respondedAt": {
           "format": "date-time",
           "description": "The time the recipient responded to the invitation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "sender": {
-          "description": "Gets the name of the sender.",
-          "type": "string",
-          "readOnly": true
-        },
-        "senderCompanyName": {
-          "description": "Gets the company name of the sender.",
           "type": "string",
           "readOnly": true
         },
@@ -3220,6 +3240,16 @@
         },
         "termsOfUse": {
           "description": "Terms of use shared when the invitation was created",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
           "type": "string",
           "readOnly": true
         }
@@ -3248,6 +3278,9 @@
     },
     "DataSet": {
       "description": "A DataSet data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3256,7 +3289,7 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of dataset.",
+          "description": "Kind of data set.",
           "enum": [
             "Blob",
             "Container",
@@ -3266,6 +3299,8 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable"
           ],
@@ -3300,7 +3335,10 @@
       }
     },
     "DataSetMapping": {
-      "description": "A dataset mapping data transfer object.",
+      "description": "A data set mapping data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -3309,7 +3347,7 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of dataset mapping.",
+          "description": "Kind of data set mapping.",
           "enum": [
             "Blob",
             "Container",
@@ -3317,6 +3355,8 @@
             "AdlsGen2FileSystem",
             "AdlsGen2Folder",
             "AdlsGen2File",
+            "KustoCluster",
+            "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable"
           ],
@@ -3396,11 +3436,6 @@
           "type": "string",
           "readOnly": true
         },
-        "sender": {
-          "description": "Gets the name of the sender.",
-          "type": "string",
-          "readOnly": true
-        },
         "sentAt": {
           "format": "date-time",
           "description": "Gets the time at which the invitation was sent.",
@@ -3418,6 +3453,16 @@
         "targetObjectId": {
           "description": "The target user or application Id that invitation is being sent to.\r\nMust be specified along TargetActiveDirectoryId. This enables sending\r\ninvitations to specific users or applications in an AD tenant.",
           "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3660,11 +3705,6 @@
           "type": "string",
           "readOnly": true
         },
-        "createdBy": {
-          "description": "Name of the user who created the share.",
-          "type": "string",
-          "readOnly": true
-        },
         "description": {
           "description": "Share description.",
           "type": "string"
@@ -3688,7 +3728,8 @@
         "shareKind": {
           "description": "Share kind.",
           "enum": [
-            "CopyBased"
+            "CopyBased",
+            "InPlace"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3699,6 +3740,16 @@
         "terms": {
           "description": "Share terms.",
           "type": "string"
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3748,8 +3799,16 @@
       "description": "A ShareSynchronization data transfer object.",
       "type": "object",
       "properties": {
-        "company": {
-          "description": "Company name",
+        "consumerEmail": {
+          "description": "Email of the user who created the synchronization",
+          "type": "string"
+        },
+        "consumerName": {
+          "description": "Name of the user who created the synchronization",
+          "type": "string"
+        },
+        "consumerTenantName": {
+          "description": "Tenant name of the consumer who created the synchronization",
           "type": "string"
         },
         "durationMs": {
@@ -3766,10 +3825,6 @@
           "description": "message of synchronization",
           "type": "string"
         },
-        "recipient": {
-          "description": "Recipient id",
-          "type": "string"
-        },
         "startTime": {
           "format": "date-time",
           "description": "start time of synchronization",
@@ -3782,6 +3837,19 @@
         "synchronizationId": {
           "description": "Synchronization id",
           "type": "string"
+        },
+        "synchronizationMode": {
+          "description": "Synchronization mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3807,16 +3875,16 @@
       }
     },
     "SynchronizationDetails": {
-      "description": "Synchronization details at dataset level",
+      "description": "Synchronization details at data set level",
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "id of dataSet",
+          "description": "Id of data set",
           "type": "string",
           "readOnly": true
         },
         "dataSetType": {
-          "description": "type of DataSet",
+          "description": "Type of the data set",
           "enum": [
             "Blob",
             "Container",
@@ -3826,6 +3894,8 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable"
           ],
@@ -3838,65 +3908,65 @@
         },
         "durationMs": {
           "format": "int32",
-          "description": "duration of dataset level copy",
+          "description": "Duration of data set level copy",
           "type": "integer",
           "readOnly": true
         },
         "endTime": {
           "format": "date-time",
-          "description": "End time of dataset level copy",
+          "description": "End time of data set level copy",
           "type": "string",
           "readOnly": true
         },
         "filesRead": {
           "format": "int64",
-          "description": "The number of files read from the source dataset.",
+          "description": "The number of files read from the source data set",
           "type": "integer",
           "readOnly": true
         },
         "filesWritten": {
           "format": "int64",
-          "description": "The number of files written into the sink dataset.",
+          "description": "The number of files written into the sink data set",
           "type": "integer",
           "readOnly": true
         },
         "message": {
-          "description": "Error Message if any",
+          "description": "Error message if any",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "name of dataSet",
+          "description": "Name of the data set",
           "type": "string",
           "readOnly": true
         },
         "rowsCopied": {
           "format": "int64",
-          "description": "The number of files copied into the sink dataset.",
+          "description": "The number of files copied into the sink data set",
           "type": "integer",
           "readOnly": true
         },
         "rowsRead": {
           "format": "int64",
-          "description": "The number of rows read from the source dataset.",
+          "description": "The number of rows read from the source data set.",
           "type": "integer",
           "readOnly": true
         },
         "sizeRead": {
           "format": "int64",
-          "description": "The size of the data read from the source dataset in bytes.",
+          "description": "The size of the data read from the source data set in bytes",
           "type": "integer",
           "readOnly": true
         },
         "sizeWritten": {
           "format": "int64",
-          "description": "The size of the data written into the sink dataset in bytes.",
+          "description": "The size of the data written into the sink data set in bytes",
           "type": "integer",
           "readOnly": true
         },
         "startTime": {
           "format": "date-time",
-          "description": "start time of dataset level copy",
+          "description": "Start time of data set level copy",
           "type": "string",
           "readOnly": true
         },
@@ -3907,7 +3977,7 @@
         },
         "vCore": {
           "format": "int64",
-          "description": "The vCore units consumed for the dataset synchronization.",
+          "description": "The vCore units consumed for the data set synchronization",
           "type": "integer",
           "readOnly": true
         }
@@ -3933,8 +4003,18 @@
       "description": "Provider share subscription properties",
       "type": "object",
       "properties": {
-        "company": {
-          "description": "Company name",
+        "consumerEmail": {
+          "description": "Email of the consumer who created the share subscription",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumerName": {
+          "description": "Name of the consumer who created the share subscription",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumerTenantName": {
+          "description": "Tenant name of the consumer who created the share subscription",
           "type": "string",
           "readOnly": true
         },
@@ -3944,19 +4024,19 @@
           "type": "string",
           "readOnly": true
         },
-        "createdBy": {
-          "description": "Created by",
+        "providerEmail": {
+          "description": "Email of the provider who created the share",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the share",
           "type": "string",
           "readOnly": true
         },
         "sharedAt": {
           "format": "date-time",
           "description": "Shared at",
-          "type": "string",
-          "readOnly": true
-        },
-        "sharedBy": {
-          "description": "Shared by",
           "type": "string",
           "readOnly": true
         },
@@ -4035,14 +4115,24 @@
           "type": "string",
           "readOnly": true
         },
-        "createdBy": {
-          "description": "The user who created the share subscription.",
-          "type": "string",
-          "readOnly": true
-        },
         "invitationId": {
           "description": "The invitation id.",
           "type": "string"
+        },
+        "providerEmail": {
+          "description": "Email of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerName": {
+          "description": "Name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "providerTenantName": {
+          "description": "Tenant name of the provider who created the resource",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Provisioning state of the share subscription",
@@ -4068,7 +4158,8 @@
         "shareKind": {
           "description": "Kind of share",
           "enum": [
-            "CopyBased"
+            "CopyBased",
+            "InPlace"
           ],
           "type": "string",
           "readOnly": true,
@@ -4079,16 +4170,6 @@
         },
         "shareName": {
           "description": "Name of the share",
-          "type": "string",
-          "readOnly": true
-        },
-        "shareSender": {
-          "description": "Sender of the share",
-          "type": "string",
-          "readOnly": true
-        },
-        "shareSenderCompanyName": {
-          "description": "Company name of the share sender",
           "type": "string",
           "readOnly": true
         },
@@ -4109,6 +4190,16 @@
         },
         "shareTerms": {
           "description": "Terms of a share",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmail": {
+          "description": "Email of the user who created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "userName": {
+          "description": "Name of the user who created the resource",
           "type": "string",
           "readOnly": true
         }
@@ -4160,13 +4251,23 @@
           "type": "string",
           "readOnly": true
         },
+        "dataSetLocation": {
+          "description": "Location of the data set.",
+          "type": "string",
+          "readOnly": true
+        },
         "dataSetName": {
           "description": "DataSet name",
           "type": "string",
           "readOnly": true
         },
+        "dataSetPath": {
+          "description": "DataSet path",
+          "type": "string",
+          "readOnly": true
+        },
         "dataSetType": {
-          "description": "Type of dataSet",
+          "description": "Type of data set",
           "enum": [
             "Blob",
             "Container",
@@ -4176,6 +4277,8 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "KustoCluster",
+            "KustoDatabase",
             "SqlDBTable",
             "SqlDWTable"
           ],
@@ -4211,6 +4314,9 @@
     },
     "SourceShareSynchronizationSetting": {
       "description": "A view of synchronization setting added by the provider",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "properties": {
         "kind": {
@@ -4219,7 +4325,6 @@
             "ScheduleBased"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "kind",
             "modelAsString": true
@@ -4287,6 +4392,19 @@
         "synchronizationId": {
           "description": "Synchronization id",
           "type": "string"
+        },
+        "synchronizationMode": {
+          "description": "Synchronization Mode",
+          "enum": [
+            "Incremental",
+            "FullSync"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "synchronizationMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4331,6 +4449,9 @@
     },
     "SynchronizationSetting": {
       "description": "A Synchronization Setting data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4375,6 +4496,9 @@
     },
     "Trigger": {
       "description": "A Trigger data transfer object.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4420,7 +4544,8 @@
     "ScheduledSynchronizationSetting": {
       "description": "A type of synchronization setting based on schedule",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4448,11 +4573,6 @@
         "createdAt": {
           "format": "date-time",
           "description": "Time at which the synchronization setting was created.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdBy": {
-          "description": "Name of the user who created the synchronization setting.",
           "type": "string",
           "readOnly": true
         },
@@ -4488,13 +4608,19 @@
           "format": "date-time",
           "description": "Synchronization time",
           "type": "string"
+        },
+        "userName": {
+          "description": "Name of the user who created the synchronization setting.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "ScheduledTrigger": {
       "description": "A type of trigger based on schedule",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4522,11 +4648,6 @@
         "createdAt": {
           "format": "date-time",
           "description": "Time at which the trigger was created.",
-          "type": "string",
-          "readOnly": true
-        },
-        "createdBy": {
-          "description": "Name of the user who created the trigger.",
           "type": "string",
           "readOnly": true
         },
@@ -4588,13 +4709,19 @@
             "name": "triggerStatus",
             "modelAsString": true
           }
+        },
+        "userName": {
+          "description": "Name of the user who created the trigger.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "BlobDataSet": {
-      "description": "An Azure storage blob dataset.",
+      "description": "An Azure storage blob data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4605,7 +4732,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobProperties",
-          "description": "Blob dataset properties.",
+          "description": "Blob data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4650,9 +4777,10 @@
       }
     },
     "BlobFolderDataSet": {
-      "description": "An Azure storage blob folder dataset.",
+      "description": "An Azure storage blob folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4663,7 +4791,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobFolderProperties",
-          "description": "Blob folder dataset properties.",
+          "description": "Blob folder data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4708,9 +4836,10 @@
       }
     },
     "BlobContainerDataSet": {
-      "description": "An Azure storage blob container dataset.",
+      "description": "An Azure storage blob container data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4721,7 +4850,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobContainerProperties",
-          "description": "Blob container dataset properties.",
+          "description": "Blob container data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4761,9 +4890,10 @@
       }
     },
     "ADLSGen2FileDataSet": {
-      "description": "An ADLS Gen 2 file dataset.",
+      "description": "An ADLS Gen 2 file data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4774,7 +4904,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FileProperties",
-          "description": "ADLS Gen 2 file dataset properties.",
+          "description": "ADLS Gen 2 file data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4819,9 +4949,10 @@
       }
     },
     "ADLSGen2FolderDataSet": {
-      "description": "An ADLS Gen 2 folder dataset.",
+      "description": "An ADLS Gen 2 folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4832,7 +4963,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FolderProperties",
-          "description": "ADLS Gen 2 folder dataset properties.",
+          "description": "ADLS Gen 2 folder data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4877,9 +5008,10 @@
       }
     },
     "ADLSGen2FileSystemDataSet": {
-      "description": "An ADLS Gen 2 file system dataset.",
+      "description": "An ADLS Gen 2 file system data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4890,7 +5022,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FileSystemProperties",
-          "description": "ADLS Gen 2 file system dataset properties.",
+          "description": "ADLS Gen 2 file system data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4930,9 +5062,10 @@
       }
     },
     "ADLSGen1FolderDataSet": {
-      "description": "An ADLS Gen 1 folder dataset.",
+      "description": "An ADLS Gen 1 folder data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4943,7 +5076,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen1FolderProperties",
-          "description": "ADLS Gen 1 folder  dataset properties.",
+          "description": "ADLS Gen 1 folder data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -4983,9 +5116,10 @@
       }
     },
     "ADLSGen1FileDataSet": {
-      "description": "An ADLS Gen 1 file dataset.",
+      "description": "An ADLS Gen 1 file data set.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -4996,7 +5130,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen1FileProperties",
-          "description": "ADLS Gen 1 file dataset properties.",
+          "description": "ADLS Gen 1 file data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -5040,8 +5174,131 @@
         }
       }
     },
+    "KustoClusterDataSet": {
+      "description": "A kusto cluster data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoClusterDataSetProperties",
+          "description": "Kusto cluster data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoCluster"
+    },
+    "KustoClusterDataSetProperties": {
+      "description": "Properties of the kusto cluster data set.",
+      "required": [
+        "kustoClusterResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the kusto cluster data set.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KustoDatabaseDataSet": {
+      "description": "A kusto database data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoDatabaseDataSetProperties",
+          "description": "Kusto database data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoDatabase"
+    },
+    "KustoDatabaseDataSetProperties": {
+      "description": "Properties of the kusto database data set.",
+      "required": [
+        "kustoDatabaseResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "kustoDatabaseResourceId": {
+          "description": "Resource id of the kusto database.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the kusto database data set.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "SqlDWTableDataSet": {
-      "description": "A SQL DW table dataset.",
+      "description": "A SQL DW table data set.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5051,7 +5308,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SqlDWTableProperties",
-          "description": "SQL DW table dataset properties.",
+          "description": "SQL DW table data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -5059,6 +5316,12 @@
     },
     "SqlDWTableProperties": {
       "description": "Properties of the SQL DW table data set.",
+      "required": [
+        "dataWarehouseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId"
+      ],
       "type": "object",
       "properties": {
         "dataSetId": {
@@ -5068,6 +5331,10 @@
         },
         "dataWarehouseName": {
           "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
           "type": "string"
         },
         "sqlServerResourceId": {
@@ -5081,7 +5348,10 @@
       }
     },
     "SqlDBTableDataSet": {
-      "description": "A SQL DB table dataset.",
+      "description": "A SQL DB table data set.",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -5091,7 +5361,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SqlDBTableProperties",
-          "description": "SQL DB table dataset properties.",
+          "description": "SQL DB table data set properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -5099,6 +5369,12 @@
     },
     "SqlDBTableProperties": {
       "description": "Properties of the SQL DB table data set.",
+      "required": [
+        "databaseName",
+        "tableName",
+        "schemaName",
+        "sqlServerResourceId"
+      ],
       "type": "object",
       "properties": {
         "databaseName": {
@@ -5109,6 +5385,10 @@
           "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
         },
         "sqlServerResourceId": {
           "description": "Resource id of SQL server",
@@ -5121,9 +5401,10 @@
       }
     },
     "BlobDataSetMapping": {
-      "description": "A Blob dataset mapping.",
+      "description": "A Blob data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5134,20 +5415,21 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobMappingProperties",
-          "description": "Blob dataset mapping properties.",
+          "description": "Blob data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "Blob"
     },
     "BlobMappingProperties": {
-      "description": "Azure storage Blob dataset mapping property bag.",
+      "description": "Azure storage Blob data set mapping property bag.",
       "required": [
         "containerName",
         "filePath",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
@@ -5156,16 +5438,17 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5187,6 +5470,22 @@
             "modelAsString": true
           }
         },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
         "resourceGroup": {
           "description": "Resource group of storage account.",
           "type": "string"
@@ -5202,9 +5501,10 @@
       }
     },
     "BlobFolderDataSetMapping": {
-      "description": "A Blob folder dataset mapping.",
+      "description": "A Blob folder data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5215,20 +5515,21 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobFolderMappingProperties",
-          "description": "Blob folder dataset mapping properties.",
+          "description": "Blob folder data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "BlobFolder"
     },
     "BlobFolderMappingProperties": {
-      "description": "Azure storage Blob folder dataset mapping property bag.",
+      "description": "Azure storage Blob folder data set mapping property bag.",
       "required": [
         "containerName",
         "prefix",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
@@ -5237,16 +5538,17 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5255,6 +5557,22 @@
         "prefix": {
           "description": "Prefix for blob folder",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "resourceGroup": {
           "description": "Resource group of storage account.",
@@ -5271,9 +5589,10 @@
       }
     },
     "BlobContainerDataSetMapping": {
-      "description": "A Blob container dataset mapping.",
+      "description": "A Blob container data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5284,19 +5603,20 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/BlobContainerMappingProperties",
-          "description": "Blob container dataset mapping properties.",
+          "description": "Blob container data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "Container"
     },
     "BlobContainerMappingProperties": {
-      "description": "Azure storage Blob container dataset mapping property bag.",
+      "description": "Azure storage Blob container data set mapping property bag.",
       "required": [
         "containerName",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
@@ -5305,18 +5625,35 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
             "modelAsString": true
           }
         },
@@ -5335,9 +5672,10 @@
       }
     },
     "ADLSGen2FileDataSetMapping": {
-      "description": "An ADLS Gen2 file dataset mapping.",
+      "description": "An ADLS Gen2 file data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5348,34 +5686,36 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FileDataSetMappingProperties",
-          "description": "ADLS Gen2 file dataset mapping properties.",
+          "description": "ADLS Gen2 file data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "AdlsGen2File"
     },
     "ADLSGen2FileDataSetMappingProperties": {
-      "description": "ADLS Gen 2 file dataset mapping property bag.",
+      "description": "ADLS Gen 2 file data set mapping property bag.",
       "required": [
         "fileSystem",
         "filePath",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5401,6 +5741,22 @@
             "modelAsString": true
           }
         },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
         "resourceGroup": {
           "description": "Resource group of storage account.",
           "type": "string"
@@ -5416,9 +5772,10 @@
       }
     },
     "ADLSGen2FolderDataSetMapping": {
-      "description": "An ADLS Gen2 folder dataset mapping.",
+      "description": "An ADLS Gen2 folder data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5429,34 +5786,36 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FolderDataSetMappingProperties",
-          "description": "ADLS Gen2 folder dataset mapping properties.",
+          "description": "ADLS Gen2 folder data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "AdlsGen2Folder"
     },
     "ADLSGen2FolderDataSetMappingProperties": {
-      "description": "ADLS Gen 2 folder dataset mapping property bag.",
+      "description": "ADLS Gen 2 folder data set mapping property bag.",
       "required": [
         "fileSystem",
         "folderPath",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5469,6 +5828,22 @@
         "folderPath": {
           "description": "Folder path within the file system.",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "resourceGroup": {
           "description": "Resource group of storage account.",
@@ -5485,9 +5860,10 @@
       }
     },
     "ADLSGen2FileSystemDataSetMapping": {
-      "description": "An ADLS Gen2 file system dataset mapping.",
+      "description": "An ADLS Gen2 file system data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5498,33 +5874,35 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ADLSGen2FileSystemDataSetMappingProperties",
-          "description": "ADLS Gen2 file system dataset mapping properties.",
+          "description": "ADLS Gen2 file system data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
       "x-ms-discriminator-value": "AdlsGen2FileSystem"
     },
     "ADLSGen2FileSystemDataSetMappingProperties": {
-      "description": "ADLS Gen 2 file system dataset mapping property bag.",
+      "description": "ADLS Gen 2 file system data set mapping property bag.",
       "required": [
         "fileSystem",
         "subscriptionId",
         "resourceGroup",
-        "storageAccountName"
+        "storageAccountName",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5533,6 +5911,22 @@
         "fileSystem": {
           "description": "The file system name.",
           "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
         },
         "resourceGroup": {
           "description": "Resource group of storage account.",
@@ -5548,10 +5942,157 @@
         }
       }
     },
-    "SqlDWTableDataSetMapping": {
-      "description": "A SQL DW Table dataset mapping.",
+    "KustoClusterDataSetMapping": {
+      "description": "A Kusto cluster data set mapping",
       "required": [
-        "properties"
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoClusterDataSetMappingProperties",
+          "description": "Kusto cluster data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoCluster"
+    },
+    "KustoClusterDataSetMappingProperties": {
+      "description": "Properties of the Kusto cluster data set mapping",
+      "required": [
+        "kustoClusterResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the sink kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KustoDatabaseDataSetMapping": {
+      "description": "A Kusto database data set mapping",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KustoDatabaseDataSetMappingProperties",
+          "description": "Kusto database data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "KustoDatabase"
+    },
+    "KustoDatabaseDataSetMappingProperties": {
+      "description": "Properties of the Kusto database data set mapping",
+      "required": [
+        "kustoClusterResourceId",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "kustoClusterResourceId": {
+          "description": "Resource id of the sink kusto cluster.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the sink kusto cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SqlDWTableDataSetMapping": {
+      "description": "A SQL DW Table data set mapping.",
+      "required": [
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5562,7 +6103,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SqlDWTableDataSetMappingProperties",
-          "description": "Sql DW dataset mapping properties.",
+          "description": "Sql DW data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -5573,21 +6114,24 @@
       "required": [
         "dataWarehouseName",
         "tableName",
-        "sqlServerResourceId"
+        "schemaName",
+        "sqlServerResourceId",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
@@ -5595,6 +6139,26 @@
         },
         "dataWarehouseName": {
           "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
           "type": "string"
         },
         "sqlServerResourceId": {
@@ -5608,9 +6172,10 @@
       }
     },
     "SqlDBTableDataSetMapping": {
-      "description": "A SQL DB Table dataset mapping.",
+      "description": "A SQL DB Table data set mapping.",
       "required": [
-        "properties"
+        "properties",
+        "kind"
       ],
       "type": "object",
       "allOf": [
@@ -5621,7 +6186,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SqlDBTableDataSetMappingProperties",
-          "description": "Sql DB dataset mapping properties.",
+          "description": "Sql DB data set mapping properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -5632,7 +6197,9 @@
       "required": [
         "databaseName",
         "tableName",
-        "sqlServerResourceId"
+        "schemaName",
+        "sqlServerResourceId",
+        "dataSetId"
       ],
       "type": "object",
       "properties": {
@@ -5641,20 +6208,41 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Gets the id of source dataset.",
+          "description": "The id of the source data set.",
           "type": "string"
         },
         "dataSetMappingStatus": {
-          "description": "Gets the status of the dataset mapping.",
+          "description": "Gets the status of the data set mapping.",
           "enum": [
             "Ok",
             "Broken"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "dataSetMappingStatus",
             "modelAsString": true
           }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "schemaName": {
+          "description": "Schema of the table. Default value is dbo.",
+          "type": "string"
         },
         "sqlServerResourceId": {
           "description": "Resource id of SQL server",
@@ -5668,6 +6256,9 @@
     },
     "ScheduledSourceSynchronizationSetting": {
       "description": "A type of synchronization setting based on schedule",
+      "required": [
+        "kind"
+      ],
       "type": "object",
       "allOf": [
         {

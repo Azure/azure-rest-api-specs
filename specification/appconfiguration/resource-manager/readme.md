@@ -26,7 +26,16 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-02-01-preview
+tag: package-2019-11-01-preview
+```
+
+### Tag: package-2019-11-01-preview
+
+These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2019-11-01-preview/appconfiguration.json
 ```
 
 ### Tag: package-2019-02-01-preview
@@ -88,6 +97,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ## Suppression
 
 ``` yaml
@@ -118,6 +131,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.AppConfiguration/preview/2019-11-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/preview/2019-02-01-preview/appconfiguration.json
   - $(this-folder)/Microsoft.AppConfiguration/stable/2019-10-01/appconfiguration.json
 

@@ -86,6 +86,12 @@
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -124,7 +130,7 @@
             "description": "The name of Cognitive Services account."
           },
           {
-		    "name": "account",
+            "name": "account",
             "in": "body",
             "required": true,
             "schema": {
@@ -142,6 +148,12 @@
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -193,6 +205,9 @@
         "responses": {
           "200": {
             "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
@@ -875,14 +890,14 @@
         "eventHubConnectionString": {
           "type": "string",
           "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
-		  "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
-		  "maxLength": 1000
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "maxLength": 1000
         },
         "storageAccountConnectionString": {
           "type": "string",
           "description": "(Personalization Only) The storage account connection string.",
-		  "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
-		  "maxLength": 1000
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "maxLength": 1000
         }
       },
       "description": "The api properties for special APIs."

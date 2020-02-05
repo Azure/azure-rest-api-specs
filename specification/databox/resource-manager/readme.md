@@ -105,12 +105,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox/azure/mgmt/databox
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databox
+  output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox
 ```
 
 ## Ruby
@@ -152,7 +152,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2018_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -165,7 +165,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.databox.v2019_09-01
-  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2019_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2019_09_01
 regenerate-manager: true
 generate-interface: true
 ```

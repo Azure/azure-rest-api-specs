@@ -25,7 +25,7 @@ These are the global settings for the Mixed Reality Azure Resource Management Cl
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2019-02-preview
+tag: package-2019-12-preview
 ```
 
 ### Tag: package-2019-12-preview

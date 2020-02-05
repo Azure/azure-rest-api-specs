@@ -29,6 +29,38 @@ openapi-type: arm
 tag: package-2017-12-01
 ```
 
+### Tag: package-2020-01-01-privatepreview
+
+These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
+
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+```
+
+### Tag: package-2018-06-01
+
+These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2018-06-01'
+input-file:
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+```
+
 
 ### Tag: package-2017-12-01-preview
 
@@ -120,7 +152,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -132,16 +164,20 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

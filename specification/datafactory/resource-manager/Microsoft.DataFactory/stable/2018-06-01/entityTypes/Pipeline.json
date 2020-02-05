@@ -215,6 +215,7 @@
     },
     "StoreReadSettings": {
       "description": "Connector read setting.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -253,6 +254,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -444,6 +449,21 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SftpWriteSettings": {
+      "description": "Sftp write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "operationTimeout": {
+          "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -685,6 +705,7 @@
     },
     "FormatReadSettings": {
       "description": "Format read settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -716,6 +737,7 @@
     },
     "FormatWriteSettings": {
       "description": "Format write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -1462,6 +1484,33 @@
         "packetSize": {
           "type": "object",
           "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "SapHanaDynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "SapHanaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+          "$ref": "#/definitions/SapHanaPartitionSettings"
+        }
+      }
+    },
+    "SapHanaPartitionSettings": {
+      "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -3222,6 +3271,14 @@
           "description": "Specifies PolyBase-related settings when allowPolyBase is true.",
           "$ref": "#/definitions/PolybaseSettings"
         },
+        "allowCopyCommand": {
+          "type": "object",
+          "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyCommandSettings": {
+          "description": "Specifies Copy Command related settings when allowCopyCommand is true.",
+          "$ref": "#/definitions/DWCopyCommandSettings"
+        },
         "tableOption": {
           "type": "object",
           "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
@@ -3263,6 +3320,40 @@
       "x-ms-enum": {
         "name": "PolybaseSettingsRejectType",
         "modelAsString": true
+      }
+    },
+    "DWCopyCommandSettings": {
+      "description": "DW Copy Command settings.",
+      "type": "object",
+      "properties": {
+        "defaultValues": {
+          "type": "array",
+          "description": "Specifies the default values for each target column in SQL DW. The default values in the property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a default value. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/DWCopyCommandDefaultValue"
+          }
+        },
+        "additionalOptions": {
+          "type": "object",
+          "description": "Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalOptions\": { \"MAXERRORS\": \"1000\", \"DATEFORMAT\": \"'ymd'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DWCopyCommandDefaultValue": {
+      "description": "Default value.",
+      "type": "object",
+      "properties": {
+        "columnName": {
+          "type": "object",
+          "description": "Column name. Type: object (or Expression with resultType string)."
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "The default value of the column. Type: object (or Expression with resultType string)."
+        }
       }
     },
     "LogStorageSettings": {
@@ -3682,6 +3773,10 @@
         "collectionReference": {
           "type": "object",
           "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
+        },
+        "mapComplexValuesToString": {
+          "type": "object",
+          "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
         },
         "mappings": {
           "type": "object",
@@ -4173,7 +4268,8 @@
           "type": "string",
           "enum": [
             "SSISDB",
-            "File"
+            "File",
+            "InlinePackage"
           ],
           "x-ms-enum": {
             "name": "SsisPackageLocationType",
@@ -4185,10 +4281,7 @@
           "description": "SSIS package location properties.",
           "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
-      },
-      "required": [
-        "packagePath"
-      ]
+      }
     },
     "SSISPackageLocationTypeProperties": {
       "description": "SSIS package location properties.",
@@ -4205,6 +4298,25 @@
         "configurationPath": {
           "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "packageName": {
+          "description": "The package name.",
+          "type": "string"
+        },
+        "packageContent": {
+          "description": "The embedded package content. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "packageLastModifiedDate": {
+          "description": "The embedded package last modified date.",
+          "type": "string"
+        },
+        "childPackages": {
+          "description": "The embedded child package list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSISChildPackage"
+          }
         }
       }
     },
@@ -4289,6 +4401,32 @@
         "domain",
         "userName",
         "password"
+      ]
+    },
+    "SSISChildPackage": {
+      "description": "SSIS embedded child package.",
+      "type": "object",
+      "properties": {
+        "packagePath": {
+          "type": "object",
+          "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Name for embedded child package."
+        },
+        "packageContent": {
+          "type": "object",
+          "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date for embedded child package."
+        }
+      },
+      "required": [
+        "packagePath",
+        "packageContent"
       ]
     },
     "SSISLogLocation": {
@@ -4653,7 +4791,7 @@
         },
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
           "description": "Web activity authentication user name for basic authentication.",
@@ -4661,7 +4799,7 @@
         },
         "password": {
           "description": "Password for the PFX file or basic authentication.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
@@ -4708,6 +4846,10 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           }
+        },
+        "connectVia": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
@@ -5617,6 +5759,10 @@
         "authentication": {
           "description": "Authentication method used for calling the endpoint.",
           "$ref": "#/definitions/WebActivityAuthentication"
+        },
+        "reportStatusOnCallBack": {
+          "type": "object",
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -5657,6 +5803,29 @@
         "integrationRuntime": {
           "description": "The integration runtime reference.",
           "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "compute": {
+          "description": "Compute properties for data flow activity.",
+          "type": "object",
+          "properties": {
+            "computeType": {
+              "description": "Compute type of the cluster which will execute data flow job.",
+              "type": "string",
+              "enum": [
+                "General",
+                "MemoryOptimized",
+                "ComputeOptimized"
+              ],
+              "x-ms-enum": {
+                "name": "DataFlowComputeType",
+                "modelAsString": true
+              }
+            },
+            "coreCount": {
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
+              "type": "integer"
+            }
+          }
         }
       },
       "required": [

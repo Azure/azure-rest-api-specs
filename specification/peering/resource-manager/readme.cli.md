@@ -25,5 +25,8 @@ cli:
     "/properties/peercontactinfo": "*/"
     
   test-setup:
-    - name: Create or Update a service with all parameters
+    - name: Create a  peering service
+    - name: Create or update a prefix for the peering service
+    - name: Delete a prefix associated with the peering service
+    - name: Delete a peering service
 ```
