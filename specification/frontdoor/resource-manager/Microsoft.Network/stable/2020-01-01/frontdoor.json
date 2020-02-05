@@ -1241,8 +1241,23 @@
           "description": "If this backend is private, provide the private link resource Id. Populating this optional field indicates that this backend is 'Private'",
           "type": "string"
         },
-        "location": {
-          "description": "Region of the backend if it is in Azure. Mandatory field if backend is 'Private'",
+        "privateEndpointStatus" : {
+          "description": "The Approval status for the connection to the Private Link",
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointStatus",
+            "modelAsString": false
+          }
+        },
+        "privateLinkApprovalMessage" : {
+          "description": "A custom message to be included in the approval request to connect to the Private Link",
           "type": "string"
         },
         "httpPort": {

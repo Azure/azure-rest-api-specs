@@ -79,7 +79,6 @@
               "properties": {
                 "backends": [
                   {
-                    "location": "westus",
                     "address": "w3.contoso.com",
                     "httpPort": 80,
                     "httpsPort": 443,
@@ -97,14 +96,15 @@
                   },
                   {
                     "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-                    "location": "westus",
+                    "privateEndpointStatus": "Approved",
+                    "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
                     "address": "10.0.1.5",
                     "httpPort": 80,
                     "httpsPort": 443,
                     "enabledState": "Enabled",
                     "weight": 1,
                     "priority": 1
-                  } 
+                  }
                 ],
                 "loadBalancingSettings": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1"
