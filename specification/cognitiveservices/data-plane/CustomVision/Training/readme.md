@@ -162,6 +162,7 @@ input-file:
   - $(this-folder)/stable/v2.2/Training.json
   - $(this-folder)/stable/v3.0/Training.json
   - $(this-folder)/stable/v3.1/Training.json
+  - $(this-folder)/stable/v3.2/Training.json
 
 ```
 
