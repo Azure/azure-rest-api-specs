@@ -57,6 +57,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-python
 ```
 
 
@@ -79,6 +80,10 @@ csharp:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Java
 
@@ -109,7 +114,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.operationsmanagement.v2015_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/operationsmanagement/resource-manager/v2015_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/operationsmanagement/mgmt-v2015_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

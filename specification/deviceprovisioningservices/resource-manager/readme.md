@@ -150,7 +150,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.deviceprovisioningservices.v2017_08_21_preview
-  output-folder: $(azure-libraries-for-java-folder)/deviceprovisioningservices/resource-manager/v2017_08_21_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2017_08_21_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -163,7 +163,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.deviceprovisioningservices.v2017_11_15
-  output-folder: $(azure-libraries-for-java-folder)/deviceprovisioningservices/resource-manager/v2017_11_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2017_11_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -176,7 +176,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.deviceprovisioningservices.v2018_01_22
-  output-folder: $(azure-libraries-for-java-folder)/deviceprovisioningservices/resource-manager/v2018_01_22
+  output-folder: $(azure-libraries-for-java-folder)/sdk/deviceprovisioningservices/mgmt-v2018_01_22
 regenerate-manager: true
 generate-interface: true
 ```
