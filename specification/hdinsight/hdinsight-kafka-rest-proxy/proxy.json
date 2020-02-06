@@ -39,7 +39,7 @@
         "tags": [ "v1consumer" ],
         "summary": "Consume records using a simple consumer",
         "description": "Consume records from one partition of a topic beginning with a specific offset. By default count is 1. It can read maximum of 6 megabytes of data at once",
-        "operationId": "consumeTopicInPartitionWithOffset",
+        "operationId": "Consumer_ConsumeTopicInPartitionWithOffset",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -111,7 +111,7 @@
         "tags": [ "v1metadata" ],
         "summary": "Get a list of Kafka brokers",
         "description": "Get a list of Kafka brokers with hostname, port, and broker id",
-        "operationId": "getBrokers",
+        "operationId": "Metadata_GetBrokers",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "responses": {
@@ -147,7 +147,7 @@
         "tags": [ "v1metadata" ],
         "summary": "Get a list of Kafka topics",
         "description": "Get a list of Kafka topics. If it is a newly created topic, please wait a few seconds for it to show up.",
-        "operationId": "getTopics",
+        "operationId": "Metadata_GetTopics",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "responses": {
@@ -183,7 +183,7 @@
         "tags": [ "v1metadata" ],
         "summary": "Get metadata about all partitions for a specific topic",
         "description": "Get metadata about all partitions for a specific topic with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
-        "operationId": "getPartitions",
+        "operationId": "Metadata_GetTopicPartitions",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -228,7 +228,7 @@
         "tags": [ "v1metadata" ],
         "summary": "Get metadata about a specific Kafka topic-partition",
         "description": "Get metadata about a specific Kafka topic-partition with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
-        "operationId": "getPartitionMetadata",
+        "operationId": "Metadata_GetMetadataForPartitionId",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -281,7 +281,7 @@
         "tags": [ "v1producer" ],
         "summary": "Produce records",
         "description": "Produce records to a topic in Kafka. If producing records to a newly created topic, please wait a few seconds for the topic to show up.",
-        "operationId": "produceMessageToTopic",
+        "operationId": "Producer_ProduceMessageToTopic",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
@@ -335,7 +335,7 @@
         "tags": [ "v1status" ],
         "summary": "Check the status of Kafka Rest proxy server",
         "description": "Check the status of Kafka Rest proxy server",
-        "operationId": "checkRestproxyStatus",
+        "operationId": "Admin_CheckRestProxyStatus",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "responses": {
@@ -353,7 +353,7 @@
         "tags": [ "v1topics" ],
         "summary": "Create a topic",
         "description": "Create a topic in Kafka with topic configuration",
-        "operationId": "putTopics",
+        "operationId": "Admin_CreateTopic",
         "consumes": [ "application/json" ],
         "produces": [ "application/json" ],
         "parameters": [
