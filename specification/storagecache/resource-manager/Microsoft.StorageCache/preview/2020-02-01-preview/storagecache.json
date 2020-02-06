@@ -1287,7 +1287,7 @@
     },
     "StorageTarget": {
       "type": "object",
-      "discriminator": "targetType",
+      "discriminator": "kind",
       "description": "Type of the Storage Target.",
       "allOf": [
         {
@@ -1295,7 +1295,7 @@
         }
       ],
       "properties": {
-        "targetType": {
+        "kind": {
           "type": "string",
           "description": "Type of the Storage Target.",
           "enum": [
@@ -1310,7 +1310,7 @@
         }
       },
       "required": [
-        "targetType"
+        "kind"
       ]
     },
     "StorageTargetResource": {
@@ -1366,7 +1366,7 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
-          "$ref": "#/definitions/StorageTarget"
+          "type": "string"
         },
         "provisioningState": {
           "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
@@ -1435,7 +1435,7 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
-          "$ref": "#/definitions/StorageTarget"
+          "type": "string"
         },
         "provisioningState": {
           "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
@@ -1499,7 +1499,7 @@
         },
         "targetType": {
           "description": "Type of the Storage Target.",
-          "$ref": "#/definitions/StorageTarget"
+          "type": "string"
         },
         "provisioningState": {
           "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
