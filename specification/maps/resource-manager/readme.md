@@ -214,9 +214,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Maps/preview/2020-02-01-preview/maps-management.json
   - $(this-folder)/Microsoft.Maps/stable/2017-01-01-preview/maps-management.json
   - $(this-folder)/Microsoft.Maps/stable/2018-05-01/maps-management.json
-  - $(this-folder)/Microsoft.Maps/preview/2020-02-01-preview/maps-management.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
