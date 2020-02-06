@@ -11,20 +11,12 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": [ "user_impersonation" ]
     }
   ],
   "securityDefinitions": {
@@ -41,13 +33,11 @@
   "paths": {
     "/providers/Microsoft.FootprintMonitoring/operations": {
       "get": {
-        "tags": [
-          "API Operations"
-        ],
+        "tags": [ "API Operations" ],
         "operationId": "Operations_List",
         "x-ms-examples": {
           "FootprintOperationsList": {
-            "$ref": "./examples/FootprintOperationsList.json"
+            "$ref": "./examples/footprintOperationsList.json"
           }
         },
         "description": "Retrieves a list of available API operations",
@@ -78,15 +68,13 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.FootprintMonitoring/footprintProfiles": {
       "get": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Get all Footprint profiles under a subscription.",
         "description": "Retrieves the information about all Footprint profiles under a subscription.",
         "operationId": "footprintProfiles_ListBySubscription",
         "x-ms-examples": {
-          "footprintProfilesListBySubscription": {
-            "$ref": "./examples/footprintProfilesListBySubscription.json"
+          "List Footprint profiles in a Subscription": {
+            "$ref": "./examples/footprintProfilesListAll.json"
           }
         },
         "parameters": [
@@ -101,32 +89,30 @@
           "200": {
             "description": "The request was successful. The response contains the Footprint profiles found.",
             "schema": {
-              "$ref": "#/definitions/FootprintProfile"
+              "$ref": "#/definitions/FootprintProfileList"
             }
           },
           "default": {
             "description": "A response with a status and optional error describing the reason for the operation result.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FootprintProfile"
-              }
+              "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles": {
       "get": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Get all Footprint profiles under a resource group.",
         "description": "Retrieves the information about all Footprint profiles under a resource group.",
-        "operationId": "footprintProfiles_ListByResourceGroup",
+        "operationId": "FootprintProfiles_ListByResourceGroup",
         "x-ms-examples": {
-          "footprintProfilesListByResourceGroup": {
-            "$ref": "./examples/footprintProfilesListByResourceGroup.json"
+          "List Footprint profiles in a Resource Group": {
+            "$ref": "./examples/footprintProfilesList.json"
           }
         },
         "parameters": [
@@ -144,10 +130,7 @@
           "200": {
             "description": "The request was successful. The response contains the Footprint profiles found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FootprintProfile"
-              }
+              "$ref": "#/definitions/FootprintProfileList"
             }
           },
           "default": {
@@ -156,14 +139,15 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}": {
       "get": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Get a Footprint profile resource.",
         "description": "Retrieves the information about a single Footprint profile.",
         "operationId": "footprintProfiles_Get",
@@ -202,9 +186,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Creates or updates a Footprint profile resource.",
         "description": "Creates or updates a Footprint profile with the specified properties.",
         "operationId": "footprintProfiles_CreateOrUpdate",
@@ -258,9 +240,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Deletes a Footprint profile resource.",
         "description": "Deletes an existing Footprint profile.",
         "operationId": "footprintProfiles_Delete",
@@ -299,9 +279,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Footprint Profiles"
-        ],
+        "tags": [ "Footprint Profiles" ],
         "summary": "Updates a Footprint profile resource.",
         "description": "Updates an existing Footprint profile resource.",
         "operationId": "footprintProfiles_Update",
@@ -351,9 +329,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/measurementEndpoints": {
       "get": {
-        "tags": [
-          "Footprint Measurement Endpoints"
-        ],
+        "tags": [ "Footprint Measurement Endpoints" ],
         "summary": "Get all measurement endpoints under a Footprint profile.",
         "description": "Retrieves the information about all measurement endpoints under a Footprint profile.",
         "operationId": "measurementEndpoints_ListByFootprintProfile",
@@ -397,9 +373,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/measurementEndpoints/{measurementEndpointName}": {
       "get": {
-        "tags": [
-          "Footprint Measurement Endpoints"
-        ],
+        "tags": [ "Footprint Measurement Endpoints" ],
         "summary": "Get a measurement endpoint under a Footprint profile resource.",
         "description": "Retrieves the information about a single measurement endpoint under a Footprint profile.",
         "operationId": "measurementEndpoints_Get",
@@ -441,9 +415,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Footprint Measurement Endpoints"
-        ],
+        "tags": [ "Footprint Measurement Endpoints" ],
         "summary": "Creates or updates a single measurement endpoint under a Footprint profile resource.",
         "description": "Creates or updates a single measurement endpoint under a Footprint profile with the specified properties.",
         "operationId": "measurementEndpoints_CreateOrUpdate",
@@ -500,9 +472,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Footprint Measurement Endpoints"
-        ],
+        "tags": [ "Footprint Measurement Endpoints" ],
         "summary": "Deletes a measurement endpoint under a Footprint profile resource.",
         "description": "Deletes an existing measurement endpoint under a Footprint profile.",
         "operationId": "measurementEndpoints_Delete",
@@ -544,9 +514,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Footprint Measurement Endpoints"
-        ],
+        "tags": [ "Footprint Measurement Endpoints" ],
         "summary": "Updates a measurement endpoint under a Footprint profile resource.",
         "description": "Updates an existing measurement endpoint under a Footprint profile resource.",
         "operationId": "measurementEndpoints_Update",
@@ -599,9 +567,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/measurementEndpoints/{measurementEndpointName}/conditions": {
       "get": {
-        "tags": [
-          "Footprint Measurement Endpoint Conditions"
-        ],
+        "tags": [ "Footprint Measurement Endpoint Conditions" ],
         "summary": "Get all measurement endpoint conditions under a Footprint measurement endpoint.",
         "description": "Retrieves the information about all measurement endpoint conditions under a Footprint measurement endpoint.",
         "operationId": "conditions_ListByMeasurementEndpoint",
@@ -648,9 +614,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/measurementEndpoints/{measurementEndpointName}/conditions/{conditionName}": {
       "get": {
-        "tags": [
-          "Footprint Measurement Endpoint Conditions"
-        ],
+        "tags": [ "Footprint Measurement Endpoint Conditions" ],
         "summary": "Get a measurement endpoint condition under a Footprint measurement endpoint resource.",
         "description": "Retrieves the information about a single measurement endpoint condition under a Footprint measurement endpoint.",
         "operationId": "measurementEndpointConditions_Get",
@@ -695,9 +659,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Footprint Measurement Endpoint Conditions"
-        ],
+        "tags": [ "Footprint Measurement Endpoint Conditions" ],
         "summary": "Creates or updates a measurement endpoint condition under a Footprint measurement resource.",
         "description": "Creates or updates a measurement endpoint condition under a Footprint measurement with the specified properties.",
         "operationId": "measurementEndpointConditions_CreateOrUpdate",
@@ -757,9 +719,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Footprint Measurement Endpoint Conditions"
-        ],
+        "tags": [ "Footprint Measurement Endpoint Conditions" ],
         "summary": "Deletes a measurement endpoint condition under a Footprint measurement resource.",
         "description": "Deletes an existing measurement endpoint condition under a Footprint measurement.",
         "operationId": "measurementEndpointConditions_Delete",
@@ -804,9 +764,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Footprint Measurement Endpoint Conditions"
-        ],
+        "tags": [ "Footprint Measurement Endpoint Conditions" ],
         "summary": "Updates a measurement endpoint condition under a Footprint measurement resource.",
         "description": "Updates an existing measurement endpoint condition under a Footprint measurement resource.",
         "operationId": "measurementEndpointConditions_Update",
@@ -862,9 +820,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/experiments": {
       "get": {
-        "tags": [
-          "Footprint Experiments"
-        ],
+        "tags": [ "Footprint Experiments" ],
         "summary": "Get all experiments under a Footprint profile.",
         "description": "Retrieves the information about all experiments under a Footprint profile.",
         "operationId": "experiments_ListByFootprintProfile",
@@ -908,9 +864,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FootprintMonitoring/footprintProfiles/{footprintProfileName}/experiments/{experimentName}": {
       "get": {
-        "tags": [
-          "Footprint Experiments"
-        ],
+        "tags": [ "Footprint Experiments" ],
         "summary": "Get a Footprint experiment resource.",
         "description": "Retrieves the information about a single Footprint experiment.",
         "operationId": "footprintExperiments_Get",
@@ -952,9 +906,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Footprint Experiments"
-        ],
+        "tags": [ "Footprint Experiments" ],
         "summary": "Creates or updates a Footprint experiment resource.",
         "description": "Creates or updates a Footprint experiment with the specified properties.",
         "operationId": "footprintExperiments_CreateOrUpdate",
@@ -1011,9 +963,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Footprint Experiments"
-        ],
+        "tags": [ "Footprint Experiments" ],
         "summary": "Deletes a Footprint experiment resource.",
         "description": "Deletes an existing Footprint experiment.",
         "operationId": "footprintExperiments_Delete",
@@ -1055,9 +1005,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Footprint Experiments"
-        ],
+        "tags": [ "Footprint Experiments" ],
         "summary": "Updates a Footprint experiment resource.",
         "description": "Updates an existing Footprint experiment resource.",
         "operationId": "footprintExperiments_Update",
@@ -1234,6 +1182,23 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "FootprintProfileList": {
+      "description": "Result of the request to list Footprint profiles. It contains a list of Footprint profile objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FootprintProfile"
+          },
+          "description": "A collection of Footprint profiles."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint profile objects if there are any.",
+          "type": "string"
+        }
+      }
     },
     "FootprintProfile": {
       "title": "Footprint Profile",
