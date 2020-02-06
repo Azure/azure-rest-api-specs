@@ -54,6 +54,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.containerservice.v2019_11_01
   output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_11_01
+```
 
 ### Tag: package-2019-10-27-preview-only and python
 
