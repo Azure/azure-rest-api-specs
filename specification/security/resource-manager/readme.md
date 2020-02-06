@@ -135,6 +135,7 @@ input-file:
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
+- Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
@@ -147,7 +148,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
-- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
@@ -367,6 +367,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+  - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
