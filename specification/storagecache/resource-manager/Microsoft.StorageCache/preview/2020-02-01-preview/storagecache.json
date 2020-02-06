@@ -1334,6 +1334,38 @@
       },
       "x-ms-azure-resource": true
     },
+    "StorageTargetProperties": {
+      "description": "Properties of the Storage Target.",
+      "properties": {
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        }
+      }
+    },
     "Nfs3Target": {
       "description": "An NFSv3 mount point for use as a Storage Target.",
       "type": "object",
@@ -1356,34 +1388,12 @@
     },
     "Nfs3TargetProperties": {
       "description": "Properties of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ],
       "properties": {
-        "junctions": {
-          "description": "List of Cache namespace junctions to target for namespace associations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceJunction"
-          }
-        },
-        "targetType": {
-          "description": "Type of the Storage Target.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateType",
-            "modelAsString": true
-          },
-          "type": "string"
-        },
         "nfs3": {
           "$ref": "#/definitions/Nfs3TargetDetails"
         }
@@ -1402,7 +1412,6 @@
           }
         }
     },
-
     "ClfsTarget": {
       "description": "Storage container for use as a CLFS Storage Target.",
       "type": "object",
@@ -1425,34 +1434,12 @@
     },
     "ClfsTargetProperties": {
       "description": "Properties of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ],
       "properties": {
-        "junctions": {
-          "description": "List of Cache namespace junctions to target for namespace associations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceJunction"
-          }
-        },
-        "targetType": {
-          "description": "Type of the Storage Target.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateType",
-            "modelAsString": true
-          },
-          "type": "string"
-        },
         "clfs": {
           "$ref": "#/definitions/ClfsTargetDetails"
         }
@@ -1466,7 +1453,6 @@
         }
       }
     },
-
     "UnknownTarget": {
       "description": "Storage container for use as an Unknown Storage Target.",
       "type": "object",
@@ -1489,34 +1475,12 @@
     },
     "UnknownTargetProperties": {
       "description": "Properties of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ],
       "properties": {
-        "junctions": {
-          "description": "List of Cache namespace junctions to target for namespace associations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamespaceJunction"
-          }
-        },
-        "targetType": {
-          "description": "Type of the Storage Target.",
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Creating",
-            "Deleting",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningStateType",
-            "modelAsString": true
-          },
-          "type": "string"
-        },
         "unknown": {
           "$ref": "#/definitions/UnknownTargetDetails"
         }
@@ -1530,7 +1494,6 @@
         }
       }
     },
-
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
       "pattern": "^[-0-9a-zA-Z_]{1,31}$",
