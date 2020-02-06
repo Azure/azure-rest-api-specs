@@ -1285,44 +1285,252 @@
         "type": "string"
       }
     },
-    "Nfs3Target": {
-      "description": "An NFSv3 mount point for use as a Storage Target.",
+    "StorageTarget": {
+      "type": "object",
+      "discriminator": "targetType",
+      "description": "Type of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetResource"
+        }
+      ],
       "properties": {
-        "target": {
-          "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
-          "pattern": "^[-.0-9a-zA-Z]+$",
-          "type": "string"
+        "targetType": {
+          "type": "string",
+          "description": "Type of the Storage Target.",
+          "enum": [
+            "nfs3",
+            "clfs",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "StorageTargetType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "targetType"
+      ]
+    },
+    "StorageTargetResource": {
+      "description": "Resource used by a Cache.",
+      "properties": {
+        "name": {
+          "description": "Name of the Storage Target.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceName"
         },
-        "usageModel": {
-          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID of the Storage Target."
+        },
+        "type": {
+          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
+          "readOnly": true,
           "type": "string"
         }
       },
-      "x-ms-discriminator-value": "nfs3",
-      "type": "object"
+      "x-ms-azure-resource": true
     },
+    "Nfs3Target": {
+      "description": "An NFSv3 mount point for use as a Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "nfs3",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy usage details",
+          "$ref": "#/definitions/Nfs3TargetProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTarget"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "Nfs3TargetProperties": {
+      "description": "Properties of the Storage Target.",
+      "properties": {
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "$ref": "#/definitions/StorageTarget"
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "nfs3": {
+          "$ref": "#/definitions/Nfs3TargetDetails"
+        }
+      }
+    },
+    "Nfs3TargetDetails": {
+      "properties": {
+          "target": {
+            "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
+            "pattern": "^[-.0-9a-zA-Z]+$",
+            "type": "string"
+          },
+          "usageModel": {
+            "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
+            "type": "string"
+          }
+        }
+    },
+
     "ClfsTarget": {
       "description": "Storage container for use as a CLFS Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "clfs",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy usage details",
+          "$ref": "#/definitions/ClfsTargetProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTarget"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "ClfsTargetProperties": {
+      "description": "Properties of the Storage Target.",
+      "properties": {
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "$ref": "#/definitions/StorageTarget"
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "clfs": {
+          "$ref": "#/definitions/ClfsTargetDetails"
+        }
+      }
+    },
+    "ClfsTargetDetails": {
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
           "$ref": "#/definitions/URLString"
         }
-      },
-      "x-ms-discriminator-value": "clfs",
-      "type": "object"
+      }
     },
+
     "UnknownTarget": {
       "description": "Storage container for use as an Unknown Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "unknown",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy usage details",
+          "$ref": "#/definitions/UnknownTargetProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTarget"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "UnknownTargetProperties": {
+      "description": "Properties of the Storage Target.",
+      "properties": {
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "$ref": "#/definitions/StorageTarget"
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "unknown": {
+          "$ref": "#/definitions/UnknownTargetDetails"
+        }
+      }
+    },
+    "UnknownTargetDetails": {
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
           "$ref": "#/definitions/UnknownProperties"
         }
-      },
-      "x-ms-discriminator-value": "unknown",
-      "type": "object"
+      }
     },
+
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
       "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -1449,84 +1657,6 @@
           "type": "array"
         }
       }
-    },
-    "StorageTarget": {
-      "description": "A storage system being cached by a Cache.",
-      "type": "object",
-      "discriminator": "targetType",
-      "properties": {
-        "name": {
-          "description": "Name of the Storage Target.",
-          "readOnly": true,
-          "$ref": "#/definitions/ResourceName"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID of the Storage Target."
-        },
-        "type": {
-          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of the Storage Target.",
-          "type": "object",
-          "properties": {
-            "junctions": {
-              "description": "List of Cache namespace junctions to target for namespace associations.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NamespaceJunction"
-              }
-            },
-            "targetType": {
-              "description": "Type of the Storage Target.",
-              "enum": [
-                "nfs3",
-                "clfs",
-                "unknown"
-              ],
-              "x-ms-enum": {
-                "name": "StorageTargetType",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "provisioningState": {
-              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Cancelled",
-                "Creating",
-                "Deleting",
-                "Updating"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningStateType",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "nfs3": {
-              "description": "Properties when targetType is nfs3.",
-              "$ref": "#/definitions/Nfs3Target"
-            },
-            "clfs": {
-              "description": "Properties when targetType is clfs.",
-              "$ref": "#/definitions/ClfsTarget"
-            },
-            "unknown": {
-              "description": "Properties when targetType is unknown.",
-              "$ref": "#/definitions/UnknownTarget"
-            }
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "NamespaceJunction": {
       "description": "A namespace junction.",
