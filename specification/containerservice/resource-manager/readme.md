@@ -59,8 +59,6 @@ input-file:
   - Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
-
-tag: package-2019-10-27-preview
 ```
 
 ### Tag: package-2019-10-27-preview
@@ -459,6 +457,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
