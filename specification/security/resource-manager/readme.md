@@ -364,10 +364,10 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
+  - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
