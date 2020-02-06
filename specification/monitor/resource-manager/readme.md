@@ -60,6 +60,7 @@ input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
 
@@ -600,6 +601,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2016-09-01/serviceDiagnosticsSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/metricDefinitions_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 
 ```
 
