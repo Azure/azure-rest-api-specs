@@ -133,10 +133,10 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -233,9 +233,9 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -323,9 +323,9 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 - Microsoft.Sql/preview/2019-06-01-preview/servers.json
-- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -492,6 +492,7 @@ input-file:
  - ./Microsoft.Sql/preview/2019-06-01-preview/servers.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
  - ./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+ - ./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -862,6 +863,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
