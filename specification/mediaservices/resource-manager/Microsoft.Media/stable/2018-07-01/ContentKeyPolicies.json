@@ -81,7 +81,8 @@
         "keyId": {
           "type": "string",
           "format": "uuid",
-          "description": "The content key ID."
+          "description": "The content key ID.",
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -387,7 +388,8 @@
         "keyValue": {
           "type": "string",
           "format": "byte",
-          "description": "The key value of the key"
+          "description": "The key value of the key",
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -407,12 +409,14 @@
         "exponent": {
           "type": "string",
           "format": "byte",
-          "description": "The RSA Parameter exponent"
+          "description": "The RSA Parameter exponent",
+          "x-nullable": true
         },
         "modulus": {
           "type": "string",
           "format": "byte",
-          "description": "The RSA Parameter modulus"
+          "description": "The RSA Parameter modulus",
+          "x-nullable": true
         }
       },
       "type": "object",
@@ -758,6 +762,18 @@
         }
       ],
       "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/ContentKeyPolicyProperties",
           "x-ms-client-flatten": true
