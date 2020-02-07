@@ -52,6 +52,15 @@ input-file:
 - Microsoft.KeyVault/stable/7.0/keyvault.json
 ```
 
+### Tag: package-7.0-preview
+
+These settings apply only when `--tag=package-7.0-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.0-preview'
+input-file:
+- Microsoft.KeyVault/preview/7.0/keyvault.json
+```
+
 ### Tag: package-2016-10
 
 These settings apply only when `--tag=package-2016-10` is specified on the command line.
