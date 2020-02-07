@@ -356,10 +356,7 @@
           "200": {
             "description": "The request was successful. The response contains the Footprint measurement endpoints found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MeasurementEndpoint"
-              }
+              "$ref": "#/definitions/MeasurementEndpointList"
             }
           },
           "default": {
@@ -597,10 +594,7 @@
           "200": {
             "description": "The request was successful. The response contains the Footprint measurement endpoint conditions found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MeasurementEndpointCondition"
-              }
+              "$ref": "#/definitions/MeasurementEndpointConditionList"
             }
           },
           "default": {
@@ -847,10 +841,7 @@
           "200": {
             "description": "The request was successful. The response contains the Footprint experiments found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FootprintExperiment"
-              }
+              "$ref": "#/definitions/FootprintExperimentList"
             }
           },
           "default": {
@@ -1313,6 +1304,23 @@
         }
       }
     },
+    "MeasurementEndpointList": {
+      "description": "Result of the request to list Footprint measurement endpoints. It contains a list of Footprint measurement endpoints objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpoint"
+          },
+          "description": "A collection of Footprint measurement endpoints."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint measurement endpoints objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
     "MeasurementEndpoint": {
       "type": "object",
       "title": "Footprint Measurement Endpoint",
@@ -1445,6 +1453,23 @@
         }
       }
     },
+    "FootprintExperimentList": {
+      "description": "Result of the request to list Footprint experiments. It contains a list of Footprint experiments objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/FootprintExperiment"
+          },
+          "description": "A collection of Footprint experiments."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint experiment objects if there are any.",
+          "type": "string"
+        }
+      }
+    },
     "FootprintExperiment": {
       "type": "object",
       "title": "Footprint Experiment",
@@ -1489,6 +1514,23 @@
           "description": "The status of a Footprint experiment.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MeasurementEndpointConditionList": {
+      "description": "Result of the request to list Footprint measurement endpoint contidions. It contains a list of Footprint measurement endpoint contidions objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MeasurementEndpointCondition"
+          },
+          "description": "A collection of Footprint measurement endpoint contidions."
+        },
+        "nextLink": {
+          "description": "URL to get the next set of Footprint measurement endpoint contidion objects if there are any.",
+          "type": "string"
         }
       }
     },
