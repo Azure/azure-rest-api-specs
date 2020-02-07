@@ -261,6 +261,7 @@
           },
           {
             "name": "privateCloud",
+            "description": "TODO",
             "in": "body",
             "required": true,
             "schema": {
@@ -316,6 +317,7 @@
           },
           {
             "name": "privateCloud",
+            "description": "TODO",
             "in": "body",
             "schema": {
               "$ref": "#/definitions/PrivateCloud"
@@ -511,6 +513,7 @@
           },
           {
             "name": "cluster",
+            "description": "TODO",
             "in": "body",
             "required": true,
             "schema": {
@@ -569,6 +572,7 @@
           },
           {
             "name": "cluster",
+            "description": "TODO",
             "in": "body",
             "required": true,
             "schema": {
@@ -747,6 +751,7 @@
     "ApiError": {
       "properties": {
         "error": {
+          "description": "TODO",
           "$ref": "#/definitions/ApiErrorBase"
         }
       },
@@ -821,21 +826,26 @@
       }
     },
     "ExpressRouteAuthorization": {
+      "description": "TODO",
       "properties": {
         "name": {
+          "description": "TODO",
           "type": "string"
         },
         "id": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         },
         "key": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "Circuit": {
+      "description": "TODO",
       "properties": {
         "primarySubnet": {
           "type": "string",
@@ -867,41 +877,53 @@
       }
     },
     "Endpoints": {
+      "description": "TODO",
       "properties": {
         "nsxtManager": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         },
         "vcsa": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "IdentitySource": {
+      "description": "TODO",
       "properties": {
         "name": {
+          "description": "TODO",
           "type": "string"
         },
         "alias": {
+          "description": "TODO",
           "type": "string"
         },
         "domain": {
+          "description": "TODO",
           "type": "string"
         },
         "baseUserDN": {
+          "description": "TODO",
           "type": "string"
         },
         "baseGroupDN": {
+          "description": "TODO",
           "type": "string"
         },
         "primaryServer": {
+          "description": "TODO",
           "type": "string"
         },
         "secondaryServer": {
+          "description": "TODO",
           "type": "string"
         },
         "ssl": {
+          "description": "TODO",
           "type": "string",
           "enum": [
             "Enabled",
@@ -913,14 +935,17 @@
           }
         },
         "username": {
+          "description": "TODO",
           "type": "string"
         },
         "password": {
+          "description": "TODO",
           "type": "string"
         }
       }
     },
     "PrivateCloud": {
+      "description": "TODO",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -928,13 +953,16 @@
       ],
       "properties": {
         "properties": {
+          "description": "TODO",
           "$ref": "#/definitions/PrivateCloudProperties"
         }
       }
     },
     "PrivateCloudProperties": {
+      "description": "TODO",
       "properties": {
         "provisioningState": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -951,12 +979,15 @@
           }
         },
         "circuit": {
+          "description": "TODO",
           "$ref": "#/definitions/Circuit"
         },
         "cluster": {
+          "description": "TODO",
           "$ref": "#/definitions/DefaultClusterProperties"
         },
         "clusters": {
+          "description": "TODO",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -964,10 +995,12 @@
           }
         },
         "endpoints": {
+          "description": "TODO",
           "readOnly": true,
           "$ref": "#/definitions/Endpoints"
         },
         "internet": {
+          "description": "TODO",
           "type": "string",
           "enum": [
             "Enabled",
@@ -979,23 +1012,28 @@
           }
         },
         "identitySources": {
+          "description": "TODO",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IdentitySource"
           }
         },
         "networkBlock": {
+          "description": "TODO",
           "type": "string"
         },
         "managementNetwork": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         },
         "provisioningNetwork": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         },
         "vmotionNetwork": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true
         },
@@ -1010,6 +1048,7 @@
       }
     },
     "Cluster": {
+      "description": "TODO",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1017,20 +1056,25 @@
       ],
       "properties": {
         "properties": {
+          "description": "TODO",
           "$ref": "#/definitions/ClusterProperties"
         }
       }
     },
     "DefaultClusterProperties": {
+      "description": "TODO",
       "properties": {
         "clusterId": {
+          "description": "TODO",
           "type": "integer",
           "readOnly": true
         },
         "clusterSize": {
+          "description": "TODO",
           "type": "integer"
         },
         "hosts": {
+          "description": "TODO",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1040,6 +1084,7 @@
       }
     },
     "ClusterProperties": {
+      "description": "TODO",
       "allOf": [
         {
           "$ref": "#/definitions/DefaultClusterProperties"
@@ -1047,6 +1092,7 @@
       ],
       "properties": {
         "provisioningState": {
+          "description": "TODO",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1063,8 +1109,10 @@
       }
     },
     "PrivateCloudList": {
+      "description": "TODO",
       "properties": {
         "value": {
+          "description": "TODO",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1079,8 +1127,10 @@
       }
     },
     "ClusterList": {
+      "description": "TODO",
       "properties": {
         "value": {
+          "description": "TODO",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1095,6 +1145,7 @@
       }
     },
     "AdminCredentials": {
+      "description": "TODO",
       "properties": {
         "nsxtUsername": {
           "description": "NSX-T Manager username",
