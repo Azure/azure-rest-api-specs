@@ -2252,6 +2252,45 @@
       },
       "description": "Identity Provider Base Parameter Properties."
     },
+    "IdentityProviderCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IdentityProviderContractProperties",
+          "description": "Identity Provider contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Identity Provider details."
+    },
+    "IdentityProviderCreateContractProperties": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderBaseParameters"
+        }
+      ],
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
+    },
     "IdentityProviderContract": {
       "properties": {
         "properties": {
@@ -2829,6 +2868,53 @@
         }
       },
       "description": "Paged OpenIdProviders list representation."
+    },
+    "OpenidConnectProviderCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OpenidConnectProviderContractProperties",
+          "description": "OpenId Connect Provider contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "OpenId Connect Provider details."
+    },
+    "OpenidConnectProviderCreateContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "required": [
+        "displayName",
+        "metadataEndpoint",
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "OpenID Connect Providers Contract."
     },
     "OpenidConnectProviderContract": {
       "properties": {
@@ -5185,6 +5271,15 @@
         "clientSecret": {
           "type": "string",
           "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "PropertyValueContract": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Secret Value of the NamedValue entity."
         }
       },
       "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
