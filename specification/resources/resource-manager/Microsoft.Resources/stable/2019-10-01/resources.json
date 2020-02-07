@@ -4603,6 +4603,34 @@
         "onErrorDeployment": {
           "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
+        },
+        "templateHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hash produced for the template."
+        },
+        "outputResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of provisioned resources.",
+          "items": {
+            "type": "object",
+            "description": "Details of provisioned resources."
+          }
+        },
+        "validatedResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of validated resources.",
+          "items": {
+            "type": "object",
+            "description": "Details of validated resources."
+          }
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."
@@ -4657,6 +4685,7 @@
     "DeploymentValidateResult": {
       "properties": {
         "error": {
+          "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The deployment validation error."
         },
