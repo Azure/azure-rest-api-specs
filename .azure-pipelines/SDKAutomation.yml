@@ -16,6 +16,9 @@ jobs:
   displayName: SDK
   pool:
     vmImage: 'Ubuntu 18.04'
+  # container:
+  #   image: azopenapitest.azurecr.io/openapi/sdk-automation:test
+  #   endpoint: openapi platform test acr registry
   timeoutInMinutes: 180
 
   variables:
@@ -50,10 +53,12 @@ jobs:
     displayName: Login into ACR
     inputs:
       command: login
-      containerRegistry: $(REGISTRY_ENDPOINT)
+      containerRegistry: openapi platform test acr registry
   - script: |
       docker pull $IMAGE
       docker tag $IMAGE sdk-automation:latest
+    env:
+      IMAGE: azopenapitest.azurecr.io/openapi/sdk-automation:test
     displayName: Pull SDK Automation Image
   - script: |
       docker run \
