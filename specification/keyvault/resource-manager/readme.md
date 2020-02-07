@@ -26,18 +26,7 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-01
-```
-
-
-### Tag: package-2020-01
-
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-01'
-input-file:
-- Microsoft.KeyVault/preview/2020-01-23/keyvault.json
-- Microsoft.KeyVault/preview/2020-01-23/providers.json
+tag: package-2019-09
 ```
 
 
