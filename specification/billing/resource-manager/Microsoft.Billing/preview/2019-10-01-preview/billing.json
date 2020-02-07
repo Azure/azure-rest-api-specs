@@ -521,66 +521,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "BillingProfiles"
-        ],
-        "operationId": "BillingProfiles_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "description": "The operation to create/update a BillingProfile.",
-        "x-ms-examples": {
-          "CreateBillingProfile": {
-            "$ref": "./examples/CreateOrUpdateBillingProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingProfileProperties"
-            },
-            "description": "Request parameters supplied to the Create BillingProfile operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/BillingProfile"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "Location URI to poll for result",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Recommends the retryable time after receiving this.",
-                "type": "integer"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "patch": {
         "tags": [
           "BillingProfiles"
@@ -5720,10 +5660,6 @@
           "items": {
             "$ref": "#/definitions/InvoiceSection"
           }
-        },
-        "budgetInformation": {
-          "description": "The budget information associated with the billing profile.",
-          "$ref": "#/definitions/BudgetInformation"
         }
       }
     },
@@ -5768,29 +5704,6 @@
         },
         "postalCode": {
           "description": "Address Postal Code.",
-          "type": "string"
-        }
-      }
-    },
-    "BudgetInformation": {
-      "description": "Budget information.",
-      "properties": {
-        "amount": {
-          "description": "The budget amount.",
-          "$ref": "#/definitions/Amount"
-        },
-        "startDate": {
-          "description": "Start Date.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "endDate": {
-          "description": "End Date.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "additionalDetails": {
-          "description": "This is an free flow string.",
           "type": "string"
         }
       }
@@ -6828,7 +6741,8 @@
       "properties": {
         "currency": {
           "description": "The currency for the amount value.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "value": {
           "description": "Amount value.",
