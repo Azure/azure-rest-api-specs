@@ -1,0 +1,623 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Data Service",
+    "version": "1.0",
+    "description": "APIs for uploading map data to Azure Maps."
+  },
+  "host": "atlas.microsoft.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-overview)  Flows. When paired with [Azure Role Based Access](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)  control it can be used to control access to Azure Maps REST APIs. Azure Role based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution  for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Note\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to.  This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* The `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* The Azure role based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs.\n* Usage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently Azure Active Directory [v1.0](https://docs.microsoft.com/en-us/azure/active-directory/develop/azure-ad-endpoint-comparison) tokens are supported.",
+      "scopes": {
+        "user_impersonation": "Impersonates a user's Azure Active Directory account."
+      }
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "description": "This is a shared key which is provisioned when creating an [Azure Maps resource](https://aka.ms/amauth) through the Azure management plane  via Azure portal, Powershell, CLI, Azure SDKs, or REST APIs. With this key, any application is authorized to access  all REST APIs. In other words, these can currently be treated as master keys to the account which they are issued for.  For publicly exposed applications our recommendation is to use server to server access of Azure Maps REST APIs where this key can be  securely stored.",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "responses": {
+    "400": {
+      "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "401": {
+      "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      },
+      "headers": {
+        "WWW-Authenticate": {
+          "type": "string",
+          "description": "Bearer realm=\"https://atlas.microsoft.com/\", error=\"invalid_token\", error_description=\"The access token expired\""
+        }
+      }
+    },
+    "403": {
+      "description": "Permission, capacity, or authentication issues.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "404": {
+      "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    },
+    "500": {
+      "description": "An error occurred while processing the request. Please try again later.",
+      "schema": {
+        "$ref": "#/definitions/ErrorResponse"
+      }
+    }
+  },
+  "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "description": "Version number of Azure Maps API. Current version is 1.0",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "default": "1.0",
+      "x-ms-parameter-location": "client"
+    },
+    "JsonFormat": {
+      "name": "format",
+      "description": "Desired format of the response. Only `json` format is supported.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "enum": [
+        "json"
+      ],
+      "x-ms-enum": {
+        "name": "JsonFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "UploadDataFormat": {
+      "name": "dataFormat",
+      "description": "Data format of the content being uploaded. Currently, only `geojson` format is supported.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "geojson",
+        "zip"
+      ],
+      "x-ms-enum": {
+        "name": "UploadDataFormat",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          },
+          {
+            "value": "zip",
+            "description": "Compressed data format."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Udid": {
+      "name": "udid",
+      "description": "The unique data id for the content. The `udid` must have been obtained from a successful [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) call.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "paths": {
+    "/mapData/upload": {
+      "post": {
+        "x-publish": true,
+        "description": "**Data Upload API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to upload data content to the Azure Maps service.<br>    \nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` format for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). \n\n### Submit Upload Request\n\nTo upload your content you will use a `POST` request where the request body will contain the data to upload, the `dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter can contain the sharing level for the data and the `Content-Type` header will be set to the content type of the data. <br>    \nFor example, to upload a collection of geofences in `GeoJSON` format, set the request body to the geofence content, set the `dataFormat` query parameter to _geojson_ and set the `Content-Type` header to either one of the following media types: \n    \n  - `application/json`\n  - `application/vnd.geo+json`\n  - `application/octet-stream`    \n\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry in `GeoJSON` using a center point and a radius:\n\n<br>\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```   \n\n<br>The Data Upload API is a long-running request with the following sequence of operations:\n<br>\n#### Send the upload request\n\n1. Client sends a Data Upload `POST` request to Azure Maps\n\n2. The server will respond with one of the following:\n \n   > HTTP `202 Accepted` - Upload request has been accepted (but not completed yet).\n\n   > HTTP `Error` - There was an error processing your Upload request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the Upload request was accepted successfully, the `Location` header in the response contains the _status URI_ to check the current status of the long-running upload request. This _status URI_ looks like the following:    \n    \n```\nhttps://atlas.microsoft.com/mapData/{uploadStatusId}/status?api-version=1.0\n```\n\n<br> Note: Please remember to add AUTH information (subscription-key/azure_auth - See [Security](#security)) to the _status URI_ before running it.\n\n<br>\n\n#### Upload request \"Accepted\" but \"In Progress\"\n\n1. Client issues a `GET` request on the _status URI_ obtained above to check the current status of the upload request.\n\n2. At this point, if the upload request is still being _processed_ by Azure Maps, the client again receives a HTTP `202 Accepted` response. The `Location` header in the response contains the _status URI_ to check the current status of the long-running upload request. The response body contains a more detailed status for the request which looks like:\n\n\n```json\n{\n    \"status\" : \"In Progress\"         \n}\n```\n\n<br>\n\n#### Upload request \"Completed\" successfully\n\n1. Client issues another `GET` request on the _status URI_ to check the current upload status.\n\n2. At this point, if the upload request has been processed and completed successfully, the client receives a HTTP `201 Created` response.\n\n3. The upload request was successful and the data has been created. The `Location` header in the response contains the URI to access/download the content in the future. The response body contains a unique data id (udid) for the data and looks like:\n\n\n```json\n{\n    \"udid\" : \"d7e5efc8-2239-4387-a286-5bb51aa804e3\"         \n}\n```\n\n<br>\n\n#### Upload request \"Failed\"\n\n1. Client issues another `GET` request on the _status URI_ to check the current upload status.\n\n2. At this point, if the upload request processing has failed, the client receives a HTTP `204 No Content` response.\n\n3. The request has failed and the data has not been created. The response body will contain a list of errors encountered while processing the upload request:\n\n\n```json\n{\n    \"error\": \n    {\n      \"code\": \"204 No Content\",\n      \"message\": \"Upload data request failed. We encountered the following problems with your data: Map data is not a valid GeoJSON\"\n    }         \n}\n```\n\n<br>\n\n### Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account gets a free storage limit of 50 MB. This means that you can either upload 1 document of size 50 MB or 5 documents, each of size 10 MB or 100 documents, each of size 500 KB and so on. Once the free storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.\n\n<br>",
+        "operationId": "Data_UploadPreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Upload GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/Upload.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/UploadDataFormat"
+          },
+          {
+            "name": "UploadContent",
+            "in": "body",
+            "description": "The content to upload.",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Content created/uploaded successfully. The `Location` header in the response contains the URI for accessing the content resource, for example - `https://atlas.microsoft.com/mapData/{udid}?api-version=1.0&subscription-key={subscription-key}`. The response body contains a unique data id `udid` for the content, for example - `\"udid\": \"25084fb7-307a-4720-8f91-7952a0b91012\"`",
+            "schema": {
+              "$ref": "#/definitions/MapDataUploadResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URI for reading/downloading the data resource."
+              },
+              "Access-Control-Expose-Headers": {
+                "type": "string",
+                "description": "The list of response headers that can be read by the client."
+              }
+            }
+          },
+          "202": {
+            "description": "Upload data request has been `Accepted`. The upload process has not completed yet. The `Location` header in the response contains the uri for checking the status of the upload, for example - `https://atlas.microsoft.com/mapData/{uploadStatusId}/status?api-version=1.0&subscription-key={subscription-key}`. The response body contains the current status for the upload, for example - `\"status\": \"Accepted\"`",
+            "schema": {
+              "$ref": "#/definitions/MapDataUploadRequestAcceptedResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URI for checking the status of the uploaded data resource."
+              },
+              "Access-Control-Expose-Headers": {
+                "type": "string",
+                "description": "The list of response headers that can be read by the client."
+              }
+            }
+          },
+          "204": {
+            "description": "Data upload failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mapData/{udid}": {
+      "put": {
+        "x-publish": true,
+        "description": "**Data Update API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to update a previously uploaded data content.<br>    \nYou can use this API in a scenario like adding/removing geofences to/from an existing collection of geofences uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). <br>\nPlease note that the Update API will *replace/override* the existing data content. \n\n### Submit Update Request\n\nTo update your content you will use a `PUT` request where the request body will contain the new data that will replace the existing data, the `Content-Type` header will be set to the content type of the data and the path will contain the `udid` of the data to update. <br>    \nFor example, to update a collection of geofences previously uploaded using the Upload API, set the request body to the new geofence content, set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response and set the `Content-Type` header to either one of the following media types: \n    \n  - `application/json`\n  - `application/vnd.geo+json`\n  - `application/octet-stream`\n\n\nHere's a sample request body for updating a simple Geofence represented as a circle geometry in `GeoJSON` using a center point and a radius:\n\n<br>\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\n<br>The previously uploaded geofence had a radius of 100m. This request will update it to 500m.<br>\nThe Data Update API is a long-running request with the following sequence of operations:\n<br>\n#### Send the update request\n\n1. Client sends a Data Update `PUT` request to Azure Maps\n\n2. The server will respond with one of the following:\n \n   > HTTP `202 Accepted` - Update request has been accepted (but not completed yet).\n\n   > HTTP `Error` - There was an error processing your Update request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the Update request was accepted successfully, the `Location` header in the response contains the _status URI_ to check the current status of the long-running update request. This _status URI_ looks like the following:    \n    \n```\nhttps://atlas.microsoft.com/mapData/{updateStatusId}/status?api-version=1.0    \n```\n\n<br> Note: Please remember to add AUTH information (subscription-key/azure_auth - See [Security](#security)) to the _status URI_ before running it.\n\n<br>\n\n#### Update request \"Accepted\" but \"In Progress\"\n\n1. Client issues a `GET` request on the _status URI_ obtained above to check the current status of the update request.\n\n2. At this point, if the update request is still being _processed_ by Azure Maps, the client receives a HTTP `202 Accepted` response. The `Location` header in the response contains the _status URI_ to check the current status of the long-running update request. The response body contains a more detailed status for the request which looks like:\n\n\n```json\n{\n    \"status\" : \"In Progress\"         \n}\n```\n\n<br>\n\n#### Update request \"Completed\" successfully\n\n1. Client issues another `GET` request on the _status URI_ to check the current update status.\n\n2. At this point, if the update request processing has completed successfully, the client receives a HTTP `201 Created` response.\n\n3. The update request was successful and the data has been created. The `Location` header in the response contains the URI to access/download the content in the future. The response body contains a unique data id (udid) for the data and looks like:\n\n\n```json\n{\n    \"udid\" : \"d7e5efc8-2239-4387-a286-5bb51aa804e3\"         \n}\n```\n\n<br>\n\n#### Update request \"Failed\"\n\n1. Client issues another `GET` request on the _status URI_ to check the current update status.\n\n2. At this point, if the update request processing has failed, the client receives a HTTP `204 No Content` response.\n\n3. The request has failed and the data has not been created. The response body will contain a list of errors encountered while processing the update request:\n\n\n```json\n{\n    \"error\": \n    {\n      \"code\": \"204 No Content\",\n      \"message\": \"Update data request failed. We encountered the following problems with your data: Data is not a valid GeoJSON\"\n    }         \n}\n```\n\n<br>\n\n### Data Update Limits\n\nPlease, be aware that currently every Azure Maps account gets a free storage limit of 50 MB. This means that you can either upload 1 document of size 50 MB or 5 documents, each of size 10 MB or 100 documents, each of size 500 KB and so on. Once the free storage limit is reached, all the new Update API calls will return a `409 Conflict` http error response. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads/updates.\n\n<br>",
+        "operationId": "Data_UpdatePreview",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Udid"
+          },
+          {
+            "name": "UpdateContent",
+            "in": "body",
+            "description": "The new content that will update/replace the previously uploaded content.",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Content updated successfully. The `Location` header in the response contains the uri for accessing the content resource, for example - `https://atlas.microsoft.com/mapData/{udid}?api-version=1.0&subscription-key={subscription-key}`. The response body contains a unique data id `udid` for the content, for example - `\"udid\" : \"25084fb7-307a-4720-8f91-7952a0b91012.geojson\"`.",
+            "schema": {
+              "$ref": "#/definitions/MapDataUpdateResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URI for reading/downloading the data resource."
+              },
+              "Access-Control-Expose-Headers": {
+                "type": "string",
+                "description": "The list of response headers that can be read by the client."
+              }
+            }
+          },
+          "202": {
+            "description": "Update data request has been `Accepted`. The update process has not completed yet. The `Location` header in the response contains the uri for checking the status of the update, for example - `https://atlas.microsoft.com/mapData/{updateStatusId}/status?api-version=1.0&subscription-key={subscription-key}`. The response body contains the current status for the update, for example - `\"status\" : \"Accepted\"`.",
+            "schema": {
+              "$ref": "#/definitions/MapDataUpdateRequestAcceptedResponse"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URI for checking the status of the uploaded data resource."
+              },
+              "Access-Control-Expose-Headers": {
+                "type": "string",
+                "description": "The list of response headers that can be read by the client."
+              }
+            }
+          },
+          "204": {
+            "description": "Data update failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "get": {
+        "x-publish": true,
+        "description": "**Data Download API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to download a previously uploaded data content.<br>    \nYou can use this API in a scenario like downloading an existing collection of geofences uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). \n\n\n### Submit Download Request\n\nTo download your content you will use a `GET` request where the path will contain the `udid` of the data to download. Optionally, you can also pass in an `Accept` header to specify a preference for the `Content-Type` of the data response. <br>\nFor example, to download a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response and set the `Accept` header to either one of the following media types: \n    \n  - `application/json`\n  - `application/vnd.geo+json`\n  - `application/octet-stream`\n\n\n### Download Data Response\n\nThe Download API will return a HTTP `200 OK` response if the data resource with the passed-in `udid` is found, where the response body will contain the content of the data resource.<br>\nA HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.<br>\n\nHere's a sample response body for a simple geofence represented in `GeoJSON` uploaded previously using the Upload API:\n<br>\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```",
+        "operationId": "Data_DownloadPreview",
+        "x-ms-examples": {
+          "Download previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/Download.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Udid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data download request completed successfully. The response body will contain the content for the passed in `udid`.",
+            "schema": {
+              "$ref": "#/definitions/MapDataDownloadResponse"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the Download API response."
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "x-publish": true,
+        "description": "**Data Delete API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to delete a previously uploaded data content.<br>    \nYou can use this API in a scenario like removing geofences previously uploaded using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). You can also use this API to delete old/unused uploaded content and create space for new content.\n\n\n### Submit Delete Request\n\nTo delete your content you will issue a `DELETE` request where the path will contain the `udid` of the data to delete.<br>    \nFor example, to delete a collection of geofences previously uploaded using the Upload API, set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response. \n\n\n### Delete Data Response\n\nThe Data Delete API returns a HTTP `204 No Content` response with an empty body, if the data resource was deleted successfully.<br>    \nA HTTP `400 Bad Request` error response will be returned if the data resource with the passed-in `udid` is not found.    ",
+        "operationId": "Data_DeletePreview",
+        "x-ms-examples": {
+          "Delete previously uploaded GeoJSON data containing geometries that represent a collection of geofences": {
+            "$ref": "./examples/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Udid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Data delete request completed successfully. The content for `udid` was deleted on the server.",
+            "schema": {
+              "$ref": "#/definitions/MapDataDeleteResponse"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    },
+    "/mapData": {
+      "get": {
+        "x-publish": true,
+        "description": "**Data List API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to fetch a list of all content uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview).   \n\n\n### Submit List Request\n\nTo list all your map data content you will issue a `GET` request with no additional parameters.\n\n\n### List Data Response\n\nThe Data List API returns the complete list of all data in `json` format. The response contains the following details for each data resource:\n\n  > udid - The unique data id for the data resource.\n\n  > location - The location of the data resource. Execute a HTTP `GET` on this location to download the data.\n\n\nHere's a sample response returning the `udid` and `location` of 3 data resources:  \n\n<br>\n\n```json\n{\n    \"mapDataList\": \n    [\n        {\n            \"udid\": \"9a1288fa-1858-4a3b-b68d-13a8j5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/9a1288fa-1858-4a3b-b68d-13a8j5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 29920,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"8b1288fa-1958-4a2b-b68e-13a7i5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/8b1288fa-1958-4a2b-b68e-13a7i5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1339,\n            \"uploadStatus\": \"Completed\"\n        },\n        {\n            \"udid\": \"7c1288fa-2058-4a1b-b68f-13a6h5af7d7c\",\n            \"location\": \"https://atlas.microsoft.com/mapData/7c1288fa-2058-4a1b-b68f-13a6h5af7d7c?api-version=1.0\",\n            \"sizeInBytes\": 1650,\n            \"uploadStatus\": \"Pending\"\n        }]\n}\n```\n\n<br>",
+        "operationId": "Data_ListPreview",
+        "x-ms-examples": {
+          "List all the previously uploaded data": {
+            "$ref": "./examples/List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionKey"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List data request completed successfully. The response body contains a list of all the previously uploaded data.",
+            "schema": {
+              "$ref": "#/definitions/MapDataListResponse"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "description": "The content-type for the Download API response."
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "403": {
+            "$ref": "#/responses/403"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "500": {
+            "$ref": "#/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The HTTP status code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "MapDataUploadResponse": {
+      "description": "The response model for the Data Upload API for the case when the content was successfully uploaded. This contains a unique data id `udid` for the uploaded content.",
+      "type": "object",
+      "properties": {
+        "udid": {
+          "description": "A unique data id `udid` for the uploaded content.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MapDataUploadRequestAcceptedResponse": {
+      "description": "The response model for the Data Upload API for the case when the upload request was accepted, but the content wasn't created yet. This contains the current `status` of the long running upload operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Current `status` of the long running upload operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MapDataUpdateResponse": {
+      "description": "The response model for the Data Update API for the case when the content was successfully updated. This contains the `udid` for the updated content.",
+      "type": "object",
+      "properties": {
+        "udid": {
+          "description": "The `udid` for the updated content.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MapDataUpdateRequestAcceptedResponse": {
+      "description": "The response model for the Data Update API for the case when the update request was accepted, but the content wasn't updated/replaced yet. This contains the current `status` of the long running update operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Current `status` of the long running update operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MapDataDownloadResponse": {
+      "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",
+      "type": "object"
+    },
+    "MapDataDeleteResponse": {
+      "description": "The response model for the Data Delete API. The response body will be empty signifying there's no content available for the `udid` anymore.",
+      "type": "object"
+    },
+    "MapDataListResponse": {
+      "description": "The response model for the Data List API. Returns a list of all the previously uploaded data.",
+      "type": "object",
+      "properties": {
+        "mapDataList": {
+          "description": "A list of all the previously uploaded data.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MapDataDetailInfo"
+          }
+        }
+      }
+    },
+    "MapDataDetailInfo": {
+      "description": "Detail information for the data.",
+      "type": "object",
+      "properties": {
+        "udid": {
+          "description": "The unique data id for the data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the data. Execute a HTTP `GET` on this location to download the data.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sizeInBytes": {
+          "description": "The size of the content in bytes.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "uploadStatus": {
+          "description": "The current upload status of the content.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
