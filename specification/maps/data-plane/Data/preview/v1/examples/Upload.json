@@ -2,27 +2,32 @@
   "parameters": {
     "api-version": "1.0",
     "subscription-key": "[subscription-key]",
-    "dataFormat": "geojson",        
+    "dataFormat": "geojson",
     "UploadContent": {
       "type": "FeatureCollection",
-      "features": [{
-        "type": "Feature",
-        "geometry": {
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
             "type": "Point",
-            "coordinates": [-122.126986, 47.639754]
-        },
-        "properties": {
+            "coordinates": [
+              -122.126986,
+              47.639754
+            ]
+          },
+          "properties": {
             "geometryId": "001",
             "radius": 500
+          }
         }
-      }]
+      ]
     }
   },
   "responses": {
     "201": {
       "headers": {
         "Location": "https://atlas.microsoft.com/mapData/{udid}?api-version=1.0",
-		"Access-Control-Expose-Headers": "Location"
+        "Access-Control-Expose-Headers": "Location"
       },
       "body": {
         "udid": "25084fb7-307a-4720-8f91-7952a0b91012"
@@ -31,7 +36,7 @@
     "202": {
       "headers": {
         "Location": "https://atlas.microsoft.com/mapData/{uploadStatusId}/status?api-version=1.0",
-		"Access-Control-Expose-Headers": "Location"
+        "Access-Control-Expose-Headers": "Location"
       },
       "body": {
         "status": "Accepted"
