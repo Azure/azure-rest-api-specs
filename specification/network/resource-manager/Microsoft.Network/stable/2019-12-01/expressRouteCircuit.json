@@ -1948,6 +1948,20 @@
         "modelAsString": true
       }
     },
+    "Ipv6CircuitConnectionConfig": {
+      "description": "IPv6 Circuit Connection properties for global reach.",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "/125 IP address space to carve out customer addresses for global reach."
+        },
+        "circuitConnectionStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/CircuitConnectionStatus",
+          "description": "Express Route Circuit connection state."
+        }
+      }
+    },
     "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
         "expressRouteCircuitPeering": {
@@ -1965,6 +1979,10 @@
         "authorizationKey": {
           "type": "string",
           "description": "The authorization key."
+        },
+        "ipv6CircuitConnectionConfig": {
+          "$ref": "#/definitions/Ipv6CircuitConnectionConfig",
+          "description": "IPv6 Address PrefixProperties of the express route circuit connection."
         },
         "circuitConnectionStatus": {
           "$ref": "#/definitions/CircuitConnectionStatus",
@@ -2220,7 +2238,7 @@
         },
         "globalReachEnabled": {
           "type": "boolean",
-          "description": "Flag denoting Global reach status."
+          "description": "Flag denoting global reach status."
         }
       },
       "description": "Properties of ExpressRouteCircuit."
