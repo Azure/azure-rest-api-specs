@@ -1493,7 +1493,11 @@
         },
         "scaleSetEvictionPolicy": {
           "$ref": "#/definitions/ScaleSetEvictionPolicy",
-          "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for low priority virtual machine scale set. Default to Delete."
+          "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for Spot or low priority virtual machine scale set. Default to Delete."
+        },
+        "spotMaxPrice": {
+          "$ref": "#/definitions/SpotMaxPrice",
+          "description": "SpotMaxPrice to be used to specify the maximum price you are willing to pay in US Dollars. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand."
         },
         "tags": {
           "type": "object",
@@ -2349,6 +2353,7 @@
       "type": "string",
       "default": "Regular",
       "enum": [
+        "Spot",
         "Low",
         "Regular"
       ],
@@ -2369,7 +2374,12 @@
         "name": "ScaleSetEvictionPolicy",
         "modelAsString": true
       },
-      "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for low priority virtual machine scale set. Default to Delete."
+      "description": "ScaleSetEvictionPolicy to be used to specify eviction policy for Spot or low priority virtual machine scale set. Default to Delete."
+    },
+    "SpotMaxPrice": {
+      "type": "float",
+      "default": -1,
+      "description": "SpotMaxPrice to be used to specify the maximum price you are willing to pay in US Dollars. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand."
     },
     "CredentialResults": {
       "properties": {
