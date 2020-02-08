@@ -38,12 +38,12 @@ These settings apply only when `--tag=ts` is specified on the command line
 
 ``` yaml $(tag) == 'ts'
 input-file: 
-  - ./search/preview/v1/search.json
-  - ./route/preview/v1/route.json
-  - ./timezone/preview/v1/timezone.json
-  - ./render/preview/v1/render.json
-  - ./mobility/preview/v1/mobility.json
-  - ./spatial/preview/v1/spatial.json
+  - ./Search/preview/v1/search.json
+  - ./Route/preview/v1/route.json
+  - ./TimeZone/preview/v1/timezone.json
+  - ./Render/preview/v1/render.json
+  - ./Mobility/preview/v1/mobility.json
+  - ./Spatial/preview/v1/spatial.json
 
 typescript:
   enum-types: true
