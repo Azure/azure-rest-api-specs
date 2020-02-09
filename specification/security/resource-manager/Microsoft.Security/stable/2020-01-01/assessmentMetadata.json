@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2020-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -478,7 +478,8 @@
           "enum": [
             "BuiltIn",
             "CustomPolicy",
-            "CustomerManaged"
+            "CustomerManaged",
+            "VerifiedPartner"
           ],
           "x-ms-enum": {
             "name": "assessmentType",
@@ -495,9 +496,16 @@
               {
                 "value": "CustomerManaged",
                 "description": "User assessments pushed directly by the user or other third party to Azure Security Center"
+              },
+              {
+                "value": "VerifiedPartner",
+                "description": "An assessment that was created by a verified 3rd party if the user connected it to ASC"
               }
             ]
           }
+        },
+        "partnerData": {
+          "$ref": "#/definitions/SecurityAssessmentMetadataPartnerData"
         }
       },
       "required": [
@@ -505,6 +513,26 @@
         "severity",
         "assessmentType"
       ]
+    },
+    "SecurityAssessmentMetadataPartnerData": {
+      "type": "object",
+      "description": "Describes the partner that created the assessment",
+      "properties": {
+        "partnerName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the company of the partner"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product of the partner that created the assessment"
+        },
+        "secret": {
+          "type": "string",
+          "description": "Secret to authenticate the partner and verify it created the assessment - write only",
+          "x-ms-secret": true
+        }
+      }
     }
   },
   "parameters": {

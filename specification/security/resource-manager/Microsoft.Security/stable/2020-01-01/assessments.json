@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2019-01-01-preview"
+    "version": "2020-01-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -261,12 +261,29 @@
         },
         "links": {
           "$ref": "#/definitions/AssessmentLinks"
+        },
+        "metadata": {
+          "$ref": "./assessmentMetadata.json#/definitions/SecurityAssessmentMetadataProperties"
+        },
+        "partnersData": {
+          "$ref": "#/definitions/SecurityAssessmentPartnerData"
         }
       },
       "required": [
         "resourceDetails",
         "status"
       ]
+    },
+    "SecurityAssessmentPartnerData": {
+      "type": "object",
+      "description": "Data regarding 3rd party partner integration",
+      "properties": {
+        "secret": {
+          "type": "string",
+          "description": "secret to authenticate the partner - write only",
+          "x-ms-secret": true
+        }
+      }
     },
     "AssessmentLinks": {
       "type": "object",
