@@ -1,616 +1,615 @@
 {
-	"swagger": "2.0",
-	"info": {
-	  "title": "Security Center",
-	  "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-	  "version": "2020-01-01-preview"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-	  "https"
-	],
-	"consumes": [
-	  "application/json"
-	],
-	"produces": [
-	  "application/json"
-	],
-	"security": [
-	  {
-		"azure_auth": [
-		  "user_impersonation"
-		]
-	  }
-	],
-	"securityDefinitions": {
-	  "azure_auth": {
-		"type": "oauth2",
-		"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-		"flow": "implicit",
-		"description": "Azure Active Directory OAuth2 Flow",
-		"scopes": {
-		  "user_impersonation": "impersonate your user account"
-		}
-	  }
-	},
-	"paths": {
-	  "/{scope}/providers/Microsoft.Security/secureScores": {
-		"get": {
-		  "x-ms-examples": {
-			"List secure scores": {
-			  "$ref": "./examples/secureScores/ListSecureScores_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Scores"
-		  ],
-		  "description": "Get secure scores on all your initiatives inside a scope",
-		  "operationId": "SecureScores_List",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			},
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/Scope"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoresList"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		  }
-		}
-	  },
-	  "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}": {
-		"get": {
-		  "x-ms-examples": {
-			"Get single secure score": {
-			  "$ref": "./examples/secureScores/GetSecureScoresSingle_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Scores"
-		  ],
-		  "description": "Get secure score for a specific initiatives inside a scope",
-		  "operationId": "SecureScores_Get",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			},
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/Scope"
-			},
-			{
-			  "$ref": "#/parameters/secureScoreName"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoresItem"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  }
-		}
-	  },
-	  "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
-		"get": {
-		  "x-ms-examples": {
-			"List secure score's controls level for the specified name (builtin)": {
-			  "$ref": "./examples/secureScores/ListSecureScoreControlsForName_builtin_example.json"
-			},
-			"List secure score's controls level for the specified name (custom)": {
-			  "$ref": "./examples/secureScores/ListSecureScoreControlsForName_custom_example.json"
-			},
-			"Get secure score's controls level for the specified name with expand parameter (builtin)": {
-			  "$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_builtin_example.json"
-			},
-			"Get secure score's controls level for the specified name with expand parameter (custom)": {
-			  "$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_custom_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Scores"
-		  ],
-		  "description": "Get all secure score controls on specific initiatives inside a scope",
-		  "operationId": "SecureScoreControlsByName_List",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			},
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/Scope"
-			},
-			{
-			  "$ref": "#/parameters/secureScoreName"
-			},
-			{
-			  "$ref": "#/parameters/ExpandControlsDefinition"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoreControlsList"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		  }
-		}
-	  },
-	  "/{scope}/providers/Microsoft.Security/secureScoreControls": {
-		"get": {
-		  "x-ms-examples": {
-			"List all secure scores controls": {
-			  "$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Scores"
-		  ],
-		  "description": "Get all secure score controls on specific initiatives inside a scope",
-		  "operationId": "SecureScoreControls_List",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			},
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/Scope"
-			},
-			{
-			  "$ref": "#/parameters/ExpandControlsDefinition"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoreControlsList"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		  }
-		}
-	  },
-	  "/providers/Microsoft.Security/secureScoreControlsDefinition": {
-		"get": {
-		  "x-ms-examples": {
-			"List secure score controls definition": {
-			  "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Score Controls Definition"
-		  ],
-		  "description": "Get definition information on all secure score controls",
-		  "operationId": "SecureScoreControlsDefinition_List",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoreControlsDefinitionList"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		  }
-		}
-	  },
-	  "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsDefinition": {
-		"get": {
-		  "x-ms-examples": {
-			"List secure score controls definition by subscription": {
-			  "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_subscription_example.json"
-			}
-		  },
-		  "tags": [
-			"Secure Score Controls Definition"
-		  ],
-		  "description": "Get definition information on all secure score controls in subscription level",
-		  "operationId": "SecureScoreControlsDefinitionSubscription_List",
-		  "parameters": [
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-			},
-			{
-			  "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-			}
-		  ],
-		  "responses": {
-			"200": {
-			  "description": "OK",
-			  "schema": {
-				"$ref": "#/definitions/SecureScoreControlsDefinitionList"
-			  }
-			},
-			"default": {
-			  "description": "Error response describing why the operation failed.",
-			  "schema": {
-				"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-			  }
-			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
-		  }
-		}
-	  }
-	},
-	"definitions": {
-	  "SecureScoresList": {
-		"type": "object",
-		"description": "Page of a secure scores list",
-		"properties": {
-		  "value": {
-			"description": "Collection of secure scores in this page",
-			"readOnly": true,
-			"type": "array",
-			"items": {
-			  "$ref": "#/definitions/SecureScoresItem"
-			}
-		  },
-		  "nextLink": {
-			"description": "The URI to fetch the next page.",
-			"readOnly": true,
-			"type": "string"
-		  }
-		}
-	  },
-	  "SecureScoresItem": {
-		"description": "Secure score item data model",
-		"readOnly": true,
-		"type": "object",
-		"properties": {
-		  "properties": {
-			"description": "Secure score item",
-			"readOnly": true,
-			"x-ms-client-flatten": true,
-			"$ref": "#/definitions/SecureScoreItemProperties"
-		  }
-		},
-		"allOf": [
-		  {
-			"$ref": "../../../common/v1/types.json#/definitions/Resource"
-		  }
-		]
-	  },
-	  "SecureScoreItemProperties": {
-		"description": "Describes properties of a calculated secure score.",
-		"readOnly": true,
-		"type": "object",
-		"properties": {
-		  "displayName": {
-			"description": "User friendly display name of the secure score item",
-			"readOnly": true,
-			"type": "string"
-		  },
-		  "score": {
-			"description": "score object",
-			"readOnly": true,
-			"x-ms-client-flatten": true,
-			"$ref": "#/definitions/SecureScoreScoreDetails"
-		  }
-		}
-	  },
-	  "SecureScoreScoreDetails": {
-		"description": "Calculation result data",
-		"readOnly": true,
-		"type": "object",
-		"properties": {
-		  "max": {
-			"description": "Maximum score applicable",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "current": {
-			"description": "Actual score",
-			"readOnly": true,
-			"type": "number",
-			"format": "double"
-		  }
-		}
-	  },
-	  "SecureScoreControlScoreObject": {
-		"description": "Calculation result data",
-		"type": "object",
-		"properties": {
-		  "max": {
-			"description": "Maximum control score (0..10)",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "current": {
-			"description": "Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00",
-			"readOnly": true,
-			"type": "number",
-			"format": "double"
-		  }
-		}
-	  },
-	  "SecureScoreControlsList": {
-		"description": "Page of a secure score controls list",
-		"type": "object",
-		"properties": {
-		  "value": {
-			"description": "Collection of secure score controls in this page",
-			"readOnly": true,
-			"type": "array",
-			"items": {
-			  "$ref": "#/definitions/SecureScoreControlDetails"
-			}
-		  },
-		  "nextLink": {
-			"description": "The URI to fetch the next page.",
-			"readOnly": true,
-			"type": "string"
-		  }
-		}
-	  },
-	  "SecureScoreControlDetails": {
-		"description": "List of security sub-assessments",
-		"type": "object",
-		"properties": {
-		  "properties": {
-			"x-ms-client-flatten": true,
-			"$ref": "#/definitions/SecureScoreControlScoreDetails"
-		  }
-		},
-		"allOf": [
-		  {
-			"$ref": "../../../common/v1/types.json#/definitions/Resource"
-		  }
-		]
-	  },
-	  "SecureScoreControlScoreDetails": {
-		"description": "Calculation result data in control level",
-		"type": "object",
-		"properties": {
-		  "displayName": {
-			"description": "User friendly display name of the control",
-			"readOnly": true,
-			"type": "string"
-		  },
-		  "score": {
-			"description": "Actual score object for the control",
-			"x-ms-client-flatten": true,
-			"$ref": "#/definitions/SecureScoreControlScoreObject"
-		  },
-		  "healthyResources": {
-			"description": "Number of healthy resources in the control",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "unhealthyResources": {
-			"description": "Number of unhealthy resources in the control",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "notApplicableResources": {
-			"description": "Number of not applicable resources in the control",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "disabledResources": {
-			"description": "Number of not resources that are disabled by policy in the control",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32"
-		  },
-		  "definition": {
-			"$ref": "#/definitions/SecureScoreControlDefinitionItem"
-		  }
-		}
-	  },
-	  "SecureScoreControlsDefinitionList": {
-		"description": "Page of a secure score controls definition list",
-		"type": "object",
-		"properties": {
-		  "value": {
-			"description": "Collection of secure score controls definition in this page",
-			"readOnly": true,
-			"type": "array",
-			"items": {
-			  "$ref": "#/definitions/SecureScoreControlDefinitionItem"
-			}
-		  },
-		  "nextLink": {
-			"description": "The URI to fetch the next page.",
-			"readOnly": true,
-			"type": "string"
-		  }
-		}
-	  },
-	  "SecureScoreControlDefinitionItem": {
-		"description": "Secure Score Control's Definition information",
-		"type": "object",
-		"properties": {
-		  "properties": {
-			"x-ms-client-flatten": true,
-			"$ref": "#/definitions/SecureScoreControlDefinitionItemProperties"
-		  }
-		},
-		"allOf": [
-		  {
-			"$ref": "../../../common/v1/types.json#/definitions/Resource"
-		  }
-		]
-	  },
-	  "SecureScoreControlDefinitionItemProperties": {
-		"description": "Secure Score Control Definition Properties",
-		"type": "object",
-		"properties": {
-		  "displayName": {
-			"description": "User friendly display name of the control",
-			"readOnly": true,
-			"type": "string"
-		  },
-		  "description": {
-			"description": "User friendly display name of the control",
-			"readOnly": true,
-			"type": "string",
-			"maxLength": 256
-		  },
-		  "maxScore": {
-			"description": "Maximum control score (0..10)",
-			"readOnly": true,
-			"type": "integer",
-			"format": "int32",
-			"minimum": 0,
-			"maximum": 10,
-			"exclusiveMinimum": false
-		  },
-		  "source": {
-			"description": "Source object from which the control was created",
-			"readOnly": true,
-			"$ref": "#/definitions/SecureScoreControlDefinitionSource"
-		  },
-		  "assessmentsDefinition": {
-			"description": "array of assessments metadata ids",
-			"readOnly": true,
-			"type": "array",
-			"items": {
-			  "$ref": "#/definitions/SecureScoreControlDefinitionAssessmentsId"
-			}
-		  }
-		}
-	  },
-	  "SecureScoreControlDefinitionAssessmentsId": {
-		"type": "object",
-		"description": "Secure Score Control Definition Properties",
-		"properties": {
-		  "id": {
-			"description": "Full assessment metadata azure ids that build the control",
-			"readOnly": true,
-			"type": "string"
-		  }
-		}
-	  },
-	  "SecureScoreControlDefinitionSource": {
-		"description": "representing the source of the control",
-		"readOnly": true,
-		"type": "object",
-		"properties": {
-		  "sourceType": {
-			"description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom if the assessment based on custom Azure Policy definition, CustomerManaged for customers who build their own controls",
-			"type": "string",
-			"enum": [
-			  "BuiltIn",
-			  "CustomPolicy",
-			  "CustomerManaged"
-			],
-			"x-ms-enum": {
-			  "name": "controlType",
-			  "modelAsString": true,
-			  "values": [
-				{
-				  "value": "BuiltIn",
-				  "description": "Azure Security Center managed assessments"
-				},
-				{
-				  "value": "CustomPolicy",
-				  "description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
-				},
-				{
-				  "value": "CustomerManaged",
-				  "description": "User controls pushed directly by the user or other third party to Azure Security Center"
-				}
-			  ]
-			}
-		  },
-		  "policySetDefinitionId": {
-			"description": "id of the policy set definition id from which the control was generated",
-			"type": "string"
-		  },
-		  "groupName": {
-			"description": "represents the GroupName within the specific policy set definition",
-			"type": "string"
-		  }
-		}
-	  }
-	},
-	"parameters": {
-	  "ExpandControlsDefinition": {
-		"name": "$expand",
-		"in": "query",
-		"required": false,
-		"type": "string",
-		"description": "OData expand. Optional.",
-		"x-ms-parameter-location": "method",
-		"enum": [
-		  "definition"
-		],
-		"x-ms-enum": {
-		  "name": "ExpandControlsEnum",
-		  "modelAsString": true,
-		  "values": [
-			{
-			  "value": "definition",
-			  "description": "Add definition object for each control"
-			}
-		  ]
-		}
-	  },
-	  "secureScoreName": {
-		"name": "secureScoreName",
-		"in": "path",
-		"required": true,
-		"type": "string",
-		"description": "The secure score initiative name",
-		"x-ms-parameter-location": "method"
-	  }
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/secureScores": {
+      "get": {
+        "x-ms-examples": {
+          "List secure scores": {
+            "$ref": "./examples/secureScores/ListSecureScores_example.json"
+          }
+        },
+        "tags": [
+          "Secure Scores"
+        ],
+        "description": "Get secure scores on all your initiatives inside a scope",
+        "operationId": "SecureScores_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoresList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get single secure score": {
+            "$ref": "./examples/secureScores/GetSecureScoresSingle_example.json"
+          }
+        },
+        "tags": [
+          "Secure Scores"
+        ],
+        "description": "Get secure score for a specific initiatives inside a scope",
+        "operationId": "SecureScores_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/secureScoreName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoresItem"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
+      "get": {
+        "x-ms-examples": {
+          "List secure score's controls level for the specified name (builtin)": {
+            "$ref": "./examples/secureScores/ListSecureScoreControlsForName_builtin_example.json"
+          },
+          "List secure score's controls level for the specified name (custom)": {
+            "$ref": "./examples/secureScores/ListSecureScoreControlsForName_custom_example.json"
+          },
+          "Get secure score's controls level for the specified name with expand parameter (builtin)": {
+            "$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_builtin_example.json"
+          },
+          "Get secure score's controls level for the specified name with expand parameter (custom)": {
+            "$ref": "./examples/secureScores/ListSecureScoreControlsForNameWithExpand_custom_example.json"
+          }
+        },
+        "tags": [
+          "Secure Scores"
+        ],
+        "description": "Get all secure score controls on specific initiatives inside a scope",
+        "operationId": "SecureScoreControlsByName_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/secureScoreName"
+          },
+          {
+            "$ref": "#/parameters/ExpandControlsDefinition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoreControlsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/secureScoreControls": {
+      "get": {
+        "x-ms-examples": {
+          "List all secure scores controls": {
+            "$ref": "./examples/secureScores/ListSecureScoreControls_example.json"
+          }
+        },
+        "tags": [
+          "Secure Scores"
+        ],
+        "description": "Get all secure score controls on specific initiatives inside a scope",
+        "operationId": "SecureScoreControls_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/ExpandControlsDefinition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoreControlsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Security/secureScoreControlsDefinition": {
+      "get": {
+        "x-ms-examples": {
+          "List secure score controls definition": {
+            "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_example.json"
+          }
+        },
+        "tags": [
+          "Secure Score Controls Definition"
+        ],
+        "description": "Get definition information on all secure score controls",
+        "operationId": "SecureScoreControlsDefinition_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoreControlsDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControlsDefinition": {
+      "get": {
+        "x-ms-examples": {
+          "List secure score controls definition by subscription": {
+            "$ref": "./examples/secureScoreControlsDefinition/ListSecureScoreControlsDefinition_subscription_example.json"
+          }
+        },
+        "tags": [
+          "Secure Score Controls Definition"
+        ],
+        "description": "Get definition information on all secure score controls in subscription level",
+        "operationId": "SecureScoreControlsDefinitionSubscription_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecureScoreControlsDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecureScoresList": {
+      "type": "object",
+      "description": "Page of a secure scores list",
+      "properties": {
+        "value": {
+          "description": "Collection of secure scores in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecureScoresItem"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SecureScoresItem": {
+      "description": "Secure score item data model",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Secure score item",
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreItemProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecureScoreItemProperties": {
+      "description": "Describes properties of a calculated secure score.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "User friendly display name of the secure score item",
+          "readOnly": true,
+          "type": "string"
+        },
+        "score": {
+          "description": "score object",
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreScoreDetails"
+        }
+      }
+    },
+    "SecureScoreScoreDetails": {
+      "description": "Calculation result data",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "max": {
+          "description": "Maximum score applicable",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "current": {
+          "description": "Actual score",
+          "readOnly": true,
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SecureScoreControlScoreObject": {
+      "description": "Calculation result data",
+      "type": "object",
+      "properties": {
+        "max": {
+          "description": "Maximum control score (0..10)",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "current": {
+          "description": "Actual score for the control = (achieved points / total points) * max score. if total points is zeroed, the return number is 0.00",
+          "readOnly": true,
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SecureScoreControlsList": {
+      "description": "Page of a secure score controls list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of secure score controls in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecureScoreControlDetails"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SecureScoreControlDetails": {
+      "description": "List of security sub-assessments",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreControlScoreDetails"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecureScoreControlScoreDetails": {
+      "description": "Calculation result data in control level",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "User friendly display name of the control",
+          "readOnly": true,
+          "type": "string"
+        },
+        "score": {
+          "description": "Actual score object for the control",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreControlScoreObject"
+        },
+        "healthyResources": {
+          "description": "Number of healthy resources in the control",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "unhealthyResources": {
+          "description": "Number of unhealthy resources in the control",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "notApplicableResources": {
+          "description": "Number of not applicable resources in the control",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "disabledResources": {
+          "description": "Number of not resources that are disabled by policy in the control",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32"
+        },
+        "definition": {
+          "$ref": "#/definitions/SecureScoreControlDefinitionItem"
+        }
+      }
+    },
+    "SecureScoreControlsDefinitionList": {
+      "description": "Page of a secure score controls definition list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of secure score controls definition in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecureScoreControlDefinitionItem"
+          }
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SecureScoreControlDefinitionItem": {
+      "description": "Secure Score Control's Definition information",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecureScoreControlDefinitionItemProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "SecureScoreControlDefinitionItemProperties": {
+      "description": "Secure Score Control Definition Properties",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "User friendly display name of the control",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "User friendly display name of the control",
+          "readOnly": true,
+          "type": "string",
+          "maxLength": 256
+        },
+        "maxScore": {
+          "description": "Maximum control score (0..10)",
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 10,
+          "exclusiveMinimum": false
+        },
+        "source": {
+          "description": "Source object from which the control was created",
+          "readOnly": true,
+          "$ref": "#/definitions/SecureScoreControlDefinitionSource"
+        },
+        "assessmentsDefinition": {
+          "description": "array of assessments metadata ids",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecureScoreControlDefinitionAssessmentsId"
+          }
+        }
+      }
+    },
+    "SecureScoreControlDefinitionAssessmentsId": {
+      "type": "object",
+      "description": "Secure Score Control Definition Properties",
+      "properties": {
+        "id": {
+          "description": "Full assessment metadata azure ids that build the control",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SecureScoreControlDefinitionSource": {
+      "description": "representing the source of the control",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "sourceType": {
+          "description": "BuiltIn if the control is built-in from Azure Security Center managed assessments, Custom if the assessment based on custom Azure Policy definition, CustomerManaged for customers who build their own controls",
+          "type": "string",
+          "enum": [
+            "BuiltIn",
+            "CustomPolicy",
+            "CustomerManaged"
+          ],
+          "x-ms-enum": {
+            "name": "controlType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BuiltIn",
+                "description": "Azure Security Center managed assessments"
+              },
+              {
+                "value": "CustomPolicy",
+                "description": "User defined policies that are automatically ingested from Azure Policy to Azure Security Center"
+              },
+              {
+                "value": "CustomerManaged",
+                "description": "User controls pushed directly by the user or other third party to Azure Security Center"
+              }
+            ]
+          }
+        },
+        "policySetDefinitionId": {
+          "description": "id of the policy set definition id from which the control was generated",
+          "type": "string"
+        },
+        "groupName": {
+          "description": "represents the GroupName within the specific policy set definition",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ExpandControlsDefinition": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData expand. Optional.",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "definition"
+      ],
+      "x-ms-enum": {
+        "name": "ExpandControlsEnum",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "definition",
+            "description": "Add definition object for each control"
+          }
+        ]
+      }
+    },
+    "secureScoreName": {
+      "name": "secureScoreName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The secure score initiative name",
+      "x-ms-parameter-location": "method"
+    }
   }
-  
+}
