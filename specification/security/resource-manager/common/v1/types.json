@@ -241,6 +241,25 @@
         "sourceComputerId",
         "machineName"
       ]
+    },
+    "AzureResourceLinks": {
+      "description": "array of azure resource IDs",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AzureResourceLink"
+      }
+    },
+    "AzureResourceLink": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource Id"
+        }
+      }
     }
   },
   "parameters": {
