@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "$top": 10,
+    "api-version": "2020-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/providers/Microsoft.Advisor/recommendations?api-version=2020-01-01&$top=10&$skiptoken=skiptoken",
+        "value": [
+          {
+            "id": "/resourceUri/providers/Microsoft.Advisor/recommendations/recGUID",
+            "name": "recGUID",
+            "properties": {
+              "category": "HighAvailability",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Compute/availabilitySets",
+              "impactedValue": "armavset",
+              "lastUpdated": "2017-02-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "This availability set is not configured for fault tolerance",
+                "solution": "To ensure high availability add one or more virtual machines to this availability set"
+              }
+            },
+            "type": "Microsoft.Advisor/recommendations"
+          }
+        ]
+      }
+    }
+  }
+}

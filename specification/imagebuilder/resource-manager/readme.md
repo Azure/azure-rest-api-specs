@@ -90,7 +90,7 @@ python:
   namespace: azure.mgmt.imagebuilder
   package-name: azure-mgmt-imagebuilder
   clear-output-folder: true
-  package-version: 0.2.1
+  package-version: 0.3.0
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -138,7 +138,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.imagebuilder.v2018_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2018_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/imagebuilder/mgmt-v2018_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -151,7 +151,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.imagebuilder.v2019_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2019_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/imagebuilder/mgmt-v2019_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
