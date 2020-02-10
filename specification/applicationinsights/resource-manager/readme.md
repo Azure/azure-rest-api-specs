@@ -245,7 +245,7 @@ These settings apply only when `--tag=package-preview-2020-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-02'
 input-file:
-  - Microsoft.Insights/preview/2020-02-10-preview/workbookTemplates_API.json
+  - Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
 ```
 ### Tag: package-2015-05
 
