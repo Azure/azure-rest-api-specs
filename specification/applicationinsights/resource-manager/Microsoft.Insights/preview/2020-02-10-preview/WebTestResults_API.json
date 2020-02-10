@@ -58,7 +58,7 @@
             "$ref": "#/parameters/PopIdParameter"
           },
           {
-            "$ref": "#/parameters/PosixTimeStampParameter"
+            "$ref": "#/parameters/TimeStampParameter"
           },
           {
             "$ref": "#/parameters/TestSuccessfulParameter"
@@ -85,7 +85,7 @@
 					}
 				},
 				"x-ms-examples": {
-					"Get Metadata for Operation": {
+					"Example Get call:": {
 						"$ref": "./examples/WebTestResultsTestResultFile.json"
 					}
 				}
@@ -139,13 +139,13 @@
       "description": "The name of the pop.",
       "x-ms-parameter-location": "method"
     },
-    "PosixTimeStampParameter": {
-      "name": "posixTimeStamp",
+    "TimeStampParameter": {
+      "name": "timeStamp",
       "in": "query",
       "required": true,
       "type": "integer",
       "format": "int64",
-      "description": "The posix time stamp for the test result",
+      "description": "The posix (epoch) time stamp for the test result",
       "x-ms-parameter-location": "method"
     },
     "TestSuccessfulParameter": {
@@ -153,7 +153,7 @@
       "in": "query",
       "required": true,
       "type": "boolean",
-      "description": "the desired success state for the test result",
+      "description": "the success state for the test result",
       "x-ms-parameter-location": "method"
     },
     "DownloadAsParameter": {
@@ -161,7 +161,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "the format of webtest result to download",
+      "description": "the format of webtest result to download, valid formats include vswebtestfile, uxdisplaystring",
       "x-ms-parameter-location": "method"
     },
     "OffsetParameter": {
