@@ -7378,6 +7378,11 @@
             ]
           }
         },
+        "providerAlertId": {
+          "description": "The identifier of the alert inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
         "processingEndTime": {
           "description": "The time the alert was made available for consumption.",
           "format": "date-time",
@@ -7459,6 +7464,14 @@
           "description": "Holds the product identifier of the alert for the product.",
           "readOnly": true,
           "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "timeGenerated": {
           "description": "The time the alert was generated.",

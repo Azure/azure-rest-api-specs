@@ -3314,7 +3314,8 @@
           "Tags"
         ],
         "operationId": "Tags_DeleteValue",
-        "description": "Deletes a tag value.",
+        "summary": "Deletes a predefined tag value for a predefined tag name.",
+        "description": "This operation allows deleting a value from the list of predefined values for an existing predefined tag name. The value being deleted must not be in use as a tag value for the given tag name for any resource.",
         "parameters": [
           {
             "name": "tagName",
@@ -3339,10 +3340,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Predefined tag value successfully deleted."
           },
           "204": {
-            "description": "No Content"
+            "description": "Predefined tag value did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3357,7 +3358,8 @@
           "Tags"
         ],
         "operationId": "Tags_CreateOrUpdateValue",
-        "description": "Creates a tag value. The name of the tag must already exist.",
+        "summary": "Creates a predefined value for a predefined tag name.",
+        "description": "This operation allows adding a value to the list of predefined values for an existing predefined tag name. A tag value can have a maximum of 256 characters.",
         "parameters": [
           {
             "name": "tagName",
@@ -3382,13 +3384,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the tag value.",
+            "description": "Predefined tag value already exists. Returns information about the predefined tag value.",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
           },
           "201": {
-            "description": "Created - Returns information about the tag value.",
+            "description": "Predefined tag value successfully created. Returns information about the predefined tag value.",
             "schema": {
               "$ref": "#/definitions/TagValue"
             }
@@ -3408,8 +3410,8 @@
           "Tags"
         ],
         "operationId": "Tags_CreateOrUpdate",
-        "summary": "Creates a tag in the subscription.",
-        "description": "The tag name can have a maximum of 512 characters and is case insensitive. Tag names created by Azure have prefixes of microsoft, azure, or windows. You cannot create tags with one of these prefixes.",
+        "summary": "Creates a predefined tag name.",
+        "description": "This operation allows adding a name to the list of predefined tag names for the given subscription. A tag name can have a maximum of 512 characters and is case-insensitive. Tag names cannot have the following prefixes which are reserved for Azure use: 'microsoft', 'azure', 'windows'.",
         "parameters": [
           {
             "name": "tagName",
@@ -3427,13 +3429,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the tag.",
+            "description": "Predefined tag name already exists. Returns information about the predefined tag name.",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
           },
           "201": {
-            "description": "Created - Returns information about the tag.",
+            "description": "Predefined tag name successfully created. Returns information about the predefined tag name.",
             "schema": {
               "$ref": "#/definitions/TagDetails"
             }
@@ -3451,8 +3453,8 @@
           "Tags"
         ],
         "operationId": "Tags_Delete",
-        "summary": "Deletes a tag from the subscription.",
-        "description": "You must remove all values from a resource tag before you can delete it.",
+        "summary": "Deletes a predefined tag name.",
+        "description": "This operation allows deleting a name from the list of predefined tag names for the given subscription. The name being deleted must not be in use as a tag name for any resource. All predefined values for the given name must have already been deleted.",
         "parameters": [
           {
             "name": "tagName",
@@ -3470,10 +3472,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Predefined tag name successfully deleted."
           },
           "204": {
-            "description": "No Content"
+            "description": "Predefined tag name did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3490,7 +3492,8 @@
           "Tags"
         ],
         "operationId": "Tags_List",
-        "description": "Gets the names and values of all resource tags that are defined in a subscription.",
+        "summary": "Gets a summary of tag usage under the subscription.",
+        "description": "This operation performs a union of predefined tags, resource tags, resource group tags and subscription tags, and returns a summary of usage for each tag name and value under the given subscription. In case of a large number of tags, this operation may return a previously cached result.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -4009,8 +4012,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceCreate",
-        "description": "Create or Replace existing tags with passing in tags.",
+        "operationId": "Tags_CreateOrUpdateAtScope",
+        "summary": "Creates or updates the entire set of tags on a resource or subscription.",
+        "description": "This operation allows adding or replacing the entire set of tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4024,13 +4028,12 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/TagsResource"
-            },
-            "description": "Parameters for creating multiple tags."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns added tag information about the resource.",
+            "description": "Tags updated successfully. Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4043,10 +4046,10 @@
           }
         },
         "x-ms-examples": {
-          "Creates multiple tags for a tracked resource.": {
+          "Update tags on a resource": {
             "$ref": "./examples/PutTagsResource.json"
           },
-          "Create multiple tags for a subscription.": {
+          "Update tags on a subscription": {
             "$ref": "./examples/PutTagsSubscription.json"
           }
         }
@@ -4055,8 +4058,9 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceUpdate",
-        "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
+        "operationId": "Tags_UpdateAtScope",
+        "summary": "Selectively updates the set of tags on a resource or subscription.",
+        "description": "This operation allows replacing, merging or selectively deleting tags on the specified resource or subscription. The specified entity can have a maximum of 50 tags at the end of the operation. The 'replace' option replaces the entire set of existing tags with a new set. The 'merge' option allows adding tags with new names and updating the values of tags with existing names. The 'delete' option allows selectively deleting tags based on given names or name/value pairs.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4069,14 +4073,13 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagPatchRequest"
-            },
-            "description": "Parameters for updating multiple tags."
+              "$ref": "#/definitions/TagsPatchResource"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns updated tag information about the resource.",
+            "description": "Tags updated successfully. Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4093,8 +4096,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceGet",
-        "description": "Gets all the tags for the resource.",
+        "operationId": "Tags_GetAtScope",
+        "summary": "Gets the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4105,7 +4108,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns tag information about the resource.",
+            "description": "Returns tags from the specified object.",
             "schema": {
               "$ref": "#/definitions/TagsResource"
             }
@@ -4118,10 +4121,10 @@
           }
         },
         "x-ms-examples": {
-          "Gets all the tags for a tracked resource.": {
+          "Get tags on a resource": {
             "$ref": "./examples/GetTagsResource.json"
           },
-          "Gets all the tags for a subscription.": {
+          "Get tags on a subscription": {
             "$ref": "./examples/GetTagsSubscription.json"
           }
         }
@@ -4130,8 +4133,8 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_ResourceDelete",
-        "description": "Deletes all the tags for the resource.",
+        "operationId": "Tags_DeleteAtScope",
+        "summary": "Deletes the entire set of tags on a resource or subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4142,7 +4145,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Tags successfully deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5028,7 +5031,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The tag ID."
+          "description": "The tag value ID."
         },
         "tagValue": {
           "type": "string",
@@ -5047,7 +5050,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The tag ID."
+          "description": "The tag name ID."
         },
         "tagName": {
           "type": "string",
@@ -5498,7 +5501,7 @@
       }
     },
     "Tags": {
-      "description": "key and value pairs for tags",
+      "description": "A dictionary of name and value pairs.",
       "properties": {
         "tags": {
           "type": "object",
@@ -5509,13 +5512,13 @@
         }
       }
     },
-    "TagPatchRequest": {
+    "TagsPatchResource": {
       "type": "object",
-      "description": "Tag Request for Patch operation.",
+      "description": "Wrapper resource for tags patch API request only.",
       "properties": {
         "operation": {
           "type": "string",
-          "description": "The operation type for the patch api.",
+          "description": "The operation type for the patch API.",
           "enum": [
             "Replace",
             "Merge",
@@ -5524,27 +5527,38 @@
         },
         "properties": {
           "$ref": "#/definitions/Tags",
-          "description": "tags object passing in the request."
+          "description": "The set of tags."
         }
       }
     },
     "TagsResource": {
       "type": "object",
-      "description": "Tags for the resource.",
+      "description": "Wrapper resource for tags API requests and responses.",
       "required": [
         "properties"
       ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the tags wrapper resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the tags wrapper resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the tags wrapper resource."
+        },
         "properties": {
           "$ref": "#/definitions/Tags",
-          "description": "tags property."
+          "description": "The set of tags."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
