@@ -23,21 +23,22 @@
               "clusterVersion": "osa.1",
               "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
               "networkProfile": {
-                "vnetCidr": "10.0.0.0/8"
+                "vnetCidr": "10.0.0.0/8",
+                "vnetId": "/subscriptions/subid1/resourceGroups/clusterrg/providers/Microsoft.Network/virtualNetworks/vnet"
               },
               "masterPoolProfile": {
                 "count": 3,
                 "vmSize": "Standard_D4s_v3",
                 "subnetCidr": "10.0.0.0/24",
                 "apiProperties": {
-                  "privateAPIServer": true
+                  "privateAPIServer": false
                 }
               },
               "agentPoolProfiles": [
                 {
                   "name": "infra",
                   "role": "infra",
-                  "count": 2,
+                  "count": 3,
                   "vmSize": "Standard_D4s_v3",
                   "osType": "Linux",
                   "subnetCidr": "10.0.0.0/24"

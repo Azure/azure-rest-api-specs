@@ -3,7 +3,7 @@
     "api-version": "2019-10-27-preview",
     "subscriptionId": "subid1",
     "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
+    "resourceName": "privateprivateclustername1",
     "parameters": {
       "location": "location1",
       "tags": {
@@ -13,14 +13,15 @@
       "properties": {
         "openShiftVersion": "v3.11",
         "networkProfile": {
-          "vnetCidr": "10.0.0.0/8"
+          "vnetCidr": "10.0.0.0/8",
+          "managementSubnetCidr" : "10.0.1.0/24"
         },
         "masterPoolProfile": {
           "count": 3,
           "vmSize": "Standard_D4s_v3",
           "subnetCidr": "10.0.0.0/24",
           "apiProperties": {
-            "privateAPIServer": false
+            "privateAPIServer": true
           }
         },
         "agentPoolProfiles": [
@@ -64,15 +65,16 @@
           "enabled": true,
           "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
         }
-      }
+      },
+      "refreshCluster": true
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/clustername1",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/privateclustername1",
         "location": "location1",
-        "name": "clustername1",
+        "name": "privateclustername1",
         "tags": {
           "archv2": "",
           "tier": "production"
@@ -82,16 +84,20 @@
           "provisioningState": "Updating",
           "openShiftVersion": "v3.11",
           "clusterVersion": "osa.1",
-          "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
-          "publicHostname": "openshift.1225bdf9337748a4bd3a.location1.azmosa.io",
+          "fqdn": "10.0.0.254",
+          "publicHostname": "10.0.0.254",
           "networkProfile": {
             "vnetCidr": "10.0.0.0/8",
+            "managementSubnetCidr": "10.0.1.0/24",
             "vnetId": "/subscriptions/subid1/resourceGroups/clusterrg/providers/Microsoft.Network/virtualNetworks/vnet"
           },
           "masterPoolProfile": {
             "count": 3,
             "vmSize": "Standard_D4s_v3",
-            "subnetCidr": "10.0.0.0/24"
+            "subnetCidr": "10.0.0.0/24",
+            "apiProperties": {
+              "privateAPIServer": true
+            }
           },
           "agentPoolProfiles": [
             {
@@ -114,8 +120,8 @@
           "routerProfiles": [
             {
               "name": "default",
-              "publicSubdomain": "apps.bc309ee87c164153871c.location1.azmosa.io",
-              "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com"
+              "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com",
+              "publicSubdomain": "apps.660d6f3097594f42ba75.location1.azmosa.io"
             }
           ],
           "authProfile": {
@@ -134,15 +140,16 @@
           "monitorProfile": {
             "enabled": true,
             "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
-          }
+          },
+          "refreshCluster": true
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/clustername1",
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/privateclustername1",
         "location": "location1",
-        "name": "clustername1",
+        "name": "privateclustername1",
         "tags": {
           "archv2": "",
           "tier": "production"
@@ -152,16 +159,20 @@
           "provisioningState": "Creating",
           "openShiftVersion": "v3.11",
           "clusterVersion": "osa.1",
-          "fqdn": "df9337748a4b.location1.cloudapp.azure.com",
-          "publicHostname": "openshift.1225bdf9337748a4bd3a.location1.azmosa.io",
+          "fqdn": "",
+          "publicHostname": "",
           "networkProfile": {
             "vnetCidr": "10.0.0.0/8",
+            "managementSubnetCidr": "10.0.1.0/24",
             "vnetId": ""
           },
           "masterPoolProfile": {
             "count": 3,
             "vmSize": "Standard_D4s_v3",
-            "subnetCidr": "10.0.0.0/24"
+            "subnetCidr": "10.0.0.0/24",
+            "apiProperties": {
+              "privateAPIServer": true
+            }
           },
           "agentPoolProfiles": [
             {
@@ -184,7 +195,7 @@
           "routerProfiles": [
             {
               "name": "default",
-              "publicSubdomain": "apps.bc309ee87c164153871c.location1.azmosa.io",
+              "publicSubdomain": "apps.660d6f3097594f42ba75.location1.azmosa.io",
               "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com"
             }
           ],
