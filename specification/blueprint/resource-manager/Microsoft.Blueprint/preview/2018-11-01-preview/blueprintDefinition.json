@@ -931,8 +931,12 @@
           "description": "If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed."
         },
         "parameters": {
+          "type": "object",
           "description": "Resource Manager template blueprint artifact parameter values.",
-          "$ref": "#/definitions/ParameterValueCollection"
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
         }
       },
       "allOf": [
@@ -1026,8 +1030,12 @@
           "description": "Azure resource ID of the policy definition."
         },
         "parameters": {
+          "type": "object",
           "description": "Parameter values for the policy definition.",
-          "$ref": "#/definitions/ParameterValueCollection"
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
         },
         "resourceGroup": {
           "type": "string",
@@ -1067,23 +1075,16 @@
         "properties"
       ]
     },
-    "ParameterValueCollection": {
-      "description": "A dictionary for parameters and their corresponding values.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "description": "Key/Value pair of parameter fulfillment.",
-        "$ref": "#/definitions/ParameterValue"
-      }
-    },
     "ParameterValue": {
       "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
       "properties": {
         "value": {
+          "type": "string",
           "description": "Parameter value as value type."
         },
         "reference": {
+          "type": "object",
           "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }

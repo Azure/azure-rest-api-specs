@@ -364,8 +364,12 @@
           "description": "ID of the published version of a blueprint definition."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterValueCollection",
-          "description": "Blueprint assignment parameter values."
+          "type": "object",
+          "description": "Resource Manager template blueprint artifact parameter values.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
         },
         "resourceGroups": {
           "$ref": "#/definitions/ResourceGroupValueCollection",
@@ -412,23 +416,16 @@
         "resourceGroups"
       ]
     },
-    "ParameterValueCollection": {
-      "description": "A dictionary for parameters and their corresponding values.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "description": "Key/Value pair of parameter fulfillment.",
-        "$ref": "#/definitions/ParameterValue"
-      }
-    },
     "ParameterValue": {
       "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
       "properties": {
         "value": {
+          "type": "string",
           "description": "Parameter value as value type."
         },
         "reference": {
+          "type": "object",
           "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }
