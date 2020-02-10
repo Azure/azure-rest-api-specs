@@ -254,7 +254,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityPatch"
+              "$ref": "#/definitions/IdentityUpdate"
             },
             "description": "Parameters to update the identity"
           }
@@ -351,28 +351,12 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "Identity": {
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the resource."
-        },
         "location": {
           "type": "string",
           "description": "The Azure region where the resource lives."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "Describes common properties of a resource."
-    },
-    "Identity": {
-      "properties": {
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -385,18 +369,6 @@
           "readOnly": true,
           "description": "The properties associated with the identity.",
           "$ref": "#/definitions/UserAssignedIdentityProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.ManagedIdentity/userAssignedIdentities"
-          ],
-          "x-ms-enum": {
-            "name": "UserAssignedIdentities",
-            "modelAsString": true
-          },
-          "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
         }
       },
       "required": [
@@ -404,14 +376,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
-      "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
-    "IdentityPatch": {
+    "IdentityUpdate": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the resource lives."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -424,40 +399,26 @@
           "readOnly": true,
           "description": "The properties associated with the identity.",
           "$ref": "#/definitions/UserAssignedIdentityProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.ManagedIdentity/userAssignedIdentities"
-          ],
-          "x-ms-enum": {
-            "name": "UserAssignedIdentities",
-            "modelAsString": true
-          },
-          "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
-      "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
     "SystemAssignedIdentity": {
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the resource lives."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "readOnly": true,
           "description": "The properties associated with the identity.",
           "$ref": "#/definitions/SystemAssignedIdentityProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of resource i.e. Microsoft.Compute/virtualMachineScaleSets"
         }
       },
       "required": [
@@ -465,10 +426,9 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
-      "x-ms-azure-resource": true,
       "description": "Describes a system assigned identity resource."
     },
     "SystemAssignedIdentityProperties": {
