@@ -1,126 +1,61 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "MonitorManagementClient",
-    "x-ms-code-generation-settings": {
-      "name": "MonitorManagementClient"
-    },
-    "version": "2020-02-01-preview"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [],
-  "produces": [
-    "application/json",
-    "text/xml"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subId}/resoucegroups/{rgId}/providers/microsoft.insights/webtests/{webtestName}/testresultforuxdisplay": {
-      "get": {
-        "tags": [
-          "FindWebTestResult"
-        ],
-        "operationId": "testresultforuxdisplay",
-        "description": "Returns the test result for the matching test",
+	"swagger": "2.0",
+	"info": {
+		"title": "MonitorManagementClient",
+		"x-ms-code-generation-settings": {
+			"name": "MonitorManagementClient"
+		},
+		"version": "2020-02-10-preview"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/subscriptions/{subscriptionId}/resoucegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webtestName}/testresultfile": {
+			"get": {
+				"tags": [
+					"FindWebTestResult"
+				],
+				"operationId": "testresultfile",
+				"description": "Returns a file test result for the matching test",
         "parameters": [
           {
-            "$ref": "#/parameters/PopParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/PartitionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PosixTimeStampParameter"
+            "$ref": "#/parameters/WebtestNameParameter"
           },
           {
-            "$ref": "#/parameters/TestSuccessfulParameter"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "successful request to get the test result object - Object to be further defined once out of preview and multistep tests have been removed.",
-            "schema": {
-              "type": "object"
-            },
-            "examples": {
-              "application/json": {
-                "ExactMatch": false,
-                "ResultAsString": null,
-                "Steps": [
-                  {
-                    "DependantRequests": [],
-                    "Detail": {
-                      "Exceptions": [],
-                      "Rules": []
-                    },
-                    "Id": "|5ffd53228edb48729dc23d7cfe9d9040.0",
-                    "Passed": true,
-                    "ReponseByte": 0,
-                    "RequestByte": 0,
-                    "RequestTime": 0.805,
-                    "ResponseBody": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n<title>Azure Application Insights Developers Guide</title>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n<link rel=\"shortcut icon\" href=\"/content/favicon.ico\" type=\"image/x-icon\" />\n<link rel=\"apple-touch-icon\" href=\"/content/favicon.png\" type=\"image/png\">\n\n<!-- CSS (load bootstrap from a CDN) -->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" integrity=\"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u\" crossorigin=\"anonymous\">\n<link rel=\"stylesheet\" href=\"/css/graph.css\">\n<link rel=\"stylesheet\" href=\"/css/10.css\">\n<link rel=\"stylesheet\" href=\"/css/site.css\">\n<link rel=\"stylesheet\" href=\"https://aiapi.azureedge.net/aircdn/ajax/libs/highlight.js/9.2.0/styles/github-gist.min.css\">\n<link rel=\"stylesheet\" href=\"https://aiapi.azureedge.net/aircdn/font-awesome/4.5.0/css/font-awesome.min.css\">\n\n<script src=\"https://code.jquery.<<Truncated>>",
-                    "ResponseHeader": "Transfer-Encoding: chunked\r\nConnection: keep-alive\r\nVary: Accept-Encoding\r\nStrict-Transport-Security: max-age=15724800; includeSubDomains\r\nX-Content-Type-Options: nosniff\r\nContent-Encoding: gzip\r\nContent-Type: text/html; charset=utf-8\r\nDate: Mon, 26 Aug 2019 12:40:40 GMT\r\nETag: W/\"3239-wgjytL97Bnl4EXLih1DDewyTIyk\"\r\nX-Powered-By: Express\r\n\r\n",
-                    "Status": "200 OK",
-                    "TotalTime": 0.8049999999999999,
-                    "Type": "Page",
-                    "Uri": "https://dev.applicationinsights.io",
-                    "TimeOfFirstByte": "2019-08-26T12:40:40.9690087Z",
-                    "StepStartTime": "2019-08-26T12:40:40.1635723Z"
-                  }
-                ],
-                "TimeStamp": "201908261240",
-                "TestRunId": "5ffd53228edb48729dc23d7cfe9d9040"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subId}/resoucegroups/{rgId}/providers/microsoft.insights/webtests/{webtestName}/testresultfile": {
-      "get": {
-        "tags": [
-          "FindWebTestResult"
-        ],
-        "operationId": "testresultsas",
-        "description": "Returns a file test result for the matching test",
-        "parameters": [
-          {
-            "$ref": "#/parameters/PopParameter"
-          },
-          {
-            "$ref": "#/parameters/PartitionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/TestIdParameter"
+            "$ref": "#/parameters/PopIdParameter"
           },
           {
             "$ref": "#/parameters/PosixTimeStampParameter"
@@ -135,109 +70,108 @@
             "$ref": "#/parameters/OffsetParameter"
           }
         ],
-        "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TestResultFileResponse"
-            },
-            "examples": {
-              "application/json": {
-                "data": "xxxxxxxxxx",
-                "nextLink": "https://brs.int.gsm.applicationinsights.io/testresultfile?pop=brs&partitionId=48c03eca-8710-4ae0-9aaf-34d863ed7404&testid=default_divyaj-test-draft-test_us-ca-sjc-azr&posixtimestamp=1566823240&testsuccessful=true&offset=10"
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
-    "TestResultFileResponse": {
-      "description": "Test result file block",
-      "type": "object",
-      "properties": {
-        "data": {
-          "description": "Base 64 encoded file contents",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "the next link.",
-          "type": "string"
-        }
-      }
-    }
-  },
+				"responses": {
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					},
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/TestResultFileResponse"
+						}
+					}
+				},
+				"x-ms-examples": {
+					"Get Metadata for Operation": {
+						"$ref": "./examples/WebTestResultsTestResultFile.json"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"ErrorResponse": {
+			"description": "Describes the format of Error response.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "Error code",
+					"type": "string"
+				},
+				"message": {
+					"description": "Error message indicating why the operation failed.",
+					"type": "string"
+				}
+			}
+		},
+		"TestResultFileResponse": {
+			"description": "Test result",
+			"type": "object",
+			"properties": {
+				"data": {
+					"description": "File contents",
+					"type": "string"
+				},
+				"nextLink": {
+					"description": "the next link.",
+					"type": "string"
+				}
+			}
+		}
+	},
   "parameters": {
-    "PopParameter": {
-      "name": "pop",
+    "WebtestNameParameter": {
+      "name": "webtestName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The pop where the result is located"
+      "description": "The name of the webtest.",
+      "x-ms-parameter-location": "method"
     },
-    "PartitionIdParameter": {
-      "name": "partitionId",
-      "in": "path",
+    "PopIdParameter": {
+      "name": "popId",
+      "in": "query",
       "required": true,
       "type": "string",
-      "description": "The partition ID for the result"
-    },
-    "TestIdParameter": {
-      "name": "testId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The test id for the result"
+      "description": "The name of the pop.",
+      "x-ms-parameter-location": "method"
     },
     "PosixTimeStampParameter": {
       "name": "posixTimeStamp",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "integer",
       "format": "int64",
-      "description": "The posix time stamp for the test result"
+      "description": "The posix time stamp for the test result",
+      "x-ms-parameter-location": "method"
     },
     "TestSuccessfulParameter": {
       "name": "testSuccessful",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "boolean",
-      "description": "the desired success state for the test result"
+      "description": "the desired success state for the test result",
+      "x-ms-parameter-location": "method"
     },
     "DownloadAsParameter": {
       "name": "downloadas",
-      "in": "path",
+      "in": "query",
       "required": true,
       "type": "string",
-      "description": "the format of webtest result to download"
+      "description": "the format of webtest result to download",
+      "x-ms-parameter-location": "method"
     },
     "OffsetParameter": {
       "name": "offset",
-      "in": "path",
+      "in": "query",
       "required": false,
-      "type": "int64",
-      "description": "the offset to start reading the file"
+      "type": "integer",
+      "format": "int64",
+      "description": "the starting offset in the file to return data from",
+      "x-ms-parameter-location": "method"
     }
   }
 }
