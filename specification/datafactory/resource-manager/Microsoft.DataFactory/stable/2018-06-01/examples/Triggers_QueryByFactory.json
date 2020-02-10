@@ -4,7 +4,10 @@
     "resourceGroupName": "exampleResourceGroup",
     "factoryName": "exampleFactoryName",
     "triggerName": "exampleTrigger",
-    "api-version": "2018-06-01"
+    "api-version": "2018-06-01",
+    "filterParameters": {
+      "parentTriggerName": "exampleTrigger"
+    }
   },
   "responses": {
     "200": {
@@ -18,15 +21,16 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleTrigger/rerunTriggers/exampleRerunTrigger",
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/triggers/exampleRerunTrigger",
             "name": "exampleRerunTrigger",
-            "type": "Microsoft.DataFactory/factories/triggers/rerunTriggers",
+            "type": "Microsoft.DataFactory/factories/triggers",
             "properties": {
               "type": "RerunTumblingWindowTrigger",
               "typeProperties": {
+                "parentTrigger": "exampleTrigger",
                 "requestedStartTime": "2018-06-16T00:39:14.905167Z",
                 "requestedEndTime": "2018-06-16T00:55:14.905167Z",
-                "maxConcurrency": 4
+                "rerunConcurrency": 4
               },
               "description": "Example description"
             }
