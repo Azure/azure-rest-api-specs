@@ -2312,11 +2312,6 @@
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
           "minLength": 1
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
-          "minLength": 1
         }
       },
       "allOf": [
@@ -2949,10 +2944,6 @@
         "clientId": {
           "type": "string",
           "description": "Client ID of developer console which is the client application."
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client Secret of developer console which is the client application."
         }
       },
       "required": [
@@ -5279,7 +5270,7 @@
       "properties": {
         "value": {
           "type": "string",
-          "description": "Secret Value of the NamedValue entity."
+          "description": "This is secret value of the NamedValue entity."
         }
       },
       "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
