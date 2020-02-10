@@ -2,6 +2,9 @@ name: "Preproduction CI for Azure Rest API specifications"
 
 trigger: none
 
+pr:
+  autoCancel: false
+
 variables:
   TRAVIS: 'true'
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
