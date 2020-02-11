@@ -60,6 +60,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R3020](#r2004) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
+| [R3021](#r2004) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -1833,6 +1835,111 @@ or
 ``` json
 "x-ms-long-running-operation-options": {
   "final-state-via": "azure-async-operation"
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r3020" ></a>R3020 PathResourceProviderNamePascalCase
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Resource provider naming must follow the pascal case. Path: {your path}
+
+**Description** :
+
+Resource provider naming in path SHOULD follow the pascal case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs)
+
+For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
+
+**How to fix the violation**: 
+
+Rename resource provider as pascal case in path.
+
+Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follw pascal case.
+
+
+Invalid: 
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Valid:
+
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3021" ></a>R3021 PathResouceTypeNameCamelCase
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Resource type naming SHOULD follow camel case. Path: {your path}
+
+**Description** :
+
+Resource type or other identifiers (include: namespace, entityTypes) SHOULD follow camel case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs, not ProactiveDetectionConfig)
+
+For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
+
+**How to fix the violation**: 
+
+Rename resource type or other identifiers as camel case in path.
+
+Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follw camel case.
+
+
+Invalid: 
+
+```
+paths : { "/subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Valid:
+
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
 }
 ```
 
