@@ -26,7 +26,7 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
+tag: package-2019-09
 ```
 
 ### Tag: package-2018-01
