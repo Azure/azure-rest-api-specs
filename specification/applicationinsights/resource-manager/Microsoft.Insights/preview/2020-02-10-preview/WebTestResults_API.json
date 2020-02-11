@@ -35,12 +35,12 @@
 	},
 	"paths": {
 		"/subscriptions/{subscriptionId}/resoucegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webtestName}/testresultfile": {
-			"get": {
-				"tags": [
-					"FindWebTestResult"
-				],
-				"operationId": "testresultfile",
-				"description": "Returns a file test result for the matching test",
+      "get": {
+        "tags": [
+          "FindWebTestResult"
+        ],
+        "operationId": "testresultfile_Get",
+        "description": "Returns a file test result for the matching test",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -70,26 +70,26 @@
             "$ref": "#/parameters/OffsetParameter"
           }
         ],
-				"responses": {
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ErrorResponse"
-						}
-					},
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/TestResultFileResponse"
-						}
-					}
-				},
-				"x-ms-examples": {
-					"Example Get call:": {
-						"$ref": "./examples/WebTestResultsTestResultFile.json"
-					}
-				}
-			}
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TestResultFileResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Example Get call:": {
+            "$ref": "./examples/WebTestResultsTestResultFile.json"
+          }
+        }
+      }
 		}
 	},
 	"definitions": {
