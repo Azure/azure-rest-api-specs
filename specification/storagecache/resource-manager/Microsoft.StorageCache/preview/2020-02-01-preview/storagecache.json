@@ -1287,30 +1287,21 @@
     },
     "StorageTarget": {
       "type": "object",
-      "discriminator": "kind",
       "description": "Type of the Storage Target.",
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetResource"
-        }
-      ],
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Type of the Storage Target.",
-          "enum": [
-            "nfs3",
-            "clfs",
-            "unknown"
-          ],
-          "x-ms-enum": {
-            "name": "StorageTargetType",
-            "modelAsString": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "description": "StorageTarget properties",
+              "$ref": "#/definitions/StorageTargetProperties"
+            }
           }
         }
-      },
-      "required": [
-        "kind"
       ]
     },
     "StorageTargetResource": {
@@ -1335,8 +1326,14 @@
       "x-ms-azure-resource": true
     },
     "StorageTargetProperties": {
+      "type": "object",
       "description": "Properties of the Storage Target.",
+      "discriminator": "targetBaseType",
       "properties": {
+        "targetBaseType": {
+          "description": "Type of the Storage Target.",
+          "$ref": "#/definitions/StorageTargetType"
+        },
         "junctions": {
           "description": "List of Cache namespace junctions to target for namespace associations.",
           "type": "array",
@@ -1363,43 +1360,49 @@
             "modelAsString": true
           },
           "type": "string"
+        },
+        "nfs3": {
+          "description": "Properties when targetType is nfs3.",
+          "$ref": "#/definitions/Nfs3Target"
+        },
+        "clfs": {
+          "description": "Properties when targetType is clfs.",
+          "$ref": "#/definitions/ClfsTarget"
+        },
+        "unknown": {
+          "description": "Properties when targetType is unknown.",
+          "$ref": "#/definitions/UnknownTarget"
         }
+      },
+      "required": [
+        "targetBaseType"
+      ]
+    },
+    "StorageTargetType": {
+      "type": "string",
+      "description": "Type of the Storage Target.",
+      "enum": [
+        "nfs3",
+        "clfs",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTargetType",
+        "modelAsString": true
       }
     },
-    "Nfs3Target": {
+    "Nfs3TargetProperties": {
       "description": "An NFSv3 mount point for use as a Storage Target.",
       "type": "object",
       "x-ms-discriminator-value": "nfs3",
-      "properties": {
-        "properties": {
-          "description": "Properties for legacy usage details",
-          "$ref": "#/definitions/Nfs3TargetProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTarget"
-        }
-      ],
-      "required": [
-        "properties"
-      ]
-    },
-    "Nfs3TargetProperties": {
-      "description": "Properties of the Storage Target.",
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetProperties"
         }
-      ],
-      "properties": {
-        "nfs3": {
-          "$ref": "#/definitions/Nfs3TargetDetails"
-        }
-      }
+      ]
     },
-    "Nfs3TargetDetails": {
+    "Nfs3Target": {
+      "description": "properties pertained to Nfs3Target",
       "properties": {
           "target": {
             "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
@@ -1412,40 +1415,18 @@
           }
         }
     },
-    "ClfsTarget": {
+    "ClfsTargetProperties": {
       "description": "Storage container for use as a CLFS Storage Target.",
       "type": "object",
       "x-ms-discriminator-value": "clfs",
-      "properties": {
-        "properties": {
-          "description": "Properties for legacy usage details",
-          "$ref": "#/definitions/ClfsTargetProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTarget"
-        }
-      ],
-      "required": [
-        "properties"
-      ]
-    },
-    "ClfsTargetProperties": {
-      "description": "Properties of the Storage Target.",
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetProperties"
         }
-      ],
-      "properties": {
-        "clfs": {
-          "$ref": "#/definitions/ClfsTargetDetails"
-        }
-      }
+      ]
     },
-    "ClfsTargetDetails": {
+    "ClfsTarget": {
+      "description": "properties pertained to ClfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
@@ -1453,40 +1434,18 @@
         }
       }
     },
-    "UnknownTarget": {
+    "UnknownTargetProperties": {
       "description": "Storage container for use as an Unknown Storage Target.",
       "type": "object",
       "x-ms-discriminator-value": "unknown",
-      "properties": {
-        "properties": {
-          "description": "Properties for legacy usage details",
-          "$ref": "#/definitions/UnknownTargetProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/StorageTarget"
-        }
-      ],
-      "required": [
-        "properties"
-      ]
-    },
-    "UnknownTargetProperties": {
-      "description": "Properties of the Storage Target.",
       "allOf": [
         {
           "$ref": "#/definitions/StorageTargetProperties"
         }
-      ],
-      "properties": {
-        "unknown": {
-          "$ref": "#/definitions/UnknownTargetDetails"
-        }
-      }
+      ]
     },
-    "UnknownTargetDetails": {
+    "UnknownTarget": {
+      "description": "properties pertained to UnknownTarget",
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
