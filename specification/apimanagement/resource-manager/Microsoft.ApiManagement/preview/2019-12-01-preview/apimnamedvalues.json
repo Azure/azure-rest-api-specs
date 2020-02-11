@@ -234,13 +234,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to create or update NamedValue was accepted.",
-            "headers": {
-              "Location": {
-                "description": "The URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
+            "description": "Request to create or update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
           },
           "201": {
             "description": "NamedValue was successfully created.",
@@ -272,6 +266,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "patch": {
@@ -316,16 +314,22 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to update NamedValue was accepted.",
-            "headers": {
-              "Location": {
-                "description": "The URL where the status of the long running operation can be checked.",
-                "type": "string"
-              }
-            }
+            "description": "Request to update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
           },
           "204": {
             "description": "NamedValue was successfully updated."
+          },
+          "200": {
+            "description": "NamedValue was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/NamedValueContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -333,6 +337,10 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       },
       "delete": {
