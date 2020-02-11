@@ -138,9 +138,7 @@ uncomment the  `exclude-file` section below and add the file paths.
 ## Suppressions
 ``` yaml
 directive:
-  - suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
-    where:
-      - $(this-folder)/Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
-    reason:
-      - instanceType is a non-settable property from the client.
+  - from: devspaces.json
+    suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    reason: instanceType is a non-settable property from the client.
 ```
