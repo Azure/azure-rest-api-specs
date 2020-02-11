@@ -39,6 +39,18 @@ directive:
     where:
       - $.definitions.LivyStatementsResponseBody.properties.total_statements
       - $.definitions.LivyStatementOutput.properties.execution_count
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: These properties need to keep the same with jupyter notebook. Rp can't change these proeprties.
+    from: Microsoft.Synapse/preview/2019-11-01-preview/adf/entityTypes/NoteBook.json
+    where:
+      - $.definitions.NotebookCellOutputItem.properties.execution_count
+      - $.definitions.NotebookCellOutputItem.properties.output_type
+      - $.definitions.NotebookCell.properties.cell_type
+      - $.definitions.NotebookLanguageInfo.properties.codemirror_mode
+      - $.definitions.NotebookKernelSpec.properties.display_name
+      - $.definitions.NotebookMetadata.properties.language_info
+      - $.definitions.NoteBook.properties.nbformat_minor
 ```
 
 ### Tag: package-2019-11-01-preview
@@ -50,6 +62,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 - Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
 - Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
+- Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
 ```
 
 ---
