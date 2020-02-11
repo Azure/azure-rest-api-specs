@@ -6,31 +6,31 @@
     "bigDataPoolName": "ExamplePool",
     "api-version": "2019-06-01-preview",
     "bigDataPoolInfo": {
-        "tags": {
-          "key": "value"
+      "tags": {
+        "key": "value"
+      },
+      "location": "West US 2",
+      "properties": {
+        "sparkVersion": "2.4",
+        "nodeCount": 4,
+        "nodeSize": "Medium",
+        "nodeSizeFamily": "MemoryOptimized",
+        "autoScale": {
+          "enabled": true,
+          "minNodeCount": 3,
+          "maxNodeCount": 50
         },
-        "location": "West US 2",
-        "properties": {
-          "sparkVersion": "2.4",
-          "nodeCount": 4,
-          "nodeSize": "Medium",
-          "nodeSizeFamily": "MemoryOptimized",
-          "autoScale": {
-            "enabled": true,
-            "minNodeCount": 3,
-            "maxNodeCount": 50
-          },
-          "autoPause": {
-            "enabled": true,
-            "delayInMinutes": 15
-          },
-          "sparkEventsFolder": "/events",
-          "libraryRequirements": {
-            "content": "",
-            "filename": "requirements.txt"
-          },
-          "defaultSparkLogFolder": "/logs"
-        }
+        "autoPause": {
+          "enabled": true,
+          "delayInMinutes": 15
+        },
+        "sparkEventsFolder": "/events",
+        "libraryRequirements": {
+          "content": "",
+          "filename": "requirements.txt"
+        },
+        "defaultSparkLogFolder": "/logs"
+      }
     }
   },
   "responses": {
