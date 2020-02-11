@@ -157,7 +157,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -262,7 +264,9 @@
             "description": "Advisor configuration name. Value must be 'default'",
             "required": true,
             "type": "string",
-            "enum": ["default"],
+            "enum": [
+              "default"
+            ],
             "x-ms-enum": {
               "name": "ConfigurationName",
               "modelAsString": true
@@ -858,13 +862,18 @@
       "description": "Advisor Digest configuration entity",
       "type": "object",
       "properties": {
+        "name": {
+          "description": "Name of digest configuration. Value is case-insensitive and must be unique within a subscription.",
+          "type": "string"
+        },
         "actionGroupResourceId": {
           "description": "Action group resource id used by digest.",
           "type": "string"
         },
         "frequency": {
-          "description": "Frequency that digest will be triggered. Value must conform to ISO 8601 standard and must be greater than equal to 7 day and less than or equal to 30 days.",
-          "type": "string"
+          "format": "int32",
+          "description": "Frequency that digest will be triggered, in days. Value must be between 7 and 30 days inclusive.",
+          "type": "integer"
         },
         "categories": {
           "description": "Categories to send digest for. If categories are not provided, then digest will be sent for all categories.",
@@ -887,6 +896,18 @@
         "language": {
           "description": "Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).",
           "type": "string"
+        },
+        "state": {
+          "description": "State of digest configuration.",
+          "enum": [
+            "Active",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DigestConfigState",
+            "modelAsString": true
+          }
         }
       }
     },
