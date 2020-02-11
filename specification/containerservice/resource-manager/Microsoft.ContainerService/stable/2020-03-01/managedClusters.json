@@ -1856,6 +1856,12 @@
       "description": "The response from the List Managed Clusters operation."
     },
     "ManagedCluster": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ManagedClusterSku",
+          "description": "The managed cluster SKU."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -2435,6 +2441,33 @@
         }
       },
       "description": "An error response from the Container service."
+    },
+    "ManagedClusterSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of a managed cluster SKU.",
+          "enum": [
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedClusterSkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of a managed cluster SKU.",
+          "enum": [
+            "Paid",
+            "Free"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedClusterSkuTier",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {
