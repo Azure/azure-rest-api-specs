@@ -369,8 +369,8 @@
       ],
       "properties": {
         "properties": {
+          "description": "Cluster properties.",
           "$ref": "#/definitions/ClusterProperties",
-          "description": "",
           "x-ms-client-flatten": true
         }
       }
@@ -379,6 +379,11 @@
       "description": "Cluster properties.",
       "type": "object",
       "properties": {
+        "onPremClusterName": {
+          "description": "Name of the on-prem cluster connected to this resource.",
+          "type": "string",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Provisioning state.",
           "type": "string",
@@ -425,6 +430,11 @@
           "items": {
             "$ref": "#/definitions/ClusterNode"
           }
+        },
+        "activeNodeName": {
+          "description": "Name of the active node.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
