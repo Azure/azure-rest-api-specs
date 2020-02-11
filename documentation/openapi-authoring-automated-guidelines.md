@@ -60,8 +60,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
-| [R3020](#r2004) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
-| [R3021](#r2004) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
+| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
+| [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
