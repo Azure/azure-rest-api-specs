@@ -61,10 +61,10 @@
             "$ref": "#/parameters/TimeStampParameter"
           },
           {
-            "$ref": "#/parameters/TestSuccessfulCriteriaParameter"
+            "$ref": "#/parameters/DownloadAsParameter"
           },
           {
-            "$ref": "#/parameters/DownloadAsParameter"
+            "$ref": "#/parameters/TestSuccessfulCriteriaParameter"
           },
           {
             "$ref": "#/parameters/ContinuationTokenParameter"
@@ -148,14 +148,6 @@
       "description": "The posix (epoch) time stamp for the webtest result.",
       "x-ms-parameter-location": "method"
     },
-    "TestSuccessfulCriteriaParameter": {
-      "name": "testSuccessfulCriteria",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "The success state criteria for the webtest result.",
-      "x-ms-parameter-location": "method"
-    },
     "DownloadAsParameter": {
       "name": "downloadAs",
       "in": "query",
@@ -179,7 +171,15 @@
           }
         ]
       },
-      "description": "The format of the webtest result to download, valid formats include webtestresult, json.",
+      "description": "The format to use when returning the webtest result.",
+      "x-ms-parameter-location": "method"
+    },
+    "TestSuccessfulCriteriaParameter": {
+      "name": "testSuccessfulCriteria",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "description": "The success state criteria for the webtest result.",
       "x-ms-parameter-location": "method"
     },
     "ContinuationTokenParameter": {
