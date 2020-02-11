@@ -2162,7 +2162,7 @@
           }
         },
         "encryption": {
-          "$ref": "#/definitions/Encryption"
+          "$ref": "#/definitions/EncryptionImages"
         }
       },
       "required": [
@@ -2170,7 +2170,7 @@
       ],
       "description": "Describes the target region information."
     },
-    "Encryption": {
+    "EncryptionImages": {
       "properties": {
         "osDiskImage": {
           "$ref": "#/definitions/OSDiskImageEncryption"
@@ -2183,12 +2183,7 @@
           "description": "A list of encryption specifications for data disk images."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiskImageEncryption"
-        }
-      ],
-      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact. Users can also specify a default disk encryption set ID to use for all disks."
+      "description": "Optional. Allows users to provide customer managed keys for encrypting the OS and data disks in the gallery artifact."
     },
     "OSDiskImageEncryption": {
       "allOf": [
