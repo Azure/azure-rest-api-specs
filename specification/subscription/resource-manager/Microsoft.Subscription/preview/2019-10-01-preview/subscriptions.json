@@ -395,7 +395,7 @@
     },
     "/providers/Microsoft.Subscription/subscriptions/{subscriptionId}": {
       "put": {
-        "description": "The operation to create a new subscription.",
+        "description": "The operation to create a new subscription or update the display name of an existing subscription.",
         "operationId": "Subscription_PutSubscription",
         "x-ms-examples": {
           "createSubscription": {
@@ -407,7 +407,7 @@
           "200": {
             "description": "Normal response for a successful query.",
             "schema": {
-              "$ref": "#/definitions/PutSubscriptionCreationResult"
+              "$ref": "#/definitions/PutSubscriptionResponse"
             }
           },
           "202": {
@@ -459,7 +459,20 @@
           "200": {
             "description": "Subscription details.",
             "schema": {
-              "$ref": "#/definitions/PutSubscriptionCreationResult"
+              "$ref": "#/definitions/PutSubscriptionResponse"
+            }
+          },
+          "202": {
+            "description": "Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer"
+              }
             }
           },
           "default": {
@@ -492,7 +505,7 @@
           "200": {
             "description": "Successful completion of the asynchronous operation",
             "schema": {
-              "$ref": "#/definitions/PutSubscriptionCreationResult"
+              "$ref": "#/definitions/PutSubscriptionResponse"
             }
           },
           "202": {
@@ -759,7 +772,7 @@
       "required": [
         "displayName",
         "skuId",
-        "scope"
+        "billingScope"
       ],
       "properties": {
         "displayName": {
@@ -770,160 +783,71 @@
           "description": "The SKU ID of the Azure plan.",
           "type": "string"
         },
-        "scope": {
-          "description": "Determines customerLe / fieldLed, partnerLed, legacy.",
+        "billingScope": {
+          "description": "Determines customerLed / fieldLed, partnerLed.",
           "type": "string"
         },
-        "owners": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdPrincipal"
-          },
-          "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
+        "initialOnwerPrincipalId": {
+          "description": "Initial owner object Id.",
+          "type": "string"
+        },
+        "initialOnwerTenantId": {
+          "description": "Initial owner tenant Id.",
+          "type": "string"
         },
         "managementGroupId": {
           "description": "The Management Group Id.",
           "type": "string"
         },
-        "costCenter": {
-          "description": "If set, the cost center will show up on the Azure usage and charges file.",
-          "type": "string"
-        },
         "resellerId": {
           "description": "Reseller ID, basically MPN Id.",
           "type": "string"
-        },
-        "additionalParameters": {
-          "description": "Additional, untyped parameters to support internal subscription creation scenarios.",
-          "$ref": "#/definitions/AdditionalInternalProperties"
-        },
-        "state": {
-          "type": "string",
-          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
-          "enum": [
-            "Enabled",
-            "Warned",
-            "PastDue",
-            "Disabled",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "SubscriptionState",
-            "modelAsString": false
-          }
         }
       }
     },
-    "PutSubscriptionCreationResult": {
+    "PutSubscriptionResponse": {
       "description": "Subscription information (same as Microsoft.Resources/subscription).",
       "properties": {
         "id": {
           "description": "Fully qualified ID for the subscription.",
           "type": "string"
         },
-        "subscriptionId": {
+        "name": {
           "description": "Subscription ID.",
           "type": "string"
         },
+        "type": {
+          "description": "Resource type, Microsoft.Subscriptions.",
+          "type": "string"
+        },
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/PutSubscriptionResponseProperties",
+            "description": "Put subscription response properties."
+          }
+        }
+      }
+    },
+    "PutSubscriptionResponseProperties": {
+      "description": "Put subscription creation result properties.",
+      "properties": {
         "displayName": {
-          "description": "Subscription display name.",
+          "description": "The friendly name of the subscription.",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "The SKU ID of the Azure plan.",
+          "type": "string"
+        },
+        "billingScope": {
+          "description": "Corresponding billing scope.",
           "type": "string"
         },
         "tenantId": {
-          "description": "Subscription tenant id.",
+          "description": "Service tenantId corresponding to the Subscription.",
           "type": "string"
-        },
-        "state": {
-          "type": "string",
-          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
-          "enum": [
-            "Enabled",
-            "Warned",
-            "PastDue",
-            "Disabled",
-            "Deleted"
-          ],
-          "x-ms-enum": {
-            "name": "SubscriptionState",
-            "modelAsString": false
-          }
-        },
-        "subscriptionPolicies": {
-          "$ref": "#/definitions/SubscriptionPolicies",
-          "description": "The subscription policies."
-        },
-        "authorizationSource": {
-          "type": "string",
-          "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
-        },
-        "managedByTenants": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedByTenant"
-          },
-          "description": "An array containing the tenants managing the subscription."
         }
       }
-    },
-    "SubscriptionPolicies": {
-      "properties": {
-        "locationPlacementId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions."
-        },
-        "quotaId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The subscription quota ID."
-        },
-        "spendingLimit": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The subscription spending limit.",
-          "enum": [
-            "On",
-            "Off",
-            "CurrentPeriodOff"
-          ],
-          "x-ms-enum": {
-            "name": "spendingLimit",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "Subscription policies."
-    },
-    "AdditionalInternalProperties": {
-      "description": "Information about a tenant managing the subscription.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of the subscription (ex:- AME tenant for internal subs). This is a GUID."
-        },
-        "pcCode": {
-          "type": "string",
-          "description": "PcCode for the internal subscriptions"
-        },
-        "costCategory": {
-          "type": "string",
-          "description": "cost Category of the internal subscriptions"
-        },
-        "serviceTreeId": {
-          "type": "string",
-          "description": "Service tree id of team."
-        }
-      }
-    },
-    "ManagedByTenant": {
-      "properties": {
-        "tenantId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The tenant ID of the managing tenant. This is a GUID."
-        }
-      },
-      "description": "Information about a tenant managing the subscription."
     }
   },
   "parameters": {
