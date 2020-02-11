@@ -418,6 +418,29 @@
           "description": "Unique, immutable resource id.",
           "type": "string",
           "readOnly": true
+        },
+        "nodes": {
+          "description": "List of nodes reported by the cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterNode"
+          }
+        }
+      }
+    },
+    "ClusterNode": {
+      "description": "Cluster node details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the cluster node.",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfCores": {
+          "description": "Number of cores on the node.",
+          "type": "number",
+          "readOnly": true
         }
       }
     },
