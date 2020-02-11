@@ -129,7 +129,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -140,6 +139,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -232,7 +232,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -242,6 +241,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -325,7 +325,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
-- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -335,6 +334,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 
 # Needed when there is more than one input file
 override-info:
@@ -871,6 +871,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
