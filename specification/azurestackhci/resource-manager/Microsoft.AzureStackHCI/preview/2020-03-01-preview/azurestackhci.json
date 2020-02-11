@@ -33,9 +33,6 @@
       "get": {
         "tags": ["Operations"],
         "operationId": "Operations_List",
-        "x-ms-examples": {
-          "ListOperations": { "$ref": "./examples/ListOperations.json" }
-        },
         "description": "List all available Microsoft.AzureStackHCI provider operations",
         "parameters": [
           {
@@ -330,7 +327,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/ClusterConnection"
             }
           },
           "default": {
@@ -344,35 +341,164 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Error response.",
+    "Cluster": {
+      "description": "Cluster details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "",
+          "x-ms-client-flatten": true
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "ClusterProperties": {
+      "description": "Cluster properties.",
+      "type": "object",
       "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "provisioningState": {
+          "description": "Provisioning state.",
           "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
           },
           "readOnly": true
+        },
+        "status": {
+          "description": "Status of the cluster agent.",
+          "type": "string",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "agentVersion": {
+          "description": "Version of the cluster agent software.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceId": {
+          "description": "Unique, immutable resource id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterConnect": {
+      "description": "Connect cluster operation parameters.",
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "Cluster agent public certificate - base64 encoded.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "certificate"
+      ]
+    },
+    "ClusterConnection": {
+      "description": "Cluster agent uses this identity to connect the cluster to Azure.",
+      "type": "object",
+      "properties": {
+        "serviceEndpoint": {
+          "description": "HCI cluster management service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "AAD tenant ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "AAD service client ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aadAuthority": {
+          "description": "AAD authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "aadAudience": {
+          "description": "AAD audience.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of available operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Operation properties."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Operation properties.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Resource provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type name.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Operation description.",
+          "type": "string"
         }
       }
     }
