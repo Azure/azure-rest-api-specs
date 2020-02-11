@@ -61,13 +61,13 @@
             "$ref": "#/parameters/TimeStampParameter"
           },
           {
-            "$ref": "#/parameters/TestSuccessfulParameter"
+            "$ref": "#/parameters/TestSuccessfulCriteriaParameter"
           },
           {
             "$ref": "#/parameters/DownloadAsParameter"
           },
           {
-            "$ref": "#/parameters/OffsetParameter"
+            "$ref": "#/parameters/ContinuationTokenParameter"
           }
         ],
         "responses": {
@@ -108,15 +108,15 @@
 			}
 		},
 		"TestResultFileResponse": {
-			"description": "Test result",
+			"description": "Test result.",
 			"type": "object",
 			"properties": {
 				"data": {
-					"description": "File contents",
+					"description": "File contents.",
 					"type": "string"
 				},
 				"nextLink": {
-					"description": "the next link.",
+					"description": "The URI that can be used to request the next section of the result file in the event the file is too large for a single request.",
 					"type": "string"
 				}
 			}
@@ -124,11 +124,11 @@
 	},
   "parameters": {
     "WebtestNameParameter": {
-      "name": "webtestName",
+      "name": "webTestName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the webtest.",
+      "description": "The name of the Application Insights webtest resource.",
       "x-ms-parameter-location": "method"
     },
     "PopIdParameter": {
@@ -136,7 +136,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The name of the pop.",
+      "description": "The point of presence where the webtest result was created.",
       "x-ms-parameter-location": "method"
     },
     "TimeStampParameter": {
@@ -145,32 +145,35 @@
       "required": true,
       "type": "integer",
       "format": "int64",
-      "description": "The posix (epoch) time stamp for the test result",
+      "description": "The posix (epoch) time stamp for the webtest result.",
       "x-ms-parameter-location": "method"
     },
-    "TestSuccessfulParameter": {
-      "name": "testSuccessful",
+    "TestSuccessfulCriteriaParameter": {
+      "name": "testSuccessfulCriteria",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "boolean",
-      "description": "the success state for the test result",
+      "description": "The success state criteria for the webtest result.",
       "x-ms-parameter-location": "method"
     },
     "DownloadAsParameter": {
-      "name": "downloadas",
+      "name": "downloadAs",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "the format of webtest result to download, valid formats include vswebtestfile, uxdisplaystring",
+      "enum": [
+        "webtestresult",
+        "json"
+      ],
+      "description": "The format of the webtest result to download, valid formats include webtestresult, json.",
       "x-ms-parameter-location": "method"
     },
-    "OffsetParameter": {
-      "name": "offset",
+    "ContinuationTokenParameter": {
+      "name": "continuationToken",
       "in": "query",
       "required": false,
-      "type": "integer",
-      "format": "int64",
-      "description": "the starting offset in the file to return data from",
+      "type": "string",
+      "description": "The continuation token.",
       "x-ms-parameter-location": "method"
     }
   }
