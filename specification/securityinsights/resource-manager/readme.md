@@ -39,7 +39,7 @@ input-file:
 directive:
   - suppress: R2059
     from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-    reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
+    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
     approved-by: "@lirenhe"
 ```
 
@@ -119,7 +119,7 @@ input-file:
 directive:
   - suppress: R2059
     from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-    reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
+    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
     approved-by: "@lirenhe"
 ```
 
