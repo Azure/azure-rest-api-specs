@@ -3681,6 +3681,49 @@
       },
       "description": "Paged NamedValue list representation."
     },
+    "NamedValueCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamedValueCreateContractProperties",
+          "description": "NamedValue entity contract properties for PUT operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "NamedValue details."
+    },
+    "NamedValueCreateContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9-._]+$"
+        },
+        "value": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedValueEntityBaseParameters"
+        }
+      ],
+      "required": [
+        "displayName",
+        "value"
+      ],
+      "description": "NamedValue Contract properties."
+    },
     "NamedValueContract": {
       "properties": {
         "properties": {
@@ -3706,8 +3749,9 @@
           "pattern": "^[A-Za-z0-9-._]+$"
         },
         "value": {
+          "x-ms-secret": true,
           "type": "string",
-          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 4096
         }
@@ -3718,8 +3762,7 @@
         }
       ],
       "required": [
-        "displayName",
-        "value"
+        "displayName"
       ],
       "description": "NamedValue Contract properties."
     },
@@ -3732,10 +3775,6 @@
           },
           "maxItems": 32,
           "description": "Optional tags that when provided can be used to filter the NamedValue list."
-        },
-        "secret": {
-          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false.",
-          "type": "boolean"
         }
       },
       "description": "NamedValue Entity Base Parameters set."
@@ -3750,6 +3789,7 @@
           "pattern": "^[A-Za-z0-9-._]+$"
         },
         "value": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.",
           "minLength": 1,
