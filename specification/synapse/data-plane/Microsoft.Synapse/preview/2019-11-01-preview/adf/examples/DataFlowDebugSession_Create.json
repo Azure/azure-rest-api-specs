@@ -3,21 +3,21 @@
     "workspaceName": "exampleWorkspace",
     "SynapseDnsSuffix": "azuresynapse.net",
     "request": {
-      "timeToLive": 60,
-      "integrationRuntime": {
-        "name": "ir1",
+      "dataFlowName": "dataflow",
+      "existingClusterId": "1221221",
+      "clusterTimeout": 50,
+      "newClusterName": "newClusterName",
+      "newClusterNodeType": "newClusterNodeType",
+      "dataBricksLinkedService": {
         "properties": {
-          "type": "Managed",
+          "type": "AzureStorage",
           "typeProperties": {
-            "computeProperties": {
-              "location": "AutoResolve",
-              "dataFlowProperties": {
-                "computeType": "General",
-                "coreCount": 48,
-                "timeToLive": 10
-              }
+            "connectionString": {
+              "type": "SecureString",
+              "value": "DefaultEndpointsProtocol=https;AccountName=examplestorageaccount;AccountKey=<storage key>"
             }
-          }
+          },
+          "description": "Example description"
         }
       }
     },
@@ -36,7 +36,6 @@
     },
     "200": {
       "body": {
-        "status": "Succeeded",
         "sessionId": "229c688c-944c-44ac-b31a-82d50f347154"
       }
     }

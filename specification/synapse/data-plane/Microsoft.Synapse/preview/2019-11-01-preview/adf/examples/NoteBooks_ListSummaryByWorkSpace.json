@@ -19,7 +19,54 @@
             "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/notebooks/exampleNoteBook",
             "name": "exampleNoteBook",
             "type": "Microsoft.Synapse/workspaces/notebooks",
-            "properties": {},
+            "properties": {
+              "description": "A sample notebook",
+              "nbformat": 4,
+              "nbformat_minor": 2,
+              "bigDataPool": {
+                "referenceName": "exampleBigDataPoolName",
+                "type": "BigDataPoolReference"
+              },
+              "sessionProperties": {
+                "driverMemory": "28g",
+                "driverCores": 4,
+                "executorMemory": "28g",
+                "executorCores": 4,
+                "numExecutors": 1
+              },
+              "metadata": {
+                "language_info": {
+                  "name": "python"
+                },
+                "kernelspec": {
+                  "name": "exampleName",
+                  "display_name": "exampleDisplayName"
+                }
+              },
+              "cells": [
+                {
+                  "cell_type": "code",
+                  "metadata": {},
+                  "source": [
+                    "def my_function():\n",
+                    " print(\"Hello from a function\")\n",
+                    "\n",
+                    "my_function()"
+                  ],
+                  "attachments": {},
+                  "outputs": [
+                    {
+                      "execution_count": 3,
+                      "output_type": "execute_result",
+                      "data": {
+                        "text/plain": "Hello from a function"
+                      },
+                      "metadata": {}
+                    }
+                  ]
+                }
+              ]
+            },
             "etag": "1500504f-0000-0200-0000-5cbe090f0000"
           }
         ]
