@@ -365,14 +365,14 @@
         },
         "parameters": {
           "type": "object",
-          "description": "Resource Manager template blueprint artifact parameter values.",
+          "description": "Blueprint assignment parameter values.",
           "additionalProperties": {
             "description": "Key/Value pair of parameter fulfillment.",
             "$ref": "#/definitions/ParameterValue"
           }
         },
         "resourceGroups": {
-          "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
+          "description": "Names and locations of resource group placeholders.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ResourceGroupValue"
@@ -424,7 +424,6 @@
       "type": "object",
       "properties": {
         "value": {
-          "type": "string",
           "description": "Parameter value as value type."
         },
         "reference": {
