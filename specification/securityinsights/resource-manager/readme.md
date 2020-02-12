@@ -116,11 +116,8 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-directive:
-  - suppress: R2059
-    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
-    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
-    approved-by: "@lirenhe"
+  - $(this-folder)/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
