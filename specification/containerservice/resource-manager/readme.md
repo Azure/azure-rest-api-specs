@@ -218,6 +218,10 @@ These settings apply only when `--tag=package-2020-02-01-only` is specified on t
 ``` yaml $(tag) == 'package-2020-02-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
+    reason: Cluster-autoscaler settings are not camel-cased
 ```
 
 ### Tag: package-2020-01-01-only
