@@ -35,6 +35,22 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
+- Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+directive:
+  - suppress: R2059
+    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
+    approved-by: "@lirenhe"
+```
+
+---
+
+### Tag: package-2019-01-preview-only
+
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01-preview-only'
+input-file:
 - Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
 ```
 
@@ -99,8 +115,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json
-
+  - $(this-folder)/Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+directive:
+  - suppress: R2059
+    from: Microsoft.SecurityInsights/stable/2020-01-01/SecurityInsights.json
+    reason: it's not actually a resource path; the validator is confused because the LogAnalytics namespace is in the URI path.
+    approved-by: "@lirenhe"
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
