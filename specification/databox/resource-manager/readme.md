@@ -26,16 +26,7 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-01
-```
-
-### Tag: package-2018-01
-
-These settings apply only when `--tag=package-2018-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-01'
-input-file:
-- Microsoft.DataBox/stable/2018-01-01/databox.json
+tag: package-2019-09
 ```
 
 ### Tag: package-2019-09
@@ -45,6 +36,15 @@ These settings apply only when `--tag=package-2019-09` is specified on the comma
 ``` yaml $(tag) == 'package-2019-09'
 input-file:
 - Microsoft.DataBox/stable/2019-09-01/databox.json
+```
+
+### Tag: package-2018-01
+
+These settings apply only when `--tag=package-2018-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-01'
+input-file:
+- Microsoft.DataBox/stable/2018-01-01/databox.json
 ```
 
 ---
