@@ -372,8 +372,11 @@
           }
         },
         "resourceGroups": {
-          "$ref": "#/definitions/ResourceGroupValueCollection",
-          "description": "Names and locations of resource group placeholders."
+          "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceGroupValue"
+          }
         },
         "status": {
           "description": "Status of blueprint assignment. This field is readonly.",
@@ -465,14 +468,6 @@
       "required": [
         "id"
       ]
-    },
-    "ResourceGroupValueCollection": {
-      "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "$ref": "#/definitions/ResourceGroupValue"
-      }
     },
     "ResourceGroupValue": {
       "description": "Represents an Azure resource group.",
