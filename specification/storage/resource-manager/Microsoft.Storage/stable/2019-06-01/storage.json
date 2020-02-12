@@ -3118,6 +3118,24 @@
       },
       "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
     },
+    "EncryptionScopeListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionScope"
+          },
+          "description": "List of encryption scopes requested.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes."
+    },
     "ErrorResponse": {
       "properties": {
         "code": {
