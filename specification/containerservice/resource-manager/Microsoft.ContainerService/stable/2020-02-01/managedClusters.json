@@ -1961,8 +1961,31 @@
         },
         "autoScalerProfile": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          "properties": {
+            "scan-interval": {
+              "type": "string"
+            },
+            "scale-down-delay-after-add": {
+              "type": "string"
+            },
+            "scale-down-delay-after-delete": {
+              "type": "string"
+            },
+            "scale-down-delay-after-failure": {
+              "type": "string"
+            },
+            "scale-down-unneeded-time": {
+              "type": "string"
+            },
+            "scale-down-unready-time": {
+              "type": "string"
+            },
+            "scale-down-utilization-threshold": {
+              "type": "string"
+            },
+            "max-graceful-termination-sec": {
+              "type": "string"
+            }
           },
           "description": "Parameters to be applied to the cluster-autoscaler when enabled"
         },
