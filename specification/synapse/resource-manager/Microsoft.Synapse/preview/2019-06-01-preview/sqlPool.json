@@ -96,6 +96,15 @@
             "name": "sqlPoolName",
             "description": "SQL pool name",
             "required": true
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/SqlPoolPatchInfo"
+            },
+            "in": "body",
+            "name": "sqlPoolInfo",
+            "description": "The updated SQL pool properties",
+            "required": true
           }
         ],
         "responses": {
@@ -2906,6 +2915,33 @@
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SQL pool SKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlPoolResourceProperties",
+          "description": "SQL pool properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlPoolPatchInfo": {
+      "type": "object",
+      "title": "SQL pool patch info",
+      "description": "A SQL Analytics pool patch info",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SQL pool SKU"
