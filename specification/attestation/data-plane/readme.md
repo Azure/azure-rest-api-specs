@@ -22,18 +22,11 @@ Following are the settings for using this specification with [AutoRest](https://
 
 ### Suppression
 
-``` yaml
-directive:
-  - suppress: R3023 
-    from: attestation.json
-    reason: This is the attestation data plane APIs, this rule is not applicable
-```
-
 ### Basic Information
 These are the global settings for the Attestation APIs.
 
 ``` yaml
-openapi-type: arm
+openapi-type: data-plane
 tag: package-2018-09-preview
 ```
 
