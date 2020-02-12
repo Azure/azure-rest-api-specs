@@ -1135,9 +1135,13 @@
               "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
               "description": "The blob service properties for blob soft delete."
             },
+            "isVersioningEnabled": {
+              "type": "boolean",
+              "description": "Versioning is enabled if set to true."
+            },
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
-              "description": "Automatic Snapshot is enabled if set to true."
+              "description": "Deprecated in favor of isVersioningEnabled property."
             },
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",
