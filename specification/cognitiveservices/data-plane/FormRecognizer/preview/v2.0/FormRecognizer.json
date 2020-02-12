@@ -122,6 +122,62 @@
         }
       }
     },
+    "/custom/models/compose": {
+      "post": {
+        "tags": [
+          "Form"
+        ],
+        "summary": "Compose trained with labels models into one composed model.",
+        "description": "Compose request would include list of models ids.\r\nIt would validate what all models either trained with labels model or composed model.\r\nIt would validate limit of models put together.",
+        "operationId": "CustomModelsComposePost",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "composeRequest",
+            "in": "body",
+            "description": "Compose models",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComposeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "innerError": {
+                    "requestId": "00000000-0000-0000-0000-000000000000"
+                  },
+                  "message": "Request body is invalid."
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Compose custom models": {
+            "$ref": "./examples/ComposeModels.json"
+          }
+        }
+      }
+    },
     "/custom/models/{modelId}": {
       "get": {
         "summary": "Get Custom Model",
@@ -733,6 +789,12 @@
         },
         "trainResult": {
           "$ref": "#/definitions/TrainResult"
+        },
+        "combinedTrainedResults": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TrainResult"
+          }
         }
       }
     },
@@ -841,6 +903,23 @@
         },
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "CombineRequest": {
+      "description": "Request contract for combine operation.",
+      "required": [
+        "modelIds"
+      ],
+      "type": "object",
+      "properties": {
+        "modelIds": {
+          "description": "List of model ids to combine.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1221,7 +1300,9 @@
       "required": [
         "docType",
         "pageRange",
-        "fields"
+        "fields",
+        "predictedModel",
+        "predictedModelConfidence"
       ],
       "properties": {
         "docType": {
@@ -1245,6 +1326,15 @@
           "additionalProperties": {
             "$ref": "#/definitions/FieldValue"
           }
+        },
+        "predictedModel": {
+          "description": "Predicted model id for this document.",
+          "type": "string"
+        },
+        "predictedModelConfidence": {
+          "format": "double",
+          "description": "Predicted model confidence.",
+          "type": "number"
         }
       }
     },
