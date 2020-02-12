@@ -609,6 +609,48 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/portalsettings/delegation/listSecrets": {
+      "post": {
+        "tags": [
+          "DelegationSettings"
+        ],
+        "operationId": "DelegationSettings_ListSecrets",
+        "description": "Gets the secret validation key of the DelegationSettings.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsPortalSettings": {
+            "$ref": "./examples/ApiManagementListSecretsPortalSettingsValidationKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the validation key.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PortalSettingValidationKeyContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {}

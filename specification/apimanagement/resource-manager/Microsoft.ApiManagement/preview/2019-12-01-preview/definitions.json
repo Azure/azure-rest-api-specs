@@ -993,10 +993,6 @@
             "url": "http://tools.ietf.org/html/rfc6749#section-4"
           }
         },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
-        },
         "resourceOwnerUsername": {
           "type": "string",
           "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
@@ -1065,6 +1061,11 @@
         "clientId": {
           "type": "string",
           "description": "Client or app id registered with this authorization server."
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         }
       },
       "allOf": [
@@ -1153,6 +1154,10 @@
         "clientId": {
           "type": "string",
           "description": "Client or app id registered with this authorization server."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         }
       },
       "allOf": [
@@ -2312,6 +2317,12 @@
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
           "minLength": 1
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
+          "minLength": 1
         }
       },
       "allOf": [
@@ -2944,6 +2955,11 @@
         "clientId": {
           "type": "string",
           "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
         }
       },
       "required": [
@@ -3437,6 +3453,7 @@
           "description": "A delegation Url."
         },
         "validationKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
         },
@@ -4489,12 +4506,14 @@
           "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "primaryKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Subscription primary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Subscription secondary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
@@ -5271,6 +5290,15 @@
         "value": {
           "type": "string",
           "description": "This is secret value of the NamedValue entity."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "PortalSettingValidationKeyContract": {
+      "properties": {
+        "validationKey": {
+          "type": "string",
+          "description": "This is secret value of the validation key in portal settings."
         }
       },
       "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
