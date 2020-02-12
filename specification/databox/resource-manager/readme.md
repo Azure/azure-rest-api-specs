@@ -182,8 +182,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
   - $(this-folder)/Microsoft.DataBox/stable/2019-09-01/databox.json
+  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/databox.json
 
 ```
 
