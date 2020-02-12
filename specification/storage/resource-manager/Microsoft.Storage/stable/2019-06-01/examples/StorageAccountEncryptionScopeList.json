@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "{resourceGroupName}",
+    "accountName": "{storageAccountName}",
+    "api-version": "2019-06-01",
+    "monitor": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/encryptionScopes/scope-1",
+            "name": "scope-1",
+            "type": "Microsoft.Storage/storageAccounts/encryptionScopes",
+            "properties": {
+            "source": "Microsoft.Storage",
+            "state": "Enabled",
+            "creationTime": "2018-10-16T02:42:41.7633306Z",
+            "lastModifiedTime": "2018-10-16T02:42:41.7633306Z"
+            }
+          },
+          {
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}/encryptionScopes/scope-2",
+            "name": "scope-2",
+            "type": "Microsoft.Storage/storageAccounts/encryptionScopes",
+            "properties": {
+              "source": "Microsoft.KeyVault",
+              "state": "Enabled",
+              "keyVaultProperties": {
+                "keyUri": "https://testvault.vault.core.windows.net/keys/key1/863425f1358359c"
+              },
+              "creationTime": "2018-10-16T04:32:14.3355306Z",
+              "lastModifiedTime": "2018-10-17T06:23:14.4513306Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
