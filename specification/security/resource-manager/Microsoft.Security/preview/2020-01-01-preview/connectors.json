@@ -216,7 +216,7 @@
       "type": "object",
       "description": "The connector setting",
       "properties": {
-        "ConnectorType": {
+        "connectorType": {
           "description": "the connector type to onboard, right now, only aws is supported",
           "type": "string",
           "enum": [
@@ -224,7 +224,7 @@
             "AwsAssumeRole"
           ],
           "x-ms-enum": {
-            "name": "ConnectorType",
+            "name": "connectorType",
             "modelAsString": true,
             "values": [
               {
@@ -238,7 +238,7 @@
             ]
           }
         },
-        "AccountId": {
+        "accountId": {
           "description": "The account id of the connector",
           "type": "string",
           "readOnly": true
@@ -276,12 +276,12 @@
             ]
           }
         },
-        "AwsUser": {
+        "awsUser": {
           "description": "Aws connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsCredentialsSettingProperties"
         },
-        "AwsAssumeRole": {
+        "awsAssumeRole": {
           "description": "Aws connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
