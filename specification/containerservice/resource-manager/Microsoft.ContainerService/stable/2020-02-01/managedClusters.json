@@ -1659,6 +1659,18 @@
           },
           "description": "Network policy used for building Kubernetes network."
         },
+        "networkMode": {
+          "type": "string",
+          "enum": [
+            "transparent",
+            "bridge"
+          ],
+          "x-ms-enum": {
+            "name": "networkMode",
+            "modelAsString": true
+          },
+          "description": "Network mode used for building Kubernetes network."
+        },
         "podCidr": {
           "type": "string",
           "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}(\\/([0-9]|[1-2][0-9]|3[0-2]))?$",
