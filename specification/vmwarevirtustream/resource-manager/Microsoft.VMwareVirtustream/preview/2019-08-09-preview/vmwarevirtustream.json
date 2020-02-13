@@ -261,7 +261,7 @@
           },
           {
             "name": "privateCloud",
-            "description": "TODO",
+            "description": "The private cloud",
             "in": "body",
             "required": true,
             "schema": {
@@ -317,7 +317,7 @@
           },
           {
             "name": "privateCloud",
-            "description": "TODO",
+            "description": "The private cloud",
             "in": "body",
             "required": true,
             "schema": {
@@ -514,7 +514,7 @@
           },
           {
             "name": "cluster",
-            "description": "TODO",
+            "description": "A cluster in the private cloud",
             "in": "body",
             "required": true,
             "schema": {
@@ -573,7 +573,7 @@
           },
           {
             "name": "cluster",
-            "description": "TODO",
+            "description": "A cluster in a private cloud",
             "in": "body",
             "required": true,
             "schema": {
@@ -752,7 +752,7 @@
     "ApiError": {
       "properties": {
         "error": {
-          "description": "TODO",
+          "description": "An error returned by the API",
           "$ref": "#/definitions/ApiErrorBase"
         }
       },
@@ -827,26 +827,26 @@
       }
     },
     "ExpressRouteAuthorization": {
-      "description": "TODO",
+      "description": "Authorization for an ExpressRoute",
       "properties": {
         "name": {
-          "description": "TODO",
+          "description": "The name of the ExpressRoute",
           "type": "string"
         },
         "id": {
-          "description": "TODO",
+          "description": "The ID of the ExpressRoute",
           "type": "string",
           "readOnly": true
         },
         "key": {
-          "description": "TODO",
+          "description": "The key of the ExpressRoute",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "Circuit": {
-      "description": "TODO",
+      "description": "An ExpressRoute Circuit",
       "properties": {
         "primarySubnet": {
           "type": "string",
@@ -878,53 +878,53 @@
       }
     },
     "Endpoints": {
-      "description": "TODO",
+      "description": "Endpoint addresses",
       "properties": {
         "nsxtManager": {
-          "description": "TODO",
+          "description": "Endpoint for the NSX-T Data Center manager",
           "type": "string",
           "readOnly": true
         },
         "vcsa": {
-          "description": "TODO",
+          "description": "Endpoint for Virtual Center Server Appliance",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "IdentitySource": {
-      "description": "TODO",
+      "description": "vCenter Single Sign On Identity Source",
       "properties": {
         "name": {
-          "description": "TODO",
+          "description": "The name of the identity source",
           "type": "string"
         },
         "alias": {
-          "description": "TODO",
+          "description": "The domain's NetBIOS name",
           "type": "string"
         },
         "domain": {
-          "description": "TODO",
+          "description": "The domain's dns name",
           "type": "string"
         },
         "baseUserDN": {
-          "description": "TODO",
+          "description": "The base distinguished name for users",
           "type": "string"
         },
         "baseGroupDN": {
-          "description": "TODO",
+          "description": "The base distinguished name for groups",
           "type": "string"
         },
         "primaryServer": {
-          "description": "TODO",
+          "description": "Primary server URL",
           "type": "string"
         },
         "secondaryServer": {
-          "description": "TODO",
+          "description": "Secondary server URL",
           "type": "string"
         },
         "ssl": {
-          "description": "TODO",
+          "description": "Protect LDAP communication using SSL certificate (LDAPS)",
           "type": "string",
           "enum": [
             "Enabled",
@@ -936,17 +936,17 @@
           }
         },
         "username": {
-          "description": "TODO",
+          "description": "The ID of an Active Directory user with a minimum of read-only access to Base DN for users and group",
           "type": "string"
         },
         "password": {
-          "description": "TODO",
+          "description": "The password of the Active Directory user with a minimum of read-only access to Base DN for users and groups.",
           "type": "string"
         }
       }
     },
     "PrivateCloud": {
-      "description": "TODO",
+      "description": "A private cloud resource",
       "allOf": [
         {
           "$ref": "#/definitions/TrackedResource"
@@ -954,16 +954,16 @@
       ],
       "properties": {
         "properties": {
-          "description": "TODO",
+          "description": "The properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudProperties"
         }
       }
     },
     "PrivateCloudProperties": {
-      "description": "TODO",
+      "description": "The properties of a private cloud resource",
       "properties": {
         "provisioningState": {
-          "description": "TODO",
+          "description": "The provisioning state",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -980,15 +980,15 @@
           }
         },
         "circuit": {
-          "description": "TODO",
+          "description": "An ExpressRoute Circuit",
           "$ref": "#/definitions/Circuit"
         },
         "cluster": {
-          "description": "TODO",
+          "description": "The default cluster used for management",
           "$ref": "#/definitions/DefaultClusterProperties"
         },
         "clusters": {
-          "description": "TODO",
+          "description": "The clusters",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -996,12 +996,12 @@
           }
         },
         "endpoints": {
-          "description": "TODO",
+          "description": "The endpoints",
           "readOnly": true,
           "$ref": "#/definitions/Endpoints"
         },
         "internet": {
-          "description": "TODO",
+          "description": "Connectivity to internet is enabled or disabled",
           "type": "string",
           "enum": [
             "Enabled",
@@ -1013,28 +1013,28 @@
           }
         },
         "identitySources": {
-          "description": "TODO",
+          "description": "vCenter Single Sign On Identity Sources",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IdentitySource"
           }
         },
         "networkBlock": {
-          "description": "TODO",
+          "description": "The block of addresses should be unique across VNet in your subscription as well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where A,B,C,D are between 0 and 255, and X is between 0 and 22",
           "type": "string"
         },
         "managementNetwork": {
-          "description": "TODO",
+          "description": "Network used to access vCenter Server and NSX-T Manager",
           "type": "string",
           "readOnly": true
         },
         "provisioningNetwork": {
-          "description": "TODO",
+          "description": "Used for virtual machine cold migration, cloning, and snapshot migration",
           "type": "string",
           "readOnly": true
         },
         "vmotionNetwork": {
-          "description": "TODO",
+          "description": "Used for live migration of virtual machines",
           "type": "string",
           "readOnly": true
         },
@@ -1049,7 +1049,7 @@
       }
     },
     "Cluster": {
-      "description": "TODO",
+      "description": "A cluster resource",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1057,25 +1057,25 @@
       ],
       "properties": {
         "properties": {
-          "description": "TODO",
+          "description": "The properties of a cluster resource",
           "$ref": "#/definitions/ClusterProperties"
         }
       }
     },
     "DefaultClusterProperties": {
-      "description": "TODO",
+      "description": "The properties of a default cluster",
       "properties": {
         "clusterId": {
-          "description": "TODO",
+          "description": "The identity",
           "type": "integer",
           "readOnly": true
         },
         "clusterSize": {
-          "description": "TODO",
+          "description": "The cluster size",
           "type": "integer"
         },
         "hosts": {
-          "description": "TODO",
+          "description": "The hosts",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1085,7 +1085,7 @@
       }
     },
     "ClusterProperties": {
-      "description": "TODO",
+      "description": "Ther properties of a cluster",
       "allOf": [
         {
           "$ref": "#/definitions/DefaultClusterProperties"
@@ -1093,7 +1093,7 @@
       ],
       "properties": {
         "provisioningState": {
-          "description": "TODO",
+          "description": "The state of the cluster provisioning",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -1110,10 +1110,10 @@
       }
     },
     "PrivateCloudList": {
-      "description": "TODO",
+      "description": "A paged list of private clouds",
       "properties": {
         "value": {
-          "description": "TODO",
+          "description": "The items on the page",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1128,10 +1128,10 @@
       }
     },
     "ClusterList": {
-      "description": "TODO",
+      "description": "A paged list of clusters",
       "properties": {
         "value": {
-          "description": "TODO",
+          "description": "The items on a page",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -1146,7 +1146,7 @@
       }
     },
     "AdminCredentials": {
-      "description": "TODO",
+      "description": "Administrative credentials for accessing vCenter and NSX-T",
       "properties": {
         "nsxtUsername": {
           "description": "NSX-T Manager username",
