@@ -278,12 +278,20 @@
       "type": "object",
       "description": "Data regarding 3rd party partner integration",
       "properties": {
+        "partnerName": {
+          "type": "string",
+          "description": "Name of the company of the partner"
+        },
         "secret": {
           "type": "string",
           "description": "secret to authenticate the partner - write only",
           "x-ms-secret": true
         }
-      }
+      },
+      "required": [
+        "partnerName",
+        "secret"
+      ]
     },
     "AssessmentLinks": {
       "type": "object",
