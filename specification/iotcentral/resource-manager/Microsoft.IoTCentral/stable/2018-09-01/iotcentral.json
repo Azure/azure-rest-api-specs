@@ -631,7 +631,35 @@
         "error": {
           "description": "Error response body.",
           "x-ms-client-flatten": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponseBody"
+        }
+      }
+    },
+    "ErrorResponseBody": {
+      "description": "Details of error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional details about the error.",
+          "items": {
+            "$ref": "#/definitions/ErrorResponseBody"
+          }
         }
       }
     },
