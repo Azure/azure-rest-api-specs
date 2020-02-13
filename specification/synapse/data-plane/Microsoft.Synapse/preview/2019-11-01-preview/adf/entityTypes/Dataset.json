@@ -359,7 +359,7 @@
     },
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "setOfObjects",
         "arrayOfObjects"
@@ -475,7 +475,7 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "Optimal",
         "Fastest"
@@ -519,7 +519,7 @@
             "bzip2"
           ],
           "x-ms-enum": {
-            "name": "avroCompressionCodec",
+            "name": "AvroCompressionCodec",
             "modelAsString": true
           }
         },
@@ -558,7 +558,7 @@
           "description": "The location of the parquet storage."
         },
         "compressionCodec": {
-          "type": "object",
+          "type": "string",
           "enum": [
             "none",
             "gzip",
@@ -566,7 +566,7 @@
             "lzo"
           ],
           "x-ms-enum": {
-            "name": "compressionCodec",
+            "name": "ParquetCompressionCodec",
             "modelAsString": true
           }
         }
@@ -612,7 +612,7 @@
           "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "compressionCodec": {
-          "type": "object",
+          "type": "string",
           "enum": [
             "bzip2",
             "gzip",
@@ -622,7 +622,7 @@
             "lz4"
           ],
           "x-ms-enum": {
-            "name": "compressionCodec",
+            "name": "DelimitedTextCompressionCodec",
             "modelAsString": true
           }
         },
@@ -720,7 +720,7 @@
             "snappy"
           ],
           "x-ms-enum": {
-            "name": "orcCompressionCodec",
+            "name": "OrcCompressionCodec",
             "modelAsString": true
           }
         }
