@@ -196,10 +196,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - The response indicates that the delete operation completed successfully"
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The response indicates the resource is already deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
