@@ -5,37 +5,7 @@
     "api-version": "2019-12-01",
     "galleryName": "myGalleryName",
     "galleryImageName": "myGalleryImageName",
-    "galleryImageVersionName": "1.0.0",
-    "galleryImageVersion": {
-      "location": "West US",
-      "properties": {
-        "publishingProfile": {
-          "targetRegions": [
-            {
-              "name": "West US",
-              "regionalReplicaCount": 1
-            },
-            {
-              "name": "East US",
-              "regionalReplicaCount": 2
-            }
-          ]
-        }
-      },
-      "storageProfile": {
-        "osDiskImage": {
-          "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
-          "hostCaching": "ReadOnly"
-        },
-        "dataDiskImages": [
-          {
-            "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
-            "lun": 1,
-            "hostCaching": "None"
-          }
-        ]
-      }
-    }
+    "galleryImageVersionName": "1.0.0"
   },
   "responses": {
     "200": {
