@@ -218,7 +218,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/NamedValueContract"
+              "$ref": "./definitions.json#/definitions/NamedValueCreateContract"
             },
             "description": "Create parameters."
           },
@@ -380,6 +380,51 @@
           },
           "204": {
             "description": "NamedValue was successfully deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}/listValue": {
+      "post": {
+        "tags": [
+          "NamedValue"
+        ],
+        "operationId": "NamedValue_ListValue",
+        "description": "Gets the secret value of the NamedValue.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsSubscription": {
+            "$ref": "./examples/ApiManagementListSecretsNamedValue.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/NamedValueIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains secret value.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/PropertyValueContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
