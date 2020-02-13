@@ -578,6 +578,20 @@
           "type": "string",
           "readOnly": true
         },
+        "hostEndpointType": {
+          "description": "The endpoint type to be exposed for a Azure Dev Spaces Controller.",
+          "enum": [
+            "Public",
+            "Private",
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HostEndpointType",
+            "modelAsString": true
+          }
+        },
         "dataPlaneFqdn": {
           "description": "DNS name for accessing DataPlane services",
           "type": "string",
