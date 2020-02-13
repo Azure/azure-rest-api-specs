@@ -993,10 +993,6 @@
             "url": "http://tools.ietf.org/html/rfc6749#section-4"
           }
         },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
-        },
         "resourceOwnerUsername": {
           "type": "string",
           "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
@@ -1065,6 +1061,11 @@
         "clientId": {
           "type": "string",
           "description": "Client or app id registered with this authorization server."
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         }
       },
       "allOf": [
@@ -1153,6 +1154,11 @@
         "clientId": {
           "type": "string",
           "description": "Client or app id registered with this authorization server."
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         }
       },
       "allOf": [
@@ -2252,6 +2258,46 @@
       },
       "description": "Identity Provider Base Parameter Properties."
     },
+    "IdentityProviderCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IdentityProviderCreateContractProperties",
+          "description": "Identity Provider contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Identity Provider details."
+    },
+    "IdentityProviderCreateContractProperties": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderBaseParameters"
+        }
+      ],
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
+    },
     "IdentityProviderContract": {
       "properties": {
         "properties": {
@@ -2275,6 +2321,7 @@
           "minLength": 1
         },
         "clientSecret": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1
@@ -2324,6 +2371,7 @@
           "minLength": 1
         },
         "clientSecret": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
           "minLength": 1
@@ -2830,6 +2878,54 @@
       },
       "description": "Paged OpenIdProviders list representation."
     },
+    "OpenidConnectProviderCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OpenidConnectProviderCreateContractProperties",
+          "description": "OpenId Connect Provider contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "OpenId Connect Provider details."
+    },
+    "OpenidConnectProviderCreateContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "clientSecret": {
+          "x-ms-secret": true,
+          "type": "string",
+          "description": "Client Secret of developer console which is the client application."
+        }
+      },
+      "required": [
+        "displayName",
+        "metadataEndpoint",
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "OpenID Connect Providers Contract."
+    },
     "OpenidConnectProviderContract": {
       "properties": {
         "properties": {
@@ -2865,6 +2961,7 @@
           "description": "Client ID of developer console which is the client application."
         },
         "clientSecret": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Client Secret of developer console which is the client application."
         }
@@ -2906,6 +3003,7 @@
           "description": "Client ID of developer console which is the client application."
         },
         "clientSecret": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Client Secret of developer console which is the client application."
         }
@@ -3360,6 +3458,7 @@
           "description": "A delegation Url."
         },
         "validationKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "A base64-encoded validation key to validate, that a request is coming from Azure API Management."
         },
@@ -3582,6 +3681,48 @@
       },
       "description": "Paged NamedValue list representation."
     },
+    "NamedValueCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NamedValueCreateContractProperties",
+          "description": "NamedValue entity contract properties for PUT operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "NamedValue details."
+    },
+    "NamedValueCreateContractProperties": {
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9-._]+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedValueEntityBaseParameters"
+        }
+      ],
+      "required": [
+        "displayName",
+        "value"
+      ],
+      "description": "NamedValue Contract properties."
+    },
     "NamedValueContract": {
       "properties": {
         "properties": {
@@ -3608,7 +3749,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 4096
         }
@@ -3619,8 +3760,7 @@
         }
       ],
       "required": [
-        "displayName",
-        "value"
+        "displayName"
       ],
       "description": "NamedValue Contract properties."
     },
@@ -4412,12 +4552,14 @@
           "description": "Upcoming subscription expiration notification date. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
         },
         "primaryKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Subscription primary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
+          "x-ms-secret": true,
           "type": "string",
           "description": "Subscription secondary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
@@ -5185,6 +5327,24 @@
         "clientSecret": {
           "type": "string",
           "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "PropertyValueContract": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "This is secret value of the NamedValue entity."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "PortalSettingValidationKeyContract": {
+      "properties": {
+        "validationKey": {
+          "type": "string",
+          "description": "This is secret value of the validation key in portal settings."
         }
       },
       "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
