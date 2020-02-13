@@ -4614,7 +4614,7 @@
           "type": "array",
           "description": "Array of provisioned resources.",
           "items": {
-            "type": "object",
+            "$ref": "#/definitions/ResourceId",
             "description": "Details of provisioned resources."
           }
         },
@@ -4623,7 +4623,7 @@
           "type": "array",
           "description": "Array of validated resources.",
           "items": {
-            "type": "object",
+            "$ref": "#/definitions/ResourceId",
             "description": "Details of validated resources."
           }
         },
@@ -4634,6 +4634,16 @@
         }
       },
       "description": "Deployment properties with additional details."
+    },
+    "ResourceId": {
+      "description": "The resource Id model.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified resource Id."
+        }
+      }
     },
     "OnErrorDeployment": {
       "properties": {
