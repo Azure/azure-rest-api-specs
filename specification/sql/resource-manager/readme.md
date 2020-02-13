@@ -887,6 +887,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
