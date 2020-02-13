@@ -626,6 +626,19 @@ input-file:
 - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
 ```
 
+### Supression
+```yaml
+directive:
+	- supress: DefinitionsPropertiesNamesCamelCase
+	- from: disks.json
+	- where: $.definitions.DiskProperties.diskIOPSReadOnly
+	- reason: IOPS should be capitalized
+		- supress: DefinitionsPropertiesNamesCamelCase
+	- from: disks.json
+	- where: $.definitions.DiskUpdateProperties.diskIOPSReadOnly
+	- reason: IOPS should be capitalized
+```
+
 
 ---
 # Code Generation
