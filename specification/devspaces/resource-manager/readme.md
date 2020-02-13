@@ -135,3 +135,10 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - from: devspaces.json
+    suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    reason: instanceType is a non-settable property from the client.
+```
