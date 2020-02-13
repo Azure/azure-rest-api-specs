@@ -345,6 +345,54 @@
         "x-ms-odata": "#/definitions/PolicyAssignment"
       }
     },
+    "/providers/Microsoft.Management/managementgroups/{managementGroupId}/providers/Microsoft.Authorization/policyAssignments": {
+      "get": {
+        "tags": [
+          "PolicyAssignments"
+        ],
+        "operationId": "PolicyAssignments_ListForManagementGroup",
+        "summary": "Retrieves all policy assignments that apply to a management group.",
+        "description": "This operation retrieves the list of all policy assignments applicable to the management group that match the given $filter. Valid values for $filter are: 'atScope()' or 'policyDefinitionId eq '{value}''. If $filter=atScope() is provided, the returned list includes all policy assignments that are assigned to the management group or the management group's ancestors. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value} that apply to the management group.",
+        "x-ms-examples": {
+          "List policy assignments that apply to a management group": {
+            "$ref": "./examples/listPolicyAssignmentsForManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The filter to apply on the operation. Valid values for $filter are: 'atScope()' or 'policyDefinitionId eq '{value}''. A filter is required when listing policy assignments at management group scope.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/policyAssignments": {
       "get": {
         "tags": [
@@ -605,15 +653,18 @@
     "ParameterValues": {
       "type": "object",
       "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "The value of the parameter.",
-            "type": "object"
-          }
-        }
+        "$ref": "#/definitions/ParameterValuesValue"
       },
       "description": "The parameter values for the policy rule. The keys are the parameter names."
+    },
+    "ParameterValuesValue": {
+      "properties": {
+        "value": {
+          "description": "The value of the parameter.",
+          "type": "object"
+        }
+      },
+      "description": "The value of a parameter."
     },
     "PolicySku": {
       "properties": {
@@ -699,14 +750,24 @@
         },
         "type": {
           "type": "string",
-          "description": "The identity type.",
+          "description": "The identity type. This is the only required field when adding a system assigned identity to a resource.",
           "enum": [
             "SystemAssigned",
             "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
-            "modelAsString": false
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "SystemAssigned",
+                "description": "Indicates that a system assigned identity is associated with the resource."
+              },
+              {
+                "value": "None",
+                "description": "Indicates that no identity is associated with the resource or that the existing identity should be removed."
+              }
+            ]
           }
         }
       },
@@ -727,6 +788,14 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for the operation."
+    },
+    "ManagementGroupIdParameter": {
+      "name": "managementGroupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the management group.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
