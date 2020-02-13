@@ -5,7 +5,6 @@ These settings apply only when `--python` is specified on the command line.
 ```yaml
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 package-name: azure-mgmt-storage
 clear-output-folder: true
 no-namespace-folders: true
