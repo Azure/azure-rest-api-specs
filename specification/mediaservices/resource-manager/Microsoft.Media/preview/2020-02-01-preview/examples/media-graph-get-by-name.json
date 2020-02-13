@@ -4,7 +4,7 @@
     "resourceGroupName": "contoso",
     "accountName": "contosomedia",
     "mediaGraphName": "SampleMediaGraph1",
-    "api-version": "2020-02-01-preview"
+    "api-version": "2019-09-01-preview"
   },
   "responses": {
     "404": {},
@@ -20,11 +20,7 @@
             {
               "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
               "name": "RTSPSource1",
-              "transport": "Http",
-              "endpoint": {
-                "@odata.type": "#Microsoft.Media.MediaGraphClearEndpoint",
-                "url": "rtsp://contoso.com:554/stream1"
-              }
+              "rtspUrl": "rtsp://contoso.com:554/stream1"
             }
           ],
           "sinks": [
@@ -34,7 +30,7 @@
               "inputs": [
                 "RTSPSource1"
               ],
-              "assetName": "SampleAsset1"
+              "assetName": "Sample Asset1"
             }
           ]
         }

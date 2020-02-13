@@ -4,7 +4,7 @@
     "resourceGroupName": "contoso",
     "accountName": "contosomedia",
     "mediaGraphName": "SampleMediaGraph",
-    "api-version": "2020-02-01-preview",
+    "api-version": "2019-09-01-preview",
     "parameters": {
       "properties": {
         "description": "updated description",
@@ -12,15 +12,10 @@
           {
             "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
             "name": "rtspSource",
-            "transport": "Http",
-            "endpoint": {
-              "@odata.type": "#Microsoft.Media.MediaGraphClearEndpoint",
-              "url": "rtsp://contoso.com:554/stream1",
-              "credentials": {
-                "@odata.type": "#Microsoft.Media.MediaGraphUsernamePasswordCredentials",
-                "username": "exampleusername",
-                "password": "examplepassword"
-              }
+            "rtspUrl": "rtsp://contoso.com:554/stream1",
+            "credentials": {
+              "username": "exampleusername",
+              "password": "examplepassword"
             }
           }
         ],
@@ -42,29 +37,25 @@
       "body": {
         "name": "SampleMediaGraph",
         "properties": {
-          "description": "",
+          "description": "updated description",
           "state": "Stopped",
           "created": "2019-09-01T00:00:00Z",
           "lastModified": "2019-09-01T00:00:00Z",
           "sources": [
             {
               "@odata.type": "#Microsoft.Media.MediaGraphRtspSource",
-              "name": "RTSPSource1",
-              "transport": "Http",
-              "endpoint": {
-                "@odata.type": "#Microsoft.Media.MediaGraphClearEndpoint",
-                "url": "rtsp://contoso.com:554/stream1"
-              }
+              "name": "rtspSource",
+              "rtspUrl": "rtsp://contoso.com:554/stream1"
             }
           ],
           "sinks": [
             {
               "@odata.type": "#Microsoft.Media.MediaGraphAssetSink",
-              "name": "AssetSink1",
+              "name": "AssetSink",
               "inputs": [
-                "RTSPSource1"
+                "rtspSource"
               ],
-              "assetName": "SampleAsset1"
+              "assetName": "SampleAsset"
             }
           ]
         }
