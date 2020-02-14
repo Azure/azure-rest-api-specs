@@ -25,7 +25,18 @@ To see additional help and options, run:
 
 ## Configuration
 
-
+## Supression
+``` yaml
+directive:
+  - supress: R3016
+    from: disk.json
+    where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
+    reason: IOPS should be capitalized
+  - supress: R3016
+    from: disk.json
+    where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
+    reason: IOPS should be capitalized
+```
 
 ### Basic Information
 These are the global settings for the Compute API.
@@ -602,19 +613,6 @@ These settings apply only when `--tag=package-2015-06-preview` is specified on t
 input-file:
 - Microsoft.Compute/stable/2015-06-15/compute.json
 - Microsoft.ContainerService/preview/2015-11-01-preview/containerService.json
-```
-
-## Supression
-``` yaml
-directive:
-  - supress: R3016
-    from: disk.json
-    where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
-    reason: IOPS should be capitalized
-  - supress: R3016
-    from: disk.json
-    where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
-    reason: IOPS should be capitalized
 ```
 
 
