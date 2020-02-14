@@ -128,7 +128,7 @@
           "NotebookWorkspacesResource"
         ],
         "description": "Creates the notebook workspace for a Cosmos DB account.",
-        "operationId": "NotebookWorkspaces_Create",
+        "operationId": "NotebookWorkspaces_CreateOrUpdate",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -147,11 +147,11 @@
             "$ref": "#/parameters/NotebookWorkspaceNameParameter"
           },
           {
-            "name": "notebookCreateParameters",
+            "name": "notebookCreateUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NotebookWorkspaceCreateParameters"
+              "$ref": "#/definitions/NotebookWorkspaceCreateUpdateParameters"
             },
             "description": "The notebook workspace to create for the current database account."
           }
@@ -272,6 +272,7 @@
           "NotebookWorkspacesResource"
         ],
         "operationId": "NotebookWorkspaces_RegenerateAuthToken",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CosmosDBNotebookWorkspaceRegenerateAuthToken": {
             "$ref": "./examples/CosmosDBNotebookWorkspaceRegenerateAuthToken.json"
@@ -317,6 +318,7 @@
           "NotebookWorkspacesResource"
         ],
         "operationId": "NotebookWorkspaces_Start",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "CosmosDBNotebookWorkspaceStart": {
             "$ref": "./examples/CosmosDBNotebookWorkspaceStart.json"
@@ -358,7 +360,7 @@
     }
   },
   "definitions": {
-    "NotebookWorkspaceCreateParameters": {
+    "NotebookWorkspaceCreateUpdateParameters": {
       "description": "Parameters to create a notebook workspace resource",
       "type": "object",
       "allOf": [
@@ -417,11 +419,13 @@
       "properties": {
         "authToken": {
           "type": "string",
-          "description": "Specifies auth token used for connecting to Notebook server (uses token-based auth)."
+          "description": "Specifies auth token used for connecting to Notebook server (uses token-based auth).",
+          "readOnly": true
         },
         "notebookServerEndpoint": {
           "type": "string",
-          "description": "Specifies the endpoint of Notebook server."
+          "description": "Specifies the endpoint of Notebook server.",
+          "readOnly": true
         }
       }
     }
