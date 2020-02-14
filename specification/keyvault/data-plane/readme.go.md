@@ -26,7 +26,7 @@ These settings apply only when `--tag=package-7.2-preview --go` is specified on 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-7.2-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/v7.2-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/v7.2-preview/$(namespace)
 ```
 
 ### Tag: package-7.1-preview and go
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-7.1-preview --go` is specified on 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-7.1-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/v7.1-preview/$(namespace)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/v7.1-preview/$(namespace)
 ```
 
 ### Tag: package-7.0 and go
