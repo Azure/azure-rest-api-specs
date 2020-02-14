@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTCentralApp",
+    "api-version": "2018-09-01"
+  },
+  "responses": {
+    "200": {
+      "header": {
+        "code": "200",
+        "message": "OK",
+        "target": "ResourceHandler.ExecuteDeleteRequest"
+      }
+    },
+    "202": {},
+    "204": {},
+    "default": {
+      "description": "Error message returned for an unexpected response",
+      "headers": {
+        "message": "Created",
+        "code": "200"
+      },
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "target": "Error target"
+        }
+      }
+    }
+  }
+}
