@@ -1023,6 +1023,200 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes/{encryptionScopeName}": {
+      "put": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Put",
+        "description": "Synchronously creates or updates an encryption scope under the specified storage account. If an encryption scope is already created and a subsequent request is issued with different properties, the encryption scope properties will be updated per the specified request.",
+        "x-ms-examples": {
+          "StorageAccountPutEncryptionScope": {
+            "$ref": "./examples/StorageAccountPutEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          },
+          {
+            "name": "encryptionScope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            },
+            "description": "Encryption scope properties to be used for the create or update."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created -- Create encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "200": {
+            "description": "OK -- Update encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Patch",
+        "description": "Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist.",
+        "x-ms-examples": {
+          "StorageAccountPatchEncryptionScope": {
+            "$ref": "./examples/StorageAccountPatchEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          },
+          {
+            "name": "encryptionScope",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            },
+            "description": "Encryption scope properties to be used for the update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_Get",
+        "description": "Returns the properties for the specified encryption scope.",
+        "x-ms-examples": {
+          "StorageAccountGetEncryptionScope": {
+            "$ref": "./examples/StorageAccountGetEncryptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/EncryptionScopeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get encryption scope operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScope"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/encryptionScopes": {
+      "get": {
+        "tags": [
+          "EncryptionScopes"
+        ],
+        "operationId": "EncryptionScopes_List",
+        "description": "Lists all the encryption scopes available under the specified storage account.",
+        "x-ms-examples": {
+          "StorageAccountEncryptionScopeList": {
+            "$ref": "./examples/StorageAccountEncryptionScopeList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List encryption scopes operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EncryptionScopeListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -3002,6 +3196,94 @@
       },
       "description": "Properties of a private link resource."
     },
+    "EncryptionScope": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EncryptionScopeProperties",
+          "x-ms-client-flatten": true,
+          "x-ms-client-name": "EncryptionScopeProperties",
+          "description": "Properties of the encryption scope."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Encryption Scope resource."
+    },
+    "EncryptionScopeProperties": {
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Storage",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionScopeSource",
+            "modelAsString": true
+          },
+          "description": "The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault."
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionScopeState",
+            "modelAsString": true
+          },
+          "description": "The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled."
+        },
+        "creationTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the creation date and time of the encryption scope in UTC."
+        },
+        "lastModifiedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets the last modification date and time of the encryption scope in UTC."
+        },
+        "keyVaultProperties": {
+          "$ref": "#/definitions/EncryptionScopeKeyVaultProperties",
+          "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
+        }
+      },
+      "description": "Properties of the encryption scope."
+    },
+    "EncryptionScopeKeyVaultProperties": {
+      "properties": {
+        "keyUri": {
+          "type": "string",
+          "description": "The object identifier for a key vault key object. When applied, the encryption scope will use the key referenced by the identifier to enable customer-managed key support on this encryption scope."
+        }
+      },
+      "description": "The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'."
+    },
+    "EncryptionScopeListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EncryptionScope"
+          },
+          "description": "List of encryption scopes requested.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of encryption scopes. Returned when total number of requested encryption scopes exceeds the maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes."
+    },
     "ErrorResponse": {
       "properties": {
         "code": {
@@ -3059,6 +3341,16 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the Storage Account",
+      "x-ms-parameter-location": "method"
+    },
+    "EncryptionScopeName": {
+      "name": "encryptionScopeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number.",
+      "maxLength": 63,
+      "minLength": 3,
       "x-ms-parameter-location": "method"
     }
   },
