@@ -609,11 +609,11 @@ input-file:
 directive:
   - supress: DefinitionsPropertiesNamesCamelCase
     from: disk.json
-    where: $.definitions.DiskProperties.diskIOPSReadOnly
+    where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
     reason: IOPS should be capitalized
   - supress: DefinitionsPropertiesNamesCamelCase
     from: disk.json
-    where: $.definitions.DiskUpdateProperties.diskIOPSReadOnly
+    where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
     reason: IOPS should be capitalized
 ```
 
