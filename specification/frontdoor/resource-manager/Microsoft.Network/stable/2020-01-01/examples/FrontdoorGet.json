@@ -79,7 +79,6 @@
               "properties": {
                 "backends": [
                   {
-                    "location": "westus",
                     "address": "w3.contoso.com",
                     "httpPort": 80,
                     "httpsPort": 443,
@@ -96,15 +95,16 @@
                     "priority": 1
                   },
                   {
-                    "privateLinkId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-                    "location": "westus",
+                    "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
+                    "privateEndpointStatus": "Approved",
+                    "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
                     "address": "10.0.1.5",
                     "httpPort": 80,
                     "httpsPort": 443,
                     "enabledState": "Enabled",
                     "weight": 1,
                     "priority": 1
-                  } 
+                  }
                 ],
                 "loadBalancingSettings": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1"
@@ -141,58 +141,58 @@
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
               "name": "rulesEngine1",
               "properties": {
-               "rules": [
-                 {
-                   "name": "Rule1",
-                   "priority": 1,
-                   "action": {
-                     "routeConfigurationOverride": {
-                       "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
-                       "redirectType": "Moved",
-                       "redirectProtocol": "HttpsOnly",
-                       "customHost": "www.bing.com",
-                       "customPath": "/api",
-                       "customFragment": "fragment",
-                       "customQueryString": "a=b"
-                     }
-                   },
-                   "matchConditions": [
-                     {
-                       "rulesEngineMatchVariable": "RemoteAddr",
-                       "rulesEngineOperator": "GeoMatch",
-                       "rulesEngineMatchValue": [
-                         "CH"
-                       ]
-                     }
-                   ],
-                   "matchProcessingBehavior": "Stop"
-                 },
-                 {
-                   "name": "Rule2",
-                   "priority": 2,
-                   "action": {
-                     "responseHeaderActions": [
-                       {
-                         "headerActionType": "Overwrite",
-                         "headerName": "Cache-Control",
-                         "value": "public, max-age=31536000"
-                       }
-                     ]
-                   },
-                   "matchConditions": [
-                     {
-                       "rulesEngineMatchVariable": "FilenameExtension",
-                       "rulesEngineOperator": "Equal",
-                       "rulesEngineMatchValue": [
-                         "jpg"
-                       ],
-                       "transforms": [
-                         "Lowercase"
-                       ]
-                     }
-                   ]
-                 }
-               ]
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "priority": 1,
+                    "action": {
+                      "routeConfigurationOverride": {
+                        "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                        "redirectType": "Moved",
+                        "redirectProtocol": "HttpsOnly",
+                        "customHost": "www.bing.com",
+                        "customPath": "/api",
+                        "customFragment": "fragment",
+                        "customQueryString": "a=b"
+                      }
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "RemoteAddr",
+                        "rulesEngineOperator": "GeoMatch",
+                        "rulesEngineMatchValue": [
+                          "CH"
+                        ]
+                      }
+                    ],
+                    "matchProcessingBehavior": "Stop"
+                  },
+                  {
+                    "name": "Rule2",
+                    "priority": 2,
+                    "action": {
+                      "responseHeaderActions": [
+                        {
+                          "headerActionType": "Overwrite",
+                          "headerName": "Cache-Control",
+                          "value": "public, max-age=31536000"
+                        }
+                      ]
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "FilenameExtension",
+                        "rulesEngineOperator": "Equal",
+                        "rulesEngineMatchValue": [
+                          "jpg"
+                        ],
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             }
           ],
