@@ -45,7 +45,7 @@
         }
       }
     },
-    "/providers/Microsoft.AzureStack/cloudmanifestfile": {
+    "/providers/Microsoft.AzureStack/cloudmanifestfiles/{verificationVersion}": {
       "get": {
         "x-ms-examples": {
           "Returns the properties of a cloud specific manifest file.": {
@@ -59,13 +59,10 @@
         "operationId": "CloudManifestFile_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "verificationVersion",
-            "in": "query",
+            "in": "path",
             "description": "Signing verification key version.",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
@@ -74,6 +71,9 @@
             "description": "Signing verification key version creation date.",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -242,11 +242,16 @@
       "description": "Cloud specific manifest GET response.",
       "type": "object",
       "properties": {
-        "value": {
+        "properties": {
           "description": "Cloud specific manifest data.",
           "$ref": "#/definitions/CloudManifestFileProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "CloudManifestFileProperties": {
       "description": "Cloud specific manifest JSON properties.",
