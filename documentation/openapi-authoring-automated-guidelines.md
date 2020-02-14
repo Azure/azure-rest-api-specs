@@ -710,13 +710,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.
+**Output Message**: The last resource provider '{0}' doesn't match the namespace.
 
-**Description**: Verifies whether more than one resource providers exists in the specification or not.
+**Description**: Verifies whether the last resource provider matches namespace or not. E.g the path /providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Insights/extResource/{extType}’ is allowed only if Microsoft.Insights matches the namespace (Microsoft.Insights). 
 
-**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider.
+**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider. So the last resource provider must match with the resource provider namespace.
 
-**How to fix the violation**: One OpenAPI(swagger) specification must have one resource provider. Please create multiple OpenAPI(swagger) specs, each for one provider. Please refer
+**How to fix the violation**: One OpenAPI(swagger) specification must locate in proper namespace. Namespace is parent folder. E.g. Microsoft.Insights. Please make sure the last resource provider name matches the namespace name. 
 [Literate Configuration](https://github.com/Azure/autorest/blob/185e337137c990b9cc1b8ebbb272e76eeeef43a1/docs/user/literate-file-formats/configuration.md).
 
 **Impact on generated code**: N/A.
