@@ -629,12 +629,12 @@ input-file:
 ## Supression
 ``` yaml
 directive:
-  - supress: DefinitionsPropertiesNamesCamelCase
-    from: Microsoft.Compute/stable/*/disk.json
+  - supress: R3016
+    from: disk.json
     where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
     reason: IOPS should be capitalized
-  - supress: DefinitionsPropertiesNamesCamelCase
-    from: Microsoft.Compute/stable/*/disk.json
+  - supress: R3016
+    from: disk.json
     where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
     reason: IOPS should be capitalized
 ```
