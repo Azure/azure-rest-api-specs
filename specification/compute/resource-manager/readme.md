@@ -25,18 +25,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-## Supression
-``` yaml
-directive:
-  - supress: R3016
-    from: disk.json
-    where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
-    reason: IOPS should be capitalized
-  - supress: R3016
-    from: disk.json
-    where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
-    reason: IOPS should be capitalized
-```
+
 
 ### Basic Information
 These are the global settings for the Compute API.
