@@ -327,6 +327,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterMonitoringUserCredential": {
+      "post": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_ListClusterMonitoringUserCredentials",
+        "summary": "Gets cluster monitoring user credential of a managed cluster.",
+        "description": "Gets cluster monitoring user credential of the managed cluster with a specified resource group and name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersListClusterCredentialResult.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}": {
       "get": {
         "tags": [

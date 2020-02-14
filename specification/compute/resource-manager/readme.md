@@ -25,7 +25,18 @@ To see additional help and options, run:
 
 ## Configuration
 
-
+## Supression
+``` yaml
+directive:
+  - supress: R3016
+    from: disk.json
+    where: $.definitions.DiskProperties.properties.diskIOPSReadOnly
+    reason: IOPS should be capitalized
+  - supress: R3016
+    from: disk.json
+    where: $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
+    reason: IOPS should be capitalized
+```
 
 ### Basic Information
 These are the global settings for the Compute API.
@@ -34,7 +45,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2019-07
+tag: package-2019-11-01-Disks
 
 directive:
   - where:
@@ -206,6 +217,21 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--package-2019-11-01-Disks` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01-Disks'
+input-file:
+- Microsoft.Compute/stable/2019-07-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2019-11-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
