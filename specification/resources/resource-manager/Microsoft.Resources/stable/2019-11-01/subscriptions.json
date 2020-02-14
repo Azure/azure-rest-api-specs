@@ -429,6 +429,44 @@
           "readOnly": true,
           "type": "string",
           "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "tenantCategory": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Category of the tenant.",
+          "enum": [
+            "Home",
+            "ProjectedBy",
+            "ManagedBy"
+          ],
+          "x-ms-enum": {
+            "name": "TenantCategory",
+            "modelAsString": false
+          }
+        },
+        "country": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region name of the address for the tenant."
+        },
+        "countryCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region abbreviation for the tenant."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the tenant."
+        },
+        "domains": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The domain name for a tenant."
+          },
+          "description": "The list of domains for the tenant."
         }
       },
       "description": "Tenant Id information."
