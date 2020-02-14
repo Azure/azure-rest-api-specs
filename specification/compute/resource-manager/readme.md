@@ -608,11 +608,11 @@ input-file:
 ``` yaml
 directive:
   - supress: DefinitionsPropertiesNamesCamelCase
-    from: disks.json
+    from: disk.json
     where: $.definitions.DiskProperties.diskIOPSReadOnly
     reason: IOPS should be capitalized
   - supress: DefinitionsPropertiesNamesCamelCase
-    from: disks.json
+    from: disk.json
     where: $.definitions.DiskUpdateProperties.diskIOPSReadOnly
     reason: IOPS should be capitalized
 ```
