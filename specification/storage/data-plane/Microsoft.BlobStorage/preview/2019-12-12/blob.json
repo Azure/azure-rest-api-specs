@@ -8002,15 +8002,15 @@
         }
       ]
     },
-	"/{containerName}/{blob}?comp=query": {
-		"post": {
+    "/{containerName}/{blob}?comp=query": {
+      "post": {
         "tags": [
           "blob"
         ],
         "operationId": "Blob_QuickQuery",
         "description": "The QuickQuery operation enables users to select/project on blob data by providing simple query expressions.",
         "parameters": [
-		  {
+          {
             "$ref": "#/parameters/QueryRequest"
           },
           {
@@ -9162,76 +9162,76 @@
       }
     },
     "DelimitedTextConfiguration": {
-	  "xml": {
+      "xml": {
         "name": "DelimitedTextConfiguration"
       },
       "description": "delimited text configuration",
       "type": "object",
-	  "required": [
-		"ColumnSeparator",
-		"FieldQuote",
-		"RecordSeparator",
-		"EscapeChar",
-		"HasHeaders"
-	  ],
-	  "properties": {
-		"ColumnSeparator": {
+      "required": [
+        "ColumnSeparator",
+        "FieldQuote",
+        "RecordSeparator",
+        "EscapeChar",
+        "HasHeaders"
+      ],
+      "properties": {
+        "ColumnSeparator": {
           "type": "string",
           "description": "column separator",
-		  "xml": {
+          "xml": {
             "name": "ColumnSeparator"
           }
         },
-		"FieldQuote": {
+        "FieldQuote": {
           "type": "string",
           "description": "field quote",
-		  "xml": {
+          "xml": {
             "name": "FieldQuote"
           }
         },
-		"RecordSeparator": {
+        "RecordSeparator": {
           "type": "string",
           "description": "record separator",
-		  "xml": {
+          "xml": {
             "name": "RecordSeparator"
           }
         },
-		"EscapeChar": {
+        "EscapeChar": {
           "type": "string",
           "description": "escape char",
-		  "xml": {
+          "xml": {
             "name": "EscapeChar"
           }
         },
-		"HasHeaders": {
+        "HasHeaders": {
           "type": "string",
           "description": "has headers",
-		  "xml": {
+          "xml": {
             "name": "HasHeaders"
           }
         }
-	  }
-	},
-	"JsonTextConfiguration": {
-	  "xml": {
+      }
+    },
+    "JsonTextConfiguration": {
+      "xml": {
         "name": "JsonTextConfiguration"
       },
       "description": "json text configuration",
       "type": "object",
-	  "required": [
-		"RecordSeparator"
-	  ],
-	  "properties": {
-		"RecordSeparator": {
+      "required": [
+        "RecordSeparator"
+      ],
+      "properties": {
+        "RecordSeparator": {
           "type": "string",
           "description": "record separator",
-		  "xml": {
+          "xml": {
             "name": "RecordSeparator"
           }
         }
-	  }
-	},
-	"ListContainersSegmentResponse": {
+      }
+    },
+    "ListContainersSegmentResponse": {
       "xml": {
         "name": "EnumerationResults"
       },
@@ -9606,82 +9606,82 @@
         "name": "ClearRange"
       }
     },
-	"QueryRequest": {
-	  "description": "the quick query body",
-	  "type": "object",
-	  "required": [
-		"QueryType",
-		"Expression"
-	  ],
-	  "properties": {
+    "QueryRequest": {
+      "description": "the quick query body",
+      "type": "object",
+      "required": [
+        "QueryType",
+        "Expression"
+      ],
+      "properties": {
         "QueryType": {
           "type": "string",
           "description": "the query type",
-		  "xml": {
+          "xml": {
             "name": "QueryType"
           },
-		  "enum": [
+          "enum": [
             "SQL"
           ]
         },
         "Expression": {
           "type": "string",
           "description": "a query statement",
-		  "xml": {
+          "xml": {
             "name": "Expression"
           }
         },
-		"InputSerialization": {
-		  "$ref": "#/definitions/QuickQuerySerialization",
-		  "xml": {
-			"name": "InputSerialization"
-		  }	  
-		},
-		"OutputSerialization": {
-		  "$ref": "#/definitions/QuickQuerySerialization",
-		  "xml": {
-			"name": "OutputSerialization"
-		  }
-		}
+        "InputSerialization": {
+          "$ref": "#/definitions/QuickQuerySerialization",
+          "xml": {
+            "name": "InputSerialization"
+          }      
+        },
+        "OutputSerialization": {
+          "$ref": "#/definitions/QuickQuerySerialization",
+          "xml": {
+            "name": "OutputSerialization"
+          }
+        }
       },
-	  "xml": {
+      "xml": {
         "name": "QueryRequest"
       }
-	},
-	"QuickQueryFormat": {
-	  "type": "object",
-	  "required": [
-		"QuickQueryType"
-	  ],
-	  "properties": {
-		"QuickQueryType": {
-		  "$ref": "#/definitions/QuickQueryType"
-		},
-		"DelimitedTextConfiguration": {
-		  "$ref": "#/definitions/DelimitedTextConfiguration"
-		},
-		"JsonTextConfiguration": {
-		  "$ref": "#/definitions/JsonTextConfiguration"
-		}		
-	  }
-	},
-	"QuickQuerySerialization": {
-	  "type": "object",
-	  "required": [
-		"Format"
-	  ],
-	  "properties": {
-		"Format": {
-		  "$ref": "#/definitions/QuickQueryFormat",
-		  "xml": {
+    },
+    "QuickQueryFormat": {
+      "type": "object",
+      "required": [
+        "QuickQueryType"
+      ],
+      "properties": {
+        "QuickQueryType": {
+          "$ref": "#/definitions/QuickQueryType"
+        },
+        "DelimitedTextConfiguration": {
+          "$ref": "#/definitions/DelimitedTextConfiguration"
+        },
+        "JsonTextConfiguration": {
+          "$ref": "#/definitions/JsonTextConfiguration"
+        }
+      }
+    },
+    "QuickQuerySerialization": {
+      "type": "object",
+      "required": [
+        "Format"
+      ],
+      "properties": {
+        "Format": {
+          "$ref": "#/definitions/QuickQueryFormat",
+          "xml": {
             "name": "Format"
           }
-		}
-	  }
-	},
-	"QuickQueryType": {
+        }
+      }
+    },
+    "QuickQueryType": {
       "type": "string",
-	  "description": "the quick query type",
+      "description": "the quick query type",
       "enum": [
         "delimited",
         "json"
@@ -9690,8 +9690,8 @@
         "name": "QuickQueryType",
         "modelAsString": false
       },
-	  "xml": {
-		"name": "Type"
+      "xml": {
+        "name": "Type"
       }
     },
     "RetentionPolicy": {
@@ -10693,7 +10693,7 @@
       "x-ms-parameter-location": "method",
       "description": "Proposed lease ID, in a GUID string format. The Blob service returns 400 (Invalid request) if the proposed lease ID is not in the correct format. See Guid Constructor (String) for a list of valid GUID string formats."
     },
-	"QueryRequest": {
+    "QueryRequest": {
       "name": "queryRequest",
       "in": "body",
       "schema": {
