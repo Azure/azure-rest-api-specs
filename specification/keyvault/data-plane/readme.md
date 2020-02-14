@@ -38,7 +38,6 @@ input-file:
 - Microsoft.KeyVault/preview/7.1/certificates.json
 - Microsoft.KeyVault/preview/7.1/common.json
 - Microsoft.KeyVault/preview/7.1/keys.json
-- Microsoft.KeyVault/preview/7.1/rbac.json
 - Microsoft.KeyVault/preview/7.1/secrets.json
 - Microsoft.KeyVault/preview/7.1/storage.json
 ```
@@ -157,14 +156,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml
 directive:
-  - suppress: AvoidNestedProperties
-    from: rbac.json
-    where: $.definitions.RoleAssignment.properties.properties
-    reason: This is correct ARM grammar for Microsoft.Authorization resources for RBAC support.
-  - suppress: AvoidNestedProperties
-    from: rbac.json
-    where: $.definitions.RoleAssignmentCreateParameters.properties.properties
-    reason: This is correct ARM grammar for Microsoft.Authorization resources for RBAC support.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: certificates.json
     where: $.definitions.CertificateOperation.properties.cancellation_requested
@@ -291,10 +282,6 @@ directive:
     reason: Suppress an invalid error caused by a bug in the linter.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: keys.json
-    where: $..parameters[?(@.name=='vaultBaseUrl')]
-    reason: Suppress an invalid error caused by a bug in the linter.
-  - suppress: MISSING_REQUIRED_PARAMETER
-    from: rbac.json
     where: $..parameters[?(@.name=='vaultBaseUrl')]
     reason: Suppress an invalid error caused by a bug in the linter.
   - suppress: MISSING_REQUIRED_PARAMETER

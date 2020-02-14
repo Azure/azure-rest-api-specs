@@ -989,8 +989,7 @@
             "EC-HSM",
             "RSA",
             "RSA-HSM",
-            "oct",
-            "oct-HSM"
+            "oct"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1015,10 +1014,6 @@
               {
                 "value": "oct",
                 "description": "Octet sequence (used to represent symmetric keys)"
-              },
-              {
-                "value": "oct-HSM",
-                "description": "Octet sequence (used to represent symmetric keys) which is not exportable from the HSM."
               }
             ]
           }
@@ -1281,8 +1276,7 @@
             "EC-HSM",
             "RSA",
             "RSA-HSM",
-            "oct",
-            "oct-HSM"
+            "oct"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1327,8 +1321,7 @@
             "EC-HSM",
             "RSA",
             "RSA-HSM",
-            "oct",
-            "oct-HSM"
+            "oct"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
@@ -1430,13 +1423,7 @@
           "enum": [
             "RSA-OAEP",
             "RSA-OAEP-256",
-            "RSA1_5",
-            "A128GCM",
-            "A192GCM",
-            "A256GCM",
-            "A128KW",
-            "A192KW",
-            "A256KW"
+            "RSA1_5"
           ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
@@ -1446,21 +1433,6 @@
         "value": {
           "type": "string",
           "format": "base64url"
-        },
-        "iv": {
-          "type": "string",
-          "format": "base64url",
-          "description": "Initialization vector for symmetric algorithms."
-        },
-        "aad": {
-          "type": "string",
-          "format": "base64url",
-          "description": "Additional data to authenticate but not encrypt/decrypt when using authenticated crypto algorithms."
-        },
-        "tag": {
-          "type": "string",
-          "format": "base64url",
-          "description": "The tag to authenticate when performing decryption with an authenticated algorithm."
         }
       },
       "description": "The key operations parameters.",
