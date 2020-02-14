@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-12-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mysql.v2017_12_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mysql/resource-manager/v2017_12_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mysql/mgmt-v2017_12_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -41,7 +41,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mysql.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/mysql/resource-manager/v2017_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mysql/mgmt-v2017_12_01
 regenerate-manager: true
 generate-interface: true
 ```

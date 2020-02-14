@@ -84,20 +84,20 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.Maintenance
-  package-name: azure-mgmt-Maintenance
+  namespace: azure.mgmt.maintenance
+  package-name: azure-mgmt-maintenance
   package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance/azure/mgmt/Maintenance
+  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance/azure/mgmt/maintenance
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance
+  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance
 ```
 
 ## Go
@@ -106,18 +106,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.Maintenance
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-Maintenance
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 

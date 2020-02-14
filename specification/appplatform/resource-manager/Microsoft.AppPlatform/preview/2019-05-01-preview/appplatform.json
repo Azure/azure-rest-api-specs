@@ -65,15 +65,6 @@
         "operationId": "Services_CreateOrUpdate",
         "parameters": [
           {
-            "name": "resource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -84,6 +75,15 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
           }
         ],
         "responses": {
@@ -168,15 +168,6 @@
         "operationId": "Services_Update",
         "parameters": [
           {
-            "name": "resource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -187,6 +178,15 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
           }
         ],
         "responses": {
@@ -271,15 +271,6 @@
         "operationId": "Services_RegenerateTestKey",
         "parameters": [
           {
-            "name": "regenerateTestKeyRequest",
-            "in": "body",
-            "description": "Parameters for the operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -290,6 +281,15 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "regenerateTestKeyRequest",
+            "in": "body",
+            "description": "Parameters for the operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
+            }
           }
         ],
         "responses": {
@@ -451,15 +451,6 @@
         "operationId": "Apps_CreateOrUpdate",
         "parameters": [
           {
-            "name": "appResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/AppResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -473,6 +464,15 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
           }
         ],
         "responses": {
@@ -556,15 +556,6 @@
         "operationId": "Apps_Update",
         "parameters": [
           {
-            "name": "appResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/AppResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -578,6 +569,15 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
           }
         ],
         "responses": {
@@ -756,15 +756,6 @@
         "operationId": "Bindings_CreateOrUpdate",
         "parameters": [
           {
-            "name": "bindingResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/BindingResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -781,6 +772,15 @@
           },
           {
             "$ref": "#/parameters/BindingNameParameter"
+          },
+          {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
           }
         ],
         "responses": {
@@ -857,15 +857,6 @@
         "operationId": "Bindings_Update",
         "parameters": [
           {
-            "name": "bindingResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/BindingResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -882,6 +873,15 @@
           },
           {
             "$ref": "#/parameters/BindingNameParameter"
+          },
+          {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
           }
         ],
         "responses": {
@@ -969,6 +969,12 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "availabilityParameters",
             "in": "body",
             "description": "Parameters supplied to the operation.",
@@ -976,12 +982,6 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityParameters"
             }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1060,15 +1060,6 @@
         "operationId": "Deployments_CreateOrUpdate",
         "parameters": [
           {
-            "name": "deploymentResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1085,6 +1076,15 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
           }
         ],
         "responses": {
@@ -1171,15 +1171,6 @@
         "operationId": "Deployments_Update",
         "parameters": [
           {
-            "name": "deploymentResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1196,6 +1187,15 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
           }
         ],
         "responses": {
