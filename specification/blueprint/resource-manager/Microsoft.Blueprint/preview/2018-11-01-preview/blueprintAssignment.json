@@ -364,12 +364,19 @@
           "description": "ID of the published version of a blueprint definition."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterValueCollection",
-          "description": "Blueprint assignment parameter values."
+          "type": "object",
+          "description": "Blueprint assignment parameter values.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
         },
         "resourceGroups": {
-          "$ref": "#/definitions/ResourceGroupValueCollection",
-          "description": "Names and locations of resource group placeholders."
+          "description": "Names and locations of resource group placeholders.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceGroupValue"
+          }
         },
         "status": {
           "description": "Status of blueprint assignment. This field is readonly.",
@@ -412,15 +419,6 @@
         "resourceGroups"
       ]
     },
-    "ParameterValueCollection": {
-      "description": "A dictionary for parameters and their corresponding values.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "description": "Key/Value pair of parameter fulfillment.",
-        "$ref": "#/definitions/ParameterValue"
-      }
-    },
     "ParameterValue": {
       "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
@@ -429,6 +427,7 @@
           "description": "Parameter value as value type."
         },
         "reference": {
+          "type": "object",
           "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }
@@ -468,14 +467,6 @@
       "required": [
         "id"
       ]
-    },
-    "ResourceGroupValueCollection": {
-      "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "$ref": "#/definitions/ResourceGroupValue"
-      }
     },
     "ResourceGroupValue": {
       "description": "Represents an Azure resource group.",
