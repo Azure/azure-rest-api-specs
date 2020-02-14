@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-03-01-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2020-03-01-preview' && $(go)
-namespace: Microsoft.AzureStackHCI
-output-folder: $(go-sdks-folder)/azurestackhci/Generated
+namespace: azurestackhci
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2020-03-01-preview/$(namespace)
 ```
