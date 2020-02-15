@@ -1845,11 +1845,11 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message** : Missing operationId , path '${operation path}', method '${operation method}'  
+**Output Message** : Missing operationId , path '${operation path}', method '${operation method}'.
 
-**Description** : Each operation must has a operationId
+**Description** : Each operation must has a unique operationId.
 
-**Why this rule is important**: OperationId is required in each operations
+**Why this rule is important**: It will violated the swagger specification if there is an operation without operationId. For more details, see: [creating-swagger](creating-swagger.md#Paths).
 
 **How to fix the violation**: Add the right operationId for each operations
 
