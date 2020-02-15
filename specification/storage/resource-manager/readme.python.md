@@ -15,7 +15,7 @@ no-namespace-folders: true
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(multiapi)
 batch:
   - tag: package-2019-06
   - tag: package-2019-04
