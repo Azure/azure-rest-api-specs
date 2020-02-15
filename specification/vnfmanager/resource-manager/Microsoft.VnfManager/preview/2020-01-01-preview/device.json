@@ -456,8 +456,15 @@
         "properties": {
           "description": "Vnf Manager device Properties."
         },
-        "$ref": "./vnfmanager.json#/definitions/TagsObject"
-      },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      }
+    },
       "DeviceRegistrationKey": {
         "description": "Vnf Manager Device registration key",
         "properties": {
