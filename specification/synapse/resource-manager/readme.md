@@ -39,7 +39,6 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json
 - Microsoft.Synapse/preview/2019-06-01-preview/checkNameAvailability.json
 - Microsoft.Synapse/preview/2019-06-01-preview/firewallRule.json
-- Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
 - Microsoft.Synapse/preview/2019-06-01-preview/operations.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
@@ -108,7 +107,6 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/bigDataPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/checkNameAvailability.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/firewallRule.json
-  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
