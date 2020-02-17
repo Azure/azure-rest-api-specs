@@ -732,13 +732,13 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-04-01/skus.json
   - $(this-folder)/Microsoft.Compute/stable/2019-07-01/disk.json
-  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-12-01/gallery.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
+  - $(this-folder)/Microsoft.Compute/stable/2019-07-01/gallery.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/compute.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/runCommands.json
   - $(this-folder)/Microsoft.Compute/stable/2019-03-01/disk.json
