@@ -6249,12 +6249,42 @@
           }
         },
         "amountDue": {
-          "description": "Amount due.",
+          "description": "The amount due as of now.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "azurePrepaymentApplied": {
+          "description": "The amount of Azure prepayment applied to the charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "billedAmount": {
-          "description": "Amount billed.",
+          "description": "The total charges for the invoice billing period.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "creditAmount": {
+          "description": "The total refund for returns and cancelations during the invoice billing period.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "freeAzureCreditApplied": {
+          "description": "The amount of free Azure credits applied to the charges.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "subTotal": {
+          "description": "The pre-tax amount due.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "taxAmount": {
+          "description": "The amount of tax charged for the billing period.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "totalAmount": {
+          "description": "The amount of Azure prepayment applied to the charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
