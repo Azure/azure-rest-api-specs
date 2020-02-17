@@ -179,6 +179,11 @@ directive:
       - Flattening does not work well with polymorphic models.
       - PrivateAtlas.properties is an arbitrary dictionary and cannot be flattened.  
       - MapsAccount.properties is an arbitrary dictionary and cannot be flattened.  
+  - suppress: R3006 # BodyTopLevelProperties
+    where:
+      - $.definitions.MapsAccount.properties
+    reason:
+      - Currently systemData is not allowed.
   - suppress: R3010  # TrackedResourceListByImmediateParent
     where:
       - $.definitions
