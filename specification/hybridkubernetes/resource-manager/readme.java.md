@@ -8,7 +8,7 @@ fluent: true
 namespace: com.microsoft.azure.management.hybridkubernetes
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerservice
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridkubernetes
 title: HybridKubernetesManagementClient
 description: "Hybrid Kubernetes Client"
 ```
@@ -17,7 +17,7 @@ description: "Hybrid Kubernetes Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: packege-2020-01-01-preview
+  - tag: package-2020-01-01-preview
   - tag: package-2019-11-01-preview
   - tag: package-2019-09-01-privatepreview
 ```
