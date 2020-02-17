@@ -11,5 +11,5 @@ nodejs:
   output-folder: $(node-sdks-folder)/lib/services/hybridkubernetesManagement
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: true
+  generate-readme-md: false
 ```
