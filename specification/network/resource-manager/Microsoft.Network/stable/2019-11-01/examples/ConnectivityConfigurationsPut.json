@@ -1,0 +1,60 @@
+{
+  "title": "Create/Update Managed Network Connectivity Policy",
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "networkManagerName": "subscriptionCAssignment",
+    "connectivityConfigurationName": "myHubAndSpoke",
+    "connectivityConfiguration": {
+      "properties": {
+        "connectivityType": "HubAndSpokeTopology",
+        "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+        "appliesToGroups": [
+          {
+            "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/networkManagerGroups/group1",
+            "groupConnectivity": "Transitive"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myHubAndSpoke",
+        "id": "/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/networkManagerConnectivityConfigurations/myHubAndSpoke",
+        "type": "Microsoft.Network/networkManagerConnectivityConfigurations",
+        "etag": "asdf-asdf-asdf2",
+        "properties": {
+          "connectivityType": "HubAndSpokeTopology",
+          "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+          "appliesToGroups": [
+            {
+                "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/groups/group1",
+                "groupConnectivity": "Transitive"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myHubAndSpoke",
+        "id": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/networkManagerConnectivityConfigurations/myHubAndSpoke",
+        "type": "Microsoft.Network/networkManagerConnectivityConfigurations",
+        "etag": "asdf-asdf-asdf2",
+        "properties": {
+          "connectivityType": "HubAndSpokeTopology",
+          "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+          "appliesToGroups": [
+            {
+                "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/networkManagerGroups/group1",
+                "groupConnectivity": "Transitive"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

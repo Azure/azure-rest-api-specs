@@ -1,0 +1,35 @@
+{
+  "title": "Get Managed Network Connecitivity Configuration List",
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subscriptionA",
+    "resourceGroupName": "myResourceGroup",
+    "networkManagerName": "subscriptionCAssignment",
+    "connectivityConfigurationName": "myHubAndSpoke"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myHubAndSpoke",
+            "id": "subscription/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/connectivityConfigurations/myHubAndSpoke",
+            "type": "Microsoft.Network/networkManagers/connectivityConfigurations",
+            "etag": "asdf-asdf-asdf2",
+            "properties": {
+              "connectivityType": "HubAndSpokeTopology",
+              "hubId": "subscriptions/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
+              "appliesToGroups": [
+                {
+                    "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/groups/group1",
+                    "groupConnectivity": "Transitive"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/managedNetworks/myManagedNetwork/connectivityConfigurations?api-version=2019-06-01&$skipToken=10"
+      }
+    }
+  }
+}

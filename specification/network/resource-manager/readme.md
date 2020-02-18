@@ -56,6 +56,11 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/firewallPolicy.json
   - Microsoft.Network/stable/2019-11-01/ipGroups.json
   - Microsoft.Network/stable/2019-11-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerConnectivityConfiguration.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerSecurityConfiguration.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerDeployment.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2019-11-01/networkManager.json
   - Microsoft.Network/stable/2019-11-01/natGateway.json
   - Microsoft.Network/stable/2019-11-01/network.json
   - Microsoft.Network/stable/2019-11-01/networkInterface.json
@@ -1138,6 +1143,21 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerConnectivityConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagersecurityDeployment.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerSecurityConfiguration.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManager.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerGroup.json
+    reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level

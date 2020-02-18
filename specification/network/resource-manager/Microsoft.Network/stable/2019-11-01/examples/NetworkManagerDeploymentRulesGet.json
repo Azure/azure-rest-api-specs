@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "subscriptionCAssignment",
+    "locationId": "useast"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/subscriptionCAssignment/securityConfigurations/Policy1/rules/BlockSSH",
+          "type": "Microsoft.Network/securityConfigurations/securityConfigurationRules",
+          "name": "BlockSSH",
+          "etag": "123451424",
+          "properties": {
+            "description": "This rule blocks SSH traffic only from the Internet",
+            "protocol": "Tcp",
+            "sourceAddressPrefixes": [
+              "Internet"
+            ],
+            "destinationAddressPrefixes": [
+              "*"
+            ],
+            "sourcePortRanges": [
+              "0-65535"
+            ],
+            "destinationPortRanges": [
+              "22"
+            ],
+            "access": "Deny",
+            "priority": 1,
+            "direction": "Inbound"
+          }
+        }
+      ]
+    }
+  }
+}

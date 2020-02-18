@@ -1,0 +1,56 @@
+{
+    "title": "Create/Update Managed Network",
+    "parameters": {
+        "api-version": "2019-11-01",
+        "subscriptionId": "subscriptionC",
+        "resourceGroupName": "rg1",
+        "networkManagerName": "subscriptionCAssignment",
+        "parameters": {
+            "properties": {
+                "displayName": "Blocking SSH to VNets",
+                "description": "Block any SSH traffic from the Internet into company VNets",
+                "networkManagerScopes": {
+                    "managementGroups":[],
+                    "subscriptions":[]
+                },
+                "networkManagerScopeAccess": ["Security"]
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "name": "subscriptionCAssignment",
+                "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment",
+                "type": "Microsoft.Network/networkManager",
+                "etag": "sadf-asdf-asdf-asdf",
+                "properties": {
+                    "displayName": "Blocking SSH to VNets",
+                    "description": "Block any SSH traffic from the Internet into company VNets",
+                    "networkManagerScopes": {
+                        "managementGroups":[],
+                        "subscriptions":[]
+                    },
+                    "networkManagerScopeAccess": ["Security"]
+                }
+            }
+        },
+        "201": {
+            "body": {
+                "name": "subscriptionCAssignment",
+                "id": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment",
+                "type": "Microsoft.Network/networkManager",
+                "etag": "sadf-asdf-asdf-asdf",
+                "properties": {
+                    "displayName": "Blocking SSH to VNets",
+                    "description": "Block any SSH traffic from the Internet into company VNets",
+                    "networkManagerScopes": {
+                        "managementGroups":[],
+                        "subscriptions":[]
+                    },
+                    "networkManagerScopeAccess": ["Security"]
+                }
+            }
+        }
+    }
+}
