@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "SynapseClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "parameters": [
+      {
+        "name": "workspaceName",
+        "description": "The name of the workspace to execute operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/getAccessControl": {
+      "post": {
+        "tags": [
+          "WorkspaceAcl"
+        ],
+        "operationId": "WorkspaceAcl_GetAccessControlInfo",
+        "description": "Get access control info.",
+        "x-ms-examples": {
+          "Get access control information": {
+            "$ref": "./examples/WorkspaceAcl_GetAccessControlInfo.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "The resource to get the access control info for.",
+            "schema": {
+              "$ref": "#/definitions/GetAccessControlInfoRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAccessControlResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/setWorkspaceAdmins": {
+      "post": {
+        "tags": [
+          "WorkspaceAcl"
+        ],
+        "operationId": "WorkspaceAcl_SetWorkspaceAdministrators",
+        "description": "Replace Admins of the Workspace.",
+        "x-ms-examples": {
+          "Set workspace admins": {
+            "$ref": "./examples/WorkspaceAcl_SetWorkspaceAdministrators.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "description": "Details of administrators object-ids.",
+            "schema": {
+              "$ref": "#/definitions/SetWorkspaceAdministratorsRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin list set succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceAccessControlResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetAccessControlInfoRequest": {
+      "type": "object",
+      "properties": {
+        "artifactType": {
+          "enum": [
+            "Workspace"
+          ],
+          "x-ms-enum": {
+            "name": "artifactType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "artifactName": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkspaceAccessControlResponse": {
+      "type": "object",
+      "properties": {
+        "administrators": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "accessControlList": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "SetWorkspaceAdministratorsRequest": {
+      "type": "object",
+      "properties": {
+        "administrators": {
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "SynapseDnsSuffixInPath": {
+      "name": "SynapseDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "azuresynapse.net​",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
+      "x-ms-parameter-location": "client"
+    }
+  }
+}
