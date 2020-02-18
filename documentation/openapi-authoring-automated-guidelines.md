@@ -60,6 +60,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -1835,5 +1836,25 @@ or
   "final-state-via": "azure-async-operation"
 }
 ```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4004" ></a>R4004 OperationIdRequired
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
+
+**Description** : Each operation must has a unique operationId.
+
+**CreatedAt** : 2020-2-18
+
+**LastModifiedAt** : 2020-2-18
+
+**Why this rule is important**: Per [creating-swagger](creating-swagger.md#Paths),The operationId is used to determine the generated method name.
+
+**How to fix the violation**: Add the right operationId for each operation
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
