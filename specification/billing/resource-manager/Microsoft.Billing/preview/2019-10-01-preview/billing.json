@@ -7453,6 +7453,33 @@
           "type": "string",
           "readOnly": true
         },
+        "agreementType": {
+          "type": "string",
+          "description": "Type of the agreement signed by customer.",
+          "enum": [
+            "MicrosoftCustomerAgreement",
+            "MicrosoftCustomerAgreementAffiliate",
+            "MicrosoftCustomerAgreementIW",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "agreementType",
+            "modelAsString": true
+          }
+        },
+        "acceptanceMode": {
+          "type": "string",
+          "description": "The mode of acceptance for an agreement.",
+          "enum": [
+            "ClickToAccept",
+            "ESignEmbedded",
+            "ESignOffline"
+          ],
+          "x-ms-enum": {
+            "name": "acceptanceMode",
+            "modelAsString": true
+          }
+        },
         "effectiveDate": {
           "description": "Effective date.",
           "type": "string",
