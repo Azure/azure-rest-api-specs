@@ -60,6 +60,11 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
+| [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
+| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
+| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
+| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -708,13 +713,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.
+**Output Message**: The last resource provider '{0}' doesn't match the namespace.
 
-**Description**: Verifies whether more than one resource providers exists in the specification or not.
+**Description**: Verifies whether the last resource provider matches namespace or not. E.g the path /providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Insights/extResource/{extType}’ is allowed only if Microsoft.Insights matches the namespace (Microsoft.Insights). 
 
-**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider.
+**Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider. So the last resource provider must match with the resource provider namespace.
 
-**How to fix the violation**: One OpenAPI(swagger) specification must have one resource provider. Please create multiple OpenAPI(swagger) specs, each for one provider. Please refer
+**How to fix the violation**: One OpenAPI(swagger) specification must locate in proper namespace. Namespace is parent folder. E.g. Microsoft.Insights. Please make sure the last resource provider name matches the namespace name. 
 [Literate Configuration](https://github.com/Azure/autorest/blob/185e337137c990b9cc1b8ebbb272e76eeeef43a1/docs/user/literate-file-formats/configuration.md).
 
 **Impact on generated code**: N/A.
@@ -1834,6 +1839,259 @@ or
 "x-ms-long-running-operation-options": {
   "final-state-via": "azure-async-operation"
 }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r3020" ></a>R3020 PathResourceProviderNamePascalCase
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Resource provider naming must follow the pascal case. Path: {your path}
+
+**Description** :
+
+Resource provider naming in path SHOULD follow the pascal case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs)
+
+For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Rename resource provider as pascal case in path.
+
+Eg: In this case, you need to replace `Microsoft.computer` with `Microsoft.Computer` to follw pascal case.
+
+
+Invalid: 
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Valid:
+
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3021" ></a>R3021 PathResouceTypeNameCamelCase
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Resource type naming SHOULD follow camel case. Path: {your path}
+
+**Description** :
+
+Resource type or other identifiers (include: namespace, entityTypes) SHOULD follow camel case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs, not ProactiveDetectionConfig)
+
+For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Rename resource type or other identifiers as camel case in path.
+
+Eg: In this case, you need to replace `ResourceGroups` with `resourceGroups` to follw camel case.
+
+
+Invalid: 
+
+```
+paths : { "/subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Valid:
+
+
+```
+paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Computer/{name}" : {
+    "get": {
+       ...
+    }
+    "post": {
+      ...
+    }
+  }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3024" ></a>R3024 EnumUniqueValue
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum must not contain case-insensitive duplicated value and make sure every value in enum unique.
+
+**Description** : Case-insensitive value in enum mean the same value. 
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Remove duplicated value in enum.
+
+Eg: In this case, you need to remove 'Failed' or 'FAILED'.
+
+
+Invalid: 
+
+```
+"enum": [
+            "Success",
+             "Failed",
+             "FAILED"
+]
+```
+
+Valid:
+
+
+```
+"enum": [
+            "Success",
+             "Failed",
+]
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3015" ></a>R3015 EnumMustHaveType
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum must define its type. All values in an enum must adhere to the specified type. 
+
+**Description** : Enum must define its type object or string. If not it will block SDK generation.
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Define type in enum.
+
+Invalid: 
+
+```
+"status":{ 
+   "description":"The state code.",
+   "enum":[ 
+      "Success",
+      "Failed"
+   ],
+   "readOnly":true,
+   "x-ms-enum":{ 
+      "name":"RespStatus",
+      "modelAsString":true
+   }
+}
+```
+
+Valid:
+
+
+```
+"status":{ 
+   "description":"The state code.",
+   "enum":[ 
+      "Success",
+      "Failed"
+   ],
+   "readOnly":true,
+   "type": "string",
+   "x-ms-enum":{ 
+      "name":"RespStatus",
+      "modelAsString":true
+   }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r3029" ></a>R3029 EnumMustNotHaveEmptyValue
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum value must not contain empty value.
+
+**Description** : Empty value is not allowed in enum value and meanless.
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Remove empty string from enum.
+
+Invalid: 
+
+```
+"enum":[ 
+   "Success",
+   "Failed",
+   "       "
+]
+```
+
+Valid:
+
+
+```
+"enum":[ 
+   "Success",
+   "Failed",
+]
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
