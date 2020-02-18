@@ -492,7 +492,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Subscription/OperationResults/Subscription_{subscriptionId}": {
+    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
       "get": {
         "description": "Get the status of the pending Microsoft.Subscription API operations.",
         "operationId": "SubscriptionOperationResult_Get",
@@ -524,7 +524,11 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID, which can be found from the location header.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -780,15 +784,15 @@
           "type": "string"
         },
         "skuId": {
-          "description": "The SKU ID of the Azure plan.",
+          "description": "The SKU ID of the Azure plan (0001 or 0002).",
           "type": "string"
         },
         "billingScope": {
-          "description": "Determines customerLed / fieldLed, partnerLed.",
+          "description": "Determines customerLed / fieldLed (/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}), partnerLed (/billingAccounts/{billingAccountId}/customers/{customerId}).",
           "type": "string"
         },
         "initialOwnerPrincipalId": {
-          "description": "Initial owner object Id.",
+          "description": "Initial owner principal Id.",
           "type": "string"
         },
         "initialOwnerTenantId": {
@@ -801,7 +805,7 @@
       "description": "Subscription information (same as Microsoft.Resources/subscription).",
       "properties": {
         "id": {
-          "description": "Fully qualified ID for the subscription.",
+          "description": "Fully qualified ID for the subscription resource.",
           "type": "string"
         },
         "name": {
