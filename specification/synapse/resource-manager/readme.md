@@ -110,6 +110,7 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
