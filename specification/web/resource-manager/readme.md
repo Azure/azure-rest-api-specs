@@ -37,6 +37,24 @@ openapi-type: arm
 tag: package-2019-08
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: XmsResourceInPutResponse
+    from: WebApps.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put
+    reason: Model type is not an Azure resource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: WebApps.json
+    where: $.definitions.KeyInfo
+    reason: Model type is not an Azure resource
+  - suppress: BodyTopLevelProperties
+    from: WebApps.json
+    where: $.definitions.KeyInfo.properties
+    reason: Model type is not an Azure resource
+```
+
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` or `--tag=package-2019-08-only` is specified on the command line.

@@ -447,7 +447,7 @@
     },
     "AutomationActionLogicApp": {
       "type": "object",
-      "description": "The logic app action that should be triggered.",
+      "description": "The logic app action that should be triggered. To learn more about Security Center's Workflow Automation capabilities, visit https://aka.ms/ASCWorkflowAutomationLearnMore",
       "x-ms-discriminator-value": "LogicApp",
       "allOf": [
         {
@@ -468,7 +468,7 @@
     },
     "AutomationActionEventHub": {
       "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
+      "description": "The target Event Hub to which event data will be exported. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
@@ -493,7 +493,7 @@
     },
     "AutomationActionWorkspace": {
       "type": "object",
-      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace.",
+      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
       "x-ms-discriminator-value": "Workspace",
       "allOf": [
         {
@@ -561,7 +561,7 @@
         },
         "operator": {
           "type": "string",
-          "description": "A valid comparer operator to use.",
+          "description": "A valid comparer operator to use. A case-insensitive comparison will be applied for String PropertyType.",
           "enum": [
             "Equals",
             "GreaterThan",
