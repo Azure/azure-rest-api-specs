@@ -7800,9 +7800,9 @@
           "type": "string"
         },
         "recoveryDiskEncryptionSetId": {
-	  "description": "The recovery disk encryption set Id.",
+          "description": "The recovery disk encryption set Id.",
           "type": "string"
-        },                
+        },
         "diskName": {
           "description": "The disk name.",
           "type": "string"
@@ -7876,6 +7876,14 @@
         },
         "kekKeyVaultArmId": {
           "description": "The KeyVault resource id for key (KEK).",
+          "type": "string"
+        },
+        "failoverDiskName": {
+          "description": "The failover name for the managed disk.",
+          "type": "string"
+        },
+        "tfoDiskName": {
+          "description": "The test failover name for the managed disk.",
           "type": "string"
         }
       }
@@ -8081,6 +8089,10 @@
           "description": "The recovery virtual network.",
           "type": "string"
         },
+        "selectedTfoAzureNetworkId": {
+          "description": "The test failover virtual network.",
+          "type": "string"
+        },
         "vmNics": {
           "description": "The virtual machine nic details.",
           "type": "array",
@@ -8161,6 +8173,10 @@
             "name": "VmEncryptionType",
             "modelAsString": true
           }
+        },
+        "tfoAzureVMName": {
+          "description": "The test failover VM name.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8328,6 +8344,10 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery os disk encryption information."
+        },
+        "tfoAzureVMName": {
+          "description": "The user given name for test failover VM.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8403,6 +8423,14 @@
         "diskEncryptionInfo": {
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "failoverDiskName": {
+          "description": "The target disk name for unplanned failover operation.",
+          "type": "string"
+        },
+        "tfoDiskName": {
+          "description": "The target disk name for test failover operation.",
+          "type": "string"
         }
       }
     },
@@ -9095,6 +9123,14 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
           }
+        },
+        "providerSpecificInput": {
+          "description": "The provider specific input.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
+          }
         }
       }
     },
@@ -9719,8 +9755,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the class type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -12587,6 +12622,27 @@
         }
       }
     },
+    "IPConfig": {
+      "description": "IP configuration details.",
+      "type": "object",
+      "properties": {
+        "staticIPAddress": {
+          "description": "The static IP address of the IP configuration.",
+          "type": "string"
+        },
+        "publicIpAddressId": {
+          "description": "The Id of the public IP address associated with the IP configuration.",
+          "type": "string"
+        },
+        "lBBackendAddressPoolIds": {
+          "description": "The backend address pools associated with the IP configuration.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Job": {
       "description": "Job details.",
       "type": "object",
@@ -14236,6 +14292,46 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
+    "RecoveryPlanA2ADetails": {
+      "description": "Recovery plan A2A specific details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "RecoveryPlanA2ADetails"
+    },
+    "RecoveryPlanA2AInput": {
+      "description": "Recovery plan A2A input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RecoveryPlanProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "primaryZone": {
+          "description": "The primary zone.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The recovery zone.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "A2A"
+    },
     "RecoveryPlanAction": {
       "description": "Recovery plan action details.",
       "required": [
@@ -14470,9 +14566,6 @@
     },
     "RecoveryPlanHyperVReplicaAzureFailoverInput": {
       "description": "Recovery plan HVR Azure failover input.",
-      "required": [
-        "vaultLocation"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -14706,6 +14799,15 @@
           "items": {
             "$ref": "#/definitions/RecoveryPlanGroup"
           }
+        },
+        "providerSpecificDetails": {
+          "description": "The provider id and provider specific details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryPlanProviderSpecificDetails"
+          },
+          "readOnly": true
         }
       }
     },
@@ -14722,6 +14824,29 @@
           "type": "string"
         }
       }
+    },
+    "RecoveryPlanProviderSpecificDetails": {
+      "description": "Recovery plan provider specific details.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "discriminator": "instanceType"
+    },
+    "RecoveryPlanProviderSpecificInput": {
+      "description": "Recovery plan provider specific input base class.",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Gets the Instance type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "RecoveryPlanProviderSpecificFailoverInput": {
       "description": "Recovery plan provider specific failover input base class.",
@@ -15967,8 +16092,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -16426,6 +16550,10 @@
         },
         "selectedRecoveryAzureNetworkId": {
           "description": "Target Azure Network Id.",
+          "type": "string"
+        },
+        "selectedTfoAzureNetworkId": {
+          "description": "The Azure Network Id for test failover.",
           "type": "string"
         },
         "selectedSourceNicId": {
@@ -16978,6 +17106,29 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "A value indicating whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMNetworkId": {
+          "description": "The network to be used by NIC during test failover.",
+          "type": "string"
+        },
+        "tfoVMSubnetName": {
+          "description": "The subnet to be used by NIC during test failover.",
+          "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+          "description": "The NSG to be used by NIC during test failover.",
+          "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+          "description": "Whether the test failover NIC has accelerated networking enabled.",
+          "type": "boolean"
+        },
+        "tfoIPConfigs": {
+          "description": "The IP configurations to be used by NIC during test failover.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfig"
+          }
         }
       }
     },
@@ -17019,6 +17170,26 @@
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "Whether the NIC has accelerated networking enabled.",
           "type": "boolean"
+        },
+        "tfoVMSubnetName": {
+          "description": "The subnet to be used by NIC during test failover.",
+          "type": "string"
+        },
+        "tfoNetworkSecurityGroupId": {
+          "description": "The NSG to be used by NIC during test failover.",
+          "type": "string"
+        },
+        "enableAcceleratedNetworkingOnTfo": {
+          "description": "Whether the test NIC has accelerated networking enabled.",
+          "type": "boolean"
+        },
+        "tfoIPConfigs": {
+          "description": "The IP configurations to be used by NIC during test failover.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfig"
+          }
         }
       }
     },
