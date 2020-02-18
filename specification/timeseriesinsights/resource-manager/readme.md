@@ -25,16 +25,16 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11-15
+tag: package-2018-08-preview
 ```
 
-### Tag: package-2017-02-preview
+### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-02-preview'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2017-11-15
@@ -46,13 +46,13 @@ input-file:
 - Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
 ```
 
-### Tag: package-2018-08-preview
+### Tag: package-2017-02-preview
 
-These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08-preview'
+``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
 ```
 
 ## Suppression
