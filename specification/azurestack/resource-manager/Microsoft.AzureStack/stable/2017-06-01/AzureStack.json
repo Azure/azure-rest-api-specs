@@ -45,11 +45,44 @@
         }
       }
     },
+    "/providers/Microsoft.AzureStack/cloudmanifestfiles": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of the cloud specific manifest file latest version.": {
+            "$ref": "examples/CloudManifestFile/List.json"
+          }
+        },
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Returns the cloud specific manifest JSON file latest version.",
+        "operationId": "CloudManifestFile_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AzureStack/cloudmanifestfiles/{verificationVersion}": {
       "get": {
         "x-ms-examples": {
           "Returns the properties of a cloud specific manifest file.": {
-            "$ref": "examples/Operation/Get.json"
+            "$ref": "examples/CloudManifestFile/Get.json"
           }
         },
         "tags": [
