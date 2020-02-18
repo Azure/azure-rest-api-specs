@@ -391,16 +391,20 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The workspace provisioning state."
         },
-        "uiDefinitionUri": {
-          "type": "string",
-          "description": "The blob URI where the UI definition file is located."
-        },
         "authorizations": {
           "description": "The workspace provider authorizations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WorkspaceProviderAuthorization"
           }
+        },
+        "createdBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "updatedBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.",
+          "$ref": "#/definitions/CreatedBy"
         }
       },
       "required": [
@@ -614,6 +618,24 @@
         }
       },
       "description": "Custom Parameters used for Cluster Creation."
+    },
+    "CreatedBy": {
+      "properties": {
+        "oid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Object ID that created the workspace."
+        },
+        "puid": {
+          "type": "string",
+          "description": "The Personal Object ID corresponding to the object ID above"
+        },
+        "applicationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal."
+        }
+      }
     },
     "WorkspaceProviderAuthorization": {
       "properties": {
