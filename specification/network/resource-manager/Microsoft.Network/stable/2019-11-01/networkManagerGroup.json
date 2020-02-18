@@ -1,295 +1,295 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "NetworkManagerGroup",
-        "description": "The Microsoft Azure Network Manager Group API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-        "version": "2019-11-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/{networkManagerGroupName}": {
-            "parameters": [
-                {
-                    "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "$ref": "#/parameters/NetworkManagerNameParameter"
-                },
-                {
-                    "$ref": "#/parameters/NetworkManagerGroupNameParameter"
-                },
-                {
-                    "$ref": "./network.json#/parameters/ApiVersionParameter"
-                }
-            ],
-            "get": {
-                "tags": [
-                    "NetworkManagerGroups"
-                ],
-                "operationId": "NetworkManagerGroups_Get",
-                "description": "Get the specified network manager group.",
-                "responses": {
-                    "200": {
-                        "description": "OK - Returns information about the network manager group.",
-                        "schema": {
-                            "$ref": "#/definitions/NetworkManagerGroup"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "NetworkManagerGroupsGet": {
-                        "$ref": "./examples/NetworkManagerGroupsGet.json"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "NetworkManagerGroups"
-                ],
-                "operationId": "NetworkManagerGroups_CreateOrUpdate",
-                "description": "Creates a network manager group.",
-                "parameters": [
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/NetworkManagerGroup"
-                        },
-                        "description": "Parameters supplied to the specify which Managed Network this scope is being assigned"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Updated - Returns information about the network manager group.",
-                        "schema": {
-                            "$ref": "#/definitions/NetworkManagerGroup"
-                        }
-                    },
-                    "201": {
-                        "description": "Created - Returns information about the network manager group.",
-                        "schema": {
-                            "$ref": "#/definitions/NetworkManagerGroup"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "NetworkManagerGroupsPut": {
-                        "$ref": "./examples/NetworkManagerGroupsPut.json"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "NetworkManagerGroups"
-                ],
-                "operationId": "NetworkManagerGroups_Delete",
-                "description": "Deletes a network manager group.",
-                "responses": {
-                    "200": {
-                        "description": "Delete Succeed."
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed."
-                    }
-                },
-                "x-ms-examples": {
-                    "NetworkManagerGroupsDelete": {
-                        "$ref": "./examples/NetworkManagerGroupsDelete.json"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/": {
-            "get": {
-                "tags": [
-                    "NetworkManagerGroups"
-                ],
-                "operationId": "NetworkManagerGroups_List",
-                "description": "Get the specified network manager group list.",
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "parameters": [
-                    {
-                        "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NetworkManagerNameParameter"
-                    },
-                    {
-                        "$ref": "./network.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK - Returns information about the network manager group.",
-                        "schema": {
-                            "$ref": "#/definitions/NetworkManagerGroupListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "NetworkManagerGroupsList": {
-                        "$ref": "./examples/NetworkManagerGroupsList.json"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "NetworkManagerGroup": {
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/NetworkManagerGroupProperties",
-                    "description": "The Network Manager Group properties"
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource name."
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Resource type."
-                },
-                "etag": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "A unique read-only string that changes whenever the resource is updated."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/SubResource"
-                }
-            ],
-            "description": "The Managed Network resource"
-        },
-        "NetworkManagerGroupListResult": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NetworkManagerGroup"
-                    },
-                    "description": "Gets a page of NetworkManagerGroup"
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Gets the URL to get the next set of results."
-                }
-            },
-            "description": "Result of the request to list NetworkManagerGroup. It contains a list of groups and a URL link to get the next set of results."
-        },
-        "NetworkManagerGroupProperties": {
-            "type": "object",
-            "properties": {
-                "displayName": {
-                    "type": "string",
-                    "description": "A friendly name for the assignment."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "A description of the assignment."
-                },
-                "groupMembers": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "Scope of Network Manager."
-                },
-                "conditionalMembership": {
-                    "type": "object",
-                    "description": "group filter."
-                },
-                "provisioningState": {
-                    "readOnly": true,
-                    "$ref": "./network.json#/definitions/ProvisioningState",
-                    "description": "The provisioning state of the scope assignment resource."
-                }
-            },
-            "description": "Properties of Managed Network"
-        }
-    },
-    "parameters": {
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group.",
-            "x-ms-parameter-location": "method"
-        },
-        "NetworkManagerNameParameter": {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the network manager.",
-            "x-ms-parameter-location": "method"
-        },
-        "NetworkManagerGroupNameParameter": {
-            "name": "networkManagerGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the network manager group to get.",
-            "x-ms-parameter-location": "method"
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagerGroup",
+    "description": "The Microsoft Azure Network Manager Group API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "version": "2019-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/{networkManagerGroupName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerGroupNameParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkManagerGroups"
+        ],
+        "operationId": "NetworkManagerGroups_Get",
+        "description": "Get the specified network manager group.",
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the network manager group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerGroup"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagerGroupsGet": {
+            "$ref": "./examples/NetworkManagerGroupsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkManagerGroups"
+        ],
+        "operationId": "NetworkManagerGroups_CreateOrUpdate",
+        "description": "Creates a network manager group.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerGroup"
+            },
+            "description": "Parameters supplied to the specify which Managed Network this scope is being assigned"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerGroup"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the network manager group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerGroup"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagerGroupsPut": {
+            "$ref": "./examples/NetworkManagerGroupsPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkManagerGroups"
+        ],
+        "operationId": "NetworkManagerGroups_Delete",
+        "description": "Deletes a network manager group.",
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagerGroupsDelete": {
+            "$ref": "./examples/NetworkManagerGroupsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/": {
+      "get": {
+        "tags": [
+          "NetworkManagerGroups"
+        ],
+        "operationId": "NetworkManagerGroups_List",
+        "description": "Get the specified network manager group list.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the network manager group.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagerGroupsList": {
+            "$ref": "./examples/NetworkManagerGroupsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkManagerGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkManagerGroupProperties",
+          "description": "The Network Manager Group properties"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "The Managed Network resource"
+    },
+    "NetworkManagerGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerGroup"
+          },
+          "description": "Gets a page of NetworkManagerGroup"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list NetworkManagerGroup. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "NetworkManagerGroupProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A friendly name for the assignment."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the assignment."
+        },
+        "groupMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Scope of Network Manager."
+        },
+        "conditionalMembership": {
+          "type": "object",
+          "description": "group filter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the scope assignment resource."
+        }
+      },
+      "description": "Properties of Managed Network"
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerNameParameter": {
+      "name": "networkManagerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network manager.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerGroupNameParameter": {
+      "name": "networkManagerGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network manager group to get.",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

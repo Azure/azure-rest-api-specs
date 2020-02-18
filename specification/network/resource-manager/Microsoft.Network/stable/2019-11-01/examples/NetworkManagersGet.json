@@ -1,28 +1,30 @@
 {
-    "title": "Get Managed Network",
-    "parameters": {
-        "api-version": "2019-11-01",
-        "subscriptionId": "subscriptionC",
-        "resourceGroupName": "rg1",
-        "networkManagerName": "subscriptionCANetworkManager"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "name": "subscriptionCANetworkManager",
-                "id": "/subscriptions/subscriptionC/resourceGroup//providers/Microsoft.Network/networkManagers/subscriptionCANetworkManager",
-                "type": "Microsoft.Network/networkManager",
-                "location": "westus",
-                "properties": {
-                    "displayName": "Blocking SSH to VNets",
-                    "description": "Block any SSH traffic from the Internet into company VNets",
-                    "networkManagerScopes": {
-                        "managementGroups":[],
-                        "subscriptions":[]
-                    },
-                    "networkManagerScopeAccess": ["Security"]
-                }
-            }
+  "title": "Get Managed Network",
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subscriptionC",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "subscriptionCANetworkManager"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "subscriptionCANetworkManager",
+        "id": "/subscriptions/subscriptionC/resourceGroup//providers/Microsoft.Network/networkManagers/subscriptionCANetworkManager",
+        "type": "Microsoft.Network/networkManager",
+        "location": "westus",
+        "properties": {
+          "displayName": "Blocking SSH to VNets",
+          "description": "Block any SSH traffic from the Internet into company VNets",
+          "networkManagerScopes": {
+            "managementGroups": [],
+            "subscriptions": []
+          },
+          "networkManagerScopeAccess": [
+            "Security"
+          ]
         }
+      }
     }
+  }
 }

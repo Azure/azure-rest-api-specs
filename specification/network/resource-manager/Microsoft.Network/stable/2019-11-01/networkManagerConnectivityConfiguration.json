@@ -1,376 +1,376 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "ConnectivityConfiguration",
-        "description": "The Microsoft Azure Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-        "version": "2019-11-01"
-    },
-    "host": "management.azure.com",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{connectivityConfigurationName}": {
-            "parameters": [
-                {
-                    "$ref": "./network.json#/parameters/ApiVersionParameter"
-                },
-                {
-                    "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "#/parameters/ResourceGroupNameParameter"
-                },
-                {
-                    "$ref": "#/parameters/NetworkManagerNameParameter"
-                },
-                {
-                    "$ref": "#/parameters/ConnectivityConfigurationNameParameter"
-                }
-            ],
-            "get": {
-                "tags": [
-                    "ConnectivityConfigurations"
-                ],
-                "operationId": "ConnectivityConfigurations_Get",
-                "description": "The Get ConnectivityConfigurations operation gets a Managed Network Connectivity Configuration resource, specified by the  resource group, Managed Network name, and connectivity Configuration name",
-                "responses": {
-                    "200": {
-                        "description": "Get successful. The operation returns the specified Managed Network Connectivity Configuration resource.",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectivityConfiguration"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "ConnectivityConfigurationsGet": {
-                        "$ref": "./examples/ConnectivityConfigurationsGet.json"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "ConnectivityConfigurations"
-                ],
-                "operationId": "ConnectivityConfigurations_CreateOrUpdate",
-                "description": "The Put ConnectivityConfigurations operation creates/updates a new Managed Network Peering Configuration",
-                "parameters": [
-                    {
-                        "name": "connectivityConfiguration",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/ConnectivityConfiguration"
-                        },
-                        "description": "Parameters supplied to create/update a Managed Network Peering Configuration"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update successful. The operation returns the resulting Managed Network Peering Configuration resource.",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectivityConfiguration"
-                        }
-                    },
-                    "201": {
-                        "description": "Create successful. The operation returns the resulting Managed Network Peering Configuration resource.",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectivityConfiguration"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "ConnectivityConfigurationsPut": {
-                        "$ref": "./examples/ConnectivityConfigurationsPut.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
-                }
-            },
-            "delete": {
-                "tags": [
-                    "ConnectivityConfigurations"
-                ],
-                "operationId": "ConnectivityConfigurations_Delete",
-                "description": "The Delete ConnectivityConfigurations operation deletes a Managed Network Connectivity Configuration, specified by the  resource group, Managed Network name, and connectivity Configuration name",
-                "responses": {
-                    "200": {
-                        "description": "Delete successful."
-                    },
-                    "202": {
-                        "description": "Accepted and the operation will complete asynchronously."
-                    },
-                    "204": {
-                        "description": "Request successful. Resource does not exist."
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "ConnectivityConfigurationsDelete": {
-                        "$ref": "./examples/ConnectivityConfigurationsDelete.json"
-                    }
-                },
-                "x-ms-long-running-operation": true,
-                "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations": {
-            "get": {
-                "tags": [
-                    "ConnectivityConfigurations"
-                ],
-                "operationId": "ConnectivityConfigurations_ListByResourceGroup",
-                "description": "The List By network Manager PeeringConfigurations operation retrieves all the Managed Network Peering Configurations in a specified Managed Network, in a paginated format.",
-                "parameters": [
-                    {
-                        "$ref": "./network.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/NetworkManagerNameParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ListPageSizeParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/ListSkipTokenParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Get successful. The operation returns all Managed Network Peering Configuration resources in the specified Managed Network, in a paginated format",
-                        "schema": {
-                            "$ref": "#/definitions/ConnectivityConfigurationListResult"
-                        }
-                    },
-                    "default": {
-                        "description": "Resource Provider error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "./network.json#/definitions/CloudError"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-examples": {
-                    "ConnectivityConfigurationsListByResourceGroup": {
-                        "$ref": "./examples/ConnectivityConfigurationsList.json"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "ConnectivityConfigurationListResult": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ConnectivityConfiguration"
-                    },
-                    "description": "Gets a page of Connectivity Configurations"
-                },
-                "nextLink": {
-                    "type": "string",
-                    "description": "Gets the URL to get the next page of results."
-                }
-            },
-            "description": "Result of the request to list Managed Network Connectivity Configurations. It contains a list of Configurations and a URL link to get the next set of results."
-        },
-        "ConnectivityConfiguration": {
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ConnectivityConfigurationProperties",
-                    "description": "Gets or sets the properties of a Managed Network Configuration"
-                },
-                "name": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "Resource name."
-                },
-                "type": {
-                  "readOnly": true,
-                  "type": "string",
-                  "description": "Resource type."
-                },
-                "etag": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "A unique read-only string that changes whenever the resource is updated."
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "./network.json#/definitions/SubResource"
-                }
-            ],
-            "description": "The Managed Network Peering Configuration resource"
-        },
-        "ConnectivityConfigurationProperties": {
-            "properties": {
-                "displayName": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "A friendly name for the assignment."
-                },
-                "description": {
-                    "type": "string",
-                    "description": "A description of the Connectivity Configuration."
-                },
-                "connectivityType": {
-                    "type": "string",
-                    "enum": [
-                        "HubAndSpokeTopology",
-                        "MeshTopology"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ConnectivityType",
-                        "modelAsString": true
-                    },
-                    "description": "Gets or sets the connectivity type of a network structure Configuration"
-                },
-                "hubId": {
-                    "type": "string",
-                    "description": "Gets or sets the hub virtual network ID"
-                },
-                "appliesToGroups": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/networkManagerGroupItem"
-                    },
-                    "description": "Groups for configuration"
-                },
-                "provisioningState": {
-                    "readOnly": true,
-                    "$ref": "./network.json#/definitions/ProvisioningState",
-                    "description": "The provisioning state of the peering Configuration resource."
-                }
-            },
-            "required": [
-                "connectivityType"
-            ],
-            "description": "Properties of a Managed Network Peering Configuration"
-        },
-        "networkManagerGroupItem": {
-            "type": "object",
-            "properties": {
-                "networkGroupId": {
-                    "type": "string",
-                    "description": "Network manager group Id."
-                },
-                "deleteExistingPeering": {
-                    "type": "boolean",
-                    "description": "Flag if need to remove current peerings."
-                },
-                "groupConnectivity": {
-                    "type": "string",
-                    "enum": [
-                        "Transitive",
-                        "NonTransitive"
-                    ],
-                    "x-ms-enum": {
-                        "name": "GroupConnectivity",
-                        "modelAsString": true
-                    },
-                    "description": "Group Connectivity."
-                }
-            }
-        }
-    },
-    "parameters": {
-        "ConnectivityConfigurationNameParameter": {
-            "name": "connectivityConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Managed Network Peering Configuration.",
-            "x-ms-parameter-location": "method"
-        },
-        "ResourceGroupNameParameter": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group.",
-            "x-ms-parameter-location": "method"
-        },
-        "NetworkManagerNameParameter": {
-            "name": "networkManagerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the network manager.",
-            "x-ms-parameter-location": "method"
-        },
-        "ListPageSizeParameter": {
-            "name": "$top",
-            "description": "May be used to limit the number of results in a page for list queries.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 20,
-            "x-ms-parameter-location": "method"
-        },
-        "ListSkipTokenParameter": {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "x-ms-parameter-location": "method"
-        }
+  "swagger": "2.0",
+  "info": {
+    "title": "ConnectivityConfiguration",
+    "description": "The Microsoft Azure Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "version": "2019-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{connectivityConfigurationName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ConnectivityConfigurationNameParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "operationId": "ConnectivityConfigurations_Get",
+        "description": "The Get ConnectivityConfigurations operation gets a Managed Network Connectivity Configuration resource, specified by the  resource group, Managed Network name, and connectivity Configuration name",
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the specified Managed Network Connectivity Configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsGet": {
+            "$ref": "./examples/ConnectivityConfigurationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "operationId": "ConnectivityConfigurations_CreateOrUpdate",
+        "description": "The Put ConnectivityConfigurations operation creates/updates a new Managed Network Peering Configuration",
+        "parameters": [
+          {
+            "name": "connectivityConfiguration",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            },
+            "description": "Parameters supplied to create/update a Managed Network Peering Configuration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Managed Network Peering Configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Managed Network Peering Configuration resource.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsPut": {
+            "$ref": "./examples/ConnectivityConfigurationsPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "operationId": "ConnectivityConfigurations_Delete",
+        "description": "The Delete ConnectivityConfigurations operation deletes a Managed Network Connectivity Configuration, specified by the  resource group, Managed Network name, and connectivity Configuration name",
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsDelete": {
+            "$ref": "./examples/ConnectivityConfigurationsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations": {
+      "get": {
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "operationId": "ConnectivityConfigurations_ListByResourceGroup",
+        "description": "The List By network Manager PeeringConfigurations operation retrieves all the Managed Network Peering Configurations in a specified Managed Network, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all Managed Network Peering Configuration resources in the specified Managed Network, in a paginated format",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsListByResourceGroup": {
+            "$ref": "./examples/ConnectivityConfigurationsList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectivityConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectivityConfiguration"
+          },
+          "description": "Gets a page of Connectivity Configurations"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list Managed Network Connectivity Configurations. It contains a list of Configurations and a URL link to get the next set of results."
+    },
+    "ConnectivityConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
+          "description": "Gets or sets the properties of a Managed Network Configuration"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "The Managed Network Peering Configuration resource"
+    },
+    "ConnectivityConfigurationProperties": {
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A friendly name for the assignment."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the Connectivity Configuration."
+        },
+        "connectivityType": {
+          "type": "string",
+          "enum": [
+            "HubAndSpokeTopology",
+            "MeshTopology"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectivityType",
+            "modelAsString": true
+          },
+          "description": "Gets or sets the connectivity type of a network structure Configuration"
+        },
+        "hubId": {
+          "type": "string",
+          "description": "Gets or sets the hub virtual network ID"
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/networkManagerGroupItem"
+          },
+          "description": "Groups for configuration"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the peering Configuration resource."
+        }
+      },
+      "required": [
+        "connectivityType"
+      ],
+      "description": "Properties of a Managed Network Peering Configuration"
+    },
+    "networkManagerGroupItem": {
+      "type": "object",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        },
+        "deleteExistingPeering": {
+          "type": "boolean",
+          "description": "Flag if need to remove current peerings."
+        },
+        "groupConnectivity": {
+          "type": "string",
+          "enum": [
+            "Transitive",
+            "NonTransitive"
+          ],
+          "x-ms-enum": {
+            "name": "GroupConnectivity",
+            "modelAsString": true
+          },
+          "description": "Group Connectivity."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConnectivityConfigurationNameParameter": {
+      "name": "connectivityConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Managed Network Peering Configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerNameParameter": {
+      "name": "networkManagerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network manager.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListPageSizeParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results in a page for list queries.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
