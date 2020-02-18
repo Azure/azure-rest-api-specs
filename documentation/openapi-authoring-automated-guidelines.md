@@ -62,6 +62,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
 | [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
+| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
+| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
+| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -1855,6 +1858,10 @@ Resource provider naming in path SHOULD follow the pascal case. (e.g. Microsoft.
 
 For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
 
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
 **How to fix the violation**: 
 
 Rename resource provider as pascal case in path.
@@ -1907,6 +1914,10 @@ Resource type or other identifiers (include: namespace, entityTypes) SHOULD foll
 
 For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
 
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
 **How to fix the violation**: 
 
 Rename resource type or other identifiers as camel case in path.
@@ -1941,6 +1952,146 @@ paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/pr
     }
   }
 }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3024" ></a>R3024 EnumUniqueValue
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum must not contain case-insensitive duplicated value and make sure every value in enum unique.
+
+**Description** : Case-insensitive value in enum mean the same value. 
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Remove duplicated value in enum.
+
+Eg: In this case, you need to remove 'Failed' or 'FAILED'.
+
+
+Invalid: 
+
+```
+"enum": [
+            "Success",
+             "Failed",
+             "FAILED"
+]
+```
+
+Valid:
+
+
+```
+"enum": [
+            "Success",
+             "Failed",
+]
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r3015" ></a>R3015 EnumMustHaveType
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum must define its type. All values in an enum must adhere to the specified type. 
+
+**Description** : Enum must define its type object or string. If not it will block SDK generation.
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Define type in enum.
+
+Invalid: 
+
+```
+"status":{ 
+   "description":"The state code.",
+   "enum":[ 
+      "Success",
+      "Failed"
+   ],
+   "readOnly":true,
+   "x-ms-enum":{ 
+      "name":"RespStatus",
+      "modelAsString":true
+   }
+}
+```
+
+Valid:
+
+
+```
+"status":{ 
+   "description":"The state code.",
+   "enum":[ 
+      "Success",
+      "Failed"
+   ],
+   "readOnly":true,
+   "type": "string",
+   "x-ms-enum":{ 
+      "name":"RespStatus",
+      "modelAsString":true
+   }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r3029" ></a>R3029 EnumMustNotHaveEmptyValue
+
+**Category** : ARM Warning
+
+**Applies to** : ARM and Data Plane OpenAPI(swagger) specs
+
+**Output Message** : Enum value must not contain empty value.
+
+**Description** : Empty value is not allowed in enum value and meanless.
+
+**CreatedAt**: 2/18/2020
+
+**LastModifiedAt**: 2/18/2020
+
+**How to fix the violation**: 
+
+Remove empty string from enum.
+
+Invalid: 
+
+```
+"enum":[ 
+   "Success",
+   "Failed",
+   "       "
+]
+```
+
+Valid:
+
+
+```
+"enum":[ 
+   "Success",
+   "Failed",
+]
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
