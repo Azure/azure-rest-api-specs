@@ -1,60 +1,60 @@
 {
+  "parameters": {
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
+    "resourceGroupName": "SampleResourceGroup_1",
+    "storageSyncServiceName": "SampleStorageSyncService_1",
+    "syncGroupName": "SampleSyncGroup_1",
+    "serverEndpointName": "SampleServerEndpoint_1",
     "parameters": {
-        "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
-        "resourceGroupName": "SampleResourceGroup_1",
-        "storageSyncServiceName": "SampleStorageSyncService_1",
-        "syncGroupName": "SampleSyncGroup_1",
-        "serverEndpointName": "SampleServerEndpoint_1",
-        "parameters": {
-            "properties": {
-                "serverLocalPath": "D:\\SampleServerEndpoint_1",
-                "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
-                "cloudTiering": "off",
-                "volumeFreeSpacePercent": 100,
-                "tierFilesOlderThanDays": 0,
-                "offlineDataTransfer": "on",
-                "offlineDataTransferShareName": "myfileshare"
-            },
-            "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
-        },
-        "api-version": "2019-03-01"
+      "properties": {
+        "serverLocalPath": "D:\\SampleServerEndpoint_1",
+        "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
+        "cloudTiering": "off",
+        "volumeFreeSpacePercent": 100,
+        "tierFilesOlderThanDays": 0,
+        "offlineDataTransfer": "on",
+        "offlineDataTransferShareName": "myfileshare"
+      },
+      "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
     },
-    "responses": {
-        "200": {
-            "headers": {
-                "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
-                "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
-            },
-            "body": {
-                "name": "SampleServerEndpoint_1",
-                "properties": {
-                    "serverLocalPath": "D:\\SampleServerEndpoint_1",
-                    "cloudTiering": "off",
-                    "volumeFreeSpacePercent": 100,
-                    "friendlyName": "somemachine.redmond.corp.microsoft.com",
-                    "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
-                    "provisioningState": "Succeeded",
-                    "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
-                    "lastOperationName": "ICreateServerEndpointWorkflow",
-                    "tierFilesOlderThanDays" : 0,
-                    "syncStatus": null,
-                    "offlineDataTransfer": "on",
-                    "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
-                    "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-                    "offlineDataTransferShareName": "myfileshare"
-                },
-                "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
-                "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
-            }
+    "api-version": "2019-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      },
+      "body": {
+        "name": "SampleServerEndpoint_1",
+        "properties": {
+          "serverLocalPath": "D:\\SampleServerEndpoint_1",
+          "cloudTiering": "off",
+          "volumeFreeSpacePercent": 100,
+          "friendlyName": "somemachine.redmond.corp.microsoft.com",
+          "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
+          "provisioningState": "Succeeded",
+          "lastWorkflowId": "storageSyncServices/healthDemo1/workflows/569afb5c-7172-4cf8-a8ea-d987f727f11a",
+          "lastOperationName": "ICreateServerEndpointWorkflow",
+          "tierFilesOlderThanDays": 0,
+          "syncStatus": null,
+          "offlineDataTransfer": "on",
+          "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
+          "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "offlineDataTransferShareName": "myfileshare"
         },
-        "202": {
-            "headers": {
-                "Azure-AsyncOperation": "https://management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/workflows/828219ea-083e-48b5-89ea-8fd9991b2e75/operations/fe680c98-5725-49c8-b0dc-5e29745f752b?api-version=2019-03-01",
-                "Location": "https://management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/workflows/828219ea-083e-48b5-89ea-8fd9991b2e75/operationresults/fe680c98-5725-49c8-b0dc-5e29745f752b?api-version=2019-03-01",
-                "Retry-After": "10",
-                "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
-                "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
-            }
-        }
+        "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
+        "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/workflows/828219ea-083e-48b5-89ea-8fd9991b2e75/operations/fe680c98-5725-49c8-b0dc-5e29745f752b?api-version=2019-03-01",
+        "Location": "https://management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/workflows/828219ea-083e-48b5-89ea-8fd9991b2e75/operationresults/fe680c98-5725-49c8-b0dc-5e29745f752b?api-version=2019-03-01",
+        "Retry-After": "10",
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      }
     }
+  }
 }

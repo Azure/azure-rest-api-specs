@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.appconfiguration
   package-name: azure-mgmt-appconfiguration
-  package-version: 2.0.0
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
+  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-appconfiguration
+  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
 ```
