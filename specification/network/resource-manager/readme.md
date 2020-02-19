@@ -1147,7 +1147,7 @@ directive:
     from: networkManagerConnectivityConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: networkManagersecurityDeployment.json
+    from: networkManagerDeployment.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerSecurityConfiguration.json

@@ -225,13 +225,175 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfigurationRule"
+            "$ref": "#/definitions/DeploymentRule"
           },
           "description": "Rule List"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
+        }
+      }
+    },
+    "DeploymentRule": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentRuleFormat",
+          "x-ms-client-flatten": true,
+          "description": "Indicates the properties of the security rule"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Network security rule."
+    },
+    "DeploymentRuleFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule. Restricted to 140 chars."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol this rule applies to.",
+          "enum": [
+            "Tcp",
+            "Udp",
+            "Icmp",
+            "Esp",
+            "*",
+            "Ah"
+          ],
+          "x-ms-enum": {
+            "name": "SecurityConfigurationRuleProtocol",
+            "modelAsString": true
+          }
+        },
+        "sourceAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destinationAddressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination port ranges."
+        },
+        "access": {
+          "$ref": "#/definitions/DeploymentRuleAccess",
+          "description": "Indicates the access allowed for this particular rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule."
+        },
+        "direction": {
+          "$ref": "#/definitions/DeploymentRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the security Configuration resource."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeploymentGroupItem"
+          },
+          "description": "Groups for configuration"
+        }
+      },
+      "required": [
+        "priority",
+        "protocol",
+        "access",
+        "direction"
+      ],
+      "description": "Security rule resource."
+    },
+    "DeploymentRuleAccess": {
+      "type": "string",
+      "description": "Whether network traffic is allowed or denied.",
+      "enum": [
+        "Allow",
+        "Deny",
+        "AlwaysAllow"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentRuleAccess",
+        "modelAsString": true
+      }
+    },
+    "DeploymentRuleDirection": {
+      "type": "string",
+      "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.",
+      "enum": [
+        "Inbound",
+        "Outbound"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentRuleDirection",
+        "modelAsString": true
+      }
+    },
+    "DeploymentGroupItem": {
+      "type": "object",
+      "properties": {
+        "groupMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Scope of Network Manager."
+        },
+        "conditionalMembership": {
+          "type": "object",
+          "description": "group filter."
+        },
+        "deployedTime": {
+          "type": "string",
+          "description": "deploy Time."
         }
       }
     }
