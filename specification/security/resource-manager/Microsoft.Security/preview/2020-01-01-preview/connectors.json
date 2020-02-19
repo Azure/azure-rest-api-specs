@@ -194,50 +194,6 @@
     }
   },
   "definitions": {
-    "HybridComputeSettingsProperties": {
-      "type": "object",
-      "description": "Settings for hybrid compute management",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        "proxyServer": {
-          "type": "object",
-          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
-          "$ref": "#/definitions/ProxyServerProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      }
-    },
-    "ProxyServerProperties": {
-      "type": "object",
-      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
-      "properties": {
-        "ip": {
-          "type": "string",
-          "description": "Proxy server IP"
-        },
-        "port": {
-          "type": "string",
-          "description": "Proxy server port"
-        }
-      }
-    },
     "ConnectorSettingList": {
       "type": "object",
       "description": "For a subscription, list of all cloud account connectors and their settings",
@@ -367,6 +323,50 @@
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         }
       ]
+    },
+    "HybridComputeSettingsProperties": {
+      "type": "object",
+      "description": "Settings for hybrid compute management",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "proxyServer": {
+          "type": "object",
+          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+          "$ref": "#/definitions/ProxyServerProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ProxyServerProperties": {
+      "type": "object",
+      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "Proxy server IP"
+        },
+        "port": {
+          "type": "string",
+          "description": "Proxy server port"
+        }
+      }
     },
     "awsCredentialsSettingProperties": {
       "type": "object",
