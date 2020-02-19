@@ -688,63 +688,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/bookShipmentPickUp": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Book shipment pick up.",
-        "operationId": "Jobs_BookShipmentPickUp",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/jobNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "shipmentPickUpRequest",
-            "in": "body",
-            "description": "Details of shipment pick up request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ShipmentPickUpRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Booked shipment pick up successfully.",
-            "schema": {
-              "$ref": "#/definitions/ShipmentPickUpResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BookShipmentPickupPost": {
-            "$ref": "./examples/BookShipmentPickupPost.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBox/jobs/{jobName}/cancel": {
       "post": {
         "tags": [
