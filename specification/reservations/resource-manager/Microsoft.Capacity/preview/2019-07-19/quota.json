@@ -521,18 +521,7 @@
         },
         "name": {
           "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
-          "properties": {
-            "value": {
-              "description": "Resource name.",
-              "type": "string",
-              "readOnly": false
-            },
-            "localizedValue": {
-              "description": "Resource display name.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
           "description": "The Resource Type Name.",
@@ -547,6 +536,21 @@
         "properties": {
           "description": "Additional properties for the specific resource provider.",
           "type": "object"
+        }
+      }
+    },
+    "ResourceName": {
+      "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
+      "properties": {
+        "value": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": false
+        },
+        "localizedValue": {
+          "description": "Resource display name.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -606,18 +610,7 @@
         },
         "name": {
           "description": "The Resource name.",
-          "properties": {
-            "localizedValue": {
-              "description": "Resource display name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Resource name.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
           "description": "Resource type for which the quota check was made.",
