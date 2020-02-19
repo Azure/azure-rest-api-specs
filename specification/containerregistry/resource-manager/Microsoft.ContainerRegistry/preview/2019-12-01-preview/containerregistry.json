@@ -134,13 +134,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections/{peConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Get properties of a private endpoint connection.",
-        "operationId": "PriGet",
+        "description": "Get the specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -155,7 +155,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/PeConnectionNameParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -176,8 +176,8 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Manual approve a private endpoint connection.",
-        "operationId": "PriApprove",
+        "description": "Update the state of specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -192,7 +192,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/PeConnectionNameParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           },
           {
             "name": "privateEndpointConnection",
@@ -219,8 +219,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnectionApprove": {
-            "$ref": "./examples/PrivateEndpointConnectionApprove.json"
+          "PrivateEndpointConnectionCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -229,8 +229,8 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Delete a private endpoint connection.",
-        "operationId": "PriDelete",
+        "description": "Deletes the specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -245,7 +245,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "$ref": "#/parameters/PeConnectionNameParameter"
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -273,7 +273,7 @@
           "PrivateEndpointConnections"
         ],
         "description": "List all private endpoint connections in a container registry.",
-        "operationId": "PriList",
+        "operationId": "PrivateEndpointConnections_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2890,10 +2890,10 @@
       "pattern": "^[a-zA-Z0-9]*$",
       "x-ms-parameter-location": "method"
     },
-    "PeConnectionNameParameter": {
-      "name": "peConnectionName",
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
       "in": "path",
-      "description": "The name of private endpoint connection.",
+      "description": "The name of the private endpoint connection.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
