@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "tenantBaseUrl": "'https://mytest.attest.azure.net'",
+    "api-version": "2018-09-01-preview",
+    "tee": "SgxEnclave",
+    "newAttestationPolicy": "newAttestationPolicyname"
+  },
+  "responses": {
+    "200": {
+      "description": "Success"
+    },
+    "400": {
+      "body": {
+          "error": {
+            "code": "400",
+            "message": "error message"
+          }
+      }
+    },
+    "401": {
+      "description": "Request is unauthorized",
+       "body": ""
+    }
+  }
+}

@@ -124,6 +124,19 @@ batch:
     ApiVersionName: Api2019_08_01
   - policyD-2016-12-01: true
     ApiVersionName: Api2019_08_01
+
+  - resources-2019-10-01: true
+    ApiVersionName: Api2019_10_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_10_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_10_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_10_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_10_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_10_01
 ```
 
 
@@ -582,6 +595,74 @@ input-file:
 
 ### 6) pkg-2019-08-AzStk-polD
 ``` yaml $(tag) == 'pkg-2019-08-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-10-01)
+tag: pkg-2019-10-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-10-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-10-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-10-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-10-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-10-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-10-AzStk-res
+``` yaml $(tag) == 'pkg-2019-10-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-10-01/resources.json
+```
+
+### 2) pkg-2019-10-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-10-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-10-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-10-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-10-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-10-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-10-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-10-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-10-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-10-Az-polD'
 input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```

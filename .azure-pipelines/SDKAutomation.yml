@@ -1,0 +1,55 @@
+trigger:
+  batch: false
+  branches:
+    include:
+      - "*"
+
+jobs:
+- job: "SDKAutomation"
+  displayName: SDK
+  pool:
+    vmImage: 'Ubuntu 18.04'
+  container:
+    image: azopenapi.azurecr.io/openapi/sdk-automation:prod
+    endpoint: azopenapi-registry
+  timeoutInMinutes: 180
+
+  variables:
+      NODE_OPTIONS: '--max-old-space-size=8192'
+      BLOB_STORAGE_PREFIX: sdkautomation-pipeline
+      SPEC_REPO: $(Build.Repository.Name)
+      PR_NUMBER: $(System.PullRequest.PullRequestNumber)
+  strategy:
+    matrix:
+      Net:
+        SDK_REPO_NAME: azure-sdk-for-net
+      Java:
+        SDK_REPO_NAME: azure-sdk-for-java
+      JavaScript:
+        SDK_REPO_NAME: azure-sdk-for-js
+      Python:
+        SDK_REPO_NAME: azure-sdk-for-python
+      Go:
+        SDK_REPO_NAME: azure-sdk-for-go
+  steps:
+  - checkout: none
+  - script: printenv
+    displayName: Display ENV
+  - script: git config --global user.email "sdkautomation@microsoft.com" && git config --global user.name "SDK Automation"
+    displayName: Configure Git
+  - script: |
+      curl \
+        -s https://api.github.com/repos/$(Build.Repository.Name)/commits/$(Build.SourceVersion)/pulls \
+        -H "Accept: application/vnd.github.groot-preview+json" \
+      | python3 -c "import sys,json; a=json.load(sys.stdin); print(f'##vso[task.setvariable variable=PR_NUMBER]{a[0][\"number\"]}' if len(a)>0 and a[0][\"base\"][\"ref\"]=='master' else '##vso[task.logissue type=error]Last commit $(Build.SourceVersion) doesnot have a related PR')"
+    displayName: Get PR_NUMBER
+    condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
+  - script: sudo chown `id -ng`:`id -ng` . && npm start
+    env:
+      BLOB_STORAGE_NAME: $(blob-storage-name)
+      BLOB_STORAGE_KEY: $(blob-storage-key)
+      GITHUB_COMMENT_AUTHOR_NAME: $(github-comment-author-name)
+      GITHUBAPP_ID: $(githubapp-id)
+      GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
+    displayName: SDK Automation
+    workingDirectory: /z
