@@ -3606,6 +3606,23 @@
         "kind"
       ]
     },
+    "AlertRuleTemplateDataSource": {
+      "description": "alert rule template data sources",
+      "properties": {
+        "connectorId": {
+          "description": "The connector id that provides the following data types",
+          "type": "string"
+        },
+        "dataTypes": {
+          "description": "The data types used by the alert rule template",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AlertRuleTemplatePropertiesBase": {
       "description": "Base alert rule template property bag.",
       "properties": {
@@ -3628,9 +3645,9 @@
           "type": "string"
         },
         "requiredDataConnectors": {
-          "description": "The required data connectors for this template",
+          "description": "The required data sources for this template",
           "items": {
-            "$ref": "#/definitions/DataConnectorStatus"
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
           },
           "type": "array"
         },
@@ -3660,13 +3677,6 @@
               }
             ]
           }
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule template",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -4857,31 +4867,6 @@
         "value"
       ]
     },
-    "DataConnectorStatus": {
-      "description": "alert rule template data connector status",
-      "properties": {
-        "connectorId": {
-          "description": "the connector id",
-          "type": "string"
-        },
-        "dataTypes": {
-          "additionalProperties": {
-            "enum": [
-              "Exist",
-              "NotExist"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "DataTypeStatus"
-            }
-          },
-          "description": "The data types availability map",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "DataConnectorRequirementsState": {
       "description": "Data connector requirements status.",
       "properties": {
@@ -5595,6 +5580,13 @@
             "severity": {
               "$ref": "#/definitions/AlertSeverity",
               "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -6392,13 +6384,6 @@
           "format": "date-time",
           "readOnly": true,
           "type": "string"
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "required": [
@@ -7122,6 +7107,15 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
+          "properties": {
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
           "required": [
             "displayName",
             "description",
