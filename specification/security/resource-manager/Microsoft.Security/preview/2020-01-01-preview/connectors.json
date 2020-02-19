@@ -37,14 +37,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors": {
       "get": {
         "x-ms-examples": {
-          "Get all connectors subscribed to the subscription": {
+          "Get all Cloud accounts connectors of a subscription": {
             "$ref": "./examples/Connectors/GetConnectorsSubscription_example.json"
           }
         },
         "tags": [
           "Connectors"
         ],
-        "description": "Details of all subscribed connectors",
+        "description": "Cloud accounts connectors of a subscription",
         "operationId": "Connectors_List",
         "parameters": [
           {
@@ -76,14 +76,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connectors/{connectorName}": {
       "get": {
         "x-ms-examples": {
-          "Get aa connector subscribed to the subscription": {
+          "Details of a specific cloud account connector": {
             "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
           }
         },
         "tags": [
           "Connectors"
         ],
-        "description": "Details of a specific connector",
+        "description": "Details of a specific cloud account connector",
         "operationId": "Connectors_Get",
         "parameters": [
           {
@@ -113,14 +113,14 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create a connector and subscribe it to the subscription": {
+          "Create a cloud account connector for a subscription": {
             "$ref": "./examples/Connectors/CreateConnectorSubscription_example.json"
           }
         },
         "tags": [
           "Connectors"
         ],
-        "description": "Create a connector or update existing connector. When onboarding or updating a connector, there is a correlation between the connector type and type of onboarding. Right now, only aws connector is supported with two options to onboard: (1) using credentials; (2) role based.",
+        "description": "Create a cloud account connector or update an existing one. Connect to your AWS cloud account using either account credentials or role-based authentication.",
         "operationId": "Connectors_CreateOrUpdate",
         "parameters": [
           {
@@ -153,14 +153,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a connector subscribed to the subscription": {
+          "Delete a cloud account connector from a subscription": {
             "$ref": "./examples/Connectors/DeleteConnectorSubscription_example.json"
           }
         },
         "tags": [
           "Connectors"
         ],
-        "description": "Delete a connector subscribed to the subscription",
+        "description": "Delete a cloud account connector from a subscription",
         "operationId": "Connectors_Delete",
         "parameters": [
           {
@@ -196,10 +196,10 @@
   "definitions": {
     "ConnectorSettingList": {
       "type": "object",
-      "description": "List of all the connector subscribed to subscription response",
+      "description": "For a subscription, list of all cloud account connectors and their settings",
       "properties": {
         "value": {
-          "description": "List of all the connector settings",
+          "description": "List of all the cloud account connector settings",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ConnectorSetting"
@@ -216,35 +216,35 @@
       "type": "object",
       "description": "The connector setting",
       "properties": {
-        "connectorType": {
-          "description": "the connector type to onboard, right now, only aws is supported",
+        "authenticationType": {
+          "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
           "type": "string",
           "enum": [
-            "AwsUser",
-            "AwsAssumeRole"
+            "awsCreds",
+            "awsAssumeRole"
           ],
           "x-ms-enum": {
-            "name": "connectorType",
+            "name": "authenticationType",
             "modelAsString": true,
             "values": [
               {
-                "value": "AwsUser",
-                "description": "Aws connector based user credentials"
+                "value": "awsCreds",
+                "description": "AWS cloud account connector user credentials authentication"
               },
               {
-                "value": "AwsAssumeRole",
-                "description": "Aws connector based assume role"
+                "value": "awsAssumeRole",
+                "description": "AWS account connector assume role authentication"
               }
             ]
           }
         },
         "accountId": {
-          "description": "The account id of the connector",
+          "description": "The ID of the cloud account",
           "type": "string",
           "readOnly": true
         },
         "state": {
-          "description": "The connector state",
+          "description": "State of the connection",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -276,19 +276,19 @@
             ]
           }
         },
-        "awsUser": {
-          "description": "Aws connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+        "awsCreds": {
+          "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsCredentialsSettingProperties"
         },
         "awsAssumeRole": {
-          "description": "Aws connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
+          "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
           "type": "object",
           "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
         },
         "hybridComputeAutoProvision": {
           "type": "string",
-          "description": "Describes what kind of Azure Arc (Hybrid compute) agent provisioning action to take",
+          "description": "Whether or not to automatically install Azure Arc (hybrid compute) agents on machines",
           "enum": [
             "On",
             "Off"
@@ -368,23 +368,23 @@
         }
       }
     },
-    "AwsCredentialsSettingProperties": {
+    "awsCredentialsSettingProperties": {
       "type": "object",
-      "description": "Describes properties of an aws connector setting",
+      "description": "AWS user credentials for the cloud account connector ",
       "properties": {
         "awsAccessKeyId": {
           "type": "string",
-          "description": "Aws access key where this is the public key part"
+          "description": "Public key element of the AWS credential object "
         },
-        "awsSecretKey": {
+        "awsSecretAccessKey": {
           "type": "string",
-          "description": "Aws access key where this is the secret key part"
+          "description": "Secret key element of the AWS credential object"
         }
       }
     },
-    "AwsAssumeRolesSettingProperties": {
+    "awsAssumeRolesSettingProperties": {
       "type": "object",
-      "description": "Describes properties of an aws connector setting",
+      "description": "AWS assume role setting for the cloud account connector ",
       "properties": {
         "awsAssumeRoleArn": {
           "type": "string",
@@ -403,14 +403,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the connector",
+      "description": "Name of the cloud account connector",
       "x-ms-parameter-location": "method"
     },
     "ConnectorSetting": {
       "name": "connectorSetting",
       "in": "body",
       "required": true,
-      "description": "The connector setting to connect to a account",
+      "description": "Settings for the cloud account connector",
       "schema": {
         "$ref": "#/definitions/ConnectorSetting"
       },
