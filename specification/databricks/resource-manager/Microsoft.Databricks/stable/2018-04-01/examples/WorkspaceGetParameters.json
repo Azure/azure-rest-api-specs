@@ -13,6 +13,9 @@
         "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Databricks/workspaces/myWorkspace",
         "type": "Microsoft.Databricks/workspaces",
         "location": "East US 2",
+        "sku": {
+          "name": "premium"
+        },
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": {
@@ -67,6 +70,10 @@
             "amlWorkspaceId": {
               "type": "String",
               "value": ""
+            },
+            "enableFedRampCertified": {
+              "type": "Bool",
+              "value": true
             }
           },
           "provisioningState": "Succeeded",
@@ -85,10 +92,19 @@
             "oid": "22222222-2222-2222-2222-222222222222",
             "puid": "33333333",
             "applicationId": "44444444-4444-4444-4444-444444444444"
-          }
+          },
+          "createdDateTime": "YYYY-MM-ddTHH:mm:ss.fffZ"
         }
       }
     },
-    "404": {}
+    "404": {
+      "headers":{},
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The Resource 'Microsoft.Databricks/workspaces/myWorkspace' under resource group 'rg' was not found."
+        }
+      }
+    }
   }
 }
