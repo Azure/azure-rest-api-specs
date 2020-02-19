@@ -1858,9 +1858,9 @@ Resource provider naming in path SHOULD follow the pascal case. (e.g. Microsoft.
 
 For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
 
-**CreatedAt**: 2/18/2020
+**CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: 2/18/2020
+**LastModifiedAt**: February 18, 2020
 
 **How to fix the violation**: 
 
@@ -1914,9 +1914,9 @@ Resource type or other identifiers (include: namespace, entityTypes) SHOULD foll
 
 For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
 
-**CreatedAt**: 2/18/2020
+**CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: 2/18/2020
+**LastModifiedAt**: February 18, 2020
 
 **How to fix the violation**: 
 
@@ -1966,9 +1966,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : Case-insensitive value in enum mean the same value. 
 
-**CreatedAt**: 2/18/2020
+**CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: 2/18/2020
+**LastModifiedAt**: February 18, 2020
 
 **How to fix the violation**: 
 
@@ -2009,9 +2009,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : Enum must define its type object or string. If not it will block SDK generation.
 
-**CreatedAt**: 2/18/2020
+**CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: 2/18/2020
+**LastModifiedAt**: February 18, 2020
 
 **How to fix the violation**: 
 
@@ -2066,9 +2066,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : Empty value is not allowed in enum value and meanless.
 
-**CreatedAt**: 2/18/2020
+**CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: 2/18/2020
+**LastModifiedAt**: February 18, 2020
 
 **How to fix the violation**: 
 
@@ -2093,5 +2093,6 @@ Valid:
    "Failed",
 ]
 ```
+
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
