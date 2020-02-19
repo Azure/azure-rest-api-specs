@@ -194,6 +194,50 @@
     }
   },
   "definitions": {
+    "HybridComputeSettingsProperties": {
+      "type": "object",
+      "description": "Settings for hybrid compute management",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "proxyServer": {
+          "type": "object",
+          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+          "$ref": "#/definitions/ProxyServerProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "ProxyServerProperties": {
+      "type": "object",
+      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "Proxy server IP"
+        },
+        "port": {
+          "type": "string",
+          "description": "Proxy server port"
+        }
+      }
+    },
     "ConnectorSettingList": {
       "type": "object",
       "description": "For a subscription, list of all cloud account connectors and their settings",
@@ -279,12 +323,12 @@
         "awsCreds": {
           "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
           "type": "object",
-          "$ref": "#/definitions/AwsCredentialsSettingProperties"
+          "$ref": "#/definitions/awsCredentialsSettingProperties"
         },
         "awsAssumeRole": {
           "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
           "type": "object",
-          "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
+          "$ref": "#/definitions/awsAssumeRolesSettingProperties"
         },
         "hybridComputeAutoProvision": {
           "type": "string",
@@ -316,57 +360,13 @@
       },
       "required": [
         "hybridComputeAutoProvision",
-        "ConnectorType"
+        "authenticationType"
       ],
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         }
       ]
-    },
-    "HybridComputeSettingsProperties": {
-      "type": "object",
-      "description": "Settings for hybrid compute management",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        "proxyServer": {
-          "type": "object",
-          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
-          "$ref": "#/definitions/ProxyServerProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      }
-    },
-    "ProxyServerProperties": {
-      "type": "object",
-      "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
-      "properties": {
-        "ip": {
-          "type": "string",
-          "description": "Proxy server IP"
-        },
-        "port": {
-          "type": "string",
-          "description": "Proxy server port"
-        }
-      }
     },
     "awsCredentialsSettingProperties": {
       "type": "object",
