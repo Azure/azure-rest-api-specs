@@ -292,7 +292,7 @@
         "tags": [
           "AgentPools"
         ],
-        "description": "Gets the queued runs for a given agent pool.",
+        "description": "Gets the count of queued runs for a given agent pool.",
         "operationId": "AgentPools_QueueStatus",
         "parameters": [
           {
@@ -1362,7 +1362,7 @@
   },
   "definitions": {
     "AgentPool": {
-      "description": "The agent pool that has the ARM resource and properties. \r\nThe agentpool will have all information to create an agent pool.",
+      "description": "The agentpool that has the ARM resource and properties. \r\nThe agentpool will have all information to create an agent pool.",
       "type": "object",
       "allOf": [
         {
@@ -1370,19 +1370,6 @@
         }
       ],
       "properties": {
-        "count": {
-          "format": "int32",
-          "description": "The count of VMs",
-          "type": "integer"
-        },
-        "sku": {
-          "description": "The SKU of VMs",
-          "type": "string"
-        },
-        "virtualNetworkResourceId": {
-          "description": "The Virtual Network Resource Id of the VMs",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/AgentPoolProperties",
           "description": "The properties associated with the agent pool",
@@ -1391,9 +1378,34 @@
       }
     },
     "AgentPoolProperties": {
-      "description": "The properties of task run.",
+      "description": "The properties of agent pool.",
       "type": "object",
       "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The count of VMs",
+          "type": "integer"
+        },
+        "tier": {
+          "description": "The Tier of VMs",
+          "type": "string"
+        },
+        "os": {
+          "description": "The OS of VMs",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OS",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkSubnetResourceId": {
+          "description": "The Virtual Network Subnet Resource Id of the VMs",
+          "type": "string"
+        },
         "provisioningState": {
           "description": "The provisioning state of this agent pool",
           "enum": [
@@ -1410,6 +1422,23 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "AgentPoolListResult": {
+      "description": "The collection of agent pools.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPool"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
         }
       }
     },
@@ -1734,23 +1763,6 @@
           "format": "int32",
           "description": "The CPU configuration in terms of number of cores required for the run.",
           "type": "integer"
-        }
-      }
-    },
-    "AgentPoolListResult": {
-      "description": "The collection of agent pools.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentPool"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
         }
       }
     },
