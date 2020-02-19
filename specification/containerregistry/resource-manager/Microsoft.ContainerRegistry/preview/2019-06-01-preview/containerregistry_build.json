@@ -1430,7 +1430,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AgentPoolProperties",
+          "$ref": "#/definitions/AgentPoolPropertiesUpdateParameters",
           "description": "The properties associated with the agent pool",
           "x-ms-client-flatten": true
         },
@@ -1440,6 +1440,16 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AgentPoolPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The count of VMs",
+          "type": "integer"
         }
       }
     },
