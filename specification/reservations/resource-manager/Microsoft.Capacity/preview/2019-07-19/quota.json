@@ -90,7 +90,7 @@
           "QuotaRequests"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Create",
         "x-ms-examples": {
           "Quotas_Request_listForCompute": {
@@ -156,7 +156,7 @@
           "QuotaRequests"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -565,7 +565,7 @@
           }
         },
         "nextLink": {
-          "description": "The uri to fetch the next set of quota limits. When there are no more pages, this is null.",
+          "description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
           "type": "string"
         }
       }
@@ -581,7 +581,7 @@
           }
         },
         "nextLink": {
-          "description": "The uri to fetch the next set of quota limits. When there are no more pages, this is null.",
+          "description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
           "type": "string"
         }
       }
@@ -772,7 +772,7 @@
           }
         },
         "nextLink": {
-          "description": "The uri to fetch the next set of quota limits. When there are no more pages, this is null.",
+          "description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
           "type": "string"
         }
       }
