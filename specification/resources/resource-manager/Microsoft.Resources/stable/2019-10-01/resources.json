@@ -4551,10 +4551,12 @@
           "description": "The duration of the template deployment."
         },
         "outputs": {
+          "readOnly": true,
           "type": "object",
           "description": "Key/value pairs that represent deployment output."
         },
         "providers": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Provider"
@@ -4562,29 +4564,30 @@
           "description": "The list of resource providers needed for the deployment."
         },
         "dependencies": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dependency"
           },
           "description": "The list of deployment dependencies."
         },
-        "template": {
-          "type": "object",
-          "description": "The template content. Use only one of Template or TemplateLink."
-        },
         "templateLink": {
+          "readOnly": true,
           "$ref": "#/definitions/TemplateLink",
-          "description": "The URI referencing the template. Use only one of Template or TemplateLink."
+          "description": "The URI referencing the template."
         },
         "parameters": {
+          "readOnly": true,
           "type": "object",
-          "description": "Deployment parameters. Use only one of Parameters or ParametersLink."
+          "description": "Deployment parameters. "
         },
         "parametersLink": {
+          "readOnly": true,
           "$ref": "#/definitions/ParametersLink",
-          "description": "The URI referencing the parameters. Use only one of Parameters or ParametersLink."
+          "description": "The URI referencing the parameters. "
         },
         "mode": {
+          "readOnly": true,
           "type": "string",
           "description": "The deployment mode. Possible values are Incremental and Complete.",
           "enum": [
@@ -4597,15 +4600,55 @@
           }
         },
         "debugSetting": {
+          "readOnly": true,
           "$ref": "#/definitions/DebugSetting",
           "description": "The debug setting of the deployment."
         },
         "onErrorDeployment": {
+          "readOnly": true,
           "$ref": "#/definitions/OnErrorDeploymentExtended",
           "description": "The deployment on error behavior."
+        },
+        "templateHash": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hash produced for the template."
+        },
+        "outputResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of provisioned resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of provisioned resources."
+          }
+        },
+        "validatedResources": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Array of validated resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "Details of validated resources."
+          }
+        },
+        "error": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment error."
         }
       },
       "description": "Deployment properties with additional details."
+    },
+    "ResourceReference": {
+      "description": "The resource Id model.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified resource Id."
+        }
+      }
     },
     "OnErrorDeployment": {
       "properties": {
@@ -4657,6 +4700,7 @@
     "DeploymentValidateResult": {
       "properties": {
         "error": {
+          "readOnly": true,
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
           "description": "The deployment validation error."
         },
