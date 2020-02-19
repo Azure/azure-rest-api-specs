@@ -210,7 +210,7 @@
             "description": "The parameters for updating an agent pool.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AgentPool"
+              "$ref": "#/definitions/AgentPoolUpdateParameters"
             }
           }
         ],
@@ -1421,6 +1421,24 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "AgentPoolUpdateParameters": {
+      "description": "The parameters for updating an agent pool.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentPoolProperties",
+          "description": "The properties associated with the agent pool",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2893,6 +2911,7 @@
     "Resource": {
       "description": "An Azure resource.",
       "required": [
+        "location"
       ],
       "properties": {
         "id": {
