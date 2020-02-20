@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkManagerGroup",
-    "description": "The Microsoft Azure Network Manager Group API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "title": "NetworkGroup",
+    "description": "The Microsoft Azure Network Group API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
     "version": "2019-11-01"
   },
   "host": "management.azure.com",
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/{networkManagerGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -46,7 +46,7 @@
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerGroupNameParameter"
+          "$ref": "#/parameters/NetworkGroupNameParameter"
         },
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -54,15 +54,15 @@
       ],
       "get": {
         "tags": [
-          "NetworkManagerGroups"
+          "NetworkGroups"
         ],
-        "operationId": "NetworkManagerGroups_Get",
-        "description": "Get the specified network manager group.",
+        "operationId": "NetworkGroups_Get",
+        "description": "Get the specified network group.",
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network manager group.",
+            "description": "OK - Returns information about the network group.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerGroup"
+              "$ref": "#/definitions/NetworkGroup"
             }
           },
           "default": {
@@ -73,39 +73,39 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagerGroupsGet": {
+          "NetworkGroupsGet": {
             "$ref": "./examples/NetworkManagerGroupsGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "NetworkManagerGroups"
+          "NetworkGroups"
         ],
-        "operationId": "NetworkManagerGroups_CreateOrUpdate",
-        "description": "Creates a network manager group.",
+        "operationId": "NetworkGroups_CreateOrUpdate",
+        "description": "Creates a network group.",
         "parameters": [
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkManagerGroup"
+              "$ref": "#/definitions/NetworkGroup"
             },
             "description": "Parameters supplied to the specify which Managed Network this scope is being assigned"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager group.",
+            "description": "Updated - Returns information about the network group.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerGroup"
+              "$ref": "#/definitions/NetworkGroup"
             }
           },
           "201": {
-            "description": "Created - Returns information about the network manager group.",
+            "description": "Created - Returns information about the network group.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerGroup"
+              "$ref": "#/definitions/NetworkGroup"
             }
           },
           "default": {
@@ -116,17 +116,17 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagerGroupsPut": {
+          "NetworkGroupsPut": {
             "$ref": "./examples/NetworkManagerGroupsPut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "NetworkManagerGroups"
+          "NetworkGroups"
         ],
-        "operationId": "NetworkManagerGroups_Delete",
-        "description": "Deletes a network manager group.",
+        "operationId": "NetworkGroups_Delete",
+        "description": "Deletes a network group.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -136,19 +136,19 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagerGroupsDelete": {
+          "NetworkGroupsDelete": {
             "$ref": "./examples/NetworkManagerGroupsDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/groups/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/": {
       "get": {
         "tags": [
-          "NetworkManagerGroups"
+          "NetworkGroups"
         ],
-        "operationId": "NetworkManagerGroups_List",
-        "description": "Get the specified network manager group list.",
+        "operationId": "NetworkGroups_List",
+        "description": "Get the specified network group list.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -168,9 +168,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network manager group.",
+            "description": "OK - Returns information about the network group.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerGroupListResult"
+              "$ref": "#/definitions/NetworkGroupListResult"
             }
           },
           "default": {
@@ -181,7 +181,7 @@
           }
         },
         "x-ms-examples": {
-          "NetworkManagerGroupsList": {
+          "NetworkGroupsList": {
             "$ref": "./examples/NetworkManagerGroupsList.json"
           }
         }
@@ -189,12 +189,12 @@
     }
   },
   "definitions": {
-    "NetworkManagerGroup": {
+    "NetworkGroup": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkManagerGroupProperties",
-          "description": "The Network Manager Group properties"
+          "$ref": "#/definitions/NetworkGroupProperties",
+          "description": "The Network Group properties"
         },
         "name": {
           "readOnly": true,
@@ -219,23 +219,23 @@
       ],
       "description": "The Managed Network resource"
     },
-    "NetworkManagerGroupListResult": {
+    "NetworkGroupListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkManagerGroup"
+            "$ref": "#/definitions/NetworkGroup"
           },
-          "description": "Gets a page of NetworkManagerGroup"
+          "description": "Gets a page of NetworkGroup"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next set of results."
         }
       },
-      "description": "Result of the request to list NetworkManagerGroup. It contains a list of groups and a URL link to get the next set of results."
+      "description": "Result of the request to list NetworkGroup. It contains a list of groups and a URL link to get the next set of results."
     },
-    "NetworkManagerGroupProperties": {
+    "NetworkGroupProperties": {
       "type": "object",
       "properties": {
         "displayName": {
@@ -283,12 +283,12 @@
       "description": "The name of the network manager.",
       "x-ms-parameter-location": "method"
     },
-    "NetworkManagerGroupNameParameter": {
-      "name": "networkManagerGroupName",
+    "NetworkGroupNameParameter": {
+      "name": "networkGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the network manager group to get.",
+      "description": "The name of the network group to get.",
       "x-ms-parameter-location": "method"
     }
   }
