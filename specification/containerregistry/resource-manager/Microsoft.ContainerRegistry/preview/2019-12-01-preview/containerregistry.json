@@ -292,7 +292,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           }
         },
@@ -672,7 +672,7 @@
           "Registries"
         ],
         "description": "Lists the private link resources for a container registry.",
-        "operationId": "Registries_ListPrivateLinkResourcesAsync",
+        "operationId": "Registries_ListPrivateLinkResources",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -689,7 +689,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly."
+            "description": "The request was successful; the private link resources were retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
           }
         },
         "x-ms-examples": {
@@ -1592,7 +1595,6 @@
             "Disconnected"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "Status",
             "modelAsString": true
@@ -1609,11 +1611,27 @@
             "Recreate"
           ],
           "type": "string",
-          "readOnly": true,
           "x-ms-enum": {
             "name": "ActionsRequired",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "The result of a request to list private endpoint connections for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of private endpoint connections. Since this list may be incomplete, the nextLink field should be used to request the next list of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private endpoint connections.",
+          "type": "string"
         }
       }
     },
@@ -2220,6 +2238,71 @@
           "x-ms-enum": {
             "name": "RegistryUsageUnit",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The result of a request to list private link resources for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A resource that supports private link capabilities.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type is private link resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The resource ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "A resource that supports private link capabilities.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "The properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource Private link DNS zone name.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
