@@ -2348,7 +2348,7 @@
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
         "bgpSettings": {
-          "$ref": "#/definitions/BgpSettings",
+          "$ref": "#/definitions/VirtualNetworkGatewayBgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
         },
         "customRoutes": {
@@ -2606,13 +2606,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The weight added to routes learned from this BGP speaker."
-        },
-        "bgpPeeringAddresses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationBgpPeeringAddress"
-          },
-          "description": "bgpPeeringAddresses for virtual network gateway."
         }
       },
       "description": "BGP settings details."
@@ -3639,6 +3632,32 @@
         }
       },
       "description": "Start packet capture parameters on virtual network gateway."
+    },
+    "VirtualNetworkGatewayBgpSettings": {
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The BGP speaker's ASN."
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "The BGP peering address and BGP identifier of this BGP speaker."
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationBgpPeeringAddress"
+          },
+          "description": "bgpPeeringAddresses for virtual network gateway."
+        }
+      },
+      "description": "BGP settings details."
     },
     "VirtualNetworkGatewayIPConfigurationBgpPeeringAddress": {
       "properties": {
