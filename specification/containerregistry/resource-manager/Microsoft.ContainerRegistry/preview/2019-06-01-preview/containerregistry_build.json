@@ -37,11 +37,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "description": "The name of agent pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -84,11 +80,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "description": "The name of agent pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AgentPoolNameParameter"
           },
           {
             "name": "agentPool",
@@ -147,11 +139,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "description": "The name of agent pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -198,11 +186,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "description": "The name of agent pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AgentPoolNameParameter"
           },
           {
             "name": "updateParameters",
@@ -308,11 +292,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "name": "agentPoolName",
-            "in": "path",
-            "description": "The name of agent pool.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AgentPoolNameParameter"
           }
         ],
         "responses": {
@@ -1383,15 +1363,15 @@
       "properties": {
         "count": {
           "format": "int32",
-          "description": "The count of VMs",
+          "description": "The count of agent machine",
           "type": "integer"
         },
         "tier": {
-          "description": "The Tier of VMs",
+          "description": "The Tier of agent machine",
           "type": "string"
         },
         "os": {
-          "description": "The OS of VMs",
+          "description": "The OS of agent machine",
           "enum": [
             "Windows",
             "Linux"
@@ -1403,7 +1383,7 @@
           }
         },
         "virtualNetworkSubnetResourceId": {
-          "description": "The Virtual Network Subnet Resource Id of the VMs",
+          "description": "The Virtual Network Subnet Resource Id of the agent machine",
           "type": "string"
         },
         "provisioningState": {
@@ -1448,7 +1428,7 @@
       "properties": {
         "count": {
           "format": "int32",
-          "description": "The count of VMs",
+          "description": "The count of agent machine",
           "type": "integer"
         }
       }
@@ -1553,6 +1533,10 @@
             "name": "RunType",
             "modelAsString": true
           }
+        },
+        "agentPoolName": {
+          "description": "The dedicated agent pool for the run.",
+          "type": "string"
         },
         "createTime": {
           "format": "date-time",
@@ -3549,6 +3533,17 @@
       "name": "taskName",
       "in": "path",
       "description": "The name of the container registry task.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9-_]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "AgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "description": "The name of the agent pool.",
       "required": true,
       "type": "string",
       "maxLength": 50,
