@@ -294,7 +294,7 @@
         "tags": [
           "asyncOperations"
         ],
-        "operationId": "GetAsyncOperationsStatus",
+        "operationId": "PrivateLinkScopeOperationStatus_Get",
         "description": "Get the status of an azure asynchronous operation associated with a private link scope operation.",
         "parameters": [
           {
@@ -818,11 +818,15 @@
         },
         "startTime": {
           "type": "string",
-          "description": "The start time of the operation."
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "Start time of the job in standard ISO8601 format."
         },
         "endTime": {
           "type": "string",
-          "description": "The end time of the operation."
+          "format": "date-time",
+          "x-nullable": true,
+          "description": "End time of the job in standard ISO8601 format."
         },
         "status": {
           "type": "string",
