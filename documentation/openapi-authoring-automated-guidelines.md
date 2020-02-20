@@ -1904,9 +1904,9 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Description** : Each operation must has a unique operationId.
 
-**CreatedAt** : 2020-2-18
+**CreatedAt** : February 18, 2020
 
-**LastModifiedAt** : 2020-2-18
+**LastModifiedAt** : February 18, 2020
 
 **Why this rule is important**: Per [creating-swagger](creating-swagger.md#Paths),The operationId is used to determine the generated method name.
 
