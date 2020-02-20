@@ -605,7 +605,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter"
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -984,7 +984,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The $expand query parameter."
+            "description": "Comma-separated list of additional properties to be included in the response. Valid values include `createdTime`, `changedTime` and `provisioningState`. For example, `$expand=createdTime,changedTime`."
           },
           {
             "name": "$top",
@@ -2407,6 +2407,33 @@
       ],
       "description": "Resource information."
     },
+    "GenericResourceExpanded": {
+      "properties": {
+        "createdTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "changedTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The changed time of the resource. This is only present if requested via the $expand query parameter."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the resource. This is only present if requested via the $expand query parameter."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenericResource"
+        }
+      ],
+      "description": "Resource information."
+    },
     "Plan": {
       "properties": {
         "name": {
@@ -2489,7 +2516,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GenericResource"
+            "$ref": "#/definitions/GenericResourceExpanded"
           },
           "description": "An array of resources."
         },
