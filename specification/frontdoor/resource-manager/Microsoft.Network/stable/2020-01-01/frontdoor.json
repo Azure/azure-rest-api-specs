@@ -1570,13 +1570,20 @@
           "description": "Treatment of URL query terms when forming the cache key.",
           "enum": [
             "StripNone",
-            "StripAll"
+            "StripAll",
+            "StripOnly",
+            "StripAllExcept"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "FrontDoorQuery",
             "modelAsString": true
           }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string",
+          "x-nullable": true
         },
         "dynamicCompression": {
           "description": "Whether to use dynamic compression for cached content",
@@ -1589,6 +1596,11 @@
             "name": "DynamicCompressionEnabled",
             "modelAsString": true
           }
+        },
+        "cacheDuration": {
+          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
