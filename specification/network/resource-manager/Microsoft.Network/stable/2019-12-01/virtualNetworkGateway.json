@@ -2606,6 +2606,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationBgpPeeringAddress"
+          },
+          "description": "bgpPeeringAddresses for virtual network gateway."
         }
       },
       "description": "BGP settings details."
@@ -3632,6 +3639,38 @@
         }
       },
       "description": "Start packet capture parameters on virtual network gateway."
+    },
+    "VirtualNetworkGatewayIPConfigurationBgpPeeringAddress": {
+      "properties": {
+        "IpconfigurationId": {
+          "type": "string",
+          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+        },
+        "DefaultBgpIpAddresses": {
+          "readOnly": true,
+          "type\": \"array\",": null,
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of default BgpPeeringAddresses which belongs to IpconfigurationId."
+        },
+        "CustomBgpIpAddresses": {
+          "type\": \"array\",": null,
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of custom BgpPeeringAddresses which belongs to IpconfigurationId."
+        },
+        "TunnelIpAddresses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of tunnel public IpAddresses which belongs to IpconfigurationId."
+        }
+      },
+      "description": "Properties of VirtualNetworkGatewayIPConfigurationBgpPeeringAddress."
     }
   }
 }
