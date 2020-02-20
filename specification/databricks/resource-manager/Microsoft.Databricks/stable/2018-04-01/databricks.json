@@ -71,7 +71,10 @@
             }
           },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -403,14 +406,16 @@
           }
         },
         "createdBy": {
-          "readOnly": true,
           "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
           "$ref": "#/definitions/CreatedBy"
         },
         "updatedBy": {
-          "readOnly": true,
           "description": "Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.",
           "$ref": "#/definitions/CreatedBy"
+        },
+        "createdDateTime": {
+          "description": "Specifies the date and time when the workspace is created.",
+          "$ref": "#definitions/CreatedDateTime"
         }
       },
       "required": [
@@ -629,6 +634,11 @@
       },
       "description": "Custom Parameters used for Cluster Creation."
     },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
     "CreatedBy": {
       "properties": {
         "oid": {
@@ -646,7 +656,8 @@
           "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal."
         }
       },
-      "description":"Provides details of the entity that created/updated the workspace."
+      "description":"Provides details of the entity that created/updated the workspace.",
+      "readOnly": true
     },
     "WorkspaceProviderAuthorization": {
       "properties": {
