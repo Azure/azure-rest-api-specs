@@ -333,15 +333,6 @@
             "format": "uuid"
           },
           {
-            "name": "source",
-            "in": "query",
-            "description": "Specify if the request is against the source Form Recognizer resource or not. Source indicates the party that has the model that is to be copied to another resource.",
-            "required": false,
-            "default": false,
-            "type": "boolean",
-            "x-nullable": false
-          },
-          {
             "name": "copyRequest",
             "in": "body",
             "description": "Copy request parameters.",
@@ -352,7 +343,7 @@
           }
         ],
         "responses": {
-          "202": {
+            "202": {
             "description": "Copy request is queued successfully.",
             "headers": {
               "Operation-Location": {
@@ -361,13 +352,13 @@
               }
             }
           },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+            "default": {
+              "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
             }
-          }
-        },
+          },
         "x-ms-examples": {
           "Copy custom model": {
             "$ref": "./examples/CopyModel.json"
@@ -419,6 +410,41 @@
         "x-ms-examples": {
           "Get copy custom model result": {
             "$ref": "./examples/CopyOperationResult.json"
+          }
+        }
+      }
+    },
+    "/custom/models/copyAuthorization": {
+      "post": {
+        "summary": "Generate Copy Authorization",
+        "description": "Generate authorization to copy a model into the target Form Recognizer resource.",
+        "operationId": "GenerateModelCopyAuthorization",
+        "consumes": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Copy request is authorized successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and ID of the model being copied. The status of model copy is specified in the status property at the model location."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Copy custom model": {
+            "$ref": "./examples/CopyModelAuthorization.json"
           }
         }
       }
@@ -617,17 +643,28 @@
       },
       "x-nullable": false
     },
-    "Authorization": {
-      "description": "Request parameter that contains claims for authorizing an operation.",
+    "CopyAuthorizationResult": {
+      "description": "Request parameter that contains authorization claims for copy operation.",
       "required": [
-        "modelId"
+        "modelId",
+        "accessToken",
+        "expirationDateTime"
       ],
       "type": "object",
       "properties": {
         "modelId": {
-          "description": "Form Recognizer model identifier that will be used as a claim token to authorize the request.",
+          "description": "Model identifier.",
+          "type": "string"
+        },
+        "accessToken": {
+          "description": "Token claim used to authorize the request.",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "description": "The date and time (in UTC) when the access token expires.",
           "type": "string",
-          "format": "uuid"
+          "x-nullable": false
         }
       }
     },
@@ -635,13 +672,14 @@
       "description": "Request parameter to copy an existing custom model.",
       "required": [
         "targetResourceId",
-        "targetResourceRegion"
+        "targetResourceRegion",
+        "copyAuthorization"
       ],
       "type": "object",
       "properties": {
         "targetResourceId": {
           "description": "Azure Resource Id of the target Form Recognizer resource where the model is copied to.",
-          "maxLength": 2048,
+          "maxLength": 1024,
           "type": "string",
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.CognitiveServices/accounts/[^/]*$",
           "x-ms-azure-resource": true
@@ -650,9 +688,9 @@
           "description": "Location of the target Azure resource.",
           "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
         },
-        "authorization": {
+        "copyAuthorization": {
           "description": "Entity that encodes claims to authorize the copy request.",
-          "$ref": "#/definitions/Authorization"
+          "$ref": "#/definitions/CopyAuthorizationResult"
         }
       }
     },

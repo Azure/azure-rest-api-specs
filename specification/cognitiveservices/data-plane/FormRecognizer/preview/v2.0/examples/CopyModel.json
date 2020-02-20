@@ -4,14 +4,17 @@
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "modelId": "{modelId}",
-    "body": {},
-    "copyRequest": {
-      "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}",
-      "targetResourceRegion": "{region}",
-      "authorization": {
-        "modelId": "{modelId}"
+    "body": {
+      "copyRequest": {
+        "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}",
+        "targetResourceRegion": "{region}",
+        "copyAuthorization": {
+          "modelId": "{modelId}",
+          "accessToken": "{accessToken}",
+          "expirationDateTime": "{dateTime}"
+        }
       }
-    }
+    }    
   },
   "responses": {
     "202": {
