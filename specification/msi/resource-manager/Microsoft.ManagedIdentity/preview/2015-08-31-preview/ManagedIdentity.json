@@ -353,15 +353,40 @@
   "definitions": {
     "Identity": {
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/IdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes an identity resource."
+    },
+    "SystemAssignedIdentity": {
+      "properties": {
         "location": {
           "type": "string",
-          "description": "The Azure region where the resource lives."
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         },
         "tags": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
           "description": "Resource tags"
         },
         "properties": {
@@ -376,30 +401,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "Describes an identity resource."
-    },
-    "SystemAssignedIdentity": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The Azure region where the resource lives."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "readOnly": true,
-          "description": "The properties associated with the identity.",
-          "$ref": "#/definitions/IdentityProperties"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Describes a system assigned identity resource."
