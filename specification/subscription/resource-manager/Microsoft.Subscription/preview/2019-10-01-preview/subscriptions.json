@@ -491,50 +491,6 @@
           }
         ]
       }
-    },
-    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
-      "get": {
-        "description": "Get the status of the pending Microsoft.Subscription API operations.",
-        "operationId": "SubscriptionOperationResult_Get",
-        "x-ms-examples": {
-          "getPendingSubscriptionOperations": {
-            "$ref": "./examples/GetSubscriptionOperationResult.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful completion of the asynchronous operation",
-            "schema": {
-              "$ref": "#/definitions/PutSubscriptionResponse"
-            }
-          },
-          "202": {
-            "description": "Accepted. Subscription update is in progress.",
-            "headers": {
-              "Location": {
-                "description": "The URL where the status of the asynchronous operation can be checked.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The operation ID, which can be found from the location header.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ]
-      }
     }
   },
   "definitions": {
