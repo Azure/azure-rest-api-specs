@@ -477,6 +477,10 @@ directive:
     reason: managedBy is a top level property
   - suppress: BodyTopLevelProperties
     from: resources.json
+    where: $.definitions.GenericResourceExpanded.properties
+    reason: createdTime,changedTime & provisioningState are top-level properties
+  - suppress: BodyTopLevelProperties
+    from: resources.json
     where: $.definitions.TagDetails.properties
     reason: TagDetails is a top level property
   - suppress: BodyTopLevelProperties
