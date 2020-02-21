@@ -1243,16 +1243,20 @@
     "Db2LinkedServiceTypeProperties": {
       "description": "DB2 linked service properties.",
       "properties": {
+        "connectionString": {
+          "type": "object",
+          "description": "The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+          "description": "Server name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+          "description": "Database name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "description": "AuthenticationType to be used for connection.",
+          "description": "AuthenticationType to be used for connection. It is mutually exclusive with connectionString property.",
           "type": "string",
           "enum": [
             "Basic"
@@ -1264,7 +1268,7 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+          "description": "Username for authentication. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "password": {
           "description": "Password for authentication.",
@@ -1272,21 +1276,17 @@
         },
         "packageCollection": {
           "type": "object",
-          "description": "Under where packages are created when querying database. Type: string (or Expression with resultType string)."
+          "description": "Under where packages are created when querying database. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "certificateCommonName": {
           "type": "object",
-          "description": "Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType string)."
+          "description": "Certificate Common Name when TLS is enabled. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "server",
-        "database"
-      ]
+      }
     },
     "TeradataLinkedService": {
       "x-ms-discriminator-value": "Teradata",
