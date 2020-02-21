@@ -5869,14 +5869,14 @@
     },
     "ThroughputSettingsResource": {
       "type": "object",
-      "description": "Cosmos DB resource throughput object",
+      "description": "Cosmos DB resource throughput object. Either throughput is required or autopilotSettings is required, but not both.",
       "properties": {
         "throughput": {
           "type": "integer",
-          "description": "Value of the Cosmos DB resource throughput"
+          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autopilotSettings is required, but not both."
         },
         "autopilotSettings": {
-          "description": "Cosmos DB resource for Autopilot settings",
+          "description": "Cosmos DB resource for Autopilot settings. Either throughput is required or autopilotSettings is required, but not both.",
           "$ref": "#/definitions/AutopilotSettingsResource"
         },
         "minimumThroughput": {
