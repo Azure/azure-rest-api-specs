@@ -1130,6 +1130,11 @@
           "format": "int32",
           "description": "softDelete data retention days. It accepts >=7 and <=90."
         },
+        "enableRbacAuthorization": {
+          "type": "boolean",
+          "default": false,
+          "description": "Property that controls how data actions are authorized. When true, this key vault uses Role Based Access Control (RBAC) for authorization of data actions, and the access policies are ignored (warning: this is a preview feature). When false, null or absent, this key vault uses the specified access policies, and any policy stored on Azure Resource Manager is ignored. Note that management actions are always authorized with RBAC."
+        },
         "createMode": {
           "type": "string",
           "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
@@ -1204,6 +1209,11 @@
           "type": "integer",
           "format": "int32",
           "description": "softDelete data retention days. It accepts >=7 and <=90."
+        },
+        "enableRbacAuthorization": {
+          "type": "boolean",
+          "default": false,
+          "description": "Property that controls how data actions are authorized. When true, this key vault uses Role Based Access Control (RBAC) for authorization of data actions, and the access policies are ignored (warning: this is a preview feature). When false, null or absent, this key vault uses the specified access policies, and any policy stored on Azure Resource Manager is ignored. Note that management actions are always authorized with RBAC."
         },
         "createMode": {
           "type": "string",
