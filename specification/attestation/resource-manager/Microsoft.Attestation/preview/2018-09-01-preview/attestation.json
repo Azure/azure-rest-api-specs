@@ -65,7 +65,7 @@
         "tags": [
           "AttestationProvider"
         ],
-        "operationId": "AttestationProviders_Get",
+        "operationId": "AttestationProvider_Get",
         "description": "Get the status of Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Get": {
@@ -109,7 +109,7 @@
         "tags": [
           "AttestationProvider"
         ],
-        "operationId": "AttestationProviders_Create",
+        "operationId": "AttestationProvider_Create",
         "description": "Creates or updates the Attestation Provider.",
         "x-ms-examples": {
           "AttestationProviders_Create": {
@@ -136,6 +136,7 @@
           {
             "name": "creationParams",
             "in": "body",
+            "required": true,
             "description": "Client supplied parameters.",
             "schema": {
               "$ref": "#/definitions/AttestationServiceCreationParams"
@@ -164,11 +165,65 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "AttestationProvider"
+        ],
+        "operationId": "AttestationProvider_Update",
+        "description": "Updates the Attestation Provider.",
+        "x-ms-examples": {
+          "AttestationProviders_Update": {
+            "$ref": "./examples/Update_AttestationProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "providerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the attestation service"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateParams",
+            "in": "body",
+            "required": true,
+            "description": "Client supplied parameters.",
+            "schema": {
+              "$ref": "#/definitions/AttestationServicePatchParams"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated attestation service",
+            "schema": {
+              "$ref": "#/definitions/AttestationProvider"
+            }
+          },
+          "default": {
+            "description": "Error result from Attestation service",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "AttestationProvider"
         ],
-        "operationId": "AttestationProviders_Delete",
+        "operationId": "AttestationProvider_Delete",
         "description": "Delete Attestation Service.",
         "x-ms-examples": {
           "AttestationProviders_Delete": {
@@ -344,7 +399,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -363,6 +418,10 @@
         "status"
       ],
       "properties": {
+        "trustModel": {
+          "type": "string",
+          "description": "Trust model for the attestation service instance."
+        },
         "status": {
           "type": "string",
           "description": "Status of attestation service.",
@@ -417,8 +476,46 @@
         }
       }
     },
+    "AttestationServicePatchParams": {
+      "description": "Parameters for patching an attestation service instance",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags that will be assigned to the attestation service instance."
+        }
+      }
+    },
     "AttestationServiceCreationParams": {
-      "description": "Client supplied parameters passed to attestation service.",
+      "description": "Parameters for creating an attestation service instance",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the attestation service instance should be created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags that will be assigned to the attestation service instance."
+        },
+        "properties": {
+          "$ref": "#/definitions/AttestationServiceCreationSpecificParams",
+          "description": "Properties of the attestation service instance"
+        }
+      }
+    },
+    "AttestationServiceCreationSpecificParams": {
+      "description": "Client supplied parameters used to create a new attestation service instance.",
       "properties": {
         "attestationPolicy": {
           "type": "string",
