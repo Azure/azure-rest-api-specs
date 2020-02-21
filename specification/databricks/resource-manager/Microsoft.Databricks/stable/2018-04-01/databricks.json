@@ -44,6 +44,9 @@
         "x-ms-examples": {
           "Get a workspace": {
             "$ref": "./examples/WorkspaceGet.json"
+          },
+          "Get a workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceGetParameters.json"
           }
         },
         "parameters": [
@@ -128,6 +131,9 @@
         "x-ms-examples": {
           "Create or update workspace": {
             "$ref": "./examples/WorkspaceCreate.json"
+          },
+          "Create or update workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceCreateWithParameters.json"
           }
         },
         "parameters": [
@@ -377,8 +383,8 @@
           "description": "The managed resource group Id."
         },
         "parameters": {
-          "type": "object",
-          "description": "Name and value pairs that define the workspace parameters."
+          "$ref": "#/definitions/WorkspaceCustomParameters",
+          "description": "The workspace's custom parameters."
         },
         "provisioningState": {
           "readOnly": true,
@@ -493,6 +499,121 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
+    },
+    "WorkspaceCustomParameterType": {
+      "description": "Provisioning status of the workspace.",
+      "readOnly": true,
+      "enum": [
+        "Bool",
+        "Object",
+        "String"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomParameterType",
+        "modelAsString": true
+      }
+    },
+    "WorkspaceCustomBooleanParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomObjectParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "object",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomStringParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Value."
+    },
+    "WorkspaceCustomParameters": {
+      "properties": {
+        "amlWorkspaceId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The Workspace ID of an Azure Machine Learning Workspace"
+        },
+        "customVirtualNetworkId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
+        },
+        "customPublicSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of a Public Subnet within the Virtual Network"
+        },
+        "customPrivateSubnetName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of the Private Subnet within the Virtual Network"
+        },
+        "enableNoPublicIp": {
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "Should the Public IP be Disabled?"
+        },
+        "loadBalancerBackendPoolName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of a Backend Address Pool within an Azure Load Balancer"
+        },
+        "loadBalancerId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The Resource ID of an Azure Load Balancer"
+        },
+        "relayNamespaceName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of an Azure Relay Namespace"
+        },
+        "storageAccountName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name which should be used for the Storage Account"
+        },
+        "storageAccountSkuName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The SKU which should be used for this Storage Account"
+        },
+        "resourceTags": {
+          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
+          "description": "A map of Tags which should be applied to the resources used by this Databricks Cluster."
+        },
+        "vnetAddressPrefix": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The first 2 octets of the virtual network /16 address range (e.g., '10.139' for the address range 10.139.0.0/16)."
+        }
+      },
+      "description": "Custom Parameters used for Cluster Creation."
     },
     "WorkspaceProviderAuthorization": {
       "properties": {
