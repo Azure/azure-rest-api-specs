@@ -1043,6 +1043,20 @@
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the service."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional VS Online Plan properties.",
+          "properties": {
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -1064,12 +1078,13 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/VSOnlinePlanInfo"
         }
       ],
       "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the service."
+        },
         "properties":{
           "type": "object",
           "description": "Additional VS Online Plan properties.",
@@ -1083,17 +1098,16 @@
               "type": "string",
               "readOnly": true,
               "description": "Service endpoint."
+            },
+            "defaultAutoSuspendDelayMinutes": {
+              "description": "Specifies auto suspend interval for environments in this plan.",
+              "type": "integer"
+            },
+            "defaultEnvironmentSku": {
+              "description": "Specifies the default environment sku name for this plan.",
+              "type": "string"
             }
           }
-        }
-      }
-    },
-    "VSOnlinePlanInfo": {
-      "description": "VS Online Plan properties. Holds properties that describe the plan.",
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "SKU of the service."
         }
       }
     },
