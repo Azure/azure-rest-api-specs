@@ -73,6 +73,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python
 ```
 
 ## Python
