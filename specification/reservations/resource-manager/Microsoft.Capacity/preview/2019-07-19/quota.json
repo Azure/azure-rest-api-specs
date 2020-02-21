@@ -368,9 +368,6 @@
             "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "description": "Ok. Sending Quota request status and details",
@@ -382,6 +379,9 @@
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
             }
           }
         }
