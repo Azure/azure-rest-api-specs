@@ -443,6 +443,9 @@
           },
           "Query all policy states at resource scope and expand policyEvaluationDetails": {
             "$ref": "./examples/PolicyStates_QueryResourceScopeExpandPolicyEvaluationDetails.json"
+          },
+		  "Query policy state at resource scope filtered by given assignment and expand Components": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeExpandComponents.json"
           }
         }
       }
@@ -1227,7 +1230,14 @@
           "type": "array",
           "items": {
             "type": "string"
+          },
+        "Components": {
+          "description": "Components",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentDetails"
           }
+        },
         }
       },
       "additionalProperties": {
@@ -1249,6 +1259,32 @@
           "description": "Evaluation details of IfNotExists effect.",
           "type": "object",
           "$ref": "#/definitions/IfNotExistsEvaluationDetails"
+        }
+      }
+    },
+	"ComponentDetails": {
+      "type": "object",
+      "description": "Component details.",
+      "properties": {
+        "id": {
+          "description": "Component Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Component type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Component name.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Component compliance evaluation timestamp.",
+          "type": "string"
+        },
+		"complianceState": {
+          "description": "Component compliance state.",
+          "type": "string"
         }
       }
     },
@@ -1761,7 +1797,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails",
+      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or $expand=Components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"
