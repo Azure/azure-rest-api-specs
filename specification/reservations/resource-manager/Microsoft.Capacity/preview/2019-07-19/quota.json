@@ -262,6 +262,9 @@
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
             }
           },
           "default": {
@@ -270,9 +273,6 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -373,15 +373,15 @@
             "description": "Ok. Sending Quota request status and details",
             "schema": {
               "$ref": "#/definitions/QuotaRequestDetailsList"
+            },
+            "x-ms-pageable": {
+              "nextLinkName": "nextLink"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
-            },
-            "x-ms-pageable": {
-              "nextLinkName": "nextLink"
             }
           }
         }
