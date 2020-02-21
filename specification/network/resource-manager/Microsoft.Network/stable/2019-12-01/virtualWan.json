@@ -3553,7 +3553,7 @@
           }
         },
         "bgpSettings": {
-          "$ref": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+          "$ref": "#/definitions/VpnGatewayBgpSettings",
           "description": "Local network gateway's BGP speaker settings."
         },
         "provisioningState": {
@@ -4599,6 +4599,56 @@
           "description": "List of p2s vpn connection Ids."
         }
       }
+    },
+    "VpnGatewayBgpSettings": {
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The BGP speaker's ASN."
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayBgpPeeringAddress"
+          },
+          "description": "bgpPeeringAddresses for Vpn gateway."
+        }
+      },
+      "description": "BGP settings details."
+    },
+    "VpnGatewayBgpPeeringAddress": {
+      "properties": {
+        "DefaultBgpIpAddresses": {
+          "readOnly": true,
+          "type\": \"array\",": null,
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of default BgpPeeringAddresses which belongs to Vpn gateway."
+        },
+        "CustomBgpIpAddresses": {
+          "type\": \"array\",": null,
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of custom BgpPeeringAddresses which belongs to Vpn gateway."
+        },
+        "TunnelIpAddresses": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of tunnel public IpAddresses which belongs to Vpn gateway."
+        }
+      },
+      "description": "Properties of VpnGatewayBgpPeeringAddress."
     }
   }
 }
