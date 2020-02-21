@@ -2263,8 +2263,12 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2308,8 +2312,12 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "extendedProperties": {
           "type": "object",
