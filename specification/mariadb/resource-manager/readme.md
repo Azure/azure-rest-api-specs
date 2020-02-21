@@ -26,7 +26,7 @@ These are the global settings for the MariaDB API.
 
 ``` yaml
 title: MariaDBManagementClient
-description: MariaDB Client
+description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MariaDB resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
 tag: package-2018-06-01
 ```
