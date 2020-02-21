@@ -7073,6 +7073,10 @@
             "$ref": "#/definitions/AttackTactic"
           },
           "type": "array"
+        },
+        "incidentConfiguration": {
+          "$ref": "#/definitions/IncidentConfiguration",
+          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
         }
       },
       "required": [
@@ -7133,6 +7137,111 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "IncidentConfiguration": {
+      "description": "Incident Configuration property bag.",
+      "properties": {
+        "createIncident": {
+          "description": "Create incidents from alerts triggered by this analytics rule",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/GroupingConfiguration",
+          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
+        }
+      },
+      "type": "object",
+      "required": [
+        "createIncident"
+      ]
+    },
+    "GroupingConfiguration": {
+      "description": "Grouping configuration property bag.",
+      "properties": {
+        "enabled": {
+          "description": "Grouping enabled",
+          "type": "boolean"
+        },
+        "reopenClosedIncident": {
+          "description": "Re-open closed matching incidents",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "description": "Limit the group to alerts created within the lookback duration (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "entitiesMatchingMethod": {
+          "description": "Grouping matching method",
+          "enum": [
+            "All",
+            "None",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntitiesMatchingMethod",
+            "values": [
+              {
+                "description": "Grouping alerts into a single incident if all the entities match",
+                "value": "All"
+              },
+              {
+                "description": "Grouping all alerts triggered by this rule into a single incident",
+                "value": "None"
+              },
+              {
+                "description": "Grouping alerts into a single incident if the selected entities match",
+                "value": "Custom"
+              }
+            ]
+          }
+        },
+        "groupByEntities": {
+          "description": "A list of entity types to group by (when entitiesMatchingMethod is Custom)",
+          "items": {
+            "description": "Grouping entity type",
+            "enum": [
+              "Account",
+              "Host",
+              "Ip",
+              "Url"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GroupingEntityType",
+              "values": [
+                {
+                  "description": "Account entity",
+                  "value": "Account"
+                },
+                {
+                  "description": "Host entity",
+                  "value": "Host"
+                },
+                {
+                  "description": "Ip entity",
+                  "value": "Ip"
+                },
+                {
+                  "description": "Url entity",
+                  "value": "Url"
+                }
+              ]
+            }
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "reopenClosedIncident",
+        "lookbackDuration",
+        "entitiesMatchingMethod"
+      ]
     },
     "SecurityAlert": {
       "allOf": [
