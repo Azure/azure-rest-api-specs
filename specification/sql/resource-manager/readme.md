@@ -866,7 +866,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/servers.json
-  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
