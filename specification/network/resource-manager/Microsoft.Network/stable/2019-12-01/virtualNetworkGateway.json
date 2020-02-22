@@ -3652,14 +3652,37 @@
         "bgpPeeringAddresses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationBgpPeeringAddress"
+            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
           },
           "description": "bgpPeeringAddresses for virtual network gateway."
         }
       },
       "description": "BGP settings details."
     },
-    "VirtualNetworkGatewayIPConfigurationBgpPeeringAddress": {
+    "IPConfigurationBgpPeeringAddress": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IPConfigurationBgpPeeringAddressPropertiesFormat",
+          "description": "Properties of the virtual network gateway bgppeering addresses."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "BgpPeering Addresses for virtual network gateway."
+    },
+    "IPConfigurationBgpPeeringAddressPropertiesFormat": {
       "properties": {
         "ipconfigurationId": {
           "type": "string",
@@ -3689,7 +3712,7 @@
           "description": "The list of tunnel public IpAddresses which belongs to IpconfigurationId."
         }
       },
-      "description": "Properties of VirtualNetworkGatewayIPConfigurationBgpPeeringAddress."
+      "description": "Properties of IPConfigurationBgpPeeringAddress."
     }
   }
 }
