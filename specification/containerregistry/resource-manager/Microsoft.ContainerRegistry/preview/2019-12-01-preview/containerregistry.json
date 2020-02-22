@@ -1793,6 +1793,18 @@
           "$ref": "#/definitions/EncryptionProperty",
           "description": "The encryption settings of container registry."
         },
+        "dataEndpointEnabled": {
+          "description": "Enable a single data endpoint per region for serving data.",
+          "type": "boolean"
+        },
+        "dataEndpointHostNames": {
+          "description": "List of host names that will serve data when dataEndpointEnabled is true.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "privateEndpointConnections": {
           "description": "List of private endpoint connections for a container registry.",
           "type": "array",
@@ -2066,6 +2078,11 @@
           "description": "Key vault uri to access the encryption key.",
           "type": "string"
         },
+        "versionedKeyIdentifier": {
+          "description": "The fully qualified key identifier that includes the version of the key that is actually used for encryption.",
+          "type": "string",
+          "readOnly": true
+        },
         "identity": {
           "description": "The client id of the identity which will be used to access key vault.",
           "type": "string"
@@ -2117,6 +2134,10 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperty",
           "description": "The encryption settings of container registry."
+        },
+        "dataEndpointEnabled": {
+          "description": "Enable a single data endpoint per region for serving data.",
+          "type": "boolean"
         }
       }
     },
