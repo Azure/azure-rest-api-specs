@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2017-08-01-preview"
+    "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -37,17 +37,14 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts": {
       "get": {
         "x-ms-examples": {
-          "Update security contact data minimal": {
-            "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_min_example.json"
-          },
-          "Update security contact data full": {
-            "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_full_example.json"
+          "List security contact data": {
+            "$ref": "./examples/SecurityContacts/GetSecurityContactsSubscription_example.json"
           }
         },
         "tags": [
           "Security Contacts"
         ],
-        "description": "Security contact configurations for the subscription",
+        "description": "List all security contact configurations for the subscription",
         "operationId": "SecurityContacts_List",
         "parameters": [
           {
@@ -76,20 +73,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts/{securityContactName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityContacts/default": {
       "get": {
         "x-ms-examples": {
-          "Get security contact data minimal": {
-            "$ref": "./examples/SecurityContacts/GetSecurityContact_min_example.json"
-          },
-          "Get security contact data full": {
-            "$ref": "./examples/SecurityContacts/GetSecurityContact_full_example.json"
+          "Get default security contact": {
+            "$ref": "./examples/SecurityContacts/GetSecurityContact_example.json"
           }
         },
         "tags": [
           "Security Contacts"
         ],
-        "description": "Security contact configurations for the subscription",
+        "description": "Get Default Security contact configurations for the subscription",
         "operationId": "SecurityContacts_Get",
         "parameters": [
           {
@@ -97,9 +91,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/SecurityContactName"
           }
         ],
         "responses": {
@@ -120,16 +111,13 @@
       "put": {
         "x-ms-examples": {
           "Create security contact data minimal": {
-            "$ref": "./examples/SecurityContacts/CreateSecurityContact_min_example.json"
-          },
-          "Create security contact data full": {
-            "$ref": "./examples/SecurityContacts/CreateSecurityContact_full_example.json"
+            "$ref": "./examples/SecurityContacts/CreateSecurityContact_example.json"
           }
         },
         "tags": [
           "Security Contacts"
         ],
-        "description": "Security contact configurations for the subscription",
+        "description": "Create security contact configurations for the subscription",
         "operationId": "SecurityContacts_Create",
         "parameters": [
           {
@@ -137,12 +125,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/SecurityContactName"
-          },
-          {
-            "$ref": "#/parameters/SecurityContact"
           }
         ],
         "responses": {
@@ -185,49 +167,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "x-ms-examples": {
-          "Update security contact data minimal": {
-            "$ref": "./examples/SecurityContacts/UpdateSecurityContact_min_example.json"
-          },
-          "Update security contact data full": {
-            "$ref": "./examples/SecurityContacts/UpdateSecurityContact_full_example.json"
-          }
-        },
-        "tags": [
-          "Security Contacts"
-        ],
-        "description": "Security contact configurations for the subscription",
-        "operationId": "SecurityContacts_Update",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/SecurityContactName"
-          },
-          {
-            "$ref": "#/parameters/SecurityContact"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SecurityContact"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

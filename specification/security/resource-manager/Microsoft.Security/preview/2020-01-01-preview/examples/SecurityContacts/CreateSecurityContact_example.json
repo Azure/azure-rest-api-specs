@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "securityContactName": "default",
+    "securityContact": {
+      "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContacts/default",
+      "name": "default",
+      "type": "Microsoft.Security/securityContacts",
+      "properties": {
+		  "notificationsByRole": {
+			  "state": "On",
+			  "roles": [
+				  "Owner"
+			  ]
+		  },
+		  "emails": [
+			  "john@contoso.com",
+			  "jane@contoso.com"
+		  ],
+		  "phone": "(214)275-4038",
+		  "alertNotifications":{
+			  "state": "On",
+			  "minimalSeverity": "Low"
+		  }
+	  }
+	}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityContacts/default",
+        "name": "default",
+        "type": "Microsoft.Security/securityContact",
+		"etag": "\"01003dcb-0000-0d00-0000-5e4ea9ed0000\"",
+		"location": "West Europe",
+        "properties": {
+			"notificationsByRole": {
+				"state": "On",
+				"roles": [
+					"Owner"
+				]
+			},
+			"emails": [
+				"john@microsoft.com",
+				"jane@microsoft.com"
+			],
+			"phone": "(214)275-4038",
+			"alertNotifications": {
+				"state": "On",
+				"minimalSeverity": "Low"
+			}
+		}
+      }
+    }
+  }
+}
