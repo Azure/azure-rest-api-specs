@@ -1665,7 +1665,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
-Since the discriminator value must be required, the discriminator value is an exception and can be marked as required.
+But it's allowed when all required properties are marked as discriminator, because the discriminator must be required.
 
 **CreatedAt** : N/A
 
@@ -1675,7 +1675,7 @@ Since the discriminator value must be required, the discriminator value is an ex
 
 **How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
 
-**Good Examples**: The following is a good example, becasue only the discriminator value be required:
+**Good Examples**: The following is a good example:
 ```json
 ......
 ......
