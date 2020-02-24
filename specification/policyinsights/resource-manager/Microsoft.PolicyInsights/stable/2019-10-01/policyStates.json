@@ -1235,7 +1235,7 @@
           "description": "Components",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ComponentDetails"
+            "$ref": "#/definitions/ComponentStateDetails"
           }
         },
         }
@@ -1262,9 +1262,9 @@
         }
       }
     },
-	"ComponentDetails": {
+	"ComponentStateDetails": {
       "type": "object",
-      "description": "Component details.",
+      "description": "Component state details.",
       "properties": {
         "id": {
           "description": "Component Id.",
@@ -1280,7 +1280,8 @@
         },
         "timestamp": {
           "description": "Component compliance evaluation timestamp.",
-          "type": "string"
+          "type": "string",
+		  "format": "date-time"
         },
 		"complianceState": {
           "description": "Component compliance state.",
@@ -1797,7 +1798,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or $expand=Components",
+      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or to expand Components use $expand=Components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"

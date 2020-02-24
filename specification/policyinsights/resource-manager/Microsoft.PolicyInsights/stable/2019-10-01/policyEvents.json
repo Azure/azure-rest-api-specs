@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyEventsClient",
-    "version": "2018-04-04"
+    "version": "2019-10-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -256,6 +256,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+		  {
+            "$ref": "#/parameters/expandParameter"
           }
         ],
         "responses": {
@@ -284,6 +287,9 @@
           },
           "Query at subscription level nested resource scope": {
             "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelNestedResourceScope.json"
+          },
+		  "Query policy events for resource scope filtered by given assignment and expand Components": {
+            "$ref": "./examples/PolicyEvents_QueryResourceScopeExpandComponents.json"
           }
         }
       }
@@ -716,6 +722,10 @@
           "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
           "type": "string"
         },
+		"complianceState": {
+          "description": "Compliance state of the resource.",
+          "type": "string"
+        },
         "tenantId": {
           "description": "Tenant ID for the policy event record.",
           "type": "string"
@@ -723,12 +733,53 @@
         "principalOid": {
           "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
           "type": "string"
-        }
+        },
+		"Components": {
+          "description": "Components",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentEventDetails"
+          }
       },
       "additionalProperties": {
         "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
+    "ComponentEventDetails": {
+      "type": "object",
+      "description": "Component event details.",
+      "properties": {
+        "id": {
+          "description": "Component Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Component type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Component name.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Timestamp for component policy event record.",
+          "type": "string",
+		  "format": "date-time"
+        },
+		"tenantId": {
+          "description": "Tenant ID for the policy event record.",
+          "type": "string"
+        },
+        "principalOid": {
+          "description": "Principal object ID for the user who initiated the resource component operation that triggered the policy event.",
+          "type": "string"
+        },
+		"policyDefinitionAction": {
+          "description": "Policy definition action, i.e. effect.",
+          "type": "string"
+        }
+      }
+    }
     "QueryFailure": {
       "description": "Error response.",
       "properties": {
@@ -949,6 +1000,18 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Apply"
+    },
+	 "expandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The $expand query parameter. For example, to expand Components, use $expand=Components",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Expand"
     }
   }
 }
