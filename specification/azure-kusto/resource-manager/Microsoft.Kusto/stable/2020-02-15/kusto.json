@@ -2328,9 +2328,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2356,10 +2353,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/LanguageExtensionsList"
-            }
+            "description": "OK."
           },
           "202": {
             "description": "Accepted"
@@ -2386,9 +2380,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2414,10 +2405,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/LanguageExtensionsList"
-            }
+            "description": "OK."
           },
           "202": {
             "description": "Accepted"
@@ -2522,6 +2510,11 @@
           "description": "A boolean value that indicates if the purge operations are enabled.",
           "default": false,
           "type": "boolean"
+        },
+        "languageExtensions": {
+          "description": "The cluster language extensions.",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "description": "Class representing the Kusto cluster properties."
@@ -2690,7 +2683,16 @@
             "Standard_D11_v2",
             "Standard_D12_v2",
             "Standard_L4s",
-            "Dev(No SLA)_Standard_D11_v2"
+            "Dev(No SLA)_Standard_D11_v2",
+            "Standard_E2a_v4",
+            "Standard_E4a_v4",
+            "Standard_E8a_v4",
+            "Standard_E16a_v4",
+            "Standard_E8as_v4+1TB_PS",
+            "Standard_E8as_v4+2TB_PS",
+            "Standard_E16as_v4+3TB_PS",
+            "Standard_E16as_v4+4TB_PS",
+            "Dev(No SLA)_Standard_E2a_v4"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
