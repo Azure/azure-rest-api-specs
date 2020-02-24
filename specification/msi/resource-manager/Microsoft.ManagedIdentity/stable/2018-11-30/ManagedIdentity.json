@@ -254,7 +254,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Identity"
+              "$ref": "#/definitions/IdentityUpdate"
             },
             "description": "Parameters to update the identity"
           }
@@ -363,6 +363,42 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Describes an identity resource."
+    },
+    "IdentityUpdate": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/UserAssignedIdentityProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "Describes an identity resource."
