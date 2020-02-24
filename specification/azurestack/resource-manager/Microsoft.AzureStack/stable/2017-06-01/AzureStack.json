@@ -44,6 +44,86 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.AzureStack/cloudManifestFiles": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of a cloud specific manifest file with latest version.": {
+            "$ref": "examples/CloudManifestFile/List.json"
+          }
+        },
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Returns a cloud specific manifest JSON file with latest version.",
+        "operationId": "CloudManifestFile_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.AzureStack/cloudManifestFiles/{verificationVersion}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the properties of a cloud specific manifest file.": {
+            "$ref": "examples/CloudManifestFile/Get.json"
+          }
+        },
+        "tags": [
+          "AzureStack"
+        ],
+        "description": "Returns a cloud specific manifest JSON file.",
+        "operationId": "CloudManifestFile_Get",
+        "parameters": [
+          {
+            "name": "verificationVersion",
+            "in": "path",
+            "description": "Signing verification key version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionCreationDate",
+            "in": "query",
+            "description": "Signing verification key version creation date.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CloudManifestFileResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -187,6 +267,68 @@
         },
         "nextLink": {
           "description": "URI to the next page of operations.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudManifestFileResponse": {
+      "description": "Cloud specific manifest GET response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Cloud specific manifest data.",
+          "$ref": "#/definitions/CloudManifestFileProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "CloudManifestFileProperties": {
+      "description": "Cloud specific manifest JSON properties.",
+      "type": "object",
+      "properties": {
+        "deploymentData": {
+          "description": "Cloud specific manifest data.",
+          "$ref": "#/definitions/CloudManifestFileDeploymentData"
+        },
+        "signature": {
+          "description": "Signature of the cloud specific manifest data.",
+          "type": "string"
+        }
+      }
+    },
+    "CloudManifestFileDeploymentData": {
+      "description": "Cloud specific manifest data for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "externalDsmsCertificates": {
+          "description": "Dsms external certificates.",
+          "type": "string"
+        },
+        "customCloudVerificationKey": {
+          "description": "Signing verification public key.",
+          "type": "string"
+        },
+        "customEnvironmentEndpoints": {
+          "description": "Environment endpoints.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CloudManifestFileEnvironmentEndpoints"
+        }
+      }
+    },
+    "CloudManifestFileEnvironmentEndpoints": {
+      "description": "Cloud specific environment endpoints for AzureStack deployment.",
+      "type": "object",
+      "properties": {
+        "customCloudArmEndpoint": {
+          "description": "ARM endpoint.",
+          "type": "string"
+        },
+        "externalDsmsEndpoint": {
+          "description": "Dsms endpoint.",
           "type": "string"
         }
       }
