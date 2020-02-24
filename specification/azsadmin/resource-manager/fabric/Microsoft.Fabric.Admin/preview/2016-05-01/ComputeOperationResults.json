@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2016-05-01"
   },
-  "host": "management.azure.com",
+  "host": "adminmanagement.local.azurestack.external",
   "schemes": [
     "https"
   ],
@@ -93,6 +93,9 @@
             "schema": {
               "$ref": "#/definitions/ComputeOperationResultList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
         "x-ms-pageable": {

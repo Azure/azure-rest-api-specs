@@ -34,39 +34,6 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
-      "get": {
-        "operationId": "SystemAssignedIdentities_GetByScope",
-        "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
-        "x-ms-examples": {
-          "MsiOperationsList": {
-            "$ref": "./examples/SystemAssignedIdentityGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ScopeParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The systemAssignedIdentity was retrieved and returned successfully.",
-            "schema": {
-              "$ref": "#/definitions/SystemAssignedIdentity"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.ManagedIdentity/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -254,7 +221,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IdentityPatch"
+              "$ref": "#/definitions/Identity"
             },
             "description": "Parameters to update the identity"
           }
@@ -351,28 +318,22 @@
     }
   },
   "definitions": {
-    "Resource": {
+    "Identity": {
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
-          "description": "The id of the resource."
+          "description": "The id of the created identity."
         },
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "The name of the resource."
+          "description": "The name of the created identity."
         },
         "location": {
           "type": "string",
-          "description": "The Azure region where the resource lives."
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "Describes common properties of a resource."
-    },
-    "Identity": {
-      "properties": {
+          "description": "The Azure region where the identity lives."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -382,9 +343,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "readOnly": true,
           "description": "The properties associated with the identity.",
-          "$ref": "#/definitions/UserAssignedIdentityProperties"
+          "$ref": "#/definitions/IdentityProperties"
         },
         "type": {
           "type": "string",
@@ -399,82 +359,13 @@
           "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
         }
       },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
-    "IdentityPatch": {
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "readOnly": true,
-          "description": "The properties associated with the identity.",
-          "$ref": "#/definitions/UserAssignedIdentityProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "Microsoft.ManagedIdentity/userAssignedIdentities"
-          ],
-          "x-ms-enum": {
-            "name": "UserAssignedIdentities",
-            "modelAsString": true
-          },
-          "description": "The type of resource i.e. Microsoft.ManagedIdentity/userAssignedIdentities"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "x-ms-azure-resource": true,
-      "description": "Describes an identity resource."
-    },
-    "SystemAssignedIdentity": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "readOnly": true,
-          "description": "The properties associated with the identity.",
-          "$ref": "#/definitions/SystemAssignedIdentityProperties"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The type of resource i.e. Microsoft.Compute/virtualMachineScaleSets"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "x-ms-azure-resource": true,
-      "description": "Describes a system assigned identity resource."
-    },
-    "SystemAssignedIdentityProperties": {
-      "description": "The properties associated with the system assigned identity.",
+    "IdentityProperties": {
+      "description": "The properties associated with the identity.",
       "type": "object",
-      "title": "System Assigned Identity properties.",
+      "title": "Identity properties.",
       "properties": {
         "tenantId": {
           "type": "string",
@@ -497,32 +388,7 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
-        }
-      }
-    },
-    "UserAssignedIdentityProperties": {
-      "description": "The properties associated with the user assigned identity.",
-      "type": "object",
-      "title": "User Assigned Identity properties.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid",
-          "description": "The id of the tenant which the identity belongs to."
-        },
-        "principalId": {
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid",
-          "description": "The id of the service principal object associated with the created identity."
-        },
-        "clientId": {
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid",
-          "description": "The id of the app associated with the identity. This is a random generated UUID by MSI."
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, then the clientSecretUrl will not be present in the response, otherwise it will be present."
         }
       }
     },
@@ -641,15 +507,6 @@
     }
   },
   "parameters": {
-    "ScopeParameter": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The resource provider scope of the resource. Parent resource being extended by Managed Identities.",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
-    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",

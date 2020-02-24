@@ -218,7 +218,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/NamedValueCreateContract"
+              "$ref": "./definitions.json#/definitions/NamedValueContract"
             },
             "description": "Create parameters."
           },
@@ -234,7 +234,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to create or update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Request to create or update NamedValue was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "201": {
             "description": "NamedValue was successfully created.",
@@ -266,10 +272,6 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "patch": {
@@ -314,22 +316,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Request to update NamedValue was accepted. Location header contains the URL where the status of the long running operation can be checked."
-          },
-          "204": {
-            "description": "NamedValue was successfully updated."
-          },
-          "200": {
-            "description": "NamedValue was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/NamedValueContract"
-            },
+            "description": "Request to update NamedValue was accepted.",
             "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
                 "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NamedValue was successfully updated."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -337,10 +333,6 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "delete": {
@@ -380,51 +372,6 @@
           },
           "204": {
             "description": "NamedValue was successfully deleted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/namedValues/{namedValueId}/listValue": {
-      "post": {
-        "tags": [
-          "NamedValue"
-        ],
-        "operationId": "NamedValue_ListValue",
-        "description": "Gets the secret value of the NamedValue.",
-        "x-ms-examples": {
-          "ApiManagementListSecretsSubscription": {
-            "$ref": "./examples/ApiManagementListSecretsNamedValue.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/NamedValueIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The response body contains secret value.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PropertyValueContract"
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

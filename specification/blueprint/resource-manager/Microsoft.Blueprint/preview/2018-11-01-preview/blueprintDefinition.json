@@ -851,19 +851,11 @@
         },
         "parameters": {
           "description": "Parameters required by this blueprint definition.",
-          "type": "object",
-          "additionalProperties": {
-            "description": "Named collection of parameter metadata.",
-            "$ref": "#/definitions/ParameterDefinition"
-          }
+          "$ref": "#/definitions/ParameterDefinitionCollection"
         },
         "resourceGroups": {
           "description": "Resource group placeholders defined by this blueprint definition.",
-          "type": "object",
-          "additionalProperties": {
-            "description": "Named collection for resourceGroupDefinition.",
-            "$ref": "#/definitions/ResourceGroupDefinition"
-          }
+          "$ref": "#/definitions/ResourceGroupDefinitionCollection"
         }
       },
       "allOf": [
@@ -939,12 +931,8 @@
           "description": "If applicable, the name of the resource group placeholder to which the Resource Manager template blueprint artifact will be deployed."
         },
         "parameters": {
-          "type": "object",
           "description": "Resource Manager template blueprint artifact parameter values.",
-          "additionalProperties": {
-            "description": "Key/Value pair of parameter fulfillment.",
-            "$ref": "#/definitions/ParameterValue"
-          }
+          "$ref": "#/definitions/ParameterValueCollection"
         }
       },
       "allOf": [
@@ -1038,12 +1026,8 @@
           "description": "Azure resource ID of the policy definition."
         },
         "parameters": {
-          "type": "object",
           "description": "Parameter values for the policy definition.",
-          "additionalProperties": {
-            "description": "Key/Value pair of parameter fulfillment.",
-            "$ref": "#/definitions/ParameterValue"
-          }
+          "$ref": "#/definitions/ParameterValueCollection"
         },
         "resourceGroup": {
           "type": "string",
@@ -1083,16 +1067,23 @@
         "properties"
       ]
     },
+    "ParameterValueCollection": {
+      "description": "A dictionary for parameters and their corresponding values.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "description": "Key/Value pair of parameter fulfillment.",
+        "$ref": "#/definitions/ParameterValue"
+      }
+    },
     "ParameterValue": {
       "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
       "properties": {
         "value": {
-          "type": "object",
-          "description": "Parameter value. Any valid JSON value is allowed including objects, arrays, strings, numbers and booleans."
+          "description": "Parameter value as value type."
         },
         "reference": {
-          "type": "object",
           "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }
@@ -1132,6 +1123,15 @@
       "required": [
         "id"
       ]
+    },
+    "ParameterDefinitionCollection": {
+      "description": "A dictionary hold parameter name and its metadata.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "description": "Named collection of parameter metadata.",
+        "$ref": "#/definitions/ParameterDefinition"
+      }
     },
     "ParameterDefinition": {
       "description": "Represent a parameter with constrains and metadata.",
@@ -1174,6 +1174,15 @@
         "type"
       ]
     },
+    "ResourceGroupDefinitionCollection": {
+      "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "description": "Named collection for resourceGroupDefinition.",
+        "$ref": "#/definitions/ResourceGroupDefinition"
+      }
+    },
     "ResourceGroupDefinition": {
       "description": "Represents an Azure resource group in a blueprint definition.",
       "type": "object",
@@ -1204,11 +1213,16 @@
         },
         "tags": {
           "description": "Tags to be assigned to this resource group.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ResourceGroupTagCollection"
         }
+      }
+    },
+    "ResourceGroupTagCollection": {
+      "description": "A dictionary of resource group tag values.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "ParameterDefinitionMetadata": {
@@ -1229,6 +1243,30 @@
           "type": "string",
           "description": "StrongType for UI to render rich experience during blueprint assignment. Supported strong types are resourceType, principalId and location.",
           "maxLength": 64
+        }
+      }
+    },
+    "ResourceGroupValueCollection": {
+      "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": {
+        "$ref": "#/definitions/ResourceGroupValue"
+      }
+    },
+    "ResourceGroupValue": {
+      "description": "Represents an Azure resource group.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource group.",
+          "minLength": 1,
+          "maxLength": 90
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the resource group."
         }
       }
     },

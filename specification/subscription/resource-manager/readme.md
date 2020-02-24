@@ -33,18 +33,6 @@ These are the global settings for the Subscription API.
 openapi-type: arm
 tag: package-2019-03-preview
 ```
-
-### Tag: package-2020-01
-
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-01'
-input-file:
-- Microsoft.Subscription/stable/2020-01-01/subscriptions.json
-title: SubscriptionClient
-description: The subscription client
-```
-
 ### Tag: package-2019-10-preview
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
@@ -185,7 +173,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Subscription/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
   - $(this-folder)/Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json

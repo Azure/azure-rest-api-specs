@@ -25,7 +25,6 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file: stable/v3.0/Prediction.json
-add-credentials: true
 ```
 
 # Validation

@@ -923,12 +923,11 @@
             "modelAsString": true
           },
           "description": "The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked."
-        },
-        "allowProtectedAppendWrites": {
-          "type": "boolean",
-          "description": "This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API"
         }
       },
+      "required": [
+        "immutabilityPeriodSinceCreationInDays"
+      ],
       "description": "The properties of an ImmutabilityPolicy of a blob container."
     },
     "ImmutabilityPolicyProperties": {
@@ -1136,13 +1135,9 @@
               "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
               "description": "The blob service properties for blob soft delete."
             },
-            "isVersioningEnabled": {
-              "type": "boolean",
-              "description": "Versioning is enabled if set to true."
-            },
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
-              "description": "Deprecated in favor of isVersioningEnabled property."
+              "description": "Automatic Snapshot is enabled if set to true."
             },
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",

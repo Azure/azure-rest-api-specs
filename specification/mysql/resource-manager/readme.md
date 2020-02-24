@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for MySql.
+This is the AutoRest configuration file for Sql.
 
 
 
@@ -22,13 +22,11 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the MySql API.
+These are the global settings for the Sql API.
 
 ``` yaml
-title: MySQLManagementClient
-description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2018-06-01
+tag: package-2017-12-01
 ```
 
 
@@ -70,7 +68,6 @@ These settings apply only when `--tag=package-2018-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-06-01'
 input-file:
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
 - Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
 - Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json

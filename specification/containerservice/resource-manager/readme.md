@@ -34,27 +34,14 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-02
-```
-
-
-### Tag: package-2020-02
-
-These settings apply only when `--tag=package-2020-02` is specified on the command line.
-
-```yaml $(tag) == 'package-2020-02'
-input-file:
-  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
-  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-  - Microsoft.ContainerService/stable/2019-08-01/location.json
-  - Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
+tag: package-2020-01
 ```
 
 ### Tag: package-2020-01
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+```yaml $(tag) == 'package-2020-01'
 input-file:
   - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - Microsoft.ContainerService/stable/2017-07-01/containerService.json
@@ -66,26 +53,13 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-11'
+```yaml $(tag) == 'package-2019-11'
 input-file:
   - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
 ```
-
-### Tag: package-2019-10-27-preview
-
-These settings apply only when `--tag=package-2019-10-27-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-10-27-preview'
-input-file:
-  - Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
-  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-  - Microsoft.ContainerService/stable/2019-08-01/location.json
-  - Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
-```
-
 ### Tag: package-2019-09-30-preview
 
 These settings apply only when `--tag=package-2019-09-30-preview` is specified on the command line.
@@ -223,19 +197,6 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
-### Tag: package-2020-02-01-only
-
-These settings apply only when `--tag=package-2020-02-01-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-02-01-only'
-input-file:
-- Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
-directive:
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    where: $.definitions.ManagedClusterProperties.properties.autoScalerProfile
-    reason: Cluster-autoscaler settings are not camel-cased
-```
-
 ### Tag: package-2020-01-01-only
 
 These settings apply only when `--tag=package-2020-01-01-only` is specified on the command line.
@@ -252,15 +213,6 @@ These settings apply only when `--tag=package-2019-11-01-only` is specified on t
 ``` yaml $(tag) == 'package-2019-11-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
-```
-
-### Tag: package-2019-10-27-preview-only
-
-These settings apply only when `--tag=package-2019-10-27-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-10-27-preview-only'
-input-file:
-- Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
 ```
 
 ### Tag: package-2019-10-01-only
@@ -486,10 +438,8 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2020-02-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2020-01-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-11-01/managedClusters.json
-  - $(this-folder)/Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-10-01/managedClusters.json

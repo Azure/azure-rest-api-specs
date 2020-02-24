@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "subscriptionId": "{subscriptionId}",
+    "parameters": {
+      "properties": {
+        "creditLimit": {
+          "value": 20000.00
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingAccounts/default/lineOfCredit/default",
+        "name": "default",
+        "type": "Microsoft.Billing/lineOfCredit",
+        "properties": {
+          "creditLimit": {
+            "currency": "USD",
+            "value": 20000.00
+          },
+          "reason": null,
+          "remainingBalance": {
+            "currency": "USD",
+            "value": 6000.00
+          },
+          "status": "Approved"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/operationResults/44000000-0000-0000-0000-000000000000?api-version=2019-10-01-preview",
+        "Retry-After": "60",
+        "OData-EntityId": "44000000-0000-0000-0000-000000000000"
+      }
+    }
+  }
+}

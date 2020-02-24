@@ -40,7 +40,6 @@
           "DeploymentScripts"
         ],
         "operationId": "DeploymentScripts_Create",
-        "x-ms-long-running-operation": true,
         "description": "Creates a deployment script.",
         "x-ms-examples": {
           "DeploymentScriptsCreate": {
@@ -99,7 +98,7 @@
           "DeploymentScripts"
         ],
         "operationId": "DeploymentScripts_Update",
-        "description": "Updates deployment script tags with specified values.",
+        "description": "Updates a deployment script.",
         "x-ms-examples": {
           "DeploymentScriptsUpdate": {
             "$ref": "./examples/DeploymentScripts_Update.json"
@@ -124,12 +123,12 @@
             "schema": {
               "$ref": "#/definitions/DeploymentScriptUpdateParameter"
             },
-            "description": "Deployment script resource with the tags to be updated."
+            "description": "Updated deployment script supplied to the operation."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Deployment script tags are updated.",
+            "description": "OK -- Deployment script is updated.",
             "schema": {
               "$ref": "#/definitions/DeploymentScript"
             }
