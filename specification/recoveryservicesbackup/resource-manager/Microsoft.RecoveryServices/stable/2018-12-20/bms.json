@@ -3532,23 +3532,20 @@
           "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
         },
-        "targetDirectoryMapping": {
-          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "targetDirectoryForFileRestore": {
+          "description": "Target directory location for restore as files.",
+          "type": "string"
         }
       }
     }
   },
   "parameters":{
-    "SubscriptionId":{
-      "name":"subscriptionId",
-      "in":"path",
-      "description":"The subscription Id.",
-      "required":true,
-      "type":"string"
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
     },
     "AzureRegion":{
       "name":"azureRegion",
