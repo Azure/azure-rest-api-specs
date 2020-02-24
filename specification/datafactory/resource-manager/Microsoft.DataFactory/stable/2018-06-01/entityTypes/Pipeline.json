@@ -259,6 +259,10 @@
           "type": "object",
           "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -294,6 +298,10 @@
           "type": "object",
           "description": "Azure blobFS wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -328,6 +336,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "ADLS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -368,6 +380,10 @@
           "type": "object",
           "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -403,6 +419,10 @@
           "type": "object",
           "description": "FileServer wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -437,6 +457,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -496,6 +520,10 @@
           "type": "object",
           "description": "The prefix filter for the Google Cloud Storage object name. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
@@ -531,6 +559,10 @@
           "type": "object",
           "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
         "useBinaryTransfer": {
           "type": "boolean",
           "description": "Specify whether to use binary transfer mode for FTP stores."
@@ -557,6 +589,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -615,6 +651,10 @@
         "wildcardFileName": {
           "type": "object",
           "description": "HDFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
         },
         "enablePartitionDiscovery": {
           "type": "boolean",
@@ -696,7 +736,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "expiryDateTime": {
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "FileServerWriteSettings": {
       "description": "File server write settings.",
@@ -832,6 +878,13 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Avro store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -847,6 +900,13 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -866,6 +926,13 @@
         "formatSettings": {
           "$ref": "#/definitions/DelimitedTextReadSettings",
           "description": "DelimitedText format settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -881,6 +948,13 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Json store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -896,6 +970,13 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "ORC store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1024,6 +1105,10 @@
           "description": "Redirect incompatible row settings when EnableSkipIncompatibleRow is true.",
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
         },
+        "logStorageSettings": {
+          "description": "Log storage settings customer need to provide when enabling session log.",
+          "$ref": "#/definitions/LogStorageSettings"
+        },
         "preserveRules": {
           "type": "array",
           "items": {
@@ -1039,6 +1124,14 @@
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Preserve rules."
+        },
+        "validateDataConsistency": {
+          "type": "object",
+          "description": "Whether to enable Data Consistency validation. Type: boolean (or Expression with resultType boolean)."
+        },
+        "skipErrorFile": {
+          "description": "Specify the fault tolerance for data consistency.",
+          "$ref": "#/definitions/SkipErrorFile"
         }
       },
       "required": [
@@ -1102,6 +1195,13 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1167,6 +1267,13 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1190,6 +1297,13 @@
         "preferredRegions": {
           "type": "object",
           "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1205,6 +1319,13 @@
         "query": {
           "type": "object",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1220,6 +1341,13 @@
         "query": {
           "type": "object",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1235,6 +1363,13 @@
         "query": {
           "type": "object",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1250,6 +1385,13 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1280,6 +1422,13 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1385,6 +1534,13 @@
         "query": {
           "type": "object",
           "description": "OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1438,6 +1594,13 @@
           "x-ms-enum": {
             "name": "SalesforceSourceReadBehavior",
             "modelAsString": true
+          }
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
           }
         }
       }
@@ -1646,6 +1809,13 @@
         "requestInterval": {
           "type": "object",
           "description": "The time to await before sending next page request. "
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1672,6 +1842,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       }
     },
@@ -1800,6 +1974,13 @@
         "recursive": {
           "type": "object",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -1879,6 +2060,13 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       },
       "required": [
@@ -1918,6 +2106,13 @@
         "partitionSettings": {
           "description": "The settings that will be leveraged for Oracle source partitioning.",
           "$ref": "#/definitions/OraclePartitionSettings"
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -2005,7 +2200,15 @@
           "$ref": "#/definitions/CopySource"
         }
       ],
-      "properties": {}
+      "properties": {
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
     },
     "CassandraSource": {
       "description": "A copy activity source for a Cassandra database.",
@@ -2054,6 +2257,13 @@
         "query": {
           "type": "object",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -2081,6 +2291,13 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -2108,6 +2325,13 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -3423,6 +3647,34 @@
       "required": [
         "linkedServiceName"
       ]
+    },
+    "SkipErrorFile": {
+      "description": "Skip error file.",
+      "type": "object",
+      "properties": {
+        "fileMissing": {
+          "type": "object",
+          "description": "Skip if file is deleted by other client during copy. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataInconsistency": {
+          "type": "object",
+          "description": "Skip if source/sink file changed by other concurrent write. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "AdditionalColumns": {
+      "description": "Specify the column name and value of additional columns.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Additional column name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Additional column value. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "OracleSink": {
       "description": "A copy activity Oracle sink.",
