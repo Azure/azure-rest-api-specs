@@ -2348,7 +2348,7 @@
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
         "bgpSettings": {
-          "$ref": "#/definitions/VirtualNetworkGatewayBgpSettings",
+          "$ref": "#/definitions/BgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
         },
         "customRoutes": {
@@ -3632,64 +3632,6 @@
         }
       },
       "description": "Start packet capture parameters on virtual network gateway."
-    },
-    "VirtualNetworkGatewayBgpSettings": {
-      "properties": {
-        "asn": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The BGP speaker's ASN."
-        },
-        "bgpPeeringAddress": {
-          "type": "string",
-          "description": "The BGP peering address and BGP identifier of this BGP speaker."
-        },
-        "peerWeight": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The weight added to routes learned from this BGP speaker."
-        },
-        "bgpPeeringAddresses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
-          },
-          "description": "BgpPeeringAddresses for virtual network gateway."
-        }
-      },
-      "description": "BGP settings details."
-    },
-    "IPConfigurationBgpPeeringAddress": {
-      "properties": {
-        "ipconfigurationId": {
-          "type": "string",
-          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
-        },
-        "defaultBgpIpAddresses": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of default BgpPeeringAddresses which belongs to IpconfigurationId."
-        },
-        "customBgpIpAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of custom BgpPeeringAddresses which belongs to IpconfigurationId."
-        },
-        "tunnelIpAddresses": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of tunnel public IpAddresses which belongs to IpconfigurationId."
-        }
-      },
-      "description": "Properties of IPConfigurationBgpPeeringAddress."
     }
   }
 }
