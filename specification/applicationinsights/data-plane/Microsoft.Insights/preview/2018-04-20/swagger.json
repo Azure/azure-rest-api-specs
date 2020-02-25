@@ -137,7 +137,7 @@
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the app, including its schema, etc.",
         "x-ms-examples": {
-          "queryPost": {
+          "metadataPost": {
             "$ref": "examples/metadata-post.json"
           }
         },
@@ -175,7 +175,7 @@
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the app, including its schema, etc.",
         "x-ms-examples": {
-          "queryGet": {
+          "metadataGet": {
             "$ref": "examples/metadata-get.json"
           }
         },
@@ -1192,6 +1192,7 @@
     "eventsResultData": {
       "description": "Events query result data.",
       "type": "object",
+      "discriminator": "type",
       "properties": {
         "id": {
           "description": "The unique ID for this event.",
