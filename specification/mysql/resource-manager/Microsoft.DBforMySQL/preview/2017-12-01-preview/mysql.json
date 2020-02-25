@@ -1517,6 +1517,19 @@
         "modelAsString": false
       }
     },
+    "MinimalTlsVersion": {
+      "type": "string",
+      "description": "Enforce a minimal Tls version for the server.",
+      "enum": [
+        "TLS1_0",
+        "TLS1_1",
+        "TLS1_2"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersionEnum",
+        "modelAsString": false
+      }
+    },
     "ProxyResource": {
       "description": "Resource properties.",
       "properties": {
@@ -1575,6 +1588,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
         },
         "byokEnforcement": {
           "type": "string",
@@ -1675,6 +1692,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1922,6 +1943,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "minimalTlsVersion": {
+              "$ref": "#/definitions/MinimalTlsVersion",
+              "description": "Enforce a minimal Tls version for the server."
             },
             "replicationRole": {
               "type": "string",
