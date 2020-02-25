@@ -1384,6 +1384,9 @@ directive:
   - suppress: GetInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
     reason: Customized verb is used for API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ipAllocation.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ---
