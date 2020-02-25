@@ -1516,6 +1516,28 @@
         "diskEncryptionSetId": {
           "type": "string",
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of key used to encrypt the data of the disk.",
+          "enum": [
+            "EncryptionAtRestWithPlatformKey",
+            "EncryptionAtRestWithCustomerKey"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EncryptionAtRestWithPlatformKey",
+                "description": "Disk is encrypted with XStore managed key at rest. It is the default encryption type."
+              },
+              {
+                "value": "EncryptionAtRestWithCustomerKey",
+                "description": "Disk is encrypted with Customer managed key at rest."
+              }
+            ]
+          }
         }
       },
       "description": "Encryption at rest settings for disk or snapshot"
