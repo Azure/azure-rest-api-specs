@@ -487,7 +487,17 @@
         },
         "minimalTlsVersion": {
           "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
-          "type": "string"
+          "enum": [
+            "None",
+            "1.0",
+            "1.1",
+            "1.2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedInstanceMinimalTlsVersion",
+            "modelAsString": true
+          }
         }
       }
     },
