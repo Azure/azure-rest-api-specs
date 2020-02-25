@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2019-12-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+			"name": "test-ipallocation1",
+			"id":	"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/IpAllocations/test-ipallocation1",
+			"type": "Microsoft.Network/IpAllocations",
+			"location": "centraluseuap",
+			"properties": {
+			  "provisioningState": "Succeeded",
+			  "resourceGuid": "e7cf1cd3-8b89-4366-9387-b876a09c80d9",
+			  "type": "Hypernet",
+			  "prefix": "3.2.5.0/24",
+			  "ipamAllocationId": "916d3b28-663f-448b-9abc-1bea9d5fed8f",
+			  "tags": {
+				"VNetID":	"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/HypernetVnet1"
+			  }
+			}
+		  },
+          {
+			"name": "test-ipallocation2",
+			"id":	"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/IpAllocations/test-ipallocation2",
+			"type": "Microsoft.Network/IpAllocations",
+			"location": "centraluseuap",
+			"properties": {
+			  "provisioningState": "Succeeded",
+			  "resourceGuid": "58fbb228-a552-490d-aad5-9b9187a2aee1",
+			  "type": "Hypernet",
+			  "prefix": "3.2.6.0/24",
+			  "ipamAllocationId": "57dc7256-2ff7-43f2-b9c8-85a70b5c6408",
+			  "tags": {
+				"VNetID":	"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/HypernetVnet2"
+			  }
+			}
+		  }
+        ]
+      }
+    }
+  }
+}
