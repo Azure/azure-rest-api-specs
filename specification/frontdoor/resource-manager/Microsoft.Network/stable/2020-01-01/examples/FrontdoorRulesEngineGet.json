@@ -62,6 +62,40 @@
                   ]
                 }
               ]
+            },
+            {
+              "name": "Rule3",
+              "priority": 3,
+              "action": {
+                "routeConfigurationOverride": {
+                  "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                  "customForwardingPath": null,
+                  "forwardingProtocol": "HttpsOnly",
+                  "cacheConfiguration": {
+                    "queryParameterStripDirective": "StripOnly",
+                    "queryParameters": "a=b,p=q",
+                    "dynamicCompression": "Disabled",
+                    "cacheDuration": "P1DT12H20M30S"
+                  },
+                  "backendPool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                  }
+                }
+              },
+              "matchConditions": [
+                {
+                  "rulesEngineMatchVariable": "RequestHeader",
+                  "rulesEngineOperator": "Equal",
+                  "rulesEngineMatchValue": [
+                    "allowoverride"
+                  ],
+                  "transforms": [
+                    "Lowercase"
+                  ],
+                  "negateCondition": false,
+                  "selector": "Rules-Engine-Route-Forward"
+                }
+              ]
             }
           ]
         }
