@@ -18,6 +18,15 @@ To see additional help and options, run:
 
 ---
 
+## Suppression
+
+``` yaml
+directive:
+  - from: service.json
+    suppress: OAV131 
+    reason: Testing purpose.
+```
+
 ## Configuration
 
 ### Basic Information
@@ -35,7 +44,6 @@ directive:
       - UniqueResourcePaths
 	  
 ```
-
 
 ### Tag: package-2018-07
 
