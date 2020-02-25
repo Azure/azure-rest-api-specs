@@ -701,6 +701,16 @@
           "type": "object",
           "description": "Setting indicating whether the service has a managed identity associated with it.",
           "properties": {
+            "principalId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The principal ID of the resource identity."
+            },
+            "tenantId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The tenant ID of the resource."
+            },
             "type": {
               "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
               "type": "string",
