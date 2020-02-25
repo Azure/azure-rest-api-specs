@@ -49,14 +49,14 @@ clicommon:
             parameter: 'resource_name'
         set:
             name: 'aks_name'
-            alias-name: 'resource_name'
+            alias: 'resource_name'
       - select: 'parameter'
         where:
             operationGroup: '(managed_clusters|container_services|open_shift_managed_clusters|operations)'
             parameter: 'resource_name'
         set:
             name: 'name'
-            aliasName: 'resource_name'
+            alias: 'resource_name'
       - select: 'parameter'
         where:
             operationGroup: 'agent_pools'
@@ -64,7 +64,7 @@ clicommon:
             parameter: 'resource_name'
         set:
             name: 'name'
-            aliasName: 'resource_name'
+            alias: 'resource_name'
       - select: 'operationGroup'
         where:
             operationGroup: 'managed_clusters'

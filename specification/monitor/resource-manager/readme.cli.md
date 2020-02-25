@@ -10,12 +10,18 @@ This directory contains the Cli common model for the Dns service.
 title: Monitor
 clicommon:
     cli-directive:
-      - select: 'enumValue'
+      - select: 'choiceValue'
         where:
-            enumSchema: 'comparison_operation_type'
-            enumValue: 'equals'
+            enum: 'comparison_operation_type'
+            value: 'equals'
         set:
-            enumValue: 'equal'
+            name: 'equal'
+      - select: 'choiceValue'
+        where:
+            enum: 'comparison_operation_type'
+            value: 'not_equals'
+        set:
+            name: 'not_equal'
       - select: 'property'
         where:
             schemaObject: 'activity_log_alert_leaf_condition'

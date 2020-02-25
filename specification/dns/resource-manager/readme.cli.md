@@ -20,6 +20,7 @@ clicommon:
             parameter: 'parameters'
         set:
             name: 'record_set'
+            required: true
       - select: 'parameter'
         where:
             operationGroup: 'record_sets'
