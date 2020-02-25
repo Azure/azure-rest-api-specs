@@ -131,6 +131,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/components/{applicationName}/metadata": {
+      "post": {
+        "operationId": "Metadata_Post",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "queryPost": {
+            "$ref": "examples/metadata-post.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "Metadata_Get",
+        "summary": "Gets metadata information",
+        "description": "Retrieve the metadata information for the app, including its schema, etc.",
+        "x-ms-examples": {
+          "queryGet": {
+            "$ref": "examples/metadata-get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/applicationName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/metadataResults"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/errorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Insights/components/{applicationName}/metrics/{metricId}": {
       "get": {
         "operationId": "Metrics_Get",
@@ -1114,7 +1192,6 @@
     "eventsResultData": {
       "description": "Events query result data.",
       "type": "object",
-      "discriminator": "type",
       "properties": {
         "id": {
           "description": "The unique ID for this event.",
@@ -2018,6 +2095,193 @@
           "type": "string"
         }
       }
+    },
+    "metadataResults": {
+      "description": "The metadata result for the app, including available tables, etc.",
+      "type": "object",
+      "properties": {
+        "tableGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTableGroup"
+          },
+          "uniqueItems": true
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataTable"
+          },
+          "uniqueItems": true
+        },
+        "functions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataFunction"
+          },
+          "uniqueItems": true
+        },
+        "applications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataApplication"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "metadataTableGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataTable": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "timespanColumn": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "bool",
+                  "datetime",
+                  "dynamic",
+                  "int",
+                  "long",
+                  "real",
+                  "string"
+                ],
+                "x-ms-enum": {
+                  "name": "MetadataColumnDataType",
+                  "modelAsString": true
+                }
+              },
+              "isPreferredFacet": {
+                "type": "boolean"
+              },
+              "source": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "name",
+              "type"
+            ]
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "metadataFunction": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "body"
+      ]
+    },
+    "metadataApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "functions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "resourceId",
+        "name",
+        "region"
+      ]
     },
     "errorDetail": {
       "title": "Error details.",
