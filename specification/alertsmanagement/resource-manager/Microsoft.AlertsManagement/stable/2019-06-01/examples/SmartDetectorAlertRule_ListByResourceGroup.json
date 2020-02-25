@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "b368ca2f-e298-46b7-b0ab-012281956afa",
+    "resourceGroupName": "MyAlertRules",
+    "api-version": "2019-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "id": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MyAlertRule",
+            "type": "Microsoft.AlertsManagement/smartDetectorAlertRules",
+            "name": "MyAlertRule",
+            "location": "global",
+            "tags": "",
+            "properties": {
+              "description": "Sample smart detector alert rule description",
+              "state": "Enabled",
+              "severity": "Sev3",
+              "frequency": "PT5M",
+              "detector": {
+                "id": "VMMemoryLeak"
+              },
+              "scope": [
+                "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default"
+              ],
+              "actionGroups": [
+                {
+                  "actionGroupId": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourcegroups/MyActionGroups/providers/microsoft.insights/actionGroups/MyActionGroup"
+                }
+              ],
+              "throttling": {
+                "duration": "PT20M"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MySecondAlertRule",
+            "type": "Microsoft.AlertsManagement/smartDetectorAlertRules",
+            "name": "MySecondAlertRule",
+            "location": "global",
+            "tags": "",
+            "properties": {
+              "description": "Sample smart detector alert rule description",
+              "state": "Disabled",
+              "severity": "Sev2",
+              "frequency": "PT15M",
+              "detector": {
+                "id": "VMMemoryLeak"
+              },
+              "scope": [
+                "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default"
+              ],
+              "actionGroups": [
+                {
+                  "actionGroupId": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourcegroups/MyActionGroups/providers/microsoft.insights/actionGroups/MyActionGroup"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,33 +1,33 @@
 {
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "testaccount",
+    "hybridRunbookWorkerGroupName": "TestHybridGroup",
+    "api-version": "2015-10-31",
     "parameters": {
-        "subscriptionId": "subid",
-        "resourceGroupName": "rg",
-        "automationAccountName": "testaccount",
-        "hybridRunbookWorkerGroupName": "TestHybridGroup",
-        "api-version": "2015-10-31",
-        "parameters":{
-            "credential": {
-                "name": "myRunAsCredentialName"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
-                "name": "TestHybridGroup",
-                "hybridRunbookWorkers": [
-                    {
-                        "name": "TestHybridWorker",
-                        "ip": "100.1.1.1",
-                        "registrationTime": "2017-03-24T12:43:45.0146578-07:00"
-                    }
-                ],
-                "credential": {
-                    "name": "myRunAsCredentialName"
-                }
-            }
-        }
+      "credential": {
+        "name": "myRunAsCredentialName"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/testaccount/hybridRunbookWorkerGroups/TestHybridGroup",
+        "name": "TestHybridGroup",
+        "hybridRunbookWorkers": [
+          {
+            "name": "TestHybridWorker",
+            "ip": "100.1.1.1",
+            "registrationTime": "2017-03-24T12:43:45.0146578-07:00"
+          }
+        ],
+        "credential": {
+          "name": "myRunAsCredentialName"
+        }
+      }
+    }
+  }
 }

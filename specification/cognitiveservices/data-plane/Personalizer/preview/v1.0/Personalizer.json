@@ -17,16 +17,15 @@
         "consumes": [
           "application/json"
         ],
-        "produces": [
-          
-        ],
+        "produces": [],
         "parameters": [
           {
             "name": "eventId",
             "in": "path",
             "description": "The event id this reward applies to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           },
           {
             "name": "reward",
@@ -43,7 +42,10 @@
             "description": "Success"
           },
           "default": {
-            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+            "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -60,19 +62,16 @@
         ],
         "summary": "Report that the specified event was actually displayed to the user and a reward should be expected for it.",
         "operationId": "Events_Activate",
-        "consumes": [
-          
-        ],
-        "produces": [
-          
-        ],
+        "consumes": [],
+        "produces": [],
         "parameters": [
           {
             "name": "eventId",
             "in": "path",
             "description": "The event ID this activation applies to.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "maxLength": 256
           }
         ],
         "responses": {
@@ -80,7 +79,10 @@
             "description": "Success"
           },
           "default": {
-            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+            "description": "Invalid reward request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -93,10 +95,10 @@
     "/rank": {
       "post": {
         "tags": [
-          "Ranking"
+          "Rank"
         ],
         "summary": "A Personalizer rank request.",
-        "operationId": "Events_Rank",
+        "operationId": "Rank",
         "consumes": [
           "application/json"
         ],
@@ -122,25 +124,114 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\\n\\n * 400 Invalid arguments.\\n\\n * 404 ResourceNotFound."
+            "description": "Invalid rank request.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
-          "Successful Events_Rank request": {
-            "$ref": "./examples/Events_Rank.json"
+          "Successful Rank request": {
+            "$ref": "./examples/Rank.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Used to return an error to the client",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PersonalizerError",
+          "description": "The error object."
+        }
+      }
+    },
+    "PersonalizerError": {
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "High level error code.",
+          "enum": [
+            "BadRequest",
+            "ResourceNotFound",
+            "InternalServerError"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ErrorCode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "BadRequest",
+                "description": "Request could not be understood by the server."
+              },
+              {
+                "value": "ResourceNotFound",
+                "description": "Requested resource does not exist on the server."
+              },
+              {
+                "value": "InternalServerError",
+                "description": "A generic error has occurred on the server."
+              }
+            ]
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Error source element.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PersonalizerError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InternalError",
+          "description": "Finer error details."
+        }
+      }
+    },
+    "InternalError": {
+      "description": "An object containing more specific information than the parent object about the error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Detailed error code.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InternalError",
+          "description": "The error object."
+        }
+      }
+    },
     "RewardRequest": {
       "description": "Reward given to a rank response.",
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "value": {
           "format": "float",
-          "description": "Reward to be assigned to an action. Value must be between -1 and 1 inclusive.",
+          "description": "Reward to be assigned to an action. Value should be between -1 and 1 inclusive.",
           "type": "number"
         }
       }
@@ -175,6 +266,7 @@
         },
         "eventId": {
           "description": "Optionally pass an eventId that uniquely identifies this Rank event. \r\nIf null, the service generates a unique eventId. The eventId will be used for\r\nassociating this request with its reward, as well as seeding the pseudo-random\r\ngenerator when making a Personalizer call.",
+          "maxLength": 256,
           "type": "string"
         },
         "deferActivation": {
@@ -185,7 +277,7 @@
       }
     },
     "RankableAction": {
-      "description": "An action with it\u0027s associated features used for ranking.",
+      "description": "An action with it's associated features used for ranking.",
       "required": [
         "id",
         "features"
@@ -194,6 +286,7 @@
       "properties": {
         "id": {
           "description": "Id of the action.",
+          "maxLength": 256,
           "type": "string"
         },
         "features": {
@@ -219,11 +312,13 @@
         },
         "eventId": {
           "description": "The eventId for the round trip from request to response.",
+          "maxLength": 256,
           "type": "string",
           "readOnly": true
         },
         "rewardActionId": {
-          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
+          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the \r\nfirst found in 'ranking' if an action in the request in first position was part of the excluded ids.",
+          "maxLength": 256,
           "type": "string",
           "readOnly": true
         }
@@ -235,12 +330,15 @@
       "properties": {
         "id": {
           "description": "Id of the action",
+          "maxLength": 256,
           "type": "string",
           "readOnly": true
         },
         "probability": {
           "format": "float",
           "description": "Probability of the action",
+          "maximum": 1,
+          "minimum": 0,
           "type": "number",
           "readOnly": true
         }
@@ -255,7 +353,8 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client",
-      "x-ms-skip-url-encoding": true
+      "x-ms-skip-url-encoding": true,
+      "maxLength": 1024
     }
   },
   "securityDefinitions": {
@@ -267,9 +366,7 @@
   },
   "security": [
     {
-      "apim_key": [
-        
-      ]
+      "apim_key": []
     }
   ],
   "tags": [
@@ -278,7 +375,7 @@
       "description": "Manages event operations."
     },
     {
-      "name": "Ranking",
+      "name": "Rank",
       "description": "Manages ranking operations."
     }
   ],

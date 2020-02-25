@@ -1,34 +1,34 @@
 {
-  "parameters" : {
+  "parameters": {
     "api-version": "2018-07-01",
-    "subscriptionId" : "subid",
-    "resourceGroupName" : "rg1",
-    "networkWatcherName" : "nw1",
-    "parameters" : {
-      "targetResourceId" : "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
+    "parameters": {
+      "targetResourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
       "queries": [
-	    {
-		  "direction" : "Inbound",
-		  "protocol" : "TCP",
-		  "source" : "10.1.0.4",
-		  "destination" : "12.11.12.14",
-		  "destinationPort" : "12100"
-		}
-	  ]
+        {
+          "direction": "Inbound",
+          "protocol": "TCP",
+          "source": "10.1.0.4",
+          "destination": "12.11.12.14",
+          "destinationPort": "12100"
+        }
+      ]
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
-		"results": [
-		  {
-	        "trafficQuery": {
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "trafficQuery": {
               "direction": "Inbound",
               "protocol": "TCP",
               "source": "10.1.0.4",
               "destination": "12.11.12.14",
               "destinationPort": "12100"
-              },
+            },
             "networkSecurityGroupResult": {
               "securityRuleAccessResult": "Allow",
               "evaluatedNetworkSecurityGroups": [
@@ -37,7 +37,7 @@
                   "matchedRule": {
                     "ruleName": "UserRule_fe_rule",
                     "action": "Allow"
-                    },
+                  },
                   "rulesEvaluationResult": [
                     {
                       "name": "UserRule_Cleanuptool-Allow-100",
@@ -82,11 +82,11 @@
                   ]
                 },
                 {
-				  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
+                  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
                   "matchedRule": {
                     "ruleName": "UserRule_fe_rule",
                     "action": "Allow"
-                    },
+                  },
                   "rulesEvaluationResult": [
                     {
                       "name": "UserRule_fe_rule",
@@ -104,17 +104,17 @@
         ]
       }
     },
-    "202" : {
-      "body" : {
-		"results": [
-		  {
-	        "trafficQuery": {
+    "202": {
+      "body": {
+        "results": [
+          {
+            "trafficQuery": {
               "direction": "Inbound",
               "protocol": "TCP",
               "source": "10.1.0.4",
               "destination": "12.11.12.14",
               "destinationPort": "12100"
-              },
+            },
             "networkSecurityGroupResult": {
               "securityRuleAccessResult": "Allow",
               "evaluatedNetworkSecurityGroups": [
@@ -123,7 +123,7 @@
                   "matchedRule": {
                     "ruleName": "UserRule_fe_rule",
                     "action": "Allow"
-                    },
+                  },
                   "rulesEvaluationResult": [
                     {
                       "name": "UserRule_Cleanuptool-Allow-100",
@@ -168,11 +168,11 @@
                   ]
                 },
                 {
-				  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
+                  "networkSecurityGroupId": "/subscriptions/61cc8a98-a8be-4bfe-a04e-0b461f93fe35/resourceGroups/NwRgCentralUSEUAP_copy/providers/Microsoft.Network/networkSecurityGroups/AppNSG",
                   "matchedRule": {
                     "ruleName": "UserRule_fe_rule",
                     "action": "Allow"
-                    },
+                  },
                   "rulesEvaluationResult": [
                     {
                       "name": "UserRule_fe_rule",

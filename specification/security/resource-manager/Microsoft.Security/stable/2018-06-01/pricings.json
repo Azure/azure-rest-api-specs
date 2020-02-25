@@ -6,12 +6,20 @@
     "version": "2018-06-01"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,8 +41,10 @@
             "$ref": "./examples/Pricings/ListPricings_example.json"
           }
         },
-        "tags": ["Pricings"],
-        "description": "Security pricing configurations in the subscription",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Lists Security Center pricing configurations in the subscription.",
         "operationId": "Pricings_List",
         "parameters": [
           {
@@ -67,8 +77,10 @@
             "$ref": "./examples/Pricings/GetPricingByName_example.json"
           }
         },
-        "tags": ["Pricings"],
-        "description": "Security pricing configuration in the subscription",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Gets a provided Security Center pricing configuration in the subscription.",
         "operationId": "Pricings_Get",
         "parameters": [
           {
@@ -102,8 +114,10 @@
             "$ref": "./examples/Pricings/PutPricingByName_example.json"
           }
         },
-        "tags": ["Pricings"],
-        "description": "Security pricing configuration in the subscription",
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Updates a provided Security Center pricing configuration in the subscription.",
         "operationId": "Pricings_Update",
         "parameters": [
           {
@@ -138,8 +152,10 @@
   },
   "definitions": {
     "PricingList": {
-      "description": "List of pricing configurations response",
-      "required": ["value"],
+      "description": "List of pricing configurations response.",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -152,7 +168,7 @@
     },
     "Pricing": {
       "type": "object",
-      "description": "Pricing tier will be applied for the scope based on the resource ID",
+      "description": "Azure Security Center is provided in two pricing tiers: free and standard, with the standard tier available with a trial period. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -172,8 +188,11 @@
       "properties": {
         "pricingTier": {
           "type": "string",
-          "description": "The pricing tier value",
-          "enum": ["Free", "Standard"],
+          "description": "The pricing tier value. Azure Security Center is provided in two pricing tiers: free and standard, with the standard tier available with a trial period. The standard tier offers advanced security capabilities, while the free tier offers basic security features.",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
           "x-ms-enum": {
             "name": "pricingTier",
             "modelAsString": true,
@@ -196,7 +215,9 @@
           "description": "The duration left for the subscriptions free trial period - in ISO 8601 format (e.g. P3Y6M4DT12H30M5S)."
         }
       },
-      "required": ["pricingTier"]
+      "required": [
+        "pricingTier"
+      ]
     }
   },
   "parameters": {

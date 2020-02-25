@@ -1,72 +1,72 @@
 {
-    "parameters": {
-        "subscriptionId": "00000000-1111-2222-3333-444444444444",
-        "resourceGroupName": "Default",
-        "locationName": "Japan East",
-        "api-version": "2017-10-01-preview"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "locationName": "Japan East",
+    "api-version": "2017-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test",
+            "name": "failover-group-test",
+            "type": "Microsoft.Sql/locations/failoverGroups",
+            "properties": {
+              "readWriteEndpoint": {
+                "failoverPolicy": "Automatic",
+                "failoverWithDataLossGracePeriodMinutes": 480
+              },
+              "readOnlyEndpoint": {
+                "failoverPolicy": "Disabled"
+              },
+              "replicationRole": "Primary",
+              "replicationState": "CATCH_UP",
+              "partnerRegions": [
                 {
-                    "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test",
-                    "name": "failover-group-test",
-                    "type": "Microsoft.Sql/locations/failoverGroups",
-                    "properties": {
-                        "readWriteEndpoint": {
-                            "failoverPolicy": "Automatic",
-                            "failoverWithDataLossGracePeriodMinutes": 480
-                        },
-                        "readOnlyEndpoint": {
-                            "failoverPolicy": "Disabled"
-                        },
-                        "replicationRole": "Primary",
-                        "replicationState": "CATCH_UP",
-                        "partnerRegions": [
-                        {
-                            "location":"Japan West",
-                            "replicationRole":"Secondary"
-                        }
-                        ],
-                        "managedInstancePairs": [ 
-                        {
-                            "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance", 
-                            "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance" 
-                        }
-                        ]
-                    }
-                },
-                {
-                    "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test-1",
-                    "name": "failover-group-test-1",
-                    "type": "Microsoft.Sql/locations/failoverGroups",
-                    "properties": {
-                        "readWriteEndpoint": {
-                            "failoverPolicy": "Automatic",
-                            "failoverWithDataLossGracePeriodMinutes": 480
-                        },
-                        "readOnlyEndpoint": {
-                            "failoverPolicy": "Disabled"
-                        },
-                        "replicationRole": "Primary",
-                        "replicationState": "CATCH_UP",
-                        "partnerRegions": [
-                        {
-                            "location":"Japan West",
-                            "replicationRole":"Secondary"
-                        }
-                        ],
-                        "managedInstancePairs": [ 
-                        {
-                            "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance-1", 
-                            "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance-1" 
-                        }
-                        ]
-                    }
+                  "location": "Japan West",
+                  "replicationRole": "Secondary"
                 }
-                ]
+              ],
+              "managedInstancePairs": [
+                {
+                  "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance",
+                  "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance"
+                }
+              ]
             }
-        }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/locations/JapanEast/instanceFailoverGroups/failover-group-test-1",
+            "name": "failover-group-test-1",
+            "type": "Microsoft.Sql/locations/failoverGroups",
+            "properties": {
+              "readWriteEndpoint": {
+                "failoverPolicy": "Automatic",
+                "failoverWithDataLossGracePeriodMinutes": 480
+              },
+              "readOnlyEndpoint": {
+                "failoverPolicy": "Disabled"
+              },
+              "replicationRole": "Primary",
+              "replicationState": "CATCH_UP",
+              "partnerRegions": [
+                {
+                  "location": "Japan West",
+                  "replicationRole": "Secondary"
+                }
+              ],
+              "managedInstancePairs": [
+                {
+                  "primaryManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-primary-mngdInstance-1",
+                  "partnerManagedInstanceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/managedInstances/failover-group-secondary-mngdInstance-1"
+                }
+              ]
+            }
+          }
+        ]
+      }
     }
+  }
 }

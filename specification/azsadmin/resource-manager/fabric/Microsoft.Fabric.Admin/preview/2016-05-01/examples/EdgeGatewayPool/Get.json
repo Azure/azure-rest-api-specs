@@ -1,31 +1,31 @@
 {
-    "parameters": {
-        "api-version": "2016-05-01",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "resourceGroupName": "System.local",
+  "parameters": {
+    "api-version": "2016-05-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "System.local",
+    "location": "local",
+    "edgeGatewayPool": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/edgeGatewayPools/default",
+        "name": "default",
+        "type": "Microsoft.Fabric.Admin/fabricLocations/edgeGatewayPools",
         "location": "local",
-        "edgeGatewayPool": "default"
+        "tags": {},
+        "properties": {
+          "gatewayType": "S2sIPsec",
+          "numberOfGateways": 1,
+          "redundantGatewayCount": 0,
+          "gatewayCapacityKiloBitsPerSecond": 100000000,
+          "publicIpAddress": "00000000-5555-0000-0001-000000000000",
+          "edgeGateways": [
+            "local/AzS-Gwy01"
+          ]
+        }
+      }
     },
-    "responses": {
-        "200": {
-            "body": {
-                "id": "/subscriptions/23a94a7f-64b3-42d8-807c-733284339015/resourceGroups/System.local/providers/Microsoft.Fabric.Admin/fabricLocations/local/edgeGatewayPools/default",
-                "name": "default",
-                "type": "Microsoft.Fabric.Admin/fabricLocations/edgeGatewayPools",
-                "location": "local",
-                "tags": {},
-                "properties": {
-                    "gatewayType": "S2sIPsec",
-                    "numberOfGateways": 1,
-                    "redundantGatewayCount": 0,
-                    "gatewayCapacityKiloBitsPerSecond": 100000000,
-                    "publicIpAddress": "00000000-5555-0000-0001-000000000000",
-                    "edgeGateways": [
-                        "local/AzS-Gwy01"
-                    ]
-                }
-            }
-        },
-        "404": {}
-    }
+    "404": {}
+  }
 }

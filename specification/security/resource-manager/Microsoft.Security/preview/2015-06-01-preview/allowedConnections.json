@@ -6,12 +6,20 @@
     "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscription_example.json"
           }
         },
-        "tags": ["AllowedConnections"],
+        "tags": [
+          "AllowedConnections"
+        ],
         "description": "Gets the list of all possible traffic between resources for the subscription",
         "operationId": "AllowedConnections_List",
         "parameters": [
@@ -70,7 +80,9 @@
             "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscriptionLocation_example.json"
           }
         },
-        "tags": ["AllowedConnections"],
+        "tags": [
+          "AllowedConnections"
+        ],
         "description": "Gets the list of all possible traffic between resources for the subscription and location.",
         "operationId": "AllowedConnections_ListByHomeRegion",
         "parameters": [
@@ -110,7 +122,9 @@
             "$ref": "./examples/AllowedConnections/GetAllowedConnections_example.json"
           }
         },
-        "tags": ["AllowedConnections"],
+        "tags": [
+          "AllowedConnections"
+        ],
         "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
         "operationId": "AllowedConnections_Get",
         "parameters": [
@@ -261,7 +275,10 @@
       "in": "path",
       "description": "The type of allowed connections (Internal, External)",
       "required": true,
-      "enum": ["Internal", "External"],
+      "enum": [
+        "Internal",
+        "External"
+      ],
       "x-ms-enum": {
         "name": "connectionType",
         "modelAsString": true,

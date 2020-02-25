@@ -42,8 +42,11 @@
         "operationId": "Assignments_CreateOrUpdate",
         "description": "Create or update a blueprint assignment.",
         "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_Create.json"
+          "Assignment with system-assigned managed identity": {
+            "$ref": "./examples/BlueprintAssignment_Create_SystemAssignedMSI.json"
+          },
+          "Assignment with user-assigned managed identity": {
+            "$ref": "./examples/BlueprintAssignment_Create_UserAssignedMSI.json"
           }
         },
         "parameters": [
@@ -164,7 +167,7 @@
         "responses": {
           "200": {
             "description": "Blueprints service SPN objectId",
-            "schema":{
+            "schema": {
               "$ref": "#/definitions/WhoIsBlueprintContract"
             }
           }
@@ -225,7 +228,9 @@
         "properties"
       ],
       "allOf": [
-        { "$ref": "#/definitions/TrackedResource" }
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ]
     },
     "AssignmentList": {
@@ -251,7 +256,7 @@
       "description": "User-assigned managed identity.",
       "properties": {
         "principalId": {
-          "type":  "string",
+          "type": "string",
           "description": "Azure Active Directory principal ID associated with this Identity."
         },
         "clientId": {
@@ -302,9 +307,19 @@
       "description": "The status of a blueprint assignment. This field is readonly.",
       "type": "object",
       "properties": {
+        "managedResources": {
+          "type": "array",
+          "description": "List of resources that were created by the blueprint assignment.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
       },
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "AssignmentLockSettings": {
@@ -330,6 +345,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "excludedActions": {
+          "type": "array",
+          "description": "List of management operations that are excluded from blueprint locks. Up to 200 actions are permitted. If the lock mode is set to 'AllResourcesReadOnly', then the following actions are automatically appended to 'excludedActions': '*/read', 'Microsoft.Network/virtualNetworks/subnets/join/action' and 'Microsoft.Authorization/locks/delete'. If the lock mode is set to 'AllResourcesDoNotDelete', then the following actions are automatically appended to 'excludedActions': 'Microsoft.Authorization/locks/delete'. Duplicate actions will get removed.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -342,12 +364,19 @@
           "description": "ID of the published version of a blueprint definition."
         },
         "parameters": {
-          "$ref": "#/definitions/ParameterValueCollection",
-          "description": "Blueprint assignment parameter values."
+          "type": "object",
+          "description": "Blueprint assignment parameter values.",
+          "additionalProperties": {
+            "description": "Key/Value pair of parameter fulfillment.",
+            "$ref": "#/definitions/ParameterValue"
+          }
         },
         "resourceGroups": {
-          "$ref": "#/definitions/ResourceGroupValueCollection",
-          "description": "Names and locations of resource group placeholders."
+          "description": "Names and locations of resource group placeholders.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceGroupValue"
+          }
         },
         "status": {
           "description": "Status of blueprint assignment. This field is readonly.",
@@ -390,51 +419,19 @@
         "resourceGroups"
       ]
     },
-    "ParameterValueCollection": {
-      "description": "A dictionary for parameters and their corresponding values.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "description": "Key/Value pair of parameter fulfillment.",
-        "$ref": "#/definitions/ParameterValueBase"
-      }
-    },
-    "ParameterValueBase": {
-      "description": "Base class for ParameterValue.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "Optional property. Establishes ParameterValueBase as a BaseClass.",
-          "type": "string"
-        }
-      }
-    },
     "ParameterValue": {
-      "description": "Value for the specified parameter.",
+      "description": "Value for the specified parameter. Can be either 'value' or 'reference' but not both.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Actual value."
-        }
-      },
-      "required": [ "value" ],
-      "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
-      ]
-    },
-    "SecretReferenceParameterValue": {
-      "description": "The reference to a secret, if the parameter should be protected.",
-      "type": "object",
-      "properties": {
+          "description": "Parameter value as value type."
+        },
         "reference": {
-          "description": "Specifies the reference.",
+          "type": "object",
+          "description": "Parameter value as reference type.",
           "$ref": "#/definitions/SecretValueReference"
         }
-      },
-      "required": [ "reference" ],
-      "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
-      ]
+      }
     },
     "SecretValueReference": {
       "description": "Reference to a Key Vault secret.",
@@ -467,15 +464,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
-    },
-    "ResourceGroupValueCollection": {
-      "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
-      "type": "object",
-      "properties": {},
-      "additionalProperties": {
-        "$ref": "#/definitions/ResourceGroupValue"
-      }
+      "required": [
+        "id"
+      ]
     },
     "ResourceGroupValue": {
       "description": "Represents an Azure resource group.",
@@ -500,12 +491,19 @@
         "location": {
           "type": "string",
           "description": "The location of this blueprint assignment.",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ]
     },
     "AzureResourceBase": {
@@ -553,17 +551,19 @@
       "properties": {
         "timeCreated": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Creation time of this blueprint definition."
         },
         "lastModified": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Last modified time of this blueprint definition."
         }
       }
     },
-    "WhoIsBlueprintContract":{
+    "WhoIsBlueprintContract": {
       "description": "Response schema for querying the Azure Blueprints service principal in the tenant.",
       "properties": {
         "objectId": {

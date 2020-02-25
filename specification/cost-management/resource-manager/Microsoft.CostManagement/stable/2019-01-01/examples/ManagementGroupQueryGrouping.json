@@ -3,31 +3,31 @@
     "api-version": "2019-01-01",
     "managementGroupId": "MyMgId",
     "scope": "providers/Microsoft.Management/managementGroups/MyMgId",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "TheLastMonth",
-        "dataset": {
-          "granularity": "None",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "ResourceGroup"
-            }
-          ],
-          "sorting": [
-            {
-              "name": "ResourceGroup",
-              "querySortingDirection": "Descending"
-            }
-          ]         
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceGroup"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "ResourceGroup",
+            "querySortingDirection": "Descending"
+          }
+        ]
       }
-    }    
+    }
   },
   "responses": {
     "200": {
@@ -57,7 +57,7 @@
                   "type": "String"
                 }
               ],
-              "rows": [                
+              "rows": [
                 [
                   20.359416562625452,
                   "VSTSHOL-1595322048000",

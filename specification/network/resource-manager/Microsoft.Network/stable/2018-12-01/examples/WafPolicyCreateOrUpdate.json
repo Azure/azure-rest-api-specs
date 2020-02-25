@@ -43,7 +43,7 @@
                 ],
                 "operator": "IPMatch",
                 "matchValues": [
-                    "192.168.1.0/24"
+                  "192.168.1.0/24"
                 ]
               },
               {
@@ -55,7 +55,7 @@
                 ],
                 "operator": "Contains",
                 "matchValues": [
-                    "Windows"
+                  "Windows"
                 ]
               }
             ],
@@ -85,27 +85,27 @@
           },
           "customRules": [
             {
-                "name": "Rule1",
-                "priority": 1,
-                "ruleType": "MatchRule",
-                "matchConditions": [
+              "name": "Rule1",
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
                     {
-                        "matchVariables": [
-                            {
-                                "variableName": "RemoteAddr",
-                                "selector": null
-                            }
-                        ],
-                        "operator": "IPMatch",
-                        "negationConditon": false,
-                        "matchValues": [
-                            "192.168.1.0/24",
-                            "10.0.0.0/24"
-                        ],
-                        "transforms": []
+                      "variableName": "RemoteAddr",
+                      "selector": null
                     }
-                ],
-                "action": "Block"
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
             },
             {
               "name": "Rule2",
@@ -164,27 +164,27 @@
           },
           "customRules": [
             {
-                "name": "Rule1",
-                "priority": 1,
-                "ruleType": "MatchRule",
-                "matchConditions": [
+              "name": "Rule1",
+              "priority": 1,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
                     {
-                        "matchVariables": [
-                            {
-                                "variableName": "RemoteAddr",
-                                "selector": null
-                            }
-                        ],
-                        "operator": "IPMatch",
-                        "negationConditon": false,
-                        "matchValues": [
-                            "192.168.1.0/24",
-                            "10.0.0.0/24"
-                        ],
-                        "transforms": []
+                      "variableName": "RemoteAddr",
+                      "selector": null
                     }
-                ],
-                "action": "Block"
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ],
+                  "transforms": []
+                }
+              ],
+              "action": "Block"
             },
             {
               "name": "Rule2",

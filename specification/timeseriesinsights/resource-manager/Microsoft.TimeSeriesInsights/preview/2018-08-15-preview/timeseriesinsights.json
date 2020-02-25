@@ -42,7 +42,9 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available Time Series Insights related operations.",
         "x-ms-examples": {
-          "List available operations for the Time Series Insights resource provider": { "$ref": "./examples/Operation_List.json" }
+          "List available operations for the Time Series Insights resource provider": {
+            "$ref": "./examples/Operation_List.json"
+          }
         },
         "parameters": [
           {
@@ -69,7 +71,9 @@
         ],
         "operationId": "Environments_CreateOrUpdate",
         "x-ms-examples": {
-          "EnvironmentsCreate": { "$ref": "./examples/EnvironmentsCreate.json" }
+          "EnvironmentsCreate": {
+            "$ref": "./examples/EnvironmentsCreate.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Create or update an environment in the specified subscription and resource group.",
@@ -133,7 +137,9 @@
         ],
         "operationId": "Environments_Get",
         "x-ms-examples": {
-          "EnvironmentsGet": { "$ref": "./examples/EnvironmentsGet.json" }
+          "EnvironmentsGet": {
+            "$ref": "./examples/EnvironmentsGet.json"
+          }
         },
         "description": "Gets the environment with the specified name in the specified subscription and resource group.",
         "parameters": [
@@ -174,7 +180,9 @@
         ],
         "operationId": "Environments_Update",
         "x-ms-examples": {
-          "EnvironmentsUpdate": { "$ref": "./examples/EnvironmentsPatchSkuCapacity.json" }
+          "EnvironmentsUpdate": {
+            "$ref": "./examples/EnvironmentsPatchSkuCapacity.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "description": "Updates the environment with the specified name in the specified subscription and resource group.",
@@ -189,11 +197,11 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "environmentUpdateParameters",
+            "name": "standardEnvironmentUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdateParameters"
+              "$ref": "#/definitions/StandardEnvironmentUpdateParameters"
             },
             "description": "Request object that contains the updated information for the environment."
           },
@@ -222,7 +230,9 @@
         ],
         "operationId": "Environments_Delete",
         "x-ms-examples": {
-          "EnvironmentsDelete": { "$ref": "./examples/EnvironmentsDelete.json" }
+          "EnvironmentsDelete": {
+            "$ref": "./examples/EnvironmentsDelete.json"
+          }
         },
         "description": "Deletes the environment with the specified name in the specified subscription and resource group.",
         "parameters": [
@@ -262,7 +272,9 @@
         ],
         "operationId": "Environments_ListByResourceGroup",
         "x-ms-examples": {
-          "EnvironmentsByResourceGroup": { "$ref": "./examples/EnvironmentsListByResourceGroup.json" }
+          "EnvironmentsByResourceGroup": {
+            "$ref": "./examples/EnvironmentsListByResourceGroup.json"
+          }
         },
         "description": "Lists all the available environments associated with the subscription and within the specified resource group.",
         "parameters": [
@@ -299,7 +311,9 @@
         ],
         "operationId": "Environments_ListBySubscription",
         "x-ms-examples": {
-          "EnvironmentsBySubscription": { "$ref": "./examples/EnvironmentsListBySubscription.json" }
+          "EnvironmentsBySubscription": {
+            "$ref": "./examples/EnvironmentsListBySubscription.json"
+          }
         },
         "description": "Lists all the available environments within a subscription, irrespective of the resource groups.",
         "parameters": [
@@ -333,7 +347,9 @@
         ],
         "operationId": "EventSources_CreateOrUpdate",
         "x-ms-examples": {
-          "CreateEventHubEventSource": { "$ref": "./examples/EventSourcesCreateEventHub.json" }
+          "CreateEventHubEventSource": {
+            "$ref": "./examples/EventSourcesCreateEventHub.json"
+          }
         },
         "description": "Create or update an event source under the specified environment.",
         "parameters": [
@@ -396,7 +412,9 @@
         ],
         "operationId": "EventSources_Get",
         "x-ms-examples": {
-          "GetEventHubEventSource": { "$ref": "./examples/EventSourcesGetEventHub.json" }
+          "GetEventHubEventSource": {
+            "$ref": "./examples/EventSourcesGetEventHub.json"
+          }
         },
         "description": "Gets the event source with the specified name in the specified environment.",
         "parameters": [
@@ -437,7 +455,9 @@
         ],
         "operationId": "EventSources_Update",
         "x-ms-examples": {
-          "UpdateEventSource": { "$ref": "./examples/EventSourcesPatchTags.json" }
+          "UpdateEventSource": {
+            "$ref": "./examples/EventSourcesPatchTags.json"
+          }
         },
         "description": "Updates the event source with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -487,7 +507,9 @@
         ],
         "operationId": "EventSources_Delete",
         "x-ms-examples": {
-          "DeleteEventSource": { "$ref": "./examples/EventSourcesDelete.json" }
+          "DeleteEventSource": {
+            "$ref": "./examples/EventSourcesDelete.json"
+          }
         },
         "description": "Deletes the event source with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -530,7 +552,9 @@
         ],
         "operationId": "EventSources_ListByEnvironment",
         "x-ms-examples": {
-          "ListEventSourcesByEnvironment": { "$ref": "./examples/EventSourcesListByEnvironment.json" }
+          "ListEventSourcesByEnvironment": {
+            "$ref": "./examples/EventSourcesListByEnvironment.json"
+          }
         },
         "description": "Lists all the available event sources associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -570,7 +594,9 @@
         ],
         "operationId": "ReferenceDataSets_CreateOrUpdate",
         "x-ms-examples": {
-          "ReferenceDataSetsCreate": { "$ref": "./examples/ReferenceDataSetsCreate.json" }
+          "ReferenceDataSetsCreate": {
+            "$ref": "./examples/ReferenceDataSetsCreate.json"
+          }
         },
         "description": "Create or update a reference data set in the specified environment.",
         "parameters": [
@@ -633,7 +659,9 @@
         ],
         "operationId": "ReferenceDataSets_Get",
         "x-ms-examples": {
-          "ReferenceDataSetsGet": { "$ref": "./examples/ReferenceDataSetsGet.json" }
+          "ReferenceDataSetsGet": {
+            "$ref": "./examples/ReferenceDataSetsGet.json"
+          }
         },
         "description": "Gets the reference data set with the specified name in the specified environment.",
         "parameters": [
@@ -674,7 +702,9 @@
         ],
         "operationId": "ReferenceDataSets_Update",
         "x-ms-examples": {
-          "ReferenceDataSetsUpdate": { "$ref": "./examples/ReferenceDataSetsPatchTags.json" }
+          "ReferenceDataSetsUpdate": {
+            "$ref": "./examples/ReferenceDataSetsPatchTags.json"
+          }
         },
         "description": "Updates the reference data set with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -724,7 +754,9 @@
         ],
         "operationId": "ReferenceDataSets_Delete",
         "x-ms-examples": {
-          "ReferenceDataSetsDelete": { "$ref": "./examples/ReferenceDataSetsDelete.json" }
+          "ReferenceDataSetsDelete": {
+            "$ref": "./examples/ReferenceDataSetsDelete.json"
+          }
         },
         "description": "Deletes the reference data set with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -767,7 +799,9 @@
         ],
         "operationId": "ReferenceDataSets_ListByEnvironment",
         "x-ms-examples": {
-          "ReferenceDataSetsListByEnvironment": { "$ref": "./examples/ReferenceDataSetsListByEnvironment.json" }
+          "ReferenceDataSetsListByEnvironment": {
+            "$ref": "./examples/ReferenceDataSetsListByEnvironment.json"
+          }
         },
         "description": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -807,7 +841,9 @@
         ],
         "operationId": "AccessPolicies_CreateOrUpdate",
         "x-ms-examples": {
-          "AccessPoliciesCreate": { "$ref": "./examples/AccessPoliciesCreate.json" }
+          "AccessPoliciesCreate": {
+            "$ref": "./examples/AccessPoliciesCreate.json"
+          }
         },
         "description": "Create or update an access policy in the specified environment.",
         "parameters": [
@@ -870,7 +906,9 @@
         ],
         "operationId": "AccessPolicies_Get",
         "x-ms-examples": {
-          "AccessPoliciesGet": { "$ref": "./examples/AccessPoliciesGet.json" }
+          "AccessPoliciesGet": {
+            "$ref": "./examples/AccessPoliciesGet.json"
+          }
         },
         "description": "Gets the access policy with the specified name in the specified environment.",
         "parameters": [
@@ -911,7 +949,9 @@
         ],
         "operationId": "AccessPolicies_Update",
         "x-ms-examples": {
-          "AccessPoliciesUpdate": { "$ref": "./examples/AccessPoliciesPatchRoles.json" }
+          "AccessPoliciesUpdate": {
+            "$ref": "./examples/AccessPoliciesPatchRoles.json"
+          }
         },
         "description": "Updates the access policy with the specified name in the specified subscription, resource group, and environment.",
         "parameters": [
@@ -961,7 +1001,9 @@
         ],
         "operationId": "AccessPolicies_Delete",
         "x-ms-examples": {
-          "AccessPoliciesDelete": { "$ref": "./examples/AccessPoliciesDelete.json" }
+          "AccessPoliciesDelete": {
+            "$ref": "./examples/AccessPoliciesDelete.json"
+          }
         },
         "description": "Deletes the access policy with the specified name in the specified subscription, resource group, and environment",
         "parameters": [
@@ -1004,7 +1046,9 @@
         ],
         "operationId": "AccessPolicies_ListByEnvironment",
         "x-ms-examples": {
-          "AccessPoliciesByEnvironment": { "$ref": "./examples/AccessPoliciesListByEnvironment.json" }
+          "AccessPoliciesByEnvironment": {
+            "$ref": "./examples/AccessPoliciesListByEnvironment.json"
+          }
         },
         "description": "Lists all the available access policies associated with the environment.",
         "parameters": [
@@ -1120,7 +1164,10 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -1181,6 +1228,7 @@
           "enum": [
             "S1",
             "S2",
+            "P1",
             "L1"
           ],
           "x-ms-enum": {
@@ -1201,6 +1249,20 @@
         "capacity"
       ],
       "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+    },
+    "WarmStoreConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "dataRetention": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying the number of days the environment's events will be available for query from the warm store."
+        }
+      },
+      "required": [
+        "dataRetention"
+      ],
+      "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
     },
     "LongTermStorageConfigurationInput": {
       "type": "object",
@@ -1251,7 +1313,10 @@
         "location": {
           "type": "string",
           "description": "The location of the resource.",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -1468,7 +1533,10 @@
         "storageLimitExceededBehavior": {
           "type": "string",
           "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
-          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "enum": [
+            "PurgeOldData",
+            "PauseIngress"
+          ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
             "modelAsString": true
@@ -1499,6 +1567,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationInput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1561,6 +1634,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationOutput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1589,7 +1667,10 @@
         "storageLimitExceededBehavior": {
           "type": "string",
           "description": "The behavior the Time Series Insights service should take when the environment's capacity has been exceeded. If \"PauseIngress\" is specified, new events will not be read from the event source. If \"PurgeOldData\" is specified, new events will continue to be read and old events will be deleted from the environment. The default behavior is PurgeOldData.",
-          "enum": [ "PurgeOldData", "PauseIngress" ],
+          "enum": [
+            "PurgeOldData",
+            "PauseIngress"
+          ],
           "x-ms-enum": {
             "name": "StorageLimitExceededBehavior",
             "modelAsString": true
@@ -1612,12 +1693,10 @@
           "$ref": "#/definitions/LongTermStorageConfigurationMutableProperties",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
-        "timeSeriesIdProperties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesIdProperty"
-          },
-          "description": "The list of event properties which will be used to partition data in the environment."
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       }
     },
@@ -1649,6 +1728,10 @@
         "ingress": {
           "$ref": "#/definitions/IngressEnvironmentStatus",
           "description": "An object that represents the status of ingress on an environment."
+        },
+        "warmStorage": {
+          "$ref": "#/definitions/WarmStorageEnvironmentStatus",
+          "description": "An object that represents the status of warm storage on an environment."
         }
       }
     },
@@ -1690,6 +1773,64 @@
         "message": {
           "type": "string",
           "description": "A message that describes the state in detail."
+        }
+      }
+    },
+    "WarmStorageEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of warm storage on an environment.",
+      "properties": {
+        "propertiesUsage": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsage",
+          "description": "An object that contains the status of warm storage properties usage."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsage": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the status of warm storage properties usage.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of warm storage properties usage. It can be \"Ok\", \"Error\", \"Unknown\".",
+          "enum": [
+            "Ok",
+            "Error",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "WarmStoragePropertiesState",
+            "modelAsString": true
+          }
+        },
+        "stateDetails": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsageStateDetails",
+          "description": "An object that contains the details about warm storage properties usage state."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsageStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details about warm storage properties usage state.",
+      "properties": {
+        "currentCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maxCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU.",
+          "minimum": 1,
+          "maximum": 10
         }
       }
     },
@@ -1819,7 +1960,10 @@
         "kind": {
           "type": "string",
           "description": "The kind of the event source.",
-          "enum": [ "Microsoft.EventHub", "Microsoft.IoTHub" ]
+          "enum": [
+            "Microsoft.EventHub",
+            "Microsoft.IoTHub"
+          ]
         }
       },
       "required": [
@@ -2148,7 +2292,10 @@
         "dataStringComparisonBehavior": {
           "type": "string",
           "description": "The reference data set key comparison behavior can be set using this property. By default, the value is 'Ordinal' - which means case sensitive key comparison will be performed while joining reference data with events or while adding new reference data. When 'OrdinalIgnoreCase' is set, case insensitive comparison will be used.",
-          "enum": [ "Ordinal", "OrdinalIgnoreCase" ],
+          "enum": [
+            "Ordinal",
+            "OrdinalIgnoreCase"
+          ],
           "x-ms-enum": {
             "name": "DataStringComparisonBehavior",
             "modelAsString": true

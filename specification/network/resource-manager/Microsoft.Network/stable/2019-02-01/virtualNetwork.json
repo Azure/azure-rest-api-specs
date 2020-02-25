@@ -79,7 +79,9 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete virtual network": { "$ref": "./examples/VirtualNetworkDelete.json" }
+          "Delete virtual network": {
+            "$ref": "./examples/VirtualNetworkDelete.json"
+          }
         }
       },
       "get": {
@@ -126,9 +128,15 @@
           }
         },
         "x-ms-examples": {
-          "Get virtual network": { "$ref": "./examples/VirtualNetworkGet.json" },
-          "Get virtual network with a delegated subnet": { "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json" },
-          "Get virtual network with service association links": { "$ref": "./examples/VirtualNetworkGetWithServiceAssociationLink.json" }
+          "Get virtual network": {
+            "$ref": "./examples/VirtualNetworkGet.json"
+          },
+          "Get virtual network with a delegated subnet": {
+            "$ref": "./examples/VirtualNetworkGetWithSubnetDelegation.json"
+          },
+          "Get virtual network with service association links": {
+            "$ref": "./examples/VirtualNetworkGetWithServiceAssociationLink.json"
+          }
         }
       },
       "put": {
@@ -187,12 +195,24 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create virtual network": { "$ref": "./examples/VirtualNetworkCreate.json" },
-          "Create virtual network with subnet": { "$ref": "./examples/VirtualNetworkCreateSubnet.json" },
-          "Create virtual network with subnet containing address prefixes": { "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json" },
-          "Create virtual network with service endpoints": { "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json" },
-          "Create virtual network with service endpoints and service endpoint policy": { "$ref": "./examples/VirtualNetworkCreateServiceEndpointPolicy.json" },
-          "Create virtual network with delegated subnets": { "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json" }
+          "Create virtual network": {
+            "$ref": "./examples/VirtualNetworkCreate.json"
+          },
+          "Create virtual network with subnet": {
+            "$ref": "./examples/VirtualNetworkCreateSubnet.json"
+          },
+          "Create virtual network with subnet containing address prefixes": {
+            "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json"
+          },
+          "Create virtual network with service endpoints": {
+            "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json"
+          },
+          "Create virtual network with service endpoints and service endpoint policy": {
+            "$ref": "./examples/VirtualNetworkCreateServiceEndpointPolicy.json"
+          },
+          "Create virtual network with delegated subnets": {
+            "$ref": "./examples/VirtualNetworkCreateSubnetWithDelegation.json"
+          }
         }
       },
       "patch": {
@@ -242,7 +262,9 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update virtual network tags": { "$ref": "./examples/VirtualNetworkUpdateTags.json" }
+          "Update virtual network tags": {
+            "$ref": "./examples/VirtualNetworkUpdateTags.json"
+          }
         }
       }
     },
@@ -270,7 +292,9 @@
           }
         },
         "x-ms-examples": {
-          "List all virtual networks": { "$ref": "./examples/VirtualNetworkListAll.json" }
+          "List all virtual networks": {
+            "$ref": "./examples/VirtualNetworkListAll.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -308,7 +332,9 @@
           }
         },
         "x-ms-examples": {
-          "List virtual networks in resource group": { "$ref": "./examples/VirtualNetworkList.json" }
+          "List virtual networks in resource group": {
+            "$ref": "./examples/VirtualNetworkList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -363,7 +389,9 @@
           }
         },
         "x-ms-examples": {
-          "Delete subnet": { "$ref": "./examples/SubnetDelete.json" }
+          "Delete subnet": {
+            "$ref": "./examples/SubnetDelete.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -421,8 +449,12 @@
           }
         },
         "x-ms-examples": {
-          "Get subnet": { "$ref": "./examples/SubnetGet.json" },
-          "Get subnet with a delegation": { "$ref": "./examples/SubnetGetWithDelegation.json" }
+          "Get subnet": {
+            "$ref": "./examples/SubnetGet.json"
+          },
+          "Get subnet with a delegation": {
+            "$ref": "./examples/SubnetGetWithDelegation.json"
+          }
         }
       },
       "put": {
@@ -488,9 +520,15 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create subnet": { "$ref": "./examples/SubnetCreate.json" },
-          "Create subnet with service endpoints": { "$ref": "./examples/SubnetCreateServiceEndpoint.json" },
-          "Create subnet with a delegation": { "$ref": "./examples/SubnetCreateWithDelegation.json" }
+          "Create subnet": {
+            "$ref": "./examples/SubnetCreate.json"
+          },
+          "Create subnet with service endpoints": {
+            "$ref": "./examples/SubnetCreateServiceEndpoint.json"
+          },
+          "Create subnet with a delegation": {
+            "$ref": "./examples/SubnetCreateWithDelegation.json"
+          }
         }
       }
     },
@@ -549,7 +587,95 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Prepare Network Policies": { "$ref": "./examples/SubnetPrepareNetworkPolicies.json" }
+          "Prepare Network Policies": {
+            "$ref": "./examples/SubnetPrepareNetworkPolicies.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ResourceNavigationLinks": {
+      "get": {
+        "operationId": "ResourceNavigationLinks_Get",
+        "description": "Gets a list of resource navigation links for a subnet.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of resource navigation links for the subnet.",
+            "schema": {
+              "$ref": "#/definitions/ResourceNavigationLinksListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ServiceAssociationLinks": {
+      "get": {
+        "operationId": "ServiceAssociationLinks_Get",
+        "description": "Gets a list of service association links for a subnet.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network."
+          },
+          {
+            "name": "subnetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the subnet."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of service association links for the subnet.",
+            "schema": {
+              "$ref": "#/definitions/ServiceAssociationLinksListResult"
+            }
+          }
         }
       }
     },
@@ -594,7 +720,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List subnets": { "$ref": "./examples/SubnetList.json" }
+          "List subnets": {
+            "$ref": "./examples/SubnetList.json"
+          }
         }
       }
     },
@@ -646,7 +774,9 @@
           }
         },
         "x-ms-examples": {
-          "Delete peering": { "$ref": "./examples/VirtualNetworkPeeringDelete.json" }
+          "Delete peering": {
+            "$ref": "./examples/VirtualNetworkPeeringDelete.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -697,7 +827,9 @@
           }
         },
         "x-ms-examples": {
-          "Get peering": { "$ref": "./examples/VirtualNetworkPeeringGet.json" }
+          "Get peering": {
+            "$ref": "./examples/VirtualNetworkPeeringGet.json"
+          }
         }
       },
       "put": {
@@ -759,7 +891,9 @@
           }
         },
         "x-ms-examples": {
-          "Create peering": { "$ref": "./examples/VirtualNetworkPeeringCreate.json" }
+          "Create peering": {
+            "$ref": "./examples/VirtualNetworkPeeringCreate.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -808,7 +942,9 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List peerings": { "$ref": "./examples/VirtualNetworkPeeringList.json" }
+          "List peerings": {
+            "$ref": "./examples/VirtualNetworkPeeringList.json"
+          }
         }
       }
     },
@@ -854,7 +990,9 @@
           }
         },
         "x-ms-examples": {
-          "Check IP address availability": { "$ref": "./examples/VirtualNetworkCheckIPAddressAvailability.json" }
+          "Check IP address availability": {
+            "$ref": "./examples/VirtualNetworkCheckIPAddressAvailability.json"
+          }
         }
       }
     },
@@ -893,7 +1031,9 @@
           }
         },
         "x-ms-examples": {
-          "VnetGetUsage": { "$ref": "./examples/VirtualNetworkListUsage.json" }
+          "VnetGetUsage": {
+            "$ref": "./examples/VirtualNetworkListUsage.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1052,7 +1192,7 @@
           "description": "The reference of the RouteTable resource."
         },
         "natGateway": {
-          "$ref":"./network.json#/definitions/SubResource",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Nat gateway associated with this subnet."
         },
         "serviceEndpoints": {
@@ -1253,6 +1393,38 @@
         }
       },
       "description": "Response for ListSubnets API service callRetrieves all subnet that belongs to a virtual network"
+    },
+    "ResourceNavigationLinksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceNavigationLink"
+          },
+          "description": "The resource navigation links in a subnet."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ResourceNavigationLinks_Get operation."
+    },
+    "ServiceAssociationLinksListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceAssociationLink"
+          },
+          "description": "The service association links in a subnet."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ServiceAssociationLinks_Get operation."
     },
     "VirtualNetworkPeeringListResult": {
       "properties": {

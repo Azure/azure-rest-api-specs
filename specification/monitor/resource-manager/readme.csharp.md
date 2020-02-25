@@ -18,7 +18,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Monitor
-  output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
+  output-folder: $(csharp-sdks-folder)/monitor/Microsoft.Azure.Management.Monitor/src/Generated
   clear-output-folder: true
 ```
 

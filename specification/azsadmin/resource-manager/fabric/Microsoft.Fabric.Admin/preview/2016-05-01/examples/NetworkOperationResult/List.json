@@ -1,32 +1,27 @@
 {
-    "parameters": {
-        "api-version": "2016-05-01",
-        "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-        "resourceGroupName": "System.local",
-        "location": "local"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
-                    {
-                        "properties": {
-                            "provisioningState": "Succeeded"
-                        }
-                    },
-                    {
-                        "properties": {
-                            "provisioningState": "Failed"
-                        },
-                        "error":{
-                            "code":"OperationBlockedDueToUpdateInProgress",
-                            "message":"The operation cannot be performed at the present time, because there is an Azure Stack update in progress. Wait until the Azure Stack update is complete and then try your operation again."
-                        }
-                        
-                    }
-                ]
+  "parameters": {
+    "api-version": "2016-05-01",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "System.local",
+    "location": "local"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded"
             }
-        },
-        "404": {}
-    }
+          },
+          {
+            "properties": {
+              "provisioningState": "Failed"
+            }
+          }
+        ]
+      }
+    },
+    "404": {}
+  }
 }

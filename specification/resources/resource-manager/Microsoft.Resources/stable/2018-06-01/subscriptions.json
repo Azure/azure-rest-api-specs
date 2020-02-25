@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SubscriptionClient",
-    "version": "2016-06-01",
+    "version": "2018-06-01",
     "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization."
   },
   "host": "management.azure.com",
@@ -320,6 +320,30 @@
           "readOnly": true,
           "type": "string",
           "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "country": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region name of the address for the tenant."
+        },
+        "countryCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Country/region abbreviation for the tenant."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the tenant."
+        },
+        "domains": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The domain name for a tenant."
+          },
+          "description": "The list of domains for the tenant."
         }
       },
       "description": "Tenant Id information."

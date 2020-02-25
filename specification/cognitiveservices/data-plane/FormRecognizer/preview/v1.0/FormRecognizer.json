@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v1.0-preview",
-    "title": "Cognitive Service Form Recognizer API V1 (Preview)",
+    "version": "1.0-preview",
+    "title": "Form Recognizer Client",
     "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
   },
   "securityDefinitions": {
@@ -33,7 +33,7 @@
     "/custom/train": {
       "post": {
         "summary": "Train Model",
-        "description": "The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration\r\n setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained are expected to be under the source. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'.\"\r\n Other content is ignored when training a model.",
+        "description": "Create and train a custom model. The train request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration\r\n setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be directly under the source folder. Subfolders are not supported. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg' and 'image/png'.\"\r\n Other type of content is ignored.",
         "operationId": "TrainCustomModel",
         "consumes": [
           "application/json"
@@ -69,6 +69,9 @@
         "x-ms-examples": {
           "Train new model example": {
             "$ref": "./examples/Train.json"
+          },
+          "Train new model example, subfolder filter options": {
+            "$ref": "./examples/TrainWithSubFolders.json"
           }
         }
       }
@@ -76,12 +79,12 @@
     "/custom/models/{id}/keys": {
       "get": {
         "summary": "Get Keys",
-        "description": "Use the API to retrieve the keys that were\r\n extracted by the specified model.",
+        "description": "Retrieve the keys that were\r\n extracted during the training of the specified model.",
         "operationId": "GetExtractedKeys",
         "consumes": [],
         "produces": [
           "application/json"
-		],
+        ],
         "parameters": [
           {
             "name": "id",
@@ -116,7 +119,7 @@
     "/custom/models": {
       "get": {
         "summary": "Get Models",
-        "description": "Get information about all trained models",
+        "description": "Get information about all trained custom models",
         "operationId": "GetCustomModels",
         "consumes": [],
         "produces": [
@@ -167,7 +170,7 @@
           "200": {
             "description": "Success",
             "schema": {
-                "$ref": "#/definitions/ModelResult"
+              "$ref": "#/definitions/ModelResult"
             }
           },
           "default": {
@@ -222,7 +225,7 @@
     "/custom/models/{id}/analyze": {
       "post": {
         "summary": "Analyze Form",
-        "description": "The document to analyze must be of a supported content type - 'application/pdf', 'image/jpeg' or 'image/png'. The response contains not just the extracted information of the analyzed form but also information about content that was not extracted along with a reason.",
+        "description": "Extract key-value pairs from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg' or 'image/png'. A success response is returned in JSON.",
         "operationId": "AnalyzeWithCustomModel",
         "consumes": [
           "application/pdf",
@@ -296,6 +299,26 @@
           "maxLength": 2048,
           "minLength": 0,
           "type": "string"
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/TrainSourceFilter",
+          "description": "Get or set filter to further search the\r\nsource path for content."
+        }
+      }
+    },
+    "TrainSourceFilter": {
+      "description": "Filters to be applied when traversing a data source.",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "A case-sensitive prefix string to filter content\r\nunder the source location. For e.g., when using a Azure Blob\r\nUri use the prefix to restrict subfolders for content.",
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "includeSubFolders": {
+          "description": "A flag to indicate if sub folders within the set of\r\nprefix folders will also need to be included when searching\r\nfor content to be preprocessed.",
+          "type": "boolean"
         }
       }
     },
@@ -337,7 +360,9 @@
           "additionalProperties": {
             "uniqueItems": false,
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
@@ -354,7 +379,11 @@
         },
         "status": {
           "description": "Get or set the status of model.",
-          "enum": [ "created", "ready", "invalid" ],
+          "enum": [
+            "created",
+            "ready",
+            "invalid"
+          ],
           "type": "string"
         },
         "createdDateTime": {

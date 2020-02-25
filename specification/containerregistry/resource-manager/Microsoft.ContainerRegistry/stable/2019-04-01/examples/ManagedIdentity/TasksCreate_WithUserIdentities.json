@@ -16,7 +16,6 @@
           "cpu": 2
         },
         "step": {
-          "type": "Docker",
           "imageNames": [
             "azurerest:testtag"
           ],
@@ -37,11 +36,11 @@
             }
           ]
         },
-        "trigger":{
+        "trigger": {
           "timerTriggers": [
             {
               "name": "myTimerTrigger",
-              "schedule": "0 30 9 * * 1-5"
+              "schedule": "30 9 * * 1-5"
             }
           ],
           "sourceTriggers": [
@@ -56,7 +55,7 @@
                   "token": "xxxxx"
                 }
               },
-              "sourceTriggerEvents":[
+              "sourceTriggerEvents": [
                 "commit"
               ]
             }
@@ -111,12 +110,12 @@
               }
             ]
           },
-          "trigger":{
+          "trigger": {
             "timerTriggers": [
               {
                 "name": "myTimerTrigger",
                 "status": "Enabled",
-                "schedule": "0 30 9 * * 1-5"
+                "schedule": "30 9 * * 1-5"
               }
             ],
             "sourceTriggers": [
@@ -128,7 +127,7 @@
                   "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
                   "branch": "master"
                 },
-                "sourceTriggerEvents":[
+                "sourceTriggerEvents": [
                   "commit"
                 ]
               }
@@ -192,12 +191,12 @@
               }
             ]
           },
-          "trigger":{
+          "trigger": {
             "timerTriggers": [
               {
                 "name": "myTimerTrigger",
                 "status": "Enabled",
-                "schedule": "0 30 9 * * 1-5"
+                "schedule": "30 9 * * 1-5"
               }
             ],
             "sourceTriggers": [
@@ -209,7 +208,7 @@
                   "repositoryUrl": "https://github.com/Azure/azure-rest-api-specs",
                   "branch": "master"
                 },
-                "sourceTriggerEvents":[
+                "sourceTriggerEvents": [
                   "commit"
                 ]
               }
