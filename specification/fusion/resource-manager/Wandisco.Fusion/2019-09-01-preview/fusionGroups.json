@@ -57,7 +57,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -100,7 +100,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -146,7 +146,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -163,7 +163,7 @@
           "fusionGroup"
         ],
         "description": "Create or update fusionGroup resource.",
-        "operationId": "FusionGroups_CreateAndUpdate",
+        "operationId": "FusionGroups_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -195,7 +195,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -238,7 +238,7 @@
             "description": "The Fusion Group was not found"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -254,7 +254,7 @@
         "tags": [
           "fusionGroup"
         ],
-        "description": "DePatches  a fusionGroup resource.",
+        "description": "Patches a fusionGroup resource.",
         "operationId": "FusionGroups_Update",
         "parameters": [
           {
@@ -286,14 +286,14 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Successful delete": {
+          "Successful Patch": {
             "$ref": "./examples/FusionGroup/FusionGroupPatch.json"
           }
         }
@@ -328,7 +328,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -377,7 +377,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -394,7 +394,7 @@
           "azureZone"
         ],
         "description": "Creates a given azureZone.",
-        "operationId": "AzureZones_Create",
+        "operationId": "AzureZones_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -435,7 +435,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -452,6 +452,57 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "azureZone"
+        ],
+        "description": "Updates a given azureZone.",
+        "operationId": "AzureZones_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "name": "azureZone",
+            "description": "azureZone update fields.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Azure Zone.",
+            "schema": {
+              "$ref": "#/definitions/AzureZoneResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Patch": {
+            "$ref": "./examples/FusionGroup/AzureZonePatch.json"
+          }
         }
       },
       "delete": {
@@ -488,7 +539,7 @@
             "description": "The Azure Zone was not found"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -537,7 +588,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -589,7 +640,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -650,7 +701,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -664,6 +715,60 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Plugins"
+        ],
+        "description": "Updates a Plugin",
+        "operationId": "Plugins_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/AzureZoneParameter"
+          },
+          {
+            "$ref": "#/parameters/PluginsParameter"
+          },
+          {
+            "name": "plugin",
+            "description": "plugin update details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Plugin.",
+            "schema": {
+              "$ref": "#/definitions/Plugin"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Plugin Patch": {
+            "$ref": "./examples/FusionGroup/PluginPatch.json"
+          }
         }
       },
       "delete": {
@@ -703,7 +808,7 @@
             "description": "The Plugin was not found"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -749,7 +854,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -797,7 +902,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -813,8 +918,8 @@
         "tags": [
           "replicationRule"
         ],
-        "description": "Update a replicationRule",
-        "operationId": "ReplicationRules_CreateAndUpdate",
+        "description": "Create or update a replicationRule",
+        "operationId": "ReplicationRules_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -855,7 +960,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -869,6 +974,57 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "replicationRule"
+        ],
+        "description": "Update a replicationRule",
+        "operationId": "ReplicationRules_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "name": "replicationRule",
+            "description": "replicationRule update details",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/ReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Replication Rule": {
+            "$ref": "./examples/FusionGroup/ReplicationRulePatch.json"
+          }
         }
       },
       "delete": {
@@ -905,7 +1061,7 @@
             "description": "The Replication Rule was not found"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -959,11 +1115,8 @@
           "200": {
             "description": "OK. The request to consistency check the path was accepted."
           },
-          "204": {
-            "description": "The path to check is not mapped."
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -976,24 +1129,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/operations": {
+    "/providers/Wandisco.Fusion/operations": {
       "get": {
         "tags": [
           "Operations"
         ],
         "description": "Lists all of the available RP operations.",
-        "operationId": "ListOperations_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
+        "operationId": "Operations_list",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -1002,7 +1144,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1024,7 +1166,7 @@
           "onPremZone"
         ],
         "description": "Returns list of OnPremZones.",
-        "operationId": "OnPremZones_List",
+        "operationId": "OnPremZones_ListByFusionGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1047,7 +1189,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1096,7 +1238,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1113,7 +1255,7 @@
           "onPremZone"
         ],
         "description": "Creates a given OnPremZone.",
-        "operationId": "OnPremZones_Create",
+        "operationId": "OnPremZones_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1154,7 +1296,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1168,6 +1310,57 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "onPremZone"
+        ],
+        "description": "Updates a given OnPremZone.",
+        "operationId": "OnPremZones_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/OnPremZoneParameter"
+          },
+          {
+            "name": "OnPremZone",
+            "description": "onPremZone update details.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating OnPrem Zone.",
+            "schema": {
+              "$ref": "#/definitions/OnPremZoneResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Patch": {
+            "$ref": "./examples/FusionGroup/OnPremZonePatch.json"
+          }
         }
       },
       "delete": {
@@ -1204,7 +1397,7 @@
             "description": "The OnPrem Zone was not found"
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1253,7 +1446,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1270,12 +1463,58 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/replicationRules/{replicationRuleName}/migrations/{migrationName}": {
+      "get": {
+        "tags": [
+          "Migrations"
+        ],
+        "description": "Read migration",
+        "operationId": "Migrations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MigrationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Migration"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Migration": {
+            "$ref": "./examples/FusionGroup/MigrationGet.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "Migrations"
         ],
         "description": "Start a migration",
-        "operationId": "Migrations_Create",
+        "operationId": "Migrations_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1312,17 +1551,8 @@
               "$ref": "#/definitions/Migration"
             }
           },
-          "404": {
-            "description": "Not found"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1364,14 +1594,8 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
-          "404": {
-            "description": "Not found"
-          },
-          "400": {
-            "description": "Bad request"
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1415,17 +1639,8 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
-          "404": {
-            "description": "Not found"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1469,17 +1684,8 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
-          "404": {
-            "description": "Not found"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1523,17 +1729,8 @@
           "200": {
             "description": "OK. The request has succeeded."
           },
-          "404": {
-            "description": "Not found"
-          },
-          "409": {
-            "description": "Conflict"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1581,7 +1778,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "description": "Error response describing the reason for operation failure.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1593,9 +1790,320 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/hiveReplicationRules": {
+      "get": {
+        "tags": [
+          "hiveReplicationRules"
+        ],
+        "description": "List of hive replication rules",
+        "operationId": "HiveReplicationRules_ListByFusionGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "replicationRule details",
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Hive Replication Rules": {
+            "$ref": "./examples/FusionGroup/HiveReplicationRulesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/hiveReplicationRules/{hiveReplicationRuleName}": {
+      "get": {
+        "tags": [
+          "hiveReplicationRule"
+        ],
+        "description": "Return a given hiveReplicationRule",
+        "operationId": "HiveReplicationRules_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/HiveReplicationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "hiveReplicationRule details",
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Hive Replication Rule": {
+            "$ref": "./examples/FusionGroup/HiveReplicationRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "hiveReplicationRule"
+        ],
+        "description": "Create or update a hiveReplicationRule",
+        "operationId": "HiveReplicationRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/HiveReplicationRuleNameParameter"
+          },
+          {
+            "name": "hiveReplicationRule",
+            "description": "hiveReplicationRule details",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Hive Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRule"
+            }
+          },
+          "201": {
+            "description": "Creating Fusion Hive Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Hive Replication Rule": {
+            "$ref": "./examples/FusionGroup/HiveReplicationRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "hiveReplicationRule"
+        ],
+        "description": "Update a hiveReplicationRule",
+        "operationId": "HiveReplicationRules_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/HiveReplicationRuleNameParameter"
+          },
+          {
+            "name": "hiveReplicationRule",
+            "description": "hiveReplicationRule update details",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updating Fusion Hive Replication Rule.",
+            "schema": {
+              "$ref": "#/definitions/HiveReplicationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Hive Replication Rule": {
+            "$ref": "./examples/FusionGroup/HiveReplicationRulePatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "hiveReplicationRule"
+        ],
+        "description": "Delete a hiveReplicationRule",
+        "operationId": "HiveReplicationRules_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/HiveReplicationRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Hive Replication Rule was successfully deleted"
+          },
+          "202": {
+            "description": "The Hive Replication Rule was accepted for deletion"
+          },
+          "204": {
+            "description": "The Hive Replication Rule was not found"
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful delete": {
+            "$ref": "./examples/FusionGroup/HiveReplicationRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/hiveReplicationRules/{hiveReplicationRuleName}/consistencyCheck": {
+      "post": {
+        "tags": [
+          "Hive Consistency Check"
+        ],
+        "description": "Trigger a consistency check on a Hive Replication Rule",
+        "operationId": "HiveConsistencyCheck_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FusionGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/HiveReplicationRuleNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request to consistency check the rule was accepted."
+          },
+          "204": {
+            "description": "The rule to check is not present."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 404 - NotFound",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful start of Consistency Check": {
+            "$ref": "./examples/FusionGroup/HiveConsistencyCheckStart.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "TagsUpdate": {
+      "description": "Resource tags",
+      "properties": {
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Resource": {
       "description": "An Azure resource.",
       "properties": {
@@ -1617,7 +2125,11 @@
         "location": {
           "description": "Location of the resource.",
           "type": "string",
-          "readOnly": false
+          "readOnly": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "description": "resource tags.",
@@ -1651,23 +2163,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ResourceList": {
-      "description": "The list of Resources.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Resource list.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of resources",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Resource"
-          }
-        }
-      }
     },
     "VirtualMachineIdentity": {
       "properties": {
@@ -1716,7 +2211,8 @@
             "provisioningState": {
               "title": "ProvisioningState",
               "description": "Provisioning State of resource",
-              "$ref": "#/definitions/ProvisioningState"
+              "$ref": "#/definitions/ProvisioningState",
+              "readOnly": true
             }
           }
         }
@@ -1813,10 +2309,6 @@
           "$ref": "#/definitions/VirtualMachineIdentity",
           "description": "Managed identity of storage account (use either key or identity)"
         },
-        "storageSecured": {
-          "description": "Secure transfer required",
-          "type": "boolean"
-        },
         "nodeCount": {
           "description": "The number of nodes in the zone",
           "type": "integer"
@@ -1824,7 +2316,56 @@
         "provisioningState": {
           "title": "ProvisioningState",
           "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "nodes": {
+          "title": "NodeDetailsList",
+          "description": "List of NodeDetails for each node in the zone",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeDetails"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "virtualNetworkId",
+        "subnet",
+        "storageAccountId",
+        "storageContainer"
+      ]
+    },
+    "NodeDetails": {
+      "title": "NodeDetails",
+      "description": "Details of a node in the zone",
+      "type": "object",
+      "properties": {
+        "vm": {
+          "x-ms-azure-resource": true,
+          "properties": {
+            "id": {
+              "type": "string",
+              "readOnly": true,
+              "description": "VM Resource Id"
+            }
+          }
+        },
+        "fusion": {
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "Up",
+                "Down",
+                "Unknown"
+              ],
+              "x-ms-enum": {
+                "name": "NodeStatus",
+                "modelAsString": false
+              }
+            }
+          }
         }
       }
     },
@@ -2009,7 +2550,10 @@
           "description": "induction token for on prem zone",
           "type": "string"
         }
-      }
+      },
+      "required":  [
+        "inductionToken"
+      ]
     },
     "OnPremZoneProperties": {
       "description": "on prem zone response properties",
@@ -2112,7 +2656,10 @@
           },
           "description": "The list of zones the replication rule applies to."
         }
-      }
+      },
+      "required": [
+        "path"
+      ]
     },
     "ReplicationRulesList": {
       "description": "The list of Replications Rules.",
@@ -2146,10 +2693,17 @@
       "description":  "Consistency Check Options Properties",
       "type" : "object",
       "properties": {
-        "nonBlocking" : {
-          "description" : "Enable a non-blocking consistency check",
-          "type": "boolean",
-          "default": true
+        "type": {
+          "enum": [
+            "NonBlocking",
+            "Blocking"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": false
+          },
+          "default": "NonBlocking"
         },
         "nonBlockingThreshold" : {
           "description": "The threshold of dirty files which will cancel a non-blocking consistency check should it be met",
@@ -2176,6 +2730,37 @@
         },
         "inconsistencyCount" : {
           "description": "The number of inconsistent files if the result of the consistency check is inconsistent",
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "HiveConsistencyReport": {
+      "description": "HiveConsistencyReport Results for rule",
+      "type": "object",
+      "properties": {
+        "running": {
+          "description": "The number of database where consistency check status is RUNNING",
+          "type": "integer",
+          "format": "int64"
+        },
+        "consistent": {
+          "description": "The number of database where consistency check status is CONSISTENT",
+          "type": "integer",
+          "format": "int64"
+        },
+        "inconsistent": {
+          "description": "The number of database where consistency check status is INCONSISTENT",
+          "type": "integer",
+          "format": "int64"
+        },
+        "failed": {
+          "description": "The number of database where consistency check status is FAILED",
+          "type": "integer",
+          "format": "int64"
+        },
+        "unknown": {
+          "description": "The number of database where consistency check status is UNKNOWN",
           "type": "integer",
           "format": "int64"
         }
@@ -2292,17 +2877,17 @@
     "MigrationProperties": {
       "description": "Properties of fusion migration",
       "properties": {
-        "donor": {
+        "source": {
           "type": "string",
-          "description": "The donor zone for replication rule"
+          "description": "The source zone for replication rule"
         },
-        "beneficiary": {
+        "target": {
           "type": "string",
-          "description": "The beneficiary zone for replication rule"
+          "description": "The target zone for replication rule"
         },
         "overwritePolicy": {
           "type": "string",
-          "description": "The overwrite policy for migration CLOBBER|SKIP_IF_SIZE_MATCH|SKIP_IF_DATE_IS_EARLIER",
+          "description": "The overwrite policy for migration Clobber|SkipIfSizeMatch|SkipIfDateIsEarlier",
           "enum": [
             "Clobber",
             "SkipIfSizeMatch",
@@ -2379,8 +2964,17 @@
         "progress": {
           "description": "Migration status",
           "$ref": "#/definitions/MigrationProgress"
+        },
+        "dateAfterWhichToMigrate": {
+          "description": "Date after which migration should occur. Required if overwritePolicy is SkipIfDateIsEarlier.",
+          "type": "string",
+          "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "source",
+        "target"
+      ]
     },
     "MigrationProgress": {
       "description": "Status of fusion migration",
@@ -2476,11 +3070,78 @@
         "Succeeded",
         "Failed",
         "Deleting",
-        "Deleted"
+        "Deleted",
+        "NotSpecified"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": false
+      }
+    },
+    "HiveReplicationRule": {
+      "description": "Hive Replication Rule",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "hive replication rule properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HiveReplicationRuleProperties"
+        }
+      }
+    },
+    "HiveReplicationRuleProperties": {
+      "description": "Properties of Created Hive Rule Name",
+      "type": "object",
+      "properties": {
+        "dbNamePattern": {
+          "type": "string",
+          "description": "The simple pattern of the Database as a mapped path determined by Fusion."
+        },
+        "tableNamePattern": {
+          "type": "string",
+          "description": "The simple pattern of the Table Name as a mapped path as determined by Fusion."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the hive replication rule."
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "recentConsistencyReport": {
+          "description": "A report of the most recent consistency check completed for this rule",
+          "type": "object",
+          "$ref": "#/definitions/HiveConsistencyReport",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dbNamePattern",
+        "tableNamePattern"
+      ]
+    },
+    "HiveReplicationRulesList": {
+      "description": "The list of Hive Replications Rules.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Hive Replication Rules list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of hive replication rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HiveReplicationRule"
+          }
+        }
       }
     }
   },
@@ -2521,7 +3182,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the azureZone resource.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "maxLength": 48
     },
     "OnPremZoneParameter": {
       "name": "onPremZoneName",
@@ -2569,6 +3231,14 @@
       "required": true,
       "type": "string",
       "description": "The id of the operationStatus",
+      "x-ms-parameter-location": "method"
+    },
+    "HiveReplicationRuleNameParameter": {
+      "name": "hiveReplicationRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the hiveReplicationRule",
       "x-ms-parameter-location": "method"
     }
   }
