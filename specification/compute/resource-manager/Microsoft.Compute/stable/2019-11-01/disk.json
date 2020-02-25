@@ -725,8 +725,8 @@
               "$ref": "#/definitions/DiskEncryptionSet"
             }
           },
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/DiskEncryptionSet"
             }
@@ -1516,28 +1516,6 @@
         "diskEncryptionSetId": {
           "type": "string",
           "description": "ResourceId of the disk encryption set to use for enabling encryption at rest."
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of key used to encrypt the data of the disk.",
-          "enum": [
-            "EncryptionAtRestWithPlatformKey",
-            "EncryptionAtRestWithCustomerKey"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "EncryptionAtRestWithPlatformKey",
-                "description": "Disk is encrypted at rest with a key managed by Microsoft."
-              },
-              {
-                "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted at rest with a key provided by the customer."
-              }
-            ]
-          }
         }
       },
       "description": "Encryption at rest settings for disk or snapshot"
@@ -1694,7 +1672,7 @@
         },
         "galleryImageReference": {
           "$ref": "#/definitions/ImageDiskReference",
-          "description": "Required if creating from a Gallery Image"
+          "description": "Required if creating from a Gallery Image. The id of the ImageDiskReference will be the ARM id of the shared galley image version from which to create a disk."
         },
         "sourceUri": {
           "type": "string",
