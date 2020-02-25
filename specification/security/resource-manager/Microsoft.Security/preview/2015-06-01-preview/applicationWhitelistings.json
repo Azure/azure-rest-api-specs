@@ -211,6 +211,9 @@
         "enforcementMode": {
           "$ref": "#/definitions/EnforcementMode"
         },
+        "protectionMode": {
+          "$ref": "#/definitions/ProtectionMode"
+        },
         "configurationStatus": {
           "$ref": "#/definitions/ConfigurationStatus"
         },
@@ -236,7 +239,12 @@
       "description": "The altered data of the recommended VM/server group policy",
       "properties": {
         "enforcementMode": {
+          "description": "The enforcement mode of the group. Can also be defined per collection type by using ProtectionMode",
           "$ref": "#/definitions/EnforcementMode"
+        },
+        "protectionMode": {
+          "description": "The protection mode of the group per collection type. Can also be defined for all collection types by using EnforcementMode",
+          "$ref": "#/definitions/ProtectionMode"
         },
         "vmRecommendations": {
           "$ref": "#/definitions/VmRecommendations"
@@ -259,11 +267,39 @@
     },
     "EnforcementMode": {
       "type": "string",
-      "description": "The application control policy enforcement mode of the VM/server group",
+      "description": "The application control policy enforcement/protection mode of the VM/server group",
       "enum": [
         "Audit",
-        "Enforce"
+        "Enforce",
+        "None"
       ]
+    },
+    "EnforcementSupport": {
+      "type": "string",
+      "description": "The VM/server supportability of Enforce feature",
+      "enum": [
+        "Supported",
+        "NotSupported",
+        "Unknown"
+      ]
+    },
+    "ProtectionMode": {
+      "type": "object",
+      "description": "The protection mode of the collection/file types. Exe/Msi/Script are used for Windows, Executable is used for Linux.",
+      "properties": {
+        "exe": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "msi": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "script": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "executable": {
+          "$ref": "#/definitions/EnforcementMode"
+        }
+      }
     },
     "RecommendationStatus": {
       "type": "string",
@@ -368,6 +404,9 @@
         },
         "resourceId": {
           "$ref": "#/definitions/VmResourceId"
+        },
+        "enforcementSupport": {
+          "$ref": "#/definitions/EnforcementSupport"
         }
       }
     },

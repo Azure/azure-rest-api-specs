@@ -30,6 +30,40 @@ tag: package-2018-07
 opt-in-extensible-enums: true
 ```
 
+### Tag: package-2020-02-preview
+
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-preview'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+```
+
+
+### Tag: package-2019-09-preview
+
+These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-preview'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+```
+
+
 ### Tag: package-2019-05-preview
 
 These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
@@ -203,7 +237,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2015-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2015_10_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2015_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2015_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -216,7 +250,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_03_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_03_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_03_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -229,7 +263,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -242,7 +276,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2018_07_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -255,7 +289,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-2019-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2019_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2019_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/mediaservices/mgmt-v2019_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -286,6 +320,15 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
+  - $(this-folder)/Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
@@ -294,14 +337,7 @@ input-file:
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Encoding.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Common.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
   - $(this-folder)/Microsoft.Media/stable/2015-10-01/media.json
   - $(this-folder)/Microsoft.Media/preview/2018-03-30-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2018-03-30-preview/Assets.json

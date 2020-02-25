@@ -26,9 +26,19 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-09
 ```
 
+
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+- Microsoft.KeyVault/stable/2019-09-01/providers.json
+```
 
 ### Tag: package-2018-02-14-preview
 
@@ -38,9 +48,7 @@ These settings apply only when `--tag=package-2018-02-14-preview` is specified o
 input-file:
 - Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
 - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
-- Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
 ```
-
 
 ### Tag: package-2018-02
 
@@ -64,7 +72,6 @@ input-file:
 - Microsoft.KeyVault/stable/2016-10-01/providers.json
 ```
 
-
 ### Tag: package-2015-06
 
 These settings apply only when `--tag=package-2015-06` is specified on the command line.
@@ -74,6 +81,14 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
+### Supressions
+
+``` yaml
+directive:
+- suppress:
+    - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
+    - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
+```
 
 ---
 # Code Generation
@@ -119,9 +134,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/stable/2019-09-01/providers.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
-  - $(this-folder)/Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-02-14/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/keyvault.json

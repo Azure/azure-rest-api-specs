@@ -628,6 +628,30 @@
           "readOnly": true,
           "type": "string",
           "description": "Log analytics query for getting the list of affected devices/alerts."
+        },
+        "topDevicesList": {
+          "description": "10 devices with the highest number of occurrences of this alert type, on this day.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "properties": {
+              "deviceId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Name of the device."
+              },
+              "alertsCount": {
+                "readOnly": true,
+                "type": "integer",
+                "description": "Number of alerts raised for this device."
+              },
+              "lastOccurrence": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Most recent time this alert was raised for this device, on this day."
+              }
+            }
+          }
         }
       }
     },
