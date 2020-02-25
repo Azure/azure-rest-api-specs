@@ -359,7 +359,7 @@
     "MediaGraph": {
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+          "$ref": "./Common.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -827,6 +827,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/MediaGraphOperationResult"
+            }
+          },
+          "default": {
+            "description": "Detailed error information.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
