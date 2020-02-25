@@ -60,6 +60,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
+| [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
 | [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 | [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
@@ -1408,9 +1409,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
-**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Model definition '{0}' has extra properties ['{1}'].
+**Output Message**: Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity, systemdata. Model definition '{0}' has extra properties ['{1}'].
 
 **Description**: Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), top level properties of a resource should be only ones from the allowed set.
+
+**CreatedAt** : N/A
+
+**LastModifiedAt** : February 18, 2020
 
 **Why the rule is important**: [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md). 
 
@@ -1662,10 +1667,55 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 **Output Message**: Properties of a PATCH request body must not be {0}. PATCH operation: '{1}' Model Definition: '{2}' Property: '{3}'
 
 **Description**: A request parameter of the Patch Operation must not have a required/default value.
+But it's allowed when all required properties are marked as discriminator, because the discriminator must be required.
+
+**CreatedAt** : N/A
+
+**LastModifiedAt** : February 18, 2020
 
 **Why the rule is important**: A PATCH operation is used to update properties of a resource. So, If the resource has 'X' number of properties and if you wish to change one of them, then a PATCH request could be sent with a value for that specified property. In other words, all the properties in the PATCH request are updated. Now, if any of the values are marked as required/default, it would force the system to update it always which is not the intention of the PATCH operation.
 
 **How to fix the violation**: Ensure that the request parameter of the Patch Operation does not have a required/default value.
+
+**Good Examples**: The following is a good example:
+```json
+......
+......
+  "patch": {
+    "tags": [
+      "SampleTag"
+    ],
+    "operationId": "Foo_Update",
+    "description": "Test Description",
+    "parameters": [
+      {
+        "name": "foo_patch",
+        "in": "body",
+        "schema": {
+          "$ref": "#/definitions/FooRequestParams"
+        },
+        "description": "foo patch request"
+      }
+    ]
+ }
+......
+......
+  "definitions": {
+    "FooRequestParams": {
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      },
+      "discriminator": "prop0",
+      "required": [
+        "prop0"
+      ]
+    }
+  }
+......
+......
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
@@ -1845,6 +1895,24 @@ or
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
+
+### <a name="r4004" ></a>R4004 OperationIdRequired
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
+
+**Description** : Each operation must has a unique operationId.
+
+**CreatedAt** : February 18, 2020
+
+**LastModifiedAt** : February 18, 2020
+
+**Why this rule is important**: Per [creating-swagger](creating-swagger.md#Paths),The operationId is used to determine the generated method name.
+
+**How to fix the violation**: Add the right operationId for each operation
 
 ### <a name="r3020" ></a>R3020 PathResourceProviderNamePascalCase
 
