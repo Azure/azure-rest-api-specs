@@ -32,16 +32,24 @@
       "description": "Manage Kafka topics"
     }
   ],
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/v1/consumer/topics/{topic}/partitions/{partition}/offsets/{offset}": {
       "get": {
-        "tags": [ "v1consumer" ],
+        "tags": [
+          "v1consumer"
+        ],
         "summary": "Consume records using a simple consumer",
         "description": "Consume records from one partition of a topic beginning with a specific offset. By default count is 1. It can read maximum of 6 megabytes of data at once",
-        "operationId": "consumeTopicInPartitionWithOffset",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Consumer_ConsumeTopicInPartitionWithOffset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "topic",
@@ -108,12 +116,18 @@
     },
     "/v1/metadata/brokers": {
       "get": {
-        "tags": [ "v1metadata" ],
+        "tags": [
+          "v1metadata"
+        ],
         "summary": "Get a list of Kafka brokers",
         "description": "Get a list of Kafka brokers with hostname, port, and broker id",
-        "operationId": "getBrokers",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Metadata_GetBrokers",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -144,12 +158,18 @@
     },
     "/v1/metadata/topics": {
       "get": {
-        "tags": [ "v1metadata" ],
+        "tags": [
+          "v1metadata"
+        ],
         "summary": "Get a list of Kafka topics",
         "description": "Get a list of Kafka topics. If it is a newly created topic, please wait a few seconds for it to show up.",
-        "operationId": "getTopics",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Metadata_GetTopics",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -180,12 +200,18 @@
     },
     "/v1/metadata/topics/{topic}/partitions": {
       "get": {
-        "tags": [ "v1metadata" ],
+        "tags": [
+          "v1metadata"
+        ],
         "summary": "Get metadata about all partitions for a specific topic",
         "description": "Get metadata about all partitions for a specific topic with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
-        "operationId": "getPartitions",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Metadata_GetTopicPartitions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "topic",
@@ -225,12 +251,18 @@
     },
     "/v1/metadata/topics/{topic}/partitions/{partition}": {
       "get": {
-        "tags": [ "v1metadata" ],
+        "tags": [
+          "v1metadata"
+        ],
         "summary": "Get metadata about a specific Kafka topic-partition",
         "description": "Get metadata about a specific Kafka topic-partition with partition ID, earliest offset, latest offset, leader, replicas, and in-sync replicas",
-        "operationId": "getPartitionMetadata",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Metadata_GetMetadataForPartition",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "topic",
@@ -278,12 +310,18 @@
     },
     "/v1/producer/topics/{topic}": {
       "post": {
-        "tags": [ "v1producer" ],
+        "tags": [
+          "v1producer"
+        ],
         "summary": "Produce records",
         "description": "Produce records to a topic in Kafka. If producing records to a newly created topic, please wait a few seconds for the topic to show up.",
-        "operationId": "produceMessageToTopic",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Producer_ProduceMessageToTopic",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "topic",
@@ -332,12 +370,18 @@
     },
     "/v1/status": {
       "get": {
-        "tags": [ "v1status" ],
+        "tags": [
+          "v1status"
+        ],
         "summary": "Check the status of Kafka Rest proxy server",
         "description": "Check the status of Kafka Rest proxy server",
-        "operationId": "checkRestproxyStatus",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Admin_CheckRestProxyStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -350,12 +394,18 @@
     },
     "/v1/topics/{topic}": {
       "put": {
-        "tags": [ "v1topics" ],
+        "tags": [
+          "v1topics"
+        ],
         "summary": "Create a topic",
         "description": "Create a topic in Kafka with topic configuration",
-        "operationId": "putTopics",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "operationId": "Admin_CreateTopic",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "topic",
@@ -447,7 +497,9 @@
     },
     "ProducerRecord": {
       "type": "object",
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "object",
