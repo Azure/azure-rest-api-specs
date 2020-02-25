@@ -1658,6 +1658,9 @@
           "Get a TI data connector.": {
             "$ref": "./examples/dataConnectors/GetThreatIntelligenceById.json"
           },
+          "Get a TI Taxii data connector.": {
+            "$ref": "./examples/dataConnectors/GetThreatIntelligenceTaxiiById.json"
+          },
           "Get a MCAS data connector.": {
             "$ref": "./examples/dataConnectors/GetMicrosoftCloudAppSecurityById.json"
           },
@@ -1824,6 +1827,9 @@
         "x-ms-examples": {
           "Check requirements for TI.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligence.json"
+          },
+          "Check requirements for TI Taxii.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligenceTaxii.json"
           },
           "Check requirements for AAD.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectory.json"
@@ -3399,6 +3405,11 @@
           "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com.",
           "readOnly": true,
           "type": "string"
+        },
+        "dnsDomain": {
+          "description": "The fully qualified domain DNS name.",
+          "readOnly": true,
+          "type": "string"
         }
       },
       "type": "object"
@@ -3600,6 +3611,23 @@
         "kind"
       ]
     },
+    "AlertRuleTemplateDataSource": {
+      "description": "alert rule template data sources",
+      "properties": {
+        "connectorId": {
+          "description": "The connector id that provides the following data types",
+          "type": "string"
+        },
+        "dataTypes": {
+          "description": "The data types used by the alert rule template",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AlertRuleTemplatePropertiesBase": {
       "description": "Base alert rule template property bag.",
       "properties": {
@@ -3622,9 +3650,9 @@
           "type": "string"
         },
         "requiredDataConnectors": {
-          "description": "The required data connectors for this template",
+          "description": "The required data sources for this template",
           "items": {
-            "$ref": "#/definitions/DataConnectorStatus"
+            "$ref": "#/definitions/AlertRuleTemplateDataSource"
           },
           "type": "array"
         },
@@ -3654,13 +3682,6 @@
               }
             ]
           }
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule template",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -4784,6 +4805,7 @@
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
+            "ThreatIntelligenceTaxii",
             "Office365",
             "AmazonWebServicesCloudTrail",
             "AzureAdvancedThreatProtection",
@@ -4805,6 +4827,9 @@
               },
               {
                 "value": "ThreatIntelligence"
+              },
+              {
+                "value": "ThreatIntelligenceTaxii"
               },
               {
                 "value": "Office365"
@@ -4846,31 +4871,6 @@
       "required": [
         "value"
       ]
-    },
-    "DataConnectorStatus": {
-      "description": "alert rule template data connector status",
-      "properties": {
-        "connectorId": {
-          "description": "the connector id",
-          "type": "string"
-        },
-        "dataTypes": {
-          "additionalProperties": {
-            "enum": [
-              "Exist",
-              "NotExist"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "modelAsString": true,
-              "name": "DataTypeStatus"
-            }
-          },
-          "description": "The data types availability map",
-          "type": "object"
-        }
-      },
-      "type": "object"
     },
     "DataConnectorRequirementsState": {
       "description": "Data connector requirements status.",
@@ -5585,6 +5585,13 @@
             "severity": {
               "$ref": "#/definitions/AlertSeverity",
               "description": "The severity for alerts created by this alert rule."
+            },
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -6382,13 +6389,6 @@
           "format": "date-time",
           "readOnly": true,
           "type": "string"
-        },
-        "tactics": {
-          "description": "The tactics of the alert rule",
-          "items": {
-            "$ref": "#/definitions/AttackTactic"
-          },
-          "type": "array"
         }
       },
       "required": [
@@ -7078,6 +7078,10 @@
             "$ref": "#/definitions/AttackTactic"
           },
           "type": "array"
+        },
+        "incidentConfiguration": {
+          "$ref": "#/definitions/IncidentConfiguration",
+          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
         }
       },
       "required": [
@@ -7112,6 +7116,15 @@
             }
           ],
           "description": "Scheduled alert rule template properties",
+          "properties": {
+            "tactics": {
+              "description": "The tactics of the alert rule template",
+              "items": {
+                "$ref": "#/definitions/AttackTactic"
+              },
+              "type": "array"
+            }
+          },
           "required": [
             "displayName",
             "description",
@@ -7129,6 +7142,111 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "IncidentConfiguration": {
+      "description": "Incident Configuration property bag.",
+      "properties": {
+        "createIncident": {
+          "description": "Create incidents from alerts triggered by this analytics rule",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/GroupingConfiguration",
+          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
+        }
+      },
+      "type": "object",
+      "required": [
+        "createIncident"
+      ]
+    },
+    "GroupingConfiguration": {
+      "description": "Grouping configuration property bag.",
+      "properties": {
+        "enabled": {
+          "description": "Grouping enabled",
+          "type": "boolean"
+        },
+        "reopenClosedIncident": {
+          "description": "Re-open closed matching incidents",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "description": "Limit the group to alerts created within the lookback duration (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "entitiesMatchingMethod": {
+          "description": "Grouping matching method",
+          "enum": [
+            "All",
+            "None",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntitiesMatchingMethod",
+            "values": [
+              {
+                "description": "Grouping alerts into a single incident if all the entities match",
+                "value": "All"
+              },
+              {
+                "description": "Grouping all alerts triggered by this rule into a single incident",
+                "value": "None"
+              },
+              {
+                "description": "Grouping alerts into a single incident if the selected entities match",
+                "value": "Custom"
+              }
+            ]
+          }
+        },
+        "groupByEntities": {
+          "description": "A list of entity types to group by (when entitiesMatchingMethod is Custom)",
+          "items": {
+            "description": "Grouping entity type",
+            "enum": [
+              "Account",
+              "Host",
+              "Ip",
+              "Url"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GroupingEntityType",
+              "values": [
+                {
+                  "description": "Account entity",
+                  "value": "Account"
+                },
+                {
+                  "description": "Host entity",
+                  "value": "Host"
+                },
+                {
+                  "description": "Ip entity",
+                  "value": "Ip"
+                },
+                {
+                  "description": "Url entity",
+                  "value": "Url"
+                }
+              ]
+            }
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "reopenClosedIncident",
+        "lookbackDuration",
+        "entitiesMatchingMethod"
+      ]
     },
     "SecurityAlert": {
       "allOf": [
@@ -7352,6 +7470,11 @@
             ]
           }
         },
+        "providerAlertId": {
+          "description": "The identifier of the alert inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
         "processingEndTime": {
           "description": "The time the alert was made available for consumption.",
           "format": "date-time",
@@ -7433,6 +7556,14 @@
           "description": "Holds the product identifier of the alert for the product.",
           "readOnly": true,
           "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "timeGenerated": {
           "description": "The time the alert was generated.",
@@ -7586,6 +7717,93 @@
         }
       ],
       "description": "TI (Threat Intelligence) requirements check properties.",
+      "type": "object",
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "TiTaxiiDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents threat intelligence taxii data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorProperties",
+          "description": "Threat intelligence taxii client data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiDataConnectorDataTypes": {
+      "description": "The available data types for Threat Intelligence taxii client data connector.",
+      "properties": {
+        "taxiiClient": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Data type for taxii client.",
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TiTaxiiDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Threat Intelligence taxii client data connector properties.",
+      "properties": {
+        "workspaceId": {
+          "description": "The workspace id.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "The friendly name for taxii client connector.",
+          "type": "string"
+        },
+        "taxiiServer": {
+          "description": "The API root server for taxii client.",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "The taxii collection id.",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The taxii server user name.",
+          "type": "string"
+        },
+        "password": {
+          "description": "The taxii server password.",
+          "type": "string"
+        },
+        "dataTypes": {
+          "$ref": "#/definitions/TiTaxiiDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object"
+    },
+    "TiTaxiiCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
       "type": "object",
       "discriminator": "kind",
       "required": [

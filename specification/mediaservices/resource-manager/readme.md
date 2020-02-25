@@ -326,9 +326,10 @@ input-file:
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
-  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - $(this-folder)/Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
