@@ -1439,6 +1439,9 @@ directive:
     from: networkwatcher.json
     where: $.definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ipAllocation.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ## Go
