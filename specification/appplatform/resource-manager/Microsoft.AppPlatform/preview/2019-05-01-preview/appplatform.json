@@ -65,6 +65,15 @@
         "operationId": "Services_CreateOrUpdate",
         "parameters": [
           {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -75,15 +84,6 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
           }
         ],
         "responses": {
@@ -168,6 +168,15 @@
         "operationId": "Services_Update",
         "parameters": [
           {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -178,15 +187,6 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServiceResource"
-            }
           }
         ],
         "responses": {
@@ -271,6 +271,15 @@
         "operationId": "Services_RegenerateTestKey",
         "parameters": [
           {
+            "name": "regenerateTestKeyRequest",
+            "in": "body",
+            "description": "Parameters for the operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -281,15 +290,6 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
-          },
-          {
-            "name": "regenerateTestKeyRequest",
-            "in": "body",
-            "description": "Parameters for the operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
-            }
           }
         ],
         "responses": {
@@ -451,6 +451,15 @@
         "operationId": "Apps_CreateOrUpdate",
         "parameters": [
           {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -464,15 +473,6 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "name": "appResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppResource"
-            }
           }
         ],
         "responses": {
@@ -556,6 +556,15 @@
         "operationId": "Apps_Update",
         "parameters": [
           {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -569,15 +578,6 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
-          },
-          {
-            "name": "appResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppResource"
-            }
           }
         ],
         "responses": {
@@ -756,6 +756,15 @@
         "operationId": "Bindings_CreateOrUpdate",
         "parameters": [
           {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -772,15 +781,6 @@
           },
           {
             "$ref": "#/parameters/BindingNameParameter"
-          },
-          {
-            "name": "bindingResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BindingResource"
-            }
           }
         ],
         "responses": {
@@ -857,6 +857,15 @@
         "operationId": "Bindings_Update",
         "parameters": [
           {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -873,15 +882,6 @@
           },
           {
             "$ref": "#/parameters/BindingNameParameter"
-          },
-          {
-            "name": "bindingResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BindingResource"
-            }
           }
         ],
         "responses": {
@@ -969,12 +969,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "availabilityParameters",
             "in": "body",
             "description": "Parameters supplied to the operation.",
@@ -982,6 +976,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityParameters"
             }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -1060,6 +1060,15 @@
         "operationId": "Deployments_CreateOrUpdate",
         "parameters": [
           {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1076,15 +1085,6 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "name": "deploymentResource",
-            "in": "body",
-            "description": "Parameters for the create or update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
           }
         ],
         "responses": {
@@ -1171,6 +1171,15 @@
         "operationId": "Deployments_Update",
         "parameters": [
           {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1187,15 +1196,6 @@
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
-          },
-          {
-            "name": "deploymentResource",
-            "in": "body",
-            "description": "Parameters for the update operation",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeploymentResource"
-            }
           }
         ],
         "responses": {
@@ -1634,6 +1634,30 @@
         }
       }
     },
+    "/internal/health": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "operationId": "Health_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AppPlatform/operations": {
       "get": {
         "tags": [
@@ -1669,6 +1693,66 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.AppPlatform/runtimeVersions": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "You can directly pass \"{value[i].value}\" attribute (in the response) to all deployment CRUD operations.",
+        "operationId": "RuntimeVersions_ListRuntimeVersions",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the details of all supported deployment runtime versions.",
+            "schema": {
+              "$ref": "#/definitions/AvailableRuntimeVersions"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeVersions_ListRuntimeVersions": {
+            "$ref": "./examples/RuntimeVersions_ListRuntimeVersions.json"
+          }
+        }
+      }
+    },
+    "/skus": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "operationId": "Sku_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSkuCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1685,6 +1769,10 @@
           "$ref": "#/definitions/ClusterResourceProperties",
           "description": "Properties of the Service resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Service resource"
         }
       }
     },
@@ -1772,6 +1860,22 @@
         },
         "serviceId": {
           "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "description": "Sku of Azure Spring Cloud",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Sku",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "Tier of the Sku",
           "type": "string",
           "readOnly": true
         }
@@ -2075,7 +2179,8 @@
             "Succeeded",
             "Failed",
             "Creating",
-            "Updating"
+            "Updating",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -2328,7 +2433,8 @@
             "Creating",
             "Updating",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Deleting"
           ],
           "type": "string",
           "readOnly": true,
@@ -2350,7 +2456,8 @@
             "Failed",
             "Allocating",
             "Upgrading",
-            "Compiling"
+            "Compiling",
+            "Processing"
           ],
           "type": "string",
           "readOnly": true,
@@ -2389,6 +2496,7 @@
           "description": "Type of the source uploaded",
           "enum": [
             "Jar",
+            "NetCoreZip",
             "Source"
           ],
           "type": "string",
@@ -2435,6 +2543,10 @@
           "description": "JVM parameter",
           "type": "string"
         },
+        "netCoreMainEntryPath": {
+          "description": "The path to the .NET executable relative to zip root",
+          "type": "string"
+        },
         "instanceCount": {
           "format": "int32",
           "description": "Instance count",
@@ -2454,7 +2566,8 @@
           "description": "Runtime version",
           "enum": [
             "Java_8",
-            "Java_11"
+            "Java_11",
+            "NetCore_31"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2724,6 +2837,123 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "Whether this dimension should be included for the Shoebox export scenario",
+          "type": "boolean"
+        }
+      }
+    },
+    "AvailableRuntimeVersions": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of all supported runtime versions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SupportedRuntimeVersion"
+          },
+          "readOnly": true
+        }
+      },
+      "readOnly": true
+    },
+    "SupportedRuntimeVersion": {
+      "description": "Supported deployment runtime version descriptor.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The raw value which could be passed to deployment CRUD operations.",
+          "enum": [
+            "Java_8",
+            "Java_11",
+            "NetCore_31"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RuntimeVersion",
+            "modelAsString": true
+          }
+        },
+        "platform": {
+          "description": "The platform of this runtime version (possible values: \"Java\" or \".NET\").",
+          "enum": [
+            "Java",
+            ".NET Core"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RuntimePlatform",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The detailed version (major.minor) of the platform.",
+          "type": "string"
+        }
+      },
+      "readOnly": true
+    },
+    "ResourceTypeSkuCollection": {
+      "description": "Collection of supported Skus of Azure Spring Cloud resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of supported Skus",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeSku"
+          }
+        }
+      }
+    },
+    "ResourceTypeSku": {
+      "description": "Supported Skus of Azure Spring Cloud resources",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "skus": {
+          "description": "Supported Skus",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuSetting"
+          }
+        }
+      }
+    },
+    "SkuSetting": {
+      "description": "Supported Sku settings of Azure Spring Cloud",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Sku",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Tier of the Sku",
+          "type": "string"
+        },
+        "locations": {
+          "description": "Locations of the Sku",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "description": "Required features of the Sku",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
