@@ -123,7 +123,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2064](#r2064) | [LROStatusCodesReturnTypeSchema](#r2064) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2023](#r2023) | [SummaryAndDescriptionMustNotBeSame](#r2023) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2010](#r2010) | [LongRunningOperationsOptionsValidator](#r2010) | ARM and Data plane OpenAPI(swagger) specs |
-
+| [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
+| [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
+  
 ### Documentation
 
 #### Documentation Errors
@@ -2094,5 +2096,73 @@ Valid:
 ]
 ```
 
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r2007" ></a>R2007 LongRunningOperationsWithLongRunningExtension
+
+**Category** : SDK Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The operation '{0}' returns 202 status code, which indicates a long running operation, please enable 'x-ms-long-running-operation'.  
+
+**Description** : Per [x-ms-long-running-operation](./swagger-extensions.md#x-ms-long-running-operation) ,The operation which returns 202 status code indicates a long running operation. Every long running operation must have the x-ms-long-running-operation enabled.
+
+**How to fix the violation**: 
+Having the "x-ms-long-running-operation" enabled.
+Eg:
+```json
+......
+......
+ "put": {
+        "operationId": "Foo_Create",
+        "responses": {
+          "202": {
+            "description": ""
+          },
+          "x-ms-long-running-operation": true
+        }
+      }
+......
+......
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
+### <a name="r2029" ></a>R2029 PageableOperation
+
+**Category** : SDK Warning
+
+**Applies to** : ARM and Data plane OpenAPI(swagger) specs
+
+**Output Message** : Based on the response model schema, operation '${operationId}' might be pageable. Consider adding the x-ms-pageable extension.  
+
+**Description** : This rule was introduced to check if a pageable operation has x-ms-pageable enabled.
+
+**How to fix the violation**: 
+Having the x-ms-pageable enabled if the operation is pageable.
+Eg:
+```json
+......
+......
+  "get": {
+        "operationId": "Foo_List",
+        "responses": {
+          "200": {
+            "description": ". ",
+            "schema": {
+              "$ref": "#/definitions/ant"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+......
+......
+```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
