@@ -485,6 +485,10 @@
         "corsConfiguration": {
           "$ref": "#/definitions/ServiceCorsConfigurationInfo",
           "description": "The settings for the CORS configuration of the service instance."
+        },
+        "exportConfiguration": {
+          "$ref": "#/definitions/ServiceExportConfigurationInfo",
+          "description": "The settings for the export operation of the service instance."
         }
       },
       "required": [
@@ -588,6 +592,17 @@
         }
       }
     },
+    "ServiceExportConfigurationInfo": {
+      "description": "Export operation configuration information",
+      "type": "object",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The name of the default export storage account.",
+          "readOnly": false
+        }
+      }
+    },
     "ServiceCorsConfigurationOriginEntry": {
       "description": "An origin for CORS.",
       "type": "string",
@@ -683,22 +698,22 @@
           "type": "string"
         },
         "identity": {
-            "type": "object",
-            "description": "Setting indicating whether the service has a managed identity associated with it.",
-            "properties": {
-                "type":{
-                    "description" : "Type of identity being specified, currently SystemAssigned and None are allowed.",
-                    "type": "string",
-                    "enum": [
-                        "SystemAssigned",
-                        "None"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ManagedServiceIdentityType",
-                        "modelAsString": true
-                    }
-                }
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
             }
+          }
         }
       },
       "x-ms-azure-resource": true,
