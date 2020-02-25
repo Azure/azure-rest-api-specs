@@ -308,7 +308,7 @@ directive:
     reason: Output not required for job update
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -320,7 +320,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
@@ -355,11 +354,11 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
