@@ -1474,6 +1474,10 @@
           "type": "string",
           "description": "Version of orchestrator specified when creating the managed cluster."
         },
+        "Upgrade": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "Settings for upgrading the agentpool"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -1561,6 +1565,15 @@
         "modelAsString": true
       },
       "description": "AgentPoolType represents types of an agent pool."
+    },
+    "AgentPoolUpgradeSettings": {
+      "properties": {
+        "MaxSurge": {
+          "type": "string",
+          "description": "Version of orchestrator specified when creating the managed cluster."
+        }
+      },
+      "description": "Settings for upgrading an agentpool"
     },
     "AgentPoolListResult": {
       "properties": {
