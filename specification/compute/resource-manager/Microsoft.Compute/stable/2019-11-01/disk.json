@@ -1395,28 +1395,6 @@
           "$ref": "#/definitions/KeyVaultAndKeyReference",
           "description": "The key vault key which is currently used by this disk encryption set."
         },
-        "type": {
-          "type": "string",
-          "description": "The type of key used to encrypt the data of the disk.",
-          "enum": [
-            "EncryptionAtRestWithPlatformKey",
-            "EncryptionAtRestWithCustomerKey"
-          ],
-          "x-ms-enum": {
-            "name": "EncryptionType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "EncryptionAtRestWithPlatformKey",
-                "description": "Disk is encrypted at rest with a key managed by Microsoft."
-              },
-              {
-                "value": "EncryptionAtRestWithCustomerKey",
-                "description": "Disk is encrypted at rest with a key provided by the customer."
-              }
-            ]
-          }
-        },
         "previousKeys": {
           "type": "array",
           "readOnly": true,
