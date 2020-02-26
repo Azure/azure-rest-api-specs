@@ -137,7 +137,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/FactoryRepoUpdate"
-            }
+            },
+            "x-ms-client-flatten": true
           }
         ],
         "responses": {
@@ -3704,7 +3705,11 @@
           "description": "Expression type.",
           "enum": [
             "Expression"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "ExpressionType",
+            "modelAsString": true
+          }
         },
         "value": {
           "type": "string",
@@ -3825,7 +3830,11 @@
           "description": "Type of integration runtime.",
           "enum": [
             "IntegrationRuntimeReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "IntegrationRuntimeReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -4237,6 +4246,7 @@
     },
     "FactoryRepoConfiguration": {
       "description": "Factory's git repo information.",
+      "x-ms-client-flatten": true,
       "type": "object",
       "discriminator": "type",
       "properties": {
@@ -4314,6 +4324,7 @@
     },
     "FactoryRepoUpdate": {
       "description": "Factory's git repo information.",
+      "x-ms-client-flatten": true,
       "properties": {
         "factoryResourceId": {
           "description": "The factory resource id.",
@@ -4452,7 +4463,11 @@
           "description": "Pipeline reference type.",
           "enum": [
             "PipelineReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PipelineReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -4576,7 +4591,11 @@
           "description": "Dataset reference type.",
           "enum": [
             "DatasetReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DatasetReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -4634,7 +4653,11 @@
           "description": "Linked service reference type.",
           "enum": [
             "LinkedServiceReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "LinkedServiceReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
@@ -5751,7 +5774,11 @@
           "description": "Data flow reference type.",
           "enum": [
             "DataFlowReference"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DataFlowReferenceType",
+            "modelAsString": true
+          }
         },
         "referenceName": {
           "type": "string",
