@@ -1540,13 +1540,13 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "$ref": "#/definitions/ServerPrivateEndpointConnectionProperties",
           "description": "Private endpoint connection properties",
           "readOnly": true
         }
       }
     },
-    "PrivateEndpointConnectionProperties": {
+    "ServerPrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
       "type": "object",
       "properties": {
@@ -1555,7 +1555,7 @@
           "description": "Private endpoint which the connection belongs to."
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "$ref": "#/definitions/ServerPrivateLinkServiceConnectionStateProperty",
           "description": "Connection state of the private endpoint connection."
         },
         "provisioningState": {
@@ -1586,7 +1586,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "PrivateLinkServiceConnectionStateProperty": {
+    "ServerPrivateLinkServiceConnectionStateProperty": {
       "required": [
         "status",
         "description"
