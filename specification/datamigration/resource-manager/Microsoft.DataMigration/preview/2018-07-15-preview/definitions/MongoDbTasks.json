@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Data Migration Service Resource Provider",
+    "title": "Azure Database Migration Service Resource Provider",
     "version": "2018-07-15-preview"
   },
   "securityDefinitions": {
@@ -256,7 +256,7 @@
       }
     },
     "MongoDbFinishCommand": {
-      "x-ms-discriminator-value": "restart",
+      "x-ms-discriminator-value": "finish",
       "type": "object",
       "description": "Properties for the command that finishes a migration in whole or in part",
       "properties": {
@@ -442,7 +442,7 @@
         "totalBytes",
         "totalDocuments"
       ],
-      "discriminator": "ResultType"
+      "discriminator": "resultType"
     },
     "MongoDbMigrationProgress": {
       "x-ms-discriminator-value": "Migration",

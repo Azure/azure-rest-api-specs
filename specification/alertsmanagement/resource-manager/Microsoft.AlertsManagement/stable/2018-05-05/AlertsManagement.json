@@ -3,8 +3,9 @@
   "info": {
     "version": "2018-05-05",
     "title": "Azure Alerts Management Service Resource Provider",
-    "description": "Azure Alerts Management Service provides a single pane of glass of alerts borne from Azure Monitor."
+    "description": "Azure Alerts Management Service provides a single pane of glass of alerts across Azure Monitor."
   },
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -40,7 +41,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Succesfully retrieved operations list.",
+            "description": "OK. Successfully retrieved operations list.",
             "schema": {
               "$ref": "#/definitions/operationsList"
             }
@@ -54,7 +55,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
-        "description": "List all the existing alerts, where the results can be selective by passing multiple filter parameters including time range and sorted on specific fields. ",
+        "description": "List all existing alerts, where the results can be filtered on the basis of multiple parameters (e.g. time range). The results can then be sorted on the basis specific fields, with the default being lastModifiedDateTime. ",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -119,7 +120,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Succesfully listed alert objects.",
+            "description": "OK. Successfully listed alert objects.",
             "schema": {
               "$ref": "#/definitions/alertsList"
             }
@@ -176,7 +177,7 @@
         },
         "x-ms-examples": {
           "GetById": {
-            "$ref": "./examples/Alerts_GetbyId.json"
+            "$ref": "./examples/Alerts_GetById.json"
           }
         }
       }
@@ -184,7 +185,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
         "operationId": "Alerts_ChangeState",
-        "description": "Change the state of the alert.",
+        "description": "Change the state of an alert.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -223,7 +224,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
         "operationId": "Alerts_GetHistory",
-        "description": "Get the history of the changes of an alert.",
+        "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -237,7 +238,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns the list of changes of alert.",
+            "description": "OK. Returns the history of the specified alert.",
             "schema": {
               "$ref": "#/definitions/alertModification"
             }
@@ -259,7 +260,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertsSummary": {
       "get": {
         "operationId": "Alerts_GetSummary",
-        "description": "Summary of alerts with the count each severity.",
+        "description": "Get a summarized count of your alerts grouped by various parameters (e.g. grouping by 'Severity' returns the count of alerts for each severity).",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -328,8 +329,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups": {
       "get": {
         "operationId": "SmartGroups_GetAll",
-        "summary": "Get all smartGroups within the subscription",
-        "description": "List all the smartGroups within the specified subscription. ",
+        "summary": "Get all Smart Groups within a specified subscription",
+        "description": "List all the Smart Groups within a specified subscription. ",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -389,6 +390,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List": {
             "$ref": "./examples/SmartGroups_List.json"
@@ -399,8 +403,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}": {
       "get": {
         "operationId": "SmartGroups_GetById",
-        "summary": "Get information of smart alerts group.",
-        "description": "Get details of smart group.",
+        "summary": "Get information related to a specific Smart Group.",
+        "description": "Get information related to a specific Smart Group.",
         "produces": [
           "application/json"
         ],
@@ -437,7 +441,7 @@
         },
         "x-ms-examples": {
           "Get": {
-            "$ref": "./examples/SmartGroups_GetbyId.json"
+            "$ref": "./examples/SmartGroups_GetById.json"
           }
         }
       }
@@ -445,7 +449,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/changeState": {
       "post": {
         "operationId": "SmartGroups_ChangeState",
-        "description": "Change the state from unresolved to resolved and all the alerts within the smart group will also be resolved.",
+        "description": "Change the state of a Smart Group.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -462,7 +466,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Alert state updated.",
+            "description": "OK. Smart Group state updated.",
             "headers": {
               "x-ms-request-id": {
                 "type": "string",
@@ -490,7 +494,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/smartGroups/{smartGroupId}/history": {
       "get": {
         "operationId": "SmartGroups_GetHistory",
-        "description": "Get the history of the changes of smart group.",
+        "description": "Get the history a smart group, which captures any Smart Group state changes (New/Acknowledged/Closed) .",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -539,7 +543,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2018-05-05T00:00:00.000Z"
+        "2018-05-05"
       ],
       "x-ms-enum": {
         "name": "api-version",
@@ -579,7 +583,7 @@
       "x-ms-parameter-location": "method"
     },
     "monitorService": {
-      "description": "Filter by monitor service which is the source of the alert instance. Default value is select all.",
+      "description": "Filter by monitor service which generates the alert instance. Default value is select all.",
       "name": "monitorService",
       "type": "string",
       "in": "query",
@@ -607,7 +611,7 @@
       }
     },
     "severity": {
-      "description": "Filter by severity.  Defaut value is select all.",
+      "description": "Filter by severity.  Default value is select all.",
       "name": "severity",
       "type": "string",
       "in": "query",
@@ -693,7 +697,7 @@
       }
     },
     "monitorCondition": {
-      "description": "Filter by monitor condition which is the state of the  monitor(alertRule) at monitor service. Default value is to select all.",
+      "description": "Filter by monitor condition which is either 'Fired' or 'Resolved'. Default value is to select all.",
       "name": "monitorCondition",
       "type": "string",
       "in": "query",
@@ -709,7 +713,7 @@
       }
     },
     "alertRule": {
-      "description": "Filter by alert rule(monitor) which fired alert instance.  Default value is to select all.",
+      "description": "Filter by specific alert rule.  Default value is to select all.",
       "name": "alertRule",
       "type": "string",
       "in": "query",
@@ -743,7 +747,7 @@
       "x-ms-parameter-location": "method"
     },
     "includeContext": {
-      "description": "Include context which has data contextual to the monitor service. Default value is false'",
+      "description": "Include context which has contextual data specific to the monitor service. Default value is false'",
       "name": "includeContext",
       "type": "boolean",
       "in": "query",
@@ -799,7 +803,7 @@
       }
     },
     "alertsSummaryGroupBy": {
-      "description": "This parameter allows the result set to be aggregated by input fields. For example, groupby=severity,alertstate.",
+      "description": "This parameter allows the result set to be grouped by input fields. For example, groupby=severity,alertstate.",
       "name": "groupby",
       "type": "string",
       "in": "query",
@@ -819,7 +823,7 @@
       }
     },
     "smartGroupsSortBy": {
-      "description": "Sort the query results by input field  Default value is sort by 'lastModifiedDateTime'.",
+      "description": "Sort the query results by input field. Default value is sort by 'lastModifiedDateTime'.",
       "name": "sortBy",
       "type": "string",
       "in": "query",
@@ -850,7 +854,7 @@
       ]
     },
     "select": {
-      "description": "This filter allows to selection of the fields(comma seperated) which would  be part of the the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
+      "description": "This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.",
       "name": "select",
       "type": "string",
       "in": "query",
@@ -911,7 +915,6 @@
     },
     "errorResponse": {
       "description": "An error response from the service.",
-      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -920,7 +923,6 @@
     },
     "errorResponseBody": {
       "description": "Details of error response.",
-      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
@@ -1015,16 +1017,16 @@
     },
     "alertContext": {
       "type": "object",
-      "description": "More details which are contextual to the monitor service.",
+      "description": "Information specific to the monitor service that gives more contextual details about the alert.",
       "readOnly": true
     },
     "essentials": {
       "type": "object",
-      "description": "This object contains normalized fields across different monitor service and also contains state related fields.",
+      "description": "This object contains consistent fields across different monitor services.",
       "properties": {
         "severity": {
           "type": "string",
-          "description": "Severity of alert Sev0 being highest and Sev3 being lowest.",
+          "description": "Severity of alert Sev0 being highest and Sev4 being lowest.",
           "readOnly": true,
           "enum": [
             "Sev0",
@@ -1040,7 +1042,7 @@
         },
         "signalType": {
           "type": "string",
-          "description": "Log based alert or metric based alert",
+          "description": "The type of signal the alert is based on, which could be metrics, logs or activity logs.",
           "readOnly": true,
           "enum": [
             "Metric",
@@ -1054,7 +1056,7 @@
         },
         "alertState": {
           "type": "string",
-          "description": "Alert object state, which is modified by the user.",
+          "description": "Alert object state, which can be modified by the user.",
           "readOnly": true,
           "enum": [
             "New",
@@ -1068,7 +1070,7 @@
         },
         "monitorCondition": {
           "type": "string",
-          "description": "Represents rule condition(Fired/Resolved) maintained by monitor service depending on the state of the state.",
+          "description": "Can be 'Fired' or 'Resolved', which represents whether the underlying conditions have crossed the defined alert rule thresholds.",
           "readOnly": true,
           "enum": [
             "Fired",
@@ -1155,7 +1157,7 @@
         "monitorConditionResolvedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because of the rule condition is not met.",
+          "description": "Resolved time(ISO-8601 format) of alert instance. This will be updated when monitor service resolves the alert instance because the rule condition is no longer met.",
           "readOnly": true
         },
         "lastModifiedUserName": {

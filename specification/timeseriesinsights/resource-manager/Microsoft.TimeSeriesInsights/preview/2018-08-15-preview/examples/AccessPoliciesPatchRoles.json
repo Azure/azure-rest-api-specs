@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "environmentName": "env1",
+    "accessPolicyName": "ap1",
+    "accessPolicyUpdateParameters": {
+      "properties": {
+        "roles": [
+          "Reader",
+          "Contributor"
+        ]
+      }
+    },
+    "api-version": "2018-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1/accessPolicies/ap1",
+        "name": "ap1",
+        "type": "Microsoft.TimeSeriesInsights/Environments/AccessPolicies",
+        "properties": {
+          "principalObjectId": "aGuid",
+          "roles": [
+            "Reader"
+          ],
+          "description": "some description"
+        }
+      }
+    }
+  }
+}

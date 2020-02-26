@@ -57,6 +57,12 @@
             "schema": {
               "$ref": "#/definitions/ContainerGroupListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -90,6 +96,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -130,6 +142,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -178,8 +196,14 @@
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
-        }, 
+        },
         "x-ms-long-running-operation": true
       },
       "patch": {
@@ -220,6 +244,12 @@
             "schema": {
               "$ref": "#/definitions/ContainerGroup"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -255,6 +285,12 @@
           },
           "204": {
             "description": "No Content - the specified container group was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -286,6 +322,12 @@
         "responses": {
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -318,8 +360,52 @@
         "responses": {
           "204": {
             "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/start": {
+      "post": {
+        "operationId": "ContainerGroups_Start",
+        "x-ms-examples": {
+          "ContainerStart": {
+            "$ref": "./examples/ContainerGroupsStart.json"
+          }
+        },
+        "summary": "Starts all containers in a container group.",
+        "description": "Starts all containers in a container group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ContainerGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.ContainerInstance/operations": {
@@ -344,6 +430,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -374,6 +466,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/UsageListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -422,6 +520,12 @@
             "schema": {
               "$ref": "#/definitions/Logs"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -457,12 +561,12 @@
             "type": "string"
           },
           {
-            "name":"containerExecRequest",
-            "in":"body",
-            "description":"The request for the exec command.",
-            "required":true,
-            "schema":{
-                "$ref":"#/definitions/ContainerExecRequest"
+            "name": "containerExecRequest",
+            "in": "body",
+            "description": "The request for the exec command.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContainerExecRequest"
             }
           }
         ],
@@ -471,6 +575,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerExecResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -509,6 +619,86 @@
           },
           "204": {
             "description": "No Content - the specified service association link was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/cachedImages": {
+      "get": {
+        "operationId": "ListCachedImages",
+        "x-ms-examples": {
+          "CachedImages": {
+            "$ref": "./examples/CachedImagesList.json"
+          }
+        },
+        "summary": "Get the list of cached images.",
+        "description": "Get the list of cached images on specific OS type for a subscription in a region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CachedImagesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/capabilities": {
+      "get": {
+        "operationId": "ListCapabilities",
+        "x-ms-examples": {
+          "GetCapabilities": {
+            "$ref": "./examples/CapabilitiesList.json"
+          }
+        },
+        "summary": "Get the list of capabilities of the location.",
+        "description": "Get the list of CPU/memory/GPU capabilities of a region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -712,6 +902,10 @@
           "description": "The CPU request of this container instance.",
           "type": "number",
           "format": "double"
+        },
+        "gpu": {
+          "description": "The GPU request of this container instance.",
+          "$ref": "#/definitions/GpuResource"
         }
       }
     },
@@ -728,6 +922,38 @@
           "description": "The CPU limit of this container instance.",
           "type": "number",
           "format": "double"
+        },
+        "gpu": {
+          "description": "The GPU limit of this container instance.",
+          "$ref": "#/definitions/GpuResource"
+        }
+      }
+    },
+    "GpuResource": {
+      "description": "The GPU resource.",
+      "type": "object",
+      "required": [
+        "count",
+        "sku"
+      ],
+      "properties": {
+        "count": {
+          "description": "The count of the GPU resource.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sku": {
+          "type": "string",
+          "description": "The SKU of the GPU resource.",
+          "enum": [
+            "K80",
+            "P100",
+            "V100"
+          ],
+          "x-ms-enum": {
+            "name": "GpuSku",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -772,7 +998,7 @@
     "GitRepoVolume": {
       "description": "Represents a volume that is populated with the contents of a git repository",
       "required": [
-       "repository"
+        "repository"
       ],
       "properties": {
         "directory": {
@@ -1020,6 +1246,10 @@
                 "networkProfile": {
                   "description": "The network profile information for a container group.",
                   "$ref": "#/definitions/ContainerGroupNetworkProfile"
+                },
+                "dnsConfig": {
+                  "description": "The DNS config information for a container group.",
+                  "$ref": "#/definitions/DnsConfiguration"
                 }
               },
               "required": [
@@ -1276,7 +1506,7 @@
         "name"
       ]
     },
-    "OperationListResult":{
+    "OperationListResult": {
       "description": "The operation list response that contains all operations for Azure Container Instance service.",
       "type": "object",
       "properties": {
@@ -1323,6 +1553,10 @@
             }
           }
         },
+        "properties": {
+          "type": "object",
+          "description": "The additional properties."
+        },
         "origin": {
           "type": "string",
           "description": "The intended executor of the operation.",
@@ -1337,8 +1571,8 @@
         }
       },
       "required": [
-          "name",
-          "display"
+        "name",
+        "display"
       ]
     },
     "UsageListResult": {
@@ -1378,7 +1612,7 @@
           "type": "object",
           "description": "The name object of the resource",
           "properties": {
-            "value":{
+            "value": {
               "readOnly": true,
               "type": "string",
               "description": "The name of the resource"
@@ -1431,7 +1665,7 @@
           "type": "object",
           "description": "The size of the terminal.",
           "properties": {
-            "rows":{
+            "rows": {
               "type": "integer",
               "description": "The row size of the terminal"
             },
@@ -1454,6 +1688,30 @@
         "password": {
           "type": "string",
           "description": "The password to start the exec command."
+        }
+      }
+    },
+    "DnsConfiguration": {
+      "description": "DNS configuration for the container group.",
+      "type": "object",
+      "required": [
+        "nameServers"
+      ],
+      "properties": {
+        "nameServers": {
+          "description": "The DNS servers for the container group.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchDomains": {
+          "description": "The DNS search domains for hostname lookup in the container group.",
+          "type": "string"
+        },
+        "options": {
+          "description": "The DNS options for the container group.",
+          "type": "string"
         }
       }
     },
@@ -1489,6 +1747,149 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "CachedImagesListResult": {
+      "description": "The response containing cached images.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/cachedImages"
+          },
+          "description": "The list of cached images."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of cached images."
+        }
+      }
+    },
+    "cachedImages": {
+      "description": "The cached image and OS type.",
+      "type": "object",
+      "required": [
+        "osType",
+        "image"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource Id of the cached image."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The OS type of the cached image."
+        },
+        "image": {
+          "type": "string",
+          "description": "The cached image name."
+        }
+      }
+    },
+    "CapabilitiesListResult": {
+      "description": "The response containing list of capabilities.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Capabilities"
+          },
+          "description": "The list of capabilities."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of capabilities."
+        }
+      }
+    },
+    "Capabilities": {
+      "description": "The regional capabilities.",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type that this capability describes."
+        },
+        "osType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The OS type that this capability describes."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource location."
+        },
+        "ipAddressType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ip address type that this capability describes."
+        },
+        "gpu": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The GPU sku that this capability describes."
+        },
+        "capabilities": {
+          "type": "object",
+          "readOnly": true,
+          "description": "The supported capabilities.",
+          "properties": {
+            "maxMemoryInGB": {
+              "type": "number",
+              "readOnly": true,
+              "description": "The maximum allowed memory request in GB."
+            },
+            "maxCpu": {
+              "type": "number",
+              "readOnly": true,
+              "description": "The maximum allowed CPU request in cores."
+            },
+            "maxGpuCount": {
+              "type": "number",
+              "readOnly": true,
+              "description": "The maximum allowed GPU count."
+            }
+          }
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
     }
   },
   "parameters": {

@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Batch.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,45 @@ To build the SDK for Batch, simply [Install AutoRest](https://aka.ms/autorest/in
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-09
+tag: package-2019-08
+```
+
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08'
+input-file:
+  - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04'
+input-file:
+  - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
+```
+
+### Tag: package-2018-12
+
+These settings apply only when `--tag=package-2018-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12'
+input-file:
+  - Microsoft.Batch/stable/2018-12-01/BatchManagement.json
 ```
 
 ### Tag: package-2017-09
@@ -41,37 +68,39 @@ input-file:
 ## Suppression
 
 Note that this setting should be removed once [this GitHub bug](https://github.com/Azure/azure-openapi-validator/issues/68) is fixed.
+
 ``` yaml
 directive:
   - suppress: R2063
     from: BatchManagement.json
     reason: Bug in linter
-
   - from:
-     - 2017-09-01/BatchManagement.json
-     - 2017-05-01/BatchManagement.json
-     - 2017-01-01/BatchManagement.json
-     - 2015-12-01/BatchManagement.json
+      - 2017-09-01/BatchManagement.json
+      - 2017-05-01/BatchManagement.json
+      - 2017-01-01/BatchManagement.json
+      - 2015-12-01/BatchManagement.json
     where:
-    - $.definitions.Application
-    - $.definitions.ApplicationPackage
+      - $.definitions.Application
+      - $.definitions.ApplicationPackage
     suppress:
-    - R2020
+      - R2020
     reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future next API versions.
-
   - from:
-     - 2017-09-01/BatchManagement.json
-     - 2017-05-01/BatchManagement.json
-     - 2017-01-01/BatchManagement.json
-     - 2015-12-01/BatchManagement.json
+      - 2017-09-01/BatchManagement.json
+      - 2017-05-01/BatchManagement.json
+      - 2017-01-01/BatchManagement.json
+      - 2015-12-01/BatchManagement.json
     where:
-    - $.definitions.Application.properties
-    - $.definitions.ApplicationPackage.properties
+      - $.definitions.Application.properties
+      - $.definitions.ApplicationPackage.properties
     suppress:
-    - R3006
+      - R3006
     reason: Proxy resource written prior to ARM guidelines update and would require breaking changes to fix. The shape of the entity will be corrected in future API versions.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: BatchManagement.json
+    where: $.definitions.UserAccount
+    reason: This field contains a secret (password) and is not returned on a get (but is required on a PUT/PATCH). Previous discussions with the modelling team had said that this was the correct way to model this type of field.
 ```
-
 
 ### Tag: package-2017-05
 
@@ -81,7 +110,6 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 input-file:
 - Microsoft.Batch/stable/2017-05-01/BatchManagement.json
 ```
-
 
 ### Tag: package-2017-01
 
@@ -101,10 +129,9 @@ input-file:
 - Microsoft.Batch/stable/2015-12-01/BatchManagement.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -113,6 +140,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -122,7 +150,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_batch']
 ```
-
 
 ## C#
 
@@ -136,7 +163,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Batch
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/Batch/Management/Management.Batch/Generated
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Management.Batch/src/Generated
   clear-output-folder: true
 ```
 
@@ -144,32 +171,6 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.batch
-  package-name: azure-mgmt-batch
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-batch/azure/mgmt/batch
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-batch
-```
 
 ## Java
 
@@ -203,7 +204,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-12' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2015_12_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2015_12_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -216,7 +217,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_09_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_09_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -229,7 +230,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_01_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_01_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -242,9 +243,40 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.batch.v2017_05_01
-  output-folder: $(azure-libraries-for-java-folder)/batch/resource-manager/v2017_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/mgmt-v2017_05_01
 regenerate-manager: true
 generate-interface: true
 ```
 
 `
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Batch/stable/2019-08-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2019-04-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2018-12-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-09-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-05-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2017-01-01/BatchManagement.json
+  - $(this-folder)/Microsoft.Batch/stable/2015-12-01/BatchManagement.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

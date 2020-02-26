@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "ScreenSharingTest-peer",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceType"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "ResourceType",
+            "querySortingDirection": "Descending"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "name": "9af9459d-441d-4055-9ed0-83d4c4a363fb",
+            "type": "microsoft.costmanagement/Query",
+            "properties": {
+              "nextLink": null,
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "ResourceType",
+                  "type": "String"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  2.10333307059661,
+                  "Microsoft.SqlServer",
+                  20180417,
+                  "USD"
+                ],
+                [
+                  20.10333307059661,
+                  "Microsoft.Compute",
+                  20180418,
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

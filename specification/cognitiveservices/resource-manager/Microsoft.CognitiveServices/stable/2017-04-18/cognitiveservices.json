@@ -35,7 +35,7 @@
         "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "Accounts_Create",
         "x-ms-examples": {
-          "Get Account": {
+          "Create Account": {
             "$ref": "./examples/CreateAccount.json"
           }
         },
@@ -58,11 +58,11 @@
             "description": "The name of Cognitive Services account."
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountCreateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
@@ -86,6 +86,12 @@
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
           },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed",
             "schema": {
@@ -101,7 +107,7 @@
         "description": "Updates a Cognitive Services account",
         "operationId": "Accounts_Update",
         "x-ms-examples": {
-          "Get Account": {
+          "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
           }
         },
@@ -124,12 +130,11 @@
             "description": "The name of Cognitive Services account."
           },
           {
-            "name": "parameters",
+            "name": "account",
             "in": "body",
             "required": true,
-            "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/CognitiveServicesAccountUpdateParameters"
+              "$ref": "#/definitions/CognitiveServicesAccount"
             },
             "description": "The parameters to provide for the created account."
           },
@@ -143,6 +148,12 @@
         "responses": {
           "200": {
             "description": "The resource provider should return 200 (OK) to indicate that the operation completed successfully. ",
+            "schema": {
+              "$ref": "#/definitions/CognitiveServicesAccount"
+            }
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/CognitiveServicesAccount"
             }
@@ -194,6 +205,9 @@
         "responses": {
           "200": {
             "description": "A 200 (OK) should be returned if the object exists and was deleted successfully;"
+          },
+          "202": {
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "a 204 (NoContent) should be used if the resource does not exist and the request is well formed."
@@ -493,7 +507,7 @@
         }
       }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
       "get": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -638,7 +652,7 @@
         "tags": [
           "CognitiveServicesAccounts"
         ],
-        "operationId": "CheckSkuAvailability_List",
+        "operationId": "CheckSkuAvailability",
         "description": "Check available SKUs.",
         "x-ms-examples": {
           "Check SKU Availability": {
@@ -663,7 +677,7 @@
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityParameter"
             },
-            "description": "Check SKU Availablity POST body."
+            "description": "Check SKU Availability POST body."
           }
         ],
         "responses": {
@@ -675,87 +689,52 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
+      "post": {
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "CheckDomainAvailability",
+        "description": "Check whether a domain is available.",
+        "x-ms-examples": {
+          "Check SKU Availability": {
+            "$ref": "./examples/CheckDomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityParameter"
+            },
+            "description": "Check Domain Availability parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "CognitiveServicesAccountCreateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Required. Gets or sets the SKU of the resource."
-        },
-        "kind": {
-          "$ref": "#/definitions/CognitiveServicesAccountKind",
-          "description": "Required. Gets or sets the Kind of the resource."
-        },
-        "location": {
-          "type": "string",
-          "description": "Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Must exist in the request. Must be an empty object. Must not be null."
-        }
-      },
-      "required": [
-        "sku",
-        "kind",
-        "location",
-        "properties"
-      ],
-      "description": "The parameters to provide for the account."
-    },
     "CognitiveServicesAccountKind": {
       "type": "string",
-      "description": "Required. Indicates the type of cognitive service account.",
-      "enum": [
-        "Bing.Autosuggest.v7",
-        "Bing.CustomSearch",
-        "Bing.Search.v7",
-        "Bing.Speech",
-        "Bing.SpellCheck.v7",
-        "ComputerVision",
-        "ContentModerator",
-        "CustomSpeech",
-        "CustomVision.Prediction",
-        "CustomVision.Training",
-        "Emotion",
-        "Face",
-        "LUIS",
-        "QnAMaker",
-        "SpeakerRecognition",
-        "SpeechTranslation",
-        "TextAnalytics",
-        "TextTranslation",
-        "WebLM"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true
-      }
-    },
-    "CognitiveServicesAccountUpdateParameters": {
-      "properties": {
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "Gets or sets the SKU of the resource."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
-        }
-      },
-      "description": "The parameters to provide for the account."
+      "description": "Required. Indicates the type of cognitive service account."
     },
     "Sku": {
       "properties": {
@@ -785,24 +764,7 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "The name of SKU.",
-      "enum": [
-        "F0",
-        "P0",
-        "P1",
-        "P2",
-        "S0",
-        "S1",
-        "S2",
-        "S3",
-        "S4",
-        "S5",
-        "S6"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      }
+      "description": "The name of SKU."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -810,7 +772,8 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "Entity Tag"
+          "description": "Entity Tag",
+          "readOnly": true
         },
         "id": {
           "type": "string",
@@ -818,8 +781,8 @@
           "readOnly": true
         },
         "kind": {
-          "type": "string",
-          "description": "Type of cognitive service account."
+          "$ref": "#/definitions/CognitiveServicesAccountKind",
+          "description": "The Kind of the resource."
         },
         "location": {
           "type": "string",
@@ -831,7 +794,6 @@
           "readOnly": true
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/CognitiveServicesAccountProperties",
           "description": "Properties of Cognitive Services account."
         },
@@ -892,14 +854,53 @@
         },
         "endpoint": {
           "type": "string",
-          "description": "Endpoint of the created account."
+          "description": "Endpoint of the created account.",
+          "readOnly": true
         },
         "internalId": {
           "type": "string",
-          "description": "The internal identifier."
+          "description": "The internal identifier.",
+          "readOnly": true
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
+          "description": "The api properties for special APIs."
         }
       },
       "description": "Properties of Cognitive Services account."
+    },
+    "CognitiveServicesAccountApiProperties": {
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
+        },
+        "eventHubConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "maxLength": 1000
+        },
+        "storageAccountConnectionString": {
+          "type": "string",
+          "description": "(Personalization Only) The storage account connection string.",
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "maxLength": 1000
+        }
+      },
+      "description": "The api properties for special APIs."
     },
     "CognitiveServicesAccountKeys": {
       "properties": {
@@ -1209,6 +1210,44 @@
         }
       }
     },
+    "CheckDomainAvailabilityParameter": {
+      "description": "Check Domain availability parameter.",
+      "properties": {
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "subdomainName",
+        "type"
+      ]
+    },
+    "CheckDomainAvailabilityResult": {
+      "description": "Check Domain availability result.",
+      "properties": {
+        "isSubdomainAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      }
+    },
     "ResourceSkuRestrictions": {
       "properties": {
         "type": {
@@ -1332,6 +1371,69 @@
         "value"
       ],
       "description": "The Get Skus operation response."
+    },
+    "NetworkRuleSet": {
+      "properties": {
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "description": "The list of IP address rules."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility."
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility from a specific virtual network."
     }
   },
   "parameters": {

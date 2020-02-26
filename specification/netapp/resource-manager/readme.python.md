@@ -19,11 +19,11 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-netapp/azure/mgmt/netapp
+  output-folder: $(python-sdks-folder)/netapp/azure-mgmt-netapp/azure/mgmt/netapp
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-netapp
+  output-folder: $(python-sdks-folder)/netapp/azure-mgmt-netapp
 ```

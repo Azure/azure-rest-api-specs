@@ -17,9 +17,9 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Compute
-output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
+output-folder: $(csharp-sdks-folder)/compute/Microsoft.Azure.Management.Compute/src/Generated
 ```
 
 ## Batch settings
@@ -37,9 +37,14 @@ batch:
     ApiVersionName: Api2016_03_30
 ```
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Compute
-output-folder: $(csharp-sdks-folder)/$(profile)/Compute/Management.Compute/Generated
+
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Compute
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Compute/Management.Compute/Generated
 batch:
   - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
@@ -47,10 +52,26 @@ batch:
   - tag: package-compute-2017-03
 ```
 
-``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Compute
-output-folder: $(csharp-sdks-folder)/$(profile)/Compute/Management.Compute/Generated
+### Profile: profile_2017_03_09
+
+These settings apply only when `--csharp-profile=profile_2017_03_09` is specified on the command line.
+
+``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Compute
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Compute/Management.Compute/Generated
 
 batch:
  - tag: package-compute-2016-03
+ ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Compute
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Compute/Management.Compute/Generated
+
+batch:
+ - tag: profile-hybrid-2019-03-01
  ```

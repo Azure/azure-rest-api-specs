@@ -248,6 +248,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply to the operation."
           }
         ],
         "responses": {
@@ -260,6 +267,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -1487,7 +1499,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -1807,7 +1819,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -1853,7 +1865,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2043,7 +2055,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2089,7 +2101,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2135,7 +2147,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2145,7 +2157,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2181,7 +2193,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2227,7 +2239,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2500,7 +2512,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -2555,7 +2567,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3002,7 +3014,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3057,7 +3069,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3112,7 +3124,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3122,7 +3134,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3167,7 +3179,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3222,7 +3234,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3277,7 +3289,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3332,7 +3344,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3387,7 +3399,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3433,7 +3445,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3479,7 +3491,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3617,7 +3629,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3670,7 +3682,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -3723,7 +3735,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4043,7 +4055,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4096,7 +4108,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4149,7 +4161,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4159,7 +4171,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4202,7 +4214,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4255,7 +4267,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4309,7 +4321,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -4363,7 +4375,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -4507,7 +4519,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
     },
     "AvailabilitySetUpdate": {
       "properties": {
@@ -5630,7 +5642,7 @@
         },
         "certificateStore": {
           "type": "string",
-          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbpring>.prv for private key. Both of these files are .pem formatted."
+          "description": "For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name &lt;UppercaseThumbprint&gt;.crt for the X509 certificate file and &lt;UppercaseThumbprint&gt;.prv for private key. Both of these files are .pem formatted."
         }
       },
       "description": "Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM."
@@ -5655,7 +5667,7 @@
       "properties": {
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
         },
         "adminUsername": {
           "type": "string",
@@ -5993,7 +6005,7 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "provisioningState": {
           "readOnly": true,
@@ -6318,7 +6330,7 @@
         },
         "zoneResilient": {
           "type": "boolean",
-          "description":  "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
+          "description": "Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS)."
         }
       },
       "description": "Describes a storage profile."
@@ -6655,7 +6667,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       },
       "description": "The API entity reference."
@@ -7213,7 +7225,7 @@
         },
         "zoneBalance": {
           "type": "boolean",
-          "description": "Whether to force stictly even Virtual Machine distribution cross x-zones in case there is zone outage."
+          "description": "Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage."
         },
         "platformFaultDomainCount": {
           "type": "integer",
@@ -7516,20 +7528,20 @@
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "RollbackStatusInfo": {
-      "properties":{
-        "successfullyRolledbackInstanceCount" : {
+      "properties": {
+        "successfullyRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which have been successfully rolled back."
         },
-        "failedRolledbackInstanceCount" : {
+        "failedRolledbackInstanceCount": {
           "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "The number of instances which failed to rollback."
         },
-        "rollbackError" : {
+        "rollbackError": {
           "$ref": "#/definitions/ApiError",
           "readOnly": true,
           "description": "Error details if OS rollback failed."
@@ -7579,7 +7591,7 @@
         "progress": {
           "$ref": "#/definitions/RollingUpgradeProgressInfo",
           "readOnly": true,
-          "description": "Counts of the VM's in each state."
+          "description": "Counts of the VMs in each state."
         },
         "error": {
           "$ref": "#/definitions/ApiError",
@@ -7691,7 +7703,7 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "provisioningState": {
           "readOnly": true,
@@ -8182,7 +8194,7 @@
         },
         "groupByOperationName": {
           "type": "boolean",
-          "description": "Group query result by  by Operation Name."
+          "description": "Group query result by Operation Name."
         },
         "groupByResourceName": {
           "type": "boolean",

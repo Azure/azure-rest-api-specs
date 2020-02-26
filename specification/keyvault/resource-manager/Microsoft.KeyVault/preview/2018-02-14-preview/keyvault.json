@@ -66,10 +66,10 @@
         },
         "x-ms-examples": {
           "Create a new vault or update an existing vault": {
-            "$ref": "./examples//createVault.json"
+            "$ref": "./examples/createVault.json"
           },
           "Create or update a vault with network acls": {
-            "$ref": "./examples//createVaultWithNetworkAcls.json"
+            "$ref": "./examples/createVaultWithNetworkAcls.json"
           }
         },
         "produces": [
@@ -133,7 +133,7 @@
         },
         "x-ms-examples": {
           "Update an existing vault": {
-            "$ref": "./examples//updateVault.json"
+            "$ref": "./examples/updateVault.json"
           }
         },
         "produces": [
@@ -174,11 +174,14 @@
         "responses": {
           "200": {
             "description": "OK Response."
+          },
+          "204": {
+            "description": "No Content."
           }
         },
         "x-ms-examples": {
           "Delete a vault": {
-            "$ref": "./examples//deleteVault.json"
+            "$ref": "./examples/deleteVault.json"
           }
         },
         "produces": [
@@ -226,7 +229,7 @@
         },
         "x-ms-examples": {
           "Retrieve a vault": {
-            "$ref": "./examples//getVault.json"
+            "$ref": "./examples/getVault.json"
           }
         },
         "produces": [
@@ -308,7 +311,7 @@
         },
         "x-ms-examples": {
           "Add an access policy, or update an access policy with new permissions": {
-            "$ref": "./examples//updateAccessPoliciesAdd.json"
+            "$ref": "./examples/updateAccessPoliciesAdd.json"
           }
         },
         "produces": [
@@ -361,7 +364,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified resource group": {
-            "$ref": "./examples//listVaultByResourceGroup.json"
+            "$ref": "./examples/listVaultByResourceGroup.json"
           }
         },
         "produces": [
@@ -407,7 +410,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
-            "$ref": "./examples//listVaultBySubscription.json"
+            "$ref": "./examples/listVaultBySubscription.json"
           }
         },
         "produces": [
@@ -446,7 +449,7 @@
         },
         "x-ms-examples": {
           "List deleted vaults in the specified subscription": {
-            "$ref": "./examples//listDeletedVaults.json"
+            "$ref": "./examples/listDeletedVaults.json"
           }
         },
         "produces": [
@@ -496,7 +499,7 @@
         },
         "x-ms-examples": {
           "Retrieve a deleted vault": {
-            "$ref": "./examples//getDeletedVault.json"
+            "$ref": "./examples/getDeletedVault.json"
           }
         },
         "produces": [
@@ -547,7 +550,7 @@
         },
         "x-ms-examples": {
           "Purge a deleted vault": {
-            "$ref": "./examples//purgeDeletedVault.json"
+            "$ref": "./examples/purgeDeletedVault.json"
           }
         },
         "produces": [
@@ -610,7 +613,7 @@
         },
         "x-ms-examples": {
           "List vaults in the specified subscription": {
-            "$ref": "./examples//listVault.json"
+            "$ref": "./examples/listVault.json"
           }
         },
         "produces": [
@@ -655,7 +658,7 @@
         },
         "x-ms-examples": {
           "Validate a vault name": {
-            "$ref": "./examples//checkVaultNameAvailability.json"
+            "$ref": "./examples/checkVaultNameAvailability.json"
           }
         },
         "produces": [
@@ -1054,26 +1057,26 @@
       "x-ms-azure-resource": true
     },
     "VaultAccessPolicyParameters": {
-      "properties": {          
-          "id": {
+      "properties": {
+        "id": {
           "readOnly": true,
           "type": "string",
           "description": "The resource id of the access policy."
         },
-          "name": {
+        "name": {
           "readOnly": true,
           "type": "string",
           "description": "The resource name of the access policy."
         },
-          "type": {
+        "type": {
           "readOnly": true,
           "type": "string",
           "description": "The resource name of the access policy."
         },
-          "location": {
+        "location": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource type of the the access policy."
+          "description": "The resource type of the access policy."
         },
         "properties": {
           "$ref": "#/definitions/VaultAccessPolicyProperties",
@@ -1232,7 +1235,7 @@
         "name",
         "type"
       ],
-      "description": "The parameters used to check the availabity of the vault name."
+      "description": "The parameters used to check the availability of the vault name."
     },
     "CheckNameAvailabilityResult": {
       "properties": {
@@ -1264,7 +1267,7 @@
     },
     "NetworkRuleSet": {
       "properties": {
-        "bypass": {         
+        "bypass": {
           "type": "string",
           "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
           "enum": [
@@ -1287,14 +1290,14 @@
             "name": "NetworkRuleAction",
             "modelAsString": true
           }
-        },      
+        },
         "ipRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IPRule"
           },
           "description": "The list of IP address rules."
-        },      
+        },
         "virtualNetworkRules": {
           "type": "array",
           "items": {
@@ -1315,7 +1318,7 @@
       "required": [
         "value"
       ],
-      "description": "A rule governing the accesibility of a vault from a specific ip address or ip range."
+      "description": "A rule governing the accessibility of a vault from a specific ip address or ip range."
     },
     "VirtualNetworkRule": {
       "properties": {
@@ -1327,7 +1330,7 @@
       "required": [
         "id"
       ],
-      "description": "A rule governing the accesibility of a vault from a specific virtual network."
+      "description": "A rule governing the accessibility of a vault from a specific virtual network."
     }
   },
   "parameters": {

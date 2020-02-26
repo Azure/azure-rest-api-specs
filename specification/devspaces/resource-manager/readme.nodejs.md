@@ -11,4 +11,6 @@ nodejs:
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
+input-file:
+- Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
 ```

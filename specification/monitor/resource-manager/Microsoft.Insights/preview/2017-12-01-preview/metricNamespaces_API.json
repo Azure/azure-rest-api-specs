@@ -1,0 +1,170 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2017-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/metricNamespaces": {
+      "get": {
+        "tags": [
+          "metricNamespaces"
+        ],
+        "operationId": "MetricNamespaces_List",
+        "description": "Lists the metric namespaces for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/StartTimeParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric namespaces",
+            "schema": {
+              "$ref": "#/definitions/MetricNamespaceCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Metric Namespaces without filter": {
+            "$ref": "./examples/GetMetricNamespaces.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MetricNamespaceName": {
+      "properties": {
+        "metricNamespaceName": {
+          "type": "string",
+          "description": "The metric namespace name."
+        }
+      },
+      "description": "The fully qualified metric namespace name."
+    },
+    "MetricNamespace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the metricNamespace."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the namespace."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the namespace."
+        },
+        "properties": {
+          "$ref": "#/definitions/MetricNamespaceName",
+          "description": "Properties which include the fully qualified namespace name."
+        }
+      },
+      "description": "Metric namespace class specifies the metadata for a metric namespace."
+    },
+    "MetricNamespaceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricNamespace"
+          },
+          "description": "The values for the metric namespaces."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents collection of metric namespaces."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "StartTimeParameter": {
+      "name": "startTime",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The ISO 8601 conform Date start time from which to query for metric namespaces.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

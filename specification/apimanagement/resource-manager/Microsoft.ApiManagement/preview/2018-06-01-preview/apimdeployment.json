@@ -64,6 +64,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus": {
+      "get": {
+        "tags": [
+          "ApiManagementServiceSkus"
+        ],
+        "summary": "Gets available SKUs for API Management service",
+        "description": "Gets all available SKU for a given API Management service",
+        "operationId": "ApiManagementServiceSkus_ListAvailableServiceSkus",
+        "x-ms-examples": {
+          "ApiManagementListSKUs-Dedicated": {
+            "$ref": "./examples/ApiManagementListSKUs-Dedicated.json"
+          },
+          "ApiManagementListSKUs-Consumption": {
+            "$ref": "./examples/ApiManagementListSKUs-Consumption.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of SKUs.",
+            "schema": {
+              "$ref": "#/definitions/ResourceSkuResults"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/restore": {
       "post": {
         "tags": [
@@ -347,10 +390,17 @@
           "200": {
             "description": "Service was successfully deleted."
           },
+          "202": {
+            "description": "The service delete request was Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementServiceResource"
+            }
+          },
           "204": {
-            "description": "Service is already deleted."
+            "description": "The service does not exist."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {
@@ -646,6 +696,141 @@
     }
   },
   "definitions": {
+    "ResourceSkuResults": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuResult"
+          },
+          "description": "The list of skus available for the service."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of API Management service Skus."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The API Management service SKUs operation response."
+    },
+    "ResourceSkuResult": {
+      "properties": {
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the SKU applies to."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "readOnly": true,
+          "description": "Specifies API Management SKU."
+        },
+        "capacity": {
+          "$ref": "#/definitions/ResourceSkuCapacity",
+          "readOnly": true,
+          "description": "Specifies the number of API Management units."
+        }
+      },
+      "description": "Describes an available API Management service SKU."
+    },
+    "ResourceSkuCapacity": {
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The maximum capacity that can be set."
+        },
+        "default": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The default capacity."
+        },
+        "scaleType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The scale type applicable to the sku.",
+          "enum": [
+            "automatic",
+            "manual",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceSkuCapacityScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "automatic",
+                "description": "Supported scale type automatic."
+              },
+              {
+                "value": "manual",
+                "description": "Supported scale type manual."
+              },
+              {
+                "value": "none",
+                "description": "Scaling not supported."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes scaling information of a SKU."
+    },
+    "ResourceSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Sku.",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
+          },
+          "enum": [
+            "Developer",
+            "Standard",
+            "Premium",
+            "Basic",
+            "Consumption"
+          ],
+          "x-ms-enum": {
+            "name": "SkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Developer",
+                "description": "Developer SKU of Api Management."
+              },
+              {
+                "value": "Standard",
+                "description": "Standard SKU of Api Management."
+              },
+              {
+                "value": "Premium",
+                "description": "Premium SKU of Api Management."
+              },
+              {
+                "value": "Basic",
+                "description": "Basic SKU of Api Management."
+              },
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Api Management."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Describes an available API Management SKU."
+    },
     "CertificateInformation": {
       "properties": {
         "expiry": {
@@ -680,7 +865,7 @@
           "description": "Certificate Password."
         },
         "storeName": {
-          "description": "The System.Security.Cryptography.x509certificates.Storename certificate store location. Only Root and CertificateAuthority are valid locations.",
+          "description": "The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only Root and CertificateAuthority are valid locations.",
           "type": "string",
           "enum": [
             "CertificateAuthority",
@@ -981,7 +1166,7 @@
         },
         "virtualNetworkType": {
           "type": "string",
-          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
+          "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
           "default": "None",
           "enum": [
             "None",
@@ -1022,7 +1207,8 @@
             "Developer",
             "Standard",
             "Premium",
-            "Basic"
+            "Basic",
+            "Consumption"
           ],
           "x-ms-enum": {
             "name": "SkuType",
@@ -1043,6 +1229,10 @@
               {
                 "value": "Basic",
                 "description": "Basic SKU of Api Management."
+              },
+              {
+                "value": "Consumption",
+                "description": "Consumption SKU of Api Management."
               }
             ]
           }

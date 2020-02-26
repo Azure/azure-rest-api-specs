@@ -1,0 +1,419 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "version": "2016-09-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettings/service": {
+      "get": {
+        "tags": [
+          "ServiceDiagnosticSettings"
+        ],
+        "operationId": "ServiceDiagnosticSettings_Get",
+        "description": "Gets the active diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about service diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type": "",
+                "name": "service",
+                "location": "",
+                "tags": null,
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get service diagnostic setting": {
+            "$ref": "./examples/getServiceDiagnosticSetting.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServiceDiagnosticSettings"
+        ],
+        "operationId": "ServiceDiagnosticSettings_CreateOrUpdate",
+        "description": "Create or update new diagnostic settings for the specified resource. **WARNING**: This method will be deprecated in future releases.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "description": "Parameters supplied to the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to create a service diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            },
+            "examples": {
+              "application/json": {
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type": "",
+                "name": "service",
+                "location": "",
+                "tags": null,
+                "properties": {
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "eventHubAuthorizationRuleId": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/authorizationrules/myrule",
+                  "metrics": [
+                    {
+                      "timeGrain": "PT1M",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ],
+                  "logs": [
+                    {
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
+                      "retentionPolicy": {
+                        "enabled": false,
+                        "days": 0
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a service diagnostic setting": {
+            "$ref": "./examples/createOrUpdateServiceDiagnosticSetting.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.",
+        "operationId": "ServiceDiagnosticSettings_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceDiagnosticSettingsResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
+            },
+            "description": "Parameters supplied to the operation."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing service diagnostics setting resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a service diagnostic setting": {
+            "$ref": "./examples/updateServiceDiagnosticSetting.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    },
+    "RetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether the retention policy is enabled."
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
+        }
+      },
+      "required": [
+        "enabled",
+        "days"
+      ],
+      "description": "Specifies the retention policy for the log."
+    },
+    "MetricSettings": {
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "format": "duration",
+          "description": "the timegrain of the metric in ISO8601 format."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether this timegrain is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "the retention policy for this timegrain."
+        }
+      },
+      "required": [
+        "enabled",
+        "timeGrain"
+      ],
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
+    },
+    "LogSettings": {
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "a value indicating whether this log is enabled."
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy",
+          "description": "the retention policy for this log."
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
+    },
+    "ServiceDiagnosticSettings": {
+      "properties": {
+        "storageAccountId": {
+          "type": "string",
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+        },
+        "serviceBusRuleId": {
+          "type": "string",
+          "description": "The service bus rule ID of the service bus namespace in which you would like to have Event Hubs created for streaming Diagnostic Logs. The rule ID is of the format: '{service bus resource ID}/authorizationrules/{key name}'."
+        },
+        "eventHubAuthorizationRuleId": {
+          "type": "string",
+          "description": "The resource Id for the event hub namespace authorization rule."
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSettings"
+          },
+          "description": "the list of metric settings."
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          },
+          "description": "the list of logs settings."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        }
+      },
+      "description": "The diagnostic settings for service."
+    },
+    "ServiceDiagnosticSettingsResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "The service diagnostics settings of the resource."
+        }
+      },
+      "description": "Description of a service diagnostic setting"
+    },
+    "ServiceDiagnosticSettingsResourcePatch": {
+      "description": "Service diagnostic setting resource for patch operations",
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceDiagnosticSettings",
+          "description": "The service diagnostics settings for an update operation."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

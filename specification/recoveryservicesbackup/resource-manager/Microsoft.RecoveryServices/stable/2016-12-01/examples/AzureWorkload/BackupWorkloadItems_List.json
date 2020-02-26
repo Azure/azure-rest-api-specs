@@ -1,52 +1,47 @@
 {
-    "parameters": {
-        "subscriptionId": "00000000-0000-0000-0000-000000000000",
-        "resourceGroupName": "testRg",
-        "vaultName": "testVault",
-        "api-version": "2016-12-01",
-        "$filter": "backupManagementType eq 'AzureWorkload'",
-        "backupFabrics": "Azure",
-        "protectionContainers": "VMAppContainer;Compute;testRG;testSQL"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
-                    {
-                        "backupManagementType": "AzureWorkload",
-                        "dataDirectoryPaths": [
-                            {
-                                "type": "Data",
-                                "path": "F:\\Data\\",
-                                "logicalName": null
-                            },
-                            {
-                                "type": "Log",
-                                "path": "F:\\Log\\",
-                                "logicalName": null
-                            }
-                        ],
-                        "name": null,
-                        "id": null,
-                        "status": {
-                            "name": null,
-                            "displayName": null,
-                            "infoText": null,
-                            "severity": null,
-                            "operationState": null
-                        },
-                        "type": null,
-                        "location": null,
-                        "friendlyName": "MSSQLSERVER",
-                        "resourceGroup": null,
-                        "resourceName": null,
-                        "subscriptionId": null,
-                        "providerName": null,
-                        "resourceType": null
-                    }
-                ],
-                "nextLink": null
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRg",
+    "vaultName": "suchandr-seacan-rsv",
+    "api-version": "2016-12-01",
+    "$filter": "backupManagementType eq 'AzureWorkload'",
+    "fabricName": "Azure",
+    "containerName": "VMAppContainer;Compute;bvtdtestag;sqlserver-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testRg/providers/Microsoft.RecoveryServices/vaults/suchandr-seacan-rsv/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;bvtdtestag;sqlserver-1/protectableItems/SQLInstance;MSSQLSERVER",
+            "name": "SQLInstance;MSSQLSERVER",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/items",
+            "properties": {
+              "dataDirectoryPaths": [
+                {
+                  "type": "Data",
+                  "path": "F:\\DATA\\"
+                },
+                {
+                  "type": "Log",
+                  "path": "F:\\LOG\\"
+                }
+              ],
+              "parentName": "MSSQLSERVER",
+              "serverName": "sqlserver-1.contoso.com",
+              "isAutoProtectable": true,
+              "subinquireditemcount": 0,
+              "subWorkloadItemCount": 3,
+              "backupManagementType": "AzureWorkload",
+              "workloadType": "SQL",
+              "workloadItemType": "SQLInstance",
+              "friendlyName": "MSSQLSERVER",
+              "protectionState": "NotProtected"
             }
-        }
+          }
+        ],
+        "nextLink": null
+      }
     }
+  }
 }

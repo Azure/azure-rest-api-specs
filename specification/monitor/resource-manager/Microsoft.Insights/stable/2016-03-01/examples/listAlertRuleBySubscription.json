@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "subscriptionId": "b67f7fec-69fc-4974-9099-a26bd6ffeda3",
+    "api-version": "2016-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/myRuleName",
+            "name": "myRuleName",
+            "type": "Microsoft.Insights/alertRules",
+            "location": "West US",
+            "tags": {
+              "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
+              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+            },
+            "properties": {
+              "name": "myRuleName",
+              "description": "Pura Vida",
+              "isEnabled": true,
+              "condition": {
+                "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                "dataSource": {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                  "resourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                  "metricName": "Requests"
+                },
+                "operator": "GreaterThan",
+                "threshold": 2.0,
+                "windowSize": "PT5M",
+                "timeAggregation": "Total"
+              },
+              "lastUpdatedTime": "2016-11-10T21:04:39.0005255Z",
+              "actions": [
+                {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                  "sendToServiceOwners": true,
+                  "customEmails": [
+                    "gu@ms.com",
+                    "su@ms.net"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin0",
+            "name": "chiricutin0",
+            "type": "Microsoft.Insights/alertRules",
+            "location": "West US",
+            "tags": {
+              "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
+              "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+            },
+            "properties": {
+              "name": "chiricutin0",
+              "description": "Pura Vida 0",
+              "isEnabled": true,
+              "condition": {
+                "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                "dataSource": {
+                  "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                  "resourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+                  "metricName": "Requests"
+                },
+                "operator": "GreaterThan",
+                "threshold": 2.0,
+                "windowSize": "PT5M",
+                "timeAggregation": "Total"
+              },
+              "lastUpdatedTime": "2016-11-10T21:04:39.1082596Z",
+              "actions": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

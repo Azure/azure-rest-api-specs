@@ -1,0 +1,780 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality",
+    "description": "Mixed Reality Resource Provider REST API",
+    "version": "2019-02-28-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.MixedReality/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Exposing Available Operations",
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/GetOperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/locations/{location}/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailabilityLocal",
+        "tags": [
+          "Proxy"
+        ],
+        "description": "Check Name Availability for global uniqueness",
+        "x-ms-examples": {
+          "CheckLocalNameAvailability": {
+            "$ref": "./examples/CheckLocalNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/checkNameAvailabilityParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_ListBySubscription",
+        "tags": [
+          "Resource",
+          "Proxy"
+        ],
+        "description": "List Spatial Anchors Accounts by Subscription",
+        "x-ms-examples": {
+          "SpatialAnchorsAccountListBySubscription": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_ListByResourceGroup",
+        "tags": [
+          "Resource"
+        ],
+        "description": "List Resources by Resource Group",
+        "x-ms-examples": {
+          "ResourceGet": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}": {
+      "delete": {
+        "operationId": "SpatialAnchorsAccounts_Delete",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete a Spatial Anchors Account.",
+        "x-ms-examples": {
+          "ResourceDelete": {
+            "$ref": "./examples/SpatialAnchorsAccount/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_Get",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Retrieve a Spatial Anchors Account.",
+        "x-ms-examples": {
+          "ResourceGet": {
+            "$ref": "./examples/SpatialAnchorsAccount/Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "SpatialAnchorsAccounts_Update",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Updating a Spatial Anchors Account",
+        "x-ms-examples": {
+          "Update spatial anchors account": {
+            "$ref": "./examples/SpatialAnchorsAccount/Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SpatialAnchorsAccounts_Create",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Creating or Updating a Spatial Anchors Account.",
+        "x-ms-examples": {
+          "ResourceCreate": {
+            "$ref": "./examples/SpatialAnchorsAccount/Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{spatialAnchorsAccountName}/keys": {
+      "get": {
+        "operationId": "SpatialAnchorsAccounts_GetKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "Get Both of the 2 Keys of a Spatial Anchors Account",
+        "x-ms-examples": {
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/SpatialAnchorsAccount/GetKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "SpatialAnchorsAccounts_RegenerateKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "Regenerate 1 Key of a Spatial Anchors Account",
+        "x-ms-examples": {
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/SpatialAnchorsAccount/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/spatialAnchorsAccountKeyRegenerateParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SpatialAnchorsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "description": "Check Name Availability Request",
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "description": "Resource Name To Verify",
+          "type": "string"
+        },
+        "type": {
+          "description": "Fully qualified resource type which includes provider namespace",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "Check Name Availability Response",
+      "type": "object",
+      "required": [
+        "nameAvailable"
+      ],
+      "properties": {
+        "nameAvailable": {
+          "description": "if name Available",
+          "$ref": "#/definitions/NameAvailability"
+        },
+        "reason": {
+          "description": "Resource Name To Verify",
+          "$ref": "#/definitions/NameUnavailableReason"
+        },
+        "message": {
+          "description": "detail message",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Response on Error",
+      "type": "object",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "description": "Describes the error in detail and provides debugging information",
+          "type": "string"
+        },
+        "code": {
+          "description": "String that can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of JSON objects that MUST contain name/value pairs for code and message, and MAY contain a name/value pair for target, as described above.The contents of this section are service-defined but must adhere to the aforementioned schema.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that represents the operation.",
+      "type": "object",
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
+      "properties": {
+        "provider": {
+          "description": "Service provider: Microsoft.ResourceProvider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Operation type: Read, write, delete, etc.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of operation",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailability": {
+      "description": "Whether or not the name is available.",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "NameAvailability",
+        "modelAsString": true
+      }
+    },
+    "NameUnavailableReason": {
+      "description": "reason of name unavailable.",
+      "type": "string",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "NameUnavailableReason",
+        "modelAsString": true
+      }
+    },
+    "OperationList": {
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "SpatialAnchorsAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "SpatialAnchorsAccount Response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Property bag.",
+          "$ref": "#/definitions/SpatialAnchorsAccountProperties"
+        }
+      }
+    },
+    "SpatialAnchorsAccountKeys": {
+      "description": "Spatial Anchors Account Keys",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "value of primary key.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "secondaryKey": {
+          "description": "value of secondary key.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SpatialAnchorsAccountKeyRegenerateRequest": {
+      "description": "Spatial Anchors Account Regenerate Key",
+      "type": "object",
+      "properties": {
+        "serial": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "default": 1,
+          "x-ms-enum": {
+            "name": "Serial",
+            "values": [
+              {
+                "value": 1,
+                "description": "The Primary Key",
+                "name": "Primary"
+              },
+              {
+                "value": 2,
+                "description": "The Secondary Key",
+                "name": "Secondary"
+              }
+            ]
+          },
+          "description": "serial of key to be regenerated"
+        }
+      }
+    },
+    "SpatialAnchorsAccountProperties": {
+      "description": "Spatial Anchors Account Customize Properties",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "description": "unique id of certain Spatial Anchors Account data contract.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountDomain": {
+          "description": "Correspond domain name of certain Spatial Anchors Account",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "SpatialAnchorsAccountList": {
+      "description": "Result of the request to get resource collection. It contains a list of resources and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpatialAnchorsAccount"
+          },
+          "description": "List of resources supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of resource list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "description": "Version of the API to be used with the client request.",
+      "in": "query",
+      "required": true,
+      "type": "string"
+    },
+    "checkNameAvailabilityParameter": {
+      "name": "checkNameAvailability",
+      "description": "Check Name Availability Request.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/CheckNameAvailabilityRequest"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "The location in which uniqueness will be verified."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "spatialAnchorsAccountKeyRegenerateParameter": {
+      "name": "spatialAnchorsAccountKeyRegenerate",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SpatialAnchorsAccountKeyRegenerateRequest"
+      },
+      "x-ms-parameter-location": "method",
+      "description": "Specifying which key to be regenerated."
+    },
+    "spatialAnchorsAccountNameParameter": {
+      "name": "spatialAnchorsAccountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Mixed Reality Spatial Anchors Account."
+    },
+    "spatialAnchorsAccountParameter": {
+      "name": "spatialAnchorsAccount",
+      "description": "Spatial Anchors Account parameter.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/SpatialAnchorsAccount"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "description": "Azure subscription ID.",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

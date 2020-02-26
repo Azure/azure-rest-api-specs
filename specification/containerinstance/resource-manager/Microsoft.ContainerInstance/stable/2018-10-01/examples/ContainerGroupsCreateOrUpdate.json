@@ -8,7 +8,7 @@
       "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
       "location": "west us",
       "name": "demo1",
-      "identity": { 
+      "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {}
@@ -30,7 +30,11 @@
               "resources": {
                 "requests": {
                   "cpu": 1,
-                  "memoryInGB": 1.5
+                  "memoryInGB": 1.5,
+                  "gpu": {
+                    "count": 1,
+                    "sku": "K80"
+                  }
                 }
               },
               "volumeMounts": [
@@ -66,6 +70,13 @@
         "networkProfile": {
           "id": "test-network-profile-id"
         },
+        "dnsConfig": {
+          "nameServers": [
+            "1.1.1.1"
+          ],
+          "searchDomains": "cluster.local svc.cluster.local",
+          "options": "ndots:2"
+        },
         "imageRegistryCredentials": [],
         "ipAddress": {
           "ports": [
@@ -93,8 +104,7 @@
           },
           {
             "name": "volume3",
-            "secret":
-            {
+            "secret": {
               "secretKey1": "SecretValue1InBase64",
               "secretKey2": "SecretValue2InBase64"
             }
@@ -126,7 +136,11 @@
                 "resources": {
                   "requests": {
                     "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
                   }
                 },
                 "volumeMounts": [
@@ -154,6 +168,13 @@
               "workspaceId": "workspaceid",
               "workspaceKey": ""
             }
+          },
+          "dnsConfig": {
+            "nameServers": [
+              "1.1.1.1"
+            ],
+            "searchDomains": "cluster.local svc.cluster.local",
+            "options": "ndots:2"
           },
           "imageRegistryCredentials": [],
           "ipAddress": {
@@ -212,7 +233,11 @@
                 "resources": {
                   "requests": {
                     "cpu": 1,
-                    "memoryInGB": 1.5
+                    "memoryInGB": 1.5,
+                    "gpu": {
+                      "count": 1,
+                      "sku": "K80"
+                    }
                   }
                 },
                 "volumeMounts": [
@@ -235,6 +260,11 @@
               }
             }
           ],
+          "dnsConfig": {
+            "nameServers": [
+              "1.1.1.1"
+            ]
+          },
           "imageRegistryCredentials": [],
           "ipAddress": {
             "ip": "10.0.0.1",
@@ -264,7 +294,7 @@
             },
             {
               "name": "volume3",
-              "secret":{}
+              "secret": {}
             }
           ]
         },

@@ -300,10 +300,6 @@
               "type": "string",
               "readOnly": true
             },
-            "adminSiteName": {
-              "description": "App Service plan administration site.",
-              "type": "string"
-            },
             "hostingEnvironmentProfile": {
               "$ref": "#/definitions/HostingEnvironmentProfile",
               "description": "Specification for the App Service Environment to use for the App Service plan.",
@@ -616,6 +612,10 @@
           "description": "ARM resource ID of the source app. App resource ID is of the form \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName} for production slots and \n/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slotName} for other slots.",
           "type": "string"
         },
+        "sourceWebAppLocation": {
+          "description": "Location of source app ex: West US or North Europe",
+          "type": "string"
+        },
         "hostingEnvironment": {
           "description": "App Service Environment.",
           "type": "string"
@@ -686,6 +686,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "supportCredentials": {
+          "description": "Gets or sets whether CORS requests with credentials are allowed. See \nhttps://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials\nfor more details.",
+          "type": "boolean"
         }
       }
     },
@@ -760,7 +764,7 @@
       "type": "object",
       "properties": {
         "unit": {
-          "description": "Units of measurement for the quota resourse.",
+          "description": "Units of measurement for the quota resource.",
           "type": "string"
         },
         "nextResetTime": {
@@ -909,6 +913,11 @@
               "description": "Kind of site that was deleted",
               "type": "string",
               "readOnly": true
+            },
+            "geoRegionName": {
+              "description": "Geo Region of the deleted site",
+              "type": "string",
+              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
@@ -979,6 +988,21 @@
           "items": {
             "$ref": "#/definitions/RampUpRule"
           }
+        }
+      }
+    },
+    "GeoDistribution": {
+      "description": "A global distribution definition.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location.",
+          "type": "string"
+        },
+        "numberOfWorkers": {
+          "format": "int32",
+          "description": "NumberOfWorkers.",
+          "type": "integer"
         }
       }
     },
@@ -1196,9 +1220,6 @@
     },
     "IpSecurityRestriction": {
       "description": "IP security restriction on an app.",
-      "required": [
-        "ipAddress"
-      ],
       "type": "object",
       "properties": {
         "ipAddress": {
@@ -1208,6 +1229,20 @@
         "subnetMask": {
           "description": "Subnet mask for the range of IP addresses the restriction is valid for.",
           "type": "string"
+        },
+        "vnetSubnetResourceId": {
+          "description": "Virtual network resource id",
+          "type": "string"
+        },
+        "vnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Vnet traffic tag",
+          "type": "integer"
+        },
+        "subnetTrafficTag": {
+          "format": "int32",
+          "description": "(internal) Subnet traffic tag",
+          "type": "integer"
         },
         "action": {
           "description": "Allow or Deny access for this IP range.",
@@ -1277,7 +1312,9 @@
           "description": "Type of managed service identity.",
           "enum": [
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1295,12 +1332,23 @@
           "type": "string",
           "readOnly": true
         },
-        "identityIds": {
-          "description": "Array of UserAssigned managed service identities.",
-          "type": "array",
-          "items": {
-            "description": "Resource Id for UserAssigned managed service identity",
-            "type": "string"
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "description": "Principal Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              },
+              "clientId": {
+                "description": "Client Id of user assigned identity",
+                "type": "string",
+                "readOnly": true
+              }
+            }
           }
         }
       }
@@ -1562,12 +1610,12 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
           "format": "int32",
-          "description": "Specifies interval in mimuntes to reevaluate ReroutePercentage.",
+          "description": "Specifies interval in minutes to reevaluate ReroutePercentage.",
           "type": "integer"
         },
         "minReroutePercentage": {
@@ -2057,6 +2105,10 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertExclusionPaths": {
+              "description": "client certificate authentication comma-separated exclusion paths",
+              "type": "string"
+            },
             "hostNamesDisabled": {
               "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.",
               "type": "boolean"
@@ -2123,6 +2175,35 @@
             "httpsOnly": {
               "description": "HttpsOnly: configures a web site to accept only https requests. Issues redirect for\nhttp requests",
               "type": "boolean"
+            },
+            "redundancyMode": {
+              "description": "Site redundancy mode",
+              "enum": [
+                "None",
+                "Manual",
+                "Failover",
+                "ActiveActive",
+                "GeoRedundant"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "RedundancyMode",
+                "modelAsString": false
+              }
+            },
+            "inProgressOperationId": {
+              "format": "uuid",
+              "description": "Specifies an operation id if this site has a pending operation.",
+              "type": "string",
+              "readOnly": true,
+              "example": "00000000-0000-0000-0000-000000000000"
+            },
+            "geoDistributions": {
+              "description": "GeoDistributions for this site",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoDistribution"
+              }
             }
           },
           "x-ms-client-flatten": true
@@ -2331,7 +2412,7 @@
         },
         "experiments": {
           "$ref": "#/definitions/Experiments",
-          "description": "This is work around for polymophic types."
+          "description": "This is work around for polymorphic types."
         },
         "limits": {
           "$ref": "#/definitions/SiteLimits",
@@ -2389,11 +2470,22 @@
           "type": "integer"
         },
         "ipSecurityRestrictions": {
-          "description": "IP security restrictions.",
+          "description": "IP security restrictions for main.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpSecurityRestriction"
           }
+        },
+        "scmIpSecurityRestrictions": {
+          "description": "IP security restrictions for scm.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpSecurityRestriction"
+          }
+        },
+        "scmIpSecurityRestrictionsUseMain": {
+          "description": "IP security restrictions for scm to use main.",
+          "type": "boolean"
         },
         "http20Enabled": {
           "description": "Http20Enabled: configures a web site to allow clients to connect over http2.0",
@@ -2549,7 +2641,7 @@
       }
     },
     "SlotSwapStatus": {
-      "description": "The status of the last successfull slot swap operation.",
+      "description": "The status of the last successful slot swap operation.",
       "type": "object",
       "properties": {
         "timestampUtc": {
@@ -2717,7 +2809,7 @@
       }
     },
     "User": {
-      "description": "User crendentials used for publishing activity.",
+      "description": "User credentials used for publishing activity.",
       "type": "object",
       "allOf": [
         {
@@ -2904,7 +2996,6 @@
               "readOnly": true
             },
             "certBlob": {
-              "format": "byte",
               "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \nPoint-To-Site VPN connection.",
               "type": "string"
             },
@@ -2924,6 +3015,10 @@
             "dnsServers": {
               "description": "DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.",
               "type": "string"
+            },
+            "isSwift": {
+              "description": "Flag that is used to denote if this is VNET injection",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true

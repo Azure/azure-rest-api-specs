@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ServiceBus/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/SBOperations_List.json"
+          }
+        },
+        "description": "Lists all of the available ServiceBus REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces": {
       "get": {
         "tags": [
@@ -41,7 +77,9 @@
         ],
         "operationId": "Namespaces_List",
         "x-ms-examples": {
-          "NameSpaceList": { "$ref": "./examples/NameSpaces/SBNameSpaceList.json" }
+          "NameSpaceList": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceList.json"
+          }
         },
         "description": "Gets all the available namespaces within the subscription, irrespective of the resource groups.",
         "externalDocs": {
@@ -49,10 +87,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -81,7 +119,9 @@
         ],
         "operationId": "Namespaces_ListByResourceGroup",
         "x-ms-examples": {
-          "NameSpaceListByResourceGroup": { "$ref": "./examples/NameSpaces/SBNameSpaceListByResourceGroup.json" }
+          "NameSpaceListByResourceGroup": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceListByResourceGroup.json"
+          }
         },
         "description": "Gets the available namespaces within a resource group.",
         "externalDocs": {
@@ -89,13 +129,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -124,7 +164,9 @@
         ],
         "operationId": "Namespaces_CreateOrUpdate",
         "x-ms-examples": {
-          "NameSpaceCreate": { "$ref": "./examples/NameSpaces/SBNameSpaceCreate.json" }
+          "NameSpaceCreate": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceCreate.json"
+          }
         },
         "description": "Creates or updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "externalDocs": {
@@ -132,7 +174,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
             "name": "namespaceName",
@@ -151,10 +193,10 @@
             "description": "Parameters supplied to create a namespace resource."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -188,7 +230,9 @@
         ],
         "operationId": "Namespaces_Delete",
         "x-ms-examples": {
-          "NameSpaceDelete": { "$ref": "./examples/NameSpaces/SBNameSpaceDelete.json" }
+          "NameSpaceDelete": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceDelete.json"
+          }
         },
         "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
         "externalDocs": {
@@ -196,16 +240,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -233,7 +277,9 @@
         ],
         "operationId": "Namespaces_Get",
         "x-ms-examples": {
-          "NameSpaceGet": { "$ref": "./examples/NameSpaces/SBNameSpaceGet.json" }
+          "NameSpaceGet": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceGet.json"
+          }
         },
         "description": "Gets a description for the specified namespace.",
         "externalDocs": {
@@ -241,16 +287,16 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -274,15 +320,17 @@
         ],
         "operationId": "Namespaces_Update",
         "x-ms-examples": {
-          "NameSpaceUpdate": { "$ref": "./examples/NameSpaces/SBNameSpaceUpdate.json" }
+          "NameSpaceUpdate": {
+            "$ref": "./examples/NameSpaces/SBNameSpaceUpdate.json"
+          }
         },
         "description": "Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
             "name": "parameters",
@@ -294,10 +342,10 @@
             "description": "Parameters supplied to update a namespace resource."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -324,7 +372,7 @@
           }
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/ipfilterrules": {
       "get": {
         "tags": [
@@ -339,16 +387,16 @@
         "description": "Gets a list of IP Filter rules for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -384,13 +432,13 @@
         "description": "Creates or updates an IpFilterRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
+            "$ref": "#/parameters/ipFilterRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -402,10 +450,10 @@
             "description": "The Namespace IpFilterRule."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -436,19 +484,19 @@
         "description": "Deletes an IpFilterRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
+            "$ref": "#/parameters/ipFilterRuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -479,19 +527,19 @@
         "description": "Gets an IpFilterRule for a Namespace by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/IPFilterRuleNameParameter"
+            "$ref": "#/parameters/ipFilterRuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -524,16 +572,16 @@
         "description": "Gets a list of VirtualNetwork rules for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -569,13 +617,13 @@
         "description": "Creates or updates an VirtualNetworkRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
           },
           {
             "name": "parameters",
@@ -587,10 +635,10 @@
             "description": "The Namespace VirtualNetworkRule."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -621,19 +669,19 @@
         "description": "Deletes an VirtualNetworkRule for a Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -664,19 +712,19 @@
         "description": "Gets an VirtualNetworkRule for a Namespace by rule name.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/NamespaceNameParameter"
+            "$ref": "#/parameters/namespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualNetworkRuleNameParameter"
+            "$ref": "#/parameters/virtualNetworkRuleNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
         ],
         "responses": {
@@ -684,6 +732,97 @@
             "description": "Namespace VirtualNetworkRule returned successfully.",
             "schema": {
               "$ref": "#/definitions/VirtualNetworkRule"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkrulesets/default": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleSetCreate": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetCreate.json"
+          }
+        },
+        "operationId": "Namespaces_CreateOrUpdateNetworkRuleSet",
+        "description": "Gets NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            },
+            "description": "The Namespace IpFilterRule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceVirtualNetworkRuleSetget": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetGet.json"
+          }
+        },
+        "operationId": "Namespaces_GetNetworkRuleSet",
+        "description": "Gets NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace NetworkRuleSet successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSet"
             }
           },
           "default": {
@@ -792,7 +931,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/SBSku",
-          "description": "Porperties of Sku"
+          "description": "Properties of SKU"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -811,7 +950,7 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/SBSku",
-          "description": "Porperties of Sku"
+          "description": "Properties of SKU"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -858,6 +997,14 @@
         "zoneRedundant": {
           "type": "boolean",
           "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Properties of BYOK Encryption description"
         }
       },
       "description": "Properties of the namespace."
@@ -902,8 +1049,57 @@
       ],
       "description": "SKU of the namespace."
     },
+    "OperationListResult": {
+      "description": "Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "A ServiceBus REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Service provider: Microsoft.ServiceBus"
+            },
+            "resource": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Resource on which the operation is performed: Invoice, etc."
+            },
+            "operation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            }
+          }
+        }
+      }
+    },
     "ErrorResponse": {
-      "description": "Error reponse indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {
@@ -1003,24 +1199,171 @@
         }
       },
       "description": "The response from the List namespace operation."
+    },
+    "Subnet": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of Virtual Network Subnet"
+        }
+      },
+      "description": "Properties supplied for Subnet"
+    },
+    "NWRuleSetIpRules": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "ipMask": {
+          "type": "string",
+          "description": "IP Mask"
+        },
+        "action": {
+          "type": "string",
+          "description": "The IP Filter Action",
+          "enum": [
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleIPAction",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The response from the List namespace operation."
+    },
+    "NWRuleSetVirtualNetworkRules": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/Subnet",
+          "description": "Subnet properties"
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Value that indicates whether to ignore missing Vnet Service Endpoint"
+        }
+      },
+      "description": "The response from the List namespace operation."
+    },
+    "NetworkRuleSet": {
+      "properties": {
+        "properties": {
+          "description": "NetworkRuleSet properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "defaultAction": {
+              "type": "string",
+              "description": "Default Action for Network Rule Set",
+              "enum": [
+                "Allow",
+                "Deny"
+              ],
+              "x-ms-enum": {
+                "name": "DefaultAction",
+                "modelAsString": true
+              }
+            },
+            "virtualNetworkRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetVirtualNetworkRules"
+              },
+              "description": "List VirtualNetwork Rules"
+            },
+            "ipRules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NWRuleSetIpRules"
+              },
+              "description": "List of IpRules"
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Description of topic resource."
+    },
+    "Identity": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault"
+        },
+        "type": {
+          "type": "string",
+          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "Encryption": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
-    "ApiVersionParameter": {
+    "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
       "description": "Client API version."
     },
-    "ResourceGroupNameParameter": {
+    "resourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
@@ -1030,7 +1373,7 @@
       "x-ms-parameter-location": "method",
       "description": "Name of the Resource group within the Azure subscription."
     },
-    "NamespaceNameParameter": {
+    "namespaceNameParameter": {
       "name": "namespaceName",
       "in": "path",
       "required": true,
@@ -1040,7 +1383,7 @@
       "x-ms-parameter-location": "method",
       "description": "The namespace name"
     },
-    "SkuNameParameter": {
+    "skuNameParameter": {
       "name": "sku",
       "in": "path",
       "required": true,
@@ -1050,7 +1393,7 @@
       "x-ms-parameter-location": "method",
       "description": "The sku type."
     },
-    "SkipParameter": {
+    "skipParameter": {
       "name": "$skip",
       "description": "Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
@@ -1060,7 +1403,7 @@
       "maximum": 1000,
       "x-ms-parameter-location": "method"
     },
-    "TopParameter": {
+    "topParameter": {
       "name": "$top",
       "description": "May be used to limit the number of results to the most recent N usageDetails.",
       "in": "query",
@@ -1070,7 +1413,7 @@
       "maximum": 1000,
       "x-ms-parameter-location": "method"
     },
-    "IPFilterRuleNameParameter": {
+    "ipFilterRuleNameParameter": {
       "name": "ipFilterRuleName",
       "in": "path",
       "required": true,
@@ -1079,7 +1422,7 @@
       "x-ms-parameter-location": "method",
       "description": "The IP Filter Rule name."
     },
-    "VirtualNetworkRuleNameParameter": {
+    "virtualNetworkRuleNameParameter": {
       "name": "virtualNetworkRuleName",
       "in": "path",
       "required": true,

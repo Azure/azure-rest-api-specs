@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
-    "version": "2017-09-01-preview"
+    "version": "2018-06-01"
   },
   "paths": {},
   "definitions": {
@@ -39,6 +39,14 @@
           "type": "array",
           "items": {
             "type": "object"
+          }
+        },
+        "runDimensions": {
+          "description": "Dimensions emitted by Pipeline.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
           }
         },
         "folder": {
@@ -98,11 +106,11 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "User proprety name.",
+          "description": "User property name.",
           "type": "string"
         },
         "value": {
-          "description": "User proprety value. Type: string (or Expression with resultType string).",
+          "description": "User property value. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -205,6 +213,826 @@
         "type": "object"
       }
     },
+    "StoreReadSettings": {
+      "description": "Connector read setting.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The read setting type."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageReadSettings": {
+      "description": "Azure blob read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure blob wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Azure Blob name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureBlobFSReadSettings": {
+      "description": "Azure blobFS read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure blobFS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure blobFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDataLakeStoreReadSettings": {
+      "description": "Azure data lake store read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "ADLS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "ADLS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonS3ReadSettings": {
+      "description": "Azure data lake store read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "AmazonS3 wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "AmazonS3 wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FileServerReadSettings": {
+      "description": "File server read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "FileServer wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "FileServer wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureFileStorageReadSettings": {
+      "description": "Azure File Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure File Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SftpWriteSettings": {
+      "description": "Sftp write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "operationTimeout": {
+          "description": "Specifies the timeout for writing each chunk to SFTP server. Default value: 01:00:00 (one hour). Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "useTempFileRename": {
+          "description": "Upload to temporary file(s) and rename. Disable this option if your SFTP server doesn't support rename operation. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
+    "GoogleCloudStorageReadSettings": {
+      "description": "Google Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Google Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Google Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Google Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FtpReadSettings": {
+      "description": "Ftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Ftp wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "useBinaryTransfer": {
+          "type": "boolean",
+          "description": "Specify whether to use binary transfer mode for FTP stores."
+        }
+      }
+    },
+    "SftpReadSettings": {
+      "description": "Sftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Sftp wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "HttpReadSettings": {
+      "description": "Sftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "requestTimeout": {
+          "type": "object",
+          "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server."
+        }
+      }
+    },
+    "HdfsReadSettings": {
+      "description": "HDFS read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "HDFS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "HDFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "fileListPath": {
+          "type": "object",
+          "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "distcpSettings": {
+          "description": "Specifies Distcp-related settings.",
+          "$ref": "#/definitions/DistcpSettings"
+        }
+      }
+    },
+    "StoreWriteSettings": {
+      "description": "Connector write settings.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The write setting type."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "copyBehavior": {
+          "description": "The type of copy behavior for copy sink.",
+          "type": "object"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageWriteSettings": {
+      "description": "Azure blob write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
+    },
+    "AzureBlobFSWriteSettings": {
+      "description": "Azure blobFS write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
+    },
+    "AzureDataLakeStoreWriteSettings": {
+      "description": "Azure data lake store write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ],
+      "properties": {
+        "expiryDateTime": {
+          "description": "Specifies the expiry time of the written files. The time is applied to the UTC time zone in the format of \"2018-12-01T05:00:00Z\". Default value is NULL. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
+    },
+    "FileServerWriteSettings": {
+      "description": "File server write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreWriteSettings"
+        }
+      ]
+    },
+    "FormatReadSettings": {
+      "description": "Format read settings.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The read setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "DelimitedTextReadSettings": {
+      "description": "Delimited text read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "skipLineCount": {
+          "type": "object",
+          "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
+        }
+      }
+    },
+    "FormatWriteSettings": {
+      "description": "Format write settings.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The write setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AvroWriteSettings": {
+      "description": "Avro write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "recordName": {
+          "type": "string",
+          "description": "Top level record name in write result, which is required in AVRO spec."
+        },
+        "recordNamespace": {
+          "type": "string",
+          "description": "Record namespace in the write result."
+        }
+      }
+    },
+    "DelimitedTextWriteSettings": {
+      "description": "Delimited text write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "quoteAllText": {
+          "type": "object",
+          "description": "Indicates whether string values should always be enclosed with quotes. Type: boolean (or Expression with resultType boolean)."
+        },
+        "fileExtension": {
+          "type": "object",
+          "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "fileExtension"
+      ]
+    },
+    "JsonWriteSettings": {
+      "description": "Json write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "filePattern": {
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
+          "type": "string",
+          "enum": [
+            "setOfObjects",
+            "arrayOfObjects"
+          ],
+          "x-ms-enum": {
+            "name": "JsonWriteFilePattern",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AvroSource": {
+      "description": "A copy activity Avro source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Avro store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "ParquetSource": {
+      "description": "A copy activity Parquet source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Parquet store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "DelimitedTextSource": {
+      "description": "A copy activity DelimitedText source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "DelimitedText store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/DelimitedTextReadSettings",
+          "description": "DelimitedText format settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "JsonSource": {
+      "description": "A copy activity Json source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Json store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "OrcSource": {
+      "description": "A copy activity ORC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "ORC store settings."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "DelimitedTextSink": {
+      "description": "A copy activity DelimitedText sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "DelimitedText store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/DelimitedTextWriteSettings",
+          "description": "DelimitedText format settings."
+        }
+      }
+    },
+    "JsonSink": {
+      "description": "A copy activity Json sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonWriteSettings",
+          "description": "Json format settings."
+        }
+      }
+    },
+    "OrcSink": {
+      "description": "A copy activity ORC sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "ORC store settings."
+        }
+      }
+    },
     "CopyActivity": {
       "x-ms-discriminator-value": "Copy",
       "description": "Copy activity.",
@@ -250,8 +1078,8 @@
           "$ref": "#/definitions/CopySink"
         },
         "translator": {
-          "description": "Copy activity translator. If not specificed, tabular translator is used.",
-          "$ref": "#/definitions/CopyTranslator"
+          "description": "Copy activity translator. If not specified, tabular translator is used.",
+          "type": "object"
         },
         "enableStaging": {
           "type": "object",
@@ -276,6 +1104,34 @@
         "redirectIncompatibleRowSettings": {
           "description": "Redirect incompatible row settings when EnableSkipIncompatibleRow is true.",
           "$ref": "#/definitions/RedirectIncompatibleRowSettings"
+        },
+        "logStorageSettings": {
+          "description": "Log storage settings customer need to provide when enabling session log.",
+          "$ref": "#/definitions/LogStorageSettings"
+        },
+        "preserveRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Preserve Rules."
+        },
+        "preserve": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Preserve rules."
+        },
+        "validateDataConsistency": {
+          "type": "object",
+          "description": "Whether to enable Data Consistency validation. Type: boolean (or Expression with resultType boolean)."
+        },
+        "skipErrorFile": {
+          "description": "Specify the fault tolerance for data consistency.",
+          "$ref": "#/definitions/SkipErrorFile"
         }
       },
       "required": [
@@ -299,6 +1155,10 @@
         "sourceRetryWait": {
           "type": "object",
           "description": "Source retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
         }
       },
       "additionalProperties": {
@@ -308,12 +1168,49 @@
         "type"
       ]
     },
+    "BinarySource": {
+      "description": "A copy activity Binary source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
+    "TabularSource": {
+      "description": "Copy activity sources of tabular type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -366,6 +1263,47 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "CosmosDbSqlApiSource": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SQL API query. Type: string (or Expression with resultType string)."
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
+        },
+        "preferredRegions": {
+          "type": "object",
+          "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -381,6 +1319,57 @@
         "query": {
           "type": "object",
           "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "DynamicsCrmSource": {
+      "description": "A copy activity Dynamics CRM source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "CommonDataServiceForAppsSource": {
+      "description": "A copy activity Common Data Service for Apps source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -396,11 +1385,194 @@
         "query": {
           "type": "object",
           "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "InformixSource": {
+      "description": "A copy activity source for Informix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSource": {
+      "description": "A copy activity source for Microsoft Access.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "Db2Source": {
+      "description": "A copy activity source for Db2 databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OdbcSource": {
+      "description": "A copy activity source for ODBC databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MySqlSource": {
+      "description": "A copy activity source for MySQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlSource": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SybaseSource": {
+      "description": "A copy activity source for Sybase databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapBwSource": {
+      "description": "A copy activity source for SapBW server via MDX.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "MDX query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ODataSource": {
+      "description": "A copy activity source for OData source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SalesforceServiceCloudSource": {
+      "description": "A copy activity Salesforce Service Cloud source.",
       "type": "object",
       "allOf": [
         {
@@ -423,6 +1595,13 @@
             "name": "SalesforceSourceReadBehavior",
             "modelAsString": true
           }
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -431,7 +1610,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -446,22 +1625,206 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
         "query": {
-          "type": "string",
+          "type": "object",
           "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
     },
-	"SqlSource": {
-      "description": "A copy activity SQL source.",
+    "SapHanaSource": {
+      "description": "A copy activity source for SAP HANA source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP HANA Sql query. Type: string (or Expression with resultType string)."
+        },
+        "packetSize": {
+          "type": "object",
+          "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for SAP HANA read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "SapHanaDynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "SapHanaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+          "$ref": "#/definitions/SapHanaPartitionSettings"
+        }
+      }
+    },
+    "SapHanaPartitionSettings": {
+      "description": "The settings that will be leveraged for SAP HANA source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapOpenHubSource": {
+      "description": "A copy activity source for SAP Business Warehouse Open Hub Destination source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "excludeLastRequest": {
+          "type": "object",
+          "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "baseRequestId": {
+          "type": "object",
+          "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        }
+      }
+    },
+    "SapTableSource": {
+      "description": "A copy activity source for SAP Table source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "rowCount": {
+          "type": "object",
+          "description": "The number of rows to be retrieved. Type: integer(or Expression with resultType integer)."
+        },
+        "rowSkips": {
+          "type": "object",
+          "description": "The number of rows that will be skipped. Type: integer (or Expression with resultType integer)."
+        },
+        "rfcTableFields": {
+          "type": "object",
+          "description": "The fields of the SAP table that will be retrieved. For example, column0, column1. Type: string (or Expression with resultType string)."
+        },
+        "rfcTableOptions": {
+          "type": "object",
+          "description": "The options for the filtering of the SAP Table. For example, COLUMN0 EQ SOME VALUE. Type: string (or Expression with resultType string)."
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the maximum number of rows that will be retrieved at a time when retrieving data from SAP Table. Type: integer (or Expression with resultType integer)."
+        },
+        "customRfcReadTableFunctionModule": {
+          "type": "object",
+          "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for SAP table read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PartitionOnInt",
+            "PartitionOnCalendarYear",
+            "PartitionOnCalendarMonth",
+            "PartitionOnCalendarDate",
+            "PartitionOnTime"
+          ],
+          "x-ms-enum": {
+            "name": "SapTablePartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for SAP table source partitioning.",
+          "$ref": "#/definitions/SapTablePartitionSettings"
+        }
+      }
+    },
+    "SapTablePartitionSettings": {
+      "description": "The settings that will be leveraged for SAP table source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "maxPartitionsNumber": {
+          "type": "object",
+          "description": "The maximum value of partitions the table will be split into. Type: integer (or Expression with resultType string)."
+        }
+      }
+    },
+    "RestSource": {
+      "description": "A copy activity Rest service source.",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "paginationRules": {
+          "type": "object",
+          "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "requestInterval": {
+          "type": "object",
+          "description": "The time to await before sending next page request. "
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "SqlSource": {
+      "description": "A copy activity SQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -479,6 +1842,100 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        },
+        "isolationLevel": {
+          "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
+    },
+    "SqlServerSource": {
+      "description": "A copy activity SQL server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        }
+      }
+    },
+    "AzureSqlSource": {
+      "description": "A copy activity Azure SQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        }
+      }
+    },
+    "SqlMISource": {
+      "description": "A copy activity Azure SQL Managed Instance source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a Azure SQL Managed Instance source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
         }
       }
     },
@@ -487,7 +1944,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -517,6 +1974,13 @@
         "recursive": {
           "type": "object",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
         }
       }
     },
@@ -566,7 +2030,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -575,6 +2039,39 @@
           "description": "Database query. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "AzureDataExplorerSource": {
+      "description": "A copy activity Azure Data Explorer (Kusto) source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Should be a Kusto Query Language (KQL) query. Type: string (or Expression with resultType string)."
+        },
+        "noTruncation": {
+          "type": "object",
+          "description": "The name of the Boolean option that controls whether truncation is applied to result-sets that go beyond a certain row-count limit."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9])).."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      },
+      "required": [
+        "query"
+      ]
     },
     "OracleSource": {
       "description": "A copy activity Oracle source.",
@@ -592,6 +2089,106 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Oracle read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "OraclePartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Oracle source partitioning.",
+          "$ref": "#/definitions/OraclePartitionSettings"
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "OraclePartitionSettings": {
+      "description": "The settings that will be leveraged for Oracle source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionNames": {
+          "type": "object",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Names of the physical partitions of Oracle table. "
+        },
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "TeradataSource": {
+      "description": "A copy activity Teradata source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Teradata query. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for teradata read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Hash",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "TeradataPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for teradata source partitioning.",
+          "$ref": "#/definitions/TeradataPartitionSettings"
+        }
+      }
+    },
+    "TeradataPartitionSettings": {
+      "description": "The settings that will be leveraged for teradata source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -603,14 +2200,22 @@
           "$ref": "#/definitions/CopySource"
         }
       ],
-      "properties": {}
+      "properties": {
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
     },
     "CassandraSource": {
       "description": "A copy activity source for a Cassandra database.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -652,6 +2257,141 @@
         "query": {
           "type": "object",
           "description": "Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string)."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "MongoDbV2Source": {
+      "description": "A copy activity source for a MongoDB database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "description": "Cursor methods for Mongodb query",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "CosmosDbMongoDbApiSource": {
+      "description": "A copy activity source for a CosmosDB (MongoDB API) database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "filter": {
+          "type": "object",
+          "description": "Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string)."
+        },
+        "cursorMethods": {
+          "description": "Cursor methods for Mongodb query.",
+          "$ref": "#/definitions/MongoDbCursorMethodsProperties"
+        },
+        "batchSize": {
+          "type": "object",
+          "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "additionalColumns": {
+          "type": "array",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/AdditionalColumns"
+          }
+        }
+      }
+    },
+    "MongoDbCursorMethodsProperties": {
+      "description": "Cursor methods for Mongodb query",
+      "type": "object",
+      "properties": {
+        "project": {
+          "type": "object",
+          "description": "Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string)."
+        },
+        "sort": {
+          "type": "object",
+          "description": "Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        },
+        "skip": {
+          "type": "object",
+          "description": "Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer)."
+        },
+        "limit": {
+          "type": "object",
+          "description": "Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "Office365Source": {
+      "description": "A copy activity source for an Office 365 service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "allowedGroups": {
+          "type": "object",
+          "description": "The groups containing all the users. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "userScopeFilterUri": {
+          "type": "object",
+          "description": "The user scope uri. Type: string (or Expression with resultType string)."
+        },
+        "dateFilterColumn": {
+          "type": "object",
+          "description": "The Column to apply the <paramref name=\"StartTime\"/> and <paramref name=\"EndTime\"/>. Type: string (or Expression with resultType string)."
+        },
+        "startTime": {
+          "type": "object",
+          "description": "Start time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "endTime": {
+          "type": "object",
+          "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "outputColumns": {
+          "type": "object",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
     },
@@ -664,6 +2404,29 @@
         }
       ],
       "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "AzureBlobFSSource": {
+      "description": "A copy activity Azure BlobFS source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "treatEmptyAsNull": {
+          "type": "object",
+          "description": "Treat empty as null. Type: boolean (or Expression with resultType boolean)."
+        },
+        "skipHeaderLineCount": {
+          "type": "object",
+          "description": "Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer)."
+        },
         "recursive": {
           "type": "object",
           "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
@@ -685,462 +2448,587 @@
         }
       }
     },
-    "AmazonMWSSource": { 
-      "description": "A copy activity Amazon Marketplace Web Service source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+    "AmazonMWSSource": {
+      "description": "A copy activity Amazon Marketplace Web Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
         }
-      } 
-    }, 
-    "AzurePostgreSqlSource": { 
-      "description": "A copy activity Azure PostgreSQL source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
-    }, 
-    "ConcurSource": { 
-      "description": "A copy activity Concur Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "CouchbaseSource": { 
-      "description": "A copy activity Couchbase server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "DrillSource": { 
-      "description": "A copy activity Drill server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "EloquaSource": { 
-      "description": "A copy activity Eloqua server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "GoogleBigQuerySource": { 
-      "description": "A copy activity Google BigQuery service source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "GreenplumSource": { 
-      "description": "A copy activity Greenplum Database source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "HBaseSource": { 
-      "description": "A copy activity HBase server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "HiveSource": { 
-      "description": "A copy activity Hive Server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "HubspotSource": { 
-      "description": "A copy activity Hubspot Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "ImpalaSource": { 
-      "description": "A copy activity Impala server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "JiraSource": { 
-      "description": "A copy activity Jira Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "MagentoSource": { 
-      "description": "A copy activity Magento server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "MariaDBSource": { 
-      "description": "A copy activity MariaDB server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "MarketoSource": { 
-      "description": "A copy activity Marketo server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "PaypalSource": { 
-      "description": "A copy activity Paypal Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "PhoenixSource": { 
-      "description": "A copy activity Phoenix server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "PrestoSource": { 
-      "description": "A copy activity Presto server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "QuickBooksSource": { 
-      "description": "A copy activity QuickBooks server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "ServiceNowSource": { 
-      "description": "A copy activity ServiceNow server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "ShopifySource": { 
-      "description": "A copy activity Shopify Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "SparkSource": { 
-      "description": "A copy activity Spark Server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "SquareSource": { 
-      "description": "A copy activity Square Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "XeroSource": { 
-      "description": "A copy activity Xero Serivce source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
-    }, 
-    "ZohoSource": { 
-      "description": "A copy activity Zoho server source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
-        }
-      } 
+      }
     },
-    "NetezzaSource": { 
-      "description": "A copy activity Netezza source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+    "AzurePostgreSqlSource": {
+      "description": "A copy activity Azure PostgreSQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
         }
-      } 
-    }, 
-    "VerticaSource": { 
-      "description": "A copy activity Vertica source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
+      ],
       "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
         }
-      } 
+      }
     },
-    "SalesforceMarketingCloudSource": { 
-      "description": "A copy activity Salesforce Marketing Cloud source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+    "AzurePostgreSqlSink": {
+      "description": "A copy activity Azure PostgreSQL sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
         }
-      } 
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
     },
-    "ResponsysSource": { 
-      "description": "A copy activity Responsys source.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/CopySource" 
-        } 
-      ], 
-      "properties": {
-        "query": { 
-          "type": "object", 
-          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)." 
+    "AzureMySqlSink": {
+      "description": "A copy activity Azure MySql sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
         }
-      } 
-    } ,
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ConcurSource": {
+      "description": "A copy activity Concur Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "CouchbaseSource": {
+      "description": "A copy activity Couchbase server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "DrillSource": {
+      "description": "A copy activity Drill server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "EloquaSource": {
+      "description": "A copy activity Eloqua server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleBigQuerySource": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GreenplumSource": {
+      "description": "A copy activity Greenplum Database source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "HBaseSource": {
+      "description": "A copy activity HBase server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "HiveSource": {
+      "description": "A copy activity Hive Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "HubspotSource": {
+      "description": "A copy activity Hubspot Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ImpalaSource": {
+      "description": "A copy activity Impala server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "JiraSource": {
+      "description": "A copy activity Jira Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MagentoSource": {
+      "description": "A copy activity Magento server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MariaDBSource": {
+      "description": "A copy activity MariaDB server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureMariaDBSource": {
+      "description": "A copy activity Azure MariaDB source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MarketoSource": {
+      "description": "A copy activity Marketo server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PaypalSource": {
+      "description": "A copy activity Paypal Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PhoenixSource": {
+      "description": "A copy activity Phoenix server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PrestoSource": {
+      "description": "A copy activity Presto server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "QuickBooksSource": {
+      "description": "A copy activity QuickBooks server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ServiceNowSource": {
+      "description": "A copy activity ServiceNow server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ShopifySource": {
+      "description": "A copy activity Shopify Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SparkSource": {
+      "description": "A copy activity Spark Server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SquareSource": {
+      "description": "A copy activity Square Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "XeroSource": {
+      "description": "A copy activity Xero Service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ZohoSource": {
+      "description": "A copy activity Zoho server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "NetezzaSource": {
+      "description": "A copy activity Netezza source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Netezza read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "DataSlice",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "NetezzaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Netezza source partitioning.",
+          "$ref": "#/definitions/NetezzaPartitionSettings"
+        }
+      }
+    },
+    "NetezzaPartitionSettings": {
+      "description": "The settings that will be leveraged for Netezza source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "VerticaSource": {
+      "description": "A copy activity Vertica source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceMarketingCloudSource": {
+      "description": "A copy activity Salesforce Marketing Cloud source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ResponsysSource": {
+      "description": "A copy activity Responsys source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "DynamicsAXSource": {
+      "description": "A copy activity Dynamics AX source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OracleServiceCloudSource": {
+      "description": "A copy activity Oracle Service Cloud source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleAdWordsSource": {
+      "description": "A copy activity Google AdWords service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "AmazonRedshiftSource": {
       "description": "A copy activity source for Amazon Redshift Source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1184,10 +3072,7 @@
           "description": "Stored procedure parameter type.",
           "$ref": "#/definitions/StoredProcedureParameterType"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "StoredProcedureParameterType": {
       "description": "Stored procedure parameter type.",
@@ -1195,6 +3080,7 @@
       "enum": [
         "String",
         "Int",
+        "Int64",
         "Decimal",
         "Guid",
         "Boolean",
@@ -1229,6 +3115,10 @@
         "sinkRetryWait": {
           "type": "object",
           "description": "Sink retry wait. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
         }
       },
       "additionalProperties": {
@@ -1311,6 +3201,55 @@
         }
       }
     },
+    "AvroSink": {
+      "description": "A copy activity Avro sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Avro store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/AvroWriteSettings",
+          "description": "Avro format settings."
+        }
+      }
+    },
+    "ParquetSink": {
+      "description": "A copy activity Parquet sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Parquet store settings."
+        }
+      }
+    },
+    "BinarySink": {
+      "description": "A copy activity Binary sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
@@ -1334,7 +3273,7 @@
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1349,7 +3288,7 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1365,6 +3304,25 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Default is . (dot). Type: string (or Expression with resultType string)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
+        }
+      }
+    },
+    "CosmosDbSqlApiSink": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
         }
       }
     },
@@ -1395,6 +3353,128 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SqlServerSink": {
+      "description": "A copy activity SQL server sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureSqlSink": {
+      "description": "A copy activity Azure SQL sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SqlMISink": {
+      "description": "A copy activity Azure SQL Managed Instance sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1418,6 +3498,18 @@
         "polyBaseSettings": {
           "description": "Specifies PolyBase-related settings when allowPolyBase is true.",
           "$ref": "#/definitions/PolybaseSettings"
+        },
+        "allowCopyCommand": {
+          "type": "object",
+          "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyCommandSettings": {
+          "description": "Specifies Copy Command related settings when allowCopyCommand is true.",
+          "$ref": "#/definitions/DWCopyCommandSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1457,6 +3549,60 @@
         "name": "PolybaseSettingsRejectType",
         "modelAsString": true
       }
+    },
+    "DWCopyCommandSettings": {
+      "description": "DW Copy Command settings.",
+      "type": "object",
+      "properties": {
+        "defaultValues": {
+          "type": "array",
+          "description": "Specifies the default values for each target column in SQL DW. The default values in the property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a default value. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/DWCopyCommandDefaultValue"
+          }
+        },
+        "additionalOptions": {
+          "type": "object",
+          "description": "Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalOptions\": { \"MAXERRORS\": \"1000\", \"DATEFORMAT\": \"'ymd'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DWCopyCommandDefaultValue": {
+      "description": "Default value.",
+      "type": "object",
+      "properties": {
+        "columnName": {
+          "type": "object",
+          "description": "Column name. Type: object (or Expression with resultType string)."
+        },
+        "defaultValue": {
+          "type": "object",
+          "description": "The default value of the column. Type: object (or Expression with resultType string)."
+        }
+      }
+    },
+    "LogStorageSettings": {
+      "description": "Log storage settings.",
+      "type": "object",
+      "properties": {
+        "linkedServiceName": {
+          "description": "Log storage linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "path": {
+          "type": "object",
+          "description": "The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "linkedServiceName"
+      ]
     },
     "StagingSettings": {
       "description": "Staging settings.",
@@ -1502,6 +3648,34 @@
         "linkedServiceName"
       ]
     },
+    "SkipErrorFile": {
+      "description": "Skip error file.",
+      "type": "object",
+      "properties": {
+        "fileMissing": {
+          "type": "object",
+          "description": "Skip if file is deleted by other client during copy. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataInconsistency": {
+          "type": "object",
+          "description": "Skip if source/sink file changed by other concurrent write. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "AdditionalColumns": {
+      "description": "Specify the column name and value of additional columns.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "description": "Additional column name. Type: string (or Expression with resultType string)."
+        },
+        "value": {
+          "type": "object",
+          "description": "Additional column value. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "OracleSink": {
       "description": "A copy activity Oracle sink.",
       "type": "object",
@@ -1528,7 +3702,26 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
+        },
+        "enableAdlsSingleFileParallel": {
+          "description": "Single File Parallel.",
+          "type": "object"
+        }
+      }
+    },
+    "AzureBlobFSSink": {
+      "description": "A copy activity Azure Data Lake Storage Gen2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "copyBehavior": {
+          "description": "The type of copy behavior for copy sink.",
+          "type": "object"
         }
       }
     },
@@ -1570,6 +3763,36 @@
         }
       }
     },
+    "InformixSink": {
+      "description": "A copy activity Informix sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSink": {
+      "description": "A copy activity Microsoft Access sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -1593,11 +3816,104 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "writeBehavior"
       ]
+    },
+    "DynamicsCrmSink": {
+      "description": "A copy activity Dynamics CRM sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "CommonDataServiceForAppsSink": {
+      "description": "A copy activity Common Data Service for Apps sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "AzureDataExplorerSink": {
+      "description": "A copy activity Azure Data Explorer sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "ingestionMappingName": {
+          "type": "object",
+          "description": "A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string."
+        },
+        "ingestionMappingAsJson": {
+          "type": "object",
+          "description": "An explicit column mapping description provided in a json format. Type: string."
+        },
+        "flushImmediately": {
+          "type": "object",
+          "description": "If set to true, any aggregation will be skipped. Default is false. Type: boolean."
+        }
+      }
     },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
@@ -1630,6 +3946,52 @@
         }
       }
     },
+    "SalesforceServiceCloudSink": {
+      "description": "A copy activity Salesforce Service Cloud sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "CosmosDbMongoDbApiSink": {
+      "description": "A copy activity sink for a CosmosDB (MongoDB API) database.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is \"insert\". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "CopyTranslator": {
       "discriminator": "type",
       "description": "A copy activity translator.",
@@ -1658,11 +4020,23 @@
       "properties": {
         "columnMappings": {
           "type": "object",
-          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string)."
+          "description": "Column mappings. Example: \"UserId: MyUserId, Group: MyGroup, Name: MyName\" Type: string (or Expression with resultType string). This property will be retired. Please use mappings property."
         },
         "schemaMapping": {
           "type": "object",
-          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object)."
+          "description": "The schema mapping to map between tabular data and hierarchical data. Example: {\"Column1\": \"$.Column1\", \"Column2\": \"$.Column2.Property1\", \"Column3\": \"$.Column2.Property2\"}. Type: object (or Expression with resultType object). This property will be retired. Please use mappings property."
+        },
+        "collectionReference": {
+          "type": "object",
+          "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
+        },
+        "mapComplexValuesToString": {
+          "type": "object",
+          "description": "Whether to map complex (array and object) values to simple strings in json format. Type: boolean (or Expression with resultType boolean)."
+        },
+        "mappings": {
+          "type": "object",
+          "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
         }
       }
     },
@@ -1722,6 +4096,18 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "variables": {
+          "description": "User specified arguments under hivevar namespace.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
+        "queryTimeout": {
+          "type": "integer",
+          "description": "Query timeout value (in minutes).  Effective when the HDInsight cluster is with ESP (Enterprise Security Package)"
         }
       }
     },
@@ -1768,12 +4154,8 @@
           }
         },
         "arguments": {
-          "description": "User specified arguments to HDInsightActivity.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          }
+          "type": "object",
+          "description": "User specified arguments to HDInsightActivity. Type: array (or Expression with resultType array)."
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -2065,24 +4447,20 @@
           "$ref": "#/definitions/SSISPackageLocation"
         },
         "runtime": {
-          "description": "Specifies the runtime to execute SSIS package.",
-          "type": "string",
-          "enum": [
-            "x64",
-            "x86"
-          ],
-          "x-ms-enum": {
-            "name": "SSISExecutionRuntime",
-            "modelAsString": true
-          }
+          "description": "Specifies the runtime to execute SSIS package. The value should be \"x86\" or \"x64\". Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "loggingLevel": {
-          "description": "The logging level of SSIS package execution.",
-          "type": "string"
+          "description": "The logging level of SSIS package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
         },
         "environmentPath": {
-          "description": "The environment path to execute the SSIS package.",
-          "type": "string"
+          "description": "The environment path to execute the SSIS package. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "executionCredential": {
+          "description": "The package execution credential.",
+          "$ref": "#/definitions/SSISExecutionCredential"
         },
         "connectVia": {
           "description": "The integration runtime reference.",
@@ -2122,6 +4500,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/SSISPropertyOverride"
           }
+        },
+        "logLocation": {
+          "description": "SSIS package execution log location.",
+          "$ref": "#/definitions/SSISLogLocation"
         }
       },
       "required": [
@@ -2131,16 +4513,68 @@
     },
     "SSISPackageLocation": {
       "description": "SSIS package location.",
-      "type" : "object",
+      "type": "object",
       "properties": {
         "packagePath": {
-          "description": "The SSIS package path.",
-          "type": "string"
+          "description": "The SSIS package path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS package location.",
+          "type": "string",
+          "enum": [
+            "SSISDB",
+            "File",
+            "InlinePackage"
+          ],
+          "x-ms-enum": {
+            "name": "SsisPackageLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package location properties.",
+          "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
-      },
-      "required": [
-        "packagePath"
-      ]
+      }
+    },
+    "SSISPackageLocationTypeProperties": {
+      "description": "SSIS package location properties.",
+      "type": "object",
+      "properties": {
+        "packagePassword": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password of the package."
+        },
+        "accessCredential": {
+          "description": "The package access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "configurationPath": {
+          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "packageName": {
+          "description": "The package name.",
+          "type": "string"
+        },
+        "packageContent": {
+          "description": "The embedded package content. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "packageLastModifiedDate": {
+          "description": "The embedded package last modified date.",
+          "type": "string"
+        },
+        "childPackages": {
+          "description": "The embedded child package list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSISChildPackage"
+          }
+        }
+      }
     },
     "SSISConnectionManager": {
       "description": "SSIS Connection Manager.",
@@ -2178,6 +4612,123 @@
       "required": [
         "value"
       ]
+    },
+    "SSISExecutionCredential": {
+      "description": "SSIS package execution credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISAccessCredential": {
+      "description": "SSIS access credential.",
+      "type": "object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISChildPackage": {
+      "description": "SSIS embedded child package.",
+      "type": "object",
+      "properties": {
+        "packagePath": {
+          "type": "object",
+          "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Name for embedded child package."
+        },
+        "packageContent": {
+          "type": "object",
+          "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date for embedded child package."
+        }
+      },
+      "required": [
+        "packagePath",
+        "packageContent"
+      ]
+    },
+    "SSISLogLocation": {
+      "description": "SSIS package execution log location",
+      "type": "object",
+      "properties": {
+        "logPath": {
+          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS log location.",
+          "type": "string",
+          "enum": [
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisLogLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package execution log location properties.",
+          "$ref": "#/definitions/SSISLogLocationTypeProperties"
+        }
+      },
+      "required": [
+        "logPath",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "SSISLogLocationTypeProperties": {
+      "description": "SSIS package execution log location properties.",
+      "type": "object",
+      "properties": {
+        "accessCredential": {
+          "description": "The package execution log access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "logRefreshInterval": {
+          "type": "object",
+          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
     },
     "CustomActivity": {
       "description": "Custom activity type.",
@@ -2224,6 +4775,10 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "retentionTimeInDays": {
+          "type": "object",
+          "description": "The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double)."
         }
       },
       "required": [
@@ -2327,6 +4882,89 @@
         "pipeline"
       ]
     },
+    "DeleteActivity": {
+      "x-ms-discriminator-value": "Delete",
+      "description": "Delete activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delete activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeleteActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DeleteActivityTypeProperties": {
+      "description": "Delete activity properties.",
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "maxConcurrentConnections": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The max concurrent connections to connect data source at the same time."
+        },
+        "enableLogging": {
+          "type": "object",
+          "description": "Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "logStorageSettings": {
+          "description": "Log storage settings customer need to provide when enableLogging is true.",
+          "$ref": "#/definitions/LogStorageSettings"
+        },
+        "dataset": {
+          "description": "Delete activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
+      ]
+    },
+    "AzureDataExplorerCommandActivity": {
+      "x-ms-discriminator-value": "AzureDataExplorerCommand",
+      "description": "Azure Data Explorer command activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Explorer command activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDataExplorerCommandActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDataExplorerCommandActivityTypeProperties": {
+      "description": "Azure Data Explorer command activity properties.",
+      "properties": {
+        "command": {
+          "type": "object",
+          "description": "A control command, according to the Azure Data Explorer command syntax. Type: string (or Expression with resultType string)."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "description": "Control command timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..)"
+        }
+      },
+      "required": [
+        "command"
+      ]
+    },
     "LookupActivity": {
       "x-ms-discriminator-value": "Lookup",
       "description": "Lookup activity.",
@@ -2409,7 +5047,7 @@
         },
         "pfx": {
           "description": "Base64-encoded contents of a PFX file.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "username": {
           "description": "Web activity authentication user name for basic authentication.",
@@ -2417,7 +5055,7 @@
         },
         "password": {
           "description": "Password for the PFX file or basic authentication.",
-          "$ref": "../datafactory.json#/definitions/SecureString"
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "resource": {
           "description": "Resource for which Azure Auth token will be requested when using MSI Authentication.",
@@ -2464,6 +5102,10 @@
           "items": {
             "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
           }
+        },
+        "connectVia": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
@@ -2554,6 +5196,68 @@
       "required": [
         "expression"
       ]
+    },
+    "SwitchActivity": {
+      "x-ms-discriminator-value": "Switch",
+      "description": "This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Switch activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SwitchActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SwitchActivityTypeProperties": {
+      "description": "Switch activity properties.",
+      "properties": {
+        "on": {
+          "description": "An expression that would evaluate to a string or integer. This is used to determine the block of activities in cases that will be executed.",
+          "$ref": "../datafactory.json#/definitions/Expression"
+        },
+        "cases": {
+          "type": "array",
+          "description": "List of cases that correspond to expected values of the 'on' property. This is an optional property and if not provided, the activity will execute activities provided in defaultActivities.",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SwitchCase"
+          }
+        },
+        "defaultActivities": {
+          "type": "array",
+          "description": "List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      },
+      "required": [
+        "on"
+      ]
+    },
+    "SwitchCase": {
+      "description": "Switch cases with have a value and corresponding activities.",
+      "properties": {
+        "value": {
+          "description": "Expected value that satisfies the expression result of the 'on' property.",
+          "type": "string"
+        },
+        "activities": {
+          "type": "array",
+          "description": "List of activities to execute for satisfied case condition.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      }
     },
     "ForEachActivity": {
       "x-ms-discriminator-value": "ForEach",
@@ -2708,6 +5412,61 @@
         "trainedModelFilePath"
       ]
     },
+    "AzureMLExecutePipelineActivity": {
+      "description": "Azure ML Execute Pipeline activity.",
+      "x-ms-discriminator-value": "AzureMLExecutePipeline",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure ML Execute Pipeline activity properties.",
+          "$ref": "#/definitions/AzureMLExecutePipelineActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMLExecutePipelineActivityTypeProperties": {
+      "description": "Azure ML Execute Pipeline activity properties.",
+      "properties": {
+        "mlPipelineId": {
+          "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "experimentName": {
+          "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "mlPipelineParameters": {
+          "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "mlParentRunId": {
+          "description": "The parent Azure ML Service pipeline run id. This information will be passed in the ParentRunId property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "continueOnStepFailure": {
+          "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "mlPipelineId"
+      ]
+    },
+    "AzureMLPipelineParameters": {
+      "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
     "DataLakeAnalyticsUSQLActivity": {
       "description": "Data Lake Analytics U-SQL activity.",
       "x-ms-discriminator-value": "DataLakeAnalyticsU-SQL",
@@ -2840,6 +5599,53 @@
       "required": [
         "expression",
         "activities"
+      ]
+    },
+    "ValidationActivity": {
+      "x-ms-discriminator-value": "Validation",
+      "description": "This activity verifies that an external resource exists.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Validation activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ValidationActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ValidationActivityTypeProperties": {
+      "description": "Validation activity properties.",
+      "properties": {
+        "timeout": {
+          "type": "object",
+          "description": "Specifies the timeout for the activity to run. If there is no value specified, it takes the value of TimeSpan.FromDays(7) which is 1 week as default. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "sleep": {
+          "type": "object",
+          "description": "A delay in seconds between validation attempts. If no value is specified, 10 seconds will be used as the default. Type: integer (or Expression with resultType integer)."
+        },
+        "minimumSize": {
+          "type": "object",
+          "description": "Can be used if dataset points to a file. The file must be greater than or equal in size to the value specified. Type: integer (or Expression with resultType integer)."
+        },
+        "childItems": {
+          "type": "object",
+          "description": "Can be used if dataset points to a folder. If set to true, the folder must have at least one file. If set to false, the folder must be empty. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dataset": {
+          "description": "Validation activity dataset reference.",
+          "$ref": "../datafactory.json#/definitions/DatasetReference"
+        }
+      },
+      "required": [
+        "dataset"
       ]
     },
     "FilterActivity": {
@@ -3091,6 +5897,196 @@
           "type": "object"
         }
       }
+    },
+    "AzureFunctionActivityMethod": {
+      "description": "The list of HTTP methods supported by a AzureFunctionActivity.",
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS",
+        "HEAD",
+        "TRACE"
+      ],
+      "x-ms-enum": {
+        "name": "AzureFunctionActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "AzureFunctionActivity": {
+      "x-ms-discriminator-value": "AzureFunctionActivity",
+      "description": "Azure Function activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Function activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFunctionActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureFunctionActivityTypeProperties": {
+      "description": "Azure Function activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/AzureFunctionActivityMethod"
+        },
+        "functionName": {
+          "type": "object",
+          "description": "Name of the Function that the Azure Function Activity will call. Type: string (or Expression with resultType string)"
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "method",
+        "functionName"
+      ]
+    },
+    "WebHookActivity": {
+      "x-ms-discriminator-value": "WebHook",
+      "description": "WebHook activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "WebHook activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WebHookActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "WebHookActivityMethod": {
+      "description": "The list of HTTP methods supported by a WebHook activity.",
+      "type": "string",
+      "enum": [
+        "POST"
+      ],
+      "x-ms-enum": {
+        "name": "WebHookActivityMethod",
+        "modelAsString": true
+      }
+    },
+    "WebHookActivityTypeProperties": {
+      "description": "WebHook activity type properties.",
+      "properties": {
+        "method": {
+          "description": "Rest API method for target endpoint.",
+          "$ref": "#/definitions/WebHookActivityMethod"
+        },
+        "url": {
+          "type": "object",
+          "description": "WebHook activity target endpoint and path. Type: string (or Expression with resultType string)."
+        },
+        "timeout": {
+          "type": "string",
+          "description": "The timeout within which the webhook should be called back. If there is no value specified, it defaults to 10 minutes. Type: string. Pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string)."
+        },
+        "body": {
+          "type": "object",
+          "description": "Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string)."
+        },
+        "authentication": {
+          "description": "Authentication method used for calling the endpoint.",
+          "$ref": "#/definitions/WebActivityAuthentication"
+        },
+        "reportStatusOnCallBack": {
+          "type": "object",
+          "description": "When set to true, statusCode, output and error in callback request body will be consumed by activity. The activity can be marked as failed by setting statusCode >= 400 in callback request. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "method",
+        "url"
+      ]
+    },
+    "ExecuteDataFlowActivity": {
+      "description": "Execute data flow activity.",
+      "x-ms-discriminator-value": "ExecuteDataFlow",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute data flow activity properties.",
+          "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ExecuteDataFlowActivityTypeProperties": {
+      "description": "Execute data flow activity properties.",
+      "properties": {
+        "dataFlow": {
+          "description": "Data flow reference.",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
+        },
+        "staging": {
+          "description": "Staging info for execute data flow activity.",
+          "$ref": "../datafactory.json#/definitions/DataFlowStagingInfo"
+        },
+        "integrationRuntime": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        },
+        "compute": {
+          "description": "Compute properties for data flow activity.",
+          "type": "object",
+          "properties": {
+            "computeType": {
+              "description": "Compute type of the cluster which will execute data flow job.",
+              "type": "string",
+              "enum": [
+                "General",
+                "MemoryOptimized",
+                "ComputeOptimized"
+              ],
+              "x-ms-enum": {
+                "name": "DataFlowComputeType",
+                "modelAsString": true
+              }
+            },
+            "coreCount": {
+              "description": "Core count of the cluster which will execute data flow job. Supported values are: 8, 16, 32, 48, 80, 144 and 272.",
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "required": [
+        "dataFlow"
+      ]
     }
   }
 }

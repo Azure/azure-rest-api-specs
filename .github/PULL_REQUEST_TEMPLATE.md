@@ -1,15 +1,17 @@
-This checklist is used to make sure that common issues in a pull request are addressed. This will expedite the process of getting your pull request merged and avoid extra work on your part to fix issues discovered during the review process.
+### Latest improvements:
+<i>MSFT employees can try out our new experience at <b>[OpenAPI Hub](https://aka.ms/openapiportal) </b> - one location for using our validation tools and finding your workflow. 
+</i><br>
+### Contribution checklist:
+- [ ] I have reviewed the [documentation](https://github.com/Azure/adx-documentation-pr/wiki/Overall-basic-flow) for the workflow.
+- [ ] [Validation tools](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) were run on swagger spec(s) and have all been fixed in this PR.
+- [ ] The [OpenAPI Hub](https://aka.ms/openapiportal) was used for checking validation status and next steps.
+### ARM API Review Checklist
+- [ ] Service team MUST add the "WaitForARMFeedback" label if the management plane API changes fall into one of the below categories. 
+- adding/removing APIs.
+- adding/removing properties.
+- adding/removing API-version. 
+- adding a new service in Azure.
 
-### PR information
-- [ ] The title of the PR is clear and informative.
-- [ ] There are a small number of commits, each of which have an informative message. This means that previously merged commits do not appear in the history of the PR. For information on cleaning up the commits in your pull request, [see this page](https://github.com/Azure/azure-powershell/blob/master/documentation/development-docs/cleaning-up-commits.md).
-- [ ] Except for special cases involving multiple contributors, the PR is started from a fork of the main repository, not a branch.
-- [ ] If applicable, the PR references the bug/issue that it fixes.
-- [ ] Swagger files are correctly named (e.g. the `api-version` in the path should match the `api-version` in the spec).
-
-### Quality of Swagger
-- [ ] I have read the [contribution guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/.github/CONTRIBUTING.md).
-- [ ] My spec meets the review criteria:
-  - [ ] The spec conforms to the [Swagger 2.0 specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md).
-  - [ ] The spec follows the guidelines described in the [Swagger checklist](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md) document.
-  - [ ] [Validation tools](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) were run on swagger spec(s) and have all been fixed in this PR.
+Failure to comply may result in delays for manifest application. Note this does not apply to data plane APIs.
+- [ ] If you are blocked on ARM review and want to get the PR merged urgently, please get the ARM oncall for reviews (RP Manifest Approvers team under Azure Resource Manager service) from IcM and reach out to them. 
+Please follow the link to find more details on [API review process](https://armwiki.azurewebsites.net/rp_onboarding/ResourceProviderOnboardingAPIRevieworkflow.html).

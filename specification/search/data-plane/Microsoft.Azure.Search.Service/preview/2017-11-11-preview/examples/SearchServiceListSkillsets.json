@@ -1,11 +1,11 @@
 {
-	"parameters": {
-		"searchServiceName": "myservice",
-		"searchDnsSuffix": "search.windows.net",
-		"api-version": "2017-11-11-Preview"
-	},
-	"responses": {
-		"200": {
+  "parameters": {
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
+    "api-version": "2017-11-11-Preview"
+  },
+  "responses": {
+    "200": {
       "body": {
         "value": [
           {
@@ -13,7 +13,7 @@
             "description": "Extract entities, detect language and extract key-phrases",
             "skills": [
               {
-                "@odata.type": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
+                "@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
                 "description": null,
                 "context": null,
                 "inputs": [
@@ -28,9 +28,11 @@
                     "targetName": "organizations"
                   }
                 ],
-                "categories": [ "Organization" ],
+                "categories": [
+                  "organization"
+                ],
                 "defaultLanguageCode": "en",
-                "minimumPrecision": null
+                "minimumPrecision": 0.7
               },
               {
                 "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
@@ -100,6 +102,6 @@
           }
         ]
       }
-		}
-	}
+    }
+  }
 }

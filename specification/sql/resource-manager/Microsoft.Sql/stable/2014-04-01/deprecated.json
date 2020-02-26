@@ -1,165 +1,212 @@
 {
-  "swagger":"2.0",
-  "info":{
-      "title":"Azure SQL Database",
-      "description":"Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
-      "version":"2014-04-01"
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including servers, databases, elastic pools, recommendations, and operations.",
+    "version": "2014-04-01"
   },
-  "host":"management.azure.com",
-  "schemes":[
-      "https"
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
   ],
-  "consumes":[
-      "application/json"
+  "consumes": [
+    "application/json"
   ],
-  "produces":[
-      "application/json"
+  "produces": [
+    "application/json"
   ],
-  "paths":{
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption":{
-          "get":{
-              "tags":[
-                  "TransparentDataEncryption"
-              ],
-              "operationId":"TransparentDataEncryptionConfigurations_ListByDatabase",
-              "description":"Gets a list of a database's transparent data encryption configurations. There is only ever one element, named 'current', so GetTransparentDataEncryptionConfiguration should be used instead.",
-              "deprecated":true,
-              "x-ms-examples":{
-                  "Get a list of transparent data encryption configurations":{
-                      "$ref":"./examples/DatabaseTransparentDataEncryptionList.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database for which the transparent data encryption applies."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/TransparentDataEncryptionListResult"
-                      }
-                  }
-              },
-              "x-ms-pageable":{
-                  "nextLinkName":null
-              }
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/transparentDataEncryption": {
+      "get": {
+        "tags": [
+          "TransparentDataEncryption"
+        ],
+        "operationId": "TransparentDataEncryptionConfigurations_ListByDatabase",
+        "description": "Gets a list of a database's transparent data encryption configurations. There is only ever one element, named 'current', so GetTransparentDataEncryptionConfiguration should be used instead.",
+        "deprecated": true,
+        "x-ms-examples": {
+          "Get a list of transparent data encryption configurations": {
+            "$ref": "./examples/DatabaseTransparentDataEncryptionList.json"
           }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions":{
-          "get":{
-              "tags":[
-                  "ImportExport"
-              ],
-              "operationId":"Extensions_ListByDatabase",
-              "description":"Gets database extensions.",
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to import into"
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/ExtensionListResult"
-                      }
-                  }
-              },
-              "x-ms-pageable":{
-                  "nextLinkName":null
-              }
-          }
-      }
-  },
-  "definitions":{
-      "TransparentDataEncryptionListResult":{
-          "properties":{
-              "value":{
-                  "type":"array",
-                  "items":{
-                      "$ref":"./sql.core.json#/definitions/TransparentDataEncryption"
-                  },
-                  "description":"The list of transparent data encryption configurations."
-              }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
-          "description":"Represents the response to a list transparent data encryption configurations request."
-      },
-      "ExtensionListResult":{
-          "properties":{
-              "value":{
-                  "type":"array",
-                  "items":{
-                      "properties":{
-
-                      }
-                  },
-                  "description":"The list of extensions."
-              }
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
-          "description":"Represents the response to a list extensions request."
-      }
-  },
-  "parameters":{
-      "ServerNameParameter":{
-          "name":"serverName",
-          "in":"path",
-          "required":true,
-          "type":"string",
-          "description":"The name of the server.",
-          "x-ms-parameter-location":"method"
-      },
-      "DatabaseExpandParameter":{
-          "name":"$expand",
-          "in":"query",
-          "required":false,
-          "type":"string",
-          "description":"A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
-          "x-ms-parameter-location":"method"
-      }
-  },
-  "securityDefinitions":{
-      "azure_auth":{
-          "type":"oauth2",
-          "description":"Azure Active Directory OAuth2 Flow",
-          "flow":"implicit",
-          "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-          "scopes":{
-              "user_impersonation":"impersonate your user account"
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database for which the transparent data encryption applies."
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TransparentDataEncryptionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions/{extensionName}": {
+      "get": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Extensions_Get",
+        "description": "Gets a database extension. This API is deprecated and should not be used.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to import into"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the extension to get",
+            "enum": [
+              "import"
+            ],
+            "x-ms-enum": {
+              "name": "ExtensionName",
+              "modelAsString": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/extensions": {
+      "get": {
+        "tags": [
+          "ImportExport"
+        ],
+        "operationId": "Extensions_ListByDatabase",
+        "description": "Gets database extensions. This API is deprecated and should not be used.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to import into"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TransparentDataEncryptionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "./sql.core.json#/definitions/TransparentDataEncryption"
+          },
+          "description": "The list of transparent data encryption configurations."
+        }
+      },
+      "description": "Represents the response to a list transparent data encryption configurations request."
+    },
+    "ExtensionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "properties": {}
+          },
+          "description": "The list of extensions."
+        }
+      },
+      "description": "Represents the response to a list extensions request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
   }
 }

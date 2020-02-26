@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service",
+        "tags": {},
+        "location": "West US",
+        "etag": "AAAAAAC2jkE=",
+        "properties": {
+          "publisherEmail": "admin@contoso.com",
+          "publisherName": "Contoso",
+          "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
+          "provisioningState": "Succeeded",
+          "createdAtUtc": "2017-10-13T16:56:47.0174063Z",
+          "gatewayUrl": "https://apimService1.azure-api.net",
+          "gatewayRegionalUrl": "https://apimService1-westus-01.regional.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Proxy",
+              "hostName": "foobar.msitesting.net",
+              "keyVaultId": "https://constoso-msi-keyvault.vault.azure.net/secrets/msitestingCert",
+              "negotiateClientCertificate": false,
+              "certificate": {
+                "expiry": "2036-01-01T07:00:00+00:00",
+                "thumbprint": "8E98XXX52CAXXXXXXX2C91F1D174FDB3A2",
+                "subject": "CN=*.msitesting.net"
+              },
+              "defaultSslBinding": true
+            }
+          ],
+          "publicIPAddresses": [
+            "13.xx.76.xxx"
+          ]
+        },
+        "sku": {
+          "name": "Developer",
+          "capacity": 1
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "ae7d906a-xxx-408a-xxxx-6b9d60e5756b",
+          "tenantId": "72f988bf-xxx-41af-xxxx-2d7cd011db47"
+        }
+      }
+    }
+  }
+}

@@ -6,8 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   package-name: "@azure/cognitiveservices-newssearch"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/cognitiveservices-newssearch"
-  override-client-name: NewsSearchAPIClient
+  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-newssearch"
   azure-arm: false
   generate-metadata: true
 ```

@@ -1,170 +1,170 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Region health operation endpoints and objects.",
-        "title": "InfrastructureInsightsManagementClient",
-        "version": "2016-05-01"
-    },
-    "host": "adminmanagement.local.azurestack.external",
-    "schemes": [
-        "https"
-    ],
-    "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the list of all health status for the region.": {
-                        "$ref": "./examples/RegionHealth/List.json"
-                    }
-                },
-                "tags": [
-                    "RegionHealths"
-                ],
-                "description": "Returns the list of all health status for the region.",
-                "operationId": "RegionHealths_List",
-                "parameters": [
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/FilterParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/RegionHealthList"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                },
-                "x-ms-odata": "#/definitions/Alert",
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
-            }
+  "swagger": "2.0",
+  "info": {
+    "description": "Region health operation endpoints and objects.",
+    "title": "InfrastructureInsightsManagementClient",
+    "version": "2016-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of all health status for the region.": {
+            "$ref": "./examples/RegionHealth/List.json"
+          }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}": {
-            "get": {
-                "x-ms-examples": {
-                    "Returns the requested health status of a region.": {
-                        "$ref": "./examples/RegionHealth/Get.json"
-                    }
-                },
-                "tags": [
-                    "RegionHealths"
-                ],
-                "description": "Returns the requested health status of a region.",
-                "operationId": "RegionHealths_Get",
-                "parameters": [
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
-                    },
-                    {
-                        "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/RegionHealth"
-                        }
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "consumes": [
-                    "application/json"
-                ]
+        "tags": [
+          "RegionHealths"
+        ],
+        "description": "Returns the list of all health status for the region.",
+        "operationId": "RegionHealths_List",
+        "parameters": [
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegionHealthList"
             }
-        }
-    },
-    "definitions": {
-        "RegionHealth": {
-            "description": "Contains information related to the health of a region.",
-            "properties": {
-                "properties": {
-                    "description": "Contains information related to the health of a region.",
-                    "$ref": "#/definitions/RegionHealthModel",
-                    "x-ms-client-flatten": true
-                }
-            },
-            "allOf": [
-                {
-                    "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
-                }
-            ]
+          }
         },
-        "RegionHealthModel": {
-            "description": "Contains information related to the health of a region.",
-            "properties": {
-                "alertSummary": {
-                    "description": "Summary of alerts.",
-                    "$ref": "InfrastructureInsights.json#/definitions/AlertSummary"
-                },
-                "usageMetrics": {
-                    "description": "List of usage metrics for the region.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "InfrastructureInsights.json#/definitions/UsageMetrics"
-                    }
-                }
-            }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "RegionHealthList": {
-            "description": "Pageable list of region health items.",
-            "properties": {
-                "value": {
-                    "description": "Array of region health items",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/RegionHealth"
-                    }
-                },
-                "nextLink": {
-                    "description": "URI to next page.",
-                    "type": "string"
-                }
-            }
-        }
+        "x-ms-odata": "#/definitions/Alert",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
     },
-    "parameters": {},
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.InfrastructureInsights.Admin/regionHealths/{location}": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the requested health status of a region.": {
+            "$ref": "./examples/RegionHealth/Get.json"
+          }
+        },
+        "tags": [
+          "RegionHealths"
+        ],
+        "description": "Returns the requested health status of a region.",
+        "operationId": "RegionHealths_Get",
+        "parameters": [
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "InfrastructureInsights.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegionHealth"
             }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "RegionHealth": {
+      "description": "Contains information related to the health of a region.",
+      "properties": {
+        "properties": {
+          "description": "Contains information related to the health of a region.",
+          "$ref": "#/definitions/RegionHealthModel",
+          "x-ms-client-flatten": true
         }
-    },
-    "security": [
+      },
+      "allOf": [
         {
-            "azure_auth": [
-                "user_impersonation"
-            ]
+          "$ref": "InfrastructureInsights.json#/definitions/TrackedResource"
         }
-    ]
+      ]
+    },
+    "RegionHealthModel": {
+      "description": "Contains information related to the health of a region.",
+      "properties": {
+        "alertSummary": {
+          "description": "Summary of alerts.",
+          "$ref": "InfrastructureInsights.json#/definitions/AlertSummary"
+        },
+        "usageMetrics": {
+          "description": "List of usage metrics for the region.",
+          "type": "array",
+          "items": {
+            "$ref": "InfrastructureInsights.json#/definitions/UsageMetrics"
+          }
+        }
+      }
+    },
+    "RegionHealthList": {
+      "description": "Pageable list of region health items.",
+      "properties": {
+        "value": {
+          "description": "Array of region health items",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionHealth"
+          }
+        },
+        "nextLink": {
+          "description": "URI to next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }

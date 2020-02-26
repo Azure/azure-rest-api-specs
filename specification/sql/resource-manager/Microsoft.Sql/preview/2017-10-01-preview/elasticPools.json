@@ -168,7 +168,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update elastic pool with mininum parameters": {
+          "Create or update elastic pool with minimum parameters": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateMin.json"
           },
           "Create or update elastic pool with all parameter": {
@@ -279,7 +279,7 @@
           "Update an elastic pool with all parameter": {
             "$ref": "./examples/ElasticPoolUpdateMax.json"
           },
-          "Update an elastic pool with mininum parameters": {
+          "Update an elastic pool with minimum parameters": {
             "$ref": "./examples/ElasticPoolUpdateMin.json"
           }
         }
@@ -386,7 +386,8 @@
       ],
       "properties": {
         "sku": {
-          "$ref": "../../../common/v1/types.json#/definitions/Sku"
+          "$ref": "../../../common/v1/types.json#/definitions/Sku",
+          "description": "The elastic pool SKU.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or the following command:\r\n\r\n```azurecli\r\naz sql elastic-pool list-editions -l <location> -o table\r\n````\r\n"
         },
         "kind": {
           "description": "Kind of elastic pool. This is metadata used for the Azure portal experience.",

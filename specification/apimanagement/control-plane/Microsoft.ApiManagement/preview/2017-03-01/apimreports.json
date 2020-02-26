@@ -224,7 +224,7 @@
           "Reports"
         ],
         "operationId": "Reports_ListByGeo",
-        "description": "Lists report records by GeoGraphy.",
+        "description": "Lists report records by geography.",
         "x-ms-examples": {
           "ApiManagementGetReportsByGeo": {
             "$ref": "./examples/ApiManagementGetReportsByGeo.json"
@@ -338,7 +338,7 @@
             "required": true,
             "type": "string",
             "format": "duration",
-            "description": "By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))"
+            "description": "By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -438,7 +438,7 @@
         },
         "interval": {
           "type": "string",
-          "description": "Length of agregation period.  Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations)."
+          "description": "Length of aggregation period.  Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations)."
         },
         "country": {
           "type": "string",
@@ -481,12 +481,12 @@
         "callCountSuccess": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of succesful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect"
+          "description": "Number of successful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect"
         },
         "callCountBlocked": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorize and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests"
+          "description": "Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests"
         },
         "callCountFailed": {
           "type": "integer",
@@ -621,7 +621,7 @@
         },
         "cache": {
           "type": "string",
-          "description": "Specifies if response cache was involved in generating the response. If the value is none, the cache was not used. If the value is hit, cached response was returned. If the value is miss, the cache was used but lookup resulted in a miss and request was fullfilled by the backend."
+          "description": "Specifies if response cache was involved in generating the response. If the value is none, the cache was not used. If the value is hit, cached response was returned. If the value is miss, the cache was used but lookup resulted in a miss and request was fulfilled by the backend."
         },
         "apiTime": {
           "type": "number",

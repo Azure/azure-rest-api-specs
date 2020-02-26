@@ -76,6 +76,12 @@
               "$ref": "#/definitions/GuestConfigurationAssignment"
             }
           },
+          "200": {
+            "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -111,7 +117,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assingment name."
+            "description": "The guest configuration assignment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -137,6 +143,57 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -217,7 +274,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The guest configuration assingment name."
+            "description": "The guest configuration assignment name."
           },
           {
             "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
@@ -397,7 +454,7 @@
           "enum": [
             "DSC"
           ]
-        }, 
+        },
         "name": {
           "type": "string",
           "description": "Name of the guest configuration."
@@ -458,7 +515,7 @@
             "ApplyOnly",
             "ApplyAndMonitor",
             "ApplyAndAutoCorrect"
-          ]     
+          ]
         },
         "allowModuleOverwrite": {
           "type": "string",
@@ -470,7 +527,7 @@
           "enum": [
             "True",
             "False"
-          ]       
+          ]
         },
         "actionAfterReboot": {
           "type": "string",
@@ -483,7 +540,7 @@
           "enum": [
             "ContinueConfiguration",
             "StopConfiguration"
-          ]     
+          ]
         },
         "refreshFrequencyMins": {
           "type": "number",
@@ -503,7 +560,7 @@
           "enum": [
             "True",
             "False"
-          ]     
+          ]
         },
         "configurationModeFrequencyMins": {
           "type": "number",
@@ -537,6 +594,7 @@
         "lastComplianceStatusChecked": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
         },
@@ -566,7 +624,10 @@
             "modelAsString": true
           },
           "enum": [
-            "Succeeded"
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Created"
           ]
         }
       },
@@ -631,6 +692,18 @@
         "vm": {
           "$ref": "#/definitions/VMInfo",
           "description": "Information about the VM."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start date and time of the guest configuration assignment compliance status check."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "details": {
           "$ref": "#/definitions/AssignmentReportDetails",
@@ -697,11 +770,13 @@
         "startTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "jobId": {
@@ -758,7 +833,7 @@
         "properties": {
           "type": "object",
           "readOnly": true,
-          "description": "Properties of a guest configuation assignment resource."
+          "description": "Properties of a guest configuration assignment resource."
         }
       },
       "description": "The guest configuration assignment resource."
@@ -779,5 +854,5 @@
       "description": "Reason and code for the compliance of the guest configuration assignment resource."
     }
   },
-"parameters": {}
+  "parameters": {}
 }
