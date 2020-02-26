@@ -1,24 +1,23 @@
 {
-    "parameters": {
-      "api-version": "2020-02-07-preview",
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "myResourceGroup",
-      "sapMonitorName": "mySapMonitor",
-      "providerInstanceName": "myProviderInstance",
-      "providerInstanceParameter": {
+  "parameters": {
+    "api-version": "2020-02-07-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "sapMonitorName": "mySapMonitor",
+    "providerInstanceName": "myProviderInstance",
+    "providerInstanceParameter": {
+      "name": "myProviderInstance",
+      "type": "hana",
+      "properties": "{\"hostname\":\"10.0.0.10\",\"dbName\":\"SYSTEMDB\",\"sqlPort\":30015,\"dbUsername\":\"SYSTEM\",\"dbPassword\":\"PASSWORD\"}"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
         "name": "myProviderInstance",
         "type": "hana",
-        "properties": "{\"hostname\":\"10.0.0.10\",\"dbName\":\"SYSTEMDB\",\"sqlPort\":30015,\"dbUsername\":\"SYSTEM\",\"dbPassword\":\"PASSWORD\"}"
-      }
-    },
-    "responses": {
-      "200": {
-        "body": {
-            "name": "myProviderInstance",
-            "type": "hana",
-            "properties": "{\"hostname\":\"10.0.0.10\",\"dbName\":\"SYSTEMDB\",\"sqlPort\":30015,\"dbUsername\":\"SYSTEM\"}"
-        }
+        "properties": "{\"hostname\":\"10.0.0.10\",\"dbName\":\"SYSTEMDB\",\"sqlPort\":30015,\"dbUsername\":\"SYSTEM\"}"
       }
     }
   }
-  
+}
