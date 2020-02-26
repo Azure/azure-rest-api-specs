@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2019-08-01",
+    "api-version": "2020-03-01",
     "parameters": {
       "properties": {
         "displayName": "my-pool-name",
@@ -22,10 +22,13 @@
         },
         "networkConfiguration": {
           "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-          "publicIPs": [
-            "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
-            "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
-          ],
+          "publicIPAddressConfiguration": {
+            "provision": "UserManaged",
+            "ipAddressIds": [
+              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+              "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+            ]
+          },
           "endpointConfiguration": {
             "inboundNatPools": [
               {
@@ -172,10 +175,13 @@
           },
           "networkConfiguration": {
             "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-            "publicIPs": [
-              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
-              "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
-            ],
+            "publicIPAddressConfiguration": {
+              "provision": "UserManaged",
+              "ipAddressIds": [
+                "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+                "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+              ]
+            },
             "endpointConfiguration": {
               "inboundNatPools": [
                 {

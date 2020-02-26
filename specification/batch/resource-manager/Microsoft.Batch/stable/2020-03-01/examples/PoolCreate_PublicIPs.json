@@ -4,15 +4,18 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2019-08-01",
+    "api-version": "2020-03-01",
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
         "networkConfiguration": {
           "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-          "publicIPs": [
-            "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
-          ]
+          "publicIPAddressConfiguration": {
+            "provision": "UserManaged",
+            "ipAddressIds": [
+              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
+            ]
+          }
         },
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
@@ -50,9 +53,12 @@
           },
           "networkConfiguration": {
             "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
-            "publicIPs": [
-              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
-            ]
+            "publicIPAddressConfiguration": {
+              "provision": "UserManaged",
+              "ipAddressIds": [
+                "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
+              ]
+            }
           },
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {

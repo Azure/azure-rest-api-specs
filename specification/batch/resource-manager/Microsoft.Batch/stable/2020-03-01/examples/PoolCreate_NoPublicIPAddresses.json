@@ -4,7 +4,26 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2020-03-01"
+    "api-version": "2020-03-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "STANDARD_D4",
+        "networkConfiguration": {
+          "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+          "publicIPAddressConfiguration": {
+            "provision": "NoPublicIPAddresses"
+          }
+        },
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
+            },
+            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+          }
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -29,29 +48,25 @@
           "taskSchedulingPolicy": {
             "nodeFillType": "Spread"
           },
+          "networkConfiguration": {
+            "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+            "publicIPAddressConfiguration": {
+              "provision": "NoPublicIPAddresses"
+            }
+          },
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {
               "imageReference": {
-                "publisher": "Canonical",
-                "offer": "UbuntuServer",
-                "sku": "18.04-LTS",
-                "version": "latest"
+                "id": "/subscriptions/subid/resourceGroups/networking-group/providers/Microsoft.Compute/images/image-123"
               },
               "nodeAgentSkuId": "batch.node.ubuntu 18.04"
             }
           },
           "scaleSettings": {
             "fixedScale": {
-              "targetDedicatedNodes": 3,
-              "targetLowPriorityNodes": 0,
-              "resizeTimeout": "PT15M"
+              "targetDedicatedNodes": 0,
+              "targetLowPriorityNodes": 0
             }
-          },
-          "resizeOperationStatus": {
-            "startTime": "2017-08-28T10:22:55.9407275Z",
-            "targetDedicatedNodes": 1,
-            "nodeDeallocationOption": "Requeue",
-            "resizeTimeout": "PT10M"
           },
           "currentDedicatedNodes": 0,
           "currentLowPriorityNodes": 0

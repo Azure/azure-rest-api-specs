@@ -3,9 +3,23 @@
     "accountName": "sampleacct",
     "resourceGroupName": "default-azurebatch-japaneast",
     "api-version": "2020-03-01",
-    "subscriptionId": "subid"
+    "subscriptionId": "subid",
+    "parameters": {
+      "location": "japaneast",
+      "properties": {
+        "autoStorage": {
+          "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+        },
+        "keyVaultReference": {
+          "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+          "url": "http://sample.vault.azure.net/"
+        },
+        "publicNetworkAccess": "Disabled"
+      }
+    }
   },
   "responses": {
+    "202": {},
     "200": {
       "body": {
         "name": "sampleacct",
@@ -13,7 +27,7 @@
         "properties": {
           "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
           "provisioningState": "Succeeded",
-          "poolAllocationMode": "BatchService",
+          "poolAllocationMode": "UserSubscription",
           "dedicatedCoreQuota": 20,
           "lowPriorityCoreQuota": 20,
           "poolQuota": 20,
@@ -22,7 +36,11 @@
             "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage",
             "lastKeySync": "2016-03-10T23:48:38.9878479Z"
           },
-          "publicNetworkAccess": "Enabled"
+          "keyVaultReference": {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+            "url": "http://sample.vault.azure.net/"
+          },
+          "publicNetworkAccess": "Disabled"
         },
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
         "type": "Microsoft.Batch/batchAccounts"
