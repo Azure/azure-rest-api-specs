@@ -11,6 +11,8 @@
         "displayName": "myHubAndSpoke", 
         "description": "Sample Configuration",
         "topology": "HubAndSpokeTopology",
+        "gatewayVnetId": "samplevnetId",
+        "gatewayVIP": "11.11.1.1",
         "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
         "appliesToGroups": [
           {
@@ -27,14 +29,14 @@
       "body": {
         "name": "myHubAndSpoke",
         "id": "/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/connectivityConfigurations/myHubAndSpoke",
-        "description":"Sample Connectivity Configuration",
         "type": "Microsoft.Network/networkManagers/connectivityConfigurations",
         "etag": "asdf-asdf-asdf2",
         "properties": {
+          "description":"Sample Connectivity Configuration",
           "topology": "HubAndSpokeTopology",
           "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
-          "GatewayVnetId": "samplevnetId",
-          "GatewayVIP": "11.11.1.1",
+          "gatewayVnetId": "samplevnetId",
+          "gatewayVIP": "11.11.1.1",
           "appliesToGroups": [
             {
               "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/groups/group1",
@@ -50,15 +52,14 @@
       "body": {
         "name": "myHubAndSpoke",
         "id": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/connectivityConfigurations/myHubAndSpoke",
-        "description":"Sample Connectivity Configuration",
         "type": "Microsoft.Network/networkManagers/connectivityConfigurations",
         "etag": "asdf-asdf-asdf2",
         "properties": {
           "displayName": "myHubAndSpoke", 
           "description": "Sample Configuration",
           "topology": "HubAndSpokeTopology",
-          "GatewayVnetId": "samplevnetId",
-          "GatewayVIP": "11.11.1.1",
+          "gatewayVnetId": "samplevnetId",
+          "gatewayVIP": "11.11.1.1",
           "hubId": "subscription/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
           "appliesToGroups": [
             {

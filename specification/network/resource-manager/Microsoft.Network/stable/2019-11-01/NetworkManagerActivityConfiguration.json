@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkManagerCommit",
-    "description": "The Microsoft Azure Network Manager Commit API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "title": "NetworkManagerActivityConfiguration",
+    "description": "The Microsoft Azure Network Manager Activity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
     "version": "2019-11-01"
   },
   "host": "management.azure.com",
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit/{commitName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityConfigurations/{securityConfigurationName}/commit/{commitName}": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -102,12 +102,6 @@
         "responses": {
           "200": {
             "description": "Put successful. The operation returns the resulting Managed Network Commit.",
-            "schema": {
-              "$ref": "#/definitions/Commit"
-            }
-          },
-          "201": {
-            "description": "Created successful - The operation returns the resulting Managed Network Commit.",
             "schema": {
               "$ref": "#/definitions/Commit"
             }
