@@ -87,7 +87,7 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 input-file:
 - Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 - Microsoft.DBforMySQL/preview/2020-01-01-preview/DataEncryptionKeys.json
-- Microsoft.DBforMySQL/preview/2020-01-01/DataEncryptionKeys.json
+- Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
 ---
