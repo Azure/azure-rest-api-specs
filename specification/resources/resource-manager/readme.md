@@ -57,7 +57,7 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10
+tag: package-deploymentscripts-2019-10-preview
 ```
 
 ### Tag: package-2019-11
@@ -438,15 +438,6 @@ input-file:
 - Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
 ```
 
-### Tag: package-deploymentscripts-2019-10
-
-These settings apply only when `--tag=package-deploymentscripts-2019-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-deploymentscripts-2019-10'
-input-file:
-- Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
-```
-
 ## Suppression
 
 ``` yaml
@@ -593,6 +584,7 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-deploymentscripts: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01

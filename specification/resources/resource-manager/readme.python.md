@@ -48,7 +48,7 @@ batch:
   - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
-  - tag: package-deploymentscripts-2019-10
+  - tag: package-deploymentscripts-2019-10-preview
 ```
 
 ### Tag: package-features-2015-12 and python
@@ -348,12 +348,12 @@ python:
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2016_06_01
 ```
 
-### Tag: package-deploymentscripts-2019-10 and python
+### Tag: package-deploymentscripts-2019-10-preview and python
 
-These settings apply only when `--tag=package-deploymentscripts-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-deploymentscripts-2019-10' && $(python)
+``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview' && $(python)
 python:
   namespace: azure.mgmt.resource.deploymentscripts.v2019_10_preview
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/deploymentscripts/v2019_10_preview
