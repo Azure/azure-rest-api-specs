@@ -60,6 +60,7 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-02
+add-credential: true
 ```
 
 
@@ -101,6 +102,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-skd-for-python
 ```
 
 ## Go
