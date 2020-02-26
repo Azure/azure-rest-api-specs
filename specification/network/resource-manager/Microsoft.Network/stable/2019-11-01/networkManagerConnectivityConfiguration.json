@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{connectivityConfigurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}": {
       "parameters": [
         {
           "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -325,11 +325,11 @@
           },
           "description": "Gets or sets the connectivity type of a network structure Configuration"
         },
-        "GatewayVnetId": {
+        "gatewayVnetId": {
           "type": "string",
           "description": "Gets or sets the gateway vnet ID"
         },
-        "GatewayVIP": {
+        "gatewayVIP": {
           "type": "string",
           "description": "Gets or sets the gateway vip ID"
         },
@@ -383,7 +383,7 @@
   },
   "parameters": {
     "ConnectivityConfigurationNameParameter": {
-      "name": "name",
+      "name": "configurationName",
       "in": "path",
       "required": true,
       "type": "string",
