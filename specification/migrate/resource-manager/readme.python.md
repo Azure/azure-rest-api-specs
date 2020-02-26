@@ -8,6 +8,7 @@ python:
   payload-flattening-threshold: 2
   package-name: azure-mgmt-migrate
   clear-output-folder: true
+add-credential: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'

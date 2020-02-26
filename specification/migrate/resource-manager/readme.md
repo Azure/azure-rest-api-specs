@@ -47,7 +47,6 @@ These are the global settings for the API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-02
-add-credential: true
 ```
 
 
