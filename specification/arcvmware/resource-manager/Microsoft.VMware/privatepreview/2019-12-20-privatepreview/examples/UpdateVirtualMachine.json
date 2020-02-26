@@ -1,0 +1,43 @@
+{
+   "parameters":{
+      "api-version":"2019-12-20-privatepreview",
+      "subscriptionId":"fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+      "resourceGroupName":"testrg",
+      "virtualMachineName":"DemoVM",
+      "body":{
+         "tags":{
+            "tag1":"value1",
+            "tag2":"value2"
+         }
+      }
+   },
+   "responses":{
+      "200":{
+         "body":{
+            "id":"/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.VMware/VirtualMachines/DemoVM",
+            "name":"DemoVM",
+            "type":"Microsoft.VMware/VirtualMachines",
+            "location":"East US",
+            "tags":{
+               "tag1":"value1",
+               "tag2":"value2"
+            },
+            "properties":{
+               "resourcePoolId":"/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.VMware/ResourcePools/HRPool",
+               "templateId":"/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.VMware/VirtualMachineTemplates/WebFrontEndTemplate",
+               "networkId":"/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.VMware/VirtualNetworks/ProdNetwork",
+               "osProfile":{
+                  "computerName":"DemoVM",
+                  "osType":"Windows"
+               },
+               "hardwareProfile":{
+                  "memorySizeInMB":4196,
+                  "numberOfCores":4
+               },
+               "moRefId":"aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+               "provisioningState":"Succeeded"
+            }
+         }
+      }
+   }
+}
