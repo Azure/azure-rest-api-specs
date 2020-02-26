@@ -11206,7 +11206,7 @@
         "password": {
           "type": "string",
           "title": "The password to access the Certificate's private key.",
-          "description": "This is required if the Certificate format is pfx. It should be omitted if the Certificate format is cer."
+          "description": "This must be omitted if the Certificate format is cer."
         }
       },
       "required": [
@@ -13328,8 +13328,8 @@
         },
         "virtualMachineImageId": {
           "type": "string",
-          "title": "The ARM resource identifier of the Virtual Machine Image or Shared Image Gallery Image. Computes Compute Nodes of the Pool will be created using this Image Id. This is of either the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName} for Virtual Machine Image or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId} for SIG image.",
-          "description": "This property is mutually exclusive with other ImageReference properties. For Virtual Machine Image it must be in the same region and subscription as the Azure Batch account. For SIG image it must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+          "title": "The ARM resource identifier of the Shared Image Gallery Image. Compute Nodes in the Pool will be created using this Image Id. This is of the form/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId}.",
+          "description": "This property is mutually exclusive with other ImageReference properties. For Virtual Machine Image it must be in the same region and subscription as the Azure Batch account. The Shared Image Gallery Image must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch Compute Node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
       "title": "A reference to an Azure Virtual Machines Marketplace Image or a custom Azure Virtual Machine Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List supported Images' operation."
@@ -13461,6 +13461,11 @@
           "$ref": "#/definitions/ContainerConfiguration",
           "title": "The container configuration for the Pool.",
           "description": "If specified, setup is performed on each Compute Node in the Pool to allow Tasks to run in containers. All regular Tasks and Job manager Tasks run on this Pool must specify the containerSettings property, and all other Tasks may specify it."
+        },
+        "diskEncryptionConfiguration": {
+          "$ref": "#/definitions/DiskEncryptionConfiguration",
+          "title": "The disk encryption configuration for the pool.",
+          "description": "If specified, encryption is performed on each node in the pool during node provisioning."
         }
       },
       "required": [
@@ -13533,12 +13538,96 @@
       ],
       "title": "The configuration for container-enabled Pools."
     },
+    "DiskEncryptionConfiguration": {
+      "properties": {
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "x-nullable": false,
+            "title": "The disks to encrypt on each compute node.",
+            "description": "If omitted, no disks on the compute nodes in the pool will be encrypted.",
+            "enum": [
+              "osdisk",
+              "temporarydisk"
+            ],
+            "x-ms-enum": {
+              "name": "DiskEncryptionTarget",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "osdisk",
+                  "description": "The OS Disk on the compute node is encrypted.",
+                  "name": "OsDisk"
+                },
+                {
+                  "value": "temporarydisk",
+                  "description": "The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.",
+                  "name": "TemporaryDisk"
+                }
+              ]
+            }
+          },
+          "title": "The list of disk targets Batch Service will encrypt on the compute node",
+          "description": "On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
+        }
+      },
+      "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Shared Image Gallery Image."
+    },
+    "IPAddressProvisioningType": {
+      "type": "string",
+      "title": "The provisioning type for Public IP Addresses for the Pool.",
+      "enum": [
+        "batchmanaged",
+        "usermanaged",
+        "nopublicipaddresses"
+      ],
+      "x-ms-enum": {
+        "name": "IPAddressProvisioningType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "batchmanaged",
+            "description": "A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.",
+            "name": "batchManaged"
+          },
+          {
+            "value": "usermanaged",
+            "description": "Public IPs are provided by the user and will be used to provision the Compute Nodes.",
+            "name": "userManaged"
+          },
+          {
+            "value": "nopublicipaddresses",
+            "description": "No public IP Address will be created.",
+            "name": "noPublicIPAddresses"
+          }
+        ]
+      }
+    },
+    "PublicIPAddressConfiguration": {
+      "properties": {
+        "provision": {
+          "$ref": "#/definitions/IPAddressProvisioningType",
+          "title": "The provisioning type for Public IP Addresses for the Pool.",
+          "description": "The default value is BatchManaged."
+        },
+        "ipAddressIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+        }
+      },
+      "description": "The public IP Address configuration of the networking configuration of a Pool."
+    },
     "NetworkConfiguration": {
       "properties": {
         "subnetId": {
           "type": "string",
           "title": "The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
-          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
             "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
             "description": "Setting up RBAC for Azure Batch VNETs"
@@ -13571,13 +13660,10 @@
           "title": "The configuration for endpoints on Compute Nodes in the Batch Pool.",
           "description": "Pool endpoint configuration is only supported on Pools with the virtualMachineConfiguration property."
         },
-        "publicIPs": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/PublicIPAddressConfiguration",
+          "title": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
+          "description": "Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property."
         }
       },
       "description": "The network configuration for a Pool."
@@ -15085,7 +15171,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The priority for this rule.",
-          "description": "Priorities within a Pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 3500. If any reserved or duplicate values are provided the request fails with HTTP status code 400."
+          "description": "Priorities within a Pool must be unique and are evaluated in order of priority. The lower the number the higher the priority. For example, rules could be specified with order numbers of 150, 250, and 350. The rule with the order number of 150 takes precedence over the rule that has an order of 250. Allowed priorities are 150 to 4096. If any reserved or duplicate values are provided the request fails with HTTP status code 400."
         },
         "access": {
           "type": "string",
