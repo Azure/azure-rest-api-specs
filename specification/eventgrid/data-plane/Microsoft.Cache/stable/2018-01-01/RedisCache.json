@@ -1,0 +1,87 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Redis Cache events published to Azure Event Grid",
+    "description": "Describes the schema of the Redis Cache events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "RedisPatchingCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Cache.PatchingCompleted event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this event.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of this event. Failed or  succeeded ",
+          "type": "string"
+        }
+      }
+    },
+    "RedisScalingCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Cache.ScalingCompleted event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this event.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of this event. Failed or  succeeded ",
+          "type": "string"
+        }
+      }
+    },
+    "RedisExportRDBCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Cache.ExportRDBCompleted event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this event.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of this event. Failed or  succeeded ",
+          "type": "string"
+        }
+      }
+    },
+    "RedisImportRDBCompletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Cache.ImportRDBCompleted event.",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The time at which the event occurred.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of this event.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of this event. Failed or  succeeded ",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
