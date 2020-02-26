@@ -1,0 +1,229 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagerActivityConfiguration",
+    "description": "The Microsoft Azure Network Manager Activity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "version": "2019-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityConfigurations/{securityConfigurationName}/commit/{commitName}": {
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/NetworkManagerNameParameter"
+        },
+        {
+          "name": "commitName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the network manager commit."
+        }
+      ],
+      "get": {
+        "tags": [
+          "NetworkManagerCommits"
+        ],
+        "operationId": "Commits_Get",
+        "description": "The Get commit operation to get a Managed Network Commit",
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the specified Managed Network Commit resource.",
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsGet": {
+            "$ref": "./examples/NetworkManagerCommitGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkManagerCommits"
+        ],
+        "operationId": "Commits_Put",
+        "description": "The put commit operation put a new Managed Network Commit",
+        "parameters": [
+          {
+            "name": "commit",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            },
+            "description": "Parameters supplied to post a Managed Network Commit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Put successful. The operation returns the resulting Managed Network Commit.",
+            "schema": {
+              "$ref": "#/definitions/Commit"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentsPost": {
+            "$ref": "./examples/NetworkManagerCommitPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkManagerCommits"
+        ],
+        "operationId": "Commits_Delete",
+        "description": "The Delete operation deletes a Managed Network Commit",
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsDelete": {
+            "$ref": "./examples/NetworkManagerCommitDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Commit": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommitProperties",
+          "description": "The Commit properties"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Configuration and location lists to commit."
+    },
+    "CommitProperties": {
+      "properties": {
+        "configuration": {
+          "type": "string",
+          "description": "configuration Id need to deploy."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the peering Configuration resource."
+        }
+      },
+      "description": "Configuration and location lists to deploy."
+    }
+  },
+  "parameters": {
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "NetworkManagerNameParameter": {
+      "name": "networkManagerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the network manager.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

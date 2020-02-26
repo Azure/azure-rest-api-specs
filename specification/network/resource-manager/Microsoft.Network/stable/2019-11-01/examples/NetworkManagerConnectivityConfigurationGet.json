@@ -5,23 +5,30 @@
     "subscriptionId": "subscriptionA",
     "resourceGroupName": "myResourceGroup",
     "networkManagerName": "subscriptionCAssignment",
-    "connectivityConfigurationName": "myHubAndSpoke"
+    "name": "myHubAndSpoke"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "myHubAndSpoke",
         "id": "/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/connectivityConfigurations/myHubAndSpoke",
-        "type": "Microsoft.Network/NetworkManager/NetworkManagerConnectivityConfigurations",
+        "type": "Microsoft.Network/networkManagers/connectivityConfigurations",
         "etag": "asdf-asdf-asdf2",
         "properties": {
-          "connectivityType": "HubAndSpokeTopology",
+          "displayName": "myHubAndSpoke", 
+          "description": "Sample Configuration",
+          "topology": "HubAndSpokeTopology",
+          "GatewayVnetId": "samplevnetId",
+          "GatewayVIP": "11.11.1.1",
           "hubId": "/subscriptionB/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myHubVnet",
           "appliesToGroups": [
             {
               "networkGroupId": "/subscriptions/subscriptionA/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/groups/group1",
+              "deleteExistingPeering": true,
               "groupConnectivity": "Transitive"
             }
-          ]
+          ],
+          "provisioningState": "Succeeded"
         }
       }
     }

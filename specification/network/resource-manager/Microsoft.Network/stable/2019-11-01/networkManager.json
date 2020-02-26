@@ -71,7 +71,7 @@
         },
         "x-ms-examples": {
           "NetworkManagersGet": {
-            "$ref": "./examples/NetworkManagersGet.json"
+            "$ref": "./examples/NetworkManagerGet.json"
           }
         }
       },
@@ -80,7 +80,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_CreateOrUpdate",
-        "description": "Creates a NetworkManager.",
+        "description": "Creates a Network Manager.",
         "parameters": [
           {
             "name": "parameters",
@@ -114,7 +114,7 @@
         },
         "x-ms-examples": {
           "NetworkManagesPut": {
-            "$ref": "./examples/NetworkManagersPut.json"
+            "$ref": "./examples/NetworkManagerPut.json"
           }
         }
       },
@@ -123,7 +123,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_Delete",
-        "description": "Deletes a network managers.",
+        "description": "Deletes a network manager.",
         "responses": {
           "200": {
             "description": "Delete Succeed."
@@ -134,7 +134,92 @@
         },
         "x-ms-examples": {
           "NetworkManagersDelete": {
-            "$ref": "./examples/NetworkManagersDelete.json"
+            "$ref": "./examples/NetworkManagerDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "NetworkManagers_Patch",
+        "description": "Update a NetworkManager.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManager"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPatch": {
+            "$ref": "./examples/NetworkManagerPatch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers": {
+      "get": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "NetworkManagers_ListBySubscription",
+        "description": "List all network managers in subscription.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the network managers.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagersList": {
+            "$ref": "./examples/NetworkManagerListAll.json"
           }
         }
       }
@@ -145,7 +230,7 @@
           "NetworkManagers"
         ],
         "operationId": "NetworkManagers_List",
-        "description": "Get the specified network manager.",
+        "description": "List network manager in resource group.",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
@@ -176,7 +261,7 @@
         },
         "x-ms-examples": {
           "NetworkManagersList": {
-            "$ref": "./examples/NetworkManagersList.json"
+            "$ref": "./examples/NetworkManagerList.json"
           }
         }
       }
@@ -249,7 +334,7 @@
           },
           "description": "Scope of Network Manager."
         },
-        "networkManagerScopeAccess": {
+        "networkManagerScopeAccesses": {
           "type": "array",
           "items": {
             "type": "string",

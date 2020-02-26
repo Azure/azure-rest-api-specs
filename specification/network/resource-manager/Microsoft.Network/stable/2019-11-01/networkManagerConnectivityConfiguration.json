@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ConnectivityConfiguration",
-    "description": "The Microsoft Azure Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
+    "description": "The Microsoft Azure Network Manager Connectivity Configuration API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
     "version": "2019-11-01"
   },
   "host": "management.azure.com",
@@ -74,7 +74,7 @@
         },
         "x-ms-examples": {
           "ConnectivityConfigurationsGet": {
-            "$ref": "./examples/NetworkManagerConnectivityConfigurationsGet.json"
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationGet.json"
           }
         }
       },
@@ -117,7 +117,7 @@
         },
         "x-ms-examples": {
           "ConnectivityConfigurationsPut": {
-            "$ref": "./examples/NetworkManagerConnectivityConfigurationsPut.json"
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -150,12 +150,49 @@
         },
         "x-ms-examples": {
           "ConnectivityConfigurationsDelete": {
-            "$ref": "./examples/NetworkManagerConnectivityConfigurationsDelete.json"
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "operationId": "ConnectivityConfigurations_Patch",
+        "description": "Update a ConnectivityConfiguration.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager ConnectivityConfigurations tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager ConnectivityConfigurations.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPut": {
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationPatch.json"
+          }
         }
       }
     },
@@ -205,7 +242,7 @@
         },
         "x-ms-examples": {
           "ConnectivityConfigurationsListByResourceGroup": {
-            "$ref": "./examples/NetworkManagerConnectivityConfigurationsList.json"
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationList.json"
           }
         }
       }
@@ -245,6 +282,13 @@
           "type": "string",
           "description": "Resource type."
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
@@ -269,17 +313,25 @@
           "type": "string",
           "description": "A description of the Connectivity Configuration."
         },
-        "connectivityType": {
+        "topology": {
           "type": "string",
           "enum": [
             "HubAndSpokeTopology",
             "MeshTopology"
           ],
           "x-ms-enum": {
-            "name": "ConnectivityType",
+            "name": "Topology",
             "modelAsString": true
           },
           "description": "Gets or sets the connectivity type of a network structure Configuration"
+        },
+        "GatewayVnetId": {
+          "type": "string",
+          "description": "Gets or sets the gateway vnet ID"
+        },
+        "GatewayVIP": {
+          "type": "string",
+          "description": "Gets or sets the gateway vip ID"
         },
         "hubId": {
           "type": "string",
@@ -299,7 +351,7 @@
         }
       },
       "required": [
-        "connectivityType"
+        "topology"
       ],
       "description": "Properties of a Managed Network Peering Configuration"
     },
@@ -331,7 +383,7 @@
   },
   "parameters": {
     "ConnectivityConfigurationNameParameter": {
-      "name": "connectivityConfigurationName",
+      "name": "name",
       "in": "path",
       "required": true,
       "type": "string",

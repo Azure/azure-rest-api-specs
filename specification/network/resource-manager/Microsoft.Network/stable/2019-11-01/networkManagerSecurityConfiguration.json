@@ -38,8 +38,8 @@
         "tags": [
           "SecurityConfigurations"
         ],
-        "operationId": "SecurityConfigurations_ListByResourceGroup",
-        "description": "The List SecurityConfigurations operation retrieves all the Managed Network Security Configurations in a resource group, in a paginated format.",
+        "operationId": "SecurityConfigurations_List",
+        "description": "The list securityConfigurations operation retrieves all the Managed Network Security Configurations in a resource group, in a paginated format.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -78,7 +78,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Get administrative security Configurations for a network manager": {
+          "List security configurations in a network manager": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationList.json"
           }
         }
@@ -107,8 +107,8 @@
           "SecurityConfigurations"
         ],
         "summary": "Get",
-        "description": "Retrieves a network manager security Configuration in a subscription. This operation retrieves the Configuration definition in the given subscription with the given name.",
-        "operationId": "securityConfigurations_Get",
+        "description": "Retrieves a network manager security Configuration.",
+        "operationId": "SecurityConfigurations_Get",
         "responses": {
           "200": {
             "description": "successful operation",
@@ -124,7 +124,7 @@
           }
         },
         "x-ms-examples": {
-          "Get administrative security Configurations for a network manager": {
+          "Get security configurations": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationGet.json"
           }
         }
@@ -210,6 +210,43 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      },
+      "patch": {
+        "tags": [
+          "NetworkManagers"
+        ],
+        "operationId": "SecurityConfigurations_Patch",
+        "description": "Update a SecurityConfiguration.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager SecurityConfiguration tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager SecurityConfiguration.",
+            "schema": {
+              "$ref": "#/definitions/SecurityConfiguration"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPut": {
+            "$ref": "./examples/NetworkManagerSecurityConfigurationPatch.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityConfigurations/{configurationName}/rules": {
@@ -235,8 +272,8 @@
           "SecurityConfigurationRules"
         ],
         "summary": "List",
-        "description": "Retrieves a network manager security Configuration rule in a subscription. This operation retrieves a rule for a network manager security Configuration in the given subscription with the given name.",
-        "operationId": "SecurityConfigurationRules_ListBySecurityConfiguration",
+        "description": "Retrieves a network manager security Configuration rule. This operation retrieves a rule for a network manager security Configuration in the given subscription with the given name.",
+        "operationId": "SecurityConfigurationRules_List",
         "responses": {
           "200": {
             "description": "successful operation",
@@ -252,7 +289,7 @@
           }
         },
         "x-ms-examples": {
-          "Get administrative security Configurations for a network manager": {
+          "List security configuration rules": {
             "$ref": "./examples/NetworkManagerSecurityConfigurationRulesList.json"
           }
         },
@@ -365,6 +402,12 @@
         "description": "Deletes a rule for a network manager security Configuration in a subscription. This operation deletes a rule for a network manager security Configuration in the given subscription with the given name.",
         "operationId": "SecurityConfigurationRules_Delete",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
           "204": {
             "description": "No Content"
           },
@@ -384,12 +427,49 @@
             "$ref": "./examples/NetworkManagerSecurityConfigurationRuleDelete.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "SecurityConfigurationRules"
+        ],
+        "operationId": "SecurityConfigurationRules_Patch",
+        "description": "Update a SecurityConfiguration Rule.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager SecurityConfiguration rule tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager SecurityConfiguration Rule.",
+            "schema": {
+              "$ref": "#/definitions/SecurityConfigurationRule"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPut": {
+            "$ref": "./examples/NetworkManagerSecurityConfigurationRulePatch.json"
+          }
+        }
       }
     }
   },
   "parameters": {
     "SecurityConfigurationParameter": {
-      "name": "configurationName",
+      "name": "name",
       "in": "path",
       "description": "The name of the network manager security Configuration.",
       "required": true,
@@ -452,6 +532,13 @@
           "type": "string",
           "description": "Resource name."
         },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
         "type": {
           "readOnly": true,
           "type": "string",
@@ -495,14 +582,14 @@
           "items": {
             "$ref": "#/definitions/SecurityConfiguration"
           },
-          "description": "Gets a page of Peering Configurations"
+          "description": "Gets a page of security configurations"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "A list of managed network security Configurations"
+      "description": "A list of managed network security configurations"
     },
     "SecurityConfigurationRuleListResult": {
       "properties": {
@@ -511,7 +598,7 @@
           "items": {
             "$ref": "#/definitions/SecurityConfigurationRule"
           },
-          "description": "A list of managed network security Configuration rules"
+          "description": "A list of managed network security configuration rules"
         },
         "nextLink": {
           "type": "string",
@@ -530,6 +617,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource name."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         },
         "type": {
           "readOnly": true,

@@ -3,7 +3,7 @@
     "api-version": "2019-11-01",
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "configurationName": "Policy1",
+    "name": "Policy1",
     "networkManagerName": "subscriptionCAssignment",
     "securityConfiguration": {
       "properties": {
@@ -16,10 +16,12 @@
       "body": {
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/subscriptionCAssignment/securityConfigurations/Policy1",
         "name": "Policy1",
-        "type": "Microsoft.Network/networkManagerSecurityConfigurations",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations",
         "etag": "123451424",
         "properties": {
-          "description": "A simple policy to block SSH traffic"
+          "displayName": "Simple policy",
+          "description": "A simple policy to block SSH traffic",
+          "provisioningState": "Succeeded"
         }
       }
     },
@@ -27,10 +29,12 @@
       "body": {
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/subscriptionCAssignment/securityConfigurations/Policy1",
         "name": "Policy1",
-        "type": "Microsoft.Network/securityConfigurations",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations",
         "etag": "123451424",
         "properties": {
-          "description": "A simple policy to block SSH traffic"
+          "displayName": "Simple policy",
+          "description": "A simple policy to block SSH traffic",
+          "provisioningState": "Succeeded"
         }
       }
     }

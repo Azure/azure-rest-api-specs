@@ -3,17 +3,27 @@
     "api-version": "2019-11-01",
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "configurationName": "Policy1",
     "networkManagerName": "subscriptionCAssignment",
-    "ruleName": "BlockSSH"
+    "configurationName": "Policy1",
+    "ruleName": "BlockSSH",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/securityConfigurations/Policy1/rules/BlockSSH",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/SecurityConfigurations/Policy1/rules/BlockSSH",
         "type": "Microsoft.Network/networkManagers/securityConfigurations/rules",
         "name": "BlockSSH",
         "etag": "123451424",
+        "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+        },
         "properties": {
           "displayName": "BlockSSH",
           "description": "This rule blocks SSH traffic only from the Internet",

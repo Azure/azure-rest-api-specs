@@ -7,16 +7,23 @@
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/securityConfigurations/Policy1",
-          "name": "Policy1",
-          "location": "eastus",
-          "properties": {
-            "description": "A simple policy to block SSH"
+      "body": 
+      {
+        "value": [
+          {
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/securityConfigurations/Policy1",
+            "name": "Policy1",
+            "type": "Microsoft.Network/networkManagers/securityConfigurations",
+            "etag": "123451424",
+            "properties": {
+              "displayName": "Simple policy",
+              "description": "A simple policy to block SSH",
+              "provisioningState": "Succeeded"
+            }
           }
-        }
-      ]
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/securityConfigurations?api-version=2019-11-01&$skipToken=10"
+      }
     }
   }
 }

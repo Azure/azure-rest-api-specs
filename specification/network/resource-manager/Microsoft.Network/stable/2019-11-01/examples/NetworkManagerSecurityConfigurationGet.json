@@ -4,7 +4,7 @@
     "subscriptionId": "subId",
     "resourceGroupName": "rg1",
     "networkManagerName": "subscriptionCAssignment",
-    "configurationName": "testSecurity"
+    "name": "testSecurity"
   },
   "responses": {
     "200": {
@@ -12,8 +12,11 @@
         "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/subscriptionCAssignment/securityConfigurations/Policy1",
         "name": "Policy1",
         "etag": "123451424",
+        "type": "Microsoft.Network/networkManagers/securityConfigurations",
         "properties": {
-          "description": "A simple policy to block SSH"
+          "displayName": "Simple policy",
+          "description": "A simple policy to block SSH",
+          "provisioningState": "Succeeded"
         }
       }
     }

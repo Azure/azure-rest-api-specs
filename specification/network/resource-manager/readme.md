@@ -58,7 +58,7 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/loadBalancer.json
   - Microsoft.Network/stable/2019-11-01/networkManagerConnectivityConfiguration.json
   - Microsoft.Network/stable/2019-11-01/networkManagerSecurityConfiguration.json
-  - Microsoft.Network/stable/2019-11-01/networkManagerDeployment.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerCommit.json
   - Microsoft.Network/stable/2019-11-01/networkManagerGroup.json
   - Microsoft.Network/stable/2019-11-01/networkManager.json
   - Microsoft.Network/stable/2019-11-01/natGateway.json
@@ -1147,7 +1147,7 @@ directive:
     from: networkManagerConnectivityConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: networkManagerDeployment.json
+    from: networkManagerCommit.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerSecurityConfiguration.json

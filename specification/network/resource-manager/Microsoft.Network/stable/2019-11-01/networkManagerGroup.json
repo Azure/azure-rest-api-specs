@@ -74,7 +74,7 @@
         },
         "x-ms-examples": {
           "NetworkGroupsGet": {
-            "$ref": "./examples/NetworkManagerGroupsGet.json"
+            "$ref": "./examples/NetworkManagerGroupGet.json"
           }
         }
       },
@@ -92,7 +92,7 @@
             "schema": {
               "$ref": "#/definitions/NetworkGroup"
             },
-            "description": "Parameters supplied to the specify which Managed Network this scope is being assigned"
+            "description": "Parameters supplied to the specify which network group need to create"
           }
         ],
         "responses": {
@@ -117,7 +117,7 @@
         },
         "x-ms-examples": {
           "NetworkGroupsPut": {
-            "$ref": "./examples/NetworkManagerGroupsPut.json"
+            "$ref": "./examples/NetworkManagerGroupPut.json"
           }
         }
       },
@@ -137,7 +137,44 @@
         },
         "x-ms-examples": {
           "NetworkGroupsDelete": {
-            "$ref": "./examples/NetworkManagerGroupsDelete.json"
+            "$ref": "./examples/NetworkManagerGroupDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkGroups"
+        ],
+        "operationId": "NetworkGroups_Patch",
+        "description": "Update a Network Group.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update network manager group tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the network manager group tags.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGroup"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagesPut": {
+            "$ref": "./examples/NetworkManagerGroupPatch.json"
           }
         }
       }
@@ -182,7 +219,7 @@
         },
         "x-ms-examples": {
           "NetworkGroupsList": {
-            "$ref": "./examples/NetworkManagerGroupsList.json"
+            "$ref": "./examples/NetworkManagerGroupList.json"
           }
         }
       }
@@ -200,6 +237,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Resource name."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
         },
         "type": {
           "readOnly": true,
@@ -240,22 +284,22 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "A friendly name for the assignment."
+          "description": "A friendly name for the network group."
         },
         "description": {
           "type": "string",
-          "description": "A description of the assignment."
+          "description": "A description of the network group."
         },
         "groupMembers": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/groupMembersItem"
           },
-          "description": "Scope of Network Manager."
+          "description": "Group members of network group."
         },
         "conditionalMembership": {
           "type": "object",
-          "description": "group filter."
+          "description": "Network group conditional filter."
         },
         "provisioningState": {
           "readOnly": true,
@@ -264,6 +308,15 @@
         }
       },
       "description": "Properties of Managed Network"
+    },
+    "groupMembersItem": {
+      "type": "object",
+      "properties": {
+        "vnetId": {
+          "type": "string",
+          "description": "Virtual Network Id."
+        }
+      }
     }
   },
   "parameters": {

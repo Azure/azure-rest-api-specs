@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "name": "Policy1",
+    "networkManagerName": "subscriptionCAssignment",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkManager/subscriptionCAssignment/securityConfigurations/Policy1",
+        "name": "Policy1",
+        "type": "Microsoft.Network/networkManagerSecurityConfigurations",
+        "etag": "123451424",
+        "tags": {
+            "tag1": "value1",
+            "tag2": "value2"
+        },
+        "properties": {
+          "description": "A simple policy to block SSH traffic"
+        }
+      }
+    }
+  }
+}
