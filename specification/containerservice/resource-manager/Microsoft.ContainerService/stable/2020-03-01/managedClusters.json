@@ -1522,6 +1522,12 @@
             "type": "string"
           },
           "description": "Taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule."
+        },
+        "agentPoolVersionProfile": {
+          "type": "object",
+          "$ref": "#/definitions/AgentPoolVersionProfile",
+          "description": "AgentPoolVersionProfile contains the agent pool components' version infomation."
+
         }
       },
       "required": [
@@ -2332,6 +2338,15 @@
         "osType"
       ],
       "description": "The list of available upgrade versions."
+    },
+    "AgentPoolVersionProfile": {
+      "properties": {
+        "nodeImageVersion": {
+          "type": "string",
+          "description": "The node image version."
+        }
+      },
+      "description": "The agent pool's node image version."
     },
     "AgentPoolAvailableVersions": {
       "properties": {
