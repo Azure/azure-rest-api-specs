@@ -89,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -137,7 +137,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -177,7 +177,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -217,7 +217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -253,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -298,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -340,7 +340,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -379,7 +379,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -676,7 +676,7 @@
         },
         "error": {
           "description": "Error that is relayed from the script execution.",
-          "$ref": "#/definitions/DefaultErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -817,30 +817,13 @@
         }
       }
     },
-    "DefaultErrorResponse": {
-      "description": "The details of the error.",
-      "type": "object",
+    "DeploymentScriptsError": {
       "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Detailed errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DefaultErrorResponse"
-          }
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
+      },
+      "description": "Deployment scripts error response."
     }
   },
   "parameters": {
