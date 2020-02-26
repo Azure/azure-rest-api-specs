@@ -1042,13 +1042,7 @@
         },
         "parameters": [
           {
-            "name": "$filter",
-            "description": "May be used to filter reservationRecommendations by properties/scope, properties/resourceType, and properties/lookBackPeriod.",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/filterParameter"
-            }
+            "$ref": "#/parameters/filterParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2820,21 +2814,6 @@
           "description": "The reservation kind.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "FilterParameter": {
-      "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
-      "properties": {
-        "properties/scope": {
-          "description": "Allowed values Single, Shared",
-          "type": "string",
-          "required": false
-        },
-        "properties/lookBackPeriod": {
-          "description": "Allowed values Last7Days, Last30Days, Last60Days. Default Last7Days",
-          "type": "string",
-          "required": false
         }
       }
     },
@@ -4665,6 +4644,14 @@
           }
         ]
       }
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations by properties/scope with allowed values ['Single', 'Shared'] and default value 'Single', properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines', and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
