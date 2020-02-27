@@ -1230,14 +1230,14 @@
           "type": "array",
           "items": {
             "type": "string"
-          },
-        "Components": {
-          "description": "Components",
+            }
+		 },
+        "components": {
+          "description": "Components state compliance records. By default this is not populated.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComponentStateDetails"
           }
-        },
         }
       },
       "additionalProperties": {
@@ -1798,7 +1798,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or to expand Components use $expand=Components",
+      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or to expand Components use $expand=components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"
