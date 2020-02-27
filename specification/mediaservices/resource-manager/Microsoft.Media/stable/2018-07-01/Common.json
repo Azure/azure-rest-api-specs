@@ -18,28 +18,27 @@
   "paths": {},
   "definitions": {
     "Resource": {
-      "description": "The core properties of ARM resources.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource ID for the resource."
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the resource."
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of the resource."
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
         }
       },
       "x-ms-azure-resource": true
     },
     "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked resource.",
+      "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
           "type": "object",
@@ -59,7 +58,7 @@
             "read",
             "create"
           ],
-          "description": "The Azure Region of the resource."
+          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
@@ -69,7 +68,7 @@
       ]
     },
     "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource.",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
