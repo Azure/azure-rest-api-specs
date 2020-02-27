@@ -1,0 +1,510 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "FeatureManagementClient",
+      "description": "Feature provider",
+      "version": "2020-01-01"
+    },
+    "host": "management.azure.com",
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "security": [
+      {
+        "azure_auth": ["user_impersonation"]
+      }
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow.",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
+        }
+      }
+    },
+    "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Features/featureProviders/{providerNamespace}/subscriptionFeatureRegistrations/{featureName}": {
+        "get": {
+          "description": "Returns a feature registration",
+          "operationId": "SubscriptionFeatureRegistrations_Get",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ProviderNamespaceParameter"
+            },
+            {
+              "$ref": "#/parameters/FeatureNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Subscription Feature Registration.",
+              "schema": {
+                "$ref": "#/definitions/SubscriptionFeatureRegistration"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Gets a feature registration": {
+              "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationGET.json"
+            }
+          }
+        },
+        "put": {
+          "description": "Create or update a feature registration.",
+          "operationId": "SubscriptionFeatureRegistrations_CreateOrUpdate",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ProviderNamespaceParameter"
+            },
+            {
+              "$ref": "#/parameters/FeatureNameParameter"
+            },
+            {
+              "name": "SubscriptionFeatureRegistrationType",
+              "description": "Subscription Feature Registration Type details.",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SubscriptionFeatureRegistration"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The feature registration is created or updated successfully.",
+              "schema": {
+                "$ref": "#/definitions/SubscriptionFeatureRegistration"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Creates a feature registration": {
+              "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationPUT.json"
+            }
+          }
+        },
+        "delete": {
+            "description": "Deletes a feature registration",
+            "operationId": "SubscriptionFeatureRegistrations_Delete",
+            "parameters": [
+              {
+                "$ref": "#/parameters/ApiVersionParameter"
+              },
+              {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+              },
+              {
+                "$ref": "#/parameters/ProviderNamespaceParameter"
+              },
+              {
+                "$ref": "#/parameters/FeatureNameParameter"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "The feature registration has been deleted successfully."
+              },
+              "204": {
+                "description": "The feature registration has been deleted already."
+              },
+              "default": {
+                "description": "Error response describing the reason for operation failure.",
+                "schema": {
+                  "$ref": "#/definitions/ErrorResponse"
+                }
+              }
+            },
+            "x-ms-examples": {
+              "Deletes a feature registration": {
+                "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationDELETE.json"
+              }
+            }
+          }
+      },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Features/featureProviders/{providerNamespace}/subscriptionFeatureRegistrations": {
+        "get": {
+          "description": "Returns subscription feature registrations for given subscription and provider namespace.",
+          "operationId": "SubscriptionFeatureRegistrations_ListBySubscription",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "#/parameters/ProviderNamespaceParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Subscription Feature Registrations.",
+              "schema": {
+                "$ref": "#/definitions/SubscriptionFeatureRegistrationList"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "x-ms-examples": {
+            "Gets a list of feature registrations": {
+              "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationLIST.json"
+            }
+          }
+        }
+      },
+      "/providers/microsoft.features/operations": {
+        "get": {
+          "description": "Returns list of operations.",
+          "operationId": "Operation_List",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Operation details.",
+              "schema": {
+                "$ref": "#/definitions/operationsList"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "deprecated": false,
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      }
+    },
+    "definitions": {
+      "ProxyResource": {
+        "description": "An Azure proxy resource.",
+        "properties": {
+          "id": {
+            "description": "Azure resource Id.",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Azure resource name.",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Azure resource type.",
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "x-ms-azure-resource": true
+      },
+      "operation": {
+        "description": "Operation provided by provider",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the operation"
+          },
+          "display": {
+            "type": "object",
+            "description": "Properties of the operation",
+            "properties": {
+              "provider": {
+                "type": "string",
+                "description": "Provider name"
+              },
+              "resource": {
+                "type": "string",
+                "description": "Resource name"
+              },
+              "operation": {
+                "type": "string",
+                "description": "Operation name"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description of the operation"
+              }
+            }
+          }
+        }
+      },
+      "operationsList": {
+        "description": "Lists the operations available.",
+        "properties": {
+          "nextLink": {
+            "description": "Url to follow for getting next page of operations.",
+            "type": "string"
+          },
+          "value": {
+            "description": "Array of operations",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/operation"
+            }
+          }
+        },
+        "required": ["value"]
+      },
+      "SubscriptionFeatureRegistration": {
+        "type": "object",
+        "description": "Subscription feature registration details",
+        "allOf": [
+          {
+            "$ref": "#/definitions/ProxyResource"
+          }
+        ],
+        "required": ["properties"],
+        "properties": {
+          "properties": {
+            "properties": {
+              "tenantId": {
+                "type": "string",
+                "description": "The tenantId.",
+                "readOnly": true
+              },
+              "subscriptionId": {
+                "type": "string",
+                "description": "The subscriptionId.",
+                "readOnly": true
+              },
+              "featureName": {
+                "type": "string",
+                "description": "The featureName.",
+                "readOnly": true
+              },
+              "providerNamespace": {
+                "type": "string",
+                "description": "The providerNamespace.",
+                "readOnly": true
+              },
+              "state": {
+                "description": "The state.",
+                "enum": [
+                  "NotSpecified",
+                  "NotRegistered",
+                  "Pending",
+                  "Registering",
+                  "Registered",
+                  "Unregistering",
+                  "Unregistered"
+                ],
+                "x-ms-enum": {
+                  "name": "SubscriptionFeatureRegistrationState",
+                  "modelAsString": true
+                }
+              },
+              "authorizationProfile": {
+                "$ref": "#/definitions/AuthorizationProfile"
+              },
+              "metadata": {
+                "additionalProperties": {
+                    "type": "string",
+                    "maxLength": 1000,
+                  },
+                  "description": "Key-value pairs for meta data."
+              },
+              "releaseDate": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The feature release date.",
+                "readOnly": true
+              },
+              "registrationDate": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The feature registration date.",
+                "readOnly": true
+              },
+              "documentationLink": {
+                "type": "string",
+                "maxLength": 1000,
+                "description": "The feature documentation link.",
+                "readOnly": true
+              },
+              "approvalType": {
+                "type": "string",
+                "description": "The feature approval type.",
+                "enum": [
+                  "NotSpecified",
+                  "ApprovalRequired",
+                  "AutoApproval"
+                ],
+                "x-ms-enum": {
+                  "name": "SubscriptionFeatureRegistrationApprovalType",
+                  "modelAsString": true
+                },
+                "readOnly": true
+              },
+              "shouldFeatureDisplayInPortal": {
+                "type": "boolean",
+                "default": false,
+                "description": "Indicates whether feature should be displayed in Portal."
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 1000,
+                "description": "The feature description."
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      "AuthorizationProfile": {
+        "description": "Authorization Profile",
+        "properties": {
+          "RequestedTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "RequestedTime",
+            "readOnly": true
+          },
+          "Requester": {
+            "type": "string",
+            "description": "Requester",
+            "readOnly": true
+          },
+          "RequesterObjectId": {
+            "type": "string",
+            "description": "RequesterObjectId",
+            "readOnly": true
+          },
+          "ApprovedTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ApprovedTime",
+            "readOnly": true
+          },
+          "Approver": {
+            "type": "string",
+            "description": "Approver",
+            "readOnly": true
+          }
+        }
+      },
+      "SubscriptionFeatureRegistrationList": {
+        "description": "The list of subscription feature registrations.",
+        "type": "object",
+        "properties": {
+          "nextLink": {
+            "description": "The link used to get the next page of subscription feature registrations list.",
+            "type": "string"
+          },
+          "value": {
+            "description": "The list of subscription feature registrations.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SubscriptionFeatureRegistration"
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "description": "Error response indicates that the service is not able to process the incoming request.",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorDefinition",
+            "description": "The error details."
+          }
+        }
+      },
+      "ErrorDefinition": {
+        "description": "Error definition.",
+        "properties": {
+          "code": {
+            "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "Description of the error.",
+            "type": "string",
+            "readOnly": true
+          },
+          "details": {
+            "description": "Internal error details.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ErrorDefinition"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The Azure subscription ID.",
+        "x-ms-parameter-location": "client"
+      },
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client Api Version.",
+        "x-ms-parameter-location": "method"
+      },
+      "ProviderNamespaceParameter": {
+        "name": "providerNamespace",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The provider namespace.",
+        "x-ms-parameter-location": "client"
+      },
+      "FeatureNameParameter": {
+        "name": "featureName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The feature name.",
+        "x-ms-parameter-location": "method"
+      }
+    }
+  }
