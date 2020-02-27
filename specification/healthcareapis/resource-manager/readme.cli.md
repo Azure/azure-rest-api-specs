@@ -14,14 +14,14 @@ cli:
     "/properties/corsconfiguration": "Cors*/"
     "/properties/cosmosdbconfiguration": "CosmosDb*/"
     "/properties/accesspolicies": "AccessPolicies*/"
-  test-setup:
-    - name: Check name availability
-    - name: Lists all of the available Healthcare service REST API operations.
-    - name: Create or Update a service with all parameters
-    - name: Delete service
-    - name: Create or Update a service with minimum parameters
-    - name: Get the metadata of a service instance.
-    - name: List all services in subscription
-    - name: List all services in resource group
-    - name: Delete service
+  test-scenario:
+    - name: ServicePut
+    - name: OperationResultsGet
+    - name: ServiceGet
+    - name: ServiceListByResourceGroup
+    - name: ServiceList
+    - name: OperationsList
+    - name: ServicePatch
+    - name: CheckNameAvailabilityPost
+    - name: ServiceDelete
 ```
