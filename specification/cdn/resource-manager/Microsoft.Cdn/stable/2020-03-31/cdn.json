@@ -2694,6 +2694,11 @@
             "type": "object",
             "$ref": "#/definitions/ResourceReference"
           },
+          "urlSigningKeys": {
+            "description": "List of keys used to validate the signed URL hashes.",
+            "type": "array",
+            "$ref": "#/definitions/UrlSigningKey"
+          },
           "deliveryPolicy": {
             "description": "A policy that specifies the delivery rules to be used for an endpoint.",
             "type": "object",
@@ -3771,7 +3776,8 @@
               "ModifyRequestHeader",
               "ModifyResponseHeader",
               "UrlRedirect",
-              "UrlRewrite"
+              "UrlRewrite",
+              "UrlSigning"
             ],
             "x-ms-enum": {
               "name": "DeliveryRuleAction",
@@ -3853,6 +3859,61 @@
           "customFragment": {
             "type": "string",
             "description": "Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #."
+          }
+        }
+      },
+      "UrlSigningActionParameters": {
+        "description": "Defines the parameters for the Url Signing action.",
+        "required": [
+          "keyId"
+        ],
+        "properties": {
+          "keyId": {
+            "description": "Id reference of the key to be used to verify the hash and should be defined in UrlSigningKeys",
+            "type": "string"
+          },
+          "algorithm": {
+            "description": "Algorithm to use for URL signing",
+            "type": "string",
+            "enum": [
+              "SHA256"
+            ]
+          },
+          "parameterNameOverride": {
+            "description": "Defines which query string parameters in the url to be considered for expires, key id etc. ",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/UrlSigningParamIdentifier"
+            }
+          },
+          "ipSubnets": {
+            "description": "Match values to match against. Supports CIDR ranges (both IPv4 and IPv6).",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UrlSigningParamIdentifier": {
+        "description": "Defines how to identify a parameter for a specific purpose e.g. expires",
+        "required": [
+          "paramIndicator",
+          "paramName"
+        ],
+        "properties": {
+          "paramIndicator": {
+            "description": "Indicates the purpose of the parameter",
+            "type": "string",
+            "enum": [
+              "expires",
+              "keyId",
+              "signature"
+            ]
+          },
+          "paramName": {
+            "description": "Parameter name",
+            "type": "string"
           }
         }
       },
@@ -4279,6 +4340,62 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "UrlSigningKey": {
+        "description": "Url signing key",
+        "required": [
+          "keyId",
+          "keySourceParameters"
+        ],
+        "properties": {
+          "keyId": {
+            "description": "Defines the customer defined key Id. This id will exist in the incoming request to indicate the key used to form the hash.",
+            "type": "string"
+          },
+          "keySourceParameters": {
+            "description": "Defines the parameters for using customer key vault for Url Signing Key.",
+            "$ref": "#/definitions/KeyVaultSigningKeyParameters"
+          }
+        }
+      },
+      "KeyVaultSigningKeyParameters": {
+        "description": "Describes the parameters for using a user's KeyVault for URL Signing Key.",
+        "required": [
+          "@odata.type",
+          "subscriptionId",
+          "resourceGroupName",
+          "vaultName",
+          "secretName",
+          "secretVersion"
+        ],
+        "properties": {
+          "@odata.type": {
+            "type": "string",
+            "enum": [
+              "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
+            ]
+          },
+          "subscriptionId": {
+            "description": "Subscription Id of the user's Key Vault containing the secret",
+            "type": "string"
+          },
+          "resourceGroupName": {
+            "description": "Resource group of the user's Key Vault containing the secret",
+            "type": "string"
+          },
+          "vaultName": {
+            "description": "The name of the user's Key Vault containing the secret",
+            "type": "string"
+          },
+          "secretName": {
+            "description": "The name of secret in Key Vault.",
+            "type": "string"
+          },
+          "secretVersion": {
+            "description": "The version(GUID) of secret in Key Vault.",
+            "type": "string"
           }
         }
       },
