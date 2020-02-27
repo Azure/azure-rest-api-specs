@@ -1042,7 +1042,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/filterParameter"
+            "$ref": "#/parameters/filterScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/filterLookBackParameter"
+          },
+          {
+            "$ref": "#/parameters/filterResourceTypeParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -4645,13 +4651,164 @@
         ]
       }
     },
-    "filterParameter": {
-      "name": "$filter",
+    "filterScopeParameter": {
+      "name": "$filter/properties/scope",
       "in": "query",
-      "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single', properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines', and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+      "description": "May be used to filter reservationRecommendations by scope within $filter parameter.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "single",
+        "shared"
+      ],
+      "x-ms-enum": {
+        "name": "scopetype",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "single",
+            "description": "Single subscription scope.",
+            "name": "SingleScopeType"
+          },
+          {
+            "value": "shared",
+            "description": "Shared subscription scope.",
+            "name": "SharedScopeType"
+          }
+        ]
+      },
+      "default": "single"
+    },
+    "filterLookBackParameter": {
+      "name": "$filter/properties/lookBackPeriod",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations lookBackPeriod.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "lookbacktype",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Last7Days",
+            "description": "Use last 7 days of data for recommendation.",
+            "name": "7DayPeriodType"
+          },
+          {
+            "value": "Last30Days",
+            "description": "Use last 30 days of data for recommendation.",
+            "name": "30DayPeriodType"
+          },
+          {
+            "value": "Last60Days",
+            "description": "Use last 60 days of data for recommendation.",
+            "name": "60DayPeriodType"
+          }
+        ]
+      },
+      "default": "Last7Days"
+    },
+    "filterResourceTypeParameter": {
+      "name": "$filter/properties/resourceType",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations by resource type.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "Last7Days",
+        "Last30Days",
+        "Last60Days"
+      ],
+      "x-ms-enum": {
+        "name": "resourcetype",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "VirtualMachines",
+            "description": "Get recommendation for VirtualMachines.",
+            "name": "VirtualMachinesType"
+          },
+          {
+            "value": "SQLDatabases",
+            "description": "Get recommendation for SQLDatabases.",
+            "name": "SQLDatabasesType"
+          },
+          {
+            "value": "PostgreSQL",
+            "description": "Get recommendation for PostgreSQL.",
+            "name": "PostgreSQLType"
+          },
+          {
+            "value": "ManagedDisk",
+            "description": "Get recommendation for ManagedDisk.",
+            "name": "ManagedDiskType"
+          },
+          {
+            "value": "MySQL",
+            "description": "Get recommendation for MySQL.",
+            "name": "MySQLType"
+          },
+          {
+            "value": "RedHat",
+            "description": "Get recommendation for RedHat.",
+            "name": "RedHatType"
+          },
+          {
+            "value": "MariaDB",
+            "description": "Get recommendation for MariaDB.",
+            "name": "MariaDBType"
+          },
+          {
+            "value": "RedisCache",
+            "description": "Get recommendation for RedisCache.",
+            "name": "RedisCacheType"
+          },
+          {
+            "value": "CosmosDB",
+            "description": "Get recommendation for CosmosDB.",
+            "name": "CosmosDBType"
+          },
+          {
+            "value": "SqlDataWarehouse",
+            "description": "Get recommendation for SqlDataWarehouse.",
+            "name": "SqlDataWarehouseType"
+          },
+          {
+            "value": "SUSELinux",
+            "description": "Get recommendation for SUSELinux.",
+            "name": "SUSELinuxType"
+          },
+          {
+            "value": "AppService",
+            "description": "Get recommendation for AppService.",
+            "name": "AppServiceType"
+          },
+          {
+            "value": "BlockBlob",
+            "description": "Get recommendation for BlockBlob.",
+            "name": "BlockBlobType"
+          },
+          {
+            "value": "AzureDataExplorer",
+            "description": "Get recommendation for AzureDataExplorer.",
+            "name": "AzureDataExplorerType"
+          },
+          {
+            "value": "VMwareCloudSimple",
+            "description": "Get recommendation for VMwareCloudSimple.",
+            "name": "VMwareCloudSimpleType"
+          }
+        ]
+      },
+      "default": "VirtualMachines"
     }
   }
 }
