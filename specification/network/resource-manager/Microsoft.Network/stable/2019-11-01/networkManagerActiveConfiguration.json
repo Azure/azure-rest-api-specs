@@ -138,27 +138,27 @@
       "description": "Configuration and location lists to deploy."
     },
     "CommitItem": {
+      "properties": {
         "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/CommitsProperties",
-              "description": "The Commit properties"
-            },
-            "name": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource name."
-            },
-            "type": {
-              "readOnly": true,
-              "type": "string",
-              "description": "Resource type."
-            },
-            "etag": {
-              "readOnly": true,
-              "type": "string",
-              "description": "A unique read-only string that changes whenever the resource is updated."
-            }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommitsProperties",
+          "description": "The Commit properties"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
       },
       "allOf": [
         {
@@ -169,41 +169,41 @@
     },
     "CommitsProperties": {
       "properties": {
-        "configurationType":{
-            "type": "string",
-            "description": "configuration type."
+        "configurationType": {
+          "type": "string",
+          "description": "configuration type."
         },
         "securityConfiguration": {
-           "properties": {
-                "rules":{
-                    "type": "array",
-                    "items":{
-                        "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfigurationRule"
-                    },                        
-                    "description": "configuration rule."
-                }
-            },
-            "description": "configuration Id need to deploy.",
-            "allOf": [
-                {
-                    "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfiguration"
-                }
-            ]
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfigurationRule"
+              },
+              "description": "configuration rule."
+            }
+          },
+          "description": "configuration Id need to deploy.",
+          "allOf": [
+            {
+              "$ref": "./networkManagerSecurityConfiguration.json#/definitions/SecurityConfiguration"
+            }
+          ]
         },
         "connectivityConfiguration": {
-            "description": "configuration Id need to deploy.",
-            "allOf": [
-                {
-                    "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration"
-                }
-            ]
+          "description": "configuration Id need to deploy.",
+          "allOf": [
+            {
+              "$ref": "./networkManagerConnectivityConfiguration.json#/definitions/ConnectivityConfiguration"
+            }
+          ]
         },
-        "configurationGroups":{
-            "type": "array",
-            "items":{
-                "$ref": "./networkManagerGroup.json#/definitions/NetworkGroup"
-            },                        
-            "description": "configuration rule."
+        "configurationGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkManagerGroup.json#/definitions/NetworkGroup"
+          },
+          "description": "configuration rule."
         },
         "deploymentTime": {
           "type": "string",
