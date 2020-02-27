@@ -45,6 +45,14 @@ directive:
     from: signalr.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}"].put
     reason:  The schema of the PUT request body is a superset of the GET response body, we have a PATCH operation to make the resource updatable
+  - suppress: TrackedResourceListByImmediateParent
+    reason: Another list APIs naming approach is used over the specs
+  - suppress: AvoidNestedProperties
+    from: signalr.json
+    where:
+    - $.definitions.SignalRFeature.properties.properties
+    - $.definitions.PrivateEndpointConnection.properties.properties
+    reason:  The 'properties' is a user-defined dictionary, cannot be flattened.
 ```
 
 ### Tag: package-2018-10-01
