@@ -144,12 +144,12 @@
             "$ref": "#/parameters/StorageTypeParameter"
           },
           {
-            "name": "LinkedStorageAccountsPropertiesPatch",
+            "name": "ComponentLinkedStorageAccountsPatch",
             "description": "Properties that need to be specified to update linked storage accounts for an Application Insights component.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccountsProperties"
+              "$ref": "#/definitions/ComponentLinkedStorageAccountsPatch"
             }
           }
         ],
@@ -238,6 +238,17 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkedStorageAccountsProperties",
+          "description": "The properties of the suppression.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ComponentLinkedStorageAccountsPatch": {
+      "description": "An Application Insights component linked storage accounts",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
