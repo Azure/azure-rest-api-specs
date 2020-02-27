@@ -378,6 +378,9 @@
           "type": "string",
           "description": "Workspace resource ID"
         },
+		"additionalWorkspaces": {
+          "$ref": "#/definitions/AdditionalWorkspacesList"
+        },
         "displayName": {
           "type": "string",
           "description": "Resource display name."
@@ -635,6 +638,67 @@
       "items": {
         "$ref": "#/definitions/RecommendationConfigurationProperties"
       }
+    },
+    "AdditionalWorkspaceProperties": {
+		"type": "object",
+		"description": "The properties of an additional workspace",
+		"properties": {
+		  "workspace": {
+			"type": "string",
+			"description": "The ARM ID of the workspace"
+		  },
+		  "type": {
+			"type": "string",
+			"description": "The type of the workspace",
+			"enum": [
+			  "Sentinel"
+			],
+			"x-ms-enum": {
+				"name": "Type",
+				"modelAsString": true,
+				"values": [
+					{
+						"value": "Sentinel",
+						"description": "The workspace is treated as a Sentinel workspace"
+					}
+				]
+			}
+		  },
+		  "dataTypes": {
+			"type": "array",
+			"description": "The data types to send to the workspace",
+			"items": {
+			  "type": "string",
+			  "enum": ["Alerts", "RawEvents"],
+			  "x-ms-enum": {
+				"name": "DataTypes",
+				"modelAsString": true,
+				"values": [
+					{
+						"value": "Alerts",
+						"description": "send security alerts to this additional workspace"
+					},
+					{
+						"value": "RawEvents",
+						"description": "send raw security events to this additional workspace"
+					}
+				]
+			  }
+			}
+		  }
+		},
+		"required": [
+		  "workspace",
+		  "type",
+		  "dataTypes"
+		]
+    },
+    "AdditionalWorkspacesList": {
+        "type": "array",
+        "description": "List of additional workspaces.",
+        "items": {
+          "$ref": "#/definitions/AdditionalWorkspaceProperties"
+        }
     },
     "UpdateIotSecuritySolutionData": {
       "type": "object",
