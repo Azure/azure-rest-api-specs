@@ -206,7 +206,7 @@
     },
     "SecurityContact": {
       "type": "object",
-      "description": "Contact details for security issues",
+      "description": "Contact details and configurations for notifications coming from Azure Security Center.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -226,7 +226,7 @@
       "properties": {
         "emails": {
           "type": "string",
-          "description": "The security contact's emails list. Defines which emails will get notifications in case option is enables. Emails will be provided as string, separated by delimiter ;"
+          "description": "List of email addresses which will get notifications from Azure Security Center by the configurations defined in this security contact."
         },
         "phone": {
           "type": "string",
@@ -234,11 +234,11 @@
         },
         "alertNotifications": {
           "type": "object",
-          "description": "Defines whether to send security alerts notifications to the security contact and for what severities",
+          "description": "Defines whether to send email notifications about new security alerts",
           "properties": {
             "state": {
               "type": "string",
-              "description": "Defines if the alertNotifications is enabled",
+              "description": "Defines if email notifications will be sent about new security alerts",
               "enum": [
                 "On",
                 "Off"
@@ -260,7 +260,7 @@
             },
             "minimalSeverity": {
               "type": "string",
-              "description": "Defines the minimal severity for which the alertNotification is enabled",
+              "description": "Defines the minimal alert severity which will be sent as email notifications",
               "enum": [
                 "High",
                 "Medium",
@@ -272,15 +272,15 @@
                 "values": [
                   {
                     "value": "High",
-                    "description": "Get notifications on new alerts"
+                    "description": "Get notifications on new alerts with High severity"
                   },
                   {
                     "value": "Medium",
-                    "description": "Get notifications on new alerts"
+                    "description": "Get notifications on new alerts with medium or high severity"
                   },
                   {
                     "value": "Low",
-                    "description": "Don't get notifications on new alerts"
+                    "description": "Don't get notifications on new alerts with low, medium or high severity"
                   }
                 ]
               }
@@ -289,11 +289,11 @@
         },
         "notificationsByRole": {
           "type": "object",
-          "description": "Defines whether to send security alerts notifications to given roles, and which roles",
+          "description": "Defines whether to send email notifications from Azure Security Center to persons with specific RBAC roles on the subscription.",
           "properties": {
             "state": {
               "type": "string",
-              "description": "Defines whether to send security alerts notifications to the given roles",
+              "description": "Defines whether to send email notifications from Azure Security Center to persons with specific RBAC roles on the subscription.",
               "enum": [
                 "On",
                 "Off"
@@ -315,7 +315,7 @@
             },
             "roles": {
               "type": "array",
-              "description": "Defines which roles should get the security notification alerts",
+              "description": "Defines which RBAC roles will get email notifications from Azure Security Center. List of allowed RBAC roles: ",
               "items": {
                 "$ref": "#/definitions/SecurityContactRole"
               }
