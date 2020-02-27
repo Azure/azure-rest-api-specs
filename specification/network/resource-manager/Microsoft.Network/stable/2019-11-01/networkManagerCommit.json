@@ -197,13 +197,21 @@
     },
     "CommitProperties": {
       "properties": {
-        "configuration": {
+        "configurationId": {
           "type": "string",
           "description": "configuration Id need to deploy."
         },
         "location": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "description": "Location string"
+        },
+        "deploymentTime": {
+          "type": "string",
+          "description": "Deployment time string",
+          "format": "date-time"
         },
         "provisioningState": {
           "readOnly": true,

@@ -60,6 +60,7 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/networkManagerSecurityConfiguration.json
   - Microsoft.Network/stable/2019-11-01/networkManagerCommit.json
   - Microsoft.Network/stable/2019-11-01/networkManagerGroup.json
+  - Microsoft.Network/stable/2019-11-01/networkManagerActiveConfiguration.json
   - Microsoft.Network/stable/2019-11-01/networkManager.json
   - Microsoft.Network/stable/2019-11-01/natGateway.json
   - Microsoft.Network/stable/2019-11-01/network.json
@@ -1157,6 +1158,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkManagerGroup.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: networkManagerActiveConfiguration.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
