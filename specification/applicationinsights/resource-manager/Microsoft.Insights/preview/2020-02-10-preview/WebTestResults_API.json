@@ -1,40 +1,40 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "MonitorManagementClient",
-		"x-ms-code-generation-settings": {
-			"name": "MonitorManagementClient"
-		},
-		"version": "2020-02-10-preview"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [],
-	"produces": [
-		"application/json"
-	],
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
-	"paths": {
-		"/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}/testresultfile": {
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2020-02-10-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}/testresultfile": {
       "get": {
         "tags": [
           "FindWebTestResult"
@@ -90,38 +90,38 @@
           }
         }
       }
-		}
-	},
-	"definitions": {
-		"ErrorResponse": {
-			"description": "Describes the format of Error response.",
-			"type": "object",
-			"properties": {
-				"code": {
-					"description": "Error code",
-					"type": "string"
-				},
-				"message": {
-					"description": "Error message indicating why the operation failed.",
-					"type": "string"
-				}
-			}
-		},
-		"TestResultFileResponse": {
-			"description": "Test result.",
-			"type": "object",
-			"properties": {
-				"data": {
-					"description": "File contents.",
-					"type": "string"
-				},
-				"nextLink": {
-					"description": "The URI that can be used to request the next section of the result file in the event the file is too large for a single request.",
-					"type": "string"
-				}
-			}
-		}
-	},
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "TestResultFileResponse": {
+      "description": "Test result.",
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "File contents.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next section of the result file in the event the file is too large for a single request.",
+          "type": "string"
+        }
+      }
+    }
+  },
   "parameters": {
     "WebTestNameParameter": {
       "name": "webTestName",
