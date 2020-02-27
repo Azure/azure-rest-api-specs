@@ -75,7 +75,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Lists all the Azure services available for support ticket creation. For **Technical** issues, select the Service Id that maps to the Azure service/product as displayed in the **Services** drop-down list on the Azure portal's [New support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) page.\nAlways use the service and it's corresponding problem classification(s) obtained programmatically for support ticket creation. This practice ensures that you always have the most recent set of service and problem classification Ids.",
+        "description": "Lists all the Azure services available for support ticket creation. For **Technical** issues, select the Service Id that maps to the Azure service/product as displayed in the **Services** drop-down list on the Azure portal's [New support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) page. Always use the service and it's corresponding problem classification(s) obtained programmatically for support ticket creation. This practice ensures that you always have the most recent set of service and problem classification Ids.",
         "operationId": "Services_List",
         "parameters": [
           {
@@ -151,7 +151,7 @@
         "tags": [
           "ProblemClassifications"
         ],
-        "description": "Lists all the problem classifications (categories) available for a specific Azure service.\n\nAlways use the service and problem classifications obtained programmatically. This practice ensures that you always have the most recent set of service and problem classification Ids.",
+        "description": "Lists all the problem classifications (categories) available for a specific Azure service. Always use the service and problem classifications obtained programmatically. This practice ensures that you always have the most recent set of service and problem classification Ids.",
         "operationId": "ProblemClassifications_List",
         "parameters": [
           {
@@ -286,7 +286,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Lists all the support tickets for an Azure subscription.\n\nYou can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_List",
         "parameters": [
           {
@@ -301,7 +301,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. [Learn more](https://docs.microsoft.com/odata/concepts/queryoptions-overview) \n_Status_ filter can only be used with 'eq' operator. For _CreatedDate_ filter, the supported operators are 'gt' and 'ge'. When using both filters, combine them using the logical 'AND'."
+            "description": "The filter to apply on the operation. We support 'odata v4.0' filter semantics. [Learn more](https://docs.microsoft.com/odata/concepts/queryoptions-overview). _Status_ filter can only be used with 'eq' operator. For _CreatedDate_ filter, the supported operators are 'gt' and 'ge'. When using both filters, combine them using the logical 'AND'."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -345,7 +345,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Get ticket details for an Azure subscription.\n\nSupport ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Get ticket details for an Azure subscription. Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_Get",
         "parameters": [
           {
@@ -386,7 +386,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "This API allows you to update the severity level, ticket status, and your contact information in the support ticket.\n\nNote: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.\n\nChanging the ticket status to _closed_ is allowed only on an unassigned case. When an engineer is actively working on the ticket, send your ticket closure request by sending a note to your engineer.",
+        "description": "This API allows you to update the severity level, ticket status, and your contact information in the support ticket.<br/><br/>Note: The severity levels cannot be changed if a support ticket is actively being worked upon by an Azure support engineer. In such a case, contact your support engineer to request severity update by adding a new communication using the Communications API.<br/><br/>Changing the ticket status to _closed_ is allowed only on an unassigned case. When an engineer is actively working on the ticket, send your ticket closure request by sending a note to your engineer.",
         "operationId": "SupportTickets_Update",
         "parameters": [
           {
@@ -433,7 +433,7 @@
           "Update contact details of a support ticket": {
             "$ref": "./examples/UpdateContactDetailsOfSupportTicketForSubscription.json"
           },
-          "Update status of support ticket": {
+          "Update status of a support ticket": {
             "$ref": "./examples/UpdateStatusOfSupportTicketForSubscription.json"
           }
         }
@@ -442,7 +442,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Creates a new support ticket for Subscription and Service limits (Quota), Technical, Billing, and Subscription Management issues for the specified subscription. Learn the [prerequisites](https://aka.ms/supportAPI) required to create a support ticket.<br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.\n\nAdding attachments are not currently supported via the API. To add a file to an existing support ticket, visit the [Manage support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest) page in the Azure portal, select the support ticket, and use the file upload control to add a new file.\n\nProviding consent to share diagnostic information with Azure support is currently not supported via the API. Azure support engineer, working on your ticket, will reach out to you for consent if your issue requires gathering diagnostic information from your Azure resources.\n\n**Creating a support ticket for on-behalf-of**: Include _x-ms-authorization-auxiliary_ header to provide an auxiliary token as per [this](https://docs.microsoft.com/azure/azure-resource-manager/management/authenticate-multi-tenant). **x-ms-authorization-auxiliary: Bearer _token_**. The primary token, the Authorization header, will be from the tenant which is capable of managing the subscription, i.e. Cloud solution provider (CSP) customer tenant. The auxiliary token will be from your tenant, i.e. Cloud solution provider (CSP) partner tenant, and should be sent as a header.",
+        "description": "Creates a new support ticket for Subscription and Service limits (Quota), Technical, Billing, and Subscription Management issues for the specified subscription. Learn the [prerequisites](https://aka.ms/supportAPI) required to create a support ticket.<br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.<br/><br/>Adding attachments are not currently supported via the API. To add a file to an existing support ticket, visit the [Manage support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest) page in the Azure portal, select the support ticket, and use the file upload control to add a new file.<br/><br/>Providing consent to share diagnostic information with Azure support is currently not supported via the API. Azure support engineer, working on your ticket, will reach out to you for consent if your issue requires gathering diagnostic information from your Azure resources.<br/><br/>**Creating a support ticket for on-behalf-of**: Include _x-ms-authorization-auxiliary_ header to provide an auxiliary token as per [this](https://docs.microsoft.com/azure/azure-resource-manager/management/authenticate-multi-tenant). The primary token will be from the tenant for whom a support ticket is being raised against the subscription, i.e. Cloud solution provider (CSP) customer tenant. The auxiliary token will be from the Cloud solution provider (CSP) partner tenant.",
         "operationId": "SupportTickets_Create",
         "parameters": [
           {
@@ -535,7 +535,7 @@
           "Create a ticket to request Quota increase for Low-priority cores for Machine Learning service": {
             "$ref": "./examples/CreateMachineLearningQuotaTicketForLowPriorityCores.json"
           },
-          "Create a ticket to request Quota increase for services that do not require quotaTicketDetails": {
+          "Create a ticket to request Quota increase for services that do not require additional details in the quotaTicketDetails object": {
             "$ref": "./examples/CreateGenericQuotaTicket.json"
           }
         }
@@ -871,7 +871,7 @@
             "type": "string"
         },
         "resourceTypes": {
-            "description": "Resource types that this service is responsible for",
+            "description": "ARM Resource types",
             "type": "array",
             "items": {
                 "type": "string"
@@ -1500,8 +1500,16 @@
             }
         },
         "status": {
-          "description": "Status to be updated on the ticket",
-          "type": "string"
+            "description": "Status to be updated on the ticket",
+            "enum": [
+                "open",
+                "closed"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+                "name": "Status",
+                "modelAsString": true
+            }
         },
         "contactDetails": {
           "$ref": "#/definitions/UpdateContactProfile",
