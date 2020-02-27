@@ -190,6 +190,14 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
   - where:
+      - $.definitions.DiskProperties.properties.diskIOPSReadOnly
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.DiskUpdateProperties.properties.diskIOPSReadOnly
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
       - $.definitions.DataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
@@ -216,8 +224,22 @@ input-file:
 - Microsoft.Compute/stable/2019-07-01/compute.json
 - Microsoft.Compute/stable/2019-07-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2019-07-01/disk.json
+- Microsoft.Compute/stable/2019-11-01/disk.json
 - Microsoft.Compute/stable/2019-12-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--package-2019-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01'
+input-file:
+- Microsoft.Compute/stable/2019-07-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2019-11-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
 
