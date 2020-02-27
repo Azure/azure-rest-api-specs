@@ -2,7 +2,10 @@
   "parameters": {
     "subscriptionId": "subid",
     "supportTicketName": "testticket",
-    "api-version": "2020-04-01"
+    "api-version": "2020-04-01",
+    "updateSupportTicket": {
+      "severity": "critical"
+    }
   },
   "responses": {
     "200": {
@@ -15,14 +18,17 @@
           "description": "This is a test - please ignore",
           "problemClassificationId": "/providers/Microsoft.Support/services/subscription_management_service_guid/problemClassifications/problemClassification_guid",
           "problemClassificationDisplayName": "Add or Edit VAT, TAX ID, or PO Number",
-          "severity": "minimal",
-          "productionOutage": false,
+          "severity": "critical",
           "require24X7Response": false,
           "contactDetails": {
             "firstName": "abc",
             "lastName": "xyz",
             "preferredContactMethod": "email",
-            "primaryEmailAddress": "abc@contoso.com",
+            "primaryEmailAddress": "test.name@contoso.com",
+            "additionalEmailAddresses": [
+              "tname@contoso.com",
+              "teamtest@contoso.com"
+            ],
             "preferredTimeZone": "Pacific Standard Time",
             "country": "USA",
             "preferredSupportLanguage": "en-US"
