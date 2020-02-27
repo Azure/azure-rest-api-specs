@@ -149,7 +149,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ComponentLinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountsProperties"
             }
           }
         ],
@@ -230,33 +230,12 @@
         }
       }
     },
-    "Resource": {
-      "description": "An Azure resource.",
-      "properties": {
-        "id": {
-          "description": "Azure resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Azure resource name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Azure resource type.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ComponentLinkedStorageAccounts": {
       "description": "An Application Insights component linked storage accounts",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
