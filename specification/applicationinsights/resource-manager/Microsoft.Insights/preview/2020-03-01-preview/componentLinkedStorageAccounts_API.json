@@ -144,12 +144,12 @@
             "$ref": "#/parameters/StorageTypeParameter"
           },
           {
-            "name": "LinkedStorageAccountsProperties",
+            "name": "LinkedStorageAccountsPropertiesPatch",
             "description": "Properties that need to be specified to update linked storage accounts for an Application Insights component.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccountsProperties"
+              "$ref": "#/definitions/LinkedStorageAccountsPropertiesPatch"
             }
           }
         ],
@@ -247,6 +247,16 @@
       }
     },
     "LinkedStorageAccountsProperties": {
+      "type": "object",
+      "description": "An Application Insights component daily data volume cap",
+      "properties": {
+        "linkedStorageAccount": {
+          "type": "string",
+          "description": "Linked storage account resource ID"
+        }
+      }
+    },
+    "LinkedStorageAccountsPropertiesPatch": {
       "type": "object",
       "description": "An Application Insights component daily data volume cap",
       "properties": {
