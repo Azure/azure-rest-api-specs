@@ -1427,8 +1427,8 @@
           "type": "integer",
           "format": "int32",
           "maximum": 100,
-          "minimum": 1,
-          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1. ",
+          "minimum": 0,
+          "description": "Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 100 (inclusive). The default value is 1. ",
           "default": 1
         },
         "vmSize": {
@@ -1469,6 +1469,10 @@
         "type": {
           "$ref": "#/definitions/AgentPoolType",
           "description": "AgentPoolType represents types of an agent pool"
+        },
+        "mode": {
+          "$ref": "#/definitions/AgentPoolMode",
+          "description": "AgentPoolMode represents mode of an agent pool"
         },
         "orchestratorVersion": {
           "type": "string",
@@ -1561,6 +1565,18 @@
         "modelAsString": true
       },
       "description": "AgentPoolType represents types of an agent pool."
+    },
+    "AgentPoolMode": {
+      "type": "string",
+      "enum": [
+        "System",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPoolMode",
+        "modelAsString": true
+      },
+      "description": "AgentPoolMode represents mode of an agent pool."
     },
     "AgentPoolListResult": {
       "properties": {
