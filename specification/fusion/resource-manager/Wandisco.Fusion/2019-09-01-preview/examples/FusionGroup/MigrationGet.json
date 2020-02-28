@@ -4,20 +4,17 @@
     "resourceGroupName": "fusionGroupTestRG",
     "fusionGroupName": "fusionGroupName",
     "api-version": "2019-09-01-preview",
-    "replicationRuleName": "repl"
+    "replicationRuleName": "repl",
+    "migrationName": "userAssignedIdentity"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "string",
-        "value": [
-          {
-            "properties": {
-              "source": "sourceZone",
-              "target": "targetZone"
-            }
-          }
-        ]
+        "properties": {
+          "source": "sourceZone",
+          "target": "targetZone",
+          "overwritePolicy": "Clobber"
+        }
       }
     }
   }
