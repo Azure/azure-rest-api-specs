@@ -44,9 +44,9 @@ These settings apply only when `--tag=package-2016-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2016-05-01'
 input-file:
-    - Microsoft.Backup.Admin/stable/2016-05-01/Backup.json
-    - Microsoft.Backup.Admin/stable/2016-05-01/BackupLocations.json
-    - Microsoft.Backup.Admin/stable/2016-05-01/Backups.json
+    - $(this-folder)/Microsoft.Backup.Admin/stable/2016-05-01/Backup.json
+    - $(this-folder)/Microsoft.Backup.Admin/stable/2016-05-01/BackupLocations.json
+    - $(this-folder)/Microsoft.Backup.Admin/stable/2016-05-01/Backups.json
 ```
 
 ---
