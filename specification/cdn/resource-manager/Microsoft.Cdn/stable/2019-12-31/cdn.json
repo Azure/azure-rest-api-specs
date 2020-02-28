@@ -3762,7 +3762,7 @@
             "ModifyResponseHeader",
             "UrlRedirect",
             "UrlRewrite",
-            "DefaultOriginGroupOverride"
+            "OriginGroupOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3893,9 +3893,9 @@
         }
       }
     },
-    "DefaultOriginGroupOverrideAction": {
+    "OriginGroupOverrideAction": {
       "description": "Defines the Origin Group override action for the delivery rule.",
-      "x-ms-discriminator-value": "DefaultOriginGroupOverride",
+      "x-ms-discriminator-value": "OriginGroupOverride",
       "allOf": [
         {
           "$ref": "#/definitions/DeliveryRuleAction"
@@ -3907,11 +3907,11 @@
       "properties": {
         "parameters": {
           "description": "Defines the parameters for the action.",
-          "$ref": "#/definitions/DefaultOriginGroupOverrideActionParameters"
+          "$ref": "#/definitions/OriginGroupOverrideActionParameters"
         }
       }
     },
-    "DefaultOriginGroupOverrideActionParameters": {
+    "OriginGroupOverrideActionParameters": {
       "description": "Defines the parameters for the Origin Group override action.",
       "required": [
         "originGroup",
@@ -3921,7 +3921,7 @@
         "@odata.type": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.DefaultOriginGroupOverrideActionParameters"
+            "#Microsoft.Azure.Cdn.Models.OriginGroupOverrideActionParameters"
           ]
         },
         "originGroup": {
