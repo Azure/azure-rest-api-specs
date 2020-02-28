@@ -4434,6 +4434,14 @@
           "readOnly": true,
           "type": "array"
         },
+        "tactics": {
+          "description": "The tactics associated with case",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
         "severity": {
           "description": "The severity of the case",
           "enum": [
@@ -5793,6 +5801,14 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with incident",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -5949,7 +5965,7 @@
         "classification": {
           "description": "The reason the incident was closed",
           "enum": [
-            "Unknown",
+            "Undetermined",
             "TruePositive",
             "FalsePositive"
           ],
@@ -5959,8 +5975,8 @@
             "name": "IncidentClassification",
             "values": [
               {
-                "description": "Incident classification was not set",
-                "value": "Unknown"
+                "description": "Incident classification was undetermined",
+                "value": "Undetermined"
               },
               {
                 "description": "Incident was true positive",
