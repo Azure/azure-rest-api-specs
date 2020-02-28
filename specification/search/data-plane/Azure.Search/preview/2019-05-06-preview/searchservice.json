@@ -2420,7 +2420,7 @@
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/KeywordTokenizer.html"
       },
-      "x-ms-external": true
+      "x-az-search-deprecated": true
     },
     "KeywordTokenizerV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2",
@@ -2640,52 +2640,6 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenizer.html"
       }
     },
-    "PathHierarchyTokenizer": {
-      "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizer",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Tokenizer"
-        }
-      ],
-      "properties": {
-        "delimiter": {
-          "type": "string",
-          "format": "char",
-          "default": "/",
-          "description": "The delimiter character to use. Default is \"/\"."
-        },
-        "replacement": {
-          "type": "string",
-          "format": "char",
-          "default": "/",
-          "description": "A value that, if set, replaces the delimiter character. Default is \"/\"."
-        },
-        "bufferSize": {
-          "type": "integer",
-          "format": "int32",
-          "default": 1024,
-          "description": "The buffer size. Default is 1024."
-        },
-        "reverse": {
-          "x-ms-client-name": "ReverseTokenOrder",
-          "type": "boolean",
-          "default": false,
-          "description": "A value indicating whether to generate tokens in reverse order. Default is false."
-        },
-        "skip": {
-          "x-ms-client-name": "NumberOfTokensToSkip",
-          "type": "integer",
-          "format": "int32",
-          "default": 0,
-          "description": "The number of initial tokens to skip. Default is 0."
-        }
-      },
-      "description": "Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.",
-      "externalDocs": {
-        "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/path/PathHierarchyTokenizer.html"
-      },
-      "x-ms-external": true
-    },
     "PathHierarchyTokenizerV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizerV2",
       "allOf": [
@@ -2780,7 +2734,7 @@
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/standard/StandardTokenizer.html"
       },
-      "x-ms-external": true
+      "x-az-search-deprecated": true
     },
     "StandardTokenizerV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizerV2",
@@ -3034,7 +2988,7 @@
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/EdgeNGramTokenFilter.html"
       },
-      "x-ms-external": true
+      "x-az-search-deprecated": true
     },
     "EdgeNGramTokenFilterV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2",
@@ -3227,7 +3181,7 @@
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/ngram/NGramTokenFilter.html"
       },
-      "x-ms-external": true
+      "x-az-search-deprecated": true
     },
     "NGramTokenFilterV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenFilterV2",
@@ -4092,11 +4046,6 @@
           "default": 0,
           "description": "The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0."
         },
-        "base64EncodeKeys": {
-          "type": "boolean",
-          "default": false,
-          "description": "Whether indexer will base64-encode all values that are inserted into key field of the target index. This is needed if keys can contain characters that are invalid in keys (such as dot '.'). Default is false."
-        },
         "configuration": {
           "type": "object",
           "additionalProperties": {
@@ -4105,8 +4054,7 @@
           "description": "A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type."
         }
       },
-      "description": "Represents parameters for indexer execution.",
-      "x-ms-external": true
+      "description": "Represents parameters for indexer execution."
     },
     "FieldMappingFunction": {
       "properties": {
