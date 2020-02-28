@@ -135,10 +135,13 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/capabilities.json
 - Microsoft.Sql/preview/2018-06-01-preview/LongTermRetentionManagedInstanceBackups.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceLongTermRetentionPolicies.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstanceOperations.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadGroups.json
 - Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
+
 
 # Needed when there is more than one input file
 override-info:
