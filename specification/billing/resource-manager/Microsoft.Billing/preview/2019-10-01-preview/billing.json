@@ -6249,12 +6249,42 @@
           }
         },
         "amountDue": {
-          "description": "Amount due.",
+          "description": "The amount due as of now.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "azurePrepaymentApplied": {
+          "description": "The amount of Azure prepayment applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "billedAmount": {
-          "description": "Amount billed.",
+          "description": "The total charges for the invoice billing period.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "creditAmount": {
+          "description": "The total refund for returns and cancellations during the invoice billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "freeAzureCreditApplied": {
+          "description": "The amount of free Azure credits applied to the charges. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "subTotal": {
+          "description": "The pre-tax amount due. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "taxAmount": {
+          "description": "The amount of tax charged for the billing period. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "totalAmount": {
+          "description": "The amount due when the invoice was generated. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -6283,6 +6313,11 @@
             "modelAsString": true
           }
         },
+        "isMonthlyInvoice": {
+          "description": "Specifies if the invoice is generated as part of monthly invoicing cycle or not. This field is applicable to billing accounts with agreement type Microsoft Customer Agreement.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "billingProfileId": {
           "description": "The billing profile id this invoice belongs to.",
           "type": "string",
@@ -6294,7 +6329,7 @@
           "readOnly": true
         },
         "purchaseOrderNumber": {
-          "description": "The purchase identifier for the invoice.",
+          "description": "An optional purchase order number used for the invoice.",
           "type": "string",
           "readOnly": true
         },
@@ -7452,6 +7487,34 @@
           "description": "The link to the agreement.",
           "type": "string",
           "readOnly": true
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the agreement signed by customer.",
+          "readOnly": true,
+          "enum": [
+            "MicrosoftCustomerAgreement",
+            "AffiliatePurchaseTerms",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "acceptanceMode": {
+          "type": "string",
+          "description": "The mode of acceptance for an agreement.",
+          "readOnly": true,
+          "enum": [
+            "ClickToAccept",
+            "ESignEmbedded",
+            "ESignOffline"
+          ],
+          "x-ms-enum": {
+            "name": "acceptanceMode",
+            "modelAsString": true
+          }
         },
         "effectiveDate": {
           "description": "Effective date.",
