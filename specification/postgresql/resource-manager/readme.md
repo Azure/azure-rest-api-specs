@@ -194,6 +194,8 @@ input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-preview/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
 
 ```
 
