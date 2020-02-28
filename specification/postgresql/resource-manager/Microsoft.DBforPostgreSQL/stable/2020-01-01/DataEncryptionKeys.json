@@ -25,16 +25,16 @@
         "operationId": "ServerKeys_ListByInstance",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -70,7 +70,7 @@
         "operationId": "ServerKeys_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
@@ -83,10 +83,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -117,9 +117,6 @@
         "operationId": "ServerKeys_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
@@ -139,10 +136,13 @@
             }
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -177,9 +177,6 @@
         "operationId": "ServerKeys_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
             "$ref": "#/parameters/ServerNameParameter"
           },
           {
@@ -190,10 +187,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -223,27 +223,6 @@
     }
   },
   "definitions": {
-    "ProxyResource": {
-      "description": "Resource properties.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ServerKeyListResult": {
       "description": "A list of PostgreSQL Server keys.",
       "type": "object",
@@ -298,7 +277,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -318,60 +297,13 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "$ref": "#/definitions/CloudErrorBody"
-        }
-      },
-      "description": "An error response from the Batch service."
-    },
-    "CloudErrorBody": {
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "description": "A list of additional details about the error."
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       },
       "description": "An error response from the Batch service."
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription ID that identifies an Azure subscription."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to use for the request."
-    },
-    "ResourceGroupParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
-      "x-ms-parameter-location": "method"
-    },
     "ServerNameParameter": {
       "name": "serverName",
       "in": "path",
