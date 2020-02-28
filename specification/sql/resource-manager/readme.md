@@ -142,7 +142,6 @@ input-file:
 - Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
 - Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
 
-
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
