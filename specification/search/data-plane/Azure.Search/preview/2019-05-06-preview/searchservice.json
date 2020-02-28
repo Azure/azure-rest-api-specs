@@ -9,14 +9,11 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{searchServiceName}.{searchDnsSuffix}",
+    "hostTemplate": "{Endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/SearchServiceNameParameter"
-      },
-      {
-        "$ref": "#/parameters/SearchDnsSuffixParameter"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -6498,23 +6495,13 @@
       "description": "For HTTP PUT requests, instructs the service to return the created/updated resource on success.",
       "x-ms-parameter-location": "method"
     },
-    "SearchServiceNameParameter": {
-      "name": "searchServiceName",
+    "Endpoint": {
+      "name": "endpoint",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "The name of the search service.",
-      "x-ms-parameter-location": "client"
-    },
-    "SearchDnsSuffixParameter": {
-      "name": "searchDnsSuffix",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "default": "search.windows.net",
-      "x-ms-skip-url-encoding": true,
-      "description": "The DNS suffix of the search service. The default is search.windows.net.",
+      "description": "The endpoint URL of the search service.",
       "x-ms-parameter-location": "client"
     }
   }
