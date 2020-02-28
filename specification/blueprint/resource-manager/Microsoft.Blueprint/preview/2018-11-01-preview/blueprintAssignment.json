@@ -42,11 +42,17 @@
         "operationId": "Assignments_CreateOrUpdate",
         "description": "Create or update a blueprint assignment.",
         "x-ms-examples": {
-          "Assignment with system-assigned managed identity": {
+          "Assignment with system-assigned managed identity at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_SystemAssignedMSI.json"
           },
-          "Assignment with user-assigned managed identity": {
+          "Assignment with user-assigned managed identity at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_UserAssignedMSI.json"
+          },
+          "Assignment with system-assigned managed identity at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Create_SystemAssignedMSI.json"
+          },
+          "Assignment with user-assigned managed identity at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Create_UserAssignedMSI.json"
           }
         },
         "parameters": [
@@ -85,8 +91,11 @@
         "operationId": "Assignments_Get",
         "description": "Get a blueprint assignment.",
         "x-ms-examples": {
-          "Assignment": {
+          "Assignment at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Get.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Get.json"
           }
         },
         "parameters": [
@@ -116,8 +125,11 @@
         "operationId": "Assignments_Delete",
         "description": "Delete a blueprint assignment.",
         "x-ms-examples": {
-          "Assignment_Delete": {
+          "Assignment_Delete at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete.json"
+          },
+          "Assignment_Delete at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_Delete.json"
           }
         },
         "parameters": [
@@ -149,8 +161,11 @@
         "operationId": "Assignments_WhoIsBlueprint",
         "description": "Get Blueprints service SPN objectId",
         "x-ms-examples": {
-          "WhoIsBlueprint_Action": {
+          "WhoIsBlueprint_Action at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/WhoIsBlueprint_Action.json"
+          },
+          "WhoIsBlueprint_Action at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/WhoIsBlueprint_Action.json"
           }
         },
         "parameters": [
@@ -182,8 +197,11 @@
         "operationId": "Assignments_List",
         "description": "List blueprint assignments within a subscription or a management group.",
         "x-ms-examples": {
-          "Assignment": {
+          "Assignment at subscription scope": {
             "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_List.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignment_List.json"
           }
         },
         "parameters": [
