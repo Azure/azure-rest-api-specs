@@ -46,7 +46,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/query": {
       "get": {
-        "operationId": "Query_Get",
+        "operationId": "Get_Query",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data",
         "x-ms-examples": {
@@ -93,7 +93,7 @@
         }
       },
       "post": {
-        "operationId": "Query_Execute",
+        "operationId": "Post_Query",
         "summary": "Execute an Analytics query",
         "description": "Executes an Analytics query for data. [Here](https://dev.loganalytics.io/documentation/Using-the-API) is an example for using POST with an Analytics query.",
         "x-ms-examples": {
@@ -139,7 +139,7 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/metadata": {
       "get": {
-        "operationId": "Metadata_Get",
+        "operationId": "Get_Metadata",
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the workspace, including its schema, functions, workspace info, categories etc.",
         "x-ms-examples": {
@@ -177,7 +177,7 @@
         }
       },
       "post": {
-        "operationId": "Metadata_Post",
+        "operationId": "Post_Metadata",
         "summary": "Gets metadata information",
         "description": "Retrieve the metadata information for the workspace, including its schema, functions, workspace info, categories etc.",
         "x-ms-examples": {
@@ -245,7 +245,7 @@
       "type": "string"
     },
     "apiVersion": {
-      "name": "apiVersion",
+      "name": "api-version",
       "description": "Client API version.",
       "in": "query",
       "required": true,
@@ -384,10 +384,12 @@
       }
     },
     "metadataResults": {
-      "description": "The metadata result for the app, including available tables, etc.",
+      "title": "A metadata response.",
+      "description": "The metadata response for the app, including available tables, etc.",
       "type": "object",
       "properties": {
         "categories": {
+          "description": "The list of categories that are referenced in this metadata response.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataCategory"
@@ -395,6 +397,7 @@
           "uniqueItems": true
         },
         "resourceTypes": {
+          "description": "The list of resource types that are referenced in this metadata response.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataResourceType"
@@ -402,6 +405,7 @@
           "uniqueItems": true
         },
         "solutions": {
+          "description": "The list of Log Analytics solutions installed on the workspace.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataSolution"
@@ -409,6 +413,7 @@
           "uniqueItems": true
         },
         "tables": {
+          "description": "The list of tables and columns that comprise the schema of the workspace.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataTable"
@@ -416,6 +421,7 @@
           "uniqueItems": true
         },
         "functions": {
+          "description": "The list of functions stored on the workspace, or introduced by solutions etc.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataFunction"
@@ -423,6 +429,7 @@
           "uniqueItems": true
         },
         "queries": {
+          "description": "The list of saved queries stored on the workspace, or introduced by solutions, resource types, etc.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataQuery"
@@ -430,6 +437,7 @@
           "uniqueItems": true
         },
         "applications": {
+          "description": "The list of Application Insights apps that were referenced in the metadata request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataApplication"
@@ -437,6 +445,7 @@
           "uniqueItems": true
         },
         "workspaces": {
+          "description": "The list of Log Analytics workspaces that were referenced in the metadata request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataWorkspace"
@@ -444,6 +453,7 @@
           "uniqueItems": true
         },
         "resources": {
+          "description": "The list of Azure resources that were referenced in the metadata request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataResource"
@@ -451,6 +461,7 @@
           "uniqueItems": true
         },
         "permissions": {
+          "description": "The list of permission rules that affected the metadata request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/metadataPermissions"
@@ -460,45 +471,56 @@
       }
     },
     "metadataCategory": {
+      "title": "A metadata category.",
+      "description": "Categories are used to group other metadata entities.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the category",
           "type": "string"
         },
         "displayName": {
+          "description": "The display name of the category",
           "type": "string"
         },
         "description": {
+          "description": "The description of the category",
           "type": "string"
         },
         "related": {
+          "description": "The related metadaa items for the category",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The tables related to the category",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The functions related to the category",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resourceTypes": {
+              "description": "The resource types related to the category",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "queries": {
+              "description": "The saved queries related to the category",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "solutions": {
+              "description": "The Log Analytics solutions related to the category",
               "type": "array",
               "items": {
                 "type": "string"
@@ -513,54 +535,68 @@
       ]
     },
     "metadataSolution": {
+      "title": "A Log Analytics solution.",
+      "description": "Solutions can group tables and functions that are associated with a certain Azure Log Analytics offering.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the Log Analytics solution",
           "type": "string"
         },
         "name": {
+          "description": "The name of the Log Analytics solution",
           "type": "string"
         },
         "displayName": {
+          "description": "The display name of the Log Analytics solution",
           "type": "string"
         },
         "description": {
+          "description": "The description of the Log Analytics solution",
           "type": "string"
         },
         "tags": {
+          "description": "The tags that are associated with the Log Analytics solution",
           "$ref": "#/definitions/tags"
         },
         "properties": {
+          "description": "The properties of the Log Analytics solution",
           "type": "object"
         },
         "related": {
+          "description": "The related metadata items for the Log Analytics solution",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The tables related to the Log Analytics solution",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The functions related to the Log Analytics solution",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "categories": {
+              "description": "The categories related to the Log Analytics solution",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "queries": {
+              "description": "The saved queries related to the Log Analytics solution",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "workspaces": {
+              "description": "The Workspaces referenced in the metadata request that are related to the Log Analytics solution",
               "type": "array",
               "items": {
                 "type": "string"
@@ -579,66 +615,82 @@
       ]
     },
     "metadataResourceType": {
+      "title": "A type of resource in Azure.",
+      "description": "Metadata about types of Azure resources, containing relevant tables, functions, etc.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the resource-type",
           "type": "string"
         },
         "type": {
+          "description": "The type of the resource-type",
           "type": "string"
         },
         "displayName": {
+          "description": "The display name of the resource-type",
           "type": "string"
         },
         "description": {
+          "description": "The description of the resource-type",
           "type": "string"
         },
         "labels": {
+          "description": "The user-defined labels of the resource-type",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "The tags associated with the resource-type",
           "$ref": "#/definitions/tags"
         },
         "properties": {
+          "description": "The properties of the resource-type",
           "type": "object"
         },
         "related": {
+          "description": "The related metadata items for the resource-type",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The tables related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The functions related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "categories": {
+              "description": "The categories related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "queries": {
+              "description": "The queries related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "workspaces": {
+              "description": "The Log Analytics workspaces related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resources": {
+              "description": "The Azure resources related to the resource-type",
               "type": "array",
               "items": {
                 "type": "string"
@@ -653,43 +705,56 @@
       ]
     },
     "metadataTable": {
+      "title": "A data table that takes part in a workspace schema.",
+      "description": "Tables are part of the workspace schema, and contain a list of columns and a reference to other relevant metadata items.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the table",
           "type": "string"
         },
         "name": {
+          "description": "The name of the table",
           "type": "string"
         },
         "description": {
+          "description": "The description of the table",
           "type": "string"
         },
         "timespanColumn": {
+          "description": "The column associated with the timespan query parameter for the table",
           "type": "string"
         },
         "labels": {
+          "description": "The user defined labels of the table",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "The tags associated with the table",
           "$ref": "#/definitions/tags"
         },
         "properties": {
+          "description": "The properties of the table",
           "type": "object"
         },
         "columns": {
+          "description": "The list of columns defined on the table",
           "type": "array",
           "items": {
             "properties": {
               "name": {
+                "description": "The name of the column",
                 "type": "string"
               },
               "description": {
+                "description": "The description of the column",
                 "type": "string"
               },
               "type": {
+                "description": "The data type of the column",
                 "type": "string",
                 "enum": [
                   "bool",
@@ -706,9 +771,11 @@
                 }
               },
               "isPreferredFacet": {
+                "description": "A flag indicating this column is a preferred facet",
                 "type": "boolean"
               },
               "source": {
+                "description": "an indication of the source of the column, used only when multiple workspaces have conflicting definition for the column",
                 "type": "object"
               }
             },
@@ -719,39 +786,46 @@
           }
         },
         "related": {
+          "description": "The related metadata items for the table",
           "type": "object",
           "properties": {
             "categories": {
+              "description": "The related categories for the table",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "solutions": {
+              "description": "The related Log Analytics solutions for the table",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resourceTypes": {
+              "description": "The related resource types for the table",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "workspaces": {
+              "description": "The related Log Analytics workspaces for the table",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The related functions for the table",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "queries": {
+              "description": "The related saved queries for the table",
               "type": "array",
               "items": {
                 "type": "string"
@@ -766,60 +840,76 @@
       ]
     },
     "metadataFunction": {
+      "title": "A stored function.",
+      "description": "Functions are stored Kusto queries that can be specified as part of queries by using their name.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the function.",
           "type": "string"
         },
         "name": {
+          "description": "The name of the function, to be used in queries.",
           "type": "string"
         },
         "parameters": {
+          "description": "The parameters/arguments of the function, if any.",
           "type": "string"
         },
         "displayName": {
+          "description": "The display name of the function.",
           "type": "string"
         },
         "description": {
+          "description": "The description of the function.",
           "type": "string"
         },
         "body": {
+          "description": "The KQL body of the function.",
           "type": "string"
         },
         "tags": {
+          "description": "The tags associated with the function.",
           "$ref": "#/definitions/tags"
         },
         "properties": {
+          "description": "The properties of the function.",
           "type": "object"
         },
         "related": {
+          "description": "The related metadata items for the function.",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The related tables for the function.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "solutions": {
+              "description": "The related Log Analytics solutions for the function.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resourceTypes": {
+              "description": "The related resource types for the function.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "categories": {
+              "description": "The related categories for the function.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "workspaces": {
+              "description": "The related workspaces for the function.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -835,54 +925,68 @@
       ]
     },
     "metadataQuery": {
+      "title": "A stored query.",
+      "description": "Queries are stored pieces of KQL, along with a list of relevant metadata items.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the query.",
           "type": "string"
         },
         "displayName": {
+          "description": "The display name of the query.",
           "type": "string"
         },
         "description": {
+          "description": "The description of the query.",
           "type": "string"
         },
         "body": {
+          "description": "The KQL body of the query.",
           "type": "string"
         },
         "labels": {
+          "description": "The user defined labels associated with the query.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "tags": {
+          "description": "The tags associated with the query.",
           "$ref": "#/definitions/tags"
         },
         "properties": {
+          "description": "The properties of the query.",
           "type": "object"
         },
         "related": {
+          "description": "The related metadata items for the query.",
           "type": "object",
           "properties": {
             "categories": {
+              "description": "The related categories for the query.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "solutions": {
+              "description": "The related Log Analytics solutions for the query.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resourceTypes": {
+              "description": "The related resource types for the query.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "tables": {
+              "description": "The related tables for the query.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -897,30 +1001,39 @@
       ]
     },
     "metadataApplication": {
+      "title": "An Application Inisghts application.",
+      "description": "Application Insights apps that were part of the metadata request and that the user has access to.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the Application Insights app.",
           "type": "string"
         },
         "resourceId": {
+          "description": "The ARM resource ID of the Application Insights app.",
           "type": "string"
         },
         "name": {
+          "description": "The name of the Application Insights app.",
           "type": "string"
         },
         "region": {
+          "description": "The Azure region of the Application Insights app.",
           "type": "string"
         },
         "related": {
+          "description": "The related metadata items for the Application Insights app.",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The related tables for the Application Insights app.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The related functions for the Application Insights app.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -937,48 +1050,60 @@
       ]
     },
     "metadataWorkspace": {
+      "title": "A Log Analytics workspace.",
+      "description": "Log Analytics workspaces that were part of the metadata request and that the user has access to.",
       "type": "object",
       "properties": {
         "id": {
+          "description": "The ID of the Log Analytics workspace.",
           "type": "string"
         },
         "resourceId": {
+          "description": "The ARM resource ID of the Log Analytics workspace.",
           "type": "string"
         },
         "name": {
+          "description": "The name of the Log Analytics workspace.",
           "type": "string"
         },
         "region": {
+          "description": "The Azure region of the Log Analytics workspace.",
           "type": "string"
         },
         "related": {
+          "description": "The related metadata items for the Log Analytics workspace.",
           "type": "object",
           "properties": {
             "tables": {
+              "description": "The related tables for the Log Analytics workspace.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "solutions": {
+              "description": "The related Log Analytics solutions for the Log Analytics workspace.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resourceTypes": {
+              "description": "The related resource types for the Log Analytics workspace.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "functions": {
+              "description": "The related functions for the Log Analytics workspace.",
               "type": "array",
               "items": {
                 "type": "string"
               }
             },
             "resources": {
+              "description": "The related Azure resources for the Log Analytics workspace.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -994,19 +1119,27 @@
         "region"
       ]
     },
-    "metadataResource": {},
+    "metadataResource": {
+      "title": "An Azure resource.",
+      "description": "Azure resources that were part of the metadata request and that the user has access to."
+    },
     "metadataPermissions": {
+      "title": "Permission information.",
+      "description": "Permission information for the metadata call, includes apps/workspaces/resource the user didn't have access to.",
       "type": "object",
       "properties": {
         "workspaces": {
+          "description": "The permission indication for the workspaces on the metadata request.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "resourceId": {
+                "description": "The resource ID on the permission indication.",
                 "type": "string"
               },
               "denyTables": {
+                "description": "The list of tables that were denied access for the resource ID.",
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1019,14 +1152,17 @@
           }
         },
         "resources": {
+          "description": "The permission indication for the Azure resources on the metadata request.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "resourceId": {
+                "description": "The resource ID on the permission indication.",
                 "type": "string"
               },
               "denyTables": {
+                "description": "The list of tables that were denied access for the resource ID.",
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1039,11 +1175,13 @@
           }
         },
         "applications": {
+          "description": "The permission indication for the Application Insights apps on the metadata request.",
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
               "resourceId": {
+                "description": "The resource ID on the permission indication.",
                 "type": "string"
               }
             },
@@ -1089,6 +1227,7 @@
           }
         },
         "additionalProperties": {
+          "description": "Additional properties that can be provided on the error details object",
           "type": "object"
         }
       },
@@ -1121,6 +1260,7 @@
           "$ref": "#/definitions/errorInfo"
         },
         "additionalProperties": {
+          "description": "Additional properties that can be provided on the error info object",
           "type": "object"
         }
       },
