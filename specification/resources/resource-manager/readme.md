@@ -557,6 +557,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -584,6 +585,7 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-deploymentscripts: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
