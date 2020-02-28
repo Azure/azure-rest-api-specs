@@ -59,6 +59,12 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
           }
         }
       }
@@ -291,6 +297,12 @@
             "schema": {
               "$ref": "#/definitions/SearchDocumentsResult"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
           }
         }
       }
@@ -334,6 +346,12 @@
             "description": "Response containing documents that match the search criteria.",
             "schema": {
               "$ref": "#/definitions/SearchDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
             }
           }
         }
@@ -384,6 +402,12 @@
             "description": "Response containing the requested document.",
             "schema": {
               "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
             }
           }
         }
@@ -529,6 +553,12 @@
             "schema": {
               "$ref": "#/definitions/SuggestDocumentsResult"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
           }
         }
       }
@@ -571,6 +601,12 @@
             "description": "Response containing suggested documents that match the partial input.",
             "schema": {
               "$ref": "#/definitions/SuggestDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
             }
           }
         }
@@ -620,6 +656,12 @@
             "description": "Response containing the status of operations for all actions in the batch.",
             "schema": {
               "$ref": "#/definitions/IndexDocumentsResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
             }
           }
         }
@@ -758,6 +800,12 @@
             "schema": {
               "$ref": "#/definitions/AutocompleteResult"
             }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
+            }
           }
         }
       }
@@ -800,6 +848,12 @@
             "description": "Response containing suggested query terms that complete the partial input.",
             "schema": {
               "$ref": "#/definitions/AutocompleteResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/SearchError"
             }
           }
         }
@@ -1291,6 +1345,28 @@
         }
       },
       "description": "The result of Autocomplete requests."
+    },
+    "SearchError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SearchError"
+          },
+          "readOnly": true,
+          "description": "An array of details about specific errors that led to this reported error."
+        }
+      }
     }
   },
   "parameters": {
