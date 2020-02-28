@@ -2,7 +2,7 @@
   "parameters": {
     "policyEventsResource": "default",
     "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-    "api-version": "2018-04-04",
+    "api-version": "2019-10-01",
     "$from": "2018-01-01T00:00:00Z",
     "$filter": "PolicyDefinitionAction eq 'deny'",
     "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, ResourceId))/groupby((PolicyAssignmentId, PolicyDefinitionId), aggregate($count as NumDeniedResources))",
