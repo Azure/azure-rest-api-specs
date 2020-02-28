@@ -7,7 +7,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 2
 package-name: azure-mgmt-storage
-clear-output-folder: true
 no-namespace-folders: true
 ```
 
@@ -16,6 +15,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi)
+clear-output-folder: true
 batch:
   - tag: package-2019-06
   - tag: package-2019-04
@@ -28,6 +28,13 @@ batch:
   - tag: package-2016-12
   - tag: package-2016-01
   - tag: package-2015-06
+```
+
+### Multi-api script
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/
+perform-load: false
 ```
 
 ### Tag: package-2019-06 and python
