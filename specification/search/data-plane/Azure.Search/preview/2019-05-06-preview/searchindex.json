@@ -10,11 +10,11 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/indexes('{indexName}')",
+    "hostTemplate": "{endpoint}/indexes('{indexName}')",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "$ref": "#/parameters/EndpointParameter"
       },
       {
         "$ref": "#/parameters/IndexNameParameter"
@@ -1390,7 +1390,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "Endpoint": {
+    "EndpointParameter": {
       "name": "endpoint",
       "in": "path",
       "required": true,
