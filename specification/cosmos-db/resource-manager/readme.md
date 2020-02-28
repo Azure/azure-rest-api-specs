@@ -27,7 +27,18 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2019-08-preview
+tag: package-2019-12
+```
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2019-08
@@ -171,6 +182,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -212,9 +224,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
