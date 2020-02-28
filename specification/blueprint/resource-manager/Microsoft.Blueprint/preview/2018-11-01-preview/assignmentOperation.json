@@ -40,10 +40,10 @@
           "AssignmentOperations"
         ],
         "operationId": "AssignmentOperations_List",
-        "description": "List operations for given blueprint assignment within a subscription.",
+        "description": "List operations for given blueprint assignment within a subscription or a management group.",
         "x-ms-examples": {
           "Assignment": {
-            "$ref": "./examples/BlueprintAssignmentOperation_List.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignmentOperation_List.json"
           }
         },
         "parameters": [
@@ -79,7 +79,7 @@
         "description": "Get a blueprint assignment operation.",
         "x-ms-examples": {
           "Assignment": {
-            "$ref": "./examples/BlueprintAssignmentOperation_Get.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignmentOperation_Get.json"
           }
         },
         "parameters": [
@@ -291,7 +291,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

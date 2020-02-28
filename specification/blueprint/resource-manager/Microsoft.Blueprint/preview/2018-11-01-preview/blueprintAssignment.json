@@ -43,10 +43,10 @@
         "description": "Create or update a blueprint assignment.",
         "x-ms-examples": {
           "Assignment with system-assigned managed identity": {
-            "$ref": "./examples/BlueprintAssignment_Create_SystemAssignedMSI.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_SystemAssignedMSI.json"
           },
           "Assignment with user-assigned managed identity": {
-            "$ref": "./examples/BlueprintAssignment_Create_UserAssignedMSI.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Create_UserAssignedMSI.json"
           }
         },
         "parameters": [
@@ -86,7 +86,7 @@
         "description": "Get a blueprint assignment.",
         "x-ms-examples": {
           "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_Get.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Get.json"
           }
         },
         "parameters": [
@@ -117,7 +117,7 @@
         "description": "Delete a blueprint assignment.",
         "x-ms-examples": {
           "Assignment_Delete": {
-            "$ref": "./examples/BlueprintAssignment_Delete.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_Delete.json"
           }
         },
         "parameters": [
@@ -150,7 +150,7 @@
         "description": "Get Blueprints service SPN objectId",
         "x-ms-examples": {
           "WhoIsBlueprint_Action": {
-            "$ref": "./examples/WhoIsBlueprint_Action.json"
+            "$ref": "./examples/subscriptionBPAssignment/WhoIsBlueprint_Action.json"
           }
         },
         "parameters": [
@@ -180,10 +180,10 @@
           "Assignment"
         ],
         "operationId": "Assignments_List",
-        "description": "List blueprint assignments within a subscription.",
+        "description": "List blueprint assignments within a subscription or a management group.",
         "x-ms-examples": {
           "Assignment": {
-            "$ref": "./examples/BlueprintAssignment_List.json"
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignment_List.json"
           }
         },
         "parameters": [
@@ -362,6 +362,10 @@
         "blueprintId": {
           "type": "string",
           "description": "ID of the published version of a blueprint definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The target subscription scope of the blueprint assignment (format: '/subscriptions/{subscriptionId}'). For management group level assignments, the property is required."
         },
         "parameters": {
           "type": "object",
@@ -580,7 +584,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
