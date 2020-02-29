@@ -2185,6 +2185,17 @@
     },
     "ManagedClusterAADProfile": {
       "properties": {
+        "managed": {
+          "type": "boolean",
+          "description": "Whether to enable managed AAD."
+        },
+        "adminGroupObjectIDs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "AAD group object IDs that will have admin role of the cluster."
+        },
         "clientAppID": {
           "type": "string",
           "description": "The client AAD application ID."
@@ -2202,10 +2213,6 @@
           "description": "The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription."
         }
       },
-      "required": [
-        "clientAppID",
-        "serverAppID"
-      ],
       "description": "AADProfile specifies attributes for Azure Active Directory integration."
     },
     "ManagedClusterAddonProfile": {
