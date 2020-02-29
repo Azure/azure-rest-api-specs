@@ -30,13 +30,6 @@ batch:
   - tag: package-2015-06
 ```
 
-### Multi-api script
-
-``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/storage/azure-mgmt-storage/azure/mgmt/storage/
-clear-output-folder: false
-perform-load: false
-```
 
 ### Tag: package-2019-06 and python
 
