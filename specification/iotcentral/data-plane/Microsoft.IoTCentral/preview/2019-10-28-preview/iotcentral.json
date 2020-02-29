@@ -1622,6 +1622,7 @@
           "in":"path",
           "name":"command_name",
           "description":"Name of this device command.",
+          "x-ms-parameter-location": "method",
           "type":"string",
           "required":true
         }
@@ -1707,6 +1708,11 @@
         "operationId":"Devices_GetProperties",
         "summary":"Get device properties",
         "description":"Get all property values of a device by device ID.",
+        "x-ms-examples":{
+          "Update properties":{
+            "$ref":"./examples/devices_properties_get.json"
+          }
+        },
         "responses":{
           "200":{
             "description":"Success",
@@ -1813,6 +1819,7 @@
           "in":"path",
           "name":"telemetry_name",
           "description":"Name of this device telemetry.",
+          "x-ms-parameter-location": "method",
           "type":"string",
           "required":true
         }
@@ -1841,6 +1848,7 @@
         "in":"path",
         "name":"device_template_id",
         "description":"Unique ID of the device template.",
+        "x-ms-parameter-location": "method",
         "type":"string",
         "required":true
       },
@@ -1848,6 +1856,7 @@
         "in":"path",
         "name":"device_id",
         "description":"Unique ID of the device.",
+        "x-ms-parameter-location": "method",
         "type":"string",
         "required":true
       },
@@ -1855,6 +1864,7 @@
         "in":"path",
         "name":"component_name",
         "description":"Name of the device component.",
+        "x-ms-parameter-location": "method",
         "type":"string",
         "required":true
       },
