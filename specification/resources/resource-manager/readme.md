@@ -57,9 +57,18 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-deploymentscripts-2019-10-preview
+tag: package-2020-01
 ```
 
+
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01'
+input-file:
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
 ### Tag: package-deploymentscripts-2019-10-preview
 
 These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
