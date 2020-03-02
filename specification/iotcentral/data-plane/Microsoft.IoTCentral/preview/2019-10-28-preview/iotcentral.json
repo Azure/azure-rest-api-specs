@@ -184,6 +184,9 @@
           "properties": {
             "commandType": {
               "description": "The call pattern of this command.",
+              "x-ms-enum": {
+                "modelAsString": true
+              },
               "type": "string",
               "enum": [
                 "synchronous",
@@ -920,6 +923,9 @@
           "properties": {
             "severity": {
               "description": "Specifies the severity of the event.",
+              "x-ms-enum": {
+                "modelAsString": true
+              },
               "type": "string",
               "enum": [
                 "error",
@@ -995,6 +1001,9 @@
           "List API tokens": {
             "$ref": "./examples/apitoken_list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -1101,6 +1110,9 @@
             "$ref": "./examples/continuousdataexports_list.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1109,7 +1121,6 @@
             }
           }
         }
-      }
     },
     "/continuousDataExports/{export_id}": {
       "parameters": [
@@ -1205,6 +1216,9 @@
           "List device templates": {
             "$ref": "./examples/devicetemplates_list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -1329,6 +1343,9 @@
             "$ref": "./examples/devices_list_by_template.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1347,6 +1364,9 @@
           "List devices": {
             "$ref": "./examples/devices_list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -1443,6 +1463,9 @@
           "List roles": {
             "$ref": "./examples/roles_list.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "responses": {
           "200": {
@@ -1635,6 +1658,9 @@
             "$ref": "./examples/devices_commandshistory_get.json"
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1709,7 +1735,7 @@
         "summary": "Get device properties",
         "description": "Get all property values of a device by device ID.",
         "x-ms-examples": {
-          "Update properties": {
+          "Get properties": {
             "$ref": "./examples/devices_properties_get.json"
           }
         },
