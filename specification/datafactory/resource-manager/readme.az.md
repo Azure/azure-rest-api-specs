@@ -16,4 +16,20 @@ directive:
     $['x-ms-client-flatten'] = true;
   reason: Flatten everything for Azure CLI
 
+clicommon:
+    naming:
+        default:
+            singularize:
+              - operationGroup
+              - operation
+    cli-directive:
+    # directive on operationGroup
+      - select: 'operationGroup'
+        where:
+            operationGroup: 'operations'
+        hidden: true
+      - where:
+            parameter: location
+        required: true
+
 ```
