@@ -48,7 +48,7 @@ These settings apply only when `--tag=package-2020-02-07-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-02-07-preview'
 input-file:
-- Microsoft.HanaOnAzure/preview/package-2020-02-07-preview/hanaonazure.json
+- Microsoft.HanaOnAzure/preview/2020-02-07-preview/hanaonazure.json
 ```
 
 
