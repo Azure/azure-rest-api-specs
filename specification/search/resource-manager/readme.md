@@ -61,7 +61,7 @@ input-file:
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-- Microsoft.Search/preview/2020-03/search.json
+- Microsoft.Search/stable/2020-03/search.json
 ```
 
 
@@ -171,7 +171,7 @@ input-file:
   - $(this-folder)/Microsoft.Search/stable/2015-08-19/search.json
   - $(this-folder)/Microsoft.Search/stable/2015-02-28/search.json
   - $(this-folder)/Microsoft.Search/preview/2019-10-01-preview/search.json
-  - $(this-folder)/Microsoft.Search/preview/2020-03-13/search.json
+  - $(this-folder)/Microsoft.Search/stable/2020-03-13/search.json
 
 ```
 
