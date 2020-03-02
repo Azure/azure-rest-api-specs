@@ -7,42 +7,38 @@ This directory contains the Cli common model for the Aks service.
 ``` yaml
 # Migrated from Powershell's readme
 clicommon:
-    glossary:
-        - 'insights'
+    naming:
+        cli:
+            glossary:
+                - 'insights'
     cli-directive:
       - select: 'operation'
         where:
             operationGroup: 'components'
             operation: '^(delete|purge|get_purge_status)$'
-        set:
-            remove: true
+        removed: true
       - select: 'operation'
         where:
             operationGroup: 'API_keys'
             operation: 'create|delete'
-        set:
-            remove: true
+        removed: true
       - select: 'operation'
         where:
             operationGorup: 'components'
             operation: 'update_tags'
-        set:
-            remove: true
+        removed: true
       - select: 'operationGroup'
         where:
             operationGroup: 'components'
-        set:
-            name: 'app_insights'
+        name: 'app_insights'
       - select: 'operation'
         where:
             operationGroup: 'components'
             operation: 'get|create_or_update'
-        set:
-            hide: true
+        hidden: true
       - select: 'operation'
         where:
             operatoinGroup: 'API_keys'
             operation: 'get'
-        set:
-            hide: true
+        hidden: true
 ```

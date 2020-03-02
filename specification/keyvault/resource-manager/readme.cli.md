@@ -47,7 +47,7 @@ clicommon:
       - where:
             resource: 'vaults'
             op: '^(get_deleted|purge_deleted)$'
-        hide: true
+        hidden: true
       - where:
             enum: 'sku_name'
         alias: 'Sku'
@@ -56,11 +56,11 @@ clicommon:
             resource: 'vaults'
             op: 'check_name_availability'
         name: 'test'
-        hide: true
+        hidden: true
       - where:
             resource: 'vaults'
             op: 'update'
-        hide: true
+        hidden: true
       - where:
             type: 'vaults'
         formatTable:

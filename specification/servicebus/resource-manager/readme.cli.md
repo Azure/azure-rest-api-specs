@@ -12,19 +12,16 @@ clicommon:
       - select: 'operation'
         where:
             operation: '(authorization_rule(s)?$|keys$|name_availability$)'
-        set:
-            hide: true
+        hidden: true
       - select: 'parameter'
         where:
             parameter: authorization_rule_name
-        set:
-            alias: AuthorizationRule
+        alias: AuthorizationRule
       - select: 'parameter'
         where:
             operation: 'authorization_rule(s)?$'
             parameter: authorization_rule_name
-        set:
-            name: name
+        name: name
       - select: 'property'
         where:
             objectSchema: 'SB_authorization_rule'

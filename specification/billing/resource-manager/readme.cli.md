@@ -32,6 +32,5 @@ clicommon:
       - select: 'operationGroup'
         where:
           operationGroup: ^(?!^billing_period$)(?!^budget$)(?!^enrollment_accounts$)(?!^invoices$)(?!^marketplace$)(?!^price_sheet$)(?!^reservation_detail$)(?!^reservation_summary$)(?!^usage_aggregate$)(?!^usage_detail$).*$
-        set:
-            hide: true
+        hidden: true
 ```

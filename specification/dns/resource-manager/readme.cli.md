@@ -38,8 +38,7 @@ clicommon:
         where:
             operationGroup: 'record_sets'
             operation: '^(create_or_update|update)$'
-        set:
-            hide: true
+        hidden: true
       - select: 'parameter'
         where:
             operationGroup: 'dns_resource_reference'
@@ -50,14 +49,12 @@ clicommon:
         where:
             operationGroup: 'dns_resource_reference'
             operation: 'get_by_target_resources'
-        set:
-            hide: true
+        hidden: true
       - select: 'operation'
         where:
             operationGroup: 'zones'
             operation: 'update'
-        set:
-            remove: true
+        removed: true
       - select: 'parameter'
         where:
             operationGroup: 'zones'
@@ -68,6 +65,5 @@ clicommon:
         where:
             operationGroup: 'zones'
             operation: 'create_or_update'
-        set:
-            hide: true
+        hidden: true
 ```

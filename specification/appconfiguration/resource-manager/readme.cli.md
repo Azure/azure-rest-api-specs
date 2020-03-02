@@ -20,23 +20,19 @@ clicommon:
       - select: 'parameter'
         where:
             parameter: '(config_store_creation_parameter|regenerate_key_parameter|check_name_availability_parameter)'
-        set:
-            hide: 'true'
+        hidden: 'true'
       - select: 'operation'
         where:
             operationGroup: 'configuration_stores'
             operation: 'update'
-        set:
-            hide: 'true'
+        hidden: 'true'
       - select: 'parameter'
         where:
             parameter: 'config_store_name'
-        set:
-            name: 'name'
+        name: 'name'
       - select: 'operationGroup'
         where:
             operationGroup: 'operations'
-        set:
-            name: 'stores'
+        name: 'stores'
 ```
 

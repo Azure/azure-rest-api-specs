@@ -24,34 +24,28 @@ clicommon:
       - select: 'operationGroup'  
         where:
             operationGroup: 'operations'
-        set:
-            hide: true
+        hidden: true
       - select: 'operationGroup'
         where:
             operationGroup: 'locations'
-        set:
-            name: 'Consortium'
+        name: 'Consortium'
       - select: 'operation'
         where:
             operationGroup: 'locations'
             operation: 'list_consortiums'
-        set:
-            name: 'list'
+        name: 'list'
       - select: 'operationGroup'
         where:
             operationGroup: 'blockchain_member_operation_results'
-        set:
-            hide: true
+        hidden: true
       - select: 'operation'
         where:
             operationGroup: 'blockchain_members'
             operation: '(create|update)'
-        set:
-            hide: true
+        hidden: true
       - select: 'operation'
         where:
             operationGroup: 'transaction_nodes'
             operation: '(create|update)'
-        set:
-            hide: true
+        hidden: true
 ```

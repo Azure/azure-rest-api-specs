@@ -40,8 +40,7 @@ clicommon:
       - select: 'operationGroup'
         where:
             operationGroup: 'operations'
-        set:
-            hide: true
+        hidden: true
       - select: 'parameter'
         where:
             operationGroup: 'agent_pools'

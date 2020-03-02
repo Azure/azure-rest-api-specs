@@ -37,12 +37,12 @@ clicommon:
         where:
             operationGroup: 'activity_log_alerts'
             operation: 'update'
-        hide: true
+        hidden: true
       - select: 'operation'
         where:
             operationGroup: 'metric_alerts'
             operation: '^(create_or_update|update)$'
-        hide: true
+        hidden: true
       - select: 'parameter'
         where:
             operationGroup: '^(metric_alerts|alert_rules|alert_rule_incidents)$'
@@ -59,12 +59,12 @@ clicommon:
         where:
             operationGroup: 'alert_rules'
             operation: '^(create_or_update|delete|update)$'
-        hide: true
+        hidden: true
       - select: 'operation'
         where:
             operationGroup: 'log_profiles'
             operation: '^(create_or_update|update)$'
-        hide: true
+        hidden: true
       - select: 'property'
         where:
             objectSchema: '^(autoscale_setting_resource|autoscale_setting_resource_patch)$'
@@ -78,7 +78,7 @@ clicommon:
       - where:
             operationGroup: 'action_groups'
             operation: 'update'
-        remove: true
+        removed: true
       - where:
             operationGroup: 'metrics'
             parameter: 'interval'
@@ -90,7 +90,7 @@ clicommon:
       - where:
             operationGroup: 'metric_definitions'
             operation: 'list'
-        hide: true
+        hidden: true
       - where:
             operationGroup: 'scheduled_query_rules'
             parameter: 'rule_name'
@@ -98,7 +98,7 @@ clicommon:
       - where:
             operationGroup: 'scheduled_query_rules'
             operation: '^(create_or_update|update)$'
-        hide: true
+        hidden: true
       - where:
             operationGroup: 'diagnostic_settings_category'
             parameter: 'resource_uri'
@@ -106,5 +106,5 @@ clicommon:
       - where:
             operationGroup: 'baselines'
             operation: 'list'
-        remove: true
+        removed: true
 ```
