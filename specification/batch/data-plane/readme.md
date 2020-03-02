@@ -360,6 +360,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Batch/stable/2020-03-01.11.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-08-01.10.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2019-06-01.9.0/BatchService.json
   - $(this-folder)/Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
