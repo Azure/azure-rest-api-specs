@@ -90,7 +90,7 @@
           "QuotaRequests"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Create",
         "x-ms-examples": {
           "Quotas_Request_listForCompute": {
@@ -156,7 +156,7 @@
           "QuotaRequests"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quota to the values specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
         "operationId": "QuotaRequest_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -293,7 +293,7 @@
           }
         },
         "summary": "Gets the Quota request status by requestId, for the specified resource provider at specified location.",
-        "description": "Gets the QuotaRequest details and status by the quota requestId for the resources for the resource provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
+        "description": "Gets the QuotaRequest details and status by the quota request Id for the resources for the resource provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
         "operationId": "QuotaRequests_GetStatus",
         "parameters": [
           {
@@ -368,9 +368,6 @@
             "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "description": "Ok. Sending Quota request status and details",
@@ -384,6 +381,9 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -495,6 +495,16 @@
       "description": "Quota limits.",
       "x-ms-azure-resource": true,
       "properties": {
+        "properties": {
+          "description": "Quota properties for the resource.",
+          "$ref": "#/definitions/QuotaProperties"
+        }
+      }
+    },
+    "QuotaProperties": {
+      "description": "Resource quota properties.",
+      "type": "object",
+      "properties": {
         "limit": {
           "description": "The quota limit.",
           "type": "integer"
@@ -511,18 +521,7 @@
         },
         "name": {
           "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
-          "properties": {
-            "value": {
-              "description": "Resource name.",
-              "type": "string",
-              "readOnly": false
-            },
-            "localizedValue": {
-              "description": "Resource display name.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
           "description": "The Resource Type Name.",
@@ -537,6 +536,21 @@
         "properties": {
           "description": "Additional properties for the specific resource provider.",
           "type": "object"
+        }
+      }
+    },
+    "ResourceName": {
+      "description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
+      "properties": {
+        "value": {
+          "description": "Resource name.",
+          "type": "string",
+          "readOnly": false
+        },
+        "localizedValue": {
+          "description": "Resource display name.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -596,18 +610,7 @@
         },
         "name": {
           "description": "The Resource name.",
-          "properties": {
-            "localizedValue": {
-              "description": "Resource display name.",
-              "type": "string",
-              "readOnly": true
-            },
-            "value": {
-              "description": "Resource name.",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ResourceName"
         },
         "resourceType": {
           "description": "Resource type for which the quota check was made.",
@@ -931,7 +934,7 @@
       "description": "The email actions.",
       "properties": {
         "value": {
-          "description": "The list of actions based on the success or failure of automatic quota increase action.",
+          "description": "The list of email actions based on the success or failure of automatic quota increase action.",
           "type": "array",
           "items": {
             "description": "The email recipients for the specific action types.",
