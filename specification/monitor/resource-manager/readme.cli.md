@@ -82,7 +82,7 @@ clicommon:
       - where:
             operationGroup: 'metrics'
             parameter: 'interval'
-        alias: TimeGrain
+        alias: time_grain
       - where:
             operationGroup: 'metrics'
             parameter: 'resource_uri'

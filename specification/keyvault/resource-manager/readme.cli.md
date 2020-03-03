@@ -50,7 +50,7 @@ clicommon:
         hidden: true
       - where:
             enum: 'sku_name'
-        alias: 'Sku'
+        alias: 'sku'
         name: 'sku'
       - where:
             resource: 'vaults'

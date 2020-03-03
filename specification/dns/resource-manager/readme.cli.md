@@ -27,7 +27,7 @@ clicommon:
             parameter: 'relative_record_set_name'
         set:
             name: 'Name'
-            alias: RelativeRecordSetName
+            alias: relative_record_set_name
       - select: 'parameter'
         where:
             operationGroup: 'record_sets'

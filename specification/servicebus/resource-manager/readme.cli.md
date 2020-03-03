@@ -16,7 +16,7 @@ clicommon:
       - select: 'parameter'
         where:
             parameter: authorization_rule_name
-        alias: AuthorizationRule
+        alias: authorization_rule
       - select: 'parameter'
         where:
             operation: 'authorization_rule(s)?$'
@@ -24,13 +24,13 @@ clicommon:
         name: name
       - select: 'property'
         where:
-            objectSchema: 'SB_authorization_rule'
+            objectSchema: 'SB_authorization_rule_properties'
             property: 'rights'
         set:
             name: 'access_right'
             alias:
-              - Right
-              - Rights
+              - right
+              - rights
       - select: 'operationGroup'
         where:
             operationGroup: 'disaster_recovery_configs'
@@ -43,9 +43,9 @@ clicommon:
         set:
             name: 'name'
             alias:
-                - Alias
-                - AliasName
-                - DisasterRecoveryConfiguration
+                - 'alias'
+                - 'alias_name'
+                - 'disaster_recovery_configuration'
       - select: 'operation'
         where:
             operationGroup: 'disaster_recovery_configs'
@@ -70,27 +70,27 @@ clicommon:
         where:
             parameter: 'namespace_name'
         set:
-            alias: Namespace
+            alias: 'namespace'
       - select: 'parameter'
         where:
             operationGroup: 'migration_configs'
             parameter: 'namespace_name'
         set:
-            alias: Name
+            alias: 'name'
       - select: 'parameter'
         where:
             parameter: 'topic_name'
         set:
-            alias: 'Topic'
+            alias: 'topic'
       - select: 'parameter'
         where:
             parameter: 'queue_name'
         set:
-            alias: Queue
+            alias: 'queue'
       - select: 'parameter'
         where:
             operation: '_keys$'
             parameter: 'authorization_rule_name'
         set:
-            alias: Name
+            alias: 'name'
 ```
