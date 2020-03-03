@@ -299,7 +299,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/AgentPoolQueueStatus"
             }
           },
           "default": {
@@ -1446,6 +1446,17 @@
         "nextLink": {
           "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
+        }
+      }
+    },
+    "AgentPoolQueueStatus": {
+      "description": "The QueueStatus of Agent Pool",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The number of pending runs in the queue",
+          "type": "integer"
         }
       }
     },
