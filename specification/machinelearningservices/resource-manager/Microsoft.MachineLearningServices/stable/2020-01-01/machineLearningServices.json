@@ -1473,6 +1473,22 @@
           "type": "string",
           "description": "The name of the managed resource group created by workspace RP in customer subscription if the workspace is CMK workspace",
           "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "The list of private endpoint connections which this workspace has." 
+        },
+        "sharedPrivateLinkResources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "description": "The list of shared private link resources which this workspace has." 
         }
       }
     },
@@ -3130,7 +3146,9 @@
       "enum": [
         "Pending",
         "Approved",
-        "Rejected"
+        "Rejected",
+        "Disconnected",
+        "Timeout"
       ],
       "x-ms-enum": {
         "name": "PrivateEndpointServiceConnectionStatus",
@@ -3203,6 +3221,43 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "SharedPrivateLinkResource": {
+      "properties":{
+        "name": {
+          "description": "Unique name of the private link.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperty",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperty": {
+      "properties": {
+        "privateLinkResourceId": {
+          "description": "The resource id that private link links to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestMessage": {
+          "description": "Request message.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        }
+      },
+      "description": "Properties of a shared private link resource."
     },
     "EncryptionProperty": {
       "properties": {
