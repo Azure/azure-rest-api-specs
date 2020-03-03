@@ -1,0 +1,655 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Quantum Workspace",
+    "version": "2019-11-04-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "security": [
+    {
+      "azure_auth": [ "user_impersonation" ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.quantum/workspaces/{workspaceName}": {
+      "get": {
+        "description": "Returns workspace resource for a given name.",
+        "operationId": "Workspaces_Get",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspace details.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update workspace resource.",
+        "operationId": "Workspaces_CreateAndUpdate",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "QuantumWorkspace",
+            "description": "Quantum workspace details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Workspace create/update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Workspaces_Update",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesPatch.json"
+          }
+        },
+        "description": "Updates a quantum workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "QuantumWorkspace",
+            "description": "Quantum workspace details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Worksapce updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete a workspace resource.",
+        "operationId": "Workspaces_Delete",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful."
+          },
+          "201": {
+            "description": "Worksapce delete request accepted.",
+            "schema": {
+              "$ref": "#/definitions/QuantumWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.quantum/workspaces": {
+      "get": {
+        "operationId": "Workspaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/quantumWorkspacesList.json"
+          }
+        },
+        "description": "Gets the available workspaces within a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workspaces successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.quantum/offerings": {
+      "get": {
+        "description": "Returns list of provider descriptions.",
+        "operationId": "Offerings_List",
+        "x-ms-examples": {
+          "QuantumWorkspacesGet": {
+            "$ref": "./examples/providerList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Providers details.",
+            "schema": {
+              "$ref": "#/definitions/ProviderListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/microsoft.quantum/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "#/definitions/operationsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuantumWorkspace"
+          },
+          "description": "Result of the List Workspace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+        }
+      },
+      "description": "The response of the List Workspaces operation."
+    },
+    "ProviderListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderDescription"
+          },
+          "description": "Result of the List Providers operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of Namespaces."
+        }
+      },
+      "description": "The response of the List Providers operation."
+    },
+    "QuantumWorkspace": {
+      "type": "object",
+      "description": "The resource proxy definition object for quantum workspace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the id for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the resource definition.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the type of the resource definition.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define quantum space's specific properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WorkspaceResourceProperties"
+            }
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Gets or sets the tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "WorkspaceResourceProperties": {
+      "description": "Resource status of workspace",
+      "properties": {
+        "providers": {
+          "type": "array",
+          "description": "Providers requested from end-customer in the workspace",
+          "items": {
+            "$ref": "#/definitions/Provider"
+          }
+        },
+        "usable": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No",
+            "Partial"
+          ],
+          "x-ms-enum": {
+            "name": "UsableStatus",
+            "modelAsString": true
+          },
+          "description": "Whether the current workspace is usable."
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "ProviderLaunching",
+            "ProviderUpdating",
+            "ProviderDeleting",
+            "ProviderProvisioning",
+            "Deleted",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "description": "Provisioning status field"
+        }
+      }
+    },
+    "ProviderDescription": {
+      "type": "object",
+      "description": "Descript provider's information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "unique provider id"
+        },
+        "name": {
+          "type": "string",
+          "description": "display name of provider"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description about this provider"
+        },
+        "targets": {
+          "type": "array",
+          "description": "list of targets from the provider",
+          "items": {
+            "$ref": "#/definitions/TargetDescription"
+          }
+        },
+        "providerSkus": {
+          "type": "array",
+          "description": "list of skus from the provider",
+          "items": {
+            "$ref": "#/definitions/SkuDescription"
+          }
+        }
+      }
+    },
+    "TargetDescription": {
+      "type": "object",
+      "description": "Descript provider's target information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "unique target id"
+        },
+        "name": {
+          "type": "string",
+          "description": "\"display name of target"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description about this sku"
+        }
+      }
+    },
+    "SkuDescription": {
+      "type": "object",
+      "description": "Descript provider's information to end customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "unique sku id"
+        },
+        "name": {
+          "type": "string",
+          "description": "display name of sku"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description about this sku"
+        },
+        "targets": {
+          "type": "array",
+          "description": "list of targets for the sku",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Provider": {
+      "type": "object",
+      "description": "Json representation of provider, used for json serialization and deserialization and save the meta information\nof provider (including both first party and 3rd party.",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "description": "partner id field"
+        },
+        "providerSku": {
+          "type": "string",
+          "description": "sku field"
+        },
+        "instanceUri": {
+          "type": "string",
+          "description": "serviceUri field"
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "application name field"
+        },
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Launching",
+            "Updating",
+            "Deleting",
+            "Deleted",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "description": "Provisioning status field"
+        }
+      }
+    },
+    "operation": {
+      "description": "Operation provided by provider",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation"
+        },
+        "display": {
+          "type": "object",
+          "description": "Properties of the operation",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Provider name"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource name"
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation name"
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation"
+            }
+          }
+        }
+      }
+    },
+    "operationsList": {
+      "description": "Lists the operations available.",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/operation"
+          }
+        }
+      },
+      "required": [ "value" ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription ID."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of quantum workspace resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
