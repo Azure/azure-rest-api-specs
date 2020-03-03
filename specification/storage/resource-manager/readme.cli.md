@@ -53,7 +53,7 @@ cli:
     - name: StorageAccountRegenerateKey
     - name: StorageAccountRegenerateKerbKey
     - name: StorageAccountListKeys
-    - name: StorageAccountCreate
+    - name: StorageAccountFailover
     - name: StorageAccountEnableAD
     - name: StorageAccountUpdate
     - name: StorageAccountCheckNameAvailability
