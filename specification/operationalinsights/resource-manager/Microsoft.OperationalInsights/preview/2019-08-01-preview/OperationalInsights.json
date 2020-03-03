@@ -258,7 +258,7 @@
           }
         },
         "operationId": "LinkedStorageAccounts_CreateOrUpdate",
-        "description": "Create or update linked storage accounts of a specific data source type of a specified workspace.",
+        "description": "Create or Update a link relation between current workspace and a group of storage accounts of a specific data source type.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -268,7 +268,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the Log Analytics Workspace that will contain the  resource"
+            "description": "Name of the Log Analytics Workspace that will contain the resource"
           },
           {
             "$ref": "#/parameters/DataSourceTypeParameter"
@@ -280,7 +280,7 @@
             "schema": {
               "$ref": "#/definitions/LinkedStorageAccounts"
             },
-            "description": "The parameters required to create or update a linked storage accounts."
+            "description": "The parameters required to create or update linked storage accounts."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -412,7 +412,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
         },
         "x-ms-examples": {
           "Gets list of linked storage accounts on a workspace.": {
@@ -574,7 +574,7 @@
       "description": "Common properties of proxy resource."
     },
 	"LinkedStorageAccountsProperties": {
-      "description": "Properties of a linked storage accounts resource.",
+      "description": "Linked storage accounts properties.",
       "type": "object",
       "properties": {
 		"dataSourceType": {
@@ -584,6 +584,10 @@
 			"customlogs",
 			"azurewatson"
 		  ],
+		  "x-ms-enum": {
+			"name": "DataSourceType",
+			"modelAsString": false
+		  }
         },
         "storageAccountIds": {
           "description": "linked storage accounts resource ids.",
@@ -599,7 +603,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
-          "description": "The properties of the linked storage accounts."
+          "description": "Linked storage accounts properties."
         }
       },
       "required": [
@@ -610,7 +614,7 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ],
-      "description": "The top level Linked storage accounts resource container.",
+      "description": "Linked storage accounts top level resource container.",
       "x-ms-azure-resource": true
     },
     "LinkedStorageAccountsListResult": {
@@ -669,7 +673,11 @@
         "customlogs",
         "azurewatson"
       ],
-      "description": "Operational Insights workspace linked storage account type.",
+	  "x-ms-enum": {
+		"name": "DataSourceType",
+		"modelAsString": false
+	  },
+      "description": "Linked storage account type.",
       "x-ms-parameter-location": "method"
     }
   }
