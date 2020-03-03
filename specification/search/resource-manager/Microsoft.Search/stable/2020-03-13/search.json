@@ -624,13 +624,13 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "operationId": "PrivateLinkResources_ListAvailable",
+        "operationId": "PrivateLinkResources_ListSupported",
         "x-ms-examples": {
-          "ListAvailablePrivateLinkResources": {
-            "$ref": "./examples/ListAvailablePrivateLinkResources.json"
+          "ListSupportedPrivateLinkResources": {
+            "$ref": "./examples/ListSupportedPrivateLinkResources.json"
           }
         },
-        "description": "Gets a list of all available private link resource types for the given service.",
+        "description": "Gets a list of all supported private link resource types for the given service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -653,7 +653,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation succeeded. The response contains the list of all available private link resource types for the given service.",
+            "description": "The operation succeeded. The response contains the list of all supported private link resource types for the given service.",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResourcesResult"
             }
@@ -884,13 +884,13 @@
         "tags": [
           "SharedPrivateLinkResources"
         ],
-        "operationId": "SharedPrivateLinkResources_Update",
+        "operationId": "SharedPrivateLinkResources__CreateOrUpdate",
         "x-ms-examples": {
-          "SharedPrivateLinkResourceUpdate": {
-            "$ref": "./examples/UpdateSharedPrivateLinkResource.json"
+          "SharedPrivateLinkResourceCreateOrUpdate": {
+            "$ref": "./examples/CreateOrUpdateSharedPrivateLinkResource.json"
           }
         },
-        "description": "Updates a shared private link resource managed by the Search service in the given resource group.",
+        "description": "Creates or updates a shared private link resource managed by the Search service in the given resource group.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -911,7 +911,7 @@
             "schema": {
               "$ref": "#/definitions/SharedPrivateLinkResource"
             },
-            "description": "The definition of the shared private link resource to update."
+            "description": "The definition of the shared private link resource to create or update."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -930,8 +930,14 @@
               "$ref": "#/definitions/SharedPrivateLinkResource"
             }
           },
+          "201": {
+            "description": "The shared private link resource was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given shared private link resource name or the shared private link resource definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or shared private link resource could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "description": "HTTP 400 (Bad Request): The given shared private link resource name or the shared private link resource definition is invalid; See the error code and message in the response for details. HTTP 404 (Not Found): The subscription, resource group, search service or shared private link resource could not be found. HTTP 409 (Conflict): The specified subscription is disabled. HTTP 409 (Conflict): A shared private link resource of the same name is being deleted, please retry in a few minutes.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -997,7 +1003,7 @@
             "$ref": "./examples/DeleteSharedPrivateLinkResource.json"
           }
         },
-        "description": "Disconnects the shared private link resource and deletes it from the Search service.",
+        "description": "Deletes the shared private link resource from the Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -1023,7 +1029,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The shared private link resource was successfully disconnected and removed from the search service."
+            "description": "The shared private link resource was successfully deleted from the search service."
           },
           "404": {
             "description": "The subscription, resource group, Search service or shared private link resource could not be found."
@@ -1488,10 +1494,10 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           },
-          "description": "The list of available Private Link Resources."
+          "description": "The list of supported Private Link Resources."
         }
       },
-      "description": "Response containing a list of available Private Link Resources.",
+      "description": "Response containing a list of supported Private Link Resources.",
       "x-ms-external": true
     },
     "PrivateLinkResource": {
@@ -1514,10 +1520,10 @@
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of an available private link resource for the Azure Cognitive Search service."
+          "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service."
         }
       },
-      "description": "Describes an available private link resource for the Azure Cognitive Search service."
+      "description": "Describes a supported private link resource for the Azure Cognitive Search service."
     },
     "PrivateLinkResourceProperties": {
       "properties": {
@@ -1548,45 +1554,45 @@
           "items": {
             "$ref": "#/definitions/ShareablePrivateLinkResourceType"
           },
-          "description": "The list of available shareable private link resource types."
+          "description": "The list of resources that are onboarded to private link service, that are supported by Azure Cognitive Search."
         }
       },
-      "description": "Describes the properties of an available private link resource for the Azure Cognitive Search service."
+      "description": "Describes the properties of a supported private link resource for the Azure Cognitive Search service. For a given API version, this represents the 'supported' groupIds when creating a shared private link resources."
     },
     "ShareablePrivateLinkResourceType": {
       "properties": {
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the shareable private link resource type."
+          "description": "The name of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
         },
         "properties": {
           "$ref": "#/definitions/ShareablePrivateLinkResourceProperties",
           "readOnly": true,
-          "description": "Describes the properties of an available shareable private link resource that can be managed by the Azure Cognitive Search service."
+          "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
         }
       },
-      "description": "Describes an available shareable private link resource that can be managed by the Azure Cognitive Search service."
+      "description": "Describes an resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
     },
     "ShareablePrivateLinkResourceProperties": {
       "properties": {
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The resource type from the provider of resource the shareable private link resource is available for."
+          "description": "The resource provider type for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
         },
         "groupId": {
           "readOnly": true,
           "type": "string",
-          "description": "The group id from the provider of resource the shareable private link resource is available for."
+          "description": "The resource provider group id for the resource that has been onboarded to private link service, supported by Azure Cognitive Search."
         },
         "description": {
           "readOnly": true,
           "type": "string",
-          "description": "The description of the shareable private link resource."
+          "description": "The description of the resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
         }
       },
-      "description": "Describes the properties of an available shareable private link resource that can be managed by the Azure Cognitive Search service."
+      "description": "Describes the properties of a resource type that has been onboarded to private link service, supported by Azure Cognitive Search."
     },
     "SearchService": {
       "properties": {
@@ -1929,7 +1935,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the shared private link resource managed by the Azure Cognitive Search service with the specified resource group.",
+      "description": "The name of the shared private link resource managed by the Azure Cognitive Search service within the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "ClientRequestIdParameter": {
@@ -1958,7 +1964,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for each request. The current version is 2020-03-13."
+      "description": "The API version to use for each request. The current version is 2019-10-01-Preview."
     }
   }
 }

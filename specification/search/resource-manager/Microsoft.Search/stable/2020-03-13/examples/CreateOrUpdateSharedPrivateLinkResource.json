@@ -2,7 +2,7 @@
   "parameters": {
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-03-13",
     "subscriptionId": "subid",
     "sharedPrivateLinkResourceName": "testResource",
     "sharedPrivateLinkResource": {
@@ -16,6 +16,17 @@
   },
   "responses": {
     "200": {
+      "body": {
+        "name": "testResource",
+        "properties": {
+          "requestMessage": "please approve",
+          "groupId": "blob",
+          "privateLinkResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Storage/storageAccounts/storageAccountName",
+          "status": "Pending"
+        }
+      }
+    },
+    "201": {
       "body": {
         "name": "testResource",
         "properties": {
