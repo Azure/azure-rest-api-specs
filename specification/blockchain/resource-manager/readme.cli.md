@@ -3,10 +3,6 @@
 This directory contains the Cli common model for the Blockchain service.
 
 > Metadata
-``` yaml
-# Migrated from Powershell's readme
-
-```
 
 ``` yaml
 # Migrated from Powershell's readme
