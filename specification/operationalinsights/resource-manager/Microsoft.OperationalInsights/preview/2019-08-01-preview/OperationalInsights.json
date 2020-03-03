@@ -247,7 +247,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts/{dataSourceType}": {
       "put": {
         "tags": [
           "LinkedStorageAccounts"
@@ -378,7 +378,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/linkedStorageAccounts": {
       "get": {
         "tags": [
           "LinkedStorageAccounts"
@@ -573,21 +573,21 @@
       },
       "description": "Common properties of proxy resource."
     },
-	"LinkedStorageAccountsProperties": {
+    "LinkedStorageAccountsProperties": {
       "description": "Linked storage accounts properties.",
       "type": "object",
       "properties": {
-		"dataSourceType": {
+        "dataSourceType": {
           "description": "linked storage accounts type.",
           "type": "string",
           "enum": [
-			"customlogs",
-			"azurewatson"
-		  ],
-		  "x-ms-enum": {
-			"name": "DataSourceType",
-			"modelAsString": false
-		  }
+            "CustomLogs",
+            "AzureWatson"
+          ],
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": false
+          }
         },
         "storageAccountIds": {
           "description": "linked storage accounts resource ids.",
@@ -664,19 +664,19 @@
       "description": "The Log Analytics workspace name.",
       "x-ms-parameter-location": "method"
     },
-	"DataSourceTypeParameter": {
+    "DataSourceTypeParameter": {
       "name": "dataSourceType",
       "in": "path",
       "required": true,
       "type": "string",
-	  "enum": [
-        "customlogs",
-        "azurewatson"
+      "enum": [
+        "CustomLogs",
+        "AzureWatson"
       ],
-	  "x-ms-enum": {
-		"name": "DataSourceType",
-		"modelAsString": false
-	  },
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": false
+      },
       "description": "Linked storage account type.",
       "x-ms-parameter-location": "method"
     }
