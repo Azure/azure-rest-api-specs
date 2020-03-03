@@ -314,6 +314,9 @@
         "x-ms-examples": {
           "DeploymentScriptsGetLogs": {
             "$ref": "./examples/DeploymentScripts_GetLogsDefault.json"
+          },
+          "DeploymentScriptsGetLogsWithTail": {
+            "$ref": "./examples/DeploymentScripts_GetLogsDefaultWithTail.json"
           }
         },
         "parameters": [
@@ -328,6 +331,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tail",
+            "in": "query",
+            "description": "The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.",
+            "type": "integer"
           }
         ],
         "responses": {
