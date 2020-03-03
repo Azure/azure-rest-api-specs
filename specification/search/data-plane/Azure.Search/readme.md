@@ -23,6 +23,7 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient and SearchIndexClient.
 
 ``` yaml
+title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
 tag: package-2019-05-preview
