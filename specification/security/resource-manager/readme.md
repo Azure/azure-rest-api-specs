@@ -159,6 +159,9 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
 
 # Needed when there is more than one input file
 override-info:
