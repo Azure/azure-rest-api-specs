@@ -1443,6 +1443,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an bookmark": {
+            "$ref": "./examples/bookmarks/expand/PostExpandBookmark.json"
+          }
+        },
+        "description": "Expand an bookmark",
+        "operationId": "Bookmark_Expand",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/BookmarkExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Bookmark"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}": {
       "get": {
         "x-ms-examples": {
@@ -4240,6 +4291,48 @@
         "query"
       ],
       "type": "object"
+    },
+    "BookmarkExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "BookmarkExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
     },
     "Case": {
       "allOf": [
@@ -8302,6 +8395,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EntityExpandParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BookmarkExpandRequestBody": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BookmarkExpandParameters"
       },
       "x-ms-parameter-location": "method"
     },
