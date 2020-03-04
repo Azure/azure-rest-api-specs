@@ -15,6 +15,190 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}": {
+      "get": {
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Gets the properties of the export pipeline.",
+        "operationId": "ExportPipelines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The export pipeline name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineGet": {
+            "$ref": "./examples/ExportPipelineGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Creates an export pipeline that copies images from a container registry to a storage account.",
+        "operationId": "ExportPipelines_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The export pipeline name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "exportPipelineCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating an export pipeline.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipeline"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineCreate": {
+            "$ref": "./examples/ExportPipelineCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Deletes an export pipeline from a container registry.",
+        "operationId": "ExportPipelines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "exportPipelineName",
+            "in": "path",
+            "description": "The export pipeline name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The export pipeline does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineDelete": {
+            "$ref": "./examples/ExportPipelineDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines": {
+      "get": {
+        "tags": [
+          "ExportPipelines"
+        ],
+        "description": "Lists all export pipelines for the specified container registry.",
+        "operationId": "ExportPipelines_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ExportPipelineListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExportPipelineList": {
+            "$ref": "./examples/ExportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importImage": {
       "post": {
         "tags": [
@@ -65,6 +249,190 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}": {
+      "get": {
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Gets the properties of the import pipeline.",
+        "operationId": "ImportPipelines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The import pipeline name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineGet": {
+            "$ref": "./examples/ImportPipelineGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Creates an import pipeline that copies images from a storage account to a container registry.",
+        "operationId": "ImportPipelines_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The import pipeline name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "importPipelineCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating an import pipeline.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipeline"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineCreate": {
+            "$ref": "./examples/ImportPipelineCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Deletes an import pipeline from a container registry.",
+        "operationId": "ImportPipelines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "importPipelineName",
+            "in": "path",
+            "description": "The import pipeline name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The import pipeline does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineDelete": {
+            "$ref": "./examples/ImportPipelineDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines": {
+      "get": {
+        "tags": [
+          "ImportPipelines"
+        ],
+        "description": "Lists all import pipelines for the specified container registry.",
+        "operationId": "ImportPipelines_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ImportPipelineListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImportPipelineList": {
+            "$ref": "./examples/ImportPipelineList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/checkNameAvailability": {
@@ -127,6 +495,88 @@
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}": {
+      "get": {
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Gets the detailed information for a given pipeline run.",
+        "operationId": "PipelineRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "pipelineRunName",
+            "in": "path",
+            "description": "The pipeline run name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well - formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunGet": {
+            "$ref": "./examples/PipelineRunGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
+      "get": {
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Lists all the pipeline runs for the specified container registry.",
+        "operationId": "PipelineRuns_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well - formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRunListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunList": {
+            "$ref": "./examples/PipelineRunList.json"
           }
         },
         "x-ms-pageable": {
@@ -1277,6 +1727,206 @@
     }
   },
   "definitions": {
+    "ExportPipeline": {
+      "description": "An object that represents an export pipeline for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the export pipeline."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExportPipelineProperties",
+          "description": "The properties of the export pipeline.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
+        }
+      }
+    },
+    "ExportPipelineProperties": {
+      "description": "The properties of an export pipeline.",
+      "required": [
+        "target",
+        "artifacts",
+        "trigger"
+      ],
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ExportPipelineTargetProperties",
+          "description": "The target properties of the export pipeline."
+        },
+        "artifacts": {
+          "description": "List of source artifacts to be transferred that are identitified by repository name. \r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "options": {
+          "description": "The list of all options configured for the pipeline.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "OverwriteTags",
+              "OverwriteBlobs",
+              "DeleteSourceBlobOnSuccess",
+              "ContinueOnErrors"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PipelineOptions",
+              "modelAsString": true
+            }
+          }
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties that describe the trigger of a pipeline."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "forceUpdateTag": {
+          "description": "How the pipeline should be forced to recreate even if the pipeline configuration has not changed",
+          "type": "string"
+        }
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "ExportPipelineTargetProperties": {
+      "description": "The properties of the export pipeline target.",
+      "required": [
+        "type",
+        "name",
+        "keyVaultUri"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of target for the export pipeline.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TargetType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The fully qualified domain name of the target for the export pipeline.\r\nTo target a container: \"https://accountName.blob.core.windows.net/containerName\"\r\nTo target a blob: \"https://accountName.blob.core.windows.net/containerName/blobName\"",
+          "type": "string"
+        },
+        "keyVaultUri": {
+          "description": "They key vault secret uri to obtain the target storage SAS token.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerProperties": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the trigger.\r\nManual: Run the pipeline immediately once the resource is created.\r\nAuto: Run the pipeline once the transferred images are replicated to the target storage account.",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineTriggerType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ExportPipelineListResult": {
+      "description": "The result of a request to list export pipelines for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExportPipeline"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "type": "string"
+        }
+      }
+    },
     "ImportImageParameters": {
       "required": [
         "source"
@@ -1352,6 +2002,130 @@
         },
         "password": {
           "description": "The password used to authenticate with the source registry.",
+          "type": "string"
+        }
+      }
+    },
+    "ImportPipeline": {
+      "description": "An object that represents an import pipeline for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "The identity of the import pipeline."
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportPipelineProperties",
+          "description": "The properties of the import pipeline.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ImportPipelineProperties": {
+      "description": "The properties of an export pipeline.",
+      "required": [
+        "source",
+        "trigger"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ImportPipelineSourceProperties",
+          "description": "The source properties of the import pipeline."
+        },
+        "options": {
+          "description": "The list of all options configured for the pipeline.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "OverwriteTags",
+              "OverwriteBlobs",
+              "DeleteSourceBlobOnSuccess",
+              "ContinueOnErrors"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "PipelineOptions",
+              "modelAsString": true
+            }
+          }
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties that describe the trigger of a pipeline."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the pipeline at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "forceUpdateTag": {
+          "description": "How the pipeline should be forced to recreate even if the pipeline configuration has not changed",
+          "type": "string"
+        }
+      }
+    },
+    "ImportPipelineSourceProperties": {
+      "description": "The properties of the import pipeline source.",
+      "required": [
+        "type",
+        "name",
+        "keyVaultUri"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of source for the import pipeline.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SourceType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The fully qualified domain name of the source for the import pipeline.\r\nWhen the source is a container: \"https://accountName.blob.core.windows.net/containerName\"\r\nWhen the source is a blob: \"https://accountName.blob.core.windows.net/containerName/blobName\"",
+          "type": "string"
+        },
+        "keyVaultUri": {
+          "description": "They key vault secret uri to obtain the source storage SAS token.",
+          "type": "string"
+        }
+      }
+    },
+    "ImportPipelineListResult": {
+      "description": "The result of a request to list import pipelines for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportPipeline"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
           "type": "string"
         }
       }
@@ -1513,6 +2287,131 @@
         },
         "internalMetricName": {
           "description": "Internal metric name.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRun": {
+      "description": "An object that represents a pipeline run for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PipelineRunProperties",
+          "description": "The properties of a pipeline run.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PipelineRunProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of a pipeline run.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "pipelineResourceId": {
+          "description": "The resource ID of pipeline against which the run was scheduled.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the pipeline run.",
+          "enum": [
+            "Running",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PipelineRunStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The time the pipeline run started.",
+          "type": "string"
+        },
+        "finishTime": {
+          "format": "date-time",
+          "description": "The time the pipeline run finished.",
+          "type": "string"
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerDescriptor",
+          "description": "The trigger that caused the pipeline run."
+        },
+        "pipelineRunErrorMessage": {
+          "description": "The error message received from backend systems for the pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The resource ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "TriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the trigger that caused the pipeline to run.",
+          "enum": [
+            "Manual",
+            "Auto"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineTriggerType",
+            "modelAsString": true
+          }
+        },
+        "sourceResourceId": {
+          "description": "The resource ID of the source that triggered the pipeline to run.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRunListResult": {
+      "description": "The result of a request to list pipeline runs for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PipelineRun"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
           "type": "string"
         }
       }
@@ -1692,41 +2591,6 @@
         }
       }
     },
-    "IdentityProperties": {
-      "description": "Managed identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of resource identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
-        }
-      }
-    },
     "RegistryProperties": {
       "description": "The properties of a container registry.",
       "type": "object",
@@ -1817,19 +2681,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The client id of user assigned identity.",
-          "type": "string"
         }
       }
     },
@@ -3038,6 +3889,28 @@
       "description": "The name of the private endpoint connection.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ExportPipelineNameParameter": {
+      "name": "exportPipelineName",
+      "in": "path",
+      "description": "The name of the export pipeline.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "ImportPipelineNameParameter": {
+      "name": "importPipelineName",
+      "in": "path",
+      "description": "The name of the import pipeline.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
       "x-ms-parameter-location": "method"
     }
   },
