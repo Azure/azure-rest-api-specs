@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}": {
       "put": {
         "tags": [
           "Assignment"
@@ -156,7 +156,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
       "post": {
         "operationId": "Assignments_WhoIsBlueprint",
         "description": "Get Blueprints service SPN objectId",
@@ -189,7 +189,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments": {
       "get": {
         "tags": [
           "Assignment"
@@ -598,7 +598,7 @@
   },
   "parameters": {
     "ScopeParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
