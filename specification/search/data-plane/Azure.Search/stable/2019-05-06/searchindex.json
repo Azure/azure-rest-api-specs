@@ -97,7 +97,7 @@
             "x-nullable": false,
             "x-ms-client-name": "IncludeTotalResultCount",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -111,7 +111,7 @@
             "description": "The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.",
             "x-ms-client-name": "Facets",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -120,7 +120,7 @@
             "type": "string",
             "description": "The OData $filter expression to apply to the search query.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -133,7 +133,7 @@
             "description": "The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
             "x-ms-client-name": "HighlightFields",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -142,7 +142,7 @@
             "type": "string",
             "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -151,7 +151,7 @@
             "type": "string",
             "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &lt;em&gt;.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -161,7 +161,7 @@
             "format": "double",
             "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -174,7 +174,7 @@
             "description": "The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
             "x-ms-client-name": "OrderBy",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -192,7 +192,7 @@
             "x-nullable": false,
             "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -206,7 +206,7 @@
             "x-ms-client-name": "ScoringParameters",
             "description": "The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes).",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -215,7 +215,7 @@
             "type": "string",
             "description": "The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -227,7 +227,7 @@
             },
             "description": "The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -245,7 +245,7 @@
             "x-nullable": false,
             "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -257,7 +257,7 @@
             },
             "description": "The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -267,7 +267,7 @@
             "format": "int32",
             "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -277,7 +277,7 @@
             "format": "int32",
             "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.",
             "x-ms-parameter-grouping": {
-              "name": "SearchParameters"
+              "name": "SearchOptions"
             }
           },
           {
@@ -292,7 +292,7 @@
           "200": {
             "description": "Response containing documents that match the search criteria.",
             "schema": {
-              "$ref": "#/definitions/DocumentSearchResult"
+              "$ref": "#/definitions/SearchDocumentsResult"
             }
           }
         }
@@ -336,7 +336,7 @@
           "200": {
             "description": "Response containing documents that match the search criteria.",
             "schema": {
-              "$ref": "#/definitions/DocumentSearchResult"
+              "$ref": "#/definitions/SearchDocumentsResult"
             }
           }
         }
@@ -429,7 +429,7 @@
             "type": "string",
             "description": "An OData expression that filters the documents considered for suggestions.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -440,7 +440,7 @@
             "x-ms-client-name": "UseFuzzyMatching",
             "x-nullable": false,
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -449,7 +449,7 @@
             "type": "string",
             "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -458,7 +458,7 @@
             "type": "string",
             "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting of suggestions is disabled.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -468,7 +468,7 @@
             "format": "double",
             "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by a suggestions query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -481,7 +481,7 @@
             "x-ms-client-name": "OrderBy",
             "description": "The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -493,7 +493,7 @@
             },
             "description": "The list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -505,7 +505,7 @@
             },
             "description": "The list of fields to retrieve. If unspecified, only the key field will be included in the results.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -515,7 +515,7 @@
             "format": "int32",
             "description": "The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5.",
             "x-ms-parameter-grouping": {
-              "name": "SuggestParameters"
+              "name": "SuggestOptions"
             }
           },
           {
@@ -530,7 +530,7 @@
           "200": {
             "description": "Response containing suggested documents that match the partial input.",
             "schema": {
-              "$ref": "#/definitions/DocumentSuggestResult"
+              "$ref": "#/definitions/SuggestDocumentsResult"
             }
           }
         }
@@ -573,7 +573,7 @@
           "200": {
             "description": "Response containing suggested documents that match the partial input.",
             "schema": {
-              "$ref": "#/definitions/DocumentSuggestResult"
+              "$ref": "#/definitions/SuggestDocumentsResult"
             }
           }
         }
@@ -616,13 +616,13 @@
           "200": {
             "description": "Response containing the status of operations for all actions in the batch.",
             "schema": {
-              "$ref": "#/definitions/DocumentIndexResult"
+              "$ref": "#/definitions/IndexDocumentsResult"
             }
           },
           "207": {
             "description": "Response containing the status of operations for all actions in the batch.",
             "schema": {
-              "$ref": "#/definitions/DocumentIndexResult"
+              "$ref": "#/definitions/IndexDocumentsResult"
             }
           }
         }
@@ -681,7 +681,7 @@
             },
             "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -690,7 +690,7 @@
             "type": "string",
             "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -700,7 +700,7 @@
             "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
             "x-ms-client-name": "UseFuzzyMatching",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -709,7 +709,7 @@
             "type": "string",
             "description": "A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -718,7 +718,7 @@
             "type": "string",
             "description": "A string tag that is prepended to hit highlights. Must be set with highlightPostTag. If omitted, hit highlighting is disabled.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -728,7 +728,7 @@
             "format": "double",
             "description": "A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -740,7 +740,7 @@
             },
             "description": "The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           },
           {
@@ -750,17 +750,16 @@
             "format": "int32",
             "description": "The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5.",
             "x-ms-parameter-grouping": {
-              "name": "AutocompleteParameters"
+              "name": "AutocompleteOptions"
             }
           }
         ],
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response containing suggested query terms that complete the partial input.",
             "schema": {
-              "$ref": "#/definitions/AutocompleteResult",
-              "description": "The result of Autocomplete query."
+              "$ref": "#/definitions/AutocompleteResult"
             }
           }
         }
@@ -801,10 +800,9 @@
         "x-ms-request-id": "request-id",
         "responses": {
           "200": {
-            "description": "",
+            "description": "Response containing suggested query terms that complete the partial input.",
             "schema": {
-              "$ref": "#/definitions/AutocompleteResult",
-              "description": "The result of Autocomplete query."
+              "$ref": "#/definitions/AutocompleteResult"
             }
           }
         }
@@ -812,7 +810,7 @@
     }
   },
   "definitions": {
-    "DocumentSuggestResult": {
+    "SuggestDocumentsResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -857,7 +855,7 @@
       "additionalProperties": true,
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval."
     },
-    "DocumentSearchResult": {
+    "SearchDocumentsResult": {
       "properties": {
         "@odata.count": {
           "type": "integer",
@@ -1001,7 +999,7 @@
       },
       "description": "Status of an indexing operation for a single document."
     },
-    "DocumentIndexResult": {
+    "IndexDocumentsResult": {
       "properties": {
         "value": {
           "x-ms-client-name": "Results",
@@ -1255,6 +1253,13 @@
     },
     "AutocompleteResult": {
       "properties": {
+        "@search.coverage": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Coverage",
+          "description": "A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request."
+        },
         "value": {
           "type": "array",
           "readOnly": true,
@@ -1300,7 +1305,7 @@
       "description": "The tracking ID sent with the request to help with debugging.",
       "x-ms-client-request-id": true,
       "x-ms-parameter-grouping": {
-        "name": "search-request-options"
+        "name": "request-options"
       },
       "x-ms-parameter-location": "method"
     },
