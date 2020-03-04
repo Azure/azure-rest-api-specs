@@ -3,7 +3,17 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "workspace-1234",
     "workspaceName": "testworkspace",
-    "api-version": "2020-01-01"
+    "api-version": "2020-01-01",
+    "parameters": {
+      "sku": {
+        "name": "Enterprise",
+        "tier": "Enterprise"
+      },
+      "properties": {
+        "friendlyName": "New friendly name",
+        "description": "new description"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -23,18 +33,8 @@
           "storageAccount": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount",
           "discoveryUrl": "http://example.com",
           "creationTime": "2017-03-01T23:14:37.0707808Z",
-          "friendlyName": "HelloName",
-          "description": "test description",
-          "encryption": {
-            "status": "Enabled",
-            "keyVaultProperties": {
-              "keyVaultArmId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv",
-              "keyIdentifier": "https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb",
-              "identityClientId": ""
-            }
-          },
-          "hbiWorkspace": false,
-          "serviceProvisionedResourceGroup": "testworkspace_0000111122223333"
+          "friendlyName": "New friendly name",
+          "description": "new description"
         }
       }
     }

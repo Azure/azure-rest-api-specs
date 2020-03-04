@@ -34,7 +34,38 @@
             }
           },
           "hbiWorkspace": false,
-          "serviceProvisionedResourceGroup": "testworkspace_0000111122223333"
+          "serviceProvisionedResourceGroup": "testworkspace_0000111122223333",
+          "privateLinkCount": 0,
+          "imageBuildCompute": "testcompute",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateEndpointConnections/testprivatelinkconnection",
+              "name": "testprivatelinkconnection",
+              "type": "Microsoft.MachineLearningServices/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "sharedPrivateLinkResources": [
+            {
+              "name": "testcosmosdbresource",
+              "properties": {
+                "privateLinkResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testcosmosdbresource/privateLinkResources/Sql",
+                "groupId": "Sql",
+                "requestMessage": "Please approve",
+                "status": "Approved"
+              }
+            }
+          ]
         }
       }
     }
