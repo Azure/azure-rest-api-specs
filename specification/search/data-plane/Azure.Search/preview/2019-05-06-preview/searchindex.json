@@ -880,6 +880,9 @@
           "description": "A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response containing suggestion query results from an index."
     },
     "SuggestResult": {
@@ -891,6 +894,9 @@
           "x-ms-client-name": "Text"
         }
       },
+      "required": [
+        "@search.text"
+      ],
       "additionalProperties": true,
       "description": "A result containing a document found by a suggestion query, plus associated metadata."
     },
@@ -956,6 +962,9 @@
           "description": "Continuation URL returned when Azure Cognitive Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response containing search results from an index."
     },
     "SearchResult": {
@@ -981,6 +990,9 @@
           "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
         }
       },
+      "required": [
+        "@search.score"
+      ],
       "additionalProperties": true,
       "description": "Contains a document found by a search query, plus associated metadata."
     },
@@ -1049,6 +1061,11 @@
           "description": "The status code of the indexing operation. Possible values include: 200 for a successful update or delete, 201 for successful document creation, 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
         }
       },
+      "required": [
+        "key",
+        "status",
+        "statusCode"
+      ],
       "description": "Status of an indexing operation for a single document."
     },
     "IndexDocumentsResult": {
@@ -1063,6 +1080,9 @@
           "description": "The list of status information for each document in the indexing request."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response containing the status of operations for all documents in the indexing request."
     },
     "SearchMode": {
@@ -1330,6 +1350,9 @@
           "x-ms-client-name": "Results"
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "The result of Autocomplete query."
     },
     "AutocompleteItem": {
@@ -1345,6 +1368,10 @@
           "description": "The query along with the completed term."
         }
       },
+      "required": [
+        "text",
+        "queryPlusText"
+      ],
       "description": "The result of Autocomplete requests."
     },
     "SearchError": {
@@ -1367,7 +1394,11 @@
           "readOnly": true,
           "description": "An array of details about specific errors that led to this reported error."
         }
-      }
+      },
+      "required": [
+        "message"
+      ],
+      "description": "Describes an error condition for the Azure Cognitive Search API."
     }
   },
   "parameters": {

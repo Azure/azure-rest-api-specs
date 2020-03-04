@@ -1659,6 +1659,9 @@
           "description": "The list of tokens returned by the analyzer specified in the request."
         }
       },
+      "required": [
+        "tokens"
+      ],
       "description": "The result of testing an analyzer on text."
     },
     "TokenInfo": {
@@ -1672,21 +1675,30 @@
           "type": "integer",
           "format": "int32",
           "readOnly": true,
+          "x-nullable": false,
           "description": "The index of the first character of the token in the input text."
         },
         "endOffset": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,
+          "x-nullable": false,
           "description": "The index of the last character of the token in the input text."
         },
         "position": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,
+          "x-nullable": false,
           "description": "The position of the token in the input text relative to other tokens. The first token in the input text has position 0, the next has position 1, and so on. Depending on the analyzer used, some tokens might have the same position, for example if they are synonyms of each other."
         }
       },
+      "required": [
+        "token",
+        "startOffset",
+        "endOffset",
+        "position"
+      ],
       "description": "Information about a token returned by an analyzer."
     },
     "AnalyzerName": {
@@ -4007,6 +4019,9 @@
           "description": "The datasources in the Search service."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response from a List Datasources request. If successful, it includes the full definitions of all datasources."
     },
     "IndexingSchedule": {
@@ -4188,6 +4203,9 @@
           "description": "The indexers in the Search service."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers."
     },
     "ItemError": {
@@ -4225,6 +4243,10 @@
           "description": "A link to a troubleshooting guide for these classes of errors. This may not be always available."
         }
       },
+      "required": [
+        "errorMessage",
+        "statusCode"
+      ],
       "description": "Represents an item- or document-level indexing error."
     },
     "ItemWarning": {
@@ -4255,6 +4277,9 @@
           "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available."
         }
       },
+      "required": [
+        "message"
+      ],
       "description": "Represents an item-level warning."
     },
     "IndexerExecutionResult": {
@@ -4324,6 +4349,13 @@
           "description": "Change tracking state with which an indexer execution finished."
         }
       },
+      "required": [
+        "status",
+        "errors",
+        "warnings",
+        "itemsProcessed",
+        "itemsFailed"
+      ],
       "description": "Represents the result of an individual indexer execution."
     },
     "IndexerExecutionStatus": {
@@ -4367,6 +4399,11 @@
           "description": "The execution limits for the indexer."
         }
       },
+      "required": [
+        "status",
+        "executionHistory",
+        "limits"
+      ],
       "description": "Represents the current status and execution history of an indexer."
     },
     "IndexerStatus": {
@@ -4927,6 +4964,10 @@
           "description": "The amount of storage in bytes consumed by the index."
         }
       },
+      "required": [
+        "documentCount",
+        "storageSize"
+      ],
       "description": "Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date."
     },
     "ListIndexesResult": {
@@ -4941,6 +4982,9 @@
           "description": "The indexes in the Search service."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     },
     "Skillset": {
@@ -5435,6 +5479,9 @@
           "description": "The skillsets defined in the Search service."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response from a list Skillset request. If successful, it includes the full definitions of all skillsets."
     },
     "TextExtractionAlgorithm": {
@@ -6437,6 +6484,9 @@
           "description": "The synonym maps in the Search service."
         }
       },
+      "required": [
+        "value"
+      ],
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
     },
     "EncryptionKey": {
@@ -6495,6 +6545,10 @@
           "description": "Service level general limits."
         }
       },
+      "required": [
+        "counters",
+        "limits"
+      ],
       "description": "Response from a get service statistics request. If successful, it includes service level counters and limits."
     },
     "ServiceCounters": {
@@ -6528,8 +6582,22 @@
           "x-ms-client-name": "synonymMapCounter",
           "$ref": "#/definitions/ResourceCounter",
           "description": "Total number of synonym maps."
+        },
+        "skillsetCount": {
+          "x-ms-client-name": "skillsetCounter",
+          "$ref": "#/definitions/ResourceCounter",
+          "description": "Total number of skillsets."
         }
       },
+      "required": [
+        "documentCount",
+        "indexesCount",
+        "indexersCount",
+        "dataSourcesCount",
+        "storageSize",
+        "synonymMaps",
+        "skillsetCount"
+      ],
       "description": "Represents service-level resource counters and quotas."
     },
     "ServiceLimits": {
@@ -6576,6 +6644,9 @@
           "description": "The resource amount quota."
         }
       },
+      "required": [
+        "usage"
+      ],
       "description": "Represents a resource's usage and quota."
     },
     "SearchError": {
@@ -6598,7 +6669,11 @@
           "readOnly": true,
           "description": "An array of details about specific errors that led to this reported error."
         }
-      }
+      },
+      "required": [
+        "message"
+      ],
+      "description": "Describes an error condition for the Azure Cognitive Search API."
     }
   },
   "parameters": {
