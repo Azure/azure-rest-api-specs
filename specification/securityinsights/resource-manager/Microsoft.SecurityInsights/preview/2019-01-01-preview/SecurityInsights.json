@@ -6082,6 +6082,10 @@
             ]
           }
         },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
         "createdTimeUtc": {
           "description": "The time the incident was created",
           "format": "date-time",
@@ -6095,6 +6099,11 @@
         "firstActivityTimeUtc": {
           "description": "The time of the first activity in the incident",
           "format": "date-time",
+          "type": "string"
+        },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
           "type": "string"
         },
         "incidentNumber": {
@@ -6124,6 +6133,15 @@
           "$ref": "#/definitions/IncidentOwnerInfo",
           "description": "Describes a user that the incident is assigned to",
           "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "severity": {
           "description": "The severity of the incident",
