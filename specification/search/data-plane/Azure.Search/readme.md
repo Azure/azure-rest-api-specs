@@ -545,10 +545,10 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/2019-05-06/searchindex.json
-  - $(this-folder)/stable/2019-05-06/searchservice.json
-  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
   - $(this-folder)/preview/2019-05-06-preview/searchservice.json
+  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
+  - $(this-folder)/stable/2019-05-06/searchservice.json
+  - $(this-folder)/stable/2019-05-06/searchindex.json
 
 ```
 
