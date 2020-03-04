@@ -1,0 +1,46 @@
+{
+    "parameters": {
+        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+        "resourceGroupName": "rg",
+        "name": "testStaticSite0",
+        "api-version": "2019-08-01",
+        "staticSite": {
+            "location": "West US 2",
+            "properties": {
+                "repositoryUrl": "https://github.com/username/RepoName",
+                "branch": "master",
+                "repositoryToken": "repoToken123",
+                "buildProperties": {
+                    "appLocation": "app",
+                    "apiLocation": "api",
+                    "appArtifactLocation": "build"
+                }
+            },
+            "sku": {
+                "name": "Basic",
+                "tier": "Basic"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0",
+                "name": "testStaticSite0",
+                "type": "Microsoft.Web/staticSites",
+                "location": "West US 2",
+                "properties": {
+                    "defaultHostname": "happy-sea-15afae3e.azurestaticwebsites.net",
+                    "repositoryUrl": "https://github.com/username/RepoName",
+                    "branch": "demo",
+                    "customDomains": []
+                },
+                "sku": {
+                    "name": "Basic",
+                    "tier": "Basic"
+                }
+            }
+        }
+    }
+}
