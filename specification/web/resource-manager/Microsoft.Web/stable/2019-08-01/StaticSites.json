@@ -233,7 +233,7 @@
             "description": "A JSON representation of the staticsite properties. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteARMResource"
+              "$ref": "#/definitions/StaticSitePatchResource"
             }
           },
           {
@@ -264,8 +264,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a static site": {
-            "$ref": "./examples/CreateOrUpdateStaticSite.json"
+          "Patch a static site": {
+            "$ref": "./examples/PatchStaticSite.json"
           }
         }
       }
@@ -1307,7 +1307,7 @@
         "properties": {
           "description": "StaticSiteBuildARMResource resource specific properties",
           "properties": {
-            "id": {
+            "buildId": {
               "description": "An identifier for the static site build.",
               "type": "string"
             },
@@ -1461,7 +1461,7 @@
         "properties": {
           "description": "StaticSiteFunctionOverviewARMResource resource specific properties",
           "properties": {
-            "name": {
+            "functionName": {
               "description": "The name for the function",
               "type": "string"
             },
@@ -1492,6 +1492,22 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "StaticSitePatchResource": {
+      "description": "ARM resource for a static site when patching",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticSite",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
         }
       }
     },
