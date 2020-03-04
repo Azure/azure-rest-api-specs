@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "searchServiceName": "myservice",
-    "searchDnsSuffix": "search.windows.net",
-    "api-version": "2019-05-06"
+    "endpoint": "https://myservice.search.windows.net",
+    "$select": "*",
+    "api-version": "2019-05-06-Preview"
   },
   "responses": {
     "200": {
@@ -28,19 +28,6 @@
               "softDeleteColumnName": "isDeleted",
               "softDeleteMarkerValue": "true"
             }
-          },
-          {
-            "name": "myblobdatasource",
-            "description": "My Azure Blob data source.",
-            "type": "azureblob",
-            "credentials": {
-              "connectionString": null
-            },
-            "container": {
-              "name": "mycontainer"
-            },
-            "dataChangeDetectionPolicy": null,
-            "dataDeletionDetectionPolicy": null
           }
         ]
       }
