@@ -30,6 +30,23 @@ tag: package-2018-07
 opt-in-extensible-enums: true
 ```
 
+### Tag: package-2020-02-preview
+
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-preview'
+input-file:
+  - Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - Microsoft.Media/stable/2018-07-01/Accounts.json
+  - Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - Microsoft.Media/stable/2018-07-01/Encoding.json
+  - Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
+  - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/stable/2018-07-01/streamingservice.json
+```
+
+
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
@@ -130,8 +147,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
-    autorest_options:
-      use: "@microsoft.azure/autorest.java@2.1.90"
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -310,9 +325,10 @@ input-file:
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
-  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - $(this-folder)/Microsoft.Media/preview/2020-02-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
+  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
@@ -345,4 +361,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

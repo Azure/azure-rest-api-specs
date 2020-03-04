@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Sql.
+This is the AutoRest configuration file for MySql.
 
 
 
@@ -22,11 +22,13 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Sql API.
+These are the global settings for the MySql API.
 
 ``` yaml
+title: MySQLManagementClient
+description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2017-12-01
+tag: package-2018-06-01
 ```
 
 
@@ -61,6 +63,30 @@ input-file:
 - Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 ```
 
+
+### Tag: package-2018-06-01
+
+These settings apply only when `--tag=package-2018-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+```
+
+
+### Tag: package-2020-01-01-privatepreview
+
+These settings apply only when `--tag=package-2020-01-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
+```
 
 ---
 # Code Generation
@@ -132,7 +158,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -149,14 +175,18 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
