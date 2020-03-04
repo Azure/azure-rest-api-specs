@@ -271,13 +271,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}/queueStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}/listQueueStatus": {
       "post": {
         "tags": [
           "AgentPools"
         ],
         "description": "Gets the count of queued runs for a given agent pool.",
-        "operationId": "AgentPools_QueueStatus",
+        "operationId": "AgentPools_GetQueueStatus",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -310,8 +310,8 @@
           }
         },
         "x-ms-examples": {
-          "AgentPools_QueueStatus": {
-            "$ref": "./examples/AgentPoolsQueueStatus.json"
+          "AgentPools_GetQueueStatus": {
+            "$ref": "./examples/AgentPoolsGetQueueStatus.json"
           }
         }
       }
@@ -927,7 +927,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}/listDetails": {
-      "get": {
+      "post": {
         "tags": [
           "TaskRuns"
         ],
