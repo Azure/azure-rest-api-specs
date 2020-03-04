@@ -3,7 +3,7 @@
   "info": {
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "title": "Storage Cache Mgmt Client",
-    "version": "2019-11-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "basePath": "/",
@@ -263,10 +263,10 @@
             "type": "string"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -322,10 +322,10 @@
             "type": "string"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -383,10 +383,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -453,10 +453,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -515,10 +515,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -549,6 +549,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -576,10 +579,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -610,6 +613,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -637,10 +643,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -671,6 +677,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -698,10 +707,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -755,10 +764,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -766,7 +775,7 @@
             "description": "Name of Storage Target.",
             "in": "path",
             "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -822,18 +831,18 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Name of the Storage Target.",
+            "description": "Name of the Storage Target. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -885,18 +894,18 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Name of the Storage Target.",
+            "description": "Name of the Storage Target. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "storageTargetName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           },
@@ -962,10 +971,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of Cache.",
+            "description": "Name of Cache. Length of name must be not greater than 80 and chars must be in list of [-0-9a-zA-Z_] char class.",
             "in": "path",
             "name": "cacheName",
-            "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+            "pattern": "^[-0-9a-zA-Z_]{1,80}$",
             "required": true,
             "type": "string"
           }
@@ -996,6 +1005,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "tags": [
           "Caches"
         ],
@@ -1111,6 +1123,10 @@
           "readOnly": true,
           "type": "string"
         },
+        "identity": {
+          "$ref": "#/definitions/CacheIdentity",
+          "description": "The identity of the cache, if configured."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the Cache.",
@@ -1155,6 +1171,18 @@
             "upgradeStatus": {
               "description": "Upgrade status of the Cache.",
               "$ref": "#/definitions/CacheUpgradeStatus"
+            },
+            "networkSettings": {
+              "$ref": "#/definitions/CacheNetworkSettings",
+              "description": "Specifies network settings of the cache."
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/CacheEncryptionSettings",
+              "description": "Specifies encryption settings of the cache."
+            },
+            "securitySettings": {
+              "$ref": "#/definitions/CacheSecuritySettings",
+              "description": "Specifies security settings of the cache."
             }
           },
           "type": "object"
@@ -1172,6 +1200,93 @@
       },
       "x-ms-azure-resource": true,
       "type": "object"
+    },
+    "CacheIdentity": {
+      "description": "Cache identity properties.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the cache."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the cache."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the cache",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "CacheIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CacheNetworkSettings": {
+      "description": "Cache network settings.",
+      "properties": {
+        "mtu": {
+          "description": "The IPv4 maximum transmission unit configured for the subnet.",
+          "type": "integer",
+          "minimum": 576,
+          "maximum": 1500,
+          "default": 1500
+        },
+        "utilityAddresses": {
+          "description": "Array of additional IP addresses used by this Cache.",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "CacheEncryptionSettings": {
+      "description": "Cache encryption settings.",
+      "properties": {
+        "keyEncryptionKey": {
+          "$ref": "#/definitions/KeyVaultKeyReference",
+          "description": "Specifies the location of the key encryption key in Key Vault."
+        }
+      }
+    },
+    "CacheSecuritySettings": {
+      "description": "Cache security settings.",
+      "properties": {
+        "rootSquash": {
+          "type": "boolean",
+          "description": "root squash of cache property."
+        }
+      }
+    },
+    "KeyVaultKeyReference": {
+      "description": "Describes a reference to Key Vault Key.",
+      "properties": {
+        "keyUrl": {
+          "type": "string",
+          "description": "The URL referencing a key encryption key in Key Vault."
+        },
+        "sourceVault": {
+          "description": "Describes a resource Id to source Key Vault.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource Id."
+            }
+          }
+        }
+      },
+      "required": [
+        "keyUrl",
+        "sourceVault"
+      ]
     },
     "CachesListResult": {
       "description": "Result of the request to list Caches. It contains a list of Caches and a URL link to get the next set of results.",
@@ -1266,8 +1381,124 @@
         "type": "string"
       }
     },
-    "Nfs3Target": {
+    "StorageTarget": {
+      "type": "object",
+      "description": "Type of the Storage Target.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "description": "StorageTarget properties",
+              "$ref": "#/definitions/StorageTargetProperties"
+            }
+          }
+        }
+      ]
+    },
+    "StorageTargetResource": {
+      "description": "Resource used by a Cache.",
+      "properties": {
+        "name": {
+          "description": "Name of the Storage Target.",
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceName"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID of the Storage Target."
+        },
+        "type": {
+          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "StorageTargetProperties": {
+      "type": "object",
+      "description": "Properties of the Storage Target.",
+      "discriminator": "targetBaseType",
+      "properties": {
+        "targetBaseType": {
+          "description": "Type of the Storage Target.",
+          "$ref": "#/definitions/StorageTargetType"
+        },
+        "junctions": {
+          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamespaceJunction"
+          }
+        },
+        "targetType": {
+          "description": "Type of the Storage Target.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "nfs3": {
+          "description": "Properties when targetType is nfs3.",
+          "$ref": "#/definitions/Nfs3Target"
+        },
+        "clfs": {
+          "description": "Properties when targetType is clfs.",
+          "$ref": "#/definitions/ClfsTarget"
+        },
+        "unknown": {
+          "description": "Properties when targetType is unknown.",
+          "$ref": "#/definitions/UnknownTarget"
+        }
+      },
+      "required": [
+        "targetBaseType"
+      ]
+    },
+    "StorageTargetType": {
+      "type": "string",
+      "description": "Type of the Storage Target.",
+      "enum": [
+        "nfs3",
+        "clfs",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "StorageTargetType",
+        "modelAsString": true
+      }
+    },
+    "Nfs3TargetProperties": {
       "description": "An NFSv3 mount point for use as a Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "nfs3",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
+    },
+    "Nfs3Target": {
+      "description": "Properties pertained to Nfs3Target",
       "properties": {
         "target": {
           "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
@@ -1278,35 +1509,49 @@
           "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
-      },
-      "x-ms-discriminator-value": "nfs3",
-      "type": "object"
+      }
+    },
+    "ClfsTargetProperties": {
+      "description": "Storage container for use as a CLFS Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "clfs",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
     },
     "ClfsTarget": {
-      "description": "Storage container for use as a CLFS Storage Target.",
+      "description": "Properties pertained to ClfsTarget",
       "properties": {
         "target": {
           "description": "Resource ID of storage container.",
           "$ref": "#/definitions/URLString"
         }
-      },
-      "x-ms-discriminator-value": "clfs",
-      "type": "object"
+      }
+    },
+    "UnknownTargetProperties": {
+      "description": "Storage container for use as an Unknown Storage Target.",
+      "type": "object",
+      "x-ms-discriminator-value": "unknown",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageTargetProperties"
+        }
+      ]
     },
     "UnknownTarget": {
-      "description": "Storage container for use as an Unknown Storage Target.",
+      "description": "Properties pertained to UnknownTarget",
       "properties": {
         "unknownMap": {
           "description": "Dictionary of string->string pairs containing information about the Storage Target.",
           "$ref": "#/definitions/UnknownProperties"
         }
-      },
-      "x-ms-discriminator-value": "unknown",
-      "type": "object"
+      }
     },
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
-      "pattern": "^[-0-9a-zA-Z_]{1,31}$",
+      "pattern": "^[-0-9a-zA-Z_]{1,80}$",
       "type": "string"
     },
     "ResourceSku": {
@@ -1430,84 +1675,6 @@
           "type": "array"
         }
       }
-    },
-    "StorageTarget": {
-      "description": "A storage system being cached by a Cache.",
-      "type": "object",
-      "discriminator": "targetType",
-      "properties": {
-        "name": {
-          "description": "Name of the Storage Target.",
-          "readOnly": true,
-          "$ref": "#/definitions/ResourceName"
-        },
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID of the Storage Target."
-        },
-        "type": {
-          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
-          "readOnly": true,
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of the Storage Target.",
-          "type": "object",
-          "properties": {
-            "junctions": {
-              "description": "List of Cache namespace junctions to target for namespace associations.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/NamespaceJunction"
-              }
-            },
-            "targetType": {
-              "description": "Type of the Storage Target.",
-              "enum": [
-                "nfs3",
-                "clfs",
-                "unknown"
-              ],
-              "x-ms-enum": {
-                "name": "StorageTargetType",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "provisioningState": {
-              "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Cancelled",
-                "Creating",
-                "Deleting",
-                "Updating"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningStateType",
-                "modelAsString": true
-              },
-              "type": "string"
-            },
-            "nfs3": {
-              "description": "Properties when targetType is nfs3.",
-              "$ref": "#/definitions/Nfs3Target"
-            },
-            "clfs": {
-              "description": "Properties when targetType is clfs.",
-              "$ref": "#/definitions/ClfsTarget"
-            },
-            "unknown": {
-              "description": "Properties when targetType is unknown.",
-              "$ref": "#/definitions/UnknownTarget"
-            }
-          }
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "NamespaceJunction": {
       "description": "A namespace junction.",
