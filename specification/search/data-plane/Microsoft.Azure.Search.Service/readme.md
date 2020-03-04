@@ -168,15 +168,15 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/preview/2019-05-06-preview/searchservice.json
+  - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/preview/2017-11-11-preview/searchservice.json
   - $(this-folder)/preview/2017-11-11/searchservice.json
   - $(this-folder)/preview/2016-09-01-preview/searchservice.json
   - $(this-folder)/preview/2016-09-01/searchservice.json
   - $(this-folder)/preview/2015-02-28-preview/searchservice.json
   - $(this-folder)/preview/2015-02-28/searchservice.json
-  
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
