@@ -30,6 +30,17 @@ openapi-type: arm
 tag: package-2019-12
 ```
 
+### Tag: package-2020-03
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03'
+input-file:
+- Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
+
 ### Tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
