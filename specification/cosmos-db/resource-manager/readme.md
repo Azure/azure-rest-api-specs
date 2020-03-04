@@ -235,9 +235,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
