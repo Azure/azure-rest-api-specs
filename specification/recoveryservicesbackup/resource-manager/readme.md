@@ -54,6 +54,7 @@ input-file:
 - Microsoft.RecoveryServices/stable/2020-02-02/bms.json
 - Microsoft.RecoveryServices/stable/2019-06-15/bms.json
 - Microsoft.RecoveryServices/stable/2017-07-01/bms.json
+- Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
 ```
 
