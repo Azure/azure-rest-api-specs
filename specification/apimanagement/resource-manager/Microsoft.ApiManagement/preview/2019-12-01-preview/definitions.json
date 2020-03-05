@@ -5187,10 +5187,9 @@
     },
     "GatewayContractProperties": {
       "properties": {
-        "region": {
-          "type": "string",
-          "description": "Gateway region.",
-          "maxLength": 100
+        "locationData": {
+          "$ref": "#/definitions/ResourceLocationDataContract",
+          "description": "Gateway location."
         },
         "description": {
           "type": "string",
@@ -5199,6 +5198,34 @@
         }
       },
       "description": "Properties of the Gateway contract."
+    },
+    "ResourceLocationDataContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A canonical name for the geographic or physical location.",
+          "maxLength": 256
+        },
+        "city": {
+          "type": "string",
+          "description": "The city or locality where the resource is located.",
+          "maxLength": 256
+        },
+        "district": {
+          "type": "string",
+          "description": "The district, state, or province where the resource is located.",
+          "maxLength": 256
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region where the resource is located.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Resource location data properties."
     },
     "GatewayKeysContract": {
       "properties": {
