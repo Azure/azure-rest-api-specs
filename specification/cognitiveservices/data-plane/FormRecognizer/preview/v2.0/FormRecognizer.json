@@ -684,8 +684,11 @@
           "x-ms-azure-resource": true
         },
         "targetResourceRegion": {
-          "description": "Location of the target Azure resource.",
-          "$ref": "../../../Common/ExtendedRegions.json#/parameters/AzureRegion"
+          "description": "Location of the target Azure resource. A valid Azure region name supported by Cognitive Services.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+$",
+          "minLength": 1,
+          "maxLength": 24
         },
         "copyAuthorization": {
           "description": "Entity that encodes claims to authorize the copy request.",
