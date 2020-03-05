@@ -14,8 +14,7 @@ directive:
     where: $
     transform: return $.replace(/locationName/, "location")
 
-
-clicommon:
+cli:
     cli-directive:
       - select: 'operationGroup'  
         where:

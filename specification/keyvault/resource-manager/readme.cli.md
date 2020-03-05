@@ -42,7 +42,7 @@ directive:
         }
       ]}
 
-clicommon:
+cli:
     cli-directive:
       - where:
             resource: 'vaults'

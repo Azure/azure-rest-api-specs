@@ -6,7 +6,7 @@ This directory contains the Cli common model for the Aks service.
 
 ``` yaml
 # Migrated from Powershell's readme
-clicommon:
+cli:
     naming:
         cli:
             glossary:

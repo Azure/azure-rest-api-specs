@@ -8,7 +8,7 @@ This directory contains the Cli common model for the Dns service.
 ``` yaml
 # Migrated from Powershell's readme
 title: Monitor
-clicommon:
+cli:
     cli-directive:
       - select: 'choiceValue'
         where:

@@ -8,10 +8,6 @@ This directory contains the Cli common model for the Aks service.
 
 service-name: Aks
 title: AksClient
-```
-
-``` yaml
-# Migrated from Powershell's readme
 
 directive:
   - from: managedClusters.json
@@ -35,7 +31,7 @@ directive:
         }
       }
 
-clicommon:
+cli:
     cli-directive:
       - select: 'operationGroup'
         where:

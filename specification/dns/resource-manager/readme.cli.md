@@ -7,12 +7,8 @@ This directory contains the Cli common model for the Dns service.
 # Migrated from Powershell's readme
 
 title: Dns
-```
 
-``` yaml
-# Migrated from Powershell's readme
-
-clicommon:
+cli:
     cli-directive:
       - select: 'parameter'  
         where:

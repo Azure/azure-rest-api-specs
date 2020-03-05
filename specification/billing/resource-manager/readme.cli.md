@@ -6,11 +6,8 @@ This directory contains the Cli common model for the Aks service.
 ``` yaml
 # Migrated from Powershell's readme
 title: Billing
-```
 
-``` yaml
-# Migrated from Powershell's readme
-clicommon:
+cli:
     cli-directive:
       - select: 'property'
         where:
