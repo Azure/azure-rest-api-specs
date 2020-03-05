@@ -1,4 +1,3 @@
-
 ## Node.js
 
 These settings apply only when `--nodejs` is specified on the command line.
@@ -11,5 +10,5 @@ nodejs:
   output-folder: $(node-sdks-folder)/lib/services/hybridkubernetesManagement
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: true
+  generate-readme-md: false
 ```

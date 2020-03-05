@@ -436,6 +436,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Created. The response contains the new key.",
+            "schema": {
+              "$ref": "#/definitions/SpoolKeys"
+            }
+          },
           "201": {
             "description": "Created and an async operation is executing in background to make the new key take effect. The response contains new keys and an Azure-AsyncOperation header to query the async operation result.",
             "schema": {
