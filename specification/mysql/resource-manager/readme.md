@@ -87,23 +87,17 @@ input-file:
 - Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
 
-
-### Tag: package-2020-01-01-preview
-
-These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-01-01-preview'
-input-file:
-- Microsoft.DBforMySQL/preview/2020-01-01-preview/DataEncryptionKeys.json
-```
-
-
 ### Tag: package-2020-01-01
 
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2020-01-01'
 input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+- Microsoft.DBforMySQL/stable/2018-06-01/QueryPerformanceInsights.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PerformanceRecommendations.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
 - Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
 ```
 
@@ -199,7 +193,6 @@ input-file:
   - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2018-06-01/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforMySQL/preview/2020-01-01-preview/DataEncryptionKeys.json
   - $(this-folder)/Microsoft.DBforMySQL/stable/2020-01-01/DataEncryptionKeys.json
 
 ```

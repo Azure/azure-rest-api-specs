@@ -1155,10 +1155,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ServerAdministratorResource"
-            }
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1179,7 +1176,7 @@
             "$ref": "./examples/ServerAdminDelete.json"
           }
         },
-        "description": "Deletes AAD Administrator.",
+        "description": "Deletes server active directory administrator.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -1196,22 +1193,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerAdministratorResource"
-            }
+            "description": "OK"
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ServerAdministratorResource"
-            }
+            "description": "Accepted"
           },
           "204": {
-            "description": "NoContent",
-            "schema": {
-              "$ref": "#/definitions/ServerAdministratorResource"
-            }
+            "description": "NoContent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1536,7 +1524,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource ID.",
+          "description": "Resource Id of the private endpoint connection.",
           "type": "string",
           "readOnly": true
         },
@@ -1672,6 +1660,18 @@
           "type": "string",
           "description": "Status showing whether the server enabled for customer managed encryption key.",
           "readOnly": true
+        },
+        "infrastructureEncryption": {
+          "type": "string",
+          "description": "Status showing whether the server enabled infrastructure encryption.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryption",
+            "modelAsString": true
+          }
         },
         "userVisibleState": {
           "type": "string",

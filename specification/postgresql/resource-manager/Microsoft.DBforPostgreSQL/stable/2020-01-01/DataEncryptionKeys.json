@@ -22,7 +22,7 @@
           "ServerKeys"
         ],
         "description": "Gets a list of  Server keys.",
-        "operationId": "ServerKeys_ListByInstance",
+        "operationId": "ServerKeys_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -228,7 +228,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
+          "description": "A list of PostgreSQL Server keys.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServerKey"
@@ -282,13 +282,13 @@
       ],
       "properties": {
         "kind": {
-          "description": "Kind of encryption protector. This is metadata used for the Azure portal experience.",
+          "description": "Kind of encryption protector used to protect the key.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/ServerKeyProperties",
-          "description": "Resource properties.",
+          "description": "Properties of the ServerKey Resource.",
           "x-ms-client-flatten": true
         }
       }
