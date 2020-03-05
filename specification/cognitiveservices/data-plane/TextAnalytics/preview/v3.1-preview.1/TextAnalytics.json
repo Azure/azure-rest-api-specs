@@ -357,6 +357,12 @@
             "type": "boolean"
           },
           {
+            "name": "aspect",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain input and document level statistics including aspect-based sentiment analysis results.",
+            "type": "boolean"
+          },
+          {
             "in": "body",
             "name": "input",
             "description": "Collection of documents to analyze.",
@@ -690,7 +696,9 @@
         "sentiment",
         "sentenceScores",
         "offset",
-        "length"
+        "length",
+        "aspects",
+        "opinions"
       ],
       "properties": {
         "sentiment": {
@@ -720,6 +728,20 @@
           "format": "int32",
           "description": "The length of the sentence by Unicode standard."
         },
+        "aspects": {
+          "type": "array",
+          "description": "an array of aspects per sentence",
+          "items": {
+            "$ref": "#/definitions/SentenceAspect"
+          }
+        },
+        "opinions": {
+          "type": "array",
+          "description": "an array of opinions per sentence",
+          "items": {
+            "$ref": "#/definitions/SentenceOpinion"
+          }
+        },
         "warnings": {
           "type": "array",
           "description": "The warnings generated for the sentence.",
@@ -728,6 +750,123 @@
           }
         }
       }
+    },
+    "SentenceAspect": {
+      "type": "object",
+      "required": [ "confidenceScores", "id", "length", "offset", "relations", "sentiment", "text" ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [ "positive", "mixed", "negative" ]
+        },
+        "confidenceScores": {
+          "description": "Aspect level sentiment confidence scores for each sentiment class.",
+          "$ref": "#/definitions/AspectConfidenceScoreLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "text": {
+          "type": "string"
+        },
+        "relations": {
+          "type": "array",
+          "description": "Aspect-based sentiment analysis.",
+          "items": {
+            "$ref": "#/definitions/AspectRelation"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings generated for the sentence.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SentenceOpinion": {
+      "type": "object",
+      "required": [ "confidenceScores", "id", "isNegated", "length", "offset", "sentiment", "text" ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [ "positive", "mixed", "negative" ]
+        },
+        "confidenceScores": {
+          "description": "Opinion level sentiment confidence scores for each sentiment class.",
+          "$ref": "#/definitions/AspectConfidenceScoreLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "text": {
+          "type": "string"
+        },
+        "isNegated": {
+          "type": "boolean"
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings generated for the sentence.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AspectRelation": {
+      "type": "object",
+      "required": [ "links", "relationType" ],
+      "properties": {
+        "relationType": {
+          "type": "string",
+          "enum": [ "opinion", "aspect" ]
+        },
+        "links": {
+          "type": "string"
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings generated for the sentence.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AspectConfidenceScoreLabel": {
+      "type": "object",
+      "required": [ "negative", "positive" ],
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "description": "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
     },
     "EntitiesResult": {
       "type": "object",
