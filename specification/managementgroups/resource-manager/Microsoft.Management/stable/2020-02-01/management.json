@@ -717,8 +717,7 @@
           "GetEntities": {
             "$ref": "./examples/GetEntities.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.Management/startTenantBackfill": {
@@ -1783,28 +1782,20 @@
         "type": {
           "type": "string",
           "enum": [
-            "/providers/Microsoft.Management/managementGroup"
+            "Microsoft.Management/managementGroup"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false,
             "values": [
               {
-                "value": "/providers/Microsoft.Management/managementGroup"
+                "value": "Microsoft.Management/managementGroup"
               }
             ]
           },
           "description": "fully qualified resource type which includes provider namespace"
         }
       }
-    },
-    "ProvisioningState": {
-      "title": "Provisioning State",
-      "type": "string",
-      "enum": [
-        "Updating"
-      ],
-      "description": "The provisioning status."
     }
   },
   "parameters": {
