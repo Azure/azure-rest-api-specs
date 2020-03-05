@@ -1700,6 +1700,27 @@
             "$ref": "#/parameters/Continuation"
           },
           {
+            "name": "mode",
+             "in": "query",
+             "description": "Mode \"set\" sets POSIX access control rights on files and directories, \"modify\" modifies one or more POSIX access control rights  that pre-exist on files and directories, \"remove\" removes one or more POSIX access control rights  that were present earlier on files and directories",
+             "required": true,
+             "type": "string",
+             "enum": [
+               "set",
+               "modify",
+               "remove"
+             ]
+          },
+          {
+            "name": "maxRecords",
+            "in": "query",
+            "description": "Optional. It specifies the maximum number of files or directories on which the acl change will be applied. If omitted or greater than 2,000, the request will process up to 2,000 items",
+            "format": "int32",
+            "minimum": 1,
+            "required": false,
+            "type": "integer"
+          },
+          {
             "$ref": "#/parameters/LeaseIdOptional"
           },
           {
