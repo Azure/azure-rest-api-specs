@@ -186,7 +186,7 @@
           "Gateway"
         ],
         "operationId": "Gateway_CreateOrUpdate",
-        "description": "Creates or updates an Gateway to be used in Api Management instance.",
+        "description": "Creates or updates a Gateway to be used in Api Management instance.",
         "x-ms-examples": {
           "ApiManagementCreateGateway": {
             "$ref": "./examples/ApiManagementCreateGateway.json"
@@ -666,7 +666,7 @@
           "GatewayHostnameConfiguration"
         ],
         "operationId": "GatewayHostnameConfiguration_CreateOrUpdate",
-        "description": "Adds an API to the specified Gateway.",
+        "description": "Creates of updates hostname configuration for a Gateway.",
         "x-ms-examples": {
           "ApiManagementCreateGatewayHostnameConfiguration": {
             "$ref": "./examples/ApiManagementCreateGatewayHostnameConfiguration.json"
@@ -690,6 +690,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/GatewayHostnameConfigurationContract"
+            }
           }
         ],
         "responses": {
@@ -905,6 +913,14 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AssociationContract"
+            }
           }
         ],
         "responses": {
