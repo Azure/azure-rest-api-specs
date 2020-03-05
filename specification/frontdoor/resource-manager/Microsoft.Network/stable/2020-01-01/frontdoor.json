@@ -1133,7 +1133,15 @@
       "properties": {
         "@odata.type": {
           "type": "string"
-        }
+        },
+        "oneOf": [
+          {
+            "$ref": "#/definitions/ForwardingConfiguration"
+          },
+          {
+            "$ref": "#/definitions/RedirectConfiguration"
+          }
+        ]
       },
       "required": [
         "@odata.type"
