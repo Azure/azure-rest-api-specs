@@ -40,11 +40,6 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
-### Tag: package-2020-01-01-preview
-
-These settings apply only when `--tag=package-2020-01-01-preview` is specified on the command line.
-
-
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
 
 

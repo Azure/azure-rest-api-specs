@@ -1155,7 +1155,10 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1176,7 +1179,7 @@
             "$ref": "./examples/ServerAdminDelete.json"
           }
         },
-        "description": "Deletes server active directory administrator.",
+        "description": "Deletes AAD Administrator.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1193,13 +1196,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "204": {
-            "description": "NoContent"
+            "description": "NoContent",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
