@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for KeyVault.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,18 +15,31 @@ To build the SDK for KeyVault, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.0
+tag: package-7.1-preview
+```
+
+### Tag: package-7.1-preview
+
+These settings apply only when `--tag=package-7.1-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-7.1-preview'
+input-file:
+- Microsoft.KeyVault/preview/7.1/certificates.json
+- Microsoft.KeyVault/preview/7.1/common.json
+- Microsoft.KeyVault/preview/7.1/keys.json
+- Microsoft.KeyVault/preview/7.1/secrets.json
+- Microsoft.KeyVault/preview/7.1/storage.json
 ```
 
 ### Tag: package-7.0
@@ -36,6 +49,15 @@ These settings apply only when `--tag=package-7.0` is specified on the command l
 ``` yaml $(tag) == 'package-7.0'
 input-file:
 - Microsoft.KeyVault/stable/7.0/keyvault.json
+```
+
+### Tag: package-7.0-preview
+
+These settings apply only when `--tag=package-7.0-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.0-preview'
+input-file:
+- Microsoft.KeyVault/preview/7.0/keyvault.json
 ```
 
 ### Tag: package-2016-10
@@ -56,10 +78,9 @@ input-file:
 - Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -70,7 +91,6 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
-
 
 ## C#
 
@@ -86,7 +106,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/keyvault/Microsoft.Azure.KeyVault/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Go
 
@@ -106,7 +125,8 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-keyvault
   override-client-name: KeyVaultClientBase
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -124,7 +144,7 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
@@ -132,3 +152,143 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateOperation.properties.cancellation_requested
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateOperation.properties.status_details
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateOperation.properties.request_id
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificatePolicy.properties.key_props
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificatePolicy.properties.secret_props
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificatePolicy.properties.x509_props
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificatePolicy.properties.lifetime_actions
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.X509CertificateProperties.properties.key_usage
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.X509CertificateProperties.properties.validity_months
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.IssuerParameters.properties.cert_transparency
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.Action.properties.action_type
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.Trigger.properties.lifetime_percentage
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.Trigger.properties.days_before_expiry
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.SubjectAlternativeNames.properties.dns_names
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.IssuerBundle.properties.org_details
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.IssuerCredentials.properties.account_id
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.OrganizationDetails.properties.admin_details
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.AdministratorDetails.properties.first_name
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.AdministratorDetails.properties.last_name
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateIssuerSetParameters.properties.org_details
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateIssuerUpdateParameters.properties.org_details
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: certificates.json
+    where: $.definitions.CertificateOperationUpdateParameter.properties.cancellation_requested
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyProperties.properties.key_size
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyProperties.properties.reuse_key
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.JsonWebKey.properties.key_ops
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.JsonWebKey.properties.key_hsm
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.key_size
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.key_ops
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyImportParameters.properties.Hsm
+    reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyUpdateParameters.properties.key_ops
+    reason: Merely refactored existing definitions into new files.
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: certificates.json
+    where: $..parameters[?(@.name=='vaultBaseUrl')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: keys.json
+    where: $..parameters[?(@.name=='vaultBaseUrl')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: secrets.json
+    where: $..parameters[?(@.name=='vaultBaseUrl')]
+    reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MISSING_REQUIRED_PARAMETER
+    from: storage.json
+    reason: Suppress an invalid error caused by a bug in the linter.
+```
