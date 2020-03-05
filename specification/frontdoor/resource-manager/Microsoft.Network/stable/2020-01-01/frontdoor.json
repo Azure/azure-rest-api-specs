@@ -1237,8 +1237,8 @@
           "description": "Location of the backend (IP address or FQDN)",
           "type": "string"
         },
-        "privateLinkResourceId": {
-          "description": "If this backend is private, provide the Private Link resource Id. Populating this optional field indicates that this backend is 'Private'",
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
           "type": "string"
         },
         "privateEndpointStatus": {
@@ -1570,13 +1570,19 @@
           "description": "Treatment of URL query terms when forming the cache key.",
           "enum": [
             "StripNone",
-            "StripAll"
+            "StripAll",
+            "StripOnly",
+            "StripAllExcept"
           ],
           "type": "string",
           "x-ms-enum": {
             "name": "FrontDoorQuery",
             "modelAsString": true
           }
+        },
+        "queryParameters": {
+          "description": "query parameters to include or exclude (comma separated).",
+          "type": "string"
         },
         "dynamicCompression": {
           "description": "Whether to use dynamic compression for cached content",
@@ -1589,6 +1595,11 @@
             "name": "DynamicCompressionEnabled",
             "modelAsString": true
           }
+        },
+        "cacheDuration": {
+          "description": "The duration for which the content needs to be cached. Allowed format is in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations). HTTP requires the value to be no more than a year",
+          "type": "string",
+          "format": "duration"
         }
       }
     },
