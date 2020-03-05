@@ -4406,9 +4406,48 @@
             "type": "string"
           },
           "description": "The API versions."
+        },
+        "pattern": {
+          "$ref": "#/definitions/AliasPatternType",
+          "description": "The pattern for an alias path."
         }
       },
-      "description": "The type of the paths for alias. "
+      "description": "The type of the paths for alias."
+    },
+    "AliasPatternType": {
+      "properties": {
+        "phrase": {
+          "type": "string",
+          "description": "The alias pattern phrase."
+        },
+        "variable": {
+          "type": "string",
+          "description": "The alias pattern variable."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "Extract"
+          ],
+          "x-ms-enum": {
+            "name": "AliasPatternType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "NotSpecified is not allowed."
+              },
+              {
+                "value": "Extract",
+                "description": "Extract is the only allowed value."
+              }
+            ]
+          },
+          "description": "The type of alias pattern"
+        }
+      },
+      "description": "The type of the pattern for an alias path."
     },
     "AliasType": {
       "properties": {
@@ -4422,6 +4461,41 @@
             "$ref": "#/definitions/AliasPathType"
           },
           "description": "The paths for an alias."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the alias.",
+          "enum": [
+            "NotSpecified",
+            "PlainText",
+            "Mask"
+          ],
+          "x-ms-enum": {
+            "name": "AliasType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "Alias type is unknown (same as not providing alias type)."
+              },
+              {
+                "value": "PlainText",
+                "description": "Alias value is not secret."
+              },
+              {
+                "value": "Mask",
+                "description": "Alias value is secret."
+              }
+            ]
+          }
+        },
+        "defaultPath": {
+          "type": "string",
+          "description": "The default path for an alias."
+        },
+        "defaultPattern": {
+          "$ref": "#/definitions/AliasPatternType",
+          "description": "The default pattern for an alias."
         }
       },
       "description": "The alias type. "
