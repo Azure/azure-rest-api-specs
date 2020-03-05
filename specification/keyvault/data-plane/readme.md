@@ -138,7 +138,13 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.KeyVault/preview/7.1/certificates.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.1/common.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.1/keys.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.1/secrets.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.1/storage.json
   - $(this-folder)/Microsoft.KeyVault/stable/7.0/keyvault.json
+  - $(this-folder)/Microsoft.KeyVault/preview/7.0/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2015-06-01/keyvault.json
 
