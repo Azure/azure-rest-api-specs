@@ -1,24 +1,47 @@
 {
   "parameters": {
-    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "subscriptionId": "6c48fa17-39c7-45f1-90ac-47a587128ace",
     "resourceGroupName": "Default-RecoveryServices-ResourceGroup",
-    "vaultName": "swaggerExample",
+    "vaultName": "pemsi-ecy-rsv2",
     "api-version": "2016-06-01"
   },
   "responses": {
     "200": {
       "body": {
-        "location": "westus",
-        "name": "swaggerExample",
-        "eTag": "W/\"datetime'2017-12-15T12%3A36%3A51.68Z'\"",
+        "location": "eastus2euap",
+        "name": "pemsi-ecy-rsv2",
+        "etag": "W/\"datetime'2020-02-28T15%3A59%3A54.9565232Z'\"",
         "tags": {
-          "TestUpdatedKey": "TestUpdatedValue"
+            "PutKey": "PutValue"
+        },
+        "identity": {
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "principalId": "8117147e-2065-4030-a24c-634115d7e89c",
+            "type": "SystemAssigned"
         },
         "properties": {
-          "provisioningState": "Succeeded"
+            "provisioningState": "Succeeded",
+            "privateEndpointConnections": [
+                {
+                    "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/Vaults/pemsi-ecy-rsv2/privateEndpointConnections/pe114-pemsi-ecy-rsv.5944358949303501042.backup.75061caa-cba4-4849-8e09-608da4914aad",
+                    "properties": {
+                        "provisioningState": "Succeeded",
+                        "privateEndpoint": {
+                            "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.Network/privateEndpoints/pe114-pemsi-ecy-rsv"
+                        },
+                        "privateLinkServiceConnectionState": {
+                            "status": "Approved",
+                            "description": "None",
+                            "actionRequired": "None"
+                        }
+                    }
+                }
+           ],
+            "privateEndpointStateForBackup": "Enabled",
+            "privateEndpointStateForSiteRecovery": "None"
         },
-        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
-        "type": "Microsoft.RecoveryServices/vaults",
+        "id": "/subscriptions/6c48fa17-39c7-45f1-90ac-47a587128ace/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/Vaults/pemsi-ecy-rsv2",
+        "type": "Microsoft.RecoveryServices/Vaults",
         "sku": {
           "name": "Standard"
         }
