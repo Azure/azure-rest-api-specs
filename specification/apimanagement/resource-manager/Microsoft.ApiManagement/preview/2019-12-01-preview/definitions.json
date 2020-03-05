@@ -5318,6 +5318,33 @@
         }
       },
       "description": "Gateway hostname configuration details."
+    },
+    "AssociationContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState" : {
+              "type": "string",
+              "description": "Provisionsing state.",
+              "enum": [
+                "created"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            }
+          },
+          "description": "Association entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Association entity details."
     }
   },
   "parameters": {}
