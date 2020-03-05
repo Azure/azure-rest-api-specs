@@ -1,5 +1,6 @@
 {
   "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
     "certificate-name": "importCert01",
     "api-version": "7.0-preview",
     "parameters": {
@@ -21,9 +22,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "https://kv-sdk-test.vault-int.azure-int.net/certificates/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
-        "kid": "https://kv-sdk-test.vault-int.azure-int.net/keys/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
-        "sid": "https://kv-sdk-test.vault-int.azure-int.net/secrets/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "id": "https://myvault.vault.azure.net/certificates/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "kid": "https://myvault.vault.azure.net/keys/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
+        "sid": "https://myvault.vault.azure.net/secrets/importCert01/f00e72f0ddee4dddadc27c0f605d84d7",
         "x5t": "fLi3U52HunIVNXubkEnf8tP6Wbo",
         "cer": "MIICODCCAeagAwIBAgIQqHmpBAv+CY9IJFoUhlbziTAJBgUrDgMCHQUAMBYxFDASBgNVBAMTC1Jvb3QgQWdlbmN5MB4XDTE1MDQyOTIxNTM0MVoXDTM5MTIzMTIzNTk1OVowFzEVMBMGA1UEAxMMS2V5VmF1bHRUZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5bVAT73zr4+N4WVv2+SvTunAw08ksS4BrJW/nNliz3S9XuzMBMXvmYzU5HJ8TtEgluBiZZYd5qsMJD+OXHSNbsLdmMhni0jYX09h3XlC2VJw2sGKeYF+xEaavXm337aZZaZyjrFBrrUl51UePaN+kVFXNlBb3N3TYpqa7KokXenJQuR+i9Gv9a77c0UsSsDSryxppYhKK7HvTZCpKrhVtulF5iPMswWe9np3uggfMamyIsK/0L7X9w9B2qN7993RR0A00nOk4H6CnkuwO77dSsD0KJsk6FyAoZBzRXDZh9+d9R76zCL506NcQy/jl0lCiQYwsUX73PG5pxOh02OwKwIDAQABo0swSTBHBgNVHQEEQDA+gBAS5AktBh0dTwCNYSHcFmRjoRgwFjEUMBIGA1UEAxMLUm9vdCBBZ2VuY3mCEAY3bACqAGSKEc+41KpcNfQwCQYFKw4DAh0FAANBAGqIjo2geVagzuzaZOe1ClGKhZeiCKfWAxklaGN+qlGUbVS4IN4V1lot3VKnzabasmkEHeNxPwLn1qvSD0cX9CE=",
         "attributes": {
@@ -35,7 +36,7 @@
           "recoveryLevel": "Recoverable+Purgeable"
         },
         "policy": {
-          "id": "https://kv-sdk-test.vault-int.azure-int.net/certificates/importCert01/policy",
+          "id": "https://myvault.vault.azure.net/certificates/importCert01/policy",
           "key_props": {
             "exportable": true,
             "kty": "RSA",
@@ -49,10 +50,7 @@
             "subject": "CN=KeyVaultTest",
             "ekus": [],
             "key_usage": [],
-            "validity_months": 297,
-            "basic_constraints": {
-              "ca": false
-            }
+            "validity_months": 297
           },
           "lifetime_actions": [
             {
