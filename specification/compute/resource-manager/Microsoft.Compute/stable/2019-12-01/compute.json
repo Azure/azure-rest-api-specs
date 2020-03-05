@@ -4572,6 +4572,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/setOrchestrationServiceState": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_SetOrchestrationServiceState",
+        "description": "Changes ServiceState property for a given service",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine scale set to create or update."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OrchestrationServiceStateInput"
+            },
+            "description": "The input object for SetOrchestrationServiceState API."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": {
       "put": {
         "tags": [
@@ -9525,6 +9574,37 @@
       },
       "description": "Extensions summary for virtual machines of a virtual machine scale set."
     },
+    "OrchestrationServiceSummary": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the service.",
+          "enum": [
+            "AutomaticRepairs"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestrationServiceNames",
+            "modelAsString": true
+          }
+        },
+        "serviceState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current state of the service.",
+          "enum": [
+            "NotRunning",
+            "Running",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestrationServiceState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Summary for an orchestration service of a virtual machine scale set."
+    },
     "VirtualMachineScaleSetInstanceView": {
       "properties": {
         "virtualMachine": {
@@ -9546,6 +9626,14 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "description": "The resource status information."
+        },
+        "orchestrationServices": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrchestrationServiceSummary"
+          },
+          "description": "The orchestration services information."
         }
       },
       "description": "The instance view of a virtual machine scale set."
@@ -10411,6 +10499,37 @@
           "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
         }
       }
+    },
+    "OrchestrationServiceStateInput": {
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service.",
+          "enum": [
+            "AutomaticRepairs"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestrationServiceNames",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "description": "The action to be performed.",
+          "enum": [
+            "Resume",
+            "Suspend"
+          ],
+          "x-ms-enum": {
+            "name": "OrchestrationServiceStateAction",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "serviceName",
+        "action"
+      ]
     }
   },
   "parameters": {
