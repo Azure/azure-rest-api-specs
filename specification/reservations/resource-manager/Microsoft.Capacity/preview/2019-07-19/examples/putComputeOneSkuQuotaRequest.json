@@ -7,10 +7,12 @@
     "api-version": "2019-07-19-preview",
     "If-Match": "*",
     "createQuotaRequest": {
-      "limit": 200,
-      "unit": "Count",
-      "name": {
-        "value": "standardFSv2Family"
+      "properties": {
+        "limit": 200,
+        "unit": "Count",
+        "name": {
+          "value": "standardFSv2Family"
+        }
       }
     }
   },
@@ -33,14 +35,18 @@
         "type": "Microsoft.Capacity/serviceLimits",
         "properties": {
           "provisioningState": "Succeeded",
-          "message": "",
+          "message": "Request succeeded",
           "properties": {
-            "limit": 200,
-            "unit": "Count",
-            "currentValue": 160,
-            "name": {
-              "value": "standardFSv2Family",
-              "localizedValue": "Standard FSv2 Family vCPUs"
+            "properties": {
+              "limit": 200,
+              "unit": "Count",
+              "currentValue": 160,
+              "name": {
+                "value": "standardFSv2Family",
+                "localizedValue": "Standard FSv2 Family vCPUs"
+              },
+              "quotaPeriod": "",
+              "properties": {}
             }
           }
         }
