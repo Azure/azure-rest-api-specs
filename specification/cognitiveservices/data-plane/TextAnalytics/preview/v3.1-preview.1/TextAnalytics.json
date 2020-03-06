@@ -571,7 +571,7 @@
       "required": [
         "id",
         "sentiment",
-        "documentScores",
+        "confidenceScores",
         "sentences"
       ],
       "properties": {
@@ -596,7 +596,7 @@
         "statistics": {
           "$ref": "#/definitions/DocumentStatistics"
         },
-        "documentScores": {
+        "confidenceScores": {
           "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
@@ -688,7 +688,7 @@
       "type": "object",
       "required": [
         "sentiment",
-        "sentenceScores",
+        "confidenceScores",
         "offset",
         "length"
       ],
@@ -706,7 +706,7 @@
             "modelAsString": false
           }
         },
-        "sentenceScores": {
+        "confidenceScores": {
           "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
@@ -798,11 +798,11 @@
           "type": "string",
           "description": "Entity text as appears in the request."
         },
-        "type": {
+        "category": {
           "type": "string",
           "description": "Entity type, such as Person/Location/Org/SSN etc"
         },
-        "subtype": {
+        "subcategory": {
           "type": "string",
           "description": "Entity sub type, such as Age/Year/TimeRange etc"
         },
