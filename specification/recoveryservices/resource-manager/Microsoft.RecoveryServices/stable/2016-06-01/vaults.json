@@ -1013,11 +1013,11 @@
           "items":{
               "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
           },
-          "description": "PrivateEndpointConnections",
+          "description": "List of private endpoint connection.",
           "readOnly": true
         },        
         "privateEndpointStateForBackup": {
-          "description": "PrivateEndpointStateForBackup",
+          "description": "Private endpoint state for backup.",
           "enum": [
             "None",
             "Enabled"
@@ -1030,7 +1030,7 @@
           }
         },
         "privateEndpointStateForSiteRecovery": {
-          "description": "PrivateEndpointStateForSiteRecovery",
+          "description": "Privat endpoint state for site recovery.",
           "enum": [
             "None",
             "Enabled"
@@ -1140,6 +1140,10 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "description": "Link to the next chunk of the response",
+          "type": "string"
         }
       }
     },
