@@ -198,7 +198,10 @@
             "$ref": "./examples/PutManagementGroup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "patch": {
         "tags": [
@@ -289,7 +292,10 @@
             "$ref": "./examples/DeleteManagementGroup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
@@ -494,7 +500,7 @@
         "tags": [
           "ManagementGroups"
         ],
-        "operationId": "HierarchySettings_Put",
+        "operationId": "HierarchySettings_CreateOrUpdate",
         "description": "Creates or updates the hierarchy settings defined at the Management Group level.\n",
         "parameters": [
           {
@@ -531,7 +537,7 @@
         "tags": [
           "ManagementGroups"
         ],
-        "operationId": "HierarchySettings_Patch",
+        "operationId": "HierarchySettings_Update",
         "description": "Updates the hierarchy settings defined at the Management Group level.\n",
         "parameters": [
           {
@@ -745,12 +751,6 @@
               "$ref": "#/definitions/TenantBackfillStatusResult"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/TenantBackfillStatusResult"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -762,8 +762,7 @@
           "StartTenantBackfill": {
             "$ref": "./examples/StartTenantBackfillRequest.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/providers/Microsoft.Management/tenantBackfillStatus": {
