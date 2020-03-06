@@ -417,6 +417,10 @@
           "type": "string",
           "description": "Error target."
         },
+        "targetRef": {
+          "type": "string",
+          "description": "The JSON pointer indicating the linked object."
+        },
         "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
@@ -596,7 +600,7 @@
     },
     "SentenceSentiment": {
       "type": "object",
-      "required": [ "sentiment", "sentenceScores", "offset", "length", "warnings" ],
+      "required": [ "sentiment", "sentenceScores", "offset", "length" ],
       "properties": {
         "sentiment": {
           "type": "string",
@@ -620,13 +624,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The length of the sentence by Unicode standard."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing sentence.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
-          }
         }
       }
     },
