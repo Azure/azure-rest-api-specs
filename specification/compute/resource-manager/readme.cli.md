@@ -1,0 +1,143 @@
+## CLI
+
+These settings don't need to apply `--cli` on the command line.
+
+``` yaml
+cli:
+  cli-name: compute
+  package-name: azure-mgmt-compute
+  namespace: azure.mgmt.compute
+  test-scenario:
+    - name: Create an empty managed disk.
+    - name: Create a managed disk by importing an unmanaged blob from a different subscription.
+    - name: Create a managed disk by copying a snapshot.
+    - name: Create a managed disk by importing an unmanaged blob from the same subscription.
+    - name: Create a managed disk from an existing managed disk in the same or different subscription.
+    - name: Create a managed disk from a platform image.
+    - name: Create a managed upload disk.
+    - name: Create a virtual machine image from a snapshot.
+    - name: Create a virtual machine image from a managed disk with DiskEncryptionSet resource.
+    - name: Create a virtual machine image from an existing virtual machine.
+    - name: Create a virtual machine image that includes a data disk from a blob.
+    - name: Create a virtual machine image that includes a data disk from a snapshot.
+    - name: Create a virtual machine image that includes a data disk from a managed disk.
+    - name: Create a virtual machine image from a blob with DiskEncryptionSet resource.
+    - name: Create a virtual machine image from a managed disk.
+    - name: Create a virtual machine image from a snapshot with DiskEncryptionSet resource.
+    - name: Create a virtual machine image from a blob.
+    - name: Create or update a simple gallery.
+    - name: Create a snapshot by importing an unmanaged blob from the same subscription.
+    - name: Create a snapshot by importing an unmanaged blob from a different subscription.
+    - name: Create a snapshot from an existing snapshot in the same or a different subscription.
+    - name: Create or update a dedicated host group.
+    - name: Create a platform-image vm with unmanaged os and data disks.
+    - name: Create a vm from a custom image.
+    - name: Create a vm with empty data disks.
+    - name: Create a custom-image vm from an unmanaged generalized os image.
+    - name: Create a vm in an availability set.
+    - name: Create a vm with premium storage.
+    - name: Create a vm with ssh authentication.
+    - name: Create a vm with password authentication.
+    - name: Create a vm with ephemeral os disk.
+    - name: Create a vm with DiskEncryptionSet resource id in the os disk and data disk.
+    - name: Create a vm with a marketplace image plan.
+    - name: Create a vm with boot diagnostics.
+    - name: Create an availability set.
+    - name: Create a disk encryption set.
+    - name: Create or update a simple gallery image.
+    - name: Create or update a dedicated host .
+    - name: Create/Update Container Service
+    - name: Create a scale set with virtual machines in different zones.
+    - name: Create a custom-image scale set from an unmanaged generalized os image.
+    - name: Create a scale set with ephemeral os disks.
+    - name: Create a scale set with ssh authentication.
+    - name: Create a scale set with premium storage.
+    - name: Create a scale set with empty data disks on each vm.
+    - name: Create a scale set with an azure load balancer.
+    - name: Create a scale set with boot diagnostics.
+    - name: Create a scale set with terminate scheduled events enabled.
+    - name: Create a scale set with automatic repairs enabled
+    - name: Create a scale set with a marketplace image plan.
+    - name: Create a scale set from a custom image.
+    - name: Create a scale set with DiskEncryptionSet resource in os disk and data disk.
+    - name: Create a platform-image scale set with unmanaged os disks.
+    - name: Create a scale set with password authentication.
+    - name: Create a scale set with an azure application gateway.
+    - name: Create or Update a proximity placement group.
+    - name: Create or update a simple gallery Application.
+    - name: Create or update a simple Gallery Image Version using snapshots as a source.
+    - name: Create or update a simple Gallery Image Version (Managed Image as source).
+    - name: Create or update a simple gallery Application Version.
+    - name: Create VirtualMachineScaleSet VM extension.
+    - name: Get VirtualMachineScaleSet VM extension.
+    - name: List extensions in Vmss instance.
+    - name: Get a gallery Application Version with replication status.
+    - name: Get a gallery Application Version.
+    - name: Get a gallery Image Version with snapshots as a source.
+    - name: Get a gallery Image Version with replication status.
+    - name: Get a gallery Image Version.
+    - name: List gallery Application Versions in a gallery Application Definition.
+    - name: Get a gallery Application.
+    - name: Create a proximity placement group.
+    - name: List gallery Image Versions in a gallery Image Definition.
+    - name: Get Virtual Machine Instance View.
+    - name: Get Container Service
+    - name: Get a dedicated host.
+    - name: Get a gallery image.
+    - name: Lists all available virtual machine sizes to which the specified virtual machine can be resized
+    - name: Get information about a disk encryption set.
+    - name: Get a Virtual Machine.
+    - name: List gallery Applications in a gallery.
+    - name: List gallery images in a gallery.
+    - name: Create a dedicated host group.
+    - name: Get information about a snapshot.
+    - name: Get a gallery.
+    - name: VirtualMachineRunCommandGet
+    - name: List Container Services by Resource Group
+    - name: Create a proximity placement group.
+    - name: Get information about a virtual machine image.
+    - name: Get information about a managed disk.
+    - name: List all disk encryption sets in a resource group.
+    - name: Lists all the virtual machines under the specified subscription for the specified location.
+    - name: List galleries in a resource group.
+    - name: List all snapshots in a resource group.
+    - name: List all virtual machine images in a resource group.
+    - name: List all managed disks in a resource group.
+    - name: VirtualMachineRunCommandList
+    - name: List Container Services
+    - name: Create a proximity placement group.
+    - name: List all disk encryption sets in a subscription.
+    - name: List availability sets in a subscription.
+    - name: List galleries in a subscription.
+    - name: List all snapshots in a subscription.
+    - name: List all virtual machine images in a subscription.
+    - name: List all managed disks in a subscription.
+    - name: Lists all available Resource SKUs
+    - name: Lists all available Resource SKUs for the specified region
+    - name: Update VirtualMachineScaleSet VM extension.
+    - name: Update a simple gallery Application Version.
+    - name: Start an extension rolling upgrade.
+    - name: Update a simple Gallery Image Version (Managed Image as source).
+    - name: Update a simple gallery Application.
+    - name: Create a proximity placement group.
+    - name: Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.
+    - name: VirtualMachineRunCommand
+    - name: Generalize a Virtual Machine.
+    - name: Update a simple gallery image.
+    - name: Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period.
+    - name: Reapply the state of a virtual machine.
+    - name: Reimage a Virtual Machine.
+    - name: Update a disk encryption set.
+    - name: Update a VM by detaching data disk
+    - name: Update a simple gallery.
+    - name: Updates tags of an Image.
+    - name: Delete VirtualMachineScaleSet VM extension.
+    - name: Delete a gallery Application Version.
+    - name: Delete a gallery Image Version.
+    - name: Delete a gallery Application.
+    - name: Create a proximity placement group.
+    - name: Delete Container Service
+    - name: Delete a gallery image.
+    - name: Delete a disk encryption set.
+    - name: Delete a gallery.
+```
