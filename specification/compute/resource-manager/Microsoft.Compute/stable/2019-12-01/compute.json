@@ -1141,6 +1141,236 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys": {
+      "get": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_ListBySubscription",
+        "description": "Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeysGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys": {
+      "get": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_ListByResourceGroup",
+        "description": "Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeysGroupListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}": {
+      "put": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_Create",
+        "description": "Creates a new SSH public key resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "sshPublicKeyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the SSH public key."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            },
+            "description": "Parameters supplied to create the SSH public key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_Delete",
+        "description": "Delete an SSH public key.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "sshPublicKeyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the SSH public key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_Get",
+        "description": "Retrieves information about an SSH public key.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "sshPublicKeyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the SSH public key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}/generateKeyPair": {
+      "post": {
+        "tags": [
+          "SshPublicKeys"
+        ],
+        "operationId": "SshPublicKeys_GenerateKeyPair",
+        "description": "Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "sshPublicKeyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the SSH public key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyGenerateKeyPairResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}": {
       "get": {
         "tags": [
@@ -6255,6 +6485,70 @@
         "value"
       ],
       "description": "The list dedicated host operation response."
+    },
+    "SshPublicKeyGenerateKeyPairResult": {
+      "properties": {
+        "privateKey": {
+          "type": "string",
+          "description": "Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret."
+        },
+        "publicKey": {
+          "type": "string",
+          "description": "Public key portion of the key pair used to authenticate to a virtual machine through ssh. The public key is in ssh-rsa format."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}"
+        }
+      },
+      "required": [
+        "privateKey",
+        "publicKey",
+        "id"
+      ],
+      "description": "Response from generation of an SSH key pair."
+    },
+	"SshPublicKeyResourceProperties": {
+      "properties": {
+        "publicKey": {
+          "type": "string",
+          "description": "SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format."
+        }
+      },
+      "description": "Properties of the SSH public key."
+    },
+	"SshPublicKeyResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SshPublicKeyResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the SSH public key."
+    },
+    "SshPublicKeysGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshPublicKeyResource"
+          },
+          "description": "The list of SSH public keys"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The list SSH public keys operation response."
     },
     "VirtualMachineSize": {
       "properties": {
