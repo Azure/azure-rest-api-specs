@@ -18,6 +18,96 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "ListPrivateLinkResources"
+        ],
+        "summary": "Returns the list of private link resources that need to be created for Backup and SiteRecovery",
+        "operationId": "PrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        },
+        "x-ms-examples": {
+            "List PrivateLinkResources": {
+            "$ref": "./examples/ListPrivateLinkResources.json"
+         }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "GetPrivateLinkResource"
+        ],
+        "summary": "Returns a specified private link resource that need to be created for Backup and SiteRecovery",
+        "operationId": "PrivateLinkResource_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Get PrivateLinkResource": {
+            "$ref": "./examples/GetPrivateLinkResource.json"
+         }
+       }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/locations/{location}/checkNameAvailability": {
       "post": {
         "tags": [
@@ -62,7 +152,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResultResource"
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
             }
           }
         },
@@ -516,105 +606,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources": {
-      "get": {
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "summary": "Returns the list of private link resources that need to be created for Backup and SiteRecovery",
-        "operationId": "PrivateLinkResources_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-            "List PrivateLinkResources": {
-            "$ref": "./examples/ListPrivateLinkResources.json"
-         }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "tags": [
-          "PrivateLinkResource"
-        ],
-        "summary": "Returns a specified private link resource that need to be created for Backup and SiteRecovery",
-        "operationId": "PrivateLinkResource_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "privateLinkResourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get PrivateLinkResource": {
-            "$ref": "./examples/GetPrivateLinkResource.json"
-         }
-       }
-      }
     }
   },
   "definitions": {
@@ -644,20 +635,6 @@
         },
         "message": {
           "type": "string"
-        }
-      }
-    },
-    "CheckNameAvailabilityResultResource": {
-      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CheckNameAvailabilityResult",
-          "description": "CheckNameAvailabilityResultResource properties"
         }
       }
     },
@@ -939,8 +916,7 @@
       ],
       "properties": {
         "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "The managed identity associated with the resource."
+          "$ref": "#/definitions/IdentityData"
         },
         "properties": {
           "$ref": "#/definitions/VaultProperties"
@@ -959,10 +935,6 @@
         }
       ],
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/IdentityData",
-          "description": "The managed identity associated with the resource."
-        },
         "properties": {
           "$ref": "#/definitions/VaultProperties"
         },
@@ -1024,6 +996,54 @@
         }
       }
     },
+    "VaultProperties": {
+      "description": "Properties of the vault.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State.",
+          "type": "string",
+          "readOnly": true
+        },
+        "upgradeDetails": {
+          "$ref": "#/definitions/UpgradeDetails"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items":{
+              "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
+          },
+          "description": "PrivateEndpointConnections",
+          "readOnly": true
+        },        
+        "privateEndpointStateForBackup": {
+          "description": "PrivateEndpointStateForBackup",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointStateForSiteRecovery": {
+          "description": "PrivateEndpointStateForSiteRecovery",
+          "enum": [
+            "None",
+            "Enabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "VaultPrivateEndpointState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "IdentityData": {
       "description": "Managed Identity Data, as received from ARM headers.",
       "required": [
@@ -1045,11 +1065,14 @@
         }
       }
     },
-    "PrivateEndpoint": {
+    "PrivateEndpointConnectionVaultProperties": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnection"
         }
       }
     },
@@ -1077,26 +1100,46 @@
         }
       }
     },
-    "PrivateEndpointConnections": {
-      "description": "Private Endpoint Connections",
-      "type": "object",
-      "properties": {
-        "privateEndpointConnectionVaultProperties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionVaultProperties"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionVaultProperties": {
+    "PrivateEndpoint": {
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateEndpointConnectionStatus",
+            "modelAsString": true
+          }
         },
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnection"
+        "description": {
+          "type": "string"
+        },
+        "actionsRequired": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResources": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
         }
       }
     },
@@ -1126,83 +1169,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "PrivateLinkResources": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "enum": [
-            "Pending",
-            "Approved",
-            "Rejected",
-            "Disconnected"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PrivateEndpointConnectionStatus",
-            "modelAsString": true
-          }
-        },
-        "description": {
-          "type": "string"
-        },
-        "actionsRequired": {
-          "type": "string"
-        }
-      }
-    },
-    "VaultProperties": {
-      "description": "Properties of the vault.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "description": "Provisioning State.",
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpointStateForBackup": {
-          "description": "PrivateEndpointStateForBackup",
-          "enum": [
-            "None",
-            "Enabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "VaultPrivateEndpointState",
-            "modelAsString": true
-          }
-        },
-        "privateEndpointStateForSiteRecovery": {
-          "description": "PrivateEndpointStateForSiteRecovery",
-          "enum": [
-            "None",
-            "Enabled"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "VaultPrivateEndpointState",
-            "modelAsString": true
-          }
-        },
-        "privateEndpointConnections": {
-          "$ref": "#/definitions/PrivateEndpointConnections",
-          "description": "PrivateEndpointConnections",
-          "readOnly": true
         }
       }
     }
