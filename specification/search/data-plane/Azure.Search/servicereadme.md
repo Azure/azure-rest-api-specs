@@ -86,7 +86,7 @@ sync-methods: none
 add-context-parameter: true
 generate-client-interfaces: false
 custom-types-subpackage: implementation.models
-custom-types: AnalyzeResult,SuggestRequest,AutocompleteRequest,ListDataSourcesResult,ListIndexersResult,ListIndexesResult,ListSkillsetsResult,ListSynonymMapsResult
+custom-types: AnalyzeResult,SuggestRequest,AutocompleteRequest,ListDataSourcesResult,ListIndexersResult,ListIndexesResult,ListSkillsetsResult,ListSynonymMapsResult,AccessCondition
 license-header: |-
   Copyright (c) Microsoft Corporation. All rights reserved.
   Licensed under the MIT License.
@@ -117,9 +117,11 @@ directive:
       where: $
       transform: >-
           return $
+          .replace(/(import com\.azure\.search\.implementation\.models\.AccessCondition\;)/g, "import com.azure.core.http.MatchConditions;")
           .replace(/(this.getSearchServiceName)/g, "this.client.getSearchServiceName")
           .replace(/(this.getEndpoint)/g, "this.client.getEndpoint")
           .replace(/(this.getSearchDnsSuffix)/g, "this.client.getSearchDnsSuffix")
+          .replace(/(AccessCondition)/g, "MatchConditions")
 
     # Change Field.analyzer/indexAnalyzer/searchAnalyzer's types from enum to string. Update setters and getters.
     - change-object-ref-to-string:
