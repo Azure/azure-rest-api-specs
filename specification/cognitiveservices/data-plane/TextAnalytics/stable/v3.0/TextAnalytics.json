@@ -430,6 +430,29 @@
         }
       }
     },
+    "TextAnalyticsWarning": {
+      "type": "object",
+      "required": [ "code", "message" ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [ "TooManyLongTokensInDocument" ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": false
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "The JSON pointer indicating the linked object."
+        }
+      }
+    },
     "InnerError": {
       "type": "object",
       "required": [ "code", "message" ],
@@ -526,7 +549,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         }
       }
@@ -596,7 +619,7 @@
     },
     "SentenceSentiment": {
       "type": "object",
-      "required": [ "sentiment", "sentenceScores", "offset", "length", "warnings" ],
+      "required": [ "sentiment", "sentenceScores", "offset", "length" ],
       "properties": {
         "sentiment": {
           "type": "string",
@@ -620,13 +643,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The length of the sentence by Unicode standard."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing sentence.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
-          }
         }
       }
     },
@@ -676,7 +692,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -764,7 +780,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -877,7 +893,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -960,7 +976,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
