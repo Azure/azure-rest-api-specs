@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "v3.0",
+    "version": "v3.0-preview.1",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v3.0",
+    "hostTemplate": "{Endpoint}/text/analytics/v3.0-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -37,8 +37,14 @@
         "summary": "Named Entity Recognition",
         "description": "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://aka.ms/taner\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
         "operationId": "EntitiesRecognitionGeneral",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -91,8 +97,14 @@
         "summary": "Entities containing personal information",
         "description": "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. For the list of supported entity types, check <a href=\"https://aka.ms/tanerpii\">Supported Entity Types in Text Analytics API</a>. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId": "EntitiesRecognitionPii",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -143,8 +155,14 @@
         "summary": "Linked entities from a well-known knowledge base",
         "description": "The API returns a list of recognized entities with links to a well-known knowledge base. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
         "operationId": "EntitiesLinking",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -195,8 +213,14 @@
         "summary": "Key Phrases",
         "description": "The API returns a list of strings denoting the key phrases in the input text. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
         "operationId": "KeyPhrases",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -247,8 +271,14 @@
         "summary": "Detect Language",
         "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
         "operationId": "Languages",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -299,8 +329,14 @@
         "summary": "Sentiment",
         "description": "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
         "operationId": "Sentiment",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "model-version",
@@ -350,7 +386,9 @@
   "definitions": {
     "MultiLanguageBatchInput": {
       "type": "object",
-      "required": [ "documents" ],
+      "required": [
+        "documents"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -364,7 +402,10 @@
     },
     "MultiLanguageInput": {
       "type": "object",
-      "required": [ "id", "text" ],
+      "required": [
+        "id",
+        "text"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -383,7 +424,10 @@
     },
     "DocumentError": {
       "type": "object",
-      "required": [ "id", "error" ],
+      "required": [
+        "id",
+        "error"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -398,11 +442,19 @@
     },
     "TextAnalyticsError": {
       "type": "object",
-      "required": [ "code", "message" ],
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "type": "string",
-          "enum": [ "invalidRequest", "invalidArgument", "internalServerError", "serviceUnavailable" ],
+          "enum": [
+            "invalidRequest",
+            "invalidArgument",
+            "internalServerError",
+            "serviceUnavailable"
+          ],
           "x-ms-enum": {
             "name": "ErrorCodeValue",
             "modelAsString": false
@@ -430,36 +482,26 @@
         }
       }
     },
-    "TextAnalyticsWarning": {
-      "type": "object",
-      "required": [ "code", "message" ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "enum": [ "TooManyLongTokensInDocument" ],
-          "x-ms-enum": {
-            "name": "WarningCodeValue",
-            "modelAsString": false
-          },
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Warning message."
-        },
-        "targetRef": {
-          "type": "string",
-          "description": "The JSON pointer indicating the linked object."
-        }
-      }
-    },
     "InnerError": {
       "type": "object",
-      "required": [ "code", "message" ],
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "type": "string",
-          "enum": [ "invalidParameterValue", "invalidRequestBodyFormat", "emptyRequest", "missingInputRecords", "invalidDocument", "modelVersionIncorrect", "invalidDocumentBatch", "unsupportedLanguageCode", "invalidCountryHint" ],
+          "enum": [
+            "invalidParameterValue",
+            "invalidRequestBodyFormat",
+            "emptyRequest",
+            "missingInputRecords",
+            "invalidDocument",
+            "modelVersionIncorrect",
+            "invalidDocumentBatch",
+            "unsupportedLanguageCode",
+            "invalidCountryHint"
+          ],
           "x-ms-enum": {
             "name": "InnerErrorCodeValue",
             "modelAsString": false
@@ -489,7 +531,11 @@
     },
     "SentimentResponse": {
       "type": "object",
-      "required": [ "documents", "errors", "modelVersion" ],
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -516,7 +562,12 @@
     },
     "DocumentSentiment": {
       "type": "object",
-      "required": [ "id", "sentiment", "documentScores", "sentences", "warnings" ],
+      "required": [
+        "id",
+        "sentiment",
+        "documentScores",
+        "sentences"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -525,7 +576,12 @@
         "sentiment": {
           "type": "string",
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
-          "enum": [ "positive", "neutral", "negative", "mixed" ],
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "mixed"
+          ],
           "x-ms-enum": {
             "name": "DocumentSentimentValue",
             "modelAsString": false
@@ -544,19 +600,17 @@
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
           }
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsWarning"
-          }
         }
       }
     },
     "RequestStatistics": {
       "type": "object",
-      "required": [ "documentsCount", "validDocumentsCount", "erroneousDocumentsCount", "transactionsCount" ],
+      "required": [
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
+        "transactionsCount"
+      ],
       "properties": {
         "documentsCount": {
           "type": "integer",
@@ -583,7 +637,10 @@
     },
     "DocumentStatistics": {
       "type": "object",
-      "required": [ "charactersCount", "transactionsCount" ],
+      "required": [
+        "charactersCount",
+        "transactionsCount"
+      ],
       "properties": {
         "charactersCount": {
           "type": "integer",
@@ -600,7 +657,11 @@
     },
     "SentimentConfidenceScorePerLabel": {
       "type": "object",
-      "required": [ "positive", "neutral", "negative" ],
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
       "properties": {
         "positive": {
           "type": "number",
@@ -619,12 +680,21 @@
     },
     "SentenceSentiment": {
       "type": "object",
-      "required": [ "sentiment", "sentenceScores", "offset", "length" ],
+      "required": [
+        "sentiment",
+        "sentenceScores",
+        "offset",
+        "length"
+      ],
       "properties": {
         "sentiment": {
           "type": "string",
           "description": "The predicted Sentiment for the sentence.",
-          "enum": [ "positive", "neutral", "negative" ],
+          "enum": [
+            "positive",
+            "neutral",
+            "negative"
+          ],
           "x-ms-enum": {
             "name": "SentenceSentimentValue",
             "modelAsString": false
@@ -643,12 +713,23 @@
           "type": "integer",
           "format": "int32",
           "description": "The length of the sentence by Unicode standard."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "The warnings generated for the sentence.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "EntitiesResult": {
       "type": "object",
-      "required": [ "documents", "errors", "modelVersion" ],
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -675,7 +756,10 @@
     },
     "DocumentEntities": {
       "type": "object",
-      "required": [ "id", "entities", "warnings" ],
+      "required": [
+        "id",
+        "entities"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -688,13 +772,6 @@
             "$ref": "#/definitions/Entity"
           }
         },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsWarning"
-          }
-        },
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
@@ -703,17 +780,23 @@
     },
     "Entity": {
       "type": "object",
-      "required": [ "text", "type", "offset", "length", "score" ],
+      "required": [
+        "text",
+        "type",
+        "offset",
+        "length",
+        "score"
+      ],
       "properties": {
         "text": {
           "type": "string",
           "description": "Entity text as appears in the request."
         },
-        "type": {
+        "category": {
           "type": "string",
           "description": "Entity type, such as Person/Location/Org/SSN etc"
         },
-        "subtype": {
+        "subcategory": {
           "type": "string",
           "description": "Entity sub type, such as Age/Year/TimeRange etc"
         },
@@ -736,7 +819,11 @@
     },
     "EntityLinkingResult": {
       "type": "object",
-      "required": [ "documents", "errors", "modelVersion" ],
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -763,7 +850,10 @@
     },
     "DocumentLinkedEntities": {
       "type": "object",
-      "required": [ "id", "entities", "warnings" ],
+      "required": [
+        "id",
+        "entities"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -776,13 +866,6 @@
             "$ref": "#/definitions/LinkedEntity"
           }
         },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsWarning"
-          }
-        },
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
@@ -791,7 +874,13 @@
     },
     "LinkedEntity": {
       "type": "object",
-      "required": [ "name", "matches", "language", "url", "dataSource" ],
+      "required": [
+        "name",
+        "matches",
+        "language",
+        "url",
+        "dataSource"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -824,7 +913,12 @@
     },
     "Match": {
       "type": "object",
-      "required": [ "score", "text", "offset", "length" ],
+      "required": [
+        "score",
+        "text",
+        "offset",
+        "length"
+      ],
       "properties": {
         "score": {
           "type": "number",
@@ -849,7 +943,11 @@
     },
     "KeyPhraseResult": {
       "type": "object",
-      "required": [ "documents", "errors", "modelVersion" ],
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -876,7 +974,10 @@
     },
     "DocumentKeyPhrases": {
       "type": "object",
-      "required": [ "id", "keyPhrases", "warnings" ],
+      "required": [
+        "id",
+        "keyPhrases"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -889,13 +990,6 @@
             "type": "string"
           }
         },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsWarning"
-          }
-        },
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
@@ -904,7 +998,9 @@
     },
     "LanguageBatchInput": {
       "type": "object",
-      "required": [ "documents" ],
+      "required": [
+        "documents"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -916,7 +1012,10 @@
     },
     "LanguageInput": {
       "type": "object",
-      "required": [ "id", "text" ],
+      "required": [
+        "id",
+        "text"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -932,7 +1031,11 @@
     },
     "LanguageResult": {
       "type": "object",
-      "required": [ "documents", "errors", "modelVersion" ],
+      "required": [
+        "documents",
+        "errors",
+        "modelVersion"
+      ],
       "properties": {
         "documents": {
           "type": "array",
@@ -959,7 +1062,10 @@
     },
     "DocumentLanguage": {
       "type": "object",
-      "required": [ "id", "detectedLanguages", "warnings" ],
+      "required": [
+        "id",
+        "detectedLanguages"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -972,13 +1078,6 @@
             "$ref": "#/definitions/DetectedLanguage"
           }
         },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/TextAnalyticsWarning"
-          }
-        },
         "statistics": {
           "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
           "$ref": "#/definitions/DocumentStatistics"
@@ -987,7 +1086,11 @@
     },
     "DetectedLanguage": {
       "type": "object",
-      "required": [ "name", "iso6391Name", "score" ],
+      "required": [
+        "name",
+        "iso6391Name",
+        "score"
+      ],
       "properties": {
         "name": {
           "type": "string",
