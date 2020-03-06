@@ -2,9 +2,9 @@
   "swagger": "2.0",
   "host": "management.azure.com",
   "info": {
-    "version": "2019-11-01",
+    "version": "2020-02-01",
     "title": "Management Groups API",
-    "description": "The Azure Management Groups API enables consolidation of multiple subscriptions/resources into an organizational hierarchy and centrally manage access control, policies, alerting and reporting for those resources."
+    "description": "The Azure Management Groups API enables consolidation of multiple \nsubscriptions/resources into an organizational hierarchy and centrally \nmanage access control, policies, alerting and reporting for those resources.\n"
   },
   "schemes": [
     "https"
@@ -36,15 +36,15 @@
   "tags": [
     {
       "name": "ManagementGroups",
-      "description": "A Management Group is a customer defined scope (grouping mechanism) that provides access control (authorization), policy management and reporting. Management Groups are organized in a strictly tree-based hierarchy."
+      "description": "A Management Group is a customer defined scope (grouping mechanism) that \nprovides access control (authorization), policy management and reporting. \nManagement Groups are organized in a strictly tree-based hierarchy.\n"
     },
     {
       "name": "Operations",
-      "description": "Management operations supported by the Microsoft.Management resource provider."
+      "description": "Management operations supported by the Microsoft.Management resource provider.\n"
     },
     {
       "name": "Entities",
-      "description": "A list of entities that belong to the Management Groups."
+      "description": "A list of entities that belong to the Management Groups.\n"
     }
   ],
   "paths": {
@@ -54,7 +54,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_List",
-        "description": "List management groups for the authenticated user.",
+        "description": "List management groups for the authenticated user.\n",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -96,7 +96,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Get",
-        "description": "Get the details of the management group.",
+        "description": "Get the details of the management group.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -148,7 +148,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_CreateOrUpdate",
-        "description": "Create or update a management group. If a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.",
+        "description": "Create or update a management group.\nIf a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -173,15 +173,15 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/OperationResults"
+              "$ref": "#/definitions/AzureAsyncOperationResults"
             },
             "headers": {
               "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\n The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state \n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\n To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             }
@@ -205,7 +205,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Update",
-        "description": "Update a management group.",
+        "description": "Update a management group.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -245,7 +245,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroups_Delete",
-        "description": "Delete management group. If a management group contains child resources, the request will fail.",
+        "description": "Delete management group.\nIf a management group contains child resources, the request will fail.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -261,15 +261,15 @@
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/OperationResults"
+              "$ref": "#/definitions/AzureAsyncOperationResults"
             },
             "headers": {
               "Location": {
-                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\n The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state \n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
                 "type": "string"
               },
               "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.\n To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
             }
@@ -295,10 +295,10 @@
     "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
       "get": {
         "tags": [
-          "ManagementGroups_Descendants"
+          "ManagementGroups"
         ],
         "operationId": "ManagementGroups_GetDescendants",
-        "description": "List all entities that descend from a management group.",
+        "description": "List all entities that descend from a management group.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -343,7 +343,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroupSubscriptions_Create",
-        "description": "Associates existing subscription with the management group.",
+        "description": "Associates existing subscription with the management group.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -359,7 +359,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
+            "description": "OK"
+          },
+		  "204": {
             "description": "NoContent"
           },
           "default": {
@@ -380,7 +383,7 @@
           "ManagementGroups"
         ],
         "operationId": "ManagementGroupSubscriptions_Delete",
-        "description": "De-associates subscription from the management group.",
+        "description": "De-associates subscription from the management group.\n",
         "parameters": [
           {
             "$ref": "#/parameters/GroupIdParameter"
@@ -396,7 +399,10 @@
           }
         ],
         "responses": {
-          "204": {
+          "200": {
+            "description": "OK"
+          },
+		  "204": {
             "description": "NoContent"
           },
           "default": {
@@ -409,6 +415,183 @@
         "x-ms-examples": {
           "DeleteSubscriptionFromManagementGroup": {
             "$ref": "./examples/RemoveManagementGroupSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/settings": {
+      "get": {
+        "tags": [
+          "ManagementGroups"
+        ],
+        "operationId": "HierarchySettings_List",
+        "description": "Gets all the hierarchy settings defined at the Management Group level. Settings can only be set on the root Management Group of the hierarchy.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettingsList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListGroupSettings": {
+            "$ref": "./examples/ListHierarchySettings.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default": {
+      "get": {
+        "tags": [
+          "ManagementGroups"
+        ],
+        "operationId": "HierarchySettings_Get",
+        "description": "Gets the hierarchy settings defined at the Management Group level. Settings can only be set on the root Management Group of the hierarchy.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/GetHierarchySettings.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagementGroups"
+        ],
+        "operationId": "HierarchySettings_Put",
+        "description": "Creates or updates the hierarchy settings defined at the Management Group level.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateOrUpdateManagementGroupSettingsRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/PutHierarchySettings.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagementGroups"
+        ],
+        "operationId": "HierarchySettings_Patch",
+        "description": "Updates the hierarchy settings defined at the Management Group level.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CreateOrUpdateManagementGroupSettingsRequestParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/PatchHierarchySettings.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagementGroups"
+        ],
+        "operationId": "HierarchySettings_Delete",
+        "description": "Deletes the hierarchy settings defined at the Management Group level.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/DeleteHierarchySettings.json"
           }
         }
       }
@@ -486,7 +669,7 @@
           "Entities"
         ],
         "operationId": "Entities_List",
-        "description": "List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.",
+        "description": "List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.\n",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -562,6 +745,12 @@
               "$ref": "#/definitions/TenantBackfillStatusResult"
             }
           },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/TenantBackfillStatusResult"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -573,7 +762,8 @@
           "StartTenantBackfill": {
             "$ref": "./examples/StartTenantBackfillRequest.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.Management/tenantBackfillStatus": {
@@ -893,7 +1083,7 @@
           }
         },
         "path": {
-          "description": "The hierarchial path from the root group to the current group.",
+          "description": "The path from the root to the current group.",
           "x-nullable": true,
           "type": "array",
           "items": {
@@ -1018,10 +1208,153 @@
           "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
           "readOnly": true
         },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagementGroupInfoProperties"
+        }
+      }
+    },
+    "AzureAsyncOperationResults": {
+      "description": "The results of Azure-AsyncOperation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
         "status": {
           "type": "string",
-          "description": "The current status of the operation",
+          "description": "The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed",
           "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagementGroupInfoProperties"
+        }
+      }
+    },
+    "HierarchySettings": {
+      "description": "Settings defined at the Management Group scope.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the settings object.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000/settings/default.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups/settings.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the object. In this case, default.",
+          "readOnly": true
+        },
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HierarchySettingsProperties"
+        }
+      }
+    },
+    "HierarchySettingsProperties": {
+      "description": "The generic properties of hierarchy settings.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the hierarchy settings. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "requireAuthorizationForGroupCreation": {
+          "type": "boolean",
+          "description": "Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access."
+        },
+        "defaultManagementGroup": {
+          "type": "string",
+          "description": "Settings that sets the default Management Group under which new subscriptions get added in this tenant. For example, /providers/Microsoft.Management/managementGroups/defaultGroup"
+        }
+      }
+    },
+    "HierarchySettingsList": {
+      "description": "Lists all hierarchy settings.",
+      "properties": {
+        "value": {
+          "description": "The list of hierarchy settings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HierarchySettingsInfo"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HierarchySettingsInfo": {
+      "description": "The hierarchy settings resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the settings object.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000/settings/default.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups/settings.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the object. In this case, default.",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "title": "Properties",
+          "$ref": "#/definitions/HierarchySettingsProperties"
+        }
+      }
+    },
+    "CreateOrUpdateSettingsRequest": {
+      "description": "Parameters for creating or updating Management Group settings",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "title": "Properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CreateOrUpdateSettingsProperties"
+        }
+      }
+    },
+    "CreateOrUpdateSettingsProperties": {
+      "description": "The properties of the request to create or update Management Group settings",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "requireAuthorizationForGroupCreation": {
+          "type": "boolean",
+          "description": "Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access."
+        },
+        "defaultManagementGroup": {
+          "type": "string",
+          "description": "Settings that sets the default Management Group under which new subscriptions get added in this tenant. For example, /providers/Microsoft.Management/managementGroups/defaultGroup"
         }
       }
     },
@@ -1455,14 +1788,14 @@
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Management/managementGroups"
+            "Microsoft.Management/managementGroup"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false,
             "values": [
               {
-                "value": "Microsoft.Management/managementGroups"
+                "value": "Microsoft.Management/managementGroup"
               }
             ]
           },
@@ -1523,7 +1856,7 @@
       "schema": {
         "$ref": "#/definitions/CreateManagementGroupRequest"
       },
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "PatchGroupRequestParameter": {
       "name": "patchGroupRequest",
@@ -1533,7 +1866,7 @@
       "schema": {
         "$ref": "#/definitions/PatchManagementGroupRequest"
       },
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "FilterParameter": {
       "name": "$filter",
@@ -1572,7 +1905,7 @@
         "ChildrenOnly"
       ],
       "x-ms-parameter-location": "method",
-      "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. With $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.With $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.With $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants.With $search=ParentOnly the API will return only the group if the user has access to at least one of the descendants of the group.With $search=ChildrenOnly the API will return only the first level of children of the group entity info specified in $filter.  The user must have direct access to the children entities or one of it's descendants for it to show up in the results."
+      "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in. \nWith $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.\nWith $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.\nWith $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants.\nWith $search=ParentOnly the API will return only the group if the user has access to at least one of the descendants of the group.\nWith $search=ChildrenOnly the API will return only the first level of children of the group entity info specified in $filter.  The user must have direct access to the children entities or one of it's descendants for it to show up in the results."
     },
     "GroupNameParameter": {
       "name": "groupName",
@@ -1581,6 +1914,16 @@
       "description": "A filter which allows the get entities call to focus on a particular group (i.e. \"$filter=name eq 'groupName'\")",
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "CreateOrUpdateManagementGroupSettingsRequestParameter": {
+      "name": "CreateTenantSettingsRequest",
+      "in": "body",
+      "required": true,
+      "description": "Tenant level settings request parameter.",
+      "schema": {
+        "$ref": "#/definitions/CreateOrUpdateSettingsRequest"
+      },
+      "x-ms-parameter-location": "client"
     },
     "OperationResultIdParameter": {
       "name": "operationResultId",
@@ -1592,7 +1935,7 @@
         "delete"
       ],
       "description": "The id of the operation result.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "CheckNameAvailabilityParameter": {
       "name": "checkNameAvailabilityRequest",
@@ -1602,7 +1945,7 @@
       "schema": {
         "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "SkipParameter": {
       "name": "$skip",
@@ -1610,7 +1953,7 @@
       "required": false,
       "type": "integer",
       "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "TopParameter": {
       "name": "$top",
@@ -1618,15 +1961,15 @@
       "required": false,
       "type": "integer",
       "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "SkipTokenParameter": {
       "name": "$skiptoken",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "Page continuation token is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
-      "x-ms-parameter-location": "method"
+      "description": "Page continuation token is only used if a previous operation returned a partial result. \nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.\n",
+      "x-ms-parameter-location": "client"
     },
     "CacheControlHeader": {
       "name": "Cache-Control",
