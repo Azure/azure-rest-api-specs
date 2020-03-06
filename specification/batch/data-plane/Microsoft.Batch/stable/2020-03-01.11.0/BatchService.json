@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2019-08-01.10.0",
+    "version": "2020-03-01.11.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -13545,8 +13545,7 @@
           "items": {
             "type": "string",
             "x-nullable": false,
-            "title": "The disks to encrypt on each compute node.",
-            "description": "If omitted, no disks on the compute nodes in the pool will be encrypted.",
+            "title": "A disk to encrypt.",
             "enum": [
               "osdisk",
               "temporarydisk"
@@ -13568,8 +13567,8 @@
               ]
             }
           },
-          "title": "The list of disk targets Batch Service will encrypt on the compute node",
-          "description": "On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
+          "title": "The list of disk targets Batch Service will encrypt on the compute node.",
+          "description": "If omitted, no disks on the compute nodes in the pool will be encrypted. On Linux pool, only \"TemporaryDisk\" is supported; on Windows pool, \"OsDisk\" and \"TemporaryDisk\" must be specified."
         }
       },
       "description": "The disk encryption configuration applied on compute nodes in the pool. Disk encryption configuration is not supported on Linux pool created with Shared Image Gallery Image."
