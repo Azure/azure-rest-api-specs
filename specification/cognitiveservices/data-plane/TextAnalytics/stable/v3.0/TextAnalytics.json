@@ -417,10 +417,6 @@
           "type": "string",
           "description": "Error target."
         },
-        "targetRef": {
-          "type": "string",
-          "description": "The JSON pointer indicating the linked object."
-        },
         "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
@@ -431,6 +427,29 @@
           "items": {
             "$ref": "#/definitions/TextAnalyticsError"
           }
+        }
+      }
+    },
+    "TextAnalyticsWarning": {
+      "type": "object",
+      "required": [ "code", "message" ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [ "TooManyLongTokensInDocument" ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": false
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "The JSON pointer indicating the linked object."
         }
       }
     },
@@ -530,7 +549,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         }
       }
@@ -673,7 +692,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -761,7 +780,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -874,7 +893,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -957,7 +976,7 @@
           "type": "array",
           "description": "Warnings encountered while processing document.",
           "items": {
-            "$ref": "#/definitions/TextAnalyticsError"
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
