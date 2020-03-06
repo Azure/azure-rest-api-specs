@@ -114,6 +114,16 @@ directive:
           .replace(/(this.client.getIndexName\(\),)/g, "$1 accept,")
           .replace(/(public Mono\<(.*)\) \{)/g, "$1\n\t\tfinal String accept \= \"application\/json\;odata\.metadata\=none\"\;\n")
 
+    # Use Document rather than Map<String, Object>
+    - from:
+          - SuggestResult.java
+          - SearchResult.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(package com.azure.search.models;)/g, "$1\nimport com.azure.search.SearchDocument;")
+          .replace(/(Map<String, Object>)/g, "SearchDocument")
+
     # Rename IndexBatch to IndexBatchBase when processing the API spec
     - rename-model:
           from: IndexBatch
