@@ -410,6 +410,14 @@
         "createdDateTime": {
           "description": "Specifies the date and time when the workspace is created.",
           "$ref": "#/definitions/CreatedDateTime"
+        },
+        "workspaceId": {
+          "description": "The unique identifier of the databricks workspace in databricks control plane.",
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "description": "The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'",
+          "type": "string"
         }
       },
       "required": [
@@ -631,6 +639,7 @@
     "CreatedDateTime": {
       "type": "string",
       "format": "date-time",
+      "description": "The date and time stamp when the workspace was created.",
       "readOnly": true
     },
     "CreatedBy": {
