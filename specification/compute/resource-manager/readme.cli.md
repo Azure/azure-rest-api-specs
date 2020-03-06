@@ -78,7 +78,7 @@ cli:
     - name: Get a gallery Image Version.
     - name: List gallery Application Versions in a gallery Application Definition.
     - name: Get a gallery Application.
-    - name: Create a proximity placement group.
+    - name: Get a proximity placement group.
     - name: List gallery Image Versions in a gallery Image Definition.
     - name: Get Virtual Machine Instance View.
     - name: Get Container Service
@@ -94,7 +94,7 @@ cli:
     - name: Get a gallery.
     - name: VirtualMachineRunCommandGet
     - name: List Container Services by Resource Group
-    - name: Create a proximity placement group.
+    - name: List proximity placement groups in a resource group.
     - name: Get information about a virtual machine image.
     - name: Get information about a managed disk.
     - name: List all disk encryption sets in a resource group.
@@ -105,7 +105,7 @@ cli:
     - name: List all managed disks in a resource group.
     - name: VirtualMachineRunCommandList
     - name: List Container Services
-    - name: Create a proximity placement group.
+    - name: List proximity placement groups in a subscription.
     - name: List all disk encryption sets in a subscription.
     - name: List availability sets in a subscription.
     - name: List galleries in a subscription.
@@ -119,7 +119,7 @@ cli:
     - name: Start an extension rolling upgrade.
     - name: Update a simple Gallery Image Version (Managed Image as source).
     - name: Update a simple gallery Application.
-    - name: Create a proximity placement group.
+    - name: Update a proximity placement group.
     - name: Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.
     - name: VirtualMachineRunCommand
     - name: Generalize a Virtual Machine.
@@ -135,7 +135,7 @@ cli:
     - name: Delete a gallery Application Version.
     - name: Delete a gallery Image Version.
     - name: Delete a gallery Application.
-    - name: Create a proximity placement group.
+    - name: Delete a proximity placement group.
     - name: Delete Container Service
     - name: Delete a gallery image.
     - name: Delete a disk encryption set.
