@@ -7,7 +7,6 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   package-name: azure-mgmt-datafactory
   clear-output-folder: true
-add-credential: true
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
