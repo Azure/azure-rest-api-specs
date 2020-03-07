@@ -5744,54 +5744,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventTypes": {
-      "get": {
-        "tags": [
-          "TopicTypes"
-        ],
-        "summary": "List event types for an azure subscription.",
-        "description": "List event types for a topic type for an azure subscription.",
-        "operationId": "TopicTypes_ListEventTypesBySubscription",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "topicTypeName",
-            "in": "path",
-            "description": "Name of the topic type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/EventTypesListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
-          }
-        },
-        "x-ms-examples": {
-          "TopicTypes_ListEventTypesBySubscription": {
-            "$ref": "./examples/TopicTypes_ListEventTypesBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}/eventTypes": {
       "get": {
         "tags": [
@@ -5907,7 +5859,7 @@
           }
         },
         "inboundIpRules": {
-          "description": "This can be used to retrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -6304,7 +6256,7 @@
           }
         },
         "inboundIpRules": {
-          "description": "This can be used to retrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -8118,7 +8070,7 @@
           }
         },
         "inboundIpRules": {
-          "description": "This can be used to retrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
@@ -8191,7 +8143,7 @@
           }
         },
         "inboundIpRules": {
-          "description": "This can be used to retrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
+          "description": "This can be used to restrict traffic from specific IPs instead of all IPs. Note: These are considered only if PublicNetworkAccess is enabled.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/InboundIpRule"
