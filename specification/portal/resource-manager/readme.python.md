@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Portal
-  package-name: portal
+  namespace: azure.mgmt.portal
+  package-name: azure-mgmt-portal
   package-version: 2015-08-01-preview
   clear-output-folder: true
 ```
