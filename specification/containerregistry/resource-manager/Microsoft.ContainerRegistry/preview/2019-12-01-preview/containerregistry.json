@@ -36,11 +36,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "exportPipelineName",
-            "in": "path",
-            "description": "The export pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ExportPipelineNameParameter"
           }
         ],
         "responses": {
@@ -61,7 +57,7 @@
         "tags": [
           "ExportPipelines"
         ],
-        "description": "Creates an export pipeline that copies images from a container registry to a storage account.",
+        "description": "Creates an export pipeline for a container registry with the specified parameters.",
         "operationId": "ExportPipelines_Create",
         "parameters": [
           {
@@ -77,11 +73,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "exportPipelineName",
-            "in": "path",
-            "description": "The export pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ExportPipelineNameParameter"
           },
           {
             "name": "exportPipelineCreateParameters",
@@ -100,7 +92,7 @@
               "$ref": "#/definitions/ExportPipeline"
             }
           },
-          "202": {
+          "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ExportPipeline"
@@ -134,11 +126,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "exportPipelineName",
-            "in": "path",
-            "description": "The export pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ExportPipelineNameParameter"
           }
         ],
         "responses": {
@@ -272,11 +260,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "importPipelineName",
-            "in": "path",
-            "description": "The import pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ImportPipelineNameParameter"
           }
         ],
         "responses": {
@@ -297,7 +281,7 @@
         "tags": [
           "ImportPipelines"
         ],
-        "description": "Creates an import pipeline that copies images from a storage account to a container registry.",
+        "description": "Creates an import pipeline for a container registry with the specified parameters.",
         "operationId": "ImportPipelines_Create",
         "parameters": [
           {
@@ -313,11 +297,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "importPipelineName",
-            "in": "path",
-            "description": "The import pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ImportPipelineNameParameter"
           },
           {
             "name": "importPipelineCreateParameters",
@@ -336,7 +316,7 @@
               "$ref": "#/definitions/ImportPipeline"
             }
           },
-          "202": {
+          "201": {
             "description": "The request was successful; the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ImportPipeline"
@@ -370,11 +350,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "importPipelineName",
-            "in": "path",
-            "description": "The import pipeline name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ImportPipelineNameParameter"
           }
         ],
         "responses": {
@@ -523,11 +499,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "pipelineRunName",
-            "in": "path",
-            "description": "The pipeline run name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PipelineRunNameParameter"
           }
         ],
         "responses": {
@@ -543,6 +515,103 @@
             "$ref": "./examples/PipelineRunGet.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Creates a pipeline run for a container registry with the specified parameters",
+        "operationId": "PipelineRuns_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PipelineRunNameParameter"
+          },
+          {
+            "name": "pipelineRunCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a pipeline run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well - formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PipelineRun"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunCreate_Export": {
+            "$ref": "./examples/PipelineRunCreate_Export.json"
+          },
+          "PipelineRunCreate_Import": {
+            "$ref": "./examples/PipelineRunCreate_Import.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PipelineRuns"
+        ],
+        "description": "Deletes a pipeline run from a container registry.",
+        "operationId": "PipelineRuns_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PipelineRunNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The pipeline run does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "PipelineRunDelete": {
+            "$ref": "./examples/PipelineRunDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns": {
@@ -1785,22 +1854,13 @@
     "ExportPipelineProperties": {
       "description": "The properties of an export pipeline.",
       "required": [
-        "target",
-        "artifacts",
-        "trigger"
+        "target"
       ],
       "type": "object",
       "properties": {
         "target": {
           "$ref": "#/definitions/ExportPipelineTargetProperties",
           "description": "The target properties of the export pipeline."
-        },
-        "artifacts": {
-          "description": "List of source artifacts to be transferred that are identitified by repository name. \r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "options": {
           "description": "The list of all options configured for the pipeline.",
@@ -1819,10 +1879,6 @@
             }
           }
         },
-        "trigger": {
-          "$ref": "#/definitions/TriggerProperties",
-          "description": "The properties that describe the trigger of a pipeline."
-        },
         "provisioningState": {
           "description": "The provisioning state of the pipeline at the time the operation was called.",
           "enum": [
@@ -1839,10 +1895,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "forceUpdateTag": {
-          "description": "How the pipeline should be forced to recreate even if the pipeline configuration has not changed",
-          "type": "string"
         }
       }
     },
@@ -1862,26 +1914,16 @@
     "ExportPipelineTargetProperties": {
       "description": "The properties of the export pipeline target.",
       "required": [
-        "type",
-        "name",
         "keyVaultUri"
       ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of target for the export pipeline.",
-          "default": "AzureStorageBlob",
-          "enum": [
-            "AzureStorageBlob"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "TargetType",
-            "modelAsString": true
-          }
+          "type": "string"
         },
-        "name": {
-          "description": "The fully qualified domain name of the target for the export pipeline.\r\nTo target a container: \"https://accountName.blob.core.windows.net/containerName\"\r\nTo target a blob: \"https://accountName.blob.core.windows.net/containerName/blobName\"",
+        "uri": {
+          "description": "The target uri of the export pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\"",
           "type": "string"
         },
         "keyVaultUri": {
@@ -1890,32 +1932,12 @@
         }
       }
     },
-    "TriggerProperties": {
-      "required": [
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type of the trigger.\r\nManual: Run the pipeline immediately once the resource is created.\r\nAuto: Run the pipeline once the transferred images are replicated to the target storage account.",
-          "enum": [
-            "Manual",
-            "Auto"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PipelineTriggerType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "ExportPipelineListResult": {
       "description": "The result of a request to list export pipelines for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExportPipeline"
@@ -2027,16 +2049,19 @@
       }
     },
     "ImportPipelineProperties": {
-      "description": "The properties of an export pipeline.",
+      "description": "The properties of an import pipeline.",
       "required": [
-        "source",
-        "trigger"
+        "source"
       ],
       "type": "object",
       "properties": {
         "source": {
           "$ref": "#/definitions/ImportPipelineSourceProperties",
           "description": "The source properties of the import pipeline."
+        },
+        "trigger": {
+          "$ref": "#/definitions/TriggerProperties",
+          "description": "The properties that describe the trigger of the import pipeline."
         },
         "options": {
           "description": "The list of all options configured for the pipeline.",
@@ -2055,10 +2080,6 @@
             }
           }
         },
-        "trigger": {
-          "$ref": "#/definitions/TriggerProperties",
-          "description": "The properties that describe the trigger of a pipeline."
-        },
         "provisioningState": {
           "description": "The provisioning state of the pipeline at the time the operation was called.",
           "enum": [
@@ -2075,36 +2096,31 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "forceUpdateTag": {
-          "description": "How the pipeline should be forced to recreate even if the pipeline configuration has not changed",
-          "type": "string"
         }
       }
     },
     "ImportPipelineSourceProperties": {
       "description": "The properties of the import pipeline source.",
       "required": [
-        "type",
-        "name",
         "keyVaultUri"
       ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of source for the import pipeline.",
-          "default": "AzureStorageBlob",
+          "default": "AzureStorageBlobContainer",
           "enum": [
-            "AzureStorageBlob"
+            "AzureStorageBlob",
+            "AzureStorageBlobContainer"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "SourceType",
+            "name": "PipelineSourceType",
             "modelAsString": true
           }
         },
-        "name": {
-          "description": "The fully qualified domain name of the source for the import pipeline.\r\nWhen the source is a container: \"https://accountName.blob.core.windows.net/containerName\"\r\nWhen the source is a blob: \"https://accountName.blob.core.windows.net/containerName/blobName\"",
+        "uri": {
+          "description": "The source uri of the import pipeline.\r\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\r\nWhen 'AzureStorageBlobContainer': \"https://accountName.blob.core.windows.net/containerName\"",
           "type": "string"
         },
         "keyVaultUri": {
@@ -2113,12 +2129,42 @@
         }
       }
     },
+    "TriggerProperties": {
+      "type": "object",
+      "properties": {
+        "sourceTrigger": {
+          "$ref": "#/definitions/SourceTriggerProperties",
+          "description": "The type of the trigger."
+        }
+      }
+    },
+    "SourceTriggerProperties": {
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The current status of the source trigger.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TriggerStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ImportPipelineListResult": {
       "description": "The result of a request to list import pipelines for a container registry.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "description": "The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImportPipeline"
@@ -2308,42 +2354,77 @@
       }
     },
     "PipelineRunProperties": {
+      "description": "The properties of a pipeline run.",
       "type": "object",
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of a pipeline run.",
-          "enum": [
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Succeeded",
-            "Failed",
-            "Canceled"
-          ],
           "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
+        "request": {
+          "$ref": "#/definitions/PipelineRunRequest",
+          "description": "The request parameters for a pipeline run."
+        },
+        "response": {
+          "$ref": "#/definitions/PipelineRunResponse",
+          "description": "The response of a pipeline run.",
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "description": "How the pipeline run should be forced to recreate even if the pipeline run configuration has not changed.",
+          "type": "string"
+        }
+      }
+    },
+    "PipelineRunRequest": {
+      "description": "The request properties provided for a pipeline run.",
+      "type": "object",
+      "properties": {
         "pipelineResourceId": {
-          "description": "The resource ID of pipeline against which the run was scheduled.",
+          "description": "The resource ID of the pipeline to run.",
           "type": "string"
         },
-        "status": {
-          "description": "The current status of the pipeline run.",
-          "enum": [
-            "Running",
-            "Succeeded",
-            "Failed"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "PipelineRunStatus",
-            "modelAsString": true
+        "artifacts": {
+          "description": "List of source artifacts to be transferred by the pipeline. \r\nSpecify an image by repository ('hello-world'). This will use the 'latest' tag.\r\nSpecify an image by tag ('hello-world:latest').\r\nSpecify an image by sha256-based manifest digest ('hello-world@sha256:abc123').",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
+        },
+        "source": {
+          "$ref": "#/definitions/PipelineRunSourceProperties",
+          "description": "The source properties of the pipeline run."
+        },
+        "target": {
+          "$ref": "#/definitions/PipelineRunTargetProperties",
+          "description": "The target properties of the pipeline run."
+        },
+        "catalogDigest": {
+          "description": "The digest of the tar used to transfer the artifacts.",
+          "type": "string"
+        },
+        "isArchiveEnabled": {
+          "description": "Indicates whether archiving is enabled for the pipeline run or not.",
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
+    "PipelineRunResponse": {
+      "description": "The response properties returned for a pipeline run.",
+      "type": "object",
+      "properties": {
+        "artifacts": {
+          "description": "The artifacts transferred in the pipeline run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progress": {
+          "$ref": "#/definitions/ProgressProperties",
+          "description": "The current progress of the copy operation."
         },
         "startTime": {
           "format": "date-time",
@@ -2355,25 +2436,79 @@
           "description": "The time the pipeline run finished.",
           "type": "string"
         },
+        "source": {
+          "$ref": "#/definitions/ImportPipelineSourceProperties",
+          "description": "The source of the pipeline run."
+        },
+        "target": {
+          "$ref": "#/definitions/ExportPipelineTargetProperties",
+          "description": "The target of the pipeline run."
+        },
+        "catalogDigest": {
+          "description": "The digest of the tar used to transfer the artifacts.",
+          "type": "string"
+        },
         "trigger": {
           "$ref": "#/definitions/TriggerDescriptor",
           "description": "The trigger that caused the pipeline run."
         },
         "pipelineRunErrorMessage": {
-          "description": "The error message received from backend systems for the pipeline run.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The resource ID.",
+          "description": "The detailed error message for the pipeline run in the case of failure.",
           "type": "string"
+        },
+        "isArchiveEnabled": {
+          "description": "Indicates whether archiving is enabled for the pipeline run or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "PipelineRunSourceProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of the source.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineRunSourceType",
+            "modelAsString": true
+          }
         },
         "name": {
-          "description": "The name of the resource.",
+          "description": "The name of the source.",
           "type": "string"
-        },
+        }
+      }
+    },
+    "PipelineRunTargetProperties": {
+      "type": "object",
+      "properties": {
         "type": {
-          "description": "The type of the resource.",
+          "description": "The type of the target.",
+          "default": "AzureStorageBlob",
+          "enum": [
+            "AzureStorageBlob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PipelineRunTargetType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the target.",
+          "type": "string"
+        }
+      }
+    },
+    "ProgressProperties": {
+      "type": "object",
+      "properties": {
+        "percentage": {
+          "description": "The percentage complete of the copy operation.",
           "type": "string"
         }
       }
@@ -2381,20 +2516,18 @@
     "TriggerDescriptor": {
       "type": "object",
       "properties": {
-        "type": {
-          "description": "The type of the trigger that caused the pipeline to run.",
-          "enum": [
-            "Manual",
-            "Auto"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PipelineTriggerType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "The resource ID of the source that triggered the pipeline to run.",
+        "sourceTrigger": {
+          "$ref": "#/definitions/SourceTriggerDescriptor",
+          "description": "The source trigger that caused the pipeline run."
+        }
+      }
+    },
+    "SourceTriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp when the source update happened.",
           "type": "string"
         }
       }
@@ -2404,7 +2537,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of webhooks.",
+          "description": "The list of pipeline runs. Since this list may be incomplete, the nextLink field should be used to request the next list of pipeline runs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PipelineRun"
@@ -3906,6 +4039,17 @@
       "name": "importPipelineName",
       "in": "path",
       "description": "The name of the import pipeline.",
+      "required": true,
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 5,
+      "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "PipelineRunNameParameter": {
+      "name": "pipelineRunName",
+      "in": "path",
+      "description": "The name of the pipeline run.",
       "required": true,
       "type": "string",
       "maxLength": 50,
