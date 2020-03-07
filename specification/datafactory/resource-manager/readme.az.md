@@ -38,47 +38,47 @@ directive:
     transform: >
       $['x-ms-client-flatten'] = false;
     reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.CmdkeySetupTypeProperties.properties.password
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class    
-  - from: swagger-document
-    where: $.definitions.LicensedComponentSetupTypeProperties.properties.licenseKey
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.*.properties.servicePrincipalKey
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.DataFlowResource.properties.properties
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.DataFlowDebugResource.properties.properties
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.IntegrationRuntimeResource.properties.properties
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.IntegrationRuntimeDebugResource.properties.properties
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.LinkedServiceResource.properties.properties
-    transform: >
-      $['x-ms-client-flatten'] = false;
+  #- from: swagger-document
+  #  where: $.definitions.CmdkeySetupTypeProperties.properties.password
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class    
+  #- from: swagger-document
+  #  where: $.definitions.LicensedComponentSetupTypeProperties.properties.licenseKey
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.*.properties.servicePrincipalKey
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.DataFlowResource.properties.properties
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.DataFlowDebugResource.properties.properties
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.IntegrationRuntimeResource.properties.properties
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.IntegrationRuntimeDebugResource.properties.properties
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
+  #  reason: manually don't flatten the polymorphic base class
+  #- from: swagger-document
+  #  where: $.definitions.LinkedServiceResource.properties.properties
+  #  transform: >
+  #    $['x-ms-client-flatten'] = false;
 
-clicommon:
+cli:
     cli-directive:
     # directive on operationGroup
       - select: 'operationGroup'
@@ -91,9 +91,30 @@ clicommon:
         required: true
       - where:
             operationGroup: 'exposure_control'
-        hidden: true
+        delete: true
       - where:
             operationGroup: 'integration_runtime_object_metadata'
-        hidden: true
+        delete: true
+      - where:
+            operationGroup: 'datasets'
+        delete: true
+      - where:
+            operationGroup: 'activity_runs'
+        delete: true
+      - where:
+            operationGroup: 'data_flows'
+        delete: true
+      - where:
+            operationGroup: 'data_flow_debug_session'
+        delete: true
+      - where:
+            operationGroup: 'integration_runtimes'
+        delete: true
+      - where:
+            operationGroup: 'integration_runtime_nodes'
+        delete: true
+      - where:
+            operationGroup: 'linked_services'
+        delete: true
 
 ```
