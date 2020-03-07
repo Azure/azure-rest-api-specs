@@ -9,7 +9,7 @@ az:
   package-name: azure-mgmt-logic
 python-sdk-output-folder: "$(output-folder)/src/logic/azext_logic/vendored_sdks/logic"
   
-clicommon:
+cli:
     cli-directive:
     # directive on operationGroup
       - select: 'operationGroup'
