@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2020-02-01",
+    "groupId": "ChildGroup",
+    "patchGroupRequest": {
+      "displayName": "AlternateDisplayName",
+      "parentGroupId": "/providers/Microsoft.Management/managementGroups/AlternateRootGroup"
+    },
+    "Cache-Control": "no-cache"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
+        "type": "Microsoft.Management/managementGroups",
+        "name": "ChildGroup",
+        "properties": {
+          "tenantId": "20000000-0000-0000-0000-000000000000",
+          "displayName": "AlternateDisplayName",
+          "details": {
+            "version": 2,
+            "updatedTime": "2018-01-25T02:46:59.0545645Z",
+            "updatedBy": "bd490e30-04cb-433e-b8c8-6066959a8bab",
+            "parent": {
+              "id": "/providers/Microsoft.Management/managementGroups/AlternateRootGroup",
+              "name": "AlternateRootGroup",
+              "displayName": "AlternateRootGroup"
+            }
+          }
+        }
+      }
+    }
+  }
+}
