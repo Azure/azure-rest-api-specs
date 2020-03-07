@@ -344,6 +344,45 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VnfManager/virtualNetworkFunctionSkus": {
+      "get": {
+        "tags": [
+          "VnfManagerVnf"
+        ],
+        "operationId": "VirtualNetworkFunctionsSkus_List",
+        "description": "Get all the available Vendor information.",
+        "parameters": [
+          {
+            "$ref": "./vnfmanager.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./vnfmanager.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of VnfManager vendors.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkFunctionVendorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./vnfmanager.json#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VnfManager vnf in resource group": {
+            "$ref": "./examples/VirtualNetworkFunctionsSkusGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -426,6 +465,57 @@
         }
       },
       "description": "Response for Vnf Manager Vnfs API service call."
+    },
+    "SKUNameType": {
+      "properties": {
+        "skuName": {
+          "type": "string",
+          "description": "The Vendor SKU name"
+        },
+        "skuType": {
+          "type": "string",
+          "description": "The Vendor SKU type"
+        }
+      }
+    },
+    "VirtualNetworkFunctionVendorPropertiesFormat": {
+      "properties": {
+        "skuNameType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SKUNameType"
+          }
+        }
+      }
+    },
+    "VirtualNetworkFunctionVendor": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkFunctionVendorPropertiesFormat",
+          "description": "Vendors of the VnfManager service provider."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./vnfmanager.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualNetworkFunctionVendorListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkFunctionVendor"
+          },
+          "description": "A list of VnfManager Vendors that are available."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
     }
   }
 }
