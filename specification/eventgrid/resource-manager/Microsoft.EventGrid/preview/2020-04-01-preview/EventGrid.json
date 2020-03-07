@@ -5911,7 +5911,7 @@
           "description": "The tenant ID of resource.",
           "type": "string"
         },
-        "UserAssignedIdentities": {
+        "userAssignedIdentities": {
           "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\r\nThis property is currently not used and reserved for future usage.",
           "type": "object",
           "additionalProperties": {
@@ -5930,15 +5930,18 @@
         },
         "id": {
           "description": "Fully qualified identifier of the resource.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "Name of the resource",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "Type of the resource",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -5966,11 +5969,11 @@
       "description": "The information about the user identity.",
       "type": "object",
       "properties": {
-        "PrincipalId": {
+        "principalId": {
           "description": "The principal id of user assigned identity.",
           "type": "string"
         },
-        "ClientId": {
+        "clientId": {
           "description": "The client id of user assigned identity.",
           "type": "string"
         }
