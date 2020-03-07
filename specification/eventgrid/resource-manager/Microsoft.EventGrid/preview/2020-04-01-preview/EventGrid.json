@@ -4125,7 +4125,7 @@
           "PartnerTopics"
         ],
         "summary": "Deactivate a partner topic.",
-        "description": "Deactivate a partner topic.",
+        "description": "Deactivate specific partner topic.",
         "operationId": "PartnerTopics_Deactivate",
         "consumes": [],
         "produces": [
@@ -4156,12 +4156,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PartnerTopic"
-            }
-          },
-          "202": {
-            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/PartnerTopic"
             }
@@ -4888,7 +4882,8 @@
           "SystemTopics_CreateOrUpdate": {
             "$ref": "./examples/SystemTopics_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -4938,7 +4933,8 @@
           "SystemTopics_Delete": {
             "$ref": "./examples/SystemTopics_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -5005,7 +5001,8 @@
           "SystemTopics_Update": {
             "$ref": "./examples/SystemTopics_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/systemTopics": {
@@ -6006,6 +6003,7 @@
       "x-ms-azure-resource": true
     },
     "PrivateEndpointConnectionProperties": {
+      "description": "Properties of the private endpoint connection resource",
       "type": "object",
       "properties": {
         "privateEndpoint": {
@@ -6042,6 +6040,7 @@
       }
     },
     "PrivateEndpoint": {
+      "description": "PrivateEndpoint information.",
       "type": "object",
       "properties": {
         "id": {
@@ -6051,6 +6050,7 @@
       }
     },
     "ConnectionState": {
+      "description": "ConnectionState Information.",
       "type": "object",
       "properties": {
         "status": {
