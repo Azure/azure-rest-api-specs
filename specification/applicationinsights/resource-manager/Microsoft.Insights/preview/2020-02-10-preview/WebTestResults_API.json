@@ -68,16 +68,16 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLink": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}/gettestresultfile": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/webtests/{webTestName}/getTestResultFile": {
       "post": {
         "tags": [
-          "FindWebTestResult"
+          "WebTests_GetTestResultFile"
         ],
-        "operationId": "gettestresultfile",
+        "operationId": "getTestResultFile",
         "description": "Returns a file test result for the matching test",
         "parameters": [
           {
@@ -250,19 +250,19 @@
       "required": true,
       "type": "string",
       "enum": [
-        "webtestresult",
-        "json"
+        "WebTestResult",
+        "Json"
       ],
       "x-ms-enum": {
         "name": "downloadAs",
         "modelAsString": true,
         "values": [
           {
-            "value": "webtestresult",
+            "value": "WebTestResult",
             "description": "Returned file will be in visual studio webtestresult file format."
           },
           {
-            "value": "json",
+            "value": "Json",
             "description": "Returned file will be in json file format."
           }
         ]
