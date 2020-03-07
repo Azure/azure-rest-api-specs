@@ -5663,6 +5663,7 @@
         }
       }
     },
+
     "/providers/Microsoft.EventGrid/topicTypes": {
       "get": {
         "tags": [
@@ -5698,51 +5699,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topicTypes/{topicTypeName}": {
-      "get": {
-        "tags": [
-          "TopicTypes"
-        ],
-        "summary": "Get a topic type for an azure subscription.",
-        "description": "Get information about a topic type for an azure subscription.",
-        "operationId": "TopicTypes_GetBySubscription",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "topicTypeName",
-            "in": "path",
-            "description": "Name of the topic type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TopicTypeInfo"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
-          }
-        },
-        "x-ms-examples": {
-          "TopicTypes_GetBySubscription": {
-            "$ref": "./examples/TopicTypes_GetBySubscription.json"
-          }
         }
       }
     },
