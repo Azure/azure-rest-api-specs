@@ -5663,47 +5663,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/topicTypes": {
-      "get": {
-        "tags": [
-          "TopicTypes"
-        ],
-        "summary": "List topic types for an Azure subscription.",
-        "description": "List all registered topic types for an Azure subscription.",
-        "operationId": "TopicTypes_ListBySubscription",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TopicTypesListResult"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 404 Not Found.\n\n * 500 Internal Server Error."
-          }
-        },
-        "x-ms-examples": {
-          "TopicTypes_ListBySubscription": {
-            "$ref": "./examples/TopicTypes_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
     "/providers/Microsoft.EventGrid/topicTypes": {
       "get": {
         "tags": [
