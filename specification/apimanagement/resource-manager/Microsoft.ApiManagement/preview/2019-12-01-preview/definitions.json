@@ -2878,54 +2878,6 @@
       },
       "description": "Paged OpenIdProviders list representation."
     },
-    "OpenidConnectProviderCreateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OpenidConnectProviderCreateContractProperties",
-          "description": "OpenId Connect Provider contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "OpenId Connect Provider details."
-    },
-    "OpenidConnectProviderCreateContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly OpenID Connect Provider name.",
-          "maxLength": 50
-        },
-        "description": {
-          "type": "string",
-          "description": "User-friendly description of OpenID Connect Provider."
-        },
-        "metadataEndpoint": {
-          "type": "string",
-          "description": "Metadata endpoint URI."
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client ID of developer console which is the client application."
-        },
-        "clientSecret": {
-          "x-ms-secret": true,
-          "type": "string",
-          "description": "Client Secret of developer console which is the client application."
-        }
-      },
-      "required": [
-        "displayName",
-        "metadataEndpoint",
-        "clientId",
-        "clientSecret"
-      ],
-      "description": "OpenID Connect Providers Contract."
-    },
     "OpenidConnectProviderContract": {
       "properties": {
         "properties": {
