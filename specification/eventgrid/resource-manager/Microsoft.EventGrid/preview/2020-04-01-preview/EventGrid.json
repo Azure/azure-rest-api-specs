@@ -3606,9 +3606,6 @@
           "200": {
             "description": "OK"
           },
-          "202": {
-            "description": "Accepted"
-          },
           "204": {
             "description": "NoContent"
           },
@@ -3893,7 +3890,8 @@
           "PartnerTopics_Delete": {
             "$ref": "./examples/PartnerTopics_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -5786,6 +5784,7 @@
       "type": "object",
       "properties": {
         "privateEndpointConnections": {
+          "description": "List of private endpoint connections.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -5912,6 +5911,7 @@
     },
     "PrivateEndpointConnection": {
       "type": "object",
+      "description": "PrivateEndpointConnection resource information.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -6217,11 +6217,11 @@
       }
     },
     "DomainUpdateParameters": {
-      "description": "Properties of the Domain update",
+      "description": "Properties of the Domain update.",
       "type": "object",
       "properties": {
         "tags": {
-          "description": "Tags of the domains resource",
+          "description": "Tags of the domains resource.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -6233,7 +6233,8 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "#/definitions/IdentityInfo"
+          "$ref": "#/definitions/IdentityInfo",
+          "description": "Identity information for the resource."
         },
         "sku": {
           "$ref": "#/definitions/ResourceSku",
@@ -6243,6 +6244,7 @@
     },
     "DomainUpdateParameterProperties": {
       "type": "object",
+      "description": "Information of domain update parameter properties.",
       "properties": {
         "publicNetworkAccess": {
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
@@ -7828,7 +7830,9 @@
     },
     "PrivateLinkResource": {
       "type": "object",
+      "description": "Information of the private link resource.",
       "properties": {
+        "description": "Properties of the private link resource.",
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
           "x-ms-client-flatten": true
