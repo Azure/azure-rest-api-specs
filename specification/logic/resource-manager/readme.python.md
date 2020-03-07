@@ -11,7 +11,6 @@ python:
   namespace: azure.mgmt.logic
   package-name: azure-mgmt-logic
   clear-output-folder: true
-add-credentials: true
 ```
 
 ```yaml $(python)
