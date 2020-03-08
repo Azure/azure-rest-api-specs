@@ -38,6 +38,10 @@ directive:
     transform: >
       $['x-ms-client-flatten'] = false;
     reason: manually don't flatten the polymorphic base class
+  - from: swagger-document
+    where: $.definitions.Pipeline.properties.activities
+    transform: >
+      $['x-ms-client-flatten'] = false;
   #- from: swagger-document
   #  where: $.definitions.CmdkeySetupTypeProperties.properties.password
   #  transform: >
