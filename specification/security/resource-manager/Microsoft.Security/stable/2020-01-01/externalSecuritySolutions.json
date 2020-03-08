@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Microsoft Defender for Cloud",
-    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
-    "version": "2020-01-01"
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -179,10 +179,7 @@
     },
     "ExternalSecuritySolution": {
       "type": "object",
-      "description": "Represents a security solution external to Microsoft Defender for Cloud which sends information to an OMS workspace and whose data is displayed by Microsoft Defender for Cloud.",
-      "required": [
-        "kind"
-      ],
+      "description": "Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whose data is displayed by Azure Security Center.",
       "discriminator": "kind",
       "properties": {},
       "allOf": [
