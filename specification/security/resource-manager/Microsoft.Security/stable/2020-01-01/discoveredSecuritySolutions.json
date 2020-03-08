@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/discoveredSecuritySolutions": {
+      "get": {
+        "x-ms-examples": {
+          "Get discovered security solutions": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a list of discovered Security Solutions for the subscription.",
+        "operationId": "DiscoveredSecuritySolutions_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions": {
+      "get": {
+        "x-ms-examples": {
+          "Get discovered security solutions from a security data location": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionsSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a list of discovered Security Solutions for the subscription and location.",
+        "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolutionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/discoveredSecuritySolutions/{discoveredSecuritySolutionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get discovered security solution from a security data location": {
+            "$ref": "./examples/DiscoveredSecuritySolutions/GetDiscoveredSecuritySolutionResourceGroupLocation_example.json"
+          }
+        },
+        "tags": [
+          "DiscoveredSecuritySolutions"
+        ],
+        "description": "Gets a specific discovered Security Solution.",
+        "operationId": "DiscoveredSecuritySolutions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/DiscoveredSecuritySolutionName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiscoveredSecuritySolution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DiscoveredSecuritySolutionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiscoveredSecuritySolution"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "DiscoveredSecuritySolution": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiscoveredSecuritySolutionProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "DiscoveredSecuritySolutionProperties": {
+      "type": "object",
+      "properties": {
+        "securityFamily": {
+          "type": "string",
+          "description": "The security family of the discovered solution",
+          "enum": [
+            "Waf",
+            "Ngfw",
+            "SaasWaf",
+            "Va"
+          ],
+          "x-ms-enum": {
+            "name": "securityFamily",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Waf"
+              },
+              {
+                "value": "Ngfw"
+              },
+              {
+                "value": "SaasWaf"
+              },
+              {
+                "value": "Va"
+              }
+            ]
+          }
+        },
+        "offer": {
+          "type": "string",
+          "description": "The security solutions' image offer"
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The security solutions' image publisher"
+        },
+        "sku": {
+          "type": "string",
+          "description": "The security solutions' image sku"
+        }
+      },
+      "required": [
+        "securityFamily",
+        "offer",
+        "publisher",
+        "sku"
+      ]
+    }
+  },
+  "parameters": {
+    "DiscoveredSecuritySolutionName": {
+      "name": "discoveredSecuritySolutionName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "Name of a discovered security solution.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
