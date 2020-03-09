@@ -7,7 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.DataShare
+  namespace: azure.mgmt.datashare
   package-name: azure-mgmt-datashare
   package-version: 2019-11-01
   clear-output-folder: true

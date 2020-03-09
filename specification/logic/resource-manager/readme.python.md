@@ -7,7 +7,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Logic
+  namespace: azure.mgmt.logic
   package-name: azure-mgmt-logic
   package-version: 2019-05-01
   clear-output-folder: true
