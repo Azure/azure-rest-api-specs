@@ -235,14 +235,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Namespace create request accepted.",
+          "200": {
+            "description": "Namespace successfully created.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "200": {
-            "description": "Namespace successfully created.",
+          "201": {
+            "description": "Namespace create request accepted.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -285,14 +285,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Namespace successfully deleted."
           },
           "202": {
             "description": "Namespace delete request accepted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -384,14 +384,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Namespace update request accepted.",
+          "200": {
+            "description": "Namespace successfully updated.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "200": {
-            "description": "Namespace successfully updated.",
+          "201": {
+            "description": "Namespace update request accepted.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -577,11 +577,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Namespace AuthorizationRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -1198,6 +1198,197 @@
         }
       }
     },
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections": {
+      "get": {
+        "tags": [
+          "SchemaCollections"
+        ],
+        "operationId": "SchemaCollections_ListByNamespace",
+        "x-ms-examples": {
+          "EventHubsListAll": {
+            "$ref": "./examples/EventHubs/EHSchemaCollectionsListByNameSpace.json"
+          }
+        },
+        "description": "Gets all the Schema Collections in a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of Schema Collections.",
+            "schema": {
+              "$ref": "#/definitions/SchemaCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections/{schemaCollectionName}": {
+      "put": {
+        "tags": [
+          "SchemaCollections"
+        ],
+        "operationId": "SchemaCollections_CreateOrUpdate",
+        "x-ms-examples": {
+          "EventHubCreate": {
+            "$ref": "./examples/EventHubs/EHSchemaCollectionCreate.json"
+          }
+        },
+        "description": "Creates or updates a new Schema Collection as a nested resource within a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaCollectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SchemaCollection"
+            },
+            "description": "Parameters supplied to create an Schema Collection resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Schema Collection successfully created.",
+            "schema": {
+              "$ref": "#/definitions/SchemaCollection"
+            }
+          },
+          "default": {
+            "description": "SchemaCollection error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SchemaCollections"
+        ],
+        "operationId": "EventHubs_Delete",
+        "x-ms-examples": {
+          "EventHubDelete": {
+            "$ref": "./examples/SchemaCollections/EHEventHubDelete.json"
+          }
+        },
+        "description": "Deletes an Schema Collection from the specified Namespace and resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Schema Collection successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "SchemaCollection error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SchemaCollections"
+        ],
+        "operationId": "EventHubs_Get",
+        "x-ms-examples": {
+          "EventHubGet": {
+            "$ref": "./examples/SchemaCollections/EHEventHubGet.json"
+          }
+        },
+        "description": "Gets an Schema Collections description for the specified Schema Collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SchemaCollectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the Schema Collection description.",
+            "schema": {
+              "$ref": "#/definitions/SchemaCollection"
+            }
+          },
+          "default": {
+            "description": "SchemaCollection error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs": {
       "get": {
         "tags": [
@@ -1331,11 +1522,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Event Hub successfully deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -1571,11 +1762,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Event Hub AuthorizationRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -1779,11 +1970,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Consumer group deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
