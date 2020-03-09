@@ -120,5 +120,9 @@ cli:
       - where:
             operationGroup: 'linked_services'
         delete: true
+    flatten:
+        cli-flatten-set-enabled: true
+        cli-flatten-all: true
+
 
 ```
