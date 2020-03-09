@@ -281,7 +281,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch.Protocol
-  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Batch/src/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/sdk/batch/Microsoft.Azure.Batch/src/GeneratedProtocol
   clear-output-folder: true
   client-side-validation: false
 ```
@@ -305,7 +305,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-batch/azure/batch
+  output-folder: $(python-sdks-folder)/sdk/azure-batch/azure/batch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -326,11 +326,12 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-batch
 nodejs:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: com.microsoft.azure.batch.protocol
-  output-folder: $(node-sdks-folder)/src/main/java
+  package-name: azure-batch
+  output-folder: $(node-sdks-folder)/sdk/batch
   payload-flattening-threshold: 1
   generate-license-txt: true
-  clear-output-folder: true
+  generate-package-json: false
+  generate-readme-md: false
 ```
 
 ## Java
@@ -345,7 +346,7 @@ java:
   namespace: com.microsoft.azure.batch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-batch
+  output-folder: $(azure-libraries-for-java-folder)/sdk/batch/microsoft-azure-batch
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
