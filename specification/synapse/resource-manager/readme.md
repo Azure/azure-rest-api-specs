@@ -73,11 +73,18 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## C#
 
@@ -91,6 +98,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
