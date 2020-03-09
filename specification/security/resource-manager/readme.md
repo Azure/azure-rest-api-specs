@@ -143,7 +143,6 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
-- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -159,6 +158,7 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
+- Microsoft.Security/stable/2020-01-01/applicationWhitelistings.json
 
 # Needed when there is more than one input file
 override-info:
