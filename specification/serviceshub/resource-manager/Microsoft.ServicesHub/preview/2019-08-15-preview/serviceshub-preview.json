@@ -511,7 +511,22 @@
           }
         }
       },
-      "ServicesHubWorkspace": {
+	  "ServicesHubWorkspace": {
+        "type": "object",
+        "description": "Services Hub Workspace",
+        "properties": {
+          "properties": {
+            "description": "Services Hub Workspace Properties",
+            "$ref": "#/definitions/ServicesHubWorkspaceProperties"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Resource"
+          }
+        ]
+      },
+      "ServicesHubWorkspaceProperties": {
         "type": "object",
         "description": "Properties of Services Hub Workspace.",
         "properties": {
