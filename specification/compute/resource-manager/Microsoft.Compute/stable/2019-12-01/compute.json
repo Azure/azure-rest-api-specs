@@ -6,20 +6,12 @@
     "version": "2019-12-01"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/providers/Microsoft.Compute/operations": {
       "get": {
-        "tags": [
-          "ComputeOperations"
-        ],
+        "tags": ["ComputeOperations"],
         "operationId": "Operations_List",
         "description": "Gets a list of compute operations.",
         "parameters": [
@@ -61,9 +51,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
       "put": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_CreateOrUpdate",
         "description": "Create or update an availability set.",
         "parameters": [
@@ -112,9 +100,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_Update",
         "description": "Update an availability set.",
         "parameters": [
@@ -158,9 +144,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_Delete",
         "description": "Delete an availability set.",
         "parameters": [
@@ -195,9 +179,7 @@
         }
       },
       "get": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_Get",
         "description": "Retrieves information about an availability set.",
         "parameters": [
@@ -234,9 +216,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_ListBySubscription",
         "description": "Lists all availability sets in a subscription.",
         "parameters": [
@@ -274,9 +254,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
       "get": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_List",
         "description": "Lists all availability sets in a resource group.",
         "parameters": [
@@ -309,9 +287,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes": {
       "get": {
-        "tags": [
-          "AvailabilitySets"
-        ],
+        "tags": ["AvailabilitySets"],
         "operationId": "AvailabilitySets_ListAvailableSizes",
         "description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.",
         "parameters": [
@@ -351,9 +327,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}": {
       "put": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_CreateOrUpdate",
         "description": "Create or update a proximity placement group.",
         "parameters": [
@@ -408,9 +382,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_Update",
         "description": "Update a proximity placement group.",
         "parameters": [
@@ -459,9 +431,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_Delete",
         "description": "Delete a proximity placement group.",
         "parameters": [
@@ -498,9 +468,7 @@
         }
       },
       "get": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_Get",
         "description": "Retrieves information about a proximity placement group .",
         "parameters": [
@@ -549,9 +517,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/proximityPlacementGroups": {
       "get": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_ListBySubscription",
         "description": "Lists all proximity placement groups in a subscription.",
         "parameters": [
@@ -582,9 +548,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups": {
       "get": {
-        "tags": [
-          "ProximityPlacementGroups"
-        ],
+        "tags": ["ProximityPlacementGroups"],
         "operationId": "ProximityPlacementGroups_ListByResourceGroup",
         "description": "Lists all proximity placement groups in a resource group.",
         "parameters": [
@@ -622,9 +586,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}": {
       "put": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_CreateOrUpdate",
         "description": "Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596)",
         "parameters": [
@@ -679,9 +641,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_Update",
         "description": "Update an dedicated host group.",
         "parameters": [
@@ -725,9 +685,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_Delete",
         "description": "Delete a dedicated host group.",
         "parameters": [
@@ -762,9 +720,7 @@
         }
       },
       "get": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_Get",
         "description": "Retrieves information about a dedicated host group.",
         "parameters": [
@@ -806,9 +762,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups": {
       "get": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_ListByResourceGroup",
         "description": "Lists all of the dedicated host groups in the specified resource group. Use the nextLink property in the response to get the next page of dedicated host groups.",
         "parameters": [
@@ -841,9 +795,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/hostGroups": {
       "get": {
-        "tags": [
-          "DedicatedHostGroups"
-        ],
+        "tags": ["DedicatedHostGroups"],
         "operationId": "DedicatedHostGroups_ListBySubscription",
         "description": "Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups.",
         "parameters": [
@@ -869,9 +821,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}": {
       "put": {
-        "tags": [
-          "DedicatedHosts"
-        ],
+        "tags": ["DedicatedHosts"],
         "operationId": "DedicatedHosts_CreateOrUpdate",
         "description": "Create or update a dedicated host .",
         "parameters": [
@@ -934,9 +884,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "DedicatedHosts"
-        ],
+        "tags": ["DedicatedHosts"],
         "operationId": "DedicatedHosts_Update",
         "description": "Update an dedicated host .",
         "parameters": [
@@ -988,9 +936,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "DedicatedHosts"
-        ],
+        "tags": ["DedicatedHosts"],
         "operationId": "DedicatedHosts_Delete",
         "description": "Delete a dedicated host.",
         "parameters": [
@@ -1036,9 +982,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "DedicatedHosts"
-        ],
+        "tags": ["DedicatedHosts"],
         "operationId": "DedicatedHosts_Get",
         "description": "Retrieves information about a dedicated host.",
         "parameters": [
@@ -1069,9 +1013,7 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "instanceView"
-            ],
+            "enum": ["instanceView"],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
               "modelAsString": false
@@ -1101,9 +1043,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts": {
       "get": {
-        "tags": [
-          "DedicatedHost"
-        ],
+        "tags": ["DedicatedHost"],
         "operationId": "DedicatedHosts_ListByHostGroup",
         "description": "Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.",
         "parameters": [
@@ -1143,9 +1083,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/sshPublicKeys": {
       "get": {
-        "tags": [
-          "SshPublicKeys"
-        ],
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_ListBySubscription",
         "description": "Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.",
         "parameters": [
@@ -1171,9 +1109,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys": {
       "get": {
-        "tags": [
-          "SshPublicKeys"
-        ],
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_ListByResourceGroup",
         "description": "Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.",
         "parameters": [
@@ -1206,9 +1142,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}": {
       "put": {
-        "tags": [
-          "SshPublicKeys"
-        ],
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_Create",
         "description": "Creates a new SSH public key resource.",
         "parameters": [
@@ -1257,10 +1191,52 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "SshPublicKeys"
+      "patch": {
+        "tags": ["SshPublicKeys"],
+        "operationId": "SshPublicKeys_Update",
+        "description": "Updates a new SSH public key resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "sshPublicKeyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the SSH public key."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            },
+            "description": "Parameters supplied to update the SSH public key."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
         ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SshPublicKeyResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_Delete",
         "description": "Delete an SSH public key.",
         "parameters": [
@@ -1295,9 +1271,7 @@
         }
       },
       "get": {
-        "tags": [
-          "SshPublicKeys"
-        ],
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_Get",
         "description": "Retrieves information about an SSH public key.",
         "parameters": [
@@ -1334,9 +1308,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}/generateKeyPair": {
       "post": {
-        "tags": [
-          "SshPublicKeys"
-        ],
+        "tags": ["SshPublicKeys"],
         "operationId": "SshPublicKeys_GenerateKeyPair",
         "description": "Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.",
         "parameters": [
@@ -1373,9 +1345,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}": {
       "get": {
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
+        "tags": ["VirtualMachineExtensionImages"],
         "operationId": "VirtualMachineExtensionImages_Get",
         "description": "Gets a virtual machine extension image.",
         "parameters": [
@@ -1423,9 +1393,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types": {
       "get": {
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
+        "tags": ["VirtualMachineExtensionImages"],
         "operationId": "VirtualMachineExtensionImages_ListTypes",
         "description": "Gets a list of virtual machine extension image types.",
         "parameters": [
@@ -1464,9 +1432,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions": {
       "get": {
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
+        "tags": ["VirtualMachineExtensionImages"],
         "operationId": "VirtualMachineExtensionImages_ListVersions",
         "description": "Gets a list of virtual machine extension image versions.",
         "parameters": [
@@ -1532,9 +1498,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
       "put": {
-        "tags": [
-          "VirtualMachineExtensions"
-        ],
+        "tags": ["VirtualMachineExtensions"],
         "operationId": "VirtualMachineExtensions_CreateOrUpdate",
         "description": "The operation to create or update the extension.",
         "parameters": [
@@ -1592,9 +1556,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "VirtualMachineExtensions"
-        ],
+        "tags": ["VirtualMachineExtensions"],
         "operationId": "VirtualMachineExtensions_Update",
         "description": "The operation to update the extension.",
         "parameters": [
@@ -1646,9 +1608,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "VirtualMachineExtensions"
-        ],
+        "tags": ["VirtualMachineExtensions"],
         "operationId": "VirtualMachineExtensions_Delete",
         "description": "The operation to delete the extension.",
         "parameters": [
@@ -1694,9 +1654,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "VirtualMachineExtensions"
-        ],
+        "tags": ["VirtualMachineExtensions"],
         "operationId": "VirtualMachineExtensions_Get",
         "description": "The operation to get the extension.",
         "parameters": [
@@ -1747,9 +1705,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions": {
       "get": {
-        "tags": [
-          "VirtualMachineExtensions"
-        ],
+        "tags": ["VirtualMachineExtensions"],
         "operationId": "VirtualMachineExtensions_List",
         "description": "The operation to get all extensions of a Virtual Machine.",
         "parameters": [
@@ -1793,9 +1749,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
+        "tags": ["VirtualMachineImages"],
         "operationId": "VirtualMachineImages_Get",
         "description": "Gets a virtual machine image.",
         "parameters": [
@@ -1853,9 +1807,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
       "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
+        "tags": ["VirtualMachineImages"],
         "operationId": "VirtualMachineImages_List",
         "description": "Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.",
         "parameters": [
@@ -1930,9 +1882,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
       "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
+        "tags": ["VirtualMachineImages"],
         "operationId": "VirtualMachineImages_ListOffers",
         "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
         "parameters": [
@@ -1972,9 +1922,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
       "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
+        "tags": ["VirtualMachineImages"],
         "operationId": "VirtualMachineImages_ListPublishers",
         "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
         "parameters": [
@@ -2007,9 +1955,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
       "get": {
-        "tags": [
-          "VirtualMachineImages"
-        ],
+        "tags": ["VirtualMachineImages"],
         "operationId": "VirtualMachineImages_ListSkus",
         "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
         "parameters": [
@@ -2056,9 +2002,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages": {
       "get": {
-        "tags": [
-          "Usage"
-        ],
+        "tags": ["Usage"],
         "operationId": "Usage_List",
         "description": "Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.",
         "parameters": [
@@ -2092,9 +2036,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines": {
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_ListByLocation",
         "description": "Gets all the virtual machines under the specified subscription for the specified location.",
         "parameters": [
@@ -2133,9 +2075,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes": {
       "get": {
-        "tags": [
-          "VirtualMachineSizes"
-        ],
+        "tags": ["VirtualMachineSizes"],
         "operationId": "VirtualMachineSizes_List",
         "description": "This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list)",
         "parameters": [
@@ -2169,9 +2109,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}": {
       "put": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_CreateOrUpdate",
         "description": "Create or update an image.",
         "parameters": [
@@ -2254,9 +2192,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_Update",
         "description": "Update an image.",
         "parameters": [
@@ -2312,9 +2248,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_Delete",
         "description": "Deletes an Image.",
         "parameters": [
@@ -2353,9 +2287,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_Get",
         "description": "Gets an image.",
         "parameters": [
@@ -2404,9 +2336,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images": {
       "get": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_ListByResourceGroup",
         "description": "Gets the list of images under a resource group.",
         "parameters": [
@@ -2444,9 +2374,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/images": {
       "get": {
-        "tags": [
-          "Images"
-        ],
+        "tags": ["Images"],
         "operationId": "Images_List",
         "description": "Gets the list of Images in the subscription. Use nextLink property in the response to get the next page of Images. Do this till nextLink is null to fetch all the Images.",
         "parameters": [
@@ -2477,9 +2405,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/capture": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Capture",
         "description": "Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.",
         "parameters": [
@@ -2532,9 +2458,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
       "put": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_CreateOrUpdate",
         "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
         "parameters": [
@@ -2623,9 +2547,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Update",
         "description": "The operation to update a virtual machine.",
         "parameters": [
@@ -2681,9 +2603,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Delete",
         "description": "The operation to delete a virtual machine.",
         "parameters": [
@@ -2722,9 +2642,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Get",
         "description": "Retrieves information about the model view or the instance view of a virtual machine.",
         "parameters": [
@@ -2748,9 +2666,7 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "instanceView"
-            ],
+            "enum": ["instanceView"],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
               "modelAsString": false
@@ -2780,9 +2696,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView": {
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_InstanceView",
         "description": "Retrieves information about the run-time state of a virtual machine.",
         "parameters": [
@@ -2824,9 +2738,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_ConvertToManagedDisks",
         "description": "Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.",
         "parameters": [
@@ -2864,9 +2776,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Deallocate",
         "description": "Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
         "parameters": [
@@ -2904,9 +2814,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/generalize": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Generalize",
         "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. <br>For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource).<br>For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/capture-image).",
         "parameters": [
@@ -2945,9 +2853,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_List",
         "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
@@ -2980,9 +2886,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines": {
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_ListAll",
         "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
@@ -3015,9 +2919,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes": {
       "get": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_ListAvailableSizes",
         "description": "Lists all available virtual machine sizes to which the specified virtual machine can be resized.",
         "parameters": [
@@ -3062,9 +2964,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_PowerOff",
         "description": "The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.",
         "parameters": [
@@ -3110,9 +3010,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reapply": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Reapply",
         "description": "The operation to reapply a virtual machine's state.",
         "parameters": [
@@ -3161,9 +3059,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Restart",
         "description": "The operation to restart a virtual machine.",
         "parameters": [
@@ -3201,9 +3097,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Start",
         "description": "The operation to start a virtual machine.",
         "parameters": [
@@ -3241,9 +3135,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Redeploy",
         "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
@@ -3281,9 +3173,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_Reimage",
         "description": "Reimages the virtual machine which has an ephemeral OS disk back to its initial state.",
         "parameters": [
@@ -3335,9 +3225,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance": {
       "post": {
-        "tags": [
-          "VirtualMachines"
-        ],
+        "tags": ["VirtualMachines"],
         "operationId": "VirtualMachines_PerformMaintenance",
         "description": "The operation to perform maintenance on a virtual machine.",
         "parameters": [
@@ -3375,9 +3263,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
       "put": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
         "description": "Create or update a VM scale set.",
         "parameters": [
@@ -3478,9 +3364,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Update",
         "description": "Update a VM scale set.",
         "parameters": [
@@ -3525,9 +3409,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Delete",
         "description": "Deletes a VM scale set.",
         "parameters": [
@@ -3566,9 +3448,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Get",
         "description": "Display information about a virtual machine scale set.",
         "parameters": [
@@ -3605,9 +3485,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Deallocate",
         "description": "Deallocates specific virtual machines in a VM scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set deallocates.",
         "parameters": [
@@ -3654,9 +3532,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_DeleteInstances",
         "description": "Deletes virtual machines in a VM scale set.",
         "parameters": [
@@ -3703,9 +3579,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_GetInstanceView",
         "description": "Gets the status of a VM scale set instance.",
         "parameters": [
@@ -3742,9 +3616,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_List",
         "description": "Gets a list of all VM scale sets under a resource group.",
         "parameters": [
@@ -3777,9 +3649,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}": {
       "put": {
-        "tags": [
-          "VirtualMachineScaleSetExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetExtensions"],
         "operationId": "VirtualMachineScaleSetExtensions_CreateOrUpdate",
         "description": "The operation to create or update an extension.",
         "parameters": [
@@ -3837,9 +3707,7 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [
-          "VirtualMachineScaleSetExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetExtensions"],
         "operationId": "VirtualMachineScaleSetExtensions_Update",
         "description": "The operation to update an extension.",
         "parameters": [
@@ -3897,9 +3765,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "VirtualMachineScaleSetExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetExtensions"],
         "operationId": "VirtualMachineScaleSetExtensions_Delete",
         "description": "The operation to delete the extension.",
         "parameters": [
@@ -3945,9 +3811,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetExtensions"],
         "operationId": "VirtualMachineScaleSetExtensions_Get",
         "description": "The operation to get the extension.",
         "parameters": [
@@ -3998,9 +3862,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetExtensions"],
         "operationId": "VirtualMachineScaleSetExtensions_List",
         "description": "Gets a list of all extensions in a VM scale set.",
         "parameters": [
@@ -4040,9 +3902,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_ListAll",
         "description": "Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets.",
         "parameters": [
@@ -4068,9 +3928,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_ListSkus",
         "description": "Gets a list of SKUs available for your VM scale set, including the minimum and maximum VM instances allowed for each SKU.",
         "parameters": [
@@ -4110,9 +3968,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osUpgradeHistory": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_GetOSUpgradeHistory",
         "description": "Gets list of OS upgrades on a VM scale set instance.",
         "parameters": [
@@ -4152,9 +4008,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_PowerOff",
         "description": "Power off (stop) one or more virtual machines in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
@@ -4209,9 +4063,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Restart",
         "description": "Restarts one or more virtual machines in a VM scale set.",
         "parameters": [
@@ -4258,9 +4110,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Start",
         "description": "Starts one or more virtual machines in a VM scale set.",
         "parameters": [
@@ -4307,9 +4157,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Redeploy",
         "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
@@ -4356,9 +4204,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/performMaintenance": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_PerformMaintenance",
         "description": "Perform maintenance on one or more virtual machines in a VM scale set. Operation on instances which are not eligible for perform maintenance will be failed. Please refer to best practices for more details: https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-maintenance-notifications",
         "parameters": [
@@ -4405,9 +4251,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_UpdateInstances",
         "description": "Upgrades one or more virtual machines to the latest SKU set in the VM scale set model.",
         "parameters": [
@@ -4454,9 +4298,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_Reimage",
         "description": "Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don't have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.",
         "parameters": [
@@ -4503,9 +4345,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimageall": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_ReimageAll",
         "description": "Reimages all the disks ( including data disks ) in the virtual machines in a VM scale set. This operation is only supported for managed disks.",
         "parameters": [
@@ -4552,9 +4392,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/cancel": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
-        ],
+        "tags": ["VirtualMachineScaleSetRollingUpgrades"],
         "operationId": "VirtualMachineScaleSetRollingUpgrades_Cancel",
         "description": "Cancels the current virtual machine scale set rolling upgrade.",
         "parameters": [
@@ -4592,9 +4430,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/osRollingUpgrade": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
-        ],
+        "tags": ["VirtualMachineScaleSetRollingUpgrades"],
         "operationId": "VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade",
         "description": "Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.",
         "parameters": [
@@ -4632,9 +4468,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensionRollingUpgrade": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
-        ],
+        "tags": ["VirtualMachineScaleSetRollingUpgrades"],
         "operationId": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
         "description": "Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.",
         "parameters": [
@@ -4677,9 +4511,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/rollingUpgrades/latest": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
-        ],
+        "tags": ["VirtualMachineScaleSetRollingUpgrades"],
         "operationId": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
         "description": "Gets the status of the latest virtual machine scale set rolling upgrade.",
         "parameters": [
@@ -4716,9 +4548,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/forceRecoveryServiceFabricPlatformUpdateDomainWalk": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_ForceRecoveryServiceFabricPlatformUpdateDomainWalk",
         "description": "Manual platform update domain walk to update virtual machines in a service fabric virtual machine scale set.",
         "parameters": [
@@ -4762,9 +4592,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/convertToSinglePlacementGroup": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
+        "tags": ["VirtualMachineScaleSets"],
         "operationId": "VirtualMachineScaleSets_ConvertToSinglePlacementGroup",
         "description": "Converts SinglePlacementGroup property to false for a existing virtual machine scale set.",
         "parameters": [
@@ -4804,9 +4632,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": {
       "put": {
-        "tags": [
-          "VirtualMachineScaleSetVMExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetVMExtensions"],
         "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
         "description": "The operation to create or update the VMSS VM extension.",
         "parameters": [
@@ -4882,9 +4708,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "VirtualMachineScaleSetVMExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetVMExtensions"],
         "operationId": "VirtualMachineScaleSetVMExtensions_Update",
         "description": "The operation to update the VMSS VM extension.",
         "parameters": [
@@ -4954,9 +4778,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "VirtualMachineScaleSetVMExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetVMExtensions"],
         "operationId": "VirtualMachineScaleSetVMExtensions_Delete",
         "description": "The operation to delete the VMSS VM extension.",
         "parameters": [
@@ -5020,9 +4842,7 @@
         }
       },
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetVMExtensions"],
         "operationId": "VirtualMachineScaleSetVMExtensions_Get",
         "description": "The operation to get the VMSS VM extension.",
         "parameters": [
@@ -5091,9 +4911,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMExtensions"
-        ],
+        "tags": ["VirtualMachineScaleSetVMExtensions"],
         "operationId": "VirtualMachineScaleSetVMExtensions_List",
         "description": "The operation to get all extensions of an instance in Virtual Machine Scaleset.",
         "parameters": [
@@ -5155,9 +4973,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Reimage",
         "description": "Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.",
         "parameters": [
@@ -5211,9 +5027,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimageall": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_ReimageAll",
         "description": "Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.",
         "parameters": [
@@ -5258,9 +5072,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Deallocate",
         "description": "Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.",
         "parameters": [
@@ -5305,9 +5117,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}": {
       "put": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Update",
         "description": "Updates a virtual machine of a VM scale set.",
         "parameters": [
@@ -5365,9 +5175,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Delete",
         "description": "Deletes a virtual machine from a VM scale set.",
         "parameters": [
@@ -5413,9 +5221,7 @@
         "x-ms-long-running-operation": true
       },
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Get",
         "description": "Gets a virtual machine from a VM scale set.",
         "parameters": [
@@ -5446,9 +5252,7 @@
             "required": false,
             "type": "string",
             "description": "The expand expression to apply on the operation.",
-            "enum": [
-              "instanceView"
-            ],
+            "enum": ["instanceView"],
             "x-ms-enum": {
               "name": "InstanceViewTypes",
               "modelAsString": false
@@ -5473,9 +5277,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
         "description": "Gets the status of a virtual machine from a VM scale set.",
         "parameters": [
@@ -5519,9 +5321,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines": {
       "get": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_List",
         "description": "Gets a list of all virtual machines in a VM scale sets.",
         "parameters": [
@@ -5583,9 +5383,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_PowerOff",
         "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
@@ -5638,9 +5436,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Restart",
         "description": "Restarts a virtual machine in a VM scale set.",
         "parameters": [
@@ -5685,9 +5481,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Start",
         "description": "Starts a virtual machine in a VM scale set.",
         "parameters": [
@@ -5732,9 +5526,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/redeploy": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
         "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
@@ -5779,9 +5571,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/performMaintenance": {
       "post": {
-        "tags": [
-          "VirtualMachineScaleSetVMs"
-        ],
+        "tags": ["VirtualMachineScaleSetVMs"],
         "operationId": "VirtualMachineScaleSetVMs_PerformMaintenance",
         "description": "Performs maintenance on a virtual machine in a VM scale set.",
         "parameters": [
@@ -5826,9 +5616,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval": {
       "post": {
-        "tags": [
-          "LogAnalytics"
-        ],
+        "tags": ["LogAnalytics"],
         "operationId": "LogAnalytics_ExportRequestRateByInterval",
         "x-ms-examples": {
           "Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.": {
@@ -5880,9 +5668,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests": {
       "post": {
-        "tags": [
-          "LogAnalytics"
-        ],
+        "tags": ["LogAnalytics"],
         "operationId": "LogAnalytics_ExportThrottledRequests",
         "x-ms-examples": {
           "Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period.": {
@@ -5994,10 +5780,7 @@
     "HyperVGenerationType": {
       "type": "string",
       "description": "Specifies the HyperVGeneration Type",
-      "enum": [
-        "V1",
-        "V2"
-      ],
+      "enum": ["V1", "V2"],
       "x-ms-enum": {
         "name": "HyperVGenerationTypes",
         "modelAsString": true
@@ -6012,11 +5795,7 @@
         "level": {
           "type": "string",
           "description": "The level code.",
-          "enum": [
-            "Info",
-            "Warning",
-            "Error"
-          ],
+          "enum": ["Info", "Warning", "Error"],
           "x-ms-enum": {
             "name": "StatusLevelTypes",
             "modelAsString": false
@@ -6075,10 +5854,7 @@
     "AvailabilitySetSkuType": {
       "type": "string",
       "description": "Specifies the sku of an Availability Set. Use 'Aligned' for virtual machines with managed disks and 'Classic' for virtual machines with unmanaged disks. Default value is 'Classic'.",
-      "enum": [
-        "Classic",
-        "Aligned"
-      ],
+      "enum": ["Classic", "Aligned"],
       "x-ms-enum": {
         "name": "AvailabilitySetSkuTypes",
         "modelAsString": true
@@ -6134,9 +5910,7 @@
           "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Availability Set operation response."
     },
     "SubResourceWithColocationStatus": {
@@ -6157,10 +5931,7 @@
         "proximityPlacementGroupType": {
           "type": "string",
           "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
-          "enum": [
-            "Standard",
-            "Ultra"
-          ],
+          "enum": ["Standard", "Ultra"],
           "x-ms-enum": {
             "name": "ProximityPlacementGroupType",
             "modelAsString": true
@@ -6234,9 +6005,7 @@
           "description": "The URI to fetch the next page of proximity placement groups."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Proximity Placement Group operation response."
     },
     "DedicatedHostGroupProperties": {
@@ -6257,9 +6026,7 @@
           "description": "A list of references to all dedicated hosts in the dedicated host group."
         }
       },
-      "required": [
-        "platformFaultDomainCount"
-      ],
+      "required": ["platformFaultDomainCount"],
       "description": "Dedicated Host Group Properties."
     },
     "DedicatedHostGroup": {
@@ -6318,19 +6085,13 @@
           "description": "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Dedicated Host Group with resource group response."
     },
     "DedicatedHostLicenseType": {
       "type": "string",
       "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**",
-      "enum": [
-        "None",
-        "Windows_Server_Hybrid",
-        "Windows_Server_Perpetual"
-      ],
+      "enum": ["None", "Windows_Server_Hybrid", "Windows_Server_Perpetual"],
       "x-ms-enum": {
         "name": "DedicatedHostLicenseTypes",
         "modelAsString": false
@@ -6448,9 +6209,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "required": [
-        "sku"
-      ],
+      "required": ["sku"],
       "description": "Specifies information about the Dedicated host."
     },
     "DedicatedHostUpdate": {
@@ -6481,9 +6240,7 @@
           "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The list dedicated host operation response."
     },
     "SshPublicKeyGenerateKeyPairResult": {
@@ -6501,14 +6258,10 @@
           "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}"
         }
       },
-      "required": [
-        "privateKey",
-        "publicKey",
-        "id"
-      ],
+      "required": ["privateKey", "publicKey", "id"],
       "description": "Response from generation of an SSH key pair."
     },
-	"SshPublicKeyResourceProperties": {
+    "SshPublicKeyResourceProperties": {
       "properties": {
         "publicKey": {
           "type": "string",
@@ -6517,11 +6270,12 @@
       },
       "description": "Properties of the SSH public key."
     },
-	"SshPublicKeyResource": {
+    "SshPublicKeyResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SshPublicKeyResourceProperties"
+          "$ref": "#/definitions/SshPublicKeyResourceProperties",
+          "description": "Properties of  the SSH public key."
         }
       },
       "allOf": [
@@ -6545,9 +6299,7 @@
           "description": "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The list SSH public keys operation response."
     },
     "VirtualMachineSize": {
@@ -6619,11 +6371,7 @@
           "description": "Whether the handler can support multiple extensions."
         }
       },
-      "required": [
-        "operatingSystem",
-        "computeRole",
-        "handlerSchema"
-      ],
+      "required": ["operatingSystem", "computeRole", "handlerSchema"],
       "description": "Describes the properties of a Virtual Machine Extension Image."
     },
     "VirtualMachineExtensionImage": {
@@ -6633,10 +6381,7 @@
           "$ref": "#/definitions/VirtualMachineExtensionImageProperties"
         }
       },
-      "required": [
-        "name",
-        "location"
-      ],
+      "required": ["name", "location"],
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -6662,10 +6407,7 @@
           "description": "Specifies the tags that are assigned to the virtual machine. For more information about using tags, see [Using tags to organize your Azure resources](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags.md)."
         }
       },
-      "required": [
-        "name",
-        "location"
-      ],
+      "required": ["name", "location"],
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -6834,11 +6576,7 @@
           "description": "Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element."
         }
       },
-      "required": [
-        "publisher",
-        "name",
-        "product"
-      ],
+      "required": ["publisher", "name", "product"],
       "description": "Used for establishing the purchase context of any 3rd Party artifact through MarketPlace."
     },
     "OSDiskImage": {
@@ -6846,19 +6584,14 @@
         "operatingSystem": {
           "type": "string",
           "description": "The operating system of the osDiskImage.",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
             "modelAsString": false
           }
         }
       },
-      "required": [
-        "operatingSystem"
-      ],
+      "required": ["operatingSystem"],
       "description": "Contains the os disk image information."
     },
     "DataDiskImage": {
@@ -6879,9 +6612,7 @@
           "description": "Specifies whether automatic OS upgrade is supported on the image."
         }
       },
-      "required": [
-        "automaticOSUpgradeSupported"
-      ],
+      "required": ["automaticOSUpgradeSupported"],
       "description": "Describes automatic OS upgrade properties on the image."
     },
     "VirtualMachineImageProperties": {
@@ -6914,10 +6645,7 @@
           "$ref": "#/definitions/VirtualMachineImageProperties"
         }
       },
-      "required": [
-        "name",
-        "location"
-      ],
+      "required": ["name", "location"],
       "allOf": [
         {
           "$ref": "#/definitions/VirtualMachineImageResource"
@@ -6943,9 +6671,7 @@
         "unit": {
           "type": "string",
           "description": "An enum describing the unit of usage measurement.",
-          "enum": [
-            "Count"
-          ],
+          "enum": ["Count"],
           "x-ms-enum": {
             "name": "UsageUnit",
             "modelAsString": false
@@ -6966,12 +6692,7 @@
           "description": "The name of the type of usage."
         }
       },
-      "required": [
-        "unit",
-        "currentValue",
-        "limit",
-        "name"
-      ],
+      "required": ["unit", "currentValue", "limit", "name"],
       "description": "Describes Compute Resource Usage."
     },
     "ListUsagesResult": {
@@ -6988,9 +6709,7 @@
           "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Usages operation response."
     },
     "VirtualMachineReimageParameters": {
@@ -7017,11 +6736,7 @@
           "description": "Specifies whether to overwrite the destination virtual hard disk, in case of conflict."
         }
       },
-      "required": [
-        "vhdPrefix",
-        "destinationContainerName",
-        "overwriteVhds"
-      ],
+      "required": ["vhdPrefix", "destinationContainerName", "overwriteVhds"],
       "description": "Capture Virtual Machine parameters."
     },
     "VirtualMachineCaptureResult": {
@@ -7302,10 +7017,7 @@
           "description": "The relative URL of the Key Vault containing the secret."
         }
       },
-      "required": [
-        "secretUrl",
-        "sourceVault"
-      ],
+      "required": ["secretUrl", "sourceVault"],
       "description": "Describes a reference to Key Vault Secret"
     },
     "DiskEncryptionSetParameters": {
@@ -7327,10 +7039,7 @@
           "description": "The relative URL of the Key Vault containing the key."
         }
       },
-      "required": [
-        "keyUrl",
-        "sourceVault"
-      ],
+      "required": ["keyUrl", "sourceVault"],
       "description": "Describes a reference to Key Vault Key"
     },
     "DiskEncryptionSettings": {
@@ -7362,11 +7071,7 @@
     "Caching": {
       "type": "string",
       "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**",
-      "enum": [
-        "None",
-        "ReadOnly",
-        "ReadWrite"
-      ],
+      "enum": ["None", "ReadOnly", "ReadWrite"],
       "x-ms-enum": {
         "name": "CachingTypes",
         "modelAsString": false
@@ -7375,11 +7080,7 @@
     "CreateOption": {
       "type": "string",
       "description": "Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \\u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.",
-      "enum": [
-        "FromImage",
-        "Empty",
-        "Attach"
-      ],
+      "enum": ["FromImage", "Empty", "Attach"],
       "x-ms-enum": {
         "name": "DiskCreateOptionTypes",
         "modelAsString": true
@@ -7402,9 +7103,7 @@
     "DiffDiskOption": {
       "type": "string",
       "description": "Specifies the ephemeral disk option for operating system disk.",
-      "enum": [
-        "Local"
-      ],
+      "enum": ["Local"],
       "x-ms-enum": {
         "name": "DiffDiskOptions",
         "modelAsString": true
@@ -7442,10 +7141,7 @@
         "osType": {
           "type": "string",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
             "modelAsString": false
@@ -7493,9 +7189,7 @@
           "$ref": "#/definitions/ManagedDiskParameters"
         }
       },
-      "required": [
-        "createOption"
-      ],
+      "required": ["createOption"],
       "description": "Specifies information about the operating system disk used by the virtual machine. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)."
     },
     "DataDisk": {
@@ -7555,10 +7249,7 @@
           "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
         }
       },
-      "required": [
-        "lun",
-        "createOption"
-      ],
+      "required": ["lun", "createOption"],
       "description": "Describes a data disk."
     },
     "StorageProfile": {
@@ -7595,9 +7286,7 @@
         "passName": {
           "type": "string",
           "description": "The pass name. Currently, the only allowable value is OobeSystem.",
-          "enum": [
-            "OobeSystem"
-          ],
+          "enum": ["OobeSystem"],
           "x-ms-enum": {
             "name": "PassNames",
             "modelAsString": false
@@ -7606,9 +7295,7 @@
         "componentName": {
           "type": "string",
           "description": "The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.",
-          "enum": [
-            "Microsoft-Windows-Shell-Setup"
-          ],
+          "enum": ["Microsoft-Windows-Shell-Setup"],
           "x-ms-enum": {
             "name": "ComponentNames",
             "modelAsString": false
@@ -7617,10 +7304,7 @@
         "settingName": {
           "type": "string",
           "description": "Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.",
-          "enum": [
-            "AutoLogon",
-            "FirstLogonCommands"
-          ],
+          "enum": ["AutoLogon", "FirstLogonCommands"],
           "x-ms-enum": {
             "name": "SettingNames",
             "modelAsString": false
@@ -7638,10 +7322,7 @@
         "protocol": {
           "type": "string",
           "description": "Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
-          "enum": [
-            "Http",
-            "Https"
-          ],
+          "enum": ["Http", "Https"],
           "x-ms-enum": {
             "name": "ProtocolTypes",
             "modelAsString": false
@@ -7882,11 +7563,7 @@
     "priority": {
       "type": "string",
       "description": "Specifies the priority for a standalone virtual machine or the virtual machines in the scale set. <br><br> 'Low' enum will be deprecated in the future, please use 'Spot' as the enum to deploy Azure Spot VM/VMSS.",
-      "enum": [
-        "Regular",
-        "Low",
-        "Spot"
-      ],
+      "enum": ["Regular", "Low", "Spot"],
       "x-ms-enum": {
         "name": "VirtualMachinePriorityTypes",
         "modelAsString": true
@@ -7895,10 +7572,7 @@
     "evictionPolicy": {
       "type": "string",
       "description": "Specifies the eviction policy for the Azure Spot VM/VMSS",
-      "enum": [
-        "Deallocate",
-        "Delete"
-      ],
+      "enum": ["Deallocate", "Delete"],
       "x-ms-enum": {
         "name": "VirtualMachineEvictionPolicyTypes",
         "modelAsString": true
@@ -8119,10 +7793,7 @@
         "hyperVGeneration": {
           "type": "string",
           "description": "Specifies the HyperVGeneration Type associated with a resource",
-          "enum": [
-            "V1",
-            "V2"
-          ],
+          "enum": ["V1", "V2"],
           "x-ms-enum": {
             "name": "HyperVGenerationType",
             "modelAsString": true
@@ -8324,9 +7995,7 @@
           "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Virtual Machine operation response."
     },
     "Sku": {
@@ -8365,11 +8034,7 @@
         "mode": {
           "type": "string",
           "description": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are  automatically updated at the same time.",
-          "enum": [
-            "Automatic",
-            "Manual",
-            "Rolling"
-          ],
+          "enum": ["Automatic", "Manual", "Rolling"],
           "x-ms-enum": {
             "name": "UpgradeMode",
             "modelAsString": false
@@ -8422,11 +8087,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "Default",
-              "OldestVM",
-              "NewestVM"
-            ],
+            "enum": ["Default", "OldestVM", "NewestVM"],
             "x-ms-enum": {
               "name": "VirtualMachineScaleSetScaleInRules",
               "modelAsString": true
@@ -8442,10 +8103,7 @@
         "osType": {
           "type": "string",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
             "modelAsString": false
@@ -8454,10 +8112,7 @@
         "osState": {
           "type": "string",
           "description": "The OS State.",
-          "enum": [
-            "Generalized",
-            "Specialized"
-          ],
+          "enum": ["Generalized", "Specialized"],
           "x-ms-enum": {
             "name": "OperatingSystemStateTypes",
             "modelAsString": false,
@@ -8479,10 +8134,7 @@
           "$ref": "#/definitions/ImageDisk"
         }
       ],
-      "required": [
-        "osType",
-        "osState"
-      ],
+      "required": ["osType", "osState"],
       "description": "Describes an Operating System disk."
     },
     "ImageDataDisk": {
@@ -8498,9 +8150,7 @@
           "$ref": "#/definitions/ImageDisk"
         }
       ],
-      "required": [
-        "lun"
-      ],
+      "required": ["lun"],
       "description": "Describes a data disk."
     },
     "ImageDisk": {
@@ -8520,11 +8170,7 @@
         "caching": {
           "type": "string",
           "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
+          "enum": ["None", "ReadOnly", "ReadWrite"],
           "x-ms-enum": {
             "name": "CachingTypes",
             "modelAsString": false
@@ -8630,9 +8276,7 @@
           "description": "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Image operation response."
     },
     "VirtualMachineScaleSetIdentity": {
@@ -8786,10 +8430,7 @@
         "osType": {
           "type": "string",
           "description": "This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
-          "enum": [
-            "Windows",
-            "Linux"
-          ],
+          "enum": ["Windows", "Linux"],
           "x-ms-enum": {
             "name": "OperatingSystemTypes",
             "modelAsString": false
@@ -8811,9 +8452,7 @@
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
         }
       },
-      "required": [
-        "createOption"
-      ],
+      "required": ["createOption"],
       "description": "Describes a virtual machine scale set operating system disk."
     },
     "VirtualMachineScaleSetUpdateOSDisk": {
@@ -8892,10 +8531,7 @@
           "description": "Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
         }
       },
-      "required": [
-        "lun",
-        "createOption"
-      ],
+      "required": ["lun", "createOption"],
       "description": "Describes a virtual machine scale set data disk."
     },
     "VirtualMachineScaleSetStorageProfile": {
@@ -8964,10 +8600,7 @@
         "privateIPAddressVersion": {
           "type": "string",
           "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
+          "enum": ["IPv4", "IPv6"],
           "x-ms-enum": {
             "name": "IPVersion",
             "modelAsString": true
@@ -9021,10 +8654,7 @@
         "privateIPAddressVersion": {
           "type": "string",
           "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
+          "enum": ["IPv4", "IPv6"],
           "x-ms-enum": {
             "name": "IPVersion",
             "modelAsString": true
@@ -9072,9 +8702,7 @@
           "$ref": "#/definitions/VirtualMachineScaleSetIPConfigurationProperties"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -9130,9 +8758,7 @@
           "description": "Whether IP forwarding enabled on this NIC."
         }
       },
-      "required": [
-        "ipConfigurations"
-      ],
+      "required": ["ipConfigurations"],
       "description": "Describes a virtual machine scale set network profile's IP configuration."
     },
     "VirtualMachineScaleSetUpdateNetworkConfigurationProperties": {
@@ -9178,9 +8804,7 @@
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
@@ -9225,9 +8849,7 @@
           "description": "The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created"
         }
       },
-      "required": [
-        "domainNameLabel"
-      ],
+      "required": ["domainNameLabel"],
       "description": "Describes a virtual machines scale sets network configuration's DNS settings."
     },
     "VirtualMachineScaleSetIpTag": {
@@ -9254,9 +8876,7 @@
           "$ref": "#/definitions/VirtualMachineScaleSetPublicIPAddressConfigurationProperties"
         }
       },
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
     },
     "VirtualMachineScaleSetUpdatePublicIPAddressConfiguration": {
@@ -9297,10 +8917,7 @@
         "publicIPAddressVersion": {
           "type": "string",
           "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
-          "enum": [
-            "IPv4",
-            "IPv6"
-          ],
+          "enum": ["IPv4", "IPv6"],
           "x-ms-enum": {
             "name": "IPVersion",
             "modelAsString": true
@@ -9461,9 +9078,7 @@
           "description": "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List VM scale set extension operation response."
     },
     "VirtualMachineScaleSetExtensionProfile": {
@@ -9767,9 +9382,7 @@
           "description": "The virtual machine scale set instance ids."
         }
       },
-      "required": [
-        "instanceIds"
-      ],
+      "required": ["instanceIds"],
       "description": "Specifies a list of virtual machine instance IDs from the VM scale set."
     },
     "VirtualMachineStatusCodeCount": {
@@ -9858,9 +9471,7 @@
           "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetListWithLinkResult": {
@@ -9877,9 +9488,7 @@
           "description": "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Virtual Machine operation response."
     },
     "VirtualMachineScaleSetSkuCapacity": {
@@ -9906,10 +9515,7 @@
           "readOnly": true,
           "type": "string",
           "description": "The scale type applicable to the sku.",
-          "enum": [
-            "Automatic",
-            "None"
-          ],
+          "enum": ["Automatic", "None"],
           "x-ms-enum": {
             "name": "VirtualMachineScaleSetSkuScaleType",
             "modelAsString": false
@@ -9952,9 +9558,7 @@
           "description": "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The Virtual Machine Scale Set List Skus operation response."
     },
     "RollbackStatusInfo": {
@@ -9985,12 +9589,7 @@
           "type": "string",
           "readOnly": true,
           "description": "Code indicating the current status of the upgrade.",
-          "enum": [
-            "RollingForward",
-            "Cancelled",
-            "Completed",
-            "Faulted"
-          ],
+          "enum": ["RollingForward", "Cancelled", "Completed", "Faulted"],
           "x-ms-enum": {
             "name": "UpgradeState",
             "modelAsString": false
@@ -10032,11 +9631,7 @@
           "readOnly": true,
           "type": "string",
           "description": "Invoker of the Upgrade Operation",
-          "enum": [
-            "Unknown",
-            "User",
-            "Platform"
-          ],
+          "enum": ["Unknown", "User", "Platform"],
           "x-ms-enum": {
             "name": "UpgradeOperationInvoker",
             "modelAsString": false
@@ -10089,9 +9684,7 @@
           "description": "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "List of Virtual Machine Scale Set OS Upgrade History operation response."
     },
     "VirtualMachineScaleSetVMProperties": {
@@ -10340,9 +9933,7 @@
           "description": "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs"
         }
       },
-      "required": [
-        "value"
-      ],
+      "required": ["value"],
       "description": "The List Virtual Machine Scale Set VMs operation response."
     },
     "RollingUpgradeStatusInfo": {
@@ -10390,12 +9981,7 @@
           "type": "string",
           "readOnly": true,
           "description": "Code indicating the current status of the upgrade.",
-          "enum": [
-            "RollingForward",
-            "Cancelled",
-            "Completed",
-            "Faulted"
-          ],
+          "enum": ["RollingForward", "Cancelled", "Completed", "Faulted"],
           "x-ms-enum": {
             "name": "RollingUpgradeStatusCode",
             "modelAsString": false
@@ -10411,10 +9997,7 @@
           "type": "string",
           "readOnly": true,
           "description": "The last action performed on the rolling upgrade.",
-          "enum": [
-            "Start",
-            "Cancel"
-          ],
+          "enum": ["Start", "Cancel"],
           "x-ms-enum": {
             "name": "RollingUpgradeActionType",
             "modelAsString": false
@@ -10555,9 +10138,7 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "x-ms-azure-resource": true
     },
     "UpdateResource": {
@@ -10612,21 +10193,14 @@
         "intervalLength": {
           "type": "string",
           "description": "Interval value in minutes used to create LogAnalytics call rate logs.",
-          "enum": [
-            "ThreeMins",
-            "FiveMins",
-            "ThirtyMins",
-            "SixtyMins"
-          ],
+          "enum": ["ThreeMins", "FiveMins", "ThirtyMins", "SixtyMins"],
           "x-ms-enum": {
             "name": "IntervalInMins",
             "modelAsString": false
           }
         }
       },
-      "required": [
-        "intervalLength"
-      ],
+      "required": ["intervalLength"],
       "allOf": [
         {
           "$ref": "#/definitions/LogAnalyticsInputBase"
@@ -10671,11 +10245,7 @@
           "description": "Group query result by Resource Name."
         }
       },
-      "required": [
-        "blobContainerSasUri",
-        "fromTime",
-        "toTime"
-      ],
+      "required": ["blobContainerSasUri", "fromTime", "toTime"],
       "description": "Api input base class for LogAnalytics Api."
     },
     "LogAnalyticsOperationResult": {
