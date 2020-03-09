@@ -494,6 +494,29 @@
         }
       }
     },
+    "TextAnalyticsWarning": {
+      "type": "object",
+      "required": [ "code", "message" ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [ "TooManyLongTokensInDocument" ],
+          "x-ms-enum": {
+            "name": "WarningCodeValue",
+            "modelAsString": false
+          },
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "The JSON pointer indicating the linked object."
+        }
+      }
+    },
     "InnerError": {
       "type": "object",
       "required": [
@@ -578,7 +601,8 @@
         "id",
         "sentiment",
         "confidenceScores",
-        "sentences"
+        "sentences",
+        "warnings"
       ],
       "properties": {
         "id": {
@@ -611,6 +635,13 @@
           "description": "Sentence level sentiment analysis.",
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         }
       }
@@ -914,7 +945,8 @@
       "type": "object",
       "required": [
         "id",
-        "entities"
+        "entities",
+        "warnings"
       ],
       "properties": {
         "id": {
@@ -926,6 +958,13 @@
           "description": "Recognized entities in the document.",
           "items": {
             "$ref": "#/definitions/Entity"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -1008,7 +1047,8 @@
       "type": "object",
       "required": [
         "id",
-        "entities"
+        "entities",
+        "warnings"
       ],
       "properties": {
         "id": {
@@ -1020,6 +1060,13 @@
           "description": "Recognized well-known entities in the document.",
           "items": {
             "$ref": "#/definitions/LinkedEntity"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -1132,7 +1179,8 @@
       "type": "object",
       "required": [
         "id",
-        "keyPhrases"
+        "keyPhrases",
+        "warnings"
       ],
       "properties": {
         "id": {
@@ -1144,6 +1192,13 @@
           "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
           "items": {
             "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
@@ -1220,7 +1275,8 @@
       "type": "object",
       "required": [
         "id",
-        "detectedLanguages"
+        "detectedLanguages",
+        "warnings"
       ],
       "properties": {
         "id": {
@@ -1232,6 +1288,13 @@
           "description": "A list of extracted languages.",
           "items": {
             "$ref": "#/definitions/DetectedLanguage"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/TextAnalyticsWarning"
           }
         },
         "statistics": {
