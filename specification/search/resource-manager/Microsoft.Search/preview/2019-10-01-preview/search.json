@@ -231,7 +231,7 @@
           "QueryKeys"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "QueryKeys_ListBySearchService",
         "x-ms-examples": {
@@ -574,7 +574,7 @@
           "Services"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "Services_ListByResourceGroup",
         "x-ms-examples": {
@@ -834,7 +834,7 @@
           "PrivateEndpointConnections"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "PrivateEndpointConnections_ListByService",
         "x-ms-examples": {
@@ -1049,7 +1049,7 @@
           "SharedPrivateLinkResources"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "SharedPrivateLinkResources_ListByService",
         "x-ms-examples": {
@@ -1100,7 +1100,7 @@
           "Services"
         ],
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "operationId": "Services_ListBySubscription",
         "x-ms-examples": {
@@ -1494,6 +1494,10 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of Shared Private Link Resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of shared private link resources, if there are any."
         }
       },
       "description": "Response containing a list of Shared Private Link Resources.",
