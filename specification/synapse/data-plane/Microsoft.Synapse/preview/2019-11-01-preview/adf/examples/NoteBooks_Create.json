@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "workspaceName": "exampleWorkspace",
+    "SynapseDnsSuffix": "dev.azuresynapse.net",
+    "noteBookName": "exampleNoteBook",
+    "ifMatch": null,
+    "noteBook": {
+      "properties": {
+        "description": "A sample notebook",
+        "nbformat": 4,
+        "nbformat_minor": 2,
+        "bigDataPool": {
+          "referenceName": "exampleBigDataPoolName",
+          "type": "BigDataPoolReference"
+        },
+        "sessionProperties": {
+          "driverMemory": "28g",
+          "driverCores": 4,
+          "executorMemory": "28g",
+          "executorCores": 4,
+          "numExecutors": 1
+        },
+        "metadata": {
+          "language_info": {
+            "name": "python"
+          },
+          "kernelspec": {
+            "name": "exampleName",
+            "display_name": "exampleDisplayName"
+          }
+        },
+        "cells": [
+          {
+            "cell_type": "code",
+            "metadata": {},
+            "source": [
+              "def my_function():\n",
+              " print(\"Hello from a function\")\n",
+              "\n",
+              "my_function()"
+            ],
+            "attachments": {},
+            "outputs": [
+              {
+                "execution_count": 3,
+                "output_type": "execute_result",
+                "data": {
+                  "text/plain": "Hello from a function"
+                },
+                "metadata": {}
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:41 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-writes": "1192",
+        "x-ms-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264",
+        "x-ms-correlation-request-id": "e4c589b7-a9fe-4c28-981c-3855ec27d264"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/notebooks/exampleNoteBook",
+        "name": "exampleNoteBook",
+        "type": "Microsoft.Synapse/workspaces/notebooks",
+        "properties": {
+          "description": "A sample notebook",
+          "nbformat": 4,
+          "nbformat_minor": 2,
+          "bigDataPool": {
+            "referenceName": "exampleBigDataPoolName",
+            "type": "BigDataPoolReference"
+          },
+          "sessionProperties": {
+            "driverMemory": "28g",
+            "driverCores": 4,
+            "executorMemory": "28g",
+            "executorCores": 4,
+            "numExecutors": 1
+          },
+          "metadata": {
+            "language_info": {
+              "name": "python"
+            },
+            "kernelspec": {
+              "name": "exampleName",
+              "display_name": "exampleDisplayName"
+            }
+          },
+          "cells": [
+            {
+              "cell_type": "code",
+              "metadata": {},
+              "source": [
+                "def my_function():\n",
+                " print(\"Hello from a function\")\n",
+                "\n",
+                "my_function()"
+              ],
+              "attachments": {},
+              "outputs": [
+                {
+                  "execution_count": 3,
+                  "output_type": "execute_result",
+                  "data": {
+                    "text/plain": "Hello from a function"
+                  },
+                  "metadata": {}
+                }
+              ]
+            }
+          ]
+        },
+        "etag": "0a0069d4-0000-0000-0000-5b245bd50000"
+      }
+    }
+  }
+}

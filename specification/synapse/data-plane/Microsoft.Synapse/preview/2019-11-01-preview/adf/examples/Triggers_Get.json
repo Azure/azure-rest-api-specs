@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "workspaceName": "exampleWorkspace",
+    "SynapseDnsSuffix": "dev.azuresynapse.net",
+    "triggerName": "exampleTrigger",
+    "ifNoneMatch": "1500544f-0000-0200-0000-5cbe09100000",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "304": {},
+    "200": {
+      "headers": {
+        "Date": "Mon, 22 Apr 2019 18:33:52 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "11989",
+        "x-ms-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870",
+        "x-ms-correlation-request-id": "8ad1759f-24c1-46a5-aef5-edd267e18870"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/triggers/exampleTrigger",
+        "name": "exampleTrigger",
+        "type": "Microsoft.Synapse/workspaces/triggers",
+        "properties": {
+          "type": "ScheduleTrigger",
+          "typeProperties": {
+            "recurrence": {
+              "frequency": "Minute",
+              "interval": 4,
+              "startTime": "2019-04-22T18:32:52.527912Z",
+              "endTime": "2019-04-22T18:48:52.5281747Z",
+              "timeZone": "UTC"
+            }
+          },
+          "pipelines": [
+            {
+              "pipelineReference": {
+                "referenceName": "examplePipeline",
+                "type": "PipelineReference"
+              },
+              "parameters": {
+                "OutputBlobNameList": [
+                  "exampleoutput.csv"
+                ]
+              }
+            }
+          ],
+          "runtimeState": "Stopped"
+        },
+        "etag": "1500544f-0000-0200-0000-5cbe09100000"
+      }
+    }
+  }
+}

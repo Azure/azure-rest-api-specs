@@ -1,0 +1,251 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SynapseClient",
+    "version": "2019-11-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "NoteBook": {
+      "description": "Notebook.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the notebook.",
+          "type": "string"
+        },
+        "bigDataPool": {
+          "description": "Big data pool reference.",
+          "$ref": "#/definitions/BigDataPoolReference"
+        },
+        "sessionProperties": {
+          "description": "Session properties.",
+          "$ref": "#/definitions/NotebookSessionProperties"
+        },
+        "metadata": {
+          "description": "Notebook root-level metadata.",
+          "$ref": "#/definitions/NotebookMetadata"
+        },
+        "nbformat": {
+          "description": "Notebook format (major number). Incremented between backwards incompatible changes to the notebook format.",
+          "type": "integer"
+        },
+        "nbformat_minor": {
+          "description": "Notebook format (minor number). Incremented for backward compatible changes to the notebook format.",
+          "type": "integer"
+        },
+        "cells": {
+          "description": "Array of cells of the current notebook.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotebookCell"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "metadata",
+        "nbformat_minor",
+        "nbformat",
+        "cells"
+      ]
+    },
+    "BigDataPoolReference": {
+      "description": "Big data pool reference.",
+      "properties": {
+        "type": {
+          "description": "Big data pool reference type.",
+          "type": "string",
+          "enum": [
+            "BigDataPoolReference"
+          ],
+          "x-ms-enum": {
+            "name": "BigDataPoolReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "Reference big data pool name.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "NotebookMetadata": {
+      "description": "Notebook root-level metadata.",
+      "type": "object",
+      "properties": {
+        "kernelspec": {
+          "description": "Kernel information.",
+          "$ref": "#/definitions/NotebookKernelSpec"
+        },
+        "language_info": {
+          "description": "Language info.",
+          "$ref": "#/definitions/NotebookLanguageInfo"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "NotebookKernelSpec": {
+      "description": "Kernel information.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the kernel specification.",
+          "type": "string"
+        },
+        "display_name": {
+          "description": "Name to display in UI.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "name",
+        "display_name"
+      ]
+    },
+    "NotebookLanguageInfo": {
+      "description": "Language info.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The programming language which this kernel runs.",
+          "type": "string"
+        },
+        "codemirror_mode": {
+          "description": "The codemirror mode to use for code in this language.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "NotebookCell": {
+      "description": "Notebook cell.",
+      "type": "object",
+      "properties": {
+        "cell_type": {
+          "description": "String identifying the type of cell.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "Cell-level metadata.",
+          "type": "object"
+        },
+        "source": {
+          "description": "Contents of the cell, represented as an array of lines.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "description": "Attachments associated with the cell.",
+          "type": "object"
+        },
+        "outputs": {
+          "description": "Cell-level output items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotebookCellOutputItem"
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "cell_type",
+        "metadata",
+        "source"
+      ]
+    },
+    "NotebookSessionProperties": {
+      "description": "Session properties.",
+      "properties": {
+        "driverMemory": {
+          "description": "Amount of memory to use for the driver process.",
+          "type": "string"
+        },
+        "driverCores": {
+          "description": "Number of cores to use for the driver.",
+          "type": "integer"
+        },
+        "executorMemory": {
+          "description": "Amount of memory to use per executor process.",
+          "type": "string"
+        },
+        "executorCores": {
+          "description": "Number of cores to use for each executor.",
+          "type": "integer"
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this session.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "driverMemory",
+        "driverCores",
+        "executorMemory",
+        "executorCores",
+        "numExecutors"
+      ]
+    },
+    "NotebookCellOutputItem": {
+      "description": "An item of the notebook cell execution output.",
+      "properties": {
+        "name": {
+          "description": "For output_type=stream, determines the name of stream (stdout / stderr).",
+          "type": "string"
+        },
+        "execution_count": {
+          "description": "Execution sequence number.",
+          "type": "integer"
+        },
+        "output_type": {
+          "description": "Execution, display, or stream outputs.",
+          "type": "string",
+          "enum": [
+            "execute_result",
+            "display_data",
+            "stream",
+            "error"
+          ],
+          "x-ms-enum": {
+            "name": "CellOutputType",
+            "modelAsString": true
+          }
+        },
+        "text": {
+          "description": "For output_type=stream, the stream's text output, represented as a string or an array of strings."
+        },
+        "data": {
+          "description": "Output data. Use MIME type as key, and content as value.",
+          "type": "object"
+        },
+        "metadata": {
+          "description": "Metadata for the output item.",
+          "type": "object"
+        }
+      },
+      "required": [
+        "output_type"
+      ]
+    }
+  }
+}
