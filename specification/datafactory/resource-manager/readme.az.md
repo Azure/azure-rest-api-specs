@@ -9,39 +9,39 @@ az:
   package-name: azure-mgmt-datafactory
 python-sdk-output-folder: "$(output-folder)/src/datafactory/azext_datafactory/vendored_sdks/datafactory"
 
-directive:
-  - from: swagger-document
-    where: $..parameters[?(@.in=='body')]
-    transform: >
-      $['x-ms-client-flatten'] = true;
-    reason: Flatten everything for Azure CLI
-  - from: swagger-document
-    where: $.definitions[*].properties.*
-    transform: >
-      $['x-ms-client-flatten'] = true;
-    reason: Flatten everything for Azure CLI
-  - from: swagger-document
-    where: $.definitions[?(@.discriminator)]
-    transform: >
-      $['x-ms-client-flatten'] = false;
-  - from: swagger-document
-    where: $.definitions[?(@.discriminator)].properties.*
-    transform: >
-      $['x-ms-client-flatten'] = false;
-  - from: swagger-document
-    where: $.definitions.FactoryRepoUpdate.properties.repoConfiguration
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.FactoryProperties.properties.repoConfiguration
-    transform: >
-      $['x-ms-client-flatten'] = false;
-    reason: manually don't flatten the polymorphic base class
-  - from: swagger-document
-    where: $.definitions.Pipeline.properties.activities
-    transform: >
-      $['x-ms-client-flatten'] = false;
+#directive:
+#  - from: swagger-document
+#    where: $..parameters[?(@.in=='body')]
+#    transform: >
+#      $['x-ms-client-flatten'] = true;
+#    reason: Flatten everything for Azure CLI
+#  - from: swagger-document
+#    where: $.definitions[*].properties.*
+#    transform: >
+#      $['x-ms-client-flatten'] = true;
+#    reason: Flatten everything for Azure CLI
+#  - from: swagger-document
+#    where: $.definitions[?(@.discriminator)]
+#    transform: >
+#      $['x-ms-client-flatten'] = false;
+#  - from: swagger-document
+#    where: $.definitions[?(@.discriminator)].properties.*
+#    transform: >
+#      $['x-ms-client-flatten'] = false;
+#  - from: swagger-document
+#    where: $.definitions.FactoryRepoUpdate.properties.repoConfiguration
+#    transform: >
+#      $['x-ms-client-flatten'] = false;
+#    reason: manually don't flatten the polymorphic base class
+#  - from: swagger-document
+#    where: $.definitions.FactoryProperties.properties.repoConfiguration
+#    transform: >
+#      $['x-ms-client-flatten'] = false;
+#    reason: manually don't flatten the polymorphic base class
+#  - from: swagger-document
+#    where: $.definitions.Pipeline.properties.activities
+#    transform: >
+#      $['x-ms-client-flatten'] = false;
   #- from: swagger-document
   #  where: $.definitions.CmdkeySetupTypeProperties.properties.password
   #  transform: >
