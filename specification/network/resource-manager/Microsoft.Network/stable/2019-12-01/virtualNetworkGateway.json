@@ -2348,7 +2348,7 @@
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
         "bgpSettings": {
-          "$ref": "#/definitions/VirtualNetworkGatewayBgpSettings",
+          "$ref": "#/definitions/BgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
         },
         "customRoutes": {
@@ -2606,6 +2606,13 @@
           "type": "integer",
           "format": "int32",
           "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
+          },
+          "description": "BGP peering address with IP configuration ID for virtual network gateway."
         }
       },
       "description": "BGP settings details."
@@ -3632,32 +3639,6 @@
         }
       },
       "description": "Start packet capture parameters on virtual network gateway."
-    },
-    "VirtualNetworkGatewayBgpSettings": {
-      "properties": {
-        "asn": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The BGP speaker's ASN."
-        },
-        "bgpPeeringAddress": {
-          "type": "string",
-          "description": "The BGP peering address and BGP identifier of this BGP speaker."
-        },
-        "peerWeight": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The weight added to routes learned from this BGP speaker."
-        },
-        "bgpPeeringAddresses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
-          },
-          "description": "BgpPeeringAddress with ipconfigurationId for virtual network gateway."
-        }
-      },
-      "description": "BGP settings details."
     },
     "IPConfigurationBgpPeeringAddress": {
       "properties": {
