@@ -526,7 +526,7 @@
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "operationId": "PrivateEndpointConnections_Put",
+        "operationId": "PrivateEndpointConnections_Create",
         "description": "Update the state of specified private endpoint connection associated with the storage sync service.",
         "x-ms-examples": {
           "PrivateEndpointConnections_Create": {
@@ -3131,7 +3131,9 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
-        "properties": {}
+        "properties": {
+          "description": "StorageSyncService Body Properties object."
+        }
       },
       "required": [
         "location"
@@ -3280,6 +3282,7 @@
       "description": "The parameters used when creating a registered server."
     },
     "RegisteredServerCreateParametersProperties": {
+      "description": "RegisteredServer Create Properties object.",
       "properties": {
         "serverCertificate": {
           "type": "string",
