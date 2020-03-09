@@ -281,7 +281,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch.Protocol
-  output-folder: $(csharp-sdks-folder)/sdk/batch/Microsoft.Azure.Batch/src/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Batch/src/GeneratedProtocol
   clear-output-folder: true
   client-side-validation: false
 ```
@@ -305,7 +305,7 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/sdk/azure-batch/azure/batch
+  output-folder: $(python-sdks-folder)/azure-batch/azure/batch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
