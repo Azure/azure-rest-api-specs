@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SynapseClient",
+    "version": "2019-11-01-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "SparkJobDefinition": {
+      "description": "Spark job definition.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the Spark job definition.",
+          "type": "string"
+        },
+        "targetBigDataPool": {
+          "description": "Big data pool reference.",
+          "$ref": "./NoteBook.json#/definitions/BigDataPoolReference"
+        },
+        "requiredSparkVersion": {
+          "description": "The required Spark version of the application.",
+          "type": "string"
+        },
+        "language": {
+          "description": "The language of the Spark application.",
+          "type": "string"
+        },
+        "jobProperties": {
+          "description": "The properties of the Spark job.",
+          "$ref": "#/definitions/SparkJobProperties"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "targetBigDataPool",
+        "jobProperties"
+      ]
+    },
+    "SparkJobProperties": {
+      "description": "The properties of the Spark job.",
+      "properties": {
+        "name": {
+          "description": "The name of the job.",
+          "type": "string"
+        },
+        "file": {
+          "description": "File containing the application to execute.",
+          "type": "string"
+        },
+        "className": {
+          "description": "Main class for Java/Scala application.",
+          "type": "string"
+        },
+        "conf": {
+          "description": "Spark configuration properties.",
+          "type": "object"
+        },
+        "args": {
+          "description": "Command line arguments for the application.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "jars": {
+          "description": "Jars to be used in this job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "description": "files to be used in this job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "archives": {
+          "description": "Archives to be used in this job.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "driverMemory": {
+          "description": "Amount of memory to use for the driver process.",
+          "type": "string"
+        },
+        "driverCores": {
+          "description": "Number of cores to use for the driver.",
+          "type": "integer"
+        },
+        "executorMemory": {
+          "description": "Amount of memory to use per executor process.",
+          "type": "string"
+        },
+        "executorCores": {
+          "description": "Number of cores to use for each executor.",
+          "type": "integer"
+        },
+        "numExecutors": {
+          "description": "Number of executors to launch for this job.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "file",
+        "driverMemory",
+        "driverCores",
+        "executorMemory",
+        "executorCores",
+        "numExecutors"
+      ]
+    }
+  }
+}

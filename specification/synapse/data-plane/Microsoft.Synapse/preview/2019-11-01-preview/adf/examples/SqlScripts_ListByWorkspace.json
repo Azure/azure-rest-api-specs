@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "workspaceName": "exampleWorkspace",
+    "SynapseDnsSuffix": "dev.azuresynapse.net",
+    "api-version": "2019-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Sat, 16 Jun 2018 00:37:43 GMT",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-subscription-reads": "14990",
+        "x-ms-request-id": "92292250-c10f-4c47-8eb6-b886b361add7",
+        "x-ms-correlation-request-id": "92292250-c10f-4c47-8eb6-b886b361add7"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.Synapse/workspaces/exampleWorkspaceName/sqlscripts/exampleSqlScript",
+            "name": "exampleSqlScript",
+            "type": "Microsoft.Synapse/workspaces/sqlscripts",
+            "properties": {
+              "description": "Covers the data transformation and LDW scenarios in one brief e2e story",
+              "content": {
+                "query": "SELECT TOP 100 * FROM example_table_name;",
+                "currentConnection": {
+                  "name": "master",
+                  "type": "SqlOnDemand"
+                },
+                "metadata": {
+                  "language": "sql"
+                }
+              },
+              "type": "SqlQuery"
+            },
+            "etag": "1500504f-0000-0200-0000-5cbe090f0000"
+          }
+        ]
+      }
+    }
+  }
+}

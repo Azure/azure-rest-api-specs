@@ -62,6 +62,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
 - Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
 - Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
+- Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
 ```
 
 ---
@@ -104,6 +105,7 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/monitoring.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
 
 ```
 
