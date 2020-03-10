@@ -1198,15 +1198,15 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections": {
       "get": {
         "tags": [
           "SchemaCollections"
         ],
         "operationId": "SchemaCollections_ListByNamespace",
         "x-ms-examples": {
-          "EventHubsListAll": {
-            "$ref": "./examples/EventHubs/EHSchemaCollectionsListByNameSpace.json"
+          "SchemaCollectionsListAll": {
+            "$ref": "./examples/SchemaCollections/EHSchemaCollectionsListByNameSpace.json"
           }
         },
         "description": "Gets all the Schema Collections in a Namespace.",
@@ -1256,8 +1256,8 @@
         ],
         "operationId": "SchemaCollections_CreateOrUpdate",
         "x-ms-examples": {
-          "EventHubCreate": {
-            "$ref": "./examples/EventHubs/EHSchemaCollectionCreate.json"
+          "SchemaCollectionCreate": {
+            "$ref": "./examples/SchemaCollections/EHSchemaCollectionCreate.json"
           }
         },
         "description": "Creates or updates a new Schema Collection as a nested resource within a Namespace.",
@@ -1306,10 +1306,10 @@
         "tags": [
           "SchemaCollections"
         ],
-        "operationId": "EventHubs_Delete",
+        "operationId": "SchemaCollections_Delete",
         "x-ms-examples": {
-          "EventHubDelete": {
-            "$ref": "./examples/SchemaCollections/EHEventHubDelete.json"
+          "SchemaCollectionDelete": {
+            "$ref": "./examples/SchemaCollections/EHSchemaCollectionDelete.json"
           }
         },
         "description": "Deletes an Schema Collection from the specified Namespace and resource group.",
@@ -1349,10 +1349,10 @@
         "tags": [
           "SchemaCollections"
         ],
-        "operationId": "EventHubs_Get",
+        "operationId": "SchemaCollections_Get",
         "x-ms-examples": {
-          "EventHubGet": {
-            "$ref": "./examples/SchemaCollections/EHEventHubGet.json"
+          "SchemaCollectionGet": {
+            "$ref": "./examples/SchemaCollections/EHSchemaCollectionGet.json"
           }
         },
         "description": "Gets an Schema Collections description for the specified Schema Collection.",
@@ -2552,6 +2552,50 @@
       ],
       "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
     },
+    "SchemaCollection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "Exact time the Event Hub was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The exact time the message was updated."
+            }
+          },
+          "description": "Properties supplied to the Create Or Update Schema Collection operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in List or Get Schema Collection operation"
+    },
+    "SchemaCollectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SchemaCollection"
+          },
+          "description": "Result of the List SchemaCollections operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of SchemaCollections."
+        }
+      },
+      "description": "The result of the List SchemaCollections operation."
+    },
     "Eventhub": {
       "properties": {
         "properties": {
@@ -3181,6 +3225,16 @@
       "maxLength": 50,
       "x-ms-parameter-location": "method",
       "description": "The Event Hub name"
+    },
+    "SchemaCollectionNameParameter": {
+      "name": "schemaCollectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20,
+      "x-ms-parameter-location": "method",
+      "description": "The Schema Collection name"
     },
     "AliasNameParameter": {
       "name": "alias",
