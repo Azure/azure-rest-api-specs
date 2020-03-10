@@ -875,6 +875,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/WorkloadClassifiers.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/ServerAzureADAdministrators.json
+  - $(this-folder)/Microsoft.Sql/preview/2019-06-01-preview/managedInstanceOperations.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
