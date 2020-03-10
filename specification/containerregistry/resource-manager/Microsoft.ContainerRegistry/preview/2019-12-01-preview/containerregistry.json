@@ -2359,8 +2359,20 @@
       "properties": {
         "provisioningState": {
           "description": "The provisioning state of a pipeline run.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "request": {
           "$ref": "#/definitions/PipelineRunRequest",
@@ -2415,6 +2427,10 @@
       "description": "The response properties returned for a pipeline run.",
       "type": "object",
       "properties": {
+        "status": {
+          "description": "The current status of the pipeline run.",
+          "type": "string"
+        },
         "artifacts": {
           "description": "The artifacts transferred in the pipeline run.",
           "type": "array",
