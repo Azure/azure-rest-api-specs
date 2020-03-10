@@ -1,0 +1,41 @@
+{
+    "parameters": {
+      "subscriptionId": "{subscription-id}",
+      "resourceGroupName": "myResourceGroup",
+      "api-version": "2019-11-01",
+      "diskEncryptionSetName": "myDiskAccess"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "properties": {
+            "privateEndpointConnections": [
+              {
+                "type": "Microsoft.Compute/diskAccesses/privateEndpointConnections",
+                "name": "myDiskAccess.{Guid}",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess/privateEndpointConnections/myDiskAccess.{Guid}",
+                "properties": {
+                  "provisioningState": "Succeeded",
+                  "timeCreated": "2020-03-10T18:09:26.3801919+00:00",
+                  "privateLinkServiceConnectionState": {
+                    "actionsRequired": "None",
+                    "description": "Please approve my connection",
+                    "status": "Approved"
+                  }
+                }
+              }],
+            "timeCreated": "2020-03-10T18:09:06.3801919+00:00",
+            "provisioningState": "Succeeded"
+          },
+          "type": "Microsoft.Compute/diskAccesses",
+          "location": "westus",
+          "tags": {
+            "department": "Development",
+            "project": "PrivateEndpointDiskAccess"
+          },
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskAccesses/myDiskAccess",
+          "name": "myDiskAccess"
+        }
+      }
+    }
+  }
