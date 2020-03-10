@@ -516,7 +516,7 @@
     },
     "DocumentSentiment": {
       "type": "object",
-      "required": [ "id", "sentiment", "documentScores", "sentences", "warnings" ],
+      "required": [ "id", "sentiment", "confidenceScores", "sentences", "warnings" ],
       "properties": {
         "id": {
           "type": "string",
@@ -534,7 +534,7 @@
         "statistics": {
           "$ref": "#/definitions/DocumentStatistics"
         },
-        "documentScores": {
+        "confidenceScores": {
           "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
@@ -619,7 +619,7 @@
     },
     "SentenceSentiment": {
       "type": "object",
-      "required": [ "sentiment", "sentenceScores", "offset", "length" ],
+      "required": [ "sentiment", "confidenceScores", "offset", "length" ],
       "properties": {
         "sentiment": {
           "type": "string",
@@ -630,7 +630,7 @@
             "modelAsString": false
           }
         },
-        "sentenceScores": {
+        "confidenceScores": {
           "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
@@ -703,7 +703,7 @@
     },
     "Entity": {
       "type": "object",
-      "required": [ "text", "type", "offset", "length", "score" ],
+      "required": [ "text", "type", "offset", "length", "confidenceScore" ],
       "properties": {
         "text": {
           "type": "string",
@@ -727,7 +727,7 @@
           "format": "int32",
           "description": "Length (in Unicode characters) for the entity text."
         },
-        "score": {
+        "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
@@ -824,9 +824,9 @@
     },
     "Match": {
       "type": "object",
-      "required": [ "score", "text", "offset", "length" ],
+      "required": [ "confidenceScore", "text", "offset", "length" ],
       "properties": {
-        "score": {
+        "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
