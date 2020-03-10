@@ -3,7 +3,7 @@
   "info": {
     "title": "SearchManagementClient",
     "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
-    "version": "2019-10-01-preview"
+    "version": "2020-03-13"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1348,19 +1348,6 @@
     },
     "NetworkRuleSet": {
       "properties": {
-        "endpointAccess": {
-          "type": "string",
-          "default": "Public",
-          "description": "The level of access to the search service endpoint. Public, the search service endpoint is reachable from the internet. Private, the search service endpoint can only be accessed via private endpoints. Default is Public.",
-          "enum": [
-            "Public",
-            "Private"
-          ],
-          "x-ms-enum": {
-            "name": "EndpointAccess",
-            "modelAsString": false
-          }
-        },
         "ipRules": {
           "type": "array",
           "description": "A list of IP restriction rules that defines the inbound network access to the search service endpoint. These restriction rules are applied only when the EndpointAccess of the search service is Public.",
@@ -1661,6 +1648,19 @@
           ],
           "x-ms-enum": {
             "name": "HostingMode",
+            "modelAsString": false
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "default": "enabled",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing customer resources and templates. If set to 'disabled', traffic over public interface is not allowed, and private endpoint connections would be the exclusive access method.",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
             "modelAsString": false
           }
         },

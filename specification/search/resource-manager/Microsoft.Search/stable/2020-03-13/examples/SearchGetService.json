@@ -2,16 +2,8 @@
   "parameters": {
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
-    "api-version": "2019-10-01-preview",
-    "subscriptionId": "subid",
-    "service": {
-      "sku": {
-        "name": "standard"
-      },
-      "identity": {
-        "type": "None"
-      }
-    }
+    "api-version": "2020-03-13",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -20,7 +12,9 @@
         "name": "mysearchservice",
         "location": "westus",
         "type": "Microsoft.Search/searchServices",
-        "tags": {},
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
         "sku": {
           "name": "standard"
         },
@@ -31,15 +25,12 @@
           "statusDetails": "",
           "hostingMode": "default",
           "provisioningState": "succeeded",
+          "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "endpointAccess": "Public",
             "ipRules": []
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": []
-        },
-        "identity": {
-          "type": "None"
         }
       }
     }
