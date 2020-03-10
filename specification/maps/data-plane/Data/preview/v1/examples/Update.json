@@ -2,7 +2,7 @@
   "parameters": {
     "api-version": "1.0",
     "subscription-key": "[subscription-key]",
-	"udid": "25084fb7-307a-4720-8f91-7952a0b91012",   
+	  "udid": "25084fb7-307a-4720-8f91-7952a0b91012",   
     "UpdateContent": {
       "type": "FeatureCollection",
       "features": [{
@@ -21,28 +21,28 @@
   "responses": {
     "201": {
       "headers": {
-        "Location": "https://atlas.microsoft.com/mapData/{udid}?api-version=1.0",
-		"Access-Control-Expose-Headers": "Location"
+        "Location": "https://atlas.microsoft.com/mapData/metadata/{udid}?api-version=1.0",
+		    "Access-Control-Expose-Headers": "Location"
       },
       "body": {
-        "udid": "25084fb7-307a-4720-8f91-7952a0b91012"
+        "operationId": "{operationId}",
+        "status": "Succeeded",
+        "resourceLocation": "https://atlas.microsoft.com/mapData/metadata/{resourceId}?api-version=1.0"
       }
     },
     "202": {
       "headers": {
-        "Location": "https://atlas.microsoft.com/mapData/{updateStatusId}/status?api-version=1.0",
-		"Access-Control-Expose-Headers": "Location"
+        "Location": "https://atlas.microsoft.com/mapData/operations/{updateOperationStatusId}?api-version=1.0",
+		    "Access-Control-Expose-Headers": "Location"
       },
-      "body": {
-        "status": "Accepted"
-      }
+      "body": {}
     },
-    "204": {
+    "200": {
       "headers": {},
       "body": {
         "error": {
-          "code": "204 No Content",
-          "message": "Map data update failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered."
+          "code": "400 Bad Request",
+          "message": "Upload request failed. Your data has been removed as we encountered the following problems with it: Map data is not a valid GeoJSON geometry."
         }
       }
     },
