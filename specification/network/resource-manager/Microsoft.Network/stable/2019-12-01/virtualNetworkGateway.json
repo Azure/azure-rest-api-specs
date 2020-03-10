@@ -3640,11 +3640,40 @@
       },
       "description": "Start packet capture parameters on virtual network gateway."
     },
+<<<<<<< HEAD
+=======
+    "VirtualNetworkGatewayBgpSettings": {
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The BGP speaker's ASN."
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "The BGP peering address and BGP identifier of this BGP speaker."
+        },
+        "peerWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight added to routes learned from this BGP speaker."
+        },
+        "bgpPeeringAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfigurationBgpPeeringAddress"
+          },
+          "description": "BGP peering address with IP configuration ID for virtual network gateway."
+        }
+      },
+      "description": "BGP settings details."
+    },
+>>>>>>> 0ddebe7ac9796872f56a685946e0daa97a19d400
     "IPConfigurationBgpPeeringAddress": {
       "properties": {
         "ipconfigurationId": {
           "type": "string",
-          "description": "The IpconfigurationId of ipconfiguration which belongs to gateway."
+          "description": "The ID of IP configuration which belongs to gateway."
         },
         "defaultBgpIpAddresses": {
           "readOnly": true,
@@ -3652,14 +3681,14 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of default BgpPeeringAddresses which belongs to IpconfigurationId."
+          "description": "The list of default BGP peering addresses which belong to IP configuration."
         },
         "customBgpIpAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The list of custom BgpPeeringAddresses which belongs to IpconfigurationId."
+          "description": "The list of custom BGP peering addresses which belong to IP configuration."
         },
         "tunnelIpAddresses": {
           "readOnly": true,
@@ -3667,7 +3696,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The list of tunnel public IpAddresses which belongs to IpconfigurationId."
+          "description": "The list of tunnel public IP addresses which belong to IP configuration."
         }
       },
       "description": "Properties of IPConfigurationBgpPeeringAddress."
