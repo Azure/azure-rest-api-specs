@@ -11,6 +11,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 2
 package-name: azure-mgmt-web
 package-version: 0.42.0
+no-namespace-folders: true
 ```
 
 ### Python multi-api
@@ -19,99 +20,101 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi)
 batch:
-  - tag: package-2019-08-only
-  - tag: package-2018-11-only
-  - tag: package-2018-02-only
-  - tag: package-2016-09-only
-  - tag: package-2016-08-only
-  - tag: package-2016-03-only
-  - tag: package-2015-08-only
-  - tag: package-2015-04-only
+  - multiapiscript: true
 ```
 
 ### Multi-api script
 
-``` yaml $(multiapiscript)output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
 clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2019-08-only
+### Tag: package-2019-08-only and python
 
 These settings apply only when `--tag=package-2019-08-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2019-08-only'
+
 namespace: azure.mgmt.web.v2019_08_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2019_08_01
 ```
 
-### Tag: package-2018-11-only
+### Tag: package-2018-11-only and python
 
 These settings apply only when `--tag=package-2018-11-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-11-only'
+
 namespace: azure.mgmt.web.v2018_11_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2018_11_01
 ```
 
-### Tag: package-2018-02-only
+### Tag: package-2018-02-only and python
 
 These settings apply only when `--tag=package-2018-02-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2018-02-only'
+
 namespace: azure.mgmt.web.v2018_02_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2018_02_01
 ```
 
-### Tag: package-2016-09-only
+### Tag: package-2016-09-only and python
 
 These settings apply only when `--tag=package-2016-09-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2016-09-only'
+
 namespace: azure.mgmt.web.v2016_09_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_09_01
 ```
 
-### Tag: package-2016-08-only
+### Tag: package-2016-08-only and python
 
 These settings apply only when `--tag=package-2016-08-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2016-08-only'
+
 namespace: azure.mgmt.web.v2016_08_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_08_01
 ```
 
-### Tag: package-2016-03-only
+### Tag: package-2016-03-only and python
 
 These settings apply only when `--tag=package-2016-03-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2016-03-only'
+
 namespace: azure.mgmt.web.v2016_03_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_03_01
 ```
 
-### Tag: package-2015-08-only
+### Tag: package-2015-08-only and python
 
 These settings apply only when `--tag=package-2019-04-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2015-08-only'
+
 namespace: azure.mgmt.web.v2015_08_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2015_08_01
 ```
 
-### Tag: package-2015-04-only
+### Tag: package-2015-04-only and python
 
 These settings apply only when `--tag=package-2019-04-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2015-04-only'
+
 namespace: azure.mgmt.web.v2015_04_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2015_04_01
 ```
