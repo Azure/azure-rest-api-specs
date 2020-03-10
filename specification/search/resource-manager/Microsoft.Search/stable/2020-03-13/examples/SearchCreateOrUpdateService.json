@@ -2,7 +2,7 @@
   "parameters": {
     "searchServiceName": "mysearchservice",
     "resourceGroupName": "rg1",
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-03-13",
     "subscriptionId": "subid",
     "service": {
       "location": "westus",
@@ -16,9 +16,6 @@
         "replicaCount": 3,
         "partitionCount": 1,
         "hostingMode": "default"
-      },
-      "identity": {
-        "type": "SystemAssigned"
       }
     }
   },
@@ -42,17 +39,12 @@
           "statusDetails": "",
           "hostingMode": "default",
           "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "endpointAccess": "Public",
             "ipRules": []
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": []
-        },
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
-          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd"
         }
       }
     },
@@ -75,17 +67,12 @@
           "statusDetails": "",
           "hostingMode": "default",
           "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
           "networkRuleSet": {
-            "endpointAccess": "Public",
             "ipRules": []
           },
           "privateEndpointConnections": [],
           "sharedPrivateLinkResources": []
-        },
-        "identity": {
-          "type": "SystemAssigned",
-          "principalId": "9d1e1f18-2122-4988-a11c-878782e40a5c",
-          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd"
         }
       }
     }
