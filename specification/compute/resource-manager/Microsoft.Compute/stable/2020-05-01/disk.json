@@ -966,6 +966,275 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}": {
+      "put": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_CreateOrUpdate",
+        "description": "Creates or updates a diskAccess",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskAccess",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            },
+            "description": "diskAccess object supplied in the body of the Put diskAccess operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a diskAccess.": {
+            "$ref": "./examples/CreateADiskAccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskEncryptionSets_Update",
+        "description": "Updates (patches) a diskAccess.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskAccess",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskAccessUpdate"
+            },
+            "description": "diskAccess object supplied in the body of the Patch diskAccess operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_Get",
+        "description": "Gets information about a diskAccess.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a diskAccess.": {
+            "$ref": "./examples/GetInformationAboutADiskAccess.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_Delete",
+        "description": "Deletes a diskAccess.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the diskAccess is already deleted, this is an expected error code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses": {
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_ListByResourceGroup",
+        "description": "Lists all the diskAccesses under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all diskAccesses in a resource group.": {
+            "$ref": "./examples/ListDiskAccessesInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskAccesses": {
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_List",
+        "description": "Lists all the diskAccesses under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all diskAccesses in a subscription.": {
+            "$ref": "./examples/ListDiskAccessesInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1888,6 +2157,109 @@
         "value"
       ],
       "description": "The List disk encryption set operation response."
+    },
+    "PrivateLinkServiceConnectionState":{
+      "properties":{
+        "actionsRequired": {
+          "type": "string",
+          "readonly": true,
+          "description": "Action required by the network admin."
+        },
+        "description": {
+          "type": "string",
+          "description": "description about the private link."
+        },
+        "status": {
+          "type": "string",
+          "description": "current state of the private link."
+        }
+      }
+    },
+    "PrivateEndpoint":{
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description":"Resource id of the private endpoint."
+        }
+      }
+    },
+    "PrivateendpointConnectionProperties": {
+      "properties": {
+        "provisioningState":{
+          "readOnly": true,
+          "type": "string",
+          "description": "The private endpoint connection provisioning state."
+        },
+        "privateEndpoint":{
+          "readOnly": true,
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The private endpoint which owns the private endpoint connection."
+        },
+        "privateLinkServiceConnectionState":{
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id of the private endpoint connection."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name of the private endpoint connection."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type of the private endpoint connection."
+        }
+      }
+    },
+    "DiskAccessProperties": {
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "A read only collection of private endpoint connections on the diskAccess."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The diskAccess provisioning state."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the diskAccess was created."
+        }
+      }
+    },
+    "DiskAccess": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskAccessProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "diskAccess resource."
     },
     "CloudError": {
       "x-ms-external": true,
