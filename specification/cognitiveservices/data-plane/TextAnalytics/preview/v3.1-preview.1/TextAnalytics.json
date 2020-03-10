@@ -980,7 +980,7 @@
         "type",
         "offset",
         "length",
-        "score"
+        "confidenceScore"
       ],
       "properties": {
         "text": {
@@ -1005,7 +1005,7 @@
           "format": "int32",
           "description": "Length (in Unicode characters) for the entity text."
         },
-        "score": {
+        "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
@@ -1117,13 +1117,13 @@
     "Match": {
       "type": "object",
       "required": [
-        "score",
+        "confidenceScore",
         "text",
         "offset",
         "length"
       ],
       "properties": {
-        "score": {
+        "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
