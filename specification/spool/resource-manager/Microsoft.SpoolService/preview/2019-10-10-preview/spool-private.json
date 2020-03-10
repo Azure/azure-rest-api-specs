@@ -1,0 +1,373 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Spool Management API",
+    "version": "2019-10-10-preview",
+    "description": "REST API for Azure Spool Service, (internal APIs)"
+  },
+  "schemes": [ "https" ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/{parentResourceType}/{parentResourceName}/eventgridfilters/{eventGridFilterName}": {
+      "patch": {
+        "description": "Update an existing eventgridfilters resource's properties.",
+        "operationId": "SpoolEventGridFilters_Update",
+        "summary": "Update",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response includes the updated filter configuration.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Update resource": {
+            "$ref": "./examples/eventGridFilterUpdate.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Get an existing eventgridfilters resource and its properties",
+        "operationId": "SpoolEventGridFilters_Get",
+        "summary": "Get",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding Spool service.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-examples": {
+          "Get resource": {
+            "$ref": "./examples/eventGridFilterGet.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a eventgrid filter on an existing resource.",
+        "operationId": "SpoolEventGridFilter_CreateOrUpdate",
+        "summary": "Create Or Update",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "An existing resource was updated.",
+            "schema": {
+              "$ref": "#/definitions/EventGridFilterResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [ "application/json" ],
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or udate resource": {
+            "$ref": "./examples/eventGridFilterCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Operation to delete a eventgrid filter.",
+        "operationId": "SpoolEventGridFilter_Delete",
+        "summary": "Delete",
+        "tags": [ "Spool CRUD" ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ParentResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EventGridFilterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been deleted successfully."
+          },
+          "202": {
+            "description": "The delete operation is being performed in the background."
+          },
+          "204": {
+            "description": "The resource did not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete resource": {
+            "$ref": "./examples/eventGridFilterDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EventGridFilterResource": {
+      "description": "A class representing an eventgrid filter resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EventGridFilterProperties",
+          "description": "The properties of the service.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EventGridFilterProperties": {
+      "description": "A class that describes the properties of an EventGridFilters resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "filter": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "subjectBeginsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not start with this string",
+              "type": "string"
+            },
+            "subjectEndsWith": {
+              "description": "Filter configuration: Removes all events with a subject that does not end with this string",
+              "type": "string"
+            },
+            "IncludedEventTypes": {
+              "description": "Event types subscribed",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "subscriberIdentityInfo": {
+          "description": "Configuration of the EventGrid filter",
+          "type": "object",
+          "properties": {
+            "clientPrincipalId": {
+              "description": "The client principal ID",
+              "type":"string"
+            },
+            "clientObjectId": {
+              "description": "The client object ID",
+              "type":"string"
+            },
+            "clientTenantId": {
+              "description": "The client tenant ID",
+              "type":"string"
+            },
+            "clientApplicationId": {
+              "description": "The client application ID",
+              "type":"string"
+            },
+            "clientAuthorizationSource": {
+              "description": "The client authorization source",
+              "type":"string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2019-10-10-preview"
+      ]
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Gets subscription ID which uniquely identifies the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ParentResourceTypeParameter": {
+      "name": "parentResourceType",
+      "in": "path",
+      "description": "The name of the parent resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ParentResourceNameParameter": {
+      "name": "parentResourceName",
+      "in": "path",
+      "description": "The name of the parent resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "EventGridFilterNameParameter": {
+      "name": "eventGridFilterName",
+      "in": "path",
+      "description": "The name of the eventgrid filter.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
