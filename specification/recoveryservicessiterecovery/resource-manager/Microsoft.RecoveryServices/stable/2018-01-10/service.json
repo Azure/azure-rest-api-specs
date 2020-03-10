@@ -16176,6 +16176,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
+          "type": "string"
         }
       }
     },
@@ -16412,6 +16416,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "resyncRequired": {
+          "description": "A value indicating whether resync is required.",
+          "type": "string",
+          "readOnly": true
+        },
         "resyncState": {
           "description": "The resync state.",
           "enum": [
@@ -16616,6 +16625,11 @@
         },
         "logStorageAccountSasSecretName": {
           "description": "The key vault secret name of the log storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
           "type": "string",
           "readOnly": true
         },
