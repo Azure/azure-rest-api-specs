@@ -5884,11 +5884,15 @@
     },
     "ThroughputSettingsResource": {
       "type": "object",
-      "description": "Cosmos DB resource throughput object",
+      "description": "Cosmos DB resource throughput object. Either throughput is required or provisionedThroughputSettings is required, but not both.",
       "properties": {
         "throughput": {
           "type": "integer",
-          "description": "Value of the Cosmos DB resource throughput"
+          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or provisionedThroughputSettings is required, but not both."
+        },
+        "provisionedThroughputSettings": {
+          "description": "Cosmos DB resource for provisioned throughput settings. Either throughput is required or provisionedThroughputSettings is required, but not both.",
+          "$ref": "#/definitions/ProvisionedThroughputSettingsResource"
         },
         "minimumThroughput": {
           "type": "string",
@@ -5900,10 +5904,53 @@
           "description": "The throughput replace is pending",
           "readOnly": true
         }
+      }
+    },
+    "ProvisionedThroughputSettingsResource": {
+      "type": "object",
+      "description": "Cosmos DB provisioned throughput settings object",
+      "properties": {
+        "maxThroughput": {
+          "type": "integer",
+          "description": "Represents maximum throughput container can scale up to."
+        },
+        "autoUpgradePolicy": {
+          "description": "Cosmos DB resource auto-upgrade policy",
+          "$ref": "#/definitions/AutoUpgradePolicyResource"
+        },
+        "targetMaxThroughput": {
+          "type": "integer",
+          "description": "Represents target maximum throughput container can scale up to once offer is no longer in pending state.",
+          "readOnly": true
+        }
       },
       "required": [
-        "throughput"
+        "maxThroughput"
       ]
+    },
+    "AutoUpgradePolicyResource": {
+      "type": "object",
+      "description": "Cosmos DB resource auto-upgrade policy",
+      "properties": {
+        "throughputPolicy": {
+          "description": "Represents throughput policy which service must adhere to for auto-upgrade",
+          "$ref": "#/definitions/ThroughputPolicyResource"
+        }
+      }
+    },
+    "ThroughputPolicyResource": {
+      "type": "object",
+      "description": "Cosmos DB resource throughput policy",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Determines whether the ThroughputPolicy is active or not"
+        },
+        "incrementPercent": {
+          "type": "integer",
+          "description": "Represents the percentage by which throughput can increase every time throughput policy kicks in."
+        }
+      }
     },
     "SqlDatabaseResource": {
       "type": "object",
@@ -6545,6 +6592,12 @@
     },
     "CreateUpdateOptions": {
       "type": "object",
+      "properties": {
+        "throughput": {
+          "type": "string",
+          "description": "Request Units per second. For example, \"throughput\": \"10000\"."
+        }
+      },
       "additionalProperties": {
         "type": "string"
       },
