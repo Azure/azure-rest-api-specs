@@ -27,6 +27,7 @@ These are the global settings for the Azure Synapse Analytics API.
 title: SynapseManagementClient
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
+azure-arm: true
 tag: package-2019-06-01-preview
 ```
 
