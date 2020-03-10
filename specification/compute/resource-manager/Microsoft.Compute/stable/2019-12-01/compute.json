@@ -1189,6 +1189,11 @@
               "$ref": "#/definitions/SshPublicKeyResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create a new SSH public key resource.": {
+            "$ref": "./examples/CreateAnSshPublicKey.json"
+          }
         }
       },
       "patch": {
@@ -1215,7 +1220,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SshPublicKeyResource"
+              "$ref": "#/definitions/SshPublicKeyUpdateResource"
             },
             "description": "Parameters supplied to update the SSH public key."
           },
@@ -1303,6 +1308,11 @@
               "$ref": "#/definitions/SshPublicKeyResource"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get an ssh public key.": {
+            "$ref": "./examples/GetAnSshPublicKey.json"
+          }
         }
       }
     },
@@ -1339,6 +1349,11 @@
             "schema": {
               "$ref": "#/definitions/SshPublicKeyGenerateKeyPairResult"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Generate an SSH key pair.": {
+            "$ref": "./examples/GenerateSshKeyPair.json"
           }
         }
       }
@@ -6275,12 +6290,27 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SshPublicKeyResourceProperties",
-          "description": "Properties of  the SSH public key."
+          "description": "Properties of the SSH public key."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the SSH public key."
+    },
+    "SshPublicKeyUpdateResource": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SshPublicKeyResourceProperties",
+          "description": "Properties of the SSH public key."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
         }
       ],
       "description": "Specifies information about the SSH public key."
