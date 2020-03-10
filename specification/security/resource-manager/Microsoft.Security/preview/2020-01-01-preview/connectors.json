@@ -216,6 +216,22 @@
       "type": "object",
       "description": "The connector setting",
       "properties": {
+          "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Auto provisioning setting data",
+          "$ref": "#/definitions/ConnectorSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ConnectorSettingProperties": {
+      "type": "object",
+      "description": "describes properties of an auto connector setting",
+      "properties": {
         "authenticationType": {
           "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
           "type": "string",
@@ -313,16 +329,7 @@
           "type": "object",
           "$ref": "#/definitions/HybridComputeSettingsProperties"
         }
-      },
-      "required": [
-        "hybridComputeAutoProvision",
-        "authenticationType"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
-      ]
+      }
     },
     "HybridComputeSettingsProperties": {
       "type": "object",
