@@ -216,9 +216,9 @@
       "type": "object",
       "description": "The connector setting",
       "properties": {
-          "properties": {
+        "properties": {
           "x-ms-client-flatten": true,
-          "description": "Auto provisioning setting data",
+          "description": "Connector setting data",
           "$ref": "#/definitions/ConnectorSettingProperties"
         }
       },
@@ -230,36 +230,125 @@
     },
     "ConnectorSettingProperties": {
       "type": "object",
-      "description": "describes properties of an auto connector setting",
+      "description": "Describes properties of an connector setting",
       "properties": {
-        "authenticationType": {
-          "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
+        "hybridComputeSettings": {
+          "description": "Settings for hybrid compute management, these settings are relevant only Arc autoProvision (Hybrid Compute).",
+          "type": "object",
+          "$ref": "#/definitions/HybridComputeSettingsProperties"
+        },
+        "authenticationDetails": {
+          "description": "Settings for authentication management, these settings are relevant only for the cloud connector.",
+          "type": "object",
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      }
+    },
+    "HybridComputeSettingsProperties": {
+      "type": "object",
+      "description": "Settings for hybrid compute management",
+      "properties": {
+        "provisioningState": {
+          "description": "State of the connection",
           "type": "string",
+          "readOnly": true,
           "enum": [
-            "awsCreds",
-            "awsAssumeRole"
+            "Valid",
+            "Invalid",
+            "Expired"
           ],
           "x-ms-enum": {
-            "name": "authenticationType",
+            "name": "state",
             "modelAsString": true,
             "values": [
               {
-                "value": "awsCreds",
-                "description": "AWS cloud account connector user credentials authentication"
+                "value": "Valid",
+                "description": "Valid service principal details."
               },
               {
-                "value": "awsAssumeRole",
-                "description": "AWS account connector assume role authentication"
+                "value": "Invalid",
+                "description": "Invalid service principal details."
+              },
+              {
+                "value": "Expired",
+                "description": "the service principal details are expired"
               }
             ]
           }
         },
-        "accountId": {
-          "description": "The ID of the cloud account",
+        "autoProvision": {
           "type": "string",
-          "readOnly": true
+          "description": "Whether or not to automatically install Azure Arc (hybrid compute) agents on machines",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "hybridComputeAutoProvision",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "On",
+                "description": "Install missing Azure Arc agent on VMs automatically"
+              },
+              {
+                "value": "Off",
+                "description": "Do not install Azure Arc agent on the VMs automatically"
+              }
+            ]
+          }
         },
-        "state": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "The name of the resource group."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "proxyServer": {
+          "type": "object",
+          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
+          "$ref": "#/definitions/ProxyServerProperties"
+        },
+        "servicePrincipal": {
+          "description": "An object to access resources that are secured by an Azure AD tenant.",
+          "type": "object",
+          "$ref": "#/definitions/ServicePrincipalProperties"
+        }
+      },
+      "required": [
+        "autoProvision",
+        "resourceGroupName"
+      ]
+    },
+    "ServicePrincipalProperties": {
+      "type": "object",
+      "description": "Details of the service principal (write only).",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Public key element of the AWS credential object "
+        },
+        "secret": {
+          "type": "string",
+          "description": "Secret key of the app id"
+        }
+      }
+    },
+    "AuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "Settings for cloud authentication management",
+      "properties": {
+        "provisioningState": {
           "description": "State of the connection",
           "type": "string",
           "readOnly": true,
@@ -292,74 +381,47 @@
             ]
           }
         },
-        "awsCreds": {
-          "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
-          "type": "object",
-          "$ref": "#/definitions/awsCredentialsSettingProperties"
-        },
-        "awsAssumeRole": {
-          "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
-          "type": "object",
-          "$ref": "#/definitions/awsAssumeRolesSettingProperties"
-        },
-        "hybridComputeAutoProvision": {
+        "authenticationType": {
+          "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
           "type": "string",
-          "description": "Whether or not to automatically install Azure Arc (hybrid compute) agents on machines",
           "enum": [
-            "On",
-            "Off"
+            "awsCreds",
+            "awsAssumeRole"
           ],
           "x-ms-enum": {
-            "name": "hybridComputeAutoProvision",
+            "name": "authenticationType",
             "modelAsString": true,
             "values": [
               {
-                "value": "On",
-                "description": "Install missing Azure Arc agent on VMs automatically"
+                "value": "awsCreds",
+                "description": "AWS cloud account connector user credentials authentication"
               },
               {
-                "value": "Off",
-                "description": "Do not install Azure Arc agent on the VMs automatically"
+                "value": "awsAssumeRole",
+                "description": "AWS account connector assume role authentication"
               }
             ]
           }
         },
-        "hybridComputeSettings": {
-          "description": "Settings for hybrid compute management, these settings are relevant only arcAutoProvision is 'On'.",
-          "type": "object",
-          "$ref": "#/definitions/HybridComputeSettingsProperties"
-        }
-      }
-    },
-    "HybridComputeSettingsProperties": {
-      "type": "object",
-      "description": "Settings for hybrid compute management",
-      "properties": {
-        "location": {
+        "accountId": {
+          "description": "The ID of the cloud account",
           "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "readOnly": true
         },
-        "resourceGroupName": {
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        "proxyServer": {
+        "awsCreds": {
+          "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
           "type": "object",
-          "description": "For a non-Azure machine that is not connected directly to the internet, specify a proxy server that the non-Azure machine can use.",
-          "$ref": "#/definitions/ProxyServerProperties"
+          "$ref": "#/definitions/AwsCredentialsSettingProperties"
         },
-        "tags": {
+        "awsAssumeRole": {
+          "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
+          "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
         }
-      }
+      },
+      "required": [
+        "authenticationType"
+      ]
     },
     "ProxyServerProperties": {
       "type": "object",
@@ -375,7 +437,7 @@
         }
       }
     },
-    "awsCredentialsSettingProperties": {
+    "AwsCredentialsSettingProperties": {
       "type": "object",
       "description": "AWS user credentials for the cloud account connector ",
       "properties": {
@@ -389,7 +451,7 @@
         }
       }
     },
-    "awsAssumeRolesSettingProperties": {
+    "AwsAssumeRolesSettingProperties": {
       "type": "object",
       "description": "AWS assume role setting for the cloud account connector ",
       "properties": {
