@@ -724,6 +724,7 @@
     "SentenceSentiment": {
       "type": "object",
       "required": [
+        "text",
         "sentiment",
         "confidenceScores",
         "offset",
@@ -732,6 +733,10 @@
         "opinions"
       ],
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
         "sentiment": {
           "type": "string",
           "description": "The predicted Sentiment for the sentence.",
