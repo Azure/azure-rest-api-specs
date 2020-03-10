@@ -1922,14 +1922,14 @@
         },
         "appId": {
           "type": "string",
-          "description": "The issuer (iss) registered claim key. The value is a 10-character Team ID, obtained from your developer account. Specify if using Token Authentication Mode"
+          "description": "The issuer (iss) registered claim key. The value is a 10-character TeamId, obtained from your developer account. Specify if using Token Authentication Mode"
         },
         "token": {
           "type": "string",
           "description": "Provider Authentication Token, obtained through your developer account. Specify if using Token Authentication Mode"
         }
       },
-      "description": "Description of a NotificationHub ApnsCredential."
+      "description": "Description of a NotificationHub ApnsCredential. Note that there is no explicit switch between Certificate and Token Authentication Modes. The mode is determined based on the properties being passed."
     },
     "ApnsCredential": {
       "properties": {
