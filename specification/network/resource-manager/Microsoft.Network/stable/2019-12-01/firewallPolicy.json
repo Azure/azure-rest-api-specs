@@ -413,6 +413,9 @@
         "x-ms-examples": {
           "Get FirewallPolicyRuleGroup": {
             "$ref": "./examples/FirewallPolicyRuleGroupGet.json"
+          },
+          "Get FirewallPolicyRuleGroup With IpGroups": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsGet.json"
           }
         }
       },
@@ -483,6 +486,9 @@
         "x-ms-examples": {
           "Create FirewallPolicyRuleGroup": {
             "$ref": "./examples/FirewallPolicyRuleGroupPut.json"
+          },
+          "Create FirewallPolicyRuleGroup With IpGroups": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -537,6 +543,9 @@
         "x-ms-examples": {
           "List all FirewallPolicyRuleGroups for a given FirewallPolicy": {
             "$ref": "./examples/FirewallPolicyRuleGroupList.json"
+          },
+          "List all FirewallPolicyRuleGroups with IpGroups for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsList.json"
           }
         },
         "x-ms-pageable": {
@@ -767,7 +776,8 @@
           "description": "Rule Condition Type.",
           "enum": [
             "ApplicationRuleCondition",
-            "NetworkRuleCondition"
+            "NetworkRuleCondition",
+            "NatRuleCondition"
           ],
           "x-ms-enum": {
             "name": "FirewallPolicyRuleConditionType",
@@ -818,9 +828,62 @@
           "items": {
             "type": "string"
           }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Rule condition of type application."
+    },
+    "NatRuleCondition": {
+      "description": "Rule condition of type nat.",
+      "x-ms-discriminator-value": "NatRuleCondition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicyRuleCondition"
+        }
+      ],
+      "properties": {
+        "ipProtocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyRuleConditionNetworkProtocol"
+          },
+          "description": "Array of FirewallPolicyRuleConditionNetworkProtocols."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses or Service Tags.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "NetworkRuleCondition": {
       "description": "Rule condition of type network.",
@@ -855,6 +918,20 @@
         "destinationPorts": {
           "type": "array",
           "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
           "items": {
             "type": "string"
           }
