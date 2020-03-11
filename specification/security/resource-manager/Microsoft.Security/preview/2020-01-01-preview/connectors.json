@@ -380,6 +380,14 @@
             ]
           }
         },
+        "permissions": {
+          "description": "The permissions detected in the cloud account.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PermissionProperty"
+          }
+        },
         "authenticationType": {
           "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
           "type": "string",
@@ -421,6 +429,34 @@
       "required": [
         "authenticationType"
       ]
+    },
+    "PermissionProperty": {
+      "description": "A permission detected in the cloud account.",
+      "type": "array",
+      "readOnly": true,
+      "enum": [
+        "AWSSecurityHubReadOnlyAccess",
+        "SecurityAudit",
+        "AmazonEC2RoleforSSM"
+      ],
+      "x-ms-enum": {
+        "name": "permission",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AWSSecurityHubReadOnlyAccess",
+            "description": "This permission provides read only access to AWS Security Hub resources."
+          },
+          {
+            "value": "SecurityAudit",
+            "description": "This permission grants access to read security configuration metadata."
+          },
+          {
+            "value": "AmazonSSMManagedInstanceCore",
+            "description": "The permission for Amazon EC2 Role to enable AWS Systems Manager service core functionality."
+          }
+        ]
+      }
     },
     "ProxyServerProperties": {
       "type": "object",
