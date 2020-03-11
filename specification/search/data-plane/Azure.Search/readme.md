@@ -279,12 +279,6 @@ directive:
         .replace(/(this.getSearchDnsSuffix)/g, "this.client.getSearchDnsSuffix")
         .replace(/(AccessCondition)/g, "MatchConditions")
 
-    # Change Field.analyzer/indexAnalyzer/searchAnalyzer's types from enum to string. Update setters and getters.
-    - change-object-ref-to-string:
-        path: "$.definitions.Field.properties.searchAnalyzer"
-    - change-object-ref-to-string:
-        path: "$.definitions.Field.properties.indexAnalyzer"
-
     # Add RestProxy import
     - from:
         - SearchServiceRestClientImpl.java
