@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.0",
+    "version": "3.1",
     "title": "Custom Vision Prediction Client"
   },
   "host": "southcentralus.api.cognitive.microsoft.com",
-  "basePath": "/customvision/v3.0/prediction",
+  "basePath": "/customvision/v3.1/prediction",
   "schemes": [
     "https"
   ],
@@ -124,7 +124,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
           }
@@ -412,7 +412,7 @@
           {
             "name": "imageData",
             "in": "formData",
-            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 0MB.",
+            "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 4MB.",
             "required": true,
             "type": "file"
           }
@@ -650,10 +650,13 @@
             "BadRequestProjectUnknownClassification",
             "BadRequestProjectUnsupportedDomainTypeChange",
             "BadRequestProjectUnsupportedExportPlatform",
+            "BadRequestProjectImagePreprocessingSettings",
+            "BadRequestProjectDuplicated",
             "BadRequestIterationName",
             "BadRequestIterationNameNotUnique",
             "BadRequestIterationDescription",
             "BadRequestIterationIsNotTrained",
+            "BadRequestIterationValidationFailed",
             "BadRequestWorkspaceCannotBeModified",
             "BadRequestWorkspaceNotDeletable",
             "BadRequestTagName",
@@ -661,14 +664,17 @@
             "BadRequestTagDescription",
             "BadRequestTagType",
             "BadRequestMultipleNegativeTag",
+            "BadRequestMultipleGeneralProductTag",
             "BadRequestImageTags",
             "BadRequestImageRegions",
             "BadRequestNegativeAndRegularTagOnSameImage",
+            "BadRequestUnsupportedDomain",
             "BadRequestRequiredParamIsNull",
             "BadRequestIterationIsPublished",
             "BadRequestInvalidPublishName",
             "BadRequestInvalidPublishTarget",
             "BadRequestUnpublishFailed",
+            "BadRequestIterationNotPublished",
             "BadRequestSubscriptionApi",
             "BadRequestExceedProjectLimit",
             "BadRequestExceedIterationPerProjectLimit",
@@ -682,6 +688,7 @@
             "BadRequestImageUrl",
             "BadRequestImageFormat",
             "BadRequestImageSizeBytes",
+            "BadRequestImageDimensions",
             "BadRequestImageExceededCount",
             "BadRequestTrainingNotNeeded",
             "BadRequestTrainingNotNeededButTrainingPipelineUpdated",
@@ -704,6 +711,10 @@
             "BadRequestPredictionResultsExceededCount",
             "BadRequestPredictionInvalidApplicationName",
             "BadRequestPredictionInvalidQueryParameters",
+            "BadRequestInvalidImportToken",
+            "BadRequestExportWhileTraining",
+            "BadRequestImageMetadataKey",
+            "BadRequestImageMetadataValue",
             "BadRequestInvalid",
             "UnsupportedMediaType",
             "Forbidden",
@@ -729,10 +740,13 @@
             "Conflict",
             "ConflictInvalid",
             "ErrorUnknown",
+            "ErrorIterationCopyFailed",
+            "ErrorPreparePerformanceMigrationFailed",
             "ErrorProjectInvalidWorkspace",
             "ErrorProjectInvalidPipelineConfiguration",
             "ErrorProjectInvalidDomain",
             "ErrorProjectTrainingRequestFailed",
+            "ErrorProjectImportRequestFailed",
             "ErrorProjectExportRequestFailed",
             "ErrorFeaturizationServiceUnavailable",
             "ErrorFeaturizationQueueTimeout",
@@ -850,6 +864,21 @@
           "description": "Bounding box of the prediction.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "tagType": {
+          "description": "Type of the predicted tag.",
+          "enum": [
+            "Regular",
+            "Negative",
+            "GeneralProduct"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "TagType",
+            "modelAsString": true
+          }
         }
       }
     }

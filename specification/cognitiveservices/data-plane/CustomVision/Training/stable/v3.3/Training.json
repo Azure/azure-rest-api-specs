@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.2",
+    "version": "3.3",
     "title": "Custom Vision Training Client"
   },
   "host": "southcentralus.api.cognitive.microsoft.com",
-  "basePath": "/customvision/v3.2/training",
+  "basePath": "/customvision/v3.3/training",
   "schemes": [
     "https"
   ],
@@ -354,6 +354,57 @@
         }
       }
     },
+    "/projects/{projectId}/artifacts": {
+      "get": {
+        "tags": [
+          "ProjectApi"
+        ],
+        "summary": "Get artifact content from blob storage, based on artifact relative path in the blob.",
+        "operationId": "GetArtifact",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The relative path for artifact.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetArtifact request": {
+            "$ref": "./examples/GetArtifact.json"
+          }
+        }
+      }
+    },
     "/projects/{projectId}/export": {
       "get": {
         "tags": [
@@ -400,12 +451,132 @@
       }
     },
     "/projects/{projectId}/images": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get images for a given project iteration or workspace.",
+        "description": "This API supports batching and range selection. By default it will only return first 50 images matching images.\r\nUse the {take} and {skip} parameters to control how many images to return in a given batch.\r\nThe filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImages",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images. Defaults to all tagged images when null. Limited to 20.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 20,
+            "minItems": 0
+          },
+          {
+            "name": "taggingStatus",
+            "in": "query",
+            "description": "The tagging status filter. It can be 'All', 'Tagged', or 'Untagged'. Defaults to 'All'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Tagged",
+              "Untagged"
+            ]
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An expression to filter the images against image metadata. Only images where the expression evaluates to true are included in the response.\r\nThe expression supports eq (Equal), ne (Not equal), and (Logical and), or (Logical or) operators.\r\nHere is an example, metadata=key1 eq 'value1' and key2 ne 'value2'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The ordering. Defaults to newest.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Newest",
+              "Oldest"
+            ]
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Maximum number of images to return. Defaults to 50, limited to 256.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 256,
+            "minimum": 0
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of images to skip before beginning the image batch. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Image"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImages request": {
+            "$ref": "./examples/GetImages.json"
+          }
+        }
+      },
       "post": {
         "tags": [
           "ImageApi"
         ],
         "summary": "Add the provided images to the set of training images.",
-        "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files",
+        "description": "This API accepts body content as multipart/form-data and application/octet-stream. When using multipart\r\nmultiple image files can be sent at once, with a maximum of 64 files.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "CreateImagesFromData",
         "consumes": [
           "multipart/form-data",
@@ -452,6 +623,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
@@ -552,7 +729,9 @@
         "operationId": "GetImageRegionProposals",
         "consumes": [],
         "produces": [
-          "application/json"
+          "application/json",
+          "application/xml",
+          "text/xml"
         ],
         "parameters": [
           {
@@ -595,13 +774,100 @@
         }
       }
     },
+    "/projects/{projectId}/images/count": {
+      "get": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Get the number of images.",
+        "description": "The filtering is on an and/or relationship. For example, if the provided tag ids are for the \"Dog\" and\r\n\"Cat\" tags, then only images tagged with Dog and/or Cat will be returned",
+        "operationId": "GetImageCount",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "iterationId",
+            "in": "query",
+            "description": "The iteration id. Defaults to workspace.",
+            "required": false,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "taggingStatus",
+            "in": "query",
+            "description": "The tagging status filter. It can be 'All', 'Tagged', or 'Untagged'. Defaults to 'All'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "All",
+              "Tagged",
+              "Untagged"
+            ]
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An expression to filter the images against image metadata. Only images where the expression evaluates to true are included in the response.\r\nThe expression supports eq (Equal), ne (Not equal), and (Logical and), or (Logical or) operators.\r\nHere is an example, metadata=key1 eq 'value1' and key2 ne 'value2'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "A list of tags ids to filter the images to count. Defaults to all tags when null.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful GetImageCount request": {
+            "$ref": "./examples/GetImageCount.json"
+          }
+        }
+      }
+    },
     "/projects/{projectId}/images/files": {
       "post": {
         "tags": [
           "ImageApi"
         ],
         "summary": "Add the provided batch of images to the set of training images.",
-        "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
+        "description": "This API accepts a batch of files, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "CreateImagesFromFiles",
         "consumes": [
           "application/json",
@@ -637,6 +903,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
@@ -727,13 +999,97 @@
         }
       }
     },
+    "/projects/{projectId}/images/metadata": {
+      "post": {
+        "tags": [
+          "ImageApi"
+        ],
+        "summary": "Update metadata of images.",
+        "description": "This API accepts a batch of image Ids, and metadata, to update images. There is a limit of 64 images.",
+        "operationId": "UpdateImageMetadata",
+        "consumes": [
+          "application/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "x-nullable": false
+          },
+          {
+            "name": "imageIds",
+            "in": "query",
+            "description": "The list of image ids to update. Limited to 64.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "x-nullable": false
+            },
+            "collectionFormat": "csv",
+            "maxItems": 256,
+            "minItems": 0
+          },
+          {
+            "name": "metadata",
+            "in": "body",
+            "description": "The metadata to be updated to the specified images. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limied to 512.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageMetadataUpdateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
+            "schema": {
+              "$ref": "#/definitions/ImageMetadataUpdateSummary"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CustomVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful UpdateImageMetadata request": {
+            "$ref": "./examples/UpdateImageMetadata.json"
+          }
+        }
+      }
+    },
     "/projects/{projectId}/images/predictions": {
       "post": {
         "tags": [
           "ImageApi"
         ],
         "summary": "Add the specified predicted images to the set of training images.",
-        "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.",
+        "description": "This API creates a batch of images from predicted images specified. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "CreateImagesFromPredictions",
         "consumes": [
           "application/json",
@@ -759,7 +1115,7 @@
           {
             "name": "batch",
             "in": "body",
-            "description": "Image and tag ids. Limited to 64 images and 20 tags per batch.",
+            "description": "Image, tag ids, and metadata. Limited to 64 images and 20 tags per batch.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImageIdCreateBatch"
@@ -769,6 +1125,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
@@ -793,7 +1155,7 @@
           "ImageApi"
         ],
         "summary": "Create a set of image regions.",
-        "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.",
+        "description": "This API accepts a batch of image regions, and optionally tags, to update existing images with region information.\r\nThere is a limit of 64 entries in the batch.\r\nIf all regions are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each region will be listed in the response payload.",
         "operationId": "CreateImageRegions",
         "consumes": [
           "application/json",
@@ -829,6 +1191,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageRegionCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
             "schema": {
               "$ref": "#/definitions/ImageRegionCreateSummary"
             }
@@ -1485,7 +1853,7 @@
           "ImageApi"
         ],
         "summary": "Add the provided images urls to the set of training images.",
-        "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.",
+        "description": "This API accepts a batch of urls, and optionally tags, to create images. There is a limit of 64 images and 20 tags.\r\nIf all images are successful created, 200(OK) status code will be returned.\r\nOtherwise, 207 (Multi-Status) status code will be returned and detail status for each image will be listed in the response payload.",
         "operationId": "CreateImagesFromUrls",
         "consumes": [
           "application/json",
@@ -1511,7 +1879,7 @@
           {
             "name": "batch",
             "in": "body",
-            "description": "Image urls and tag ids. Limited to 64 images and 20 tags per batch.",
+            "description": "Image urls, tag ids, and metadata. Limited to 64 images and 20 tags per batch.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ImageUrlCreateBatch"
@@ -1521,6 +1889,12 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImageCreateSummary"
+            }
+          },
+          "207": {
+            "description": "207",
             "schema": {
               "$ref": "#/definitions/ImageCreateSummary"
             }
@@ -2179,6 +2553,13 @@
             "description": "The id of the prediction resource to publish to.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "overwrite",
+            "in": "query",
+            "description": "Whether to overwrite the published model with the given name (default: false).",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -2604,7 +2985,8 @@
             "type": "string",
             "enum": [
               "Regular",
-              "Negative"
+              "Negative",
+              "GeneralProduct"
             ]
           }
         ],
@@ -2990,6 +3372,13 @@
             "description": "Token generated from the export project call.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Optional, name of the project to use instead of auto-generated name.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3091,9 +3480,11 @@
             "BadRequestTagDescription",
             "BadRequestTagType",
             "BadRequestMultipleNegativeTag",
+            "BadRequestMultipleGeneralProductTag",
             "BadRequestImageTags",
             "BadRequestImageRegions",
             "BadRequestNegativeAndRegularTagOnSameImage",
+            "BadRequestUnsupportedDomain",
             "BadRequestRequiredParamIsNull",
             "BadRequestIterationIsPublished",
             "BadRequestInvalidPublishName",
@@ -3113,6 +3504,7 @@
             "BadRequestImageUrl",
             "BadRequestImageFormat",
             "BadRequestImageSizeBytes",
+            "BadRequestImageDimensions",
             "BadRequestImageExceededCount",
             "BadRequestTrainingNotNeeded",
             "BadRequestTrainingNotNeededButTrainingPipelineUpdated",
@@ -3137,6 +3529,8 @@
             "BadRequestPredictionInvalidQueryParameters",
             "BadRequestInvalidImportToken",
             "BadRequestExportWhileTraining",
+            "BadRequestImageMetadataKey",
+            "BadRequestImageMetadataValue",
             "BadRequestInvalid",
             "UnsupportedMediaType",
             "Forbidden",
@@ -3206,6 +3600,7 @@
           "format": "uuid",
           "type": "string",
           "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000",
           "x-nullable": false
         },
         "name": {
@@ -3274,7 +3669,7 @@
           }
         },
         "downloadUri": {
-          "description": "URI used to download the model.",
+          "description": "URI used to download the model. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -3314,6 +3709,7 @@
           "description": "Id of the image.",
           "type": "string",
           "readOnly": true,
+          "example": "00000000-0000-0000-0000-000000000000",
           "x-nullable": false
         },
         "created": {
@@ -3338,17 +3734,17 @@
           "x-nullable": false
         },
         "resizedImageUri": {
-          "description": "The URI to the (resized) image used for training.",
+          "description": "The URI to the (resized) image used for training. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "thumbnailUri": {
-          "description": "The URI to the thumbnail of the original image.",
+          "description": "The URI to the thumbnail of the original image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "originalImageUri": {
-          "description": "The URI to the original uploaded image.",
+          "description": "The URI to the original uploaded image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -3366,6 +3762,15 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageRegion"
+          },
+          "readOnly": true,
+          "x-nullable": true
+        },
+        "metadata": {
+          "description": "Metadata associated with this image.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
           "readOnly": true,
           "x-nullable": true
@@ -3447,9 +3852,19 @@
           "items": {
             "format": "uuid",
             "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000",
             "x-nullable": false
           },
           "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limied to 512.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
         }
       }
     },
@@ -3471,6 +3886,7 @@
           "items": {
             "format": "uuid",
             "type": "string",
+            "example": "00000000-0000-0000-0000-000000000000",
             "x-nullable": false
           },
           "readOnly": false
@@ -3504,6 +3920,15 @@
             "x-nullable": false
           },
           "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limied to 512.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
         }
       }
     },
@@ -3533,6 +3958,62 @@
             "x-nullable": false
           },
           "readOnly": false
+        }
+      }
+    },
+    "ImageMetadataUpdateEntry": {
+      "description": "Entry associating a metadata to an image.",
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "format": "uuid",
+          "description": "Id of the image.",
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Status of the metadata update.",
+          "enum": [
+            "OK",
+            "ErrorImageNotFound",
+            "ErrorLimitExceed",
+            "ErrorUnknown"
+          ],
+          "type": "string",
+          "readOnly": false,
+          "x-nullable": false,
+          "x-ms-enum": {
+            "name": "ImageMetadataUpdateStatus",
+            "modelAsString": true
+          }
+        },
+        "metadata": {
+          "description": "Metadata of the image.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
+        }
+      }
+    },
+    "ImageMetadataUpdateSummary": {
+      "type": "object",
+      "properties": {
+        "isBatchSuccessful": {
+          "type": "boolean",
+          "readOnly": true,
+          "x-nullable": false
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageMetadataUpdateEntry",
+            "x-nullable": false
+          },
+          "readOnly": true
         }
       }
     },
@@ -4034,6 +4515,15 @@
             "x-nullable": false
           },
           "readOnly": false
+        },
+        "metadata": {
+          "description": "The metadata of image. Limited to 50 key-value pairs per image. The length of key is limited to 256. The length of value is limied to 512.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": false,
+          "x-nullable": true
         }
       }
     },
@@ -4286,6 +4776,21 @@
           "description": "Bounding box of the prediction.",
           "readOnly": true,
           "x-nullable": true
+        },
+        "tagType": {
+          "description": "Type of the predicted tag.",
+          "enum": [
+            "Regular",
+            "Negative",
+            "GeneralProduct"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "TagType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4299,7 +4804,7 @@
           "readOnly": false
         },
         "results": {
-          "description": "Result of an prediction request.",
+          "description": "Result of an image prediction request.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/StoredImagePrediction",
@@ -4446,7 +4951,7 @@
           "x-nullable": false
         },
         "thumbnailUri": {
-          "description": "Gets the thumbnail url representing the image.",
+          "description": "Gets the thumbnail url representing the image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -4647,17 +5152,17 @@
       "type": "object",
       "properties": {
         "resizedImageUri": {
-          "description": "The URI to the (resized) prediction image.",
+          "description": "The URI to the (resized) prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "thumbnailUri": {
-          "description": "The URI to the thumbnail of the original prediction image.",
+          "description": "The URI to the thumbnail of the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "originalImageUri": {
-          "description": "The URI to the original prediction image.",
+          "description": "The URI to the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -4726,17 +5231,17 @@
           "x-nullable": false
         },
         "resizedImageUri": {
-          "description": "The URI to the (resized) prediction image.",
+          "description": "The URI to the (resized) prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "thumbnailUri": {
-          "description": "The URI to the thumbnail of the original prediction image.",
+          "description": "The URI to the thumbnail of the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
         "originalImageUri": {
-          "description": "The URI to the original prediction image.",
+          "description": "The URI to the original prediction image. If VNET feature is enabled this will be a relative path to be used with GetArtifact, otherwise this will be an absolute URI to the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -4951,7 +5456,8 @@
           "description": "Gets or sets the type of the tag.",
           "enum": [
             "Regular",
-            "Negative"
+            "Negative",
+            "GeneralProduct"
           ],
           "type": "string",
           "readOnly": false,
