@@ -162,17 +162,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
+          "202": {
+            "description": "Accepted response definition.",
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -370,9 +361,13 @@
             "modelAsString": true
           }
         },
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/sku",
+          "description": "The sku properties."
         }
       },
       "description": "Cluster properties."
@@ -409,10 +404,10 @@
     },
     "ClusterPatchProperties": {
       "properties": {
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
-        }
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
+        },
       },
       "description": "Log Analytics cluster patch properties."
     },
@@ -469,6 +464,40 @@
         }
       },
       "description": "The list clusters operation response."
+    },
+    "keyVaultProperties": {
+      "properties": {
+        "keyVaultUri":{
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyName":{
+          "description": "The name of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyVersion":{
+          "description": "The version of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+      }
+    },
+    "sku": {
+      "properties": {
+        "capacityReservationLevel":{
+          "description": "The value of the Capacity Reservation in GB per day",
+          "enum": [
+            "CapacityReservation"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        },
+        "name":{
+          "description": "The SKU type",
+          "type": "string"
+        },
+      }
     },
     "Identity": {
       "properties": {
