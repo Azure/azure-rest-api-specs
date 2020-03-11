@@ -15,5 +15,5 @@ Please also specify `--go-sdks-folder=<path to the root directory of your azure-
 
 ```yaml $(tag) == 'package-2019-07-24' && $(go)
 namespace: Microsoft.AzureData
-output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2017-03-01-preview/$(namespace)
+output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2019-07-24-preview/$(namespace)
 ```
