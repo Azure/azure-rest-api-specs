@@ -1198,18 +1198,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemagroups": {
       "get": {
         "tags": [
-          "SchemaCollections"
+          "SchemaGroups"
         ],
-        "operationId": "SchemaCollections_ListByNamespace",
+        "operationId": "SchemaGroups_ListByNamespace",
         "x-ms-examples": {
-          "SchemaCollectionsListAll": {
-            "$ref": "./examples/SchemaCollections/EHSchemaCollectionsListByNameSpace.json"
+          "SchemaGroupsListAll": {
+            "$ref": "./examples/SchemaGroups/EHSchemaGroupsListByNameSpace.json"
           }
         },
-        "description": "Gets all the Schema Collections in a Namespace.",
+        "description": "Gets all the Schema Groups in a Namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1232,9 +1232,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of Schema Collections.",
+            "description": "Successfully retrieved the list of Schema Groups.",
             "schema": {
-              "$ref": "#/definitions/SchemaCollectionListResult"
+              "$ref": "#/definitions/SchemaGroupListResult"
             }
           },
           "default": {
@@ -1249,18 +1249,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemacollections/{schemaCollectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/schemagroups/{schemaGroupName}": {
       "put": {
         "tags": [
-          "SchemaCollections"
+          "SchemaGroups"
         ],
-        "operationId": "SchemaCollections_CreateOrUpdate",
+        "operationId": "SchemaGroups_CreateOrUpdate",
         "x-ms-examples": {
-          "SchemaCollectionCreate": {
-            "$ref": "./examples/SchemaCollections/EHSchemaCollectionCreate.json"
+          "SchemaGroupCreate": {
+            "$ref": "./examples/SchemaGroups/EHSchemaGroupCreate.json"
           }
         },
-        "description": "Creates or updates a new Schema Collection as a nested resource within a Namespace.",
+        "description": "Creates or updates a new Schema Group as a nested resource within a Namespace. The schema group resource includes metadata and properties for the group, but it does not include a list of the schemas contained by the group. ",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1269,16 +1269,16 @@
             "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SchemaCollectionNameParameter"
+            "$ref": "#/parameters/SchemaGroupNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SchemaCollection"
+              "$ref": "#/definitions/SchemaGroup"
             },
-            "description": "Parameters supplied to create an Schema Collection resource."
+            "description": "Parameters supplied to create a Schema Group resource."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1289,13 +1289,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Schema Collection successfully created.",
+            "description": "Schema Group successfully created.",
             "schema": {
-              "$ref": "#/definitions/SchemaCollection"
+              "$ref": "#/definitions/SchemaGroup"
             }
           },
           "default": {
-            "description": "SchemaCollection error response describing why the operation failed.",
+            "description": "SchemaGroup error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1304,15 +1304,15 @@
       },
       "delete": {
         "tags": [
-          "SchemaCollections"
+          "SchemaGroups"
         ],
-        "operationId": "SchemaCollections_Delete",
+        "operationId": "SchemaGroups_Delete",
         "x-ms-examples": {
-          "SchemaCollectionDelete": {
-            "$ref": "./examples/SchemaCollections/EHSchemaCollectionDelete.json"
+          "SchemaGroupDelete": {
+            "$ref": "./examples/SchemaGroups/EHSchemaGroupDelete.json"
           }
         },
-        "description": "Deletes an Schema Collection from the specified Namespace and resource group.",
+        "description": "Deletes an Schema Group from the specified Namespace and resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1321,7 +1321,7 @@
             "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SchemaCollectionNameParameter"
+            "$ref": "#/parameters/SchemaGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1332,13 +1332,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Schema Collection successfully deleted."
+            "description": "Schema Group successfully deleted."
           },
           "204": {
             "description": "No content."
           },
           "default": {
-            "description": "SchemaCollection error response describing why the operation failed.",
+            "description": "SchemaGroup error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -1347,15 +1347,15 @@
       },
       "get": {
         "tags": [
-          "SchemaCollections"
+          "SchemaGroups"
         ],
-        "operationId": "SchemaCollections_Get",
+        "operationId": "SchemaGroups_Get",
         "x-ms-examples": {
-          "SchemaCollectionGet": {
-            "$ref": "./examples/SchemaCollections/EHSchemaCollectionGet.json"
+          "SchemaGroupGet": {
+            "$ref": "./examples/SchemaGroups/EHSchemaGroupGet.json"
           }
         },
-        "description": "Gets an Schema Collections description for the specified Schema Collection.",
+        "description": "Gets an Schema Groups description for the specified Schema Group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -1364,7 +1364,7 @@
             "$ref": "#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/SchemaCollectionNameParameter"
+            "$ref": "#/parameters/SchemaGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1375,13 +1375,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the Schema Collection description.",
+            "description": "Successfully retrieved the Schema Group description.",
             "schema": {
-              "$ref": "#/definitions/SchemaCollection"
+              "$ref": "#/definitions/SchemaGroup"
             }
           },
           "default": {
-            "description": "SchemaCollection error response describing why the operation failed.",
+            "description": "SchemaGroup error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -2552,7 +2552,7 @@
       ],
       "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
     },
-    "SchemaCollection": {
+    "SchemaGroup": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2568,9 +2568,16 @@
               "format": "date-time",
               "type": "string",
               "description": "The exact time the message was updated."
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "A name-value pair to associate with the group as metadata."
             }
           },
-          "description": "Properties supplied to the Create Or Update Schema Collection operation."
+          "description": "Properties supplied to the Create Or Update Schema Group operation."
         }
       },
       "allOf": [
@@ -2578,23 +2585,23 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Single item in List or Get Schema Collection operation"
+      "description": "Single item in List or Get Schema Group operation"
     },
-    "SchemaCollectionListResult": {
+    "SchemaGroupListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SchemaCollection"
+            "$ref": "#/definitions/SchemaGroup"
           },
-          "description": "Result of the List SchemaCollections operation."
+          "description": "Result of the List SchemaGroups operation."
         },
         "nextLink": {
           "type": "string",
-          "description": "Link to the next set of results. Not empty if Value contains incomplete list of SchemaCollections."
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of SchemaGroups."
         }
       },
-      "description": "The result of the List SchemaCollections operation."
+      "description": "The result of the List SchemaGroups operation."
     },
     "Eventhub": {
       "properties": {
@@ -3226,15 +3233,15 @@
       "x-ms-parameter-location": "method",
       "description": "The Event Hub name"
     },
-    "SchemaCollectionNameParameter": {
-      "name": "schemaCollectionName",
+    "SchemaGroupNameParameter": {
+      "name": "schemaGroupName",
       "in": "path",
       "required": true,
       "type": "string",
       "minLength": 1,
       "maxLength": 20,
       "x-ms-parameter-location": "method",
-      "description": "The Schema Collection name"
+      "description": "The Schema Group name"
     },
     "AliasNameParameter": {
       "name": "alias",
