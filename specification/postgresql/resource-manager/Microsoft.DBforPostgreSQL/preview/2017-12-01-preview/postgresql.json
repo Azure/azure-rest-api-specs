@@ -1149,13 +1149,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated the active directory administrator",
             "schema": {
               "$ref": "#/definitions/ServerAdministratorResource"
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1193,13 +1196,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully deleted the active directory administrator"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Operation in progress"
           },
           "204": {
-            "description": "NoContent"
+            "description": "The specified Server active directory administrator does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
