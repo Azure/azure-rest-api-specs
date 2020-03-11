@@ -1,329 +1,329 @@
 {
-  "swagger":"2.0",
-  "info":{
-    "version":"2018-12-20",
-    "title":"RecoveryServicesBackupClient",
-    "x-ms-code-generation-settings":{
-      "internalConstructors":false
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-12-20",
+    "title": "RecoveryServicesBackupClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
     }
   },
-  "host":"management.azure.com",
-  "schemes":[
+  "host": "management.azure.com",
+  "schemes": [
     "https"
   ],
-  "consumes":[
+  "consumes": [
     "application/json"
   ],
-  "produces":[
+  "produces": [
     "application/json"
   ],
-  "paths":{
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default":{
-      "get":{
-        "tags":[
+  "paths": {
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupAadProperties/default": {
+      "get": {
+        "tags": [
           "AadProperties"
         ],
-        "summary":"Fetches the AAD properties from target region BCM stamp.",
-        "operationId":"AadProperties_Get",
-        "produces":[
+        "summary": "Fetches the AAD properties from target region BCM stamp.",
+        "operationId": "AadProperties_Get",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK",
-            "schema":{
-              "$ref":"#/definitions/AADPropertiesResource"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AADPropertiesResource"
             }
           }
         },
-        "x-ms-examples":{
-          "Get AAD Properties for authentication in the third region":{
-            "$ref":"./examples/AzureIaasVm/BackupAadProperties_Get.json"
+        "x-ms-examples": {
+          "Get AAD Properties for authentication in the third region": {
+            "$ref": "./examples/AzureIaasVm/BackupAadProperties_Get.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore":{
-      "post":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore": {
+      "post": {
+        "tags": [
           "CrossRegionRestore"
         ],
-        "summary":"Restores the specified backed up data in a different region as compared to where the data is backed up.",
-        "operationId":"CrossRegionRestore_Trigger",
-        "produces":[
+        "summary": "Restores the specified backed up data in a different region as compared to where the data is backed up.",
+        "operationId": "CrossRegionRestore_Trigger",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name":"parameters",
-            "in":"body",
-            "description":"resource cross region restore request",
-            "required":true,
-            "schema":{
-              "$ref":"#/definitions/CrossRegionRestoreRequestResource"
+            "name": "parameters",
+            "in": "body",
+            "description": "resource cross region restore request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CrossRegionRestoreRequestResource"
             }
           }
         ],
-        "responses":{
-          "202":{
-            "description":"Accepted"
+        "responses": {
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
-        "x-ms-examples":{
-          "Trigger Cross Region Restore":{
-            "$ref":"./examples/AzureIaasVm/TriggerCrossRegionRestore_Post.json"
+        "x-ms-examples": {
+          "Trigger Cross Region Restore": {
+            "$ref": "./examples/AzureIaasVm/TriggerCrossRegionRestore_Post.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob":{
-      "post":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob": {
+      "post": {
+        "tags": [
           "CrrJobDetails"
         ],
-        "summary":"Get CRR job details from target region.",
-        "operationId":"BackupCrrJobDetails_Get",
-        "produces":[
+        "summary": "Get CRR job details from target region.",
+        "operationId": "BackupCrrJobDetails_Get",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK",
-            "schema":{
-              "$ref":"#/definitions/JobResource"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
             }
           }
         },
-        "x-ms-examples":{
-          "Get Cross Region Restore Job Details in the secondary region":{
-            "$ref":"./examples/AzureIaasVm/GetCrrJob_Post.json"
+        "x-ms-examples": {
+          "Get Cross Region Restore Job Details in the secondary region": {
+            "$ref": "./examples/AzureIaasVm/GetCrrJob_Post.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs":{
-      "post":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs": {
+      "post": {
+        "tags": [
           "BackupCrrJobs"
         ],
-        "summary":"Gets the list of CRR jobs from the target region.",
-        "operationId":"BackupCrrJobs_List",
-        "produces":[
+        "summary": "Gets the list of CRR jobs from the target region.",
+        "operationId": "BackupCrrJobs_List",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK",
-            "schema":{
-              "$ref":"#/definitions/JobResourceList"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResourceList"
             }
           }
         },
-        "x-ms-pageable":{
-          "nextLinkName":"nextLink"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "x-ms-examples":{
-          "List Cross Region Restore Jobs in the secondary region":{
-            "$ref":"./examples/AzureIaasVm/ListCrrJobs_Post.json"
+        "x-ms-examples": {
+          "List Cross Region Restore Jobs in the secondary region": {
+            "$ref": "./examples/AzureIaasVm/ListCrrJobs_Post.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}":{
-      "get":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationResults/{operationId}": {
+      "get": {
+        "tags": [
           "CrrOperationResults"
         ],
-        "operationId":"CrrOperationResults_Get",
-        "produces":[
+        "operationId": "CrrOperationResults_Get",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name":"operationId",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK"
+        "responses": {
+          "200": {
+            "description": "OK"
           },
-          "202":{
-            "description":"Accepted"
+          "202": {
+            "description": "Accepted"
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-        "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
-        "x-ms-examples":{
-          "Get Operation Results for Cross Region Restore":{
-            "$ref":"./examples/AzureIaasVm/GetCrrOperationResults_Get.json"
+        "x-ms-examples": {
+          "Get Operation Results for Cross Region Restore": {
+            "$ref": "./examples/AzureIaasVm/GetCrrOperationResults_Get.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}":{
-      "get":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrOperationsStatus/{operationId}": {
+      "get": {
+        "tags": [
           "CrrOperationStatus"
         ],
-        "operationId":"CrrOperationStatus_Get",
-        "produces":[
+        "operationId": "CrrOperationStatus_Get",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/AzureRegion"
+            "$ref": "#/parameters/AzureRegion"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name":"operationId",
-            "in":"path",
-            "required":true,
-            "type":"string"
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK",
-            "schema":{
-              "$ref":"#/definitions/OperationStatus"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
-        "x-ms-examples":{
-          "Get Operation Status for Cross Region Restore":{
-            "$ref":"./examples/AzureIaasVm/GetCrrOperationStatus_Get.json"
+        "x-ms-examples": {
+          "Get Operation Status for Cross Region Restore": {
+            "$ref": "./examples/AzureIaasVm/GetCrrOperationStatus_Get.json"
           }
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/accessToken":{
-      "post":{
-        "tags":[
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}/accessToken": {
+      "post": {
+        "tags": [
           "RecoveryPoints"
         ],
-        "summary":"Returns the Access token for communication between BMS and Protection service",
-        "operationId":"RecoveryPoints_GetAccessToken",
-        "produces":[
+        "summary": "Returns the Access token for communication between BMS and Protection service",
+        "operationId": "RecoveryPoints_GetAccessToken",
+        "produces": [
           "application/json"
         ],
-        "parameters":[
+        "parameters": [
           {
-            "$ref":"#/parameters/ApiVersion"
+            "$ref": "#/parameters/ApiVersion"
           },
           {
-            "$ref":"#/parameters/VaultName"
+            "$ref": "#/parameters/VaultName"
           },
           {
-            "$ref":"#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref":"#/parameters/SubscriptionId"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name":"fabricName",
-            "in":"path",
-            "description":"Fabric name associated with the container.",
-            "required":true,
-            "type":"string"
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the container.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"containerName",
-            "in":"path",
-            "description":"Name of the container.",
-            "required":true,
-            "type":"string"
+            "name": "containerName",
+            "in": "path",
+            "description": "Name of the container.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"protectedItemName",
-            "in":"path",
-            "description":"Name of the Protected Item.",
-            "required":true,
-            "type":"string"
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Name of the Protected Item.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name":"recoveryPointId",
-            "in":"path",
-            "description":"Recovery Point Id",
-            "required":true,
-            "type":"string"
+            "name": "recoveryPointId",
+            "in": "path",
+            "description": "Recovery Point Id",
+            "required": true,
+            "type": "string"
           }
         ],
-        "responses":{
-          "200":{
-            "description":"OK",
-            "schema":{
-              "$ref":"#/definitions/CrrAccessTokenResource"
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CrrAccessTokenResource"
             }
           }
         },
-        "x-ms-examples":{
-          "Get Access Token for Crr":{
-            "$ref":"./examples/AzureIaasVm/GetAccessToken_Get.json"
+        "x-ms-examples": {
+          "Get Access Token for Crr": {
+            "$ref": "./examples/AzureIaasVm/GetAccessToken_Get.json"
           }
         }
       }
@@ -3542,60 +3542,60 @@
       }
     }
   },
-  "parameters":{
-    "SubscriptionId":{
-      "name":"subscriptionId",
-      "in":"path",
-      "description":"The subscription Id.",
-      "required":true,
-      "type":"string"
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
     },
-    "AzureRegion":{
-      "name":"azureRegion",
-      "in":"path",
-      "description":"Azure region to hit Api",
-      "required":true,
-      "type":"string",
-      "x-ms-parameter-location":"method"
+    "AzureRegion": {
+      "name": "azureRegion",
+      "in": "path",
+      "description": "Azure region to hit Api",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-    "ApiVersion":{
-      "name":"api-version",
-      "in":"query",
-      "description":"Client Api Version.",
-      "required":true,
-      "type":"string"
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
     },
-    "ResourceGroupName":{
-      "name":"resourceGroupName",
-      "in":"path",
-      "description":"The name of the resource group where the recovery services vault is present.",
-      "required":true,
-      "type":"string",
-      "x-ms-parameter-location":"method"
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-    "VaultName":{
-      "name":"vaultName",
-      "in":"path",
-      "description":"The name of the recovery services vault.",
-      "required":true,
-      "type":"string",
-      "x-ms-parameter-location":"method"
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
-  "securityDefinitions":{
-    "azure_auth":{
-      "type":"oauth2",
-      "description":"Azure Active Directory OAuth2 Flow",
-      "flow":"implicit",
-      "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes":{
-        "user_impersonation":"impersonate your user account."
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
       }
     }
   },
-  "security":[
+  "security": [
     {
-      "azure_auth":[
+      "azure_auth": [
         "user_impersonation"
       ]
     }

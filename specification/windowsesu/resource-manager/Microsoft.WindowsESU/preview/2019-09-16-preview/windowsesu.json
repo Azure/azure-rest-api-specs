@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,10 +39,14 @@
   "paths": {
     "/providers/Microsoft.WindowsESU/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "ListOperations": { "$ref": "./examples/ListOperations.json" }
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
         },
         "description": "List all available Windows.ESU provider operations.",
         "parameters": [
@@ -63,10 +75,14 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsESU/multipleActivationKeys": {
       "get": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_List",
         "x-ms-examples": {
-          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeys.json" }
+          "ListMultipleActivationKeys": {
+            "$ref": "./examples/ListMultipleActivationKeys.json"
+          }
         },
         "description": "List all Multiple Activation Keys (MAK) created for a subscription.",
         "parameters": [
@@ -98,10 +114,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsESU/multipleActivationKeys": {
       "get": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_ListByResourceGroup",
         "x-ms-examples": {
-          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeysByResourceGroup.json" }
+          "ListMultipleActivationKeys": {
+            "$ref": "./examples/ListMultipleActivationKeysByResourceGroup.json"
+          }
         },
         "description": "List all Multiple Activation Keys (MAK) in a resource group.",
         "parameters": [
@@ -136,10 +156,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsESU/multipleActivationKeys/{multipleActivationKeyName}": {
       "get": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_Get",
         "x-ms-examples": {
-          "GetMultipleActivationKey": { "$ref": "./examples/GetMultipleActivationKey.json" }
+          "GetMultipleActivationKey": {
+            "$ref": "./examples/GetMultipleActivationKey.json"
+          }
         },
         "description": "Get a MAK key.",
         "parameters": [
@@ -172,10 +196,14 @@
         }
       },
       "put": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_Create",
         "x-ms-examples": {
-          "CreateMultipleActivationKey": { "$ref": "./examples/CreateMultipleActivationKey.json" }
+          "CreateMultipleActivationKey": {
+            "$ref": "./examples/CreateMultipleActivationKey.json"
+          }
         },
         "description": "Create a MAK key.",
         "parameters": [
@@ -224,10 +252,14 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_Update",
         "x-ms-examples": {
-          "UpdateMultipleActivationKey": { "$ref": "./examples/UpdateMultipleActivationKey.json" }
+          "UpdateMultipleActivationKey": {
+            "$ref": "./examples/UpdateMultipleActivationKey.json"
+          }
         },
         "description": "Update a MAK key.",
         "parameters": [
@@ -269,10 +301,14 @@
         }
       },
       "delete": {
-        "tags": ["MultipleActivationKeys"],
+        "tags": [
+          "MultipleActivationKeys"
+        ],
         "operationId": "MultipleActivationKeys_Delete",
         "x-ms-examples": {
-          "DeleteMultipleActivationKey": { "$ref": "./examples/DeleteMultipleActivationKey.json" }
+          "DeleteMultipleActivationKey": {
+            "$ref": "./examples/DeleteMultipleActivationKey.json"
+          }
         },
         "description": "Delete a MAK key.",
         "parameters": [
@@ -344,7 +380,10 @@
                 "name": "OsType",
                 "modelAsString": true
               },
-              "x-ms-mutability": ["create", "read"]
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "supportType": {
               "description": "Type of support",
@@ -358,24 +397,36 @@
                 "name": "SupportType",
                 "modelAsString": true
               },
-              "x-ms-mutability": ["create", "read"]
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "installedServerNumber": {
               "description": "Number of activations/servers using the MAK key.",
               "type": "integer",
               "minimum": 1,
               "maximum": 5000,
-              "x-ms-mutability": ["create", "read"]
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "agreementNumber": {
               "description": "Agreement number under which the key is requested.",
               "type": "string",
-              "x-ms-mutability": ["create", "read"]
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "isEligible": {
               "description": "<code> true </code> if user has eligible on-premises Windows physical or virtual machines, and that the requested key will only be used in their organization; <code> false </code> otherwise.",
               "type": "boolean",
-              "x-ms-mutability": ["create", "read"]
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             },
             "provisioningState": {
               "type": "string",
