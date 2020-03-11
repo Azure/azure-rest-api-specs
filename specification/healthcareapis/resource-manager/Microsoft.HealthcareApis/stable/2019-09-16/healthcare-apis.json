@@ -683,22 +683,22 @@
           "type": "string"
         },
         "identity": {
-            "type": "object",
-            "description": "Setting indicating whether the service has a managed identity associated with it.",
-            "properties": {
-                "type":{
-                    "description" : "Type of identity being specified, currently SystemAssigned and None are allowed.",
-                    "type": "string",
-                    "enum": [
-                        "SystemAssigned",
-                        "None"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ManagedServiceIdentityType",
-                        "modelAsString": true
-                    }
-                }
+          "type": "object",
+          "description": "Setting indicating whether the service has a managed identity associated with it.",
+          "properties": {
+            "type": {
+              "description": "Type of identity being specified, currently SystemAssigned and None are allowed.",
+              "type": "string",
+              "enum": [
+                "SystemAssigned",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "ManagedServiceIdentityType",
+                "modelAsString": true
+              }
             }
+          }
         }
       },
       "x-ms-azure-resource": true,
