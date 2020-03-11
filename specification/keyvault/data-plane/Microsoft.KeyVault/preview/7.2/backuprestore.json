@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultClient",
+    "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+    "version": "7.2-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{vaultBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "vaultBaseUrl",
+        "description": "The vault name, for example https://myvault.vault.azure.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/backup": {
+      "post": {
+        "tags": [
+          "FullBackup"
+        ],
+        "operationId": "FullBackup",
+        "description": "Creates full backup using the user provided SAS token to azure blob storage.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "azureStorageBlobContainerUri",
+            "schema": {
+              "$ref": "#/definitions/SASTokenParameter"
+            },
+            "description": "Azure blob SAS token pointing to a valid azure blob container where the full backup needs to be stored. This token needs to be valid atleast next 24 hours from the time of making this call"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started full backup",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create full backup": {
+            "$ref": "./examples/FullBackup-example.json"
+          }
+        }
+      }
+    },
+    "/backup/{jobId}/pending": {
+      "get": {
+        "tags": [
+          "FullBackup"
+        ],
+        "operationId": "FullBackupStatus",
+        "description": "Returns the full backup operation status",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Job Id returned part of the creation of backup"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the full backup status",
+            "schema": {
+              "$ref": "#/definitions/FullBackupOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Full backup status": {
+            "$ref": "./examples/FullBackup-pending-example.json"
+          }
+        }
+      }
+    },
+    "/restore": {
+      "put": {
+        "tags": [
+          "FullRestore"
+        ],
+        "operationId": "FullRestoreOperation",
+        "description": "Restores all key materials using the SAS token to the previously stored Azure Storage backup folder",
+        "parameters": [
+          {
+            "name": "restoreBlobDetails",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperationParameters"
+            },
+            "description": "Azure blob SAS token to the folder where the previous successful full backup was stored"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Started full backup restore",
+            "schema": {
+              "$ref": "#/definitions/FullRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create full restore from backup": {
+            "$ref": "./examples/FullRestore-example.json"
+          }
+        }
+      }
+    },
+    "/restore/{jobId}/pending": {
+      "get": {
+        "tags": [
+          "FullRestore"
+        ],
+        "operationId": "FullRestoreStatus",
+        "description": "Returns the full restore operation status from a user provided valid backup",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Job Id returned part of the full restore operation"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the full restore status",
+            "schema": {
+              "$ref": "#/definitions/FullRestoreOperation"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Full restore status": {
+            "$ref": "./examples/FullRestore-pending-example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RestoreOperationParameters": {
+      "properties": {
+        "sasTokenParameters": {
+          "$ref": "#/definitions/SASTokenParameter"
+        },
+        "folderToRestore": {
+          "type": "string",
+          "description": "Folder name of the blob where the previous successful backup was stored"
+        }
+      },
+      "required": [
+        "folderToRestore",
+        "sasTokenParameters"
+      ]
+    },
+    "SASTokenParameter": {
+      "properties": {
+        "storageResourceUri": {
+          "type": "string",
+          "description": "Azure blob strorage container uri"
+        },
+        "token": {
+          "type": "string",
+          "description": "Azure Blob Storage SAS token pointing to the azure blob storage container"
+        }
+      },
+      "required": [
+        "token",
+        "storageResourceUri"
+      ]
+    },
+    "FullBackupOperation": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the backup operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of backup operation."
+        },
+        "error": {
+          "$ref": "common.json#/definitions/Error",
+          "description": "Error encountered, if any, during the full backup operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the backup operation in UTC"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the backup operation in UTC"
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the full backup operation."
+        },
+        "azureStorageBlobContainerUri": {
+          "type": "string",
+          "description": "The Azure Blob Storage folder Uri which contains the full backup"
+        }
+      },
+      "description": "Full backup operation"
+    },
+    "FullRestoreOperation": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the restore operation."
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of restore operation."
+        },
+        "error": {
+          "$ref": "common.json#/definitions/Error",
+          "description": "Error encountered, if any, during the full restore operation."
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the full restore operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the restore operation"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the restore operation"
+        }
+      },
+      "description": "Full restore operation"
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    }
+  }
+}
