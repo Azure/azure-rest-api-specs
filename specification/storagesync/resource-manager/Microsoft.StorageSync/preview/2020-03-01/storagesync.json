@@ -3800,6 +3800,14 @@
           "type": "string",
           "description": "Storage Sync service Uid",
           "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionItem"
+          },
+          "description": "List of private endpoint connections associated with the storage sync service."
         }
       }
     },
@@ -4086,6 +4094,14 @@
           "$ref": "#/definitions/ServerEndpointRecallStatus",
           "description": "Recall status. Only populated if cloud tiering is enabled.",
           "readOnly": true
+        },
+        "initialDownloadPolicy": {
+          "$ref": "#/definitions/InitialDownloadPolicy",
+          "description": "Policy for how namespace and files are recalled during FastDr."
+        },
+        "localCacheMode": {
+          "$ref": "#/definitions/LocalCacheMode",
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         }
       }
     },
