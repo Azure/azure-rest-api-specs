@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Data Factory V2.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Data Factory V2, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,21 +15,31 @@ To build the SDK for Data Factory V2, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Data Factory V2 API.
 
 ``` yaml
 title: DataFactoryManagementClient
 description: The Azure Data Factory V2 management API provides a RESTful set of web services that interact with Azure Data Factory V2 services.
 openapi-type: arm
-tag: package-2018-06
+tag: package-2020-02
 ```
 
+
+### Tag: package-2020-02
+
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.DataFactory/stable/2020-02-29/datafactory.json
+```
 ### Tag: package-2018-06
 
 These settings apply only when `--tag=package-2018-06` is specified on the command line.
@@ -49,8 +59,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -66,7 +76,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
-
 
 ## C#
 
@@ -99,11 +108,13 @@ python:
   package-version: 1.0.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -117,7 +128,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
 
 ## Suppression
 
@@ -219,7 +229,7 @@ directive:
       - DataFlow add type required  
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -236,11 +246,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
