@@ -442,6 +442,241 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByStorageSyncService",
+        "description": "Gets the private link resources that need to be created for a storage sync service.",
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSyncServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the storage sync service.",
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSyncServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Create",
+        "description": "Update the state of specified private endpoint connection associated with the storage sync service.",
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Create": {
+            "$ref": "./examples/PrivateEndpointConnections_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSyncServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the storage sync service.",
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/StorageSyncServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/privateEndpointConnections": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "storageSyncServiceName",
+            "in": "path",
+            "description": "Name of Storage Sync Service resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PrivateEndpointConnection Resource"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByStorageSyncService",
+        "description": "Get a PrivateEndpointConnection List.",
+        "x-ms-examples": {
+          "PrivateEndpointConnections_ListByStorageSyncService": {
+            "$ref": "./examples/PrivateEndpointConnections_ListByStorageSyncService.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Array of Sync Group resources in Storage Sync Service",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionArray"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "request id.",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error message indicating why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups": {
       "get": {
         "parameters": [
@@ -2896,7 +3131,9 @@
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
-        "properties": {}
+        "properties": {
+          "description": "StorageSyncService Body Properties object."
+        }
       },
       "required": [
         "location"
@@ -3015,6 +3252,14 @@
         "offlineDataTransferShareName": {
           "type": "string",
           "description": "Offline data transfer share name"
+        },
+        "initialDownloadPolicy": {
+          "$ref": "#/definitions/InitialDownloadPolicy",
+          "description": "Policy for how namespace and files are recalled during FastDr."
+        },
+        "localCacheMode": {
+          "$ref": "#/definitions/LocalCacheMode",
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         }
       }
     },
@@ -3045,6 +3290,7 @@
       "description": "The parameters used when creating a registered server."
     },
     "RegisteredServerCreateParametersProperties": {
+      "description": "RegisteredServer Create Properties object.",
       "properties": {
         "serverCertificate": {
           "type": "string",
@@ -3426,6 +3672,19 @@
         }
       }
     },
+    "PrivateEndpointConnectionArray": {
+      "type": "object",
+      "description": "Array of PrivateEndpointConnection",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of PrivateEndpointConnection.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        }
+      }
+    },
     "SyncGroupArray": {
       "type": "object",
       "description": "Array of SyncGroup",
@@ -3541,6 +3800,14 @@
           "type": "string",
           "description": "Storage Sync service Uid",
           "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionItem"
+          },
+          "description": "List of private endpoint connections associated with the storage sync service."
         }
       }
     },
@@ -3738,6 +4005,10 @@
         "offlineDataTransferShareName": {
           "type": "string",
           "description": "Offline data transfer share name"
+        },
+        "localCacheMode": {
+          "$ref": "#/definitions/LocalCacheMode",
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         }
       }
     },
@@ -3823,6 +4094,14 @@
           "$ref": "#/definitions/ServerEndpointRecallStatus",
           "description": "Recall status. Only populated if cloud tiering is enabled.",
           "readOnly": true
+        },
+        "initialDownloadPolicy": {
+          "$ref": "#/definitions/InitialDownloadPolicy",
+          "description": "Policy for how namespace and files are recalled during FastDr."
+        },
+        "localCacheMode": {
+          "$ref": "#/definitions/LocalCacheMode",
+          "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access."
         }
       }
     },
@@ -4035,6 +4314,31 @@
         "on",
         "off"
       ]
+    },
+    "LocalCacheMode": {
+      "type": "string",
+      "description": "Policy for enabling follow-the-sun business models: link local cache to cloud behavior to pre-populate before local access.",
+      "enum": [
+        "DownloadNewAndModifiedFiles",
+        "UpdateLocallyCachedFiles"
+      ],
+      "x-ms-enum": {
+        "name": "LocalCacheMode",
+        "modelAsString": false
+      }
+    },
+    "InitialDownloadPolicy": {
+      "type": "string",
+      "description": "Policy for how namespace and files are recalled during FastDr",
+      "enum": [
+        "NamespaceOnly",
+        "NamespaceThenModifiedFiles",
+        "AvoidTieredFiles"
+      ],
+      "x-ms-enum": {
+        "name": "InitialDownloadPolicy",
+        "modelAsString": false
+      }
     },
     "ServerEndpointSyncHealthState": {
       "type": "string",
@@ -4417,6 +4721,182 @@
           "readOnly": true
         }
       }
+    },
+    "PrivateEndpointConnectionItem": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full identifier of the private endpoint connection."
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Private endpoint connection properties."
+        }
+      },
+      "description": "Private endpoint connection item."
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Private endpoint connection resource.",
+      "x-ms-azure-resource": true
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Properties of the private endpoint object."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Approval state of the private link connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "Provisioning state of the private endpoint connection."
+        }
+      },
+      "description": "Properties of the private endpoint connection resource."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full identifier of the private endpoint resource."
+        }
+      },
+      "description": "Private endpoint object properties."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been approved, rejected or removed by the key vault owner."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval or rejection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "An object that represents the approval state of the private link connection."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndpointConnectionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointConnectionProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateLinkResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "A private link resource"
+    },
+    "PrivateLinkResourceProperties": {
+      "properties": {
+        "groupId": {
+          "description": "Group identifier of private link resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "Required member names of private link resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Required DNS zone names of the the private link resource."
+        }
+      },
+      "description": "Properties of a private link resource."
+    }
+  },
+  "parameters": {
+    "StorageSyncServiceNameParameter": {
+      "name": "storageSyncServiceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the storage sync service name within the specified resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the Storage Account",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

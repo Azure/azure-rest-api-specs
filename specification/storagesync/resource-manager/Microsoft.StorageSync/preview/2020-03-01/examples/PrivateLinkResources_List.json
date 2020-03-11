@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res6977",
+    "storageSyncServiceName": "sss2527",
+    "api-version": "2020-03-01",
+    "monitor": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/res6977/providers/Microsoft.StorageSync/storageSyncServices/sss2527/privateLinkResources/afs",
+            "name": "afs",
+            "type": "Microsoft.StorageSync/storageSyncServices/privateLinkResources",
+            "properties": {
+              "groupId": "afs",
+              "requiredMembers": [
+                "management",
+                "sync.primary",
+                "sync.secondary"
+              ],
+              "requiredZoneNames": [
+                "privatelink.afs.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
