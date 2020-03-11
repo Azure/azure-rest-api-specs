@@ -565,7 +565,7 @@
       "required": [
         "id",
         "sentiment",
-        "confidenceScores",
+        "documentScores",
         "sentences"
       ],
       "properties": {
@@ -590,7 +590,7 @@
         "statistics": {
           "$ref": "#/definitions/DocumentStatistics"
         },
-        "confidenceScores": {
+        "documentScores": {
           "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
@@ -681,17 +681,12 @@
     "SentenceSentiment": {
       "type": "object",
       "required": [
-        "text",
         "sentiment",
-        "confidenceScores",
+        "sentenceScores",
         "offset",
         "length"
       ],
       "properties": {
-        "text": {
-          "type": "string",
-          "description": "The sentence text."
-        },
         "sentiment": {
           "type": "string",
           "description": "The predicted Sentiment for the sentence.",
@@ -705,7 +700,7 @@
             "modelAsString": false
           }
         },
-        "confidenceScores": {
+        "sentenceScores": {
           "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
           "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
