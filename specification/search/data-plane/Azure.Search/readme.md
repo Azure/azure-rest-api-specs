@@ -23,7 +23,6 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient and SearchIndexClient.
 
 ``` yaml
-title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
 ```
@@ -35,6 +34,7 @@ These settings apply only when `--tag=package-2019-05-searchservice-preview` is 
 ``` yaml $(tag) == 'package-2019-05-searchservice-preview'
 input-file:
 - preview/2019-05-06-preview/searchservice.json
+title: SearchServiceRestClient
 ```
 
 ### Tag: package-2019-05-searchindex-preview
@@ -44,6 +44,7 @@ These settings apply only when `--tag=package-2019-05-searchindex-preview` is sp
 ``` yaml $(tag) == 'package-2019-05-searchindex-preview'
 input-file:
 - preview/2019-05-06-preview/searchindex.json
+title: SearchIndexRestClient
 ```
 
 ### Tag: package-2019-05-searchservice
@@ -84,7 +85,7 @@ sync-methods: none
 add-context-parameter: true
 generate-client-interfaces: false
 custom-types-subpackage: implementation.models
-custom-types: AnalyzeResult
+custom-types: AnalyzeResult,SuggestRequest,AutocompleteRequest,ListDataSourcesResult,ListIndexersResult,ListIndexesResult,ListSkillsetsResult,ListSynonymMapsResult,AccessCondition
 license-header: |-
   Copyright (c) Microsoft Corporation. All rights reserved.
   Licensed under the MIT License.
@@ -94,36 +95,36 @@ license-header: |-
 require: ./autorest-custom-directives.md
 
 vararg-properties: >-
-  CorsOptions.allowedOrigins,
   AutocompleteOptions.searchFields,
   SearchOptions.facets, SearchOptions.highlightFields, SearchOptions.orderBy, SearchOptions.scoringParameters, SearchOptions.searchFields, SearchOptions.select,
-  SuggestOptions.orderBy, SuggestOptions.searchFields, SuggestOptions.select
+  SuggestOptions.orderBy, SuggestOptions.searchFields, SuggestOptions.select, CorsOptions.allowedOrigins
+```
 
+``` yaml $(java)
 directive:
-    # Rename IndexBatch to IndexBatchImpl when processing the API spec
-    - rename-model:
-          from: IndexBatch
-          to: IndexBatchImpl
+    # Change DocumentsImpl to take Accept header parameter
+    - from: DocumentsImpl.java
+      where: $
+      transform: >-
+          return $
+          .replace(/(\@HostParam\(\"indexName\"\) String indexName)/g, "$1\, @HeaderParam\(\"accept\"\) String accept")
+          .replace(/(this.client.getIndexName\(\),)/g, "$1 accept,")
+          .replace(/(public Mono\<(.*)\) \{)/g, "$1\n\t\tfinal String accept \= \"application\/json\;odata\.metadata\=none\"\;\n")
 
     # Use Document rather than Map<String, Object>
     - from:
-          - DocumentsImpl.java
+          - SuggestResult.java
           - SearchResult.java
       where: $
       transform: >-
           return $
-          .replace(/(package com.azure.search.models;)/g, "$1\nimport com.azure.search.Document;")
-          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.search.Document;")
-          .replace(/(Map<String, Object>)/g, "Document")
-          .replace(/(Object)/g, "Document")
+          .replace(/(package com.azure.search.models;)/g, "$1\nimport com.azure.search.SearchDocument;")
+          .replace(/(Map<String, Object>)/g, "SearchDocument")
 
-    # Use Document rather than Map<String, Object>
-    - from: SuggestResult.java
-      where: $
-      transform: >-
-          return $
-          .replace(/(import java.util.Map;\n)/g, "import com.azure.search.Document;")
-          .replace(/(Map<String, Object>)/g, "Document")
+    # Rename IndexBatch to IndexBatchBase when processing the API spec
+    - rename-model:
+          from: IndexBatch
+          to: IndexBatchBase
 
     # Enable configuration of RestProxy serializer
     - from: DocumentsImpl.java
@@ -131,6 +132,8 @@ directive:
       transform: >-
           return $
           .replace(/(import com.azure.core.util.serializer.JacksonAdapter;)/g, "$1\nimport com.azure.core.util.serializer.SerializerAdapter;")
+          .replace(/(import java.util.List;)/g, "$1\nimport java.util.Map;")
+          .replace(/(Mono\<SimpleResponse\<Object\>\>)/g, "Mono<SimpleResponse<Map<? extends String, Object>>>")
           .replace(/(@param client the instance of the service client containing this operation class.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
           .replace(/(public DocumentsImpl\(SearchIndexRestClientImpl client\) {)/g, "public DocumentsImpl(SearchIndexRestClientImpl client, SerializerAdapter serializer) {")
           .replace(/(this.service = RestProxy.create\(DocumentsService.class, client.getHttpPipeline\(\)\);)/g, "this.service = RestProxy.create(DocumentsService.class, client.getHttpPipeline(), serializer);")
@@ -145,9 +148,10 @@ directive:
           .replace(/(void setIndexName)/g, "public void setIndexName")
           .replace(/(void setSearchDnsSuffix)/g, "public void setSearchDnsSuffix")
           .replace(/(void setSearchServiceName)/g, "public void setSearchServiceName")
-          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.util.serializer.SerializerAdapter;")
+          .replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.util.serializer.JacksonAdapter;\nimport com.azure.core.util.serializer.SerializerAdapter;")
           .replace(/(this\(RestProxy.createDefaultPipeline\(\)\);)/g, "this(RestProxy.createDefaultPipeline(), JacksonAdapter.createDefaultSerializerAdapter());")
           .replace(/(@param httpPipeline The HTTP pipeline to send requests through.)/g, "$1\n     \* @param serializer the serializer to be used for service client requests.")
+          .replace(/(this\(new HttpPipelineBuilder\(\)\.policies\(new UserAgentPolicy\(\)\, new RetryPolicy\(\)\, new CookiePolicy\(\)\)\.build\(\)\)\;)/g, "this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy()).build(), new JacksonAdapter());")
           .replace(/(public SearchIndexRestClientImpl\(HttpPipeline httpPipeline\) {)/g, "public SearchIndexRestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializer) {")
           .replace(/(this.documents = new DocumentsImpl\(this\);)/g, "this.documents = new DocumentsImpl(this, serializer);")
 
@@ -180,26 +184,25 @@ directive:
           .replace(/(new SearchIndexRestClientImpl\(pipeline)/g, "$1, serializer")
           .replace(/(this.pipeline = RestProxy.createDefaultPipeline\(\);\s+})/g, "$1\n        if \(serializer == null\) {\n            this.serializer = JacksonAdapter.createDefaultSerializerAdapter\(\);\n        }")
 
-    # Enable IndexBatchImpl to be used as a generic type
-    - from: IndexBatchImpl.java
+    # Enable IndexBatchBase to be used as a generic type
+    - from: IndexBatchBase.java
       where: $
       transform: >-
           return $
-          .replace(/(public final class IndexBatchImpl)/g, "public class IndexBatchImpl<T>")
+          .replace(/(public final class IndexBatchBase)/g, "public class IndexBatchBase<T>")
           .replace(/(private List<IndexAction> actions;)/g, "private List<IndexAction<T>> actions;")
           .replace(/(public List<IndexAction> getActions\(\) {)/g, "public List<IndexAction<T>> getActions() {")
-          .replace(/(public IndexBatchImpl setActions\(List<IndexAction> actions\) {)/g, "protected IndexBatchImpl<T> setActions(List<IndexAction<T>> actions) {")
+          .replace(/(public IndexBatchBase setActions\(List<IndexAction> actions\) {)/g, "protected IndexBatchBase<T> setActions(List<IndexAction<T>> actions) {")
 
-    # Replace use of generated IndexBatchImpl with custom IndexBatch class
+    # Replace use of generated IndexBatchBase with custom IndexBatch class
     - from: DocumentsImpl.java
       where: $
       transform: >-
           return $
-          .replace(/(IndexBatchImpl)/g, "IndexBatch")
-          .replace(/(IndexBatch )/g, "IndexBatch<T> ")
           .replace(/(Mono<IndexDocumentsResult> indexAsync)/g, "<T> $1")
           .replace(/(Mono<SimpleResponse<IndexDocumentsResult>> index)/g, "<T> $1")
-          .replace(/(import com.azure.search.implementation.models.IndexBatch)/g, "import com.azure.search.models.IndexBatch")
+          .replace(/(IndexBatchBase)/g, "IndexBatchBase<T>")
+          .replace(/(com\.azure\.search\.models\.IndexBatchBase\<T\>)/g, "com.azure.search.models.IndexBatchBase")
 
     # Change get to is
     - from: DocumentsImpl.java
@@ -235,7 +238,6 @@ directive:
           return $.replace(/(public SuggestResult setAdditionalProperties)/g, "SuggestResult setAdditionalProperties")
 
     - from:
-          - FacetResult.java
           - SearchResult.java
           - SuggestResult.java
       where: $
@@ -257,65 +259,54 @@ directive:
     - from: DataType.java
       where: $
       transform: >-
-          return $
-          .replace(/(public static final DataType EDM_COMPLEX_TYPE = fromString\("Edm.ComplexType"\);)/g, "$1\n\n    /**\n     * Returns a collection of a specific DataType\n     * @param dataType the corresponding DataType\n     * @return a Collection of the corresponding DataType\n     */\n    @JsonCreator\n    public static DataType Collection(DataType dataType) {\n        return fromString(String.format(\"Collection(%s)\", dataType.toString()));\n    }")
+        return $
+        .replace(/(public static final DataType EDM_COMPLEX_TYPE = fromString\("Edm.ComplexType"\);)/g, "$1\n\n    /**\n     * Returns a collection of a specific DataType\n     * @param dataType the corresponding DataType\n     * @return a Collection of the corresponding DataType\n     */\n    @JsonCreator\n    public static DataType collection(DataType dataType) {\n        return fromString(String.format(\"Collection(%s)\", dataType.toString()));\n    }")
 
     # Workaround to fix bad host path parameters
     - from:
-          - SkillsetsImpl.java
-          - DatasetsImpl.java
-          - DataSourcesImpl.java
-          - IndexersImpl.java
-          - IndexesImpl.java
-          - SynonymMapsImpl.java
+        - SkillsetsImpl.java
+        - DatasetsImpl.java
+        - DataSourcesImpl.java
+        - IndexersImpl.java
+        - IndexesImpl.java
+        - SynonymMapsImpl.java
       where: $
       transform: >-
-          return $
-          .replace(/(this.getSearchServiceName)/g, "this.client.getSearchServiceName")
-          .replace(/(this.getSearchDnsSuffix)/g, "this.client.getSearchDnsSuffix")
-
-    # Replace VoidResponse with SimpleResponse<Void>
-    - from:
-          - SkillsetsImpl.java
-          - DatasetsImpl.java
-          - DataSourcesImpl.java
-          - IndexersImpl.java
-          - IndexesImpl.java
-          - SynonymMapsImpl.java
-      where: $
-      transform: >-
-          return $
-          .replace(/(import com.azure.core.http.rest.VoidResponse;\n)/g, "")
-          .replace(/(VoidResponse)/g, "SimpleResponse<Void>")
+        return $
+        .replace(/(import com\.azure\.search\.implementation\.models\.AccessCondition\;)/g, "import com.azure.core.http.MatchConditions;")
+        .replace(/(this.getSearchServiceName)/g, "this.client.getSearchServiceName")
+        .replace(/(this.getEndpoint)/g, "this.client.getEndpoint")
+        .replace(/(this.getSearchDnsSuffix)/g, "this.client.getSearchDnsSuffix")
+        .replace(/(AccessCondition)/g, "MatchConditions")
 
     # Change Field.analyzer/indexAnalyzer/searchAnalyzer's types from enum to string. Update setters and getters.
     - change-object-ref-to-string:
-          path: "$.definitions.Field.properties.analyzer"
+        path: "$.definitions.Field.properties.analyzer"
     - change-object-ref-to-string:
-          path: "$.definitions.Field.properties.searchAnalyzer"
+        path: "$.definitions.Field.properties.searchAnalyzer"
     - change-object-ref-to-string:
-          path: "$.definitions.Field.properties.indexAnalyzer"
+        path: "$.definitions.Field.properties.indexAnalyzer"
 
     # Change CustomAnalyzer.tokenizer/tokenFilters/charFilters' types from enum to string. Update setters and getters.
     - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.tokenizer"
+        path: "$.definitions.CustomAnalyzer.properties.tokenizer"
     - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.tokenFilters.items"
+        path: "$.definitions.CustomAnalyzer.properties.tokenFilters.items"
     - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.charFilters.items"
+        path: "$.definitions.CustomAnalyzer.properties.charFilters.items"
 
     - from:
-          - SearchServiceRestClientImpl.java
+        - SearchServiceRestClientImpl.java
       where: $
       transform: >-
-          return $.replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.http.rest.RestProxy;")
+        return $.replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.http.rest.RestProxy;")
 
     - from:
-          - DataSourceType.java
+        - DataSourceType.java
       where: $
       transform: >-
-          return $
-          .replace(/(COSMOS_DB)/g, "COSMOS")
+        return $
+        .replace(/(COSMOS_DB)/g, "COSMOS")
 ```
 
 ## C# 
