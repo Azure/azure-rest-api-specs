@@ -333,7 +333,7 @@
     "/sentiment": {
       "post": {
         "summary": "Sentiment",
-        "description": "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description": "The API returns a detailed sentiment analysis for the input text. The analysis is done in multiple levels of granularity, start from the a document level, down to sentence and key terms (aspects) and opinions.",
         "operationId": "Sentiment",
         "consumes": [
           "application/json",
@@ -513,7 +513,7 @@
         },
         "targetRef": {
           "type": "string",
-          "description": "The JSON pointer indicating the linked object."
+          "description": "A JSON pointer reference indicating the target object."
         }
       }
     },
@@ -762,7 +762,7 @@
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the sentence by Unicode standard."
+          "description": "The length of the sentence."
         },
         "aspects": {
           "type": "array",
@@ -812,7 +812,7 @@
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the aspect by Unicode standard."
+          "description": "The length of the aspect."
         },
         "text": {
           "type": "string",
@@ -859,7 +859,7 @@
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of the opinion by Unicode standard."
+          "description": "The length of the opinion."
         },
         "text": {
           "type": "string",
@@ -1003,12 +1003,12 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position (in Unicode characters) for the entity text."
+          "description": "Start position for the entity text."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length (in Unicode characters) for the entity text."
+          "description": "Length for the entity text."
         },
         "confidenceScore": {
           "type": "number",
@@ -1140,12 +1140,12 @@
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "Start position (in Unicode characters) for the entity match text."
+          "description": "Start position for the entity match text."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "Length (in Unicode characters) for the entity match text."
+          "description": "Length for the entity match text."
         }
       }
     },
