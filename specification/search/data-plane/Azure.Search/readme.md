@@ -35,6 +35,8 @@ These settings apply only when `--tag=package-2019-05-searchservice-preview` is 
 input-file:
 - preview/2019-05-06-preview/searchservice.json
 title: SearchServiceRestClient
+custom-types-subpackage: implementation.models
+custom-types: AnalyzeResult,SuggestRequest,AutocompleteRequest,ListDataSourcesResult,ListIndexersResult,ListIndexesResult,ListSkillsetsResult,ListSynonymMapsResult,AccessCondition
 ```
 
 ### Tag: package-2019-05-searchindex-preview
@@ -76,6 +78,8 @@ This swagger is ready for C# and Java.
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--java-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-java clone>`.
+To re-generate search sdk in java, please use the following autorest setting:
+ --use=@microsoft.azure/autorest.java@3.0.3 --version=2.0.4413
 
 ``` yaml $(java)
 output-folder: $(java-sdks-folder)/search
@@ -84,8 +88,6 @@ java: true
 sync-methods: none
 add-context-parameter: true
 generate-client-interfaces: false
-custom-types-subpackage: implementation.models
-custom-types: AnalyzeResult,SuggestRequest,AutocompleteRequest,ListDataSourcesResult,ListIndexersResult,ListIndexesResult,ListSkillsetsResult,ListSynonymMapsResult,AccessCondition
 license-header: |-
   Copyright (c) Microsoft Corporation. All rights reserved.
   Licensed under the MIT License.
@@ -138,7 +140,6 @@ directive:
           .replace(/(public DocumentsImpl\(SearchIndexRestClientImpl client\) {)/g, "public DocumentsImpl(SearchIndexRestClientImpl client, SerializerAdapter serializer) {")
           .replace(/(this.service = RestProxy.create\(DocumentsService.class, client.getHttpPipeline\(\)\);)/g, "this.service = RestProxy.create(DocumentsService.class, client.getHttpPipeline(), serializer);")
 
-    # Enable public access to client setters
     # Enable configuration of RestProxy serializer
     - from: SearchIndexRestClientImpl.java
       where: $
@@ -155,7 +156,6 @@ directive:
           .replace(/(public SearchIndexRestClientImpl\(HttpPipeline httpPipeline\) {)/g, "public SearchIndexRestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializer) {")
           .replace(/(this.documents = new DocumentsImpl\(this\);)/g, "this.documents = new DocumentsImpl(this, serializer);")
 
-    # Enable IndexAction to be used as a generic type
     # Enable serialization of both POJOs and Maps
     - from: IndexAction.java
       where: $
@@ -281,26 +281,18 @@ directive:
 
     # Change Field.analyzer/indexAnalyzer/searchAnalyzer's types from enum to string. Update setters and getters.
     - change-object-ref-to-string:
-        path: "$.definitions.Field.properties.analyzer"
-    - change-object-ref-to-string:
         path: "$.definitions.Field.properties.searchAnalyzer"
     - change-object-ref-to-string:
         path: "$.definitions.Field.properties.indexAnalyzer"
 
-    # Change CustomAnalyzer.tokenizer/tokenFilters/charFilters' types from enum to string. Update setters and getters.
-    - change-object-ref-to-string:
-        path: "$.definitions.CustomAnalyzer.properties.tokenizer"
-    - change-object-ref-to-string:
-        path: "$.definitions.CustomAnalyzer.properties.tokenFilters.items"
-    - change-object-ref-to-string:
-        path: "$.definitions.CustomAnalyzer.properties.charFilters.items"
-
+    # Add RestProxy import
     - from:
         - SearchServiceRestClientImpl.java
       where: $
       transform: >-
         return $.replace(/(package com.azure.search.implementation;)/g, "$1\nimport com.azure.core.http.rest.RestProxy;")
 
+    # Rename COSMOS_DB to COSMOS in DataSourceType.java
     - from:
         - DataSourceType.java
       where: $
