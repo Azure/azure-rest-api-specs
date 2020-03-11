@@ -417,7 +417,7 @@
           "type": "string",
           "description": "Error target."
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         },
@@ -481,7 +481,7 @@
           "type": "string",
           "description": "Error target."
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         }
@@ -621,6 +621,10 @@
       "type": "object",
       "required": [ "sentiment", "confidenceScores", "offset", "length" ],
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
         "sentiment": {
           "type": "string",
           "description": "The predicted Sentiment for the sentence.",
