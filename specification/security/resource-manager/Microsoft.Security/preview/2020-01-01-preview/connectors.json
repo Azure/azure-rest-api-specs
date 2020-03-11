@@ -331,15 +331,27 @@
     },
     "ServicePrincipalProperties": {
       "type": "object",
-      "description": "Details of the service principal (write only).",
+      "description": "Details of the service principal.",
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Public key element of the AWS credential object "
+          "description": "Application id of service principal."
+        },
+        "servicePrincipalNames": {
+          "type": "string",
+          "description": "Service principal names."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the Service principal."
+        },
+        "id": {
+          "type": "string",
+          "description": "Id of the Service principal."
         },
         "secret": {
           "type": "string",
-          "description": "Secret key of the app id"
+          "description": "Secret key or password stored in the service principal (write only)."
         }
       }
     },
