@@ -151,7 +151,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"
+            "$ref": "#/definitions/AppWhitelistingGroup"
           }
         ],
         "responses": {
@@ -249,7 +249,7 @@
     },
     "AppWhitelistingGroupData": {
       "type": "object",
-      "description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
+      "description": "Represents a VM/server group and set of rules to be allowed running on a machine",
       "properties": {
         "enforcementMode": {
           "$ref": "#/definitions/EnforcementMode"
@@ -258,36 +258,20 @@
           "$ref": "#/definitions/ProtectionMode"
         },
         "configurationStatus": {
+          "readOnly": true,
           "$ref": "#/definitions/ConfigurationStatus"
         },
         "recommendationStatus": {
+          "readOnly": true,
           "$ref": "#/definitions/RecommendationStatus"
         },
         "issues": {
+          "readOnly": true,
           "$ref": "#/definitions/AppWhitelistingIssuesSummaries"
         },
         "sourceSystem": {
+          "readOnly": true,
           "$ref": "#/definitions/SourceSystem"
-        },
-        "vmRecommendations": {
-          "$ref": "#/definitions/VmRecommendations"
-        },
-        "pathRecommendations": {
-          "$ref": "#/definitions/PathRecommendations"
-        }
-      }
-    },
-    "AppWhitelistingPutGroupData": {
-      "type": "object",
-      "description": "The altered data of the recommended VM/server group policy",
-      "properties": {
-        "enforcementMode": {
-          "description": "The enforcement mode of the group. Can also be defined per collection type by using ProtectionMode",
-          "$ref": "#/definitions/EnforcementMode"
-        },
-        "protectionMode": {
-          "description": "The protection mode of the group per collection type. Can also be defined for all collection types by using EnforcementMode",
-          "$ref": "#/definitions/ProtectionMode"
         },
         "vmRecommendations": {
           "$ref": "#/definitions/VmRecommendations"
@@ -590,16 +574,6 @@
         false,
         true
       ],
-      "x-ms-parameter-location": "method"
-    },
-    "AppWhitelistingGroupDataPutDataBody": {
-      "in": "body",
-      "name": "body",
-      "description": "The updated VM/server group data",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/AppWhitelistingPutGroupData"
-      },
       "x-ms-parameter-location": "method"
     }
   }
