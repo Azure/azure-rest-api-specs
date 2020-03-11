@@ -125,19 +125,9 @@ directive:
 
     # Change Field.analyzer/indexAnalyzer/searchAnalyzer's types from enum to string. Update setters and getters.
     - change-object-ref-to-string:
-          path: "$.definitions.Field.properties.analyzer"
-    - change-object-ref-to-string:
           path: "$.definitions.Field.properties.searchAnalyzer"
     - change-object-ref-to-string:
           path: "$.definitions.Field.properties.indexAnalyzer"
-
-    # Change CustomAnalyzer.tokenizer/tokenFilters/charFilters' types from enum to string. Update setters and getters.
-    - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.tokenizer"
-    - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.tokenFilters.items"
-    - change-object-ref-to-string:
-          path: "$.definitions.CustomAnalyzer.properties.charFilters.items"
 
     - from:
           - SearchServiceRestClientImpl.java
