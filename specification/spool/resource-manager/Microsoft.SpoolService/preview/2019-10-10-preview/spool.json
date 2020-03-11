@@ -49,7 +49,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
+    "/providers/Microsoft.SpoolService/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Checks that the Spool name is valid and is not already in use.",
         "operationId": "Spool_CheckNameAvailability",
@@ -695,7 +695,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/LocationResource"
+        },
+        {
+          "$ref": "#/definitions/TaggedResource"
         }
       ],
       "properties": {
@@ -703,29 +709,6 @@
           "$ref": "#/definitions/SpoolProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "tags": {
-          "description": "Tags of the service which is a list of key value pairs that describe the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
         }
       }
     },
@@ -747,13 +730,38 @@
           "description": "The type of the service - e.g. \"Microsoft.SpoolService/spools\"",
           "type": "string",
           "readOnly": true
-        },
-        "location": {
-          "description": "The Azure location where the Spool service is running.",
-          "type": "string"
         }
       },
       "x-ms-azure-resource": true
+    },
+    "LocationResource": {
+      "description": "An ARM resource with its own location (not a global or an inherited location).",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The Azure location where the Spool service is running.",
+          "type": "string",
+          "x-ms-mutability": ["create", "read"]
+        }
+      }
+    },
+    "TaggedResource": {
+      "description": "An ARM resource with that can accept tags",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Tags of the service which is a list of key value pairs that describe the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
+      }
     },
     "SpoolProperties": {
       "description": "A class that describes the properties of the Spool service.",
