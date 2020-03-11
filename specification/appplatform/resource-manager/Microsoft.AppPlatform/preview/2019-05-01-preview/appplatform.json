@@ -6,24 +6,37 @@
     "description": "REST API for Azure Spring Cloud"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get a Service and its properties.",
         "operationId": "Services_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the corresponding Service.",
@@ -45,26 +58,34 @@
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create a new Service or update an exiting Service.",
         "operationId": "Services_CreateOrUpdate",
-        "parameters": [{
-          "name": "resource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ServiceResource"
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        ],
         "responses": {
           "201": {
             "description": "Created. The response describes the new Service and contains a Location header to query the operation result.",
@@ -96,18 +117,25 @@
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to delete a Service.",
         "operationId": "Services_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "202": {
             "description": "Accepted. The response indicates the delete operation is performed in the background."
@@ -133,26 +161,34 @@
         }
       },
       "patch": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to update an exiting Service.",
         "operationId": "Services_Update",
-        "parameters": [{
-          "name": "resource",
-          "in": "body",
-          "description": "Parameters for the update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ServiceResource"
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the updated Service.",
@@ -186,18 +222,25 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/listTestKeys": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "List test keys for a Service.",
         "operationId": "Services_ListTestKeys",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the test keys.",
@@ -221,26 +264,34 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/regenerateTestKey": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Regenerate a test key for a Service.",
         "operationId": "Services_RegenerateTestKey",
-        "parameters": [{
-          "name": "regenerateTestKeyRequest",
-          "in": "body",
-          "description": "Parameters for the operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
+        "parameters": [
+          {
+            "name": "regenerateTestKeyRequest",
+            "in": "body",
+            "description": "Parameters for the operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateTestKeyRequestPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success.",
@@ -264,17 +315,24 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/disableTestEndpoint": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "operationId": "Services_DisableTestEndpoint",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -295,17 +353,24 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/enableTestEndpoint": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "operationId": "Services_EnableTestEndpoint",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -329,26 +394,35 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get an App and its properties.",
         "operationId": "Apps_Get",
-        "parameters": [{
-          "name": "syncStatus",
-          "in": "query",
-          "description": "Indicates whether sync status",
-          "required": false,
-          "type": "string"
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        "parameters": [
+          {
+            "name": "syncStatus",
+            "in": "query",
+            "description": "Indicates whether sync status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the corresponding App.",
@@ -370,28 +444,37 @@
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create a new App or update an exiting App.",
         "operationId": "Apps_CreateOrUpdate",
-        "parameters": [{
-          "name": "appResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AppResource"
+        "parameters": [
+          {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the updated App.",
@@ -423,20 +506,28 @@
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to delete an App.",
         "operationId": "Apps_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Success. The response indicates the resource doesn't exist."
@@ -458,52 +549,65 @@
         }
       },
       "patch": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to update an exiting App.",
         "operationId": "Apps_Update",
-        "parameters": [{
-          "name": "appResource",
-          "in": "body",
-          "description": "Parameters for the update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AppResource"
+        "parameters": [
+          {
+            "name": "appResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
+          {
+            "name": "x-ms-identity-url",
+            "in": "header",
+            "description": "The URL to the data plane of MSI for the given resource",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-identity-principal-id",
+            "in": "header",
+            "description": "The object id of the identity resource",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-home-tenant-id",
+            "in": "header",
+            "description": "The tenant id of the resource",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-tenant-id",
+            "in": "header",
+            "description": "he tenant id of the caller that made the request to ARM",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
           }
-        }, {
-          "name": "x-ms-identity-url",
-          "in": "header",
-          "description": "The URL to the data plane of MSI for the given resource",
-          "required": false,
-          "type": "string"
-        }, {
-          "name": "x-ms-identity-principal-id",
-          "in": "header",
-          "description": "The object id of the identity resource",
-          "required": false,
-          "type": "string"
-        }, {
-          "name": "x-ms-home-tenant-id",
-          "in": "header",
-          "description": "The tenant id of the resource",
-          "required": false,
-          "type": "string"
-        }, {
-          "name": "x-ms-client-tenant-id",
-          "in": "header",
-          "description": "he tenant id of the caller that made the request to ARM",
-          "required": false,
-          "type": "string"
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the updated App.",
@@ -537,18 +641,25 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Handles requests to list all resources in a Service.",
         "operationId": "Apps_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of Apps in the Service.",
@@ -575,20 +686,28 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/getResourceUploadUrl": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get an resource upload URL for an App, which may be artifacts or source archive.",
         "operationId": "Apps_GetResourceUploadUrl",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the resource upload URL.",
@@ -612,22 +731,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/bindings/{bindingName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get a Binding and its properties.",
         "operationId": "Bindings_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/BindingNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BindingNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the corresponding Binding.",
@@ -649,30 +777,40 @@
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create a new Binding or update an exiting Binding.",
         "operationId": "Bindings_CreateOrUpdate",
-        "parameters": [{
-          "name": "bindingResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/BindingResource"
+        "parameters": [
+          {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BindingNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/BindingNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the created or updated Binding.",
@@ -694,22 +832,31 @@
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to delete a Binding.",
         "operationId": "Bindings_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/BindingNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BindingNameParameter"
+          }
+        ],
         "responses": {
           "204": {
             "description": "Success. The response indicates the resource doesn't exist."
@@ -731,30 +878,40 @@
         }
       },
       "patch": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to update an exiting Binding.",
         "operationId": "Bindings_Update",
-        "parameters": [{
-          "name": "bindingResource",
-          "in": "body",
-          "description": "Parameters for the update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/BindingResource"
+        "parameters": [
+          {
+            "name": "bindingResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BindingResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BindingNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/BindingNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the updated Binding.",
@@ -778,20 +935,28 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/bindings": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Handles requests to list all resources in an App.",
         "operationId": "Bindings_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of Bindings in the App.",
@@ -818,20 +983,28 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates/{certificateName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get the certificate resource.",
-        "operationId": "Certificate_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/CertificateNameParameter"
-        }],
+        "operationId": "Certificates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the certificate.",
@@ -847,34 +1020,43 @@
           }
         },
         "x-ms-examples": {
-          "Certificate_Get": {
-            "$ref": "./examples/Certificate_Get.json"
+          "Certificates_Get": {
+            "$ref": "./examples/Certificates_Get.json"
           }
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create or update certificate resource.",
-        "operationId": "Certificate_CreateOrUpdate",
-        "parameters": [{
-          "name": "certificateResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CertificateResource"
+        "operationId": "Certificates_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "certificateResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/CertificateNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the existed certificate updated.",
@@ -897,26 +1079,34 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Certificate_CreateOrUpdate": {
-            "$ref": "./examples/Certificate_CreateOrUpdate.json"
+          "Certificates_CreateOrUpdate": {
+            "$ref": "./examples/Certificates_CreateOrUpdate.json"
           }
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Delete the certificate resource.",
-        "operationId": "Certificate_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/CertificateNameParameter"
-        }],
+        "operationId": "Certificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response indicates the certificate deleted.",
@@ -938,28 +1128,36 @@
           }
         },
         "x-ms-examples": {
-          "Certificate_Delete": {
-            "$ref": "./examples/Certificate_Delete.json"
+          "Certificates_Delete": {
+            "$ref": "./examples/Certificates_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "List all the certificates of one user.",
-        "operationId": "Certificate_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/CertificateNameParameter"
-        }],
+        "operationId": "Certificates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the custom domain resource list of one application.",
@@ -975,36 +1173,43 @@
           }
         },
         "x-ms-examples": {
-          "Certificate_List": {
-            "$ref": "./examples/Certificate_List.json"
+          "Certificates_List": {
+            "$ref": "./examples/Certificates_List.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/locations/{location}/checkNameAvailability": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Checks that the resource name is valid and is not already in use.",
         "operationId": "Services_CheckNameAvailability",
-        "parameters": [{
-          "name": "location",
-          "in": "path",
-          "description": "the region",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "availabilityParameters",
-          "in": "body",
-          "description": "Parameters supplied to the operation.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/NameAvailabilityParameters"
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "description": "the region",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilityParameters",
+            "in": "body",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the name availability.",
@@ -1028,22 +1233,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains/{domainName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get the custom domain of one lifecycle application.",
         "operationId": "CustomDomains_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the custom domain.",
@@ -1065,30 +1279,40 @@
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create or update custom domain of one lifecycle application.",
         "operationId": "CustomDomains_CreateOrUpdate",
-        "parameters": [{
-          "name": "domainResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CustomDomainResource"
+        "parameters": [
+          {
+            "name": "domainResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the existed custom domain updated.",
@@ -1110,22 +1334,31 @@
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Delete the custom domain of one lifecycle application.",
         "operationId": "CustomDomains_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response indicates the custom domain deleted.",
@@ -1153,30 +1386,40 @@
         }
       },
       "patch": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Update custom domain of one lifecycle application.",
         "operationId": "CustomDomains_Patch",
-        "parameters": [{
-          "name": "domainResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CustomDomainResource"
+        "parameters": [
+          {
+            "name": "domainResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the existed custom domain updated.",
@@ -1200,22 +1443,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "List the custom domains of one lifecycle application.",
         "operationId": "CustomDomains_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the custom domain resource list of one application.",
@@ -1239,29 +1491,39 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains/checknameavailability": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Check the resource name is valid as well as not in use.",
         "operationId": "CustomDomains_CheckNameAvailability",
-        "parameters": [{
-          "name": "parameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/NameAvailabilityParameters"
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/CustomDomainNameParameter"
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describe the name is available.",
@@ -1285,22 +1547,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get a Deployment and its properties.",
         "operationId": "Deployments_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the corresponding Deployment.",
@@ -1322,30 +1593,40 @@
         }
       },
       "put": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Create a new Deployment or update an exiting Deployment.",
         "operationId": "Deployments_CreateOrUpdate",
-        "parameters": [{
-          "name": "deploymentResource",
-          "in": "body",
-          "description": "Parameters for the create or update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/DeploymentResource"
+        "parameters": [
+          {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        ],
         "responses": {
           "201": {
             "description": "Created. The response describes the new Deployment and contains a Location header to query the\r\noperation result.",
@@ -1377,22 +1658,31 @@
         }
       },
       "delete": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to delete a Deployment.",
         "operationId": "Deployments_Delete",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response indicates the resource is deleted."
@@ -1414,30 +1704,40 @@
         }
       },
       "patch": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Operation to update an exiting Deployment.",
         "operationId": "Deployments_Update",
-        "parameters": [{
-          "name": "deploymentResource",
-          "in": "body",
-          "description": "Parameters for the update operation",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/DeploymentResource"
+        "parameters": [
+          {
+            "name": "deploymentResource",
+            "in": "body",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
           }
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        ],
         "responses": {
           "202": {
             "description": "Accepted. The response indicates the exiting Deployment is now updating and contains a Location\r\nheader to query the operation result.",
@@ -1471,31 +1771,40 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Handles requests to list all resources in an App.",
         "operationId": "Deployments_List",
-        "parameters": [{
-          "name": "version",
-          "in": "query",
-          "description": "Version of the deployments to be listed",
-          "required": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+        "parameters": [
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           },
-          "collectionFormat": "multi",
-          "uniqueItems": false
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }],
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of Deployments in the App.",
@@ -1522,29 +1831,37 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/deployments": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "List deployments for a certain service",
         "operationId": "Deployments_ListClusterAllDeployments",
-        "parameters": [{
-          "name": "version",
-          "in": "query",
-          "description": "Version of the deployments to be listed",
-          "required": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+        "parameters": [
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           },
-          "collectionFormat": "multi",
-          "uniqueItems": false
-        }, {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }],
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1571,22 +1888,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/start": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Start the deployment.",
         "operationId": "Deployments_Start",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -1614,22 +1940,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/stop": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Stop the deployment.",
         "operationId": "Deployments_Stop",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -1657,22 +1992,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/restart": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Restart the deployment.",
         "operationId": "Deployments_Restart",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success."
@@ -1700,22 +2044,31 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/deployments/{deploymentName}/getLogFileUrl": {
       "post": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Get deployment log file URL",
         "operationId": "Deployments_GetLogFileUrl",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }, {
-          "$ref": "#/parameters/ServiceNameParameter"
-        }, {
-          "$ref": "#/parameters/AppNameParameter"
-        }, {
-          "$ref": "#/parameters/DeploymentNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response contains the log file URL.",
@@ -1742,14 +2095,19 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/Spring": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "Services_ListBySubscription",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of Services in the subscription.",
@@ -1776,16 +2134,22 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "Services_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        }, {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of Services in the resource group.",
@@ -1812,11 +2176,15 @@
     },
     "/internal/health": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "operationId": "Health_Get",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -1832,12 +2200,16 @@
     },
     "/providers/Microsoft.AppPlatform/operations": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "Lists all of the available REST API operations of the Microsoft.AppPlatform provider.",
         "operationId": "Operations_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the list of operations.",
@@ -1864,12 +2236,16 @@
     },
     "/providers/Microsoft.AppPlatform/runtimeVersions": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "description": "You can directly pass \"{value[i].value}\" attribute (in the response) to all deployment CRUD operations.",
         "operationId": "RuntimeVersions_ListRuntimeVersions",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success. The response describes the details of all supported deployment runtime versions.",
@@ -1893,11 +2269,15 @@
     },
     "/skus/Spring": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "operationId": "Sku_ListServiceSku",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1916,11 +2296,15 @@
     },
     "/skus/Spring/apps/deployments": {
       "get": {
-        "tags": ["AppPlatform"],
+        "tags": [
+          "AppPlatform"
+        ],
         "operationId": "Sku_ListDeploymentSku",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1942,9 +2326,11 @@
     "ServiceResource": {
       "description": "Service resource",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/TrackedResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterResourceProperties",
@@ -1960,9 +2346,11 @@
     "TrackedResource": {
       "description": "The resource model definition for a ARM tracked top level resource.",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/Resource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "location": {
           "description": "The GEO location of the resource.",
@@ -2005,7 +2393,17 @@
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the Service",
-          "enum": ["Creating", "Updating", "Deleting", "Deleted", "Succeeded", "Failed", "Moving", "Moved", "MoveFailed"],
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Deleted",
+            "Succeeded",
+            "Failed",
+            "Moving",
+            "Moved",
+            "MoveFailed"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2040,11 +2438,13 @@
       "properties": {
         "name": {
           "description": "Name of the Sku",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "tier": {
           "description": "Tier of the Sku",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2054,7 +2454,13 @@
       "properties": {
         "state": {
           "description": "State of the config server.",
-          "enum": ["NotAvailable", "Deleted", "Failed", "Succeeded", "Updating"],
+          "enum": [
+            "NotAvailable",
+            "Deleted",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2078,7 +2484,12 @@
       "properties": {
         "state": {
           "description": "State of the trace proxy.",
-          "enum": ["NotAvailable", "Failed", "Succeeded", "Updating"],
+          "enum": [
+            "NotAvailable",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2126,7 +2537,9 @@
     },
     "ConfigServerGitProperty": {
       "description": "Property of git.",
-      "required": ["uri"],
+      "required": [
+        "uri"
+      ],
       "type": "object",
       "properties": {
         "repositories": {
@@ -2181,7 +2594,10 @@
     },
     "GitPatternRepository": {
       "description": "Git repository property payload",
-      "required": ["name", "uri"],
+      "required": [
+        "name",
+        "uri"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -2266,12 +2682,17 @@
     },
     "RegenerateTestKeyRequestPayload": {
       "description": "Regenerate test key request payload",
-      "required": ["keyType"],
+      "required": [
+        "keyType"
+      ],
       "type": "object",
       "properties": {
         "keyType": {
           "description": "Type of the test key",
-          "enum": ["Primary", "Secondary"],
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "TestKeyType",
@@ -2283,9 +2704,11 @@
     "AppResource": {
       "description": "App resource payload",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/ProxyResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/AppResourceProperties",
@@ -2304,9 +2727,11 @@
     "ProxyResource": {
       "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/Resource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {}
     },
     "AppResourceProperties": {
@@ -2324,7 +2749,13 @@
         },
         "provisioningState": {
           "description": "Provisioning state of the App",
-          "enum": ["Succeeded", "Failed", "Creating", "Updating", "Deleting"],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating",
+            "Deleting"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2451,9 +2882,11 @@
     "BindingResource": {
       "description": "Binding resource payload",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/ProxyResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/BindingResourceProperties",
@@ -2527,9 +2960,11 @@
     "CertificateResource": {
       "description": "Certificate resource payload.",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/ProxyResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/CertificateProperties",
@@ -2543,7 +2978,10 @@
     },
     "CertificateProperties": {
       "description": "Certificate resource payload.",
-      "required": ["vaultUri", "keyVaultCertName"],
+      "required": [
+        "vaultUri",
+        "keyVaultCertName"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -2616,7 +3054,10 @@
     },
     "NameAvailabilityParameters": {
       "description": "Name availability parameters payload",
-      "required": ["type", "name"],
+      "required": [
+        "type",
+        "name"
+      ],
       "type": "object",
       "properties": {
         "type": {
@@ -2651,9 +3092,11 @@
     "CustomDomainResource": {
       "description": "Custom domain resource payload.",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/ProxyResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomDomainProperties",
@@ -2708,9 +3151,11 @@
     "DeploymentResource": {
       "description": "Deployment resource payload",
       "type": "object",
-      "allOf": [{
-        "$ref": "#/definitions/ProxyResource"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeploymentResourceProperties",
@@ -2734,7 +3179,13 @@
         },
         "provisioningState": {
           "description": "Provisioning state of the Deployment",
-          "enum": ["Creating", "Updating", "Succeeded", "Failed", "Deleting"],
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2748,7 +3199,16 @@
         },
         "status": {
           "description": "Status of the Deployment",
-          "enum": ["Unknown", "Stopped", "Running", "Failed", "Allocating", "Upgrading", "Compiling", "Processing"],
+          "enum": [
+            "Unknown",
+            "Stopped",
+            "Running",
+            "Failed",
+            "Allocating",
+            "Upgrading",
+            "Compiling",
+            "Processing"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2784,7 +3244,11 @@
       "properties": {
         "type": {
           "description": "Type of the source uploaded",
-          "enum": ["Jar", "NetCoreZip", "Source"],
+          "enum": [
+            "Jar",
+            "NetCoreZip",
+            "Source"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "UserSourceType",
@@ -2850,7 +3314,11 @@
         },
         "runtimeVersion": {
           "description": "Runtime version",
-          "enum": ["Java_8", "Java_11", "NetCore_31"],
+          "enum": [
+            "Java_8",
+            "Java_11",
+            "NetCore_31"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RuntimeVersion",
@@ -2905,7 +3373,9 @@
     },
     "LogFileUrlResponse": {
       "description": "Log file URL payload",
-      "required": ["url"],
+      "required": [
+        "url"
+      ],
       "type": "object",
       "properties": {
         "url": {
@@ -3145,7 +3615,11 @@
       "properties": {
         "value": {
           "description": "The raw value which could be passed to deployment CRUD operations.",
-          "enum": ["Java_8", "Java_11", "NetCore_31"],
+          "enum": [
+            "Java_8",
+            "Java_11",
+            "NetCore_31"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RuntimeVersion",
@@ -3154,7 +3628,10 @@
         },
         "platform": {
           "description": "The platform of this runtime version (possible values: \"Java\" or \".NET\").",
-          "enum": ["Java", ".NET Core"],
+          "enum": [
+            "Java",
+            ".NET Core"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "RuntimePlatform",
@@ -3202,7 +3679,9 @@
     },
     "SkuSetting": {
       "description": "Supported Sku settings of Azure Spring Cloud",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -3237,7 +3716,9 @@
     },
     "SkuCapacity": {
       "description": "The SKU capacity",
-      "required": ["minimum"],
+      "required": [
+        "minimum"
+      ],
       "type": "object",
       "properties": {
         "minimum": {
@@ -3257,7 +3738,11 @@
         },
         "scaleType": {
           "description": "Gets or sets the type of the scale.",
-          "enum": ["None", "Manual", "Automatic"],
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "SkuScaleType",
@@ -3308,7 +3793,9 @@
       "description": "Client Api Version.",
       "required": true,
       "type": "string",
-      "enum": ["2019-05-01-preview"]
+      "enum": [
+        "2019-05-01-preview"
+      ]
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -3385,7 +3872,11 @@
       "description": "Azure Active Directory OAuth2 Flow"
     }
   },
-  "security": [{
-    "azure_auth": ["user_impersonation"]
-  }]
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
