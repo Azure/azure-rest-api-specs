@@ -185,7 +185,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "SignalR"
@@ -271,13 +271,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response indicates the update to private endpoint connection is successful.",
+            "description": "OK. The response indicates the private endpoint connection is updated successfully.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result."
+          "201": {
+            "description": "Created. The response indicates the private endpoint connection is now updating and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
           "default": {
             "description": "An unexpected error occurred during the operation.",
@@ -342,7 +345,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateLinkResources": {
       "get": {
         "tags": [
           "SignalR"
@@ -1551,19 +1554,39 @@
     "PrivateLinkResource": {
       "description": "Private link resource",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of a private link resource",
+          "x-ms-client-flatten": true
+        },
         "id": {
-          "description": "Full qualified Id of the private link resource",
-          "type": "string"
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "name": {
-          "description": "Name of the private link resource",
-          "type": "string"
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "type": {
-          "description": "Type of the private link resource",
-          "type": "string"
-        },
+          "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Private link resource properties",
+      "type": "object",
+      "properties": {
         "groupId": {
           "description": "Group Id of the private link resource",
           "type": "string"
