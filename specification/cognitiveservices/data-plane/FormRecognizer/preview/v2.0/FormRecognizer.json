@@ -343,7 +343,7 @@
           }
         ],
         "responses": {
-            "202": {
+          "202": {
             "description": "Copy request is queued successfully.",
             "headers": {
               "Operation-Location": {
@@ -352,13 +352,13 @@
               }
             }
           },
-            "default": {
-              "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
-          },
+          }
+        },
         "x-ms-examples": {
           "Copy custom model": {
             "$ref": "./examples/CopyModel.json"
@@ -419,8 +419,7 @@
         "summary": "Generate Copy Authorization",
         "description": "Generate authorization to copy a model into the target Form Recognizer resource.",
         "operationId": "GenerateModelCopyAuthorization",
-        "consumes": [
-        ],
+        "consumes": [],
         "produces": [
           "application/json"
         ],
