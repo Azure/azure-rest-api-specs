@@ -1,0 +1,2207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-07-24-preview",
+    "title": "AzureDataManagementClient",
+    "description": "The AzureData management API provides a RESTful set of web APIs to manage Azure Data Resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureData/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available SQL Server Registration API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Lists all of the available SQL Server Registration API operations.": {
+            "$ref": "./examples/ListOperation.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}": {
+      "get": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL Server registration.": {
+            "$ref": "./examples/GetSqlServerRegistration.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Creates or updates a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server registration to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 TinaGroupUpdateFailVmAttached - SQL Server registration cannot be updated as it has attached a SQL Server.\n\n * 400 InvalidSqlImageOffer - Provided SQL image offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, file share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account url.\n\n * 400 TinaGroupNameTooLong - SQL Server registration name cannot exceed 15 characters.\n\n * 400 InvalidTinaGroupName - Invalid SQL Server registration name.\n\n * 400 TinaGroupNotEmpty - SQL Server registration is not empty.\n\n * 400 TinaGroupUpdateNotAllowed - Update to SQL Server registration is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveTINAGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "201": {
+            "description": "Successfully created the SQL Server registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SQL Server registration.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerRegistration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Deletes a SQL Server registration.",
+        "operationId": "SqlServerRegistrations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server registration."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 TinaGroupUpdateFailVmAttached - SQL Server registration cannot be updated as it has attached a SQL Server.\n\n * 400 InvalidSqlImageOffer - Provided SQL image offer is invalid.\n\n * 400 InvalidSqlSku - Provided SQL sku is invalid.\n\n * 400 OuPathAndDomainMismatch - OU path is not within the domain provided.\n\n * 400 InvalidAccountNameFormat - Account name format is invalid.\n\n * 400 CloudWitnessUnsupported - For Windows Server 2012R2 setup cloud witness is not allowed.\n\n * 400 FileShareWitnessDisAllowed - For Windows Server 2016 and beyond setup, file share witness is not allowed.\n\n * 400 InvalidStorageAccountUrl - Invalid storage account url.\n\n * 400 TinaGroupNameTooLong - SQL Server registration name cannot exceed 15 characters.\n\n * 400 InvalidTinaGroupName - Invalid SQL Server registration name.\n\n * 400 TinaGroupNotEmpty - SQL Server registration is not empty.\n\n * 400 TinaGroupUpdateNotAllowed - Update to SQL Server registration is not allowed.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveTINAGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server registration does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SQL Server registration.": {
+            "$ref": "./examples/DeleteSqlServerRegistration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Updates SQL Server Registration tags.",
+        "operationId": "SqlServerRegistrations_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server Registration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistrationUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server Registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistration"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Registration tags.": {
+            "$ref": "./examples/UpdateSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations": {
+      "get": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets all SQL Server registrations in a resource group.",
+        "operationId": "SqlServerRegistrations_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all SQL Server registrations in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server registrations in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlServerRegistrations": {
+      "get": {
+        "tags": [
+          "SqlServerRegistrations"
+        ],
+        "description": "Gets all SQL Server registrations in a subscription.",
+        "operationId": "SqlServerRegistrations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all SQL Server registrations in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerRegistrationListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server registrations in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlServerRegistration.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}/sqlServers/{sqlServerName}": {
+      "get": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Gets a SQL Server.",
+        "operationId": "SqlServers_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the SQL Server.",
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a SQL Server.": {
+            "$ref": "./examples/GetSqlServer.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Creates or updates a SQL Server.",
+        "operationId": "SqlServers_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Server to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the SQL Server.",
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - Server resource id property cannot be updated.\n\n * 400 TinaAlreadyIncludedInGroup - SQL Server cannot be moved from one group to another in same operation.\n\n * 400 TinaCannotRemoveFromGroup - SQL Server cannot be removed from group.\n\n * 400 VmLocationMismatch - VM location does not match that of SQL Server.\n\n * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL Server registration does not match that of the SQL Server.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 SingleNicOnVmAllowed - Only Single NIC Servers are allowed.\n\n * 400 InvalidTinaGroupResourceIdParameterValue - SQL Server registration resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription id for SQL Server and SQL Server registration are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.\n\n * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images\n\n * 400 InvalidVmResourceIdParameterValue - Provided Server resource id is not valid.\n\n * 400 MismatchInTinaAndVmResourceIdSubscription - Mismatch in subscription id for SQL Server and Server resource id property.\n\n * 400 MismatchTinaAndVmName - SQL Server name is not same as the Server name provided on ServerResourceId property.\n\n * 400 MismatchTinaAndVmRgName - SQL Server resource group name is not same as the Server resource group name provided on ServerResourceId property.\n\n * 400 NotSupportedTinaOSVersion - Server OS type is not Windows. Only Windows OS versions are supported\n\n * 400 VmNotRunning - The VM is not in running state.\n\n * 400 VmAgentNotRunning - The VM agent is not installed or in running state.\n\n * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Server.\n\n * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Server as this was not created from Azure marketplace image.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL Server registration.\n\n * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.\n\n * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete SQL storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveTINAGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 404 SubscriptionDoesNotHaveTINAInResourceGroup - Subscription does not have SQL Server Instance in resource group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "201": {
+            "description": "Successfully created the SQL Server.",
+            "schema": {
+              "$ref": "#/definitions/SqlServer"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a SQL Server in a Registration group.": {
+            "$ref": "./examples/CreateOrUpdateSqlServerWithRegistrationGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Deletes a SQL Server.",
+        "operationId": "SqlServers_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sqlServerName",
+            "in": "path",
+            "description": "Name of the SQL Server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Server."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidVmResourceIdChange - Server resource id property cannot be updated.\n\n * 400 TinaAlreadyIncludedInGroup - SQL Server cannot be moved from one group to another in same operation.\n\n * 400 TinaCannotRemoveFromGroup - SQL Server cannot be removed from group.\n\n * 400 VmLocationMismatch - VM location does not match that of SQL Server.\n\n * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL Server registration does not match that of the SQL Server.\n\n * 400 VmInsufficientPermission - Insufficient permission to Vm.\n\n * 400 SingleNicOnVmAllowed - Only Single NIC Servers are allowed.\n\n * 400 InvalidTinaGroupResourceIdParameterValue - SQL Server registration resource id is not in correct format.\n\n * 400 MismatchVmGroupSubscription - Subscription id for SQL Server and SQL Server registration are different.\n\n * 400 IncompleteDomainCredentialsProperty - Incomplete input provided for domain credentials property.\n\n * 400 BYOLChangeToPAYGNotSupported - The conversion from AHUB to PAYG is not supported for BYOL images\n\n * 400 InvalidVmResourceIdParameterValue - Provided Server resource id is not valid.\n\n * 400 MismatchInTinaAndVmResourceIdSubscription - Mismatch in subscription id for SQL Server and Server resource id property.\n\n * 400 MismatchTinaAndVmName - SQL Server name is not same as the Server name provided on ServerResourceId property.\n\n * 400 MismatchTinaAndVmRgName - SQL Server resource group name is not same as the Server resource group name provided on ServerResourceId property.\n\n * 400 NotSupportedTinaOSVersion - Server OS type is not Windows. Only Windows OS versions are supported\n\n * 400 VmNotRunning - The VM is not in running state.\n\n * 400 VmAgentNotRunning - The VM agent is not installed or in running state.\n\n * 400 SqlExtNotInstalled - Sql Iaas Extension is not installed on Server.\n\n * 400 PAYGNotSupportedForNonGalleryVM - License type PAYG is invalid for this Server as this was not created from Azure marketplace image.\n\n * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL Server registration.\n\n * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.\n\n * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.\n\n * 400 BackupScheduleTypeNotSet - Backup schedule type needs to be set.\n\n * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.\n\n * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.\n\n * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.\n\n * 400 IncompleteAutoPatchingSettings - Incomplete auto patching settings specified.\n\n * 400 IncompleteAutoBackupSettings - Incomplete auto backup settings specified.\n\n * 400 IncompleteSqlStorageSettings - Incomplete SQL storage settings specified.\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 SubscriptionDoesNotHaveTINAGroupInResourceGroup - Subscription does not have SQL Server registration in resource group.\n\n * 404 SubscriptionDoesNotHaveTINAInResourceGroup - Subscription does not have SQL Server Instance in resource group.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Server does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SQL Server.": {
+            "$ref": "./examples/DeleteSqlServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlServerRegistrations/{sqlServerRegistrationName}/sqlServers": {
+      "get": {
+        "tags": [
+          "SqlServers"
+        ],
+        "description": "Gets all SQL Servers in a SQL Server Registration.",
+        "operationId": "SqlServers_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "sqlServerRegistrationName",
+            "in": "path",
+            "description": "Name of the SQL Server registration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The child resources to include in the response.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved all SQL Servers in the SQL Server Registration.",
+            "schema": {
+              "$ref": "#/definitions/SqlServerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Servers in a SQL Server Registration.": {
+            "$ref": "./examples/ListByResourceGroupSqlServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlInstances": {
+      "get": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_List",
+        "summary": "List sqlInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlIInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances": {
+      "get": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_ListByResourceGroup",
+        "description": "Gets all sqlInstances in a resource group.",
+        "summary": "List sqlInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlInstances/{sqlInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_Get",
+        "description": "Retrieves a SQL Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlInstanceName",
+            "description": "Name of SQL Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/GetSqlInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_Create",
+        "description": "Creates or replaces a SQL Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlInstanceName",
+            "description": "The name of SQL Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_Delete",
+        "description": "Deletes a SQL Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlInstanceName",
+            "description": "The name of Sql Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Instance.": {
+            "$ref": "./examples/DeleteSqlInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlInstances"
+        ],
+        "operationId": "SqlInstances_Update",
+        "description": "Updates a SQL Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlInstanceName",
+            "description": "Name of sqlInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a sql Instance tags.": {
+            "$ref": "./examples/UpdateSqlInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_List",
+        "summary": "List postgres Instance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Postgres Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_ListByResourceGroup",
+        "description": "Get a postgres Instances list by Resource group name.",
+        "summary": "List postgres Instance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all postgres Instances in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/postgresInstances/{postgresInstanceName}": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Get",
+        "description": "Retrieves a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a postgres Instances.": {
+            "$ref": "./examples/GetPostgresInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Create",
+        "description": "Creates or replaces a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of PostgresInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a postgres Instance.": {
+            "$ref": "./examples/CreateOrUpdatePostgresInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Delete",
+        "description": "Deletes a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Postgres Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified Postgres Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PostgresInstances.": {
+            "$ref": "./examples/DeletePostgresInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Update",
+        "description": "Updates a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "postgresInstanceName",
+            "description": "Name of Postgres Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Postgres Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PostgresInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a postgres Instances tags.": {
+            "$ref": "./examples/UpdatePostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/hybridDataManagers": {
+      "get": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_List",
+        "summary": "List hybridDataManager resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManagerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all hybridDataManagers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionHybridDataManager.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/hybridDataManagers": {
+      "get": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_ListByResourceGroup",
+        "summary": "List hybridDataManager resources in the resource group",
+        "description": "Get a hybridDataManager list by Resource group name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManagerListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all hybridDataManagers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupHybridDataManager.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/hybridDataManagers/{hybridDataManagerName}": {
+      "put": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_Create",
+        "description": "Creates or replaces a hybridDataManager resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "hybridDataManagerName",
+            "description": "Name of HybridDataManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManager"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManager"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a hybridDataManager tags.": {
+            "$ref": "./examples/CreateOrUpdateHybridDataManager.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_Delete",
+        "description": "Deletes a hybridDataManager resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "hybridDataManagerName",
+            "description": "Name of HybridDataManager",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the HybridDataManager."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified HybridDataManager does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a HybridDataManagers.": {
+            "$ref": "./examples/DeleteHybridDataManager.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_Get",
+        "description": "Retrieves a hybridDataManager resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "hybridDataManagerName",
+            "description": "Name of HybridDataManager",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManager"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a hybridDataManager tags.": {
+            "$ref": "./examples/GetHybridDataManager.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "HybridDataManagers"
+        ],
+        "operationId": "HybridDataManagers_Update",
+        "description": "Updates a hybridDataManager resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "hybridDataManagerName",
+            "description": "Name of HybridDataManager",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The HybridDataManager.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HybridDataManagerUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/HybridDataManager"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a hybridDataManager tags.": {
+            "$ref": "./examples/UpdateHybridDataManager.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceModelWithAllowedPropertySet": {
+      "description": "The resource model definition containing the full set of allowed properties for a resource. Except properties bag, there cannot be a top level property outside of this set.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "managedBy": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "The  fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "kind": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$"
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. "
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Identity"
+            }
+          ]
+        },
+        "sku": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            }
+          ]
+        },
+        "plan": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Plan"
+            }
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          },
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. "
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Identity": {
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "description": "Plan for the resource.",
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list SQL operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "SQL REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation / action.",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "user",
+            "system"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized friendly description for the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerRegistrationProperties": {
+      "description": "The SQL server Registration properties.",
+      "type": "object",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription Id",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name",
+          "type": "string"
+        },
+        "propertyBag": {
+          "description": "Optional Properties as JSON string",
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SqlServerRegistration": {
+      "description": "A SQL server registration.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerRegistrationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlServerRegistrationUpdate": {
+      "description": "An update to a SQL Server Registration.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlServerRegistrationListResult": {
+      "description": "Server",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServerRegistration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlServerProperties": {
+      "description": "The SQL server properties.",
+      "type": "object",
+      "properties": {
+        "cores": {
+          "format": "int32",
+          "description": "Cores of the Sql Server.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "update",
+            "read"
+          ]
+        },
+        "version": {
+          "description": "Version of the Sql Server.",
+          "type": "string"
+        },
+        "edition": {
+          "description": "Sql Server Edition.",
+          "type": "string"
+        },
+        "registrationID": {
+          "description": "ID for Parent Sql Server Registration.",
+          "type": "string"
+        },
+        "propertyBag": {
+          "description": "Sql Server Json Property Bag.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlServer": {
+      "description": "A SQL server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlServerListResult": {
+      "description": "A list of SQL servers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlServer"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PostgresInstanceProperties": {
+      "description": "Postgres Instance properties.",
+      "type": "object",
+      "properties": {
+        "hybridDataManagerId": {
+          "type": "string",
+          "description": "null"
+        }
+      }
+    },
+    "PostgresInstance": {
+      "description": "A Postgres Instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource",
+          "description": "null"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PostgresInstanceProperties",
+          "x-ms-client-flatten": true,
+          "description": "null"
+        }
+      }
+    },
+    "PostgresInstanceUpdate": {
+      "description": "An update to a Postgres Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "hybridDataManagerId": {
+          "type": "string",
+          "description": "null"
+        }
+      }
+    },
+    "PostgresInstanceListResult": {
+      "description": "A list of PostgresInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostgresInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlInstanceProperties": {
+      "description": "Properties of PostgresInstance.",
+      "type": "object",
+      "properties": {
+        "hybridDataManagerId": {
+          "type": "string",
+          "description": "null"
+        }
+      }
+    },
+    "SqlInstance": {
+      "description": "A SqlInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SqlInstanceUpdate": {
+      "description": "An update to a SQL Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlInstanceListResult": {
+      "description": "A list of SqlInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "HybridDataManagerProperties": {
+      "description": "Hybrid data manager properties",
+      "type": "object"
+    },
+    "HybridDataManager": {
+      "description": "Hybrid data manager resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HybridDataManagerProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HybridDataManagerUpdate": {
+      "description": "An update to a HybridDataManager.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HybridDataManagerListResult": {
+      "description": "A list of HybridDataManager.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridDataManager"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody",
+          "description": "null"
+        }
+      },
+      "description": "An error response from the Azure Data service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the Batch service."
+    },
+    "ODataError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A language-independent error name."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          },
+          "description": "The error details."
+        }
+      },
+      "type": "object",
+      "description": "Information about an error."
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the Azure subscription"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Azure resource group",
+      "x-ms-parameter-location": "method"
+    },
+    "location": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure region to use for the request",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request"
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID that identifies an Azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API version to use for the request.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "ResourceGroupParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlServerNameParameter": {
+      "name": "SqlServerName",
+      "in": "path",
+      "description": "Name of the Sql Server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlServerRegistrationNameParameter": {
+      "name": "SqlServerRegistrationNameParameter",
+      "in": "path",
+      "description": "Name of the Sql Server registration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PostgresInstanceNameParameter": {
+      "in": "path",
+      "name": "postgresInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlInstanceNameParameter": {
+      "in": "path",
+      "name": "sqlInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "HybridDataManagerNameParameter": {
+      "in": "path",
+      "name": "hybridDataManagerName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
