@@ -100,7 +100,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.AzureData/preview/2017-03-01-preview/azuredata.json
+  - $(this-folder)/Microsoft.AzureData/preview/2019-07-24-preview/azuredata.json
 
 ```
 
