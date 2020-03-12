@@ -680,7 +680,11 @@
               "set",
               "modify",
               "remove"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "PathSetAccessControlRecursiveMode",
+              "modelAsString": false
+            }
           },
           {
             "name": "maxRecords",
@@ -1709,7 +1713,11 @@
                "set",
                "modify",
                "remove"
-             ]
+             ],
+             "x-ms-enum": {
+              "name": "PathSetAccessControlRecursiveMode",
+              "modelAsString": false
+            }
           },
           {
             "name": "maxRecords",
@@ -2531,7 +2539,7 @@
      }
   },
   "definitions": {
-    "AclFailedEntryList": {
+    "AclFailedEntry": {
       "type": "object",
       "properties": {
         "name": {
@@ -2563,7 +2571,7 @@
         "failedEntries": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AclFailedEntryList"
+            "$ref": "#/definitions/AclFailedEntry"
           }
         }
       }
