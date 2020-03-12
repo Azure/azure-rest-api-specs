@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "parentResourceName": "MySpoolResource",
+    "eventGridFilterName": "MySpoolEventFilter",
+    "api-version": "2019-10-10-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.SpoolService/spools/MySpoolResource/eventGridFilters/MySpoolEventFilter",
+        "name": "MySpoolEventFilter",
+        "type": "Microsoft.SpoolService/spools/eventGridFilters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "filter": {
+            "subjectBeginsWith": "ConfiguredBegin",
+            "subjectEndsWith": "ConfiguredEnd",
+            "IncludedEventTypes": [
+              "Microsoft.SpoolService.EndpointCreated"
+            ]
+          },
+          "subscriberIdentityInfo": {
+            "clientPrincipalId": "00000000-0000-0000-0000-000000000000",
+            "clientObjectId": "11111111-1111-1111-1111-111111111111",
+            "clientTenantId": "22222222-2222-2222-2222-222222222222",
+            "clientApplicationId": "33333333-3333-3333-3333-333333333333",
+            "clientAuthorizationSource": "https://active.directory.com"
+          }
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "code": "NotFound",
+        "message": "Requested resource not found"
+      }
+    }
+  }
+}
