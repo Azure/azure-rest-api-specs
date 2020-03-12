@@ -41,7 +41,7 @@
             "schema": {
               "$ref": "#/definitions/SASTokenParameter"
             },
-            "description": "Azure blob SAS token pointing to a valid azure blob container where the full backup needs to be stored. This token needs to be valid atleast next 24 hours from the time of making this call"
+            "description": "Azure blob shared access signature token pointing to a valid azure blob container where the full backup needs to be stored. This token needs to be valid for atleast next 24 hours from the time of making this call"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -210,7 +210,7 @@
       "properties": {
         "storageResourceUri": {
           "type": "string",
-          "description": "Azure blob strorage container uri"
+          "description": "Azure blob storage container uri"
         },
         "token": {
           "type": "string",
