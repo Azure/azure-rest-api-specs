@@ -2598,7 +2598,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_ConvertToManagedDisks",
-        "description": "Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.",
+        "description": "Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation. <br>For Windows, please refer to [Convert a virtual machine from unmanaged disks to managed disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks).<br>For Linux, please refer to [Convert a virtual machine from unmanaged disks to managed disks.](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/convert-unmanaged-to-managed-disks).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2627,6 +2627,11 @@
           },
           "202": {
             "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Generalize a Virtual Machine.": {
+            "$ref": "./examples/ConvertToManagedDisks.json"
           }
         },
         "x-ms-long-running-operation": true
