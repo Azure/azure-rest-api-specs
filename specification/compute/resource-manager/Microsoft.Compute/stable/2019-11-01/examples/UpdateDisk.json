@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-11-01",
+    "diskName": "diskname",
+    "disk": {
+      "properties": {
+        "diskSizeGB": 200
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "diskname",
+        "location": "eastus",
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "properties": {
+          "creationData": {
+            "createOption": "Empty"
+          },
+          "diskSizeGB": 200,
+          "provisioningState": "Updating",
+          "isArmResource": true,
+          "faultDomain": 0
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "startTime": "2020-03-11T03:18:22.4109086+00:00",
+        "endTime": "2020-03-11T03:18:22.5203166+00:00",
+        "status": "Succeeded",
+        "properties": {
+          "output": {
+            "name": "diskname",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname",
+            "type": "Microsoft.Compute/disks",  "location": "eastus",
+            "sku": {
+              "name": "Standard_LRS",
+              "tier": "Standard"
+            },
+            "properties": {
+              "creationData": {
+                "createOption": "Empty"
+              },
+              "diskSizeGB": 200,
+              "diskIOPSReadWrite": 500,
+              "diskMBpsReadWrite": 60,
+              "encryption": {    
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "timeCreated": "2020-03-11T02:12:10.9399412+00:00",
+              "provisioningState": "Succeeded",
+              "diskState": "Unattached",
+              "diskSizeBytes": 214748364800,
+              "uniqueId": "5c03ed91-65da-49c4-9bfa-49da3a2b189c"
+            }
+          }
+        },
+        "name": "57bc8924-d089-4466-a566-c4e2eafd8224"
+      }
+    }
+  }
+}

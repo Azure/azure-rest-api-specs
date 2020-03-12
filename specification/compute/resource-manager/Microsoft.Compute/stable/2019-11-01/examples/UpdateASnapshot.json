@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-11-01",
+    "snapshotName": "snapshotname",
+    "snapshot": {}
+  },
+  "responses": {
+    "202": {
+      "location": "eastus",
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Copy",  
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname", 
+          "sourceUniqueId": "4fbef858-20a6-4f07-8758-d935e1c9b864"
+        },
+        "diskSizeGB": 200,
+        "provisioningState": "Updating",
+        "isArmResource": true,
+        "faultDomain": 0
+      }
+    },
+    "200": {
+      "name":
+      "snapshotname",
+      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/snapshots/snapshotname",
+      "type": "Microsoft.Compute/snapshots",  "location": "eastus",  
+      "sku": {
+        "name": "Standard_LRS",
+        "tier": "Standard"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Copy",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname",
+          "sourceUniqueId": "4fbef858-20a6-4f07-8758-d935e1c9b864"
+        },
+        "diskSizeGB": 200,
+        "encryption": {
+          "type": "EncryptionAtRestWithPlatformKey"
+        },
+        "incremental": false,
+        "timeCreated": "2020-03-11T11:17:43.3133913+00:00",
+        "provisioningState": "Succeeded",
+        "diskState": "ActiveSAS",
+        "diskSizeBytes": 214748364800,
+        "uniqueId": "50b1d0d2-1a78-4280-afdd-0582c67a469d"
+      }
+    }
+  }
+}

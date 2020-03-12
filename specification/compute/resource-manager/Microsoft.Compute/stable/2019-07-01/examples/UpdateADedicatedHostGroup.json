@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "hostGroupName": "hostgroupnamexyz",
+    "parameters": {
+      "tags": {
+        "department": "finance"
+      },
+      "properties": {
+        "platformFaultDomainCount": 3
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "hostgroupnamexyz",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/TEST_CLI_MGMT_COMPUTE_TEST_COMPUTEF5F00E12/providers/Microsoft.Compute/hostGroups/hostgroupnamexyz",
+        "location": "eastus",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": ["1"],
+        "properties": {
+          "platformFaultDomainCount": 3
+        }
+      }   
+    }
+  }
+}

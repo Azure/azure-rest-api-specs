@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-11-01",
+    "snapshotName": "snapshotname",
+    "snapshot": {
+      "location": "eastus",
+      "properties": {
+        "creationData": {
+          "createOption": "Copy",
+          "sourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname",
+            "sourceUniqueId": "dd2562b8-b884-44c6-b09e-54fa0d2aa061"
+          },
+          "provisioningState": "Updating",
+          "isArmResource": true
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "startTime": "2020-03-10T16:04:06.8302334+00:00",
+        "endTime": "2020-03-10T16:04:07.3146475+00:00",
+        "status": "Succeeded",
+        "properties": {
+          "output": {
+            "name": "snapshotname",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/snapshots/snapshotname",
+            "type": "Microsoft.Compute/snapshots",
+            "location": "eastus",
+            "sku": {
+              "name": "Standard_LRS",
+              "tier": "Standard"
+            },
+            "properties": {
+              "creationData": {
+                "createOption": "Copy",
+                "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/disks/diskname",
+                "sourceUniqueId": "dd2562b8-b884-44c6-b09e-54fa0d2aa061"
+              },
+              "diskSizeGB": 200,
+              "encryption": {
+                "type": "EncryptionAtRestWithPlatformKey"
+              },
+              "incremental": false,
+              "timeCreated": "2020-03-10T16:04:06.8302334+00:00",
+              "provisioningState": "Succeeded",
+              "diskState": "Unattached",
+              "diskSizeBytes": 214748364800,
+              "uniqueId": "72e6ce85-b9f3-4761-bd2c-09420c14b7d3"
+            }
+          }
+        },
+        "name": "82cbbded-e57d-4a0a-9ea1-a0776056c8d6"
+      }
+    }
+  }
+}

@@ -146,7 +146,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update disk": {
+            "$ref": "./examples/UpdateDisk.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -213,7 +218,12 @@
             "description": "If the disk is deleted, this is an expected error code."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a managed disk.": {
+            "$ref": "./examples/DeleteAManagedDisk.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks": {
@@ -329,6 +339,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Grant Access Disk.": {
+            "$ref": "./examples/DrantAccessDisk.json"
+          }
         }
       }
     },
@@ -364,6 +379,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Revoke Access Disk.": {
+            "$ref": "./examples/RevokeAccessDisk.json"
+          }
         }
       }
     },
@@ -420,6 +440,9 @@
           },
           "Create a snapshot by importing an unmanaged blob from a different subscription.": {
             "$ref": "./examples/CreateASnapshotByImportingAnUnmanagedBlobFromADifferentSubscription.json"
+          },
+          "Create a snapshot by copying a disk": {
+            "$ref": "./examples/CreateASnapshotByCopyingADisk.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -467,7 +490,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a snapshot": {
+            "$ref": "./examples/UpdateASnapshot.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -534,7 +562,12 @@
             "description": "If the snapshot is deleted, this is an expected error code."
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a snapshot.": {
+            "$ref": "./examples/DeleteASnapshot.json"
+          },
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots": {
@@ -650,6 +683,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Grant access snapshot": {
+            "$ref": "./examples/GrantAccesssSnapshot.json"
+          }
         }
       }
     },
@@ -685,6 +723,11 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Revoke access snapshot": {
+            "$ref": "./examples/RevokeAccesssSnapshot.json"
+          }
         }
       }
     },
