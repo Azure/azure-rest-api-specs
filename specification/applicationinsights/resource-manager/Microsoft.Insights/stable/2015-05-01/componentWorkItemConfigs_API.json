@@ -325,21 +325,6 @@
         }
       }
     },
-    "InnerError": {
-      "type": "object",
-      "description": "Inner error",
-      "properties": {
-        "diagnosticcontext": {
-          "type": "string",
-          "description": "Provides correlation for request"
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Request time"
-        }
-      }
-    },
     "WorkItemConfigurationError": {
       "type": "object",
       "description": "Error associated with trying to get work item configuration or configurations",
@@ -353,7 +338,7 @@
           "description": "Error message"
         },
         "innererror": {
-          "$ref": "#/definitions/InnerError"
+          "$ref" : "./componentAnnotations_API.json#/definitions/InnerError"
         }
       }
     }
