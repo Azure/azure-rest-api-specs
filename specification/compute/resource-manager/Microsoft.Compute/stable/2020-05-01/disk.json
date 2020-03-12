@@ -973,7 +973,7 @@
           "DiskAccesses"
         ],
         "operationId": "DiskAccesses_CreateOrUpdate",
-        "description": "Creates or updates a diskAccess",
+        "description": "Creates or updates a diskAccess resource",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1004,8 +1004,8 @@
               "$ref": "#/definitions/DiskAccess"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/DiskAccess"
             }
@@ -1028,8 +1028,8 @@
         "tags": [
           "DiskAccesses"
         ],
-        "operationId": "DiskEncryptionSets_Update",
-        "description": "Updates (patches) a diskAccess.",
+        "operationId": "DiskAccesses_Update",
+        "description": "Updates (patches) a diskAccess resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1080,7 +1080,7 @@
           "DiskAccesses"
         ],
         "operationId": "DiskAccesses_Get",
-        "description": "Gets information about a diskAccess.",
+        "description": "Gets information about a diskAccess resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1120,7 +1120,7 @@
           "DiskAccesses"
         ],
         "operationId": "DiskAccesses_Delete",
-        "description": "Deletes a diskAccess.",
+        "description": "Deletes a diskAccess resource.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1143,7 +1143,7 @@
             "description": "Accepted"
           },
           "204": {
-            "description": "If the diskAccess is already deleted, this is an expected error code."
+            "description": "If the diskAccess object is already deleted, this is an expected error code."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1161,7 +1161,7 @@
           "DiskAccesses"
         ],
         "operationId": "DiskAccesses_ListByResourceGroup",
-        "description": "Lists all the diskAccesses under a resource group.",
+        "description": "Lists all the diskAccess resources under a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1203,7 +1203,7 @@
           "DiskAccesses"
         ],
         "operationId": "DiskAccesses_List",
-        "description": "Lists all the diskAccesses under a subscription.",
+        "description": "Lists all the diskAccess resources under a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2171,7 +2171,16 @@
         },
         "status": {
           "type": "string",
-          "description": "current state of the private link."
+          "description": "current state of the private link.",
+          "enum": [
+            "Approved",
+            "Rejected",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStates",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2184,7 +2193,7 @@
         }
       }
     },
-    "PrivateendpointConnectionProperties": {
+    "PrivateEndpointConnectionProperties": {
       "properties": {
         "provisioningState":{
           "readOnly": true,
@@ -2260,6 +2269,37 @@
         }
       ],
       "description": "diskAccess resource."
+    },
+    "DiskAccessUpdate":{
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "diskAccess update resource"
+    },
+    "DiskAccessList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskAccess"
+          },
+          "description": "A list of diskAccess resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of diskAccess resources. Call ListNext() with this to fetch the next page of diskAccess resources."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List diskAccess resource operation response."
     },
     "CloudError": {
       "x-ms-external": true,
