@@ -1699,16 +1699,10 @@
         },
         "responses": {
           "200": {
-            "description": "Induction request completed.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Induction request completed."
           },
           "202": {
-            "description": "Induction request accepted.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Induction request accepted."
           },
           "default": {
             "description": "Error response describing the reason for operation failure.",
@@ -2675,11 +2669,14 @@
       "type": "object",
       "properties": {
         "fusion": {
+          "description": "Details of the fusion server node.",
           "properties": {
             "nodeName": {
+              "description": "The name of the Fusion node",
               "type": "string"
             },
             "status": {
+              "description": "The status of the node (Up/Down) or Unknown if the node is not responding",
               "type": "string",
               "enum": [
                 "Up",
@@ -2696,7 +2693,7 @@
       }
     },
     "AzureNodeDetails": {
-      "title": "NodeDetails",
+      "title": "AzureNodeDetails",
       "description": "Details of a node in an azure zone",
       "type": "object",
       "allOf": [
