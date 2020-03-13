@@ -3,7 +3,7 @@
   "info": {
     "version": "2019-07-19-preview",
     "title": "Azure Token Service Resource Provider API",
-    "description": "REST API for Azure Blockchain Token Service",
+    "description": "REST API for Resource Provider Microsoft.BlockchainTokens",
     "x-ms-code-generation-settings": {
       "name": "DevOpsClient"
     }
@@ -190,6 +190,54 @@
           }
         }
       },
+      "patch": {
+        "operationId": "TokenService_Update",
+        "description": "Updates an Azure Blockchain TokenService.",
+        "tags": [
+          "TokenService"
+        ],
+        "parameters": [{
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/TokenServiceNameParameter"
+          },
+          {
+            "name": "TokenServiceResourceParameter",
+            "description": "token service details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Azure Token Service has been updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenServiceResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TokenService_Update": {
+            "$ref": "./examples/UpdateTokenService.json"
+          }
+        }
+      },
       "get": {
         "operationId": "TokenService_Get",
         "description": "Gets an existing Azure Blockchain TokenService.",
@@ -250,7 +298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Token Service has been deleted successfully."
+            "description": "The Azure Blockchain TokenService has been deleted successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -323,7 +371,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The Azure Pipelines have been fetched successfully.",
+            "description": "The Azure Blockchain TokenServices have been fetched successfully.",
             "schema": {
               "$ref": "#/definitions/TokenServiceResourceListResult"
             }
@@ -1155,11 +1203,11 @@
       "x-ms-external": true,
       "properties": {
         "error": {
-          "description": "Details of the error from the Pipelines Resource Provider.",
+          "description": "Details of the error from the Microsoft.BlockchainTokens Resource Provider.",
           "$ref": "#/definitions/CloudErrorBody"
         }
       },
-      "description": "An error response from the Pipelines Resource Provider."
+      "description": "An error response from the Microsoft.BlockchainTokens Resource Provider."
     },
     "CloudErrorBody": {
       "x-ms-external": true,
@@ -1184,7 +1232,7 @@
           "description": "A list of additional details about the error."
         }
       },
-      "description": "An error response from the Pipelines Resource Provider."
+      "description": "An error response from the Microsoft.BlockchainTokens Resource Provider."
     },
     "OperationListResult": {
       "properties": {
@@ -1194,14 +1242,14 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
-          "description": "List of operations supported by Microsoft.DevOps resource provider."
+          "description": "List of operations supported by Microsoft.BlockchainTokens resource provider."
         },
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of operations, if there are any."
         }
       },
-      "description": "Result of a request to list all operations supported by Microsoft.DevOps resource provider."
+      "description": "Result of a request to list all operations supported by Microsoft.BlockchainTokens resource provider."
     },
     "Operation": {
       "properties": {
@@ -1249,29 +1297,24 @@
     },
     "TokenServiceResource": {
       "type": "object",
-      "description": "Employee details",
+      "description": "Token service resource",
       "allOf": [{
         "$ref": "#/definitions/TrackedResource"
       }],
       "properties": {
         "properties": {
-          "description": "Custom properties of token service resource",
+          "description": "Custom properties of tokenService resource",
           "x-ms-client-flatten": true,
           "type": "object",
           "properties": {
             "description": {
               "type": "string",
-              "description": "The description of the token service"
-            },
-            "tenantId": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The AAD Tenant where the token service belongs to"
+              "description": "The description of the tokenService"
             },
             "dnsName": {
               "type": "string",
               "readOnly": true,
-              "description": "The DNS name for this token service"
+              "description": "The DNS name for this tokenService"
             }
           }
         }
@@ -1295,7 +1338,7 @@
     },
     "GroupResource": {
       "type": "object",
-      "description": "Group is a collection of accounts in TokenService",
+      "description": "Group is a collection of accounts in a tokenService",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1316,10 +1359,10 @@
       }
     },
     "GroupResourceListResult": {
-      "description": "List of groups in a TokenService",
+      "description": "List of groups in a tokenService",
       "properties": {
         "value": {
-          "description": "List of groups in a token services.",
+          "description": "List of groups in a tokenService.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/GroupResource"
@@ -1333,7 +1376,7 @@
     },
     "AccountResource": {
       "type": "object",
-      "description": "Account is a blockchain account belonging to a group in a token service",
+      "description": "Account is a blockchain account belonging to a group in a tokenService",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1351,12 +1394,26 @@
             },
             "provisioningState": {
               "type": "string",
+              "enum": [
+                "NotSpecified",
+                "Accepted",
+                "Running",
+                "Creating",
+                "Created",
+                "Deleting",
+                "Deleted",
+                "Canceled",
+                "Failed",
+                "Succeeded",
+                "MovingResources",
+                "TransientFailure"
+              ],
               "description": "Provisioning state of the account",
               "readOnly": true
             },
-            "blockchainNetworkName": {
+            "blockchainNetworkId": {
               "type": "string",
-              "description": "Resource name of the blockchain network the account is associated with."
+              "description": "ResourceId of the blockchain network the account is associated with."
             },
             "publicAddress": {
               "type": "string",
@@ -1384,7 +1441,7 @@
     },
     "BlockchainNetworkResource": {
       "type": "object",
-      "description": "BlockchainNetwork is a blockchain network connection in TokenService",
+      "description": "BlockchainNetwork is a blockchain network connection",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1409,6 +1466,10 @@
             },
             "blockchainPlatformName": {
               "type": "string",
+              "enum": [
+                "Quorum",
+                "POA"
+              ],
               "description": "Platform name of a blockchain network connection (Quorum | POA)"
             },
             "blockchainNode": {
@@ -1420,10 +1481,10 @@
       }
     },
     "BlockchainNetworkResourceListResult": {
-      "description": "List of blockchainNetworks in a TokenService",
+      "description": "List of blockchainNetworks in a tokenService",
       "properties": {
         "value": {
-          "description": "List of blockchainNetworks in a token services.",
+          "description": "List of blockchainNetworks in a token service.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BlockchainNetworkResource"
@@ -1437,7 +1498,7 @@
     },
     "TokenTemplateResource": {
       "type": "object",
-      "description": "TokenTemplate is a template for token contracts in TokenService",
+      "description": "TokenTemplate is a template for token contracts in tokenService",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1457,12 +1518,22 @@
               "type": "string",
               "description": "TTF formula of the token template"
             },
-            "openAPISpec": {
-              "type": "string",
-              "description": "OpenAPI specification of the token template"
-            },
             "provisioningState": {
               "type": "string",
+              "enum": [
+                "NotSpecified",
+                "Accepted",
+                "Running",
+                "Creating",
+                "Created",
+                "Deleting",
+                "Deleted",
+                "Canceled",
+                "Failed",
+                "Succeeded",
+                "MovingResources",
+                "TransientFailure"
+              ],
               "description": "Provisioning state of the token template",
               "readOnly": true
             }
@@ -1471,10 +1542,10 @@
       }
     },
     "TokenTemplateResourceListResult": {
-      "description": "List of tokenTemplates in a TokenService",
+      "description": "List of tokenTemplates in a tokenService",
       "properties": {
         "value": {
-          "description": "List of tokenTemplates in a token services.",
+          "description": "List of tokenTemplates in a tokenService.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TokenTemplateResource"
@@ -1515,7 +1586,7 @@
           "readOnly": true
         },
         "reason": {
-          "description": "Gets the name availability reason.",
+          "description": "Gets the reason.",
           "enum": [
             "NotSpecified",
             "AlreadyExists",
@@ -1549,7 +1620,7 @@
       }
     },
     "Sku": {
-      "description": "Blockchain member Sku in payload",
+      "description": "BlockchainTokens Sku in payload",
       "type": "object",
       "properties": {
         "name": {
@@ -1591,7 +1662,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name token service resource.",
+      "description": "The name of the tokenservice.",
       "x-ms-parameter-location": "method"
     },
     "GroupNameParameter": {
@@ -1623,7 +1694,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the TokenTemplate.",
+      "description": "The name of the tokenTemplate.",
       "x-ms-parameter-location": "method"
     }
   }
