@@ -94,35 +94,43 @@ cli:
             parameter: location
         required: true
       - where:
-            operationGroup: 'exposure_control'
-        delete: true
+            group: pipelines
+            parameter: pipeline
+        set:
+            json: true
+            #      - where:
+            #            operationGroup: 'exposure_control'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'integration_runtime_object_metadata'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'datasets'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'activity_runs'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'data_flows'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'data_flow_debug_session'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'integration_runtimes'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'integration_runtime_nodes'
+            #        delete: true
+            #      - where:
+            #            operationGroup: 'linked_services'
+            #        delete: true
+    cli-flatten-directive:
       - where:
-            operationGroup: 'integration_runtime_object_metadata'
-        delete: true
-      - where:
-            operationGroup: 'datasets'
-        delete: true
-      - where:
-            operationGroup: 'activity_runs'
-        delete: true
-      - where:
-            operationGroup: 'data_flows'
-        delete: true
-      - where:
-            operationGroup: 'data_flow_debug_session'
-        delete: true
-      - where:
-            operationGroup: 'integration_runtimes'
-        delete: true
-      - where:
-            operationGroup: 'integration_runtime_nodes'
-        delete: true
-      - where:
-            operationGroup: 'linked_services'
-        delete: true
-    flatten:
-        cli-flatten-set-enabled: true
-        cli-flatten-all: true
+            group: pipelines
+            parameter: pipeline
+        flatten: false
+
 
 
 ```
