@@ -1454,6 +1454,13 @@
           },
           "description": "Array of IP configuration profiles which reference this subnet."
         },
+        "ipAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "./ipAllocation.json#/definitions/IpAllocation"
+          },
+          "description": "Array of IpAllocation which reference this subnet."
+        },
         "resourceNavigationLinks": {
           "readOnly": true,
           "type": "array",
@@ -1733,6 +1740,13 @@
           "$ref": "#/definitions/VirtualNetworkBgpCommunities",
           "default": null,
           "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
+        },
+        "ipAllocations": {
+          "type": "array",
+          "items": {
+            "$ref": "./ipAllocation.json#/definitions/IpAllocation"
+          },
+          "description": "Array of IpAllocation which reference this VNET."
         }
       },
       "description": "Properties of the virtual network."
