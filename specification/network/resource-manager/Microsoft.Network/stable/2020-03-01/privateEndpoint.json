@@ -396,6 +396,206 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}": {
+      "delete": {
+       "tags": [
+         "PrivateDnsZoneGroup"
+       ],
+       "operationId": "PrivateDnsZoneGroups_Delete",
+       "description": "Deletes the specified private dns zone group.",
+       "parameters": [
+         {
+           "name": "resourceGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the resource group."
+         },
+         {
+           "name": "privateEndpointName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private endpoint."
+         },
+         {
+           "name": "privateDnsZoneGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private dns zone group."
+         },
+         {
+           "$ref": "./network.json#/parameters/ApiVersionParameter"
+         },
+         {
+           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+         }
+       ],
+       "responses": {
+         "202": {
+           "description": "Accepted and the operation will complete asynchronously."
+         },
+         "204": {
+           "description": "Request successful. Resource does not exist."
+         },
+         "200": {
+           "description": "Delete successful."
+         },
+         "default": {
+           "description": "Error response describing why the operation failed.",
+           "schema": {
+             "$ref": "./network.json#/definitions/CloudError"
+           }
+         }
+       },
+       "x-ms-long-running-operation": true,
+       "x-ms-long-running-operation-options": {
+         "final-state-via": "location"
+       },
+       "x-ms-examples": {
+         "Delete private dns zone group": {
+           "$ref": "./examples/PrivateEndpointDnsZoneGroupDelete.json"
+         }
+       }
+     },
+     "get": {
+       "tags": [
+         "PrivateDnsZoneGroup"
+       ],
+       "operationId": "PrivateDnsZoneGroups_Get",
+       "description": "Gets the private dns zone group by specified private endzone",
+       "parameters": [
+         {
+           "name": "resourceGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the resource group."
+         },
+         {
+           "name": "privateEndpointName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private endpoint."
+         },
+         {
+           "name": "privateDnsZoneGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private dns zone group."
+         },
+         {
+           "$ref": "./network.json#/parameters/ApiVersionParameter"
+         },
+         {
+           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+         },
+         {
+           "name": "$expand",
+           "in": "query",
+           "required": false,
+           "type": "string",
+           "description": "Expands referenced resources."
+         }
+       ],
+       "responses": {
+         "200": {
+           "description": "Request successful. The operation returns the resulting privateDnsZoneGroup resource.",
+           "schema": {
+             "$ref": "#/definitions/PrivateDNSZoneGroup"
+           }
+         },
+         "default": {
+           "description": "Error response describing why the operation failed.",
+           "schema": {
+             "$ref": "./network.json#/definitions/CloudError"
+           }
+         }
+       },
+       "x-ms-examples": {
+         "Get private dns zone group": {
+           "$ref": "./examples/PrivateEndpointDNSZoneGroupGet.json"
+         }
+       }
+     },
+     "put": {
+       "tags": [
+         "PrivateDnsZoneGroup"
+       ],
+       "operationId": "PrivateDnsZoneGroups_CreateOrUpdate",
+       "description": "Creates or updates a private dns zone group in the specified private endpoint",
+       "parameters": [
+         {
+           "name": "resourceGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the resource group."
+         },
+         {
+           "name": "privateEndpointName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private endpoint."
+         },
+         {
+           "name": "privateDnsZoneGroupName",
+           "in": "path",
+           "required": true,
+           "type": "string",
+           "description": "The name of the private dns zone group."
+         },
+         {
+           "name": "parameters",
+           "in": "body",
+           "required": true,
+           "schema": {
+             "$ref": "#/definitions/PrivateDNSZoneGroup"
+           },
+           "description": "Parameters supplied to the create or update private dns zone group operation."
+         },
+         {
+           "$ref": "./network.json#/parameters/ApiVersionParameter"
+         },
+         {
+           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+         }
+       ],
+       "responses": {
+         "200": {
+           "description": "Update successful. The operation returns the resulting PrivateDNSZoneGroup resource.",
+           "schema": {
+             "$ref": "#/definitions/PrivateDNSZoneGroup"
+           }
+         },
+         "201": {
+           "description": "Create successful. The operation returns the resulting PrivateDNSZoneGroup resource.",
+           "schema": {
+             "$ref": "#/definitions/PrivateDNSZoneGroup"
+           }
+         },
+         "default": {
+           "description": "Error response describing why the operation failed.",
+           "schema": {
+             "$ref": "./network.json#/definitions/CloudError"
+           }
+         }
+       },
+       "x-ms-long-running-operation": true,
+       "x-ms-long-running-operation-options": {
+         "final-state-via": "azure-async-operation"
+       },
+       "x-ms-examples": {
+         "Create private dns zone group": {
+           "$ref": "./examples/PrivateEndpointDnsZoneGroupCreate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -451,9 +651,31 @@
             "$ref": "#/definitions/PrivateLinkServiceConnection"
           },
           "description": "A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource."
+        },
+        "customDnsConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDnsConfig"
+          },
+          "description": "A grouping of information about dns configurations connecting to the remote resource."
         }
       },
       "description": "Properties of the private endpoint."
+    },
+    "CustomDnsConfig":{
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "The fqdn for the remote resource."
+        },
+        "ipAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The ip addresses which points to the remote resources."
+        }
+      }
     },
     "PrivateLinkServiceConnection": {
       "properties": {
@@ -567,6 +789,115 @@
         }
       },
       "description": "The information of an AvailablePrivateEndpointType."
+    },
+    "PrivateDNSZoneGroup": {
+      "properties": {
+        "name":{
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type":{
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateDNSZoneGroupProperties",
+          "description": "Properties of the private dns zone group."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Private dns zone group resource."
+    },
+    "PrivateDNSZoneGroupProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private dns zone group resource."
+        },
+        "privateDnsZoneConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateDnsZoneConfig"
+          },
+          "description": "A collection of private dns zone configurations of the private dns zone group."
+        }
+      },
+      "description": "Properties of the private dns zone group."
+    },
+    "PrivateDnsZoneConfig": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateDnsZoneConfigProperties",
+          "description": "Properties of the private dns zone configuration."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "PrivateDnsZoneConfig resource."
+    },
+    "PrivateDnsZoneConfigProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private dns zone group resource."
+        },
+        "privateDnsZoneId": {
+          "type": "string",
+          "description": "The resource id of the private dns zone."
+        }, 
+        "recordSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/recordSet"
+          },
+          "description": "A collection of information regarding a recordSet, holding information to identify private resources"
+        }
+      }
+    },
+    "recordSet": {
+      "properties": {
+        "recordType": {
+          "type": "string",
+          "description": "resource record type"
+        },
+        "recordSetName": { 
+          "type": "string",
+          "description": "recordset name"
+        },
+        "fqdn": { 
+          "type": "string",
+          "description": "fqdn of the recordset"
+        },
+        "ipAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The ip addresses this record set contains"
+        }
+      }
     }
   }
 }
