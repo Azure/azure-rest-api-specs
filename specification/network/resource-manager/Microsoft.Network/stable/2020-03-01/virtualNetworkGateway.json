@@ -2459,6 +2459,24 @@
       ],
       "description": "VPN client revoked certificate of virtual network gateway."
     },
+    "RadiusServer": {
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "The address of this radius server."
+        },
+        "radiusServerScore": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The initial score assigned to this radius server."
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "description": "The secret used for this radius server."
+        }
+      },
+      "description": "Radius Server Settings."
+    },
     "VpnClientConfiguration": {
       "properties": {
         "vpnClientAddressPool": {
@@ -2510,6 +2528,13 @@
         "radiusServerSecret": {
           "type": "string",
           "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection."
+        },
+        "radiusServers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RadiusServer"
+          },
+          "description": "The radiusServers property for multiple radius server configuration."
         },
         "aadTenant": {
           "type": "string",
@@ -2876,6 +2901,11 @@
           "type": "integer",
           "format": "int32",
           "description": "The routing weight."
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The DPD timeout of this connection in seconds."
         },
         "sharedKey": {
           "type": "string",
