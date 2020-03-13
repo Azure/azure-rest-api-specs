@@ -500,7 +500,7 @@
       "properties": {
         "code": {
           "type": "string",
-          "enum": [ "TooManyLongTokensInDocument" ],
+          "enum": [ "LongWordsInDocument", "DocumentTruncated" ],
           "x-ms-enum": {
             "name": "WarningCodeValue",
             "modelAsString": false
@@ -777,13 +777,6 @@
           "items": {
             "$ref": "#/definitions/SentenceOpinion"
           }
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings generated for the sentence.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -824,13 +817,6 @@
           "items": {
             "$ref": "#/definitions/AspectRelation"
           }
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings generated for the sentence.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -868,35 +854,21 @@
         "isNegated": {
           "type": "boolean",
           "description": "The indicator representing if the opinion is negated."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings generated for the sentence.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
     "AspectRelation": {
       "type": "object",
-      "required": [ "links", "relationType" ],
+      "required": [ "ref", "relationType" ],
       "properties": {
         "relationType": {
           "type": "string",
           "enum": [ "opinion", "aspect" ],
           "description": "The type related to the aspect."
         },
-        "links": {
+        "ref": {
           "type": "string",
           "description": "The JSON pointer indicating the linked object."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings generated for the sentence.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
