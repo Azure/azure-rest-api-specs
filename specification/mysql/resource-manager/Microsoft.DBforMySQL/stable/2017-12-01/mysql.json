@@ -1072,6 +1072,193 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/Administrators/activeDirectory": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Get",
+        "x-ms-examples": {
+          "ServerAdministratorGet": {
+            "$ref": "./examples/ServerAdminGet.json"
+          }
+        },
+        "description": "Gets information about a AAD server administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_CreateOrUpdate",
+        "x-ms-examples": {
+          "ServerAdministratorCreate": {
+            "$ref": "./examples/ServerAdminCreateUpdate.json"
+          }
+        },
+        "description": "Creates or update active directory administrator on an existing server. The update action will overwrite the existing administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            },
+            "description": "The required parameters for creating or updating an AAD server administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the active directory administrator",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "202": {
+            "description": "Operation in progress",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Delete",
+        "x-ms-examples": {
+          "ServerAdministratorsDelete": {
+            "$ref": "./examples/ServerAdminDelete.json"
+          }
+        },
+        "description": "Deletes server active directory administrator.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the active directory administrator"
+          },
+          "202": {
+            "description": "Operation in progress"
+          },
+          "204": {
+            "description": "The specified Server active directory administrator does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_List",
+        "description": "Returns a list of server Administrators.",
+        "x-ms-examples": {
+          "get a list of server administrators": {
+            "$ref": "./examples/ServerAdminList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
@@ -1321,6 +1508,115 @@
         "modelAsString": false
       }
     },
+    "MinimalTlsVersion": {
+      "type": "string",
+      "description": "Enforce a minimal Tls version for the server.",
+      "enum": [
+        "TLS1_0",
+        "TLS1_1",
+        "TLS1_2",
+        "TLSEnforcementDisabled"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersionEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerPrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ServerPrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServerPrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "TrackedResource": {
       "description": "Resource properties including location and tags for track resources.",
       "properties": {
@@ -1359,13 +1655,35 @@
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
         },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
+        },
+        "byokEnforcement": {
+          "type": "string",
+          "description": "Status showing whether the server data encryption is enabled with customer-managed keys.",
+          "readOnly": true
+        },
+        "infrastructureEncryption": {
+          "type": "string",
+          "description": "Status showing whether the server enabled infrastructure encryption.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryption",
+            "modelAsString": true
+          }
+        },
         "userVisibleState": {
           "type": "string",
           "description": "A state of a server that is visible to user.",
           "enum": [
             "Ready",
             "Dropping",
-            "Disabled"
+            "Disabled",
+            "Inaccessible"
           ],
           "x-ms-enum": {
             "name": "ServerState",
@@ -1398,6 +1716,26 @@
           "format": "int32",
           "minimum": 0,
           "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessEnum",
+            "modelAsString": true
+          }
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1453,6 +1791,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "minimalTlsVersion": {
+          "$ref": "#/definitions/MinimalTlsVersion",
+          "description": "Enforce a minimal Tls version for the server."
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1595,8 +1937,41 @@
       },
       "description": "Billing information related properties of a server."
     },
+    "ResourceIdentity": {
+      "description": "Azure Active Directory identity configuration for a resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory principal id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The Azure Active Directory tenant id.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Server": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -1667,6 +2042,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "minimalTlsVersion": {
+              "$ref": "#/definitions/MinimalTlsVersion",
+              "description": "Enforce a minimal Tls version for the server."
             },
             "replicationRole": {
               "type": "string",
@@ -2227,6 +2606,68 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "ServerAdministratorProperties": {
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "The type of administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType"
+          }
+        },
+        "login": {
+          "type": "string",
+          "description": "The server administrator login account name."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The server administrator Sid (Secure ID).",
+          "format": "uuid"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The server Active Directory Administrator tenant id.",
+          "format": "uuid"
+        }
+      },
+      "required": [
+        "tenantId",
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "description": "The properties of an server Administrator."
+    },
+    "ServerAdministratorResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerAdministratorProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the server AAD administrator."
+        }
+      },
+      "description": "Represents a and external administrator to be created.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerAdministratorResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAdministratorResource"
+          },
+          "description": "The list of server Active Directory Administrators for the server."
+        }
+      },
+      "description": "The response to a list Active Directory Administrators request."
     }
   },
   "parameters": {

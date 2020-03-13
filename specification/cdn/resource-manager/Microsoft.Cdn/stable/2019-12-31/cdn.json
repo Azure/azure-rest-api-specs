@@ -651,7 +651,7 @@
         "tags": [
           "Endpoints"
         ],
-        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update custom domains, use the Update Custom Domain operation.",
+        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin Group operation. To update custom domains, use the Update Custom Domain operation.",
         "operationId": "Endpoints_Update",
         "x-ms-examples": {
           "Endpoints_Update": {
@@ -2655,7 +2655,7 @@
           }
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. This property at Endpoint is only allowed when endpoint uses single origin and can be overridden by the same property specified at origin.If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+          "description": "The host header value sent to the origin with each request. This property at Endpoint can only be set allowed when endpoint uses single origin. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
           "type": "string"
         },
         "isCompressionEnabled": {
@@ -3761,7 +3761,8 @@
             "ModifyRequestHeader",
             "ModifyResponseHeader",
             "UrlRedirect",
-            "UrlRewrite"
+            "UrlRewrite",
+            "OriginGroupOverride"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3889,6 +3890,44 @@
         "preserveUnmatchedPath": {
           "description": "Whether to preserve unmatched path. Default value is true.",
           "type": "boolean"
+        }
+      }
+    },
+    "OriginGroupOverrideAction": {
+      "description": "Defines the Origin Group override action for the delivery rule.",
+      "x-ms-discriminator-value": "OriginGroupOverride",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/OriginGroupOverrideActionParameters"
+        }
+      }
+    },
+    "OriginGroupOverrideActionParameters": {
+      "description": "Defines the parameters for the Origin Group override action.",
+      "required": [
+        "originGroup",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.OriginGroupOverrideActionParameters"
+          ]
+        },
+        "originGroup": {
+          "description": "A reference to the origin group from where the content will be fetched from when CDN does not have it",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
@@ -4138,7 +4177,7 @@
           "exclusiveMinimum": false
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. If endpoint uses multiple origins for load balancing, then the host header at endpoint is ignored and this one is considered.",
           "type": "string"
         },
         "priority": {
@@ -4377,7 +4416,7 @@
           "exclusiveMinimum": false
         },
         "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. If endpoint uses multiple origins for load balancing, then the host header at endpoint is ignored and this one is considered.",
           "type": "string"
         },
         "priority": {
