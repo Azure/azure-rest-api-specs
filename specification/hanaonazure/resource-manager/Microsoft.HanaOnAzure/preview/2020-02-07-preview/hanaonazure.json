@@ -256,6 +256,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "ProviderInstances_List",
+        "summary": "Gets a list of provider instnaces in the specified SAP monitor.",
+        "description": "Gets a list of provider instnaces in the specified SAP monitor. The operations returns various properties of each provider instnaces.",
+        "x-ms-examples": {
+          "List all SAP Monitors in a subscription": {
+            "$ref": "./examples/ProviderInstances_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProviderInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}/providerInstances/{providerInstanceName}": {
       "get": {
         "tags": [
@@ -410,37 +456,63 @@
   },
   "definitions": {
     "Resource": {
-      "description": "The resource model definition.",
+      "description": "The core properties of ARM resources",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource ID"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource name"
+          "description": "The name of the resource"
         },
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
         "tags": {
-          "readOnly": true,
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
@@ -495,7 +567,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
@@ -545,37 +617,39 @@
           "readOnly": true,
           "type": "string",
           "description": "The version of the payload running in the Collector VM"
-        },
-        "providerInstances": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProviderInstance"
-          },
-          "description": "The list of monitor provider instances."
         }
       },
       "description": "Describes the properties of a SAP monitor."
     },
+    "ProviderInstanceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProviderInstance"
+          },
+          "description": "The list of provider instances."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of provider instances."
+        }
+      },
+      "description": "The response from the List provider instances operation."
+    },
     "ProviderInstance": {
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the provider instance."
-        },
-        "type": {
-          "type": "string",
-          "description": "The provider instance type."
-        },
         "properties": {
           "type": "string",
           "description": "A JSON string containing the properties of the provider instance."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "A provider instance associated with a SAP monitor."
     }
   },
   "parameters": {
