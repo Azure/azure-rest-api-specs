@@ -82,7 +82,7 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2020-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-03-01/webapplicationfirewall.json
-  - Microsoft.Network/stable/2019-11-01/ipAllocation.json
+  - Microsoft.Network/stable/2020-03-01/ipAllocation.json
 ```
 ### Tag: package-2019-12
 
