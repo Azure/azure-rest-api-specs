@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "availabilitySetName": "availabilitysetnamexyz",
+    "parameters": {
+    	"properties": {
+    		"platformUpdateDomainCount": 20,
+    		"platformFaultDomainCount":2
+    	}
+    }
+
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+      	"name": "availabilitysetnamexyz",
+      	"id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/availabilitySets/availabilitysetnamexyz",
+      	"type": "Microsoft.Compute/availabilitySets",
+      	"location": "eastus",
+      	"properties": {
+      		"platformUpdateDomainCount": 20,
+      	  "platformFaultDomainCount": 2
+      	},
+      	"sku": { 
+          "name": "Classic"
+        }
+      }
+    }
+  }
+}

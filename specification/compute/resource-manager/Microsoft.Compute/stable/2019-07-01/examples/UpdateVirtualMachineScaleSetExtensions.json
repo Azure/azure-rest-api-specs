@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ResourceGroup",
+    "api-version": "2019-07-01",
+    "vmScaleSetName": "virtualmachinescalesetname",
+    "vmssExtensionName": "vmssextensionname",
+    "extensionParameters": {
+      "properties": {
+        "autoUpgradeMinorVersion": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "vmssextensionname",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/virtualMachineScaleSets/virtualmachinescalesetname/extensions/vmssextensionname",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/extensions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "autoUpgradeMinorVersion": true,
+          "publisher": "Microsoft.Azure.NetworkWatcher",
+          "type": "NetworkWatcherAgentWindows",
+          "typeHandlerVersion": "1.4"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "vmssextensionname",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/virtualMachineScaleSets/virtualmachinescalesetname/extensions/vmssextensionname",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/extensions",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "autoUpgradeMinorVersion": true,
+          "publisher": "Microsoft.Azure.NetworkWatcher",
+          "type": "NetworkWatcherAgentWindows",
+          "typeHandlerVersion": "1.4"
+        }
+      }
+    }
+  }
+}

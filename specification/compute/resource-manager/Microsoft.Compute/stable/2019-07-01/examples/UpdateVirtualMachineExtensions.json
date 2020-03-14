@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "vmName": "vmnamexyz",
+    "vmExtensionName": "virtualmachineextensionname",
+    "extensionParameters": {
+    	"properties": {
+        "autoUpgradeMinorVersion": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+    	"body": {
+        "name": "virtualmachineextensionname",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/virtualMachines/vmnamexyz/extensions/virtualmachineextensionname",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "location": "eastus",
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "provisioningState": "Updating",
+          "publisher":"Microsoft.Azure.NetworkWatcher",
+          "type": "NetworkWatcherAgentWindows",
+          "typeHandlerVersion": "1.4"
+        }
+      }
+    }
+  }
+}

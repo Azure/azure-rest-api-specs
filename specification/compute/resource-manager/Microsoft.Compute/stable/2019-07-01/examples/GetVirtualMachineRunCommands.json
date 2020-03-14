@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2019-07-01",
+    "location": "eastus",
+    "commandId": "RunPowerShellScript"
+  },
+  "responses": {
+    "200": {
+      "body": {
+      	"script": [
+      		"param(",
+      		"    [string]$arg1,",
+      		"    [string]$arg2",
+      		")",
+      		"Write-Host This is a sample script with parameters $arg1 $arg2"
+      	],
+      	"parameters": [
+      		{
+      			"name": "arg1",
+      			"type": "string",
+            "required": false
+          },
+          {
+          	"name": "arg2",
+          	"type": "string",
+          	"required": false
+          }
+        ],
+        "$schema": "http://schema.management.azure.com/schemas/2016-11-17/runcommands.json",
+        "id": "RunPowerShellScript",
+        "osType": "Windows",
+        "label": "Executes a PowerShell script",
+        "description": "Custom multiline PowerShell script should be defined in script property. Optional parameters can be set in parameters property."
+      }
+    }
+  }
+}

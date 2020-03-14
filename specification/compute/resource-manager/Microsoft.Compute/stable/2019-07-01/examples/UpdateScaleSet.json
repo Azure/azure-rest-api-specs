@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "ResourceGroup",
+    "api-version": "2019-07-01",
+    "vmScaleSetName": "virtualmachinescalesetname",
+    "parameters": {
+      "sku": {
+        "name": "Standard_D1_v2",
+        "tier": "Standard",
+        "capacity": 2
+      },
+      "properties": {
+        "upgradePolicy": {
+          "mode": "Manual"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "virtualmachinescalesetname",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/virtualMachineScaleSets/virtualmachinescalesetname",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "location": "eastus",
+        "sku": {
+          "name": "Standard_D1_v2",   
+          "tier": "Standard",
+          "capacity": 2
+        },
+        "properties": {
+          "singlePlacementGroup": true,
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "virtualMachineProfile": {
+            "osProfile": {
+              "computerNamePrefix": "testPC",
+              "adminUsername": "testuser",
+              "linuxConfiguration": {
+                "disablePasswordAuthentication": false,
+                "provisionVMAgent": true
+              },
+              "secrets": [],   
+              "allowExtensionOperations": true,
+              "requireGuestProvisionSignal": true
+            },
+            "storageProfile": {
+              "osDisk": {
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "diskSizeGB": 512  
+              },
+              "imageReference": {
+                "publisher": "Canonical",
+                "offer": "UbuntuServer",
+                "sku": "18.04-LTS",
+              "version": "latest"
+            }
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations":[
+              {
+                "name":"testPC","properties": {
+                  "primary": true,
+                  "enableAcceleratedNetworking": false,
+                  "dnsSettings": {
+                    "dnsServers":[]
+                  },
+                  "enableIPForwarding": false,
+                  "ipConfigurations":[
+                    {
+                      "name": "testPC",
+                      "properties":{
+                        "subnet":{
+                          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Network/virtualNetworks/networknamexyz/subnets/subnetxyz"
+                        },
+                        "privateIPAddressVersion":"IPv4"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "vmssextensionname",
+                "properties": {
+                  "autoUpgradeMinorVersion": true,
+                  "publisher": "Microsoft.Azure.NetworkWatcher",
+                  "type": "NetworkWatcherAgentWindows",         
+                  "typeHandlerVersion": "1.4"
+                }
+              }
+            ]
+          }
+        },
+        "provisioningState": "Updating",
+        "overprovision": true,
+        "doNotRunExtensionsOnOverprovisionedVMs": false,
+        "uniqueId": "052fe2f1-c75d-482f-9b18-bad155cba912"
+      }
+    },
+    "202": {}
+  }
+}

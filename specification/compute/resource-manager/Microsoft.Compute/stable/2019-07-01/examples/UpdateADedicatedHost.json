@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2019-07-01",
+    "hostGroupName": "hostgroupnamexyz",
+    "hostName": "hostName",
+    "parameters": {"tags": {"department": "HR"}}
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+    	"name": "hostname",
+    	"id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test_cli_mgmt_compute_test_computef5f00e12/providers/Microsoft.Compute/hostGroups/hostgroupnamexyz/hosts/hostname",
+        "location": "eastus",
+        "tags": {
+        	"department": "HR"
+        },
+        "sku": {
+        	"name": "DSv3-Type1"
+        }, 
+         "properties": {
+         	"platformFaultDomain": 1,
+         	"autoReplaceOnFailure": true,
+         	"hostId": "6fa2419e-54a6-44a0-9037-97ddd931b2f4", 
+            "provisioningTime": "2020-03-11T11:22:18.9753481+00:00",
+            "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}
