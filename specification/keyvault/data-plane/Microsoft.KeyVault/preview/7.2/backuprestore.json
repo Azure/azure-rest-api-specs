@@ -18,7 +18,7 @@
           "FullBackup"
         ],
         "operationId": "FullBackup",
-        "description": "Creates full backup using the user provided SAS token to azure blob storage.",
+        "description": "Creates full backup using user provided SAS token to Azure Blob Storage container",
         "parameters": [
           {
             "in": "body",
@@ -26,7 +26,7 @@
             "schema": {
               "$ref": "#/definitions/SASTokenParameter"
             },
-            "description": "Azure blob shared access signature token pointing to a valid azure blob container where the full backup needs to be stored. This token needs to be valid for atleast next 24 hours from the time of making this call"
+            "description": "Azure Blob shared access signature token pointing to a valid Azure Blob container where the full backup needs to be stored. This token needs to be valid for atleast next 24 hours from the time of making this call"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -183,7 +183,7 @@
         },
         "folderToRestore": {
           "type": "string",
-          "description": "Folder name of the blob where the previous successful backup was stored"
+          "description": "Folder name of the blob where the previous successful full backup is stored"
         }
       },
       "required": [
@@ -195,16 +195,16 @@
       "properties": {
         "storageResourceUri": {
           "type": "string",
-          "description": "Azure blob storage container uri"
+          "description": "Azure Blob storage container Uri"
         },
         "token": {
           "type": "string",
-          "description": "Azure Blob Storage SAS token pointing to the azure blob storage container"
+          "description": "Azure Blob storage SAS token pointing to the azure blob storage container"
         }
       },
       "required": [
-        "token",
-        "storageResourceUri"
+        "storageResourceUri",
+        "token"
       ]
     },
     "FullBackupOperation": {
@@ -237,7 +237,7 @@
         },
         "azureStorageBlobContainerUri": {
           "type": "string",
-          "description": "The Azure Blob Storage folder Uri which contains the full backup"
+          "description": "The Azure Blob storage folder Uri which contains the full backup"
         }
       },
       "description": "Full backup operation"
