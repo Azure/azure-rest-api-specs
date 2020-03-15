@@ -1509,6 +1509,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Network/stable/2020-03-01/privateEndpoint.json
   - $(this-folder)/Microsoft.Network/stable/2019-12-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2019-12-01/applicationSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-12-01/availableDelegations.json
