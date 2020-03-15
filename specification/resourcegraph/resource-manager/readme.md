@@ -48,6 +48,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 ```yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
 ```
 
 ### Tag: package-2018-09-preview
