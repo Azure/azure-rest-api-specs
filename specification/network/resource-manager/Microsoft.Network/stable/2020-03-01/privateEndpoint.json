@@ -675,7 +675,8 @@
           },
           "description": "The ip addresses which points to the remote resources."
         }
-      }
+      },
+      "description": "Contains custom DNS resolution configuration from customer."
     },
     "PrivateLinkServiceConnection": {
       "properties": {
@@ -836,7 +837,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The resource name."
         },
         "type": {
           "readOnly": true,
@@ -870,13 +871,14 @@
         "recordSets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/recordSet"
+            "$ref": "#/definitions/RecordSet"
           },
           "description": "A collection of information regarding a recordSet, holding information to identify private resources."
         }
-      }
+      },
+      "description": "Properties of the private dns zone configuration resource."
     },
-    "recordSet": {
+    "RecordSet": {
       "properties": {
         "recordType": {
           "type": "string",
@@ -897,7 +899,8 @@
           },
           "description": "The ip addresses this record set contains."
         }
-      }
+      },
+      "description": "A collective group of information concerning the record set connectivity information."
     }
   }
 }
