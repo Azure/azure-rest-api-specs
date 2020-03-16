@@ -12,8 +12,23 @@ This is the AutoRest configuration file for Databricks.
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-02-15
   - tag: package-2018-04-01
 ```
+
+### Tag: package-2020-02-15 and java
+
+These settings apply only when `--tag=package-2020-02-15 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-02-15' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databricks.v2020-02-15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2020-02-15
+regenerate-manager: true
+generate-interface: true
+```
+
 
 ### Tag: package-2018-04-01 and java
 
@@ -48,7 +63,18 @@ These are the global settings for the Databricks API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2020-02-15
 tag: package-2018-04-01
+```
+
+
+### Tag: package-2020-02-15
+
+These settings apply only when `--tag=package-2020-02-15` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-15'
+input-file:
+- Microsoft.Databricks/stable/2020-02-15/databricks.json
 ```
 
 
@@ -95,6 +121,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Databricks/stable/2020-02-15/databricks.json
   - $(this-folder)/Microsoft.Databricks/stable/2018-04-01/databricks.json
 
 ```
