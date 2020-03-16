@@ -2,6 +2,11 @@ name: "Azure OpenAPI"
 
 trigger: none
 
+pr:
+  branches:
+    include:
+      - "*"
+
 variables:
   TRAVIS: 'true'
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
