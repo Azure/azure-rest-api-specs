@@ -64,7 +64,6 @@ These are the global settings for the Databricks API.
 ``` yaml
 openapi-type: arm
 tag: package-2020-02-15
-tag: package-2018-04-01
 ```
 
 
