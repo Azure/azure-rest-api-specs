@@ -1,32 +1,54 @@
 {
   "parameters": {
-    "api-version": "2019-01-01-preview",
+    "api-version": "2020-01-01-preview",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "connecotrName": "default"
+    "connecotrName": "aws_dev"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/default",
-          "name": "default",
-          "type": "Microsoft.Security/connectors",
-          "awsAccountId": "922315681122",
-          "authenticationType": "awsCreds",
-          "state": "Valid",
-          "hybridComputeAutoProvision": "On",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev",
+        "name": "aws_dev",
+        "type": "Microsoft.Security/connectors",
+        "properties": {
           "hybridComputeSettings": {
-            "location": "West US 2",
+            "provisioningState": "Valid",
+            "autoProvision": "On",
+            "tenantId": "72f977ff-8bf1-41af-91ab-2d7cd011db47",
             "resourceGroupName": "AwsConnectorRG",
+            "location": "West US 2",
             "proxyServer": {
               "ip": "167.220.197.140",
               "port": "34"
             },
-            "tags": {
-              "tag1": "aws_account"
+            "servicePrincipal": {
+              "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1",
+              "servicePrincipalNames": "{ad9bcd79-be9c-45ab-abd8-80ca1654a7d1, https://Arc-for-servers}",
+              "displayName": "Hybrid-RP",
+              "id": "5be92c87-01c4-42f5-bade-c1c10af87758",
+              "secret": null
+            }
+          },
+          "authenticationDetails": {
+            "provisioningState": "Valid",
+            "grantedPermissions": [
+              "AWS::AWSSecurityHubReadOnlyAccess",
+              "AWS::SecurityAudit",
+              "AWS::AmazonSSMAutomationRole"
+            ],
+            "authenticationType": "awsCreds",
+            "accountId": "922315681122",
+            "awsCreds": {
+              "awsAccessKeyId": null,
+              "awsSecretKey": null
+            },
+            "awsAssumeRole": {
+              "awsAssumeRoleArn": null,
+              "awsExternalId": null
             }
           }
+        }
       }
     }
   }
 }
-
