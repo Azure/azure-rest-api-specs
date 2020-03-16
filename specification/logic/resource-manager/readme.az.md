@@ -8,16 +8,18 @@ az:
   namespace: azure.mgmt.logic
   package-name: azure-mgmt-logic
 python-sdk-output-folder: "$(output-folder)/src/logic/azext_logic/vendored_sdks/logic"
-  
+
+# uncomment following to use json instead of flatten
 #cli:
 #    cli-directive:
-#      directive on operationGroup
-#       - select: 'operationGroup'
-#         where:
-#             operationGroup: 'operations'
-#         hidden: true
 #       - where:
-#             parameter: location
-#         required: true
+#            group: 'Workflows'
+#            op: 'CreateOrUpdate'
+#            param: 'workflow'
+#         json: true
+#       - where:
+#            type: 'workflow'
+#            prop: 'properties'
+#         flatten: false
 
 ```
