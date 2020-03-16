@@ -14,6 +14,14 @@ cli:
     "/properties/corsconfiguration": "Cors*/"
     "/properties/cosmosdbconfiguration": "CosmosDb*/"
     "/properties/accesspolicies": "AccessPolicies*/"
-  test-setup:
-    - name: Create or Update a service with all parameters
+  test-scenario:
+    - name: ServicePut
+    - name: OperationResultsGet
+    - name: ServiceGet
+    - name: ServiceListByResourceGroup
+    - name: ServiceList
+    - name: OperationsList
+    - name: ServicePatch
+    - name: CheckNameAvailabilityPost
+    - name: ServiceDelete
 ```

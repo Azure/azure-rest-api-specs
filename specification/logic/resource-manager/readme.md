@@ -132,6 +132,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
+  - repo: azure-cli-extensions
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_logic']
 ```
@@ -213,7 +214,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2019-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.logic.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2019_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -225,7 +226,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2018-07-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.logic.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -238,7 +239,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.logic.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2016_06_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/logic/mgmt-v2016_06_01
 regenerate-manager: true
 generate-interface: true
 ```

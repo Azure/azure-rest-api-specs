@@ -40,6 +40,7 @@
           "DeploymentScripts"
         ],
         "operationId": "DeploymentScripts_Create",
+        "x-ms-long-running-operation": true,
         "description": "Creates a deployment script.",
         "x-ms-examples": {
           "DeploymentScriptsCreate": {
@@ -88,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -98,7 +99,7 @@
           "DeploymentScripts"
         ],
         "operationId": "DeploymentScripts_Update",
-        "description": "Updates a deployment script.",
+        "description": "Updates deployment script tags with specified values.",
         "x-ms-examples": {
           "DeploymentScriptsUpdate": {
             "$ref": "./examples/DeploymentScripts_Update.json"
@@ -123,12 +124,12 @@
             "schema": {
               "$ref": "#/definitions/DeploymentScriptUpdateParameter"
             },
-            "description": "Updated deployment script supplied to the operation."
+            "description": "Deployment script resource with the tags to be updated."
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- Deployment script is updated.",
+            "description": "OK -- Deployment script tags are updated.",
             "schema": {
               "$ref": "#/definitions/DeploymentScript"
             }
@@ -136,7 +137,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -176,7 +177,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -216,7 +217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -252,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -291,13 +292,13 @@
           "200": {
             "description": "OK -- Returns deployment script logs if available.",
             "schema": {
-              "$ref": "#/definitions/ScriptLogsList" 
+              "$ref": "#/definitions/ScriptLogsList"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -313,6 +314,9 @@
         "x-ms-examples": {
           "DeploymentScriptsGetLogs": {
             "$ref": "./examples/DeploymentScripts_GetLogsDefault.json"
+          },
+          "DeploymentScriptsGetLogsWithTail": {
+            "$ref": "./examples/DeploymentScripts_GetLogsDefaultWithTail.json"
           }
         },
         "parameters": [
@@ -327,6 +331,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tail",
+            "in": "query",
+            "description": "The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -339,7 +349,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -378,7 +388,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -405,7 +415,10 @@
         },
         "location": {
           "type": "string",
-          "x-ms-mutability": [ "read", "create" ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "The location of the ACI and the storage account for the deployment script."
         },
         "tags": {
@@ -669,6 +682,10 @@
           "format": "date-time",
           "readOnly": true,
           "description": "Time the deployment script resource will expire."
+        },
+        "error": {
+          "description": "Error that is relayed from the script execution.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -809,30 +826,13 @@
         }
       }
     },
-    "DefaultErrorResponse": {
-      "description": "The details of the error.",
-      "type": "object",
+    "DeploymentScriptsError": {
       "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Detailed errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DefaultErrorResponse"
-          }
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
+      },
+      "description": "Deployment scripts error response."
     }
   },
   "parameters": {

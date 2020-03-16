@@ -432,11 +432,20 @@
             "cors": {
               "$ref": "./common.json#/definitions/CorsRules",
               "description": "Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service."
+            },
+            "shareDeleteRetentionPolicy": {
+              "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
+              "description": "The file service properties for share soft delete."
             }
           },
           "x-ms-client-flatten": true,
           "x-ms-client-name": "FileServiceProperties",
           "description": "The properties of File services in storage account."
+        },
+        "sku": {
+          "$ref": "./common.json#/definitions/Sku",
+          "readOnly": true,
+          "description": "Sku name and tier."
         }
       },
       "allOf": [
@@ -513,8 +522,8 @@
         "shareQuota": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 5120,
-          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120)."
+          "maximum": 102400,
+          "description": "The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400."
         }
       },
       "description": "The properties of the file share."

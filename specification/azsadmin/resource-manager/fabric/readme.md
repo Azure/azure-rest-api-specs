@@ -114,6 +114,20 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2018-10-01/StorageSubSystem.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json"
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
+    - "Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json"
+```
+
+## Suppression
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress01      
+    reason: externalDNSIPAddress01 is a customized name, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress02      
+    reason: externalDNSIPAddress02 is a customized name, no camel case restriction needed.
 ```
 
 ---
@@ -172,6 +186,7 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2018-10-01/Volume.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Drive.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json
+  - $(this-folder)/Microsoft.Fabric.Admin/preview/2019-05-01/NasCluster.json
 
 ```
 

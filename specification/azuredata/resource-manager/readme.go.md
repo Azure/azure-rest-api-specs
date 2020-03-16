@@ -8,12 +8,12 @@ go:
   clear-output-folder: true
 ```
 
-### Tag: package-2017-03-01-preview and go
+### Tag: package-2019-07-24 and go
 
-These settings apply only when `--tag=package-2017-03-01-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-2019-07-24 --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-2017-03-01-preview' && $(go)
+```yaml $(tag) == 'package-2019-07-24' && $(go)
 namespace: Microsoft.AzureData
-output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2017-03-01-preview/$(namespace)
+output-folder: $(go-sdks-folder)/services/preview/$(namespace)/mgmt/2019-07-24-preview/$(namespace)
 ```
