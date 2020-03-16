@@ -1,14 +1,11 @@
 {
   "parameters": {
-    "api-version": "2017-11-11-preview",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "assignmentName": "assignSimpleBlueprint",
     "assignment": {
       "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {}
-        }
+        "type": "SystemAssigned"
       },
       "location": "eastus",
       "properties": {
@@ -41,14 +38,9 @@
     "201": {
       "body": {
         "identity": {
-          "type": "UserAssigned",
+          "type": "SystemAssigned",
           "tenantId": "00000000-0000-0000-0000-000000000000",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-identity": {
-              "principalId": "00000000-0000-0000-0000-000000000000",
-              "clientId": "00000000-0000-0000-0000-000000000000"
-            }
-          }
+          "principalId": "00000000-0000-0000-0000-000000000000"
         },
         "location": "eastus",
         "properties": {

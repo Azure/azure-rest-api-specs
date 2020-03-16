@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "api-version": "2017-11-11-preview",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000"
+    "api-version": "2018-11-01-preview",
+    "resourceScope": "managementGroups/ContosoOnlineGroup"
   },
   "responses": {
     "200": {
@@ -18,6 +18,7 @@
               "description": "enforce pre-defined simpleBlueprint to this XXXXXXXX subscription.",
               "provisioningState": "failed",
               "blueprintId": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint",
+              "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
               "parameters": {
                 "storageAccountType": {
                   "value": "Standard_LRS"
@@ -39,7 +40,7 @@
                 }
               }
             },
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
+            "id": "/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprintAssignments/assignSimpleBlueprint",
             "type": "Microsoft.Blueprint/Assignment",
             "name": "assignSimpleBlueprint"
           }
