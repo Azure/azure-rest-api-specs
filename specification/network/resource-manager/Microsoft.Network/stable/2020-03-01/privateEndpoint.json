@@ -657,7 +657,7 @@
           "items": {
             "$ref": "#/definitions/CustomDnsConfig"
           },
-          "description": "A grouping of information about dns configurations connecting to the remote resource."
+          "description": "A grouping of information about dns configurations connecting to the private endpoint."
         }
       },
       "description": "Properties of the private endpoint."
@@ -666,14 +666,14 @@
       "properties": {
         "fqdn": {
           "type": "string",
-          "description": "The fqdn for the remote resource."
+          "description": "Fqdn that resolves for private endpoint ip address."
         },
         "ipAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The ip addresses which points to the remote resources."
+          "description": "The private ip address of the private endpoint."
         }
       },
       "description": "Contains custom DNS resolution configuration from customer."
@@ -890,14 +890,14 @@
         },
         "fqdn": {
           "type": "string",
-          "description": "FQDN of the recordset."
+          "description": "Fqdn that resolves for private endpoint ip address."
         },
         "ipAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The ip addresses this record set contains."
+          "description": "The private ip address of the private endpoint."
         }
       },
       "description": "A collective group of information about the record set connectivity information."
