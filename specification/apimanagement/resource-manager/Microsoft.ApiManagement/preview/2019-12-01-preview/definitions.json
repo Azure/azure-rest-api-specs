@@ -5042,6 +5042,23 @@
           "type": "string",
           "description": "User Password. If no value is provided, a default password is generated."
         },
+        "appType": {
+          "type": "string",
+          "description": "Determines the type of application which send the create user request. Default is old publisher portal.",
+          "enum": [
+            "developerPortal"
+          ],
+          "x-ms-enum": {
+            "name": "AppType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "developerPortal",
+                "description": "User create request was sent by new developer portal."
+              }
+            ]
+          }
+        },
         "confirmation": {
           "type": "string",
           "description": "Determines the type of confirmation e-mail that will be sent to the newly created user.",
