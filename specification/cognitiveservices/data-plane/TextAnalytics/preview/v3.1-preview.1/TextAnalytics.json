@@ -782,12 +782,8 @@
     },
     "SentenceAspect": {
       "type": "object",
-      "required": [ "confidenceScores", "id", "length", "offset", "relations", "sentiment", "text" ],
+      "required": [ "confidenceScores", "length", "offset", "relations", "sentiment", "text" ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
         "sentiment": {
           "type": "string",
           "enum": [ "positive", "mixed", "negative" ],
@@ -822,12 +818,8 @@
     },
     "SentenceOpinion": {
       "type": "object",
-      "required": [ "confidenceScores", "id", "isNegated", "length", "offset", "sentiment", "text" ],
+      "required": [ "confidenceScores", "isNegated", "length", "offset", "sentiment", "text" ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
         "sentiment": {
           "type": "string",
           "enum": [ "positive", "mixed", "negative" ],
