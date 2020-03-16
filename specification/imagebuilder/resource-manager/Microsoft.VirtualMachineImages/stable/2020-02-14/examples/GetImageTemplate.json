@@ -14,9 +14,8 @@
         "type": "Microsoft.VirtualMachineImages/imageTemplate",
         "properties": {
           "source": {
-            "type": "ISO",
-            "sourceUri": "http://redhat.com/path/to/installation.iso",
-            "sha256Checksum": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f"
+            "type": "ManagedImage",
+            "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
           },
           "customize": [
             {
@@ -37,7 +36,8 @@
             }
           ],
           "vmProfile": {
-            "vmSize": "Standard_D2s_v3"
+            "vmSize": "Standard_D2s_v3",
+            "osDiskSizeGB": 64
           }
         }
       }

@@ -170,8 +170,11 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create an Image Template.": {
-            "$ref": "./examples/CreateImageTemplate.json"
+          "Create an Image Template for Linux.": {
+            "$ref": "./examples/CreateImageTemplateLinux.json"
+          },
+          "Create an Image Template for Windows.": {
+            "$ref": "./examples/CreateImageTemplateWindows.json"
           },
           "Create an Image Template with a user assigned identity configured": {
             "$ref": "./examples/CreateImageTemplateWithUserAssignedIdentity.json"
@@ -371,6 +374,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/cancel": {
+      "post": {
+        "tags": [
+          "VirtualMachineImageTemplate"
+        ],
+        "operationId": "VirtualMachineImageTemplates_Cancel",
+        "description": "Cancel the long running image build based on the image template",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ImageTemplateNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The long running image build has been canceled."
+          },
+          "202": {
+            "description": "The request is accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Cancel the image build based on the imageTemplate.": {
+            "$ref": "./examples/CancelImageBuild.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs": {
       "get": {
         "tags": [
@@ -523,29 +572,6 @@
         "type"
       ]
     },
-    "ImageTemplateIsoSource": {
-      "description": "Describes an image source that is an installation ISO. Currently only supports Red Hat Enterprise Linux 7.2-7.5 ISO's.",
-      "x-ms-discriminator-value": "ISO",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ImageTemplateSource"
-        }
-      ],
-      "properties": {
-        "sourceUri": {
-          "type": "string",
-          "description": "URI to get the ISO image. This URI has to be accessible to the resource provider at the time of the image template creation."
-        },
-        "sha256Checksum": {
-          "type": "string",
-          "description": "SHA256 Checksum of the ISO image."
-        }
-      },
-      "required": [
-        "sourceUri",
-        "sha256Checksum"
-      ]
-    },
     "ImageTemplatePlatformImageSource": {
       "description": "Describes an image source from [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages).",
       "x-ms-discriminator-value": "PlatformImage",
@@ -570,6 +596,10 @@
         "version": {
           "type": "string",
           "description": "Image version from the [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages)."
+        },
+        "planInfo": {
+          "$ref": "#/definitions/PlatformImagePurchasePlan",
+          "description": "Optional configuration of purchase plan for platform image."
         }
       }
     },
@@ -672,6 +702,33 @@
         "restartTimeout": {
           "type": "string",
           "description": "Restart timeout specified as a string of magnitude and unit, e.g. '5m' (5 minutes) or '2h' (2 hours) [Default: '5m']"
+        }
+      }
+    },
+    "ImageTemplateWindowsUpdateCustomizer": {
+      "description": "Installs Windows Updates. Corresponds to Packer Windows Update Provisioner (https://github.com/rgl/packer-provisioner-windows-update)",
+      "x-ms-discriminator-value": "WindowsUpdate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ImageTemplateCustomizer"
+        }
+      ],
+      "properties": {
+        "searchCriteria": {
+          "type": "string",
+          "description": "Criteria to search updates. Omit or specify empty string to use the default (search all). Refer to above link for examples and detailed description of this field."
+        },
+        "filters": {
+          "type": "array",
+          "description": "Array of filters to select updates to apply. Omit or specify empty array to use the default (no filter). Refer to above link for examples and detailed description of this field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateLimit": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of updates to apply at a time. Omit or specify 0 to use the default (1000)"
         }
       }
     },
@@ -806,6 +863,22 @@
           "items": {
             "type": "string"
           }
+        },
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "Flag that indicates whether created image version should be excluded from latest. Omit to use the default (false)."
+        },
+        "storageAccountType": {
+          "type": "string",
+          "enum": [
+            "Standard_LRS",
+            "Standard_ZRS"
+          ],
+          "x-ms-enum": {
+            "name": "SharedImageStorageAccountType",
+            "modelAsString": false
+          },
+          "description": "Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS)."
         }
       },
       "required": [
@@ -823,12 +896,52 @@
         }
       ]
     },
+    "PlatformImagePurchasePlan": {
+      "description": "Purchase plan configuration for platform image.",
+      "properties": {
+        "planName": {
+          "type": "string",
+          "description": "Name of the purchase plan."
+        },
+        "planProduct": {
+          "type": "string",
+          "description": "Product of the purchase plan."
+        },
+        "planPublisher": {
+          "type": "string",
+          "description": "Publisher of the purchase plan."
+        }
+      },
+      "required": [
+        "planName",
+        "planProduct",
+        "planPublisher"
+      ]
+    },
+    "VirtualNetworkConfig": {
+      "description": "Virtual Network configuration.",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource id of a pre-existing subnet."
+        }
+      }
+    },
     "ImageTemplateVmProfile": {
       "description": "Describes the virtual machine used to build, customize and capture images",
       "properties": {
         "vmSize": {
           "type": "string",
           "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2)."
+        },
+        "osDiskSizeGB": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Size of the OS disk in GB. Omit or specify 0 to use Azure's default OS disk size."
+        },
+        "vnetConfig": {
+          "$ref": "#/definitions/VirtualNetworkConfig",
+          "description": "Optional configuration of the virtual network to use to deploy the build virtual machine in. Omit if no specific virtual network needs to be used."
         }
       }
     },
@@ -855,7 +968,6 @@
           "enum": [
             "BadSourceType",
             "BadPIRSource",
-            "BadISOSource",
             "BadManagedImageSource",
             "BadSharedImageVersionSource",
             "BadCustomizerType",
@@ -895,9 +1007,11 @@
           "type": "string",
           "enum": [
             "Running",
+            "Canceling",
             "Succeeded",
             "PartiallySucceeded",
-            "Failed"
+            "Failed",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "RunState",
@@ -1196,6 +1310,10 @@
         "properties": {
           "title": "Properties of the operation.",
           "type": "object"
+        },
+        "isDataAction": {
+          "title": "The flag that indicates whether the operation applies to data plane.",
+          "type": "boolean"
         }
       }
     },

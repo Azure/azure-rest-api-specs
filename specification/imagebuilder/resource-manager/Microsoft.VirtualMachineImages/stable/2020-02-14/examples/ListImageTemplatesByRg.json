@@ -15,9 +15,8 @@
             "type": "Microsoft.VirtualMachineImages/imageTemplate",
             "properties": {
               "source": {
-                "type": "ISO",
-                "sourceUri": "http://redhat.com/path/to/installation.iso",
-                "sha256Checksum": "120acbca7b3d55465eb9f8ef53ad7365f2997d42d4f83d7cc285bf5c71e1131f"
+                "type": "ManagedImage",
+                "imageId": "/subscriptions/{subscription-id}/resourceGroups/source_rg/providers/Microsoft.Compute/images/source_image"
               },
               "customize": [
                 {
@@ -38,7 +37,8 @@
                 }
               ],
               "vmProfile": {
-                "vmSize": "Standard_D2s_v3"
+                "vmSize": "Standard_D2s_v3",
+                "osDiskSizeGB": 64
               }
             }
           },
@@ -53,7 +53,12 @@
                 "publisher": "Canonical",
                 "offer": "UbuntuServer",
                 "sku": "18.04-LTS",
-                "version": "18.04.201902121"
+                "version": "18.04.201902121",
+                "planInfo": {
+                  "planName": "example_plan_name",
+                  "planProduct": "example_plan_product",
+                  "planPublisher": "example_plan_publisher"
+                }
               },
               "customize": [
                 {
@@ -72,15 +77,15 @@
                 {
                   "type": "SharedImage",
                   "galleryImageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/gallery/baseimages/images/baseimage",
-                  "replicationRegions": [
-                    "eastus",
-                    "westus"
-                  ],
-                  "runOutputName": "gallery"
+                  "replicationRegions":[ "eastus", "westus"],
+                  "runOutputName": "gallery",
+                  "excludeFromLatest": true,
+                  "storageAccountType": "Standard_LRS"
                 }
               ],
               "vmProfile": {
-                "vmSize": "Standard_D8s_v3"
+                "vmSize": "Standard_D8s_v3",
+                "osDiskSizeGB": 64
               }
             }
           }
