@@ -7497,6 +7497,10 @@
           "description": "The recovery availability set Id.",
           "type": "string"
         },
+		"recoveryProximityPlacementGroupId": {
+		  "description": "The recovery proximity placement group Id.",
+		  "type":"string"
+		},
         "vmDisks": {
           "description": "The list of vm disk details.",
           "type": "array",
@@ -8175,7 +8179,15 @@
         "tfoAzureVMName": {
           "description": "The test failover VM name.",
           "type": "string"
-        }
+        },
+		"recoveryAzureGeneration": {
+		  "description": "The recovery azure generation.",
+		  "type": "string"
+		},
+		"recoveryProximityPlacementGroupId": {
+		  "description": "The recovery proximity placement group Id.",
+		  "type":"string"
+		}
       },
       "x-ms-discriminator-value": "A2A"
     },
@@ -8257,6 +8269,10 @@
           "description": "The recovery availability set.",
           "type": "string"
         },
+		"recoveryProximityPlacementGroupId": {
+		  "description": "The recovery proximity placement group Id.",
+		  "type":"string"
+		}
         "policyId": {
           "description": "The Policy Id.",
           "type": "string"
@@ -8343,6 +8359,10 @@
           "$ref": "#/definitions/DiskEncryptionInfo",
           "description": "The recovery os disk encryption information."
         },
+		"recoveryProximityPlacementGroupId": {
+		  "description": "The recovery proximity placement group Id.",
+		  "type":"string"
+		},
         "tfoAzureVMName": {
           "description": "The user given name for test failover VM.",
           "type": "string"
