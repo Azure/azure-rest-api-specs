@@ -1,9 +1,16 @@
 {
   "parameters": {
     "subscriptionId": "subid",
-    "environmentName": "env1",
     "resourceGroupName": "rg1",
-    "api-version": "2018-08-15-preview"
+    "environmentName": "env1",
+    "longTermEnvironmentUpdateParameters": {
+      "properties": {
+        "warmStoreConfiguration": {
+          "dataRetention": "P14D"
+        }
+      }
+    },
+    "api-version": "2020-05-15"
   },
   "responses": {
     "200": {
@@ -25,7 +32,7 @@
             }
           ],
           "warmStoreConfiguration": {
-            "dataRetention": "P31D"
+            "dataRetention": "P14D"
           },
           "creationTime": "Fri, 15 May 2020 22:55:58 GMT",
           "provisioningState": "Succeeded"

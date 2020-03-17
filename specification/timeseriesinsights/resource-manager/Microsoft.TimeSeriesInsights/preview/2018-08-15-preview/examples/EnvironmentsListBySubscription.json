@@ -12,15 +12,26 @@
             "location": "West US",
             "name": "env1",
             "type": "Microsoft.TimeSeriesInsights/Environments",
-            "kind": "Standard",
+            "kind": "LongTerm",
             "tags": {},
             "properties": {
-              "dataRetentionTime": "P31D",
-              "provisioningState": "Succeeded",
-              "creationTime": "2017-04-18T19:20:33.2288820Z"
+              "storageConfiguration": {
+                "accountName": "<storageAccountName>"
+              },
+              "timeSeriesIdProperties": [
+                {
+                  "name": "DeviceId1",
+                  "type": "string"
+                }
+              ],
+              "warmStoreConfiguration": {
+                "dataRetention": "P31D"
+              },
+              "creationTime": "Fri, 15 May 2020 22:55:58 GMT",
+              "provisioningState": "Succeeded"
             },
             "sku": {
-              "name": "S1",
+              "name": "L1",
               "capacity": 1
             }
           }

@@ -181,7 +181,7 @@
         "operationId": "Environments_Update",
         "x-ms-examples": {
           "EnvironmentsUpdate": {
-            "$ref": "./examples/EnvironmentsPatchSkuCapacity.json"
+            "$ref": "./examples/EnvironmentsPatchWarmStoreDataRetention.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -197,11 +197,11 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "standardEnvironmentUpdateParameters",
+            "name": "longTermEnvironmentUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StandardEnvironmentUpdateParameters"
+              "$ref": "#/definitions/LongTermEnvironmentUpdateParameters"
             },
             "description": "Request object that contains the updated information for the environment."
           },

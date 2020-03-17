@@ -3,13 +3,14 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "environmentName": "env1",
-    "standardEnvironmentUpdateParameters": {
-      "sku": {
-        "name": "S1",
-        "capacity": 10
+    "longTermEnvironmentUpdateParameters": {
+      "properties": {
+        "warmStoreConfiguration": {
+          "dataRetention": "P14D"
+        }
       }
     },
-    "api-version": "2020-05-15"
+    "api-version": "2018-08-15-preview"
   },
   "responses": {
     "200": {
@@ -31,7 +32,7 @@
             }
           ],
           "warmStoreConfiguration": {
-            "dataRetention": "P31D"
+            "dataRetention": "P14D"
           },
           "creationTime": "Fri, 15 May 2020 22:55:58 GMT",
           "provisioningState": "Succeeded"

@@ -4,7 +4,7 @@
     "environmentName": "env1",
     "resourceGroupName": "rg1",
     "api-version": "2018-08-15-preview5",
-    "$expand": "status"
+    "expand": "status"
   },
   "responses": {
     "200": {
@@ -13,29 +13,26 @@
         "location": "West US",
         "name": "env1",
         "type": "Microsoft.TimeSeriesInsights/Environments",
-        "kind": "Standard",
+        "kind": "LongTerm",
         "tags": {},
         "properties": {
-          "dataRetentionTime": "P31D",
-          "provisioningState": "Succeeded",
-          "creationTime": "2017-04-18T19:20:33.2288820Z",
-          "storageLimitExceededBehavior": "PurgeOldData",
-          "partitionKeyProperties": [
+          "storageConfiguration": {
+            "accountName": "<storageAccountName>"
+          },
+          "timeSeriesIdProperties": [
             {
               "name": "DeviceId1",
-              "type": "String"
+              "type": "string"
             }
           ],
-          "dataAccessId": "<dataAccessId>",
-          "dataAccessFqdn": "<dataAccessIdFqdn>",
-          "status": {
-            "ingress": {
-              "state": "Running"
-            }
-          }
+          "warmStoreConfiguration": {
+            "dataRetention": "P31D"
+          },
+          "creationTime": "Fri, 15 May 2020 22:55:58 GMT",
+          "provisioningState": "Succeeded"
         },
         "sku": {
-          "name": "S1",
+          "name": "L1",
           "capacity": 1
         }
       }

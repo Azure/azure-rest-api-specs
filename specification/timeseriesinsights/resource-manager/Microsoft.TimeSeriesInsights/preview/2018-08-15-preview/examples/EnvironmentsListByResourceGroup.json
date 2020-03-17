@@ -7,25 +7,32 @@
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1",
-            "location": "West US",
-            "name": "env1",
-            "type": "Microsoft.TimeSeriesInsights/Environments",
-            "kind": "Standard",
-            "tags": {},
-            "properties": {
-              "dataRetentionTime": "P31D",
-              "provisioningState": "Succeeded",
-              "creationTime": "2017-04-18T19:20:33.2288820Z"
-            },
-            "sku": {
-              "name": "S1",
-              "capacity": 1
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.TimeSeriesInsights/Environments/env1",
+        "location": "West US",
+        "name": "env1",
+        "type": "Microsoft.TimeSeriesInsights/Environments",
+        "kind": "LongTerm",
+        "tags": {},
+        "properties": {
+          "storageConfiguration": {
+            "accountName": "<storageAccountName>"
+          },
+          "timeSeriesIdProperties": [
+            {
+              "name": "DeviceId1",
+              "type": "string"
             }
-          }
-        ]
+          ],
+          "warmStoreConfiguration": {
+            "dataRetention": "P31D"
+          },
+          "creationTime": "Fri, 15 May 2020 22:55:58 GMT",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "L1",
+          "capacity": 1
+        }
       }
     }
   }
