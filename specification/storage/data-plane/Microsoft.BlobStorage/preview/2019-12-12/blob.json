@@ -4807,9 +4807,6 @@
           "enum": [
             "metadata"
           ]
-        },
-        {
-          "$ref": "#/parameters/VersionId"
         }
       ]
     },
@@ -10513,7 +10510,8 @@
           "deleted",
           "metadata",
           "snapshots",
-          "uncommittedblobs"
+          "uncommittedblobs",
+          "versions"
         ],
         "x-ms-enum": {
           "name": "ListBlobsIncludeItem",
@@ -10795,7 +10793,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to delete. It for service version 2019_10_10 and newer."
+      "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer."
     },
     "SourceContentMD5": {
       "name": "x-ms-source-content-md5",
