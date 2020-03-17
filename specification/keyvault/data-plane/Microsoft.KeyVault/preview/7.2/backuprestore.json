@@ -18,7 +18,7 @@
           "FullBackup"
         ],
         "operationId": "FullBackup",
-        "description": "Creates full backup using user provided SAS token to Azure Blob Storage container",
+        "description": "Creates a full backup using a user-provided SAS token to an Azure blob storage container.",
         "parameters": [
           {
             "in": "body",
@@ -26,7 +26,7 @@
             "schema": {
               "$ref": "#/definitions/SASTokenParameter"
             },
-            "description": "Azure Blob shared access signature token pointing to a valid Azure Blob container where the full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call"
+            "description": "Azure blob shared access signature token pointing to a valid Azure blob container where full backup needs to be stored. This token needs to be valid for at least next 24 hours from the time of making this call"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -69,14 +69,14 @@
           "FullBackup"
         ],
         "operationId": "FullBackupStatus",
-        "description": "Returns the full backup operation status",
+        "description": "Returns the status of full backup operation",
         "parameters": [
           {
             "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Job Id returned part of the creation of backup"
+            "description": "The id returned as part of the backup request"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -109,7 +109,7 @@
           "FullRestore"
         ],
         "operationId": "FullRestoreOperation",
-        "description": "Restores all key materials using the SAS token to the previously stored Azure Storage backup folder",
+        "description": "Restores all key materials using the SAS token pointing to a previously stored Azure Blob storage backup folder",
         "parameters": [
           {
             "name": "restoreBlobDetails",
@@ -117,7 +117,7 @@
             "schema": {
               "$ref": "#/definitions/RestoreOperationParameters"
             },
-            "description": "Azure blob SAS token to the folder where the previous successful full backup was stored"
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -125,7 +125,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Started full backup restore",
+            "description": "Started restore operation from the previously stored backup",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -160,14 +160,14 @@
           "FullRestore"
         ],
         "operationId": "FullRestoreStatus",
-        "description": "Returns the full restore operation status from a user provided valid backup",
+        "description": "Returns the status of full restore operation",
         "parameters": [
           {
             "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Job Id returned part of the full restore operation"
+            "description": "The Job Id returned part of the full restore operation"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -203,7 +203,7 @@
         },
         "folderToRestore": {
           "type": "string",
-          "description": "Folder name of the blob where the previous successful full backup is stored"
+          "description": "The Folder name of the blob where the previous successful full backup was stored"
         }
       },
       "required": [
@@ -219,7 +219,7 @@
         },
         "token": {
           "type": "string",
-          "description": "Azure Blob storage SAS token pointing to the azure blob storage container"
+          "description": "The SAS token pointing to an Azure Blob storage container"
         }
       },
       "required": [
@@ -257,7 +257,7 @@
         },
         "azureStorageBlobContainerUri": {
           "type": "string",
-          "description": "The Azure Blob storage folder Uri which contains the full backup"
+          "description": "The Azure blob storage container Uri which contains the full backup"
         }
       },
       "description": "Full backup operation"
