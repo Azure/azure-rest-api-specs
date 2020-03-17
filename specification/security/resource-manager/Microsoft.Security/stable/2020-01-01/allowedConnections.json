@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2020-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/allowedConnections": {
+      "get": {
+        "x-ms-examples": {
+          "Get allowed connections on a subscription": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AllowedConnections"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription",
+        "operationId": "AllowedConnections_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/allowedConnections": {
+      "get": {
+        "x-ms-examples": {
+          "Get allowed connections on a subscription from security data location": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnectionsSubscriptionLocation_example.json"
+          }
+        },
+        "tags": [
+          "AllowedConnections"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location.",
+        "operationId": "AllowedConnections_ListByHomeRegion",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/allowedConnections/{connectionType}": {
+      "get": {
+        "x-ms-examples": {
+          "Get allowed connections": {
+            "$ref": "./examples/AllowedConnections/GetAllowedConnections_example.json"
+          }
+        },
+        "tags": [
+          "AllowedConnections"
+        ],
+        "description": "Gets the list of all possible traffic between resources for the subscription and location, based on connection type.",
+        "operationId": "AllowedConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/ConnectionType"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AllowedConnectionsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllowedConnectionsList": {
+      "type": "object",
+      "description": "List of all possible traffic between Azure resources",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AllowedConnectionsResource"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AllowedConnectionsResource": {
+      "type": "object",
+      "description": "The resource whose properties describes the allowed traffic between Azure resources",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "$ref": "#/definitions/AllowedConnectionsResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "AllowedConnectionsResourceProperties": {
+      "type": "object",
+      "description": "Describes the allowed traffic between Azure resources",
+      "properties": {
+        "calculatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The UTC time on which the allowed connections resource was calculated"
+        },
+        "connectableResources": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of connectable resources",
+          "items": {
+            "$ref": "#/definitions/ConnectableResource"
+          }
+        }
+      }
+    },
+    "ConnectableResource": {
+      "type": "object",
+      "description": "Describes the allowed inbound and outbound traffic of an Azure resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure resource id"
+        },
+        "inboundConnectedResources": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The list of Azure resources that the resource has inbound allowed connection from",
+          "items": {
+            "$ref": "#/definitions/ConnectedResource"
+          }
+        },
+        "outboundConnectedResources": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The list of Azure resources that the resource has outbound allowed connection to",
+          "items": {
+            "$ref": "#/definitions/ConnectedResource"
+          }
+        }
+      }
+    },
+    "ConnectedResource": {
+      "type": "object",
+      "description": "Describes properties of a connected resource",
+      "properties": {
+        "connectedResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure resource id of the connected resource"
+        },
+        "tcpPorts": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The allowed tcp ports"
+        },
+        "udpPorts": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The allowed udp ports"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConnectionType": {
+      "name": "connectionType",
+      "type": "string",
+      "in": "path",
+      "description": "The type of allowed connections (Internal, External)",
+      "required": true,
+      "enum": [
+        "Internal",
+        "External"
+      ],
+      "x-ms-enum": {
+        "name": "connectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Internal"
+          },
+          {
+            "value": "External"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
