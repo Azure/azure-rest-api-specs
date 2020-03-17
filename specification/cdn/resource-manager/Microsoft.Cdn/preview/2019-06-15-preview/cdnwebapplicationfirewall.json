@@ -463,13 +463,10 @@
         "defaultCustomBlockResponseStatusCode": {
           "description": "If the action type is block, this field defines the default customer overridable http response status code.",
           "type": "integer",
-          "enum": [
-            200,
-            403,
-            405,
-            406,
-            429
-          ]
+          "maximum": 599,
+          "exclusiveMaximum": false,
+          "minimum": 200,
+          "exclusiveMinimum": false
         },
         "defaultCustomBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
@@ -603,6 +600,7 @@
           "enum": [
             "RemoteAddr",
             "SocketAddr",
+            "Country",
             "RequestMethod",
             "RequestHeader",
             "RequestUri",
@@ -617,7 +615,7 @@
           }
         },
         "selector": {
-          "description": "Selector can used to match a specific key for QueryString, Cookies, RequestHeader or PostArgs.",
+          "description": "Selector can used to match a specific key for QueryString, RequestUri, RequestHeaders or RequestBody.",
           "type": "string"
         },
         "operator": {
