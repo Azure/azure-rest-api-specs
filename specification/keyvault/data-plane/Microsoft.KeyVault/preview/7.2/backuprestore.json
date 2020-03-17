@@ -35,6 +35,16 @@
         "responses": {
           "202": {
             "description": "Started full backup",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/FullBackupOperation"
             }
@@ -116,6 +126,16 @@
         "responses": {
           "202": {
             "description": "Started full backup restore",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/FullRestoreOperation"
             }
