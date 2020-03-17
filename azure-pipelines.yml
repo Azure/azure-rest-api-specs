@@ -1,8 +1,12 @@
 name: "Azure OpenAPI"
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - master
 
 pr:
+  autoCancel: false
   branches:
     include:
       - "*"
@@ -24,5 +28,6 @@ jobs:
 - template: .azure-pipelines/ModelValidation.yml
 - template: .azure-pipelines/BreakingChange.yml
 - template: .azure-pipelines/LintDiff.yml
-- template: .azure-pipelines/SwaggerToSDK.yml
 - template: .azure-pipelines/NetworkValidation.yml
+- template: .azure-pipelines/Spellcheck.yml
+- template: .azure-pipelines/PrettierCheck.yml

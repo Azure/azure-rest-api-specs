@@ -1,6 +1,6 @@
 jobs:
 - job: "SDK"
-  timeoutInMinutes: 120
+  timeoutInMinutes: 180
   strategy:
     matrix:
       java:
@@ -9,11 +9,11 @@ jobs:
       javascript:
         AZURE_SDK_REPO: azure-sdk-for-js
         AZURE_SDK_PARAMS: ''
-      node:
-        AZURE_SDK_REPO: azure-sdk-for-node
-        AZURE_SDK_PARAMS: ''
       python:
         AZURE_SDK_REPO: azure-sdk-for-python
+        AZURE_SDK_PARAMS: ''
+      cliextension:
+        AZURE_SDK_REPO: azure-cli-extensions
         AZURE_SDK_PARAMS: ''
       go:
         AZURE_SDK_REPO: azure-sdk-for-go
