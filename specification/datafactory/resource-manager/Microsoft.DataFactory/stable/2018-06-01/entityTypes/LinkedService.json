@@ -5692,6 +5692,46 @@
       "required": [
         "functionAppUrl"
       ]
+    },
+    "SnowflakeLinkedService": {
+      "x-ms-discriminator-value": "Snowflake",
+      "description": "Snowflake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeLinkedServiceTypeProperties": {
+      "description": "Snowflake linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of snowflake. Type: string, SecureString.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
     }
   }
 }
