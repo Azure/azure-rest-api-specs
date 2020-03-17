@@ -17,9 +17,22 @@
         "trace": {
           "enabled": true,
           "appInsightInstrumentationKey": "00000000-0000-0000-0000-000000000000"
+        },
+        "encryption": {
+          "keySource": "Microsoft.KeyVault",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://kek-keyvault.vault.azure.net",
+            "keyName": "kek",
+            "keyVersion": "00000000000000000000000000000000"
+          }
         }
       },
       "type": "Microsoft.AppPlatform/Spring",
+      "identity": {
+        "type": "SystemAssigned",
+        "principalId": null,
+        "tenantId": null
+      },
       "sku": null,
       "location": "eastus",
       "tags": {
@@ -56,6 +69,11 @@
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
         "type": "Microsoft.AppPlatform/Spring",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
         "sku": null,
         "location": "eastus",
         "tags": {
@@ -89,6 +107,11 @@
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
         "type": "Microsoft.AppPlatform/Spring",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
         "sku": null,
         "location": "eastus",
         "tags": {
