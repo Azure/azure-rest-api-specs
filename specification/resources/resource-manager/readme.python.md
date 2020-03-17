@@ -7,7 +7,6 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource
 payload-flattening-threshold: 2
-clear-output-folder: true
 no-namespace-folders: true
 verbose: true
 debug: true
@@ -18,6 +17,7 @@ debug: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(multiapi)
+clear-output-folder: true
 batch:
   - tag: package-features-2015-12
   - tag: package-links-2016-09
@@ -49,7 +49,6 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-deploymentscripts-2019-10-preview
-  - multiapiscript: true
 ```
 
 ### Multi-api script
