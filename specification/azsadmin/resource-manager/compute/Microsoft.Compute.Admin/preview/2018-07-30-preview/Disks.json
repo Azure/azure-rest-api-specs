@@ -45,6 +45,12 @@
             "$ref": "Disks.json#/parameters/SourceSharePathParameter"
           },
           {
+            "$ref": "DiskMigrationJobs.json#/parameters/SourceScaleUnitParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/SourceVolumeLabelParameter"
+          },
+          {
             "$ref": "Disks.json#/parameters/DiskCountParameter"
           },
           {
@@ -269,6 +275,22 @@
     "SourceSharePathParameter": {
       "description": "The source share which the resource belongs to.",
       "name": "sharePath",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceScaleUnitParameter": {
+      "description": "The source scale unit which the resource belongs to.",
+      "name": "scaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceVolumeLabelParameter": {
+      "description": "The source volume label which the resource belongs to.",
+      "name": "volumeLabel",
       "in": "query",
       "required": false,
       "type": "string",
