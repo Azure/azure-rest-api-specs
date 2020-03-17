@@ -1,12 +1,34 @@
 ---
 - rule:
-    path: "specification/**/Microsoft.Network/**"
+    paths: 
+      - "specification/network/**"
     reviewers:
       - lirenhe
       - zikalino
+      - MyronFanQiu
 
 - rule:
-    path: "specification/**/date-plane/**"
+    paths: 
+      - "specification/@(blockchain|insight)/**"
+    reviewers:
+      - MyronFanQiu
+
+- rule:
+    paths: "specification/compute/**"
+    reviewers:
+      - ArcturusZhang
+
+- rule:
+    paths: 
+      - "specification/@(keyvault|notificationhubs|containerinstance)/**"
+      - "specification/@(containerservice|databricks|containerregistry|compute)/**"
+    reviewers:
+      - fengzhou-msft
+
+- rule:
+    # data-plane PR
+    paths: 
+      - "specification/**/date-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
@@ -14,19 +36,24 @@
       - tjprescott
 
 - rule:
-    path: "documentation/**"
+    paths: 
+      - "documentation/**"
     reviewers:
+      - josefree
       - akning-ms
 
 - rule:
-    path: "**/package.json"
+    paths: 
+      - "**/package.json"
     reviewers:
       - akning-ms
       - ruowan
       - NullMDR
 
 - rule:
-    path: "**"
+    # manager-plane PR
+    paths: 
+      - "**"
     reviewers:
       - MyronFanQiu
       - yungezz
