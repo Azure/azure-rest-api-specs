@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: Microsoft.AzureData
   package-name: azuredata
-  package-version: 2017-03-01-preview
+  package-version: 2019-07-24
   clear-output-folder: true
 ```
 
