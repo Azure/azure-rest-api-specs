@@ -314,6 +314,14 @@ input-file:
 - Microsoft.Insights/preview/2020-02-02-preview/components_API.json
 ```
 
+### Tag: package-2020-03-01-preview
+
+These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01-preview'
+input-file:
+- Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+
 ---
 
 # Code Generation
