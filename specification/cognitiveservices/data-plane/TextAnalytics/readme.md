@@ -263,6 +263,7 @@ input-file:
   - $(this-folder)/stable/v2.1/TextAnalytics.json
   - $(this-folder)/preview/v2.1/TextAnalytics.json
   - $(this-folder)/preview/v3.0-preview.1/TextAnalytics.json
+  - $(this-folder)/preview/v3.1-preview.1/TextAnalytics.json
 
 ```
 
