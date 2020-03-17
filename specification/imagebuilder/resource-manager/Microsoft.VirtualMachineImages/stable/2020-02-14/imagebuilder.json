@@ -6,20 +6,12 @@
     "version": "2020-02-14"
   },
   "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -36,9 +28,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
       "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_List",
         "description": "Gets information about the VM image templates associated with the subscription.",
         "parameters": [
@@ -75,9 +65,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates": {
       "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_ListByResourceGroup",
         "description": "Gets information about the VM image templates associated with the specified resource group.",
         "parameters": [
@@ -117,9 +105,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}": {
       "put": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_CreateOrUpdate",
         "description": "Create or update a virtual machine image template",
         "parameters": [
@@ -182,9 +168,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_Update",
         "description": "Update the tags for this Virtual Machine Image Template",
         "parameters": [
@@ -241,9 +225,7 @@
         }
       },
       "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_Get",
         "description": "Get information about a virtual machine image template",
         "parameters": [
@@ -281,9 +263,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_Delete",
         "description": "Delete a virtual machine image template",
         "parameters": [
@@ -330,9 +310,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/run": {
       "post": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_Run",
         "description": "Create artifacts from a existing image template",
         "parameters": [
@@ -376,9 +354,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/cancel": {
       "post": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_Cancel",
         "description": "Cancel the long running image build based on the image template",
         "parameters": [
@@ -422,9 +398,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs": {
       "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_ListRunOutputs",
         "description": "List all run outputs for the specified Image Template resource",
         "parameters": [
@@ -467,9 +441,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VirtualMachineImages/imageTemplates/{imageTemplateName}/runOutputs/{runOutputName}": {
       "get": {
-        "tags": [
-          "VirtualMachineImageTemplate"
-        ],
+        "tags": ["VirtualMachineImageTemplate"],
         "operationId": "VirtualMachineImageTemplates_GetRunOutput",
         "description": "Get the specified run output for the specified image template resource",
         "parameters": [
@@ -512,9 +484,7 @@
     },
     "/providers/Microsoft.VirtualMachineImages/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "operationId": "Operations_List",
         "description": "Lists available operations for the Microsoft.VirtualMachineImages provider",
         "parameters": [
@@ -568,9 +538,7 @@
           "description": "Specifies the type of source image you want to start with."
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "ImageTemplatePlatformImageSource": {
       "description": "Describes an image source from [Azure Gallery Images](https://docs.microsoft.com/en-us/rest/api/compute/virtualmachineimages).",
@@ -617,9 +585,7 @@
           "description": "ARM resource id of the managed image in customer subscription"
         }
       },
-      "required": [
-        "imageId"
-      ]
+      "required": ["imageId"]
     },
     "ImageTemplateSharedImageVersionSource": {
       "description": "Describes an image source that is an image version in a shared image gallery.",
@@ -635,9 +601,7 @@
           "description": "ARM resource id of the image version in the shared image gallery"
         }
       },
-      "required": [
-        "imageVersionId"
-      ]
+      "required": ["imageVersionId"]
     },
     "ImageTemplateCustomizer": {
       "description": "Describes a unit of image customization",
@@ -652,9 +616,7 @@
           "description": "Friendly Name to provide context on what this customization step does"
         }
       },
-      "required": [
-        "type"
-      ]
+      "required": ["type"]
     },
     "ImageTemplateShellCustomizer": {
       "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'scriptUri' or 'inline' can be specified.",
@@ -814,10 +776,7 @@
           "description": "Tags that will be applied to the artifact once it has been created/updated by the distributor."
         }
       },
-      "required": [
-        "type",
-        "runOutputName"
-      ]
+      "required": ["type", "runOutputName"]
     },
     "ImageTemplateManagedImageDistributor": {
       "x-ms-discriminator-value": "ManagedImage",
@@ -838,10 +797,7 @@
           "description": "Azure location for the image, should match if image already exists"
         }
       },
-      "required": [
-        "imageId",
-        "location"
-      ]
+      "required": ["imageId", "location"]
     },
     "ImageTemplateSharedImageDistributor": {
       "x-ms-discriminator-value": "SharedImage",
@@ -870,10 +826,7 @@
         },
         "storageAccountType": {
           "type": "string",
-          "enum": [
-            "Standard_LRS",
-            "Standard_ZRS"
-          ],
+          "enum": ["Standard_LRS", "Standard_ZRS"],
           "x-ms-enum": {
             "name": "SharedImageStorageAccountType",
             "modelAsString": false
@@ -881,10 +834,7 @@
           "description": "Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS)."
         }
       },
-      "required": [
-        "galleryImageId",
-        "replicationRegions"
-      ]
+      "required": ["galleryImageId", "replicationRegions"]
     },
     "ImageTemplateVhdDistributor": {
       "x-ms-discriminator-value": "VHD",
@@ -912,11 +862,7 @@
           "description": "Publisher of the purchase plan."
         }
       },
-      "required": [
-        "planName",
-        "planProduct",
-        "planPublisher"
-      ]
+      "required": ["planName", "planProduct", "planPublisher"]
     },
     "VirtualNetworkConfig": {
       "description": "Virtual Network configuration.",
@@ -947,13 +893,7 @@
     },
     "ProvisioningState": {
       "type": "string",
-      "enum": [
-        "Creating",
-        "Updating",
-        "Succeeded",
-        "Failed",
-        "Deleting"
-      ],
+      "enum": ["Creating", "Updating", "Succeeded", "Failed", "Deleting"],
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": false
@@ -1021,12 +961,7 @@
         },
         "runSubState": {
           "type": "string",
-          "enum": [
-            "Queued",
-            "Building",
-            "Customizing",
-            "Distributing"
-          ],
+          "enum": ["Queued", "Building", "Customizing", "Distributing"],
           "x-ms-enum": {
             "name": "RunSubState",
             "modelAsString": false
@@ -1086,20 +1021,14 @@
           "description": "Describes how virtual machine is set up to build images"
         }
       },
-      "required": [
-        "source",
-        "distribute"
-      ]
+      "required": ["source", "distribute"]
     },
     "ImageTemplateIdentity": {
       "properties": {
         "type": {
           "type": "string",
           "description": "The type of identity used for the image template. The type 'None' will remove any identities from the image template.",
-          "enum": [
-            "UserAssigned",
-            "None"
-          ],
+          "enum": ["UserAssigned", "None"],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
@@ -1232,10 +1161,7 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "x-ms-mutability": ["create", "read"]
         },
         "tags": {
           "type": "object",
@@ -1245,9 +1171,7 @@
           "description": "Resource tags"
         }
       },
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "x-ms-azure-resource": true
     },
     "SubResource": {
@@ -1268,9 +1192,7 @@
           "description": "Resource type"
         }
       },
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "Operation": {
       "title": "A REST API operation",
