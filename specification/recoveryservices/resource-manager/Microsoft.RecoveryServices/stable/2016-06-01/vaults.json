@@ -1045,23 +1045,33 @@
       }
     },
     "IdentityData": {
-      "description": "Managed Identity Data, as received from ARM headers.",
       "required": [
         "type"
       ],
       "type": "object",
+      "description": "Identity for the resource.",
       "properties": {
-        "tenantId": {
-          "description": "The tenant Id header.",
-          "type": "string"
-        },
         "principalId": {
-          "description": "The principal Id header.",
-          "type": "string"
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
         },
         "type": {
-          "description": "The Identity type, can be SystemAssigned/UserAssigned/None.",
-          "type": "string"
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": true
+          }
         }
       }
     },
