@@ -1053,6 +1053,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "resourceMetadata": {
+          "$ref": "#/definitions/ResourceMetadata",
+          "description": "Metadata of resource that was assessed"
         }
       }
     },
@@ -1087,6 +1091,20 @@
         },
         "solution": {
           "description": "The remediation action suggested by the recommendation.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceMetadata": {
+      "description": "Recommendation resource metadata",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Azure resource Id of the assessed resource",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source from which recommendation is generated",
           "type": "string"
         }
       }
