@@ -359,7 +359,7 @@
         },
         "securityProviderName": {
           "description": "The security provider name",
-          "$ref": "#/definitions/securityPartnerProvidersecurityProviderName"
+          "$ref": "#/definitions/SecurityPartnerProvidersecurityProviderName"
         },
         "connectionStatus": {
           "readOnly": true,
@@ -393,7 +393,23 @@
       ],
       "description": "Security Partner Provider resource."
     },
-    "securityPartnerProvidersecurityProviderName": {
+    "SecurityPartnerProviderListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityPartnerProvider"
+          },
+          "description": "List of Security Partner Providers in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListSecurityPartnerProviders API service call."
+    },
+    "SecurityPartnerProvidersecurityProviderName": {
       "type": "string",
       "description": "The Security Providers.",
       "enum": [
