@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myTokens-rg",
+    "tokenServiceName": "myTokens",
+    "groupName": "myGroup",
+    "api-version": "2019-07-01-preview",
+    "GroupResourceParameter": {
+      "location": "West US",
+      "properties":
+      {
+        "description": "My token service"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Create the group successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myTokens-rg/providers/Microsoft.BlockchainTokens/tokenServices/myTokens/groups/myGroup",
+        "name": "myGroup",
+        "type": "Microsoft.Blockchains/tokenServices/groups",
+        "location": "West US",
+        "properties": {
+          "description": "My group"
+        }
+      }
+    }
+  }
+}
