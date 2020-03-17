@@ -804,7 +804,7 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Start date",
+            "description": "Start date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -812,14 +812,14 @@
           {
             "name": "endDate",
             "in": "query",
-            "description": "End date",
+            "description": "End date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
             "in": "query",
             "required": false,
             "type": "string"
@@ -973,7 +973,7 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "Start date",
+            "description": "Start date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
@@ -981,14 +981,14 @@
           {
             "name": "endDate",
             "in": "query",
-            "description": "End date",
+            "description": "End date. Only applicable when querying with billing profile",
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
           },
           {
             "name": "$filter",
-            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'. Not applicable when querying with billing profile",
             "in": "query",
             "required": false,
             "type": "string"
@@ -1042,11 +1042,7 @@
         },
         "parameters": [
           {
-            "name": "$filter",
-            "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/filterParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1092,7 +1088,7 @@
         "parameters": [
           {
             "name": "$filter",
-            "description": "Filter reservation transactions by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "description": "Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge' ",
             "in": "query",
             "required": false,
             "type": "string"
@@ -4648,6 +4644,14 @@
           }
         ]
       }
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "May be used to filter reservationRecommendations by: properties/scope with allowed values ['Single', 'Shared'] and default value 'Single'; properties/resourceType with allowed values ['VirtualMachines', 'SQLDatabases', 'PostgreSQL', 'ManagedDisk', 'MySQL', 'RedHat', 'MariaDB', 'RedisCache', 'CosmosDB', 'SqlDataWarehouse', 'SUSELinux', 'AppService', 'BlockBlob', 'AzureDataExplorer', 'VMwareCloudSimple'] and default value 'VirtualMachines'; and properties/lookBackPeriod with allowed values ['Last7Days', 'Last30Days', 'Last60Days'] and default value 'Last7Days'.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }

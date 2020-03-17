@@ -242,7 +242,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the validation errors in case the VM is unsuitable for protection.": {
             "$ref": "./examples/ReplicationEligibilityResults_List.json"
@@ -287,7 +286,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the validation errors in case the VM is unsuitable for protection.": {
             "$ref": "./examples/ReplicationEligibilityResults_Get.json"
@@ -11717,6 +11715,11 @@
           "description": "The process server Id.",
           "type": "string"
         },
+        "processServerName": {
+          "description": "The process server name.",
+          "type": "string",
+          "readOnly": true
+        },
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
           "type": "string"
@@ -13844,6 +13847,60 @@
         "agentVersionDetails": {
           "$ref": "#/definitions/VersionDetails",
           "description": "The agent version details."
+        },
+        "health": {
+          "description": "The health of Process Server.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
+        },
+        "psStatsRefreshTime": {
+          "format": "date-time",
+          "description": "The process server stats refresh time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "throughputUploadPendingDataInBytes": {
+          "format": "int64",
+          "description": "The uploading pending data in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputInMBps": {
+          "format": "int64",
+          "description": "The throughput in MBps.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputInBytes": {
+          "format": "int64",
+          "description": "The throughput in bytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "throughputStatus": {
+          "description": "The throughput status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marsCommunicationStatus": {
+          "description": "The MARS communication status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marsRegistrationStatus": {
+          "description": "The MARS registration status.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -16153,6 +16210,12 @@
           "description": "The maximum cpu cores count supported by target compute size.",
           "type": "integer"
         },
+        "vCPUsAvailable": {
+          "format": "int32",
+          "description": "The Available vCPUs supported by target compute size.",
+          "type": "integer",
+          "readOnly": true
+        },
         "memoryInGB": {
           "format": "double",
           "description": "The maximum memory in GB supported by target compute size.",
@@ -16178,6 +16241,14 @@
         "highIopsSupported": {
           "description": "The value indicating whether the target compute size supports high Iops.",
           "type": "string"
+        },
+        "hyperVGenerations": {
+          "description": "The supported HyperV Generations.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
@@ -17129,6 +17200,32 @@
           "items": {
             "$ref": "#/definitions/IPConfig"
           }
+        },
+        "recoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "recoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "reuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
+          "type": "boolean",
+          "default": false
+        },
+        "tfoRecoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoRecoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoReuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
+          "type": "boolean",
+          "default": false
         }
       }
     },
@@ -17190,6 +17287,32 @@
           "items": {
             "$ref": "#/definitions/IPConfig"
           }
+        },
+        "recoveryNicName": {
+          "description": "The name of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "recoveryNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs.",
+          "type": "string"
+        },
+        "reuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during failover subject to availability.",
+          "type": "boolean",
+          "default": false
+        },
+        "tfoNicName": {
+          "description": "The name of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoNicResourceGroupName": {
+          "description": "The resource group of the NIC to be used when creating target NICs in TFO.",
+          "type": "string"
+        },
+        "tfoReuseExistingNic": {
+          "description": "A value indicating whether an existing NIC is allowed to be reused during test failover subject to availability.",
+          "type": "boolean",
+          "default": false
         }
       }
     },
