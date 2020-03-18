@@ -8,55 +8,57 @@
   },
   "responses": {
     "200": {
-      "value": [
-        {
-          "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34",
-          "location": "westus2",
-          "name": "centos-template",
-          "properties": {
-            "amountOfRam": 4096,
-            "controllers": [
-              {
-                "id": "1000",
-                "name": "SCSI controller 0",
-                "subType": "LSI_PARALEL",
-                "type": "SCSI"
-              }
-            ],
-            "disks": [
-              {
-                "controllerId": "1000",
-                "independenceMode": "persistent",
-                "totalSize": 10485760,
-                "virtualDiskId": "2000",
-                "virtualDiskName": "Hard disk 1"
-              }
-            ],
-            "guestOS": "Other (32-bit)",
-            "guestOSType": "other",
-            "nics": [
-              {
-                "ipAddresses": null,
-                "macAddress": "00:50:56:a6:7e:93",
-                "network": {
-                  "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19"
-                },
-                "nicType": "E1000",
-                "powerOnBoot": true,
-                "virtualNicId": "4000",
-                "virtualNicName": "Network adapter 1"
-              }
-            ],
-            "numberOfCores": 2,
-            "path": "Datacenter/Workload VMs",
-            "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
-            "vSphereNetworks": null,
-            "vSphereTags": null,
-            "vmwaretools": "10309"
-          },
-          "type": "Microsoft.VMwareCloudSimple/virtualMachineTemplates"
-        }
-      ]
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34",
+            "location": "westus2",
+            "name": "centos-template",
+            "properties": {
+              "amountOfRam": 4096,
+              "controllers": [
+                {
+                  "id": "1000",
+                  "name": "SCSI controller 0",
+                  "subType": "LSI_PARALEL",
+                  "type": "SCSI"
+                }
+              ],
+              "disks": [
+                {
+                  "controllerId": "1000",
+                  "independenceMode": "persistent",
+                  "totalSize": 10485760,
+                  "virtualDiskId": "2000",
+                  "virtualDiskName": "Hard disk 1"
+                }
+              ],
+              "guestOS": "Other (32-bit)",
+              "guestOSType": "other",
+              "nics": [
+                {
+                  "ipAddresses": null,
+                  "macAddress": "00:50:56:a6:7e:93",
+                  "network": {
+                    "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19"
+                  },
+                  "nicType": "E1000",
+                  "powerOnBoot": true,
+                  "virtualNicId": "4000",
+                  "virtualNicName": "Network adapter 1"
+                }
+              ],
+              "numberOfCores": 2,
+              "path": "Datacenter/Workload VMs",
+              "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
+              "vSphereNetworks": null,
+              "vSphereTags": null,
+              "vmwaretools": "10309"
+            },
+            "type": "Microsoft.VMwareCloudSimple/virtualMachineTemplates"
+          }
+        ]
+      }
     }
   }
 }

@@ -63,6 +63,7 @@
     },
     "DatasetLocation": {
       "description": "Dataset location.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -151,6 +152,34 @@
           "$ref": "#/definitions/DatasetLocation"
         }
       ]
+    },
+    "AzureFileStorageLocation": {
+      "description": "The location of file server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "GoogleCloudStorageLocation": {
+      "description": "The location of Google Cloud Storage dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of Google Cloud Storage. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of Google Cloud Storage. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "FtpServerLocation": {
       "description": "The location of ftp server dataset.",
@@ -682,6 +711,84 @@
         "location"
       ]
     },
+    "JsonDataset": {
+      "x-ms-discriminator-value": "Json",
+      "description": "Json dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Json dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JsonDatasetTypeProperties"
+        }
+      }
+    },
+    "JsonDatasetTypeProperties": {
+      "description": "Json dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the json data storage."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "OrcDataset": {
+      "x-ms-discriminator-value": "Orc",
+      "description": "ORC dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ORC dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OrcDatasetTypeProperties"
+        }
+      }
+    },
+    "OrcDatasetTypeProperties": {
+      "description": "ORC dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the ORC data storage."
+        },
+        "orcCompressionCodec": {
+          "type": "string",
+          "enum": [
+            "none",
+            "zlib",
+            "snappy"
+          ],
+          "x-ms-enum": {
+            "name": "orcCompressionCodec",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "BinaryDataset": {
       "x-ms-discriminator-value": "Binary",
       "description": "Binary dataset.",
@@ -945,6 +1052,38 @@
           "type": "object"
         }
       }
+    },
+    "CosmosDbSqlApiCollectionDataset": {
+      "x-ms-discriminator-value": "CosmosDbSqlApiCollection",
+      "description": "Microsoft Azure CosmosDB (SQL API) Collection dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "CosmosDB (SQL API) Collection dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CosmosDbSqlApiCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CosmosDbSqlApiCollectionDatasetTypeProperties": {
+      "description": "CosmosDB (SQL API) Collection dataset properties.",
+      "properties": {
+        "collectionName": {
+          "type": "object",
+          "description": "CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collectionName"
+      ]
     },
     "DocumentDbCollectionDataset": {
       "x-ms-discriminator-value": "DocumentDbCollection",
@@ -1430,6 +1569,78 @@
         "tableName": {
           "type": "object",
           "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The name of Azure MySQL database table. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonRedshiftTableDataset": {
+      "x-ms-discriminator-value": "AmazonRedshiftTable",
+      "description": "The Amazon Redshift table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon Redshift table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRedshiftTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AmazonRedshiftTableDatasetTypeProperties": {
+      "description": "Amazon Redshift table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Amazon Redshift table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Amazon Redshift schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "Db2TableDataset": {
+      "x-ms-discriminator-value": "Db2Table",
+      "description": "The Db2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Db2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Db2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "Db2TableDatasetTypeProperties": {
+      "description": "Db2 table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Db2 schema name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Db2 table name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1559,7 +1770,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2668,7 +2887,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/NetezzaTableDatasetTypeProperties"
+        }
+      }
+    },
+    "NetezzaTableDatasetTypeProperties": {
+      "description": "Netezza dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Netezza. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Netezza. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2832,6 +3068,39 @@
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
+    "SnowflakeDataset": {
+      "x-ms-discriminator-value": "SnowflakeTable",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeDatasetTypeProperties": {
+      "description": "Snowflake dataset properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Snowflake database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
         }
       }
     }

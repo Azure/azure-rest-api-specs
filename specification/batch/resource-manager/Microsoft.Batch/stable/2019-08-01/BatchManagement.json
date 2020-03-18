@@ -481,7 +481,7 @@
             "$ref": "./examples/ApplicationPackageActivate.json"
           }
         },
-        "description": "Activates the specified application package.",
+        "description": "Activates the specified application package. This should be done after the `ApplicationPackage` was created and uploaded. This needs to be done before an `ApplicationPackage` can be used on Pools or Tasks",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -730,7 +730,7 @@
             "$ref": "./examples/ApplicationPackageCreate.json"
           }
         },
-        "description": "Creates an application package record.",
+        "description": "Creates an application package record. The record contains the SAS where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -2817,7 +2817,7 @@
         "vmSize": {
           "type": "string",
           "title": "The size of virtual machines in the pool. All VMs in a pool are the same size.",
-          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (http://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
+          "description": "For information about available sizes of virtual machines for Cloud Services pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall. For information about available VM sizes for pools using images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series)."
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
@@ -3786,7 +3786,7 @@
             "type": "string"
           },
           "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
-          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. This is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The network configuration for a pool."
@@ -4179,7 +4179,7 @@
       "properties": {
         "azureBlobFileSystemConfiguration": {
           "$ref": "#/definitions/AzureBlobFileSystemConfiguration",
-          "title": "The Azure Storage container to mount using blob FUSE on each node.",
+          "title": "The Azure Storage Container to mount using blob FUSE on each node.",
           "description": "This property is mutually exclusive with all other properties."
         },
         "nfsMountConfiguration": {
@@ -4195,25 +4195,24 @@
         "azureFileShareConfiguration": {
           "$ref": "#/definitions/AzureFileShareConfiguration",
           "title": "The Azure File Share to mount on each node.",
-          "description": "This is CIFS based for linux and net use for for windows, and this property is mutually exclusive with all other properties."
+          "description": "This property is mutually exclusive with all other properties."
         }
       },
-      "title": "The file system to mount on each node.",
-      "description": "Each property is mutually exclusive."
+      "title": "The file system to mount on each node."
     },
     "AzureBlobFileSystemConfiguration": {
       "properties": {
         "accountName": {
           "type": "string",
-          "title": "The Azure Storage account name."
+          "title": "The Azure Storage Account name."
         },
         "containerName": {
           "type": "string",
-          "title": "The Azure Blob Storage container name."
+          "title": "The Azure Blob Storage Container name."
         },
         "accountKey": {
           "type": "string",
-          "title": "The Azure Storage account key.",
+          "title": "The Azure Storage Account key.",
           "description": "This property is mutually exclusive with sasKey and one must be specified."
         },
         "sasKey": {
@@ -4237,7 +4236,7 @@
         "containerName",
         "relativeMountPath"
       ],
-      "title": "Blobfuse file system details."
+      "title": "Information used to connect to an Azure Storage Container using Blobfuse."
     },
     "NFSMountConfiguration": {
       "properties": {
@@ -4252,14 +4251,15 @@
         },
         "mountOptions": {
           "type": "string",
-          "title": "Specifies various mount options that can be used."
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
         }
       },
       "required": [
         "source",
         "relativeMountPath"
       ],
-      "title": "NFS file system detail."
+      "title": "Information used to connect to an NFS file system."
     },
     "CIFSMountConfiguration": {
       "properties": {
@@ -4278,11 +4278,12 @@
         },
         "mountOptions": {
           "type": "string",
-          "title": "Specifies various mount options that can be used."
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
         },
         "password": {
           "type": "string",
-          "title": "The password to authenticate with."
+          "title": "The password to use for authentication against the CIFS file system."
         }
       },
       "required": [
@@ -4291,7 +4292,7 @@
         "password",
         "relativeMountPath"
       ],
-      "title": "CIFS file system details."
+      "title": "Information used to connect to a CIFS file system."
     },
     "AzureFileShareConfiguration": {
       "properties": {
@@ -4301,7 +4302,8 @@
         },
         "azureFileUrl": {
           "type": "string",
-          "title": "The Azure Files URL."
+          "title": "The Azure Files URL.",
+          "description": "This is of the form 'https://{account}.file.core.windows.net/'."
         },
         "accountKey": {
           "type": "string",
@@ -4314,7 +4316,8 @@
         },
         "mountOptions": {
           "type": "string",
-          "title": "Specifies various mount options that can be used."
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
         }
       },
       "required": [
@@ -4323,7 +4326,7 @@
         "accountKey",
         "relativeMountPath"
       ],
-      "title": "Azure Files details."
+      "title": "Information used to connect to an Azure Fileshare."
     }
   },
   "parameters": {

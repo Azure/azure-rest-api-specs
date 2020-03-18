@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2019-05-01"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -140,64 +140,79 @@
       "properties": {
         "storageNode": {
           "description": "Node that the drive is physically connected.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "serialNumber": {
           "description": "Serial number of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "healthStatus": {
           "description": "Health status of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "operationalStatus": {
           "description": "Operational status of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "usage": {
           "description": "Intended usage of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "physicalLocation": {
           "description": "Indicate where the hardware is located.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "model": {
           "description": "Model of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "firmwareVersion": {
           "description": "The firmware version of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "isIndicationEnabled": {
           "description": "Indicate whether the drive's identification LEDs are active or not.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "manufacturer": {
           "description": "The name of the drive's manufacturer.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "storagePool": {
           "description": "The storage pool where the drive is located.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "mediaType": {
           "description": "Media type of the drive.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "capacityGB": {
           "description": "Total capacity in GB of the drive.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "description": {
           "description": "Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "action": {
           "description": "Detailed recommended action for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },

@@ -287,7 +287,7 @@
             }
           },
           "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound(Azure Dev Spaces Controller doesn't exist.), 400 - BadRequest(One or more update parameters are invalid.)",
+            "description": "Error response describing the reason for operation failure. 404 - NotFound(Azure Dev Spaces Controller doesn't exist.), 400 - BadRequest(One or more update parameters are invalid.), 409 - Conflict(Target container host is not in a supported state.)",
             "schema": {
               "$ref": "#/definitions/DevSpacesErrorResponse"
             }
@@ -580,6 +580,11 @@
         },
         "dataPlaneFqdn": {
           "description": "DNS name for accessing DataPlane services",
+          "type": "string",
+          "readOnly": true
+        },
+        "targetContainerHostApiServerFqdn": {
+          "description": "DNS of the target container host's API server",
           "type": "string",
           "readOnly": true
         },

@@ -34,16 +34,19 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/assignmentOperations": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/assignmentOperations": {
       "get": {
         "tags": [
           "AssignmentOperations"
         ],
         "operationId": "AssignmentOperations_List",
-        "description": "List operations for given blueprint assignment within a subscription.",
+        "description": "List operations for given blueprint assignment within a subscription or a management group.",
         "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignmentOperation_List.json"
+          "Assignment at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignmentOperation_List.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignmentOperation_List.json"
           }
         },
         "parameters": [
@@ -70,7 +73,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/assignmentOperations/{assignmentOperationName}": {
+    "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/assignmentOperations/{assignmentOperationName}": {
       "get": {
         "tags": [
           "AssignmentOperations"
@@ -78,8 +81,11 @@
         "operationId": "AssignmentOperations_Get",
         "description": "Get a blueprint assignment operation.",
         "x-ms-examples": {
-          "Assignment": {
-            "$ref": "./examples/BlueprintAssignmentOperation_Get.json"
+          "Assignment at subscription scope": {
+            "$ref": "./examples/subscriptionBPAssignment/BlueprintAssignmentOperation_Get.json"
+          },
+          "Assignment at management group scope": {
+            "$ref": "./examples/managementGroupBPAssignment/BlueprintAssignmentOperation_Get.json"
           }
         },
         "parameters": [
@@ -287,11 +293,11 @@
   },
   "parameters": {
     "ScopeParameter": {
-      "name": "scope",
+      "name": "resourceScope",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

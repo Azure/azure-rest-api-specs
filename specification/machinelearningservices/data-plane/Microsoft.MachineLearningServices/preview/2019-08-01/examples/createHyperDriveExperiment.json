@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "region": "eastus",
+    "dnsSuffix": "api.azureml.ms",
+    "armScope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace/experiments/demo_experiment",
+    "config": "multipart-form-data"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "code": 201,
+        "result": {
+          "all_jobs_generated": false,
+          "cancellation_requested": false,
+          "created": "2019-05-23T20:00:00.0Z",
+          "created_by_user_id": 0,
+          "description": null,
+          "experiment_id": "demo_experiment_1",
+          "experiment_uri": null,
+          "generator_config": {
+            "name": "BAYESIANOPTIMIZATION",
+            "parameter_space": {
+              "--param1": [
+                "uniform",
+                [
+                  0,
+                  1
+                ]
+              ]
+            }
+          },
+          "max_concurrent_jobs": 1,
+          "max_duration_minutes": 10080,
+          "max_total_jobs": 4,
+          "modified": "2019-05-23T20:00:00.0Z",
+          "name": "demo_experiment",
+          "platform": "AML",
+          "platform_config": {},
+          "policy_config": {
+            "name": "DEFAULT"
+          },
+          "primary_metric_config": {
+            "name": "accuracy",
+            "goal": "MAXIMIZE"
+          },
+          "status": "Running",
+          "study_id": 0,
+          "study_uri": null,
+          "hyperdrive_run_id": ""
+        }
+      }
+    }
+  }
+}
