@@ -14963,7 +14963,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestWrapper"
+              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
             }
           },
           {
@@ -19873,7 +19873,7 @@
       }
     },
     "ArmIdWrapper": {
-      "description": "ArmIdWrapper",
+      "description": "A wrapper for an ARM resource id",
       "type": "object",
       "properties": {
         "id": {
@@ -21867,7 +21867,7 @@
       }
     },
     "PrivateLinkConnectionApprovalRequest": {
-      "description": "PrivateLinkConnectionApprovalRequest",
+      "description": "A request to approve or reject a private endpoint connection",
       "type": "object",
       "properties": {
         "privateLinkServiceConnectionState": {
@@ -21875,38 +21875,42 @@
         }
       }
     },
-    "PrivateLinkConnectionApprovalRequestWrapper": {
-      "description": "PrivateLinkConnectionApprovalRequestWrapper",
+    "PrivateLinkConnectionApprovalRequestResource": {
+      "description": "Private Endpoint ARM resource.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
       "properties": {
-        "id": {
-          "type": "string"
-        },
         "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest"
+          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
         }
       }
     },
     "PrivateLinkConnectionState": {
-      "description": "PrivateLinkConnectionState",
+      "description": "The state of a private link connection",
       "type": "object",
       "properties": {
         "status": {
-          "description": "Status",
+          "description": "Status of a private link connection",
           "type": "string"
         },
         "description": {
-          "description": "Description",
+          "description": "Description of a private link connection",
           "type": "string"
         },
         "actionsRequired": {
-          "description": "ActionsRequired",
+          "description": "ActionsRequired for a private link connection",
           "type": "string"
         }
       }
     },
     "PrivateLinkResource": {
-      "description": "PrivateLinkResource",
+      "description": "A private link resource",
       "required": [
         "id",
         "name",
@@ -21919,7 +21923,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Name",
+          "description": "Name of a private link resource",
           "type": "string"
         },
         "type": {
@@ -21927,21 +21931,21 @@
         },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties"
+          "description": "Properties of a private link resource"
         }
       }
     },
     "PrivateLinkResourceProperties": {
-      "description": "PrivateLinkResourceProperties",
+      "description": "Properties of a private link resource",
       "type": "object",
       "properties": {
         "groupId": {
-          "description": "GroupId",
+          "description": "GroupId of a private link resource",
           "type": "string",
           "readOnly": true
         },
         "requiredMembers": {
-          "description": "RequiredMembers",
+          "description": "RequiredMembers of a private link resource",
           "type": "array",
           "items": {
             "type": "string"
@@ -21949,7 +21953,7 @@
           "readOnly": true
         },
         "requiredZoneNames": {
-          "description": "RequiredZoneNames",
+          "description": "RequiredZoneNames of a private link resource",
           "type": "array",
           "items": {
             "type": "string"
@@ -21959,7 +21963,7 @@
       }
     },
     "PrivateLinkResourcesWrapper": {
-      "description": "PrivateLinkResource",
+      "description": "Wrapper for a collection of private link resources",
       "required": [
         "value"
       ],
@@ -22462,7 +22466,7 @@
       }
     },
     "RemotePrivateEndpointConnection": {
-      "description": "RemotePrivateEndpointConnection",
+      "description": "A remote private endpoint connection",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -22471,7 +22475,7 @@
         },
         "privateEndpoint": {
           "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint"
+          "description": "PrivateEndpoint of a remote private endpoint connection"
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkConnectionState"
@@ -22479,7 +22483,7 @@
       }
     },
     "RemotePrivateEndpointConnectionWrapper": {
-      "description": "RemotePrivateEndpointConnectionWrapper",
+      "description": "Wrapper for a remote private endpoint connection",
       "required": [
         "properties"
       ],
@@ -22490,7 +22494,7 @@
           "readOnly": true
         },
         "name": {
-          "description": "Name",
+          "description": "Name of a remote private endpoint connection",
           "type": "string",
           "readOnly": true
         },
