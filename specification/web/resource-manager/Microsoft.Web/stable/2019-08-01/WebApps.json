@@ -14977,13 +14977,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/RemotePrivateEndpointConnectionWrapper"
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "202": {
             "description": "Asynchronous operation in progress.",
             "schema": {
-              "$ref": "#/definitions/RemotePrivateEndpointConnectionWrapper"
+              "$ref": "#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -21866,6 +21866,22 @@
         }
       }
     },
+    "PrivateEndpointConnectionResource": {
+      "description": "Private Endpoint Connection ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RemotePrivateEndpointConnection",
+          "description": "Core resource properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "PrivateLinkConnectionApprovalRequest": {
       "description": "A request to approve or reject a private endpoint connection",
       "type": "object",
@@ -21876,7 +21892,7 @@
       }
     },
     "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint ARM resource.",
+      "description": "Private Endpoint Connection Approval ARM resource.",
       "type": "object",
       "allOf": [
         {
