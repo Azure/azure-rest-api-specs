@@ -1320,6 +1320,18 @@
         "modelAsString": false
       }
     },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessEnum",
+        "modelAsString": true
+      }
+    },
     "ServerPrivateEndpointConnection": {
       "description": "A private endpoint connection under a server",
       "type": "object",
@@ -1498,16 +1510,8 @@
           "description": "The maximum number of replicas that a master server can have."
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccessEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "privateEndpointConnections": {
           "description": "List of private endpoint connections on a server",
@@ -1571,6 +1575,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1785,6 +1793,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "publicNetworkAccess": {
+              "$ref": "#/definitions/PublicNetworkAccess",
+              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
             },
             "replicationRole": {
               "type": "string",
