@@ -63,6 +63,7 @@ input-file:
 - Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
 - Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
 - Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
+- Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
 ```
 
 ---
@@ -106,6 +107,7 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/sparkFrontend.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/workspaceAcl.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-11-01-preview/adf/datafactory.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/managedPrivateEndpoints.json
 
 ```
 
