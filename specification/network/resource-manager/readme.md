@@ -70,6 +70,7 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/publicIpPrefix.json
   - Microsoft.Network/stable/2020-03-01/routeFilter.json
   - Microsoft.Network/stable/2020-03-01/routeTable.json
+  - Microsoft.Network/stable/2020-03-01/securityPartnerProvider.json
   - Microsoft.Network/stable/2020-03-01/serviceCommunity.json
   - Microsoft.Network/stable/2020-03-01/serviceEndpointPolicy.json
   - Microsoft.Network/stable/2020-03-01/serviceTags.json
