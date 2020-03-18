@@ -75,7 +75,7 @@
         "tags": [
           "Services"
         ],
-        "description": "Lists all the Azure services available for support ticket creation. For **Technical** issues, select the Service Id that maps to the Azure service/product as displayed in the **Services** drop-down list on the Azure portal's [New support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) page. Always use the service and it's corresponding problem classification(s) obtained programmatically for support ticket creation. This practice ensures that you always have the most recent set of service and problem classification Ids.",
+        "description": "Lists all the Azure services available for support ticket creation. For **Technical** issues, select the Service Id that maps to the Azure service/product as displayed in the **Services** drop-down list on the Azure portal's [New support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) page. Always use the service and its corresponding problem classification(s) obtained programmatically for support ticket creation. This practice ensures that you always have the most recent set of service and problem classification Ids.",
         "operationId": "Services_List",
         "parameters": [
           {
@@ -241,7 +241,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Check the availability of a resource name. This API should to be used to check the uniqueness of the name for support ticket creation for the selected subscription.",
+        "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for support ticket creation for the selected subscription.",
         "operationId": "SupportTickets_CheckNameAvailability",
         "x-ms-examples": {
           "Checks whether name is available for SupportTicket resource": {
@@ -286,7 +286,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_List",
         "parameters": [
           {
@@ -442,13 +442,13 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Creates a new support ticket for Subscription and Service limits (Quota), Technical, Billing, and Subscription Management issues for the specified subscription. Learn the [prerequisites](https://aka.ms/supportAPI) required to create a support ticket.<br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.<br/><br/>Adding attachments are not currently supported via the API. To add a file to an existing support ticket, visit the [Manage support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest) page in the Azure portal, select the support ticket, and use the file upload control to add a new file.<br/><br/>Providing consent to share diagnostic information with Azure support is currently not supported via the API. Azure support engineer, working on your ticket, will reach out to you for consent if your issue requires gathering diagnostic information from your Azure resources.<br/><br/>**Creating a support ticket for on-behalf-of**: Include _x-ms-authorization-auxiliary_ header to provide an auxiliary token as per [this](https://docs.microsoft.com/azure/azure-resource-manager/management/authenticate-multi-tenant). The primary token will be from the tenant for whom a support ticket is being raised against the subscription, i.e. Cloud solution provider (CSP) customer tenant. The auxiliary token will be from the Cloud solution provider (CSP) partner tenant.",
+        "description": "Creates a new support ticket for Subscription and Service limits (Quota), Technical, Billing, and Subscription Management issues for the specified subscription. Learn the [prerequisites](https://aka.ms/supportAPI) required to create a support ticket.<br/><br/>Always call the Services and ProblemClassifications API to get the most recent set of services and problem categories required for support ticket creation.<br/><br/>Adding attachments is not currently supported via the API. To add a file to an existing support ticket, visit the [Manage support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/managesupportrequest) page in the Azure portal, select the support ticket, and use the file upload control to add a new file.<br/><br/>Providing consent to share diagnostic information with Azure support is currently not supported via the API. The Azure support engineer working on your ticket will reach out to you for consent if your issue requires gathering diagnostic information from your Azure resources.<br/><br/>**Creating a support ticket for on-behalf-of**: Include _x-ms-authorization-auxiliary_ header to provide an auxiliary token as per [documentation](https://docs.microsoft.com/azure/azure-resource-manager/management/authenticate-multi-tenant). The primary token will be from the tenant for whom a support ticket is being raised against the subscription, i.e. Cloud solution provider (CSP) customer tenant. The auxiliary token will be from the Cloud solution provider (CSP) partner tenant.",
         "operationId": "SupportTickets_Create",
         "parameters": [
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name.",
+            "description": "Support ticket name",
             "required": true,
             "type": "string"
           },
@@ -470,13 +470,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - SupportTicket created successfully",
+            "description": "OK - SupportTicket created successfully.",
             "schema": {
               "$ref": "#/definitions/SupportTicketDetails"
             }
           },
           "202": {
-            "description": "Accepted, SupportTicket will be created asynchronously"
+            "description": "Accepted, SupportTicket will be created asynchronously."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -523,10 +523,10 @@
           "Create a ticket to request Quota increase for Servers for SQL Database": {
             "$ref": "./examples/CreateSqlDatabaseQuotaTicketForServers.json"
           },
-          "Create a ticket to request Quota increase for DTUs for SQL Data Warehouse": {
+          "Create a ticket to request Quota increase for DTUs for Azure Synapse Analytics": {
             "$ref": "./examples/CreateSqlDatawarehouseQuotaTicketForDTUs.json"
           },
-          "Create a ticket to request Quota increase for Servers for SQL Data Warehouse": {
+          "Create a ticket to request Quota increase for Servers for Azure Synapse Analytics": {
             "$ref": "./examples/CreateSqlDatawarehouseQuotaTicketForServers.json"
           },
           "Create a ticket to request Quota increase for specific VM family cores for Machine Learning service": {
@@ -546,7 +546,7 @@
         "tags": [
           "Communications"
         ],
-        "description": "Check the availability of a resource name. This API should to be used to check the uniqueness of the name for adding a new communication to the support ticket.",
+        "description": "Check the availability of a resource name. This API should be used to check the uniqueness of the name for adding a new communication to the support ticket.",
         "operationId": "Communications_CheckNameAvailability",
         "x-ms-examples": {
           "Checks whether name is available for Communication resource": {
@@ -564,7 +564,7 @@
           {
             "name": "checkNameAvailabilityInput",
             "in": "body",
-            "description": "Input to check",
+            "description": "Input to check.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityInput"
@@ -753,7 +753,7 @@
             }
           },
           "202": {
-            "description": "Accepted, Communication will be created asynchronously"
+            "description": "Accepted - Communication will be created asynchronously."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -788,7 +788,7 @@
       }
     },
     "Operation": {
-      "description": "The operation supported by Microsoft Support RP.",
+      "description": "The operation supported by Microsoft Support resource provider.",
       "type": "object",
       "properties": {
         "name": {
@@ -800,22 +800,22 @@
           "description": "The object that describes the operation.",
           "properties": {
             "description": {
-              "description": "The description of the operation",
+              "description": "The description of the operation.",
               "type": "string",
               "readOnly": true
             },
             "operation": {
-              "description": "The action that users can perform, based on their permission level",
+              "description": "The action that users can perform, based on their permission level.",
               "type": "string",
               "readOnly": true
             },
             "provider": {
-              "description": "Service provider: Microsoft Support",
+              "description": "Service provider: Microsoft Support.",
               "type": "string",
               "readOnly": true
             },
             "resource": {
-              "description": "Resource on which the operation is performed",
+              "description": "Resource on which the operation is performed.",
               "type": "string",
               "readOnly": true
             }
@@ -828,7 +828,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of Service resources",
+          "description": "List of Service resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Service"
