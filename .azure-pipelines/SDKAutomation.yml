@@ -7,14 +7,15 @@ trigger:
 pr:
   autoCancel: false
 
+variables:
+  IMAGE: azopenapi.azurecr.io/openapi/sdk-automation:prod
+  REGISTRY_ENDPOINT: azopenapi-registry
+
 jobs:
 - job: "SDKAutomation"
   displayName: SDK
   pool:
     vmImage: 'Ubuntu 18.04'
-  container:
-    image: azopenapi.azurecr.io/openapi/sdk-automation:prod
-    endpoint: azopenapi-registry
   timeoutInMinutes: 180
 
   variables:
@@ -32,14 +33,12 @@ jobs:
         SDK_REPO_NAME: azure-sdk-for-js
       Python:
         SDK_REPO_NAME: azure-sdk-for-python
+      Cliextension:
+        SDK_REPO_NAME: azure-cli-extensions
       Go:
         SDK_REPO_NAME: azure-sdk-for-go
   steps:
   - checkout: none
-  - script: printenv
-    displayName: Display ENV
-  - script: git config --global user.email "sdkautomation@microsoft.com" && git config --global user.name "SDK Automation"
-    displayName: Configure Git
   - script: |
       curl \
         -s https://api.github.com/repos/$(Build.Repository.Name)/commits/$(Build.SourceVersion)/pulls \
@@ -47,7 +46,28 @@ jobs:
       | python3 -c "import sys,json; a=json.load(sys.stdin); print(f'##vso[task.setvariable variable=PR_NUMBER]{a[0][\"number\"]}' if len(a)>0 and a[0][\"base\"][\"ref\"]=='master' else '##vso[task.logissue type=error]Last commit $(Build.SourceVersion) doesnot have a related PR')"
     displayName: Get PR_NUMBER
     condition: in(variables['Build.Reason'], 'IndividualCI', 'Manual')
-  - script: sudo chown `id -ng`:`id -ng` . && npm start
+  - task: Docker@2
+    displayName: Login into ACR
+    inputs:
+      command: login
+      containerRegistry: $(REGISTRY_ENDPOINT)
+  - script: |
+      docker pull $IMAGE
+      docker tag $IMAGE sdk-automation:latest
+    displayName: Pull SDK Automation Image
+  - script: |
+      docker run \
+        -e BLOB_STORAGE_NAME \
+        -e BLOB_STORAGE_KEY \
+        -e GITHUB_COMMENT_AUTHOR_NAME \
+        -e GITHUBAPP_ID \
+        -e GITHUBAPP_PRIVATE_KEY \
+        -e NODE_OPTIONS \
+        -e BLOB_STORAGE_PREFIX \
+        -e SPEC_REPO \
+        -e PR_NUMBER \
+        -e SDK_REPO_NAME \
+        sdk-automation:latest npm start
     env:
       BLOB_STORAGE_NAME: $(blob-storage-name)
       BLOB_STORAGE_KEY: $(blob-storage-key)
@@ -55,4 +75,3 @@ jobs:
       GITHUBAPP_ID: $(githubapp-id)
       GITHUBAPP_PRIVATE_KEY: $(githubapp-private-key)
     displayName: SDK Automation
-    workingDirectory: /z
