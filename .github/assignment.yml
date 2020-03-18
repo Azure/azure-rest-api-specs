@@ -1,0 +1,45 @@
+---
+- rule:
+    paths: "documentation/**"
+    reviewers:
+      - ruowan
+      - raych1
+
+- rule:
+    paths: "specification/**/Microsoft.Network/**"
+    reviewers:
+      - ruowan
+      - NullMDR
+      - Dreamgoing
+
+- rule:
+    paths: 
+      - "specification/@(containerservice|databricks|containerregistry|compute)/**"
+      - "specification/@(docker)/**"
+    reviewers:
+      - ruowan
+      - Dreamgoing
+
+- rule:
+    paths: "specification/**/date-plane/**"
+    reviewers:
+      - Dreamgoing
+
+- rule:
+    paths: 
+      - "specification/**/resource-manager/**"
+    reviewers:
+      - NullMDR
+      - ruowan
+
+- rule:
+    paths: 
+     - "**/package.json"
+     - "package.json"
+    reviewers:
+      - ruowan
+
+- rule:
+    paths: "**"
+    reviewers:
+      - ruowan
