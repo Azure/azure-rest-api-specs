@@ -76,6 +76,7 @@ input-file:
 - Microsoft.Web/stable/2019-08-01/Recommendations.json
 - Microsoft.Web/stable/2019-08-01/ResourceProvider.json
 - Microsoft.Web/stable/2019-08-01/WebApps.json
+- Microsoft.Web/stable/2019-08-01/StaticSites.json
 - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
 - Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
