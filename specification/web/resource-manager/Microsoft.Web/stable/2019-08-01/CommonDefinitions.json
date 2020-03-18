@@ -2486,6 +2486,25 @@
         }
       }
     },
+    "StringDictionary": {
+      "description": "String dictionary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Settings.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "User": {
       "description": "User credentials used for publishing activity.",
       "type": "object",
