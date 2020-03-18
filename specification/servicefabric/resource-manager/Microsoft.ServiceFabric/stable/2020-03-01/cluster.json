@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2019-03-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1110,6 +1110,10 @@
           "type": "string",
           "description": "The protected diagnostics storage key name."
         },
+        "protectedAccountKeyName2": {
+          "type": "string",
+          "description": "The secondary protected diagnostics storage key name."
+        },
         "blobEndpoint": {
           "type": "string",
           "description": "The blob endpoint of the azure storage account."
@@ -1469,13 +1473,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2019-03-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2019-03-01"
+        "2020-03-01"
       ],
-      "default": "2019-03-01",
+      "default": "2020-03-01",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {

@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2019-03-01"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1012,6 +1012,10 @@
     "ApplicationResource": {
       "description": "The application resource.",
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Describes the managed identities for an Azure resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ApplicationResourceProperties",
@@ -1109,6 +1113,13 @@
         "metrics": {
           "$ref": "#/definitions/ApplicationMetricDescriptionList",
           "description": "List of application capacity metric description."
+        },
+        "managedIdentities": {
+          "description": "List of user assigned identities for the application, each mapped to a friendly name.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationUserAssignedIdentity"
+          }
         }
       }
     },
@@ -1239,6 +1250,26 @@
         "applicationHealthPolicy": {
           "$ref": "#/definitions/ArmApplicationHealthPolicy",
           "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n"
+        },
+        "upgradeMode": {
+          "$ref": "#/definitions/RollingUpgradeMode",
+          "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored."
+        }
+      }
+    },
+    "ApplicationUserAssignedIdentity": {
+      "required": [
+        "name",
+        "principalId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The friendly name of user assigned identity."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity."
         }
       }
     },
@@ -1395,6 +1426,61 @@
       "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "0"
     },
+    "ManagedIdentity": {
+      "description": "Describes the managed identities for an Azure resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of the managed identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "The type of managed identity for the resource."
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentityMap",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n"
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the resource.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "SystemAssigned",
+            "description": "Indicates that system assigned identity is associated with the resource."
+          },
+          {
+            "value": "UserAssigned",
+            "description": "Indicates that user assigned identity is associated with the resource."
+          },
+          {
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
+          },
+          {
+            "value": "None",
+            "description": "Indicates that no identity is associated with the resource."
+          }
+        ]
+      }
+    },
     "MoveCost": {
       "type": "string",
       "description": "Specifies the move cost for the service.",
@@ -1440,20 +1526,20 @@
       ],
       "x-ms-discriminator-value": "Named",
       "required": [
-        "Count",
-        "Names"
+        "count",
+        "names"
       ],
       "properties": {
-        "Count": {
+        "count": {
           "type": "integer",
           "description": "The number of partitions."
         },
-        "Names": {
+        "names": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Array of size specified by the ‘Count’ parameter, for the names of the partitions."
+          "description": "Array of size specified by the ‘count’ parameter, for the names of the partitions."
         }
       }
     },
@@ -1585,6 +1671,39 @@
       },
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
+    },
+    "RollingUpgradeMode": {
+      "type": "string",
+      "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored.",
+      "enum": [
+        "Invalid",
+        "UnmonitoredAuto",
+        "UnmonitoredManual",
+        "Monitored"
+      ],
+      "default": "Monitored",
+      "x-ms-enum": {
+        "name": "RollingUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Invalid",
+            "description": "Indicates the upgrade mode is invalid. All Service Fabric enumerations have the invalid type. The value is zero."
+          },
+          {
+            "value": "UnmonitoredAuto",
+            "description": "The upgrade will proceed automatically without performing any health monitoring. The value is 1"
+          },
+          {
+            "value": "UnmonitoredManual",
+            "description": "The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding. The value is 2"
+          },
+          {
+            "value": "Monitored",
+            "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 3"
+          }
+        ]
+      }
     },
     "ServiceCorrelationDescription": {
       "type": "object",
@@ -1744,13 +1863,13 @@
     },
     "ServicePlacementPolicyDescription": {
       "type": "object",
-      "discriminator": "Type",
+      "discriminator": "type",
       "description": "Describes the policy to be used for placement of a Service Fabric service.",
       "required": [
-        "Type"
+        "type"
       ],
       "properties": {
-        "Type": {
+        "type": {
           "$ref": "#/definitions/ServicePlacementPolicyType",
           "description": "The type of placement policy for a service fabric service. Following are the possible values."
         }
@@ -2061,6 +2180,27 @@
         }
       }
     },
+    "UserAssignedIdentity": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The principal id of user assigned identity."
+        },
+        "clientId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The client id of user assigned identity."
+        }
+      }
+    },
+    "UserAssignedIdentityMap": {
+      "type": "object",
+      "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
     "UniformInt64RangePartitionSchemeDescription": {
       "description": "Describes a partitioning scheme where an integer range is allocated evenly across a number of partitions.",
       "allOf": [
@@ -2074,22 +2214,22 @@
       ],
       "x-ms-discriminator-value": "UniformInt64Range",
       "required": [
-        "Count",
-        "LowKey",
-        "HighKey"
+        "count",
+        "lowKey",
+        "highKey"
       ],
       "properties": {
-        "Count": {
+        "count": {
           "type": "integer",
           "description": "The number of partitions."
         },
-        "LowKey": {
+        "lowKey": {
           "type": "string",
-          "description": "String indicating the lower bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+          "description": "String indicating the lower bound of the partition key range that\nshould be split between the partition ‘count’\n"
         },
-        "HighKey": {
+        "highKey": {
           "type": "string",
-          "description": "String indicating the upper bound of the partition key range that\nshould be split between the partition ‘Count’\n"
+          "description": "String indicating the upper bound of the partition key range that\nshould be split between the partition ‘count’\n"
         }
       }
     },
@@ -2130,13 +2270,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2019-03-01\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2019-03-01"
+        "2020-03-01"
       ],
-      "default": "2019-03-01",
+      "default": "2020-03-01",
       "x-ms-parameter-location": "client"
     },
     "applicationName": {
