@@ -1212,6 +1212,7 @@ input-file:
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/Recommendations.json
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/ResourceProvider.json
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/WebApps.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/StaticSites.json
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/AppServicePlans.json
   - $(this-folder)/Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
