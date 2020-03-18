@@ -738,7 +738,7 @@
           "type": "string"
         },
         "components": {
-          "description": "Components event records. By default this is not populated.",
+          "description": "Components events records populated only when URL contains $expand=components clause.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComponentEventDetails"
@@ -1013,7 +1013,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails or to expand Components use $expand=components",
+      "description": "The $expand query parameter. For example, to expand components use $expand=components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"
