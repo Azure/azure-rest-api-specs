@@ -1,5 +1,6 @@
 jobs:
 - job: "BreakingChange"
+  condition: not(and(startsWith(variables['System.PullRequest.TargetBranch'], 'network-'), endsWith(variables['System.PullRequest.TargetBranch'], '-release')))
   pool:
     vmImage: 'Ubuntu 16.04'
   steps:
