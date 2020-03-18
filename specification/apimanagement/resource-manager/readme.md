@@ -353,6 +353,7 @@ input-file:
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimdeployment.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimdiagnostics.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimemailtemplates.json
+  - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimgateways.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimgroups.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimidentityprovider.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimissues.json
