@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "Endpoint": "{Endpoint}",
+    "input": {
+      "documents": [
+        {
+          "countryHint": "US",
+          "id": "1",
+          "text": "Hello world"
+        },
+        {
+          "id": "2",
+          "text": "Bonjour tout le monde"
+        },
+        {
+          "id": "3",
+          "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "documents": [
+          {
+            "id": "1",
+            "detectedLanguages": [
+              {
+                "name": "English",
+                "iso6391Name": "en",
+                "confidenceScore": 1
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "2",
+            "detectedLanguages": [
+              {
+                "name": "French",
+                "iso6391Name": "fr",
+                "confidenceScore": 1
+              }
+            ],
+            "warnings": []
+          },
+          {
+            "id": "3",
+            "detectedLanguages": [
+              {
+                "name": "Spanish",
+                "iso6391Name": "es",
+                "confidenceScore": 1
+              }
+            ],
+            "warnings": []
+          }
+        ],
+        "errors": [],
+        "modelVersion": "2020-04-01"
+      }
+    }
+  }
+}
