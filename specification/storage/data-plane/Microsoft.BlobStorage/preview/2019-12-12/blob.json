@@ -4762,6 +4762,11 @@
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc1123",
@@ -4807,9 +4812,6 @@
           "enum": [
             "metadata"
           ]
-        },
-        {
-          "$ref": "#/parameters/VersionId"
         }
       ]
     },
@@ -5739,6 +5741,11 @@
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
               },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
               "Date": {
                 "type": "string",
                 "format": "date-time-rfc1123",
@@ -5841,6 +5848,11 @@
                 "x-ms-client-name": "Version",
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
               },
               "Date": {
                 "type": "string",
@@ -7654,6 +7666,11 @@
                 "x-ms-client-name": "Version",
                 "type": "string",
                 "description": "Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
               },
               "Date": {
                 "type": "string",
@@ -10513,7 +10530,8 @@
           "deleted",
           "metadata",
           "snapshots",
-          "uncommittedblobs"
+          "uncommittedblobs",
+          "versions"
         ],
         "x-ms-enum": {
           "name": "ListBlobsIncludeItem",
@@ -10795,7 +10813,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to delete. It for service version 2019_10_10 and newer."
+      "description": "The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer."
     },
     "SourceContentMD5": {
       "name": "x-ms-source-content-md5",
