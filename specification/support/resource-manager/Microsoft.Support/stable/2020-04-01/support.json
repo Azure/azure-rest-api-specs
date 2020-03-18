@@ -863,7 +863,7 @@
       }
     },
     "ServiceProperties": {
-      "description": "Details about Azure service available for support ticket creation.",
+      "description": "Details about an Azure service available for support ticket creation.",
       "type": "object",
       "properties": {
         "displayName": {
@@ -1038,7 +1038,7 @@
     },
     "CommunicationDetails": {
       "x-ms-azure-resource": true,
-      "description": "Object that represents Communication resource.",
+      "description": "Object that represents a Communication resource.",
       "type": "object",
       "properties": {
         "id": {
@@ -1130,7 +1130,7 @@
       "type": "object",
       "properties": {
         "supportTicketId": {
-          "description": "System generated support ticket id that is unique.",
+          "description": "System generated support ticket Id that is unique.",
           "type": "string"
         },
         "description": {
@@ -1138,7 +1138,7 @@
           "type": "string"
         },
         "problemClassificationId": {
-          "description": "Each Azure service has its own set of issue category called problem classification that corresponds to the type of problem you're experiencing. This parameter is the resource id of ProblemClassification resource.",
+          "description": "Each Azure service has its own set of issue category called problem classification that corresponds to the type of problem you're experiencing. This parameter is the resource Id of the ProblemClassification resource.",
           "type": "string"
         },
         "problemClassificationDisplayName": {
@@ -1147,7 +1147,7 @@
           "readOnly": true
         },
         "severity": {
-          "description": "A value that indicates the urgency of the case, which in turn determines the response time according to the service level agreement of the technical support plan you have with Azure. Note: 'Highest critical impact' severity is reserved only to our Premium customers.",
+          "description": "A value that indicates the urgency of the case, which in turn determines the response time according to the service level agreement of the technical support plan you have with Azure. Note: 'Highest critical impact' severity is reserved only for our Premium customers.",
           "enum": [
             "minimal",
             "moderate",
@@ -1161,7 +1161,7 @@
           }
         },
         "enrollmentId": {
-          "description": "Enrollment ID associated with the support ticket.",
+          "description": "Enrollment Id associated with the support ticket.",
           "type": "string",
           "readOnly": true
         },
@@ -1179,7 +1179,7 @@
         },
         "supportEngineer": {
           "$ref": "#/definitions/SupportEngineer",
-          "description": "Information about support engineer working on this support ticket."
+          "description": "Information about the support engineer working on this support ticket."
         },
         "supportPlanType": {
           "description": "Support plan type associated with the support ticket.",
@@ -1196,7 +1196,7 @@
           "type": "string"
         },
         "serviceId": {
-          "description": "This is the resource id of the Azure service resource associated with the support ticket.",
+          "description": "This is the resource Id of the Azure service resource associated with the support ticket.",
           "type": "string"
         },
         "serviceDisplayName": {
@@ -1211,23 +1211,23 @@
         },
         "createdDate": {
           "format": "date-time",
-          "description": "Time in UTC (ISO 8601 format) when support ticket was created.",
+          "description": "Time in UTC (ISO 8601 format) when the support ticket was created.",
           "type": "string",
           "readOnly": true
         },
         "modifiedDate": {
           "format": "date-time",
-          "description": "Time in UTC (ISO 8601 format) when support ticket was last modified.",
+          "description": "Time in UTC (ISO 8601 format) when the support ticket was last modified.",
           "type": "string",
           "readOnly": true
         },
         "technicalTicketDetails": {
           "$ref": "#/definitions/TechnicalTicketDetails",
-          "description": "Additional ticket details associated with a technical support ticket request. ."
+          "description": "Additional ticket details associated with a technical support ticket request."
         },
         "quotaTicketDetails": {
           "$ref": "#/definitions/QuotaTicketDetails",
-          "description": "Additional ticket details associated with a quota support ticket request. ."
+          "description": "Additional ticket details associated with a quota support ticket request."
         }
       }
     },
@@ -1237,13 +1237,13 @@
       "properties": {
         "startTime": {
           "format": "date-time",
-          "description": "Time in UTC (ISO 8601 format) when service level agreement starts.",
+          "description": "Time in UTC (ISO 8601 format) when the service level agreement starts.",
           "type": "string",
           "readOnly": true
         },
         "expirationTime": {
           "format": "date-time",
-          "description": "Time in UTC (ISO 8601 format) when service level agreement expires.",
+          "description": "Time in UTC (ISO 8601 format) when the service level agreement expires.",
           "type": "string",
           "readOnly": true
         },
@@ -1270,10 +1270,10 @@
       "properties": {
         "error": {
           "$ref": "#/definitions/ServiceError",
-          "description": "The api error details."
+          "description": "The API error details."
         }
       },
-      "description": "The api error."
+      "description": "The API error."
     },
     "ServiceError": {
       "type": "object",
@@ -1299,7 +1299,7 @@
           "readOnly": true
         }
       },
-      "description": "The api error details."
+      "description": "The API error details."
     },
     "ServiceErrorDetail": {
       "type": "object",
@@ -1322,7 +1322,7 @@
       "description": "The error details."
     },
     "ContactProfile": {
-      "description": "Contact information associated with support ticket.",
+      "description": "Contact information associated with the support ticket.",
       "required": [
         "firstName",
         "lastName",
@@ -1423,7 +1423,7 @@
           "type": "string"
         },
         "preferredTimeZone": {
-          "description": "Time zone of the user. This is the name of the time zone from [Microsoft Time Zone Index Values](https://support.microsoft.com/en-us/help/973627/microsoft-time-zone-index-values).",
+          "description": "Time zone of the user. This is the name of the time zone from [Microsoft Time Zone Index Values](https://support.microsoft.com/help/973627/microsoft-time-zone-index-values).",
           "type": "string"
         },
         "country": {
@@ -1441,7 +1441,7 @@
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "This is the resource id of the Azure service resource (For example: A virtual machine resource or an HDInsight resource) for which the support ticket is created.",
+          "description": "This is the resource Id of the Azure service resource (For example: A virtual machine resource or an HDInsight resource) for which the support ticket is created.",
           "type": "string"
         }
       }
@@ -1451,7 +1451,7 @@
       "type": "object",
       "properties": {
         "quotaChangeRequestSubType": {
-          "description": "Required for certain quota types when there is a sub type that you are requesting quota increase for. Example: Batch.",
+          "description": "Required for certain quota types when there is a sub type, such as Batch, for which you are requesting a quota increase.",
           "type": "string"
         },
         "quotaChangeRequestVersion": {
@@ -1482,7 +1482,7 @@
       }
     },
     "UpdateSupportTicket": {
-      "description": "Updates severity, ticket status and contact details in the support ticket.",
+      "description": "Updates severity, ticket status, and contact details in the support ticket.",
       "type": "object",
       "properties": {
         "severity": {
@@ -1524,14 +1524,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Azure subscription id."
+      "description": "Azure subscription Id."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Api version."
+      "description": "API version."
     }
   }
 }
