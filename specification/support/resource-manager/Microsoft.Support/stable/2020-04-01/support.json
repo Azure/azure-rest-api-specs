@@ -30,7 +30,7 @@
         "user_impersonation": "impersonate your user account"
       },
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow"
+      "description": "Azure Active Directory OAuth2 Flow."
     }
   },
   "paths": {
@@ -117,7 +117,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "Name of Azure service",
+            "description": "Name of Azure service.",
             "required": true,
             "type": "string"
           },
@@ -351,7 +351,7 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
@@ -392,14 +392,14 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "updateSupportTicket",
             "in": "body",
-            "description": "UpdateSupportTicket object",
+            "description": "UpdateSupportTicket object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateSupportTicket"
@@ -448,7 +448,7 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
@@ -557,7 +557,7 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
@@ -604,7 +604,7 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
@@ -670,14 +670,14 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "communicationName",
             "in": "path",
-            "description": "Communication name",
+            "description": "Communication name.",
             "required": true,
             "type": "string"
           },
@@ -718,21 +718,21 @@
           {
             "name": "supportTicketName",
             "in": "path",
-            "description": "Support ticket name",
+            "description": "Support ticket name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "communicationName",
             "in": "path",
-            "description": "Communication name",
+            "description": "Communication name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "createCommunicationParameters",
             "in": "body",
-            "description": "Communication object",
+            "description": "Communication object.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CommunicationDetails"
@@ -792,7 +792,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
+          "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
           "readOnly": true
         },
@@ -841,37 +841,37 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the resource",
+          "description": "Id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource 'Microsoft.Support/services'",
+          "description": "Type of the resource 'Microsoft.Support/services'.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceProperties",
-          "description": "Properties of the resource"
+          "description": "Properties of the resource."
         }
       }
     },
     "ServiceProperties": {
-      "description": "Details about Azure service available for support ticket creation",
+      "description": "Details about Azure service available for support ticket creation.",
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Localized name of Azure service",
+          "description": "Localized name of Azure service.",
           "type": "string"
         },
         "resourceTypes": {
-          "description": "ARM Resource types",
+          "description": "ARM Resource types.",
           "type": "array",
           "items": {
             "type": "string"
@@ -880,11 +880,11 @@
       }
     },
     "ProblemClassificationsListResult": {
-      "description": "Collection of ProblemClassification resources",
+      "description": "Collection of ProblemClassification resources.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of ProblemClassification resources",
+          "description": "List of ProblemClassification resources.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProblemClassification"
@@ -893,33 +893,33 @@
       }
     },
     "ProblemClassification": {
-      "description": "ProblemClassification resource object",
+      "description": "ProblemClassification resource object.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the resource",
+          "description": "Id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource 'Microsoft.Support/problemClassification'",
+          "description": "Type of the resource 'Microsoft.Support/problemClassification'.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProblemClassificationProperties",
-          "description": "Properties of the resource"
+          "description": "Properties of the resource."
         }
       }
     },
     "ProblemClassificationProperties": {
-      "description": "Details about a problem classification available for an Azure service",
+      "description": "Details about a problem classification available for an Azure service.",
       "type": "object",
       "properties": {
         "displayName": {
@@ -937,7 +937,7 @@
       ],
       "properties": {
         "name": {
-          "description": "The resource name to validate",
+          "description": "The resource name to validate.",
           "type": "string"
         },
         "type": {
@@ -950,7 +950,7 @@
             "name": "Type",
             "modelAsString": false
           },
-          "description": "The type of resource"
+          "description": "The type of resource."
         }
       }
     },
@@ -994,28 +994,28 @@
     },
     "SupportTicketDetails": {
       "x-ms-azure-resource": true,
-      "description": "Object that represents SupportTicketDetails resource",
+      "description": "Object that represents SupportTicketDetails resource.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the resource",
+          "description": "Id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource 'Microsoft.Support/supportTickets'",
+          "description": "Type of the resource 'Microsoft.Support/supportTickets'.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SupportTicketDetailsProperties",
-          "description": "Properties of the resource"
+          "description": "Properties of the resource."
         }
       }
     },
@@ -1038,28 +1038,28 @@
     },
     "CommunicationDetails": {
       "x-ms-azure-resource": true,
-      "description": "Object that represents Communication resource",
+      "description": "Object that represents Communication resource.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the resource",
+          "description": "Id of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the resource",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
         "type": {
-          "description": "Type of the resource 'Microsoft.Support/communications'",
+          "description": "Type of the resource 'Microsoft.Support/communications'.",
           "type": "string",
           "readOnly": true
         },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CommunicationDetailsProperties",
-          "description": "Properties of the resource"
+          "description": "Properties of the resource."
         }
       }
     },
@@ -1072,7 +1072,7 @@
       "type": "object",
       "properties": {
         "communicationType": {
-          "description": "Communication type",
+          "description": "Communication type.",
           "enum": [
             "web",
             "phone"
@@ -1085,7 +1085,7 @@
           "readOnly": true
         },
         "communicationDirection": {
-          "description": "Direction of communication",
+          "description": "Direction of communication.",
           "enum": [
             "inbound",
             "outbound"
@@ -1098,15 +1098,15 @@
           "readOnly": true
         },
         "sender": {
-          "description": "Email address of the sender. This property is required if called by a service principal",
+          "description": "Email address of the sender. This property is required if called by a service principal.",
           "type": "string"
         },
         "subject": {
-          "description": "Subject of the communication",
+          "description": "Subject of the communication.",
           "type": "string"
         },
         "body": {
-          "description": "Body of the communication",
+          "description": "Body of the communication.",
           "type": "string"
         },
         "createdDate": {
@@ -1223,11 +1223,11 @@
         },
         "technicalTicketDetails": {
           "$ref": "#/definitions/TechnicalTicketDetails",
-          "description": "Additional ticket details associated with a technical support ticket request. "
+          "description": "Additional ticket details associated with a technical support ticket request. ."
         },
         "quotaTicketDetails": {
           "$ref": "#/definitions/QuotaTicketDetails",
-          "description": "Additional ticket details associated with a quota support ticket request. "
+          "description": "Additional ticket details associated with a quota support ticket request. ."
         }
       }
     },
@@ -1248,7 +1248,7 @@
           "readOnly": true
         },
         "slaMinutes": {
-          "description": "Service Level Agreement in minutes",
+          "description": "Service Level Agreement in minutes.",
           "type": "integer",
           "readOnly": true
         }
@@ -1388,15 +1388,15 @@
       "type": "object",
       "properties": {
         "firstName": {
-          "description": "First name",
+          "description": "First name.",
           "type": "string"
         },
         "lastName": {
-          "description": "Last name",
+          "description": "Last name.",
           "type": "string"
         },
         "preferredContactMethod": {
-          "description": "Preferred contact method",
+          "description": "Preferred contact method.",
           "enum": [
             "email",
             "phone"
@@ -1408,11 +1408,11 @@
           }
         },
         "primaryEmailAddress": {
-          "description": "Primary email address",
+          "description": "Primary email address.",
           "type": "string"
         },
         "additionalEmailAddresses": {
-          "description": "Email addresses listed will be copied on any correspondence about the support ticket",
+          "description": "Email addresses listed will be copied on any correspondence about the support ticket.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1451,11 +1451,11 @@
       "type": "object",
       "properties": {
         "quotaChangeRequestSubType": {
-          "description": "Required for certain quota types when there is a sub type that you are requesting quota increase for. Example: Batch",
+          "description": "Required for certain quota types when there is a sub type that you are requesting quota increase for. Example: Batch.",
           "type": "string"
         },
         "quotaChangeRequestVersion": {
-          "description": "Quota change request version",
+          "description": "Quota change request version.",
           "type": "string"
         },
         "quotaChangeRequests": {
@@ -1468,7 +1468,7 @@
       }
     },
     "QuotaChangeRequest": {
-      "description": "This property is required for providing the region and new quota limits",
+      "description": "This property is required for providing the region and new quota limits.",
       "type": "object",
       "properties": {
         "region": {
@@ -1486,7 +1486,7 @@
       "type": "object",
       "properties": {
         "severity": {
-          "description": "Severity level",
+          "description": "Severity level.",
           "enum": [
             "minimal",
             "moderate",
@@ -1500,7 +1500,7 @@
           }
         },
         "status": {
-          "description": "Status to be updated on the ticket",
+          "description": "Status to be updated on the ticket.",
           "enum": [
             "open",
             "closed"
@@ -1524,14 +1524,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Azure subscription id"
+      "description": "Azure subscription id."
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Api version"
+      "description": "Api version."
     }
   }
 }
