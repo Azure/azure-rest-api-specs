@@ -45,6 +45,12 @@
             "$ref": "Disks.json#/parameters/SourceSharePathParameter"
           },
           {
+            "$ref": "Disks.json#/parameters/SourceScaleUnitParameter"
+          },
+          {
+            "$ref": "Disks.json#/parameters/SourceVolumeLabelParameter"
+          },
+          {
             "$ref": "Disks.json#/parameters/DiskCountParameter"
           },
           {
@@ -267,8 +273,24 @@
       "x-ms-parameter-location": "method"
     },
     "SourceSharePathParameter": {
-      "description": "The source share which the resource belongs to.",
+      "description": "The share which the resource belongs to.",
       "name": "sharePath",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceScaleUnitParameter": {
+      "description": "The scale unit which the resource belongs to.",
+      "name": "scaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SourceVolumeLabelParameter": {
+      "description": "The volume label of the volume which the resource belongs to.",
+      "name": "volumeLabel",
       "in": "query",
       "required": false,
       "type": "string",
