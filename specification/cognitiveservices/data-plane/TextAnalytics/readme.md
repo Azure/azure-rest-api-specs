@@ -128,7 +128,6 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_2_0'
 input-file: stable/v2.0/TextAnalytics.json
-log-file: logs/log.txt
 ```
 
 ### Release 2.1
@@ -137,7 +136,6 @@ These settings apply only when `--tag=release_2_1` is specified on the command l
 
 ``` yaml $(tag) == 'release_2_1'
 input-file: stable/v2.1/TextAnalytics.json
-log-file: logs/log.txt
 ```
 
 ### Release 2.1-Preview
@@ -146,7 +144,6 @@ These settings apply only when `--tag=release_2_1_preview` is specified on the c
 
 ``` yaml $(tag) == 'release_2_1_preview'
 input-file: preview/v2.1/TextAnalytics.json
-log-file: logs/log.txt
 ```
 
 ### Release 3.0-Preview.1
@@ -155,7 +152,14 @@ These settings apply only when `--tag=release_3_0_preview.1` is specified on the
 
 ``` yaml $(tag) == 'release_3_0_preview.1'
 input-file: preview/v3.0-preview.1/TextAnalytics.json
-log-file: logs/log.txt
+```
+
+### Release 3.0
+
+These settings apply only when `--tag=release_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_0'
+input-file: stable/v3.0/TextAnalytics.json
 ```
 
 ### Release 3.1-Preview.1
@@ -164,7 +168,6 @@ These settings apply only when `--tag=release_3_1_preview.1` is specified on the
 
 ``` yaml $(tag) == 'release_3_1_preview.1'
 input-file: preview/v3.1-preview.1/TextAnalytics.json
-log-file: logs/log.txt
 ```
 
 ## Swagger to SDK
