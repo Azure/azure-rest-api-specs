@@ -46,6 +46,17 @@ batch:
   - tag: package-2015-06split
 ```
 
+### Tag: package-2019-12 and python
+
+These settings apply only when `--tag=package-2019-12 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-12' && $(python)
+python:
+  namespace: azure.mgmt.network.v2019_12_01
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2019_12_01
+```
+
 ### Tag: package-2019-11 and python
 
 These settings apply only when `--tag=package-2019-11 --python` is specified on the command line.
