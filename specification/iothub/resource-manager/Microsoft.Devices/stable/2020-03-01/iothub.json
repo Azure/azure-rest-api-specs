@@ -1770,7 +1770,7 @@
         ],
         "summary": "Get private endpoint connection",
         "description": "Get private endpoint connection properties",
-        "operationId": "PrivateEndpointConnection_Get",
+        "operationId": "PrivateEndpointConnections_Get",
         "x-ms-examples": {
           "PrivateEndpointConnection_Get": {
             "$ref": "./examples/iothub_getprivateendpointconnection.json"
@@ -1815,7 +1815,7 @@
         ],
         "summary": "Update private endpoint connection",
         "description": "Update the status of a private endpoint connection with the specified name",
-        "operationId": "PrivateEndpointConnection_Update",
+        "operationId": "PrivateEndpointConnections_Update",
         "x-ms-examples": {
           "PrivateEndpointConnection_Update": {
             "$ref": "./examples/iothub_updateprivateendpointconnection.json"
@@ -1876,7 +1876,7 @@
         ],
         "summary": "Delete private endpoint connection",
         "description": "Delete private endpoint connection with the specified name",
-        "operationId": "PrivateEndpointConnection_Delete",
+        "operationId": "PrivateEndpointConnections_Delete",
         "x-ms-examples": {
           "PrivateEndpointConnection_Delete": {
             "$ref": "./examples/iothub_deleteprivateendpointconnection.json"
@@ -2491,6 +2491,7 @@
     },
     "PrivateEndpointConnection": {
       "description": "The private endpoint connection of an IotHub",
+      "x-ms-azure-resource": true,
       "type": "object",
       "properties": {
         "id": {
@@ -2556,14 +2557,14 @@
             "Disconnected"
           ],
           "type": "string",
-          "x-ms=enum": {
+          "x-ms-enum": {
             "name": "PrivateLinkServiceConnectionStatus",
             "modelAsString": true
           }
         },
         "description": {
           "type": "string",
-          "description": "The description for the current state of a privat endpoint connection"
+          "description": "The description for the current state of a private endpoint connection"
         },
         "actionsRequired": {
           "type": "string",
