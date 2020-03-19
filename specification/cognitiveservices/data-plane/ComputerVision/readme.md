@@ -37,7 +37,7 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_3_0'
 input-file:
-  - preview/v3.0/Ocr.json
+  - preview/v3.0-preview/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -154,7 +154,7 @@ input-file:
   - $(this-folder)/stable/v2.0/Ocr.json
   - $(this-folder)/stable/v2.1/ComputerVision.json
   - $(this-folder)/stable/v2.1/Ocr.json
-  - $(this-folder)/preview/v3.0/Ocr.json
+  - $(this-folder)/preview/v3.0-preview/Ocr.json
 
 ```
 
