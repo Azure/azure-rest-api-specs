@@ -11,7 +11,7 @@ python:
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-datafactory
   package-version: 1.0.0
-  clear-output-folder: true
+  #clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
