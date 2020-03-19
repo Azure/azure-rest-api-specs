@@ -40,6 +40,17 @@ These settings apply only when `--tag=package-2020-01-01-privatepreview` is spec
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
 ```
+These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2020-01-01'
+input-file:
+- Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+- Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+```
+
 
 ### Tag: package-2018-06-01-privatepreview
 
@@ -168,11 +179,12 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2020-01-01-privatepreview/DataEncryptionKeys.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
-  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2018-06-01/PrivateLinkResources.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2020-01-01/DataEncryptionKeys.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
 
 ```
