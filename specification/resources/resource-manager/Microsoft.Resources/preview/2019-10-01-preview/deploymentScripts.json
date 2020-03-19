@@ -604,6 +604,11 @@
       "x-ms-external": true,
       "description": "Common properties for the deployment script.",
       "properties": {
+        "containerSettings": {
+          "type": "object",
+          "description": "Container settings.",
+          "$ref": "#/definitions/ContainerConfiguration"
+        },
         "cleanupPreference": {
           "type": "string",
           "description": "The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.",
@@ -648,6 +653,16 @@
             "type": "object",
             "description": "Script output in <name, value> pair."
           }
+        }
+      }
+    },
+    "ContainerConfiguration": {
+      "type": "object",
+      "description": "Settings to customize ACI container instance.",
+      "properties": {
+        "containerGroupName": {
+          "type": "string",
+          "description":  "Container group name, if not specified then the name will get auto-generated."
         }
       }
     },
