@@ -14,7 +14,10 @@
         "capacity": 0
       },
       "identity": {
-        "type": "SystemAssigned"
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {}
+        }
       },
       "location": "West US",
       "tags": {
@@ -39,14 +42,14 @@
           "tag3": "value3"
         },
         "location": "West US",
-        "etag": "AAAAAAAAWiE=",
+        "etag": "AAAAAAAFzyQ=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Created",
           "targetProvisioningState": "Activating",
-          "createdAtUtc": "2019-04-11T16:29:29.9711098Z",
+          "createdAtUtc": "2020-03-12T01:05:33.4573398Z",
           "hostnameConfigurations": [
             {
               "type": "Proxy",
@@ -62,9 +65,10 @@
           "capacity": 0
         },
         "identity": {
-          "type": "SystemAssigned",
-          "principalId": "dfb9a757-df69-4966-a8d0-711a9cd8ffb4",
-          "tenantId": "XXXXXX-86f1-41af-91ab-2d7cd011db47"
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {}
+          }
         }
       }
     },
@@ -79,14 +83,14 @@
           "tag3": "value3"
         },
         "location": "West US",
-        "etag": "AAAAAAAAWiU=",
+        "etag": "AAAAAAAFzyk=",
         "properties": {
           "publisherEmail": "apim@autorestsdk.com",
           "publisherName": "autorestsdk",
           "notificationSenderEmail": "apimgmt-noreply@mail.windowsazure.com",
           "provisioningState": "Succeeded",
           "targetProvisioningState": "",
-          "createdAtUtc": "2019-04-11T16:29:29.9711098Z",
+          "createdAtUtc": "2020-03-12T01:05:33.4573398Z",
           "gatewayUrl": "https://apimService1.azure-api.net",
           "hostnameConfigurations": [
             {
@@ -96,17 +100,30 @@
               "defaultSslBinding": true
             }
           ],
+          "customProperties": {
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30": "False",
+            "Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2": "False"
+          },
           "virtualNetworkType": "None",
-          "enableClientCertificate": false
+          "disableGateway": false
         },
         "sku": {
           "name": "Consumption",
           "capacity": 0
         },
         "identity": {
-          "type": "SystemAssigned",
-          "principalId": "dfb9a757-df69-4966-a8d0-711a9cd8ffb4",
-          "tenantId": "XXXXXX-86f1-41af-91ab-2d7cd011db47"
+          "type": "UserAssigned",
+          "tenantId": "XXXXX-86f1-41af-XXXX-2d7cd011db47",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/apimService1": {
+              "principalId": "XXXXX-6e62-4649-9f54-a119fc1ba85e",
+              "clientId": "5a2c6b8e-0905-XXXX-a772-993c9418137f"
+            }
+          }
         }
       }
     },
