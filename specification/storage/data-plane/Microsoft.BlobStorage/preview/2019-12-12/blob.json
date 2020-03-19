@@ -3500,6 +3500,16 @@
                 "type": "string",
                 "format": "date-time-rfc1123",
                 "description": "The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set."
+              },
+              "x-ms-version-id": {
+                "x-ms-client-name": "VersionId",
+                "type": "string",
+                "description": "A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob."
+              },
+              "x-ms-is-current-version": {
+                "x-ms-client-name": "IsCurrentVersion",
+                "type": "boolean",
+                "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
               }
             }
           },
