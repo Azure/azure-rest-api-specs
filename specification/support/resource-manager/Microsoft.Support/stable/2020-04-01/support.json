@@ -84,7 +84,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved list of Azure services available for support.",
+            "description": "Successfully retrieved list of the Azure services available for support.",
             "schema": {
               "$ref": "#/definitions/ServicesListResult"
             }
@@ -117,7 +117,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "Name of Azure service.",
+            "description": "Name of the Azure service.",
             "required": true,
             "type": "string"
           },
@@ -140,7 +140,7 @@
           }
         },
         "x-ms-examples": {
-          "Gets details of Azure service": {
+          "Gets details of the Azure service": {
             "$ref": "./examples/GetService.json"
           }
         }
@@ -157,7 +157,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "Name of Azure service for which the problem classifications need to be retrieved.",
+            "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
             "required": true,
             "type": "string"
           },
@@ -200,7 +200,7 @@
           {
             "name": "serviceName",
             "in": "path",
-            "description": "Name of Azure service available for support.",
+            "description": "Name of the Azure service available for support.",
             "required": true,
             "type": "string"
           },
@@ -286,7 +286,7 @@
         "tags": [
           "SupportTickets"
         ],
-        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
+        "description": "Lists all the support tickets for an Azure subscription. You can also filter the support tickets by _Status_ or _CreatedDate_ using the $filter parameter. Output will be a paged result with _nextLink_, using which you can retrieve the next set of support tickets. <br/><br/>Support ticket data is available for 12 months after ticket creation. If a ticket was created more than 12 months ago, a request for data might cause an error.",
         "operationId": "SupportTickets_List",
         "parameters": [
           {
@@ -867,7 +867,7 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Localized name of Azure service.",
+          "description": "Localized name of the Azure service.",
           "type": "string"
         },
         "resourceTypes": {
@@ -1201,7 +1201,7 @@
         },
         "serviceDisplayName": {
           "type": "string",
-          "description": "Localized name of Azure service.",
+          "description": "Localized name of the Azure service.",
           "readOnly": true
         },
         "status": {
