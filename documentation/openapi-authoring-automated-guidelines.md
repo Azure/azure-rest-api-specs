@@ -66,6 +66,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
 | [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
+| [R4005](#r4005) | [XmsEnumNameUnique](#r4005) | ARM OpenAPI(swagger) specs |
+| [R4006](#r4006) | [XmsCodeGenerationSettingDeprecated](#r4006) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -1914,6 +1916,8 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **How to fix the violation**: Add the right operationId for each operation
 
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
 ### <a name="r3020" ></a>R3020 PathResourceProviderNamePascalCase
 
 **Category** : ARM Warning
@@ -2234,3 +2238,83 @@ Eg:
 ```
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4005" ></a>R4005 XmsEnumNameUnique
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
+
+**Description** : Property name in x-ms-extension is required , the rule introduce to avoid duplicate x-ms-enum name.
+
+**CreatedAt**: March 18, 2020
+
+**LastModifiedAt**: March 18, 2020
+
+**How to fix the violation**: Update the duplicate x-ms-enum name :
+
+The following would be invalid:
+```json
+    "State": {
+        "description": "The  state of the configuration store.",
+        "enum": [
+            "Failed",
+            "Canceled"
+        ],
+        "type": "string",
+        "readOnly": true,
+        "x-ms-enum": {
+            "name": "DuplicateName",
+            "modelAsString": true
+        }
+    },
+    "status": {
+        "description": "The state code.",
+        "enum": [
+            "Success",
+            "FAILED"
+        ],
+        "readOnly": true,
+        "type": "string",
+        "x-ms-enum": {
+            "name": "DuplicateName",
+            "modelAsString": true
+        }
+    }
+}
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4006" ></a>R4006 XmsCodeGenerationSettingDeprecated
+
+**Category** : ARM Warning
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The x-ms-code-generation-settings extenison was deprecated. Consider remove it from the swagger.  
+
+**Description** : New autorest (V3) will stop supporting “x-ms-code-generation-settings” inside the Swagger. This was designed before there was Readme.md to hold configuration options, and this node should disappear and be replaced by actual readme descriptions.
+
+**CreatedAt**: March 18, 2020
+
+**LastModifiedAt**: March 18, 2020
+
+**How to fix the violation**: The only value of this node today is to override the client name, which could be done with a “title” line in the Readme, and some C# only options that could be done readme.csharp.me (and those options disappears anyway with the new codegen for Csharp).
+
+The following would be invalid:
+
+```json
+ "info": {
+    "version": "2016-05-16",
+    "x-ms-code-generation-settings": {
+      "name": "AnalysisServicesManagementClient"
+    }
+  }
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+
