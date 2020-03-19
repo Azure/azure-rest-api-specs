@@ -2927,7 +2927,7 @@
           "readOnly": true
         },
         "quantity": {
-          "description": "The quantity for calcualted savings.",
+          "description": "The quantity for calculated savings.",
           "type": "number",
           "readOnly": true
         },
@@ -2954,6 +2954,9 @@
         "appliedScopes": {
           "description": "List of subscriptions for which the reservation is applied.",
           "type": "array",
+          "items": {
+            "type":"string"
+          },
           "readOnly": true
         },
         "onDemandRate": {
@@ -3039,7 +3042,7 @@
           "readOnly": true
         },
         "usageData": {
-          "description": "The breakdown of historical resource usage.  The values are in the order in which the usage occured between the firstConsumptionDate and the lastConsumptionDate.",
+          "description": "The breakdown of historical resource usage.  The values are in the order of usage between the firstConsumptionDate and the lastConsumptionDate.",
           "type": "array",
           "items": {
             "type": "number"
