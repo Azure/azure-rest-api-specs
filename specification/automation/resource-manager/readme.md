@@ -345,6 +345,7 @@ input-file:
   - $(this-folder)/Microsoft.Automation/stable/2018-06-30/python2package.json
   - $(this-folder)/Microsoft.Automation/preview/2020-01-13-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.Automation/preview/2020-01-13-preview/privateLinkResources.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
