@@ -51,7 +51,6 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/endpointService.json
   - Microsoft.Network/stable/2020-03-01/expressRouteCircuit.json
   - Microsoft.Network/stable/2020-03-01/expressRouteCrossConnection.json
-  - Microsoft.Network/stable/2020-03-01/expressRouteGateway.json
   - Microsoft.Network/stable/2020-03-01/expressRoutePort.json
   - Microsoft.Network/stable/2020-03-01/firewallPolicy.json
   - Microsoft.Network/stable/2020-03-01/ipGroups.json
