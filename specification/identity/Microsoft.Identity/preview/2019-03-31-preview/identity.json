@@ -1,0 +1,3558 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Application, ServicePrincipal APIs for ARM",
+        "description": "Every API listed under 'ARM API' will be translated into the corresponding API listed under 'MSGraph API'",
+
+        "version": "2019-03-31-preview"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "https://management.azure.com/providers/Microsoft.Identity"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            "clientId": "ae9febd2-671a-4428-a9e5-812ed8dd72e8",
+            "flow": "implicit",
+            "description": "Azure Active Directory Authorization",
+            "scopes": {
+                "https://management.azure.com/providers/Microsoft.Identity/Directory.AccessAsUser.All": "Impersonate your user account"
+            }
+        }
+    },
+    "parameters": {
+        "authorizationHeaderParam": {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Contains the bearer token used to authorize access to the API.",
+            "required": false,
+            "type": "string",
+            "x-powershell-hide": true,
+            "x-powershell-required": false
+        },
+        "trackingHeaderParam": {
+            "name": "client-request-id",
+            "in": "header",
+            "description": "Contains the correlation id for the operation.",
+            "required": false,
+            "type": "string",
+            "x-powershell-hide": true,
+            "x-powershell-required": false
+        },
+        "idParam": {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of an object in Azure Active Directory",
+            "required": true,
+            "type": "string",
+            "x-powershell-hide": false,
+            "x-powershell-required": true
+        },
+        "appIdParam": {
+            "name": "appId",
+            "in": "path",
+            "description": "The appId of an application",
+            "required": true,
+            "type": "string",
+            "x-powershell-hide": false,
+            "x-powershell-required": true
+        },
+        "targetTypeParam": {
+            "in": "path",
+            "name": "targetType",
+            "description": "object type name of directory object that will be assigned settings",
+            "type": "string",
+            "required": true,
+            "x-powershell-hide": false,
+            "x-powershell-required": true
+        },
+        "appIdentifierParam": {
+            "in": "path",
+            "name": "appIdentifier",
+            "description": "The unique idenfier of an application",
+            "required": true,
+            "type": "string"
+        },
+        "spIdentifierParam": {
+            "in": "path",
+            "name": "spIdentifier",
+            "description": "The unique idenfier of a servicePrincipal",
+            "required": true,
+            "type": "string"
+        },
+        "objectIdParam": {
+            "name": "objectId",
+            "in": "path",
+            "description": "The unique identifier of the object specific Azure Active Directory object",
+            "required": true,
+            "type": "string",
+            "x-powershell-hide": false,
+            "x-powershell-required": true
+        },
+        "appRoleAssignmentIdParam": {
+            "name": "appRoleAssignmentId",
+            "in": "path",
+            "description": "The unique identifier of a appRoleAssignment in Azure Active Directory (ObjectId)",
+            "required": true,
+            "type": "string",
+            "x-powershell-hide": false,
+            "x-powershell-required": true
+        },
+        "apiVersionParam": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version.",
+            "enum": [
+              "2019-03-31-preview"
+            ]
+        },
+        "clientIdParam": {
+            "name": "clientId",
+            "in": "path",
+            "description": "The id of the client service principal for the application which is authorized to act on behalf of a signed-in user when accessing an API.",
+            "required": true,
+            "type": "string"
+        },
+        "consentTypeParam": {
+            "name": "consentType",
+            "in": "path",
+            "description": "Indicates if authorization is granted for the client application to impersonate all users or only a specific user.",
+            "required": true,
+            "type": "string"
+        },
+        "principalIdParam": {
+            "name": "principalId",
+            "in": "path",
+            "description": "The id of the user on behalf of whom the client is authorized to access the resource.",
+            "required": true,
+            "type": "string"
+        },
+        "resourceIdParam": {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The id of the resource service principal to which access is authorized.",
+            "required": true,
+            "type": "string"
+        },
+        "appRoleIdParam": {
+            "name": "appRoleId",
+            "in": "path",
+            "description": "The identifier (id) for the app role which is assigned to the principal. This app role must be exposed in the appRoles property on the resource application's service principal (resourceId).",
+            "required": true,
+            "type": "string"
+        }
+    },
+    "responses": {
+        "unexpectedErrorResponse": {
+            "description": "Unexpected error",
+            "headers": {
+                "ocp-aad-diagnositcs-server-name": {
+                    "type": "string",
+                    "description": "The identifier for the server that performed the requested operation."
+                },
+                "ocp-aad-session-key": {
+                    "description": "The key that identifies the current session with the directory service.",
+                    "type": "string"
+                }
+            },
+            "schema": {
+                "$ref": "#/definitions/odata.error"
+            }
+        },
+        "successResponse": {
+            "description": "Success",
+            "headers": {
+                "ocp-aad-diagnositcs-server-name": {
+                    "type": "string",
+                    "description": "The identifier for the server that performed the requested operation."
+                },
+                "ocp-aad-session-key": {
+                    "description": "The key that identifies the current session with the directory service.",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "paths": {
+        "/providers/Microsoft.Identity/applications": {
+            "get": {
+                "operationId": "ListApplications",
+                "summary": "Get a list of applications.",
+                "description": "Get a list of applications.",
+                "tags": [
+                    "Applications"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of applications",
+                        "schema": {
+                            "$ref": "#/definitions/getARMApplicationsResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/applications/{appIdentifier}": {
+            "get": {
+                "operationId": "GetApplication",
+                "summary": "Get an application by appIdentifier",
+                "description": "Get an application by appIdentifier",
+                "tags": [
+                    "Applications"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application found",
+                        "schema": {
+                            "$ref": "#/definitions/getARMApplicationResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "NewApplication",
+                "summary": "Create or update an application from ARM template.",
+                "description": "Create or update an application from ARM template.",
+                "tags": [
+                    "Applications"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "armApplication",
+                        "in": "body",
+                        "description": "New application",
+                        "required": true,
+                        "x-powershell-hide": true,
+                        "x-powershell-required": false,
+                        "schema": {
+                            "$ref": "#/definitions/armApplicationCore"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created application",
+                        "schema": {
+                            "$ref": "#/definitions/getARMApplicationResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "SetARMApplication",
+                "summary": "Create or update an application from ARM template.",
+                "description": "Create or update an application from ARM template.",
+                "tags": [
+                    "Applications"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "armApplication",
+                        "in": "body",
+                        "description": "New application",
+                        "required": true,
+                        "x-powershell-hide": true,
+                        "x-powershell-required": false,
+                        "schema": {
+                            "$ref": "#/definitions/armApplicationCore"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created application",
+                        "schema": {
+                            "$ref": "#/definitions/getARMApplicationResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "RemoveARMApplication",
+                "summary": "Delete an application by appIdentifier.",
+                "description": "Delete an application by appIdentifier.",
+                "tags": [
+                    "Applications"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/applications/{appIdentifier}/owners": {
+            "get": {
+                "operationId": "ListApplicationsOwners",
+                "summary": "List owners for this application.",
+                "description": "List owners for this application.",
+                "tags": [
+                    "Applications: Owners"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getOwnersResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/applications/{appIdentifier}/owners/{id}": {
+            "put": {
+                "operationId": "NewApplicationOwner",
+                "summary": "Assign an owner for this application.",
+                "description": "Assign an owner for this application.",
+                "tags": [
+                    "Applications: Owners"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/idParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "appOwner",
+                        "in": "body",
+                        "description": "New applicaiton owner",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ownersCore"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "RemoveApplicationOwner",
+                "summary": "Remove an application owner.",
+                "description": "Remove an application owner.",
+                "tags": [
+                    "Applications: Owners"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/idParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals": {
+            "get": {
+                "operationId": "ListServicePrincipals",
+                "summary": "Get a list of servicePrincipals within the directory.",
+                "description": "Get a list of servicePrincipals within the directory.",
+                "tags": [
+                    "ServicePrincipals"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of service principals",
+                        "schema": {
+                            "$ref": "#/definitions/getARMServicePrincipalsResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}": {
+            "get": {
+                "operationId": "GetARMServicePrincipal",
+                "summary": "Get a service principal by objectId",
+                "description": "Get a service principal by objectId from Azure Active Directory",
+                "tags": [
+                    "ServicePrincipals"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ServicePrincipal found",
+                        "schema": {
+                            "$ref": "#/definitions/getARMServicePrincipalResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "NewARMServicePrincipal",
+                "summary": "Updates a service principal",
+                "description": "Updates a service principal",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "servicePrincipal",
+                        "in": "body",
+                        "description": "service principal with updated fields",
+                        "required": true,
+                        "x-powershell-hide": true,
+                        "x-powershell-required": false,
+                        "schema": {
+                            "$ref": "#/definitions/armServicePrincipalCore"
+                        }
+                    }
+                ],
+                "tags": [
+                    "ServicePrincipals"
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "SetARMServicePrincipal",
+                "summary": "Updates a service principal",
+                "description": "Updates a service principal",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "servicePrincipal",
+                        "in": "body",
+                        "description": "service principal with updated fields",
+                        "required": true,
+                        "x-powershell-hide": true,
+                        "x-powershell-required": false,
+                        "schema": {
+                            "$ref": "#/definitions/armServicePrincipalCore"
+                        }
+                    }
+                ],
+                "tags": [
+                    "ServicePrincipals"
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "RemoveARMServicePrincipal",
+                "summary": "Delete a servicePrincipal by spIdentifier.",
+                "description": "Delete a servicePrincipal by spIdentifier.",
+                "tags": [
+                    "ServicePrincipals"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/owners": {
+            "get": {
+                "operationId": "ListServicePrincipalOwners",
+                "summary": "List owners for this servicePrincipal.",
+                "description": "List owners for this servicePrincipal.",
+                "tags": [
+                    "ServicePrincipals: Owners"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getOwnersResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/owners/{id}": {
+            "put": {
+                "operationId": "NewServicePrincipalOwner",
+                "summary": "Assign an owner for this servicePrincipal.",
+                "description": "Assign an owner for this servicePrincipal.",
+                "tags": [
+                    "ServicePrincipals: Owners"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/idParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "servicePrincipalOwner",
+                        "in": "body",
+                        "description": "New servicePrincipal owner",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ownersCore"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }, 
+            "delete": {
+                "operationId": "RemoveServicePrincipalOwner",
+                "summary": "Remove a servicePrincipal owner.",
+                "description": "Remove a servicePrincipal owner.",
+                "tags": [
+                    "ServicePrincipals: Owners"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/idParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/oauth2PermissionGrants": {
+            "get": {
+                "operationId": "GetServicePrincipalOAuth2PermissionGrants",
+                "summary": "Get the list of delegated permission grants (oAuth2PermissionGrants).",
+                "description": "Get the list of the oAuth2PermissionGrants that the user granted this service principal.  These permissions are typically granted when an application asked for a specific permission to a resource that the user has discretion over.",
+                "tags": [
+                    "ServicePrincipals: oAuth2PermissionGrants"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The permissions that the service principal has been granted to another service principal.",
+                        "schema": {
+                            "$ref": "#/definitions/getOAuth2PermissionGrantsResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/oauth2PermissionGrants/{clientId}:{consentType}:{principalId}:{resourceId}": {
+            "get": {
+                "operationId": "GetServicePrincipalOAuth2PermissionGrant",
+                "summary": "Get a single delegated permission grant.",
+                "description": "Get a single oAuth2PermissionGrant that the user granted this service principal.",
+                "tags": [
+                    "ServicePrincipals: oAuth2PermissionGrants"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/clientIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/consentTypeParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Application found",
+                        "schema": {
+                            "$ref": "#/definitions/getOAuth2PermissionGrantResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "CreateServicePrincipalOAuth2PermissionGrants",
+                "summary": "Create a delegated permission grant.",
+                "description": "Create a delegated permission grant (oAuth2PermissionGrants).",
+                "tags": [
+                    "ServicePrincipals: oAuth2PermissionGrants"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/clientIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/consentTypeParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "oAuth2PermissionGrant",
+                        "in": "body",
+                        "description": "New delegated permission grant",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/oAuth2PermissionGrant"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created delegated permission grant",
+                        "schema": {
+                            "$ref": "#/definitions/oAuth2PermissionGrant"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "RemoveOAuth2PermissionGrant",
+                "summary": "Delete an oAuth2PermissionGrant.",
+                "description": "Delete an oAuth2PermissionGrant.",
+                "tags": [
+                    "ServicePrincipals: oAuth2PermissionGrants"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/clientIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/consentTypeParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/appRoleAssignedTo": {
+            "get": {
+                "operationId": "ListServicePrincipalAppRoleAssignedTo",
+                "summary": "Get the users, groups and service principals assigned app roles for this service principal.",
+                "description": "Get the users, groups and service principals assigned app roles for this service principal.",
+                "tags": [
+                    "ServicePrincipals: AppRoleAssignedTo"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getAppRoleAssignmentsResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Identity/servicePrincipals/{spIdentifier}/appRoleAssignedTo/{principalId:resourceId:appRoleId}": {
+            "get": {
+                "operationId": "GetServicePrincipalAppRoleAssignedTo",
+                "summary": "Get the users, groups and service principals assigned app roles for this service principal.",
+                "description": "Get the users, groups and service principals assigned app roles for this service principal.",
+                "tags": [
+                    "ServicePrincipals: AppRoleAssignedTo"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appRoleIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/getAppRoleAssignmentResponse"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "put": {
+                "operationId": "NewServicePrincipalAppRoleAssignmentTo",
+                "summary": "Assign an app role for this service principal to a user, group or service principal.",
+                "description": "Assign an app role for this service principal to a user, group or service principal.",
+                "tags": [
+                    "ServicePrincipals: AppRoleAssignedTo"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appRoleIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    },
+                    {
+                        "name": "appRoleAssignment",
+                        "in": "body",
+                        "description": "Assign an app role for a resource service principal.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/appRoleAssignment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "the created app role assignment",
+                        "schema": {
+                            "$ref": "#/definitions/appRoleAssignment"
+                        }
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            },
+            "delete": {
+                "x-powershell-verb": "Remove",
+                "x-powershell-noun": "AzureADServiceAppRoleAssignment",
+                "x-powershell-cmdlet": true,
+                "operationId": "RemoveServicePrincipalAppRoleAssignment",
+                "summary": "Delete a service principal application role assignment.",
+                "description": "Delete a service principal application role assignment.",
+                "tags": [
+                    "ServicePrincipals: AppRoleAssignedTo"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/authorizationHeaderParam"
+                    },
+                    {
+                        "$ref": "#/parameters/spIdentifierParam"
+                    },
+                    {
+                        "$ref": "#/parameters/principalIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/resourceIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/appRoleIdParam"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParam"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "$ref": "#/responses/successResponse"
+                    },
+                    "default": {
+                        "$ref": "#/responses/unexpectedErrorResponse"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "apiApplication": {
+            "description": "Specifies settings for an API application.",
+            "properties": {
+                "requestedAccessTokenVersion": {
+                    "description": "Specifies the accepted access token version for the current API resource. Possible values are 1 or 2.",
+                    "type": "integer"
+                },
+                "oauth2PermissionScopes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/permissionScope"
+                    }
+                },
+                "preAuthorizedApplications": {
+                    "description": "Lists applications and requested permissions for implicit consent. Requires an admin to have provided consent to the application. preAuthorizedApplications do not require the user to consent to the requested permissions. Permissions listed in preAuthorizedApplications do not require user consent. However, any additional requested permissions not listed in preAuthorizedApplications require user consent.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/preAuthorizedApplication"
+                    }
+                },
+                "knownClientApplications": {
+                    "description": "",
+                    "type": "array",
+                    "items": {
+
+                    }
+                }
+            }
+        },
+        "appRole": {
+            "description": "The collection of application roles that an application may declare. These roles can be assigned to users, groups, or service principals. Not nullable.",
+            "properties": {
+                "allowedMemberTypes": {
+                    "description": "Specifies whether this app role definition can be assigned to users and groups by setting to \"User\", or to other applications (that are accessing this application in daemon service scenarios) by setting to \"Application\", or to both.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "description": {
+                    "description": "Permission help text that appears in the admin app assignment and consent experiences.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "Display name for the permission that appears in the admin consent and app assignment experiences.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Unique role identifier inside the appRoles collection.",
+                    "type": "string"
+                },
+                "isEnabled": {
+                    "description": "When creating or updating a role definition, this must be set to true (which is the default). To delete a role, this must first be set to false. At that point, in a subsequent call, this role may be removed.",
+                    "type": "boolean"
+                },
+                "value": {
+                    "description": "Specifies the value of the roles claim that the application should expect in the authentication and access tokens.",
+                    "type": "string"
+                }
+            }
+        },
+        "appRoleAssignment": {
+            "description": "Used to record when a user or group is assigned to an application.",
+            "x-readOnly": [
+                "creationTimestamp",
+                "principalDisplayName",
+                "principalType",
+                "resourceDisplayName"
+            ],
+            "allOf": [
+                {
+                    "required": [
+                        "appRoleId",
+                        "principalId",
+                        "resourceId"
+                    ],
+                    "properties": {
+                        "creationTimestamp": {
+                            "description": "The time when the grant was created.",
+                            "type": "string",
+                            "format": "date-time",
+                            "readOnly": true
+                        },
+                        "appRoleId": {
+                            "description": "The role id that was assigned to the principal. This role must be declared by the target resource application resourceId in its appRoles property. Where the resource does not declare any permissions, a default id (zero GUID) must be specified.",
+                            "type": "string"
+                        },
+                        "principalDisplayName": {
+                            "description": "The display name of the principal that was granted the access.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "principalId": {
+                            "description": "The unique identifier (objectId) for the principal being granted the access.",
+                            "type": "string"
+                        },
+                        "principalType": {
+                            "description": "The type of principal. This can either be \"User\", \"Group\" or \"ServicePrincipal\".",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "resourceDisplayName": {
+                            "description": "The display name of the resource to which the assignment was made.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "resourceId": {
+                            "description": "The unique identifier (objectId) for the target resource (service principal) for which the assignment was made.",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "armPrologue": {
+            "description": "ARM prologue",
+            "discriminator": "id",
+            "x-readOnly": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for the object.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type.": {
+                    "description": "Type of ARM object",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Resource name",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "getAppRoleAssignmentResponse": {
+            "description": "A list of app role assignments.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "properties": {
+                        "type": "object",
+                        "properties.": {
+                            "$ref": "#/definitions/appRoleAssignment"
+                        }
+                    }
+                }
+            ]
+        },
+        "getAppRoleAssignmentsResponse": {
+            "description": "A list of app role assignments.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/appRoleAssignment"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "owners": {
+            "description": "Owners.",
+            "x-readOnly": [
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "required": [
+                        "id"
+                    ],
+                    "properties": {
+
+                        "properties.":{
+                            "$ref": "#definitions/ownersCore"
+                        }
+                    }
+                }
+            ]
+        },
+        "ownersCore": {
+            "description": "Owners.",
+            "x-readOnly": [
+            ],
+            "allOf": [
+                {
+                    "required": [
+                        "id"
+                    ],
+                    "properties": {
+                        "id": {
+                            "description": "Owner's object ID",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "getOwnerResponse": {
+            "description": "A list of app role assignments.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "properties": {
+                        "type": "object",
+                        "properties.": {
+                            "$ref": "#/definitions/ownersCore"
+                        }
+                    }
+                }
+            ]
+        },
+        "getOwnersResponse": {
+            "description": "A list of app role assignments.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getOwnerResponse"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "armApplication": {
+            "description": "Represents an application. Any application that outsources authentication to Azure AD must be registered in a directory.",
+            "x-readOnly": [
+
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "$ref": "#definitions/armApplicationCore"
+                }
+            ]
+        },
+        "armApplicationCore": {
+            "description": "Represents an application. Any application that outsources authentication to Azure AD must be registered in a directory.",
+            "x-readOnly": [
+                "appId",
+                "armIdentifier"
+            ],
+            "allOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "description": "The unique identifier for the object.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "appId": {
+                            "description": "The unique identifier for the application.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "armIdentifier": {
+                            "description": "The unique identifier for the object with in ARM.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "displayName": {
+                            "description": "The display name of the application.",
+                            "type": "string",
+                            "x-filterOptions": [
+                                {
+                                    "filterOption": "StartsWith"
+                                },
+                                {
+                                    "filterOption": "Equals"
+                                }
+                            ]
+                        },
+                        "info": {
+                            "$ref": "#/definitions/informationalUrl"
+                        },
+                        "api": {
+                            "$ref":"#/definitions/apiApplication"
+                        },
+                        "web": {
+                            "$ref": "#/definitions/webApplication"
+                        },
+                        "publicClient": {
+                            "$ref": "#/definitions/publicClientApplication"
+                        },                        
+                        "isFallbackPublicClient": {
+                            "description": "Specifies if the application can act as a public client. For example,  an installed application running on a mobile device. Default value is false.",
+                            "type": "boolean"
+                        },
+                        "appRoles": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/appRole"
+                            }
+                        },
+                        "requiredResourceAccess": {
+                            "description": "Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/requiredResourceAccess"
+                            }
+                        },
+                        "identifierUris": {
+                            "description": "The URIs that identify the application. not nullable, the any operator is required for filter expressions on multi-valued properties",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "keyCredentials": {
+                            "description": "The collection of credentials associated with the service principal. If linked to an associated application then this collection will be empty.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/keyCredential"
+                            }
+                        },
+                        "passwordCredentials": {
+                            "description": "The collection of password credentials associated with the application.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/passwordCredential"
+                            }
+                        },
+                        "groupMembershipClaims": {
+                            "description": "Group membership claims.",
+                            "type": "string"
+                        },
+                        "optionalClaims": {
+                            "$ref": "#/definitions/optionalClaims"
+                        },
+                        "signInAudience": {
+                            "description": "Audience for signing in to the application (AzureADMyOrg, AzureADMultipleOrgs, AzureADandPersonalMicrosoftAccount).",
+                            "type": "string"
+                        },
+                        "tags": {
+                            "description": "Custom strings that can be used to categorize and identify the application.",
+                            "type": "array",
+                            "items":{
+                                "type": "string"
+                            }
+                        },
+                        "tokenEncryptionKeyId": {
+                            "description": "KeyId for for the KeyCredential to be used for AccessToken encryption..",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "getARMApplicationsResponse": {
+            "description": "Get one applications.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getARMApplicationResponse"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "getARMApplicationResponse": {
+            "description": "A list of applications.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "properties": {
+                        "type": "object",
+                        "properties.": {
+                            "$ref": "#/definitions/armApplicationCore"
+                        }    
+                    }
+                }
+            ]
+        },
+        "servicePrincipal": {
+            "description": "Represents an instance of an application in a directory.",
+            "x-readOnly": [
+                "addIns",
+                "appDisplayName",
+                "appOwnerTenantId",
+                "appRoles",
+            ],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/directoryObject"
+                },
+                {
+                    "required": [
+                        "appId"
+                    ],
+                    "properties": {
+                        "armIdentifier": {
+                            "description": "The unique identifier for the object with in ARM.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "accountEnabled": {
+                            "description": "true if the service principal account is enabled; otherwise, false.",
+                            "type": "string"
+                        },
+                        "alternativeNames": {
+                            "description": "The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "appDisplayName": {
+                            "description": "The display name exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "appId": {
+                            "description": "The unique identifier for the associated application (its appId property).",
+                            "type": "string"
+                        },
+                        "appOwnerTenantId": {
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "appRoleAssignmentRequired": {
+                            "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
+                            "type": "boolean"
+                        },
+                        "appRoles": {
+                            "description": "The application roles exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/appRole"
+                            }
+                        },
+                        "displayName": {
+                            "description": "The display name for the service principal.",
+                            "type": "string",
+                            "x-filterOptions": [
+                                {
+                                    "filterOption": "StartsWith"
+                                },
+                                {
+                                    "filterOption": "Equals"
+                                }
+                            ]
+                        },
+                        "homepage": {
+                            "description": "The URL to the homepage of the associated application.",
+                            "type": "string"
+                        },
+                        "keyCredentials": {
+                            "description": "The collection of key credentials associated with the service principal.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/keyCredential"
+                            }
+                        },
+                        "logoutUrl": {
+                            "type": "string"
+                        },
+                        "oauth2Permissions": {
+                            "description": "The OAuth 2.0 permissions exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/oAuth2Permission"
+                            }
+                        },
+                        "replyUrls": {
+                            "description": "The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "servicePrincipalNames": {
+                            "description": "The URIs that identify the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "tags": {
+                            "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "armServicePrincipal": {
+            "description": "Represents an instance of an application in a directory.",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for the object.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "description": "Type of ARM object",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "apiVersion": {
+                    "description": "ARM API Version",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "Resource name",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "armServicePrincipalCore": {
+            "description": "Represents an instance of an application in a directory.",
+            "x-readOnly": [
+                "addIns",
+                "appDisplayName",
+                "appOwnerTenantId",
+                "appRoles"
+            ],
+            "allOf": [
+                {
+                    "required": [
+                        "appId"
+                    ],
+                    "properties": {
+                        "armIdentifier": {
+                            "description": "The unique identifier for the object with in ARM.",
+                            "type": "string",
+                            "readOnly": true
+                        },
+                        "accountEnabled": {
+                            "description": "true if the service principal account is enabled; otherwise, false.",
+                            "type": "string"
+                        },
+                        "alternativeNames": {
+                            "description": "The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "appDisplayName": {
+                            "description": "The display name exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "appId": {
+                            "description": "The unique identifier for the associated application (its appId property).",
+                            "type": "string"
+                        },
+                        "appOwnerTenantId": {
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "appRoleAssignmentRequired": {
+                            "description": "Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.",
+                            "type": "boolean"
+                        },
+                        "appRoles": {
+                            "description": "The application roles exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/appRole"
+                            }
+                        },
+                        "displayName": {
+                            "description": "The display name for the service principal.",
+                            "type": "string",
+                            "x-filterOptions": [
+                                {
+                                    "filterOption": "StartsWith"
+                                },
+                                {
+                                    "filterOption": "Equals"
+                                }
+                            ]
+                        },
+                        "homepage": {
+                            "description": "The URL to the homepage of the associated application.",
+                            "type": "string"
+                        },
+                        "keyCredentials": {
+                            "description": "The collection of key credentials associated with the service principal.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/keyCredential"
+                            }
+                        },
+                        "logoutUrl": {
+                            "type": "string"
+                        },
+                        "oauth2Permissions": {
+                            "description": "The OAuth 2.0 permissions exposed by the associated application.",
+                            "readOnly": true,
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/oAuth2Permission"
+                            }
+                        },
+                        "replyUrls": {
+                            "description": "The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "servicePrincipalNames": {
+                            "description": "The URIs that identify the associated application.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "tags": {
+                            "description": "Optional list of tags that you can apply to your service principals. Not nullable.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "getServicePrincipalsResponse": {
+            "description": "A list of service principals.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getARMServicePrincipalResponse"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "getARMServicePrincipalsResponse": {
+            "description": "A list of service principals.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getARMServicePrincipalResponse"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "getARMServicePrincipalResponse": {
+            "description": "A list of service principals.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "properties": {
+                        "type": "object",
+                        "properties.": {
+                            "$ref": "#/definitions/armServicePrincipalCore"
+                        }
+                    }
+                }
+            ]
+        },
+        "oAuth2Permission": {
+            "description": "Represents an OAuth 2.0 delegated permission scope. The specified OAuth 2.0 delegated permission scopes may be requested by client applications (through the requiredResourceAccess collection on the Application object) when calling a resource application. The oauth2Permissions property of the ServicePrincipal entity and of the Application entity is a collection of OAuth2Permission.",
+            "properties": {
+                "adminConsentDescription": {
+                    "description": "Permission help text that appears in the admin consent and app assignment experiences.",
+                    "type": "string"
+                },
+                "adminConsentDisplayName": {
+                    "description": "Display name for the permission that appears in the admin consent and app assignment experiences.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Unique scope permission identifier inside the oauth2Permissions collection.",
+                    "type": "string"
+                },
+                "isEnabled": {
+                    "description": "When creating or updating a permission, this property must be set to true (which is the default). To delete a permission, this property must first be set to false. At that point, in a subsequent call, the permission may be removed. ",
+                    "type": "boolean"
+                },
+                "type": {
+                    "description": "Specifies whether this scope permission can be consented to by an end user, or whether it is a tenant-wide permission that must be consented to by a Company Administrator. Possible values are \"User\" or \"Admin\".",
+                    "type": "string"
+                },
+                "userConsentDescription": {
+                    "description": "Permission help text that appears in the end user consent experience.",
+                    "type": "string"
+                },
+                "userConsentDisplayName": {
+                    "description": "Display name for the permission that appears in the end user consent experience.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the scope claim that the resource application should expect in the OAuth 2.0 access token.",
+                    "type": "string"
+                }
+            }
+        },
+        "oAuth2PermissionGrant": {
+            "description": "Represents the OAuth 2.0 delegated permission scopes that have been granted to an application (represented by a service principal) as part of the user or admin consent process.",
+            "x-readOnly": [
+                "expiryTime",
+                "objectId",
+                "startTime"
+            ],
+            "properties": {
+                "clientId": {
+                    "description": "Specifies the objectId of the service principal granted consent to impersonate the user when accessing the resource (represented by the resourceId).",
+                    "type": "string"
+                },
+                "consentType": {
+                    "description": "Specifies whether consent was provided by the administrator on behalf of the organization or whether consent was provided by an individual. The possible values are \"AllPrincipals\" or \"Principal\".",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The unique identifier for the permission scope.",
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "principalId": {
+                    "description": "If consentType is \"AllPrincipals\" this value is null, and the consent applies to all users in the organization. If consentType is \"Principal\" then this property specifies the objectId of the user that granted consent, and applies only for that user.",
+                    "type": "string"
+                },
+                "resourceId": {
+                    "description": "Specifies the objectId of the resource service principal to which access has been granted.",
+                    "type": "string"
+                },
+                "scope": {
+                    "description": "Specifies the value of the scope claim that the resource application should expect in the OAuth 2.0 access token.",
+                    "type": "string"
+                }
+            }
+        },
+        "getOAuth2PermissionGrantResponse": {
+            "description": "Get oAuth2PermissionGrant.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/armPrologue"
+                },
+                {
+                    "properties": {
+                        "type": "object",
+                        "properties.": {
+                            "$ref": "#/definitions/oAuth2PermissionGrant"
+                        }
+                    }
+                }
+            ]
+        },
+        "getOAuth2PermissionGrantsResponse": {
+            "description": "List oAuth2PermissionGrants.",
+            "allOf": [
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/getOAuth2PermissionGrantResponse"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "directorySettingTemplate": {
+            "description": "A directory setting template in Azure Active Directory.",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for the template. Read-only.",
+                    "type": "string"
+                },
+                "displayName": {
+                    "description": "The complete human readable name for the directory setting that this template was created for.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A description of the directory setting template",
+                    "type": "string"
+                },
+                "values": {
+                    "description": "A array of the directory setting template values",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/settingTemplateValue"
+                    }
+                }
+            }
+        },
+        "informationalUrl": {
+            "description": "Represents a group of URLs that provide terms of service, marketing, support and privacy policy information about an application. The default value for each string is null.",
+            "properties": {
+                "termsOfServiceUrl": {
+                    "description": "The terms of service URL",
+                    "type": "string"
+                },
+                "marketingUrl": {
+                    "description": "The marketing URL",
+                    "type": "string"
+                },
+                "privacyStatementUrl": {
+                    "description": "The privacy policy URL",
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "description": "The support URL",
+                    "type": "string"
+                },
+                "logoUrl": {
+                    "description": "The logo URL",
+                    "type": "string"
+                }
+            }
+        },
+        "settingTemplateValue": {
+            "description": "A directory setting template value in Azure Active Directory",
+            "properties": {
+                "name": {
+                    "description": "The complete human readable name for the directory setting template value.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A description of the directory setting template value.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of directory setting template value.",
+                    "type": "string"
+                },
+                "defaultValue": {
+                    "description": "The default value of directory setting template value.",
+                    "type": "string"
+                }
+            }
+        },
+        "getDirectorySettingTemplateResponse": {
+            "description": "A list of directory setting templates.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/directorySettingTemplate"
+                        }
+                    }
+                }
+            }]
+        },
+        "directorySetting": {
+            "description": "A directory settings in Azure Active Directory",
+            "x-readOnly": [
+                "id",
+                "displayName"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for these settings. Read-only.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "displayName": {
+                    "description": "Display name of this group of settings, which comes from the associated template. Read-only.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "templateId": {
+                    "description": "Unique identifier for the template used to create this group of settings. Read-only.",
+                    "type": "string"
+                },
+                "values": {
+                    "description": "Collection of name value pairs. Must contain and set all the settings defined in the template.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/settingValue"
+                    }
+                }
+            }
+        },
+        "settingValue": {
+            "description": "Name value pair in settings values field.",
+            "properties": {
+                "name": {
+                    "description": "Name of the setting (as defined by the directorySettingTemplate).",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Value of the setting.",
+                    "type": "string"
+                }
+            }
+        },
+        "getDirectorySettingResponse": {
+            "description": "A list of directory settings.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/directorySetting"
+                        }
+                    }
+                }
+            }]
+        },
+        "targetType": {
+            "type": "string",
+            "default": "Groups",
+            "enum": [
+                "Groups",
+                "Users",
+                "ServicePrincipals",
+                "Applications",
+                "Devices"
+            ],
+            "description": "object type name of directory object that will be assigned settings"
+        },
+        "invitation": {
+            "description": "A invitation object.",
+            "x-readOnly": [
+                "id",
+                "inviteRedeemUrl",
+                "invitedUser",
+                "status"
+            ],
+            "required": [
+                "invitedUserEmailAddress",
+                "inviteRedirectUrl"
+            ],
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for the settings.",
+                    "type": "string"
+                },
+                "invitedUserDisplayName": {
+                    "description": "The display name of the invited user.",
+                    "type": "string"
+                },
+                "invitedUserEmailAddress": {
+                    "description": "The email address of the invited user.",
+                    "type": "string"
+                },
+                "sendInvitationMessage": {
+                    "description": "indicates whether a invitation message with redeem url should be sent or not.",
+                    "type": "boolean"
+                },
+                "inviteRedeemUrl": {
+                    "description": "The redeem URL for the invited user.",
+                    "type": "string"
+                },
+                "inviteRedirectUrl": {
+                    "description": "The URL invited user should be redirected to after redemption.",
+                    "type": "string"
+                },
+                "invitedUser": {
+                    "description": "The objectId of the invited user.",
+                    "$ref": "#/definitions/user"
+                },
+                "invitedUserMessageInfo": {
+                    "description": "Additional configuration for the message being sent to the invited user, including customizing message text, language and cc recipient list.",
+                    "$ref": "#/definitions/invitedUserMessageInfo"
+                },
+                "invitedUserType": {
+                    "description": "The userType of the user being invited. By default, this is Guest. You can invite as Member if you're are company administrator.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the invitation.",
+                    "type": "string"
+                }
+            }
+        },
+        "invitedUserMessageInfo": {
+            "description": "The invitedUserMessageInfo object allows you to configure the invitation message",
+            "properties": {
+                "ccRecipients": {
+                    "description": "Additional recipients the invitation message should be sent to.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/recipient"
+                    }
+                },
+                "customizedMessageBody": {
+                    "description": "Customized message body you want to send if you don't want the default message.",
+                    "type": "string"
+                },
+                "messageLanguage": {
+                    "description": "The language you want to send the default message in. If the customizedMessageBody is specified, this property is ignored, and the message is sent using the customizedMessageBody. The language format should be in ISO 639. The default is en-US.",
+                    "type": "string"
+                }
+            }
+        },
+        "recipient": {
+            "description": "Message recipient reprensentation.",
+            "properties": {
+                "emailAddress": {
+                    "$ref": "#/definitions/emailAddress"
+                }
+            }
+        },
+        "emailAddress": {
+            "description": "Message email address reprensentation.",
+            "properties": {
+                "name": {
+                    "description": "Name of the person",
+                    "type": "string"
+                },
+                "address": {
+                    "description": "Email address",
+                    "type": "string"
+                }
+            }
+        },
+        "msGroup": {
+            "description": "Represents an Azure Active Directory Group.",
+            "x-readOnly": [
+                "createdDateTime",
+                "onPremisesSyncEnabled",
+                "onPremisesLastSyncDateTime",
+                "mail",
+                "onPremisesSecurityIdentifier",
+                "proxyAddresses",
+                "deletedDateTime",
+                "renewedDateTime"
+            ],
+            "allOf": [{
+                "$ref": "#/definitions/msDirectoryObject"
+            }, {
+                "required": [
+                    "displayName",
+                    "mailEnabled",
+                    "mailNickname",
+                    "securityEnabled"
+                ],
+                "x-createTimeSetOnly": [
+                    "mailEnabled"
+                ],
+                "properties": {
+                    "createdDateTime": {
+                        "description": "Indicates the time when the group was created.",
+                        "readOnly": true,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "description": {
+                        "description": "An optional description for the group.",
+                        "type": "string"
+                    },
+                    "onPremisesSyncEnabled": {
+                        "description": "true if this object is synced from an on-premises directory; false if this object was originally synced from an on-premises directory but is no longer synced; null if this object has never been synced from an on-premises directory (default).",
+                        "type": "boolean",
+                        "readOnly": true
+                    },
+                    "deletedDateTime": {
+                        "description": "Indicates the time when the group was soft deleted.",
+                        "readOnly": true,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "displayName": {
+                        "description": "The display name for the group. This property is required when a group is created and it cannot be cleared during updates.",
+                        "type": "string",
+                        "x-filterOptions": [{
+                            "filterOption": "StartsWith"
+                        }, {
+                            "filterOption": "Equals"
+                        }]
+                    },
+                    "onPremisesLastSyncDateTime": {
+                        "description": "Indicates the last time at which the object was synced with the on-premises directory.",
+                        "readOnly": true,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "mail": {
+                        "description": "The SMTP address for the group.",
+                        "type": "string",
+                        "readOnly": true,
+                        "x-filterOptions": [{
+                            "filterOption": "Equals"
+                        }]
+                    },
+                    "mailEnabled": {
+                        "type": "boolean",
+                        "description": "Specifies whether the group is mail-enabled. If the securityEnabled property is also true, the group is a mail-enabled security group; otherwise, the group is a Microsoft Exchange distribution group. Only (pure) security groups can be created using Azure AD Graph. For this reason, the property must be set false when creating a group and it cannot be updated using Azure AD Graph."
+                    },
+                    "mailNickname": {
+                        "description": "The mail alias for the group. This property must be specified when a group is created.",
+                        "type": "string",
+                        "x-filterOptions": [{
+                            "filterOption": "Equals"
+                        }]
+                    },
+                    "onPremisesSecurityIdentifier": {
+                        "readOnly": true,
+                        "description": "Contains the on-premises security identifier (SID) for the group that was synchronized from on-premises to the cloud.",
+                        "type": "string"
+                    },
+                    "proxyAddresses": {
+                        "readOnly": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "securityEnabled": {
+                        "description": "Specifies whether the group is a security group. If the mailEnabled property is also true, the group is a mail-enabled security group; otherwise it is a security group. Only (pure) security groups can be created using Azure AD Graph. For this reason, the property must be set true when creating a group.",
+                        "type": "boolean"
+                    },
+                    "groupTypes": {
+                        "description": "Specifies the type of group to create. Possible values are Unified to create an Office 365 group, or DynamicMembership for dynamic groups.  For all other group types, like security-enabled groups and email-enabled security groups, do not set this property.",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "membershipRule": {
+                        "description": "Dynamic membership rule. e.g: (user.department -eq Sales)",
+                        "type": "string"
+                    },
+                    "membershipRuleProcessingState": {
+                        "description": "On or Paused. Indicates whether the dynamic membership processing is on or paused.",
+                        "type": "string"
+                    },
+                    "visibility": {
+                        "description": "Visibility of the group. Indicates whether the group is public, private or membership is hidden.",
+                        "type": "string"
+                    },
+                    "renewedDateTime": {
+                        "description": "Date and Time (UTC) when the group was last renewed.",
+                        "readOnly": true,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            }]
+        },
+        "getMSGroupsResponse": {
+            "description": "A list of groups.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/msGroup"
+                        }
+                    }
+                }
+            }]
+        },
+        "implicitGrantSettings": {
+            "description": "The implicit grant settings.",
+            "properties": {
+                "enableIdTokenIssuance": {
+                    "description": "The value indicating whether id token issuance is enabled.",
+                    "type": "boolean"
+                },
+                "enableAccessTokenIssuance": {
+                    "description": "The value indicating whether access token issuance is enabled",
+                    "type": "boolean"
+                }
+            }
+        },
+        "policy": {
+            "allOf": [{
+                "$ref": "#/definitions/msDirectoryObject"
+            }, {
+                "required": [
+                    "definition",
+                    "displayName",
+                    "type"
+                ],
+                "properties": {
+                    "alternativeIdentifier": {
+                        "type": "string"
+                    },
+                    "definition": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "isOrganizationDefault": {
+                        "type": "boolean"
+                    },
+                    "keyCredentials": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/keyCredential"
+                        }
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                }
+            }]
+        },
+        "preAuthorizedApplication": {
+            "description": "Represents an application and requested permissions for implicit consent. Requires an admin to have provided consent to the application. preAuthorizedApplications do not require the user to consent to the requested permissions. Permissions listed in preAuthorizedApplications do not require user consent. However, any additional requested permissions not listed in preAuthorizedApplications require user consent.",
+            "properties": {
+                "appId": {
+                    "description": "The unique identifier for the application.",
+                    "type": "string"
+                },
+                "permissionIds": {
+                    "description": "The unique identifier for either the publishedPermissionScope or appRole the application requires.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "keyCredential": {
+            "description": "Contains a key credential associated with an application or a service principal. The keyCredentials property of the Application and ServicePrincipal entities is a collection of KeyCredential.",
+            "properties": {
+                "customKeyIdentifier": {
+                    "description": "Custom key identifier.",
+                    "type": "string",
+                    "format": "byte"
+                },
+                "endDateTime": {
+                    "description": "The date and time at which the credential expires",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "keyId": {
+                    "description": "The unique identifier of the key.",
+                    "type": "string"
+                },
+                "startDateTime": {
+                    "description": "The date and time at which the credential becomes valid.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "type": {
+                    "description": "The type of credential. Symmetric, Asymmetric",
+                    "type": "string"
+                },
+                "usage": {
+                    "description": "A string that describes the purpose for which the key can be used; for example, \"Verify\".",
+                    "type": "string"
+                },
+                "key": {
+                    "description": "The secret value",
+                    "type": "string",
+                    "format": "byte"
+                }
+            }
+        },
+        "keyCredentialProof": {
+            "description": "Contains a key credential associated with an application or a service principal. The keyCredentials property of the Application and ServicePrincipal entities is a collection of KeyCredential.",
+            "properties": {
+                "keyCredential": {
+                    "$ref": "#/definitions/keyCredential"
+                },
+                "passwordCredential": {
+                    "description": "Password",
+                    "type": "string"
+                },
+                "proof": {
+                    "description": "Proof of possession",
+                    "type": "string"
+                }
+            }
+        },
+        "optionalClaims": {
+            "description": "Specifying the claims to be included in the token.",
+            "properties": {
+                "idToken": {
+                    "description": "Optional claims requested to be included in the id token.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/optionalClaim"
+                    }
+                },
+                "accessToken": {
+                    "description": "Optional claims requested to be included in the access token.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/optionalClaim"
+                    }
+                },
+                "samlToken": {
+                    "description": "Optional claims requested to be included in the saml token.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/optionalClaim"
+                    }
+                }
+            }
+        },
+        "optionalClaim": {
+            "description": "Specifying the claims to be included in a token.",
+            "properties": {
+                "name": {
+                    "description": "Claim name.",
+                    "type": "string"
+                },
+                "source": {
+                    "description": "Claim source.",
+                    "type": "string"
+                },
+                "essential": {
+                    "description": "Is this a requied claim.",
+                    "type": "boolean",
+                    "required": false
+                },
+                "additionalProperties": {
+                    "description": "Additional properties.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "keyId": {
+            "description": "KeyId",
+            "properties": {
+                "keyId": {
+                    "description": "The unique identifier of the key.",
+                    "type": "string"
+                }
+            }
+        },
+        "keyIdProof": {
+            "description": "KeyId",
+            "properties": {
+                "keyId": {
+                    "description": "The unique identifier of the key.",
+                    "type": "string"
+                },
+                "proof": {
+                    "description": "Proof of possession",
+                    "type": "string"
+                }
+            }
+        },
+        "passwordCredential": {
+            "description": "Contains a password credential associated with an application or a service principal. The passwordCredentials property of the ServicePrincipal entity and of the Application entity is a collection of PasswordCredential.",
+            "properties": {
+                "customKeyIdentifier": {
+                    "type": "string",
+                    "format": "byte"
+                },
+                "endDateTime": {
+                    "description": "The date and time at which the password expires.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "keyId": {
+                    "description": "The unique identifier of the key.",
+                    "type": "string"
+                },
+                "startDateTime": {
+                    "description": "The date and time at which the credential becomes valid.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "secretText": {
+                    "description": "The secret value",
+                    "type": "string"
+                },
+                "hint": {
+                    "type": "string"
+                }
+            }
+        },
+        "parentalControlSettings": {
+            "description": "Parental control settings.",
+            "properties": {
+                "countriesBlockedForMinors": {
+                    "description": "Countries in which the app is blocked for minors.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "legalAgeGroupRule": {
+                    "description": "The LegalAgeGroupRule that applies to users.",
+                    "type": "string",
+                    "enum": [
+                        "Allow",
+                        "RequireConsentForPrivacyServices",
+                        "RequireConsentForMinors",
+                        "RequireConsentForKids",
+                        "BlockMinors"
+                    ]
+                }
+            }
+        },
+        "permissionScope": {
+            "description": "Represents an OAuth 2.0 delegated permission scope. The specified OAuth 2.0 delegated permission scopes may be requested by client applications (through the requiredResourceAccess collection on the Application object) when calling a resource application. The oauth2Permissions property of the ServicePrincipal entity and of the Application entity is a collection of OAuth2Permission.",
+            "properties": {
+                "adminConsentDescription": {
+                    "description": "Permission help text that appears in the admin consent and app assignment experiences.",
+                    "type": "string"
+                },
+                "adminConsentDisplayName": {
+                    "description": "Display name for the permission that appears in the admin consent and app assignment experiences.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "Unique scope permission identifier inside the oauth2Permissions collection.",
+                    "type": "string"
+                },
+                "isEnabled": {
+                    "description": "When creating or updating a permission, this property must be set to true (which is the default). To delete a permission, this property must first be set to false. At that point, in a subsequent call, the permission may be removed. ",
+                    "type": "boolean"
+                },
+                "type": {
+                    "description": "Specifies whether this scope permission can be consented to by an end user, or whether it is a tenant-wide permission that must be consented to by a Company Administrator. Possible values are \"User\" or \"Admin\".",
+                    "type": "string"
+                },
+                "userConsentDescription": {
+                    "description": "Permission help text that appears in the end-user consent experience.",
+                    "type": "string"
+                },
+                "userConsentDisplayName": {
+                    "description": "Display name for the permission that appears in the end-user consent experience.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the scope claim that the resource application should expect in the OAuth 2.0 access token.",
+                    "type": "string"
+                }
+            }
+        },
+        "tokenLifetimePolicy": {
+            "required": [
+                "version"
+            ],
+            "properties": {
+                "accessTokenLifetime": {
+                    "type": "string"
+                },
+                "maxInactiveTime": {
+                    "type": "string"
+                },
+                "singleFactorRefreshTokenMaxAge": {
+                    "type": "string"
+                },
+                "multiFactorRefreshTokenMaxAge": {
+                    "type": "string"
+                },
+                "singleFactorSessionTokenAge": {
+                    "type": "string"
+                },
+                "multiFactorSessionTokenMaxAge": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "getPoliciesResponse": {
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/policy"
+                        }
+                    }
+                }
+            }]
+        },
+        "privilegedOperationEvent": {
+            "description": "Represents an audit event that is generated by Privileged Identity Management for the role operations.",
+            "properties": {
+                "additionalInformation": {
+                    "description": "Detailed human readable information for the event.",
+                    "type": "string"
+                },
+                "creationDateTime": {
+                    "description": "Indicates the time when the event is created.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "expirationDateTime": {
+                    "description": "This is only used when the requestType is \"Elevate\", and it indicates the expiration time for the role activation.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "description": "The unique identifier for privilegedOperationEvent.",
+                    "type": "string"
+                },
+                "referenceKey": {
+                    "description": "Incident/Request ticket number during role activation.",
+                    "type": "string"
+                },
+                "referenceSystem": {
+                    "description": "Incident/Request ticketing system provided during tole activation.",
+                    "type": "string"
+                },
+                "requestType": {
+                    "description": "The request operation type.",
+                    "type": "string"
+                },
+                "requestorId": {
+                    "description": "The user id of the requestor who initiates the operation.",
+                    "type": "boolean"
+                },
+                "requestorName": {
+                    "description": "The user name of the requestor who initiates the operation.",
+                    "type": "string"
+                },
+                "roleId": {
+                    "description": "The id of of the role that is associated with the operation.",
+                    "type": "string"
+                },
+                "roleName": {
+                    "description": "The name of the role.",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "description": "The tenant (organization) id.",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "The id of the user that is associated with the operation.",
+                    "type": "boolean"
+                },
+                "userMail": {
+                    "description": "The user's email.",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "The user's display name.",
+                    "type": "string"
+                }
+            }
+        },
+        "getPrivilegedOperationEventResponse": {
+            "description": "A list of priviledged opertation events.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/privilegedOperationEvent"
+                        }
+                    }
+                }
+            }]
+        },
+        "privilegedRole": {
+            "description": "Represents an Azure AD administrator role.",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for administrator role. It is a GUID string and has the same value as the role template id from Azure AD for the given role. ",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Role name.",
+                    "type": "string"
+                }
+            }
+        },
+        "getPrivilegedRoleResponse": {
+            "description": "A list of priviledged roles.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/privilegedRole"
+                        }
+                    }
+                }
+            }]
+        },
+        "privilegedRoleAssignment": {
+            "description": "Represents a privileged role assignment for a particular user.",
+            "required": [
+                "roleId",
+                "userId"
+            ],
+            "properties": {
+                "expirationDateTime": {
+                    "description": "The UTC DateTime when the temporary privileged role assignment will be expired. For permanent role assignment, the value is null.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "description": "The unique identifier for the privileged role assignment.",
+                    "type": "string"
+                },
+                "isElevated": {
+                    "description": "True if the role assignment is activated. false if the role assignment is deactivated.",
+                    "type": "boolean"
+                },
+                "resultMessage": {
+                    "description": "Result message set by the service.",
+                    "type": "string"
+                },
+                "roleId": {
+                    "description": "Role identifier. In GUID string format.",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "User identifier. In GUID string format.",
+                    "type": "string"
+                }
+            }
+        },
+        "getPrivilegedRoleAssignmentResponse": {
+            "description": "A list of priviledged roles.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/privilegedRoleAssignment"
+                        }
+                    }
+                }
+            }]
+        },
+        "privilegedRoleSettings": {
+            "description": "Represents the settings for a privileged role.",
+            "properties": {
+                "elevationDuration": {
+                    "description": "The duration when the role is activated.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The unique identifier for the role settings.",
+                    "type": "string"
+                },
+                "isMfaOnElevationConfigurable": {
+                    "description": "True if mfaOnElevation is configurable. false if mfaOnElevation is not configurable.",
+                    "type": "boolean"
+                },
+                "lastGlobalAdmin": {
+                    "description": "Internal used only.",
+                    "type": "boolean"
+                },
+                "maxElavationDuration": {
+                    "description": "Maximal duration for the activated role.",
+                    "type": "string"
+                },
+                "mfaOnElevation": {
+                    "description": "True if MFA is required to activate the role. false if MFA is not required to activate the role.",
+                    "type": "boolean"
+                },
+                "minElevationDuration": {
+                    "description": "Minimal duration for the activated role.",
+                    "type": "string"
+                },
+                "notificationToUserOnElevation": {
+                    "description": "True if send notification to the end user when the role is activated. false if do not send notification when the role is activated.",
+                    "type": "boolean"
+                },
+                "ticketingInfoOnElevation": {
+                    "description": "True if send notification to the end user when the role is activated. false if do not send notification when the role is activated.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "privilegedRoleSummary": {
+            "description": "The statistics summary for a particular role.",
+            "properties": {
+                "elevatedCount": {
+                    "description": "The number of users that have the role assigned and the role is activated.",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "The unique identifier for the role.",
+                    "type": "string"
+                },
+                "managedCount": {
+                    "description": "The number of users that have the role assigned but the role is deactivated.",
+                    "type": "integer"
+                },
+                "mfaEnabled": {
+                    "description": "True if the role activation requires MFA. false if the role activation doesn't require MFA.",
+                    "type": "boolean"
+                },
+                "status": {
+                    "description": "Possible values are: ok, bad. The value depends on the ratio of (managedCount / usersCount). ",
+                    "type": "string"
+                },
+                "usersCount": {
+                    "description": "The number of users that are assigned with the role.",
+                    "type": "integer"
+                }
+            }
+        },
+        "groupLifecyclePolicy": {
+            "description": "Expiration policy for groups.",
+            "required": [
+                "groupLifetimeInDays",
+                "managedGroupTypes",
+                "alternateNotificationEmails"
+            ],
+            "properties": {
+                "id": {
+                    "description": "An Unique identifier for a policy. Read-only.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "groupLifetimeInDays": {
+                    "description": "Number of days a group can exist before it needs to be renewed.",
+                    "type": "integer"
+                },
+                "managedGroupTypes": {
+                    "description": "Expiry applies for these types of groups. Possible values are All, Selected, None.",
+                    "type": "string"
+                },
+                "alternateNotificationEmails": {
+                    "description": "Semicolon separated list of notification email addresses to send notifications to for groups without owners.",
+                    "type": "string"
+                }
+            }
+        },
+        "getGroupLifecyclePoliciesResponse": {
+            "description": "A list of expiration policies.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/groupLifecyclePolicy"
+                        }
+                    }
+                }
+            }]
+        },
+        "lcmGroupId": {
+            "description": "Represents a group object present in expiration policy.",
+            "required": [
+                "groupId"
+            ],
+            "properties": {
+                "groupId": {
+                    "description": "A Guid that is the unique identifier for the group. Key. Not nullable.",
+                    "type": "string"
+                }
+            }
+        },
+        "groupLifecyclePoliciesActionMethodsResponse": {
+            "description": "Boolean value indicating whether the operation succeeded or not.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "boolean"
+                    }
+                }
+            }]
+        },
+        "keyValue": {
+            "description": "Represents an application role that may be requested by a client application calling another application or that may be used to assign an application to users or groups in a specified application role. The appRoles property of the ServicePrincipal entity and of the Application entity is a collection of AppRole.",
+            "properties": {
+                "key": {
+                    "description": "Unique role identifier inside the appRoles collection.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "When creating or updating a role definition, this must be set to true (which is the default). To delete a role, this must first be set to false. At that point, in a subsequent call, this role may be removed.",
+                    "type": "string"
+                }
+            }
+        },
+        "msDirectoryObject": {
+            "description": "Represents an Azure Active Directory object. The directoryObject type is the base type for many other directory entity types.",
+            "discriminator": "id",
+            "x-readOnly": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "description": "A Guid that is the unique identifier for the object. Key. Not nullable. Read-only.",
+                    "type": "string"
+                },
+                "@odata.type": {
+                    "readOnly": true,
+                    "description": "Odata Type of the object if returned by an api returning different object types. Read-only.",
+                    "type": "string"
+                }
+            }
+        },
+        "getDirectoryObjectsResponse": {
+            "description": "A list of directory objects.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/msDirectoryObject"
+                        }
+                    }
+                }
+            }]
+        },
+        "identityProvider": {
+          "description": "An identityProvider object. This entity represents the configuration of an identity (authentication) provider like MSA, Amazon, Facebook, Google etc.",
+          "required": [
+            "type",
+            "clientId",
+            "clientSecret"
+          ],
+          "x-readOnly": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "description": "Unique identifier for the object.",
+              "type": "string",
+              "readOnly": true
+            },
+            "type": {
+              "description": "The type of the Identity Provider. Can be one of the following values Microsoft,  Google, Amazon, LinkedIn,  Facebook",
+              "type": "string"
+            },
+            "name": {
+              "description": "Display name of the identityProvider.",
+              "type": "string"
+            },
+            "clientId": {
+              "description": "This is the clientId of the application which will be used to access the identityProvider .",
+              "type": "string"
+            },
+            "clientSecret": {
+              "description": "Client-Secret for the app which will be used to access the identityProvider. This is write-only. At the time of read ***** will be returned.",
+              "type": "string"
+            }
+          }
+        },
+        "getidentityProvidersResponse": {
+          "description": "A list of identityProvider objects.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/odataResponse"
+            },
+            {
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/identityProvider"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "odataResponse": {
+            "discriminator": "odata.metadata",
+            "properties": {
+                "@odata.nextLink": {
+                    "description": "Gets or sets the next link for the OData response. Getter returns null if no next link should be sent back to the client.",
+                    "type": "string"
+                },
+                "@odata.context": {
+                    "type": "string"
+                }
+            }
+        },
+        "odata.error": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "throwSite": {
+                    "type": "string"
+                },
+                "request-id": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "innerError": {
+                    "$ref": "#/definitions/odata.error"
+                }
+            }
+        },
+        "odata.errorResponse": {
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/odata.error"
+                }
+            }
+        },
+        "odata.link": {
+            "properties": {
+                "@odata.id": {
+                    "type": "string",
+                    "description": "URL identifying a specific object in Azure Active Directory.  Typically: https://graph.windows.net/[tenantId]/directoryObjects/[objectId] or /directoryObjects/[objectId]"
+                }
+            }
+        },
+        "user": {
+            "description": "The user object in Azure AD",
+            "allOf": [{
+                "$ref": "#/definitions/msDirectoryObject"
+            }]
+        },
+        "name": {
+            "description": "Name object.",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "description": "The connector group name.",
+                    "type": "string"
+                }
+            }
+        },
+        "applicationProxyOnPremisesPublishingObject": {
+            "description": "Application Proxy on premises publishing object.",
+            "properties": {
+                "onPremisesPublishing": {
+                    "description": "The application proxy application object.",
+                    "$ref": "#/definitions/applicationProxyApplicationObject"
+                },
+                "replyUrls": {
+                    "description": "The reply urls for Azure AD Application.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "identifierUris": {
+                    "description": "The identifier uris for Azure AD Application.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "homepage": {
+                    "description": "The homepage url for Azure AD Application.",
+                    "type": "string"
+                },
+                "logoutUrl": {
+                    "description": "The logout url for Azure AD Application.",
+                    "type": "string"
+                }
+            }
+        },
+        "onPremisesPublishingVerifiedCustomDomainCertificatesMetadataObject": {
+            "description": "Application Proxy verified custom domain certificate metadata object.",
+            "properties": {
+                "thumbprint": {
+                    "description": "The thumbprint of the certificate..",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "subjectName": {
+                    "description": "The subject of the certificate.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "issuer": {
+                    "description": "The issuer of the certificate.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "issueDate": {
+                    "description": "The issue date for the certificate.",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "expiryDate": {
+                    "description": "The expiry date for the certificate.",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "onPremisesPublishingVerifiedCustomDomainKeyCredentialObject": {
+            "description": "Application Proxy verified custom domain key credential object.",
+            "required": [
+                "value"
+            ],
+            "properties": {
+                "keyId": {
+                    "description": "Id for the credential.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The key type. currently only X509CertificateAndPassword supported.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The encoded SSL certificate.",
+                    "type": "string",
+                    "format": "byte"
+                }
+            }
+        },
+        "onPremisesPublishingVerifiedCustomDomainPasswordCredentialObject": {
+            "description": "Application Proxy verified custom domain password credential object.",
+            "required": [
+                "value"
+            ],
+            "properties": {
+                "value": {
+                    "description": "The password for the SSL certificate.",
+                    "type": "string"
+                }
+            }
+        },
+        "onPremisesPublishingSingleSignOnObject": {
+            "description": "Application Proxy single sign on settings object.",
+            "required": [
+                "singleSignOnMode",
+                "kerberosSignOnSettings"
+            ],
+            "properties": {
+                "singleSignOnMode": {
+                    "description": "The single sign on mode.",
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "onPremisesKerberos",
+                        "headerBased"
+                    ],
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                },
+                "kerberosSignOnSettings": {
+                    "description": "The kerberos single sign on settings.",
+                    "$ref": "#/definitions/onPremisesPublishingKerberosSignOnSettingsObject"
+                }
+            }
+        },
+        "onPremisesPublishingKerberosSignOnSettingsObject":{
+            "description": "Application Proxy kerberos single sign on settings.",
+            "required": [
+                "kerberosServicePrincipalName",
+                "kerberosSignOnMappingAttributeType"
+            ],
+            "properties": {
+                "kerberosServicePrincipalName": {
+                    "description": "The user principal name.",
+                    "type": "string",
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "kerberosSignOnMappingAttributeType": {
+                    "description": "The kerberos sign on mapping attribute type.",
+                    "type": "string",
+                    "enum": [
+                        "userPrincipalName",
+                        "onPremisesUserPrincipalName",
+                        "userPrincipalUsername",
+                        "onPremisesUserPrincipalUsername",
+                        "onPremisesSAMAccountName"
+                    ],
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                }
+            }
+        },
+        "applicationProxyApplicationObject": {
+            "description": "Application Proxy application object.",
+            "properties": {
+                "externalUrl": {
+                    "description": "The external url.",
+                    "type": "string",
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "internalUrl": {
+                    "description": "The internal url.",
+                    "type": "string",
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "externalAuthenticationType": {
+                    "description": "The external authentication type.",
+                    "type": "string",
+                    "enum": [
+                        "aadPreAuthentication",
+                        "passthru"
+                    ],
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                },
+                "isTranslateHostHeaderEnabled": {
+                    "description": "A boolean indicating whether to translate host address in headers.",
+                    "type": "boolean",
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                },
+                "isTranslateLinksInBodyEnabled": {
+                    "description": "A boolean indicating whether to translate links in body.",
+                    "type": "boolean",
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                },
+                "isOnPremPublishingEnabled": {
+                    "description": "A boolean indicating whether the application is enabled.",
+                    "type": "boolean"
+                },
+                "applicationServerTimeout": {
+                    "description": "The backend timeout.",
+                    "type": "string",
+                    "enum": [
+                        "default",
+                        "long"
+                    ],
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                },
+                "verifiedCustomDomainCertificatesMetadata": {
+                    "description": "The verified custom domain certificate metadata object.",
+                    "$ref": "#/definitions/onPremisesPublishingVerifiedCustomDomainCertificatesMetadataObject",
+                    "readOnly": true
+                },
+                "verifiedCustomDomainKeyCredential": {
+                    "description": "The verified custom domain key credential object.",
+                    "$ref": "#/definitions/onPremisesPublishingVerifiedCustomDomainKeyCredentialObject"
+                },
+                "verifiedCustomDomainPasswordCredential": {
+                    "description": "The verified custom domain password credential object.",
+                    "$ref": "#/definitions/onPremisesPublishingVerifiedCustomDomainPasswordCredentialObject"
+                },
+                "singleSignOnSettings": {
+                    "description": "The single sign on settings object.",
+                    "$ref": "#/definitions/onPremisesPublishingSingleSignOnObject"
+                }
+            }
+        },
+        "getApplicationProxyApplicationObjectsResponse": {
+            "description": "A list of application proxy applications.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/applicationProxyApplicationObject"
+                        }
+                    }
+                }
+            }]
+        },
+        "applicationProxyConnectorObject": {
+            "description": "Application Proxy connector object.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for application proxy connector object. Key. Not nullable. Read-only.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "machineName": {
+                    "description": "The machine name.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "externalIp": {
+                    "description": "The external ip address.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "status": {
+                    "description": "The status of the connector.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                }
+            }
+        },
+        "getApplicationProxyConnectorObjectsResponse": {
+            "description": "A list of application proxy connectors.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/applicationProxyConnectorObject"
+                        }
+                    }
+                }
+            }]
+        },
+        "applicationProxyConnectorGroupObject": {
+            "description": "Application Proxy connector group object.",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for application proxy connector group object. Key. Not nullable. Read-only.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "The connector group name.",
+                    "type": "string",
+                    "x-filterOptions": [{
+                        "filterOption": "StartsWith"
+                    }, {
+                        "filterOption": "Equals"
+                    }]
+                },
+                "connectorGroupType": {
+                    "description": "The connector group type.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "isDefault": {
+                    "description": "A boolean value indicating whether this is the default connector group.",
+                    "type": "boolean",
+                    "readOnly": true,
+                    "x-filterOptions": [{
+                        "filterOption": "Equals"
+                    }]
+                }
+            }
+        },
+        "getApplicationProxyConnectorGroupObjectsResponse": {
+            "description": "A list of application proxy connector groups.",
+            "allOf": [{
+                "$ref": "#/definitions/odataResponse"
+            }, {
+                "properties": {
+                    "value": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/applicationProxyConnectorGroupObject"
+                        }
+                    }
+                }
+            }]
+        },
+        "requiredResourceAccess": {
+            "description": "Specifies the set of OAuth 2.0 permission scopes and app roles under the specified resource that an application requires access to. The specified OAuth 2.0 permission scopes may be requested by client applications (through the requiredResourceAccess collection) when calling a resource application. The requiredResourceAccess property of the Application entity is a collection of ReqiredResourceAccess.",
+            "properties": {
+                "resourceAppId": {
+                    "description": "The unique identifier for the resource that the application requires access to. This should be equal to the appId declared on the target resource application.",
+                    "type": "string"
+                },
+                "resourceAccess": {
+                    "description": "The list of OAuth2.0 permission scopes and app roles that the application requires from the specified resource.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/resourceAccess"
+                    }
+                }
+            }
+        },
+        "resourceAccess": {
+            "description": "OAuth2.0 permission scope and app role that the application requires from the specified resource.",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for one of the OAuth2Permission or AppRole instances that the resource application exposes.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Specifies whether the id property references an OAuth2Permission or an AppRole. Possible values are 'scope' or 'role'.",
+                    "type": "string"
+                }
+            }
+        },
+        "serviceEndpoint": {
+            "description": "The service endpoint entity contains service discovery information.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/directoryObject"
+                },
+                {
+                    "required": [
+                        "capability",
+                        "uri"
+                    ],
+                    "properties": {
+                        "capability": {
+                            "type": "string",
+                            "description": "A text identifier for the service's capability. Examples are \"Documents\" and \"Mail\"."
+                        },
+                        "serviceId": {
+                            "description": "The identifier of the service.",
+                            "type": "string"
+                        },
+                        "serviceName": {
+                            "description": "The display name of the service.",
+                            "type": "string"
+                        },
+                        "uri": {
+                            "description": "Uri of the service’s endpoint.",
+                            "type": "string"
+                        },
+                        "resourceId": {
+                            "description": "An identifier for a specific resource within the service.",
+                            "type": "string"
+                        }
+                    }
+                }
+            ]
+        },
+        "getServiceEndpointsResponse": {
+            "description": "A list of service endpoints.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/odataResponse"
+                },
+                {
+                    "properties": {
+                        "value": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/serviceEndpoint"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "webApplication": {
+            "description": "Specifies settings for a web application.",
+            "properties": {
+                "logoutUrl": {
+                    "description": "Specifies the URL that will be used by Microsoft's authorization service to logout an user using front-channel, back-channel or SAML logout protocols.",
+                    "type": "string"
+                },
+                "oauth2AllowImplicitFlow": {
+                    "description": "Specifies whether this web application can request tokens using the oAuth 2.0 implicit flow. The default is false.",
+                    "type": "boolean"
+                },
+                "redirectUris": {
+                    "description": "Specifies the URLs that user tokens are sent to for sign in, or the redirect URIs that OAuth 2.0 authorization codes and access tokens are sent to.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "implicitGrantSettings": {
+                    "$ref":"#/definitions/implicitGrantSettings"
+                }
+            }
+        },
+        "publicClientApplication": {
+            "description": "Specifies settings for a web application.",
+            "properties": {
+                "redirectUris": {
+                    "description": "Specifies the URLs that user tokens are sent to for sign in, or the redirect URIs that OAuth 2.0 authorization codes and access tokens are sent to.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
