@@ -1322,6 +1322,9 @@ directive:
     from: routeTable.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: securityPartnerProvider.json
+    reason: name, id and type properties are inherited from the upper level  
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceCommunity.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: AvoidNestedProperties
