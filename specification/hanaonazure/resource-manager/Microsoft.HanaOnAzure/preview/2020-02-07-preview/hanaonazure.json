@@ -640,8 +640,27 @@
     "ProviderInstance": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProviderInstanceProperties",
+          "description": "Provider Instance properties"
+        },
+        "provisioningState": {
+          "readOnly": true,
           "type": "string",
-          "description": "A JSON string containing the properties of the provider instance."
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the provider instance"
         }
       },
       "allOf": [
@@ -650,6 +669,19 @@
         }
       ],
       "description": "A provider instance associated with a SAP monitor."
+    },
+    "ProviderInstanceProperties": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of provider instance."
+        },
+        "properties": {
+          "type": "string",
+          "description": "A JSON string containing the properties of the provider instance."
+        }
+      },
+      "description": "Describes the properties of a provider instance."
     }
   },
   "parameters": {
