@@ -157,7 +157,6 @@ input-file:
   - $(this-folder)/stable/v2.1/Ocr.json
   - $(this-folder)/stable/v3.0/ComputerVision.json
   - $(this-folder)/stable/v3.0/Ocr.json
-
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
