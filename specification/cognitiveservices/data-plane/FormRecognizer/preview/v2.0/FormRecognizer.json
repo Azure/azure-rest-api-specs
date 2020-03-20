@@ -315,7 +315,7 @@
     "/custom/models/{modelId}/copy": {
       "post": {
         "summary": "Copy Custom Model",
-        "description": "Copy custom model to user specified target Form Recognizer resource.",
+        "description": "Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource.",
         "operationId": "CopyCustomModel",
         "consumes": [
           "application/json"
@@ -410,6 +410,9 @@
         "x-ms-examples": {
           "Get copy custom model result": {
             "$ref": "./examples/CopyOperationResult.json"
+          },
+          "Get copy custom model result with failures": {
+            "$ref": "./examples/CopyOperationResultWithErrors.json"
           }
         }
       }
@@ -670,7 +673,7 @@
       }
     },
     "CopyRequest": {
-      "description": "Request parameter to copy an existing custom model.",
+      "description": "Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID.",
       "required": [
         "targetResourceId",
         "targetResourceRegion",
