@@ -2792,6 +2792,11 @@
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
               },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplication",
+                "x-ms-header-collection-prefix": "x-ms-or-"
+              },
               "Content-Length": {
                 "type": "integer",
                 "format": "int64",
@@ -3287,6 +3292,11 @@
                 "type": "string",
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplication",
+                "x-ms-header-collection-prefix": "x-ms-or-"
               },
               "x-ms-blob-type": {
                 "x-ms-client-name": "BlobType",
@@ -8693,13 +8703,13 @@
         "error": {
           "description": "The service error response object.",
           "properties": {
-        "Code": {
+            "Code": {
               "description": "The service error code.",
-          "type": "string"
-        },
-        "Message": {
+              "type": "string"
+            },
+            "Message": {
               "description": "The service error message.",
-          "type": "string"
+              "type": "string"
             }
           }
         }
@@ -8792,6 +8802,9 @@
         },
         "Metadata": {
           "$ref": "#/definitions/BlobMetadata"
+        },
+        "ObjectReplication": {
+          "$ref": "#/definitions/BlobObjectReplication"
         }
       }
     },
@@ -9554,6 +9567,15 @@
         "type": "string"
       }
     },
+    "BlobObjectReplication": {
+      "type": "object",
+      "xml": {
+        "name": "ObjectReplication"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "Metrics": {
       "description": "a summary of request statistics grouped by API in hour or minute aggregates for blobs",
       "required": [
@@ -9676,7 +9698,7 @@
           "$ref": "#/definitions/QuickQuerySerialization",
           "xml": {
             "name": "InputSerialization"
-          }      
+          }
         },
         "OutputSerialization": {
           "$ref": "#/definitions/QuickQuerySerialization",
@@ -10647,6 +10669,20 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>"
+    },
+    "ObjectReplication": {
+      "name": "x-ms-or",
+      "x-ms-client-name": "objectReplication",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "complete",
+        "failed"
+      ],
+      "x-ms-parameter-location": "method",
+      "description": "Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information.",
+      "x-ms-header-collection-prefix": "x-ms-or-"
     },
     "PathRenameMode": {
       "name": "mode",
