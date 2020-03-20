@@ -36,7 +36,7 @@ perform-load: false
 
 ### Tag: package-2019-09
 
-These settings apply only when `--tag=package-2019-09 --python` is specified on the command line.
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-09'
 namespace: azure.mgmt.keyvault.v2019_09_01
@@ -45,7 +45,7 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 
 ### Tag: package-2018-02
 
-These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-02'
 namespace: azure.mgmt.keyvault.v2018_02_14
@@ -54,9 +54,9 @@ output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/key
 
 ### Tag: package-2016-10
 
-These settings apply only when `--tag=package-2016-10 --python` is specified on the command line.
+These settings apply only when `--tag=package-2016-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2016-10'
 namespace: azure.mgmt.keyvault.v2016_10_01
-output-folder: $(python-sdks-folder/keyvault)/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
 ```
