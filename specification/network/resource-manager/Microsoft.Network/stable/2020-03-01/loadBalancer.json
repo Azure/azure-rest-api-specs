@@ -1438,11 +1438,17 @@
       "description": "Properties of the loadbalancer backend addresses."
     },
     "LoadBalancerBackendAddress": {
-      "$ref": "#/definitions/LoadBalancerBackendAddressPropertiesFormat",
+      "properties":{
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LoadBalancerBackendAddressPropertiesFormat",
+          "description": "Properties of load balancer backend address pool."
+        },
       "name": {
         "type": "string",
         "description": "Name of the backend address"
-      },
+      }
+    },
       "description": "Loadbalancer backend addresses."
     },
     "BackendAddressPoolPropertiesFormat": {
