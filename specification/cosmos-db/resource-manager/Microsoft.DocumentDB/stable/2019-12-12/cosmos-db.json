@@ -5869,15 +5869,15 @@
     },
     "ThroughputSettingsResource": {
       "type": "object",
-      "description": "Cosmos DB resource throughput object. Either throughput is required or autopilotSettings is required, but not both.",
+      "description": "Cosmos DB resource throughput object. Either throughput is required or provisionedThroughputSettings is required, but not both.",
       "properties": {
         "throughput": {
           "type": "integer",
-          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autopilotSettings is required, but not both."
+          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or provisionedThroughputSettings is required, but not both."
         },
-        "autopilotSettings": {
-          "description": "Cosmos DB resource for Autopilot settings. Either throughput is required or autopilotSettings is required, but not both.",
-          "$ref": "#/definitions/AutopilotSettingsResource"
+        "provisionedThroughputSettings": {
+          "description": "Cosmos DB resource for provisioned throughput settings. Either throughput is required or provisionedThroughputSettings is required, but not both.",
+          "$ref": "#/definitions/ProvisionedThroughputSettingsResource"
         },
         "minimumThroughput": {
           "type": "string",
@@ -5891,13 +5891,13 @@
         }
       }
     },
-    "AutopilotSettingsResource": {
+    "ProvisionedThroughputSettingsResource": {
       "type": "object",
-      "description": "Cosmos DB autopilot settings object",
+      "description": "Cosmos DB provisioned throughput settings object",
       "properties": {
         "maxThroughput": {
           "type": "integer",
-          "description": "Represents max throughput an autopilot container can operate at."
+          "description": "Represents maximum throughput container can scale up to."
         },
         "autoUpgradePolicy": {
           "description": "Cosmos DB resource auto-upgrade policy",
@@ -5905,7 +5905,7 @@
         },
         "targetMaxThroughput": {
           "type": "integer",
-          "description": "Represents target max throughput an autopilot container should operate at once offer is no longer in pending state.",
+          "description": "Represents target maximum throughput container can scale up to once offer is no longer in pending state.",
           "readOnly": true
         }
       },

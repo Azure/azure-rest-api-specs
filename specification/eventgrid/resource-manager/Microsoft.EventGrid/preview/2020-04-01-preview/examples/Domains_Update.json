@@ -9,26 +9,29 @@
         "tag1": "value1",
         "tag2": "value2"
       },
-      "allowTrafficFromAllIPs": false,
-      "inboundIpRules": [
-        {
-          "ipMask": "12.18.30.15",
-          "action": "Allow"
-        },
-        {
-          "ipMask": "12.18.176.1",
-          "action": "Allow"
-        }
-      ]
+      "properties": {
+        "publicNetworkAccess": "Enabled",
+        "inboundIpRules": [
+          {
+            "ipMask": "12.18.30.15",
+            "action": "Allow"
+          },
+          {
+            "ipMask": "12.18.176.1",
+            "action": "Allow"
+          }
+        ]
+      }
     }
   },
   "responses": {
+    "200": {},
     "201": {
       "body": {
         "properties": {
           "endpoint": "https://exampledomain1.westus2-1.eventgrid.azure.net/api/events",
           "provisioningState": "Succeeded",
-          "allowTrafficFromAllIPs": false,
+          "publicNetworkAccess": "Enabled",
           "inboundIpRules": [
             {
               "ipMask": "12.18.30.15",

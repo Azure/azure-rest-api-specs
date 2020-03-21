@@ -43,8 +43,12 @@
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -82,8 +86,12 @@
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -121,8 +129,12 @@
             }
           }
         ],
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Successful operation.",
@@ -182,7 +194,14 @@
         "name": "Granularity",
         "modelAsString": false
       },
-      "enum": ["yearly", "monthly", "weekly", "daily", "hourly", "minutely"]
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely"
+      ]
     },
     "CustomInterval": {
       "type": "integer",
@@ -192,7 +211,10 @@
     },
     "Request": {
       "type": "object",
-      "required": ["granularity", "series"],
+      "required": [
+        "granularity",
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
@@ -227,7 +249,10 @@
     },
     "Point": {
       "type": "object",
-      "required": ["timestamp", "value"],
+      "required": [
+        "timestamp",
+        "value"
+      ],
       "properties": {
         "timestamp": {
           "type": "string",
@@ -365,7 +390,10 @@
     },
     "ChangePointDetectRequest": {
       "type": "object",
-      "required": ["granularity", "series"],
+      "required": [
+        "granularity",
+        "series"
+      ],
       "properties": {
         "series": {
           "type": "array",
@@ -401,7 +429,11 @@
     },
     "ChangePointDetectResponse": {
       "type": "object",
-      "required": ["isChangePoint", "confidenceScores", "period"],
+      "required": [
+        "isChangePoint",
+        "confidenceScores",
+        "period"
+      ],
       "properties": {
         "period": {
           "type": "integer",
