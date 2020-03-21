@@ -288,7 +288,7 @@
             "name": "sessionId",
             "in": "query",
             "type": "string",
-            "description": "A value to be used to create a sticky session, which can help to get more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set.",
+            "description": "A value to be used to create a sticky session, which can help to get more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service.",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -917,7 +917,10 @@
           "description": "The similarity score computed between the search query and this field."
         }
       },
-      "additionalProperties": true,
+      "required": [
+        "uniqueTokenMatches",
+        "similarityScore"
+      ],
       "description": "A list of features describing the scoring of a specific field against the search query."
     },
     "DocumentSearchResult": {
@@ -1133,7 +1136,7 @@
         "name": "ScoringStatistics",
         "modelAsString": false
       },
-      "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring."
+      "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
     },
     "AutocompleteMode": {
       "type": "string",
@@ -1205,12 +1208,11 @@
         },
         "scoringStatistics": {
           "$ref": "#/definitions/ScoringStatistics",
-          "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring."
+          "description": "A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries."
         },
         "sessionId": {
           "type": "string",
-          "description": "A value to be used to create a sticky session, which can help getting more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set.",
-          "x-ms-client-name": "SessionId"
+          "description": "A value to be used to create a sticky session, which can help getting more consistent results. As long as the same sessionId is used, a best-effort attempt will be made to target the same replica set. Be wary that reusing the same sessionID values repeatedly can interfere with the load balancing of the requests across replicas and adversely affect the performance of the search service."
         },
         "scoringParameters": {
           "type": "array",
