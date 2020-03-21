@@ -413,6 +413,9 @@
         "x-ms-examples": {
           "LoadBalancerBackendAddressPoolList": {
             "$ref": "./examples/LoadBalancerBackendAddressPoolList.json"
+          },
+          "LBBackendAddressPoolListWithBackendAddressesPoolType": {
+            "$ref": "./examples/LBBackendAddressPoolListWithBackendAddressesPoolType.json"
           }
         },
         "x-ms-pageable": {
@@ -473,10 +476,13 @@
         "x-ms-examples": {
           "LoadBalancerBackendAddressPoolGet": {
             "$ref": "./examples/LoadBalancerBackendAddressPoolGet.json"
+          },
+          "LoadBalancer with BackendAddressPool with BackendAddresses": {
+            "$ref": "./examples/LBBackendAddressPoolWithBackendAddressesGet.json"
           }
         }
       },
-      "put" : {
+      "put": {
         "tags": [
           "LoadBalancers"
         ],
@@ -549,7 +555,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
@@ -1428,7 +1433,7 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to an existing virtual network."
         },
-        "ipAddress":{
+        "ipAddress": {
           "readOnly": true,
           "type": "string",
           "description": "IP Address belonging to the virtual network referenced above.",
@@ -1438,17 +1443,17 @@
       "description": "Properties of the loadbalancer backend addresses."
     },
     "LoadBalancerBackendAddress": {
-      "properties":{
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LoadBalancerBackendAddressPropertiesFormat",
           "description": "Properties of load balancer backend address pool."
         },
-      "name": {
-        "type": "string",
-        "description": "Name of the backend address"
-      }
-    },
+        "name": {
+          "type": "string",
+          "description": "Name of the backend address"
+        }
+      },
       "description": "Loadbalancer backend addresses."
     },
     "BackendAddressPoolPropertiesFormat": {
