@@ -5,7 +5,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -14,6 +13,10 @@ python:
   package-name: azure-mgmt-operationsmanagement
   package-version: 2015-11-01-preview
   clear-output-folder: true
+directive:
+  from: OperationsManagement.json
+  where: $.definitions.CodeMessageError.properties.error
+  transform: $['x-ms-client-name'] = 'CodeMessageErrorErr'
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
