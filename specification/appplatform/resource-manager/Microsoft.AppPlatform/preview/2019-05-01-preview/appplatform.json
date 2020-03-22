@@ -88,7 +88,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created. The response describes the new Service and contains a Location header to query the operation result.",
+            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -197,7 +197,7 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting Service is now updating and contains a Location header to query the operation result.",
+            "description": "Accepted. The response indicates the exiting Service is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -401,13 +401,6 @@
         "operationId": "Apps_Get",
         "parameters": [
           {
-            "name": "syncStatus",
-            "in": "query",
-            "description": "Indicates whether sync status",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -421,6 +414,13 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "syncStatus",
+            "in": "query",
+            "description": "Indicates whether sync status",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -962,17 +962,17 @@
         "operationId": "Services_CheckNameAvailability",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "location",
             "in": "path",
             "description": "the region",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "availabilityParameters",
@@ -1238,18 +1238,6 @@
         "operationId": "Deployments_List",
         "parameters": [
           {
-            "name": "version",
-            "in": "query",
-            "description": "Version of the deployments to be listed",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": false
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1263,6 +1251,18 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           }
         ],
         "responses": {
@@ -1298,18 +1298,6 @@
         "operationId": "Deployments_ListClusterAllDeployments",
         "parameters": [
           {
-            "name": "version",
-            "in": "query",
-            "description": "Version of the deployments to be listed",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": false
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1320,6 +1308,18 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           }
         ],
         "responses": {

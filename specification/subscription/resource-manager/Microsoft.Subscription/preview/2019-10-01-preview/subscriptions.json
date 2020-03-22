@@ -542,13 +542,6 @@
             "MS-AZR-0017P",
             "MS-AZR-0148P"
           ]
-        },
-        "additionalParameters": {
-          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
         }
       }
     },
@@ -556,16 +549,11 @@
       "description": "The parameters required to create a new subscription.",
       "required": [
         "displayName",
-        "billingProfileId",
         "skuId"
       ],
       "properties": {
         "displayName": {
           "description": "The friendly name of the subscription.",
-          "type": "string"
-        },
-        "billingProfileId": {
-          "description": "The ARM ID of the billing profile for which you want to create the subscription.",
           "type": "string"
         },
         "skuId": {
@@ -583,13 +571,6 @@
         "managementGroupId": {
           "description": "The identifier of the management group to which this subscription will be associated.",
           "type": "string"
-        },
-        "additionalParameters": {
-          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
         }
       }
     },
@@ -610,10 +591,6 @@
         },
         "resellerId": {
           "description": "Reseller ID, basically MPN Id.",
-          "type": "string"
-        },
-        "serviceProviderId": {
-          "description": "Service provider ID, basically MPN Id.",
           "type": "string"
         }
       }
