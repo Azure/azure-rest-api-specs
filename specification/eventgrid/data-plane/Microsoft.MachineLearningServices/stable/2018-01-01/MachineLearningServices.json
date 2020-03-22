@@ -17,7 +17,7 @@
         },
         "modelVersion": {
           "description": "The version of the model that was registered.",
-          "type": "integer"
+          "type": "string"
         },
         "modelTags": {
           "description": "The tags of the model that was registered.",
@@ -123,6 +123,40 @@
           "description": "The end time of the target dataset time series that resulted in drift detection.",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "MachineLearningServicesRunStatusChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.MachineLearningServices.RunStatusChanged event.",
+      "type": "object",
+      "properties": {
+        "experimentId": {
+          "description": "The ID of the experiment that the Machine Learning Run belongs to.",
+          "type": "string"
+        },
+        "experimentName": {
+          "description": "The name of the experiment that the Machine Learning Run belongs to.",
+          "type": "string"
+        },
+        "runId": {
+          "description": "The ID of the Machine Learning Run.",
+          "type": "string"
+        },
+        "runType": {
+          "description": "The Run Type of the Machine Learning Run.",
+          "type": "string"
+        },
+        "runTags": {
+          "description": "The tags of the Machine Learning Run.",
+          "type": "object"
+        },
+        "runProperties": {
+          "description": "The properties of the Machine Learning Run.",
+          "type": "object"
+        },
+        "runStatus": {
+          "description": "The status of the Machine Learning Run.",
+          "type": "string"
         }
       }
     }

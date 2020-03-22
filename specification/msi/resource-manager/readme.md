@@ -43,6 +43,15 @@ input-file:
 - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 ```
 
+## Suppression
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: ManagedIdentity.json
+    where: $.definitions.SystemAssignedIdentity
+    reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
+```
+
 ---
 # Code Generation
 
