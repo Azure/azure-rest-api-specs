@@ -4647,7 +4647,8 @@
           "enum": [
             "SSISDB",
             "File",
-            "InlinePackage"
+            "InlinePackage",
+            "PackageStore"
           ],
           "x-ms-enum": {
             "name": "SsisPackageLocationType",
@@ -4676,6 +4677,10 @@
         "configurationPath": {
           "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "configurationAccessCredential": {
+          "description": "The configuration file access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
         },
         "packageName": {
           "description": "The package name.",
