@@ -83,54 +83,38 @@ python-sdk-output-folder: "$(output-folder)/src/datafactory/azext_datafactory/ve
   #    $['x-ms-client-flatten'] = false;
 
 cli:
+    polymorphism:
+        expand-as-resource: true
     cli-directive:
     # directive on operationGroup
       - select: 'operationGroup'
         where:
-            operationGroup: 'operations'
-            operation: 'list'
+            operationGroup: 'Operations'
+            operation: 'List'
         hidden: true
       - where:
             parameter: location
         required: true
       - where:
-            group: pipelines
+            group: Pipelines
             parameter: pipeline
-        set:
-            json: true
-            #      - where:
-            #            operationGroup: 'exposure_control'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'integration_runtime_object_metadata'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'datasets'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'activity_runs'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'data_flows'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'data_flow_debug_session'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'integration_runtimes'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'integration_runtime_nodes'
-            #        delete: true
-            #      - where:
-            #            operationGroup: 'linked_services'
-            #        delete: true
-    cli-flatten-directive:
+        json: true
       - where:
-            group: pipelines
-            parameter: pipeline
-        flatten: false
-
-
-
+            group: datasets
+            op: CreateOrUpdate
+            param: properties
+        poly-resource: true
+      - where:
+            type: CosmosDbSqlApiCollectionDataset
+        json: true
+      - where:
+            group: IntegrationRuntimes
+            op: CreateOrUpdate
+            param: properties
+        poly-resource: true
+      - where:
+            group: LinkedServices
+            op: CreateOrUpdate
+            param: properties
+        poly-resource: true
 ```
