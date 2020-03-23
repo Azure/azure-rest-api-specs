@@ -117,4 +117,9 @@ cli:
             op: CreateOrUpdate
             param: properties
         poly-resource: true
+      - where:
+            group: LinkedServices
+            op: CreateOrUpdate
+            param: properties
+        poly-resource: true  
 ```
