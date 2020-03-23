@@ -36,7 +36,7 @@ tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-12'
+``` yaml $(tag) == 'package-2019-12'
 input-file:
   - Microsoft.ApiManagement/stable/2019-12-01/apimanagement.json
   - Microsoft.ApiManagement/stable/2019-12-01/apimapis.json
