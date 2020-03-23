@@ -812,6 +812,10 @@
           "type": "string",
           "description": "Resource type",
           "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of Cognitive Services account."
         }
       },
       "x-ms-azure-resource": true
@@ -869,6 +873,17 @@
         "networkAcls": {
           "$ref": "#/definitions/NetworkRuleSet",
           "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption properties for this resource."
+        },
+        "userOwnedStorage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserOwnedStorage"
+          },
+          "description": "The storage accounts for this resource."
         },
         "apiProperties": {
           "$ref": "#/definitions/CognitiveServicesAccountApiProperties",
@@ -1434,6 +1449,105 @@
         "id"
       ],
       "description": "A rule governing the accessibility from a specific virtual network."
+    },
+    "Identity": {
+      "description": "Managed service identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of managed service identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "tenantId": {
+          "description": "Tenant of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "principalId": {
+          "description": "Principal Id of managed service identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}",
+          "type": "object",
+          "additionalProperties": {
+            "description": "User-assigned managed identity.",
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "User-assigned managed identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Azure Active Directory principal ID associated with this Identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client App Id associated with this identity."
+        }
+      }
+    },
+    "Encryption": {
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.CognitiveServices",
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "Version of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
+    },
+    "UserOwnedStorage": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Full resource id of a Microsoft.Storage resource."
+        }
+      },
+      "description": "The user owned storage for Cognitive Services account."
     }
   },
   "parameters": {
