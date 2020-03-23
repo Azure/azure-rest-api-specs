@@ -15,17 +15,17 @@ cli:
       - select: 'operation'
         where:
             operationGroup: 'components'
-            operation: '^(delete|purge|get_purge_status)$'
+            operation: '^(delete|purge|getPurgeStatus)$'
         removed: true
       - select: 'operation'
         where:
-            operationGroup: 'API_keys'
+            operationGroup: 'APIkeys'
             operation: 'create|delete'
         removed: true
       - select: 'operation'
         where:
             operationGorup: 'components'
-            operation: 'update_tags'
+            operation: 'updateTags'
         removed: true
       - select: 'operationGroup'
         where:
@@ -34,11 +34,11 @@ cli:
       - select: 'operation'
         where:
             operationGroup: 'components'
-            operation: 'get|create_or_update'
+            operation: 'get|createOrUpdate'
         hidden: true
       - select: 'operation'
         where:
-            operatoinGroup: 'API_keys'
+            operatoinGroup: 'APIKeys'
             operation: 'get'
         hidden: true
 ```

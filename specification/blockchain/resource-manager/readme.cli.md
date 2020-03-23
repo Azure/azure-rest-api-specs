@@ -23,24 +23,24 @@ cli:
       - select: 'operationGroup'
         where:
             operationGroup: 'locations'
-        name: 'Consortium'
+        name: 'consortium'
       - select: 'operation'
         where:
             operationGroup: 'locations'
-            operation: 'list_consortiums'
+            operation: 'listConsortiums'
         name: 'list'
       - select: 'operationGroup'
         where:
-            operationGroup: 'blockchain_member_operation_results'
+            operationGroup: 'blockchainMemberOperationResults'
         hidden: true
       - select: 'operation'
         where:
-            operationGroup: 'blockchain_members'
+            operationGroup: 'blockchainMembers'
             operation: '(create|update)'
         hidden: true
       - select: 'operation'
         where:
-            operationGroup: 'transaction_nodes'
+            operationGroup: 'transactionNodes'
             operation: '(create|update)'
         hidden: true
 ```
