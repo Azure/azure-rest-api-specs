@@ -17,11 +17,11 @@ cli:
       - select: 'operation'
         where:
             operationGroup: 'machines'
-            operation: '(reconnect|create_or_update|update)'
+            operation: '(reconnect|createOrUpdate|update)'
         removed: true
       - select: 'operation'
         where:
-            operationGroup: 'machine_extensions'
-            operation: '(create_or_update|update|delete|get|list)'
+            operationGroup: 'machineExtensions'
+            operation: '(createOrUpdate|update|delete|get|list)'
         removed: true
 ```

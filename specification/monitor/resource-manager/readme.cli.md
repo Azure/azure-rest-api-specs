@@ -12,71 +12,71 @@ cli:
     cli-directive:
       - select: 'choiceValue'
         where:
-            enum: 'comparison_operation_type'
+            enum: 'comparisonOperationType'
             value: 'equals'
         set:
             name: 'equal'
       - select: 'choiceValue'
         where:
-            enum: 'comparison_operation_type'
-            value: 'not_equals'
+            enum: 'comparisonOperationType'
+            value: 'notEquals'
         set:
             name: 'not_equal'
       - select: 'property'
         where:
-            schemaObject: 'activity_log_alert_leaf_condition'
+            schemaObject: 'activityLogAlertLeafCondition'
             property: 'equals'
         set:
             name: 'equal'
       - select: 'operationGroup'
         where:
-            operationGroup: 'metric_alerts_status'
+            operationGroup: 'metricAlertsStatus'
         set:
             name: 'metric_alert_status'
       - select: 'operation'
         where:
-            operationGroup: 'activity_log_alerts'
+            operationGroup: 'activityLogAlerts'
             operation: 'update'
         hidden: true
       - select: 'operation'
         where:
-            operationGroup: 'metric_alerts'
-            operation: '^(create_or_update|update)$'
+            operationGroup: 'metricAlerts'
+            operation: '^(createOrUpdate|update)$'
         hidden: true
       - select: 'parameter'
         where:
-            operationGroup: '^(metric_alerts|alert_rules|alert_rule_incidents)$'
-            parameter: 'rule_name'
+            operationGroup: '^(metricAlerts|alertRules|alertRuleIncidents)$'
+            parameter: 'ruleName'
         set:
             name: name
       - select: 'property'
         where:
-            objectSchema: '^(alert_rule_resource|alert_rule_resource_patch)$'
-            property: 'is_enabled'
+            objectSchema: '^(AlertRule)$'
+            property: 'isEnabled'
         set:
             name: 'enabled'
       - select: 'operation'
         where:
-            operationGroup: 'alert_rules'
-            operation: '^(create_or_update|delete|update)$'
+            operationGroup: 'alertRules'
+            operation: '^(createOrUpdate|delete|update)$'
         hidden: true
       - select: 'operation'
         where:
-            operationGroup: 'log_profiles'
-            operation: '^(create_or_update|update)$'
+            operationGroup: 'logProfiles'
+            operation: '^(createOrUpdate|update)$'
         hidden: true
       - select: 'property'
         where:
-            objectSchema: '^(autoscale_setting_resource|autoscale_setting_resource_patch)$'
-            property: 'target_resource_uri'
+            objectSchema: '^(AutoscaleSetting)$'
+            property: 'targetResourceUri'
         set:
             name: 'target_resource_id'
       - where:
-            objectSchema: '^(action_group|action_group_resource)$'
-            property: 'group_short_name'
+            objectSchema: '^(actionGroup)$'
+            property: 'groupShortName'
         name: 'short_name'
       - where:
-            operationGroup: 'action_groups'
+            operationGroup: 'actionGroups'
             operation: 'update'
         removed: true
       - where:
@@ -85,23 +85,23 @@ cli:
         alias: time_grain
       - where:
             operationGroup: 'metrics'
-            parameter: 'resource_uri'
+            parameter: 'resourceUri'
         name: 'resource_id'
       - where:
-            operationGroup: 'metric_definitions'
+            operationGroup: 'metricDefinitions'
             operation: 'list'
         hidden: true
       - where:
-            operationGroup: 'scheduled_query_rules'
-            parameter: 'rule_name'
+            operationGroup: 'scheduledQueryRules'
+            parameter: 'ruleName'
         name: name
       - where:
-            operationGroup: 'scheduled_query_rules'
-            operation: '^(create_or_update|update)$'
+            operationGroup: 'scheduledQueryRules'
+            operation: '^(createOrUpdate|update)$'
         hidden: true
       - where:
-            operationGroup: 'diagnostic_settings_category'
-            parameter: 'resource_uri'
+            operationGroup: 'diagnosticSettingsCategory'
+            parameter: 'resourceUri'
         name: 'resource_id'
       - where:
             operationGroup: 'baselines'

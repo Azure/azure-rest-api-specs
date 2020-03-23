@@ -11,20 +11,20 @@ cli:
     cli-directive:
       - select: 'operation'
         where:
-            operation: '(authorization_rule(s)?$|keys$|name_availability$)'
+            operation: '(authorizationRule(s)?$|keys$|nameAvailability$)'
         hidden: true
       - select: 'parameter'
         where:
-            parameter: authorization_rule_name
+            parameter: authorizationRuleName
         alias: authorization_rule
       - select: 'parameter'
         where:
-            operation: 'authorization_rule(s)?$'
-            parameter: authorization_rule_name
+            operation: 'authorizationRule(s)?$'
+            parameter: authorizationRuleName
         name: name
       - select: 'property'
         where:
-            objectSchema: 'SB_authorization_rule_properties'
+            objectSchema: 'SBAuthorizationRule-properties'
             property: 'rights'
         set:
             name: 'access_right'
@@ -33,12 +33,12 @@ cli:
               - rights
       - select: 'operationGroup'
         where:
-            operationGroup: 'disaster_recovery_configs'
+            operationGroup: 'disasterRecoveryConfigs'
         set:
             name: 'disaster_recovery_configurations'
       - select: 'parameter'
         where:
-            operationGroup: 'disaster_recovery_configs'
+            operationGroup: 'disasterRecoveryConfigs'
             parameter: 'alias'
         set:
             name: 'name'
@@ -48,49 +48,46 @@ cli:
                 - 'disaster_recovery_configuration'
       - select: 'operation'
         where:
-            operationGroup: 'disaster_recovery_configs'
-            operation: 'break_pairing'
+            operationGroup: 'disasterRecoveryConfigs'
+            operation: 'breakPairing'
         set:
-            name: 'disable_pairing'
-      - select: 'parameter'
-        where:
-            operationGroup: 'disaster_recovery_configs$|'
+            name: 'disablePairing'
       - select: 'operationGroup'
         where:
-            operationGroup: 'migration_configs'
+            operationGroup: 'migrationConfigs'
         set:
             name: migration
       - select: 'operation'
         where:
-            operationGroup: 'migration_configs'
+            operationGroup: 'migrationConfigs'
             operation: 'revert'
         set:
             name: 'stop'
       - select: 'parameter'
         where:
-            parameter: 'namespace_name'
+            parameter: 'namespaceName'
         set:
             alias: 'namespace'
       - select: 'parameter'
         where:
-            operationGroup: 'migration_configs'
-            parameter: 'namespace_name'
+            operationGroup: 'migrationConfigs'
+            parameter: 'namespaceName'
         set:
             alias: 'name'
       - select: 'parameter'
         where:
-            parameter: 'topic_name'
+            parameter: 'topicName'
         set:
             alias: 'topic'
       - select: 'parameter'
         where:
-            parameter: 'queue_name'
+            parameter: 'queueName'
         set:
             alias: 'queue'
       - select: 'parameter'
         where:
-            operation: '_keys$'
-            parameter: 'authorization_rule_name'
+            operation: 'Keys$'
+            parameter: 'authorizationRuleName'
         set:
             alias: 'name'
 ```

@@ -46,15 +46,15 @@ cli:
     cli-directive:
       - where:
             resource: 'vaults'
-            op: '^(get_deleted|purge_deleted)$'
+            op: '^(getDeleted|purgeDeleted)$'
         hidden: true
       - where:
-            enum: 'sku_name'
+            enum: 'skuName'
         alias: 'sku'
         name: 'sku'
       - where:
             resource: 'vaults'
-            op: 'check_name_availability'
+            op: 'checkNameAvailability'
         name: 'test'
         hidden: true
       - where:
@@ -62,7 +62,7 @@ cli:
             op: 'update'
         hidden: true
       - where:
-            type: 'vaults'
+            type: 'vault'
         formatTable:
             properties:
                 - Name
@@ -70,7 +70,7 @@ cli:
                 - Location
                 - Uri
       - where:
-            type: 'deleted_vault'
+            type: 'deletedVault'
         formatTable:
             properties:
               - Name
