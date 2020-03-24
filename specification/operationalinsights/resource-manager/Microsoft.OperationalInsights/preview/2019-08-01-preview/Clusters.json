@@ -489,6 +489,12 @@
       "properties": {
         "capacityReservationLevel": {
           "description": "The value of the Capacity Reservation in GB per day",
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
           "enum": [
             "CapacityReservation"
           ],
@@ -496,10 +502,6 @@
             "name": "SkuNameEnum",
             "modelAsString": true
           }
-        },
-        "name": {
-          "description": "The SKU type",
-          "type": "string"
         }
       }
     },
