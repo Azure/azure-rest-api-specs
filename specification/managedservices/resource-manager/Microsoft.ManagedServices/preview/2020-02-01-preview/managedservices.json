@@ -539,6 +539,13 @@
           },
           "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
         },
+        "eligibleAuthorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EligibleAuthorization"
+          },
+          "description": "Eligible PIM authorization tuple containing principal id of the user/security group or service principal, id of the built-in role, and just-in-time access policy setting"
+        },
         "registrationDefinitionName": {
           "type": "string",
           "description": "Name of the registration definition."
@@ -671,6 +678,13 @@
                     "$ref": "#/definitions/Authorization"
                   },
                   "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+                },
+                "eligibleAuthorizations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/EligibleAuthorization"
+                  },
+                  "description": "Eligible PIM authorization tuple containing principal id of the user/security group or service principal, id of the built-in role, and just-in-time access policy setting"
                 },
                 "registrationDefinitionName": {
                   "type": "string",
@@ -875,6 +889,58 @@
       ],
       "type": "object",
       "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
+    },
+    "EligibleAuthorization": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of the security group/service principal/user that would be delegated permissions to the projected subscription"
+        },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Display name of the principal Id."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition identifier. This role will delegate all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
+        },
+        "justInTimeAccessPolicy": {
+          "description": "Just-in-time access policy setting.",
+          "$ref": "#/definitions/JustInTimeAccessPolicy"
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "description": "Eligible authorization tuple containing principle Id (of user/service principal/security group), role definition id, and the just-in-time access setting."
+    },
+    "JustInTimeAccessPolicy": {
+      "properties": {
+        "multiFactorAuthProvider": {
+          "type": "string",
+          "readOnly": true,
+          "description": "MFA provider.",
+          "enum": [
+            "Azure",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "MultiFactorAuthProvider",
+            "modelAsString": true
+          }
+        },
+        "maximumActivationDuration": {
+          "type": "string",
+          "description": "Maximum access duration in ISO format.  The default value is \"PT8H\"."
+        }
+      },
+      "required": [
+        "multiFactorAuthProvider"
+      ],
+      "type": "object",
+      "description": "Just-in-time access policy setting."
     },
     "ErrorResponse": {
       "properties": {
