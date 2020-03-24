@@ -1,238 +1,273 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2020-01-01"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
+    "swagger": "2.0",
+    "info": {
+      "title": "Security Center",
+      "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+      "version": "2020-01-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+      "https"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "security": [
+      {
+        "azure_auth": [
+          "user_impersonation"
+        ]
       }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securitySolutions": {
-      "get": {
-        "x-ms-examples": {
-          "Get security solutions": {
-            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsSubscription_example.json"
-          }
-        },
-        "tags": [
-          "SecuritySolutions"
-        ],
-        "description": "Gets a list of Security Solutions for the subscription.",
-        "operationId": "SecuritySolutions_List",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SecuritySolutionList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+    ],
+    "securityDefinitions": {
+      "azure_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+        "flow": "implicit",
+        "description": "Azure Active Directory OAuth2 Flow",
+        "scopes": {
+          "user_impersonation": "impersonate your user account"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/securitySolutions/{securitySolutionName}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a security solution from a security data location": {
-            "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsResourceGroupLocation_example.json"
+    "paths": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/SecuritySolutions": {
+        "get": {
+          "x-ms-examples": {
+            "Get security solutions": {
+              "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsSubscription_example.json"
+            }
+          },
+          "tags": [
+            "SecuritySolutions"
+          ],
+          "description": "Gets a list of Security Solutions for the subscription.",
+          "operationId": "SecuritySolutions_List",
+          "parameters": [
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/SecuritySolutionList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
           }
-        },
-        "tags": [
-          "SecuritySolutions"
-        ],
-        "description": "Gets a specific Security Solution.",
-        "operationId": "SecuritySolutions_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+        }
+      },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/SecuritySolutions": {
+        "get": {
+          "x-ms-examples": {
+            "Get security solutions from a security data location": {
+              "$ref": "./examples/SecuritySolutions/GetSecuritySolutionsSubscriptionLocation_example.json"
+            }
           },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-          },
-          {
-            "$ref": "#/parameters/SecuritySolutionName"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          "tags": [
+            "SecuritySolutions"
+          ],
+          "description": "Gets list of Security Solutions for the subscription and location.",
+          "operationId": "SecuritySolutions_ListByHomeRegion",
+          "parameters": [
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/SecuritySolutionList"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
+        }
+      },
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/locations/{ascLocation}/SecuritySolutions/{SecuritySolutionName}": {
+        "get": {
+          "x-ms-examples": {
+            "Get a security solution from a security data location": {
+              "$ref": "./examples/SecuritySolutions/GetSecuritySolutionResourceGroupLocation_example.json"
+            }
+          },
+          "tags": [
+            "SecuritySolutions"
+          ],
+          "description": "Gets a specific Security Solution.",
+          "operationId": "SecuritySolutions_Get",
+          "parameters": [
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+            },
+            {
+              "$ref": "#/parameters/SecuritySolutionName"
+            },
+            {
+              "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/SecuritySolution"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "SecuritySolutionList": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
               "$ref": "#/definitions/SecuritySolution"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
           }
         }
-      }
-    }
-  },
-  "definitions": {
-    "SecuritySolutionList": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SecuritySolution"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URI to fetch the next page."
-        }
-      }
-    },
-    "SecuritySolution": {
-      "type": "object",
-      "properties": {
+      },
+      "SecuritySolution": {
+        "type": "object",
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SecuritySolutionProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SecuritySolutionProperties"
+          }
         },
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/Location"
-        }
-      ]
+        "required": [
+          "properties"
+        ],
+        "allOf": [
+          {
+            "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/definitions/Location"
+          }
+        ]
+      },
+      "SecuritySolutionProperties": {
+        "type": "object",
+        "properties": {
+          "securityFamily": {
+            "type": "string",
+            "description": "The security family of the security solution",
+            "enum": [
+              "Waf",
+              "Ngfw",
+              "SaasWaf",
+              "Va"
+            ],
+            "x-ms-enum": {
+              "name": "securityFamily",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Waf"
+                },
+                {
+                  "value": "Ngfw"
+                },
+                {
+                  "value": "SaasWaf"
+                },
+                {
+                  "value": "Va"
+                }
+              ]
+            }
+          },
+          "provisioningState": {
+            "type": "string",
+            "description": "The security family provisioning State",
+            "enum": [
+              "Succeeded",
+              "Failed",
+              "Updating"
+            ],
+            "x-ms-enum": {
+              "name": "provisioningState",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "Succeeded"
+                },
+                {
+                  "value": "Failed"
+                },
+                {
+                  "value": "Updating"
+                }
+              ]
+            }
+          },
+          "template": {
+            "type": "string",
+            "description": "The security solutions' template"
+          },
+          "protectionStatus": {
+            "type": "string",
+            "description": "The security solutions' status"
+          }
+        },
+        "required": [
+          "securityFamily",
+          "provisioningState",
+          "template",
+          "protectionStatus"
+        ]
+      }
     },
-    "SecuritySolutionProperties": {
-      "type": "object",
-      "properties": {
-        "securityFamily": {
-          "type": "string",
-          "description": "The security family of the security solution",
-          "enum": [
-            "Waf",
-            "Ngfw",
-            "SaasWaf",
-            "Va"
-          ],
-          "x-ms-enum": {
-            "name": "securityFamily",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Waf"
-              },
-              {
-                "value": "Ngfw"
-              },
-              {
-                "value": "SaasWaf"
-              },
-              {
-                "value": "Va"
-              }
-            ]
-          }
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "The security family provisioning State",
-          "enum": [
-            "Succeeded",
-            "Failed",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "provisioningState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Succeeded"
-              },
-              {
-                "value": "Failed"
-              },
-              {
-                "value": "Updating"
-              }
-            ]
-          }
-        },
-        "template": {
-          "type": "string",
-          "description": "The security solutions' template"
-        },
-        "protectionStatus": {
-          "type": "string",
-          "description": "The security solutions' status"
-        }
-      },
-      "required": [
-        "securityFamily",
-        "provisioningState",
-        "template",
-        "protectionStatus"
-      ]
-    }
-  },
-  "parameters": {
-    "SecuritySolutionName": {
-      "name": "securitySolutionName",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "description": "Name of security solution.",
-      "x-ms-parameter-location": "method"
+    "parameters": {
+      "SecuritySolutionName": {
+        "name": "SecuritySolutionName",
+        "type": "string",
+        "in": "path",
+        "required": true,
+        "description": "Name of security solution.",
+        "x-ms-parameter-location": "method"
+      }
     }
   }
-}
+  
