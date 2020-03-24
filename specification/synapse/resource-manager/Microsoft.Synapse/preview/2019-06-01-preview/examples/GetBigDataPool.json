@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "bigDataPoolName": "ExamplePool",
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/bigDataPools/ExamplePool",
+        "type": "Microsoft.Synapse/workspaces/bigDataPools",
+        "location": "West US 2",
+        "name": "ExamplePool",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sparkVersion": "2.4",
+          "nodeCount": 4,
+          "nodeSize": "Medium",
+          "nodeSizeFamily": "MemoryOptimized",
+          "autoScale": {
+            "enabled": true,
+            "minNodeCount": 3,
+            "maxNodeCount": 50
+          },
+          "autoPause": {
+            "enabled": true,
+            "delayInMinutes": 15
+          },
+          "creationDate": "1970-01-01T00:00:00Z",
+          "sparkEventsFolder": "/events",
+          "libraryRequirements": {
+            "time": "1970-01-01T00:00:00Z",
+            "content": "",
+            "filename": "requirements.txt"
+          },
+          "defaultSparkLogFolder": "/logs"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

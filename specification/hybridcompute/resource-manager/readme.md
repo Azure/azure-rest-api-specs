@@ -24,7 +24,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08
+tag: package-2019-12
 ```
 
 ### Tag: package-2019-03
@@ -43,6 +43,15 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.HybridCompute/preview/2019-08-02/HybridCompute.json
+```
+
+### Tag: package-2019-12
+
+These settings apply only when `--tag=package-2019-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12'
+input-file:
+- Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
 ```
 
 ---
@@ -170,16 +179,16 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2019-03
+  - tag: package-2019-12
 ```
 
-### Tag: package-2019-03 and go
+### Tag: package-2019-12 and go
 
-These settings apply only when `--tag=package-2019-03 --go` is specified on the command line.
+These settings apply only when `--tag=package-2019-12 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag)=='package-2019-03' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/hybridcompute/mgmt/2019-03-18-preview/hybridcompute
+``` yaml $(tag)=='package-2019-12' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/hybridcompute/mgmt/2019-12-12/hybridcompute
 ```
 
 ## Java
@@ -200,18 +209,18 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-hybridcompute
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2019-03
+  - tag: package-2019-12
 ```
 
-### Tag: package-2019-03 and java
+### Tag: package-2019-12 and java
 
-These settings apply only when `--tag=package-2019-03 --java` is specified on the command line.
+These settings apply only when `--tag=package-2019-12 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2019-12' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.hybridcompute.v2019_03_18
-  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_03_18
+  namespace: com.microsoft.azure.management.hybridcompute.v2019_12_12
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hybridcompute/mgmt-v2019_12_12
 
 regenerate-manager: true
 generate-interface: true
@@ -231,6 +240,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.HybridCompute/preview/2019-03-18/HybridCompute.json
   - $(this-folder)/Microsoft.HybridCompute/preview/2019-08-02/HybridCompute.json
+  - $(this-folder)/Microsoft.HybridCompute/stable/2019-12-12/HybridCompute.json
 
 ```
 

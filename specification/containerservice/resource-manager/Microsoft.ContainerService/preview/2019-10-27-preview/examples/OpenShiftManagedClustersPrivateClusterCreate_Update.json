@@ -1,0 +1,223 @@
+{
+  "parameters": {
+    "api-version": "2019-10-27-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "privateclustername1",
+    "parameters": {
+      "location": "location1",
+      "tags": {
+        "tier": "production",
+        "archv2": ""
+      },
+      "properties": {
+        "openShiftVersion": "v3.11",
+        "networkProfile": {
+          "vnetCidr": "10.0.0.0/8",
+          "managementSubnetCidr": "10.0.1.0/24"
+        },
+        "masterPoolProfile": {
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "subnetCidr": "10.0.0.0/24",
+          "apiProperties": {
+            "privateApiServer": true
+          }
+        },
+        "agentPoolProfiles": [
+          {
+            "name": "infra",
+            "role": "infra",
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
+          },
+          {
+            "name": "compute",
+            "role": "compute",
+            "count": 4,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "subnetCidr": "10.0.0.0/24"
+          }
+        ],
+        "routerProfiles": [
+          {
+            "name": "default"
+          }
+        ],
+        "authProfile": {
+          "identityProviders": [
+            {
+              "name": "Azure AD",
+              "provider": {
+                "kind": "AADIdentityProvider",
+                "clientId": "clientId",
+                "secret": "secret",
+                "tenantId": "tenantId",
+                "customerAdminGroupId": "customerAdminGroupId"
+              }
+            }
+          ]
+        },
+        "monitorProfile": {
+          "enabled": true,
+          "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
+        },
+        "refreshCluster": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/privateclustername1",
+        "location": "location1",
+        "name": "privateclustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+        "properties": {
+          "provisioningState": "Updating",
+          "openShiftVersion": "v3.11",
+          "clusterVersion": "osa.1",
+          "fqdn": "10.0.0.254",
+          "publicHostname": "10.0.0.254",
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8",
+            "managementSubnetCidr": "10.0.1.0/24",
+            "vnetId": "/subscriptions/subid1/resourceGroups/clusterrg/providers/Microsoft.Network/virtualNetworks/vnet"
+          },
+          "masterPoolProfile": {
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "subnetCidr": "10.0.0.0/24",
+            "apiProperties": {
+              "privateApiServer": true
+            }
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "infra",
+              "role": "infra",
+              "count": 3,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            },
+            {
+              "name": "compute",
+              "role": "compute",
+              "count": 4,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            }
+          ],
+          "routerProfiles": [
+            {
+              "name": "default",
+              "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com",
+              "publicSubdomain": "apps.660d6f3097594f42ba75.location1.azmosa.io"
+            }
+          ],
+          "authProfile": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
+                  "kind": "AADIdentityProvider",
+                  "clientId": "clientId",
+                  "tenantId": "tenantId",
+                  "customerAdminGroupId": "customerAdminGroupId"
+                }
+              }
+            ]
+          },
+          "monitorProfile": {
+            "enabled": true,
+            "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
+          },
+          "refreshCluster": true
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/openShiftManagedClusters/privateclustername1",
+        "location": "location1",
+        "name": "privateclustername1",
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/OpenShiftManagedClusters",
+        "properties": {
+          "provisioningState": "Creating",
+          "openShiftVersion": "v3.11",
+          "clusterVersion": "osa.1",
+          "fqdn": "",
+          "publicHostname": "",
+          "networkProfile": {
+            "vnetCidr": "10.0.0.0/8",
+            "managementSubnetCidr": "10.0.1.0/24",
+            "vnetId": ""
+          },
+          "masterPoolProfile": {
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "subnetCidr": "10.0.0.0/24",
+            "apiProperties": {
+              "privateApiServer": true
+            }
+          },
+          "agentPoolProfiles": [
+            {
+              "name": "infra",
+              "role": "infra",
+              "count": 3,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            },
+            {
+              "name": "compute",
+              "role": "compute",
+              "count": 4,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "subnetCidr": "10.0.0.0/24"
+            }
+          ],
+          "routerProfiles": [
+            {
+              "name": "default",
+              "publicSubdomain": "apps.660d6f3097594f42ba75.location1.azmosa.io",
+              "fqdn": "osa2925bdf9337748f4bd3b.location1.cloudapp.azure.com"
+            }
+          ],
+          "authProfile": {
+            "identityProviders": [
+              {
+                "name": "Azure AD",
+                "provider": {
+                  "kind": "AADIdentityProvider",
+                  "clientId": "clientId",
+                  "tenantId": "tenantId",
+                  "customerAdminGroupId": "customerAdminGroupId"
+                }
+              }
+            ]
+          },
+          "monitorProfile": {
+            "enabled": true,
+            "workspaceResourceID": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.OperationalInsights/workspaces/workspacename1"
+          }
+        }
+      }
+    }
+  }
+}

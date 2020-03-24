@@ -1,14 +1,14 @@
 {
   "parameters": {
-    "subscriptionId": "76cb77fa-8b17-4eab-9493-b65dace99813",
+    "subscriptionId": "subid",
     "supportTicketName": "testticket",
     "api-version": "2019-05-01-preview",
     "createSupportTicketParameters": {
       "properties": {
-        "serviceId": "/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89",
+        "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
         "title": "my title",
         "description": "my description",
-        "problemClassificationId": "/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89/problemClassifications/e12e3d1d-7fa0-af33-c6d0-3c50df9658a3",
+        "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/cores_problemClassification_guid",
         "severity": "moderate",
         "contactDetails": {
           "firstName": "abc",
@@ -33,23 +33,23 @@
   },
   "responses": {
     "202": {
-        "headers": {
-            "location": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationResults/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview",
-            "azure-asyncoperation": "https://management.azure.com/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/operationsStatus/1ec71b3f-5d74-4239-be45-897f23f4f52e?api-version=2019-05-01-preview"
-        }
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationResults/operationid?api-version=2019-05-01-preview",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Support/operationsStatus/operationid?api-version=2019-05-01-preview"
+      }
     },
     "200": {
       "body": {
-        "id": "/subscriptions/76cb77fa-8b17-4eab-9493-b65dace99813/providers/Microsoft.Support/supportTickets/testticket",
+        "id": "/subscriptions/subid/providers/Microsoft.Support/supportTickets/testticket",
         "name": "testticket",
         "type": "Microsoft.Support/supportTickets",
         "properties": {
           "supportTicketId": "119120321001170",
           "description": "my description",
-          "problemClassificationId": "/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89/problemClassifications/e12e3d1d-7fa0-af33-c6d0-3c50df9658a3",
+          "problemClassificationId": "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/cores_problemClassification_guid",
           "problemClassificationDisplayName": "Compute-VM (cores-vCPUs) subscription limit increases",
           "severity": "moderate",
-		  "productionOutage": false,
+          "productionOutage": false,
           "require24X7Response": false,
           "contactDetails": {
             "firstName": "abc",
@@ -76,7 +76,7 @@
           },
           "supportPlanType": "Premier",
           "title": "my title",
-          "serviceId": "/providers/Microsoft.Support/services/06bfd9d3-516b-d5c6-5802-169c800dec89",
+          "serviceId": "/providers/Microsoft.Support/services/quota_service_guid",
           "serviceDisplayName": "Service and subscription limits (quotas)",
           "status": "Open",
           "createdDate": "2018-03-20T21:36:18Z",
