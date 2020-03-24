@@ -69,6 +69,7 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/publicIpPrefix.json
   - Microsoft.Network/stable/2020-03-01/routeFilter.json
   - Microsoft.Network/stable/2020-03-01/routeTable.json
+  - Microsoft.Network/stable/2020-03-01/securityPartnerProvider.json
   - Microsoft.Network/stable/2020-03-01/serviceCommunity.json
   - Microsoft.Network/stable/2020-03-01/serviceEndpointPolicy.json
   - Microsoft.Network/stable/2020-03-01/serviceTags.json
@@ -1319,6 +1320,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: routeTable.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: securityPartnerProvider.json
+    reason: name, id and type properties are inherited from the upper level  
   - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceCommunity.json
     reason: name, id and type properties are inherited from the upper level
