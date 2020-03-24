@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Document Translation",
     "version": "v1.0-preview"
@@ -12,55 +12,41 @@
         ],
         "summary": "Submit a batch document translation request to the translation service",
         "description": "Submit a batch request to the document translation service.\r\nUser can specify a list of target languages to be translated to.\r\n            \r\nA batch request can consist of 1-n input source folders.\r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\n            \r\nNote: the API will go through all the files in the folder and subfolders since in most storage source\r\nthe folder structure are merely virtual.\r\n            \r\nWe will create subfolder for each target language.\r\nFor Example, if the input is https://[myblob]/container/ and destination output is https://[myblob]/outputcontainer/\r\nand the container contains 2 files a.txt, b.docx.  The translation is from en to [es,fr]\r\nThe documents translated will be placed in\r\nhttps://[myblob]/outputcontainer/es/a.txt\r\nhttps://[myblob]/outputcontainer/es/b.docx\r\nhttps://[myblob]/outputcontainer/fr/a.txt\r\nhttps://[myblob]/outputcontainer/fr/b.docx\r\n            \r\nA status file will also be written in the root folder.",
-        "requestBody": {
-          "description": "Job request details",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JobSubmissionBatchRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/JobSubmissionBatchRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/JobSubmissionBatchRequest"
-              }
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Job request details",
+            "schema": {
+              "$ref": "#/definitions/JobSubmissionBatchRequest"
             }
           }
-        },
+        ],
         "responses": {
           "202": {
             "description": "Successful request and it is accepted by the service.  The job details are returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobStatusResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/JobStatusResponse"
             }
           },
           "400": {
             "description": "Invalid request.  See Error detail for missing or invalid parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "401": {
             "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         }
@@ -73,92 +59,49 @@
         ],
         "summary": "Submit a binary document in the POST body to the translation service.",
         "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/pdf for .pdf files",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "name": "To",
             "in": "query",
+            "name": "To",
             "description": "The language code for the documents to translate to",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
+            "in": "query",
             "name": "From",
-            "in": "query",
             "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document (TBD)",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
-            "name": "Category",
             "in": "query",
+            "name": "Category",
             "description": "Category for the translation system (Optional)",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocumentSubmissionResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocumentSubmissionResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DocumentSubmissionResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/DocumentSubmissionResponse"
             }
           },
           "400": {
             "description": "Invalid request.  See Error detail for missing or invalid parameters",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "401": {
             "description": "The request is unauthorized",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "202": {
@@ -175,89 +118,68 @@
         "summary": "Returns the status of the batch translation job",
         "description": "Returns the status of the translation job.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.\r\n            \r\nBy default, the API will only returns the summary.  Detailed status of each document can be included by passing includeDetailStatus with value 'true' in the query parameter\r\n            \r\nOptionally, this API supports paging if the list of detailed status of each document is long.\r\nThe X-Pagination response header will be returned to support paging.\r\nThe list of document details are sorted alphabetically",
         "operationId": "Get batch translation job status",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "jobId",
             "in": "path",
+            "name": "jobId",
             "description": "Format - guid.  The Job ID",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
           },
           {
+            "in": "query",
             "name": "PageNumber",
-            "in": "query",
             "description": "Optional paging parameter if detailed status of each document is supported\r\nThis allows user to specific the page number and the max number of result per page.\r\nPageNumber should start with 1\r\nThe X-Pagination header is returned with paging information",
-            "schema": {
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 1
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 1,
+            "maximum": 2147483647,
+            "minimum": 1
           },
           {
+            "in": "query",
             "name": "PageSize",
-            "in": "query",
             "description": "Optional paging parameter if detailed status of each document is supported\r\nThis allows user to specific the page number and the max number of result per page.\r\nThe X-Pagination header is returned with paging information",
-            "schema": {
-              "maximum": 2147483647,
-              "minimum": 1,
-              "type": "integer",
-              "format": "int32",
-              "default": 100
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 100,
+            "maximum": 2147483647,
+            "minimum": 1
           },
           {
-            "name": "includeDetailStatus",
             "in": "query",
+            "name": "includeDetailStatus",
             "description": "[Optional] parameter for whether to include detail status of each document",
-            "schema": {
-              "type": "boolean"
-            }
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful request and returns the status of the job",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobStatusResponseDetailed"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/JobStatusResponseDetailed"
             }
           },
           "400": {
             "description": "The request is invalid.  Check the input parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "401": {
             "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "404": {
             "description": "The requested jobId is not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         }
@@ -269,530 +191,482 @@
         "summary": "Cancel a currently processing or queued job.",
         "description": "Cancel a currently processing or queued job.\r\nA job will not be cancelled if it is already completed or failed.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
         "operationId": "Cancel Job request",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "jobId",
             "in": "path",
+            "name": "jobId",
             "description": "Format - guid.  The Job ID",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful request and returns the status of the job",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/JobStatusResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/JobStatusResponse"
             }
           },
           "400": {
             "description": "The request is invalid.  Check the input parameters",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "401": {
             "description": "The request is unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           },
           "404": {
             "description": "The requested jobId is not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponseV2"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "StorageSource": {
-        "enum": [
-          "AzureBlob"
-        ],
-        "type": "string",
-        "description": "Storage Source"
-      },
-      "JobBatchRequestInput": {
-        "required": [
-          "destinationFolder",
-          "sourceFolder"
-        ],
-        "type": "object",
-        "properties": {
-          "sourceFolder": {
-            "type": "string",
-            "description": "Location of the folder / container with your documents",
-            "example": "https://myblob.blob.core.windows.net/mycontainer"
-          },
-          "destinationFolder": {
-            "type": "string",
-            "description": "Location of the folder / container for the output",
-            "example": "https://myblob.blob.core.windows.net/mycontainer"
-          },
-          "prefixFilter": {
-            "type": "string",
-            "description": "Specifies a string that filters the results to return only blobs whose name begins with the specified prefix.",
-            "nullable": true,
-            "example": "FilePrefix"
-          },
-          "suffixFilter": {
-            "type": "string",
-            "description": "Specifies a string that filters the results to return only blobs whose name ends with the specified prefix.",
-            "nullable": true,
-            "example": ".txt"
-          },
-          "sourceAccessToken": {
-            "type": "string",
-            "description": "SourceAccessToken if needed to access the folder / container / file\r\nThis can be null and be specified as part of the SourceFolder url if needed",
-            "nullable": true,
-            "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
-          },
-          "destinationAccessToken": {
-            "type": "string",
-            "description": "DestinationAccessToken if needed to access the folder / container\r\nThis can be null and be specified as part of the DestinationUrl url if needed",
-            "nullable": true,
-            "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
-          },
-          "storageSource": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StorageSource"
-              }
-            ],
-            "description": "Specify whether this is AzureBlob or other storage source\r\nOptional.  Default: AzureBlob"
+  "definitions": {
+    "StorageSource": {
+      "description": "Storage Source",
+      "enum": [
+        "AzureBlob"
+      ],
+      "type": "string"
+    },
+    "JobBatchRequestInput": {
+      "description": "Definition for the input batch job request",
+      "required": [
+        "destinationFolder",
+        "sourceFolder"
+      ],
+      "type": "object",
+      "properties": {
+        "sourceFolder": {
+          "description": "Location of the folder / container with your documents",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/mycontainer"
+        },
+        "destinationFolder": {
+          "description": "Location of the folder / container for the output",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/mycontainer"
+        },
+        "prefixFilter": {
+          "description": "Specifies a string that filters the results to return only blobs whose name begins with the specified prefix.",
+          "type": "string",
+          "example": "FilePrefix"
+        },
+        "suffixFilter": {
+          "description": "Specifies a string that filters the results to return only blobs whose name ends with the specified prefix.",
+          "type": "string",
+          "example": ".txt"
+        },
+        "sourceAccessToken": {
+          "description": "SourceAccessToken if needed to access the folder / container / file\r\nThis can be null and be specified as part of the SourceFolder url if needed",
+          "type": "string",
+          "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
+        },
+        "destinationAccessToken": {
+          "description": "DestinationAccessToken if needed to access the folder / container\r\nThis can be null and be specified as part of the DestinationUrl url if needed",
+          "type": "string",
+          "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
+        },
+        "storageSource": {
+          "description": "Specify whether this is AzureBlob or other storage source\r\nOptional.  Default: AzureBlob",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StorageSource"
+            }
+          ]
+        }
+      }
+    },
+    "JobSubmissionBatchRequest": {
+      "description": "Job submission batch request",
+      "required": [
+        "inputs",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The list of language codes for the documents to translate to",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
-        "additionalProperties": false,
-        "description": "Definition for the input batch job request"
-      },
-      "JobSubmissionBatchRequest": {
-        "required": [
-          "inputs",
-          "to"
-        ],
-        "type": "object",
-        "properties": {
-          "to": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The list of language codes for the documents to translate to"
-          },
-          "inputs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JobBatchRequestInput"
-            },
-            "description": "The input list of documents or folders containing documents"
-          },
-          "from": {
-            "type": "string",
-            "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document (TBD)",
-            "nullable": true,
-            "example": "en"
-          },
-          "category": {
-            "type": "string",
-            "description": "Category for the translation system (Optional)",
-            "nullable": true,
-            "example": "a999cf06-cc84-41cb-800b-cf4bdcfcb460-GENERAL"
+        "inputs": {
+          "description": "The input list of documents or folders containing documents",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobBatchRequestInput"
           }
         },
-        "additionalProperties": false,
-        "description": "Job submission batch request"
-      },
-      "Status": {
-        "enum": [
-          "NotStarted",
-          "Running",
-          "Succeeded",
-          "Failed",
-          "Cancelled"
-        ],
-        "type": "string",
-        "description": "List of possible statuses for job or document"
-      },
-      "StatusSummary": {
-        "type": "object",
-        "properties": {
-          "overallStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Status"
-              }
-            ],
-            "description": "Overall Job status"
+        "from": {
+          "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document (TBD)",
+          "type": "string",
+          "example": "en"
+        },
+        "category": {
+          "description": "Category for the translation system (Optional)",
+          "type": "string",
+          "example": "a999cf06-cc84-41cb-800b-cf4bdcfcb460-GENERAL"
+        }
+      }
+    },
+    "Status": {
+      "description": "List of possible statuses for job or document",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "type": "string"
+    },
+    "StatusSummary": {
+      "type": "object",
+      "properties": {
+        "overallStatus": {
+          "description": "Overall Job status",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Status"
+            }
+          ]
+        },
+        "totalDocuments": {
+          "format": "int32",
+          "description": "Total document count",
+          "type": "integer",
+          "example": 1
+        },
+        "failedDocuments": {
+          "format": "int32",
+          "description": "Number of documents that has failed",
+          "type": "integer",
+          "example": 0
+        },
+        "succeedDocuments": {
+          "format": "int32",
+          "description": "Number of documents that have succeeded",
+          "type": "integer",
+          "example": 1
+        },
+        "inProgressDocuments": {
+          "format": "int32",
+          "description": "Number of documents that are in progress",
+          "type": "integer",
+          "example": 0
+        },
+        "notYetStartedDocuments": {
+          "format": "int32",
+          "description": "Number of documents that has not yet been proceessed",
+          "type": "integer",
+          "example": 0
+        }
+      }
+    },
+    "JobStatusResponse": {
+      "description": "Job status response",
+      "required": [
+        "createdDateTimeUtc",
+        "jobId",
+        "jobStatus",
+        "lastActionDateTimeUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "format": "uuid",
+          "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
+          "type": "string",
+          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
+        },
+        "createdDateTimeUtc": {
+          "format": "date-time",
+          "description": "Job created date time",
+          "type": "string",
+          "example": "2020-01-20T11:40:07.7010000-08:00"
+        },
+        "lastActionDateTimeUtc": {
+          "format": "date-time",
+          "description": "Date time in which the job's status has been updated",
+          "type": "string",
+          "example": "2020-01-20T11:41:07.7010000-08:00"
+        },
+        "jobStatus": {
+          "description": "Status / progress of the translation job.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StatusSummary"
+            }
+          ]
+        }
+      }
+    },
+    "ErrorCodeV2": {
+      "description": "Enums containing high level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable"
+      ],
+      "type": "string"
+    },
+    "DetailedErrorCode": {
+      "description": "Detailed error code enum.",
+      "enum": [
+        "InvalidParameterValue",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputRecords",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode"
+      ],
+      "type": "string"
+    },
+    "InnerErrorV2": {
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets detailed error code.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DetailedErrorCode"
+            }
+          ],
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets additional supportive details regarding the error and/or expected policies.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "totalDocuments": {
-            "type": "integer",
-            "description": "Total document count",
-            "format": "int32",
-            "example": 1
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Gets finer error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerErrorV2"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorV2": {
+      "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Gets high level error code.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorCodeV2"
+            }
+          ],
+          "readOnly": true
+        },
+        "details": {
+          "description": "Gets additional supportive details regarding the error and/or expected policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorV2"
           },
-          "failedDocuments": {
-            "type": "integer",
-            "description": "Number of documents that has failed",
-            "format": "int32",
-            "example": 0
-          },
-          "succeedDocuments": {
-            "type": "integer",
-            "description": "Number of documents that have succeeded",
-            "format": "int32",
-            "example": 1
-          },
-          "inProgressDocuments": {
-            "type": "integer",
-            "description": "Number of documents that are in progress",
-            "format": "int32",
-            "example": 0
-          },
-          "notYetStartedDocuments": {
-            "type": "integer",
-            "description": "Number of documents that has not yet been proceessed",
-            "format": "int32",
-            "example": 0
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "description": "Gets finer error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/InnerErrorV2"
+            }
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorResponseV2": {
+      "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created either through Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly from\r\na controller.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Contains information to be conveyed by the Error Response, including\r\nstatus code and message.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorV2"
+            }
+          ]
+        }
+      }
+    },
+    "DocumentSubmissionResponse": {
+      "description": "The response for a document submission",
+      "type": "object",
+      "properties": {
+        "job": {
+          "description": "Detail of the underlying translation Job",
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobStatusResponse"
+            }
+          ]
+        },
+        "documentDownloadUrl": {
+          "format": "uri",
+          "description": "Document download link",
+          "type": "string"
+        },
+        "documentExpirationDateTimeUtc": {
+          "format": "date-time",
+          "description": "Datetime in Utc when the document will no longer be available",
+          "type": "string"
+        }
+      }
+    },
+    "DocumentStatusDetail": {
+      "required": [
+        "documentStatus",
+        "path",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Location of the document or folder",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
+        },
+        "documentStatus": {
+          "description": "Status / progress of the translation of the Document.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Status"
+            }
+          ]
+        },
+        "detectedLanguage": {
+          "description": "Detected language of the original document (to be implemented)",
+          "type": "string",
+          "example": "en"
+        },
+        "to": {
+          "description": "To language",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "example": "document is malformed"
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "Error code if any",
+          "type": "integer",
+          "example": 400052
+        },
+        "progress": {
+          "format": "float",
+          "description": "Progress of the translation if available",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number",
+          "example": 0.5
+        },
+        "id": {
+          "format": "int64",
+          "description": "Internal Id",
+          "type": "integer"
+        }
+      }
+    },
+    "JobStatusResponseDetailed": {
+      "description": "Job status response",
+      "required": [
+        "createdDateTimeUtc",
+        "jobId",
+        "jobStatus",
+        "lastActionDateTimeUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "documentStatusDetails": {
+          "description": "The detail status of individual documents",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentStatusDetail"
           }
         },
-        "additionalProperties": false
-      },
-      "JobStatusResponse": {
-        "required": [
-          "createdDateTimeUtc",
-          "jobId",
-          "jobStatus",
-          "lastActionDateTimeUtc"
-        ],
-        "type": "object",
-        "properties": {
-          "jobId": {
-            "type": "string",
-            "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
-            "format": "uuid",
-            "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
-          },
-          "createdDateTimeUtc": {
-            "type": "string",
-            "description": "Job created date time",
-            "format": "date-time",
-            "example": "2020-01-20T19:40:07.7010000+00:00"
-          },
-          "lastActionDateTimeUtc": {
-            "type": "string",
-            "description": "Date time in which the job's status has been updated",
-            "format": "date-time",
-            "example": "2020-01-20T19:41:07.7010000+00:00"
-          },
-          "jobStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusSummary"
-              }
-            ],
-            "description": "Status / progress of the translation job."
+        "jobErrors": {
+          "description": "If job has failed, Errors will be populated with detailed error message",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorV2"
           }
         },
-        "additionalProperties": false,
-        "description": "Job status response"
-      },
-      "ErrorCodeV2": {
-        "enum": [
-          "InvalidRequest",
-          "InvalidArgument",
-          "InternalServerError",
-          "ServiceUnavailable"
-        ],
-        "type": "string",
-        "description": "Enums containing high level error codes."
-      },
-      "DetailedErrorCode": {
-        "enum": [
-          "InvalidParameterValue",
-          "InvalidRequestBodyFormat",
-          "EmptyRequest",
-          "MissingInputRecords",
-          "InvalidDocument",
-          "ModelVersionIncorrect",
-          "InvalidDocumentBatch",
-          "UnsupportedLanguageCode"
-        ],
-        "type": "string",
-        "description": "Detailed error code enum."
-      },
-      "InnerErrorV2": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DetailedErrorCode"
-              }
-            ],
-            "description": "Gets detailed error code.",
-            "readOnly": true
-          },
-          "details": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Gets additional supportive details regarding the error and/or expected policies.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Gets high level error message.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "target": {
-            "type": "string",
-            "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "innerError": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InnerErrorV2"
-              }
-            ],
-            "description": "Gets finer error details.",
-            "nullable": true,
-            "readOnly": true
-          }
+        "jobId": {
+          "format": "uuid",
+          "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
+          "type": "string",
+          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
         },
-        "additionalProperties": false,
-        "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested)."
-      },
-      "ErrorV2": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ErrorCodeV2"
-              }
-            ],
-            "description": "Gets high level error code.",
-            "readOnly": true
-          },
-          "details": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorV2"
-            },
-            "description": "Gets additional supportive details regarding the error and/or expected policies.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "message": {
-            "type": "string",
-            "description": "Gets high level error message.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "target": {
-            "type": "string",
-            "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-            "nullable": true,
-            "readOnly": true
-          },
-          "innerError": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/InnerErrorV2"
-              }
-            ],
-            "description": "Gets finer error details.",
-            "nullable": true,
-            "readOnly": true
-          }
+        "createdDateTimeUtc": {
+          "format": "date-time",
+          "description": "Job created date time",
+          "type": "string",
+          "example": "2020-01-20T11:40:07.7010000-08:00"
         },
-        "additionalProperties": false,
-        "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details."
-      },
-      "ErrorResponseV2": {
-        "type": "object",
-        "properties": {
-          "error": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ErrorV2"
-              }
-            ],
-            "description": "Contains information to be conveyed by the Error Response, including\r\nstatus code and message.",
-            "nullable": true
-          }
+        "lastActionDateTimeUtc": {
+          "format": "date-time",
+          "description": "Date time in which the job's status has been updated",
+          "type": "string",
+          "example": "2020-01-20T11:41:07.7010000-08:00"
         },
-        "additionalProperties": false,
-        "description": "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created either through Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly from\r\na controller."
-      },
-      "DocumentSubmissionResponse": {
-        "type": "object",
-        "properties": {
-          "job": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/JobStatusResponse"
-              }
-            ],
-            "description": "Detail of the underlying translation Job",
-            "nullable": true
-          },
-          "documentDownloadUrl": {
-            "type": "string",
-            "description": "Document download link",
-            "format": "uri",
-            "nullable": true
-          },
-          "documentExpirationDateTimeUtc": {
-            "type": "string",
-            "description": "Datetime in Utc when the document will no longer be available",
-            "format": "date-time"
-          }
-        },
-        "additionalProperties": false,
-        "description": "The response for a document submission"
-      },
-      "DocumentStatusDetail": {
-        "required": [
-          "documentStatus",
-          "path",
-          "to"
-        ],
-        "type": "object",
-        "properties": {
-          "path": {
-            "type": "string",
-            "description": "Location of the document or folder",
-            "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
-          },
-          "documentStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Status"
-              }
-            ],
-            "description": "Status / progress of the translation of the Document."
-          },
-          "detectedLanguage": {
-            "type": "string",
-            "description": "Detected language of the original document (to be implemented)",
-            "nullable": true,
-            "example": "en"
-          },
-          "to": {
-            "type": "string",
-            "description": "To language"
-          },
-          "errorMessage": {
-            "type": "string",
-            "description": "Error message if any",
-            "nullable": true,
-            "example": "document is malformed"
-          },
-          "errorCode": {
-            "type": "integer",
-            "description": "Error code if any",
-            "format": "int32",
-            "example": 400052
-          },
-          "progress": {
-            "maximum": 1,
-            "minimum": 0,
-            "type": "number",
-            "description": "Progress of the translation if available",
-            "format": "float",
-            "example": 0.5
-          },
-          "id": {
-            "type": "integer",
-            "description": "Internal Id",
-            "format": "int64"
-          }
-        },
-        "additionalProperties": false
-      },
-      "JobStatusResponseDetailed": {
-        "required": [
-          "createdDateTimeUtc",
-          "jobId",
-          "jobStatus",
-          "lastActionDateTimeUtc"
-        ],
-        "type": "object",
-        "properties": {
-          "documentStatusDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DocumentStatusDetail"
-            },
-            "description": "The detail status of individual documents",
-            "nullable": true
-          },
-          "jobErrors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ErrorV2"
-            },
-            "description": "If job has failed, Errors will be populated with detailed error message",
-            "nullable": true
-          },
-          "jobId": {
-            "type": "string",
-            "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
-            "format": "uuid",
-            "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
-          },
-          "createdDateTimeUtc": {
-            "type": "string",
-            "description": "Job created date time",
-            "format": "date-time",
-            "example": "2020-01-20T19:40:07.7010000+00:00"
-          },
-          "lastActionDateTimeUtc": {
-            "type": "string",
-            "description": "Date time in which the job's status has been updated",
-            "format": "date-time",
-            "example": "2020-01-20T19:41:07.7010000+00:00"
-          },
-          "jobStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StatusSummary"
-              }
-            ],
-            "description": "Status / progress of the translation job."
-          }
-        },
-        "additionalProperties": false,
-        "description": "Job status response"
+        "jobStatus": {
+          "description": "Status / progress of the translation job.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/StatusSummary"
+            }
+          ]
+        }
       }
     }
   }
