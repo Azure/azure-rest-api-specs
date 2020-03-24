@@ -42,6 +42,16 @@ input-file:
 - Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
 ```
 
+### Tag: package-2020-02-07-preview
+
+These settings apply only when `--tag=package-2020-02-07-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-02-07-preview'
+input-file:
+- Microsoft.HanaOnAzure/preview/2020-02-07-preview/hanaonazure.json
+```
+
+
 # Code Generation
 
 
