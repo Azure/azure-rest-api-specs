@@ -275,6 +275,7 @@ input-file:
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2020-02-18-preview/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json
 
 ```
