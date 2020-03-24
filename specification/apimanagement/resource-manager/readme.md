@@ -384,6 +384,40 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimanagement.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapis.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapisByTags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimapiversionsets.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimauthorizationservers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimbackends.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcaches.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimcertificates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdeployment.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimdiagnostics.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimemailtemplates.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimgateways.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimgroups.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimidentityprovider.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimissues.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimloggers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnamedvalues.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnetworkstatus.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimnotifications.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimopenidconnectproviders.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimpolicies.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimpolicydescriptions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimportalsettings.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimproducts.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimproductsByTags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimquotas.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimregions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimreports.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimsubscriptions.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtagresources.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtags.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimtenant.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/apimusers.json
+  - $(this-folder)/Microsoft.ApiManagement/stable/2019-12-01/definitions.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimanagement.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapis.json
   - $(this-folder)/Microsoft.ApiManagement/preview/2019-12-01-preview/apimapisByTags.json
