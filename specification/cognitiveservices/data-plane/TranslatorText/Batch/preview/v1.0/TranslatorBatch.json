@@ -127,8 +127,7 @@
             "name": "jobId",
             "description": "Format - guid.  The Job ID",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "in": "query",
@@ -200,8 +199,7 @@
             "name": "jobId",
             "description": "Format - guid.  The Job ID",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -371,7 +369,7 @@
         },
         "notYetStartedDocuments": {
           "format": "int32",
-          "description": "Number of documents that has not yet been proceessed",
+          "description": "Number of documents that has not yet been processed",
           "type": "integer",
           "example": 0
         }
@@ -388,7 +386,6 @@
       "type": "object",
       "properties": {
         "jobId": {
-          "format": "uuid",
           "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
           "type": "string",
           "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
@@ -550,7 +547,6 @@
           ]
         },
         "documentDownloadUrl": {
-          "format": "uri",
           "description": "Document download link",
           "type": "string"
         },
@@ -642,7 +638,6 @@
           }
         },
         "jobId": {
-          "format": "uuid",
           "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
           "type": "string",
           "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
