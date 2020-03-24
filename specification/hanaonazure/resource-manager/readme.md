@@ -122,6 +122,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.HanaOnAzure/preview/2017-11-03-preview/hanaonazure.json
+  - $(this-folder)/Microsoft.HanaOnAzure/preview/2020-02-07-preview/hanaonazure.json
 
 ```
 
