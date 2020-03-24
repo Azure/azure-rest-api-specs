@@ -50,7 +50,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
 | [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs |
-| [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -67,7 +66,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
 | [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
-| [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -98,6 +96,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs |
+| [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -128,6 +127,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2010](#r2010) | [LongRunningOperationsOptionsValidator](#r2010) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2007](#r2007) | [LongRunningOperationsWithLongRunningExtension](#r2007) | ARM OpenAPI(swagger) specs |
 | [R2029](#r2029) | [PageableOperation](#r2029) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4006](#r4006) | [DeprecatedXmsCodeGenerationSetting](#r4006) | ARM and Data plane OpenAPI(swagger) specs |
   
 ### Documentation
 
@@ -2241,13 +2241,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r4005" ></a>R4005 UniqueXmsEnumName
 
-**Category** : ARM Error
+**Category** : SDK Error
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
-**Description** : Property name in x-ms-extension is required , the rule introduced to avoid duplicate x-ms-enum name.
+**Description** : Property name in x-ms-extension is required , the rule is introduced to avoid duplicate x-ms-enum name.
 
 **CreatedAt**: March 18, 2020
 
@@ -2290,19 +2290,19 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r4006" ></a>R4006 DeprecatedXmsCodeGenerationSetting
 
-**Category** : ARM Warning
+**Category** : SDK Warning
 
 **Applies to** : ARM and Data plane OpenAPI(swagger) specs
 
 **Output Message** : The x-ms-code-generation-setting extension is being deprecated. Please remove it and move settings to readme file for code generation.
 
-**Description** : x-ms-code-generation-settings is being deprecated. AutoRest (v3) will stop supporting it inside the Swagger. There was Readme.md to hold the same configuration options. Please ensure to remove the parameter from swagger spec and move settings to readme.
+**Description** : The x-ms-code-generation-settings is being deprecated. AutoRest (v3) is using settings in readme file for code generation and will stop supporting it inside the swagger file. Please ensure to remove the parameter from swagger spec and move settings to readme.
 
 **CreatedAt**: March 18, 2020
 
 **LastModifiedAt**: March 18, 2020
 
-**How to fix the violation**: Since the only value of this extension today is to override the client name, which could be done with a “title” line in the Readme,you could remove the extension from swagger spec and move settings to readme.
+**How to fix the violation**: Since the only value of this extension today is to override the client name, which could be done with a 'title' line in the readme file,you could remove the extension from swagger spec and move settings to readme.
 
 The following would be invalid:
 
