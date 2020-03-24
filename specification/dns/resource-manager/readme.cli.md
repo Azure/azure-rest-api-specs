@@ -12,39 +12,39 @@ cli:
     cli-directive:
       - select: 'parameter'  
         where:
-            operationGroup: 'record_sets'
+            operationGroup: 'recordSets'
             parameter: 'parameters'
         set:
             name: 'record_set'
             required: true
       - select: 'parameter'
         where:
-            operationGroup: 'record_sets'
-            parameter: 'relative_record_set_name'
+            operationGroup: 'recordSets'
+            parameter: 'relativeRecordSetName'
         set:
-            name: 'Name'
+            name: 'name'
             alias: relative_record_set_name
       - select: 'parameter'
         where:
-            operationGroup: 'record_sets'
-            parameter: '(recordsetnamesuffix|record_set_name_suffix)'
+            operationGroup: 'recordSets'
+            parameter: '(recordsetnamesuffix|recordSetNameSuffix)'
         set:
             name: 'name_suffix'
       - select: 'operation'
         where:
-            operationGroup: 'record_sets'
-            operation: '^(create_or_update|update)$'
+            operationGroup: 'recordSets'
+            operation: '^(createOrUpdate|update)$'
         hidden: true
       - select: 'parameter'
         where:
-            operationGroup: 'dns_resource_reference'
+            operationGroup: 'dnsResourceReference'
             parameter: 'parameters'
         set:
             name: 'resource_reference'
       - select: 'operation'
         where:
-            operationGroup: 'dns_resource_reference'
-            operation: 'get_by_target_resources'
+            operationGroup: 'dnsResourceReference'
+            operation: 'getByTargetResources'
         hidden: true
       - select: 'operation'
         where:
@@ -60,6 +60,6 @@ cli:
       - select: 'operation'
         where:
             operationGroup: 'zones'
-            operation: 'create_or_update'
+            operation: 'createOrUpdate'
         hidden: true
 ```
