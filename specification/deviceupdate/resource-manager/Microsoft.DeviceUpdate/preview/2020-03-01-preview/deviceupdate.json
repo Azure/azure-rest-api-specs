@@ -199,7 +199,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.deviceupdate/accounts/{accountName}/instances": {
       "get": {
         "description": "Returns instances for a given account name",
-        "operationId": "Instances_List",
+        "operationId": "Instances_ListByAccount",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -232,8 +232,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Gets a list of accounts": {
-            "$ref": "./examples/Instance/Instances_List.json"
+          "Gets a list of instances by account": {
+            "$ref": "./examples/Instance/Instances_ListByAccount.json"
           }
         }
       }
@@ -454,6 +454,8 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Device Update Account properties",
           "type": "object",
           "properties": {
             "aduTenantName": {
@@ -497,13 +499,15 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Device Update Instance properties",
+          "type": "object",
           "properties": {
             "sku": {
               "type": "string",
               "description": "Azure Device Update SKU"
             }
-          },
-          "type": "object"
+          }
         }
       }
     },
