@@ -3,7 +3,12 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "testRG",
     "accountName": "Contoso",
-    "api-version": "2020-03-01-preview"
+    "api-version": "2020-03-01-preview",
+    "tagUpdatePayload": {
+      "tags": {
+        "tagKey":"tagValue"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -12,6 +17,9 @@
         "id": "/subscriptions/{subscriptionId}/resourceGroups/testRG/providers/Microsoft.DeviceUpdate/accounts/Contoso",
         "type": "Microsoft.DeviceUpdate/accounts",
         "location": "West US 2",
+        "tags":{
+          "tagKey":"tagValue"
+        },
         "properties": {
           "writeRegion": "West US 2",
           "readRegions": [

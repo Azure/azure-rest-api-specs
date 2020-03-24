@@ -114,7 +114,7 @@
       },
       "put": {
         "description": "Create or update account.",
-        "operationId": "Accounts_CreateAndUpdate",
+        "operationId": "Accounts_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -154,7 +154,7 @@
         },
         "x-ms-examples": {
           "Creates or updates an account": {
-            "$ref": "./examples/Account/Accounts_Put.json"
+            "$ref": "./examples/Account/Accounts_Create.json"
           }
         }
       },
@@ -192,6 +192,52 @@
         "x-ms-examples": {
           "Deletes an account": {
             "$ref": "./examples/Account/Accounts_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Update account, currently only updates tags.",
+        "operationId": "Accounts_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates an account": {
+            "$ref": "./examples/Account/Accounts_Update.json"
           }
         }
       }
@@ -281,7 +327,7 @@
       },
       "put": {
         "description": "Create or update instance.",
-        "operationId": "Instances_CreateAndUpdate",
+        "operationId": "Instances_Create",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -324,7 +370,7 @@
         },
         "x-ms-examples": {
           "Gets a list of accounts": {
-            "$ref": "./examples/Instance/Instances_Put.json"
+            "$ref": "./examples/Instance/Instances_Create.json"
           }
         }
       },
@@ -367,11 +413,60 @@
             "$ref": "./examples/Instance/Instances_Delete.json"
           }
         }
+      },
+      "patch": {
+        "description": "Update instance, currently only updates tags.",
+        "operationId": "Instances_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/InstanceNameParameter"
+          },
+          {
+            "name": "tagUpdatePayload",
+            "description": "Updated tags.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Instance updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of accounts": {
+            "$ref": "./examples/Instance/Instances_Update.json"
+          }
+        }
       }
     },
     "/providers/Microsoft.DeviceUpdate/operations": {
       "get": {
-        "description": "Returns list of operations.",
+        "description": "Returns list of operations for Microsoft.DeviceUpdate resource provider.",
         "operationId": "Operations_List",
         "parameters": [
           {
@@ -441,6 +536,19 @@
       },
       "x-ms-azure-resource": true
     },
+    "TagUpdate": {
+      "type": "object",
+      "description": "Request payload used to update an existing resource's tags.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Dictionary of key-value pairs to be set as tags on a Device Update resource. This will overwrite any existing tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "Account": {
       "type": "object",
       "description": "Account details",
@@ -455,15 +563,19 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Device Update Account properties",
+          "description": "Device Update Account properties.",
           "type": "object",
           "properties": {
-            "aduTenantName": {
+            "writeRegion": {
               "type": "string",
-              "description": "Azure Device Update Tenant ID.",
-              "minLength": 1,
-              "maxLength": 64,
-              "pattern": "^[A-Za-z0-9]+$"
+              "description": "Device Update Account write region."
+            },
+            "readRegions": {
+              "type":"array",
+              "description": "Device Update Account read regions.",
+              "items":{
+                "type":"string"
+              }
             }
           }
         }
@@ -505,7 +617,7 @@
           "properties": {
             "sku": {
               "type": "string",
-              "description": "Azure Device Update SKU"
+              "description": "Device Update SKU"
             }
           }
         }
