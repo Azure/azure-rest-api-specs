@@ -1520,20 +1520,12 @@
     "PrivateEndpointConnection": {
       "description": "An object that represents a private endpoint connection for a container registry.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "type": {
-          "description": "The resource type is private endpoint connection.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "The resource ID.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "The properties of a private endpoint connection.",
@@ -2896,6 +2888,27 @@
           "type": "string"
         }
       }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "Resource": {
       "description": "An Azure resource.",
