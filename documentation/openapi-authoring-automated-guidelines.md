@@ -2075,13 +2075,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
-**Output Message** : Enum must define its type. All values in an enum must adhere to the specified type. 
-
-**Description** : Enum must define its type object or string. If not it will block SDK generation.
+**Output Message** : Enum must define its type and "object" type is not allowed due to Autorest refuse to parse it. 
+ 
+**Description** : Enum must define its type "string". If not it will block SDK generation. If define type as "object" , the new Autorest refuse to parse it.
 
 **CreatedAt**: February 18, 2020
 
-**LastModifiedAt**: February 18, 2020
+**LastModifiedAt**: February 20, 2020
 
 **How to fix the violation**: 
 
