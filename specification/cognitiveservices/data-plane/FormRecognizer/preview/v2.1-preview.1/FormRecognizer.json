@@ -1481,7 +1481,14 @@
           "items": {
             "$ref": "#/definitions/DataTable"
           }
-        }
+        },
+        "checkboxes": {
+          "description": "List of checkboxes extracted from the page.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Checkbox"
+          }
+        }        
       }
     },
     "KeyValuePair": {
@@ -1518,6 +1525,9 @@
         "text"
       ],
       "properties": {
+        "type": {
+          "$ref": "#/definitions/KeyValueType"
+        },        
         "text": {
           "description": "The text content of the key or value.",
           "type": "string"
@@ -1538,6 +1548,38 @@
     "ElementReference": {
       "description": "Reference to a line or word.",
       "type": "string"
+    },
+    "Checkbox": {
+      "description": "Information about the extracted checkbox contained in a page.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "confidence",
+        "checkboxState"
+      ],
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of the checkbox.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "confidence": {
+          "description": "Confidence value.",
+          "$ref": "#/definitions/Confidence"
+        },
+        "checkboxState": {
+          "type": "string",
+          "description": "Is the current checkbox checked?",
+          "enum": [
+            "checked",
+            "unchecked"
+          ],
+          "x-ms-enum": {
+            "name": "FieldValueType",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        }
+      }
     },
     "DataTable": {
       "description": "Information about the extracted table contained in a page.",
