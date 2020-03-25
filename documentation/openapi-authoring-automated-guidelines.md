@@ -43,7 +43,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3007](#r3007) | [PutGetPatchResponseSchema](#r3007) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3025](#r3025) | [TrackedResourceGetOperation](#r3025) | ARM OpenAPI(swagger) specs |
 | [R3026](#r3026) | [TrackedResourcePatchOperation](#r3026) | ARM OpenAPI(swagger) specs |
-| [R2059](#r2059) | [UniqueResourcePaths](#r2059) | ARM OpenAPI(swagger) specs |
+| [R3030](#R3030) | [PathResourceProviderMatchNamespace](#R3030) | ARM OpenAPI(swagger) specs |
 | [R2016](#r2016) | [PatchBodyParametersSchema](#r2016) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2062](#r2062) | [XmsResourceInPutResponse](#r2062) | ARM OpenAPI(swagger) specs |
 | [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs |
@@ -62,7 +62,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 | [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
-| [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
+| [R3021](#r3021) | [PathResourceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 | [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
 | [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
@@ -711,14 +711,14 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r2059" />R2059 UniqueResourcePaths
+### <a name="R3030" />R3030 PathResourceProviderMatchNamespace
 **Category** : ARM Error
 
 **Applies to** : ARM OpenAPI(swagger) specs
 
 **Output Message**: The last resource provider '{0}' doesn't match the namespace.
 
-**Description**: Verifies whether the last resource provider matches namespace or not. E.g the path /providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Insights/extResource/{extType}’ is allowed only if Microsoft.Insights matches the namespace (Microsoft.Insights). 
+**Description**: Verifies whether the last resource provider matches namespace or not. E.g the path /providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.Insights/extResource/{extType}' is allowed only if Microsoft.Insights matches the namespace (Microsoft.Insights). 
 
 **Why the rule is important**: Per the [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md), each OpenAPI(swagger) specification must contain one resource provider. So the last resource provider must match with the resource provider namespace.
 
@@ -1970,7 +1970,7 @@ paths : { "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/pr
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
-### <a name="r3021" ></a>R3021 PathResouceTypeNameCamelCase
+### <a name="r3021" ></a>R3021 PathResourceTypeNameCamelCase
 
 **Category** : ARM Warning
 

@@ -209,6 +209,9 @@
         "x-ms-examples": {
           "StorageAccountGetProperties": {
             "$ref": "./examples/StorageAccountGetProperties.json"
+          },
+          "StorageAccountGetPropertiesCMKEnabled": {
+            "$ref": "./examples/StorageAccountGetPropertiesCMKEnabled.json"
           }
         },
         "parameters": [
@@ -261,6 +264,9 @@
           },
           "StorageAccountEnableAD": {
             "$ref": "./examples/StorageAccountEnableAD.json"
+          },
+          "StorageAccountEnableCMK": {
+            "$ref": "./examples/StorageAccountEnableCMK.json"
           }
         },
         "parameters": [
@@ -1604,6 +1610,19 @@
           "type": "string",
           "description": "The Uri of KeyVault.",
           "x-ms-client-name": "KeyVaultUri"
+        },
+        "currentVersionedKeyIdentifier": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The object identifier of the current versioned Key Vault Key in use.",
+          "x-ms-client-name": "CurrentVersionedKeyIdentifier"
+        },
+        "lastKeyRotationTimestamp": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "Timestamp of last rotation of the Key Vault Key.",
+          "x-ms-client-name": "LastKeyRotationTimestamp"
         }
       }
     },
