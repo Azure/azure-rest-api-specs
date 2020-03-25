@@ -38,7 +38,7 @@
             "get": {
                 "x-ms-examples": {
                     "Get security solutions": {
-                        "$ref": "./examples/SecuritySolutionsSolutionsReferenceData/GetSecuritysecuritySolutionsReferenceData_example.json"
+                        "$ref": "./examples/SecuritySolutionsReferenceData/GetSecuritySolutionsReferenceData_example.json"
                     }
                 },
                 "tags": [
@@ -67,9 +67,6 @@
                             "$ref": "../../../common/v1/types.json#/definitions/CloudError"
                         }
                     }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
                 }
             }
         },
@@ -77,11 +74,11 @@
             "get": {
                 "x-ms-examples": {
                     "Get security solutions from a security data location": {
-                        "$ref": "./examples/SecuritySolutionsSolutionsReferenceData/GetSecuritySolutionssecurityReferenceDataSubscriptionLocation_example.json"
+                        "$ref": "./examples/SecuritySolutionsReferenceData/GetSecuritySolutionsReferenceDataSubscriptionLocation_example.json"
                     }
                 },
                 "tags": [
-                    "SecuritySolutions"
+                    "SecuritySolutionsReferenceData"
                 ],
                 "description": "Gets list of all supported Security Solutions for subscription and location.",
                 "operationId": "SecuritySolutions_ListByHomeRegion",
@@ -109,9 +106,6 @@
                             "$ref": "../../../common/v1/types.json#/definitions/CloudError"
                         }
                     }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
                 }
             }
         }
@@ -125,11 +119,6 @@
                     "items": {
                         "$ref": "#/definitions/securitySolutionsReferenceData"
                     }
-                },
-                "nextLink": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The URI to fetch the next page."
                 }
             }
         },
