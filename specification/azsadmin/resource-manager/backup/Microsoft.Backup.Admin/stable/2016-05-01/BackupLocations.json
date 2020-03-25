@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-09-01",
+    "version": "2016-05-01",
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations": {
       "get": {
         "x-ms-examples": {
           "Returns the list of backup locations.": {
@@ -37,12 +37,6 @@
           },
           {
             "$ref": "Backup.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "Backup.json#/parameters/TopParameter"
-          },
-          {
-            "$ref": "Backup.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -58,7 +52,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}": {
       "get": {
         "x-ms-examples": {
           "Returns a specific backup location based on name.": {
@@ -90,6 +84,9 @@
             "schema": {
               "$ref": "#/definitions/BackupLocation"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         }
       },
@@ -133,15 +130,15 @@
             "schema": {
               "$ref": "#/definitions/BackupLocation"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-            "final-state-via" : "location"
-        }
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/createBackup": {
       "post": {
         "x-ms-examples": {
           "Back up a specific location.": {
@@ -149,9 +146,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-            "final-state-via" : "location"
-        },
         "description": "Back up a specific location.",
         "tags": [
           "BackupLocations"
@@ -232,14 +226,9 @@
           "description": "Password to access the location.",
           "type": "string"
         },
-        "encryptionCertBase64": {
-          "description": "The base64 raw data for the backup encryption certificate.",
+        "encryptionKeyBase64": {
+          "description": "Encryption key.",
           "type": "string"
-        },
-        "encryptionCertThumbprint": {
-          "description": "The thumbprint of the encryption certificate.",
-          "type": "string",
-          "readOnly": true
         },
         "backupFrequencyInHours": {
           "description": "The interval, in hours, for the frequency that the scheduler takes a backup.",
@@ -247,8 +236,7 @@
         },
         "availableCapacity": {
           "description": "Free space at the backup location.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "isBackupSchedulerEnabled": {
           "description": "True if the backup scheduler is enabled.",
@@ -257,14 +245,12 @@
         "nextBackupTime": {
           "description": "The scheduled time of the next backup.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "lastBackupTime": {
           "description": "Time of backup.",
           "type": "string",
-          "format": "date-time",
-          "readOnly": true
+          "format": "date-time"
         },
         "backupRetentionPeriodInDays": {
           "description": "The retention period, in days, for backs in the storage location.",

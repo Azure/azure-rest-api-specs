@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-09-01",
+    "version": "2016-05-01",
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups": {
       "get": {
         "x-ms-examples": {
           "Returns a list of backups from a location.": {
@@ -40,12 +40,6 @@
           },
           {
             "$ref": "Backup.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "Backup.json#/parameters/TopParameter"
-          },
-          {
-            "$ref": "Backup.json#/parameters/SkipParameter"
           }
         ],
         "responses": {
@@ -54,6 +48,9 @@
             "schema": {
               "$ref": "#/definitions/BackupList"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
         "x-ms-pageable": {
@@ -61,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}": {
       "get": {
         "x-ms-examples": {
           "Returns a backup from a location based on name.": {
@@ -96,18 +93,18 @@
             "schema": {
               "$ref": "#/definitions/Backup"
             }
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Backup.Admin/backupLocations/{location}/backups/{backup}/restore": {
       "post": {
         "x-ms-examples": {
           "Restore a backup.": {
             "$ref": "./examples/Backups/Restore.json"
-          },
-          "Restore a single role from backup.": {
-            "$ref": "./examples/Backups/SingleRepoRestore.json"
           }
         },
         "description": "Restore a backup.",
@@ -130,9 +127,6 @@
           },
           {
             "$ref": "Backup.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/RestoreOptionsParameter"
           }
         ],
         "responses": {
@@ -141,12 +135,12 @@
           },
           "202": {
             "description": "ACCEPTED"
+          },
+          "404": {
+            "description": "NOT FOUND"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options" : {
-            "final-state-via" : "location"
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -186,6 +180,11 @@
           "type": "string",
           "readOnly": true
         },
+        "backupId": {
+          "description": "Unique GUID for the backup.",
+          "type": "string",
+          "readOnly": true
+        },
         "roleStatus": {
           "description": "Backup status for each role.",
           "$ref": "#/definitions/RoleOperationStatusList",
@@ -213,22 +212,12 @@
           "readOnly": true
         },
         "stampVersion": {
-          "description": "Azure Stack stamp version of the backup.",
+          "description": "Current version.",
           "type": "string",
           "readOnly": true
         },
         "oemVersion": {
           "description": "OEM version.",
-          "type": "string",
-          "readOnly": true
-        },
-        "isCloudRecoveryReady": {
-          "description": "True if the backup can be used for cloud recovery scenario.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "encryptionCertThumbprint": {
-          "description": "The thumbprint of the certificate used to encrypt the backup encryption key.",
           "type": "string",
           "readOnly": true
         }
@@ -288,23 +277,6 @@
           "type": "string"
         }
       }
-    },
-    "RestoreOptions": {
-      "description": "Properties for restore options.",
-      "properties": {
-        "roleName": {
-          "description": "The Azure Stack role name for restore, set it to empty for all infrastructure role",
-          "type": "string"
-        },
-        "decryptionCertBase64": {
-          "description": "The certificate file raw data in Base64 string. This should be the .pfx file with the private key.",
-          "type": "string"
-        },
-        "decryptionCertPassword": {
-          "description": "The password for the decryption certificate.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -314,16 +286,6 @@
       "description": "Name of the backup.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "RestoreOptionsParameter": {
-      "name": "restoreOptions",
-      "in": "body",
-      "description": "Restore options.",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/RestoreOptions"
-      },
       "x-ms-parameter-location": "method"
     }
   },
