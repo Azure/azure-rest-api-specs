@@ -1545,6 +1545,18 @@
         }
       }
     },
+    "KeyValueType": {
+      "type": "string",
+      "description": "Semantic data type of the key value element.",
+      "enum": [
+        "checkbox"
+      ],
+      "x-ms-enum": {
+        "name": "KeyValueType",
+        "modelAsString": true
+      },
+      "x-nullable": false
+    },
     "ElementReference": {
       "description": "Reference to a line or word.",
       "type": "string"
@@ -1768,6 +1780,14 @@
             "$ref": "#/definitions/FieldValue"
           }
         },
+        "valueCheckbox": {
+          "description": "Checkbox value.",
+          "type": "string",
+          "enum": [
+            "checked",
+            "unchecked"
+          ]
+        },        
         "text": {
           "description": "Text content of the extracted field.",
           "type": "string"
@@ -1806,7 +1826,8 @@
         "number",
         "integer",
         "array",
-        "object"
+        "object",
+        "checkbox"
       ],
       "x-ms-enum": {
         "name": "FieldValueType",
