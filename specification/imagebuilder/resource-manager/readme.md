@@ -177,6 +177,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.VirtualMachineImages/stable/2020-02-14/imagebuilder.json
   - $(this-folder)/Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
   - $(this-folder)/Microsoft.VirtualMachineImages/preview/2018-02-01-preview/imagebuilder.json
   - $(this-folder)/Microsoft.VirtualMachineImages/preview/2019-02-01-preview/imagebuilder.json
