@@ -278,7 +278,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountsCreate"
             },
             "description": "The parameters required to create or update linked storage accounts."
           },
@@ -604,6 +604,38 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
+          "description": "Linked storage accounts properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Linked storage accounts top level resource container.",
+      "x-ms-azure-resource": true
+    },
+	"LinkedStorageAccountsCreateProperties": {
+      "description": "Linked storage accounts properties.",
+      "type": "object",
+      "properties": {
+        "storageAccountIds": {
+          "description": "Linked storage accounts resources ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+	"LinkedStorageAccountsCreate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedStorageAccountsCreateProperties",
           "description": "Linked storage accounts properties."
         }
       },
