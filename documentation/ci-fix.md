@@ -22,16 +22,23 @@ npm install; npm run prettier -- --write "specification/<service>/**/*.json"
 
 Then please commit and push changes made by prettier.
 
-## How to run model validation locally
+## Model Validation
 
-Model validation is provided by OAV tool and the command to run model validation locally is `oav validate-example <spec-path>`. 
-Please see [readme](https://github.com/Azure/oav/blob/master/README.md) in OAV reposiotry for installation and command usuage details.
+Run Model Validation locally:
+```
+npm install -g oav
+oav validate-example <swagger-spec-path>
+```
+Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
+And refer to [guideline](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) to check error code and how to fix in detail.
 
-## How to run semantic validation locally
-
-Semantic validation is provided by OAV tool and the command to run model validation locally is `oav validate-spec <spec-path>`. 
-Please see [readme](https://github.com/Azure/oav/blob/master/README.md) in OAV reposiotry for installation and command usuage details.
-
-## How to fix model validation and semantic checks
-
-Here is the [guideline](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) to understand the check failures and how to fix them.
+## Semantic Validation
+Run Semantic Validation locally:
+```
+npm install -g oav
+oav validate-spec <swagger-spec-path>
+```
+Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how to install or run tool in details.
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
+And refer to [guideline](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) to check error code and how to fix in detail.
