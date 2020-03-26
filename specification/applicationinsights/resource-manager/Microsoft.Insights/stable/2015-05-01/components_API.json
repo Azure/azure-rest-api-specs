@@ -504,6 +504,14 @@
         "ImmediatePurgeDataOn30Days": {
           "type": "boolean",
           "description": "Purge data immediately after 30 days."
+        },
+        "publicNetworkAccessForIngestion": {
+          "title": "The network access type for accessing Application Insights ingestion.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "publicNetworkAccessForQuery": {
+          "title": "The network access type for accessing Application Insights query.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
         }
       },
       "required": [
@@ -600,6 +608,29 @@
       "required": [
         "status"
       ]
+    },
+    "PublicNetworkAccessType": {
+      "type": "string",
+      "description": "The network access type for operating on the Application Insights Component. By default it is Enabled",
+      "default": "Enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Enables connectivity to Application Insights through public DNS."
+          },
+          {
+            "value": "Disabled",
+            "description": "Disables public connectivity to Application Insights through public DNS."
+          }
+        ]
+      }
     }
   },
   "parameters": {

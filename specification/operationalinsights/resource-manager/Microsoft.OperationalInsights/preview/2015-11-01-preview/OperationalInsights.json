@@ -1697,6 +1697,14 @@
           "minimum": -1,
           "maximum": 730,
           "description": "The workspace data retention in days. -1 means Unlimited retention for the Unlimited Sku. 730 days is the maximum allowed for all other Skus. "
+        },
+        "publicNetworkAccessForIngestion": {
+          "title": "The network access type for accessing Log Analytics ingestion.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "publicNetworkAccessForQuery": {
+          "title": "The network access type for accessing Log Analytics query.",
+          "$ref": "#/definitions/PublicNetworkAccessType"
         }
       },
       "description": "Workspace properties."
@@ -1983,6 +1991,29 @@
           "description": "The error detail of the operation if any.",
           "$ref": "#/definitions/ErrorResponse"
         }
+      }
+    },
+    "PublicNetworkAccessType": {
+      "type": "string",
+      "description": "The network access type for operating on the Log Analytics Workspace. By default it is Enabled",
+      "default": "Enabled",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Enables connectivity to Log Analytics through public DNS."
+          },
+          {
+            "value": "Disabled",
+            "description": "Disables public connectivity to Log Analytics through public DNS."
+          }
+        ]
       }
     }
   },
