@@ -578,8 +578,9 @@
       "type": "object",
       "properties": {
         "dataSourceType": {
-          "description": "linked storage accounts type.",
+          "description": "Linked storage accounts type.",
           "type": "string",
+          "readOnly": true,
           "enum": [
             "CustomLogs",
             "AzureWatson"
@@ -590,7 +591,7 @@
           }
         },
         "storageAccountIds": {
-          "description": "linked storage accounts resource ids.",
+          "description": "Linked storage accounts resources ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -677,7 +678,7 @@
         "name": "DataSourceType",
         "modelAsString": false
       },
-      "description": "Linked storage account type.",
+      "description": "Linked storage accounts type.",
       "x-ms-parameter-location": "method"
     }
   }
