@@ -211,6 +211,63 @@
             "$ref": "./examples/IpAllocationCreate.json"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "IpAllocations"
+        ],
+        "operationId": "IpAllocations_UpdateTags",
+        "description": "Updates a IpAllocation tags.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ipAllocationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the IpAllocation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update IpAllocation tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting IpAllocation resource.",
+            "schema": {
+              "$ref": "#/definitions/IpAllocation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update virtual network tags": {
+            "$ref": "./examples/IpAllocationUpdateTags.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/IpAllocations": {
