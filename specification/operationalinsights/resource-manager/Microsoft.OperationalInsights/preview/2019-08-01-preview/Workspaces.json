@@ -379,9 +379,30 @@
         "publicNetworkAccessForQuery": {
           "description": "The network access type for accessing Log Analytics query.",
           "$ref": "#/definitions/PublicNetworkAccessType"
+        },
+        "privateLinkScopedResources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkScopedResource"
+          },
+          "description": "List of linked private link scope resources."
         }
       },
       "description": "Workspace properties."
+    },
+    "PrivateLinkScopedResource": {
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "scopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      },
+      "description": "The private link scope resource reference."
     },
     "Workspace": {
       "properties": {
