@@ -115,6 +115,12 @@
             "$ref": "DiskMigrationJobs.json#/parameters/TargetShareParameter"
           },
           {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetScaleUnitParameter"
+          },
+          {
+            "$ref": "DiskMigrationJobs.json#/parameters/TargetVolumeLabelParameter"
+          },
+          {
             "$ref": "DiskMigrationJobs.json#/parameters/DiskListParameter"
           },
           {
@@ -378,7 +384,23 @@
       "description": "The target share name.",
       "name": "targetShare",
       "in": "query",
-      "required": true,
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetScaleUnitParameter": {
+      "description": "The target scale unit name.",
+      "name": "targetScaleUnit",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TargetVolumeLabelParameter": {
+      "description": "The target volume label.",
+      "name": "targetVolumeLabel",
+      "in": "query",
+      "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
