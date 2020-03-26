@@ -24,7 +24,16 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05-preview
+tag: package-2020-04
+```
+
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04'
+input-file:
+  - Microsoft.Support/stable/2020-04-01/support.json
 ```
 
 ### Tag: package-2019-05-preview
@@ -93,6 +102,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Support/stable/2020-04-01/support.json
   - $(this-folder)/Microsoft.Support/preview/2019-05-01-preview/support.json
 
 ```
