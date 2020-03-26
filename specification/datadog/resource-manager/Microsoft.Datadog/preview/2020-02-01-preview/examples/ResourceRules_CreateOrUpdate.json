@@ -6,19 +6,7 @@
         "monitorName": "myMonitor",
         "ruleSetName": "default",
         "requestBody": {
-            "resourceRules": [
-                {
-                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault",
-                    "enableLogs": true,
-                    "enableMetrics": false
-                }
-            ]
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "name": "default",
+            "properties": {
                 "resourceRules": [
                     {
                         "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault",
@@ -27,17 +15,23 @@
                     }
                 ]
             }
-        },
-        "202": {
+        }
+    },
+    "responses": {
+        "200": {
             "body": {
                 "name": "default",
-                "resourceRules": [
-                    {
-                        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault",
-                        "enableLogs": true,
-                        "enableMetrics": false
-                    }
-                ]
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/resourceRules/default",
+                "type": "Microsoft.Datadog/monitors/resourceRules",
+                "properties": {
+                    "resourceRules": [
+                        {
+                            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault",
+                            "enableLogs": true,
+                            "enableMetrics": false
+                        }
+                    ]
+                }
             }
         }
     }

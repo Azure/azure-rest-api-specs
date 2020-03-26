@@ -230,7 +230,7 @@
                             "$ref": "#/definitions/DatadogMonitorResource"
                         }
                     },
-                    "202": {
+                    "201": {
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/DatadogMonitorResource"
@@ -291,20 +291,13 @@
                             "$ref": "#/definitions/DatadogMonitorResource"
                         }
                     },
-                    "202": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/DatadogMonitorResource"
-                        }
-                    },
                     "default": {
                         "description": "Default error response.",
                         "schema": {
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
-                },
-                "x-ms-long-running-operation": true
+                }
             },
             "delete": {
                 "tags": [
@@ -467,20 +460,13 @@
                             "$ref": "#/definitions/MonitoringTagRules"
                         }
                     },
-                    "202": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringTagRules"
-                        }
-                    },
                     "default": {
                         "description": "Default error response.",
                         "schema": {
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
-                },
-                "x-ms-long-running-operation": true
+                }
             },
             "get": {
                 "tags": [
@@ -650,20 +636,13 @@
                             "$ref": "#/definitions/MonitoringResourceRules"
                         }
                     },
-                    "202": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringResourceRules"
-                        }
-                    },
                     "default": {
                         "description": "Default error response.",
                         "schema": {
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
-                },
-                "x-ms-long-running-operation": true
+                }
             },
             "get": {
                 "tags": [
@@ -813,7 +792,10 @@
                 "Failed",
                 "Canceled"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+                "modelAsString": true
+            }
         },
         "DatadogSubscriptionTypes": {
             "enum": [
@@ -821,7 +803,10 @@
                 "free",
                 "pro"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+                "modelAsString": true
+            }
         },
         "DatadogOrganizationProperties": {
             "type": "object",
@@ -836,7 +821,7 @@
                     "type": "string",
                     "readOnly": true
                 },
-                "subscription": {
+                "datadogSubscriptionType": {
                     "$ref": "#/definitions/DatadogSubscriptionTypes"
                 },
                 "apiKey": {
@@ -855,12 +840,6 @@
             "description": "Properties specific to the monitor resource.",
             "type": "object",
             "properties": {
-                "createdTime": {
-                    "format": "date-time",
-                    "description": "Timestamp of creation of the resource.",
-                    "type": "string",
-                    "readOnly": true
-                },
                 "provisioningState": {
                     "$ref": "#/definitions/ProvisioningState"
                 },
@@ -870,6 +849,9 @@
             }
         },
         "DatadogMonitorResource": {
+            "required": [
+                "location"
+            ],
             "type": "object",
             "properties": {
                 "id": {
@@ -929,14 +911,10 @@
                 }
             }
         },
-        "MonitoringTagRules": {
-            "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+        "MonitoringTagRuleProperties": {
+            "description": "The properties of a tag rule set.",
             "type": "object",
             "properties": {
-                "name": {
-                    "description": "Name of the rule set.",
-                    "type": "string"
-                },
                 "logTags": {
                     "description": "Capture logs of resources containing one of these tags. If no tags are specified, logs will be disabled.",
                     "type": "object",
@@ -950,6 +928,27 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                }
+            }
+        },
+        "MonitoringTagRules": {
+            "description": "Capture logs and metrics of Azure resources based on ARM tags.",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name of the rule set.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "The id of the rule set.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the rule set.",
+                    "type": "string"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MonitoringTagRuleProperties"
                 }
             }
         },
@@ -988,6 +987,19 @@
                 }
             }
         },
+        "MonitoringResourceRuleProperties": {
+            "description": "The properties of a resource rule set.",
+            "type": "object",
+            "properties": {
+                "resourceRules": {
+                    "description": "The list of rules specific to resources, overriding the tag rules.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ResourceRule"
+                    }
+                }
+            }
+        },
         "MonitoringResourceRules": {
             "description": "Capture logs and metrics based on ARM resource identifiers.",
             "type": "object",
@@ -996,12 +1008,16 @@
                     "description": "Name of the rule set.",
                     "type": "string"
                 },
-                "resourceRules": {
-                    "description": "The list of rules specific to resources, overriding the tag rules.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ResourceRule"
-                    }
+                "id": {
+                    "description": "The id of the rule set.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the rule set.",
+                    "type": "string"
+                },
+                "properties": {
+                    "$ref": "#/definitions/MonitoringResourceRuleProperties"
                 }
             }
         },

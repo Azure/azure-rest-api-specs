@@ -6,18 +6,7 @@
         "monitorName": "myMonitor",
         "ruleSetName": "default",
         "requestBody": {
-            "logTags": {
-                "Environment": "Dev"
-            },
-            "metricTags": {
-                "Environment": "Prod"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "name": "default",
+            "properties": {
                 "logTags": {
                     "Environment": "Dev"
                 },
@@ -25,15 +14,21 @@
                     "Environment": "Prod"
                 }
             }
-        },
-        "202": {
+        }
+    },
+    "responses": {
+        "200": {
             "body": {
                 "name": "default",
-                "logTags": {
-                    "Environment": "Dev"
-                },
-                "metricTags": {
-                    "Environment": "Prod"
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
+                "type": "Microsoft.Datadog/monitors/tagRules",
+                "properties": {
+                    "logTags": {
+                        "Environment": "Dev"
+                    },
+                    "metricTags": {
+                        "Environment": "Prod"
+                    }
                 }
             }
         }
