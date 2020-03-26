@@ -278,7 +278,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedStorageAccounts"
+              "$ref": "#/definitions/LinkedStorageAccountsCreate"
             },
             "description": "The parameters required to create or update linked storage accounts."
           },
@@ -578,7 +578,7 @@
       "type": "object",
       "properties": {
         "dataSourceType": {
-          "description": "linked storage accounts type.",
+          "description": "Linked storage accounts type.",
           "type": "string",
           "enum": [
             "CustomLogs",
@@ -590,7 +590,7 @@
           }
         },
         "storageAccountIds": {
-          "description": "linked storage accounts resource ids.",
+          "description": "Linked storage accounts resources ids.",
           "type": "array",
           "items": {
             "type": "string"
@@ -603,6 +603,38 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LinkedStorageAccountsProperties",
+          "description": "Linked storage accounts properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Linked storage accounts top level resource container.",
+      "x-ms-azure-resource": true
+    },
+    "LinkedStorageAccountsCreateProperties": {
+      "description": "Linked storage accounts properties.",
+      "type": "object",
+      "properties": {
+        "storageAccountIds": {
+          "description": "Linked storage accounts resources ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LinkedStorageAccountsCreate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LinkedStorageAccountsCreateProperties",
           "description": "Linked storage accounts properties."
         }
       },
@@ -677,7 +709,7 @@
         "name": "DataSourceType",
         "modelAsString": false
       },
-      "description": "Linked storage account type.",
+      "description": "Linked storage accounts type.",
       "x-ms-parameter-location": "method"
     }
   }
