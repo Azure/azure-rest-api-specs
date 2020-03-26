@@ -537,7 +537,7 @@ directive:
     reason: OperationsAPI will come from Resources
   - from: deploymentScripts.json
     suppress: R3006 #BodyTopLevelProperties
-    where: $.definitions.AzureResourceBase
+    where: $.definitions.DeploymentScript
     reason: Currently systemData is not allowed
 ```
 
