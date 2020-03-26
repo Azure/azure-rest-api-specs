@@ -51,10 +51,10 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -67,7 +67,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -90,10 +90,10 @@
         "description": "Gets the Log Analytics clusters in a subscription.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,10 +155,10 @@
             "description": "The parameters required to create or update a Log Analytics cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -177,7 +177,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -210,10 +210,10 @@
             "description": "Name of the Log Analytics Cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -226,7 +226,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -258,10 +258,10 @@
             "description": "Name of the Log Analytics Cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -274,7 +274,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -318,10 +318,10 @@
             "description": "The parameters required to patch a Log Analytics cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref":  "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -334,7 +334,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ClusterErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -342,16 +342,6 @@
     }
   },
   "definitions": {
-    "ClusterErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The details of the error.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
-        }
-      }
-    },
     "ClusterProperties": {
       "properties": {
         "nextLink": {
@@ -386,6 +376,36 @@
         }
       },
       "description": "Cluster properties."
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "ClusterPatchProperties": {
       "properties": {
@@ -428,7 +448,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "description": "The top level Log Analytics cluster resource container.",
@@ -479,7 +499,40 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
     }
   },
-  "parameters": {}
+  "parameters": {
+  }
 }
