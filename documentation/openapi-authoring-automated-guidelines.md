@@ -50,6 +50,8 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs |
 | [R3011](#r3011) | [DescriptionMustNotBeNodeName](#r3011) | ARM and Data plane OpenAPI(swagger) specs |
 | [R2020](#r2020) | [RequiredPropertiesMissingInResourceModel](#r2020) | ARM OpenAPI(swagger) specs |
+| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
+| [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -61,11 +63,6 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs |
 | [R2004](#r2004) | [NonApplicationJsonType](#r2004) | ARM OpenAPI(swagger) specs |
 | [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
-| [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
-| [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
-| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM OpenAPI(swagger) specs |
-| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM OpenAPI(swagger) specs |
-| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM OpenAPI(swagger) specs |
 
 ### SDK Violations
 
@@ -96,6 +93,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs |
 | [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs |
 | [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs |
+| [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM and Data plan OpenAPI(swagger) specs |
+| [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
+| [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
 
 #### SDK Warnings
@@ -1906,7 +1906,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Missing operationId. path:'${operation path}' operation:'${operation}'.
 
-**Description** : Each operation must has a unique operationId.
+**Description** : Each operation must haave a unique operationId.
 
 **CreatedAt** : February 18, 2020
 
@@ -1982,9 +1982,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Resource type naming SHOULD follow camel case. Path: {your path}
 
-**Description** :
-
-Resource type or other identifiers (include: namespace, entityTypes) SHOULD follow camel case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs, not ProactiveDetectionConfig)
+**Description** : Resource type or other identifiers (include: namespace, entityTypes) SHOULD follow camel case. (e.g. Microsoft.Insights/components/proactiveDetectionConfigs, not ProactiveDetectionConfig)
 
 For more detail, pls refer to https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#172-casing 
 
@@ -2032,13 +2030,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3024" ></a>R3024 EnumUniqueValue
 
-**Category** : ARM Warning
+**Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
 **Output Message** : Enum must not contain case-insensitive duplicated value and make sure every value in enum unique.
 
-**Description** : Case-insensitive value in enum mean the same value. 
+**Description** : Enum must not contain duplicated value (case insentive).
 
 **CreatedAt**: February 18, 2020
 
@@ -2075,13 +2073,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3015" ></a>R3015 EnumMustHaveType
 
-**Category** : ARM Warning
+**Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
 **Output Message** : Enum must define its type. All values in an enum must adhere to the specified type. 
 
-**Description** : Enum must define its type object or string. If not it will block SDK generation.
+**Description** : Enum must define type, and type must not be object. Or it will fail SDK auto-generation.
 
 **CreatedAt**: February 18, 2020
 
@@ -2132,13 +2130,13 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 ### <a name="r3029" ></a>R3029 EnumMustNotHaveEmptyValue
 
-**Category** : ARM Warning
+**Category** : SDK Error
 
 **Applies to** : ARM and Data Plane OpenAPI(swagger) specs
 
 **Output Message** : Enum value must not contain empty value.
 
-**Description** : Empty value is not allowed in enum value and meanless.
+**Description** : Emum must not be empty, or contain special character, like space, tab, etc. It will lead to code generation failure in downstream pipeline.
 
 **CreatedAt**: February 18, 2020
 
@@ -2247,7 +2245,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : Must not have duplicate name in x-ms-enum extension , make sure every x-ms-enum name unique.  
 
-**Description** : Property name in x-ms-extension is required , the rule is introduced to avoid duplicate x-ms-enum name.
+**Description** : Must not have duplicate name in x-ms-enum extension.
 
 **CreatedAt**: March 18, 2020
 
