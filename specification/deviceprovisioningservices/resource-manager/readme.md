@@ -54,6 +54,15 @@ input-file:
 - Microsoft.Devices/stable/2018-01-22/iotdps.json
 ```
 
+### Tag: package-2020-01
+
+These settings apply only when `--tag=package-2020-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01'
+input-file:
+- Microsoft.Devices/stable/2020-01-01/iotdps.json
+```
+
 ---
 # Code Generation
 
@@ -198,6 +207,7 @@ input-file:
   - $(this-folder)/Microsoft.Devices/preview/2017-08-21-preview/iotdps.json
   - $(this-folder)/Microsoft.Devices/stable/2017-11-15/iotdps.json
   - $(this-folder)/Microsoft.Devices/stable/2018-01-22/iotdps.json
+  - $(this-folder)/Microsoft.Devices/stable/2020-01-01/iotdps.json
 
 ```
 
