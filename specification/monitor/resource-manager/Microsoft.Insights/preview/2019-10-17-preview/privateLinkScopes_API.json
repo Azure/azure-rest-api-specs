@@ -229,6 +229,12 @@
             "schema": {
               "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
             }
+          },
+          "201": {
+            "description": "Successful request when creating or updating a Azure Monitor PrivateLinkScope. The updated PrivateLinkScope was created and is returned.",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorPrivateLinkScope"
+            }
           }
         },
         "x-ms-examples": {
@@ -696,7 +702,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully scoped azure monitor resource in a private link scope.",
+            "description": "Successfully create or updated a new azure monitor scoped resource in a private link scope.",
+            "schema": {
+              "$ref": "#/definitions/ScopedResource"
+            }
+          },
+          "201": {
+            "description": "Successfully created a new azure monitor scoped resource in a private link scope.",
             "schema": {
               "$ref": "#/definitions/ScopedResource"
             }
@@ -1148,14 +1160,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Azure resource type"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-azure-resource": true,
-          "description": "azure resource tags"
         }
       },
       "description": "An azure resource object"
