@@ -623,6 +623,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
