@@ -76,6 +76,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-loganalytics
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -103,30 +105,55 @@ csharp:
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
-``` yaml $(python)
-python-mode: create
+```yaml $(python)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.loganalytics
   package-name: azure-mgmt-loganalytics
-  title: LogAnalyticsManagementClient
-  description: The Log Analytics Client.
   clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics
 ```
-``` yaml $(python) && $(python-mode) == 'create'
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2019-08-preview
+  - tag: package-2015-11-preview
+  - tag: package-2015-03
+```
+
+### Tag: package-2019-08-preview and python
+
+These settings apply only when `--tag=package-2019-08-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview' && $(python)
 python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics
+  namespace: azure.mgmt.loganalytics.v2019_08_01_preview
+  output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics/v2019_08_01_preview
+```
+
+### Tag: package-2015-11-preview and python
+
+These settings apply only when `--tag=package-2015-11-preview --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-11-preview' && $(python)
+python:
+  namespace: azure.mgmt.loganalytics.v2015_11_01_preview
+  output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics/v2015_11_01_preview
+```
+
+### Tag: package-2015-03 and python
+
+These settings apply only when `--tag=package-2015-03 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-03' && $(python)
+python:
+  namespace: azure.mgmt.loganalytics.v2015_03_20
+  output-folder: $(python-sdks-folder)/loganalytics/azure-mgmt-loganalytics/azure/mgmt/loganalytics/v2015_03_20
 ```
 
 ## Go
