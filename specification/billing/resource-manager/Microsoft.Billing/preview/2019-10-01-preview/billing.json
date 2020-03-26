@@ -824,7 +824,7 @@
           }
         },
         "operationId": "InvoiceSections_Get",
-        "description": "Gets an invoice section by id. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Gets an invoice section by its ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1909,7 +1909,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_ListByBillingSubscription",
-        "description": "Lists invoices by billing subscriptions name.",
+        "description": "Lists the invoices for a subscription.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1968,7 +1968,7 @@
           "Invoices"
         ],
         "operationId": "Invoices_GetById",
-        "description": "Gets the invoice by name.",
+        "description": "Gets an invoice by ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2729,7 +2729,7 @@
           "Transactions"
         ],
         "operationId": "Transactions_ListByInvoice",
-        "description": "Lists the transactions by invoice. Transactions include purchases, refunds and Azure usage charges.",
+        "description": "Lists the transactions for an invoice. Transactions include purchases, refunds and Azure usage charges.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2836,7 +2836,7 @@
           "Policies"
         ],
         "operationId": "Policies_GetByBillingProfile",
-        "description": "List the policies for a billing profile. This operation is supported only for billing accounts with agreeement type Microsoft Customer Agreement.",
+        "description": "Lists the policies for a billing profile. This operation is supported only for billing accounts with agreeement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2924,7 +2924,7 @@
           "Policies"
         ],
         "operationId": "Policies_GetByCustomer",
-        "description": "List the policies for a customer. This operation is supported only for billing accounts with agreeement type Microsoft Partner Agreement.",
+        "description": "Lists the policies for a customer. This operation is supported only for billing accounts with agreeement type Microsoft Partner Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -4644,7 +4644,7 @@
   },
   "definitions": {
     "CustomerListResult": {
-      "description": "Result of listing customers.",
+      "description": "The list of customers.",
       "properties": {
         "value": {
           "description": "The list of customers.",
@@ -4720,7 +4720,7 @@
           "$ref": "#/definitions/AddressValidationStatus"
         },
         "suggestedAddresses": {
-          "description": "list of suggested addresses.",
+          "description": "The list of suggested addresses.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AddressDetails"
@@ -4734,7 +4734,7 @@
     },
     "AddressValidationStatus": {
       "type": "string",
-      "description": "Status of the address validation response.",
+      "description": "Status of the address validation.",
       "enum": [
         "Valid",
         "Invalid"
@@ -5046,7 +5046,7 @@
     },
     "TransferStatus": {
       "type": "string",
-      "description": "Possible transfer status.",
+      "description": "The status of a transfer.",
       "enum": [
         "Pending",
         "InProgress",
@@ -5063,7 +5063,7 @@
     },
     "ProductTransferStatus": {
       "type": "string",
-      "description": "Possible transfer status.",
+      "description": "The status of a transfer.",
       "enum": [
         "NotStarted",
         "InProgress",
@@ -5076,7 +5076,7 @@
       }
     },
     "RecipientTransferDetailsListResult": {
-      "description": "Result of listing details of the transfer received by caller.",
+      "description": "The list of transfers received by caller.",
       "properties": {
         "value": {
           "description": "The list of transfers received by caller.",
@@ -5094,7 +5094,7 @@
       }
     },
     "TransferDetailsListResult": {
-      "description": "Result of listing details of the transfer initiated by caller.",
+      "description": "The list of transfers initiated by caller.",
       "properties": {
         "value": {
           "description": "The list of transfers initiated by caller.",
@@ -5244,7 +5244,7 @@
       }
     },
     "BillingAccountListResult": {
-      "description": "Result of listing billing accounts.",
+      "description": "The list of billing accounts.",
       "properties": {
         "value": {
           "description": "The list of billing accounts.",
@@ -5262,7 +5262,7 @@
       }
     },
     "BillingAccount": {
-      "description": "A billing account resource.",
+      "description": "A billing account.",
       "type": "object",
       "allOf": [
         {
@@ -5271,7 +5271,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "A billing account.",
+          "description": "The properties of the billing account.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingAccountProperties"
         }
@@ -5286,7 +5286,7 @@
           "readOnly": true
         },
         "address": {
-          "description": "The address associated with billing account.",
+          "description": "The address associated with the billing account.",
           "$ref": "#/definitions/AddressDetails"
         },
         "agreementType": {
@@ -5376,7 +5376,7 @@
       }
     },
     "BillingProperty": {
-      "description": "A billing property resource.",
+      "description": "A billing property.",
       "type": "object",
       "allOf": [
         {
@@ -5489,14 +5489,14 @@
           "readOnly": true
         },
         "skuDescription": {
-          "description": "The sku desscription of the Azure plan for the subscription.",
+          "description": "The sku description of the Azure plan for the subscription.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "Enrollment": {
-      "description": "Current entity level details",
+      "description": "The properties of an enrollment.",
       "properties": {
         "startDate": {
           "description": "The start date of the enrollment.",
@@ -5571,7 +5571,7 @@
       }
     },
     "DepartmentListResult": {
-      "description": "Result of listing departments.",
+      "description": "The list of departments.",
       "properties": {
         "value": {
           "description": "The list of departments.",
@@ -5589,7 +5589,7 @@
       }
     },
     "Department": {
-      "description": "A department resource.",
+      "description": "A department.",
       "type": "object",
       "allOf": [
         {
@@ -5605,7 +5605,7 @@
       }
     },
     "DepartmentProperties": {
-      "description": "The properties of the department.",
+      "description": "The properties of a department.",
       "properties": {
         "departmentName": {
           "description": "The name of the department.",
@@ -5629,7 +5629,7 @@
       }
     },
     "EnrollmentAccountListResult": {
-      "description": "Result of listing enrollment accounts.",
+      "description": "The list of enrollment accounts.",
       "properties": {
         "value": {
           "description": "The list of enrollment accounts.",
@@ -5647,7 +5647,7 @@
       }
     },
     "EnrollmentAccount": {
-      "description": "An account resource.",
+      "description": "An enrollment account.",
       "type": "object",
       "allOf": [
         {
@@ -5656,38 +5656,38 @@
       ],
       "properties": {
         "properties": {
-          "description": "An account.",
+          "description": "The properties of an enrollment account.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/EnrollmentAccountProperties"
         }
       }
     },
     "EnrollmentAccountProperties": {
-      "description": "The properties of the account.",
+      "description": "The properties of an enrollment account.",
       "properties": {
         "accountName": {
-          "description": "The name of the account.",
+          "description": "The name of the enrollment account.",
           "type": "string"
         },
         "costCenter": {
-          "description": "The cost center associated with the account.",
+          "description": "The cost center associated with the enrollment account.",
           "type": "string"
         },
         "accountOwner": {
-          "description": "The owner of the account.",
+          "description": "The owner of the enrollment account.",
           "type": "string"
         },
         "status": {
-          "description": "The status of the account.",
+          "description": "The status of the enrollment account.",
           "type": "string"
         },
         "startDate": {
-          "description": "The start date of the account.",
+          "description": "The start date of the enrollment account.",
           "type": "string",
           "format": "date-time"
         },
         "endDate": {
-          "description": "The end date of the account.",
+          "description": "The end date of the enrollment account.",
           "type": "string",
           "format": "date-time"
         },
@@ -5698,10 +5698,10 @@
       }
     },
     "InstructionListResult": {
-      "description": "Result of listing instructions.",
+      "description": "The list of billing instructions used during invoice generation.",
       "properties": {
         "value": {
-          "description": "The list of instructions.",
+          "description": "The list of billing instructions used during invoice generation.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -5716,7 +5716,7 @@
       }
     },
     "BillingProfileListResult": {
-      "description": "Result of listing billing profiles.",
+      "description": "The list of billing profiles.",
       "properties": {
         "value": {
           "description": "The list of billing profiles.",
@@ -5734,7 +5734,7 @@
       }
     },
     "BillingProfile": {
-      "description": "A billing profile resource.",
+      "description": "A billing profile.",
       "type": "object",
       "allOf": [
         {
@@ -5743,14 +5743,14 @@
       ],
       "properties": {
         "properties": {
-          "description": "A billing profile.",
+          "description": "The properties of the billing profile.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingProfileProperties"
         }
       }
     },
     "Instruction": {
-      "description": "A instruction resource.",
+      "description": "An instruction.",
       "type": "object",
       "allOf": [
         {
@@ -5759,7 +5759,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "A billing instruction.",
+          "description": "A billing instruction used during invoice generation.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InstructionProperties"
         }
@@ -5814,7 +5814,7 @@
           "type": "boolean"
         },
         "enabledAzurePlans": {
-          "description": "Enabled azure plans for this billing profile.",
+          "description": "Enabled azure plans for the billing profile.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzurePlan"
@@ -5962,7 +5962,7 @@
       }
     },
     "InvoiceSectionListResult": {
-      "description": "Result of listing invoice sections.",
+      "description": "The list of invoice sections.",
       "properties": {
         "value": {
           "description": "The list of invoice sections.",
@@ -5980,7 +5980,7 @@
       }
     },
     "InvoiceSection": {
-      "description": "An invoice section resource.",
+      "description": "An invoice section.",
       "type": "object",
       "allOf": [
         {
@@ -5989,7 +5989,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The invoice section.",
+          "description": "The properties of an invoice section.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InvoiceSectionProperties"
         }
@@ -6006,7 +6006,7 @@
     },
     "InvoiceSectionListWithCreateSubPermissionResult": {
       "type": "object",
-      "description": "Result of listing invoice section properties with create subscription permission.",
+      "description": "The list of invoice section properties with create subscription permission.",
       "properties": {
         "value": {
           "description": "The list of invoice section properties with create subscription permission.",
@@ -6112,7 +6112,7 @@
       "description": "A secure URL that can be used to download a an entity until the URL expires.",
       "properties": {
         "expiryTime": {
-          "description": "The time in UTC at which this download URL will expire.",
+          "description": "The time in UTC when the download URL will expire.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
@@ -6191,7 +6191,7 @@
       "x-ms-azure-resource": true
     },
     "InvoiceListResult": {
-      "description": "Result of listing invoices.",
+      "description": "The list of invoices.",
       "properties": {
         "value": {
           "description": "The list of invoices.",
@@ -6209,7 +6209,7 @@
       }
     },
     "Invoice": {
-      "description": "An invoice resource.",
+      "description": "An invoice.",
       "type": "object",
       "allOf": [
         {
@@ -6335,12 +6335,12 @@
           "readOnly": true
         },
         "purchaseOrderNumber": {
-          "description": "An optional purchase order number on the invoice.",
+          "description": "An optional purchase order number for the invoice.",
           "type": "string",
           "readOnly": true
         },
         "documents": {
-          "description": "List of documents available to download including invoice and tax documents.",
+          "description": "List of documents available to download such as invoice and tax receipt.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -6356,14 +6356,14 @@
           }
         },
         "subscriptionId": {
-          "description": "The subscription id this invoice belongs to.",
+          "description": "The ID of the subscription for which the invoice is generated.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "PaymentProperties": {
-      "description": "The properties of the payment.",
+      "description": "The properties of a payment.",
       "properties": {
         "paymentType": {
           "description": "The type of payment.",
@@ -6376,13 +6376,13 @@
           "$ref": "#/definitions/Amount"
         },
         "date": {
-          "description": "The date of the payment.",
+          "description": "The date when the payment was made.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "paymentMethodFamily": {
-          "description": "The payment method family.",
+          "description": "The family of payment method.",
           "type": "string",
           "enum": [
             "Credits",
@@ -6403,10 +6403,10 @@
       }
     },
     "Document": {
-      "description": "The properties of the invoice download.",
+      "description": "The properties of a document.",
       "properties": {
         "kind": {
-          "description": "Document type.",
+          "description": "The type of the document.",
           "type": "string",
           "enum": [
             "Invoice",
@@ -6428,7 +6428,7 @@
       }
     },
     "ProductsListResult": {
-      "description": "Result of listing products. It contains a list of available products summaries in reverse chronological order by purchase date.",
+      "description": "The list of products. It contains a list of available product summaries in reverse chronological order by purchase date.",
       "properties": {
         "value": {
           "description": "The list of products.",
@@ -6446,7 +6446,7 @@
       }
     },
     "Product": {
-      "description": "A product resource.",
+      "description": "A product.",
       "type": "object",
       "allOf": [
         {
@@ -6462,7 +6462,7 @@
       }
     },
     "ProductProperties": {
-      "description": "The properties of the product.",
+      "description": "The properties of a product.",
       "properties": {
         "displayName": {
           "description": "The display name of the product.",
@@ -6523,7 +6523,7 @@
           }
         },
         "lastCharge": {
-          "description": "Last month charges.",
+          "description": "The last month charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -6653,7 +6653,7 @@
       }
     },
     "BillingSubscriptionsListResult": {
-      "description": "Result of listing billing subscriptions.",
+      "description": "The list of billing subscriptions.",
       "properties": {
         "value": {
           "description": "The list of billing subscriptions.",
@@ -6671,7 +6671,7 @@
       }
     },
     "BillingSubscription": {
-      "description": "A billing Subscription resource.",
+      "description": "A billing subscription.",
       "type": "object",
       "allOf": [
         {
@@ -6716,12 +6716,12 @@
           }
         },
         "lastMonthCharges": {
-          "description": "Last month charges.",
+          "description": "The last month charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
         "monthToDateCharges": {
-          "description": "Month to date charges.",
+          "description": "The current month to date charges.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         },
@@ -6795,7 +6795,7 @@
       }
     },
     "TransactionListResult": {
-      "description": "Result of listing transactions.",
+      "description": "The list of transactions.",
       "properties": {
         "value": {
           "description": "The list of transactions.",
@@ -6813,7 +6813,7 @@
       }
     },
     "Transaction": {
-      "description": "A transaction resource.",
+      "description": "A transaction.",
       "type": "object",
       "allOf": [
         {
@@ -6860,7 +6860,7 @@
           "readOnly": true
         },
         "orderName": {
-          "description": "The name of the reservation order. The field is only applicable for transaction of kind reservation.",
+          "description": "The name of the reservation order. The field is only applicable for transactions of kind reservation.",
           "type": "string",
           "readOnly": true
         },
@@ -6870,12 +6870,12 @@
           "readOnly": true
         },
         "productTypeId": {
-          "description": "The type ID of the product for which the transaction took place.",
+          "description": "The ID of the product type for which the transaction took place.",
           "type": "string",
           "readOnly": true
         },
         "productType": {
-          "description": "The type description of the product for which the transaction took place.",
+          "description": "The type of the product for which the transaction took place.",
           "type": "string",
           "readOnly": true
         },
@@ -7021,7 +7021,7 @@
       }
     },
     "Policy": {
-      "description": "The Policy.",
+      "description": "A policy.",
       "type": "object",
       "allOf": [
         {
@@ -7037,7 +7037,7 @@
       }
     },
     "PolicyProperties": {
-      "description": "The properties of policy.",
+      "description": "The properties of a policy.",
       "properties": {
         "marketplacePurchases": {
           "description": "The policy that controls whether Azure maketplace purchases are allowed for a billing profile.",
@@ -7079,7 +7079,7 @@
       }
     },
     "CustomerPolicy": {
-      "description": "The Customer's Policy.",
+      "description": "The customer's Policy.",
       "type": "object",
       "allOf": [
         {
@@ -7095,7 +7095,7 @@
       }
     },
     "CustomerPolicyProperties": {
-      "description": "The properties of a Customer's policy.",
+      "description": "The properties of a customer's policy.",
       "properties": {
         "viewCharges": {
           "description": "The policy that controls whether the users in customer's organization can view charges at pay-as-you-go prices.",
@@ -7131,14 +7131,14 @@
       "description": "The properties of available balance.",
       "properties": {
         "amount": {
-          "description": "Balance Amount.",
+          "description": "Balance amount.",
           "readOnly": true,
           "$ref": "#/definitions/Amount"
         }
       }
     },
     "Amount": {
-      "description": "The Amount.",
+      "description": "The amount.",
       "properties": {
         "currency": {
           "description": "The currency for the amount value.",
@@ -7152,7 +7152,7 @@
       }
     },
     "PaymentMethodsListResult": {
-      "description": "Result of listing payment methods.",
+      "description": "The list of payment methods.",
       "properties": {
         "value": {
           "description": "The list of payment methods.",
@@ -7170,7 +7170,7 @@
       }
     },
     "PaymentMethod": {
-      "description": "A payment method resource.",
+      "description": "A payment method.",
       "type": "object",
       "allOf": [
         {
@@ -7186,10 +7186,10 @@
       }
     },
     "PaymentMethodProperties": {
-      "description": "The properties of the payment method.",
+      "description": "The properties of a payment method.",
       "properties": {
         "paymentMethodType": {
-          "description": "Payment method type.",
+          "description": "The type of payment method.",
           "type": "string",
           "enum": [
             "Credits",
@@ -7219,10 +7219,10 @@
     },
     "UpdateAutoRenewRequest": {
       "type": "object",
-      "description": "Request parameters to update auto renew for support product.",
+      "description": "Request parameters to update auto renew settings for a product.",
       "properties": {
         "autoRenew": {
-          "description": "Flag to update the auto-renew settings for a product.",
+          "description": "The flag that determines the auto-renew settings for a product.",
           "type": "string",
           "enum": [
             "true",
@@ -7253,12 +7253,12 @@
               "readOnly": true
             },
             "resource": {
-              "description": "Resource on which the operation is performed: Invoice, etc.",
+              "description": "Resource on which the operation is performed such as invoice and billing subscription.",
               "type": "string",
               "readOnly": true
             },
             "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
+              "description": "Operation type such as read, write and delete.",
               "type": "string",
               "readOnly": true
             }
@@ -7267,10 +7267,10 @@
       }
     },
     "OperationListResult": {
-      "description": "Result listing billing operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "The list of billing operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
-          "description": "List of billing operations supported by the Microsoft.Billing resource provider.",
+          "description": "The list of billing operations supported by the Microsoft.Billing resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -7298,10 +7298,10 @@
       }
     },
     "BillingRoleAssignmentListResult": {
-      "description": "Result of get list of role assignments",
+      "description": "The list of role assignments.",
       "properties": {
         "value": {
-          "description": "The list role assignments",
+          "description": "The list of role assignments.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -7311,7 +7311,7 @@
       }
     },
     "BillingRoleAssignment": {
-      "description": "a role assignment",
+      "description": "The role assignment",
       "type": "object",
       "allOf": [
         {
@@ -7320,7 +7320,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The role assignment the caller has",
+          "description": "The properties of the role assignment.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingRoleAssignmentProperties"
         }
@@ -7367,10 +7367,10 @@
       }
     },
     "BillingRoleDefinitionListResult": {
-      "description": "list the role definitions.",
+      "description": "The list of role definitions.",
       "properties": {
         "value": {
-          "description": "The list of role definitions.",
+          "description": "The role definitions.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -7380,7 +7380,7 @@
       }
     },
     "BillingRoleDefinition": {
-      "description": "Result of get role definition for a role.",
+      "description": "The properties of a role definition.",
       "type": "object",
       "allOf": [
         {
@@ -7389,7 +7389,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "The role definition for a role.",
+          "description": "The properties of the a role definition.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BillingRoleDefinitionProperties"
         }
@@ -7471,7 +7471,7 @@
       }
     },
     "Agreement": {
-      "description": "An agreement resource.",
+      "description": "An agreement.",
       "type": "object",
       "allOf": [
         {
@@ -7480,14 +7480,14 @@
       ],
       "properties": {
         "properties": {
-          "description": "An agreement.",
+          "description": "The properties of an agreement.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AgreementProperties"
         }
       }
     },
     "AgreementProperties": {
-      "description": "The properties of the agreement.",
+      "description": "The properties of an agreement.",
       "properties": {
         "agreementLink": {
           "description": "The URL to download the agreement.",
@@ -7496,7 +7496,7 @@
         },
         "category": {
           "type": "string",
-          "description": "Category of the agreement signed by customer.",
+          "description": "The category of the agreement signed by a customer.",
           "readOnly": true,
           "enum": [
             "MicrosoftCustomerAgreement",
@@ -7523,19 +7523,19 @@
           }
         },
         "effectiveDate": {
-          "description": "The date at which the agreement gets effective.",
+          "description": "The date from which the agreement is effective.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "expirationDate": {
-          "description": "The date at which the agreement expires.",
+          "description": "The date when the agreement expires.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "participants": {
-          "description": "Participants or signer of the agreement.",
+          "description": "The list of participants that participates in acceptance of an agreement.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Participants"
@@ -7566,7 +7566,7 @@
       "description": "Transfer validation response.",
       "properties": {
         "properties": {
-          "description": "Transfer validation response properties.",
+          "description": "The properties of transfer validation response.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ValidateTransferResponseProperties"
         }
@@ -7574,7 +7574,7 @@
     },
     "ValidateTransferResponseProperties": {
       "type": "object",
-      "description": "Properties of transfer validation response.",
+      "description": "The properties of transfer validation response.",
       "properties": {
         "status": {
           "description": "The status of validation",
@@ -7587,7 +7587,7 @@
           "readOnly": true
         },
         "results": {
-          "description": "Array of validation results.",
+          "description": "The array of validation results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ValidationResultProperties"
@@ -7616,21 +7616,21 @@
       }
     },
     "Participants": {
-      "description": "Details about the participant or signer.",
+      "description": "The details about a participant.",
       "properties": {
         "status": {
-          "description": "The signing status.",
+          "description": "The acceptance status of the participant.",
           "type": "string",
           "readOnly": true
         },
         "statusDate": {
-          "description": "The date at which status got changed.",
+          "description": "The date when the status got changed.",
           "type": "string",
           "format": "date-time",
           "readOnly": true
         },
         "email": {
-          "description": "The email address of the participant or signer.",
+          "description": "The email address of the participant.",
           "type": "string",
           "readOnly": true
         }
@@ -7653,12 +7653,12 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2019-10-01-preview."
+      "description": "The version of the API to be used with the client request. The current version is 2019-10-01-preview."
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Azure Subscription ID.",
+      "description": "The ID that uniquely identifies an Azure subscription.",
       "required": true,
       "type": "string"
     },
@@ -7689,7 +7689,7 @@
     "departmentNameParameter": {
       "name": "departmentName",
       "in": "path",
-      "description": "Department Id.",
+      "description": "The ID that uniquely identifies a department.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -7787,7 +7787,7 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "required": true,
-      "description": "Update auto renew request parameters.",
+      "description": "Request parameters that are provided to the update auto renew operation.",
       "schema": {
         "$ref": "#/definitions/UpdateAutoRenewRequest"
       }
