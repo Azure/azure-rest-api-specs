@@ -1168,7 +1168,6 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "A collection of private link resources",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
@@ -1181,15 +1180,10 @@
       }
     },
     "PrivateLinkResource": {
-      "description": "Information of the private link resource.",
+      "description": "Private Link Resource.",
       "readOnly": true,
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of the private link resource.",
-          "x-ms-client-flatten": true
-        },
         "id": {
           "description": "e.g. subscriptions/{subId}/resourceGroups/{groupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/backupresource.",
           "type": "string",
@@ -1204,12 +1198,7 @@
           "description": "e.g. Microsoft.RecoveryServices/vaults/privateLinkResources",
           "readOnly": true,
           "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
+        },
         "groupId": {
           "description": "e.g. f9ad6492-33d4-4690-9999-6bfd52a0d081 (Backup) or f9ad6492-33d4-4690-9999-6bfd52a0d082 (SiteRecovery)",
           "readOnly": true,
