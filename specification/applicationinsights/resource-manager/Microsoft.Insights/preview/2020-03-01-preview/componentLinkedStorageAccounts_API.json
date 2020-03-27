@@ -282,7 +282,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The type of the Application Insights component linked storage account.",
+      "enum": [
+        "ServiceProfiler"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true
+      },
+      "description": "The type of the Application Insights component data source for the linked storage account.",
       "x-ms-parameter-location": "method"
     }
   }
