@@ -465,7 +465,7 @@
           "PrivateDnsZoneGroup"
         ],
         "operationId": "PrivateDnsZoneGroups_Get",
-        "description": "Gets the private dns zone group by specified private endzone.",
+        "description": "Gets the private dns zone group resource by specified private dns zone group name.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -506,7 +506,7 @@
           "200": {
             "description": "Request successful. The operation returns the resulting privateDnsZoneGroup resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateDNSZoneGroup"
+              "$ref": "#/definitions/PrivateDnsZoneGroup"
             }
           },
           "default": {
@@ -555,7 +555,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateDNSZoneGroup"
+              "$ref": "#/definitions/PrivateDnsZoneGroup"
             },
             "description": "Parameters supplied to the create or update private dns zone group operation."
           },
@@ -568,15 +568,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting PrivateDNSZoneGroup resource.",
+            "description": "Update successful. The operation returns the resulting PrivateDnsZoneGroup resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateDNSZoneGroup"
+              "$ref": "#/definitions/PrivateDnsZoneGroup"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting PrivateDNSZoneGroup resource.",
+            "description": "Create successful. The operation returns the resulting PrivateDnsZoneGroup resource.",
             "schema": {
-              "$ref": "#/definitions/PrivateDNSZoneGroup"
+              "$ref": "#/definitions/PrivateDnsZoneGroup"
             }
           },
           "default": {
@@ -594,6 +594,59 @@
           "Create private dns zone group": {
             "$ref": "./examples/PrivateEndpointDnsZoneGroupCreate.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups": {
+      "get": {
+        "tags": [
+          "PrivateDnsZoneGroup"
+        ],
+        "operationId": "PrivateDnsZoneGroups_List",
+        "description": "Gets all private dns zone groups in a private endpoint.",
+        "parameters": [
+          {
+            "name": "privateEndpointName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private endpoint."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of private dns zone group resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateDnsZoneGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private endpoints in resource group": {
+            "$ref": "./examples/PrivateEndpointDnsZoneGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -676,7 +729,7 @@
           "description": "The private ip address of the private endpoint."
         }
       },
-      "description": "Contains custom DNS resolution configuration from customer."
+      "description": "Contains custom Dns resolution configuration from customer."
     },
     "PrivateLinkServiceConnection": {
       "properties": {
@@ -753,6 +806,23 @@
       },
       "description": "Response for the ListPrivateEndpoints API service call."
     },
+    "PrivateDnsZoneGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateDnsZoneGroup"
+          },
+          "description": "A list of private dns zone group resources in a private endpoint."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for the ListPrivateDnsZoneGroups API service call."
+    },
     "AvailablePrivateEndpointTypesResult": {
       "properties": {
         "value": {
@@ -791,7 +861,7 @@
       },
       "description": "The information of an AvailablePrivateEndpointType."
     },
-    "PrivateDNSZoneGroup": {
+    "PrivateDnsZoneGroup": {
       "properties": {
         "name": {
           "readOnly": true,
@@ -805,7 +875,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateDNSZoneGroupProperties",
+          "$ref": "#/definitions/PrivateDnsZoneGroupPropertiesFormat",
           "description": "Properties of the private dns zone group."
         }
       },
@@ -816,7 +886,7 @@
       ],
       "description": "Private dns zone group resource."
     },
-    "PrivateDNSZoneGroupProperties": {
+    "PrivateDnsZoneGroupPropertiesFormat": {
       "properties": {
         "provisioningState": {
           "readOnly": true,
@@ -835,35 +905,16 @@
     },
     "PrivateDnsZoneConfig": {
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The resource type."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateDnsZoneConfigProperties",
           "description": "Properties of the private dns zone configuration."
         }
       },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ],
       "description": "PrivateDnsZoneConfig resource."
     },
     "PrivateDnsZoneConfigProperties": {
       "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the private dns zone group resource."
-        },
         "privateDnsZoneId": {
           "type": "string",
           "description": "The resource id of the private dns zone."
