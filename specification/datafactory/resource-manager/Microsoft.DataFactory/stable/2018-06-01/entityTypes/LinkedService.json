@@ -1243,16 +1243,20 @@
     "Db2LinkedServiceTypeProperties": {
       "description": "DB2 linked service properties.",
       "properties": {
+        "connectionString": {
+          "type": "object",
+          "description": "The connection string. It is mutually exclusive with server, database, authenticationType, userName, packageCollection and certificateCommonName property. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
         "server": {
           "type": "object",
-          "description": "Server name for connection. Type: string (or Expression with resultType string)."
+          "description": "Server name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "database": {
           "type": "object",
-          "description": "Database name for connection. Type: string (or Expression with resultType string)."
+          "description": "Database name for connection. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "authenticationType": {
-          "description": "AuthenticationType to be used for connection.",
+          "description": "AuthenticationType to be used for connection. It is mutually exclusive with connectionString property.",
           "type": "string",
           "enum": [
             "Basic"
@@ -1264,7 +1268,7 @@
         },
         "username": {
           "type": "object",
-          "description": "Username for authentication. Type: string (or Expression with resultType string)."
+          "description": "Username for authentication. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "password": {
           "description": "Password for authentication.",
@@ -1272,21 +1276,17 @@
         },
         "packageCollection": {
           "type": "object",
-          "description": "Under where packages are created when querying database. Type: string (or Expression with resultType string)."
+          "description": "Under where packages are created when querying database. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "certificateCommonName": {
           "type": "object",
-          "description": "Certificate Common Name when TLS is enabled. Type: string (or Expression with resultType string)."
+          "description": "Certificate Common Name when TLS is enabled. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. It is mutually exclusive with connectionString property. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "server",
-        "database"
-      ]
+      }
     },
     "TeradataLinkedService": {
       "x-ms-discriminator-value": "Teradata",
@@ -2263,8 +2263,12 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",
@@ -2308,8 +2312,12 @@
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "securityToken": {
-          "description": "The security token is required to remotely access Salesforce instance.",
+          "description": "The security token is optional to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "apiVersion": {
+          "type": "object",
+          "description": "The Salesforce API version used in ADF. Type: string (or Expression with resultType string)."
         },
         "extendedProperties": {
           "type": "object",
@@ -3028,10 +3036,7 @@
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "server"
-      ]
+      }
     },
     "AmazonMWSLinkedService": {
       "x-ms-discriminator-value": "AmazonMWS",
@@ -5683,6 +5688,97 @@
       },
       "required": [
         "functionAppUrl"
+      ]
+    },
+    "SnowflakeLinkedService": {
+      "x-ms-discriminator-value": "Snowflake",
+      "description": "Snowflake linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeLinkedServiceTypeProperties": {
+      "description": "Snowflake linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of snowflake. Type: string, SecureString.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "SharePointOnlineListLinkedService": {
+      "x-ms-discriminator-value": "SharePointOnlineList",
+      "description": "SharePoint Online List linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SharePoint Online List linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SharePointOnlineListLinkedServiceTypeProperties": {
+      "description": "SharePoint Online List linked service properties.",
+      "properties": {
+        "siteUrl": {
+          "type": "object",
+          "description": "The URL of the SharePoint Online site. For example, https://contoso.sharepoint.com/sites/siteName. Type: string (or Expression with resultType string)."
+        },
+        "tenantId": {
+          "type": "object",
+          "description": "The tenant ID under which your application resides. You can find it from Azure portal Active Directory overview page. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The application (client) ID of your application registered in Azure Active Directory. Make sure to grant SharePoint site permission to this application. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "siteUrl",
+        "tenantId",
+        "servicePrincipalId",
+        "servicePrincipalKey"
       ]
     }
   }

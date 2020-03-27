@@ -572,7 +572,7 @@
               "format": "date-time",
               "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported."
             },
-            "maxConcurrency": {
+            "rerunConcurrency": {
               "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
               "type": "integer",
               "minimum": 1,
@@ -580,9 +580,10 @@
             }
           },
           "required": [
+            "parentTrigger",
             "requestedStartTime",
             "requestedEndTime",
-            "maxConcurrency"
+            "rerunConcurrency"
           ]
         }
       },

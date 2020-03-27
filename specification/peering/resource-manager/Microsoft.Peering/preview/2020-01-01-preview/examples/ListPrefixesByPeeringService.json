@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "subId",
+    "resourceGroupName": "rgName",
+    "peeringServiceName": "peeringServiceName",
+    "api-version": "2020-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "prefix": "192.168.1.0/24",
+              "prefixValidationState": "Verified",
+              "learnedType": "ViaServiceProvider",
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded"
+            },
+            "name": "peeringServicePrefixName1",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName1"
+          },
+          {
+            "properties": {
+              "prefix": "192.168.2.0/24",
+              "prefixValidationState": "Verified",
+              "learnedType": "ViaServiceProvider",
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded"
+            },
+            "name": "peeringServicePrefixName2",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/prefixes/peeringServicePrefixName2"
+          }
+        ]
+      }
+    }
+  }
+}

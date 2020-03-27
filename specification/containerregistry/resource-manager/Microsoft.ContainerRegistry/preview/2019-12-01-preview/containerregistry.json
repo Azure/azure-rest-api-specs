@@ -134,6 +134,178 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get the specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionGet": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The parameters for creating a private endpoint connection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionCreateOrUpdate": {
+            "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes the specified private endpoint connection associated with the container registry.",
+        "operationId": "PrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The private endpoint connection does not exist in the subscription."
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionDelete": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections in a container registry.",
+        "operationId": "PrivateEndpointConnections_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionList": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}": {
       "get": {
         "tags": [
@@ -491,6 +663,45 @@
           "RegistryListUsages": {
             "$ref": "./examples/RegistryListUsages.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "Registries"
+        ],
+        "description": "Lists the private link resources for a container registry.",
+        "operationId": "Registries_ListPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the private link resources were retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryListPrivateLinkResources": {
+            "$ref": "./examples/RegistryListPrivateLinkResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1306,6 +1517,116 @@
         }
       }
     },
+    "PrivateEndpointConnection": {
+      "description": "An object that represents a private endpoint connection for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The properties of a private endpoint connection.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private endpoint."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of private endpoint connection resource.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "The Private Endpoint resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "This is private endpoint resource created with Microsoft.Network resource provider.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The state of a private link service connection.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The description for connection status. For example if connection is rejected it can indicate reason for rejection.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "enum": [
+            "None",
+            "Recreate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ActionsRequired",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "description": "The result of a request to list private endpoint connections for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of private endpoint connections. Since this list may be incomplete, the nextLink field should be used to request the next list of private endpoint connections.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private endpoint connections.",
+          "type": "string"
+        }
+      }
+    },
     "Registry": {
       "description": "An object that represents a container registry.",
       "required": [
@@ -1463,6 +1784,26 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperty",
           "description": "The encryption settings of container registry."
+        },
+        "dataEndpointEnabled": {
+          "description": "Enable a single data endpoint per region for serving data.",
+          "type": "boolean"
+        },
+        "dataEndpointHostNames": {
+          "description": "List of host names that will serve data when dataEndpointEnabled is true.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections for a container registry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       }
     },
@@ -1729,6 +2070,11 @@
           "description": "Key vault uri to access the encryption key.",
           "type": "string"
         },
+        "versionedKeyIdentifier": {
+          "description": "The fully qualified key identifier that includes the version of the key that is actually used for encryption.",
+          "type": "string",
+          "readOnly": true
+        },
         "identity": {
           "description": "The client id of the identity which will be used to access key vault.",
           "type": "string"
@@ -1780,6 +2126,10 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperty",
           "description": "The encryption settings of container registry."
+        },
+        "dataEndpointEnabled": {
+          "description": "Enable a single data endpoint per region for serving data.",
+          "type": "boolean"
         }
       }
     },
@@ -1901,6 +2251,71 @@
           "x-ms-enum": {
             "name": "RegistryUsageUnit",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "description": "The result of a request to list private link resources for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of private link resources.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "A resource that supports private link capabilities.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type is private link resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "The resource ID.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "A resource that supports private link capabilities.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "The properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource Private link DNS zone name.",
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -2474,6 +2889,27 @@
         }
       }
     },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "Resource": {
       "description": "An Azure resource.",
       "required": [
@@ -2569,6 +3005,14 @@
       "maxLength": 50,
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "description": "The name of the private endpoint connection.",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   },
