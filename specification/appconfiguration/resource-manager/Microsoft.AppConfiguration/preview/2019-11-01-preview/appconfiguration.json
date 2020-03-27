@@ -939,6 +939,14 @@
         "encryption": {
           "$ref": "#/definitions/EncryptionProperties",
           "description": "The encryption settings of the configuration store."
+        },
+        "privateEndpointConnections": {
+          "description": "private endpoint connections of configuration store",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       }
     },
@@ -1374,8 +1382,7 @@
       "properties": {
         "id": {
           "description": "The resource ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "The name of the resource.",
