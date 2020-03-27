@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "v1.0-preview.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "query": {
+      "to": "fr"
+    },
+    "body": "ZG9jdW1lbnQgYmluYXJ5IGJvZHk="
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "job": {
+          "jobId": "727bf148-f327-47a0-9481-abae6362f11e",
+          "createdDateTimeUtc": "2020-03-26T00:00:00Z",
+          "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
+          "jobStatus": {
+            "overallStatus": 2,
+            "totalDocuments": 10,
+            "failedDocuments": 1,
+            "succeedDocuments": 9,
+            "inProgressDocuments": 0,
+            "notYetStartedDocuments": 0
+          }
+        },
+        "documentDownloadUrl": "https://myblob.blob.core.windows.net/container/file.txt",
+        "documentExpirationDateTimeUtc": "2020-03-27T00:00:00Z"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": 0,
+          "message": "Some argument is incorrect"
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": 1,
+          "message": "Job id not found"
+        }
+      }
+    }
+  }
+}
