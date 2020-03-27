@@ -44,6 +44,11 @@
               "$ref": "#/definitions/ErrorResponseV2"
             }
           }
+        },
+        "x-ms-examples": {
+          "Batch Submit": {
+            "$ref": "./examples/postbatch.json"
+          }
         }
       }
     },
@@ -96,6 +101,11 @@
           },
           "202": {
             "description": "Successful request and it is accepted by the service.  The job details are returned"
+          }
+        },
+        "x-ms-examples": {
+          "Document Submit": {
+            "$ref": "./examples/post.json"
           }
         }
       }
@@ -238,12 +248,12 @@
         "sourceFolder": {
           "description": "Location of the folder / container with your documents",
           "type": "string",
-          "example": "https://myblob.blob.core.windows.net/mycontainer"
+          "example": "https://myblob.blob.core.windows.net/sourceContainer/"
         },
         "destinationFolder": {
           "description": "Location of the folder / container for the output",
           "type": "string",
-          "example": "https://myblob.blob.core.windows.net/mycontainer"
+          "example": "https://myblob.blob.core.windows.net/destinationContainer"
         },
         "prefixFilter": {
           "description": "Specifies a string that filters the results to return only blobs whose name begins with the specified prefix.",
