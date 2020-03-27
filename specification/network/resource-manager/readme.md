@@ -53,6 +53,7 @@ input-file:
   - Microsoft.Network/stable/2020-03-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2020-03-01/expressRoutePort.json
   - Microsoft.Network/stable/2020-03-01/firewallPolicy.json
+  - Microsoft.Network/stable/2020-03-01/ipAllocation.json
   - Microsoft.Network/stable/2020-03-01/ipGroups.json
   - Microsoft.Network/stable/2020-03-01/loadBalancer.json
   - Microsoft.Network/stable/2020-03-01/natGateway.json
@@ -1438,6 +1439,9 @@ directive:
   - suppress: GetInOperationName
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
     reason: Customized verb is used for API
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ipAllocation.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ---
@@ -1490,6 +1494,9 @@ directive:
     from: networkwatcher.json
     where: $.definitions.ConnectionMonitorHttpConfiguration.properties.preferHTTPS
     reason: Accidentally shipped with wrong casing - however fixing the casing is introducing a breaking change which is worse than living with the naming violation
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ipAllocation.json
+    reason: name, id and type properties are inherited from the upper level
 ```
 
 ## Go
