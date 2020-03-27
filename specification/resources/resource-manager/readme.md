@@ -544,6 +544,13 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - from: deploymentScripts.json
+    suppress: R3006 #BodyTopLevelProperties
+    where: 
+    - $.definitions.DeploymentScript.properties
+    - $.definitions.AzureCliScript.properties
+    - $.definitions.AzurePowerShellScript.properties
+    reason: Currently systemData is not allowed
 ```
 
 ---
