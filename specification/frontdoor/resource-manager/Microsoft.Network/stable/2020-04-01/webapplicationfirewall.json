@@ -301,6 +301,14 @@
             "$ref": "#/definitions/FrontendEndpointLink"
           }
         },
+        "routingRuleLinks": {
+          "description": "Describes Routing Rules associated with this Web Application Firewall policy.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RoutingRuleLink"
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -856,7 +864,18 @@
           "description": "Resource ID."
         }
       }
-    }
+    },
+    "RoutingRuleLink": {
+      "description": "Defines the Resource ID for a Routing Rule.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      }
+    },
   },
   "parameters": {
     "PolicyNameParameter": {
