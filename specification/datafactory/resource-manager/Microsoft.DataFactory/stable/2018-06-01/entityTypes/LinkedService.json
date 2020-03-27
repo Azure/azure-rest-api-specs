@@ -5729,6 +5729,57 @@
       "required": [
         "connectionString"
       ]
+    },
+    "SharePointOnlineListLinkedService": {
+      "x-ms-discriminator-value": "SharePointOnlineList",
+      "description": "SharePoint Online List linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SharePoint Online List linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SharePointOnlineListLinkedServiceTypeProperties": {
+      "description": "SharePoint Online List linked service properties.",
+      "properties": {
+        "siteUrl": {
+          "type": "object",
+          "description": "The URL of the SharePoint Online site. For example, https://contoso.sharepoint.com/sites/siteName. Type: string (or Expression with resultType string)."
+        },
+        "tenantId": {
+          "type": "object",
+          "description": "The tenant ID under which your application resides. You can find it from Azure portal Active Directory overview page. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The application (client) ID of your application registered in Azure Active Directory. Make sure to grant SharePoint site permission to this application. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "description": "The client secret of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "siteUrl",
+        "tenantId",
+        "servicePrincipalId",
+        "servicePrincipalKey"
+      ]
     }
   }
 }
