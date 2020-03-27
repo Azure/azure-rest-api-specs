@@ -8,6 +8,9 @@ This directory contains the Cli common model for the Dns service.
 ``` yaml
 # Migrated from Powershell's readme
 title: KeyVault
+cli-name: keyvault
+package-name: azure-mgmt-keyvault
+namespace: azure.mgmt.keyvault
 
 directive: 
   # we have to pick the model that will not be inlined in a circular reference. (was very bad previously)

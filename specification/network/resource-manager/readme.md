@@ -134,6 +134,18 @@ input-file:
   - Microsoft.Network/stable/2019-11-01/webapplicationfirewall.json
 ```
 
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-only'
+input-file:
+  - Microsoft.Network/stable/2019-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-11-01/publicIpPrefix.json
+
+```
+
+
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
