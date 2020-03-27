@@ -12,6 +12,7 @@
         ],
         "summary": "Submit a batch document translation request to the translation service",
         "description": "Submit a batch request to the document translation service.\r\nUser can specify a list of target languages to be translated to.\r\n            \r\nA batch request can consist of 1-n input source folders.\r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\n            \r\nNote: the API will go through all the files in the folder and subfolders since in most storage source\r\nthe folder structure are merely virtual.\r\n            \r\nWe will create subfolder for each target language.\r\nFor Example, if the input is https://[myblob]/container/ and destination output is https://[myblob]/outputcontainer/\r\nand the container contains 2 files a.txt, b.docx.  The translation is from en to [es,fr]\r\nThe documents translated will be placed in\r\nhttps://[myblob]/outputcontainer/es/a.txt\r\nhttps://[myblob]/outputcontainer/es/b.docx\r\nhttps://[myblob]/outputcontainer/fr/a.txt\r\nhttps://[myblob]/outputcontainer/fr/b.docx\r\n            \r\nA status file will also be written in the root folder.",
+        "operationId": "Batch Job Submit",
         "consumes": [
           "application/json",
           "text/json",
@@ -53,6 +54,7 @@
         ],
         "summary": "Submit a binary document in the POST body to the translation service.",
         "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/pdf for .pdf files",
+        "operationId": "Single Document Submit",
         "produces": [
           "text/plain",
           "application/json",
@@ -105,7 +107,7 @@
         ],
         "summary": "Returns the status of the batch translation job",
         "description": "Returns the status of the translation job.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.\r\n            \r\nBy default, the API will only returns the summary.  Detailed status of each document can be included by passing includeDetailStatus with value 'true' in the query parameter\r\n            \r\nOptionally, this API supports paging if the list of detailed status of each document is long.\r\nThe X-Pagination response header will be returned to support paging.\r\nThe list of document details are sorted alphabetically",
-        "operationId": "Get batch translation job status",
+        "operationId": "Get Job Status",
         "produces": [
           "application/json"
         ],
@@ -166,48 +168,7 @@
         },
         "x-ms-examples": {
           "Get Status": {
-            "parameters": {
-              "api-version": "v1.0-preview.1",
-              "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
-              "resourceGroupName": "TestResourceGroup",
-              "jobId": "727BF148-F327-47A0-9481-ABAE6362F11E"
-            },
-            "responses": {
-              "200": {
-                "headers": {},
-                "body": {
-                  "jobId": "727bf148-f327-47a0-9481-abae6362f11e",
-                  "createdDateTimeUtc": "2020-03-26T00:00:00Z",
-                  "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
-                  "jobStatus": {
-                    "overallStatus": 2,
-                    "totalDocuments": 10,
-                    "failedDocuments": 1,
-                    "succeedDocuments": 9,
-                    "inProgressDocuments": 0,
-                    "notYetStartedDocuments": 0
-                  }
-                }
-              },
-              "400": {
-                "headers": {},
-                "body": {
-                  "error": {
-                    "code": 0,
-                    "message": "Some argument is incorrect"
-                  }
-                }
-              },
-              "404": {
-                "headers": {},
-                "body": {
-                  "error": {
-                    "code": 1,
-                    "message": "Job id not found"
-                  }
-                }
-              }
-            }
+            "$ref": "./examples/status.json"
           }
         }
       },
@@ -217,7 +178,7 @@
         ],
         "summary": "Cancel a currently processing or queued job.",
         "description": "Cancel a currently processing or queued job.\r\nA job will not be cancelled if it is already completed or failed.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
-        "operationId": "Cancel Job request",
+        "operationId": "Cancel Job Request",
         "produces": [
           "application/json"
         ],
@@ -252,48 +213,7 @@
         },
         "x-ms-examples": {
           "Cancel a running example": {
-            "parameters": {
-              "api-version": "v1.0-preview.1",
-              "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
-              "resourceGroupName": "TestResourceGroup",
-              "jobId": "727BF148-F327-47A0-9481-ABAE6362F11E"
-            },
-            "responses": {
-              "200": {
-                "headers": {},
-                "body": {
-                  "jobId": "727bf148-f327-47a0-9481-abae6362f11e",
-                  "createdDateTimeUtc": "2020-03-26T00:00:00Z",
-                  "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
-                  "jobStatus": {
-                    "overallStatus": 2,
-                    "totalDocuments": 10,
-                    "failedDocuments": 1,
-                    "succeedDocuments": 9,
-                    "inProgressDocuments": 0,
-                    "notYetStartedDocuments": 0
-                  }
-                }
-              },
-              "400": {
-                "headers": {},
-                "body": {
-                  "error": {
-                    "code": 0,
-                    "message": "Some argument is incorrect"
-                  }
-                }
-              },
-              "404": {
-                "headers": {},
-                "body": {
-                  "error": {
-                    "code": 1,
-                    "message": "Job id not found"
-                  }
-                }
-              }
-            }
+            "$ref": "./examples/cancel.json"
           }
         }
       }
