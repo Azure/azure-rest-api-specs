@@ -7535,11 +7535,27 @@
         "modelAsString": true
       }
     },
+    "DiffDiskPlacement": {
+      "type": "string",
+      "description": "Specifies the ephemeral disk placement for operating system disk.",
+      "enum": [
+        "CacheDisk",
+        "ResourceDisk"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskPlacement",
+        "modelAsString": true
+      }
+    },
     "DiffDiskSettings": {
       "properties": {
         "option": {
           "$ref": "#/definitions/DiffDiskOption",
           "description": "Specifies the ephemeral disk settings for operating system disk."
+        },
+        "placement": {
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "description": "Specifies the ephemeral disk placement for operating system disk. This property is used to specify Cache disk or Resource disk for ephemeral OS disk provisioning."
         }
       },
       "description": "Describes the parameters of ephemeral disk settings that can be specified for operating system disk. <br><br> NOTE: The ephemeral disk settings can only be specified for managed disk."
