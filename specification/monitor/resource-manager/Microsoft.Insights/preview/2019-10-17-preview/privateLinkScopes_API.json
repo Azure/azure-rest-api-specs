@@ -982,7 +982,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateLinkProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1063,7 +1063,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateLinkProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1118,7 +1118,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/PrivateLinkProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1144,24 +1144,25 @@
         }
       }
     },
-    "PrivateLinkProxyResource": {
+    "ProxyResource": {
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
+          "readOnly": true,
           "description": "Azure resource Id"
         },
         "name": {
-          "readOnly": true,
           "type": "string",
+          "readOnly": true,
           "description": "Azure resource name"
         },
         "type": {
-          "readOnly": true,
           "type": "string",
+          "readOnly": true,
           "description": "Azure resource type"
         }
       },
+      "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
     "ErrorResponse": {
