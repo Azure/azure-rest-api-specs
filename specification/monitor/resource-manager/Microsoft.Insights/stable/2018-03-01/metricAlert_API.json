@@ -171,6 +171,9 @@
           },
           "Get a dynamic alert rule for multiple resources": {
             "$ref": "./examples/getDynamicMetricAlertMultipleResource.json"
+          },
+          "Get a web test alert rule": {
+            "$ref": "./examples/getWebTestMetricAlert.json"
           }
         }
       },
@@ -235,6 +238,9 @@
           },
           "Create or update a dynamic alert rule for Multiple Resources": {
             "$ref": "./examples/createOrUpdateDynamicMetricAlertMultipleResource.json"
+          },
+          "Create or update a web test alert rule": {
+            "$ref": "./examples/createOrUpdateWebTestMetricAlert.json"
           }
         }
       },
@@ -308,11 +314,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content: the request was successful, but the response is empty"
-          },
           "200": {
             "description": "Successful request to delete an metric alert rule"
+          },
+          "204": {
+            "description": "No content: the request was successful, but the response is empty"
           }
         },
         "x-ms-examples": {
@@ -519,7 +525,7 @@
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "the flag that indicates whether the alert should be auto resolved or not."
+          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
         "actions": {
           "type": "array",
@@ -647,9 +653,11 @@
       "discriminator": "odata.type",
       "properties": {
         "odata.type": {
+          "type": "string",
           "enum": [
             "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
+            "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+            "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
           ],
           "x-ms-enum": {
             "name": "odatatype",
@@ -682,6 +690,30 @@
       },
       "description": "Specifies the metric alert criteria for a single resource that has multiple metric criteria."
     },
+    "WebtestLocationAvailabilityCriteria": {
+      "x-ms-discriminator-value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
+      "type": "object",
+      "properties": {
+        "webTestId": {
+          "type": "string",
+          "description": "The Application Insights web test Id."
+        },
+        "componentId": {
+          "type": "string",
+          "description": "The Application Insights resource Id."
+        },
+        "failedLocationCount": {
+          "type": "number",
+          "description": "The number of failed locations."
+        }
+      },
+      "required": [
+        "webTestId",
+        "componentId",
+        "failedLocationCount"
+      ],
+      "description": "Specifies the metric alert rule criteria for a web test resource."
+    },
     "MetricCriteria": {
       "x-ms-discriminator-value": "StaticThresholdCriterion",
       "type": "object",
@@ -696,6 +728,7 @@
       ],
       "properties": {
         "operator": {
+          "type": "string",
           "enum": [
             "Equals",
             "NotEquals",
@@ -770,6 +803,7 @@
       "discriminator": "criterionType",
       "properties": {
         "criterionType": {
+          "type": "string",
           "enum": [
             "StaticThresholdCriterion",
             "DynamicThresholdCriterion"
@@ -795,10 +829,10 @@
         "timeAggregation": {
           "enum": [
             "Average",
+            "Count",
             "Minimum",
             "Maximum",
-            "Total",
-            "Count"
+            "Total"
           ],
           "x-ms-enum": {
             "name": "AggregationType",
@@ -837,6 +871,7 @@
       ],
       "properties": {
         "operator": {
+          "type": "string",
           "enum": [
             "GreaterThan",
             "LessThan",
@@ -849,6 +884,7 @@
           "description": "The operator used to compare the metric value against the threshold."
         },
         "alertSensitivity": {
+          "type": "string",
           "enum": [
             "Low",
             "Medium",

@@ -24,6 +24,16 @@ These settings apply only when `--tag=package-2019-12-01` is specified on the co
 input-file:
   - Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
+
+### Tag: package-2020-01-01
+
+These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-01-01'
+input-file:
+  - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -37,6 +47,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
+  - $(this-folder)/Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 
 ```
 
