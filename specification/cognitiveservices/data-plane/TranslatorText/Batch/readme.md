@@ -1,25 +1,39 @@
-# Cognitive Services Translator Text Batch SDK
+# Cognitive Services Translation Batch SDK
+
+The Cognitive Service  SDK has support for the Translation Batch Cognitive Service.
+While this repository contains the [Autorest](https://aka.ms/autorest) generated SDK, the easiest way to consume the SDK is by installing the NuGet package for it.
+
+Note that the Cognitive Services Translation Batch SDK is simply a wrapper on top of the Translation Batch Cognitive service. As such, it will generate calls to the Azure service.
+
+
+## Prerequisites
+You must have a [Cognitive Services API account](https://docs.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account) with **Translation Batch API**.
+
+## Installing the NuGet SDK Package
+1. Create a new Console solution in Visual Studio.
+2. Right click on the solution and click **Manage NuGet Packages for Solution**
+3. Mark the **Include Prerelease** checkbox.
+4. Select the **Browse** tab, and Search for **Microsoft.Azure.CognitiveServices.Translation.Batch**
+5. Select the NuGet package and install it.
+
+## Releases
 
 > see https://aka.ms/autorest
 
-Configuration for generating Translator Text Batch SDK.
-
-The current release is `preview_1_0`.
+The current preview release is `release_1_0_preview`.
 
 ``` yaml
-
-tag: preview_1_0
+tag: release_1_0_preview
 add-credentials: true
-openapi-type: data-plane
 ```
 
-# Releases
+### Release 1.0-Preview
 
-### Preview 1.0
-These settings apply only when `--tag=preview_1_0` is specified on the command line.
+These settings apply only when `--tag=release_1_0_preview` is specified on the command line.
 
-``` yaml $(tag) == 'preview_1_0'
+``` yaml $(tag) == 'release_1_0_preview'
 input-file: preview/v1.0/TranslatorBatch.json
+log-file: logs/log.txt
 ```
 
 ## Swagger to SDK
@@ -32,20 +46,26 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-nodejs
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-ruby
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_translationbatch']
 ```
 
 ## CSharp Settings
+
 These settings apply only when `--csharp` is specified on the command line.
+
 ``` yaml $(csharp)
 csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.TranslatorText.Batch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/TranslatorText/Batch/Generated
+  namespace: Microsoft.Azure.CognitiveServices.Translation.Batch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Translation.Batch/src/Generated
   clear-output-folder: true
-```
+````
 
 ## Python
 
@@ -59,47 +79,27 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.translatortext.batch
-  package-name: azure-cognitiveservices-translatortext.batch
+  namespace: azure.cognitiveservices.translation.batch
+  package-name: azure-cognitiveservices-translation.batch
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translatortext/azure/cognitiveservices/translatortext/batch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translation-batch/azure/cognitiveservices/translation/batch
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translatortext-batch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-translation-batch
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
+See configuration in [readme.go.md](./readme.go.md)
 
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: translatortext
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: preview_1_0
-```
-
-### Tag: preview_1_0 and go
-
-These settings apply only when `--tag=preview_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'preview_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/preview/$(namespace)
-```
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -108,48 +108,11 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.translatortext.batch
+  namespace: com.microsoft.azure.cognitiveservices.translation.batch
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/translatortext/batch
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/translation/batch
   with-optional-parameters: true
   with-single-async-method: true
-```
-
-## Node.js
-
-``` yaml $(nodejs)
-nodejs:
-  package-name: azure-cognitiveservices-translatortext-batch
-  package-version: 1.0.0
-  output-folder: $(node-sdks-folder)/lib/services/translatorText/batch
-  azure-arm: false
-  generate-license-txt: true
-  generate-package-json: true
-  generate-readme-md: false
-```
-
-## Multi-API/Profile support for AutoRest v3 generators 
-
-AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
-
-This block is updated by an automatic script. Edits may be lost!
-
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
-# include the azure profile definitions from the standard location
-require: $(this-folder)/../../../../profiles/readme.md
-
-# all the input files across all versions
-input-file:
-  - $(this-folder)/preview/v1.0/TranslatorBatch.json
-
-```
-
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
-
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
