@@ -444,11 +444,22 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
           "description": "Log Analytics cluster properties."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "description": "The top level Log Analytics cluster resource container.",
