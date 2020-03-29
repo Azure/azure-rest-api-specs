@@ -273,12 +273,7 @@
           "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
         },
         "storageSource": {
-          "description": "Specify whether this is AzureBlob or other storage source\r\nOptional.  Default: AzureBlob",
-          "allOf": [
-            {
-              "$ref": "#/definitions/StorageSource"
-            }
-          ]
+          "$ref": "#/definitions/StorageSource"
         }
       }
     },
@@ -331,12 +326,7 @@
       "type": "object",
       "properties": {
         "overallStatus": {
-          "description": "Overall Job status",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Status"
-            }
-          ]
+          "$ref": "#/definitions/Status"
         },
         "totalDocuments": {
           "format": "int32",
@@ -398,12 +388,7 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "jobStatus": {
-          "description": "Status / progress of the translation job.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatusSummary"
-            }
-          ]
+          "$ref": "#/definitions/StatusSummary"
         }
       }
     },
@@ -436,13 +421,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "Gets detailed error code.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DetailedErrorCode"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/DetailedErrorCode"
         },
         "details": {
           "description": "Gets additional supportive details regarding the error and/or expected policies.",
@@ -463,13 +442,7 @@
           "readOnly": true
         },
         "innerError": {
-          "description": "Gets finer error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerErrorV2"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/InnerErrorV2"
         }
       }
     },
@@ -478,13 +451,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "description": "Gets high level error code.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorCodeV2"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/ErrorCodeV2"
         },
         "details": {
           "description": "Gets additional supportive details regarding the error and/or expected policies.",
@@ -505,13 +472,7 @@
           "readOnly": true
         },
         "innerError": {
-          "description": "Gets finer error details.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/InnerErrorV2"
-            }
-          ],
-          "readOnly": true
+          "$ref": "#/definitions/InnerErrorV2"
         }
       }
     },
@@ -520,12 +481,7 @@
       "type": "object",
       "properties": {
         "error": {
-          "description": "Contains information to be conveyed by the Error Response, including\r\nstatus code and message.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorV2"
-            }
-          ]
+          "$ref": "#/definitions/ErrorV2"
         }
       }
     },
@@ -534,12 +490,7 @@
       "type": "object",
       "properties": {
         "job": {
-          "description": "Detail of the underlying translation Job",
-          "allOf": [
-            {
-              "$ref": "#/definitions/JobStatusResponse"
-            }
-          ]
+          "$ref": "#/definitions/JobStatusResponse"
         },
         "documentDownloadUrl": {
           "description": "Document download link",
@@ -566,12 +517,7 @@
           "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
         },
         "documentStatus": {
-          "description": "Status / progress of the translation of the Document.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Status"
-            }
-          ]
+          "$ref": "#/definitions/Status"
         },
         "detectedLanguage": {
           "description": "Detected language of the original document (to be implemented)",
@@ -650,12 +596,7 @@
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
         "jobStatus": {
-          "description": "Status / progress of the translation job.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/StatusSummary"
-            }
-          ]
+          "$ref": "#/definitions/StatusSummary"
         }
       }
     }
