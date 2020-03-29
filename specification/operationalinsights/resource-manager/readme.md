@@ -57,10 +57,11 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/DataExports.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/DataSources.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/IntelligencePacks.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
-- Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedStorageAccounts.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/ManagementGroups.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/Operations.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationStatuses.json
