@@ -235,12 +235,13 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "The resource id of the resource that will be linked to the workspace."
+          "description": "The resource id of the resource that will be linked to the workspace. This should be used for linking resources which require read access"
+        },
+        "writeAccessResourceId": {
+          "type": "string",
+          "description": "The resource id of the resource that will be linked to the workspace. This should be used for linking resources which require write access"
         }
       },
-      "required": [
-        "resourceId"
-      ],
       "description": "Linked service properties."
     },
     "LinkedService": {
@@ -276,7 +277,7 @@
           "items": {
             "$ref": "#/definitions/LinkedService"
           },
-          "description": "Gets or sets a list of linked service instances."
+          "description": "The list of linked service instances"
         }
       },
       "description": "The list linked service operation response."

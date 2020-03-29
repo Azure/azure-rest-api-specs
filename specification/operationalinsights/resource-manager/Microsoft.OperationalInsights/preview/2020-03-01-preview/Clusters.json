@@ -129,11 +129,13 @@
         "description": "Create or update a Log Analytics cluster.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the Log Analytics cluster."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "clusterName",
@@ -153,26 +155,11 @@
               "$ref": "#/definitions/Cluster"
             },
             "description": "The parameters required to create or update a Log Analytics cluster."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
+          "202": {
+            "description": "Accepted response definition."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -196,11 +183,7 @@
         "description": "Deletes a cluster instance.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the Log Analytics cluster."
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "clusterName",
@@ -244,11 +227,14 @@
         "description": "Gets a Log Analytics cluster instance.",
         "parameters": [
           {
-            "name": "resourceGroupName",
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the Log Analytics cluster."
+            "description": "Name of the Log Analytics Cluster."
           },
           {
             "name": "clusterName",
@@ -292,11 +278,14 @@
         "description": "Updates a Log Analytics cluster.",
         "parameters": [
           {
-            "name": "resourceGroupName",
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the cluster."
+            "description": "Name of the Log Analytics Cluster."
           },
           {
             "name": "clusterName",
@@ -370,9 +359,9 @@
             "modelAsString": true
           }
         },
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
         }
       },
       "description": "Cluster properties."
@@ -389,9 +378,9 @@
     },
     "ClusterPatchProperties": {
       "properties": {
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
         }
       },
       "description": "Log Analytics cluster patch properties."
@@ -402,6 +391,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPatchProperties",
           "description": "Log Analytics cluster properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/sku",
+          "description": "The sku properties."
         },
         "tags": {
           "type": "object",
@@ -419,6 +412,10 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/sku",
+          "description": "The sku properties."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -449,6 +446,42 @@
         }
       },
       "description": "The list clusters operation response."
+    },
+    "keyVaultProperties": {
+      "properties": {
+        "keyVaultUri": {
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyName": {
+          "description": "The name of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "The version of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "sku": {
+      "properties": {
+        "capacity": {
+          "description": "The capacity value",
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
+          "enum": [
+            "CapacityReservation"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "Identity": {
       "properties": {
