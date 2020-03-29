@@ -400,7 +400,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}": {
       "delete": {
         "tags": [
-          "PrivateDnsZoneGroup"
+          "PrivateDnsZoneGroups"
         ],
         "operationId": "PrivateDnsZoneGroups_Delete",
         "description": "Deletes the specified private dns zone group.",
@@ -462,7 +462,7 @@
       },
       "get": {
         "tags": [
-          "PrivateDnsZoneGroup"
+          "PrivateDnsZoneGroups"
         ],
         "operationId": "PrivateDnsZoneGroups_Get",
         "description": "Gets the private dns zone group resource by specified private dns zone group name.",
@@ -493,13 +493,6 @@
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Expands referenced resources."
           }
         ],
         "responses": {
@@ -524,7 +517,7 @@
       },
       "put": {
         "tags": [
-          "PrivateDnsZoneGroup"
+          "PrivateDnsZoneGroups"
         ],
         "operationId": "PrivateDnsZoneGroups_CreateOrUpdate",
         "description": "Creates or updates a private dns zone group in the specified private endpoint.",
@@ -600,7 +593,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups": {
       "get": {
         "tags": [
-          "PrivateDnsZoneGroup"
+          "PrivateDnsZoneGroups"
         ],
         "operationId": "PrivateDnsZoneGroups_List",
         "description": "Gets all private dns zone groups in a private endpoint.",
@@ -708,25 +701,25 @@
         "customDnsConfigs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CustomDnsConfig"
+            "$ref": "#/definitions/CustomDnsConfigPropertiesFormat"
           },
-          "description": "A grouping of information about dns configurations connecting to the private endpoint."
+          "description": "An array of custom dns configurations."
         }
       },
       "description": "Properties of the private endpoint."
     },
-    "CustomDnsConfig": {
+    "CustomDnsConfigPropertiesFormat": {
       "properties": {
         "fqdn": {
           "type": "string",
-          "description": "Fqdn that resolves for private endpoint ip address."
+          "description": "Fqdn that resolves to private endpoint ip address."
         },
         "ipAddresses": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "The private ip address of the private endpoint."
+          "description": "A list of private ip addresses of the private endpoint."
         }
       },
       "description": "Contains custom Dns resolution configuration from customer."
@@ -864,7 +857,6 @@
     "PrivateDnsZoneGroup": {
       "properties": {
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
@@ -907,13 +899,13 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateDnsZoneConfigProperties",
+          "$ref": "#/definitions/PrivateDnsZonePropertiesFormat",
           "description": "Properties of the private dns zone configuration."
         }
       },
       "description": "PrivateDnsZoneConfig resource."
     },
-    "PrivateDnsZoneConfigProperties": {
+    "PrivateDnsZonePropertiesFormat": {
       "properties": {
         "privateDnsZoneId": {
           "type": "string",
@@ -941,7 +933,7 @@
         },
         "fqdn": {
           "type": "string",
-          "description": "Fqdn that resolves for private endpoint ip address."
+          "description": "Fqdn that resolves to private endpoint ip address."
         },
         "ipAddresses": {
           "type": "array",
@@ -951,7 +943,7 @@
           "description": "The private ip address of the private endpoint."
         }
       },
-      "description": "A collective group of information about the record set connectivity information."
+      "description": "A collective group of information about the record set information."
     }
   }
 }
