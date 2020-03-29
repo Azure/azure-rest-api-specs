@@ -210,26 +210,6 @@
     }
   },
   "definitions": {
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "description": "Common properties of proxy resource."
-    },
     "LinkedStorageAccountsProperties": {
       "description": "Linked storage accounts properties.",
       "type": "object",
@@ -269,7 +249,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "Linked storage accounts top level resource container.",

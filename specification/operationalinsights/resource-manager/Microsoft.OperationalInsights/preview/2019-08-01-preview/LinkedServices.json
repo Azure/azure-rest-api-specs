@@ -249,6 +249,13 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LinkedServiceProperties",
           "description": "The properties of the linked service."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "required": [
@@ -256,7 +263,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "The top level Linked service resource container.",
@@ -273,33 +280,6 @@
         }
       },
       "description": "The list linked service operation response."
-    },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Common properties of proxy resource."
     }
   },
   "parameters": {}
