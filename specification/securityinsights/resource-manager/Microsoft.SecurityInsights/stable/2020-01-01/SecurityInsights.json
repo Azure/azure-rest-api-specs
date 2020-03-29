@@ -459,7 +459,691 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "operationId": "AlertRuleTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets the alert rule template.",
+        "operationId": "AlertRuleTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
+      "get": {
+        "x-ms-examples": {
+          "Get all cases.": {
+            "$ref": "./examples/cases/GetCases.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Gets all cases.",
+        "deprecated": true,
+        "operationId": "Cases_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case.": {
+            "$ref": "./examples/cases/GetCaseById.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Gets a case.",
+        "deprecated": true,
+        "operationId": "Cases_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case.": {
+            "$ref": "./examples/cases/CreateCase.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Creates or updates the case.",
+        "deprecated": true,
+        "operationId": "Cases_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/Case"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Case"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a case.": {
+            "$ref": "./examples/cases/DeleteCase.json"
+          }
+        },
+        "tags": [
+          "Cases"
+        ],
+        "description": "Delete the case.",
+        "deprecated": true,
+        "operationId": "Cases_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case comments.": {
+            "$ref": "./examples/cases/comments/GetAllCaseComments.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets all case comments.",
+        "deprecated": true,
+        "operationId": "Comments_ListByCase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case comment.": {
+            "$ref": "./examples/cases/comments/GetCaseCommentById.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets a case comment.",
+        "deprecated": true,
+        "operationId": "Cases_GetComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case comment.": {
+            "$ref": "./examples/cases/comments/CreateCaseComment.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Creates the case comment.",
+        "deprecated": true,
+        "operationId": "CaseComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          },
+          {
+            "$ref": "#/parameters/CaseComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
+      "get": {
+        "x-ms-examples": {
+          "Get all bookmarks.": {
+            "$ref": "./examples/bookmarks/GetBookmarks.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Gets all bookmarks.",
+        "operationId": "Bookmarks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a bookmark.": {
+            "$ref": "./examples/bookmarks/GetBookmarkById.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Gets a bookmark.",
+        "operationId": "Bookmarks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a bookmark.": {
+            "$ref": "./examples/bookmarks/CreateBookmark.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Creates or updates the bookmark.",
+        "operationId": "Bookmarks_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/Bookmark"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Bookmark"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a bookmark.": {
+            "$ref": "./examples/bookmarks/DeleteBookmark.json"
+          }
+        },
+        "tags": [
+          "Bookmarks"
+        ],
+        "description": "Delete the bookmark.",
+        "operationId": "Bookmarks_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+ "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an bookmark": {
+            "$ref": "./examples/bookmarks/expand/PostExpandBookmark.json"
+          }
+        },
+        "description": "Expand an bookmark",
+        "operationId": "Bookmark_Expand",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/BookmarkExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Bookmark"
+        ]
+      }
+    },
+       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
       "get": {
         "x-ms-examples": {
           "Get all data connectors.": {
@@ -1515,6 +2199,13 @@
           },
           "type": "array"
         },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "productFilter": {
           "description": "The alerts' productName on which the cases will be generated",
           "enum": [
@@ -2213,7 +2904,7 @@
           "type": "string",
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "IncidentSeverity",
+            "name": "CaseSeverity",
             "values": [
               {
                 "description": "Critical severity",
@@ -2311,6 +3002,78 @@
       "required": true,
       "type": "string"
     },
+    "Bookmark": {
+      "description": "The bookmark",
+      "in": "body",
+      "name": "bookmark",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Bookmark"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BookmarkId": {
+      "description": "Bookmark ID",
+      "in": "path",
+      "name": "bookmarkId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Case": {
+      "description": "The case",
+      "in": "body",
+      "name": "case",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Case"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CaseComment": {
+      "description": "The case comment",
+      "in": "body",
+      "name": "caseComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CaseComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CaseCommentId": {
+      "description": "Case comment ID",
+      "in": "path",
+      "name": "caseCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CaseId": {
+      "description": "Case ID",
+      "in": "path",
+      "name": "caseId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "ConsentId": {
       "description": "consent ID",
       "in": "path",
@@ -2349,6 +3112,42 @@
       "description": "entity query ID",
       "in": "path",
       "name": "entityQueryId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Incident": {
+      "description": "The incident",
+      "in": "body",
+      "name": "incident",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/Incident"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentComment": {
+      "description": "The incident comment",
+      "in": "body",
+      "name": "incidentComment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/IncidentComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentCommentId": {
+      "description": "Incident comment ID",
+      "in": "path",
+      "name": "incidentCommentId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IncidentId": {
+      "description": "Incident ID",
+      "in": "path",
+      "name": "incidentId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
