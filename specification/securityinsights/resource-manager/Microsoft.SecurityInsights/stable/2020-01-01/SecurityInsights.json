@@ -607,309 +607,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a case.": {
-            "$ref": "./examples/cases/GetCaseById.json"
-          }
-        },
-        "tags": [
-          "Cases"
-        ],
-        "description": "Gets a case.",
-        "deprecated": true,
-        "operationId": "Cases_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Case"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Creates or updates a case.": {
-            "$ref": "./examples/cases/CreateCase.json"
-          }
-        },
-        "tags": [
-          "Cases"
-        ],
-        "description": "Creates or updates the case.",
-        "deprecated": true,
-        "operationId": "Cases_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          },
-          {
-            "$ref": "#/parameters/Case"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Case"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Case"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete a case.": {
-            "$ref": "./examples/cases/DeleteCase.json"
-          }
-        },
-        "tags": [
-          "Cases"
-        ],
-        "description": "Delete the case.",
-        "deprecated": true,
-        "operationId": "Cases_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments": {
-      "get": {
-        "x-ms-examples": {
-          "Get all case comments.": {
-            "$ref": "./examples/cases/comments/GetAllCaseComments.json"
-          }
-        },
-        "tags": [
-          "CaseComments"
-        ],
-        "description": "Gets all case comments.",
-        "deprecated": true,
-        "operationId": "Comments_ListByCase",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          },
-          {
-            "$ref": "#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "#/parameters/ODataOrderBy"
-          },
-          {
-            "$ref": "#/parameters/ODataTop"
-          },
-          {
-            "$ref": "#/parameters/ODataSkipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CaseCommentList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-odata": "#/definitions/CaseComment",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a case comment.": {
-            "$ref": "./examples/cases/comments/GetCaseCommentById.json"
-          }
-        },
-        "tags": [
-          "CaseComments"
-        ],
-        "description": "Gets a case comment.",
-        "deprecated": true,
-        "operationId": "Cases_GetComment",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          },
-          {
-            "$ref": "#/parameters/CaseCommentId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CaseComment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Creates or updates a case comment.": {
-            "$ref": "./examples/cases/comments/CreateCaseComment.json"
-          }
-        },
-        "tags": [
-          "CaseComments"
-        ],
-        "description": "Creates the case comment.",
-        "deprecated": true,
-        "operationId": "CaseComments_CreateComment",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/CaseId"
-          },
-          {
-            "$ref": "#/parameters/CaseCommentId"
-          },
-          {
-            "$ref": "#/parameters/CaseComment"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/CaseComment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
       "get": {
         "x-ms-examples": {
@@ -1093,54 +790,6 @@
             }
           }
         }
-      }
-    },
- "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/expand": {
-      "post": {
-        "x-ms-examples": {
-          "Expand an bookmark": {
-            "$ref": "./examples/bookmarks/expand/PostExpandBookmark.json"
-          }
-        },
-        "description": "Expand an bookmark",
-        "operationId": "Bookmark_Expand",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/BookmarkId"
-          },
-          {
-            "$ref": "#/parameters/BookmarkExpandRequestBody"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BookmarkExpandResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "tags": [
-          "Bookmark"
-        ]
       }
     },
        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
@@ -1348,6 +997,361 @@
           }
         }
       }
+},
+"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incidents.": {
+            "$ref": "./examples/incidents/GetIncidents.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets all incidents.",
+        "operationId": "Incidents_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident.": {
+            "$ref": "./examples/incidents/GetIncidentById.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Gets an incident.",
+        "operationId": "Incidents_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates an incident.": {
+            "$ref": "./examples/incidents/CreateIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Creates or updates the incident.",
+        "operationId": "Incidents_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/Incident"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Incident"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an incident.": {
+            "$ref": "./examples/incidents/DeleteIncident.json"
+          }
+        },
+        "tags": [
+          "Incidents"
+        ],
+        "description": "Delete the incident.",
+        "operationId": "Incidents_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all incident comments.": {
+            "$ref": "./examples/incidents/comments/GetAllIncidentComments.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets all incident comments.",
+        "operationId": "IncidentComments_ListByIncident",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/IncidentComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}/comments/{incidentCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an incident comment.": {
+            "$ref": "./examples/incidents/comments/GetIncidentCommentById.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Gets an incident comment.",
+        "operationId": "IncidentComments_GetComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates an incident comment.": {
+            "$ref": "./examples/incidents/comments/CreateIncidentComment.json"
+          }
+        },
+        "tags": [
+          "IncidentComments"
+        ],
+        "description": "Creates the incident comment.",
+        "operationId": "IncidentComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentCommentId"
+          },
+          {
+            "$ref": "#/parameters/IncidentComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IncidentComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1461,7 +1465,7 @@
       "description": "Action property bag base.",
       "properties": {
         "logicAppResourceId": {
-          "description": "Logic App Resource Id, providers/Microsoft.Logic/workflows/{WorkflowID}.",
+          "description": "Logic App Resource Id, /subscriptions/{my-subscription}/resourceGroups/{my-resource-group}/providers/Microsoft.Logic/workflows/{my-workflow-id}.",
           "type": "string"
         }
       },
@@ -2601,6 +2605,10 @@
             "$ref": "#/definitions/AttackTactic"
           },
           "type": "array"
+        },
+        "incidentConfiguration": {
+          "$ref": "#/definitions/IncidentConfiguration",
+          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
         }
       },
       "required": [
@@ -2661,6 +2669,486 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "IncidentConfiguration": {
+      "description": "Incident Configuration property bag.",
+      "properties": {
+        "createIncident": {
+          "description": "Create incidents from alerts triggered by this analytics rule",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/GroupingConfiguration",
+          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
+        }
+      },
+      "type": "object",
+      "required": [
+        "createIncident"
+      ]
+    },
+    "GroupingConfiguration": {
+      "description": "Grouping configuration property bag.",
+      "properties": {
+        "enabled": {
+          "description": "Grouping enabled",
+          "type": "boolean"
+        },
+        "reopenClosedIncident": {
+          "description": "Re-open closed matching incidents",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "description": "Limit the group to alerts created within the lookback duration (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "entitiesMatchingMethod": {
+          "description": "Grouping matching method",
+          "enum": [
+            "All",
+            "None",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntitiesMatchingMethod",
+            "values": [
+              {
+                "description": "Grouping alerts into a single incident if all the entities match",
+                "value": "All"
+              },
+              {
+                "description": "Grouping all alerts triggered by this rule into a single incident",
+                "value": "None"
+              },
+              {
+                "description": "Grouping alerts into a single incident if the selected entities match",
+                "value": "Custom"
+              }
+            ]
+          }
+        },
+        "groupByEntities": {
+          "description": "A list of entity types to group by (when entitiesMatchingMethod is Custom)",
+          "items": {
+            "description": "Grouping entity type",
+            "enum": [
+              "Account",
+              "Host",
+              "Ip",
+              "Url"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GroupingEntityType",
+              "values": [
+                {
+                  "description": "Account entity",
+                  "value": "Account"
+                },
+                {
+                  "description": "Host entity",
+                  "value": "Host"
+                },
+                {
+                  "description": "Ip entity",
+                  "value": "Ip"
+                },
+                {
+                  "description": "Url entity",
+                  "value": "Url"
+                }
+              ]
+            }
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "reopenClosedIncident",
+        "lookbackDuration",
+        "entitiesMatchingMethod"
+      ]
+    },
+    "SecurityAlert": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a security alert entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAlertProperties",
+          "description": "SecurityAlert entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityAlert"
+    },
+    "SecurityAlertProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "SecurityAlert entity property bag.",
+      "properties": {
+        "alertDisplayName": {
+          "description": "The display name of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "alertType": {
+          "description": "The type name of the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "compromisedEntity": {
+          "description": "Display name of the main entity being reported on.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "confidenceLevel": {
+          "description": "The confidence level of this alert.",
+          "enum": [
+            "Unknown",
+            "Low",
+            "High"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConfidenceLevel",
+            "values": [
+              {
+                "description": "Unknown confidence, the is the default value",
+                "value": "Unknown"
+              },
+              {
+                "description": "Low confidence, meaning we have some doubts this is indeed malicious or part of an attack",
+                "value": "Low"
+              },
+              {
+                "description": "High confidence that the alert is true positive malicious",
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "confidenceReasons": {
+          "description": "The confidence reasons",
+          "items": {
+            "description": "confidence reason item",
+            "properties": {
+              "reason": {
+                "description": "The reason's description",
+                "readOnly": true,
+                "type": "string"
+              },
+              "reasonType": {
+                "description": "The type (category) of the reason",
+                "readOnly": true,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "confidenceScore": {
+          "description": "The confidence score of the alert.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "confidenceScoreStatus": {
+          "description": "The confidence score calculation status, i.e. indicating if score calculation is pending for this alert, not applicable or final.",
+          "enum": [
+            "NotApplicable",
+            "InProcess",
+            "NotFinal",
+            "Final"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConfidenceScoreStatus",
+            "values": [
+              {
+                "description": "Score will not be calculated for this alert as it is not supported by virtual analyst",
+                "value": "NotApplicable"
+              },
+              {
+                "description": "No score was set yet and calculation is in progress",
+                "value": "InProcess"
+              },
+              {
+                "description": "Score is calculated and shown as part of the alert, but may be updated again at a later time following the processing of additional data",
+                "value": "NotFinal"
+              },
+              {
+                "description": "Final score was calculated and available",
+                "value": "Final"
+              }
+            ]
+          }
+        },
+        "description": {
+          "description": "Alert description.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "endTimeUtc": {
+          "description": "The impact end time of the alert (the time of the last event contributing to the alert).",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "intent": {
+          "description": "Holds the alert intent stage(s) mapping for this alert.",
+          "enum": [
+            "Unknown",
+            "Probing",
+            "Exploitation",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KillChainIntent",
+            "values": [
+              {
+                "description": "The default value.",
+                "value": "Unknown"
+              },
+              {
+                "description": "Probing could be an attempt to access a certain resource regardless of a malicious intent or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt originating from outside the network in attempt to scan the target system and find a way in.",
+                "value": "Probing"
+              },
+              {
+                "description": "Exploitation is the stage where an attacker manage to get foothold on the attacked resource. This stage is applicable not only for compute hosts, but also for resources such as user accounts, certificates etc. Adversaries will often be able to control the resource after this stage.",
+                "value": "Exploitation"
+              },
+              {
+                "description": "Persistence is any access, action, or configuration change to a system that gives an adversary a persistent presence on that system. Adversaries will often need to maintain access to systems through interruptions such as system restarts, loss of credentials, or other failures that would require a remote access tool to restart or alternate backdoor for them to regain access.",
+                "value": "Persistence"
+              },
+              {
+                "description": "Privilege escalation is the result of actions that allow an adversary to obtain a higher level of permissions on a system or network. Certain tools or actions require a higher level of privilege to work and are likely necessary at many points throughout an operation. User accounts with permissions to access specific systems or perform specific functions necessary for adversaries to achieve their objective may also be considered an escalation of privilege.",
+                "value": "PrivilegeEscalation"
+              },
+              {
+                "description": "Defense evasion consists of techniques an adversary may use to evade detection or avoid other defenses. Sometimes these actions are the same as or variations of techniques in other categories that have the added benefit of subverting a particular defense or mitigation. ",
+                "value": "DefenseEvasion"
+              },
+              {
+                "description": "Credential access represents techniques resulting in access to or control over system, domain, or service credentials that are used within an enterprise environment. Adversaries will likely attempt to obtain legitimate credentials from users or administrator accounts (local system administrator or domain users with administrator access) to use within the network. With sufficient access within a network, an adversary can create accounts for later use within the environment.",
+                "value": "CredentialAccess"
+              },
+              {
+                "description": "Discovery consists of techniques that allow the adversary to gain knowledge about the system and internal network. When adversaries gain access to a new system, they must orient themselves to what they now have control of and what benefits operating from that system give to their current objective or overall goals during the intrusion. The operating system provides many native tools that aid in this post-compromise information-gathering phase.",
+                "value": "Discovery"
+              },
+              {
+                "description": "Lateral movement consists of techniques that enable an adversary to access and control remote systems on a network and could, but does not necessarily, include execution of tools on remote systems. The lateral movement techniques could allow an adversary to gather information from a system without needing additional tools, such as a remote access tool. An adversary can use lateral movement for many purposes, including remote Execution of tools, pivoting to additional systems, access to specific information or files, access to additional credentials, or to cause an effect.",
+                "value": "LateralMovement"
+              },
+              {
+                "description": "The execution tactic represents techniques that result in execution of adversary-controlled code on a local or remote system. This tactic is often used in conjunction with lateral movement to expand access to remote systems on a network.",
+                "value": "Execution"
+              },
+              {
+                "description": "Collection consists of techniques used to identify and gather information, such as sensitive files, from a target network prior to exfiltration. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.",
+                "value": "Collection"
+              },
+              {
+                "description": "Exfiltration refers to techniques and attributes that result or aid in the adversary removing files and information from a target network. This category also covers locations on a system or network where the adversary may look for information to exfiltrate.",
+                "value": "Exfiltration"
+              },
+              {
+                "description": "The command and control tactic represents how adversaries communicate with systems under their control within a target network.",
+                "value": "CommandAndControl"
+              },
+              {
+                "description": "The impact intent primary objective is to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process. This would often refer to techniques such as ransom-ware, defacement, data manipulation and others.",
+                "value": "Impact"
+              }
+            ]
+          }
+        },
+        "providerAlertId": {
+          "description": "The identifier of the alert inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "processingEndTime": {
+          "description": "The time the alert was made available for consumption.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productComponentName": {
+          "description": "The name of a component inside the product which generated the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productName": {
+          "description": "The name of the product which published this alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "productVersion": {
+          "description": "The version of the product generating the alert.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "remediationSteps": {
+          "description": "Manual action items to take to remediate the alert.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
+        },
+        "startTimeUtc": {
+          "description": "The impact start time of the alert (the time of the first event contributing to the alert).",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "status": {
+          "description": "The lifecycle status of the alert.",
+          "enum": [
+            "Unknown",
+            "New",
+            "Resolved",
+            "Dismissed",
+            "InProgress"
+          ],
+          "readOnly": true,
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AlertStatus",
+            "values": [
+              {
+                "description": "Unknown value",
+                "value": "Unknown"
+              },
+              {
+                "description": "New alert",
+                "value": "New"
+              },
+              {
+                "description": "Alert closed after handling",
+                "value": "Resolved"
+              },
+              {
+                "description": "Alert dismissed as false positive",
+                "value": "Dismissed"
+              },
+              {
+                "description": "Alert is being handled",
+                "value": "InProgress"
+              }
+            ]
+          }
+        },
+        "systemAlertId": {
+          "description": "Holds the product identifier of the alert for the product.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "timeGenerated": {
+          "description": "The time the alert was generated.",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "vendorName": {
+          "description": "The name of the vendor that raise the alert.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SecurityGroupEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents a security group entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityGroupEntityProperties",
+          "description": "SecurityGroup entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "SecurityGroup"
+    },
+    "SecurityGroupEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "SecurityGroup entity property bag.",
+      "properties": {
+        "distinguishedName": {
+          "description": "The group distinguished name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "objectGuid": {
+          "description": "A single-value attribute that is the unique identifier for the object, assigned by active directory.",
+          "format": "uuid",
+          "readOnly": true,
+          "type": "string"
+        },
+        "sid": {
+          "description": "The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "Settings": {
       "allOf": [
