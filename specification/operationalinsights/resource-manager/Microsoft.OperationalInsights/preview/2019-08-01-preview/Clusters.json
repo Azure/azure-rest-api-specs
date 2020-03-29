@@ -444,22 +444,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
           "description": "Log Analytics cluster properties."
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "#/definitions/ResourceCommonProperties"
         }
       ],
       "description": "The top level Log Analytics cluster resource container.",
@@ -510,6 +499,38 @@
         "type"
       ],
       "description": "Identity for the resource."
+    },
+    "ResourceCommonProperties": {	
+      "properties": {	
+        "id": {	
+          "readOnly": true,	
+          "type": "string",	
+          "description": "Resource Id"	
+        },	
+        "name": {	
+          "readOnly": true,	
+          "type": "string",	
+          "description": "Resource name"	
+        },	
+        "type": {	
+          "readOnly": true,	
+          "type": "string",	
+          "description": "Resource type"	
+        },	
+        "location": {	
+          "type": "string",	
+          "description": "Resource location"	
+        },	
+        "tags": {	
+          "type": "object",	
+          "additionalProperties": {	
+            "type": "string"	
+          },	
+          "description": "Resource tags"	
+        }	
+      },	
+      "description": "The resource definition.",	
+      "x-ms-azure-resource": true	
     }
   },
   "parameters": {}
