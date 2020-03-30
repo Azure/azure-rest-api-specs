@@ -128,3 +128,11 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+``` yaml $(trenton)
+trenton:
+  extensions: securityinsights
+  namespace: azure.mgmt.securityinsights
+  package-name: azure-mgmt-securityinsights
+clear-output-folder: true
+``` 
+
