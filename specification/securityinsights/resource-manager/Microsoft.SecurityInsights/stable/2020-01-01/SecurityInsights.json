@@ -2775,50 +2775,6 @@
         "entitiesMatchingMethod"
       ]
     },
-    "SecurityGroupEntity": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "description": "Represents a security group entity.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SecurityGroupEntityProperties",
-          "description": "SecurityGroup entity properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "SecurityGroup"
-    },
-    "SecurityGroupEntityProperties": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "description": "SecurityGroup entity property bag.",
-      "properties": {
-        "distinguishedName": {
-          "description": "The group distinguished name",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectGuid": {
-          "description": "A single-value attribute that is the unique identifier for the object, assigned by active directory.",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "sid": {
-          "description": "The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Settings": {
       "allOf": [
         {
@@ -3191,42 +3147,6 @@
       "description": "Bookmark ID",
       "in": "path",
       "name": "bookmarkId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Case": {
-      "description": "The case",
-      "in": "body",
-      "name": "case",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/Case"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "CaseComment": {
-      "description": "The case comment",
-      "in": "body",
-      "name": "caseComment",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/CaseComment"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "CaseCommentId": {
-      "description": "Case comment ID",
-      "in": "path",
-      "name": "caseCommentId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CaseId": {
-      "description": "Case ID",
-      "in": "path",
-      "name": "caseId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
