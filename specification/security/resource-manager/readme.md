@@ -375,6 +375,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
