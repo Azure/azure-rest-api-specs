@@ -2605,10 +2605,6 @@
             "$ref": "#/definitions/AttackTactic"
           },
           "type": "array"
-        },
-        "incidentConfiguration": {
-          "$ref": "#/definitions/IncidentConfiguration",
-          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
         }
       },
       "required": [
@@ -2669,23 +2665,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
-    },
-    "IncidentConfiguration": {
-      "description": "Incident Configuration property bag.",
-      "properties": {
-        "createIncident": {
-          "description": "Create incidents from alerts triggered by this analytics rule",
-          "type": "boolean"
-        },
-        "groupingConfiguration": {
-          "$ref": "#/definitions/GroupingConfiguration",
-          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
-        }
-      },
-      "type": "object",
-      "required": [
-        "createIncident"
-      ]
     },
     "GroupingConfiguration": {
       "description": "Grouping configuration property bag.",
