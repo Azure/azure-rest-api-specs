@@ -5428,7 +5428,6 @@
     },
     "PrivateEndpointConnection": {
       "type": "object",
-      "description": "PrivateEndpointConnection resource information.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -5745,8 +5744,8 @@
       }
     },
     "DomainUpdateParameterProperties": {
-      "type": "object",
       "description": "Information of domain update parameter properties.",
+      "type": "object",
       "properties": {
         "publicNetworkAccess": {
           "description": "This determines if traffic is allowed over public network. By default it is enabled. \r\nYou can further restrict to specific IPs by configuring <seealso cref=\"P:Microsoft.Azure.Events.ResourceProvider.Common.Contracts.DomainUpdateParameterProperties.InboundIpRules\" />",
@@ -5949,6 +5948,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "isSubjectCaseSensitive": {
+          "description": "Specifies if the SubjectBeginsWith and SubjectEndsWith properties of the filter\r\nshould be compared in a case sensitive manner.",
+          "type": "boolean"
         },
         "advancedFilters": {
           "description": "An array of advanced filters that are used for filtering event channels.",
@@ -7370,8 +7373,8 @@
       }
     },
     "PrivateLinkResource": {
-      "type": "object",
       "description": "Information of the private link resource.",
+      "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
