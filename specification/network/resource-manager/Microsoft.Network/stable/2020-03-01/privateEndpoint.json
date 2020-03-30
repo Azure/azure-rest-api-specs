@@ -860,6 +860,11 @@
           "type": "string",
           "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
         "type": {
           "readOnly": true,
           "type": "string",
@@ -897,6 +902,10 @@
     },
     "PrivateDnsZoneConfig": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateDnsZonePropertiesFormat",
@@ -934,6 +943,15 @@
         "fqdn": {
           "type": "string",
           "description": "Fqdn that resolves to private endpoint ip address."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the recordset."
+        },
+        "ttl": {
+          "type": "int",
+          "description": "Recordset time to live."
         },
         "ipAddresses": {
           "type": "array",
