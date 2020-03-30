@@ -888,7 +888,7 @@
         },
         "delegatedRoleDefinitionIds": {
           "type": "array",
-          "description": "The list of delegated role definition ids which define all the permissions that the security group/service principal/user must have on the projected subscription.",
+          "description": "The delegatedRoleDefinitionIds field is required when the roleDefinitionId refers to the User Access Administrator Role. It is the list of role definition ids which define all the permissions that the user in the authorization can assign to other security groups/service principals/users.",
           "items": {
             "format": "uuid",
             "type": "string"
@@ -944,6 +944,7 @@
         },
         "maximumActivationDuration": {
           "type": "string",
+          "format": "duration",
           "description": "Maximum access duration in ISO 8601 format.  The default value is \"PT8H\"."
         }
       },
