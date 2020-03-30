@@ -11,7 +11,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.operationsmanagement
   package-name: azure-mgmt-operationsmanagement
-  package-version: 2015-11-01-preview
+  package-version: 0.1.0
   clear-output-folder: true
 directive:
   from: OperationsManagement.json

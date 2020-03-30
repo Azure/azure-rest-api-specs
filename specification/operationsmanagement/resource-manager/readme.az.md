@@ -18,16 +18,4 @@ directive:
   - from: OperationsManagement.json
     where: $.parameters.ResourceNameParameter
     transform: $['x-ms-parameter-location'] = 'method'
-  
-#cli:
-#    cli-directive:
-#      directive on operationGroup
-#       - select: 'operationGroup'
-#         where:
-#             operationGroup: 'operations'
-#         hidden: true
-#       - where:
-#             parameter: location
-#         required: true
-
 ```
