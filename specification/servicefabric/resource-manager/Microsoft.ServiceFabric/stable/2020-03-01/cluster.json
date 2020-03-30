@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2019-06-01-preview"
+    "version": "2020-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -80,7 +80,7 @@
         "tags": [
           "Cluster"
         ],
-        "operationId": "Clusters_Create",
+        "operationId": "Clusters_CreateOrUpdate",
         "summary": "Creates or updates a Service Fabric cluster resource.",
         "description": "Create or update a Service Fabric cluster resource with the specified name.",
         "parameters": [
@@ -1112,7 +1112,7 @@
         },
         "protectedAccountKeyName2": {
           "type": "string",
-          "description": "The secondary protected diagnostics storage key name. If one of the storage account keys is rotated the cluster will fallback to using the other."
+          "description": "The secondary protected diagnostics storage key name."
         },
         "blobEndpoint": {
           "type": "string",
@@ -1473,13 +1473,13 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2019-06-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2020-03-01\" for this specification.",
       "required": true,
       "type": "string",
       "enum": [
-        "2019-06-01-preview"
+        "2020-03-01"
       ],
-      "default": "2019-06-01-preview",
+      "default": "2020-03-01",
       "x-ms-parameter-location": "client"
     },
     "clusterNameParameter": {
