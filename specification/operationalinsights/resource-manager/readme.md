@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
+- Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
 ```
 
@@ -57,6 +58,8 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
 ```
 
 ---
@@ -156,9 +159,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
 
 ```
 
