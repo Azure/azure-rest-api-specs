@@ -1,0 +1,1559 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagedNetworkManagementClient",
+    "description": "The Microsoft Azure Managed Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to programmatically view, control, change, and monitor your entire Azure network centrally and with ease.",
+    "version": "2019-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}": {
+      "get": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_Get",
+        "description": "The Get ManagedNetworks operation gets a Managed Network Resource, specified by the resource group and Managed Network name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the specified Managed Network resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworksGet": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_CreateOrUpdate",
+        "description": "The Put ManagedNetworks operation creates/updates a Managed Network Resource, specified by resource group and Managed Network name",
+        "parameters": [
+          {
+            "name": "managedNetwork",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            },
+            "description": "Parameters supplied to the create/update a Managed Network Resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Managed Network resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Managed Network resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworksPut": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_Delete",
+        "description": "The Delete ManagedNetworks operation deletes a Managed Network Resource, specified by the  resource group and Managed Network name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworksDelete": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_Update",
+        "description": "Updates the specified Managed Network resource tags.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkUpdate"
+            },
+            "description": "Parameters supplied to update application gateway tags and/or scope."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the updated Managed Network resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            }
+          },
+          "201": {
+            "description": "Update successful. The operation returns the updated Managed Network resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetwork"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworksPatch": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksPatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks": {
+      "get": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_ListByResourceGroup",
+        "description": "The ListByResourceGroup ManagedNetwork operation retrieves all the Managed Network resources in a resource group in a paginated format.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all Managed Network resources under the specified resource group in a paginated format",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworksListByResourceGroup": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetwork/managedNetworks": {
+      "get": {
+        "tags": [
+          "ManagedNetworks"
+        ],
+        "operationId": "ManagedNetworks_ListBySubscription",
+        "description": "The ListBySubscription  ManagedNetwork operation retrieves all the Managed Network Resources in the current subscription in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all Managed Network resources under the current subscription in a paginated format.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedNetworksListBySubscription": {
+            "$ref": "./examples/ManagedNetwork/ManagedNetworksListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments/{scopeAssignmentName}": {
+      "get": {
+        "tags": [
+          "ScopeAssignments"
+        ],
+        "operationId": "ScopeAssignments_Get",
+        "description": "Get the specified scope assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The base resource of the scope assignment.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scopeAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the scope assignment to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the scope assignment.",
+            "schema": {
+              "$ref": "#/definitions/ScopeAssignment"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeAssignmentsGet": {
+            "$ref": "./examples/ScopeAssignment/ScopeAssignmentsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScopeAssignments"
+        ],
+        "operationId": "ScopeAssignments_CreateOrUpdate",
+        "description": "Creates a scope assignment.",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeAssignment"
+            },
+            "description": "Parameters supplied to the specify which Managed Network this scope is being assigned"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The base resource of the scope assignment to create. The scope can be any REST resource instance. For example, use 'subscriptions/{subscription-id}' for a subscription, 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and 'subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scopeAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the scope assignment to create."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated - Returns information about the scope assignment.",
+            "schema": {
+              "$ref": "#/definitions/ScopeAssignment"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the scope assignment.",
+            "schema": {
+              "$ref": "#/definitions/ScopeAssignment"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeAssignmentsPut": {
+            "$ref": "./examples/ScopeAssignment/ScopeAssignmentsPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScopeAssignments"
+        ],
+        "operationId": "ScopeAssignments_Delete",
+        "description": "Deletes a scope assignment.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the scope assignment to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "scopeAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the scope assignment to delete."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Succeed."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "ScopeAssignmentsDelete": {
+            "$ref": "./examples/ScopeAssignment/ScopeAssignmentsDelete.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedNetwork/scopeAssignments": {
+      "get": {
+        "tags": [
+          "ScopeAssignments"
+        ],
+        "operationId": "ScopeAssignments_List",
+        "description": "Get the specified scope assignment.",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The base resource of the scope assignment.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the scope assignment.",
+            "schema": {
+              "$ref": "#/definitions/ScopeAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopeAssignmentsList": {
+            "$ref": "./examples/ScopeAssignment/ScopeAssignmentsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups/{managedNetworkGroupName}": {
+      "get": {
+        "tags": [
+          "ManagedNetworkGroups"
+        ],
+        "operationId": "ManagedNetworkGroups_Get",
+        "description": "The Get ManagedNetworkGroups operation gets a Managed Network Group specified by the resource group, Managed Network name, and group name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the specified Managed Network Group resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkGroup"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagementNetworkGroupsGet": {
+            "$ref": "./examples/ManagedNetworkGroup/ManagedNetworkGroupsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetworkGroups"
+        ],
+        "operationId": "ManagedNetworkGroups_CreateOrUpdate",
+        "description": "The Put ManagedNetworkGroups operation creates or updates a Managed Network Group resource",
+        "parameters": [
+          {
+            "name": "managedNetworkGroup",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkGroup"
+            },
+            "description": "Parameters supplied to the create/update a Managed Network Group resource"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Managed Network Group resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkGroup"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Managed Network Group resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkGroup"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagementNetworkGroupsPut": {
+            "$ref": "./examples/ManagedNetworkGroup/ManagedNetworkGroupsPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedNetworkGroups"
+        ],
+        "operationId": "ManagedNetworkGroups_Delete",
+        "description": "The Delete ManagedNetworkGroups operation deletes a Managed Network Group specified by the resource group, Managed Network name, and group name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagementNetworkGroupsDelete": {
+            "$ref": "./examples/ManagedNetworkGroup/ManagedNetworkGroupsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkGroups": {
+      "get": {
+        "tags": [
+          "ManagedNetworkGroups"
+        ],
+        "operationId": "ManagedNetworkGroups_ListByManagedNetwork",
+        "description": "The ListByManagedNetwork ManagedNetworkGroup operation retrieves all the Managed Network Groups in a specified Managed Networks in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all Managed Network Group resources under the specified Managed Network in a paginated format.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkGroupListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedNetworksGroupsListByManagedNetwork": {
+            "$ref": "./examples/ManagedNetworkGroup/ManagedNetworkGroupsListByManagedNetwork.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies/{managedNetworkPeeringPolicyName}": {
+      "get": {
+        "tags": [
+          "ManagedNetworkPeeringPolicies"
+        ],
+        "operationId": "ManagedNetworkPeeringPolicies_Get",
+        "description": "The Get ManagedNetworkPeeringPolicies operation gets a Managed Network Peering Policy resource, specified by the  resource group, Managed Network name, and peering policy name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkPeeringPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns the specified Managed Network Peering Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworkPeeringPoliciesGet": {
+            "$ref": "./examples/ManagedNetworkPeeringPolicy/ManagedNetworkPeeringPoliciesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetworkPeeringPolicies"
+        ],
+        "operationId": "ManagedNetworkPeeringPolicies_CreateOrUpdate",
+        "description": "The Put ManagedNetworkPeeringPolicies operation creates/updates a new Managed Network Peering Policy",
+        "parameters": [
+          {
+            "name": "managedNetworkPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+            },
+            "description": "Parameters supplied to create/update a Managed Network Peering Policy"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkPeeringPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Managed Network Peering Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Managed Network Peering Policy resource.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworkPeeringPoliciesPut": {
+            "$ref": "./examples/ManagedNetworkPeeringPolicy/ManagedNetworkPeeringPoliciesPut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedNetworkPeeringPolicies"
+        ],
+        "operationId": "ManagedNetworkPeeringPolicies_Delete",
+        "description": "The Delete ManagedNetworkPeeringPolicies operation deletes a Managed Network Peering Policy, specified by the  resource group, Managed Network name, and peering policy name",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkPeeringPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedNetworkPeeringPoliciesDelete": {
+            "$ref": "./examples/ManagedNetworkPeeringPolicy/ManagedNetworkPeeringPoliciesDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetwork/managedNetworks/{managedNetworkName}/managedNetworkPeeringPolicies": {
+      "get": {
+        "tags": [
+          "ManagedNetworkPeeringPolicies"
+        ],
+        "operationId": "ManagedNetworkPeeringPolicies_ListByManagedNetwork",
+        "description": "The ListByManagedNetwork PeeringPolicies operation retrieves all the Managed Network Peering Policies in a specified Managed Network, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ListPageSizeParameter"
+          },
+          {
+            "$ref": "#/parameters/ListSkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get successful. The operation returns all Managed Network Peering Policy resources in the specified Managed Network, in a paginated format",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkPeeringPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ManagedNetworkPeeringPoliciesListByManagedNetwork": {
+            "$ref": "./examples/ManagedNetworkPeeringPolicy/ManagedNetworkPeeringPoliciesListByManagedNetwork.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedNetwork/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available MNC operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Resource Provider error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedNetwork": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedNetworkProperties",
+          "description": "The MNC properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The Managed Network resource"
+    },
+    "ManagedNetworkProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network"
+        },
+        "connectivity": {
+          "$ref": "#/definitions/ConnectivityCollection",
+          "readOnly": true,
+          "description": "The collection of groups and policies concerned with connectivity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "description": "Properties of Managed Network"
+    },
+    "ManagedNetworkUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Update Tags of Managed Network"
+    },
+    "ManagedNetworkListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetwork"
+          },
+          "description": "Gets a page of ManagedNetworks"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list Managed Network. It contains a list of Managed Networks and a URL link to get the next set of results."
+    },
+    "Scope": {
+      "properties": {
+        "managementGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of management groups covered by the Managed Network"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of subscriptions covered by the Managed Network"
+        },
+        "virtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of virtual nets covered by the Managed Network"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of  subnets covered by the Managed Network"
+        }
+      },
+      "description": "Scope of a Managed Network"
+    },
+    "ScopeAssignment": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScopeAssignmentProperties",
+          "description": "The Scope Assignment properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The Managed Network resource"
+    },
+    "ScopeAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScopeAssignment"
+          },
+          "description": "Gets a page of ScopeAssignment"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list ScopeAssignment. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "ScopeAssignmentProperties": {
+      "type": "object",
+      "properties": {
+        "assignedManagedNetwork": {
+          "type": "string",
+          "description": "The managed network ID with scope will be assigned to."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "description": "Properties of Managed Network"
+    },
+    "ConnectivityCollection": {
+      "properties": {
+        "groups": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkGroup"
+          },
+          "description": "The collection of connectivity related Managed Network Groups within the Managed Network"
+        },
+        "peerings": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+          },
+          "description": "The collection of Managed Network Peering Policies within the Managed Network"
+        }
+      },
+      "description": "The collection of Connectivity related groups and policies within the Managed Network"
+    },
+    "ManagedNetworkGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ManagedNetworkGroupProperties",
+          "description": "Gets or sets the properties of a network group"
+        },
+        "kind": {
+          "description": "Responsibility role under which this Managed Network Group will be created",
+          "enum": [
+            "Connectivity"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The Managed Network Group resource"
+    },
+    "ManagedNetworkGroupProperties": {
+      "properties": {
+        "managementGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of management groups covered by the Managed Network"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of subscriptions covered by the Managed Network"
+        },
+        "virtualNetworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of virtual nets covered by the Managed Network"
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "The collection of  subnets covered by the Managed Network"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "description": "Properties of a Managed Network Group"
+    },
+    "ManagedNetworkGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkGroup"
+          },
+          "description": "Gets a page of ManagedNetworkGroup"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Result of the request to list Managed Network Groups. It contains a list of groups and a URL link to get the next set of results."
+    },
+    "ManagedNetworkPeeringPolicy": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedNetworkPeeringPolicyProperties",
+          "description": "Gets or sets the properties of a Managed Network Policy"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "The Managed Network Peering Policy resource"
+    },
+    "ManagedNetworkPeeringPolicyProperties": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "HubAndSpokeTopology",
+            "MeshTopology"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          },
+          "description": "Gets or sets the connectivity type of a network structure policy"
+        },
+        "hub": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Gets or sets the hub virtual network ID"
+        },
+        "spokes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "Gets or sets the spokes group IDs"
+        },
+        "mesh": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "Gets or sets the mesh group IDs"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceProperties"
+        }
+      ],
+      "required": [
+        "type"
+      ],
+      "description": "Properties of a Managed Network Peering Policy"
+    },
+    "HubAndSpokePeeringPolicyProperties": {
+      "x-ms-discriminator-value": "HubAndSpokeTopology",
+      "properties": {
+        "hub": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "Gets or sets the hub virtual network ID"
+        },
+        "spokes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "Gets or sets the spokes group IDs"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedNetworkPeeringPolicyProperties"
+        }
+      ],
+      "description": "Properties of a Hub and Spoke Peering Policy"
+    },
+    "MeshPeeringPolicyProperties": {
+      "x-ms-discriminator-value": "MeshTopology",
+      "properties": {
+        "mesh": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "description": "Gets or sets the mesh group IDs"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedNetworkPeeringPolicyProperties"
+        }
+      ],
+      "description": "Properties of a Mesh Peering Policy"
+    },
+    "ManagedNetworkPeeringPolicyListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkPeeringPolicy"
+          },
+          "description": "Gets a page of Peering Policies"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next page of results."
+        }
+      },
+      "description": "Result of the request to list Managed Network Peering Policies. It contains a list of policies and a URL link to get the next set of results."
+    },
+    "ErrorResponse": {
+      "description": "The error response that indicates why an operation has failed.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.ManagedNetwork",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Managed Network operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Resource Provider operations supported by the Managed Network resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Resource": {
+      "description": "The general resource model definition",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ResourceId": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource Id"
+        }
+      },
+      "description": "Generic pointer to a resource"
+    },
+    "ResourceProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Provisioning state of the ManagedNetwork resource.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "description": "Base for resource properties."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkNameParameter": {
+      "name": "managedNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Managed Network.",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkGroupNameParameter": {
+      "name": "managedNetworkGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Managed Network Group.",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkPeeringPolicyNameParameter": {
+      "name": "managedNetworkPeeringPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Managed Network Peering Policy.",
+      "x-ms-parameter-location": "method"
+    },
+    "ListPageSizeParameter": {
+      "name": "$top",
+      "description": "May be used to limit the number of results in a page for list queries.",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "x-ms-parameter-location": "method"
+    },
+    "ListSkipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

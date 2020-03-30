@@ -8,6 +8,7 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-batch"
   output-folder: "$(typescript-sdks-folder)/sdk/batch/arm-batch"
+  clear-output-folder: true
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

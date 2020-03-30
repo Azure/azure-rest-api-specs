@@ -8,74 +8,76 @@
   },
   "responses": {
     "200": {
-      "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine",
-      "location": "westus2",
-      "name": "myVirtualMachine",
-      "properties": {
-        "amountOfRam": 4096,
-        "controllers": [
-          {
-            "id": "1000",
-            "name": "SCSI controller 0",
-            "subType": "LSI_PARALEL",
-            "type": "SCSI"
-          }
-        ],
-        "disks": [
-          {
-            "controllerId": "1000",
-            "independenceMode": "persistent",
-            "totalSize": 10485760,
-            "virtualDiskId": "2000",
-            "virtualDiskName": "Hard disk 1"
-          }
-        ],
-        "folder": "Datacenter/Workload VMs",
-        "guestOS": "Other (32-bit)",
-        "guestOSType": "other",
-        "nics": [
-          {
-            "ipAddresses": null,
-            "macAddress": "00:50:56:a6:d0:e1",
-            "network": {
-              "assignable": false,
-              "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualnetworks/dvportgroup-19",
-              "location": "westus2",
-              "name": "Datacenter/CS-Management",
-              "properties": {
-                "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud"
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine",
+        "location": "westus2",
+        "name": "myVirtualMachine",
+        "properties": {
+          "amountOfRam": 4096,
+          "controllers": [
+            {
+              "id": "1000",
+              "name": "SCSI controller 0",
+              "subType": "LSI_PARALEL",
+              "type": "SCSI"
+            }
+          ],
+          "disks": [
+            {
+              "controllerId": "1000",
+              "independenceMode": "persistent",
+              "totalSize": 10485760,
+              "virtualDiskId": "2000",
+              "virtualDiskName": "Hard disk 1"
+            }
+          ],
+          "folder": "Datacenter/Workload VMs",
+          "guestOS": "Other (32-bit)",
+          "guestOSType": "other",
+          "nics": [
+            {
+              "ipAddresses": null,
+              "macAddress": "00:50:56:a6:d0:e1",
+              "network": {
+                "assignable": false,
+                "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualnetworks/dvportgroup-19",
+                "location": "westus2",
+                "name": "Datacenter/CS-Management",
+                "properties": {
+                  "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud"
+                },
+                "type": "Microsoft.VMwareCloudSimple/virtualNetworks"
               },
-              "type": "Microsoft.VMwareCloudSimple/virtualNetworks"
-            },
-            "nicType": "E1000",
-            "powerOnBoot": true,
-            "virtualNicId": "4000",
-            "virtualNicName": "Network adapter 1"
-          }
-        ],
-        "numberOfCores": 2,
-        "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
-        "provisioningState": "Succeeded",
-        "resourcePool": {
-          "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcepools/resgroup-26",
-          "location": "westus2",
-          "name": "Workload",
+              "nicType": "E1000",
+              "powerOnBoot": true,
+              "virtualNicId": "4000",
+              "virtualNicName": "Network adapter 1"
+            }
+          ],
+          "numberOfCores": 2,
           "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
-          "properties": {
-            "fullName": "Datacenter/Cluster/Workload"
+          "provisioningState": "Succeeded",
+          "resourcePool": {
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcepools/resgroup-26",
+            "location": "westus2",
+            "name": "Workload",
+            "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
+            "properties": {
+              "fullName": "Datacenter/Cluster/Workload"
+            },
+            "type": "Microsoft.VMwareCloudSimple/resourcePools"
           },
-          "type": "Microsoft.VMwareCloudSimple/resourcePools"
+          "status": "running",
+          "templateId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualmachinetemplates/vm-34",
+          "vSphereNetworks": null,
+          "vmId": "vm-100",
+          "vmwaretools": "10309"
         },
-        "status": "running",
-        "templateId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualmachinetemplates/vm-34",
-        "vSphereNetworks": null,
-        "vmId": "vm-100",
-        "vmwaretools": "10309"
-      },
-      "tags": {
-        "inUse": "true"
-      },
-      "type": "Microsoft.VMwareCloudSimple/virtualMachines"
+        "tags": {
+          "inUse": "true"
+        },
+        "type": "Microsoft.VMwareCloudSimple/virtualMachines"
+      }
     }
   }
 }

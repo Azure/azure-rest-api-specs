@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventhubs.v2018_01_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventhubs/resource-manager/v2018_01_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventhubs/mgmt-v2018_01_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -43,7 +43,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventhubs.v2015_08_01
-  output-folder: $(azure-libraries-for-java-folder)/eventhubs/resource-manager/v2015_08_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventhubs/mgmt-v2015_08_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -56,7 +56,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.eventhubs.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/eventhubs/resource-manager/v2017_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/eventhubs/mgmt-v2017_04_01
 regenerate-manager: true
 generate-interface: true
 ```

@@ -2,6 +2,9 @@ name: "Preproduction CI for Azure Rest API specifications"
 
 trigger: none
 
+pr:
+  autoCancel: false
+
 variables:
   TRAVIS: 'true'
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
@@ -10,40 +13,9 @@ variables:
   TRAVIS_PULL_REQUEST_SLUG: $(Build.Repository.Name)
   TRAVIS_PULL_REQUEST_SHA: $(Build.SourceVersion)
   PR_ONLY: 'true'
+  PREPRODUCTION_PIPELINE: 'true'
 
 jobs:
-
-- job: "BranchProtection"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  condition: and(variables['PRIVATE'], eq(variables['System.PullRequest.TargetBranch'], 'master'))
-  steps:
-  - script: '>&2 echo "the branch is protected"'
-    failOnStderr: true
-
-- job: "Spellcheck"
-  condition: "not(variables['PRIVATE'])"
-  variables:
-    NODE_OPTIONS: '--max-old-space-size=8192'
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  continueOnError: true
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm run spellcheck'
-    displayName: 'Run cSpell'
-
-- job: "Avocado"
-  pool:
-    vmImage: 'Ubuntu 16.04'
-  steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      verbose: false
-  - script: 'npm install -D @azure/avocado@0.5.1'
-  - script: './node_modules/.bin/avocado'
-    displayName: 'Avocado'
+- template: .azure-pipelines/BreakingChange.yml
+- template: .azure-pipelines/ModelValidation.yml
+- template: .azure-pipelines/LintDiff.yml

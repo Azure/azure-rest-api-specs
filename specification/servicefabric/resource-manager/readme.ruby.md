@@ -13,7 +13,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2019-03
-  - tag: package-2018-02
+  - tag: package-2019-03-preview
   - tag: package-2017-07
   - tag: package-2016-09
 ```
@@ -24,17 +24,17 @@ These settings apply only when `--tag=package-2019-03 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2019-03' && $(ruby)
-namespace: "Azure::ServiceFabric::Mgmt::V2019_03_01_preview"
+namespace: "Azure::ServiceFabric::Mgmt::V2019_03_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_service_fabric/lib
 ```
 
-### Tag: package-2018-02 and ruby
+### Tag: package-2019-03-preview and ruby
 
-These settings apply only when `--tag=package-2018-02 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2019-03-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(ruby)
-namespace: "Azure::ServiceFabric::Mgmt::V2018_02_01_preview"
+``` yaml $(tag) == 'package-2019-03-preview' && $(ruby)
+namespace: "Azure::ServiceFabric::Mgmt::V2019_03_01-preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_service_fabric/lib
 ```
 

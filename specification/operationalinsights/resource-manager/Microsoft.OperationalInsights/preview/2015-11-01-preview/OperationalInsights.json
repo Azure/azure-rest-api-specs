@@ -990,6 +990,50 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/locations/{location}/operationStatuses/{asyncOperationId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get specific operation status": {
+            "$ref": "./examples/operationStatuses.json"
+          }
+        },
+        "tags": [
+          "asyncOperations"
+        ],
+        "operationId": "GetAsyncOperationsStatus",
+        "description": "Get the status of an azure asynchronous operation.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The region name of operation."
+          },
+          {
+            "name": "asyncOperationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation Id."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Operation status.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1314,7 +1358,8 @@
             "Premium",
             "PerNode",
             "PerGB2018",
-            "Standalone"
+            "Standalone",
+            "CapacityReservation"
           ],
           "x-ms-enum": {
             "name": "SkuNameEnum",
@@ -1347,15 +1392,18 @@
         },
         "source": {
           "type": "string",
-          "description": "The source of the workspace.  Source defines where the workspace was created. 'Azure' implies it was created in Azure.  'External' implies it was created via the Operational Insights Portal. This value is set on the service side and read-only on the client side."
+          "description": "This is a read-only legacy property. It is always set to 'Azure' by the service. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "customerId": {
           "type": "string",
-          "description": "The ID associated with the workspace.  Setting this value at creation time allows the workspace being created to be linked to an existing workspace."
+          "description": "This is a read-only property. Represents the ID associated with the workspace.",
+          "readOnly": true
         },
         "portalUrl": {
           "type": "string",
-          "description": "The URL of the Operational Insights portal for this workspace.  This value is set on the service side and read-only on the client side."
+          "description": "This is a legacy property and is not used anymore. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -1466,6 +1514,51 @@
         }
       },
       "description": "Common properties of proxy resource."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "The status of operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The operation Id."
+        },
+        "name": {
+          "type": "string",
+          "description": "The operation name."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        },
+        "error": {
+          "type": "object",
+          "description": "The error detail of the operation if any.",
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
     }
   },
   "parameters": {

@@ -1,0 +1,50 @@
+{
+  "title": "List exports",
+  "description": "Get a list of all exports in your application",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "16cad42a-bd47-4684-b106-9f9b4d2d02e9",
+            "etag": "076f201d-e9c3-4bef-af0a-608420ba4526",
+            "displayName": "Export to Storage 1",
+            "endpoint": {
+              "type": "StorageEndpoint",
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=jeffscratchppe;AccountKey=*****;EndpointSuffix=core.windows.net",
+              "name": "cde"
+            },
+            "status": "starting",
+            "enabled": true,
+            "sources": [
+              "devices",
+              "deviceTemplates",
+              "telemetry"
+            ]
+          },
+          {
+            "id": "9dce0282-751d-4121-aed3-b316d658f17a",
+            "etag": "3398c6b5-de40-44ad-bf4a-0c216e2b4d88",
+            "displayName": "Export to Event Hubs 1",
+            "endpoint": {
+              "type": "EventHubsEndpoint",
+              "connectionString": "Endpoint=sb://roommonitoring.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=*****",
+              "name": "roommonitoring-ehout"
+            },
+            "status": "stopping",
+            "enabled": false,
+            "sources": [
+              "devices",
+              "deviceTemplates",
+              "telemetry"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

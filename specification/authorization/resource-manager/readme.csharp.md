@@ -54,7 +54,7 @@ input-file:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Authorization
-output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/Generated
+output-folder: $(csharp-sdks-folder)/authorization/Microsoft.Azure.Management.Authorization/src/Generated
 ```
 
 ## Batch settings

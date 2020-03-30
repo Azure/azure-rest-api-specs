@@ -5,7 +5,7 @@
     "resourceGroupName": "contosoresources",
     "accountName": "contosomedia",
     "transformName": "exampleTransform",
-    "$filter": "properties/created ge 2018-09-27T22:56:18.5507138Z and properties/created le 2018-09-27T22:56:28.5507138Z",
+    "$filter": "properties/created ge 2019-10-10T22:38:13.1259050Z and properties/created le 2019-10-10T22:38:23.1259050Z",
     "$orderby": "properties/created"
   },
   "responses": {
@@ -17,7 +17,7 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job2",
             "type": "Microsoft.Media/mediaservices/transforms/jobs",
             "properties": {
-              "created": "2018-09-27T22:56:18.5507138Z",
+              "created": "2019-10-10T22:38:13.125905Z",
               "state": "Processing",
               "input": {
                 "@odata.type": "#Microsoft.Media.JobInputs",
@@ -29,18 +29,20 @@
                   }
                 ]
               },
-              "lastModified": "2018-09-27T22:56:18.5507138Z",
+              "lastModified": "2019-10-10T22:38:13.125905Z",
               "outputs": [
                 {
                   "@odata.type": "#Microsoft.Media.JobOutputAsset",
                   "state": "Processing",
                   "progress": 50,
                   "label": "example-custom-label",
+                  "startTime": "2019-10-10T22:28:03.125905Z",
                   "assetName": "job2 output"
                 }
               ],
               "priority": "Low",
-              "correlationData": {}
+              "correlationData": {},
+              "startTime": "2019-10-10T22:28:03.125905Z"
             }
           },
           {
@@ -48,7 +50,7 @@
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/exampleTransform/jobs/job3",
             "type": "Microsoft.Media/mediaservices/transforms/jobs",
             "properties": {
-              "created": "2018-09-27T22:56:28.5507138Z",
+              "created": "2019-10-10T22:38:23.125905Z",
               "state": "Finished",
               "input": {
                 "@odata.type": "#Microsoft.Media.JobInputs",
@@ -60,18 +62,22 @@
                   }
                 ]
               },
-              "lastModified": "2018-09-27T22:56:28.5507138Z",
+              "lastModified": "2019-10-10T22:38:23.125905Z",
               "outputs": [
                 {
                   "@odata.type": "#Microsoft.Media.JobOutputAsset",
                   "state": "Finished",
                   "progress": 100,
                   "label": "example-custom-label",
+                  "startTime": "2019-10-10T22:28:03.125905Z",
+                  "endTime": "2019-10-10T22:38:03.125905Z",
                   "assetName": "job3 output"
                 }
               ],
               "priority": "Low",
-              "correlationData": {}
+              "correlationData": {},
+              "startTime": "2019-10-10T22:28:03.125905Z",
+              "endTime": "2019-10-10T22:38:03.125905Z"
             }
           }
         ]
