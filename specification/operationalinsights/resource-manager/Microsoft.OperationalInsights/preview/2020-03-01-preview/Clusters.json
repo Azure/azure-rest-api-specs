@@ -376,7 +376,7 @@
           "description": "Log Analytics cluster properties."
         },
         "sku": {
-          "$ref": "#/definitions/sku",
+          "$ref": "#/definitions/ClusterSku",
           "description": "The sku properties."
         },
         "tags": {
@@ -384,7 +384,12 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Resource tags"
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         }
       },
       "description": "The top level Log Analytics cluster resource container.",
@@ -397,7 +402,7 @@
           "description": "The identity of the resource."
         },
         "sku": {
-          "$ref": "#/definitions/sku",
+          "$ref": "#/definitions/ClusterSku",
           "description": "The sku properties."
         },
         "properties": {
@@ -446,7 +451,7 @@
         }
       }
     },
-    "sku": {
+    "ClusterSku": {
       "properties": {
         "capacity": {
           "description": "The capacity value",

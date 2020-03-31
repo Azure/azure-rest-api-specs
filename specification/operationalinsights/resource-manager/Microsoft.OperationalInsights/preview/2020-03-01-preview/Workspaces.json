@@ -290,7 +290,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workspace"
+              "$ref": "#/definitions/WorkspacePatch"
             },
             "description": "The parameters required to patch a workspace."
           },
@@ -313,7 +313,7 @@
     }
   },
   "definitions": {
-    "Sku": {
+    "WorkspaceSku": {
       "properties": {
         "name": {
           "type": "string",
@@ -362,7 +362,7 @@
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "#/definitions/WorkspaceSku",
           "description": "The SKU of the workspace."
         },
         "retentionInDays": {
@@ -419,6 +419,38 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The top level Workspace resource container.",
+      "x-ms-azure-resource": true
+    },
+    "WorkspacePatch": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceProperties",
+          "description": "Workspace properties."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Location. Optional."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags. Optional."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
         }
       ],
       "description": "The top level Workspace resource container.",
