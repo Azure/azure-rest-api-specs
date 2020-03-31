@@ -1909,27 +1909,28 @@
         }
       }
     },
-    "BookmarkExpandResponse": {
-      "description": "The entity expansion result operation response.",
+    "ClientInfo": {
+      "description": "Information on the client (user or application) that made some action",
       "properties": {
-        "metaData": {
-          "$ref": "#/definitions/ExpansionResultsMetadata",
-          "description": "The metadata from the expansion operation results."
+        "email": {
+          "description": "The email of the client.",
+          "type": "string"
         },
-        "value": {
-          "description": "The expansion result values.",
-          "properties": {
-            "entities": {
-              "description": "Array of the expansion result entities.",
-              "items": {
-                "$ref": "#/definitions/Entity"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
+        "name": {
+          "description": "The name of the client.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the client.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the client.",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "CloudError": {
       "description": "Error response structure.",
@@ -2333,6 +2334,50 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "GeoLocation": {
+      "description": "The geo-location context attached to the ip entity",
+      "properties": {
+        "asn": {
+          "description": "Autonomous System Number",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "city": {
+          "description": "City name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "The country code according to ISO 3166 format",
+          "readOnly": true,
+          "type": "string"
+        },
+        "countryName": {
+          "description": "Country name according to ISO 3166 Alpha 2: the lowercase of the English Short Name",
+          "readOnly": true,
+          "type": "string"
+        },
+        "latitude": {
+          "description": "The longitude of the identified location, expressed as a floating point number with range of -180 to 180, with positive numbers representing East and negative numbers representing West. Latitude and longitude are derived from the city or postal code.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "longitude": {
+          "description": "The latitude of the identified location, expressed as a floating point number with range of - 90 to 90, with positive numbers representing North and negative numbers representing South. Latitude and longitude are derived from the city or postal code.",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "state": {
+          "description": "State name",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "readOnly": true,
+      "type": "object"
     },
     "Incident": {
       "allOf": [
@@ -3738,24 +3783,6 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Bookmark"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "RelationName": {
-      "name": "relationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Relation Name",
-      "x-ms-parameter-location": "method"
-    },
-    "RelationInputModel": {
-      "name": "relationInputModel",
-      "in": "body",
-      "description": "The relation input model",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/RelationsModelInput"
       },
       "x-ms-parameter-location": "method"
     },
