@@ -436,6 +436,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2018-05-01/componentProactiveDetection_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPackQueries_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2020-02-02-preview/components_API.json
   - $(this-folder)/Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 
 ```
