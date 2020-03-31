@@ -57,16 +57,6 @@ directive:
 
 ```
 
-### Tag: package-2015-11-01
-
-These settings apply only when `--tag=package-2015-11-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-11-01'
-input-file:
-    - Microsoft.Subscriptions/preview/2015-11-01/Subscriptions.json
-    - Microsoft.Subscriptions/preview/2015-11-01/Offer.json
-```
-
 ---
 # Code Generation
 
@@ -82,22 +72,22 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
 
-These settings apply only when `--python` is specified on the command line.
+``` yaml
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../../profiles/readme.md
 
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Subscriptions/preview/2015-11-01/Subscriptions.json
+  - $(this-folder)/Microsoft.Subscriptions/preview/2015-11-01/Offer.json
+
 ```
 
-### Tag: package-2015-11-01 and python
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
 
-These settings apply only when `--tag=package-2015-11-01 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-11-01' && $(python)
-namespace: azure.mgmt.subscriptions.v2015_06_01_preview
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
