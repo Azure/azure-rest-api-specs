@@ -58,6 +58,16 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/GetUserSettingsResponse"
+            },
+            "headers": {
+              "x-ms-console-required-location-code": {
+                "type": "string",
+                "description": "normalized required location code"
+              },
+              "x-ms-console-preview-user": {
+                "type": "boolean",
+                "description": "indicates whether user is a previous usr."
+              }
             }
           },
           "default": {
@@ -331,6 +341,16 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/GetUserSettingsResponse"
+            },
+            "headers": {
+              "x-ms-console-required-location-code": {
+                "type": "string",
+                "description": "normalized required location code"
+              },
+              "x-ms-console-preview-user": {
+                "type": "boolean",
+                "description": "indicates whether user is a previous usr."
+              }
             }
           },
           "default": {
@@ -665,22 +685,11 @@
       "description": "The user settings response content",
       "type": "object",
       "required": [
-        "userSettings",
-        "headers"
+        "userSettings"
       ],
       "properties": {
         "userSettings": {
           "$ref": "#/definitions/CloudShellUserSettings"
-        },
-        "headers": {
-          "x-ms-console-required-location-code": {
-            "type": "string",
-            "description": "normalized required location code"
-          },
-          "x-ms-console-preview-user": {
-            "type": "boolean",
-            "description": "indicates whether user is a previous usr."
-          }
         }
       }
     },
