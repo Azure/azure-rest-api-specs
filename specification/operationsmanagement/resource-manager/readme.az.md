@@ -18,4 +18,7 @@ directive:
   - from: OperationsManagement.json
     where: $.parameters.ResourceNameParameter
     transform: $['x-ms-parameter-location'] = 'method'
+  - from: OperationsManagement.json
+    where: $.definitions.CodeMessageError.properties.error
+    transform: $['x-ms-client-name'] = 'error'
 ```

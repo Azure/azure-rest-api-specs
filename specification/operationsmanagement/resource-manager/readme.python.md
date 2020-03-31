@@ -13,10 +13,6 @@ python:
   package-name: azure-mgmt-operationsmanagement
   package-version: 0.1.0
   clear-output-folder: true
-directive:
-  from: OperationsManagement.json
-  where: $.definitions.CodeMessageError.properties.error
-  transform: $['x-ms-client-name'] = 'err'
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
