@@ -15,6 +15,15 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   clear-output-folder: true
+
+# remove DUMMY member of enum
+directive:
+  - from: source-file-csharp
+    where: $ 
+    transform: >-
+      return $.
+        replace(/.*public const string DELETEME.*/g,'').
+        replace(/, 'DELETEME'/g,'');
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
