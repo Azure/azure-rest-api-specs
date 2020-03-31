@@ -1,0 +1,10 @@
+## CLI
+
+These settings apply only when `--cli` is specified on the command line.
+
+``` yaml $(cli)
+cli:
+  cli-name: storageimportexport
+  namespace: azure.mgmt.storageimportexport
+  package-name: azure-mgmt-storageimportexport
+```
