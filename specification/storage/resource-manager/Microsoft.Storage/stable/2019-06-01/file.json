@@ -240,6 +240,9 @@
           },
           "Create NFS Shares": {
             "$ref": "./examples/FileSharesPut_NFS.json"
+          },
+          "PutShares with Access Tier": {
+            "$ref": "./examples/FileSharesPut_AccessTier.json"
           }
         },
         "description": "Creates a new share under the specified account as described by request body. The share resource includes metadata and properties for that share. It does not include a list of the files contained by the share. ",
@@ -560,15 +563,17 @@
       "properties": {
         "deletedShareName": {
           "type": "string",
-          "required": true,
           "description": "Required. Identify the name of the deleted share that will be restored."
         },
         "deletedShareVersion": {
           "type": "string",
-          "required": true,
           "description": "Required. Identify the version of the deleted share that will be restored."
         }
       },
+      "required": [
+        "deletedShareName",
+        "deletedShareVersion"
+      ],
       "description": "The deleted share to be restored."
     },
     "FileShareItem": {
@@ -636,7 +641,10 @@
             "modelAsString": true
           },
           "description": "The authentication protocol that is used for the file share. Can only be specified when creating a share.",
-          "x-ms-mutability": [ "create", "read" ]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "rootSquash": {
           "type": "string",
