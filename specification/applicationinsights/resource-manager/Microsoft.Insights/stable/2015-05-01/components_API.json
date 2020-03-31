@@ -505,18 +505,31 @@
           "type": "boolean",
           "description": "Purge data immediately after 30 days."
         },
-        "publicNetworkAccessForIngestion": {
-          "title": "The network access type for accessing Application Insights ingestion.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
-        },
-        "publicNetworkAccessForQuery": {
-          "title": "The network access type for accessing Application Insights query.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
+        "PrivateLinkScopedResources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkScopedResource"
+          },
+          "description": "List of linked private link scope resources."
         }
       },
       "required": [
         "Application_Type"
       ]
+    },
+    "PrivateLinkScopedResource": {
+      "properties": {
+        "ResourceId": {
+          "type": "string",
+          "description": "The full resource Id of the private link scope resource."
+        },
+        "ScopeId": {
+          "type": "string",
+          "description": "The private link scope unique Identifier."
+        }
+      },
+      "description": "The private link scope resource reference."
     },
     "ApplicationInsightsComponentListResult": {
       "description": "Describes the list of Application Insights Resources.",
