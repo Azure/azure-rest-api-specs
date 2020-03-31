@@ -2100,6 +2100,116 @@
         "kind"
       ]
     },
+    "EntityKind": {
+      "description": "Describes an entity with kind.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/EntityInnerKind",
+          "description": "The kind of the entity."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "type": "object"
+    },
+    "EntityInnerKind": {
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "IoTDevice",
+        "SecurityAlert",
+        "Bookmark"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "EntityKind",
+        "values": [
+          {
+            "description": "Entity represents account in the system.",
+            "value": "Account"
+          },
+          {
+            "description": "Entity represents host in the system.",
+            "value": "Host"
+          },
+          {
+            "description": "Entity represents file in the system.",
+            "value": "File"
+          },
+          {
+            "description": "Entity represents azure resource in the system.",
+            "value": "AzureResource"
+          },
+          {
+            "description": "Entity represents cloud application in the system.",
+            "value": "CloudApplication"
+          },
+          {
+            "description": "Entity represents dns resolution in the system.",
+            "value": "DnsResolution"
+          },
+          {
+            "description": "Entity represents file hash in the system.",
+            "value": "FileHash"
+          },
+          {
+            "description": "Entity represents ip in the system.",
+            "value": "Ip"
+          },
+          {
+            "description": "Entity represents malware in the system.",
+            "value": "Malware"
+          },
+          {
+            "description": "Entity represents process in the system.",
+            "value": "Process"
+          },
+          {
+            "description": "Entity represents registry key in the system.",
+            "value": "RegistryKey"
+          },
+          {
+            "description": "Entity represents registry value in the system.",
+            "value": "RegistryValue"
+          },
+          {
+            "description": "Entity represents security group in the system.",
+            "value": "SecurityGroup"
+          },
+          {
+            "description": "Entity represents url in the system.",
+            "value": "Url"
+          },
+          {
+            "description": "Entity represents IoT device in the system.",
+            "value": "IoTDevice"
+          },
+          {
+            "description": "Entity represents security alert in the system.",
+            "value": "SecurityAlert"
+          },
+          {
+            "description": "Entity represents bookmark in the system.",
+            "value": "Bookmark"
+          }
+        ]
+      }
+    },
     "FusionAlertRule": {
       "allOf": [
         {
