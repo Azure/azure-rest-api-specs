@@ -46,7 +46,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
+              "$ref": "#/definitions/PrivateLinkResourceList"
             }
           }
         },
@@ -1162,7 +1162,7 @@
         }
       }
     },
-    "PrivateLinkResources": {
+    "PrivateLinkResourceList": {
       "description": "Class which represent the stamps associated with the vault.",
       "readOnly": true,
       "type": "object",
@@ -1191,12 +1191,12 @@
           "x-ms-client-flatten": true
         },
         "id": {
-          "description": "e.g. subscriptions/{subId}/resourceGroups/{groupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/privateLinkResources/backupresource.",
+          "description": "Fully qualified identifier of the resource.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "e.g. backupresource or siterecoveryresource.",
+          "description": "Name of the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -1225,7 +1225,7 @@
           }
         },
         "requiredZoneNames": {
-          "description": "eg - [privatelink.eus.backup.windowsazure.com, privatelink.queue.core.windows.net]",
+          "description": "The private link resource Private link DNS zone name.",
           "readOnly": true,
           "type": "array",
           "items": {
