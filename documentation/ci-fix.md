@@ -62,7 +62,7 @@ Run linter locally:
 ```
 npm install -g autorest
 autorest --validation --azure-validator --input-file=<path-to-spec>
-
+or
 autorest --validation --azure-validator <path-to-readme>
 
 ```
