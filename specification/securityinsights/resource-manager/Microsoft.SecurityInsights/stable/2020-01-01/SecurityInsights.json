@@ -1626,6 +1626,26 @@
       },
       "type": "object"
     },
+    "AlertRuleTemplatesList": {
+      "description": "List all the alert rule templates.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alert rule templates.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of alert rule templates.",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplate"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AlertRuleTriggerOperator": {
       "description": "The operation against the threshold that triggers alert rule.",
       "enum": [
@@ -1774,6 +1794,142 @@
         }
       },
       "type": "object"
+    },
+    "Bookmark": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a bookmark in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BookmarkProperties",
+          "description": "Bookmark properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "BookmarkList": {
+      "description": "List all the bookmarks.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of cases.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of bookmarks.",
+          "items": {
+            "$ref": "#/definitions/Bookmark"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BookmarkProperties": {
+      "description": "Describes bookmark properties",
+      "properties": {
+        "created": {
+          "description": "The time the bookmark was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that created the bookmark",
+          "type": "object"
+        },
+        "displayName": {
+          "description": "The display name of the bookmark",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels relevant to this bookmark",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "type": "array"
+        },
+        "notes": {
+          "description": "The notes of the bookmark",
+          "type": "string"
+        },
+        "query": {
+          "description": "The query of the bookmark.",
+          "type": "string"
+        },
+        "queryResult": {
+          "description": "The query result of the bookmark.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "The last time the bookmark was updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedBy": {
+          "$ref": "#/definitions/UserInfo",
+          "description": "Describes a user that updated the bookmark",
+          "type": "object"
+        },
+        "incidentInfo": {
+          "$ref": "#/definitions/IncidentInfo",
+          "description": "Describes an incident that relates to bookmark",
+          "type": "object"
+        }
+      },
+      "required": [
+        "displayName",
+        "query"
+      ],
+      "type": "object"
+    },
+    "BookmarkExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "BookmarkExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
     },
     "CloudError": {
       "description": "Error response structure.",
@@ -2032,6 +2188,400 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
+    },
+    "Incident": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents an incident in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentProperties",
+          "description": "Incident properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentAdditionalData": {
+      "description": "Incident additional data property bag.",
+      "properties": {
+        "alertsCount": {
+          "description": "The number of alerts in the incident",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "bookmarksCount": {
+          "description": "The number of bookmarks in the incident",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "commentsCount": {
+          "description": "The number of comments in the incident",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "alertProductNames": {
+          "description": "List of product names of alerts in the incident",
+          "items": {
+            "description": "Alert product name",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with incident",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentComment": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an incident comment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncidentCommentProperties",
+          "description": "Incident comment properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "IncidentCommentList": {
+      "description": "List of incident comments.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of comments.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "items": {
+            "$ref": "#/definitions/IncidentComment"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentCommentProperties": {
+      "description": "Incident comment property bag.",
+      "properties": {
+        "createdTimeUtc": {
+          "description": "The time the comment was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "message": {
+          "description": "The comment message",
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/ClientInfo",
+          "description": "Describes the client that created the comment",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object"
+    },
+    "IncidentLabel": {
+      "description": "Represents an incident label",
+      "properties": {
+        "labelName": {
+          "description": "The name of the label",
+          "type": "string"
+        },
+        "labelType": {
+          "description": "The type of the label",
+          "enum": [
+            "User",
+            "System"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentLabelType",
+            "values": [
+              {
+                "description": "Label manually created by a user",
+                "value": "User"
+              },
+              {
+                "description": "Label automatically created by the system",
+                "value": "System"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "labelName"
+      ],
+      "type": "object"
+    },
+    "IncidentList": {
+      "description": "List all the incidents.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of incidents.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of incidents.",
+          "items": {
+            "$ref": "#/definitions/Incident"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncidentOwnerInfo": {
+      "description": "Information on the user an incident is assigned to",
+      "properties": {
+        "email": {
+          "description": "The email of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the incident is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the incident is assigned to.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the incident is assigned to.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IncidentProperties": {
+      "description": "Describes incident properties",
+      "properties": {
+        "additionalData": {
+          "$ref": "#/definitions/IncidentAdditionalData",
+          "description": "Additional data on the incident",
+          "readOnly": true,
+          "type": "object"
+        },
+        "classification": {
+          "description": "The reason the incident was closed",
+          "enum": [
+            "Undetermined",
+            "TruePositive",
+            "BenignPositive",
+            "FalsePositive"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentClassification",
+            "values": [
+              {
+                "description": "Incident classification was undetermined",
+                "value": "Undetermined"
+              },
+              {
+                "description": "Incident was true positive",
+                "value": "TruePositive"
+              },
+              {
+                "description": "Incident was benign positive",
+                "value": "BenignPositive"
+              },
+              {
+                "description": "Incident was false positive",
+                "value": "FalsePositive"
+              }
+            ]
+          }
+        },
+        "createdTimeUtc": {
+          "description": "The time the incident was created",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the incident",
+          "type": "string"
+        },
+        "firstActivityTimeUtc": {
+          "description": "The time of the first activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "incidentNumber": {
+          "description": "A sequential number",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "labels": {
+          "description": "List of labels relevant to this incident",
+          "items": {
+            "$ref": "#/definitions/IncidentLabel"
+          },
+          "type": "array"
+        },
+        "lastActivityTimeUtc": {
+          "description": "The time of the last activity in the incident",
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastModifiedTimeUtc": {
+          "description": "The last time the incident was updated",
+          "format": "date-time",
+          "readOnly": true,
+          "type": "string"
+        },
+        "owner": {
+          "$ref": "#/definitions/IncidentOwnerInfo",
+          "description": "Describes a user that the incident is assigned to",
+          "type": "object"
+        },
+        "severity": {
+          "description": "The severity of the incident",
+          "enum": [
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentSeverity",
+            "values": [
+              {
+                "description": "High severity",
+                "value": "High"
+              },
+              {
+                "description": "Medium severity",
+                "value": "Medium"
+              },
+              {
+                "description": "Low severity",
+                "value": "Low"
+              },
+              {
+                "description": "Informational severity",
+                "value": "Informational"
+              }
+            ]
+          }
+        },
+        "status": {
+          "description": "The status of the incident",
+          "enum": [
+            "New",
+            "Active",
+            "Closed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentStatus",
+            "values": [
+              {
+                "description": "An active incident which isn't being handled currently",
+                "value": "New"
+              },
+              {
+                "description": "An active incident which is being handled",
+                "value": "Active"
+              },
+              {
+                "description": "A non-active incident",
+                "value": "Closed"
+              }
+            ]
+          }
+        },
+        "title": {
+          "description": "The title of the incident",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "severity",
+        "status"
+      ],
+      "type": "object"
+    },
+    "IpEntity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "description": "Represents an ip entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IpEntityProperties",
+          "description": "Ip entity properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Ip"
+    },
+    "IpEntityProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "description": "Ip entity property bag.",
+      "properties": {
+        "address": {
+          "description": "The IP address as string, e.g. 127.0.0.1 (either in Ipv4 or Ipv6)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "$ref": "#/definitions/GeoLocation",
+          "description": "The geo-location context attached to the ip entity"
+        },
+        "threatIntelligence": {
+          "description": "A list of TI contexts attached to the ip entity.",
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
     },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
