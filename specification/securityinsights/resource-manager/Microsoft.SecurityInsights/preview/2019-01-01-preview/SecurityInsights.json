@@ -6087,6 +6087,38 @@
             ]
           }
         },
+        "classificationReason": {
+          "description": "The classification reason the incident was closed with",
+          "enum": [
+            "SuspiciousActivity",
+            "SuspiciousButExpected",
+            "IncorrectAlertLogic",
+            "InaccurateData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentClassificationReason",
+            "values": [
+              {
+                "description": "Classification reason was suspicious activity",
+                "value": "SuspiciousActivity"
+              },
+              {
+                "description": "Classification reason was suspicious but expected",
+                "value": "SuspiciousButExpected"
+              },
+              {
+                "description": "Classification reason was incorrect alert logic",
+                "value": "IncorrectAlertLogic"
+              },
+              {
+                "description": "Classification reason was inaccurate data",
+                "value": "InaccurateData"
+              }
+            ]
+          }
+        },
         "createdTimeUtc": {
           "description": "The time the incident was created",
           "format": "date-time",
