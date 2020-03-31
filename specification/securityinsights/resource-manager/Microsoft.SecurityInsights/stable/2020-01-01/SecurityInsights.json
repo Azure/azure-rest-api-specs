@@ -2084,6 +2084,22 @@
       },
       "type": "object"
     },
+    "Entity": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/EntityKind"
+        }
+      ],
+      "description": "Specific entity.",
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
+    },
     "FusionAlertRule": {
       "allOf": [
         {
