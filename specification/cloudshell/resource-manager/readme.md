@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for YourServiceName.
+This is the AutoRest configuration file for CloudShell.
 
 ## Getting Started
 
