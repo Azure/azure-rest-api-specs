@@ -549,64 +549,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
-      "get": {
-        "x-ms-examples": {
-          "Get all cases.": {
-            "$ref": "./examples/cases/GetCases.json"
-          }
-        },
-        "tags": [
-          "Cases"
-        ],
-        "description": "Gets all cases.",
-        "deprecated": true,
-        "operationId": "Cases_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "#/parameters/ODataOrderBy"
-          },
-          {
-            "$ref": "#/parameters/ODataTop"
-          },
-          {
-            "$ref": "#/parameters/ODataSkipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CaseList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks": {
       "get": {
         "x-ms-examples": {
