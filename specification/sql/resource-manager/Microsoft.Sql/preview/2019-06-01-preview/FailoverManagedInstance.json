@@ -19,19 +19,20 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/failover": {
       "post": {
         "tags": [
-          "FailoverManagedInstances"
+          "ManagedInstances"
         ],
-        "description": "Failovers a managed instance",
+        "description": "Failovers a managed instnace.",
         "operationId": "ManagedInstances_Failover",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance to failover.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "replicaType",
@@ -49,6 +50,9 @@
             }
           },
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -56,17 +60,17 @@
           "200": {
             "description": "Successfully completed managed instance failover."
           },
-          "202": {
-            "description": "Managed instance failover in progress."
-          },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 ManagedInstanceFailoverThrottled - There was a recent failover on the managed instance.\n\n * 400 ManagedInstanceFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 409 ManagedInstanceNotInStateToFailover - The managed instance is currently in a state such that failover cannot be issued."
+            "description": "*** Error Responses: ***\n\n * 400 ManagementServiceFeatureDisabled - User attempted to use a feature which is disabled.\n\n * 400 ManagedInstanceFailoverThrottled - There was a recent failover on the managed instance.\n\n * 400 ManagedInstanceFailoverNotSupportedOnSKU - This type of customer initiated failover is not supported on the given SKU.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 409 ManagedInstanceNotInStateToFailover - The managed instance is currently in a state such that failover cannot be issued."
+          },
+          "202": {
+            "description": "Managed instance failover is in progress."
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Failover a managed instance": {
-            "$ref": "./examples/FailoverManagedInstance"
+          "Failover a managed instance.": {
+            "$ref": "./examples/FailoverManagedInstance.json"
           }
         }
       }
