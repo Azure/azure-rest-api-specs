@@ -328,7 +328,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetNearbyTransitPreview",
-        "description": "**Find Nearby Transit API**\n\n**Applies to**: S1 pricing tier.\n\nGet Nearby Transit service allows you to search transit objects, for example, public transit stops ans shared bikes around a given location  returning the transit object details. Service allows users to search for specific object types and within a given radius returning a set of transit object with object details. Additional  information such as transit operator information is returned depending on the options selected. The returned information can be used for further processing such as requesting [real-time arrivals](https://aka.ms/AzureMapsMobilityRealTimeArrivals) for the stop or [transit stop details](https://aka.ms/AzureMapsMobilityTransitStop) such as main transit type of most lines stopping for a given public, active service alerts or main transport agency. ",
+        "description": "**Find Nearby Transit API**\n\n**Applies to**: S1 pricing tier.\n\nGet Nearby Transit service allows you to search public transit stops around a given location  returning the transit object details. Service allows users to search for public transit stops within a given radius returning a set of stops with stop details. Additional  information such as transit operator information is returned depending on the options selected. The returned information can be used for further processing such as requesting [real-time arrivals](https://aka.ms/AzureMapsMobilityRealTimeArrivals) for the stop or [transit stop details](https://aka.ms/AzureMapsMobilityTransitStop) such as main transit type of most lines stopping for a given public, active service alerts or main transport agency. ",
         "x-ms-examples": {
           "NearbyTransit": {
             "$ref": "./examples/GetNearbyTransit.json"
@@ -373,22 +373,14 @@
           },
           {
             "name": "objectType",
-            "description": "Comma separated list of transit object types. By default, objectType is set to `stop`. Supported values are:\n  * `stop` - Public transit stop\n  * `docklessBike` - Dockless bike\n  * `docklessElectricBike` - Dockless electric bike\n  * `docklessScooter` - Dockless scooter\n  * `docklessElectricScooter` - Dockless electric scooter\n  * `docklessMoped` - Dockless moped\n  * `carShare` - Car share vehicle\n  * `docklessVehicle` - Dockless vehicle\n  * `bikeDock` - Bike dock",
+            "description": "Comma separated list of transit object types. By default, objectType is set to `stop`. Supported values are:\n  * `stop` - Public transit stop",
             "in": "query",
             "required": false,
             "type": "array",
             "items": {
               "type": "string",
               "enum": [
-                "stop",
-                "docklessBike",
-                "docklessElectricBike",
-                "docklessElectricScooter",
-                "docklessScooter",
-                "docklessMoped",
-                "carShare",
-                "docklessVehicle",
-                "bikeDock"
+                "stop"
               ],
               "x-ms-enum": {
                 "name": "ObjectType",
@@ -396,39 +388,7 @@
                 "values": [
                   {
                     "value": "stop",
-                    "description": "Stop"
-                  },
-                  {
-                    "value": "docklessBike",
-                    "description": "Dockless bike"
-                  },
-                  {
-                    "value": "docklessElectricBike",
-                    "description": "Dockless electric bike"
-                  },
-                  {
-                    "value": "docklessElectricScooter",
-                    "description": "Dockless electric scooter"
-                  },
-                  {
-                    "value": "docklessScooter",
-                    "description": "Dockless scooter"
-                  },
-                  {
-                    "value": "docklessMoped",
-                    "description": "Dockless moped"
-                  },
-                  {
-                    "value": "carShare",
-                    "description": "Car Share"
-                  },
-                  {
-                    "value": "docklessVehicle",
-                    "description": "Dockless Vehicle"
-                  },
-                  {
-                    "value": "bikeDock",
-                    "description": "Docked Bike"
+                    "description": "Public transit stop"
                   }
                 ]
               }
@@ -443,124 +403,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/NearbyTransitResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/mobility/transit/dock/{format}": {
-      "get": {
-        "x-publish": true,
-        "operationId": "Mobility_GetTransitDockInfoPreview",
-        "description": "**Transit Dock Info API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Dock Info API allows to request static and real-time information for a given bike or scooter docking station. Response includes availability and vacancy information and operator details. The service supplements [Nearby Transit API](https://aka.ms/AzureMapsMobilityNearbyTransit) that allows you to search nearby bike and scooter docking stations.",
-        "x-ms-examples": {
-          "TransitDockInfo": {
-            "$ref": "./examples/GetTransitDockInfo.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/JsonFormat"
-          },
-          {
-            "name": "query",
-            "description": "dockId. Required parameter specifying the docking station to search for. Can be retrieved via [Get Nearby Transit API](https://aka.ms/AzureMapsMobilityNearbyTransit).",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/MobilityLanguage"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/TransitDockInfoResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/mobility/transit/carShare/{format}": {
-      "get": {
-        "x-publish": true,
-        "operationId": "Mobility_GetCarShareInfoPreview",
-        "description": "**Car Share Info API**\n\n**Applies to**: S1 pricing tier.\n\nService allows to request static and real-time information for a given car share vehicle.  Response contains details such as availability and vacancy information and operator details. The service supplements [Nearby Transit API](https://aka.ms/AzureMapsMobilityNearbyTransit).",
-        "x-ms-examples": {
-          "CarShareInfo": {
-            "$ref": "./examples/GetCarShareInfo.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ClientId"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionKey"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/JsonFormat"
-          },
-          {
-            "name": "query",
-            "description": "vehicleId. The unique identifier of the car share vehicle. For example, \"29B8C4AFC062D681E050007F01004F07\". Can be requested by using [Nearby Transit API](https://aka.ms/AzureMapsMobilityNearbyTransit).",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/MobilityLanguage"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CarShareResponse"
             }
           },
           "400": {
@@ -822,7 +664,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetTransitRoutePreview",
-        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and focus on certain types of bikes, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time. ",
+        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time. ",
         "x-ms-examples": {
           "TransitRoute": {
             "$ref": "./examples/GetTransitRoute.json"
@@ -1128,13 +970,12 @@
           },
           {
             "name": "bikeType",
-            "description": "Bike type of the bike. Specifies which type of bikes will be used. If not specified, all will be allowed.",
+            "description": "Bike type of the bike. Specifies which type of bikes will be used. Only private bikes are supported.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "privateBike",
-              "dockedBike"
+              "privateBike"
             ],
             "x-ms-enum": {
               "name": "BikeType",
@@ -1143,10 +984,6 @@
                 {
                   "value": "privateBike",
                   "description": "Use private bike."
-                },
-                {
-                  "value": "dockedBike",
-                  "description": "Use docked bike share bike."
                 }
               ]
             }
@@ -1619,7 +1456,7 @@
       }
     },
     "Polygon": {
-      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.    ",
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
       "type": "object",
       "allOf": [
         {
@@ -1783,71 +1620,6 @@
         },
         "legs": {
           "$ref": "#/definitions/ItinerarySummary"
-        }
-      }
-    },
-    "CarShareResponse": {
-      "description": "Details of the car share vehicle. Name is always returned. Level of other returned details depends on car share operator.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Car share provider specific value – most often will be the vehicle's license plate.",
-          "type": "string"
-        },
-        "model": {
-          "description": "Model of the car.",
-          "type": "string"
-        },
-        "seatCount": {
-          "description": "Total number of seats in the vehicle.",
-          "type": "integer"
-        },
-        "fuelLevel": {
-          "description": "Percentage of fuel indicating the fuel level, 100 being full, 0 empty. Unit: percentage (%).",
-          "type": "integer"
-        },
-        "batteryLevel": {
-          "description": "Percentage of battery indicating the battery level, 100 being full, 0 empty. Unit: percentage (%).",
-          "type": "integer"
-        },
-        "pricing": {
-          "description": "Pricing details including currency, reservation price and usage price.",
-          "$ref": "#/definitions/Pricing"
-        },
-        "position": {
-          "description": "Last known location of the vehicle.",
-          "$ref": "#/definitions/Coordinate"
-        },
-        "operatorInfo": {
-          "description": "Details of the share operator.",
-          "$ref": "#/definitions/OperatorInfo"
-        }
-      }
-    },
-    "TransitDockInfoResponse": {
-      "description": "This object is returned from a successful Transit Dock Info call.",
-      "type": "object",
-      "properties": {
-        "availableVehicles": {
-          "description": "Number of available bikes / scooters in the given bike or scooter docking station.",
-          "type": "integer"
-        },
-        "vacantLocations": {
-          "description": "Number of vacant dock locations in the given bike or scooter docking station.",
-          "type": "integer"
-        },
-        "position": {
-          "description": "The dock's position.",
-          "$ref": "#/definitions/Coordinate"
-        },
-        "lastUpdated": {
-          "description": "When the vacancy and availability information was last updated.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "operatorInfo": {
-          "description": "Details of the share operator. Id is always returned. Level of other returned details depends on the operator.",
-          "$ref": "#/definitions/OperatorInfo"
         }
       }
     },
