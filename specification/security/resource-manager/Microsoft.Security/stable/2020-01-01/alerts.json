@@ -15,11 +15,13 @@
   "produces": [
     "application/json"
   ],
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -44,7 +46,8 @@
         ],
         "description": "List all the alerts that are associated with the subscription",
         "operationId": "Alerts_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -91,7 +94,8 @@
         ],
         "description": "List all the alerts that are associated with the resource group",
         "operationId": "Alerts_ListByResourceGroup",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -141,7 +145,8 @@
         ],
         "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
         "operationId": "Alerts_ListSubscriptionLevelByRegion",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -191,7 +196,8 @@
         ],
         "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
         "operationId": "Alerts_ListResourceGroupLevelByRegion",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -244,7 +250,8 @@
         ],
         "description": "Get an alert that is associated with a subscription",
         "operationId": "Alerts_GetSubscriptionLevel",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -285,7 +292,8 @@
         ],
         "description": "Get an alert that is associated a resource group or a resource in a resource group",
         "operationId": "Alerts_GetResourceGroupLevel",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -329,7 +337,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateSubscriptionLevelStateToDismiss",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -367,7 +376,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateSubscriptionLevelStateToResolve",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -405,7 +415,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateSubscriptionLevelStateToReactivate",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -443,7 +454,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateResourceGroupLevelStateToResolve",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -484,7 +496,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateResourceGroupLevelStateToDismiss",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -525,7 +538,8 @@
         ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateResourceGroupLevelStateToReactivate",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -567,9 +581,11 @@
           "$ref": "#/definitions/AlertProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "AlertEntity": {
       "type": "object",
@@ -652,7 +668,8 @@
           "x-ms-enum": {
             "name": "severity",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "Informational",
                 "description": "Informational"
               },
@@ -696,7 +713,8 @@
           "x-ms-enum": {
             "name": "intent",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "Unknown",
                 "description": "Unknown"
               },
@@ -889,9 +907,11 @@
       "type": "object",
       "description": "Azure resource identifier.",
       "x-ms-discriminator-value": "AzureResource",
-      "allOf": [{
-        "$ref": "#/definitions/ResourceIdentifier"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceIdentifier"
+        }
+      ],
       "properties": {
         "azureResourceId": {
           "readOnly": true,
@@ -904,9 +924,11 @@
       "type": "object",
       "description": "Represents a Log Analytics workspace scope identifier.",
       "x-ms-discriminator-value": "LogAnalytics",
-      "allOf": [{
-        "$ref": "#/definitions/ResourceIdentifier"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceIdentifier"
+        }
+      ],
       "properties": {
         "workspaceId": {
           "readOnly": true,
@@ -950,7 +972,8 @@
           "x-ms-enum": {
             "name": "ResourceIdentifierType",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "AzureResource"
               },
               {
