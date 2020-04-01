@@ -547,8 +547,11 @@
           }
         },
         "x-ms-examples": {
-          "Update load balancer backend pool": {
+          "Update load balancer backend pool with backend addresses containing virtual network and  IP address.": {
             "$ref": "./examples/LBBackendAddressPoolWithBackendAddressesPut.json"
+          },
+          "Update load balancer backend pool with backend addresses containing virtual network and IP address defined in network interfaces.": {
+            "$ref": "./examples/LBBackendAddressPoolWithBackendAddressesPutWithNICIPConfiguration.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1430,13 +1433,17 @@
     "LoadBalancerBackendAddressPropertiesFormat": {
       "properties": {
         "virtualNetwork": {
-          "$ref": "./network.json#/definitions/SubResource",
+          "$ref": "./virtualNetwork.json#/definitions/VirtualNetwork",
           "description": "Reference to an existing virtual network."
         },
         "ipAddress": {
           "type": "string",
           "description": "IP Address belonging to the referenced virtual network.",
           "x-ms-azure-resource": false
+        },
+        "networkInterfaceIPConfiguration" : {
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "Reference to IP address defined in network interfaces."
         }
       },
       "description": "Properties of the load balancer backend addresses."
