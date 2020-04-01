@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights client for Components",
-    "version": "2020-02-02-preview"
+    "description": "Azure Application Insights client for Components.",
+    "version": "2018-05-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -192,6 +192,12 @@
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
             }
+          },
+          "201": {
+            "description": "Updating the Application Insights component's tags was successful. Component tags are updated and returned with the rest of the Component's object properties.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
           }
         },
         "x-ms-examples": {
@@ -231,6 +237,12 @@
         ],
         "responses": {
           "200": {
+            "description": "Updating the Application Insights component's tags was successful. Component tags are updated and returned with the rest of the Component's object properties.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationInsightsComponent"
+            }
+          },
+          "201": {
             "description": "Updating the Application Insights component's tags was successful. Component tags are updated and returned with the rest of the Component's object properties.",
             "schema": {
               "$ref": "#/definitions/ApplicationInsightsComponent"
@@ -495,7 +507,7 @@
         "RetentionInDays": {
           "type": "integer",
           "description": "Retention period in days.",
-          "readOnly": true
+          "default": 90
         },
         "DisableIpMasking": {
           "type": "boolean",
@@ -504,10 +516,6 @@
         "ImmediatePurgeDataOn30Days": {
           "type": "boolean",
           "description": "Purge data immediately after 30 days."
-        },
-        "WorkspaceResourceId": {
-          "type": "string",
-          "description": "ResourceId of the log analytics workspace which the data will be ingested to."
         },
         "PrivateLinkScopedResources": {
           "readOnly": true,
@@ -527,8 +535,7 @@
         }
       },
       "required": [
-        "Application_Type",
-        "WorkspaceResourceId"
+        "Application_Type"
       ]
     },
     "PrivateLinkScopedResource": {
