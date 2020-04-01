@@ -120,11 +120,8 @@
               "$ref": "#/definitions/EnvironmentResource"
             }
           },
-          "404": {
-            "description": "The subscription or resource group could not be found."
-          },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given environment request body is invalid; See the error code and message in the response for details.",
+            "description": "The given environment request is invalid; See the error code and message in the response for details.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -167,7 +164,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -217,7 +214,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -254,10 +251,10 @@
             "description": "The environment was successfully deleted."
           },
           "204": {
-            "description": "The environment was successfully deleted."
+            "description": "No changes were made as the specified environment does not exist."
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -275,6 +272,9 @@
           "EnvironmentsByResourceGroup": {
             "$ref": "./examples/EnvironmentsListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable":{
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the available environments associated with the subscription and within the specified resource group.",
         "parameters": [
@@ -296,7 +296,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, or resource group could not be found.",
+            "description": "The subscription, or resource group could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -315,6 +315,9 @@
             "$ref": "./examples/EnvironmentsListBySubscription.json"
           }
         },
+        "x-ms-pageable":{
+          "nextLinkName": "nextLink"
+        },
         "description": "Lists all the available environments within a subscription, irrespective of the resource groups.",
         "parameters": [
           {
@@ -332,7 +335,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription could not be found.",
+            "description": "The subscription could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -399,7 +402,7 @@
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given event source request body is invalid; See the error code and message in the response for details.",
+            "description": "The given event source request is invalid; See the error code and message in the response for details.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -442,7 +445,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or event source could not be found.",
+            "description": "The subscription, resource group, environment, or event source could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -494,7 +497,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or event source could not be found.",
+            "description": "The subscription, resource group, environment, or event source could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -537,7 +540,7 @@
             "description": "The event source was successfully deleted."
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or event source could not be found.",
+            "description": "The subscription, resource group, environment, or event source could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -555,6 +558,9 @@
           "ListEventSourcesByEnvironment": {
             "$ref": "./examples/EventSourcesListByEnvironment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the available event sources associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -579,7 +585,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -646,7 +652,7 @@
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given reference data set request body is invalid; See the error code and message in the response for details.",
+            "description": "The given reference data set request is invalid; See the error code and message in the response for details.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -689,7 +695,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or reference data set could not be found.",
+            "description": "The subscription, resource group, environment, or reference data set could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -741,7 +747,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or reference data set could not be found.",
+            "description": "The subscription, resource group, environment, or reference data set could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -784,7 +790,7 @@
             "description": "The reference data set was successfully deleted."
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or reference data set could not be found.",
+            "description": "The subscription, resource group, environment, or reference data set could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -802,6 +808,9 @@
           "ReferenceDataSetsListByEnvironment": {
             "$ref": "./examples/ReferenceDataSetsListByEnvironment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the available reference data sets associated with the subscription and within the specified resource group and environment.",
         "parameters": [
@@ -826,7 +835,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -893,7 +902,7 @@
             }
           },
           "default": {
-            "description": "HTTP 400 (Bad Request): The given access policy request body is invalid; See the error code and message in the response for details.",
+            "description": "The given access policy request body is invalid; See the error code and message in the response for details.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -936,7 +945,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or access policy could not be found.",
+            "description": "The subscription, resource group, environment, or access policy could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -988,7 +997,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or access policy could not be found.",
+            "description": "The subscription, resource group, environment, or access policy could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1031,7 +1040,7 @@
             "description": "The access policy was successfully deleted."
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, environment, or access policy could not be found.",
+            "description": "The subscription, resource group, environment, or access policy could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -1049,6 +1058,9 @@
           "AccessPoliciesByEnvironment": {
             "$ref": "./examples/AccessPoliciesListByEnvironment.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "description": "Lists all the available access policies associated with the environment.",
         "parameters": [
@@ -1073,7 +1085,7 @@
             }
           },
           "default": {
-            "description": "HTTP 404 (Not Found): The subscription, resource group, or environment could not be found.",
+            "description": "The subscription, resource group, or environment could not be found.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
