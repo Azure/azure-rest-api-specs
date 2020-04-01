@@ -38,7 +38,7 @@
         "operationId": "getUserSettingsWithLocation",
         "x-ms-examples": {
           "GetUserSettings": {
-            "$ref": "./examples/GetUserSettings.json"
+            "$ref": "./examples/GetUserSettings_Location.json"
           }
         },
         "summary": "Get user settings.",
@@ -120,7 +120,7 @@
         "summary": "delete user settings.",
         "x-ms-examples": {
           "DeleteUserSettings": {
-            "$ref": "./examples/DeleteUserSettings.json"
+            "$ref": "./examples/DeleteUserSettings_Location.json"
           }
         },
         "description": "Delete cloud shell settings for current signed in user",
@@ -155,7 +155,7 @@
         "summary": "put user settings.",
         "x-ms-examples": {
           "PutUserSettings": {
-            "$ref": "./examples/PutUserSettings.json"
+            "$ref": "./examples/PutUserSettings_Location.json"
           }
         },
         "description": "Create or update cloud shell settings for current signed in user",
@@ -198,7 +198,7 @@
         "summary": "Get console",
         "x-ms-examples": {
           "GetConsole": {
-            "$ref": "./examples/GetConsole.json"
+            "$ref": "./examples/GetConsole_Location.json"
           }
         },
         "description": "Gets the console for the user.",
@@ -233,7 +233,7 @@
         "summary": "Put console",
         "x-ms-examples": {
           "PutConsole": {
-            "$ref": "./examples/PutConsole.json"
+            "$ref": "./examples/PutConsole_Location.json"
           }
         },
         "description": "Puts a request for a console",
@@ -274,7 +274,7 @@
         "summary": "Delete console",
         "x-ms-examples": {
           "DeleteConsole": {
-            "$ref": "./examples/DeleteConsole.json"
+            "$ref": "./examples/DeleteConsole_Location.json"
           }
         },
         "description": "Deletes the console",
@@ -308,6 +308,11 @@
     "/providers/Microsoft.Portal/locations/{location}/consoles/{consoleName}/keepAlive": {
       "post": {
         "operationId": "keepAliveWithLocation",
+        "x-ms-examples": {
+          "GetUserSettings": {
+            "$ref": "./examples/KeepAlive_Location.json"
+          }
+        },
         "summary": "Keep alive",
         "description": "Keep console alive",
         "parameters": [
@@ -334,6 +339,11 @@
     "/providers/Microsoft.Portal/userSettings/{userSettingsName}": {
       "get": {
         "operationId": "GetUserSettings",
+        "x-ms-examples": {
+          "GetUserSettings": {
+            "$ref": "./examples/GetUserSettings.json"
+          }
+        },
         "summary": "Get user settings.",
         "description": "Get current user settings for current signed in user. This operation returns settings for the user's cloud shell preferences including preferred location, storage profile, shell type, font and size settings.",
         "parameters": [
@@ -404,6 +414,11 @@
       },
       "delete": {
         "operationId": "DeleteUserSettings",
+        "x-ms-examples": {
+          "DeleteUserSettings": {
+            "$ref": "./examples/DeleteUserSettings.json"
+          }
+        },
         "summary": "delete user settings.",
         "description": "Delete cloud shell settings for current signed in user",
         "parameters": [
@@ -431,6 +446,11 @@
       },
       "put": {
         "operationId": "PutUserSettings",
+        "x-ms-examples": {
+          "PutUserSettings": {
+            "$ref": "./examples/PutUserSettings.json"
+          }
+        },
         "summary": "put user settings.",
         "description": "Create or update cloud shell settings for current signed in user",
         "parameters": [
@@ -466,6 +486,11 @@
     "/providers/Microsoft.Portal/consoles/{consoleName}": {
       "get": {
         "operationId": "GetConsole",
+        "x-ms-examples": {
+          "GetConsole": {
+            "$ref": "./examples/GetConsole.json"
+          }
+        },
         "summary": "Get console",
         "description": "Gets the console for the user.",
         "parameters": [
@@ -493,6 +518,11 @@
       },
       "put": {
         "operationId": "PutConsole",
+        "x-ms-examples": {
+          "PutConsole": {
+            "$ref": "./examples/PutConsole.json"
+          }
+        },
         "summary": "Put console",
         "description": "Puts a request for a console",
         "parameters": [
@@ -535,6 +565,11 @@
       },
       "delete": {
         "operationId": "DeleteConsole",
+        "x-ms-examples": {
+          "DeleteConsole": {
+            "$ref": "./examples/DeleteConsole.json"
+          }
+        },
         "summary": "Delete console",
         "description": "Deletes the console",
         "parameters": [
@@ -564,6 +599,11 @@
     "/providers/Microsoft.Portal/consoles/{consoleName}/keepAlive": {
       "post": {
         "operationId": "KeepAlive",
+        "x-ms-examples": {
+          "KeepAlive": {
+            "$ref": "./examples/KeepAlive.json"
+          }
+        },
         "summary": "Keep alive",
         "description": "Keep console alive",
         "parameters": [
@@ -602,12 +642,12 @@
       "description": "Cloud shell console properties.",
       "type": "object",
       "required": [
-        "OsType",
-        "ProvisioningState",
-        "Uri"
+        "osType",
+        "provisioningState",
+        "uri"
       ],
       "properties": {
-        "OsType": {
+        "osType": {
           "description": "The operating system type of the cloud shell.",
           "type": "string",
           "enum": [
@@ -615,7 +655,7 @@
             "Windows"
           ]
         },
-        "ProvisioningState": {
+        "provisioningState": {
           "description": "Provisioning state of the console.",
           "type": "string",
           "enum": [
@@ -630,7 +670,7 @@
             "Succeeded"
           ]
         },
-        "Uri": {
+        "uri": {
           "description": "Uri of the console.",
           "type": "string"
         }
@@ -640,10 +680,10 @@
       "description": "Cloud shell properties for creating a console.",
       "type": "object",
       "required": [
-        "OsType"
+        "osType"
       ],
       "properties": {
-        "OsType": {
+        "osType": {
           "description": "The operating system type of the cloud shell.",
           "type": "string",
           "enum": [
@@ -651,7 +691,7 @@
             "Windows"
           ]
         },
-        "ProvisioningState": {
+        "provisioningState": {
           "description": "Provisioning state of the console.",
           "type": "string",
           "enum": [
@@ -666,7 +706,7 @@
             "Succeeded"
           ]
         },
-        "Uri": {
+        "uri": {
           "description": "Uri of the console.",
           "type": "string"
         }
@@ -849,21 +889,24 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the console"
+      "description": "The name of the console",
+      "x-ms-parameter-location": "client"
     },
     "LocationParameter": {
       "name": "location",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The provider location"
+      "description": "The provider location",
+      "x-ms-parameter-location": "method"
     },
     "UserSettingsNameParameter": {
       "name": "userSettingsName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the user settings"
+      "description": "The name of the user settings",
+      "x-ms-parameter-location": "client"
     }
   }
 }
