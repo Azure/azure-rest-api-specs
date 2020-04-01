@@ -770,6 +770,38 @@
         "type"
       ]
     },
+    "CompressionReadSettings": {
+      "description": "Compression read settings.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The Compression setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ZipDeflateReadSettings": {
+      "description": "The ZipDeflate compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveZipFileNameAsFolder": {
+          "description": "Preserve the zip file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -782,6 +814,40 @@
         "skipLineCount": {
           "type": "object",
           "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
+        },
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
+    "JsonReadSettings": {
+      "description": "Json read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
+    "BinaryReadSettings": {
+      "description": "Binary read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
         }
       }
     },
@@ -948,6 +1014,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonReadSettings",
+          "description": "Json format settings."
         },
         "additionalColumns": {
           "type": "array",
@@ -1180,6 +1250,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Binary store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/BinaryReadSettings",
+          "description": "Binary format settings."
         }
       }
     },
