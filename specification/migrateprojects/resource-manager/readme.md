@@ -21,7 +21,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2018_09_01
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_09_01
 regenerate-manager: true
 generate-interface: true
 ```

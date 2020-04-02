@@ -162,7 +162,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.addons.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/addons/resource-manager/v2018_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/addons/mgmt-v2018_03_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -175,7 +175,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.addons.v2017_05_15
-  output-folder: $(azure-libraries-for-java-folder)/addons/resource-manager/v2017_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/addons/mgmt-v2017_05_15
 regenerate-manager: true
 generate-interface: true
 ```

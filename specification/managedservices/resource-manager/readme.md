@@ -26,18 +26,27 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06
+tag: package-2019-09
 ```
 
 
+### Tag: package-2019-09
+
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-09'
+input-file:
+  - Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
+```
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-06'
+``` yaml $(tag) == 'package-2019-06'
 input-file:
   - Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
 ```
+
 ### Tag: package-2019-04-preview
 
 These settings apply only when `--tag=package-2019-04-preview` is specified on the command line.
@@ -96,7 +105,7 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -108,17 +117,17 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/preview/2019-04-01-preview/managedservices.json
   - $(this-folder)/Microsoft.ManagedServices/preview/2018-06-01-preview/managedservices.json
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

@@ -29,7 +29,7 @@ openapi-type: arm
 tag: package-2019-06-01-preview
 ```
 
-### Tag: package-2019-03-01-preview
+### Tag: package-2019-06-01-preview
 
 These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
 
@@ -54,13 +54,26 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_managed_network']
 ```
 
+## C#
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.ManagedNetwork
+  output-folder: $(csharp-sdks-folder)/managednetwork/Microsoft.Azure.Management.ManagedNetwork/src/generated
+  clear-output-folder: true
+```
+
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
-
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
@@ -82,4 +95,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

@@ -59,6 +59,12 @@
           },
           "Create HDInsight cluster with Autoscale configuration": {
             "$ref": "./examples/CreateHDInsightClusterWithAutoscaleConfig.json"
+          },
+          "Create Kafka cluster with Kafka Rest Proxy": {
+            "$ref": "./examples/CreateKafkaClusterWithKafkaRestProxy.json"
+          },
+          "Create cluster with TLS 1.2": {
+            "$ref": "./examples/CreateHDInsightClusterWithTLS12.json"
           }
         },
         "parameters": [
@@ -553,6 +559,28 @@
         }
       }
     },
+    "ClientGroupInfo": {
+      "description": "The information of AAD security group.",
+      "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The AAD security group name."
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The AAD security group id."
+        }
+      }
+    },
+    "KafkaRestProperties": {
+      "description": "The kafka rest proxy configuration which contains AAD security group information.",
+      "properties": {
+        "clientGroupInfo": {
+          "$ref": "#/definitions/ClientGroupInfo",
+          "description": "The information of AAD security group."
+        }
+      }
+    },
     "SecurityProfile": {
       "description": "The security profile which contains Ssh public key for the HDInsight cluster.",
       "properties": {
@@ -931,6 +959,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -946,6 +978,10 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
         }
       }
     },
@@ -1066,6 +1102,10 @@
           "$ref": "#/definitions/ClusterDefinition",
           "description": "The cluster definition."
         },
+        "kafkaRestProperties": {
+          "$ref": "#/definitions/KafkaRestProperties",
+          "description": "The cluster kafka rest proxy configuration."
+        },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
           "description": "The security profile."
@@ -1118,6 +1158,10 @@
         "diskEncryptionProperties": {
           "$ref": "#/definitions/DiskEncryptionProperties",
           "description": "The disk encryption properties."
+        },
+        "minSupportedTlsVersion": {
+          "type": "string",
+          "description": "The minimal supported tls version."
         }
       },
       "required": [

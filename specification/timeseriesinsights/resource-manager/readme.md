@@ -25,16 +25,16 @@ These are the global settings for the TimeSeriesInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-11-15
+tag: package-2018-08-preview
 ```
 
-### Tag: package-2017-02-preview
+### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-02-preview'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
 ```
 
 ### Tag: package-2017-11-15
@@ -46,13 +46,13 @@ input-file:
 - Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
 ```
 
-### Tag: package-2018-08-preview
+### Tag: package-2017-02-preview
 
-These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
+These settings apply only when `--tag=package-2017-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08-preview'
+``` yaml $(tag) == 'package-2017-02-preview'
 input-file:
-- Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+- Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
 ```
 
 ## Suppression
@@ -92,6 +92,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python
 ```
 
 ## Go
@@ -112,6 +113,10 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-timeseriesinsights
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
@@ -129,7 +134,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2017_11_15
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2017_11_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2017_11_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -142,7 +147,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2017_02_28_preview
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2017_02_28_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2017_02_28_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -155,7 +160,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.timeseriesinsights.v2018_08_15_preview
-  output-folder: $(azure-libraries-for-java-folder)/timeseriesinsights/resource-manager/v2018_08_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/timeseriesinsights/mgmt-v2018_08_15_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -172,9 +177,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
-  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
   - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2018-08-15-preview/timeseriesinsights.json
+  - $(this-folder)/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json
+  - $(this-folder)/Microsoft.TimeSeriesInsights/preview/2017-02-28-preview/timeseriesinsights.json
 
 ```
 

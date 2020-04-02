@@ -104,7 +104,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.machinelearningexperimentation.v2017_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/machinelearningexperimentation/resource-manager/v2017_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningexperimentation/mgmt-v2017_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

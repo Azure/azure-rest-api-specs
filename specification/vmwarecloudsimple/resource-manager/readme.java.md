@@ -28,7 +28,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-04-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.vmwarecloudsimple.v2019_04_01
-  output-folder: $(azure-libraries-for-java-folder)/vmwarecloudsimple/resource-manager/v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/vmwarecloudsimple/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
 ```

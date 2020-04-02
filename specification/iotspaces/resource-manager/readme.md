@@ -21,7 +21,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.iotspacesservice.v2017_10_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/iotspacesservice/resource-manager/v2017_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotspacesservice/mgmt-v2017_10_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

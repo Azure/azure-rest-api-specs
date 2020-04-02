@@ -26,25 +26,41 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05
+tag: package-2019-10
 ```
 
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.Consumption/stable/2019-10-01/consumption.json
+```
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Consumption/stable/2019-06-01/consumption.json
+```
 
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-05'
+``` yaml $(tag) == 'package-2019-05'
 input-file:
   - Microsoft.Consumption/stable/2019-05-01/consumption.json
 ```
-
 
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
 ```
@@ -256,7 +272,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_04_24_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_04_24_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_04_24_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -269,7 +285,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_11_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_11_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_11_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -282,7 +298,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_01_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_01_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_01_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -295,7 +311,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_03_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_03_31
 regenerate-manager: true
 generate-interface: true
 directive:
@@ -318,7 +334,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2017-12-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2017_12_30_preview
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2017_12_30_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2017_12_30_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -331,7 +347,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_05_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_05_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_05_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -344,7 +360,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_06_30
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_06_30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_06_30
 regenerate-manager: true
 generate-interface: true
 ```
@@ -357,7 +373,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_08_31
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_08_31
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_08_31
 regenerate-manager: true
 generate-interface: true
 ```
@@ -370,7 +386,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-10' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2018_10_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2018_10_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -383,12 +399,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.consumption.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/consumption/mgmt-v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -400,6 +416,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Consumption/stable/2019-10-01/consumption.json
+  - $(this-folder)/Microsoft.Consumption/stable/2019-06-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-05-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
@@ -417,11 +435,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-

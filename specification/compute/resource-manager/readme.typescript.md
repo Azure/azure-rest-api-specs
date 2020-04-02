@@ -14,6 +14,7 @@ typescript:
 ``` yaml $(typescript) && !$(profile)
   package-name: "@azure/arm-compute"
   output-folder: "$(typescript-sdks-folder)/sdk/compute/arm-compute"
+  clear-output-folder: true
   
 ```
 

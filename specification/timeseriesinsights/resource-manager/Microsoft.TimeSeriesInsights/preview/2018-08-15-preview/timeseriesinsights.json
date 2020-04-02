@@ -197,11 +197,11 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           },
           {
-            "name": "environmentUpdateParameters",
+            "name": "standardEnvironmentUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnvironmentUpdateParameters"
+              "$ref": "#/definitions/StandardEnvironmentUpdateParameters"
             },
             "description": "Request object that contains the updated information for the environment."
           },
@@ -1228,6 +1228,7 @@
           "enum": [
             "S1",
             "S2",
+            "P1",
             "L1"
           ],
           "x-ms-enum": {
@@ -1248,6 +1249,20 @@
         "capacity"
       ],
       "description": "The sku determines the type of environment, either standard (S1 or S2) or long-term (L1). For standard environments the sku determines the capacity of the environment, the ingress rate, and the billing rate."
+    },
+    "WarmStoreConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "dataRetention": {
+          "type": "string",
+          "format": "duration",
+          "description": "ISO8601 timespan specifying the number of days the environment's events will be available for query from the warm store."
+        }
+      },
+      "required": [
+        "dataRetention"
+      ],
+      "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
     },
     "LongTermStorageConfigurationInput": {
       "type": "object",
@@ -1552,6 +1567,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationInput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1614,6 +1634,11 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationOutput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       },
       "required": [
@@ -1668,12 +1693,10 @@
           "$ref": "#/definitions/LongTermStorageConfigurationMutableProperties",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
-        "timeSeriesIdProperties": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TimeSeriesIdProperty"
-          },
-          "description": "The list of event properties which will be used to partition data in the environment."
+        "warmStoreConfiguration": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoreConfigurationProperties",
+          "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
       }
     },
@@ -1705,6 +1728,10 @@
         "ingress": {
           "$ref": "#/definitions/IngressEnvironmentStatus",
           "description": "An object that represents the status of ingress on an environment."
+        },
+        "warmStorage": {
+          "$ref": "#/definitions/WarmStorageEnvironmentStatus",
+          "description": "An object that represents the status of warm storage on an environment."
         }
       }
     },
@@ -1746,6 +1773,64 @@
         "message": {
           "type": "string",
           "description": "A message that describes the state in detail."
+        }
+      }
+    },
+    "WarmStorageEnvironmentStatus": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that represents the status of warm storage on an environment.",
+      "properties": {
+        "propertiesUsage": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsage",
+          "description": "An object that contains the status of warm storage properties usage."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsage": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the status of warm storage properties usage.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "This string represents the state of warm storage properties usage. It can be \"Ok\", \"Error\", \"Unknown\".",
+          "enum": [
+            "Ok",
+            "Error",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "WarmStoragePropertiesState",
+            "modelAsString": true
+          }
+        },
+        "stateDetails": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WarmStoragePropertiesUsageStateDetails",
+          "description": "An object that contains the details about warm storage properties usage state."
+        }
+      }
+    },
+    "WarmStoragePropertiesUsageStateDetails": {
+      "readOnly": true,
+      "type": "object",
+      "description": "An object that contains the details about warm storage properties usage state.",
+      "properties": {
+        "currentCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the number of properties used by the environment for S1/S2 SKU and number of properties used by Warm Store for PAYG SKU",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "maxCount": {
+          "format": "int32",
+          "type": "integer",
+          "description": "A value that represents the maximum number of properties used allowed by the environment for S1/S2 SKU and maximum number of properties allowed by Warm Store for PAYG SKU.",
+          "minimum": 1,
+          "maximum": 10
         }
       }
     },
