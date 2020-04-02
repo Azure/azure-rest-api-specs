@@ -1329,7 +1329,10 @@
             "name": "parameters",
             "in": "body",
             "description": "The object for adding a new linked workspace",
-            "$ref": "#/definitions/LinkedWorkspaceCreateDto"
+            "requied": "true",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspaceCreateDto"
+            }
           }
         ],
         "responses": {
@@ -1369,7 +1372,7 @@
             "$ref": "#/parameters/LinkName"
           }
         ],
-        "response": {
+        "responses": {
           "200": {
             "description": "Successfully retrieved the detail of the linked workspace.",
             "schema": {
@@ -1413,7 +1416,7 @@
             "$ref": "#/parameters/UserAssignedIdentityResourceId"
           }
         ],
-        "response": {
+        "responses": {
           "200": {
             "description": "Successfully updated the detail of the linked workspace.",
             "schema": {
@@ -1456,7 +1459,7 @@
             "$ref": "#/parameters/LinkName"
           }
         ],
-        "response": {
+        "responses": {
           "200": {
             "description": "Successfully deleted the linked workspace."
           },
@@ -1577,23 +1580,6 @@
       "type": "string",
       "description": "The name of the private endpoint connection associated with the workspace",
       "x-ms-parameter-location": "method"
-    },
-    "LinkedWorkspaceCreateDto": {
-      "description": "object used for creating linked workspace.",
-      "properties": {
-        "linkName": {
-          "description": "Friendly name of the linked workspace",
-          "type": "string"
-        },
-        "resourceId": {
-          "description": "ResourceId of the linked workspace",
-          "type": "string"
-        },
-        "userAssignedIdentityResourceId": {
-          "description": "ResourceId of the user assigned identity for the linked workspace",
-          "type": "string"
-        }
-      }
     },
     "LinkName": {
       "name": "linkName",
@@ -1825,6 +1811,24 @@
         "userAssignedIdentityResourceId": {
           "type": "string",
           "description": "ResourceId of the user assigned identity that used to communicate with the linked workspace."
+        }
+      }
+    },
+    "LinkedWorkspaceCreateDto": {
+      "type": "object",
+      "description": "object used for creating linked workspace.",
+      "properties": {
+        "linkName": {
+          "description": "Friendly name of the linked workspace",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ResourceId of the linked workspace",
+          "type": "string"
+        },
+        "userAssignedIdentityResourceId": {
+          "description": "ResourceId of the user assigned identity for the linked workspace",
+          "type": "string"
         }
       }
     },
