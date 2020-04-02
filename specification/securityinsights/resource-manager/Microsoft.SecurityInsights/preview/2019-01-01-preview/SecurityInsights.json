@@ -6087,6 +6087,10 @@
             ]
           }
         },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
         "classificationReason": {
           "description": "The classification reason the incident was closed with",
           "enum": [
@@ -6134,6 +6138,11 @@
           "format": "date-time",
           "type": "string"
         },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
+          "type": "string"
+        },
         "incidentNumber": {
           "description": "A sequential number",
           "readOnly": true,
@@ -6161,6 +6170,15 @@
           "$ref": "#/definitions/IncidentOwnerInfo",
           "description": "Describes a user that the incident is assigned to",
           "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "severity": {
           "description": "The severity of the incident",
