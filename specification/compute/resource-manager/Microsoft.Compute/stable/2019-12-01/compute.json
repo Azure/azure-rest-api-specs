@@ -2679,6 +2679,12 @@
           },
           "Create a vm with DiskEncryptionSet resource id in the os disk and data disk.": {
             "$ref": "./examples/CreateAVmWithDiskEncryptionSetResource.json"
+          },
+          "Create a vm with ephemeral os disk provisioning in Resource disk using placement property.": {
+            "$ref": "./examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsResourceDisk.json"
+          },
+          "Create a vm with ephemeral os disk provisioning in Cache disk using placement property.": {
+            "$ref": "./examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json"
           }
         }
       },
@@ -3534,6 +3540,9 @@
           },
           "Create a scale set with DiskEncryptionSet resource in os disk and data disk.": {
             "$ref": "./examples/CreateAScalesetWithDiskEncryptionSetResource.json"
+          },
+          "Create a scale set with ephemeral os disks using placement property.": {
+            "$ref": "./examples/CreateAScaleSetWithDiffOsDiskUsingDiffDiskPlacement.json"
           }
         }
       },
@@ -7535,11 +7544,27 @@
         "modelAsString": true
       }
     },
+    "DiffDiskPlacement": {
+      "type": "string",
+      "description": "Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. By default For more information on Ephemeral OS disk size requirements, please refer : https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements",
+      "enum": [
+        "CacheDisk",
+        "ResourceDisk"
+      ],
+      "x-ms-enum": {
+        "name": "DiffDiskPlacement",
+        "modelAsString": true
+      }
+    },
     "DiffDiskSettings": {
       "properties": {
         "option": {
           "$ref": "#/definitions/DiffDiskOption",
           "description": "Specifies the ephemeral disk settings for operating system disk."
+        },
+        "placement": {
+          "$ref": "#/definitions/DiffDiskPlacement",
+          "description": "Specifies the ephemeral disk placement for operating system disk. This property is used to specify Cache disk or Resource disk for ephemeral OS disk provisioning. By default if customer does not specify this placement property in the request, the Ephemeral OS disk will be provisioned using Cache disk."
         }
       },
       "description": "Describes the parameters of ephemeral disk settings that can be specified for operating system disk. <br><br> NOTE: The ephemeral disk settings can only be specified for managed disk."
