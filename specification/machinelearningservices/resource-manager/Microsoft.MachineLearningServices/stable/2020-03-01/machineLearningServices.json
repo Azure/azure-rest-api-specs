@@ -1413,7 +1413,13 @@
             "$ref": "#/parameters/LinkName"
           },
           {
-            "$ref": "#/parameters/UserAssignedIdentityResourceId"
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for updating an exsiting linked workspace",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspaceUpdateDto"
+            }
           }
         ],
         "responses": {
@@ -1826,6 +1832,16 @@
           "description": "ResourceId of the linked workspace",
           "type": "string"
         },
+        "userAssignedIdentityResourceId": {
+          "description": "ResourceId of the user assigned identity for the linked workspace",
+          "type": "string"
+        }
+      }
+    },
+    "LinkedWorkspaceUpdateDto": {
+      "type": "object",
+      "descriptions": "object used for updating linked workspace.",
+      "properties": {
         "userAssignedIdentityResourceId": {
           "description": "ResourceId of the user assigned identity for the linked workspace",
           "type": "string"
