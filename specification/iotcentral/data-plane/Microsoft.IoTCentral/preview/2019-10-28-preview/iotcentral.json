@@ -76,6 +76,7 @@
       "discriminator": "type"
     },
     "SymmetricKeyAttestation": {
+      "x-ms-discriminator-value": "SymmetricKeyAttestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -95,6 +96,7 @@
       ]
     },
     "X509Attestation": {
+      "x-ms-discriminator-value": "X509Attestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -114,6 +116,7 @@
       ]
     },
     "TpmAttestation": {
+      "x-ms-discriminator-value": "TpmAttestation",
       "allOf": [
         {
           "$ref": "#/definitions/Attestation"
@@ -1549,8 +1552,14 @@
           }
         ],
         "x-ms-examples": {
-          "Create or update device attestation": {
-            "$ref": "./examples/devices_attestations_set.json"
+          "Create or update device attestation - Symmetric Key": {
+            "$ref": "./examples/devices_attestations_set_symmetricKey.json"
+          },
+          "Create or update device attestation - X509": {
+            "$ref": "./examples/devices_attestations_set_x509.json"
+          },
+          "Create or update device attestation - TPM": {
+            "$ref": "./examples/devices_attestations_set_tpm.json"
           }
         },
         "responses": {

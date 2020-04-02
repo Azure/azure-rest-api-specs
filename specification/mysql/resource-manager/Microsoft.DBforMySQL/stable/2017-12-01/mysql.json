@@ -1522,6 +1522,30 @@
         "modelAsString": true
       }
     },
+    "InfrastructureEncryption": {
+      "type": "string",
+      "description": "Status showing whether the server enabled infrastructure encryption.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "InfrastructureEncryption",
+        "modelAsString": true
+      }
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessEnum",
+        "modelAsString": true
+      }
+    },
     "ServerPrivateEndpointConnection": {
       "description": "A private endpoint connection under a server",
       "type": "object",
@@ -1665,16 +1689,8 @@
           "readOnly": true
         },
         "infrastructureEncryption": {
-          "type": "string",
-          "description": "Status showing whether the server enabled infrastructure encryption.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "InfrastructureEncryption",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/InfrastructureEncryption",
+          "description": "Status showing whether the server enabled infrastructure encryption."
         },
         "userVisibleState": {
           "type": "string",
@@ -1718,16 +1734,8 @@
           "description": "The maximum number of replicas that a master server can have."
         },
         "publicNetworkAccess": {
-          "type": "string",
-          "description": "Whether or not public endpoint access is allowed for this server.  Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "PublicNetworkAccessEnum",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "privateEndpointConnections": {
           "description": "List of private endpoint connections on a server",
@@ -1795,6 +1803,14 @@
         "minimalTlsVersion": {
           "$ref": "#/definitions/MinimalTlsVersion",
           "description": "Enforce a minimal Tls version for the server."
+        },
+        "infrastructureEncryption": {
+          "$ref": "#/definitions/InfrastructureEncryption",
+          "description": "Status showing whether the server enabled infrastructure encryption."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1991,6 +2007,10 @@
     },
     "ServerForCreate": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -2020,6 +2040,10 @@
     },
     "ServerUpdateParameters": {
       "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity",
+          "description": "The Azure Active Directory identity of the server."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The SKU (pricing tier) of the server."
@@ -2046,6 +2070,10 @@
             "minimalTlsVersion": {
               "$ref": "#/definitions/MinimalTlsVersion",
               "description": "Enforce a minimal Tls version for the server."
+            },
+            "publicNetworkAccess": {
+              "$ref": "#/definitions/PublicNetworkAccess",
+              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
             },
             "replicationRole": {
               "type": "string",
@@ -2653,7 +2681,7 @@
       "description": "Represents a and external administrator to be created.",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ]
     },
