@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "invoiceName": "{invoiceName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/12345678/invoices/EA00123456",
+        "name": "EA00123456",
+        "type": "Microsoft.Billing/billingAccounts/invoices",
+        "properties": {
+          "dueDate": "2018-01-16T17:32:28Z",
+          "invoiceDate": "2018-01-01T17:32:28Z",
+          "status": "Due",
+          "amountDue": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "billedAmount": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "creditAmount": {
+            "currency": "USD",
+            "value": 2.00
+          },
+          "subTotal": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "taxAmount": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "totalAmount": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "invoicePeriodStartDate": "2018-01-01T17:32:28Z",
+          "invoicePeriodEndDate": "2018-01-15T17:32:28Z",
+          "purchaseOrderNumber": "123456",
+          "documents": [
+            {
+              "kind": "Invoice",
+              "url": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345678/invoices/EA00123456/download?api-version=2019-10-01-preview",
+              "documentNumber": "9812345678"
+            }
+          ],
+          "payments": [
+            {
+              "date": "2018-01-14T17:32:28Z",
+              "amount": {
+                "currency": "USD",
+                "value": 2.00
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
