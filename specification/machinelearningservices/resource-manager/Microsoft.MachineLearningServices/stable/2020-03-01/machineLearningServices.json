@@ -1297,7 +1297,7 @@
               "type": "array",
               "description": "array of linked workspaces.",
               "items": {
-                "$ref": "#/definitoins/LinkedWorkspace"
+                "$ref": "#/definitions/LinkedWorkspace"
               }
             }
           },
@@ -1326,13 +1326,10 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/LinkNameInBody"
-          },
-          {
-            "$ref": "#/parameters/LinkedWorkspaceResourceId"
-          },
-          {
-            "$ref": "#/parameters/UserAssignedIdentityResourceId"
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for adding a new linked workspace",
+            "$ref": "#/definitions/LinkedWorkspaceCreateDto"
           }
         ],
         "responses": {
@@ -1369,7 +1366,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/LinkNameInPath"
+            "$ref": "#/parameters/LinkName"
           }
         ],
         "response": {
@@ -1410,7 +1407,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/LinkNameInPath"
+            "$ref": "#/parameters/LinkName"
           },
           {
             "$ref": "#/parameters/UserAssignedIdentityResourceId"
@@ -1456,7 +1453,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "$ref": "#/parameters/LinkNameInPath"
+            "$ref": "#/parameters/LinkName"
           }
         ],
         "response": {
@@ -1581,31 +1578,24 @@
       "description": "The name of the private endpoint connection associated with the workspace",
       "x-ms-parameter-location": "method"
     },
-    "LinkNameInBody": {
-      "name": "linkName",
-      "in": "body",
-      "required": true,
-      "type": "string",
-      "description": "Friendly name of the linked workspace",
-      "x-ms-parameter-location": "method"
+    "LinkedWorkspaceCreateDto": {
+      "description": "object used for creating linked workspace.",
+      "properties": {
+        "linkName": {
+          "description": "Friendly name of the linked workspace",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "ResourceId of the linked workspace",
+          "type": "string"
+        },
+        "userAssignedIdentityResourceId": {
+          "description": "ResourceId of the user assigned identity for the linked workspace",
+          "type": "string"
+        }
+      }
     },
-    "LinkedWorkspaceResourceId": {
-      "name": "resourceId",
-      "in": "body",
-      "required": true,
-      "type": "string",
-      "description": "ResourceId of the linked workspace",
-      "x-ms-parameter-location": "method"
-    },
-    "UserAssignedIdentityResourceId": {
-      "name": "userAssignedIdentityResourceId",
-      "in": "body",
-      "required": true,
-      "type": "string",
-      "description": "ResourceId of the user assigned identity for the linked workspace",
-      "x-ms-parameter-location": "method"
-    },
-    "LinkNameInPath": {
+    "LinkName": {
       "name": "linkName",
       "in": "path",
       "required": true,
