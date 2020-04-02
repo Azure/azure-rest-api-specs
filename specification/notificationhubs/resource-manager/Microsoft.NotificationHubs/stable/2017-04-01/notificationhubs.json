@@ -1692,23 +1692,12 @@
       "description": "Namespace properties."
     },
     "NamespaceCreateOrUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NamespaceProperties",
-          "description": "Properties of the Namespace."
-        },
-        "sku": {
-          "$ref": "#/definitions/Sku",
-          "description": "The sku of the created namespace"
-        }
-      },
       "required": [
         "location"
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/NamespaceResource"
         }
       ],
       "description": "Parameters supplied to the CreateOrUpdate Namespace operation."
