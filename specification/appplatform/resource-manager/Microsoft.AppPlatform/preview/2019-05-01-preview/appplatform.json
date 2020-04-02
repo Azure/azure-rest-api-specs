@@ -2533,6 +2533,10 @@
           "$ref": "#/definitions/AppResourceProperties",
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
+        },
+        "location": {
+          "description": "The GEO location of the application, always the same with its parent resource",
+          "type": "string"
         }
       }
     },
@@ -2780,7 +2784,8 @@
       "properties": {
         "thumbprint": {
           "description": "The thumbprint of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "vaultUri": {
           "description": "The vault uri of user key vault.",
@@ -2796,23 +2801,28 @@
         },
         "issuer": {
           "description": "The issuer of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "issuedDate": {
           "description": "The issue date of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "expirationDate": {
           "description": "The expiration date of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "activateDate": {
           "description": "The activate date of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "subjectName": {
           "description": "The subject name of certificate.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "dnsNames": {
           "description": "The domain list of certificate.",
@@ -2820,7 +2830,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2987,6 +2998,10 @@
           "type": "string",
           "readOnly": true
         },
+        "deploymentSettings": {
+          "$ref": "#/definitions/DeploymentSettings",
+          "description": "Deployment settings of the Deployment"
+        },
         "provisioningState": {
           "description": "Provisioning state of the Deployment",
           "enum": [
@@ -3001,10 +3016,6 @@
             "name": "DeploymentResourceProvisioningState",
             "modelAsString": true
           }
-        },
-        "deploymentSettings": {
-          "$ref": "#/definitions/DeploymentSettings",
-          "description": "Deployment settings of the Deployment"
         },
         "status": {
           "description": "Status of the Deployment",
