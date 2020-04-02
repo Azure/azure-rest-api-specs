@@ -2043,6 +2043,10 @@
           "$ref": "#/definitions/AppResourceProperties",
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
+        },
+        "location": {
+          "description": "The GEO location of the application, always the same with its parent resource",
+          "type": "string"
         }
       }
     },
@@ -2322,6 +2326,10 @@
           "type": "string",
           "readOnly": true
         },
+        "deploymentSettings": {
+          "$ref": "#/definitions/DeploymentSettings",
+          "description": "Deployment settings of the Deployment"
+        },
         "provisioningState": {
           "description": "Provisioning state of the Deployment",
           "enum": [
@@ -2336,10 +2344,6 @@
             "name": "DeploymentResourceProvisioningState",
             "modelAsString": true
           }
-        },
-        "deploymentSettings": {
-          "$ref": "#/definitions/DeploymentSettings",
-          "description": "Deployment settings of the Deployment"
         },
         "status": {
           "description": "Status of the Deployment",
