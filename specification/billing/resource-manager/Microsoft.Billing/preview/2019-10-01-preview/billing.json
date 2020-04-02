@@ -2127,7 +2127,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "BillingSubscriptionInvoices_GetById": {
+          "Invoice": {
             "$ref": "./examples/BillingSubscriptionInvoice.json"
           }
         },
@@ -6444,6 +6444,11 @@
           "description": "The date when the invoice was generated.",
           "type": "string",
           "format": "date-time",
+          "readOnly": true
+        },
+        "invoiceNumber": {
+          "description": "The invoice document number of the generated invoice.",
+          "type": "string",
           "readOnly": true
         },
         "status": {
