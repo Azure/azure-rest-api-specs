@@ -9,15 +9,18 @@
     "body": "ZG9jdW1lbnQgYmluYXJ5IGJvZHk="
   },
   "responses": {
-    "200": {
-      "headers": {},
+    "201": {
+      "headers": {
+        "location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/documents/12345",
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      },
       "body": {
         "job": {
-          "jobId": "727bf148-f327-47a0-9481-abae6362f11e",
+          "id": "727bf148-f327-47a0-9481-abae6362f11e",
           "createdDateTimeUtc": "2020-03-26T00:00:00Z",
           "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
-          "jobStatus": {
-            "overallStatus": "NotStarted",
+          "status": "NotStarted",
+          "summary": {
             "totalDocuments": 1,
             "failedDocuments": 0,
             "succeedDocuments": 0,

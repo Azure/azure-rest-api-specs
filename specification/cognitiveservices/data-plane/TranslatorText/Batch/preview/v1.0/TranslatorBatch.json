@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Document Translation",
-    "version": "v1.0-preview"
+    "title": "Batch Text Translation API",
+    "version": "v1.0-preview.1"
   },
+  "host": "westus2.cognitiveservices.azure.com",
+  "basePath": "/translator/text/batch",
+  "schemes": [
+    "https"
+  ],
   "paths": {
-    "/translate/v1.0-preview/document/job": {
+    "/v1.0-preview.1/documents": {
       "post": {
         "tags": [
           "TranslateJob"
         ],
         "summary": "Submit a batch document translation request to the translation service",
-        "description": "Submit a batch request to the document translation service.\r\nUser can specify a list of target languages to be translated to.\r\n            \r\nA batch request can consist of 1-n input source folders.\r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\n            \r\nNote: the API will go through all the files in the folder and subfolders since in most storage source\r\nthe folder structure are merely virtual.\r\n            \r\nWe will create subfolder for each target language.\r\nFor Example, if the input is https://[myblob]/container/ and destination output is https://[myblob]/outputcontainer/\r\nand the container contains 2 files a.txt, b.docx.  The translation is from en to [es,fr]\r\nThe documents translated will be placed in\r\nhttps://[myblob]/outputcontainer/es/a.txt\r\nhttps://[myblob]/outputcontainer/es/b.docx\r\nhttps://[myblob]/outputcontainer/fr/a.txt\r\nhttps://[myblob]/outputcontainer/fr/b.docx\r\n            \r\nA status file will also be written in the root folder.",
-        "operationId": "Batch Job Submit",
+        "description": "Submit a batch request to the document translation service.\r\nUser can specify a list of target languages to be translated to.\r\n            \r\nA batch request can consist of 1-n input source folders.\r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\n      ///\r\nWe will create subfolder for each target language.\r\nFor Example, if the input is https://[myblob]/container/ and destination output is https://[myblob]/outputcontainer/\r\nand the container contains 2 files a.txt, b.docx.  The translation is from en to [es,fr]\r\nThe documents translated will be placed in\r\nhttps://[myblob]/outputcontainer/es/a.txt\r\nhttps://[myblob]/outputcontainer/es/b.docx\r\nhttps://[myblob]/outputcontainer/fr/a.txt\r\nhttps://[myblob]/outputcontainer/fr/b.docx\r\n            \r\nIf the file with the same name already exists, it will be overwritten.\r\n            \r\nA status file will also be written in the root folder.",
+        "operationId": "Batch Documents Submit",
         "consumes": [
           "application/json",
           "text/json",
@@ -25,17 +30,17 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Job request details",
+            "description": "request details",
             "schema": {
               "$ref": "#/definitions/JobSubmissionBatchRequest"
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "Successful request and it is accepted by the service.  The job details are returned",
+          "201": {
+            "description": "Successful request and the batch request is created by the service.  The job details are returned",
             "schema": {
-              "$ref": "#/definitions/JobStatusResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           },
           "400": {
@@ -52,14 +57,14 @@
         }
       }
     },
-    "/translate/v1.0-preview/document": {
+    "/v1.0-preview.1/documents/upload": {
       "post": {
         "tags": [
           "TranslateJob"
         ],
         "summary": "Submit a binary document in the POST body to the translation service.",
         "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/pdf for .pdf files",
-        "operationId": "Single Document Submit",
+        "operationId": "Single Document Upload",
         "produces": [
           "text/plain",
           "application/json",
@@ -87,10 +92,22 @@
           }
         ],
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful request and it is accepted by the service.  The job details are returned",
             "schema": {
               "$ref": "#/definitions/DocumentSubmissionResponse"
+            },
+            "headers": {
+              "Location": {
+                "description": "Location of the document status",
+                "type": "string",
+                "format": ""
+              },
+              "Operation-Location": {
+                "description": "Location of the operation",
+                "type": "string",
+                "format": ""
+              }
             }
           },
           "400": {
@@ -107,63 +124,44 @@
         }
       }
     },
-    "/translate/v1.0-preview/document/job/{jobId}": {
+    "/v1.0-preview.1/documents/{documentId}": {
       "get": {
         "tags": [
           "TranslateJob"
         ],
-        "summary": "Returns the status of the batch translation job",
-        "description": "Returns the status of the translation job.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.\r\n            \r\nBy default, the API will only returns the summary.  Detailed status of each document can be included by passing includeDetailStatus with value 'true' in the query parameter\r\n            \r\nOptionally, this API supports paging if the list of detailed status of each document is long.\r\nThe X-Pagination response header will be returned to support paging.\r\nThe list of document details are sorted alphabetically",
-        "operationId": "Get Job Status",
+        "summary": "Returns the status of the specific document",
+        "description": "Returns the status of the translation of the document.\r\nNote: there will be one document detail for each translated to language operations",
+        "operationId": "Get Document Status",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "jobId",
-            "description": "Format - guid.  The Job ID",
+            "name": "documentId",
+            "description": "Format - int64.  The document id",
             "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "PageNumber",
-            "description": "Optional paging parameter if detailed status of each document is supported\r\nThis allows user to specific the page number and the max number of result per page.\r\nPageNumber should start with 1\r\nThe X-Pagination header is returned with paging information",
             "type": "integer",
-            "format": "int32",
-            "default": 1,
-            "maximum": 2147483647,
-            "minimum": 1
-          },
-          {
-            "in": "query",
-            "name": "PageSize",
-            "description": "Optional paging parameter if detailed status of each document is supported\r\nThis allows user to specific the page number and the max number of result per page.\r\nThe X-Pagination header is returned with paging information",
-            "type": "integer",
-            "format": "int32",
-            "default": 100,
-            "maximum": 2147483647,
-            "minimum": 1
-          },
-          {
-            "in": "query",
-            "name": "includeDetailStatus",
-            "description": "[Optional] parameter for whether to include detail status of each document",
-            "type": "boolean"
+            "format": "int64"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful request and returns the status of the job",
             "schema": {
-              "$ref": "#/definitions/JobStatusResponseDetailed"
-            }
-          },
-          "400": {
-            "description": "The request is invalid.  Check the input parameters",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/DocumentStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": "string"
+              }
             }
           },
           "404": {
@@ -174,7 +172,61 @@
           }
         },
         "x-ms-examples": {
-          "Get Status": {
+          "Get Document Status": {
+            "$ref": "./examples/document.json"
+          }
+        }
+      }
+    },
+    "/v1.0-preview.1/operations/{id}": {
+      "get": {
+        "tags": [
+          "TranslateJob"
+        ],
+        "summary": "Returns the status of the batch translation operation",
+        "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.",
+        "operationId": "Get Operation Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Format - uuid.  The operation id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the status of the batch translation operation",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "The requested operation id is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Status": {
             "$ref": "./examples/status.json"
           }
         }
@@ -183,50 +235,209 @@
         "tags": [
           "TranslateJob"
         ],
-        "summary": "Cancel a currently processing or queued job.",
-        "description": "Cancel a currently processing or queued job.\r\nA job will not be cancelled if it is already completed or failed.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
-        "operationId": "Cancel Job Request",
+        "summary": "Cancel a currently processing or queued operation.",
+        "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
+        "operationId": "cancel operation",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "jobId",
-            "description": "Format - guid.  The Job ID",
+            "name": "id",
+            "description": "Format - uuid.  The operation-id",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request and returns the status of the job",
+            "description": "Successful request and returns the status of the operation",
             "schema": {
-              "$ref": "#/definitions/JobStatusResponse"
-            }
-          },
-          "400": {
-            "description": "The request is invalid.  Check the input parameters",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
+              "$ref": "#/definitions/OperationStatusResponse"
             }
           },
           "404": {
-            "description": "The requested jobId is not found",
+            "description": "The requested operation id is not found",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
             }
           }
         },
         "x-ms-examples": {
-          "Cancel a running example": {
+          "Cancel an operation example": {
             "$ref": "./examples/cancel.json"
+          }
+        }
+      }
+    },
+    "/v1.0-preview.1/operations/{id}/documents": {
+      "get": {
+        "tags": [
+          "TranslateJob"
+        ],
+        "summary": "Returns the status of the documents of a translation batch operation",
+        "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall operation status as well as a summary of the current progress of the documents being translated.\r\n            \r\nThe documents are sorted by the document Id and then the translate to language\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get Detailed Document Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Format - uuid.  The operation id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the status of the documents",
+            "schema": {
+              "$ref": "#/definitions/DocumentStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            }
+          },
+          "404": {
+            "description": "The requested operation id is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Documents Status for the operation id": {
+            "$ref": "./examples/documents.json"
+          }
+        }
+      }
+    },
+    "/v1.0-preview.1/documents/formats": {
+      "get": {
+        "tags": [
+          "TranslateJob"
+        ],
+        "summary": "Returns the list of supported document formats",
+        "description": "The list of supported document formats supported by our service.\r\nThe list will include the common file extension used and supported as well as the content-type if using the upload API.",
+        "operationId": "Get Document Formats",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the list of document formats",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/DocumentFormat"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Document Formats": {
+            "$ref": "./examples/format.json"
+          }
+        }
+      }
+    },
+    "/v1.0-preview.1/storagesources": {
+      "get": {
+        "tags": [
+          "TranslateJob"
+        ],
+        "summary": "Returns the list of supported storage sources",
+        "description": "The list of storage sources supported by our service.",
+        "operationId": "Get storage sources that we currently support",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the list of storage sources",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/StorageSource"
+                }
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Document Storage Sources": {
+            "$ref": "./examples/storage.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "DocumentFilter": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "description": "A case-sensitive prefix string to filter documents in the source path for translation. \r\nFor example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.",
+          "type": "string",
+          "example": "FolderA"
+        },
+        "suffix": {
+          "description": "A case-sensitive suffix string to filter documents in the source path for translation. \r\nThis is most often use for file extensions",
+          "type": "string",
+          "example": ".txt"
+        },
+        "includeSubFolder": {
+          "description": "A flag to indicate if sub folders within the set of prefix folders will also need to be included when searching for content to be translated.",
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
     "StorageSource": {
       "description": "Storage Source",
       "enum": [
@@ -234,46 +445,56 @@
       ],
       "type": "string"
     },
-    "JobBatchRequestInput": {
-      "description": "Definition for the input batch job request",
+    "SourceInput": {
+      "description": "Source of the input documents",
       "required": [
-        "destinationFolder",
-        "sourceFolder"
+        "path"
       ],
       "type": "object",
       "properties": {
-        "sourceFolder": {
+        "filter": {
+          "$ref": "#/definitions/DocumentFilter"
+        },
+        "path": {
           "description": "Location of the folder / container with your documents",
           "type": "string",
-          "example": "https://myblob.blob.core.windows.net/sourceContainer/"
-        },
-        "destinationFolder": {
-          "description": "Location of the folder / container for the output",
-          "type": "string",
-          "example": "https://myblob.blob.core.windows.net/destinationContainer"
-        },
-        "prefixFilter": {
-          "description": "Specifies a string that filters the results to return only blobs whose name begins with the specified prefix.",
-          "type": "string",
-          "example": "FilePrefix"
-        },
-        "suffixFilter": {
-          "description": "Specifies a string that filters the results to return only blobs whose name ends with the specified prefix.",
-          "type": "string",
-          "example": ".txt"
-        },
-        "sourceAccessToken": {
-          "description": "SourceAccessToken if needed to access the folder / container / file\r\nThis can be null and be specified as part of the SourceFolder url if needed",
-          "type": "string",
-          "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
-        },
-        "destinationAccessToken": {
-          "description": "DestinationAccessToken if needed to access the folder / container\r\nThis can be null and be specified as part of the DestinationUrl url if needed",
-          "type": "string",
-          "example": "sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-06-17T04:21:39Z&st=2020-01-30T21:21:39Z&spr=https&sig=6Y5rNxDmsfNqlmTYsSLWS6Oj9HLaizEyMDKUa8YP69s%3D"
+          "example": "https://myblob.blob.core.windows.net/Container/"
         },
         "storageSource": {
           "$ref": "#/definitions/StorageSource"
+        }
+      }
+    },
+    "DestinationInput": {
+      "description": "Destination for the finished translated documents",
+      "required": [
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Location of the folder / container with your documents",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/Container/"
+        },
+        "storageSource": {
+          "$ref": "#/definitions/StorageSource"
+        }
+      }
+    },
+    "BatchRequest": {
+      "description": "Definition for the input batch translation request",
+      "required": [
+        "destination",
+        "source"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/SourceInput"
+        },
+        "destination": {
+          "$ref": "#/definitions/DestinationInput"
         }
       }
     },
@@ -296,7 +517,7 @@
           "description": "The input list of documents or folders containing documents",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobBatchRequestInput"
+            "$ref": "#/definitions/BatchRequest"
           }
         },
         "from": {
@@ -325,9 +546,6 @@
     "StatusSummary": {
       "type": "object",
       "properties": {
-        "overallStatus": {
-          "$ref": "#/definitions/Status"
-        },
         "totalDocuments": {
           "format": "int32",
           "description": "Total document count",
@@ -360,35 +578,111 @@
         }
       }
     },
-    "JobStatusResponse": {
-      "description": "Job status response",
+    "DocumentStatusDetail": {
       "required": [
         "createdDateTimeUtc",
-        "jobId",
-        "jobStatus",
-        "lastActionDateTimeUtc"
+        "lastActionDateTimeUtc",
+        "path",
+        "status",
+        "to"
       ],
       "type": "object",
       "properties": {
-        "jobId": {
-          "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
+        "path": {
+          "description": "Location of the document or folder",
           "type": "string",
-          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
+          "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
         },
         "createdDateTimeUtc": {
           "format": "date-time",
-          "description": "Job created date time",
+          "description": "Operation created date time",
           "type": "string",
           "example": "2020-01-20T11:40:07.7010000-08:00"
         },
         "lastActionDateTimeUtc": {
           "format": "date-time",
-          "description": "Date time in which the job's status has been updated",
+          "description": "Date time in which the operation's status has been updated",
           "type": "string",
           "example": "2020-01-20T11:41:07.7010000-08:00"
         },
-        "jobStatus": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "detectedLanguage": {
+          "description": "Detected language of the original document (to be implemented)",
+          "type": "string",
+          "example": "en"
+        },
+        "to": {
+          "description": "To language",
+          "type": "string"
+        },
+        "errorMessage": {
+          "description": "Error message if any",
+          "type": "string",
+          "example": "document is malformed"
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "Error code if any",
+          "type": "integer",
+          "example": 400052
+        },
+        "progress": {
+          "format": "float",
+          "description": "Progress of the translation if available",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number",
+          "example": 0.5
+        },
+        "id": {
+          "format": "int64",
+          "description": "Document Id",
+          "type": "integer"
+        }
+      }
+    },
+    "OperationStatusResponse": {
+      "description": "Job status response",
+      "required": [
+        "createdDateTimeUtc",
+        "id",
+        "lastActionDateTimeUtc",
+        "summary"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Id of the operation.",
+          "type": "string",
+          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
+        },
+        "createdDateTimeUtc": {
+          "format": "date-time",
+          "description": "Operation created date time",
+          "type": "string",
+          "example": "2020-01-20T11:40:07.7010000-08:00"
+        },
+        "lastActionDateTimeUtc": {
+          "format": "date-time",
+          "description": "Date time in which the operation's status has been updated",
+          "type": "string",
+          "example": "2020-01-20T11:41:07.7010000-08:00"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "summary": {
           "$ref": "#/definitions/StatusSummary"
+        },
+        "documentStatusDetails": {
+          "description": "The detail status of individual documents",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentStatusDetail"
+          }
         }
       }
     },
@@ -490,7 +784,7 @@
       "type": "object",
       "properties": {
         "job": {
-          "$ref": "#/definitions/JobStatusResponse"
+          "$ref": "#/definitions/OperationStatusResponse"
         },
         "documentDownloadUrl": {
           "description": "Document download link",
@@ -503,100 +797,44 @@
         }
       }
     },
-    "DocumentStatusDetail": {
-      "required": [
-        "documentStatus",
-        "path",
-        "to"
-      ],
+    "DocumentStatusResponse": {
+      "description": "Document Status Response",
       "type": "object",
       "properties": {
-        "path": {
-          "description": "Location of the document or folder",
-          "type": "string",
-          "example": "https://myblob.blob.core.windows.net/mycontainer/fr/mydoc.txt"
-        },
-        "documentStatus": {
-          "$ref": "#/definitions/Status"
-        },
-        "detectedLanguage": {
-          "description": "Detected language of the original document (to be implemented)",
-          "type": "string",
-          "example": "en"
-        },
-        "to": {
-          "description": "To language",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "Error message if any",
-          "type": "string",
-          "example": "document is malformed"
-        },
-        "errorCode": {
-          "format": "int32",
-          "description": "Error code if any",
-          "type": "integer",
-          "example": 400052
-        },
-        "progress": {
-          "format": "float",
-          "description": "Progress of the translation if available",
-          "maximum": 1,
-          "minimum": 0,
-          "type": "number",
-          "example": 0.5
-        },
-        "id": {
-          "format": "int64",
-          "description": "Internal Id",
-          "type": "integer"
-        }
-      }
-    },
-    "JobStatusResponseDetailed": {
-      "description": "Job status response",
-      "required": [
-        "createdDateTimeUtc",
-        "jobId",
-        "jobStatus",
-        "lastActionDateTimeUtc"
-      ],
-      "type": "object",
-      "properties": {
-        "documentStatusDetails": {
+        "documents": {
           "description": "The detail status of individual documents",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentStatusDetail"
           }
         },
-        "jobErrors": {
-          "description": "If job has failed, Errors will be populated with detailed error message",
+        "@nextLink": {
+          "description": "Url for the next page.  Null if no more pages available",
+          "type": "string"
+        }
+      }
+    },
+    "DocumentFormat": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "Name of the format",
+          "type": "string",
+          "example": "PlainText"
+        },
+        "fileExtensions": {
+          "description": "Supported file extension for this format",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorV2"
+            "type": "string"
           }
         },
-        "jobId": {
-          "description": "Job Id Guid.  \r\nYou can get the status of the job via GET /batch/job/{jobId}",
-          "type": "string",
-          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
-        },
-        "createdDateTimeUtc": {
-          "format": "date-time",
-          "description": "Job created date time",
-          "type": "string",
-          "example": "2020-01-20T11:40:07.7010000-08:00"
-        },
-        "lastActionDateTimeUtc": {
-          "format": "date-time",
-          "description": "Date time in which the job's status has been updated",
-          "type": "string",
-          "example": "2020-01-20T11:41:07.7010000-08:00"
-        },
-        "jobStatus": {
-          "$ref": "#/definitions/StatusSummary"
+        "contentTypes": {
+          "description": "Supported Content-Types for this format",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
