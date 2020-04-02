@@ -10,23 +10,36 @@
       ],
       "inputs": [
         {
-          "sourceFolder": "https://myblob.blob.core.windows.net/sourceContainer",
-          "destinationFolder": "https://myblob.blob.core.windows.net/destinationContainer",
-          "prefixFilter": "pre",
-          "suffixFilter": ".txt"
+          "source": {
+            "filter": {
+              "prefix": "pre",
+              "suffix": ".txt",
+              "includeSubFolder": true
+            },
+            "path": "https://myblob.blob.core.windows.net/sourceContainer",
+            "storageSource": "AzureBlob"
+          },
+          "destination": {
+            "path": "https://myblob.blob.core.windows.net/destinationContainer",
+            "storageSource": "AzureBlob"
+          }
         }
-      ]
+      ],
+      "from": "en",
+      "category": "general"
     }
   },
   "responses": {
-    "202": {
-      "headers": {},
+    "201": {
+      "headers": {
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      },
       "body": {
-        "jobId": "727bf148-f327-47a0-9481-abae6362f11e",
+        "id": "727bf148-f327-47a0-9481-abae6362f11e",
         "createdDateTimeUtc": "2020-03-26T00:00:00Z",
         "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
-        "jobStatus": {
-          "overallStatus": "Succeeded",
+        "status": "Succeeded",
+        "summary": {
           "totalDocuments": 10,
           "failedDocuments": 1,
           "succeedDocuments": 9,
