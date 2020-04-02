@@ -1643,6 +1643,101 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "Invoice": {
+            "$ref": "./examples/EaInvoice.json"
+          }
+        },
+        "operationId": "BillingAccountInvoices_Get",
+        "description": "Gets an invoice by ID. The operation is supported for Enterprise Agreement enrollment billing accounts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "EaInvoiceDownload": {
+            "$ref": "./examples/EaInvoiceDownload.json"
+          }
+        },
+        "operationId": "EaInvoices_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download an invoice. The operation is supported for Enterprise Agreement enrollment billing accounts.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/pricesheet/default/download": {
       "post": {
         "tags": [
@@ -1861,6 +1956,65 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "ModernInvoiceDownload": {
+            "$ref": "./examples/InvoiceDownload.json"
+          }
+        },
+        "operationId": "Invoices_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download an invoice. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions": {
       "get": {
         "tags": [
@@ -1914,7 +2068,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "BillingSubscriptionsListByBillingAccount": {
+          "BillingSubscriptionInvoices_List": {
             "$ref": "./examples/BillingSubscriptionInvoicesList.json"
           }
         },
@@ -1962,25 +2116,22 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}": {
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}": {
       "get": {
         "tags": [
           "Invoices"
         ],
-        "operationId": "Invoices_GetById",
+        "operationId": "BillingSubscriptionInvoices_GetById",
         "description": "Gets an invoice by ID.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "BillingSubscriptionsListByBillingAccount": {
+          "BillingSubscriptionInvoices_GetById": {
             "$ref": "./examples/BillingSubscriptionInvoice.json"
           }
         },
         "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
           {
             "$ref": "#/parameters/billingSubscriptionNameParameter"
           },
@@ -1996,6 +2147,62 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Invoice"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}/download": {
+      "post": {
+        "tags": [
+          "Invoices"
+        ],
+        "x-ms-examples": {
+          "PricesheetDownload": {
+            "$ref": "./examples/BillingSubscriptionInvoiceDownload.json"
+          }
+        },
+        "operationId": "BillingSubscriptionInvoices_Download",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Gets a URL to download an invoice.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
             }
           },
           "default": {

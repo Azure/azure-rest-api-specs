@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingSubscriptionName": "{billingSubscriptionName}",
+    "invoiceName": "{invoiceName}"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/00000000-0000-0000-0000-000000000000/operationResults/invoiceDownload_00000000-0000-0000-0000-000000000000?api-version=2019-10-01-preview",
+        "Retry-After": "10"
+      }
+    },
+    "200": {
+      "body": {
+        "url": "https://myaccount.blob.core.windows.net/invoices/0000000000.pdf?sv=2019-02-02&sr=b&sig=NJKX5rYITeGQK%2FQYbXPoFaK5PWeNVPGrrOjbFro%2BOME%3D&se=2020-04-02T00%3A09%3A19Z&sp=r"
+      }
+    }
+  }
+}

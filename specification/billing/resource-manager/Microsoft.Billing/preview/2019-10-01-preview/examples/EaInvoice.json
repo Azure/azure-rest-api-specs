@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "invoiceName": "{invoiceName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/000000/invoices/0000000000",
+        "name": "0000000000",
+        "type": "Microsoft.Billing/billingAccounts/invoices",
+        "properties": {
+          "dueDate": "2018-01-16T17:32:28Z",
+          "invoiceDate": "2018-01-01T17:32:28Z",
+          "invoiceNumber": "1234567890",
+          "status": "Due",
+          "amountDue": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "billedAmount": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "creditAmount": {
+            "currency": "USD",
+            "value": 2.00
+          },
+          "subTotal": {
+            "currency": "USD",
+            "value": 33.99
+          },
+          "taxAmount": {
+            "currency": "USD",
+            "value": 0.00
+          },
+          "totalAmount": {
+            "currency": "USD",
+            "value": 16.53
+          },
+          "invoicePeriodStartDate": "2018-01-01T17:32:28Z",
+          "invoicePeriodEndDate": "2018-01-15T17:32:28Z",
+          "purchaseOrderNumber": "123456",
+          "documents": [
+            {
+              "kind": "Invoice",
+              "url": "https://microsoft.com/invoice.pdf"
+            },
+            {
+              "kind": "CreditNote",
+              "url": "https://microsoft.com/creditNote.pdf"
+            }
+          ],
+          "payments": [
+            {
+              "date": "2018-01-14T17:32:28Z",
+              "amount": {
+                "currency": "USD",
+                "value": 2.00
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
