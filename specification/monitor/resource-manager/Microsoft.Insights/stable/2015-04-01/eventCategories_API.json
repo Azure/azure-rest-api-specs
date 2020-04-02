@@ -52,7 +52,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./activityLogs_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -74,28 +74,12 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "EventCategoryCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LocalizableString"
+            "$ref": "./activityLogs_API.json#/definitions/LocalizableString"
           },
           "description": "the list that includes the Azure event categories."
         }
@@ -104,20 +88,6 @@
         "value"
       ],
       "description": "A collection of event categories. Currently possible values are: Administrative, Security, ServiceHealth, Alert, Recommendation, Policy."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {

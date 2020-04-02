@@ -52,7 +52,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./metrics_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -198,7 +198,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./metrics_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -380,20 +380,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ServiceDiagnosticSettings",
           "description": "The service diagnostics settings for an update operation."
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
         }
       }
     }

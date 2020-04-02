@@ -83,7 +83,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./metricDefinitions_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -159,22 +159,6 @@
     }
   },
   "definitions": {
-    "LocalizableString": {
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "the invariant value."
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "the locale specific value."
-        }
-      },
-      "description": "The localizable string class."
-    },
     "Unit": {
       "type": "string",
       "description": "the unit of the metric.",
@@ -235,7 +219,7 @@
     "MetadataValue": {
       "properties": {
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "./metricDefinitions_API.json#/definitions/LocalizableString",
           "description": "the name of the metadata."
         },
         "value": {
@@ -244,20 +228,6 @@
         }
       },
       "description": "Represents a metric metadata value."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     },
     "Response": {
       "type": "object",
@@ -303,7 +273,7 @@
           "description": "the resource type of the metric resource."
         },
         "name": {
-          "$ref": "#/definitions/LocalizableString",
+          "$ref": "./metricDefinitions_API.json#/definitions/LocalizableString",
           "description": "the name and the display name of the metric, i.e. it is localizable string."
         },
         "unit": {
