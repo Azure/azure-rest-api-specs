@@ -1228,6 +1228,252 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces": {
+      "get": {
+        "tags": [
+          "LinkedWorkspace"
+        ],
+        "operationId": "LinkedWorkspace_List",
+        "description": "List linked workspaces under a workspace per some query criteria.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "name": "link-subscriptionId",
+            "in": "query",
+            "type": "string",
+            "description": "The subscriptionid of the linked workspace."
+          },
+          {
+            "name": "link-resource-group",
+            "in": "query",
+            "type": "string",
+            "description": "The resource group name of the linked workspace."
+          },
+          {
+            "name": "link-resource-name",
+            "in": "query",
+            "type": "string",
+            "description": "The resource name of the linked workspace."
+          },
+          {
+            "name": "link-resourceId",
+            "in": "query",
+            "type": "string",
+            "description": "The resourceId of the linked workspace."
+          },
+          {
+            "name": "link-type",
+            "in": "query",
+            "type": "string",
+            "description": "The type of the linked workspace.",
+            "enum": [
+              "Synapse"
+            ],
+            "x-ms-enum": {
+              "name": "LinkType",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "uai-resourceId",
+            "in": "query",
+            "type": "string",
+            "description": "The resourceId of the user assigned identity for the linked workspace."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the linked workspaces.",
+            "schema": {
+              "type": "array",
+              "description": "array of linked workspaces.",
+              "items": {
+                "$ref": "#/definitoins/LinkedWorkspace"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }          
+        }
+      },
+      "post": {
+        "tags": [
+          "LinkedWorkspace"
+        ],
+        "operationId": "LinkedWorkspace_Create",
+        "description": "Add a new linked workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkNameInBody"
+          },
+          {
+            "$ref": "#/parameters/LinkedWorkspaceResourceId"
+          },
+          {
+            "$ref": "#/parameters/UserAssignedIdentityResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
+      "get": {
+        "tags": [
+          "LinkedWorkspace"
+        ],
+        "operationId": "LinkedWorkspace_Get",
+        "description": "Get the detail of a linked workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkNameInPath"
+          }
+        ],
+        "response": {
+          "200": {
+            "description": "Successfully retrieved the detail of the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspace"
+            }
+          },
+          "404": {
+            "description": "Specific linked workspace not found.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LinkedWorkspace"
+        ],
+        "operationId": "LinkedWorkspace_Update",
+        "description": "Update the detail of a linked workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkNameInPath"
+          },
+          {
+            "$ref": "#/parameters/UserAssignedIdentityResourceId"
+          }
+        ],
+        "response": {
+          "200": {
+            "description": "Successfully updated the detail of the linked workspace.",
+            "schema": {
+              "$ref": "#/definitions/LinkedWorkspace"
+            }
+          },
+          "404": {
+            "description": "Specific linked workspace not found.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/delinkWorkspace/{linkName}": {
+      "post": {
+        "tags": [
+          "LinkedWorkspace"
+        ],
+        "operationId": "LinkedWorkspace_Delete",
+        "description": "Delete a linked workspace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LinkNameInPath"
+          }
+        ],
+        "response": {
+          "200": {
+            "description": "Successfully deleted the linked workspace."
+          },
+          "204": {
+            "description": "Specific linked workspace not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }        
+      }
     }
   },
   "parameters": {
@@ -1333,6 +1579,38 @@
       "required": true,
       "type": "string",
       "description": "The name of the private endpoint connection associated with the workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "LinkNameInBody": {
+      "name": "linkName",
+      "in": "body",
+      "required": true,
+      "type": "string",
+      "description": "Friendly name of the linked workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "LinkedWorkspaceResourceId": {
+      "name": "resourceId",
+      "in": "body",
+      "required": true,
+      "type": "string",
+      "description": "ResourceId of the linked workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "UserAssignedIdentityResourceId": {
+      "name": "userAssignedIdentityResourceId",
+      "in": "body",
+      "required": true,
+      "type": "string",
+      "description": "ResourceId of the user assigned identity for the linked workspace",
+      "x-ms-parameter-location": "method"
+    },
+    "LinkNameInPath": {
+      "name": "linkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Friendly name of the linked workspace",
       "x-ms-parameter-location": "method"
     }
   },
@@ -1500,6 +1778,63 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources in this workspace."
+        },
+        "linkedWorkspaces": {
+          "type": "object",
+          "description": "Dictionary that contains all linked workspaces in the AML workspace, with resourceId of the linked workspace as key.",
+          "additionalProperties": {
+            "$ref": "#/definitions/LinkedWorkspace"
+          }
+        }
+      }
+    },
+    "LinkedWorkspace": {
+      "description": "Linked workspace.",
+      "type": "object",
+      "properties": {
+        "linkName": {
+          "type": "string",
+          "description": "Friendly name of the linked workspace."
+        },
+        "linkType": {
+          "type": "string",
+          "enum": [
+            "Synapse"
+          ],
+          "x-ms-enum": {
+            "name": "LinkType",
+            "modelAsString": true
+          },
+          "readOnly": true,
+          "description": "The type of the linked workspace."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "SubscriptionId of the target of the linked workspace."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group name of the target of the linked workspace."
+        },
+        "providerNamespace": {
+          "type": "string",
+          "description": "Resource provider namespace of the target of the linked workspace."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type of the target of the linked workspace."
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "Resource name of the target of the linked workspace."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ResourceId of the target of the linked workspace."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "description": "ResourceId of the user assigned identity that used to communicate with the linked workspace."
         }
       }
     },
@@ -1944,15 +2279,47 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "SystemAssigned,UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentities",
+          "description": "The user assigned identities associated with the resource."
         }
       },
       "description": "Identity for the resource."
+    },
+    "UserAssignedIdentities": {
+      "description": "dictionary containing all the user assigned identities, with resourceId of the UAI as key.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "UserAssignedIdentity": {
+      "description": "User Assigned Identity",
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of the user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of the user assigned identity."
+        },
+        "clientId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The clientId(aka appId) of the user assigned identity."
+        }
+      }
     },
     "Resource": {
       "description": "Azure Resource Manager resource envelope.",
