@@ -18,6 +18,16 @@ csharp:
 
 # remove DUMMY member of enum
 directive:
+    # dynamically add a DELETEME value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DELETEME');
+      }
+      return $;
+    
+    # remove it from the C# generated code
   - from: source-file-csharp
     where: $ 
     transform: >-
