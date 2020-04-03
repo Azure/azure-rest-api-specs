@@ -1818,6 +1818,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/ListContainersFilter"
           }
         ],
         "responses": {
@@ -1922,6 +1925,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/ListContainersFilter"
           }
         ],
         "responses": {
@@ -8997,6 +9003,9 @@
         },
         "Metadata": {
           "$ref": "#/definitions/BlobMetadata"
+        },
+        "BlobTags": {
+          "$ref": "#/definitions/BlobTags"
         }
       }
     },
@@ -10807,7 +10816,8 @@
           "metadata",
           "snapshots",
           "uncommittedblobs",
-          "versions"
+          "versions",
+          "tags"
         ],
         "x-ms-enum": {
           "name": "ListBlobsIncludeItem",
@@ -10816,6 +10826,14 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Include this parameter to specify one or more datasets to include in the response."
+    },
+    "ListContainersFilter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Filters the results to return only to return only blobs whose tags match the specified expression.",
+      "x-ms-parameter-location": "method"
     },
     "ListContainersInclude": {
       "name": "include",
