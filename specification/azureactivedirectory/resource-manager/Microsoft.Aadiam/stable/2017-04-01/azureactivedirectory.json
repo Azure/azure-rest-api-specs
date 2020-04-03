@@ -37,39 +37,39 @@
     }
   },
   "paths": {
-    "/providers/microsoft.aadiam/privateLinksForAzureAD": {
-        "get": {
-          "tags": [
-            "PrivateLinksForAzureAD"
-          ],
-          "operationId": "PrivateLinksForAzureAD_List",
-          "x-ms-examples": {
-            "Gets the PrivateLinksForAzureAD": {
-              "$ref": "./examples/listPrivateLinksForAzureAD.json"
+    "/providers/microsoft.aadiam/privateLinkForAzureAD": {
+      "get": {
+        "tags": [
+          "PrivateLinkForAzureAD"
+        ],
+        "operationId": "PrivateLinkForAzureAD_List",
+        "x-ms-examples": {
+          "Gets the PrivateLinksForAzureAD": {
+            "$ref": "./examples/listPrivateLinksForAzureAD.json"
+          }
+        },
+        "description": "Operation to return the list of Private Links For AzureAD.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
+            "schema": {
+              "$ref": "#/definitions/privateLinkforAzureAD"
             }
           },
-          "description": "Operation to return the list of Private Links For AzureAD.",
-          "parameters": [
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Successful request to get list of Private Links For AzureAD.",
-              "schema": {
-                "$ref": "#/definitions/OperationsDiscoveryCollection"
-              }
-            },
-            "default": {
-              "description": "Error, failed to get list of Private Links For AzureAD.",
-              "schema": {
-                "$ref": "#/definitions/ErrorResponse"
-              }
+          "default": {
+            "description": "Error, failed to get list of Private Links For AzureAD.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
-      },
+      }
+    },
     "/providers/microsoft.aadiam/operations": {
       "get": {
         "tags": [
@@ -508,6 +508,39 @@
             "$ref": "#/definitions/OperationsDiscovery"
           }
         }
+      }
+    },
+    "privateLinkforAzureAD": {
+    "description": "PrivateLink Policy configuration object.",
+    "type": "object",
+    "properties": {
+          "name": {
+            "description": "Name of the Private Link Azure AD Policy.",
+            "type": "string"
+          },
+          "ownerTenantId": {
+            "description": "Guid of the ownere tenatnId",
+            "type": "string"
+          },
+          "tenants": {
+            "description": "The list of tenantIds.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "resourceName": {
+            "description": "Name fo the pirvate link policy resource",
+            "type": "string"
+          },
+          "subscription": {
+            "description": "Subscription Identifier",
+            "type": "string"
+          },
+          "resourceGroup": {
+            "description": "Name of the resource group",
+            "type": "string"
+          }
       }
     },
     "DiagnosticSettingsCategory": {
