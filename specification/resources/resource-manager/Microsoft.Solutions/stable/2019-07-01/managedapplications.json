@@ -1606,15 +1606,40 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/userAssignedResourceIdentity"
+          },
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
       },
       "description": "Identity for the resource."
+    },
+    "userAssignedResourceIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id of user assigned identity."
+        }
+      },
+      "description": "Represents the user assigned identity that is contained within the UserAssignedIdentities dictionary on ResourceIdentity"
     },
     "Resource": {
       "properties": {
