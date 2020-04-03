@@ -162,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.HybridData/stable/2019-06-01/hybriddata.json
   - $(this-folder)/Microsoft.HybridData/stable/2016-06-01/hybriddata.json
 
 ```
