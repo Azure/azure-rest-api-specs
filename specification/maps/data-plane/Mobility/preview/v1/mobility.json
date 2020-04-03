@@ -78,7 +78,7 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -373,26 +373,11 @@
           },
           {
             "name": "objectType",
-            "description": "Comma separated list of transit object types. By default, objectType is set to `stop`. Supported values are:\n  * `stop` - Public transit stop",
+            "description": "The transit object type. By default, objectType is set to `stop`",
             "in": "query",
             "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "stop"
-              ],
-              "x-ms-enum": {
-                "name": "ObjectType",
-                "modelAsString": false,
-                "values": [
-                  {
-                    "value": "stop",
-                    "description": "Public transit stop"
-                  }
-                ]
-              }
-            }
+            "default": "stop",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -583,7 +568,7 @@
               "values": [
                 {
                   "value": "stopId",
-                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists."
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists"
                 },
                 {
                   "value": "stopKey",
@@ -715,7 +700,7 @@
                 },
                 {
                   "value": "stopId",
-                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists."
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists"
                 },
                 {
                   "value": "stopKey",
@@ -754,7 +739,7 @@
                 },
                 {
                   "value": "stopId",
-                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists."
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists."
                 },
                 {
                   "value": "stopKey",
@@ -974,19 +959,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": [
-              "privateBike"
-            ],
-            "x-ms-enum": {
-              "name": "BikeType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "privateBike",
-                  "description": "Use private bike."
-                }
-              ]
-            }
+            "default": "privateBike"
           },
           {
             "$ref": "#/parameters/MobilityLanguage"
@@ -1192,7 +1165,7 @@
               "values": [
                 {
                   "value": "stopId",
-                  "description": "The unique identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists."
+                  "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists."
                 },
                 {
                   "value": "stopKey",
@@ -1704,7 +1677,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The object identifier found as a result of the query, for example, stopId for stops.",
+          "description": "The unique identifier (stopID) for the returned public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
           "type": "string"
         },
         "type": {
@@ -1729,7 +1702,7 @@
       "type": "object",
       "properties": {
         "stopId": {
-          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists.",
+          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
           "type": "string"
         },
         "stopKey": {
@@ -2305,7 +2278,7 @@
           "type": "string"
         },
         "stopId": {
-          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring stops overtime, it is suggested to use stopId that will not change if the physical stop exists.",
+          "description": "The unique Azure Maps identifier for the respective public transit stop. When referring to public transit stops over time, it is recommended to use `stopId` since it will not change, as long as the physical stop exists.",
           "type": "string"
         },
         "scheduleTime": {
@@ -2316,46 +2289,6 @@
         "scheduleType": {
           "description": "Whether the result is based on real-time or static data.",
           "$ref": "#/definitions/ScheduleType"
-        }
-      }
-    },
-    "Pricing": {
-      "type": "object",
-      "description": "Pricing details including currency, reservation price and usage price.",
-      "properties": {
-        "currency": {
-          "description": "The [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html) of returned prices. Will be returned in case any of the other pricing fields were returned.",
-          "type": "string"
-        },
-        "usagePrice": {
-          "description": "The price per minute charged when the vehicle is in use.",
-          "type": "string"
-        },
-        "reservationPrice": {
-          "description": "The price per minute charged when the vehicle has been reserved but not yet in use.",
-          "type": "string"
-        }
-      }
-    },
-    "OperatorInfo": {
-      "description": "Contains information about the operator. Apart form Id and name, all other fields are optional and nor always returned.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Id of the operator operating this object.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the operator operating this object.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Short description about the operator.",
-          "type": "string"
-        },
-        "siteUrl": {
-          "description": "Operator's home page.",
-          "type": "string"
         }
       }
     },
