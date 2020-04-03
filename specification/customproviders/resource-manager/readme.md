@@ -85,6 +85,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
 
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
