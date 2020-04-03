@@ -60,7 +60,51 @@
         },
         "x-ms-examples": {
           "Get private link resources for workspace": {
-            "$ref": "./examples/GetPrivateLinkResources.json"
+            "$ref": "./examples/ListPrivateLinkResources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "summary": "Get Private Link Resource",
+        "description": "Get private link resource in workspace",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./workspace.json#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkResourceNameParameter"
+          }
+        ],
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            },
+            "description": "Private link resource details"
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources for workspace": {
+            "$ref": "./examples/GetPrivateLinkResource.json"
           }
         }
       }
@@ -128,6 +172,16 @@
           "description": "Required DNS zone names of the the private link resource."
         }
       }
+    }
+  },
+  "parameters": {
+    "privateLinkResourceNameParameter": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link resource",
+      "x-ms-parameter-location": "method"
     }
   }
 }
