@@ -70,6 +70,16 @@ input-file:
 - Microsoft.ServiceFabric/stable/2020-03-01/application.json
 ```
 
+### Tag: package-2019-11-preview
+
+These settings apply only when `--tag=package-2019-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-preview'
+input-file:
+- Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
+```
+
 ### Tag: package-2019-06-preview
 
 These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
@@ -197,6 +207,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2020-03-01/application.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2019-03-01/cluster.json
