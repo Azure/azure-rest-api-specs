@@ -40,9 +40,9 @@
     "/providers/microsoft.aadiam/privateLinkForAzureAd": {
       "get": {
         "tags": [
-          "PrivateLinkForAzureAd"
+          "privateLinkForAzureAd"
         ],
-        "operationId": "PrivateLinkForAzureAd_List",
+        "operationId": "privateLinkForAzureAd_List",
         "x-ms-examples": {
           "Gets the PrivateLinksForAzureAD": {
             "$ref": "./examples/AzureADPrivateLinkPolicyList.json"
@@ -58,7 +58,7 @@
           "200": {
             "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/privateLinkforAzureAd"
+              "$ref": "#/definitions/privateLinkForAzureAd"
             }
           },
           "default": {
@@ -70,12 +70,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAD/{policyName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateLinkResources"
         ],
-        "description": "Gets the private link resources that need to be created for a Privte Link Policy of Azure AD.",
+        "description": "Gets the private link resources that need to be created for a policy of AzureAD.",
         "operationId": "PrivateLinkResources_ListByPrivateLinkPolicy",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -114,7 +114,7 @@
         "tags": [
           "PrivateLinkResources"
         ],
-        "description": "Gets the private link resources that need to be created for a Cosmos DB account.",
+        "description": "Gets the private link resources that need to be created for a policy of AzureAD.",
         "operationId": "PrivateLinkResources_Get",
         "parameters": [
           {
@@ -588,7 +588,7 @@
         }
       }
     },
-    "privateLinkforAzureAd": {
+    "privateLinkForAzureAd": {
     "description": "PrivateLink Policy configuration object.",
     "type": "object",
     "properties": {
@@ -597,7 +597,7 @@
             "type": "string"
           },
           "ownerTenantId": {
-            "description": "Guid of the ownere tenatnId",
+            "description": "Guid of the owner tenant",
             "type": "string"
           },
           "tenants": {
@@ -608,7 +608,7 @@
             }
           },
           "resourceName": {
-            "description": "Name fo the pirvate link policy resource",
+            "description": "Name of the pirvate link policy resource",
             "type": "string"
           },
           "subscription": {
