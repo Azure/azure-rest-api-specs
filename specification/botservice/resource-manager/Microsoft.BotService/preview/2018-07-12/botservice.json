@@ -311,6 +311,9 @@
         "x-ms-examples": {
           "Create Bot": {
             "$ref": "./examples/PutChannel.json"
+          },
+          "Create Line Bot": {
+            "$ref": "./examples/PutLineChannel.json"
           }
         },
         "parameters": [
@@ -369,6 +372,9 @@
         "x-ms-examples": {
           "Update Bot": {
             "$ref": "./examples/UpdateChannel.json"
+          },
+          "Update Line":{
+            "$ref": "./examples/UpdateLineChannel.json"
           }
         },
         "parameters": [
@@ -478,6 +484,9 @@
         "x-ms-examples": {
           "Get Bot": {
             "$ref": "./examples/GetChannel.json"
+          },
+          "Get Line Bot": {
+            "$ref": "./examples/GetLineChannel.json"
           }
         },
         "parameters": [
@@ -610,7 +619,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/DirectLineChannel/regeneratekeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/channels/{channelName}/regeneratekeys": {
       "post": {
         "tags": [
           "Channel"
@@ -620,6 +629,9 @@
         "x-ms-examples": {
           "Regenerate Keys for DirectLine Channel Site": {
             "$ref": "./examples/DirectlineRegenerateKeys.json"
+          },
+          "Regenerate Keys for WebChat Channel Site": {
+            "$ref": "./examples/WebChatRegenerateKeys.json"
           }
         },
         "parameters": [
@@ -631,6 +643,9 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/regenerateKeyschannelNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2817,6 +2832,30 @@
         ]
       },
       "description": "The name of the Channel resource."
+    },
+    "regenerateKeyschannelNameParameter": {
+      "name": "channelName",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "WebChatChannel",
+        "DirectLineChannel"
+      ],
+      "x-ms-enum": {
+        "name": "channelName",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "WebChatChannel"
+          },
+          {
+            "value": "DirectLineChannel"
+          }
+        ]
+      },
+      "description": "The name of the Channel resource for which keys are to be regenerated."
     }
   }
 }
