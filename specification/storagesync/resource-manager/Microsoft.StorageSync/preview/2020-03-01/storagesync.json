@@ -162,13 +162,39 @@
               "$ref": "#/definitions/StorageSyncService"
             }
           },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error message indicating why the operation failed.",
             "schema": {
               "$ref": "#/definitions/StorageSyncError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "parameters": [
@@ -278,13 +304,39 @@
               }
             }
           },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error message indicating why the operation failed.",
             "schema": {
               "$ref": "#/definitions/StorageSyncError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "parameters": [
@@ -329,6 +381,31 @@
               }
             }
           },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
           "204": {
             "description": "Storage Sync Service Resource doesn't exist"
           },
@@ -339,7 +416,8 @@
             }
           }
         }
-      }
+      },
+        "x-ms-long-running-operation": true
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices": {
       "get": {
@@ -3132,7 +3210,10 @@
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters."
         },
         "properties": {
-          "description": "StorageSyncService Body Properties object."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceCreateParametersProperties",
+          "description": "The parameters used to create the storage sync service."
         }
       },
       "required": [
@@ -3176,6 +3257,24 @@
         }
       },
       "description": "The parameters used when creating a cloud endpoint."
+    },
+    "StorageSyncServiceCreateParametersProperties": {
+      "description": "StorageSyncService Properties object.",
+      "properties": {
+        "incomingTrafficPolicy": {
+            "$ref": "#/definitions/IncomingTrafficPolicy",
+            "description": "Incoming Traffic Policy"
+            }
+      }
+    },
+    "StorageSyncServiceUpdateParametersProperties": {
+      "description": "StorageSyncService Properties object.",
+      "properties": {
+        "incomingTrafficPolicy": {
+            "$ref": "#/definitions/IncomingTrafficPolicy",
+            "description": "Incoming Traffic Policy"
+            }
+      }
     },
     "CloudEndpointCreateParametersProperties": {
       "description": "CloudEndpoint Properties object.",
@@ -3785,7 +3884,13 @@
     "StorageSyncServiceUpdateProperties": {
       "type": "object",
       "description": "Storage Sync Service Update Properties object.",
-      "properties": {}
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageSyncServiceUpdateParametersProperties",
+          "description": "The parameters used to update the storage sync service."
+        }
+      }
     },
     "StorageSyncServiceProperties": {
       "type": "object",
@@ -3800,6 +3905,22 @@
           "type": "string",
           "description": "Storage Sync service Uid",
           "readOnly": true
+        },
+        "incomingTrafficPolicy": {
+            "$ref": "#/definitions/IncomingTrafficPolicy",
+            "description": "Incoming Traffic Policy"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "StorageSyncService Provisioning State"
+        },
+        "lastWorkflowId": {
+          "type": "string",
+          "description": "StorageSyncService lastWorkflowId"
+        },
+        "lastOperationName": {
+          "type": "string",
+          "description": "Resource Last Operation Name"
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -3928,6 +4049,10 @@
         "managementEndpointUri": {
           "type": "string",
           "description": "Management Endpoint Uri"
+        },
+        "telemetryEndpointUri": {
+          "type": "string",
+          "description": "Telemetry Endpoint Uri"
         },
         "monitoringConfiguration": {
           "type": "string",
@@ -4313,6 +4438,14 @@
       "enum": [
         "on",
         "off"
+      ]
+    },
+    "IncomingTrafficPolicy": {
+      "type": "string",
+      "description": "Type of the Incoming Traffic Policy",
+      "enum": [
+        "AllowInternetTraffic",
+        "AllowVirtualNetworks"
       ]
     },
     "LocalCacheMode": {
