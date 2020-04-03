@@ -12,4 +12,20 @@ nodejs:
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: false
+
+directive:
+    # dynamically add a DELETETHISENUM value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DELETETHISENUM');
+      }
+      return $;
+
+  - from: source-file-nodejs
+    where: $ 
+    transform: >-
+      return $.
+        replace(/, 'DELETETHISENUM'/g,'');
 ```

@@ -6,6 +6,25 @@ These settings apply only when `--go` is specified on the command line.
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
   clear-output-folder: true
+
+directive:
+    # dynamically add a DELETEME value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DELETETHISENUM');
+      }
+      return $;
+
+  - from: source-file-go
+    where: $ 
+    transform: >-
+      return $.
+        replace(/\/\/ DELETETHISENUM .../g,'').
+        replace(/DELETETHISENUM OrchestrationServiceNames = "DELETETHISENUM"\n/g,'').
+        replace(/,DELETETHISENUM/,'').
+        replace(/, 'DELETETHISENUM'/,'');
 ```
 
 ### Go multi-api

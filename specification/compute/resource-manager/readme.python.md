@@ -10,6 +10,23 @@ python:
   package-name: azure-mgmt-compute
   no-namespace-folders: true
   clear-output-folder: true
+
+directive:
+    # dynamically add a DELETETHISENUM value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DELETETHISENUM');
+      }
+      return $;
+
+  - from: source-file-python
+    where: $ 
+    transform: >-
+      return $.
+        replace(/, 'DELETETHISENUM'/g,'').
+        replace(/deletethisenum = "DELETETHISENUM"/g,'');
 ```
 
 ### Python multi-api
