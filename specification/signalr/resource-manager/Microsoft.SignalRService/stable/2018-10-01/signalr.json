@@ -1069,6 +1069,19 @@
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
           "readOnly": true
+        },
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
@@ -1120,6 +1133,19 @@
         "type": {
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       },
@@ -1448,6 +1474,19 @@
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
           "readOnly": true
+        },
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1579,6 +1618,19 @@
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
           "readOnly": true
+        },
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1662,6 +1714,18 @@
         "location": {
           "description": "Azure GEO region: e.g. West US | East US | North Central US | South Central US | West Europe | North Europe | East Asia | Southeast Asia | etc. \r\nThe geo region of a resource never changes after it is created.",
           "type": "string"
+        },
+        "kind": {
+          "description": "The kind of the service. (e.g. signalr vs. rawwebsockets)",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          }
         }
       }
     },
