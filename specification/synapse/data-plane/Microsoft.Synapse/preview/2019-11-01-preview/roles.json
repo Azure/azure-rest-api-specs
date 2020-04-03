@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "SynapseClient"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
+    "parameters": [
+      {
+        "name": "workspaceName",
+        "description": "The name of the workspace to execute operations on.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      },
+      {
+        "$ref": "#/parameters/SynapseDnsSuffixInPath"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/rbac/roles": {
+      "get": {
+        "tags": [
+          "SynapseRoles"
+        ],
+        "operationId": "Roles_ListRoles",
+        "description": "List roles.",
+        "x-ms-examples": {
+          "Get access control information": {
+            "$ref": "./examples/Roles_ListRoles.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/RolesListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./roleAssignments.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    },
+    "/rbac/roles/{roleId}": {
+      "get": {
+        "tags": [
+          "SynapseRoles"
+        ],
+        "operationId": "Roles_GetRoleById",
+        "description": "Get role by role Id.",
+        "x-ms-examples": {
+          "Get access control information": {
+            "$ref": "./examples/Roles_GetRoleById.json"
+          }
+        },
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/RoleIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response.",
+            "schema": {
+              "$ref": "#/definitions/SynapseRole"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./roleAssignments.json#/definitions/ErrorContract"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RolesListResponse": {
+      "description": "A list of Synapse roles available.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Synapse roles.",
+          "items": {
+            "$ref": "#/definitions/SynapseRole"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page of results, if any remaining results exist.",
+          "type": "string"
+        }
+      }
+    },
+    "SynapseRole": {
+      "description": "Synapse role details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Role ID",
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Synapse role",
+          "type": "string"
+        },
+        "isBuiltIn": {
+          "description": "Is a built-in role or not",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Synapse client API Version."
+    },
+    "SynapseDnsSuffixInPath": {
+      "name": "SynapseDnsSuffix",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "default": "dev.azuresynapse.net",
+      "x-ms-skip-url-encoding": true,
+      "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
+      "x-ms-parameter-location": "client"
+    },
+    "RoleIdParameter": {
+      "name": "roleId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Synapse Built-In Role Id.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
