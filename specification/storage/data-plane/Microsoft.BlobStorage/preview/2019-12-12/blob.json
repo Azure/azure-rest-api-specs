@@ -4092,6 +4092,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/BlobTagsHeader"
           }
         ],
         "responses": {
@@ -4258,6 +4261,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/BlobTagsHeader"
           }
         ],
         "responses": {
@@ -4433,6 +4439,9 @@
           },
           {
             "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/BlobTagsHeader"
           }
         ],
         "responses": {
@@ -8686,7 +8695,7 @@
             "$ref": "#/parameters/ClientRequestId"
           },
           {
-            "$ref": "#/parameters/BlobTags"
+            "$ref": "#/parameters/BlobTagsBody"
           }
         ],
         "responses": {
@@ -10202,7 +10211,7 @@
         "modelAsString": true
       }
     },
-    "BlobTags" : {
+    "BlobTagsBody" : {
       "name": "Tags",
       "in": "body",
       "schema": {
@@ -10210,6 +10219,15 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Blob tags"
+    },
+    "BlobTagsHeader": {
+      "name": "x-ms-tags",
+      "x-ms-client-name": "BlobTagsString",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Optional.  Used to set blob tags in various blob operations."
     },
     "AccessTierRequired": {
       "name": "x-ms-access-tier",
