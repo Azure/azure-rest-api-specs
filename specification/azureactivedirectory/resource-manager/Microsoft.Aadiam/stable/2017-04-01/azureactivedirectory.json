@@ -37,12 +37,12 @@
     }
   },
   "paths": {
-    "/providers/microsoft.aadiam/privateLinkForAzureAD": {
+    "/providers/microsoft.aadiam/privateLinkForAzureAd": {
       "get": {
         "tags": [
-          "PrivateLinkForAzureAD"
+          "PrivateLinkForAzureAd"
         ],
-        "operationId": "PrivateLinkForAzureAD_List",
+        "operationId": "PrivateLinkForAzureAd_List",
         "x-ms-examples": {
           "Gets the PrivateLinksForAzureAD": {
             "$ref": "./examples/AzureADPrivateLinkPolicyList.json"
@@ -58,7 +58,7 @@
           "200": {
             "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/privateLinkforAzureAD"
+              "$ref": "#/definitions/privateLinkforAzureAd"
             }
           },
           "default": {
@@ -88,10 +88,10 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/PolicyNameParameter"
           },
           {
-            "$ref": "#/parameters/PolicyNameParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -109,7 +109,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAD/{policyName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.aadiam/privateLinkForAzureAd/{policyName}/privateLinkResources/{groupName}": {
       "get": {
         "tags": [
           "PrivateLinkResources"
@@ -124,13 +124,13 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "#/parameters/PolicyNameParameter"
           },
           {
             "$ref": "#/parameters/GroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -588,7 +588,7 @@
         }
       }
     },
-    "privateLinkforAzureAD": {
+    "privateLinkforAzureAd": {
     "description": "PrivateLink Policy configuration object.",
     "type": "object",
     "properties": {
