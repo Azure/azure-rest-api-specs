@@ -2988,6 +2988,12 @@
                 "type": "string",
                 "format": "byte",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-tag-count": {
+                "x-ms-client-name": "TagCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob"
               }
             },
             "schema": {
@@ -3205,6 +3211,12 @@
                 "type": "string",
                 "format": "byte",
                 "description": "If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range"
+              },
+              "x-ms-tag-count": {
+                "x-ms-client-name": "TagCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob"
               }
             },
             "schema": {
@@ -3515,6 +3527,12 @@
                 "x-ms-client-name": "IsCurrentVersion",
                 "type": "boolean",
                 "description": "The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header."
+              },
+              "x-ms-tag-count": {
+                "x-ms-client-name": "TagCount",
+                "type": "integer",
+                "format": "int64",
+                "description": "The number of tags associated with the blob"
               }
             }
           },
