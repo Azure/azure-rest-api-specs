@@ -42,7 +42,7 @@
         "description": "Gets the private link resources that need to be created for a policy of AzureAD.",
         "operationId": "PrivateLinkResources_ListByPrivateLinkPolicy",
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -156,6 +156,10 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
         }
       }
     },
@@ -230,7 +234,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2019-08-01."
+      "description": "Version of the API to be used with the client request."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
