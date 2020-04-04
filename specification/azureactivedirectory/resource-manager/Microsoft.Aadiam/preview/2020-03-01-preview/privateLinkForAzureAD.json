@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-03-01-preview",
+    "title": "azureactivedirectory",
+    "description": "Private link Policy for Azure Active Directory."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/microsoft.aadiam/privateLinkForAzureAd": {
+      "get": {
+        "tags": [
+          "privateLinkForAzureAd"
+        ],
+        "operationId": "privateLinkForAzureAd_List",
+        "x-ms-examples": {
+          "Gets the PrivateLinksForAzureAD": {
+            "$ref": "./examples/AzureADPrivateLinkPolicyList.json"
+          }
+        },
+        "description": "Operation to return the list of Private Links For AzureAD.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
+            "schema": {
+              "$ref": "#/definitions/privateLinkPolicy"
+            }
+          },
+          "default": {
+            "description": "Error, failed to get list of Private Links For AzureAD.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "privateLinkPolicy": {
+    "description": "PrivateLink Policy configuration object.",
+    "type": "object",
+    "properties": {
+          "name": {
+            "description": "Name of the Private Link Azure AD Policy.",
+            "type": "string"
+          },
+          "ownerTenantId": {
+            "description": "Guid of the owner tenant",
+            "type": "string"
+          },
+          "tenants": {
+            "description": "The list of tenantIds.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "resourceName": {
+            "description": "Name of the private link policy resource",
+            "type": "string"
+          },
+          "ation": {
+            "description": "Subscription Identifier",
+            "type": "string"
+          },
+          "resourceGroup": {
+            "description": "Name of the resource group",
+            "type": "string"
+          }
+      }
+    },
+
+    "ErrorResponse": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The error details."
+        }
+      }
+    },
+    "ErrorDefinition": {
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Description of the error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Internal error details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}
