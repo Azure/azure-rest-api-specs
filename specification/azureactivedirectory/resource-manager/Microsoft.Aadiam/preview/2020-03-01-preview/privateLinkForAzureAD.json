@@ -55,7 +55,7 @@
           "200": {
             "description": "Successful request to get list of Private Links configuration objects For AzureAD.",
             "schema": {
-              "$ref": "#/definitions/privateLinkPolicy"
+              "$ref": "#/definitions/privateLinkPolicyListResult"
             }
           },
           "default": {
@@ -69,6 +69,19 @@
     }
   },
   "definitions": {
+    "privateLinkPolicyListResult": {
+      "description": "A list of private link policies",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link policies",
+          "items": {
+            "$ref": "#/definitions/privateLinkPolicy"
+          }
+        }
+      }
+    },
     "privateLinkPolicy": {
     "description": "PrivateLink Policy configuration object.",
     "type": "object",
@@ -92,7 +105,7 @@
             "description": "Name of the private link policy resource",
             "type": "string"
           },
-          "ation": {
+          "subscriptionId": {
             "description": "Subscription Identifier",
             "type": "string"
           },
@@ -102,7 +115,6 @@
           }
       }
     },
-
     "ErrorResponse": {
       "description": "Error response.",
       "properties": {
