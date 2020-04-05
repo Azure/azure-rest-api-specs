@@ -8097,6 +8097,14 @@
         "operationId": "Versions_ExportLuFormat",
         "parameters": [
           {
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "description": "Lu format extension",
+            "type" : "string",
+            "enum": ["lu"]
+          },
+          {
             "$ref": "#/parameters/AppIdInPath"
           },
           {
@@ -8105,7 +8113,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The LUIS application structure in LU format."
+            "description": "The LUIS application structure in LU format.",
+            "schema": {
+              "$ref":"#/definitions/ExportResponse"
+            }
           },
           "default": {
             "description": "Error Response.",
@@ -8115,7 +8126,7 @@
           }
         },
         "produces": [
-          "text/plain"
+          "application/json"
         ],
         "x-ms-examples": {
           "Successful Export Application Version": {
@@ -9124,6 +9135,11 @@
     "VersionResponse": {
       "description": "The new version ID returned by when importing a model version.",
       "type": "string"
+    },
+    "ExportResponse": {
+      "description": "The LUIS application structure in LU format.",
+      "type": "object",
+      "format": "file"
     },
     "FeatureIDResponse": {
       "description": "The ID of the created feature.",
