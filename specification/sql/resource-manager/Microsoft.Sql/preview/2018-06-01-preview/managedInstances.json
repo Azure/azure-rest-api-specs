@@ -328,90 +328,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/sqlAgent/current": {
-      "get": {
-        "tags": [
-          "ManagedInstances"
-        ],
-        "description": "Gets current instance sql agent configuration.",
-        "operationId": "SqlAgentConfiguration_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved current sql agent configuration.",
-            "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance."
-          }
-        },
-        "x-ms-examples": {
-          "Gets current instance sql agent configuration.": {
-            "$ref": "./examples/SqlAgentConfigurationGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ManagedInstances"
-        ],
-        "description": "Puts new sql agent configuration to instance.",
-        "operationId": "SqlAgentConfiguration_Put",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ManagedInstanceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully put sql agent configuration",
-            "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 SqlAgentManagedServerNotFound - User tried to configure sql agent of unknown managed instance."
-          }
-        },
-        "x-ms-examples": {
-          "Puts new sql agent configuration to instance.": {
-            "$ref": "./examples/SqlAgentConfigurationPut.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -601,36 +517,6 @@
         },
         "properties": {
           "$ref": "#/definitions/ManagedInstanceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "SqlAgentConfigurationProperties": {
-      "description": "Sql agent configuration properties.",
-      "type": "object",
-      "properties": {
-        "state": {
-          "description": "The state of Sql Agent.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string"
-        }
-      }
-    },
-    "SqlAgentConfiguration": {
-      "description": "A recoverable managed database resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlAgentConfigurationProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }

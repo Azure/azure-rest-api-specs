@@ -79,6 +79,7 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
 - Microsoft.Sql/stable/2014-04-01/usages.json
+- Microsoft.Sql/stable/2018-06-01/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
