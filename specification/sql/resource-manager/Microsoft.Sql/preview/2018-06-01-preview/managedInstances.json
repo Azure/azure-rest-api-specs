@@ -606,6 +606,36 @@
         }
       }
     },
+    "SqlAgentConfigurationProperties": {
+      "description": "Sql agent configuration properties.",
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "The state of Sql Agent.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "SqlAgentConfiguration": {
+      "description": "A recoverable managed database resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlAgentConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "ManagedInstanceUpdate": {
       "description": "An update request for an Azure SQL Database managed instance.",
       "type": "object",
