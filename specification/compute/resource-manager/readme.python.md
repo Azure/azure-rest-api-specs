@@ -26,7 +26,7 @@ directive:
     transform: >-
       return $.
         replace(/, 'DummyOrchestrationServiceName'/g,'').
-        replace(/dummyorchestrationservicename = "DummyOrchestrationServiceName"/g,'');
+        replace(/dummy_orchestration_service_name = "DummyOrchestrationServiceName"/g,'');
 ```
 
 ### Python multi-api

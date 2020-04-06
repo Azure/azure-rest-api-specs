@@ -33,10 +33,9 @@ directive:
     transform: >-
       return $.
         replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
-        replace(/, 'DummyOrchestrationServiceName'/g,'');
+        replace(/, 'DummyOrchestrationServiceName'/g,'').
+        replace(/\/\/\/ 'DummyOrchestrationServiceName'<\/param>/g,'');
 ```
-
-
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Compute

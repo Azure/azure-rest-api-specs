@@ -27,5 +27,5 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/, 'DummyOrchestrationServiceName'/g,'');
+        replace(/[,*] 'DummyOrchestrationServiceName'/g,'');
 ```
