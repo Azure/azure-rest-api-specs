@@ -33,8 +33,7 @@ directive:
     transform: >-
       return $.
         replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
-        replace(/, 'DummyOrchestrationServiceName'/g,'').
-        replace(/\/\/\/ 'DummyOrchestrationServiceName'<\/param>/g,'');
+        replace(/, 'DummyOrchestrationServiceName'/g,'');
 ```
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
