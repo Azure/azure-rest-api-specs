@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "managementGroupId": "TestManagementGroup",
+    "api-version": "2019-09-01",
+    "$filter": "atScope()"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyAssignments/TestCostManagement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "name": "TestCostManagement",
+            "location": "eastus",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "e6d23f8d-af97-4fbc-bda6-00604e4e3d0a",
+              "tenantId": "4bee2b8a-1bee-47c2-90e9-404241551135"
+            },
+            "properties": {
+              "displayName": "Storage Cost Management",
+              "description": "Minimize the risk of accidental cost overruns",
+              "metadata": {
+                "category": "Cost Management"
+              },
+              "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyDefinitions/storageSkus",
+              "parameters": {
+                "allowedSkus": {
+                  "value": "Standard_A1"
+                }
+              },
+              "scope": "/providers/Microsoft.Management/managementGroups/TestManagementGroup",
+              "notScopes": []
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyAssignments/TestTagEnforcement",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "name": "TestTagEnforcement",
+            "properties": {
+              "displayName": "Enforces a tag key and value",
+              "description": "Ensure a given tag key and value are present on all resources",
+              "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/TestManagementGroup/providers/Microsoft.Authorization/policyDefinitions/TagKeyValue",
+              "scope": "/providers/Microsoft.Management/managementGroups/TestManagementGroup",
+              "notScopes": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}

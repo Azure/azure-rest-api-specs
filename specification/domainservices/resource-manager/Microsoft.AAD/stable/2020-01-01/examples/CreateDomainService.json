@@ -1,0 +1,188 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "subscriptionId": "1639790a-76a2-4ac4-98d9-8562f5dfcb4d",
+    "resourceGroupName": "TestResourceGroup",
+    "domainServiceName": "TestDomainService.com",
+    "domainService": {
+      "location": "West US",
+      "properties": {
+        "domainName": "TestDomainService.com",
+        "replicaSets": [
+          {
+            "location": "West US",
+            "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS"
+          }
+        ],
+        "ldapsSettings": {
+          "ldaps": "Enabled",
+          "pfxCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+          "pfxCertificatePassword": "Password01",
+          "externalAccess": "Enabled"
+        },
+        "domainSecuritySettings": {
+          "ntlmV1": "Enabled",
+          "tlsV1": "Disabled",
+          "syncNtlmPasswords": "Enabled"
+        },
+        "filteredSync": "Enabled",
+        "notificationSettings": {
+          "notifyGlobalAdmins": "Enabled",
+          "notifyDcAdmins": "Enabled",
+          "additionalRecipients": [
+            "jicha@microsoft.com",
+            "caalmont@microsoft.com"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "HTTP 200 (OK) if the operation was successful.",
+      "body": {
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "location": "West US",
+        "etag": "W/\"datetime'2017-04-10T04%3A42%3A19.7067387Z'\"",
+        "properties": {
+          "version": 2,
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "domainName": "TestDomainService.com",
+          "deploymentId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "replicaSets": [
+            {
+              "replicaSetId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "location": "West US",
+              "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS",
+              "domainControllerIpAddress": [
+                "10.0.0.1",
+                "10.0.0.2"
+              ],
+              "externalAccessIpAddress": "13.64.148.151",
+              "serviceStatus": "Running"
+            }
+          ],
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "externalAccess": "Enabled"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "filteredSync": "Enabled",
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "description": "HTTP 201 (Created) if the operation completed successfully.",
+      "body": {
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "location": "West US",
+        "etag": "W/\"datetime'2017-04-10T04%3A42%3A19.7067387Z'\"",
+        "properties": {
+          "version": 2,
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "domainName": "TestDomainService.com",
+          "deploymentId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "syncOwner": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+          "replicaSets": [
+            {
+              "replicaSetId": "4a619871-0150-41c4-aeb4-0b10deb7940a",
+              "location": "West US",
+              "vnetSiteId": "99083198-a39c-469f-972d-59017e7f078c",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS",
+              "domainControllerIpAddress": [
+                "10.0.0.1",
+                "10.0.0.2"
+              ],
+              "externalAccessIpAddress": "13.64.148.151",
+              "serviceStatus": "Running"
+            }
+          ],
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "publicCertificate": "MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...",
+            "certificateThumbprint": "9154A390F0C387D679E0DD040701745CDFED67F3",
+            "certificateNotAfter": "2018-02-15T21:43:21Z",
+            "externalAccess": "Enabled"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "filteredSync": "Enabled",
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+      "body": {
+        "id": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestResourceGroup/providers/Microsoft.AAD/DomainServices/TestDomainService.com",
+        "name": "TestDomainService.com",
+        "type": "Microsoft.AAD/DomainServices",
+        "location": "West US",
+        "etag": "W/\"datetime'2017-04-10T04%3A42%3A19.7067387Z'\"",
+        "properties": {
+          "version": 2,
+          "tenantId": "3f8cd22c-7b32-48aa-a01c-f533133b1def",
+          "domainName": "TestDomainService.com",
+          "replicaSets": [
+            {
+              "location": "West US",
+              "subnetId": "/subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/TestNetworkResourceGroup/providers/Microsoft.Network/virtualNetworks/TestVnetWUS/subnets/TestSubnetWUS"
+            }
+          ],
+          "ldapsSettings": {
+            "ldaps": "Enabled",
+            "externalAccess": "Enabled"
+          },
+          "domainSecuritySettings": {
+            "ntlmV1": "Enabled",
+            "tlsV1": "Disabled",
+            "syncNtlmPasswords": "Enabled"
+          },
+          "filteredSync": "Enabled",
+          "notificationSettings": {
+            "notifyGlobalAdmins": "Enabled",
+            "notifyDcAdmins": "Enabled",
+            "additionalRecipients": [
+              "jicha@microsoft.com",
+              "caalmont@microsoft.com"
+            ]
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

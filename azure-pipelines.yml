@@ -1,5 +1,13 @@
 name: "Azure OpenAPI"
 
+trigger:
+  branches:
+    include:
+      - master
+
+pr:
+  autoCancel: false
+
 variables:
   TRAVIS: 'true'
   TRAVIS_BRANCH: $(System.PullRequest.TargetBranch)
@@ -19,3 +27,4 @@ jobs:
 - template: .azure-pipelines/LintDiff.yml
 - template: .azure-pipelines/NetworkValidation.yml
 - template: .azure-pipelines/Spellcheck.yml
+- template: .azure-pipelines/PrettierCheck.yml

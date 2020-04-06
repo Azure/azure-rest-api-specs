@@ -341,11 +341,6 @@
           "type": "boolean",
           "description": "Indicates whether the security automation is enabled."
         },
-        "metadata": {
-          "type": "object",
-          "description": "The metadata of the security automation resource.",
-          "$ref": "#/definitions/AutomationMetadata"
-        },
         "scopes": {
           "type": "array",
           "description": "A collection of scopes on which the security automations logic is applied. Supported scopes are the subscription itself or a resource group under that subscription. The automation will only apply on defined scopes.",
@@ -366,34 +361,6 @@
           "items": {
             "$ref": "#/definitions/AutomationAction"
           }
-        }
-      }
-    },
-    "AutomationMetadata": {
-      "type": "object",
-      "description": "The metadata of the security automation resource.",
-      "properties": {
-        "createdDateTimeUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The security automation creation date."
-        },
-        "createdBy": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The AAD object ID of the entity that created the security automation."
-        },
-        "lastUpdatedDateTimeUtc": {
-          "readOnly": true,
-          "type": "string",
-          "format": "date-time",
-          "description": "The security automation last updated date."
-        },
-        "lastUpdatedBy": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The AAD object ID of the entity that last updated the security automation."
         }
       }
     },
@@ -480,7 +447,7 @@
     },
     "AutomationActionLogicApp": {
       "type": "object",
-      "description": "The logic app action that should be triggered.",
+      "description": "The logic app action that should be triggered. To learn more about Security Center's Workflow Automation capabilities, visit https://aka.ms/ASCWorkflowAutomationLearnMore",
       "x-ms-discriminator-value": "LogicApp",
       "allOf": [
         {
@@ -491,39 +458,17 @@
         "logicAppResourceId": {
           "type": "string",
           "description": "The triggered Logic App Azure Resource ID. This can also reside on other subscriptions, given that you have permissions to trigger the Logic App"
-        }
-      }
-    },
-    "AutomationActionLogicAppInput": {
-      "type": "object",
-      "description": "The logic app action that should be triggered.",
-      "x-ms-discriminator-value": "LogicApp",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionLogicApp"
-        }
-      ],
-      "properties": {
+        },
         "uri": {
           "type": "string",
-          "description": "The Logic App trigger URI endpoint.",
+          "description": "The Logic App trigger URI endpoint (it will not be included in any response).",
           "format": "uri"
         }
       }
     },
-    "AutomationActionLogicAppOutput": {
-      "type": "object",
-      "description": "The logic app action that should be triggered.",
-      "x-ms-discriminator-value": "LogicApp",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionLogicApp"
-        }
-      ]
-    },
     "AutomationActionEventHub": {
       "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
+      "description": "The target Event Hub to which event data will be exported. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
@@ -534,44 +479,21 @@
         "eventHubResourceId": {
           "type": "string",
           "description": "The target Event Hub Azure Resource ID."
-        }
-      }
-    },
-    "AutomationActionEventHubInput": {
-      "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
-      "x-ms-discriminator-value": "EventHub",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionEventHub"
-        }
-      ],
-      "properties": {
-        "connectionString": {
-          "type": "string",
-          "description": "The target Event Hub connection string"
-        }
-      }
-    },
-    "AutomationActionEventHubOutput": {
-      "type": "object",
-      "description": "The target Event Hub to which event data will be exported.",
-      "x-ms-discriminator-value": "EventHub",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AutomationActionEventHub"
-        }
-      ],
-      "properties": {
+        },
         "sasPolicyName": {
+          "readOnly": true,
           "type": "string",
           "description": "The target Event Hub SAS policy name."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The target Event Hub connection string (it will not be included in any response)."
         }
       }
     },
     "AutomationActionWorkspace": {
       "type": "object",
-      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace.",
+      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace. To learn more about Security Center continuous export capabilities, visit https://aka.ms/ASCExportLearnMore",
       "x-ms-discriminator-value": "Workspace",
       "allOf": [
         {
@@ -639,7 +561,7 @@
         },
         "operator": {
           "type": "string",
-          "description": "A valid comparer operator to use.",
+          "description": "A valid comparer operator to use. A case-insensitive comparison will be applied for String PropertyType.",
           "enum": [
             "Equals",
             "GreaterThan",

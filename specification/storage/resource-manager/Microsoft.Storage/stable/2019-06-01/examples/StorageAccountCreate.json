@@ -9,13 +9,26 @@
         "name": "Standard_GRS"
       },
       "kind": "Storage",
-      "location": "eastus2euap",
+      "location": "eastus",
       "properties": {
         "isHnsEnabled": true,
         "routingPreference": {
           "routingChoice": "MicrosoftRouting",
           "publishMicrosoftEndpoints": true,
           "publishInternetEndpoints": true
+        },
+        "encryption": {
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
         }
       },
       "tags": {
@@ -29,7 +42,7 @@
       "body": {
         "id": "/subscriptions/{subscription-id}/resourceGroups/res9101/providers/Microsoft.Storage/storageAccounts/sto4445",
         "kind": "Storage",
-        "location": "eastus2euap",
+        "location": "eastus",
         "name": "sto4445",
         "properties": {
           "isHnsEnabled": true,
@@ -62,6 +75,21 @@
             "routingChoice": "MicrosoftRouting",
             "publishMicrosoftEndpoints": true,
             "publishInternetEndpoints": true
+          },
+          "encryption": {
+            "services": {
+              "file": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              },
+              "blob": {
+                "keyType": "Account",
+                "enabled": true,
+                "lastEnabledTime": "2019-12-11T20:49:31.7036140Z"
+              }
+            },
+            "keySource": "Microsoft.Storage"
           },
           "secondaryLocation": "centraluseuap",
           "statusOfPrimary": "available",

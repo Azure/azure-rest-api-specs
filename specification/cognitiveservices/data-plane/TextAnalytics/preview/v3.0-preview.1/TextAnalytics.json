@@ -80,7 +80,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -138,7 +138,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -254,7 +254,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -312,7 +312,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -370,7 +370,7 @@
           "default": {
             "description": "Error Response",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/TextAnalyticsError"
             }
           }
         },
@@ -436,13 +436,11 @@
         "error": {
           "type": "object",
           "description": "Document Error.",
-          "items": {
-            "$ref": "#/definitions/Error"
-          }
+          "$ref": "#/definitions/TextAnalyticsError"
         }
       }
     },
-    "Error": {
+    "TextAnalyticsError": {
       "type": "object",
       "required": [
         "code",
@@ -457,6 +455,10 @@
             "internalServerError",
             "serviceUnavailable"
           ],
+          "x-ms-enum": {
+            "name": "ErrorCodeValue",
+            "modelAsString": false
+          },
           "description": "Error code."
         },
         "message": {
@@ -467,7 +469,7 @@
           "type": "string",
           "description": "Error target."
         },
-        "innererror": {
+        "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         },
@@ -475,7 +477,7 @@
           "type": "array",
           "description": "Details about specific errors that led to this reported error.",
           "items": {
-            "$ref": "#/definitions/Error"
+            "$ref": "#/definitions/TextAnalyticsError"
           }
         }
       }
@@ -500,17 +502,28 @@
             "unsupportedLanguageCode",
             "invalidCountryHint"
           ],
+          "x-ms-enum": {
+            "name": "InnerErrorCodeValue",
+            "modelAsString": false
+          },
           "description": "Error code."
         },
         "message": {
           "type": "string",
           "description": "Error message."
         },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Error details."
+        },
         "target": {
           "type": "string",
           "description": "Error target."
         },
-        "innererror": {
+        "innerError": {
           "$ref": "#/definitions/InnerError",
           "description": "Inner error contains more specific information."
         }
@@ -568,13 +581,18 @@
             "neutral",
             "negative",
             "mixed"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DocumentSentimentValue",
+            "modelAsString": false
+          }
         },
         "statistics": {
           "$ref": "#/definitions/DocumentStatistics"
         },
         "documentScores": {
-          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class."
+          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "sentences": {
           "type": "array",
@@ -676,10 +694,15 @@
             "positive",
             "neutral",
             "negative"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "SentenceSentimentValue",
+            "modelAsString": false
+          }
         },
         "sentenceScores": {
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
         },
         "offset": {
           "type": "integer",
