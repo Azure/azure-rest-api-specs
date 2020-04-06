@@ -58,7 +58,13 @@
             "$ref": "#/parameters/Api-VersionQueryParam"
           },
           {
-            "$ref": "#/parameters/ConnectedClusterBodyParam"
+            "in": "body",
+            "name": "ConnectedCluster",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedCluster"
+            },
+            "description": "Parameters supplied to the Create a Connected Cluster."
           }
         ],
         "responses": {
@@ -112,7 +118,13 @@
             "$ref": "#/parameters/Api-VersionQueryParam"
           },
           {
-            "$ref": "#/parameters/ConnectedClusterPatchBodyParam"
+            "in": "body",
+            "name": "ConnectedClusterPatch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedClusterPatch"
+            },
+            "description": "Parameters supplied to update Connected Cluster."
           }
         ],
         "responses": {
@@ -217,17 +229,17 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredential": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listClusterUserCredentials": {
       "post": {
-        "summary": "Gets cluster user credential of a connected cluster",
-        "operationId": "ConnectedCluster_ListClusterUserCredential",
-        "description": "Gets cluster user credential of the connected cluster with a specified resource group and name.",
+        "summary": "Gets cluster user credentials of a connected cluster",
+        "operationId": "ConnectedCluster_ListClusterUserCredentials",
+        "description": "Gets cluster user credentials of the connected cluster with a specified resource group and name.",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
-          "ListClusterUserCredentialExample": {
-            "$ref": "./examples/ConnectedClustersListClusterCredentialResult.json"
+          "ListClusterUserCredentialsExample": {
+            "$ref": "./examples/ConnectedClustersListClusterCredentialsResult.json"
           }
         },
         "parameters": [
@@ -248,50 +260,7 @@
           "200": {
             "description": "Action performed successfully",
             "schema": {
-              "$ref": "#/definitions/CredentialResult"
-            }
-          },
-          "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Kubernetes/connectedClusters/{clusterName}/listProxyConnectionDetail": {
-      "post": {
-        "summary": "Lists the endpoint and credential for proxy",
-        "operationId": "ConnectedCluster_ListProxyConnectionDetail",
-        "description": "API to fetch endpoint and credential details to proxy server",
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "ListProxyConnectionDetailExample": {
-            "$ref": "./examples/ListProxyConnectionDetailExample.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdPathParam"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNamePathParam"
-          },
-          {
-            "$ref": "#/parameters/ClusterNamePathParam"
-          },
-          {
-            "$ref": "#/parameters/Api-VersionQueryParam"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Action performed successfully",
-            "schema": {
-              "$ref": "#/definitions/ConnectedClusterProxyProfile"
+              "$ref": "#/definitions/CredentialResults"
             }
           },
           "default": {
@@ -424,15 +393,6 @@
     }
   },
   "definitions": {
-    "ConnectedClusterProxyProfile": {
-      "type": "object",
-      "properties": {
-        "proxyConnection": {
-          "type": "string",
-          "description": "Endpoint and authentication details to connect to proxy"
-        }
-      }
-    },
     "OperationList": {
       "description": "The paginated list of connected cluster API operations.",
       "properties": {
@@ -541,7 +501,8 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectedClusterProperties"
+          "$ref": "#/definitions/ConnectedClusterProperties",
+          "description": "Describes the connected cluster resource properties."
         }
       }
     },
@@ -563,9 +524,10 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of identity used for the connected cluster. The type 'SystemAssigned, includes a system created identity.",
+          "description": "The type of identity used for the connected cluster. The type 'SystemAssigned, includes a system created identity. The type 'None' means no identity is assigned to the connected cluster.",
           "enum": [
-            "SystemAssigned"
+            "SystemAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
@@ -590,14 +552,17 @@
           "$ref": "#/definitions/ConnectedClusterAADProfile"
         },
         "kubernetesVersion": {
+          "readOnly": true,
           "type": "string",
           "description": "The Kubernetes version of the connected cluster resource"
         },
         "totalNodeCount": {
+          "readOnly": true,
           "type": "integer",
           "description": "Number of nodes present in the connected cluster resource"
         },
         "agentVersion": {
+          "readOnly": true,
           "type": "string",
           "description": "Version of the agent running on the connected cluster resource"
         },
@@ -610,6 +575,19 @@
         }
       }
     },
+    "CredentialResults": {
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CredentialResult"
+          },
+          "description": "Base64-encoded Kubernetes configuration file."
+        }
+      },
+      "description": "The list of credential result response."
+    },
     "CredentialResult": {
       "type": "object",
       "properties": {
@@ -618,7 +596,7 @@
           "readOnly": true,
           "description": "The name of the credential."
         },
-        "kubeconfig": {
+        "value": {
           "type": "string",
           "format": "byte",
           "readOnly": true,
@@ -675,9 +653,27 @@
             "type": "string"
           },
           "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConnectedClusterPatchProperties",
+          "description": "Describes the connected cluster resource properties that can be updated during PATCH operation."
         }
       },
       "description": "Object containing updates for patch operations."
+    },
+    "ConnectedClusterPatchProperties": {
+      "type": "object",
+      "properties": {
+        "agentPublicKeyCertificate": {
+          "type": "string",
+          "description": "Base64 encoded public certificate used by the agent to do the initial handshake to the backend services in Azure."
+        },
+        "locationData": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/locationData",
+          "description": "Metadata pertaining to the geographic location of the resource."
+        }
+      }
     },
     "ErrorResponse": {
       "description": "The error response that indicates why an operation has failed.",
@@ -712,24 +708,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Kubernetes cluster on which get is called.",
-      "x-ms-parameter-location": "method"
-    },
-    "ConnectedClusterBodyParam": {
-      "in": "body",
-      "name": "ConnectedCluster",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ConnectedCluster"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "ConnectedClusterPatchBodyParam": {
-      "in": "body",
-      "name": "ConnectedClusterPatch",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/ConnectedClusterPatch"
-      },
       "x-ms-parameter-location": "method"
     },
     "ResourceGroupNamePathParam": {
