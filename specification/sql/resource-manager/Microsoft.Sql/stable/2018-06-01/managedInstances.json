@@ -22,7 +22,7 @@
           "ManagedInstances"
         ],
         "description": "Gets current instance sql agent configuration.",
-        "operationId": "SqlAgentConfiguration_Get",
+        "operationId": "SqlAgent_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -41,7 +41,7 @@
           "200": {
             "description": "Successfully retrieved current sql agent configuration.",
             "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
+              "$ref": "#/definitions/SqlAgent"
             }
           },
           "default": {
@@ -50,7 +50,7 @@
         },
         "x-ms-examples": {
           "Gets current instance sql agent configuration.": {
-            "$ref": "./examples/SqlAgentConfigurationGet.json"
+            "$ref": "./examples/SqlAgentGet.json"
           }
         }
       },
@@ -59,7 +59,7 @@
           "ManagedInstances"
         ],
         "description": "Puts new sql agent configuration to instance.",
-        "operationId": "SqlAgentConfiguration_Put",
+        "operationId": "SqlAgent_Put",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -72,7 +72,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
+              "$ref": "#/definitions/SqlAgent"
             }
           },
           {
@@ -86,7 +86,7 @@
           "200": {
             "description": "Successfully put sql agent configuration",
             "schema": {
-              "$ref": "#/definitions/SqlAgentConfiguration"
+              "$ref": "#/definitions/SqlAgent"
             }
           },
           "default": {
@@ -95,15 +95,15 @@
         },
         "x-ms-examples": {
           "Puts new sql agent configuration to instance.": {
-            "$ref": "./examples/SqlAgentConfigurationPut.json"
+            "$ref": "./examples/SqlAgentPut.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SqlAgentConfigurationProperties": {
-      "description": "Sql agent configuration properties.",
+    "SqlAgentProperties": {
+      "description": "Sql agent properties.",
       "type": "object",
       "properties": {
         "state": {
@@ -112,12 +112,16 @@
             "Enabled",
             "Disabled"
           ],
+          "x-ms-enum": [
+            "Enabled",
+            "Disabled"
+          ],
           "type": "string"
         }
       }
     },
-    "SqlAgentConfiguration": {
-      "description": "A recoverable managed database resource.",
+    "SqlAgent": {
+      "description": "A management instance sql agent resource.",
       "type": "object",
       "allOf": [
         {
@@ -126,7 +130,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SqlAgentConfigurationProperties",
+          "$ref": "#/definitions/SqlAgentProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
