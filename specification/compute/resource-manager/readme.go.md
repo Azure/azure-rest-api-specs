@@ -8,12 +8,12 @@ go:
   clear-output-folder: true
 
 directive:
-    # dynamically add a DELETEME value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: compute.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DELETETHISENUM');
+        $.push('DummyOrchestrationServiceName');
       }
       return $;
 
@@ -21,10 +21,10 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/\/\/ DELETETHISENUM .../g,'').
-        replace(/DELETETHISENUM OrchestrationServiceNames = "DELETETHISENUM"\n/g,'').
-        replace(/,DELETETHISENUM/,'').
-        replace(/, 'DELETETHISENUM'/,'');
+        replace(/\/\/ DummyOrchestrationServiceName .../g,'').
+        replace(/DummyOrchestrationServiceName OrchestrationServiceNames = "DummyOrchestrationServiceName"\n/g,'').
+        replace(/,DummyOrchestrationServiceName/,'').
+        replace(/, 'DummyOrchestrationServiceName'/,'');
 ```
 
 ### Go multi-api

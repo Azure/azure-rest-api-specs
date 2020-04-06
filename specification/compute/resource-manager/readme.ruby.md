@@ -12,7 +12,6 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
-  - tag: package-compute-2019-12-01
   - tag: package-disks-2018-04
   - tag: package-compute-only-2017-12
   - tag: package-skus-2017-09
@@ -20,16 +19,6 @@ batch:
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
-```
-
-### Tag: package-compute-2019-12-01 and ruby
-
-These settings apply only when `--tag=package-compute-2019-12-01 --ruby` is specified on the command line.
-Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
-
-``` yaml $(tag) == 'package-compute-2019-12-01' && $(ruby)
-namespace: "Azure::Compute::Mgmt::V2019_12_01"
-output-folder: $(ruby-sdks-folder)/management/azure_mgmt_compute/lib
 ```
 
 ### Tag: package-disks-2018-04 and ruby

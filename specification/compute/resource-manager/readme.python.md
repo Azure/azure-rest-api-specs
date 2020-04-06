@@ -12,12 +12,12 @@ python:
   clear-output-folder: true
 
 directive:
-    # dynamically add a DELETETHISENUM value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: compute.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DELETETHISENUM');
+        $.push('DummyOrchestrationServiceName');
       }
       return $;
 
@@ -25,8 +25,8 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/, 'DELETETHISENUM'/g,'').
-        replace(/deletethisenum = "DELETETHISENUM"/g,'');
+        replace(/, 'DummyOrchestrationServiceName'/g,'').
+        replace(/dummyorchestrationservicename = "DummyOrchestrationServiceName"/g,'');
 ```
 
 ### Python multi-api

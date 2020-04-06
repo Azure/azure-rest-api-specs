@@ -18,12 +18,12 @@ csharp:
 
 # remove DUMMY member of enum
 directive:
-    # dynamically add a DELETEME value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: compute.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DELETEME');
+        $.push('DummyOrchestrationServiceName');
       }
       return $;
     
@@ -32,8 +32,8 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/.*public const string DELETEME.*/g,'').
-        replace(/, 'DELETEME'/g,'');
+        replace(/.*public const string DummyOrchestrationServiceName.*/g,'').
+        replace(/, 'DummyOrchestrationServiceName'/g,'');
 ```
 
 

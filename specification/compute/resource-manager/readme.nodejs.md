@@ -14,12 +14,12 @@ nodejs:
   generate-readme-md: false
 
 directive:
-    # dynamically add a DELETETHISENUM value to the enum 
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
   - from: compute.json
     where: $..enum
     transform: >-
       if( $.length === 1 && $[0] === "AutomaticRepairs") { 
-        $.push('DELETETHISENUM');
+        $.push('DummyOrchestrationServiceName');
       }
       return $;
 
@@ -27,5 +27,5 @@ directive:
     where: $ 
     transform: >-
       return $.
-        replace(/, 'DELETETHISENUM'/g,'');
+        replace(/, 'DummyOrchestrationServiceName'/g,'');
 ```
