@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-11-01-preview --go` is specif
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2019-11-01-preview' && $(go)
-namespace: Microsoft.KubernetesConfiguration
+namespace: Microsoft.Azure.Management.KubernetesConfiguration
 output-folder: $(go-sdks-folder)/kubernetesconfiguration/Generated
 ```

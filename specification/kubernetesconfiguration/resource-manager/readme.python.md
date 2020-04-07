@@ -8,7 +8,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.KubernetesConfiguration
+  namespace: Microsoft.Azure.Management.KubernetesConfiguration
   package-name: kubernetesconfiguration
   package-version: 2019-11-01-preview
   clear-output-folder: true

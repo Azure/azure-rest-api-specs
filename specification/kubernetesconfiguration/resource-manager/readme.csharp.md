@@ -1,4 +1,4 @@
-## C
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.KubernetesConfiguration
-  output-folder: $(csharp-sdks-folder)/kubernetesconfiguration/management/Microsoft.KubernetesConfiguration/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.KubernetesConfiguration
+  output-folder: $(csharp-sdks-folder)/kubernetesconfiguration/Microsoft.Azure.Management.KubernetesConfiguration/src/Generated
 ```
