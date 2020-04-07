@@ -671,22 +671,6 @@
             }
           },
           {
-           "name": "mode",
-            "in": "query",
-            "description": "Optional. Valid and Required for \"SetAccessControlRecursive\" operation.  Mode \"set\" sets POSIX access control rights on files and directories, \"modify\" modifies one or more POSIX access control rights  that pre-exist on files and directories, \"remove\" removes one or more POSIX access control rights  that were present earlier on files and directories",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "set",
-              "modify",
-              "remove"
-            ],
-            "x-ms-enum": {
-              "name": "PathSetAccessControlRecursiveMode",
-              "modelAsString": false
-            }
-          },
-          {
             "name": "maxRecords",
             "in": "query",
             "description": "Optional. Valid for \"SetAccessControlRecursive\" operation. It specifies the maximum number of files or directories on which the acl change will be applied. If omitted or greater than 2,000, the request will process up to 2,000 items",
@@ -701,6 +685,9 @@
             "description": "Optional. The number of paths processed with each invocation is limited. If the number of paths to be processed exceeds this limit, a continuation token is returned in the response header x-ms-continuation. When a continuation token is  returned in the response, it must be percent-encoded and specified in a subsequent invocation of setAcessControlRecursive operation.",
             "required": false,
             "type": "string"
+          },
+          {
+           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
           },
           {
             "$ref": "#/parameters/Position"
@@ -1704,20 +1691,7 @@
             "$ref": "#/parameters/Continuation"
           },
           {
-            "name": "mode",
-             "in": "query",
-             "description": "Mode \"set\" sets POSIX access control rights on files and directories, \"modify\" modifies one or more POSIX access control rights  that pre-exist on files and directories, \"remove\" removes one or more POSIX access control rights  that were present earlier on files and directories",
-             "required": true,
-             "type": "string",
-             "enum": [
-               "set",
-               "modify",
-               "remove"
-             ],
-             "x-ms-enum": {
-              "name": "PathSetAccessControlRecursiveMode",
-              "modelAsString": false
-            }
+           "$ref": "#/parameters/PathSetAccessControlRecursiveMode"
           },
           {
             "name": "maxRecords",
@@ -2197,6 +2171,22 @@
       "description": "Optional.  When deleting a directory, the number of paths that are deleted with each invocation is limited.  If the number of paths to be deleted exceeds this limit, a continuation token is returned in this response header.  When a continuation token is returned in the response, it must be specified in a subsequent invocation of the delete operation to continue deleting the directory.",
       "required": false,
       "type": "string"
+    },
+    "PathSetAccessControlRecursiveMode": {
+      "name": "mode",
+      "in": "query",
+      "description": "Mode \"set\" sets POSIX access control rights on files and directories, \"modify\" modifies one or more POSIX access control rights  that pre-exist on files and directories, \"remove\" removes one or more POSIX access control rights  that were present earlier on files and directories",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "set",
+        "modify",
+        "remove"
+       ],
+      "x-ms-enum": {
+        "name": "PathSetAccessControlRecursiveMode",
+        "modelAsString": false
+      }
     },
     "Directory": {
       "name": "directory",
