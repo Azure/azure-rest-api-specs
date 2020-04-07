@@ -4121,6 +4121,11 @@
           "format": "int32",
           "description": "Routing weight for vpn connection."
         },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The dead peer detection timeout for a vpn connection in seconds."
+        },
         "connectionStatus": {
           "description": "The connection status.",
           "$ref": "#/definitions/VpnConnectionStatus"
@@ -4694,6 +4699,13 @@
         "radiusServerSecret": {
           "type": "string",
           "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection."
+        },
+        "radiusServers": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetworkGateway.json#/definitions/RadiusServer"
+          },
+          "description": "Multiple Radius Server configuration for VpnServerConfiguration."
         },
         "aadAuthenticationParameters": {
           "$ref": "#/definitions/AadAuthenticationParameters",
