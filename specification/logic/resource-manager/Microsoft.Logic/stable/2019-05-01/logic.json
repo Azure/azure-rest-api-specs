@@ -8930,19 +8930,19 @@
       "properties": {
         "triggers": {
           "$ref": "#/definitions/FlowAccessControlConfigurationPolicy",
-          "description": "The run workflow triggers."
+          "description": "The access control configuration for invoking workflow triggers."
         },
         "contents": {
           "$ref": "#/definitions/FlowAccessControlConfigurationPolicy",
-          "description": "The run workflow contents."
+          "description": "The access control configuration for accessing workflow run contents."
         },
         "actions": {
           "$ref": "#/definitions/FlowAccessControlConfigurationPolicy",
-          "description": "The run workflow actions."
+          "description": "The access control configuration for workflow actions."
         },
         "workflowManagement": {
           "$ref": "#/definitions/FlowAccessControlConfigurationPolicy",
-          "description": "The workflow management."
+          "description": "The access control configuration for workflow management."
         }
       }
     },
@@ -8960,7 +8960,7 @@
         },
         "openAuthenticationPolicies": {
           "$ref": "#/definitions/OpenAuthenticationAccessPolicies",
-          "description": "The authentication policies for flow."
+          "description": "The authentication policies for workflow."
         }
       }
     },
@@ -9010,7 +9010,6 @@
       "type": "string",
       "description": "Open authentication policy provider type.",
       "enum": [
-        "NotSpecified",
         "AAD"
       ],
       "x-ms-enum": {
