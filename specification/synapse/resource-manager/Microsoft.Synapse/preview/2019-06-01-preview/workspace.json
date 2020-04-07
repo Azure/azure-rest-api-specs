@@ -779,6 +779,17 @@
             "type": "string"
           },
           "type": "object"
+        },
+        "managedVirtualNetwork": {
+          "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
+          "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections to the workspace",
+          "type": "array",
+          "items": {
+            "$ref": "./privateEndpointConnections.json#/definitions/PrivateEndpointConnection"
+          }
         }
       }
     },
