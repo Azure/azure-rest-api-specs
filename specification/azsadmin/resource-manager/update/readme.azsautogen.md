@@ -27,18 +27,6 @@ openapi-type: arm
 tag: package-2016-05-01
 ```
 
-### Tag: package-2016-05-01
-
-These settings apply only when `--tag=package-2016-05-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-05-01'
-input-file:
-    - "Microsoft.Update.Admin/preview/2016-05-01/Update.json"
-    - "Microsoft.Update.Admin/preview/2016-05-01/Updates.json"
-    - "Microsoft.Update.Admin/preview/2016-05-01/UpdateLocations.json"
-    - "Microsoft.Update.Admin/preview/2016-05-01/UpdateRuns.json"
-```
-
 ---
 # Code Generation
 
@@ -57,7 +45,7 @@ csharp:
   clear-output-folder: true
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators
+## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -76,10 +64,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set,
+If there are files that should not be in the `all-api-versions` set, 
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file:
+#exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
