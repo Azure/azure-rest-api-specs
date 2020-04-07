@@ -44,7 +44,7 @@ batch:
 These settings apply only when `--tag=package-compute-2019-12 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-compute-2017-03' && $(ruby)
+``` yaml $(tag) == 'package-compute-2019-12' && $(ruby)
 namespace: "Azure::Compute::Mgmt::V2019_12_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_compute/lib
 ```
