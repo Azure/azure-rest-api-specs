@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KeyVaultManagementClient",
+    "description": "The Azure management API provides a RESTful set of web services that interact with Azure Key Vault.",
+    "version": "2020-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}": {
+      "put": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Create or update a managed HSM cluster in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the managed HSM cluster"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            },
+            "description": "Parameters to create or update the managed HSM cluster"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "200": {
+            "description": "Created or updated managed HSM cluster",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new managed HSM cluster or update an existing managed HSM cluster": {
+            "$ref": "./examples/ManagedHsm_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Update",
+        "x-ms-long-running-operation": true,
+        "description": "Update a managed HSM cluster in the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "description": "Name of the managed HSM cluster"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            },
+            "description": "Parameters to patch the managed HSM cluster"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "200": {
+            "description": "Patched managed HSM cluster",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an existing managed HSM cluster": {
+            "$ref": "./examples/ManagedHsm_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Delete",
+        "description": "Deletes the specified managed HSM cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed HSM cluster to delete"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a managed HSM cluster": {
+            "$ref": "./examples/ManagedHsm_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_Get",
+        "description": "Gets the specified managed HSM cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed HSM cluster."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved managed HSM cluster",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsm"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve a managed HSM cluster": {
+            "$ref": "./examples/ManagedHsm_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_ListByResourceGroup",
+        "description": "The List operation gets information about the managed HSM clusters associated with the subscription and within the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM clusters in the specified resource group.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed HSM clusters in a resource group": {
+            "$ref": "./examples/ManagedHsm_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/managedHSMs": {
+      "get": {
+        "tags": [
+          "ManagedHsms"
+        ],
+        "operationId": "ManagedHsms_ListBySubscription",
+        "description": "The List operation gets information about the managed HSM clusters associated with the subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM clusters in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed HSM clusters in a subscription": {
+            "$ref": "./examples/ManagedHsm_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedHsmSku": {
+      "properties": {
+        "family": {
+          "type": "string",
+          "description": "SKU Family of the managed HSM cluster",
+          "enum": [
+            "A"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedHsmSkuFamily",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "SKU of the managed HSM cluster",
+          "enum": [
+            "Standard_B1",
+            "Custom_B32"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedHsmSkuName",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "SKU details",
+      "required": [
+        "name",
+        "family"
+      ]
+    },
+    "DeleteRetentionPolicy": {
+      "properties": {
+        "contentPurge": {
+          "type": "string",
+          "description": "Property specifying the level of purge protection for keys within this Managed HSM.",
+          "enum": [ "AlwaysDisabled", "DisabledByDefault", "AllowedByDefault" ],
+          "x-ms-enum": {
+            "name": "ContentPurge",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AlwaysDisabled",
+                "description": "Keys may not be purged, and this policy may not be overriden for individual keys."
+              },
+              {
+                "value": "DisabledByDefault",
+                "description": "Keys may not be purged by default, but purge may be enabled on individual keys at key creation time."
+              },
+              {
+                "value": "AllowedByDefault",
+                "description": "Keys may be purged by default, but purge may be disabled on individual keys."
+              }
+            ]
+          }
+        },
+        "retentionInDays": {
+          "type": "integer",
+          "description": "The soft delete retention period (in days) to be applied to both individual keys and the Managed HSM itself."
+        }
+      },
+      "description": "Properties of the managed HSM cluster"
+    },
+    "ManagedHsmProperties": {
+      "properties": {
+        "deleteRetentionPolicy": {
+          "$ref": "#/definitions/DeleteRetentionPolicy",
+          "description": "The delete retention policy for the Managed HSM."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "The create mode to indicate whether the resource is being created or is being recovered from a deleted resource.",
+          "enum": [
+            "recover",
+            "default"
+          ],
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "recover",
+                "description": "Recover the vault from a soft-deleted resource."
+              },
+              {
+                "value": "default",
+                "description": "Create a new vault.  This is the default option."
+              }
+            ]
+          }
+        },
+        "statusMessage": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Status Message."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Provisioning state.",
+          "enum": [ "Succeeded", "Allocating", "Provisioning", "Failed", "Deleting" ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The managed HSM cluster has been full provisioned."
+              },
+              {
+                "value": "Allocating",
+                "description": "Resources are currently being allocated for the managed HSM resource."
+              },
+              {
+                "value": "Provisioning",
+                "description": "The managed HSM cluster is currently being provisioned."
+              },
+              {
+                "value": "Failed",
+                "description": "Provisioning of the managed HSM cluster has failed."
+              },
+              {
+                "value": "Deleting",
+                "description": "The managed HSM cluster is currently being deleted."
+              }
+            ]
+          }
+        }
+      },
+      "description": "Properties of the managed HSM cluster"
+    },
+    "ManagedHsm": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedHsmProperties",
+          "description": "Properties of the managed HSM"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedHsmResource"
+        }
+      ],
+      "description": "Resource information with extended details."
+    },
+    "ManagedHsmResource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Azure Resource Manager resource ID for the managed HSM cluster."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the managed HSM cluster."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type of the managed HSM cluster."
+        },
+        "location": {
+          "type": "string",
+          "description": "The supported Azure location where the managed HSM cluster should be created.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "Managed HSM resource",
+      "x-ms-azure-resource": true
+    },
+    "ManagedHsmListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedHsm"
+          },
+          "description": "The list of managed HSM clusters."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of managed HSM clusters."
+        }
+      },
+      "description": "List of managed HSM clusters"
+    },
+    "ManagedHsmError": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "description": "The server error.",
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The error exception."
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        },
+        "innererror": {
+          "x-ms-client-name": "innerError",
+          "readOnly": true,
+          "description": "The inner error, contains a more specific error code.",
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "description": "The server error."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Resource Group to which the managed HSM cluster belongs.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+} 

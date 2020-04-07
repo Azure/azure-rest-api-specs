@@ -50,6 +50,18 @@ input-file:
 - Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
 ```
 
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/managedhsm.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
+```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
