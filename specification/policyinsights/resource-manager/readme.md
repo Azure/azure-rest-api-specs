@@ -76,7 +76,7 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
 - Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
 ```
@@ -249,6 +249,7 @@ input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+  - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
