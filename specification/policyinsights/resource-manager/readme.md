@@ -248,11 +248,11 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-07-01/remediations.json
-  - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyMetadata.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+  - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
 
