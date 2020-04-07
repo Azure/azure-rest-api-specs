@@ -10,6 +10,9 @@
         "name": "Basic",
         "tier": "Basic"
       },
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "friendlyName": "HelloName",
         "description": "test description",
@@ -47,6 +50,11 @@
         "name": "testworkspace",
         "type": "Microsoft.MachineLearningServices/workspaces",
         "location": "eastus2euap",
+        "identity": {
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "type": "SystemAssigned"
+        },
         "sku": {
           "name": "Basic",
           "tier": "Basic"
