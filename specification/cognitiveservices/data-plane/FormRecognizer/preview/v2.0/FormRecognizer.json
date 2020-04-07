@@ -38,6 +38,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "trainRequest",
@@ -72,52 +75,6 @@
           },
           "Train custom model with subfolder filter options": {
             "$ref": "./examples/TrainBatchWithSubFolders.json"
-          }
-        }
-      },
-      "get": {
-        "summary": "List Custom Models",
-        "description": "Get information about all custom models",
-        "operationId": "GetCustomModels",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "op",
-            "in": "query",
-            "description": "Specify whether to return summary or full list of models.",
-            "required": false,
-            "default": "full",
-            "type": "string",
-            "enum": [
-              "full",
-              "summary"
-            ]
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Models"
-            }
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "modelList"
-        },
-        "x-ms-examples": {
-          "List custom models": {
-            "$ref": "./examples/GetModels.json"
           }
         }
       }
@@ -217,6 +174,9 @@
           "image/jpeg",
           "image/png",
           "image/tiff"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -493,6 +453,96 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/custom/models?op=full": {
+      "get": {
+        "summary": "List Custom Models",
+        "description": "Get information about all custom models",
+        "operationId": "ListCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "Specify whether to return summary or full list of models.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "full"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "modelList"
+        },
+        "x-ms-examples": {
+          "List custom models": {
+            "$ref": "./examples/GetModels.json"
+          }
+        }
+      }
+    },
+    "/custom/models?op=summary": {
+      "get": {
+        "summary": "Get Custom Models",
+        "description": "Get information about all custom models",
+        "operationId": "GetCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "Specify whether to return summary or full list of models.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "summary"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get models summary": {
+            "$ref": "./examples/GetModelsSummary.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "OperationStatus": {
       "type": "string",
@@ -629,10 +679,6 @@
         }
       }
     },
-    "SourceDataStream": {
-      "description": "A PDF document, image (jpg/png/tiff), or JSON file to analyze.",
-      "type": "object"
-    },
     "ModelInfo": {
       "description": "Basic custom model information.",
       "type": "object",
@@ -696,7 +742,7 @@
               "x-nullable": false
             },
             "limit": {
-              "description": "Max number of models that can be trained for this subscription.",
+              "description": "Max number of models that can be trained for this account.",
               "type": "integer",
               "x-nullable": false
             },
@@ -1221,6 +1267,7 @@
     },
     "DocumentResult": {
       "description": "A set of extracted fields corresponding to the input document.",
+      "type": "object",
       "required": [
         "docType",
         "pageRange",
@@ -1268,14 +1315,13 @@
         },
         "valueDate": {
           "description": "Date value.",
+          "format": "date",
           "type": "string",
-          "format": "date-time",
           "x-nullable": false
         },
         "valueTime": {
           "description": "Time value.",
           "type": "string",
-          "format": "date-time",
           "x-nullable": false
         },
         "valuePhoneNumber": {
@@ -1376,7 +1422,7 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/SourceDataStream"
+        "$ref": "#/definitions/SourcePath"
       }
     }
   }
