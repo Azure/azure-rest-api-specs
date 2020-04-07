@@ -1724,12 +1724,12 @@
         "tags": [
           "GET"
         ],
-        "summary": "Get private link resources",
-        "description": "Get private link resources for the given IotHub",
-        "operationId": "PrivateLinkResources_Get",
+        "summary": "List private link resources",
+        "description": "List private link resources for the given IotHub",
+        "operationId": "PrivateLinkResources_List",
         "x-ms-examples": {
-          "PrivateLinkResources_Get": {
-            "$ref": "./examples/iothub_getprivatelinkresources.json"
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/iothub_listprivatelinkresources.json"
           }
         },
         "parameters": [
@@ -1748,9 +1748,95 @@
         ],
         "responses": {
           "200": {
-            "description": "The body contains the private link resources",
+            "description": "The body contains the list of private link resources",
             "schema": {
               "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/privateLinkResources/{groupId}": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "Get the specified private link resource",
+        "description": "Get the specified private link resource for the given IotHub",
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/iothub_getprivatelinkresources.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          },
+          {
+            "$ref": "#/parameters/groupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the specified of private link resource",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformation"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "GET"
+        ],
+        "summary": "List private endpoint connections",
+        "description": "List private endpoint connection properties",
+        "operationId": "PrivateEndpointConnections_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/resourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The body contains the list of private endpoint connection properties",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionsList"
             }
           },
           "default": {
@@ -2171,6 +2257,18 @@
             "$ref": "#/definitions/SharedAccessSignatureAuthorizationRule"
           }
         },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Whether requests from Public Network are allowed",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PublicNetworkAccess"
+          }
+        },
         "ipFilterRules": {
           "description": "The IP filter rules.",
           "type": "array",
@@ -2479,6 +2577,18 @@
           "type": "string",
           "description": "The resource type."
         },
+        "properties": {
+          "$ref": "#/definitions/GroupIdInformationProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GroupIdInformationProperties": {
+      "description": "The properties for a group information object",
+      "type": "object",
+      "properties": {
         "groupId": {
           "type": "string",
           "description": "The group id"
@@ -2489,7 +2599,21 @@
           "items": {
             "type": "string"
           }
+        },
+        "requiredZoneNames": {
+          "description": "The required DNS zones for a specific group id",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
+      }
+    },
+    "PrivateEndpointConnectionsList": {
+      "description": "The list of private endpoint connections for an IotHub",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointConnection"
       }
     },
     "PrivateEndpointConnection": {
@@ -3993,6 +4117,14 @@
       "required": true,
       "type": "string",
       "pattern": "^[A-Za-z0-9-._]{1,64}$",
+      "x-ms-parameter-location": "method"
+    },
+    "groupId": {
+      "name": "groupId",
+      "in": "path",
+      "description": "The name of the private link resource",
+      "required": true,
+      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "privateEndpointConnectionName": {
