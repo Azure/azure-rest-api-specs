@@ -334,9 +334,7 @@ See configuration in [readme.ruby.md](./readme.ruby.md)
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
-
 ```
-
 If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
