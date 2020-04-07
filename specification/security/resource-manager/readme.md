@@ -139,13 +139,12 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
-- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
-- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
+- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
-- Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
@@ -157,8 +156,10 @@ input-file:
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
 - Microsoft.Security/stable/2020-01-01/assessments.json
-- Microsoft.Security/stable/2020-01-01/discoveredSecuritySolutions.json
-- Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
+- Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+- Microsoft.Security/stable/2020-01-01/allowedConnections.json
+- Microsoft.Security/stable/2020-01-01/topologies.json
+- Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
 
 # Needed when there is more than one input file
 override-info:
@@ -371,6 +372,10 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/adaptiveNetworkHardenings.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
