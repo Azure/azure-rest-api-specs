@@ -599,7 +599,6 @@ input-file:
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/alertRules_API.json
   - $(this-folder)/Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
   - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
   - $(this-folder)/Microsoft.Insights/stable/2019-06-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
@@ -616,6 +615,7 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
   - $(this-folder)/Microsoft.Insights/stable/2019-03-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
   - $(this-folder)/Microsoft.Insights/stable/2018-03-01/actionGroups_API.json
