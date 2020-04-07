@@ -1,0 +1,96 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Log Analytics",
+    "description": "Azure Log Analytics API reference.",
+    "version": "2020-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/linkTargets": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "x-ms-examples": {
+          "LinkTargetsList": {
+            "$ref": "./examples/WorkspacesListLinkTargets.json"
+          }
+        },
+        "operationId": "Workspaces_ListLinkTargets",
+        "description": "Get a list of workspaces which the current user has administrator privileges and are not associated with an Azure Subscription. The subscriptionId parameter in the Url is ignored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LinkTarget"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LinkTarget": {
+      "properties": {
+        "customerId": {
+          "type": "string",
+          "description": "The GUID that uniquely identifies the workspace. "
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The display name of the workspace.",
+          "x-ms-client-name": "DisplayName"
+        },
+        "workspaceName": {
+          "type": "string",
+          "description": "The DNS valid workspace name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the workspace."
+        }
+      },
+      "description": "Metadata for a workspace that isn't linked to an Azure subscription."
+    }
+  },
+  "parameters": {}
+}

@@ -78,6 +78,7 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkTargets.json
 ```
 
 ---
@@ -197,7 +198,7 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
-
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkTargets.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
