@@ -443,6 +443,12 @@
           },
           "Query all policy states at resource scope and expand policyEvaluationDetails": {
             "$ref": "./examples/PolicyStates_QueryResourceScopeExpandPolicyEvaluationDetails.json"
+          },
+          "Query component policy compliance state at resource scope filtered by given assignment.": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeExpandComponents.json"
+          },
+          "Query component policy compliance state count grouped by state type at resource scope filtered by given assignment.": {
+            "$ref": "./examples/PolicyStates_QueryResourceScopeExpandComponentsGroupByWithAggregate.json"
           }
         }
       }
@@ -1228,6 +1234,28 @@
           "items": {
             "type": "string"
           }
+        },
+        "components": {
+          "description": "Components state compliance records populated only when URL contains $expand=components clause.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComponentStateDetails"
+          }
+        },
+        "policyDefinitionVersion": {
+          "description": "Evaluated policy definition version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySetDefinitionVersion": {
+          "description": "Evaluated policy set definition version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "policyAssignmentVersion": {
+          "description": "Evaluated policy assignment version.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "additionalProperties": {
@@ -1250,6 +1278,36 @@
           "type": "object",
           "$ref": "#/definitions/IfNotExistsEvaluationDetails"
         }
+      }
+    },
+    "ComponentStateDetails": {
+      "type": "object",
+      "description": "Component state details.",
+      "properties": {
+        "id": {
+          "description": "Component Id.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Component type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Component name.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Component compliance evaluation timestamp.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "complianceState": {
+          "description": "Component compliance state.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
       }
     },
     "ExpressionEvaluationDetails": {
@@ -1761,7 +1819,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The $expand query parameter. For example, to expand policyEvaluationDetails, use $expand=policyEvaluationDetails",
+      "description": "The $expand query parameter. For example, to expand components use $expand=components",
       "x-ms-parameter-location": "method",
       "x-ms-parameter-grouping": {
         "name": "QueryOptions"
