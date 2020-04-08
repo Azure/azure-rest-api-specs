@@ -652,22 +652,16 @@
     "Cluster": {
       "type": "object",
       "description": "The cluster resource\n",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The cluster resource properties"
+        }
+      },
       "allOf": [
         {
-          "description": "The cluster resource properties"
-        },
-        {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ClusterProperties",
-              "description": "The cluster resource properties"
-            }
-          }
         }
       ]
     },
