@@ -57,7 +57,7 @@ avocado
 
 When type avocado in command line, avocado will validate in the current directory.
 
-Note: When running in Azure pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
+Note: When running in Swagger PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
