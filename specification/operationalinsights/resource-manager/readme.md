@@ -28,7 +28,7 @@ These are the global settings for the OperationalInsights API.
 title: OperationalInsightsManagementClient
 description: Operational Insights Client
 openapi-type: arm
-tag: package-2015-11-preview
+tag: package-2020-03-preview
 ```
 
 
@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-2015-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2015-11-preview'
 input-file:
+- Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
 ```
 
@@ -57,7 +58,30 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+```
+
+### Tag: package-2020-03-preview
+
+These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/ManagementGroups.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Operations.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/OperationStatuses.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Usages.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Workspaces.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
 ```
 
 ---
@@ -157,10 +181,26 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/LinkedServices.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/LinkedServices.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/DataSources.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/IntelligencePacks.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedServices.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkedStorageAccounts.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/ManagementGroups.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Operations.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/OperationStatuses.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Usages.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Workspaces.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
 
 ```
 

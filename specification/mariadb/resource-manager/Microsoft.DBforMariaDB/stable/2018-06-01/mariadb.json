@@ -1320,6 +1320,113 @@
         "modelAsString": false
       }
     },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessEnum",
+        "modelAsString": true
+      }
+    },
+    "ServerPrivateEndpointConnection": {
+      "description": "A private endpoint connection under a server",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource Id of the private endpoint connection.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerPrivateEndpointConnectionProperties",
+          "description": "Private endpoint connection properties",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerPrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/ServerPrivateLinkServiceConnectionStateProperty",
+          "description": "Connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "description": "State of the private endpoint connection.",
+          "enum": [
+            "Approving",
+            "Ready",
+            "Dropping",
+            "Failed",
+            "Rejecting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateEndpointProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource id of the private endpoint.",
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ServerPrivateLinkServiceConnectionStateProperty": {
+      "required": [
+        "status",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The private link service connection status.",
+          "enum": [
+            "Approved",
+            "Pending",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The private link service connection description.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "The actions required for private link service connection.",
+          "enum": [
+            "None"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStateActionsRequire",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "TrackedResource": {
       "description": "Resource properties including location and tags for track resources.",
       "properties": {
@@ -1401,6 +1508,18 @@
           "format": "int32",
           "minimum": 0,
           "description": "The maximum number of replicas that a master server can have."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections on a server",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerPrivateEndpointConnection"
+          },
+          "readOnly": true
         }
       },
       "description": "The properties of a server."
@@ -1456,6 +1575,10 @@
         "sslEnforcement": {
           "$ref": "#/definitions/SslEnforcement",
           "description": "Enable ssl enforcement or not when connect to server."
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
         },
         "storageProfile": {
           "$ref": "#/definitions/StorageProfile",
@@ -1670,6 +1793,10 @@
             "sslEnforcement": {
               "$ref": "#/definitions/SslEnforcement",
               "description": "Enable ssl enforcement or not when connect to server."
+            },
+            "publicNetworkAccess": {
+              "$ref": "#/definitions/PublicNetworkAccess",
+              "description": "Whether or not public network access is allowed for this server. Value is optional but if passed in, must be 'Enabled' or 'Disabled'"
             },
             "replicationRole": {
               "type": "string",
