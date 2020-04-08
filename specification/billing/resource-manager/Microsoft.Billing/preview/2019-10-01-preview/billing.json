@@ -2161,7 +2161,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/default/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/invoices/{invoiceName}/download": {
       "post": {
         "tags": [
           "Invoices"
@@ -2180,6 +2180,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/billingSubscriptionNameParameter"
