@@ -17,6 +17,7 @@
         "produces": [
           "application/json"
         ],
+        "description": "Get existing configuration profile for specified subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -50,6 +51,7 @@
         "produces": [
           "application/json"
         ],
+        "description": "Create a new configuration profile for specified subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -63,6 +65,7 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Configuration profile properties.",
             "schema": {
               "$ref": "#/definitions/ConfigurationProfileResource"
             }
@@ -153,10 +156,21 @@
         "tags": [
           "Operations"
         ],
+        "description": "Lists the operations available from this provider.",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -166,8 +180,13 @@
             }
           },
           "default": {
+            "description": "Error response describing why the operation failed",
             "$ref": "#/definitions/Error"
           }
+        },
+        "x-ms-examples": {},
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
