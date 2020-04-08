@@ -284,7 +284,6 @@ These settings apply only when `--tag=package-2019-10-17-preview` is specified o
 ```yaml $(tag) == 'package-2019-10-17-preview'
 input-file:
   - Microsoft.Insights/preview/2019-10-17-preview/workbookTemplates_API.json
-  - Microsoft.Insights/preview/2018-05-01/components_API.json
 ```
 
 ### Tag: package-2018-05-01-preview
@@ -294,6 +293,7 @@ These settings apply only when `--tag=package-2018-05-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-05-01-preview'
 input-file:
 - Microsoft.Insights/preview/2018-05-01/componentProactiveDetection_API.json
+- Microsoft.Insights/preview/2018-05-01/components_API.json
 ```
 
 ### Tag: package-2019-09-01-preview
