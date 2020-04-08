@@ -151,6 +151,20 @@
       "description": "The resource definition.",
       "x-ms-azure-resource": true
     },
+    "ErrorResponse": {
+      "description": "Error response indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "NWRuleSetIpRules": {
       "x-ms-client-flatten": true,
       "properties": {
@@ -209,14 +223,14 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
-    "ApiVersionParameter": {
+    "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "required": true,
