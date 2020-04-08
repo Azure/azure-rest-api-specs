@@ -92,6 +92,14 @@ input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
+### Tag: 2019-10-17-preview-only
+
+These settings apply only when `--tag=2019-10-17-preview-only` is specified on the command line.
+
+```yaml $(tag) == '2019-10-17-preview-only'
+input-file:
+- Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
+```
 
 ### Tag: package-2019-06
 
@@ -121,7 +129,6 @@ input-file:
 - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 ```
-
 
 ### Tag: package-2019-03
 
