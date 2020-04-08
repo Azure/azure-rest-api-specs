@@ -14997,7 +14997,8 @@
           "Approves or rejects a private endpoint connection for a site.": {
             "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -15043,6 +15044,12 @@
               "type": "object"
             }
           },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -15054,7 +15061,8 @@
           "Delete a private endpoint connection for a site.": {
             "$ref": "./examples/DeleteSitePrivateEndpointConnection.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateLinkResources": {
@@ -22495,31 +22503,6 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "RemotePrivateEndpointConnectionWrapper": {
-      "description": "Wrapper for a remote private endpoint connection",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "Name of a remote private endpoint connection",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection"
         }
       }
     },
