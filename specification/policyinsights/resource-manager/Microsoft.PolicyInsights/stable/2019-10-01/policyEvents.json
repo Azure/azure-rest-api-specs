@@ -67,6 +67,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -86,6 +89,9 @@
         "x-ms-examples": {
           "Query at management group scope": {
             "$ref": "./examples/PolicyEvents_QueryManagementGroupScope.json"
+          },
+          "Query at management group scope with next link": {
+            "$ref": "./examples/PolicyEvents_QueryManagementGroupScopeNextLink.json"
           }
         }
       }
@@ -124,6 +130,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -143,6 +152,9 @@
         "x-ms-examples": {
           "Query at subscription scope": {
             "$ref": "./examples/PolicyEvents_QuerySubscriptionScope.json"
+          },
+          "Query at subscription scope with next link": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionScopeNextLink.json"
           },
           "Time range; sort, select and limit": {
             "$ref": "./examples/PolicyEvents_TimeRangeSortSelectTop.json"
@@ -199,6 +211,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -218,6 +233,9 @@
         "x-ms-examples": {
           "Query at resource group scope": {
             "$ref": "./examples/PolicyEvents_QueryResourceGroupScope.json"
+          },
+          "Query at resource group scope with next link": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupScopeNextLink.json"
           }
         }
       }
@@ -259,6 +277,9 @@
           },
           {
             "$ref": "#/parameters/expandParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -278,6 +299,9 @@
         "x-ms-examples": {
           "Query at resource scope": {
             "$ref": "./examples/PolicyEvents_QueryResourceScope.json"
+          },
+          "Query at resource scope with next link": {
+            "$ref": "./examples/PolicyEvents_QueryResourceScopeNextLink.json"
           },
           "Query at subscription level resource scope": {
             "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelResourceScope.json"
@@ -337,6 +361,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -356,6 +383,9 @@
         "x-ms-examples": {
           "Query at subscription level policy set definition scope": {
             "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicySetDefinitionScope.json"
+          },
+          "Query at subscription level policy set definition scope with next link": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicySetDefinitionScopeNextLink.json"
           }
         }
       }
@@ -400,6 +430,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -463,6 +496,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -482,6 +518,9 @@
         "x-ms-examples": {
           "Query at subscription level policy assignment scope": {
             "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyAssignmentScope.json"
+          },
+          "Query at subscription level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyAssignmentScopeNextLink.json"
           }
         }
       }
@@ -529,6 +568,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -548,6 +590,9 @@
         "x-ms-examples": {
           "Query at resource group level policy assignment scope": {
             "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScope.json"
+          },
+          "Query at resource group level policy assignment scope with next link": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScopeNextLink.json"
           }
         }
       }
@@ -602,6 +647,10 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "@odata.nextLink": {
+          "description": "Odata next link; URL to get the next set of results.",
+          "type": "string"
         },
         "value": {
           "description": "Query results.",
@@ -1019,6 +1068,18 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Expand"
+    },
+    "skipTokenParameter": {
+      "name": "$skiptoken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "SkipToken"
     }
   }
 }

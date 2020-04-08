@@ -67,6 +67,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -96,7 +99,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults?api-version=2019-10-01&$skipToken=WpmWfBSvPhkAK6QD": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
       "post": {
         "operationId": "PolicyEvents_ListQueryResultsForSubscription",
         "description": "Queries policy events for the resources under the subscription.",
@@ -130,6 +133,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -211,6 +217,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -274,6 +283,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -352,6 +364,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -421,6 +436,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -490,6 +508,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -562,6 +583,9 @@
           },
           {
             "$ref": "#/parameters/applyParameter"
+          },
+          {
+            "$ref": "#/parameters/skipTokenParameter"
           }
         ],
         "responses": {
@@ -965,6 +989,18 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Apply"
+    },
+    "skipTokenParameter": {
+      "name": "$skiptoken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only provided if a previous response returned a partial result as a part of nextLink element.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "SkipToken"
     }
   }
 }
