@@ -14,6 +14,10 @@ package-name: azure-synapse
 package-version: 0.1.0
 clear-output-folder: true
 credential-scopes: https://dev.azuresynapse.net/.default
+batch:
+  - package-spark: true
+  - package-development: true
+  - package-access-control: true
 ```
 ``` yaml $(python-mode) == 'update'
 no-namespace-folders: true
