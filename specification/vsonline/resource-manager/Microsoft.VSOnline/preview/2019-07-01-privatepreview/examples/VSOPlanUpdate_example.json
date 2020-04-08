@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "planName": "myVSOPlan",
+    "api-version": "2019-07-01-privatepreview",
+    "subscriptionId": "0000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroup",
+    "location":"eastus2euap",
+    "vsonlinePlanUpdateParameters": {
+      "tags": {
+        "key1":"value1",
+        "key2":"value2"
+      },
+      "sku": {"name":"Preview"}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.VSOnline/plans/myVSOPlan",
+        "type": "Microsoft.VSOnline/plans",
+        "name": "myVSOPlan",
+        "location": "eastus2euap",
+        "properties":{},
+        "tags":{"key1":"value1",
+          "key2":"value2"}
+      }
+    }
+  }
+}

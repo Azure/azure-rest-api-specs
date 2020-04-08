@@ -69,6 +69,21 @@ input-file:
 ```
 
 ---
+```yaml
+openapi-type: arm
+tag: package-2019-07-01-privatepreview
+```
+
+### Tag: package-2019-07-01-privatepreview
+
+These settings apply only when `--tag=package-2019-07-01-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-07-01-privatepreview'
+input-file:
+  - Microsoft.VSOnline/preview/2019-07-01-privatepreview/vsonline.json
+```
+
+---
 
 # Code Generation
 
