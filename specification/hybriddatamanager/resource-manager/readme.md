@@ -26,6 +26,25 @@ These are the global settings for the HybridDataManager API.
 
 ``` yaml
 openapi-type: arm
+tag: package-2019-06
+```
+
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.HybridData/stable/2019-06-01/hybriddata.json
+directive:
+  - suppress:
+    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
+    - R2062 #to suppress (XmsResourceInPutResponse/R2062/ARMViolation)
+```
+
+``` yaml
+openapi-type: arm
 tag: package-2016-06
 ```
 
@@ -143,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.HybridData/stable/2019-06-01/hybriddata.json
   - $(this-folder)/Microsoft.HybridData/stable/2016-06-01/hybriddata.json
 
 ```

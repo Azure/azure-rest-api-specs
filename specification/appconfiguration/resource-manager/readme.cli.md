@@ -17,20 +17,20 @@ cli:
   cli-directive:
     - select: 'parameter'
       where:
-          parameter: '(config_store_creation_parameter|regenerate_key_parameter|check_name_availability_parameter)'
+          parameter: '(configStoreCreationParameters|regenerateKeyParameters|checkNameAvailabilityParameters)'
       hidden: 'true'
     - select: 'operation'
       where:
-          operationGroup: 'configuration_stores'
+          operationGroup: 'ConfigurationStores'
           operation: 'update'
       hidden: 'true'
     - select: 'parameter'
       where:
-          parameter: 'config_store_name'
+          parameter: 'configStoreName'
       name: 'name'
     - select: 'operationGroup'
       where:
-          operationGroup: 'operations'
+          operationGroup: 'Operations'
       name: 'stores'
 ```
 
