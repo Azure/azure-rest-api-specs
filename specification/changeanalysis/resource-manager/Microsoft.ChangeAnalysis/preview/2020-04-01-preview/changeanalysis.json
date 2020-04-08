@@ -1,132 +1,397 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-04-01-preview",
-    "title": "changeanalysis",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "changeanalysisClient"
-    }
+    "title": "AzureChangeAnalysisManagementClient",
+    "version": "2019-04-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
+  "schemes": [
+    "https"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeAnalysis/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeAnalysis/profile/{profileName}": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/ConfigurationProfileResource"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "$ref": "#/definitions/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ConfigurationProfileResource"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ChangeAnalysis/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperationList"
+            }
+          },
+          "default": {
+            "$ref": "#/definitions/Error"
           }
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "ResourceIdentity": {
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "type": {
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
           "type": "string",
-          "description": "Sample property of type string"
+          "x-ms-enum": {
+            "name": "ManagedIdentityTypes",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "format": "uuid",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
-    "ErrorResponse": {
-      "description": "Error response.",
+    "AzureMonitorWorkspaceProperties": {
+      "type": "object",
       "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
+        "workspaceId": {
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "type": "string"
         }
       }
     },
-    "ErrorDefinition": {
-      "description": "Error definition.",
+    "NotificationsState": {
+      "enum": [
+        "None",
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NotificationsState",
+        "modelAsString": true
+      }
+    },
+    "NotificationSettings": {
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceProperties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties"
+        },
+        "activationState": {
+          "$ref": "#/definitions/NotificationsState"
+        }
+      }
+    },
+    "ConfigurationProfileResourceProperties": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "$ref": "#/definitions/NotificationSettings"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationProfileResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProfileResourceProperties"
+        }
+      }
+    },
+    "Error": {
+      "description": "Unexpected Azure Change Analysis ProxyResource Provider Error.",
       "properties": {
         "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+          "description": "Error code.",
+          "type": "string"
         },
         "message": {
-          "description": "Description of the error.",
+          "description": "Error message.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProviderOperationDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay"
+        }
+      }
+    },
+    "ResourceProviderOperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperationDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
           "type": "string",
           "readOnly": true
         },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
     "SubscriptionIdParameter": {
+      "in": "path",
       "name": "subscriptionId",
-      "in": "path",
+      "description": "The Microsoft Azure subscription ID.",
       "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "type": "string"
     },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
+    "ProfileNameParameter": {
       "in": "path",
+      "name": "profileName",
+      "description": "The name of the configuration profile. The profile name should be set to 'default', all other names will be overwritten.",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group.",
+      "pattern": "^(?!.*-$)[^-][a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
-      "name": "api-version",
       "in": "query",
+      "name": "api-version",
+      "description": "The client API version.",
       "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "type": "string"
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
