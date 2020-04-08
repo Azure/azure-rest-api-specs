@@ -138,7 +138,7 @@
             "description": "The Windows IoT Device Service metadata and security metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeviceServiceProperties"
+              "$ref": "#/definitions/DeviceServiceProperties2"
             }
           },
           {
@@ -151,6 +151,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "201": {
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceService"
@@ -196,7 +202,7 @@
             "description": "The Windows IoT Device Service metadata and security metadata.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeviceServiceProperties"
+              "$ref": "#/definitions/DeviceServiceProperties2"
             }
           },
           {
@@ -428,6 +434,27 @@
           "description": "Windows IoT Device Service OEM AAD domain",
           "type": "string"
         }
+
+      }
+    },
+    "DeviceServiceProperties2": {
+      "description": "The properties of a Windows IoT Device Service.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
+        },
+        "properties": {
+          "description": "The properties of a Windows IoT Device Service.",
+          "$ref": "#/definitions/DeviceServiceProperties",
+          "x-ms-client-flatten": true
+        }
+
       }
     },
     "DeviceService": {
