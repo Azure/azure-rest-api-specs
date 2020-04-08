@@ -3535,6 +3535,50 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregates": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the ipAddressAggregates for a given service.",
+        "x-ms-examples": {
+          "services_listIpAddressAggregates": {
+            "$ref": "./examples/IpAddressAggregates.json"
+          }
+        },
+        "operationId": "services_listIpAddressAggregates",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skiptoken",
+            "in": "query",
+            "description": "Used to paginate results",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of ip addresses.",
+            "schema": {
+              "$ref": "#/definitions/IpAddressAggregates"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -5328,6 +5372,105 @@
           "items": {
             "$ref": "#/definitions/InboundReplicationNeighbor"
           }
+        }
+      }
+    },
+    "IpAddressAggregate": {
+      "description": "The key value pair for properties.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "The service ID",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "The Bad Ip Address",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "When the event occurred",
+          "type": "string"
+        },
+        "firstAuditTimestamp": {
+          "description": "The first audit timestamp",
+          "type": "string"
+        },
+        "lastAuditTimestamp": {
+          "description": "The last audit timestamp",
+          "type": "string"
+        },
+        "extranetLockoutErrorCount": {
+          "description": "The extranet lockout error count",
+          "type": "integer"
+        },
+        "badPasswordErrorCount": {
+          "description": "The bad password error count",
+          "type": "integer"
+        },
+        "uniqueUsernamesAttemptedCount": {
+          "description": "The unique usernames attempted",
+          "type": "integer"
+        },
+        "attemptCountThresholdIsExceeded": {
+          "description": "Has the attempt count threshold been exceeded",
+          "type": "boolean"
+        },
+        "timeSpan": {
+          "description": "The timespan of the event",
+          "type": "string"
+        },
+        "isWhitelistedIpAddress": {
+          "description": "Is the address a whitelisted IP address?",
+          "type": "boolean"
+        },
+        "networkLocation": {
+          "description": "The network location",
+          "type": "string"
+        },
+        "attemptCountThresholdOnTrigger": {
+          "description": "The attempted count threshold on trigger.",
+          "type": "integer"
+        },
+        "attemptThresholdTypeOnTrigger": {
+          "description": "The attempt threshold type on trigger.",
+          "type": "string"
+        },
+        "geographicLocation": {
+          "description": "The geographic location.",
+          "type": "string"
+        }
+      }
+    },
+    "IpAddressAggregates": {
+      "description": "The list of Risky IP Aggregates.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The value returned by the operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpAddressAggregate"
+          }
+        },
+        "nextLink": {
+          "description": "The next link if the page is paginized.",
+          "type": "string"
+        },
+        "totalCount": {
+          "description": "The number of results.",
+          "type": "integer"
+        },
+        "continuationToken": {
+          "description": "The key for the property.",
+          "type": "string"
         }
       }
     },
