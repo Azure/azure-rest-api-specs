@@ -9,6 +9,22 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   generate-metadata: true
+
+directive:
+    # dynamically add a DummyOrchestrationServiceName value to the enum 
+  - from: compute.json
+    where: $..enum
+    transform: >-
+      if( $.length === 1 && $[0] === "AutomaticRepairs") { 
+        $.push('DummyOrchestrationServiceName');
+      }
+      return $;
+
+  - from: source-file-typescript
+    where: $ 
+    transform: >-
+      return $.
+        replace(/[,|*] 'DummyOrchestrationServiceName'/g,'');
 ```
 
 ``` yaml $(typescript) && !$(profile)
