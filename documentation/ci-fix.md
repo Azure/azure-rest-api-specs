@@ -69,3 +69,23 @@ autorest --validation --azure-validator <path-to-readme>
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
+
+## Avocado
+
+Run avocado locally:
+
+```
+npm install -g @azure/avocado
+
+avocado
+```
+
+When type avocado in command line, avocado will validate in the current directory.
+
+Note: When running in Swagger PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
+
+- Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
+- Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
+
+Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
