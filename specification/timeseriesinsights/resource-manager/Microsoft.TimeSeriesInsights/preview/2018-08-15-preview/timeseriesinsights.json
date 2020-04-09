@@ -1848,6 +1848,10 @@
             "name": "Kind",
             "modelAsString": true
           }
+        },
+        "localTimestamp": {
+          "$ref": "#/definitions/LocalTimestamp",
+          "description": "An object that represents the local timestamp property. It contains the format of local timestamp that needs to be used and the corresponding timezone offset information. If a value isn't specified for localTimestamp, or if null, then the local timestamp will not be ingressed with the events."
         }
       },
       "required": [
@@ -1911,6 +1915,7 @@
     },
     "EventHubEventSourceUpdateParameters": {
       "type": "object",
+      "x-ms-discriminator-value": "Microsoft.EventHub",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1926,6 +1931,7 @@
       "description": "Parameters supplied to the Update Event Source operation to update an EventHub event source."
     },
     "IoTHubEventSourceUpdateParameters": {
+      "x-ms-discriminator-value": "Microsoft.IoTHub",
       "type": "object",
       "properties": {
         "properties": {
