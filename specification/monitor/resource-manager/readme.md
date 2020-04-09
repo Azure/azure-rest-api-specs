@@ -92,11 +92,11 @@ input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
-### Tag: 2019-10-17-preview-only
+### Tag: package-2019-10-17-preview-only
 
-These settings apply only when `--tag=2019-10-17-preview-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-10-17-preview-only` is specified on the command line.
 
-```yaml $(tag) == '2019-10-17-preview-only'
+```yaml $(tag) == 'package-2019-10-17-preview-only'
 input-file:
 - Microsoft.Insights/preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
