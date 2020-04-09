@@ -8115,7 +8115,9 @@
           "200": {
             "description": "The LUIS application structure in LU format.",
             "schema": {
-              "$ref":"#/definitions/ExportResponse"
+              "description": "The LUIS application structure in LU format.",
+              "type": "object",
+              "format": "file"
             }
           },
           "default": {
@@ -9135,11 +9137,6 @@
     "VersionResponse": {
       "description": "The new version ID returned by when importing a model version.",
       "type": "string"
-    },
-    "ExportResponse": {
-      "description": "The LUIS application structure in LU format.",
-      "type": "object",
-      "format": "file"
     },
     "FeatureIDResponse": {
       "description": "The ID of the created feature.",
