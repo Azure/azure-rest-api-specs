@@ -51,7 +51,7 @@
         "description": "Lists all available Relay REST API operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -64,7 +64,7 @@
           "default": {
             "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -294,7 +294,7 @@
           "default": {
             "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -523,7 +523,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuName",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "tier": {
@@ -534,7 +534,7 @@
           ],
           "x-ms-enum": {
             "name": "SkuTier",
-            "modelAsString": false
+            "modelAsString": true
           }
         }
       },
@@ -555,7 +555,7 @@
       ],
       "x-ms-enum": {
         "name": "UnavailableReason",
-        "modelAsString": false
+        "modelAsString": true
       },
       "description": "Specifies the reason for the unavailability of the service."
     },
