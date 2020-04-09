@@ -3439,6 +3439,48 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/SimulateEviction": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_SimulateEviction",
+        "description": "The operation to simulate the eviction of spot virtual machine",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Simulate Eviction a virtual machine.": {
+            "$ref": "./examples/SimulateEvictionOfVM.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
       "put": {
         "tags": [
@@ -7967,7 +8009,7 @@
         },
         "gracePeriod": {
           "type": "string",
-          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value."
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M)."
         }
       },
       "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
