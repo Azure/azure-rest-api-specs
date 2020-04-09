@@ -162,17 +162,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "201": {
-            "description": "Created response definition.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
+          "202": {
+            "description": "Accepted response definition."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -370,9 +361,9 @@
             "modelAsString": true
           }
         },
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
         }
       },
       "description": "Cluster properties."
@@ -409,9 +400,9 @@
     },
     "ClusterPatchProperties": {
       "properties": {
-        "encryptionKeyUri": {
-          "type": "string",
-          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
+        "keyVaultProperties": {
+          "$ref": "#/definitions/keyVaultProperties",
+          "description": "The associated key properties."
         }
       },
       "description": "Log Analytics cluster patch properties."
@@ -422,6 +413,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPatchProperties",
           "description": "Log Analytics cluster properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/sku",
+          "description": "The sku properties."
         },
         "tags": {
           "type": "object",
@@ -439,6 +434,10 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "The identity of the resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/sku",
+          "description": "The sku properties."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -469,6 +468,42 @@
         }
       },
       "description": "The list clusters operation response."
+    },
+    "keyVaultProperties": {
+      "properties": {
+        "keyVaultUri": {
+          "description": "The Key Vault uri which holds they key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyName": {
+          "description": "The name of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        },
+        "keyVersion": {
+          "description": "The version of the key associated with the Log Analytics cluster.",
+          "type": "string"
+        }
+      }
+    },
+    "sku": {
+      "properties": {
+        "capacity": {
+          "description": "The capacity value",
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU.",
+          "enum": [
+            "CapacityReservation"
+          ],
+          "x-ms-enum": {
+            "name": "SkuNameEnum",
+            "modelAsString": true
+          }
+        }
+      }
     },
     "Identity": {
       "properties": {

@@ -20,6 +20,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-10-17-preview-only
   - tag: package-2019-06-01-only
   - tag: package-2019-03-01-only
   - tag: package-2018-11-27-preview-only
@@ -37,8 +38,18 @@ batch:
   - tag: package-2016-03-01-only
   - tag: package-2015-07-01-only
   - tag: package-2015-04-01-only
-```
 
+```
+### Tag: package-2019-10-17-preview-only and python
+
+These settings apply only when `--tag=package-2019-10-17-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-10-17-preview-only' && $(python)
+python:
+  namespace: $(python-base-namespace).v2019_10_17
+  output-folder: $(python-sdks-folder)/$(python-base-folder)/v2019_10_17
+```
 
 ### Tag: package-2019-06-01-only and python
 

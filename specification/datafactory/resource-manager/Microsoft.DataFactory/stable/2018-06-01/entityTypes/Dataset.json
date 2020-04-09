@@ -359,7 +359,7 @@
     },
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "setOfObjects",
         "arrayOfObjects"
@@ -475,7 +475,7 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "Optimal",
         "Fastest"
@@ -618,7 +618,7 @@
           "description": "The location of the parquet storage."
         },
         "compressionCodec": {
-          "type": "string",
+          "type": "object",
           "enum": [
             "none",
             "gzip",
@@ -672,7 +672,7 @@
           "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
         },
         "compressionCodec": {
-          "type": "string",
+          "type": "object",
           "enum": [
             "bzip2",
             "gzip",
@@ -3101,6 +3101,32 @@
         "table": {
           "type": "object",
           "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SharePointOnlineListResourceDataset": {
+      "x-ms-discriminator-value": "SharePointOnlineListResource",
+      "description": "The sharepoint online list resource dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sharepoint online list dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListDatasetTypeProperties"
+        }
+      }
+    },
+    "SharePointOnlineListDatasetTypeProperties": {
+      "description": "Sharepoint online list dataset properties.",
+      "properties": {
+        "listName": {
+          "type": "object",
+          "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
         }
       }
     }
