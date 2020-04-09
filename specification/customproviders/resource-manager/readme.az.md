@@ -7,7 +7,7 @@ az:
   extensions: customproviders
   namespace: azure.mgmt.customproviders
   package-name: azure-mgmt-customproviders
-python-sdk-output-folder: "$(output-folder)/src/customproviders/azext_customproviders/vendored_sdks/customproviders"
+python-sdk-output-folder: "$(output-folder)/azext_customproviders/vendored_sdks/customproviders"
   
 #cli:
 #    cli-directive:

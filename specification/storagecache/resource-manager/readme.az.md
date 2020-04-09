@@ -7,7 +7,7 @@ az:
   extensions: storagecache
   namespace: azure.mgmt.storagecache
   package-name: azure-mgmt-storagecache
-python-sdk-output-folder: "$(output-folder)/src/storagecache/azext_storagecache/vendored_sdks/storagecache"
+python-sdk-output-folder: "$(output-folder)/azext_storagecache/vendored_sdks/storagecache"
   
 #cli:
 #    cli-directive:
