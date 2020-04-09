@@ -27,7 +27,7 @@ These are the global settings for the Kubernetes Connect RP.
 
 ```yaml
 openapi-type: arm
-tag: package-2020-01-preview
+tag: package-2020-01-01-preview
 ```
 
 ### Tag: package-2020-01-01-preview
@@ -89,10 +89,6 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 
