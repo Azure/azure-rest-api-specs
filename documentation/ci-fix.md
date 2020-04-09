@@ -45,6 +45,31 @@ Please see [readme](https://github.com/Azure/oav/blob/master/README.md) for how 
 Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
+## Breaking Change Check
+
+run oad locally (the breaking change is reported by oad tool):
+```
+npm install -g oad
+oad compare <old-spec-path> <new-spec-path> 
+```
+Please see [readme](https://github.com/Azure/openapi-diff/blob/master/README.md) for how to install or run tool in details.
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
+Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/master/docs) for detailed description of all oad rules and how-to-fix guidance.
+
+## Linter Validation
+
+Run linter locally:
+```
+npm install -g autorest
+autorest --validation --azure-validator --input-file=<path-to-spec>
+or
+autorest --validation --azure-validator <path-to-readme>
+
+```
+Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/master/README.md) for how to install or run tool in details.
+Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/linter).
+Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
+
 ## Avocado
 
 Run avocado locally:
@@ -63,3 +88,4 @@ Note: When running in Swagger PR pipeline, Avocado only report errors with file 
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"
 
 Refer to [Avocado Readme](https://github.com/Azure/avocado/blob/master/README.md) for detailed description of validations and how-to-fix guidance.
+
