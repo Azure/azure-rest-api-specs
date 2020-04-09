@@ -1240,7 +1240,7 @@
           }
         },
         "operationId": "LinkedWorkspaces_List",
-        "description": "List linked workspaces under a workspace per some query criteria.",
+        "description": "List all linked workspaces under a AML workspace.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1253,49 +1253,6 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "name": "link-subscriptionId",
-            "in": "query",
-            "type": "string",
-            "description": "The subscriptionid of the linked workspace."
-          },
-          {
-            "name": "link-resource-group",
-            "in": "query",
-            "type": "string",
-            "description": "The resource group name of the linked workspace."
-          },
-          {
-            "name": "link-resource-name",
-            "in": "query",
-            "type": "string",
-            "description": "The resource name of the linked workspace."
-          },
-          {
-            "name": "link-resourceId",
-            "in": "query",
-            "type": "string",
-            "description": "The resourceId of the linked workspace."
-          },
-          {
-            "name": "link-type",
-            "in": "query",
-            "type": "string",
-            "description": "The type of the linked workspace.",
-            "enum": [
-              "Synapse"
-            ],
-            "x-ms-enum": {
-              "name": "LinkType",
-              "modelAsString": true
-            }
-          },
-          {
-            "name": "uai-resourceId",
-            "in": "query",
-            "type": "string",
-            "description": "The resourceId of the user assigned identity for the linked workspace."
           }
         ],
         "responses": {
@@ -1316,7 +1273,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
       "put": {
         "tags": [
           "LinkedWorkspaces"
@@ -1339,15 +1298,18 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
+            "$ref": "#/parameters/LinkName"
+          },
+          {
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "The object for adding a new linked workspace",
+            "description": "The object for creating or updating a new linked workspace",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LinkedWorkspaceCreateDto"
+              "$ref": "#/definitions/LinkedWorkspaceDto"
             }
           }
         ],
@@ -1365,9 +1327,7 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.MachineLearningServices/workspaces/{workspaceName}/linkedWorkspaces/{linkName}": {
+      },
       "get": {
         "tags": [
           "LinkedWorkspaces"
@@ -1399,58 +1359,6 @@
         "responses": {
           "200": {
             "description": "Successfully retrieved the detail of the linked workspace.",
-            "schema": {
-              "$ref": "#/definitions/LinkedWorkspace"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "LinkedWorkspaces"
-        ],
-        "operationId": "LinkedWorkspaces_Update",
-        "description": "Update the detail of a linked workspace.",
-        "x-ms-examples": {
-          "UpdateLinkedWorkspace": {
-            "$ref": "./examples/updateLinkedWorkspace.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/LinkName"
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The object for updating an existing linked workspace",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LinkedWorkspaceUpdateDto"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully updated the detail of the linked workspace.",
             "schema": {
               "$ref": "#/definitions/LinkedWorkspace"
             }
@@ -3651,7 +3559,7 @@
         }
       }
     },
-    "LinkedWorkspaceCreateDto": {
+    "LinkedWorkspaceDto": {
       "type": "object",
       "description": "object used for creating linked workspace.",
       "properties": {
@@ -3659,15 +3567,6 @@
           "description": "Friendly name of the linked workspace",
           "type": "string"
         },
-        "properties": {
-          "$ref": "#/definitions/LinkedWorkspaceProps"
-        }
-      }
-    },
-    "LinkedWorkspaceUpdateDto": {
-      "type": "object",
-      "description": "Object used for updating linked workspace.",
-      "properties": {
         "properties": {
           "$ref": "#/definitions/LinkedWorkspaceProps"
         }
