@@ -70,6 +70,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-trenton
 ```
 
 ## C#
@@ -127,4 +128,12 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+
+``` yaml $(trenton)
+trenton:
+  extensions: securityinsights
+  namespace: azure.mgmt.securityinsights
+  package-name: azure-mgmt-securityinsights
+clear-output-folder: true
+``` 
 
