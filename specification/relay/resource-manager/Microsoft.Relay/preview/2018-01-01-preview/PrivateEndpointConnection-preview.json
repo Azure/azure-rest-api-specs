@@ -51,16 +51,16 @@
         "description": "Lists all Private Endpoint Connections for the Relay namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
           "default": {
             "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -96,16 +96,16 @@
         "description": "Updates the specified private endpoint connection associated with the Relay namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/privateEndpointConnectionName"
@@ -136,7 +136,7 @@
           "default": {
             "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -155,19 +155,19 @@
         "description": "Deletes the specified private endpoint connection associated with the relay namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -177,7 +177,7 @@
           "default": {
             "description": "Relay error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -196,19 +196,19 @@
         "description": "Gets the specified private endpoint connection associated with the Relay Namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -241,22 +241,22 @@
         "description": "Gets the Operation status of private endpoint connection associated with Relay namespace.",
         "parameters": [
           {
-            "$ref": "#/parameters/resourceGroupNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/namespaceNameParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
           },
           {
             "$ref": "#/parameters/privateEndpointConnectionName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/OperationTypeParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/OperationTypeParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -277,69 +277,6 @@
     }
   },
   "definitions": {
-    "TrackedResource": {
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "required": [
-        "location"
-      ],
-      "description": "Definition of resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "description": "The resource definition.",
-      "x-ms-azure-resource": true
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
     "PrivateEndpointConnectionListResult": {
       "properties": {
         "value": {
@@ -372,7 +309,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
         }
       ],
       "description": "Private endpoint connection resource.",
@@ -475,40 +412,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
-    },
-    "resourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method",
-      "description": "Name of the Resource group within the Azure subscription."
-    },
-    "namespaceNameParameter": {
-      "name": "namespaceName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "minLength": 6,
-      "maxLength": 50,
-      "x-ms-parameter-location": "method",
-      "description": "The namespace name"
-    },
     "privateEndpointConnectionName": {
       "name": "privateEndpointConnectionName",
       "in": "path",
