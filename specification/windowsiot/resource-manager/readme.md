@@ -103,6 +103,8 @@ See configuration in [readme.java.md](./readme.java.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## Trenton
+See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -129,30 +131,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
-## trenton
-
-These settings apply only when `--trenton` is specified on the command line.
-
-``` yaml $(trenton)
-trenton:
-  cli_name: windowsiot
-  azure_arm: true
-  license_header: MICROSOFT_MIT_NO_VERSION
-  payload_flattening_threshold: 2
-  namespace: azure.mgmt.windowsiot
-  package_name: azure-mgmt-windowsiot
-  clear_output_folder: false
-overrides:
-  - where:
-      method: "Update"
-    set:
-      - BodyPosition: 2
-  - where:
-      method: "CreateOrUpdate"
-    set:
-      - BodyPosition: 2
-  - where:
-      property: "deviceName"
-    set:
-      - IdPortion: "DeviceServices"
-```
