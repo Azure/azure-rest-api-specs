@@ -184,6 +184,18 @@ directive:
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P99
     reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: PathResourceProviderNamePascalCase
+    from: cosmos-db.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: notebook.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateEndpointConnection.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateLinkResources.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
