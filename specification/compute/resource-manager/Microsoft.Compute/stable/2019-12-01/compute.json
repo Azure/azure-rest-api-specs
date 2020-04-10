@@ -7588,7 +7588,7 @@
     },
     "DiffDiskPlacement": {
       "type": "string",
-      "description": "Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. By default For more information on Ephemeral OS disk size requirements, please refer : https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements",
+      "description": "Specifies the ephemeral disk placement for operating system disk. This property can be used by user in the request to choose the location i.e, cache disk or resource disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer Ephemeral OS disk size requirements for Windows VM at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VM at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements",
       "enum": [
         "CacheDisk",
         "ResourceDisk"
@@ -7606,7 +7606,7 @@
         },
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
-          "description": "Specifies the ephemeral disk placement for operating system disk. This property is used to specify Cache disk or Resource disk for ephemeral OS disk provisioning. By default if customer does not specify this placement property in the request, the Ephemeral OS disk will be provisioned using Cache disk."
+          "description": "Specifies the ephemeral disk placement for operating system disk.<br><br> Possible values are: <br><br> **CacheDisk** <br><br> **ResourceDisk** <br><br> Default: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** is used.<br><br> Refer to VM size documentation for Windows VM at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk."
         }
       },
       "description": "Describes the parameters of ephemeral disk settings that can be specified for operating system disk. <br><br> NOTE: The ephemeral disk settings can only be specified for managed disk."
@@ -7661,7 +7661,7 @@
         },
         "caching": {
           "$ref": "#/definitions/Caching",
-          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None** for Standard storage. **ReadOnly** for Premium storage."
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
