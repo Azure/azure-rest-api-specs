@@ -1239,16 +1239,10 @@
             }
           },
           "429": {
-            "description": "TooManyRequests. Request is throttled. Retry after backoff.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
+            "description": "TooManyRequests. Request is throttled."           
           },
           "503": {
-            "description": "ServiceUnavailable. Service is temporarily unavailable. Retry after backoff.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
+            "description": "ServiceUnavailable. Service is temporarily unavailable.",
             "headers": {
               "RetryAfter": {
                 "type": "integer",
