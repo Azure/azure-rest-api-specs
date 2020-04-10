@@ -83,6 +83,11 @@
         "operationId": "patchUserSettingsWithLocation",
         "summary": "patch user settings.",
         "description": "Patch cloud shell settings for current signed in user",
+        "x-ms-examples": {
+          "PatchUserSettings": {
+            "$ref": "./examples/PatchUserSettings_Location.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -99,7 +104,7 @@
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/CloudShellUserSettings"
+              "$ref": "#/definitions/CloudShellPatchUserSettings"
             }
           }
         ],
@@ -383,6 +388,11 @@
         "operationId": "PatchUserSettings",
         "summary": "patch user settings.",
         "description": "Patch cloud shell settings for current signed in user",
+        "x-ms-examples": {
+          "PatchUserSettings": {
+            "$ref": "./examples/PatchUserSettings.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -396,7 +406,7 @@
             "required": true,
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/CloudShellUserSettings"
+              "$ref": "#/definitions/CloudShellPatchUserSettings"
             }
           }
         ],
@@ -757,6 +767,36 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserProperties"
+        }
+      }
+    },
+    "CloudShellPatchUserSettings": {
+      "description": "Cloud shell patch operation user settings.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchProperties"
+        }
+      }
+    },
+    "PatchProperties": {
+      "description": "The cloud shell user settings patch properties.",
+      "type": "object",
+      "required": [
+        "preferredShellType"
+      ],
+      "properties": {
+        "preferredShellType": {
+          "description": "The shell type of the cloud shell.",
+          "type": "string",
+          "enum": [
+            "bash",
+            "pwsh",
+            "powershell"
+          ]
         }
       }
     },
