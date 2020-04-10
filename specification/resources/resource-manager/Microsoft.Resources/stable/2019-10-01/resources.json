@@ -5282,6 +5282,69 @@
     },
     "DeploymentOperationProperties": {
       "properties": {
+        "provisioningOperation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the current provisioning operation.",
+          "enum": [
+            "NotSpecified",
+            "Create",
+            "Delete",
+            "Waiting",
+            "AzureAsyncOperationWaiting",
+            "ResourceCacheWaiting",
+            "Action",
+            "Read",
+            "EvaluateDeploymentOutput",
+            "DeploymentCleanup"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningOperation",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotSpecified",
+                "description": "The provisioning operation is not specified."
+              },
+              {
+                "value": "Create",
+                "description": "The provisioning operation is create."
+              },
+              {
+                "value": "Delete",
+                "description": "The provisioning operation is delete."
+              },
+              {
+                "value": "Waiting",
+                "description": "The provisioning operation is waiting."
+              },
+              {
+                "value": "AzureAsyncOperationWaiting",
+                "description": "The provisioning operation is waiting Azure async operation."
+              },
+              {
+                "value": "ResourceCacheWaiting",
+                "description": "The provisioning operation is waiting for resource cache."
+              },
+              {
+                "value": "Action",
+                "description": "The provisioning operation is action."
+              },
+              {
+                "value": "Read",
+                "description": "The provisioning operation is read."
+              },
+              {
+                "value": "EvaluateDeploymentOutput",
+                "description": "The provisioning operation is evaluate output."
+              },
+              {
+                "value": "DeploymentCleanup",
+                "description": "The provisioning operation is cleanup. This operation is part of the 'complete' mode deployment."
+              }
+            ]
+          }
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
