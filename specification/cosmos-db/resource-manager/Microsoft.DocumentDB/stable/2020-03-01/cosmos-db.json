@@ -4621,6 +4621,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4651,6 +4658,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4781,6 +4795,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4811,6 +4832,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4845,6 +4873,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4875,6 +4910,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4909,6 +4951,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4941,6 +4990,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4971,6 +5027,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -5949,6 +6012,16 @@
         "incrementPercent": {
           "type": "integer",
           "description": "Represents the percentage by which throughput can increase every time throughput policy kicks in."
+        }
+      }
+    },
+    "OptionsResource": {
+      "type": "object",
+      "description": "Cosmos DB options resource object",
+      "properties": {
+        "throughput": {
+          "type": "integer",
+          "description": "Value of the Cosmos DB resource throughput. Use the ThroughputSetting resource when retrieving offer details."
         }
       }
     },
