@@ -13,13 +13,15 @@ If your problem is some existing error name that is not a word and need to supre
 Please run the following command (from an administrator Node.js command prompt if running on Windows):
 
 ```
-npm install; npm run prettier-fix
+npm install
+npm run prettier-fix
 ```
 
 Or if you want to fix specified service:
 
 ```
-npm install; npm run prettier -- --write "specification/<service>/**/*.json"
+npm install
+npm run prettier -- --write "specification/<service>/**/*.json"
 ```
 
 Then please commit and push changes made by prettier.
