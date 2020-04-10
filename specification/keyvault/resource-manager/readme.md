@@ -152,10 +152,6 @@ input-file:
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/keyvault.json
   - $(this-folder)/Microsoft.KeyVault/stable/2016-10-01/providers.json
   - $(this-folder)/Microsoft.KeyVault/stable/2015-06-01/keyvault.json
-  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/keyvault.json
-  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/providers.json
-  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/secrets.json
-  - $(this-folder)/Microsoft.KeyVault/preview/2020-04-01-preview/managedHsm.json
 
 ```
 
