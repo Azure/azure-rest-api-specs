@@ -18,7 +18,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{parentResourceName}/eventgridfilters/{eventGridFilterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/eventgridfilters/{eventGridFilterName}": {
       "parameters": [
         {
           "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
@@ -30,7 +30,7 @@
           "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
         },
         {
-          "$ref": "#/parameters/ParentResourceNameParameter"
+          "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
         },
         {
           "$ref": "#/parameters/EventGridFilterNameParameter"
@@ -38,9 +38,9 @@
       ],
       "patch": {
         "description": "Update an existing eventgridfilters resource's properties.",
-        "operationId": "EventGridFilters_Update",
+        "operationId": "EventGridFilter_Update",
         "summary": "Update",
-        "tags": [ "CommunicationService CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "parameters": [
           {
             "name": "parameters",
@@ -75,9 +75,9 @@
       },
       "get": {
         "description": "Get an existing eventgridfilters resource and its properties",
-        "operationId": "EventGridFilters_Get",
+        "operationId": "EventGridFilter_Get",
         "summary": "Get",
-        "tags": [ "CommunicationService CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
             "description": "Success. The response describe the corresponding CommunicationService.",
@@ -103,7 +103,7 @@
         "description": "Create or update a eventgrid filter on an existing resource.",
         "operationId": "EventGridFilter_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "CommunicationService CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "parameters": [
           {
             "name": "parameters",
@@ -142,7 +142,7 @@
         "description": "Operation to delete a eventgrid filter.",
         "operationId": "EventGridFilter_Delete",
         "summary": "Delete",
-        "tags": [ "CommunicationService CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
             "description": "The resource has been deleted successfully."
@@ -168,7 +168,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{parentResourceName}/eventgridfilters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/CommunicationServices/{communicationServiceName}/eventgridfilters": {
       "parameters": [
         {
           "$ref": "CommunicationService.json#/parameters/ApiVersionParameter"
@@ -180,17 +180,17 @@
           "$ref": "CommunicationService.json#/parameters/ResourceGroupParameter"
         },
         {
-          "$ref": "#/parameters/ParentResourceNameParameter"
+          "$ref": "CommunicationService.json#/parameters/CommunicationServiceName"
         }
       ],
       "get": {
-        "description": "Handles requests to list all resources in a resource group.",
+        "description": "Handles requests to list all eventgridfilters on a CommunicationService resource.",
         "operationId": "EventGridFilters_ListByCommunicationServiceResource",
         "summary": "List All EventGrid Filters on a CommunicationService Resource",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of CommunicationServices in a resourceGroup.",
+            "description": "Success. The response describes the list of EventGridFilters in a CommunicationService.",
             "schema": {
               "$ref": "#/definitions/EventGridFilterResourceList"
             }
@@ -318,14 +318,6 @@
     }
   },
   "parameters": {
-    "ParentResourceNameParameter": {
-      "name": "parentResourceName",
-      "in": "path",
-      "description": "The name of the parent resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "EventGridFilterNameParameter": {
       "name": "eventGridFilterName",
       "in": "path",
