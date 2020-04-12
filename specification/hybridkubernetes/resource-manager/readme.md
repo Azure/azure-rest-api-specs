@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
-- Microsoft.Kubernetes/preview/2020-01-01-preview/hybridkubernetes.json
+- Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 ```
 
 
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
-- Microsoft.Kubernetes/preview/2019-11-01-preview/hybridkubernetes.json
+- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
 ```
 
 ### Tag: package-2019-09-01-privatepreview
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2019-09-01-privatepreview` is spec
 
 ```yaml $(tag) == 'package-2019-09-01-privatepreview'
 input-file:
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/hybridkubernetes.json
+- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
 ```
 
 ---
@@ -110,9 +110,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-- Microsoft.Kubernetes/preview/2020-01-01-preview/hybridkubernetes.json
-- Microsoft.Kubernetes/preview/2019-11-01-preview/hybridkubernetes.json
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/hybridkubernetes.json
+- Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
+- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
 
 ```
 
