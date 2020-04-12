@@ -7635,11 +7635,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "in": "header",
-            "name": "ArmToken",
-            "required": false,
-            "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
-            "type": "string"
+            "$ref": "#/parameters/ArmTokenParamter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7688,11 +7684,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "in": "header",
-            "name": "ArmToken",
-            "required": false,
-            "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
-            "type": "string"
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -7730,11 +7722,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "in": "header",
-            "name": "ArmToken",
-            "required": false,
-            "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
-            "type": "string"
+            "$ref": "#/parameters/ArmTokenParamter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7782,11 +7770,7 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
-            "in": "header",
-            "name": "ArmToken",
-            "required": false,
-            "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
-            "type": "string"
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -10850,6 +10834,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ArmTokenParamter":{
+      "in": "header",
+      "name": "ArmToken",
+      "required": false,
+      "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
+      "type": "string"
     },
     "Endpoint": {
       "name": "Endpoint",
