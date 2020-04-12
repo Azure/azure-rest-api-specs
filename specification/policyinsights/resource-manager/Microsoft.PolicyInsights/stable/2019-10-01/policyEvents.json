@@ -599,42 +599,6 @@
           }
         }
       }
-    },
-    "/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata": {
-      "get": {
-        "operationId": "PolicyEvents_GetMetadata",
-        "description": "Gets OData metadata XML document.",
-        "produces": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OData metadata XML document.",
-            "schema": {
-              "$ref": "#/definitions/MetadataDocument"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailure"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get metadata": {
-            "$ref": "./examples/PolicyEvents_GetMetadata.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
