@@ -7,7 +7,7 @@
       "subscriptions": [
         "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
       ],
-      "query": "where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
+      "query": "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | project id, name, location, resourceGroup, properties.storageProfile.osDisk.osType | limit 5",
       "facets": [
         {
           "expression": "location",

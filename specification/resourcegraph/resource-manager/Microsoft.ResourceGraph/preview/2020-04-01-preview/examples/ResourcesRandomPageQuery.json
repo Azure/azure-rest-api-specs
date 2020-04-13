@@ -1,15 +1,14 @@
 {
   "title": "Random page query",
-  "description": "A query on resources requesting the random page using skip token, top and skip overrides",
+  "description": "A query on resources specifying paging and max rows through query options",
   "parameters": {
     "api-version": "2020-04-01-preview",
     "query": {
       "subscriptions": [
         "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
       ],
-      "query": "where name contains 'test' | project id, name, type, location",
+      "query": "Resources | where name contains 'test' | project id, name, type, location",
       "options": {
-        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==",
         "$top": 2,
         "$skip": 10
       }
@@ -21,7 +20,8 @@
         "totalRecords": 386,
         "count": 2,
         "resultTruncated": "false",
-        "$skipToken": "eyAibm8yIjogImx1Y2syIiwgImJ1dDIiOiAibmljZTIiLCAidHJ5MiI6ICIhIiB9",
+        "facets": [],
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ==",
         "data": {
           "columns": [
             {
