@@ -2959,6 +2959,11 @@
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
               },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplication",
+                "x-ms-header-collection-prefix": "x-ms-or-"
+              },
               "Content-Length": {
                 "type": "integer",
                 "format": "int64",
@@ -3481,6 +3486,11 @@
                 "type": "string",
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplication",
+                "x-ms-header-collection-prefix": "x-ms-or-"
               },
               "x-ms-blob-type": {
                 "x-ms-client-name": "BlobType",
@@ -9380,6 +9390,9 @@
         },
         "BlobTags": {
           "$ref": "#/definitions/BlobTags"
+        },
+        "ObjectReplication": {
+          "$ref": "#/definitions/BlobObjectReplication"
         }
       }
     },
@@ -10279,6 +10292,15 @@
             "attribute": true
           }
         }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "BlobObjectReplication": {
+      "type": "object",
+      "xml": {
+        "name": "ObjectReplication"
       },
       "additionalProperties": {
         "type": "string"
@@ -11455,6 +11477,16 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>"
+    },
+    "ObjectReplication": {
+      "name": "x-ms-or",
+      "x-ms-client-name": "objectReplication",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Optional. Only valid when Object Replication is enabled for the storage container. When retrieving this header on the source blob, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed). When retrieving the status on the destination blob, the policy id will be provided as the value of this header (e.g. x-ms-or-policy-id: policy-id).",
+      "x-ms-header-collection-prefix": "x-ms-or-"
     },
     "PathRenameMode": {
       "name": "mode",
