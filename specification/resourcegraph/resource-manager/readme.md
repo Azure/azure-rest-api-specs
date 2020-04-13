@@ -41,15 +41,15 @@ model-validator: true
 message-format: json
 ```
 
-
 ### Tag: package-preview-2020-04
 
 These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-04'
+``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
   - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
 ```
+
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
@@ -122,6 +122,10 @@ directive:
       Renaming it to ResourceChanges_ListResourceChanges causes yet another warning:
               "Per the Noun_Verb convention for Operation Ids, the noun 'ResourceChanges' should not appear after the underscore."
       Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
+  - suppress: EnumInsteadOfBoolean
+    where: $.definitions.ResourceChangesRequestParameters.properties.fetchPropertyChanges
+    from: resourcegraph.json
+    reason: This is a clear scenario for a boolean and will not have more than 2 values in the future.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
