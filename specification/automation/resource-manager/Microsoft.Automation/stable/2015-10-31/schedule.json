@@ -315,61 +315,6 @@
     }
   },
   "definitions": {
-    "AdvancedSchedule": {
-      "properties": {
-        "weekDays": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Days of the week that the job should execute on."
-        },
-        "monthDays": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32",
-            "x-nullable": false
-          },
-          "description": "Days of the month that the job should execute on. Must be between 1 and 31."
-        },
-        "monthlyOccurrences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AdvancedScheduleMonthlyOccurrence"
-          },
-          "description": "Occurrences of days within a month."
-        }
-      },
-      "description": "The properties of the create Advanced Schedule."
-    },
-    "AdvancedScheduleMonthlyOccurrence": {
-      "properties": {
-        "occurrence": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Occurrence of the week within the month. Must be between 1 and 5"
-        },
-        "day": {
-          "type": "string",
-          "description": "Day of the occurrence. Must be one of monday, tuesday, wednesday, thursday, friday, saturday, sunday.",
-          "enum": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday"
-          ],
-          "x-ms-enum": {
-            "name": "ScheduleDay",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "The properties of the create advanced schedule monthly occurrence."
-    },
     "ScheduleCreateOrUpdateProperties": {
       "properties": {
         "description": {
@@ -401,7 +346,7 @@
           "description": "Gets or sets the time zone of the schedule."
         },
         "advancedSchedule": {
-          "$ref": "#/definitions/AdvancedSchedule",
+          "$ref": "../../common/v1/schemas.json#/definitions/AdvancedSchedule",
           "description": "Gets or sets the AdvancedSchedule."
         }
       },
@@ -469,7 +414,7 @@
     "Schedule": {
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ScheduleProperties",
+          "$ref": "../../common/v1/schemas.json#/definitions/ScheduleProperties",
           "x-ms-client-flatten": true,
           "description": "Gets or sets the properties of the schedule."
         }
@@ -480,85 +425,6 @@
         }
       ],
       "description": "Definition of the schedule."
-    },
-    "ScheduleProperties": {
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the start time of the schedule.",
-          "x-nullable": false
-        },
-        "startTimeOffsetMinutes": {
-          "readOnly": true,
-          "type": "number",
-          "format": "double",
-          "description": "Gets the start time's offset in minutes.",
-          "x-nullable": false
-        },
-        "expiryTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the end time of the schedule.",
-          "x-nullable": true
-        },
-        "expiryTimeOffsetMinutes": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the expiry time's offset in minutes.",
-          "x-nullable": false
-        },
-        "isEnabled": {
-          "type": "boolean",
-          "default": false,
-          "description": "Gets or sets a value indicating whether this schedule is enabled."
-        },
-        "nextRun": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the next run time of the schedule.",
-          "x-nullable": true
-        },
-        "nextRunOffsetMinutes": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the next run time's offset in minutes.",
-          "x-nullable": false
-        },
-        "interval": {
-          "description": "Gets or sets the interval of the schedule."
-        },
-        "frequency": {
-          "type": "string",
-          "description": "Gets or sets the frequency of the schedule.",
-          "$ref": "#/definitions/scheduleFrequency"
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "Gets or sets the time zone of the schedule."
-        },
-        "advancedSchedule": {
-          "$ref": "#/definitions/AdvancedSchedule",
-          "description": "Gets or sets the advanced schedule."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time.",
-          "x-nullable": false
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last modified time.",
-          "x-nullable": false
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description."
-        }
-      },
-      "description": "Definition of schedule parameters."
     },
     "ScheduleUpdateProperties": {
       "properties": {

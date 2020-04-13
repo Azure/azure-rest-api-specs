@@ -706,7 +706,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./job.json#/definitions/JobStream"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStream"
             }
           },
           "default": {
@@ -765,7 +765,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./job.json#/definitions/JobStreamListResult"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStreamListResult"
             }
           },
           "default": {
@@ -1040,40 +1040,6 @@
     }
   },
   "definitions": {
-    "ContentHash": {
-      "properties": {
-        "algorithm": {
-          "type": "string",
-          "description": "Gets or sets the content hash algorithm used to hash the content."
-        },
-        "value": {
-          "type": "string",
-          "description": "Gets or sets expected hash value of the content."
-        }
-      },
-      "required": [
-        "algorithm",
-        "value"
-      ],
-      "description": "Definition of the runbook property type."
-    },
-    "ContentLink": {
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "Gets or sets the uri of the runbook content."
-        },
-        "contentHash": {
-          "$ref": "#/definitions/ContentHash",
-          "description": "Gets or sets the hash."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the content."
-        }
-      },
-      "description": "Definition of the content link."
-    },
     "RunbookProperties": {
       "properties": {
         "runbookType": {
@@ -1093,7 +1059,7 @@
           }
         },
         "publishContentLink": {
-          "$ref": "#/definitions/ContentLink",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentLink",
           "description": "Gets or sets the published runbook content link."
         },
         "state": {
@@ -1245,7 +1211,7 @@
           "description": "Gets or sets the draft runbook properties."
         },
         "publishContentLink": {
-          "$ref": "#/definitions/ContentLink",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentLink",
           "description": "Gets or sets the published runbook content link."
         },
         "description": {
@@ -1409,7 +1375,7 @@
           "description": "Gets or sets whether runbook is in edit mode."
         },
         "draftContentLink": {
-          "$ref": "#/definitions/ContentLink",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentLink",
           "description": "Gets or sets the draft runbook content link."
         },
         "creationTime": {
