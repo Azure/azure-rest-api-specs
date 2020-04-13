@@ -4,21 +4,21 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
-    "ruleGroupName": "ruleGroup1",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "parameters": {
       "properties": {
         "priority": 110,
         "rules": [
           {
-            "ruleType": "FirewallPolicyFilterRule",
-            "name": "Example-Filter-Rule",
+            "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+            "name": "Example-Filter-Rule-Collection",
             "action": {
               "type": "Deny"
             },
-            "ruleConditions": [
+            "rules": [
               {
-                "ruleConditionType": "NetworkRuleCondition",
-                "name": "network-condition1",
+                "ruleType": "NetworkRule",
+                "name": "network-rule1",
                 "sourceAddresses": [
                   "10.1.25.0/24"
                 ],
@@ -41,23 +41,23 @@
   "responses": {
     "200": {
       "body": {
-        "name": "ruleGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/ruleGroup1",
+        "name": "ruleCollectionGroup1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "properties": {
           "provisioningState": "Succeeded",
           "priority": 110,
           "rules": [
             {
-              "ruleType": "FirewallPolicyFilterRule",
-              "name": "Example-Filter-Rule",
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Example-Filter-Rule-Collection",
               "action": {
                 "type": "Deny"
               },
-              "ruleConditions": [
+              "rules": [
                 {
-                  "ruleConditionType": "NetworkRuleCondition",
-                  "name": "network-condition1",
+                  "ruleType": "NetworkRule",
+                  "name": "network-rule1",
                   "sourceAddresses": [
                     "10.1.25.0/24"
                   ],
@@ -87,15 +87,15 @@
           "priority": 110,
           "rules": [
             {
-              "ruleType": "FirewallPolicyFilterRule",
-              "name": "Example-Filter-Rule",
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Example-Filter-Rule-Collection",
               "action": {
                 "type": "Deny"
               },
-              "ruleConditions": [
+              "rules": [
                 {
-                  "ruleConditionType": "NetworkRuleCondition",
-                  "name": "network-condition1",
+                  "ruleType": "NetworkRule",
+                  "name": "network-rule1",
                   "sourceAddresses": [
                     "10.1.25.0/24"
                   ],

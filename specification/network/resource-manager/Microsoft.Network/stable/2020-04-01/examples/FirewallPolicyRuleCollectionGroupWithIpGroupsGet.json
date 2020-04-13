@@ -17,16 +17,16 @@
           "priority": 110,
           "rules": [
             {
-              "ruleType": "FirewallPolicyFilterRule",
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule",
               "priority": 200,
               "action": {
                 "type": "Deny"
               },
-              "ruleConditions": [
+              "rules": [
                 {
-                  "ruleConditionType": "NetworkRuleCondition",
-                  "name": "network-condition1",
+                  "ruleType": "NetworkRule",
+                  "name": "network-rule1",
                   "ipProtocols": [
                     "TCP"
                   ],
