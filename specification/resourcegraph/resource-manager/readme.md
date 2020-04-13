@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-2019-04
+tag: package-preview-2020-04
 ```
 
 ### Validations
@@ -41,11 +41,20 @@ model-validator: true
 message-format: json
 ```
 
+
+### Tag: package-preview-2020-04
+
+These settings apply only when `--tag=package-preview-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-04'
+input-file:
+  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
+```
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
 ```
@@ -115,7 +124,7 @@ directive:
       Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -133,11 +142,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
