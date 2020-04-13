@@ -39,25 +39,6 @@ input-file:
 - Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 ```
 
-
-### Tag: package-2019-11-01-preview
-
-These settings apply only when `--tag=package-2019-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-11-01-preview'
-input-file:
-- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
-```
-
-### Tag: package-2019-09-01-privatepreview
-
-These settings apply only when `--tag=package-2019-09-01-privatepreview` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-09-01-privatepreview'
-input-file:
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
-```
-
 ---
 
 # Code Generation
@@ -111,8 +92,6 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
 - Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
-- Microsoft.Kubernetes/preview/2019-11-01-preview/connectedClusters.json
-- Microsoft.Kubernetes/privatepreview/2019-09-01-privatepreview/connectedClusters.json
 
 ```
 
