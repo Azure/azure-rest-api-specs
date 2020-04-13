@@ -1237,22 +1237,7 @@
             "schema": {
               "$ref": "#/definitions/ReservationDetailsListResult"
             }
-          },
-          "404":{
-            "description": "Not Found. User not found."   
-          },
-          "429": {
-            "description": "TooManyRequests. Request is throttled."           
-          },
-          "503": {
-            "description": "ServiceUnavailable. Service is temporarily unavailable.",
-            "headers": {
-              "RetryAfter": {
-                "type": "integer",
-                "description": "Indicates how long the client should wait before retrying."
-              }
-            }
-          },
+          },          
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -4462,7 +4447,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\n*** Some Error Responses: ***\n\n * 429 TooManyRequests - Request is throttled. Retry after backing off.\n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after backing off for the time specified in the RetryAfter header.",
       "type": "object",
       "properties": {
         "error": {
