@@ -945,14 +945,31 @@
           "description": "Password to logon the server.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "connectionString": {
+          "type": "object",
+          "description": "The connection string. It is mutually exclusive with sasUri property. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "accountKey": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of accountKey in connection string."
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure File resource. It is mutually exclusive with connectionString property. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
+        },
+        "fileShare": {
+          "description": "The azure file share name. It is required when auth with accountKey/sasToken. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "host"
-      ]
+      }
     },
     "GoogleCloudStorageLinkedService": {
       "x-ms-discriminator-value": "GoogleCloudStorage",
