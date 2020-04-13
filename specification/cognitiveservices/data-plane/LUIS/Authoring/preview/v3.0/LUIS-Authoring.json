@@ -7635,6 +7635,9 @@
             "$ref": "#/parameters/BearerAuthPath"
           },
           {
+            "$ref": "#/parameters/ArmTokenParamter"
+          },
+          {
             "name": "azureAccountInfoObject",
             "in": "body",
             "schema": {
@@ -7679,6 +7682,9 @@
           },
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -7714,6 +7720,9 @@
           },
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           },
           {
             "name": "azureAccountInfoObject",
@@ -7759,6 +7768,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/BearerAuthPath"
+          },
+          {
+            "$ref": "#/parameters/ArmTokenParamter"
           }
         ],
         "responses": {
@@ -7857,6 +7869,256 @@
         "x-ms-examples": {
           "Successful Get published application package request": {
             "$ref": "./examples/package/SuccessfulGetPublishedApplicationPackageRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/apps/import?JsonVersion=V2": {
+      "post": {
+        "description": "Imports an application to LUIS, the application's structure is included in the request body.",
+        "operationId": "Apps_ImportV2App",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LuisAppV2"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the imported application.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/apps/SuccessfulImportV2ApplicationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/import?format=lu": {
+      "post": {
+        "description": "Imports an application to LUIS, the application's structure is included in the request body.",
+        "operationId": "Apps_ImportLuFormat",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "query",
+            "description": "The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppLu",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "201": {
+            "description": "The ID of the imported application.",
+            "x-nullable": false,
+            "schema": {
+              "$ref": "#/definitions/GuidResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/apps/SuccessfulImportLuApplicationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/import?JsonVersion=V2": {
+      "post": {
+        "description": "Imports a new version into a LUIS application.",
+        "operationId": "Versions_ImportV2App",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The new versionId to import. If not specified, the versionId will be read from the imported object.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppV2",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LuisAppV2"
+            },
+            "description": "A LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "The created application version.",
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/versions/SuccessfulImportV2ApplicationVersionRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/import?format=lu": {
+      "post": {
+        "description": "Imports a new version into a LUIS application.",
+        "operationId": "Versions_ImportLuFormat",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The new versionId to import. If not specified, the versionId will be read from the imported object.",
+            "type": "string"
+          },
+          {
+            "name": "luisAppLu",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "An LU representing the LUIS application structure."
+          }
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "responses": {
+          "201": {
+            "description": "The created application version.",
+            "schema": {
+              "$ref": "#/definitions/VersionResponse"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Import Application": {
+            "$ref": "./examples/versions/SuccessfulImportLuApplicationVersionRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/export?format=lu": {
+      "get": {
+        "description": "Exports a LUIS application to text format.",
+        "operationId": "Versions_ExportLuFormat",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "required": true,
+            "description": "Lu format extension",
+            "type": "string",
+            "enum": [
+              "lu"
+            ]
+          },
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The LUIS application structure in LU format.",
+            "schema": {
+              "description": "The LUIS application structure in LU format.",
+              "type": "object",
+              "format": "file"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/octet-stream"
+        ],
+        "x-ms-examples": {
+          "Successful Export Application Version": {
+            "$ref": "./examples/versions/SuccessfulExportLuApplicationVersionRequest.json"
           }
         }
       }
@@ -8576,6 +8838,30 @@
         }
       }
     },
+    "HierarchicalModelV2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inherits": {
+          "type": "object",
+          "$ref": "#/definitions/PrebuiltDomainObject"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApplicationPublishObject": {
       "description": "Object model for publishing a specific application version.",
       "type": "object",
@@ -8588,6 +8874,121 @@
           "description": "Indicates if the staging slot should be used, instead of the Production one.",
           "default": false,
           "type": "boolean"
+        }
+      }
+    },
+    "LuisAppV2": {
+      "description": "Exported Model - An exported LUIS Application.",
+      "additionalProperties": true,
+      "type": "object",
+      "properties": {
+        "luis_schema_version": {
+          "description": "Luis schema deserialization version.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the application.",
+          "type": "string"
+        },
+        "versionId": {
+          "description": "The version ID of the application that was exported.",
+          "type": "string"
+        },
+        "desc": {
+          "description": "The description of the application.",
+          "type": "string"
+        },
+        "culture": {
+          "description": "The culture of the application. E.g.: en-us.",
+          "type": "string"
+        },
+        "intents": {
+          "description": "List of intents.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "entities": {
+          "description": "List of entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "closedLists": {
+          "description": "List of list entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ClosedList"
+          },
+          "type": "array"
+        },
+        "composites": {
+          "description": "List of composite entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModelV2"
+          },
+          "type": "array"
+        },
+        "patternAnyEntities": {
+          "description": "List of Pattern.Any entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternAny"
+          },
+          "type": "array"
+        },
+        "regex_entities": {
+          "description": "List of regular expression entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/RegexEntity"
+          },
+          "type": "array"
+        },
+        "prebuiltEntities": {
+          "description": "List of prebuilt entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PrebuiltEntity"
+          },
+          "type": "array"
+        },
+        "regex_features": {
+          "description": "List of pattern features.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONRegexFeature"
+          },
+          "type": "array"
+        },
+        "model_features": {
+          "description": "List of model features.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONModelFeature"
+          },
+          "type": "array"
+        },
+        "patterns": {
+          "description": "List of patterns.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/PatternRule"
+          },
+          "type": "array"
+        },
+        "utterances": {
+          "description": "List of example utterances.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONUtterance"
+          },
+          "type": "array"
         }
       }
     },
@@ -10427,6 +10828,14 @@
       "in": "header",
       "description": "The bearer authorization header to use; containing the user's ARM token used to validate Azure accounts information.",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ArmTokenParamter": {
+      "in": "header",
+      "name": "ArmToken",
+      "required": false,
+      "description": "The custom arm token header to use; containing the user's ARM token used to validate azure accounts information.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
