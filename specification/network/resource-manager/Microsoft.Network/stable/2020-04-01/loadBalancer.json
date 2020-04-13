@@ -558,6 +558,68 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "delete": {
+        "tags": [
+          "LoadBalancers"
+        ],
+        "operationId": "LoadBalancerBackendAddressPools_Delete",
+        "description": "Deletes the specified load balancer backend address pool.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the load balancer."
+          },
+          {
+            "name": "backendAddressPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the backend address pool."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BackendAddressPoolDelete": {
+            "$ref": "./examples/LoadBalancerBackendAddressPoolDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
