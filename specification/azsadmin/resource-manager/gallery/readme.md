@@ -47,3 +47,13 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
 ```
+
+# AutoRest v3 generators
+
+> see https://aka.ms/autorest
+
+``` yaml
+input-file:
+  - Microsoft.Gallery.Admin/preview/2015-04-01/Gallery.json
+  - Microsoft.Gallery.Admin/preview/2015-04-01/GalleryItem.json
+```
