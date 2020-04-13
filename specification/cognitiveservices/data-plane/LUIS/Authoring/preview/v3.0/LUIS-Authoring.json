@@ -8882,6 +8882,10 @@
       "additionalProperties": true,
       "type": "object",
       "properties": {
+        "luis_schema_version": {
+          "description": "Luis schema tokenizer version.",
+          "type": "string"
+        },
         "name": {
           "description": "The name of the application.",
           "type": "string"
@@ -8930,14 +8934,6 @@
           },
           "type": "array"
         },
-        "hierarchicals": {
-          "description": "List of hierarchical entities.",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/HierarchicalModelV2"
-          },
-          "type": "array"
-        },
         "patternAnyEntities": {
           "description": "List of Pattern.Any entities.",
           "items": {
@@ -8970,7 +8966,7 @@
           },
           "type": "array"
         },
-        "phraselists": {
+        "model_features": {
           "description": "List of model features.",
           "items": {
             "type": "object",
