@@ -384,7 +384,7 @@
         },
         "data": {
           "description": "Query output in tabular format.",
-          "$ref": "#/definitions/Table"
+          "type": "object"
         },
         "facets": {
           "description": "Query facets.",
@@ -504,7 +504,7 @@
         },
         "data": {
           "description": "A table containing the desired facets. Only present if the facet is valid.",
-          "$ref": "#/definitions/Table"
+          "type": "object"
         }
       },
       "required": [
@@ -818,10 +818,6 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of results.",
-          "type": "string"
         }
       }
     },
@@ -866,7 +862,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Api Version."
     }
   }
 }
