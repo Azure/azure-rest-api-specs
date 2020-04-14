@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/digitaltwins
+  output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins
 ```
