@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/windowsesu/azure-mgmt-windowsesu
+  output-folder: $(python-sdks-folder)/windowsesu/azure-mgmt-windowsesu/azure/mgmt/windowsesu
 ```
