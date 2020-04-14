@@ -245,7 +245,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.quantum/offerings": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.quantum/locations/{locationName}/offerings": {
       "get": {
         "description": "Returns list of provider descriptions.",
         "operationId": "Offerings_List",
@@ -260,6 +260,9 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -470,9 +473,56 @@
           "type": "string",
           "description": "display name of provider"
         },
+        "properties": {
+          "type": "object",
+          "description": "provider properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProviderProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ProviderProperties": {
+      "type": "object",
+      "description": "Provider properties.",
+      "properties": {
         "description": {
           "type": "string",
           "description": "Description about this provider"
+        },
+        "defaultEndpoint": {
+          "type": "string",
+          "description": "Provider's default endpoint"
+        },
+        "aad": {
+          "type": "object",
+          "description": "Azure Acitve Directory info",
+          "properties": {
+            "applicationId": {
+              "type": "string",
+              "description": "Provider's application id"
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "Provider's tenant id"
+            }
+          }
+        },
+        "managedApplication": {
+          "type": "object",
+          "description": "Managed application info",
+          "properties": {
+            "publisherId": {
+              "type": "string",
+              "description": "Provider's publisher id"
+            },
+            "offerId": {
+              "type": "string",
+              "description": "Provider's offer id"
+            }
+          }
         },
         "targets": {
           "type": "array",
@@ -481,7 +531,7 @@
             "$ref": "#/definitions/TargetDescription"
           }
         },
-        "providerSkus": {
+        "skus": {
           "type": "array",
           "description": "list of skus from the provider",
           "items": {
@@ -505,6 +555,20 @@
         "description": {
           "type": "string",
           "description": "Description about this sku"
+        },
+        "acceptedDataFormats": {
+          "type": "array",
+          "description": "List of data formats",
+          "items": {
+            "type": "string"
+          }
+        },
+        "acceptedContentEncodings": {
+          "type": "array",
+          "description": "List of content encodings",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -627,6 +691,14 @@
       "required": true,
       "type": "string",
       "description": "The Azure subscription ID."
+    },
+    "LocationParameter": {
+      "name": "locationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Location.",
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
