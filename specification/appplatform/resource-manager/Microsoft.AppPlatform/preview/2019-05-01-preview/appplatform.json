@@ -88,7 +88,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created. The response describes the new Service and contains a Location header to query the operation result.",
+            "description": "Created. The response describes the new Service and contains a Location header to query the\r\noperation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -197,7 +197,7 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting Service is now updating and contains a Location header to query the operation result.",
+            "description": "Accepted. The response indicates the exiting Service is now updating and contains a Location\r\nheader to query the operation result.",
             "schema": {
               "$ref": "#/definitions/ServiceResource"
             }
@@ -401,13 +401,6 @@
         "operationId": "Apps_Get",
         "parameters": [
           {
-            "name": "syncStatus",
-            "in": "query",
-            "description": "Indicates whether sync status",
-            "required": false,
-            "type": "string"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -421,6 +414,13 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "syncStatus",
+            "in": "query",
+            "description": "Indicates whether sync status",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -953,6 +953,191 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the certificate resource.",
+        "operationId": "Certificates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Get": {
+            "$ref": "./examples/Certificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update certificate resource.",
+        "operationId": "Certificates_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          },
+          {
+            "name": "certificateResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the existed certificate updated.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_CreateOrUpdate": {
+            "$ref": "./examples/Certificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the certificate resource.",
+        "operationId": "Certificates_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CertificateNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the certificate deleted."
+          },
+          "204": {
+            "description": "No content. The response indicates the certificate doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_Delete": {
+            "$ref": "./examples/Certificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/certificates": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List all the certificates of one user.",
+        "operationId": "Certificates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the custom domain resource list of one application.",
+            "schema": {
+              "$ref": "#/definitions/CertificateResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Certificates_List": {
+            "$ref": "./examples/Certificates_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/locations/{location}/checkNameAvailability": {
       "post": {
         "tags": [
@@ -962,17 +1147,17 @@
         "operationId": "Services_CheckNameAvailability",
         "parameters": [
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "location",
             "in": "path",
             "description": "the region",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "availabilityParameters",
@@ -1001,6 +1186,311 @@
         "x-ms-examples": {
           "Services_CheckNameAvailability": {
             "$ref": "./examples/Services_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the custom domain of one lifecycle application.",
+        "operationId": "CustomDomains_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the custom domain.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_Get": {
+            "$ref": "./examples/CustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update custom domain of one lifecycle application.",
+        "operationId": "CustomDomains_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          },
+          {
+            "name": "domainResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the existed custom domain updated.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/CustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Delete the custom domain of one lifecycle application.",
+        "operationId": "CustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the custom domain deleted."
+          },
+          "204": {
+            "description": "No content. The response indicates the custom domain doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_Delete": {
+            "$ref": "./examples/CustomDomains_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Update custom domain of one lifecycle application.",
+        "operationId": "CustomDomains_Patch",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomDomainNameParameter"
+          },
+          {
+            "name": "domainResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the existed custom domain updated.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_Patch": {
+            "$ref": "./examples/CustomDomains_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List the custom domains of one lifecycle application.",
+        "operationId": "CustomDomains_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the custom domain resource list of one application.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "CustomDomains_List": {
+            "$ref": "./examples/CustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/apps/{appName}/domains/validate": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Check the resource name is valid as well as not in use.",
+        "operationId": "CustomDomains_Validate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "validatePayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidatePayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the name is available.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainValidateResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomDomains_Validate": {
+            "$ref": "./examples/CustomDomains_Validate.json"
           }
         }
       }
@@ -1238,18 +1728,6 @@
         "operationId": "Deployments_List",
         "parameters": [
           {
-            "name": "version",
-            "in": "query",
-            "description": "Version of the deployments to be listed",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": false
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1263,6 +1741,18 @@
           },
           {
             "$ref": "#/parameters/AppNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           }
         ],
         "responses": {
@@ -1298,18 +1788,6 @@
         "operationId": "Deployments_ListClusterAllDeployments",
         "parameters": [
           {
-            "name": "version",
-            "in": "query",
-            "description": "Version of the deployments to be listed",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": false
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -1320,6 +1798,18 @@
           },
           {
             "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Version of the deployments to be listed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "uniqueItems": false
           }
         ],
         "responses": {
@@ -2043,6 +2533,10 @@
           "$ref": "#/definitions/AppResourceProperties",
           "description": "Properties of the App resource",
           "x-ms-client-flatten": false
+        },
+        "location": {
+          "description": "The GEO location of the application, always the same with its parent resource",
+          "type": "string"
         }
       }
     },
@@ -2087,6 +2581,14 @@
         "activeDeploymentName": {
           "description": "Name of the active deployment of the App",
           "type": "string"
+        },
+        "fqdn": {
+          "description": "Fully qualified dns Name.",
+          "type": "string"
+        },
+        "httpsOnly": {
+          "description": "Indicate if only https is allowed.",
+          "type": "boolean"
         },
         "createdTime": {
           "format": "date-time",
@@ -2256,6 +2758,101 @@
         }
       }
     },
+    "CertificateResource": {
+      "description": "Certificate resource payload.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "Properties of the certificate resource payload.",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "CertificateProperties": {
+      "description": "Certificate resource payload.",
+      "required": [
+        "vaultUri",
+        "keyVaultCertName"
+      ],
+      "type": "object",
+      "properties": {
+        "thumbprint": {
+          "description": "The thumbprint of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vaultUri": {
+          "description": "The vault uri of user key vault.",
+          "type": "string"
+        },
+        "keyVaultCertName": {
+          "description": "The certificate name of key vault.",
+          "type": "string"
+        },
+        "certVersion": {
+          "description": "The certificate version of key vault.",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "The issuer of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "issuedDate": {
+          "description": "The issue date of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "The expiration date of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "activateDate": {
+          "description": "The activate date of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectName": {
+          "description": "The subject name of certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dnsNames": {
+          "description": "The domain list of certificate.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateResourceCollection": {
+      "description": "Collection compose of certificate resources list and a possible link for next page.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The certificate resources list.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CertificateResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to next page of certificate list.",
+          "type": "string"
+        }
+      }
+    },
     "NameAvailabilityParameters": {
       "description": "Name availability parameters payload",
       "required": [
@@ -2293,6 +2890,85 @@
       },
       "readOnly": true
     },
+    "CustomDomainResource": {
+      "description": "Custom domain resource payload.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomDomainProperties",
+          "description": "Properties of the custom domain resource.",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "CustomDomainProperties": {
+      "description": "Custom domain of app resource payload.",
+      "type": "object",
+      "properties": {
+        "thumbprint": {
+          "description": "The thumbprint of bound certificate.",
+          "type": "string"
+        },
+        "appName": {
+          "description": "The app name of domain.",
+          "type": "string"
+        },
+        "certName": {
+          "description": "The bound certificate name of domain.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainResourceCollection": {
+      "description": "Collection compose of a custom domain resources list and a possible link for next page.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The custom domain resources list.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDomainResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to next page of custom domain list.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainValidatePayload": {
+      "description": "Custom domain validate payload.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name to be validated",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainValidateResult": {
+      "description": "Validation result for custom domain.",
+      "type": "object",
+      "properties": {
+        "isValid": {
+          "description": "Indicates if domain name is valid.",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Message of why domain name is invalid.",
+          "type": "string"
+        }
+      }
+    },
     "DeploymentResource": {
       "description": "Deployment resource payload",
       "type": "object",
@@ -2322,6 +2998,10 @@
           "type": "string",
           "readOnly": true
         },
+        "deploymentSettings": {
+          "$ref": "#/definitions/DeploymentSettings",
+          "description": "Deployment settings of the Deployment"
+        },
         "provisioningState": {
           "description": "Provisioning state of the Deployment",
           "enum": [
@@ -2336,10 +3016,6 @@
             "name": "DeploymentResourceProvisioningState",
             "modelAsString": true
           }
-        },
-        "deploymentSettings": {
-          "$ref": "#/definitions/DeploymentSettings",
-          "description": "Deployment settings of the Deployment"
         },
         "status": {
           "description": "Status of the Deployment",
@@ -2816,6 +3492,22 @@
       "name": "bindingName",
       "in": "path",
       "description": "The name of the Binding resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CustomDomainNameParameter": {
+      "name": "domainName",
+      "in": "path",
+      "description": "The name of the custom domain resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CertificateNameParameter": {
+      "name": "certificateName",
+      "in": "path",
+      "description": "The name of the certificate resource.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

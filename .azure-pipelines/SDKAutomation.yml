@@ -7,6 +7,10 @@ trigger:
 pr:
   autoCancel: false
 
+variables:
+  IMAGE: azopenapi.azurecr.io/openapi/sdk-automation:prod
+  REGISTRY_ENDPOINT: azopenapi-registry
+
 jobs:
 - job: "SDKAutomation"
   displayName: SDK
@@ -33,7 +37,7 @@ jobs:
       Python:
         SDK_REPO_NAME: azure-sdk-for-python
       Cliextension:
-        SDK_REPO_NAME: cli-extension-az
+        SDK_REPO_NAME: azure-cli-extensions
       Go:
         SDK_REPO_NAME: azure-sdk-for-go
   steps:
@@ -49,12 +53,10 @@ jobs:
     displayName: Login into ACR
     inputs:
       command: login
-      containerRegistry: openapi platform test acr registry
+      containerRegistry: $(REGISTRY_ENDPOINT)
   - script: |
       docker pull $IMAGE
       docker tag $IMAGE sdk-automation:latest
-    env:
-      IMAGE: azopenapitest.azurecr.io/openapi/sdk-automation:test
     displayName: Pull SDK Automation Image
   - script: |
       docker run \

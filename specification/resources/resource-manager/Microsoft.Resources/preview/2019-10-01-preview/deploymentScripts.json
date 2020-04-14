@@ -89,7 +89,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -137,7 +137,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -177,7 +177,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -217,7 +217,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -253,7 +253,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -298,7 +298,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -314,6 +314,9 @@
         "x-ms-examples": {
           "DeploymentScriptsGetLogs": {
             "$ref": "./examples/DeploymentScripts_GetLogsDefault.json"
+          },
+          "DeploymentScriptsGetLogsWithTail": {
+            "$ref": "./examples/DeploymentScripts_GetLogsDefaultWithTail.json"
           }
         },
         "parameters": [
@@ -328,6 +331,12 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "tail",
+            "in": "query",
+            "description": "The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.",
+            "type": "integer"
           }
         ],
         "responses": {
@@ -340,7 +349,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         }
@@ -379,7 +388,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
+              "$ref": "#/definitions/DeploymentScriptsError"
             }
           }
         },
@@ -430,6 +439,11 @@
             "name": "ScriptType",
             "modelAsString": true
           }
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "allOf": [
@@ -595,6 +609,11 @@
       "x-ms-external": true,
       "description": "Common properties for the deployment script.",
       "properties": {
+        "containerSettings": {
+          "type": "object",
+          "description": "Container settings.",
+          "$ref": "#/definitions/ContainerConfiguration"
+        },
         "cleanupPreference": {
           "type": "string",
           "description": "The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.",
@@ -642,6 +661,18 @@
         }
       }
     },
+    "ContainerConfiguration": {
+      "type": "object",
+      "description": "Settings to customize ACI container instance.",
+      "properties": {
+        "containerGroupName": {
+          "type": "string",
+          "description": "Container group name, if not specified then the name will get auto-generated. Not specifying a 'containerGroupName' indicates the system to generate a unique name which might end up flagging an Azure Policy as non-compliant. Use 'containerGroupName' when you have an Azure Policy that expects a specific naming convention or when you want to fully control the name. 'containerGroupName' property must be between 1 and 63 characters long, must contain only lowercase letters, numbers, and dashes and it cannot start or end with a dash and consecutive dashes are not allowed. To specify a 'containerGroupName', add the following object to properties: { \"containerSettings\": { \"containerGroupName\": \"contoso-container\" } }. If you do not want to specify a 'containerGroupName' then do not add 'containerSettings' property.",
+          "minLength": 1,
+          "maxLength": 63
+        }
+      }
+    },
     "ScriptStatus": {
       "type": "object",
       "description": "Generic object modeling results of script execution.",
@@ -676,7 +707,7 @@
         },
         "error": {
           "description": "Error that is relayed from the script execution.",
-          "$ref": "#/definitions/DefaultErrorResponse"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     },
@@ -817,30 +848,13 @@
         }
       }
     },
-    "DefaultErrorResponse": {
-      "description": "The details of the error.",
-      "type": "object",
+    "DeploymentScriptsError": {
       "properties": {
-        "code": {
-          "description": "One of a server-defined set of error codes.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human-readable representation of the error.",
-          "type": "string"
-        },
-        "target": {
-          "description": "The target of the particular error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Detailed errors.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DefaultErrorResponse"
-          }
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
-      }
+      },
+      "description": "Deployment scripts error response."
     }
   },
   "parameters": {
