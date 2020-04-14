@@ -1135,6 +1135,238 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInSubscription",
+        "summary": "List dataController resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a subscription.": {
+            "$ref": "./examples/ListSubscriptionDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers": {
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_ListInGroup",
+        "summary": "List dataController resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PageOfDataControllerResource"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all dataControllers in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupDataController.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/dataControllers/{dataControllerName}": {
+      "put": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PutDataController",
+        "description": "Creates or replaces a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "x-ms-examples": {
+            "Updates a dataControllers tags.": {
+              "$ref": "./examples/CreateOrUpdateDataController.json"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_DeleteDataController",
+        "description": "Deletes a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "204": {
+            "description": "Missing"
+          },
+          "x-ms-examples": {
+            "Delete a dataController.": {
+              "$ref": "./examples/DeleteDataController.json"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_GetDataController",
+        "description": "Retrieves a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "x-ms-examples": {
+            "Updates a dataController tags.": {
+              "$ref": "./examples/GetDataController.json"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataControllers"
+        ],
+        "operationId": "DataControllers_PatchDataController",
+        "description": "Updates a dataController resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "dataControllerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DataControllerResource"
+            }
+          },
+          "x-ms-examples": {
+            "Updates a dataController tags.": {
+              "$ref": "./examples/UpdateDataController.json"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/hybridDataManagers": {
       "get": {
         "tags": [
@@ -1860,6 +2092,260 @@
           "description": "Link to retrieve next page of results.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "PageOfDataControllerResource": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/DataControllerResource"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "DataControllerResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureResource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/DataControllerProperties"
+            }
+          }
+        }
+      ]
+    },
+    "AzureResource": {
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "family": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      }
+    },
+    "DataControllerProperties": {
+      "type": "object",
+      "properties": {
+        "data_controller": {
+          "$ref": "#/definitions/DataController"
+        },
+        "request_type": {
+          "$ref": "#/definitions/RequestType"
+        },
+        "upload_request": {
+          "$ref": "#/definitions/UsageUploadRequest"
+        },
+        "upload_response": {
+          "$ref": "#/definitions/UsageUploadResponse"
+        },
+        "handshake_request": {
+          "$ref": "#/definitions/HandshakeRequest"
+        },
+        "handshake_response": {
+          "$ref": "#/definitions/HandshakeResponse"
+        }
+      }
+    },
+    "DataController": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "azure_resource_type": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resource_group": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "RequestType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Handshake",
+        "UsageUpload"
+      ],
+      "x-ms-enum": {
+        "name": "RequestType",
+        "modelAsString": true
+      }
+    },
+    "UsageUploadRequest": {
+      "type": "object",
+      "properties": {
+        "export_type": {
+          "type": "string"
+        },
+        "data_timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "data": {
+          "items": {
+            "$ref": "#/definitions/UsageRecord"
+          },
+          "type": "array"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageRecord": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "event_seq": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "event_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "subscription_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resource_group": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "quantity": {
+          "type": "number",
+          "format": "double"
+        },
+        "tags": {
+          "type": "string"
+        }
+      }
+    },
+    "UsageUploadResponse": {
+      "type": "object",
+      "properties": {
+        "usage_upload_status": {
+          "$ref": "#/definitions/UsageUploadStatus"
+        },
+        "usage_water_mark": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "UsageUploadStatus": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Failed",
+        "PartialSuccess",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "UsageUploadStatus",
+        "modelAsString": true
+      }
+    },
+    "HandshakeRequest": {
+      "type": "object"
+    },
+    "HandshakeResponse": {
+      "type": "object",
+      "properties": {
+        "usage_upload_url": {
+          "type": "string"
+        },
+        "usage_result_url": {
+          "type": "string"
         }
       }
     },
