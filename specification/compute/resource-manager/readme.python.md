@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -29,11 +29,21 @@ directive:
         replace(/dummy_orchestration_service_name = "DummyOrchestrationServiceName"/g,'');
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+package-name: azure-mgmt-compute
+no-namespace-folders: true
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2019-12-01-only
   - tag: package-2019-11-01-only
@@ -50,6 +60,33 @@ batch:
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
   - tag: package-compute-2015-06
+```
+
+```yaml $(multiapi) && $(track2)
+clear-output-folder: true
+batch:
+  - tag: package-2019-12-01-only
+  - tag: package-2019-11-01-only
+  - tag: package-2019-07-01-only
+  - tag: package-2019-04-01-only
+  - tag: package-2019-03-01-only
+  - tag: package-2018-10-01-only
+  - tag: package-2018-09-30-only
+  - tag: package-compute-only-2018-06
+  - tag: package-compute-2018-04
+  - tag: package-compute-only-2017-12
+  - tag: package-skus-2017-09
+  - tag: package-compute-2017-03
+  - tag: package-compute-2016-04-preview
+  - tag: package-compute-2016-03
+  - tag: package-compute-2015-06
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/$(package-top-folder)/azure-mgmt-compute/azure/mgmt/compute/
+clear-output-folder: false
+perform-load: false
 ```
 
 ### Tag: package-2019-12-01-only and python
