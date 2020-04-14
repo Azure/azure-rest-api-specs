@@ -168,6 +168,10 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.Relay/stable/2017-04-01/relay.json
   - $(this-folder)/Microsoft.Relay/stable/2016-07-01/relay.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/Namespaces-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/NetworkRuleSets-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
+  - $(this-folder)/Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
 
 ```
 
