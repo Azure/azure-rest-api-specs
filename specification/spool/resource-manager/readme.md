@@ -40,7 +40,7 @@ input-file:
 ```
 ```yaml $(tag) == 'package-2019-10-10-preview' && $(generate-private)
 input-file:
-  - Microsoft.Spoolservice/preview/2019-10-10-preview/spool-private.json
+  - Microsoft.SpoolService/preview/2019-10-10-preview/spool-private.json
 ```
 
 ---
