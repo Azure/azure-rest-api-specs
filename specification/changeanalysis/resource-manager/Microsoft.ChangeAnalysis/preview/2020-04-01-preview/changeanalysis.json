@@ -15,6 +15,8 @@
           "ConfigurationProfile"
         ],
         "summary": "Get the configuration profile for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "Get",
         "produces": [
           "application/json",
           "default"
@@ -50,6 +52,8 @@
           "ConfigurationProfile"
         ],
         "summary": "Updates configuration profile for for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "Create",
         "consumes": [
           "application/json"
         ],
@@ -96,6 +100,8 @@
           "ConfigurationProfile"
         ],
         "summary": "Updates a configuration profile with the specified parameters.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "Update",
         "consumes": [
           "application/json"
         ],
@@ -142,6 +148,8 @@
           "ConfigurationProfile"
         ],
         "summary": "Deletes existing configuration profile.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "Delete",
         "produces": [
           "default"
         ],
@@ -179,11 +187,21 @@
         ],
         "summary": "Lists operations for the resource provider.",
         "description": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their description.",
+        "operationId": "List",
         "produces": [
-          "text/plain",
           "application/json",
-          "text/json",
           "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -198,6 +216,9 @@
               "$ref": "#/definitions/Error"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -219,13 +240,11 @@
         },
         "principalId": {
           "format": "uuid",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "tenantId": {
           "format": "uuid",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -270,16 +289,19 @@
           "$ref": "#/definitions/NotificationSettings"
         },
         "lastModifiedBy": {
+          "description": "The principal that last modified the configuration profile.",
           "type": "string",
           "readOnly": true
         },
         "lastModifiedTime": {
           "format": "date-time",
+          "description": "The last modification time of the configuration profile.",
           "type": "string",
           "readOnly": true
         },
         "createdTime": {
           "format": "date-time",
+          "description": "The creation date of configuration profile.",
           "type": "string",
           "readOnly": true
         }
@@ -368,7 +390,7 @@
       "description": "An Azure resource.",
       "properties": {
         "id": {
-          "description": "The resource ID.",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
           "type": "string",
           "readOnly": true
         },
