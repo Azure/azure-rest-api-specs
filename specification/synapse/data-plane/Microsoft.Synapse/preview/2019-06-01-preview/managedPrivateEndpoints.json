@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2019-06-01-preview",
-    "title": "SynapseClient"
+    "title": "VnetClient"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{workspaceName}.{SynapseDnsSuffix}",
@@ -188,12 +188,22 @@
     "ManagedPrivateEndpoint": {
       "description": "Managed private endpoint",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
         "properties": {
           "$ref": "#/definitions/ManagedPrivateEndpointProperties",
           "description": "Managed private endpoint properties"
@@ -261,7 +271,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "default": "azuresynapse.net​",
+      "default": "dev.azuresynapse.net",
       "x-ms-skip-url-encoding": true,
       "description": "Gets the DNS suffix used as the base for all Synapse service requests.",
       "x-ms-parameter-location": "client"
