@@ -3579,6 +3579,40 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.ADHybridHealthService/services/{serviceName}/ipAddressAggregateSettings": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "description": "Gets the ipAddressAggregateSettings.",
+        "x-ms-examples": {
+          "services_getIpAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettings.json"
+          }
+        },
+        "operationId": "services_getIpAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ip AddressAggregate Settings.",
+            "schema": {
+              "$ref": "#/definitions/IpAddressAggregateSetting"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5471,6 +5505,36 @@
         "continuationToken": {
           "description": "The key for the property.",
           "type": "string"
+        }
+      }
+    },
+    "IpAddressAggregateSetting": {
+      "description": "The key value pair for IP Aggregate Thresholds.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID for the entree",
+          "type": "string"
+        },
+        "badPasswordAndExtranetLockoutCombinedDailyThreshold": {
+          "description": "The tenant ID",
+          "type": "integer"
+        },
+        "badPasswordAndExtranetLockoutCombinedHourlyThreshold": {
+          "description": "The service ID",
+          "type": "integer"
+        },
+        "extranetLockoutDailyThreshold": {
+          "description": "The Bad Ip Address",
+          "type": "integer"
+        },
+        "extranetLockoutHourlyThreshold": {
+          "description": "When the event occurred",
+          "type": "integer"
+        },
+        "emailNotificationEnabled": {
+          "description": "The first audit timestamp",
+          "type": "boolean"
         }
       }
     },
