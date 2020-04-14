@@ -1,132 +1,725 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "2020-01-12-preview",
-    "title": "industrydatalifecycle",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "industrydatalifecycleClient"
-    }
-  },
-  "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
-  "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/operations": {
-      "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
-            "schema": {
-              "$ref": "#/definitions/Result"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Result": {
-      "description": "Sample result definition",
-      "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "readOnly": true
-        }
-      }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request."
-    }
-  }
+	"swagger": "2.0",
+	"info": {
+		"version": "2020-01-12-preview",
+		"title": "IndustryDataLifecycleClient",
+		"description": "API's to manage industry data lifecycle",
+		"x-ms-code-generation-settings": {
+			"name": "IndustryDataLifecycleClient"
+		}
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [{
+		"azure_auth": [
+			"user_impersonation"
+		]
+	}],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.IndustryDataLifecycle/derivedModels": {
+			"get": {
+				"tags": [
+					"DerivedModels"
+				],
+				"operationId": "DerivedModels_ListBySubscription",
+				"description": "Lists all derived models in a subscription.",
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
+				"x-ms-examples": {
+					"DerivedModels_ListBySubscription": {
+						"$ref": "./examples/derivedmodels_listbysubscription.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/SelectParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/DerivedModelListResponse"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/derivedModels": {
+			"get": {
+				"tags": [
+					"DerivedModels"
+				],
+				"operationId": "DerivedModels_ListByResourceGroup",
+				"description": "Lists all derived models references in a resource group.",
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
+				"x-ms-examples": {
+					"DerivedModels_ListByResourceGroup": {
+						"$ref": "./examples/derivedmodels_listbyresourcegroup.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/SelectParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/DerivedModelListResponse"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/derivedModels/{derivedModelName}": {
+			"put": {
+				"tags": [
+					"DerivedModels"
+				],
+				"operationId": "DerivedModels_CreateOrUpdate",
+				"description": "Creates a new derived model or update existing derived model identified by name.",
+				"x-ms-examples": {
+					"DerivedModels_CreateOrUpdate": {
+						"$ref": "./examples/derivedmodels_createorupdate.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/DerivedModelNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "derivedModelRequest",
+						"description": "DerivedModel create or update request object.",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DerivedModel"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Updated.",
+						"schema": {
+							"$ref": "#/definitions/DerivedModel"
+						}
+					},
+					"201": {
+						"description": "Created.",
+						"schema": {
+							"$ref": "#/definitions/DerivedModel"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			},
+			"get": {
+				"tags": [
+					"DerivedModels"
+				],
+				"operationId": "DerivedModels_Get",
+				"description": "Get derived model identified by name.",
+				"x-ms-examples": {
+					"DerivedModels_Get": {
+						"$ref": "./examples/derivedmodels_get.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/DerivedModelNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/SelectParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/DerivedModel"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"DerivedModels"
+				],
+				"operationId": "DerivedModels_Delete",
+				"description": "Deletes derived model identified by name.",
+				"x-ms-examples": {
+					"DerivedModels_Delete": {
+						"$ref": "./examples/derivedmodels_delete.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/DerivedModelNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success."
+					},
+					"204": {
+						"description": "No Content."
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/derivedModels/{derivedModelName}/entities": {
+			"get": {
+				"tags": [
+					"Entities"
+				],
+				"operationId": "DerivedModels_ListEntities",
+				"description": "Lists all entities belonging to a derived models.",
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
+				"x-ms-examples": {
+					"DerivedModels_ListEntities": {
+						"$ref": "./examples/derivedmodels_listentities.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/DerivedModelNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/SelectParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/EntityListResponse"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IndustryDataLifecycle/derivedModels/{derivedModelName}/relationships": {
+			"get": {
+				"tags": [
+					"Relationships"
+				],
+				"operationId": "DerivedModels_ListRelationships",
+				"description": "Lists all relationships belonging to a derived models.",
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
+				"x-ms-examples": {
+					"DerivedModels_ListRelationships": {
+						"$ref": "./examples/derivedmodels_listrelationships.json"
+					}
+				},
+				"parameters": [{
+						"$ref": "common.json#/parameters/SubscriptionIdParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ResourceGroupNameParameter"
+					},
+					{
+						"$ref": "#/parameters/DerivedModelNameParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/ApiVersionParameter"
+					},
+					{
+						"$ref": "common.json#/parameters/SelectParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/RelationshipListResponse"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "common.json#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"DerivedModelListResponse": {
+			"description": "Response object containing list of derviedModels and a URL link to get the next set of results.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Array of derivedModel objects.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DerivedModel"
+					}
+				},
+				"nextLink": {
+					"description": "The next link.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"DerivedModel": {
+			"description": "DerivedModel resource object.",
+			"type": "object",
+			"properties": {
+				"properties": {
+					"description": "DerivedModel properties.",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/DerivedModelProperties"
+				}
+			},
+			"allOf": [{
+				"$ref": "common.json#/definitions/ProxyResource"
+			}]
+		},
+		"DerivedModelProperties": {
+			"description": "Object representing derived model properties.",
+			"required": [
+				"baseModelId", "baseModelType"
+			],
+			"type": "object",
+			"properties": {
+				"description": {
+					"description": "Derived model properties description.",
+					"type": "string"
+				},
+				"baseModelId": {
+					"description": "BaseModel Id from which model is derived.",
+					"type": "string",
+					"x-ms-mutability": ["create", "read"]
+				},
+				"baseModelType": {
+					"description": "BaseModel type from which model is derived.",
+					"type": "string",
+					"enum": [
+						"BuiltIn",
+						"Custom"
+					],
+					"x-ms-enum": {
+						"name": "baseModelType",
+						"modelAsString": true
+					},
+					"x-ms-mutability": ["create", "read"]
+				},
+				"configuration": {
+					"description": "Object representing included / excluded baseModel entities, customized baseModel entities and newly added user defined entities.",
+					"$ref": "#/definitions/Configuration"
+				},
+				"relationships": {
+					"description": "List of all the added and modified relationships between entities.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Relationship"
+					}
+				}
+			}
+		},
+		"Configuration": {
+			"description": "Object representing included/excluded baseModel entities, customized baseModel entities and newly added user defined entities.",
+			"type": "object",
+			"properties": {
+				"baseModelEntities": {
+					"description": "List of included/excluded baseModel entities based on some filter criteria.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EntitySetFilter"
+					}
+				},
+				"entitiesToChange": {
+					"description": "List of customized baseModel entities.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EntityToChange"
+					}
+				},
+				"userDefinedEntities": {
+					"description": "List of newly added user defined entities.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Entity"
+					}
+				}
+			}
+		},
+		"EntitySetFilter": {
+			"description": "Object representing list of included or excluded entities.",
+			"required": [
+				"include",
+				"propertyName",
+				"propertyValue"
+			],
+			"type": "object",
+			"properties": {
+				"include": {
+					"description": "Include or exclude.",
+					"type": "string",
+					"enum": [
+						"true",
+						"false"
+					],
+					"x-ms-enum": {
+						"name": "include",
+						"modelAsString": true
+					}
+				},
+				"propertyName": {
+					"description": "Type of entity property eg. BusinessArea, EntityName, Industry.",
+					"type": "string",
+					"enum": [
+						"BusinessArea",
+						"Industry",
+						"EntityName"
+					],
+					"x-ms-enum": {
+						"name": "EntityGroupTypes",
+						"modelAsString": true
+					}
+				},
+				"propertyValue": {
+					"description": "Value of entity property eg. Channel, Prod*, Retail.",
+					"type": "string"
+				}
+			}
+		},
+		"EntityToChange": {
+			"description": "Object representing changed entity.",
+			"required": [
+				"path", "entityName"
+			],
+			"type": "object",
+			"properties": {
+				"entityName": {
+					"description": "Entity name.",
+					"type": "string"
+				},
+				"path": {
+					"description": "Entity path from root corpus.",
+					"type": "string"
+				},
+				"attributes": {
+					"description": "List of modified attributes of entity.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Attribute"
+					}
+				},
+				"relationships": {
+					"description": "List of modified relationships between entities.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Relationship"
+					}
+				}
+			}
+		},
+		"EntityListResponse": {
+			"description": "Response to list of entities. Contains list of entities and a URL link to get the next set of results.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Array of entity objects.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Entity"
+					}
+				},
+				"nextLink": {
+					"description": "The next link.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"Entity": {
+			"description": "Object representing an entity.",
+			"required": [
+				"entityName",
+				"path",
+				"businessArea"
+			],
+			"type": "object",
+			"properties": {
+				"description": {
+					"description": "Entity description.",
+					"type": "string"
+				},
+				"entityName": {
+					"description": "Entity name.",
+					"type": "string"
+				},
+				"path": {
+					"description": "Entity path from root corpus.",
+					"type": "string"
+				},
+				"attributes": {
+					"description": "List of attributes of entity.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Attribute"
+					}
+				},
+				"businessArea": {
+					"description": "Bussiness area entity belongs to.",
+					"type": "string"
+				},
+				"industries": {
+					"description": "List of industries entity belong to.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"primaryKey": {
+					"description": "List of properties forming primary key.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"relationships": {
+					"description": "List of modified relationships between entities.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Relationship"
+					}
+				}
+			}
+		},
+		"Attribute": {
+			"description": "Object representing attribute of an entity.",
+			"type": "object",
+			"properties": {
+				"description": {
+					"description": "Description of attribute.",
+					"type": "string"
+				},
+				"name": {
+					"description": "Name of attribute.",
+					"type": "string"
+				},
+				"attributeReference": {
+					"description": "Attribute reference.",
+					"type": "string"
+				},
+				"dataType": {
+					"description": "Attribute datatype.",
+					"type": "string"
+				},
+				"dataTypeLength": {
+					"description": "Attribute datatype length.",
+					"format": "int32",
+					"type": "integer"
+				},
+				"minValue": {
+					"description": "Attribute datatype min value.",
+					"type": "string"
+				},
+				"maxValue": {
+					"description": "Attribute datatype max value.",
+					"type": "string"
+				},
+				"isNullable": {
+					"description": "Is attribute nullable.",
+					"type": "string",
+					"enum": [
+						"true",
+						"false"
+					],
+					"x-ms-enum": {
+						"name": "isNullable",
+						"modelAsString": true
+					}
+				}
+			}
+		},
+		"RelationshipListResponse": {
+			"description": "Response to list of relationships. Contains list of relationships and a URL link to get the next set of results.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "Array of entity objects.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Relationship"
+					}
+				},
+				"nextLink": {
+					"description": "The next link.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"Relationship": {
+			"description": "Object representing relationship between entities.",
+			"type": "object",
+			"properties": {
+				"fromEntity": {
+					"description": "From entity path.",
+					"type": "string"
+				},
+				"toEntity": {
+					"description": "To entity path.",
+					"type": "string"
+				},
+				"fromAttribute": {
+					"description": "From entity attribute.",
+					"type": "string"
+				},
+				"toAttribute": {
+					"description": "To entity attribute.",
+					"type": "string"
+				}
+			}
+		}
+	},
+	"parameters": {
+		"DerivedModelNameParameter": {
+			"description": "DerivedModel resource identifier.",
+			"name": "derivedModelName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method"
+		},
+		"EntityNameParameter": {
+			"description": "Entity name.",
+			"name": "entityName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method"
+		},
+		"RelationshipIdParameter": {
+			"description": "Relationship id.",
+			"name": "relationshipId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method"
+		}
+	}
 }

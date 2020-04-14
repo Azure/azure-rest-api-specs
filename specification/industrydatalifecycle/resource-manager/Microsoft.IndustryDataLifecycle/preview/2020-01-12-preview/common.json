@@ -1,0 +1,345 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "2020-01-12-preview",
+		"title": "IndustryDataLifecycleClient",
+		"description": "API's to manage industry data lifecycle",
+		"x-ms-code-generation-settings": {
+			"name": "IndustryDataLifecycleClient"
+		}
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [{
+		"azure_auth": [
+			"user_impersonation"
+		]
+	}],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
+	"paths": {
+		"/providers/Microsoft.IndustryDataLifecycle/operations": {
+			"get": {
+				"tags": [
+					"Operations"
+				],
+				"description": "Lists all of the available RP operations.",
+				"operationId": "Operations_List",
+				"x-ms-pageable": {
+					"nextLinkName": "nextLink"
+				},
+				"x-ms-examples": {
+					"Operations_List": {
+						"$ref": "./examples/operations_list.json"
+					}
+				},
+				"parameters": [{
+					"$ref": "#/parameters/ApiVersionParameter"
+				}],
+				"responses": {
+					"200": {
+						"description": "Success.",
+						"schema": {
+							"$ref": "#/definitions/OperationListResponse"
+						}
+					},
+					"default": {
+						"description": "Error.",
+						"schema": {
+							"$ref": "#/definitions/ErrorResponse"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"OperationListResponse": {
+			"description": "Response to list operations. It contains a list of resources, supported operations on them and a URL link to get the next set of results.",
+			"type": "object",
+			"properties": {
+				"value": {
+					"description": "List of resources and supported operations on them by the Microsoft.IndustryDataLifecycle resource provider.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Operation"
+					}
+				},
+				"nextLink": {
+					"description": "URL to get the next set of operations if there are any.",
+					"type": "string",
+					"readOnly": true
+				}
+			}
+		},
+		"Operation": {
+			"description": "Resources and supported operations on them.",
+			"type": "object",
+			"properties": {
+				"name": {
+					"description": "Operation name: {provider}/{resource}/{read | write | action | delete}",
+					"type": "string",
+					"readOnly": true
+				},
+				"display": {
+					"description": "The object that represents the operation.",
+					"properties": {
+						"provider": {
+							"description": "Service provider: Microsoft.IndustryDataLifecycle",
+							"type": "string",
+							"readOnly": true
+						},
+						"resource": {
+							"description": "Resource Type",
+							"type": "string",
+							"readOnly": true
+						},
+						"operation": {
+							"description": "Name of the operation",
+							"type": "string",
+							"readOnly": true
+						},
+						"description": {
+							"description": "Description of the operation",
+							"type": "string",
+							"readOnly": true
+						}
+					}
+				}
+			}
+		},
+		"SystemData": {
+			"description": "Metadata pertaining to creation and last modification of the resource.",
+			"type": "object",
+			"readOnly": true,
+			"properties": {
+				"createdBy": {
+					"type": "string",
+					"description": "The identity that created the resource."
+				},
+				"createdByType": {
+					"type": "string",
+					"description": "The type of identity that created the resource.",
+					"enum": [
+						"User",
+						"Application",
+						"ManagedIdentity",
+						"Key"
+					],
+					"x-ms-enum": {
+						"name": "createdByType",
+						"modelAsString": true
+					}
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": "The timestamp of resource creation (UTC)."
+				},
+				"lastModifiedBy": {
+					"type": "string",
+					"description": "The identity that last modified the resource."
+				},
+				"lastModifiedByType": {
+					"type": "string",
+					"description": "The type of identity that last modified the resource.",
+					"enum": [
+						"User",
+						"Application",
+						"ManagedIdentity",
+						"Key"
+					],
+					"x-ms-enum": {
+						"name": "createdByType",
+						"modelAsString": true
+					}
+				},
+				"lastModifiedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": "The type of identity that last modified the resource."
+				}
+			}
+		},
+		"Resource": {
+			"description": "Resource object containing common attributes in proxy and tracked resources.",
+			"type": "object",
+			"properties": {
+				"id": {
+					"description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the resource",
+					"type": "string",
+					"readOnly": true
+
+				},
+				"type": {
+					"description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+					"type": "string",
+					"readOnly": true
+				}
+			},
+			"x-ms-azure-resource": true
+		},
+		"TrackedResource": {
+			"description": "The resource model definition for a ARM tracked top level resource",
+			"required": [
+				"location"
+			],
+			"properties": {
+				"tags": {
+					"type": "object",
+					"additionalProperties": {
+						"type": "string"
+					},
+					"x-ms-mutability": [
+						"read",
+						"create",
+						"update"
+					],
+					"description": "Resource tags."
+				},
+				"location": {
+					"type": "string",
+					"x-ms-mutability": [
+						"read",
+						"create"
+					],
+					"description": "The geo-location where the resource lives"
+				}
+			},
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}]
+		},
+		"ProxyResource": {
+			"description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+			"allOf": [{
+				"$ref": "#/definitions/Resource"
+			}]
+		},
+		"ErrorResponse": {
+			"description": "Standard error response.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "One of a server-defined set of error codes.",
+					"type": "string",
+					"readOnly": true
+				},
+				"message": {
+					"description": "A human-readable representation of the error.",
+					"type": "string",
+					"readOnly": true
+				},
+				"target": {
+					"description": "The target of the error.",
+					"type": "string",
+					"readOnly": true
+				},
+				"details": {
+					"description": "An array of details about specific errors that led to this reported error.",
+					"uniqueItems": false,
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ErrorResponse"
+					},
+					"readOnly": true
+				},
+				"innerError": {
+					"description": "An object containing more specific information than the current object about the error.",
+					"$ref": "#/definitions/InnerError"
+				}
+			}
+		},
+		"InnerError": {
+			"description": "Inner error containing list of errors.",
+			"type": "object",
+			"properties": {
+				"code": {
+					"description": "A more specific error code than was provided by the containing error.",
+					"type": "string"
+				},
+				"innererror": {
+					"description": "An object containing more specific information than the current object about the error.",
+					"$ref": "#/definitions/InnerError"
+				}
+			},
+			"additionalProperties": {
+				"description": "Storage for additional fields in (de)serialization.",
+				"type": "object"
+			}
+		}
+	},
+	"parameters": {
+		"SubscriptionIdParameter": {
+			"description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+			"name": "subscriptionId",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"minLength": 1
+		},
+		"ResourceGroupNameParameter": {
+			"description": "The name of the resource group. The name is case insensitive.",
+			"name": "resourceGroupName",
+			"in": "path",
+			"required": true,
+			"type": "string",
+			"pattern": "^[-\\w\\._\\(\\)]+$",
+			"minLength": 1,
+			"maxLength": 90,
+			"x-ms-parameter-location": "method"
+		},
+		"ApiVersionParameter": {
+			"description": "The API version to be used with the HTTP request.",
+			"name": "api-version",
+			"in": "query",
+			"required": true,
+			"type": "string",
+			"minLength": 1
+		},
+		"SelectParameter": {
+			"description": "An OData $select clause. Used to select the properties to be returned in the GET response.",
+			"name": "$select",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"x-ms-parameter-location": "method",
+			"x-ms-parameter-grouping": {
+				"postfix": "Options"
+			}
+		},
+		"FilterParameter": {
+			"description": "An OData $filter clause. Used to filter results that are returned in the GET response.",
+			"name": "$filter",
+			"in": "query",
+			"required": false,
+			"type": "string",
+			"x-ms-parameter-location": "method",
+			"x-ms-parameter-grouping": {
+				"postfix": "Options"
+			}
+		}
+	}
+}

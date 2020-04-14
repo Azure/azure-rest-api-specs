@@ -35,6 +35,7 @@ These settings apply only when `--tag=package-2020-01-12-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-01-12-preview'
 input-file:
+  - Microsoft.IndustryDataLifecycle/preview/2020-01-12-preview/common.json
   - Microsoft.IndustryDataLifecycle/preview/2020-01-12-preview/industrydatalifecycle.json
 ```
 

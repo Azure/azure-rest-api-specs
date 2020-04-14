@@ -1,0 +1,73 @@
+{
+	"parameters": {
+		"api-version": "2020-01-12-preview",
+		"subscriptionId": "00000000-0000-0000-0000-000000000000",
+		"resourceGroupName": "rg01",
+		"derivedModelName": "contoso"
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg01/providers/Microsoft.IndustryDataLifecycle/derivedModels/contoso",
+				"name": "contoso",
+				"type": "Microsoft.IndustryDataLifecycle/derivedModels",
+				"properties": {
+					"description": "Model to analyse sales behavior of customers during month of december",
+					"baseModelId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg01/providers/Microsoft.IndustryDataLifecycle/baseModels/Retail",
+					"baseModelType": "Custom",
+					"configuration": {
+						"baseModelEntities": [{
+							"include": "true",
+							"propertyName": "BusinessArea",
+							"propertyValue": "Sales"
+						}],
+						"entitiesToChange": [{
+							"path": "/{path_from_root_corpus_inherited_from_parent}/Brand",
+							"entityName": "Brand",
+							"attributes": [{
+								"description": "Brand name",
+								"name": "name",
+								"attributeReference": null,
+								"dataType": "string",
+								"dataTypeLength": 1000,
+								"minValue": "5",
+								"maxValue": "500",
+								"isNullable": "false"
+							}],
+							"relationships": [{
+								"fromEntity": "/{path_from_root_corpus}/{entity_name}",
+								"toEntity": "/{path_from_root_corpus}/{entity_name}",
+								"fromAttribute": "{from attribute path}",
+								"toAttribute": "{to attribute path}"
+							}]
+						}],
+						"userDefinedEntities": [{
+							"description": "Product entity ",
+							"path": "path_from_root_corpus",
+							"entityName": "Product",
+							"attributes": [{
+								"attributeReference": null,
+								"description": "Product name",
+								"name": "name",
+								"dataType": "string",
+								"dataTypeLength": 1000,
+								"minValue": "5",
+								"maxValue": "500",
+								"isNullable": "false"
+							}],
+							"businessArea": "Sales",
+							"industries": ["Industry01", "Industry02", "Industry03"],
+							"primaryKey": ["Attribute01", "Attribute02", "Attribute03"],
+							"relationships": [{
+								"fromEntity": "/{path_from_root_corpus}/{entity_name}",
+								"toEntity": "/{path_from_root_corpus}/{entity_name}",
+								"fromAttribute": "{from attribute path}",
+								"toAttribute": "{to attribute path}"
+							}]
+						}]
+					}
+				}
+			}
+		}
+	}
+}
