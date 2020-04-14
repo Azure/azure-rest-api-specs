@@ -187,7 +187,7 @@
         ],
         "summary": "Lists operations for the resource provider.",
         "description": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their description.",
-        "operationId": "List",
+        "operationId": "Operation_List",
         "produces": [
           "application/json",
           "default"
@@ -225,9 +225,11 @@
   },
   "definitions": {
     "ResourceIdentity": {
+      "description": "The identity block returned by ARM resource that supports managed identity.",
       "type": "object",
       "properties": {
         "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
           "enum": [
             "None",
             "SystemAssigned"
@@ -240,26 +242,34 @@
         },
         "principalId": {
           "format": "uuid",
-          "type": "string"
+          "description": "The principal id of the identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
         },
         "tenantId": {
           "format": "uuid",
-          "type": "string"
+          "description": "The tenant id associated with the resource's identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
     "AzureMonitorWorkspaceProperties": {
+      "description": "Azure Monitor workspace configuration to receive change notifications.",
       "type": "object",
       "properties": {
         "workspaceId": {
+          "description": "The Azure Monitor workspace ID - the unique identifier for the Log Analytics workspace.",
           "type": "string"
         },
         "workspaceResourceId": {
+          "description": "The Azure Monitor workspace ARM Resource ID.\r\nThe resource ID should be in the following format:\r\n/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}",
           "type": "string"
         }
       }
     },
     "NotificationsState": {
+      "description": "The state of notifications feature.",
       "enum": [
         "None",
         "Enabled",
@@ -272,6 +282,7 @@
       }
     },
     "NotificationSettings": {
+      "description": "Notifications model to configure notification settings for subscription.",
       "type": "object",
       "properties": {
         "azureMonitorWorkspaceProperties": {
@@ -283,6 +294,7 @@
       }
     },
     "ConfigurationProfileResourceProperties": {
+      "description": "The properties of a configuration profile.",
       "type": "object",
       "properties": {
         "notifications": {
@@ -338,6 +350,7 @@
       }
     },
     "ResourceProviderOperationDisplay": {
+      "description": "The resource provider operation details.",
       "type": "object",
       "properties": {
         "provider": {
@@ -359,6 +372,7 @@
       }
     },
     "ResourceProviderOperationDefinition": {
+      "description": "The resource provider operation definition.",
       "type": "object",
       "properties": {
         "name": {
@@ -371,6 +385,7 @@
       }
     },
     "ResourceProviderOperationList": {
+      "description": "The resource provider operation list.",
       "type": "object",
       "properties": {
         "value": {
