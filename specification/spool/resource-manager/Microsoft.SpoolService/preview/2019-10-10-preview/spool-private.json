@@ -18,7 +18,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{parentResourceName}/eventgridfilters/{eventGridFilterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventgridfilters/{eventGridFilterName}": {
       "parameters": [
         {
           "$ref": "spool.json#/parameters/ApiVersionParameter"
@@ -30,7 +30,7 @@
           "$ref": "spool.json#/parameters/ResourceGroupParameter"
         },
         {
-          "$ref": "#/parameters/ParentResourceNameParameter"
+          "$ref": "spool.json#/parameters/SpoolServiceName"
         },
         {
           "$ref": "#/parameters/EventGridFilterNameParameter"
@@ -38,9 +38,9 @@
       ],
       "patch": {
         "description": "Update an existing eventgridfilters resource's properties.",
-        "operationId": "EventGridFilters_Update",
+        "operationId": "EventGridFilter_Update",
         "summary": "Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "parameters": [
           {
             "name": "parameters",
@@ -75,9 +75,9 @@
       },
       "get": {
         "description": "Get an existing eventgridfilters resource and its properties",
-        "operationId": "EventGridFilters_Get",
+        "operationId": "EventGridFilter_Get",
         "summary": "Get",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
             "description": "Success. The response describe the corresponding Spool service.",
@@ -103,7 +103,7 @@
         "description": "Create or update a eventgrid filter on an existing resource.",
         "operationId": "EventGridFilter_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "parameters": [
           {
             "name": "parameters",
@@ -142,7 +142,7 @@
         "description": "Operation to delete a eventgrid filter.",
         "operationId": "EventGridFilter_Delete",
         "summary": "Delete",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
             "description": "The resource has been deleted successfully."
@@ -168,7 +168,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{parentResourceName}/eventgridfilters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/eventgridfilters": {
       "parameters": [
         {
           "$ref": "spool.json#/parameters/ApiVersionParameter"
@@ -180,17 +180,17 @@
           "$ref": "spool.json#/parameters/ResourceGroupParameter"
         },
         {
-          "$ref": "#/parameters/ParentResourceNameParameter"
+          "$ref": "spool.json#/parameters/SpoolServiceName"
         }
       ],
       "get": {
-        "description": "Handles requests to list all resources in a resource group.",
+        "description": "Handles requests to list all eventgridfilters on a spool resource.",
         "operationId": "EventGridFilters_ListBySpoolResource",
         "summary": "List All EventGrid Filters on a Spool Resource",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "EventGridFilter" ],
         "responses": {
           "200": {
-            "description": "Success. The response describes the list of Spool services in a resourceGroup.",
+            "description": "Success. The response describes the list of EventGrid filters on a Spool resource.",
             "schema": {
               "$ref": "#/definitions/EventGridFilterResourceList"
             }
@@ -318,14 +318,6 @@
     }
   },
   "parameters": {
-    "ParentResourceNameParameter": {
-      "name": "parentResourceName",
-      "in": "path",
-      "description": "The name of the parent resource.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "EventGridFilterNameParameter": {
       "name": "eventGridFilterName",
       "in": "path",

@@ -5,6 +5,7 @@
     "version": "2019-10-10-preview",
     "description": "REST API for Azure Spool Service"
   },
+  "host": "management.azure.com",
   "schemes": [ "https" ],
   "securityDefinitions": {
     "azure_auth": {
@@ -23,7 +24,7 @@
         "description": "Lists all of the available REST API operations of the Microsoft.SpoolService provider.",
         "operationId": "Operations_List",
         "summary": "List Operations",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Operations" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -102,7 +103,7 @@
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "Spool_ListBySubscription",
         "summary": "List By Subscription",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -141,7 +142,7 @@
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "Spool_ListByResourceGroup",
         "summary": "List By Resource Group",
-        "tags": [ "Common Azure REST API" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -178,12 +179,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}": {
       "patch": {
         "description": "Operation to update an exiting Spool service.",
         "operationId": "Spool_Update",
         "summary": "Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -232,7 +233,7 @@
         "description": "Get the Spool service and its properties.",
         "operationId": "Spool_Get",
         "summary": "Get",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -272,7 +273,7 @@
         "description": "Create a new Spool service or update an existing Spool service.",
         "operationId": "Spool_CreateOrUpdate",
         "summary": "Create Or Update",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -323,7 +324,7 @@
         "description": "Operation to delete a Spool service.",
         "operationId": "Spool_Delete",
         "summary": "Delete",
-        "tags": [ "Spool CRUD" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -363,13 +364,12 @@
         }
       }
     },
-    
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/listKeys": {
       "post": {
         "description": "Get the access keys of the Spool resource.",
         "operationId": "Spool_ListKeys",
         "summary": "List Keys",
-        "tags": [ "Spool Keys" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -406,12 +406,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{spoolName}/regenerateKey": {
       "post": {
         "description": "Regenerate Spool service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "Spool_RegenerateKey",
         "summary": "Regenerate Key",
-        "tags": [ "Spool Keys" ],
+        "tags": [ "Spool" ],
         "parameters": [
           {
             "name": "parameters",
@@ -884,7 +884,7 @@
       "x-ms-parameter-location": "method"
     },
     "SpoolServiceName": {
-      "name": "resourceName",
+      "name": "spoolName",
       "in": "path",
       "description": "The name of the Spool resource.",
       "required": true,
