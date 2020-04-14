@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -12,15 +12,40 @@ python:
   no-namespace-folders: true
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+package-name: azure-mgmt-eventhub
+no-namespace-folders: true
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2018-01-preview
   - tag: package-2017-04
   - tag: package-2015-08
+```
+
+```yaml $(multiapi) && $(track2)
+clear-output-folder: true
+batch:
+  - tag: package-2018-01-preview
+  - tag: package-2017-04
+  - tag: package-2015-08
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/
+clear-output-folder: false
+perform-load: false
 ```
 
 ### Tag: package-2018-01-preview and python

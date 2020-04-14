@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-```yaml $(python)
+```yaml $(python) && !$(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -14,11 +14,21 @@ python:
   debug: true
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+package-name: azure-mgmt-resource
+no-namespace-folders: true
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-features-2015-12
   - tag: package-links-2016-09
@@ -50,6 +60,48 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-deploymentscripts-2019-10-preview
+```
+
+```yaml $(multiapi) && $(track2)
+clear-output-folder: true
+batch:
+  - tag: package-features-2015-12
+  - tag: package-links-2016-09
+  - tag: package-locks-2016-09
+  - tag: package-locks-2015-01
+  - tag: package-managedapplications-2018-06
+  - tag: package-policy-2019-09
+  - tag: package-policy-2019-06
+  - tag: package-policy-2019-01  
+  - tag: package-policy-2018-05
+  - tag: package-policy-2018-03
+  - tag: package-policy-2017-06
+  - tag: package-policy-2016-12
+  - tag: package-policy-2016-04
+  - tag: package-policy-2015-10
+  - tag: package-resources-2019-10
+  - tag: package-resources-2019-08
+  - tag: package-resources-2019-07
+  - tag: package-resources-2019-0510
+  - tag: package-resources-2019-05
+  - tag: package-resources-2019-03
+  - tag: package-resources-2018-05
+  - tag: package-resources-2018-02
+  - tag: package-resources-2017-05
+  - tag: package-resources-2016-09
+  - tag: package-resources-2016-02
+  - tag: package-subscriptions-2019-11
+  - tag: package-subscriptions-2019-06
+  - tag: package-subscriptions-2018-06
+  - tag: package-subscriptions-2016-06
+  - tag: package-deploymentscripts-2019-10-preview
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/
+clear-output-folder: false
+perform-load: false
 ```
 
 ### Tag: package-features-2015-12 and python

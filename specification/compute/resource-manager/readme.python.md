@@ -84,7 +84,7 @@ batch:
 ```
 
 ``` yaml $(multiapiscript)
-output-folder: $(python-sdks-folder)/$(package-top-folder)/azure-mgmt-compute/azure/mgmt/compute/
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 clear-output-folder: false
 perform-load: false
 ```

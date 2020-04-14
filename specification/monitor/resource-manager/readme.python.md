@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -14,11 +14,22 @@ python:
   python-base-namespace: azure.mgmt.monitor
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+package-name: azure-mgmt-eventhub
+no-namespace-folders: true
+python-base-folder: monitor/azure-mgmt-monitor/azure/mgmt/monitor
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2019-10-17-preview-only
   - tag: package-2019-06-01-only
@@ -38,8 +49,38 @@ batch:
   - tag: package-2016-03-01-only
   - tag: package-2015-07-01-only
   - tag: package-2015-04-01-only
-
 ```
+
+```yaml $(multiapi) && $(track2)
+clear-output-folder: true
+batch:
+  - tag: package-2019-10-17-preview-only
+  - tag: package-2019-06-01-only
+  - tag: package-2019-03-01-only
+  - tag: package-2018-11-27-preview-only
+  - tag: package-2018-09-01-only
+  - tag: package-2018-06-01-preview-only
+  - tag: package-2018-04-16-only
+  - tag: package-2018-03-01-only
+  - tag: package-2018-01-01-only
+  - tag: package-2017-12-01-preview-only
+  - tag: package-2017-11-01-preview-only
+  - tag: package-2017-05-01-preview-only
+  - tag: package-2017-04-01-only
+  - tag: package-2017-03-01-preview-only
+  - tag: package-2016-09-01-only
+  - tag: package-2016-03-01-only
+  - tag: package-2015-07-01-only
+  - tag: package-2015-04-01-only
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/$(python-base-folder)/
+clear-output-folder: false
+perform-load: false
+```
+
 ### Tag: package-2019-10-17-preview-only and python
 
 These settings apply only when `--tag=package-2019-10-17-preview-only --python` is specified on the command line.

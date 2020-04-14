@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python)
+``` yaml $(python) && !$(track2)
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -12,11 +12,21 @@ python:
   no-namespace-folders: true
 ```
 
+These settings apply only when `--track2` is specified on the command line.
+
+``` yaml $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 2
+package-name: azure-mgmt-network
+no-namespace-folders: true
+```
+
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(python) && $(multiapi)
+```yaml $(python) && $(multiapi) && !$(track2)
 batch:
   - tag: package-2020-03
   - tag: package-2019-12
@@ -45,6 +55,45 @@ batch:
   - tag: package-2016-12
   - tag: package-2016-09
   - tag: package-2015-06split
+```
+
+```yaml $(multiapi) && $(track2)
+clear-output-folder: true
+batch:
+  - tag: package-2020-03
+  - tag: package-2019-12
+  - tag: package-2019-11
+  - tag: package-2019-09
+  - tag: package-2019-08
+  - tag: package-2019-07
+  - tag: package-2019-06
+  - tag: package-2019-04
+  - tag: package-2019-02
+  - tag: package-2018-12
+  - tag: package-2018-11
+  - tag: package-2018-10
+  - tag: package-2018-08
+  - tag: package-2018-07
+  - tag: package-2018-06
+  - tag: package-2018-04
+  - tag: package-2018-02
+  - tag: package-2018-01
+  - tag: package-2017-11
+  - tag: package-2017-10
+  - tag: package-2017-09
+  - tag: package-2017-08
+  - tag: package-2017-06
+  - tag: package-2017-03
+  - tag: package-2016-12
+  - tag: package-2016-09
+  - tag: package-2015-06split
+  - multiapiscript: true
+```
+
+``` yaml $(multiapiscript)
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
+clear-output-folder: false
+perform-load: false
 ```
 
 ### Tag: package-2020-03 and python
