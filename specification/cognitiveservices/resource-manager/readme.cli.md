@@ -5,7 +5,9 @@ These settings apply only when `--cli` is specified on the command line.
 ``` yaml $(cli)
 cli:
   test-scenario:
+    - name: /Accounts/put/Create Account Min
     - name: /Accounts/put/Create Account
+      disabled: true
     - name: /Accounts/get/Get Usages
     - name: /Accounts/get/List SKUs
     - name: /Accounts/get/Get Account
@@ -16,6 +18,7 @@ cli:
     - name: /Accounts/post/Regenerate Keys
     - name: /Accounts/post/List Keys
     - name: /Accounts/patch/Update Account
+      disabled: true
     - name: //post/Check SKU Availability
     - name: //post/Check SKU Availability
     - name: /Accounts/delete/Delete Account
