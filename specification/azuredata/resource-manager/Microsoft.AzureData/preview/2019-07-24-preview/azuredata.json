@@ -1275,13 +1275,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted",
+            "description": "Successfully deleted the DataController."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "#/definitions/DataControllerResource"
+              "$ref": "#/definitions/CloudError"
             }
           },
           "204": {
-            "description": "Missing"
+            "description": "The specified DataController does not exist."
           }
         },
         "x-ms-examples": {
