@@ -2021,7 +2021,10 @@
             "type": "string",
             "maxLength": 255,
             "minLength": 1,
-            "example": [ "user1", "user2" ]
+            "example": [
+              "user1",
+              "user2"
+            ]
           }
         }
       }
@@ -2675,19 +2678,6 @@
         }
       }
     },
-    "mountTargetList": {
-      "description": "List of Mount Targets",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A list of Mount targets",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/mountTarget"
-          }
-        }
-      }
-    },
     "mountTarget": {
       "description": "Mount Target",
       "type": "object",
@@ -2759,6 +2749,36 @@
           "type": "string",
           "readOnly": true,
           "example": "1.2.3.4"
+        },
+        "subnet": {
+          "title": "subnet",
+          "type": "string",
+          "description": "The subnet",
+          "example": "1.2.3.4"
+        },
+        "startIp": {
+          "title": "startIp",
+          "description": "The start of IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "endIp": {
+          "title": "endIp",
+          "description": "The end of IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "gateway": {
+          "title": "gateway",
+          "description": "The gateway of the IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "netmask": {
+          "title": "netmask",
+          "description": "The netmask of the IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "255.255.255.0"
         },
         "smbServerFqdn": {
           "title": "smbServerFQDN",
@@ -3037,7 +3057,7 @@
           "description": "List of volumes",
           "type": "array",
           "items": {
-            "type":  "object",
+            "type": "object",
             "readOnly": true,
             "description": "Associated volume resource Id"
           }
