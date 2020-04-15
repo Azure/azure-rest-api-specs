@@ -5,9 +5,10 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml !$(track2)
-  python-mode: create
+python-mode: create
 python:
   azure-arm: true
+  payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.mgmt.appconfiguration
   package-name: azure-mgmt-appconfiguration
