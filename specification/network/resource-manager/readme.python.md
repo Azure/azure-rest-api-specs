@@ -15,7 +15,6 @@ These settings apply only when `--track2` is specified on the command line.
 ``` yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-payload-flattening-threshold: 2
 package-name: azure-mgmt-network
 no-namespace-folders: true
 ```
