@@ -5,13 +5,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml !$(track2)
-python-mode: create
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-namespace: azure.mgmt.appconfiguration
-package-name: azure-mgmt-appconfiguration
-package-version: 0.1.0
-clear-output-folder: true
+  python-mode: create
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: azure.mgmt.appconfiguration
+  package-name: azure-mgmt-appconfiguration
+  package-version: 0.1.0
+  clear-output-folder: true
 ```
 
 These settings apply only when `--track2` is specified on the command line.
