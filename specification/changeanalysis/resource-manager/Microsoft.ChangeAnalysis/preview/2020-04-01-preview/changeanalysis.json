@@ -2,13 +2,204 @@
   "swagger": "2.0",
   "info": {
     "title": "AzureChangeAnalysisManagementClient",
-    "version": "2019-04-01-preview"
+    "version": "2020-04-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeAnalysis/profile/{profileName}": {
+      "get": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "summary": "Get the configuration profile for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "ConfigurationProfile_Get",
+        "produces": [
+          "application/json",
+          "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationProfile_Get": {
+            "$ref": "./examples/ConfigurationProfileGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "summary": "Updates configuration profile for for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "ConfigurationProfile_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request body containing new configuration profile.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationProfile_Create": {
+            "$ref": "./examples/ConfigurationProfileCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "summary": "Updates a configuration profile with the specified parameters.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "ConfigurationProfile_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json",
+          "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The parameters for updating a configuration store.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationProfileResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationProfile_Update": {
+            "$ref": "./examples/ConfigurationProfileUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationProfile"
+        ],
+        "summary": "Deletes existing configuration profile.",
+        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "operationId": "ConfigurationProfile_Delete",
+        "produces": [
+          "default"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationProfile_Delete": {
+            "$ref": "./examples/ConfigurationProfileDelete.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ChangeAnalysis/operations": {
       "get": {
         "tags": [
@@ -58,6 +249,131 @@
     }
   },
   "definitions": {
+    "ResourceIdentity": {
+      "description": "The identity block returned by ARM resource that supports managed identity.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of managed identity used. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user-assigned identities. The type 'None' will remove any identities.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedIdentityTypes",
+            "modelAsString": true
+          }
+        },
+        "principalId": {
+          "format": "uuid",
+          "description": "The principal id of the identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "format": "uuid",
+          "description": "The tenant id associated with the resource's identity. This property will only be provided for a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceProperties": {
+      "description": "Azure Monitor workspace configuration to receive change notifications.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "description": "The Azure Monitor workspace ID - the unique identifier for the Log Analytics workspace.",
+          "type": "string"
+        },
+        "workspaceResourceId": {
+          "description": "The Azure Monitor workspace ARM Resource ID.\r\nThe resource ID should be in the following format:\r\n/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}",
+          "type": "string"
+        }
+      }
+    },
+    "NotificationsState": {
+      "description": "The state of notifications feature.",
+      "enum": [
+        "None",
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NotificationsState",
+        "modelAsString": true
+      }
+    },
+    "NotificationSettings": {
+      "description": "Notifications model to configure notification settings for subscription.",
+      "type": "object",
+      "properties": {
+        "azureMonitorWorkspaceProperties": {
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties"
+        },
+        "activationState": {
+          "$ref": "#/definitions/NotificationsState"
+        }
+      }
+    },
+    "ConfigurationProfileResourceProperties": {
+      "description": "The properties of a configuration profile.",
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "$ref": "#/definitions/NotificationSettings"
+        },
+        "lastModifiedBy": {
+          "description": "The principal that last modified the configuration profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "description": "The last modification time of the configuration profile.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "The creation date of configuration profile.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfigurationProfileResource": {
+      "description": "The configuration profile along with all resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity"
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProfileResourceProperties"
+        }
+      }
+    },
+    "Error": {
+      "description": "Unexpected Azure Change Analysis ProxyResource Provider Error.",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        }
+      }
+    },
     "ResourceProviderOperationDisplay": {
       "description": "The resource provider operation details.",
       "type": "object",
@@ -106,19 +422,6 @@
         },
         "nextLink": {
           "description": "The URI that can be used to request the next page for list of Azure operations.",
-          "type": "string"
-        }
-      }
-    },
-    "Error": {
-      "description": "Unexpected Azure Change Analysis ProxyResource Provider Error.",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
           "type": "string"
         }
       }
