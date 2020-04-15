@@ -7,6 +7,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   package-name: azure-mgmt-resource
+  payload-flattening-threshold: 2
   clear-output-folder: true
   no-namespace-folders: true
   verbose: true
