@@ -78,7 +78,6 @@ input-file:
 - Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
 - Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
 - Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
-- Microsoft.EventHub/preview/2018-01-01-preview/operations-preview.json
 - Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
 - Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
 - Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
