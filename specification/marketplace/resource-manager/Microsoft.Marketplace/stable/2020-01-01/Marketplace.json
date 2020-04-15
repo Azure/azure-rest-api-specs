@@ -2,7 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-01-01",
-    "title": "Marketplace RP Service"
+    "title": "MarketplaceManagementClient",
+    "description": "REST APIs for Azure Marketplace"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -223,8 +224,8 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreByName": {
-            "$ref": "./examples/GetPrivateStoreByName.json"
+          "GetPrivateStore": {
+            "$ref": "./examples/GetPrivateStore.json"
           }
         }
       },
@@ -277,10 +278,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Change successful",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreProperties"
-            }
+            "description": "Change successful"
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -431,8 +429,12 @@
             "modelAsString": true
           }
         },
-        "name": {
-          "description": "Private Store name",
+        "privateStoreId": {
+          "description": "Private Store id",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "Identifier for purposes of race condition",
           "type": "string"
         }
       }
@@ -455,12 +457,12 @@
     "Offer": {
       "type": "object",
       "properties": {
-        "id": {
+        "uniqueOfferId": {
           "description": "Offers unique id",
           "type": "string",
           "readOnly": true
         },
-        "displayName": {
+        "offerDisplayName": {
           "description": "It will be displayed prominently in the marketplace",
           "type": "string",
           "readOnly": true
@@ -470,23 +472,13 @@
           "type": "string",
           "readOnly": true
         },
-        "summary": {
-          "description": "Brief purpose or function of offer",
-          "type": "string",
-          "readOnly": true
-        },
-        "longSummary": {
-          "description": "Purpose or function of offer",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Description of offer",
-          "type": "string",
-          "readOnly": true
-        },
         "eTag": {
           "description": "Identifier for purposes of race condition",
+          "type": "string"
+        },
+        "privateStoreId": {
+          "readOnly": true,
+          "description": "Private store unique id",
           "type": "string"
         },
         "plans": {
@@ -495,18 +487,30 @@
           "items": {
             "$ref": "#/definitions/Plan"
           }
+        },
+        "specificPlanIdsLimitation": {
+          "description": "Plan ids limitation for this offer",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "Plan": {
       "type": "object",
       "properties": {
-        "planId": {
+        "skuId": {
           "description": "Identifier for this plan",
           "type": "string",
           "readOnly": true
         },
-        "displayName": {
+        "planId": {
+          "description": "Text identifier for this plan",
+          "type": "string",
+          "readOnly": true
+        },
+        "planDisplayName": {
           "description": "Friendly name for the plan for display in the marketplace",
           "type": "string",
           "readOnly": true
