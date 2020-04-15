@@ -2114,20 +2114,20 @@
       }
     },
     "DataControllerResource": {
+      "description": "Data controller resource",
+      "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureResource"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "properties": {
-              "$ref": "#/definitions/DataControllerProperties"
-            }
-          },
-          "x-ms-azure-resource": true
+          "$ref": "#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataControllerProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
     },
     "AzureResource": {
       "type": "object",
