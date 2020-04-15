@@ -36,8 +36,7 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
   - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/changeanalysis.json
-  - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/examples/ConfigurationProfileCreateWithIdentity.json
-  - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/examples/ConfigurationProfileUpdateWithIdentity.json
+
 ```
 
 ---
