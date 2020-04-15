@@ -5,12 +5,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml !$(track2)
-python-mode: create
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-keyvault
-clear-output-folder: true
-no-namespace-folders: true
+python:
+  python-mode: create
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  package-name: azure-mgmt-keyvault
+  clear-output-folder: true
+  no-namespace-folders: true
 ```
 
 These settings apply only when `--track2` is specified on the command line.
@@ -55,6 +56,9 @@ These settings apply only when `--tag=package-2019-09 --python` is specified on 
 ``` yaml $(tag) == 'package-2019-09'
 namespace: azure.mgmt.keyvault.v2019_09_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2019_09_01
+python:
+  namespace: azure.mgmt.keyvault.v2019_09_01
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2019_09_01
 ```
 
 ### Tag: package-2018-02 and python
@@ -64,6 +68,9 @@ These settings apply only when `--tag=package-2018-02 --python` is specified on 
 ``` yaml $(tag) == 'package-2018-02'
 namespace: azure.mgmt.keyvault.v2018_02_14
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2018_02_14
+python:
+  namespace: azure.mgmt.keyvault.v2018_02_14
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2018_02_14
 ```
 
 ### Tag: package-2016-10 and python
@@ -73,4 +80,7 @@ These settings apply only when `--tag=package-2016-10 --python` is specified on 
 ``` yaml $(tag) == 'package-2016-10' 
 namespace: azure.mgmt.keyvault.v2016_10_01
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
+python:
+  namespace: azure.mgmt.keyvault.v2016_10_01
+  output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2016_10_01
 ```
