@@ -2051,6 +2051,7 @@
     "ResourcePoolProperties": {
       "description": "Defines the resource properties.",
       "required": [
+        "arcZoneId",
         "moRefId",
         "vCenterId"
       ],
@@ -2067,6 +2068,50 @@
         "arcZoneId": {
           "description": "Gets or sets the ARM Id of the arcZone of the vCenter.",
           "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the resource pool.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets or sets the status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuSharesLevel": {
+          "description": "Gets or sets CPUSharesLevel which specifies the CPU allocation level for this pool.\r\nThis property is used in relative allocation between resource consumers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cpuReservationMHz": {
+          "format": "int64",
+          "description": "Gets or sets CPUReservationMHz which specifies the CPU size in MHz that is guaranteed\r\nto be available.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "cpuLimitMHz": {
+          "format": "int64",
+          "description": "Gets or sets CPULimitMHz which specifies a CPU usage limit in MHz.\r\nUtilization will not exceed this limit even if there are available resources.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memSharesLevel": {
+          "description": "Gets or sets CPUSharesLevel which specifies the memory allocation level for this pool.\r\nThis property is used in relative allocation between resource consumers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memReservationGB": {
+          "format": "int64",
+          "description": "Gets or sets MemReservationGB which specifies the guaranteed available memory in\r\ngigabytes.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "memLimitGB": {
+          "format": "int64",
+          "description": "Gets or sets MemLimitGB specifies a memory usage limit in gigabytes.\r\nUtilization will not exceed the specified limit even if there are available resources.",
+          "type": "integer",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -2147,16 +2192,6 @@
       ],
       "type": "object",
       "properties": {
-        "createdTimestamp": {
-          "description": "Gets the timestamp marking arcZone creation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "description": "Gets the timestamp marking last updated on the arcZone.",
-          "type": "string",
-          "readOnly": true
-        },
         "uuid": {
           "description": "Gets or sets a unique identifier for this zone.",
           "type": "string",
@@ -2170,6 +2205,10 @@
           "description": "Gets the K8s namespace for the arc zone.",
           "type": "string",
           "readOnly": true
+        },
+        "authentication": {
+          "description": "Credentials to authenticate to k8s.",
+          "$ref": "#/definitions/KubernetesAuthentication"
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -2257,25 +2296,28 @@
         }
       }
     },
+    "KubernetesAuthentication": {
+      "description": "Defines the kubernetes authentication class.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Gets or sets kubernetes authentication type.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets kubernetes authentication value.",
+          "type": "string"
+        }
+      }
+    },
     "VCenterProperties": {
       "description": "Defines the resource properties.",
       "required": [
         "fqdn",
-        "port",
-        "arcZoneId"
+		"arcZoneId"
       ],
       "type": "object",
       "properties": {
-        "createdTimestamp": {
-          "description": "Gets the timestamp marking vCenter creation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "description": "Gets the timestamp marking last updated on the vCenter.",
-          "type": "string",
-          "readOnly": true
-        },
         "fqdn": {
           "description": "Gets or sets the FQDN/IPAddress of the vCenter.",
           "type": "string"
@@ -2291,17 +2333,17 @@
           "description": "Gets or sets the ARM Id of the arcZone of the vCenter.",
           "type": "string"
         },
-        "version": {
-          "description": "Gets the version of the vCenter.",
-          "type": "string",
-          "readOnly": true
-        },
         "credentials": {
           "description": "Credentials to connect to vcenter.",
           "$ref": "#/definitions/KubernetesSecret"
         },
+        "version": {
+          "description": "Gets or sets the version of the vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
         "instanceUuid": {
-          "description": "Gets the instance UUID of the vCenter.",
+          "description": "Gets or sets the instance UUID of the vCenter.",
           "type": "string",
           "readOnly": true
         },
@@ -2326,22 +2368,18 @@
       "description": "Virtual disk model",
       "properties": {
         "diskId": {
-          "description": "Disk's id",
+          "description": "Gets or sets the disk id.",
           "type": "string",
           "readOnly": true
         },
-        "controllerId": {
-          "description": "Disk's Controller id",
-          "type": "string",
-          "readOnly": true
-        },
-        "totalSize": {
-          "description": "Disk's total size",
+        "diskSizeGB": {
+          "format": "int32",
+          "description": "Gets or sets the disk total size.",
           "type": "integer",
           "readOnly": true
         },
-        "virtualDiskName": {
-          "description": "Disk's display name",
+        "diskName": {
+          "description": "Gets or sets the disk name.",
           "type": "string",
           "readOnly": true
         }
@@ -2418,8 +2456,7 @@
         "Windows",
         "Linux"
       ],
-      "type": "string",
-      "readOnly": true
+      "type": "string"
     },
     "OsProfile": {
       "description": "Defines the resource properties.",
@@ -2427,7 +2464,8 @@
       "properties": {
         "computerName": {
           "description": "Gets or sets computer name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "adminUserName": {
           "description": "Gets or sets administrator username.",
@@ -2438,8 +2476,18 @@
           "type": "string"
         },
         "osType": {
-          "description": "Type of OS.",
-          "$ref": "#/definitions/OsType"
+          "description": "Gets or sets the type of the os.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OsType"
+            }
+          ],
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2447,7 +2495,7 @@
       "description": "Defines the resource properties.",
       "type": "object",
       "properties": {
-        "memorySizeInMB": {
+        "memorySizeMB": {
           "format": "int32",
           "description": "Gets or sets memory size in MBs for the vm.",
           "type": "integer"
@@ -2464,33 +2512,35 @@
       "type": "object",
       "properties": {
         "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
-          },
-          "description": "Specifies the list of network interfaces associated with the virtual machine."
+          }
         }
       }
     },
     "StorageProfile": {
       "description": "Defines the resource properties.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
           },
-          "description": "Specifies the list of virtual disks."
+          "readOnly": true
         }
       }
     },
     "VirtualMachineProperties": {
       "description": "Defines the resource properties.",
       "required": [
+        "arcZoneId",
         "resourcePoolId",
-        "templateId"
+        "templateId",
+        "vCenterId"
       ],
       "type": "object",
       "properties": {
@@ -2504,6 +2554,10 @@
         },
         "arcZoneId": {
           "description": "Gets or sets the ARM Id of the arcZone of the vCenter.",
+          "type": "string"
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
           "type": "string"
         },
         "osProfile": {
@@ -2520,14 +2574,29 @@
         },
         "storageProfile": {
           "description": "Storage properties.",
-          "$ref": "#/definitions/StorageProfile"
+          "allOf": [
+            {
+              "$ref": "#/definitions/StorageProfile"
+            }
+          ],
+          "readOnly": true
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
           "type": "string"
         },
-        "powerStatus": {
-          "description": "Gets the powerstatus of the virtual machine.",
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the vm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets or sets the status of the resource.",
           "type": "string",
           "readOnly": true
         },
@@ -2606,6 +2675,7 @@
     "VirtualMachineTemplateProperties": {
       "description": "Defines the resource properties.",
       "required": [
+        "arcZoneId",
         "moRefId",
         "vCenterId"
       ],
@@ -2623,16 +2693,61 @@
           "description": "Gets or sets the ARM Id of the arcZone of the vCenter.",
           "type": "string"
         },
-        "memorySizeInMB": {
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual machine template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "memorySizeMB": {
           "format": "int32",
-          "description": "Gets or sets memory size in MBs for the vm.",
+          "description": "Gets or sets memory size in MBs for the template.",
           "type": "integer",
           "readOnly": true
         },
         "numberOfCores": {
           "format": "int32",
-          "description": "Gets or sets the number of cores for the vm.",
+          "description": "Gets or sets the number of cores for the template.",
           "type": "integer",
+          "readOnly": true
+        },
+        "osType": {
+          "description": "Gets or sets the type of the os.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OsType"
+            }
+          ],
+          "readOnly": true
+        },
+        "osName": {
+          "description": "Gets or sets os name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the template.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkInterfaces": {
+          "description": "Gets or sets the network interfaces of the template.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
+          "readOnly": true
+        },
+        "disks": {
+          "description": "Gets or sets the disks the template.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          },
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets or sets the status of the resource.",
+          "type": "string",
           "readOnly": true
         },
         "provisioningState": {
@@ -2710,6 +2825,7 @@
     "VirtualNetworkProperties": {
       "description": "Defines the resource properties.",
       "required": [
+        "arcZoneId",
         "moRefId",
         "vCenterId"
       ],
@@ -2726,6 +2842,16 @@
         "arcZoneId": {
           "description": "Gets or sets the ARM Id of the arcZone of the vCenter.",
           "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual network.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets or sets the status of the resource.",
+          "type": "string",
+          "readOnly": true
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
@@ -2803,26 +2929,25 @@
       "description": "Network Interface model",
       "properties": {
         "ipAddresses": {
-          "description": "NIC ip addresses",
+          "description": "Gets or sets the nic ip addresses.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "macAddress": {
-          "description": "NIC MAC address",
+          "description": "Gets or sets the NIC MAC address.",
           "type": "string",
           "readOnly": true
         },
         "networkId": {
-          "description": "ARM Id of the Virtual Network",
+          "description": "Gets or sets the ARM Id of the network resource to connect the virtual machine.",
           "type": "string"
         },
         "nicType": {
           "description": "NIC type",
           "type": "string",
-          "readOnly": true,
           "enum": [
             "E1000",
             "E1000E",
@@ -2837,63 +2962,75 @@
           }
         },
         "nicId": {
-          "description": "Network Interface id",
+          "description": "Gets or sets the network interface Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nicName": {
+          "description": "Gets or sets the network interface name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerOnBoot": {
+          "description": "Gets or sets the power on boot.",
+          "$ref": "#/definitions/PowerOnBootOption"
+        },
+        "customization": {
+          "description": "Gets or sets the customization.",
+          "$ref": "#/definitions/NicCustomization"
+        }
+      }
+    },
+    "PowerOnBootOption": {
+      "description": "Defines the options for power on boot.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string"
+    },
+    "NicCustomization": {
+      "description": "Defines the network interface customizations.",
+      "type": "object",
+      "properties": {
+        "allocationMethod": {
+          "description": "Gets or sets the nic allocation method.",
+          "type": "string"
+        },
+        "dnsServers": {
+          "description": "Gets or sets the dns servers.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "gateway": {
+          "description": "Gets or sets the gateway.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipAddress": {
+          "description": "Gets or sets the ip address for the nic.",
+          "type": "string"
+        },
+        "mask": {
+          "description": "Gets or sets the mask.",
+          "type": "string"
+        },
+        "primaryWinsServer": {
+          "description": "Gets or sets the primary server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "secondaryWinsServer": {
+          "description": "Gets or sets the secondary server.",
           "type": "string",
           "readOnly": true
         }
       }
-    },
-    "NetworkInterfaceCustomization": {
-      "description": "NIC Customization",
-      "properties": {
-        "allocationMethod": {
-          "description": "IP address allocation method",
-          "type": "string",
-          "enum": [
-            "static",
-            "dynamic"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false,
-            "name": "AllocationMethod"
-          }
-        },
-        "dnsServers": {
-          "description": "List of dns servers to use",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPV4Address"
-          }
-        },
-        "gateway": {
-          "description": "Gateway addresses assigned to nic",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPV4Address"
-          }
-        },
-        "ipAddress": {
-          "description": "Static ip address for nic",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "mask": {
-          "description": "Network mask for nic",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "primaryWinsServer": {
-          "description": "primary WINS server for Windows",
-          "$ref": "#/definitions/IPV4Address"
-        },
-        "secondaryWinsServer": {
-          "description": "secondary WINS server for Windows",
-          "$ref": "#/definitions/IPV4Address"
-        }
-      }
-    },
-    "IPV4Address": {
-      "description": "IPV4 Address type.",
-      "type": "string",
-      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])[.]){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
     },
     "operation": {
       "description": "Operation provided by provider",
