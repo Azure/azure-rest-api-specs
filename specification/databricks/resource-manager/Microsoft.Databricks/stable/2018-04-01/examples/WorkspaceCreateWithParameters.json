@@ -8,8 +8,14 @@
       "properties": {
         "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
         "parameters": {
-          "storageAccountName": {
-            "value": "myStorageAccount"
+          "customVirtualNetworkId": {
+            "value": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork"
+          },
+          "customPublicSubnetName": {
+            "value": "myPublicSubnet"
+          },
+          "customPrivateSubnetName": {
+            "value": "myPrivateSubnet"
           }
         }
       },
@@ -30,55 +36,17 @@
         "properties": {
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "parameters": {
-            "amlWorkspaceId": {
-              "type": "String",
-              "value": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.MachineLearningServices/workspaces/myAmlWorkspace"
-            },
             "customPrivateSubnetName": {
               "type": "String",
-              "value": "PrivateBob"
+              "value": "myPrivateSubnet"
             },
             "customPublicSubnetName": {
               "type": "String",
-              "value": "PublicSarah"
+              "value": "myPublicSubnet"
             },
             "customVirtualNetworkId": {
               "type": "String",
               "value": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/myNetwork"
-            },
-            "enableNoPublicIp": {
-              "type": "Bool",
-              "value": true
-            },
-            "loadBalancerBackendPoolName": {
-              "type": "String",
-              "value": "CustomBackendAddressPool"
-            },
-            "loadBalancerId": {
-              "type": "String",
-              "value": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Network/loadBalancers/lb1"
-            },
-            "relayNamespaceName": {
-              "type": "String",
-              "value": "test"
-            },
-            "resourceTags": {
-              "type": "Object",
-              "value": {
-                "hello": "world"
-              }
-            },
-            "storageAccountName": {
-              "type": "String",
-              "value": "mysa999"
-            },
-            "storageAccountSkuName": {
-              "type": "String",
-              "value": "Standard_GRS"
-            },
-            "vnetAddressPrefix": {
-              "type": "String",
-              "value": "10.139"
             }
           },
           "provisioningState": "Succeeded",
