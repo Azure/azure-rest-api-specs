@@ -9,8 +9,8 @@ python-mode: create
 python:
   azure-arm: true
   payload-flattening-threshold: 2
-  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.mgmt.appconfiguration
+  license-header: MICROSOFT_MIT_NO_VERSION
   package-name: azure-mgmt-appconfiguration
   package-version: 0.1.0
   clear-output-folder: true
