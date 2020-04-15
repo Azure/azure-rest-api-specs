@@ -13,10 +13,10 @@
     "/v1.0-preview.1/documents": {
       "post": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Submit a batch document translation request to the translation service",
-        "description": "Submit a batch request to the document translation service.\r\nUser can specify a list of target languages to be translated to.\r\n            \r\nA batch request can consist of 1-n input source folders.\r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\n      ///\r\nWe will create subfolder for each target language.\r\nFor Example, if the input is https://[myblob]/container/ and destination output is https://[myblob]/outputcontainer/\r\nand the container contains 2 files a.txt, b.docx.  The translation is from en to [es,fr]\r\nThe documents translated will be placed in\r\nhttps://[myblob]/outputcontainer/es/a.txt\r\nhttps://[myblob]/outputcontainer/es/b.docx\r\nhttps://[myblob]/outputcontainer/fr/a.txt\r\nhttps://[myblob]/outputcontainer/fr/b.docx\r\n            \r\nIf the file with the same name already exists, it will be overwritten.\r\n            \r\nA status file will also be written in the root folder.",
+        "description": "Submit a batch request to the document translation service.\r\n            \r\nEach request can consists of multiple inputs.\r\nEach input will contains both a source and destination container for source and target language pair.\r\n            \r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\nThe prefix will be applied to the subpath after the container name\r\n            \r\nGlossaries / Translation memory can be supplied and will be applied when the document is being translated.\r\nIf the glossary is invalid or unreachable during translation time.  An error will be indicated in the document status.\r\n            \r\nIf the file with the same name already exists in the destination, it will be overwritten.\r\nTargetUrl for each target language needs to be unique.",
         "operationId": "Batch Documents Submit",
         "consumes": [
           "application/json",
@@ -37,16 +37,59 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Successful request and the batch request is created by the service.  The job details are returned",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+          "202": {
+            "description": "Successful request and the batch request is created by the service.  The header Operation-Location will indicate a status url with the operation id.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Location of the operation",
+                "type": "string",
+                "format": ""
+              }
             }
           },
           "400": {
-            "description": "Invalid request.  See Error detail for missing or invalid parameters",
+            "description": "Invalid request.  Check input parameters",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -55,12 +98,124 @@
             "$ref": "./examples/batch.json"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "summary": "Returns the status of the documents of a translation batch operation",
+        "description": "Returns the status of the list of documents translation operation status in the subscription\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get Detailed Document Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the status of the documents",
+            "schema": {
+              "$ref": "#/definitions/DocumentStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": ""
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.  Check input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "404": {
+            "description": "Resource is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Documents Status": {
+            "$ref": "./examples/documents.json"
+          }
+        }
       }
     },
     "/v1.0-preview.1/documents/upload": {
       "post": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Submit a binary document in the POST body to the translation service.",
         "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/pdf for .pdf files",
@@ -73,15 +228,8 @@
         "parameters": [
           {
             "in": "query",
-            "name": "To",
-            "description": "The language code for the documents to translate to",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "From",
-            "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document (TBD)",
+            "name": "SourceLanguage",
+            "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document",
             "type": "string"
           },
           {
@@ -89,11 +237,18 @@
             "name": "Category",
             "description": "Category for the translation system (Optional)",
             "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "TargetLanguage",
+            "description": "The language code for the documents to translate to",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "201": {
-            "description": "Successful request and it is accepted by the service.  The job details are returned",
+            "description": "Successful request and it is created by the service.  The operation details are returned",
             "schema": {
               "$ref": "#/definitions/DocumentSubmissionResponse"
             },
@@ -111,9 +266,48 @@
             }
           },
           "400": {
-            "description": "Invalid request.  See Error detail for missing or invalid parameters",
+            "description": "Invalid request.  Check input parameters",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -127,10 +321,10 @@
     "/v1.0-preview.1/documents/{documentId}": {
       "get": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Returns the status of the specific document",
-        "description": "Returns the status of the translation of the document.\r\nNote: there will be one document detail for each translated to language operations",
+        "description": "Returns the status of the translation of the document.",
         "operationId": "Get Document Status",
         "produces": [
           "application/json"
@@ -147,9 +341,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request and returns the status of the job",
+            "description": "Successful request and it is accepted by the service.  The operation details are returned",
             "schema": {
-              "$ref": "#/definitions/DocumentStatusResponse"
+              "$ref": "#/definitions/DocumentStatusDetail"
             },
             "headers": {
               "Retry-After": {
@@ -164,10 +358,49 @@
               }
             }
           },
-          "404": {
-            "description": "The requested jobId is not found",
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "404": {
+            "description": "Resource is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -181,7 +414,7 @@
     "/v1.0-preview.1/operations/{id}": {
       "get": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Returns the status of the batch translation operation",
         "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.",
@@ -203,7 +436,7 @@
           "200": {
             "description": "Successful request and returns the status of the batch translation operation",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/OperationStatusSummary"
             },
             "headers": {
               "Retry-After": {
@@ -218,25 +451,64 @@
               }
             }
           },
-          "404": {
-            "description": "The requested operation id is not found",
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "404": {
+            "description": "Resource is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
         "x-ms-examples": {
           "Get Operation Status": {
-            "$ref": "./examples/status.json"
+            "$ref": "./examples/operation.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Cancel a currently processing or queued operation.",
-        "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
+        "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling.  A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
         "operationId": "cancel operation",
         "produces": [
           "application/json"
@@ -253,15 +525,54 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request and returns the status of the operation",
+            "description": "Cancel request has been submitted",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/OperationStatusSummary"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             }
           },
           "404": {
-            "description": "The requested operation id is not found",
+            "description": "Resource is not found",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -275,11 +586,11 @@
     "/v1.0-preview.1/operations/{id}/documents": {
       "get": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Returns the status of the documents of a translation batch operation",
-        "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall operation status as well as a summary of the current progress of the documents being translated.\r\n            \r\nThe documents are sorted by the document Id and then the translate to language\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get Detailed Document Status",
+        "description": "Returns the status of the list of documents translation operation by a given operation id.\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get Detailed Document Status for a given operation id",
         "produces": [
           "application/json"
         ],
@@ -333,15 +644,57 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "Invalid request.  Check input parameters",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             }
           },
           "404": {
-            "description": "The requested operation id is not found",
+            "description": "Resource is not found",
             "schema": {
               "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -352,10 +705,115 @@
         }
       }
     },
+    "/v1.0-preview.1/operations": {
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "summary": "Returns the list of operations submitted and their summary status",
+        "description": "Returns the list of status of the translation batch operation.\r\nThe list will consist only of the batch request submitted by the user (based on their subscription)\r\n            \r\nThe operation status are sorted by the operation Id\r\n            \r\nIf the number of operations exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get status of operation list",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the status of the all the operations",
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": ""
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.  Check input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get status for operation list": {
+            "$ref": "./examples/operations.json"
+          }
+        }
+      }
+    },
     "/v1.0-preview.1/documents/formats": {
       "get": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Returns the list of supported document formats",
         "description": "The list of supported document formats supported by our service.\r\nThe list will include the common file extension used and supported as well as the content-type if using the upload API.",
@@ -365,15 +823,36 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request and returns the list of document formats",
+            "description": "Returns the list of supported document file formats",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/DocumentFormat"
-                }
-              }
+              "$ref": "#/definitions/FileFormatListResult"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -384,10 +863,63 @@
         }
       }
     },
+    "/v1.0-preview.1/glossaries/formats": {
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "summary": "Returns the list of supported document formats",
+        "description": "The list of supported glossary formats supported by our service.\r\nThe list will include the common file extension used.",
+        "operationId": "Get Glossary Formats",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of supported glossary file formats",
+            "schema": {
+              "$ref": "#/definitions/FileFormatListResult"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"format\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Glossary Formats": {
+            "$ref": "./examples/glossary.json"
+          }
+        }
+      }
+    },
     "/v1.0-preview.1/storagesources": {
       "get": {
         "tags": [
-          "TranslateJob"
+          "Translation"
         ],
         "summary": "Returns the list of supported storage sources",
         "description": "The list of storage sources supported by our service.",
@@ -399,13 +931,34 @@
           "200": {
             "description": "Successful request and returns the list of storage sources",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/StorageSource"
-                }
-              }
+              "$ref": "#/definitions/StorageSourceListResult"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occured\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"source\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
@@ -430,11 +983,6 @@
           "description": "A case-sensitive suffix string to filter documents in the source path for translation. \r\nThis is most often use for file extensions",
           "type": "string",
           "example": ".txt"
-        },
-        "includeSubFolder": {
-          "description": "A flag to indicate if sub folders within the set of prefix folders will also need to be included when searching for content to be translated.",
-          "type": "boolean",
-          "example": false
         }
       }
     },
@@ -448,34 +996,81 @@
     "SourceInput": {
       "description": "Source of the input documents",
       "required": [
-        "path"
+        "sourceUrl"
       ],
       "type": "object",
       "properties": {
-        "filter": {
-          "$ref": "#/definitions/DocumentFilter"
-        },
-        "path": {
+        "sourceUrl": {
           "description": "Location of the folder / container with your documents",
           "type": "string",
           "example": "https://myblob.blob.core.windows.net/Container/"
+        },
+        "filter": {
+          "$ref": "#/definitions/DocumentFilter"
+        },
+        "language": {
+          "description": "Language code\r\nIf none is specified, we will perform auto detect on the document",
+          "type": "string",
+          "example": "en"
         },
         "storageSource": {
           "$ref": "#/definitions/StorageSource"
         }
       }
     },
-    "DestinationInput": {
-      "description": "Destination for the finished translated documents",
+    "Glossary": {
+      "description": "Glossary / translation memory for the request",
       "required": [
-        "path"
+        "glossaryUrl"
       ],
       "type": "object",
       "properties": {
-        "path": {
+        "glossaryUrl": {
+          "description": "Location of the glossary. \r\nWe will use the file extension to extract the formating if the format parameter is not supplied.\r\n\r\nIf the translation language pair is not present in the glossary, it will not be applied",
+          "type": "string",
+          "example": "https://myblob.blob.core.windows.net/Container/myglossary.tsv"
+        },
+        "format": {
+          "description": "Format",
+          "type": "string",
+          "example": "XLIFF"
+        },
+        "version": {
+          "description": "Version",
+          "type": "string",
+          "example": "2.0"
+        }
+      }
+    },
+    "TargetInput": {
+      "description": "Destination for the finished translated documents",
+      "required": [
+        "language",
+        "targetUrl"
+      ],
+      "type": "object",
+      "properties": {
+        "targetUrl": {
           "description": "Location of the folder / container with your documents",
           "type": "string",
-          "example": "https://myblob.blob.core.windows.net/Container/"
+          "example": "https://myblob.blob.core.windows.net/TargetUrl/"
+        },
+        "category": {
+          "description": "Category / custom system for translation request",
+          "type": "string",
+          "example": "general"
+        },
+        "language": {
+          "description": "Target Language",
+          "type": "string",
+          "example": "fr"
+        },
+        "glossaries": {
+          "description": "List of Glossary",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Glossary"
+          }
         },
         "storageSource": {
           "$ref": "#/definitions/StorageSource"
@@ -485,50 +1080,36 @@
     "BatchRequest": {
       "description": "Definition for the input batch translation request",
       "required": [
-        "destination",
-        "source"
+        "source",
+        "targets"
       ],
       "type": "object",
       "properties": {
         "source": {
           "$ref": "#/definitions/SourceInput"
         },
-        "destination": {
-          "$ref": "#/definitions/DestinationInput"
+        "targets": {
+          "description": "Location of the destation for the output",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetInput"
+          }
         }
       }
     },
     "JobSubmissionBatchRequest": {
       "description": "Job submission batch request",
       "required": [
-        "inputs",
-        "to"
+        "inputs"
       ],
       "type": "object",
       "properties": {
-        "to": {
-          "description": "The list of language codes for the documents to translate to",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "inputs": {
           "description": "The input list of documents or folders containing documents",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BatchRequest"
           }
-        },
-        "from": {
-          "description": "The language code of the original document\r\nIf none is specified, we will perform auto detect on the document (TBD)",
-          "type": "string",
-          "example": "en"
-        },
-        "category": {
-          "description": "Category for the translation system (Optional)",
-          "type": "string",
-          "example": "a999cf06-cc84-41cb-800b-cf4bdcfcb460-GENERAL"
         }
       }
     },
@@ -539,44 +1120,10 @@
         "Running",
         "Succeeded",
         "Failed",
-        "Cancelled"
+        "Cancelled",
+        "Cancelling"
       ],
       "type": "string"
-    },
-    "StatusSummary": {
-      "type": "object",
-      "properties": {
-        "totalDocuments": {
-          "format": "int32",
-          "description": "Total document count",
-          "type": "integer",
-          "example": 1
-        },
-        "failedDocuments": {
-          "format": "int32",
-          "description": "Number of documents that has failed",
-          "type": "integer",
-          "example": 0
-        },
-        "succeedDocuments": {
-          "format": "int32",
-          "description": "Number of documents that have succeeded",
-          "type": "integer",
-          "example": 1
-        },
-        "inProgressDocuments": {
-          "format": "int32",
-          "description": "Number of documents that are in progress",
-          "type": "integer",
-          "example": 0
-        },
-        "notYetStartedDocuments": {
-          "format": "int32",
-          "description": "Number of documents that has not yet been processed",
-          "type": "integer",
-          "example": 0
-        }
-      }
     },
     "DocumentStatusDetail": {
       "required": [
@@ -643,7 +1190,60 @@
         }
       }
     },
-    "OperationStatusResponse": {
+    "DocumentStatusResponse": {
+      "description": "Document Status Response",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The detail status of individual documents",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentStatusDetail"
+          }
+        },
+        "@nextLink": {
+          "description": "Url for the next page.  Null if no more pages available",
+          "type": "string",
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?$top=5&$skip=15"
+        }
+      }
+    },
+    "StatusSummary": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "format": "int32",
+          "description": "Total count",
+          "type": "integer",
+          "example": 1
+        },
+        "failed": {
+          "format": "int32",
+          "description": "Failed count",
+          "type": "integer",
+          "example": 0
+        },
+        "success": {
+          "format": "int32",
+          "description": "Number of Success",
+          "type": "integer",
+          "example": 1
+        },
+        "inProgress": {
+          "format": "int32",
+          "description": "Number of in progress",
+          "type": "integer",
+          "example": 0
+        },
+        "notYetStarted": {
+          "format": "int32",
+          "description": "Count of not yet started",
+          "type": "integer",
+          "example": 0
+        }
+      }
+    },
+    "OperationStatusSummary": {
       "description": "Job status response",
       "required": [
         "createdDateTimeUtc",
@@ -676,12 +1276,98 @@
         },
         "summary": {
           "$ref": "#/definitions/StatusSummary"
+        }
+      }
+    },
+    "DocumentSubmissionResponse": {
+      "description": "The response for a document submission",
+      "type": "object",
+      "properties": {
+        "job": {
+          "$ref": "#/definitions/OperationStatusSummary"
         },
-        "documentStatusDetails": {
-          "description": "The detail status of individual documents",
+        "documentDownloadUrl": {
+          "description": "Document download link",
+          "type": "string"
+        },
+        "documentExpirationDateTimeUtc": {
+          "format": "date-time",
+          "description": "Datetime in Utc when the document will no longer be available",
+          "type": "string"
+        }
+      }
+    },
+    "OperationStatusResponse": {
+      "description": "Document Status Response",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The summary status of individual opearation",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DocumentStatusDetail"
+            "$ref": "#/definitions/OperationStatusSummary"
+          }
+        },
+        "@nextLink": {
+          "description": "Url for the next page.  Null if no more pages available",
+          "type": "string",
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operations?$top=5&$skip=15"
+        }
+      }
+    },
+    "FileFormat": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "Name of the format",
+          "type": "string",
+          "example": "PlainText"
+        },
+        "fileExtensions": {
+          "description": "Supported file extension for this format",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contentTypes": {
+          "description": "Supported Content-Types for this format",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "versions": {
+          "description": "Supported Version",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FileFormatListResult": {
+      "description": "Base type for List return in our api",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "list of objects",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileFormat"
+          }
+        }
+      }
+    },
+    "StorageSourceListResult": {
+      "description": "Base type for List return in our api",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "list of objects",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageSource"
           }
         }
       }
@@ -692,21 +1378,10 @@
         "InvalidRequest",
         "InvalidArgument",
         "InternalServerError",
-        "ServiceUnavailable"
-      ],
-      "type": "string"
-    },
-    "DetailedErrorCode": {
-      "description": "Detailed error code enum.",
-      "enum": [
-        "InvalidParameterValue",
-        "InvalidRequestBodyFormat",
-        "EmptyRequest",
-        "MissingInputRecords",
-        "InvalidDocument",
-        "ModelVersionIncorrect",
-        "InvalidDocumentBatch",
-        "UnsupportedLanguageCode"
+        "ServiceUnavailable",
+        "ResourceNotFound",
+        "Unauthorized",
+        "RequestRateTooHigh"
       ],
       "type": "string"
     },
@@ -715,14 +1390,14 @@
       "type": "object",
       "properties": {
         "code": {
-          "$ref": "#/definitions/DetailedErrorCode"
+          "format": "int32",
+          "description": "Gets detailed error code.",
+          "type": "integer",
+          "readOnly": true
         },
-        "details": {
-          "description": "Gets additional supportive details regarding the error and/or expected policies.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
+        "error": {
+          "description": "Gets detailed error string.",
+          "type": "string",
           "readOnly": true
         },
         "message": {
@@ -747,14 +1422,6 @@
         "code": {
           "$ref": "#/definitions/ErrorCodeV2"
         },
-        "details": {
-          "description": "Gets additional supportive details regarding the error and/or expected policies.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorV2"
-          },
-          "readOnly": true
-        },
         "message": {
           "description": "Gets high level error message.",
           "type": "string",
@@ -778,65 +1445,19 @@
           "$ref": "#/definitions/ErrorV2"
         }
       }
-    },
-    "DocumentSubmissionResponse": {
-      "description": "The response for a document submission",
-      "type": "object",
-      "properties": {
-        "job": {
-          "$ref": "#/definitions/OperationStatusResponse"
-        },
-        "documentDownloadUrl": {
-          "description": "Document download link",
-          "type": "string"
-        },
-        "documentExpirationDateTimeUtc": {
-          "format": "date-time",
-          "description": "Datetime in Utc when the document will no longer be available",
-          "type": "string"
-        }
-      }
-    },
-    "DocumentStatusResponse": {
-      "description": "Document Status Response",
-      "type": "object",
-      "properties": {
-        "documents": {
-          "description": "The detail status of individual documents",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DocumentStatusDetail"
-          }
-        },
-        "@nextLink": {
-          "description": "Url for the next page.  Null if no more pages available",
-          "type": "string"
-        }
-      }
-    },
-    "DocumentFormat": {
-      "type": "object",
-      "properties": {
-        "format": {
-          "description": "Name of the format",
-          "type": "string",
-          "example": "PlainText"
-        },
-        "fileExtensions": {
-          "description": "Supported file extension for this format",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "contentTypes": {
-          "description": "Supported Content-Types for this format",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     }
-  }
+  },
+  "securityDefinitions": {
+    "subscription_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header",
+      "description": "Provide your cognitive services subscription key here."
+    }
+  },
+  "security": [
+    {
+      "subscription_key": []
+    }
+  ]
 }

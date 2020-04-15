@@ -2,41 +2,7 @@
   "parameters": {
     "api-version": "v1.0-preview.1",
     "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
-    "resourceGroupName": "TestResourceGroup",
-    "batchRequest": {
-      "inputs": [
-        {
-          "source": {
-            "sourceUrl": "https://myblob.blob.core.windows.net/sourceContainer",
-            "filter": {
-              "prefix": "pre",
-              "suffix": ".txt"
-            },
-            "language": "en",
-            "storageSource": "AzureBlob"
-          },
-          "targets": [
-            {
-              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer1",
-              "category": "general",
-              "language": "fr",
-              "glossaries": [
-                {
-                  "glossaryUrl": "https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf"
-                }
-              ],
-              "storageSource": "AzureBlob"
-            },
-            {
-              "targetUrl": "https://myblob.blob.core.windows.net/destinationContainer2",
-              "category": "general",
-              "language": "es",
-              "storageSource": "AzureBlob"
-            }
-          ]
-        }
-      ]
-    }
+    "resourceGroupName": "TestResourceGroup"
   },
   "responses": {
     "401": {
@@ -45,6 +11,7 @@
         "error": {
           "code": "Unauthorized",
           "message": "User is not authorized",
+          "target": "Operation",
           "innerError": {
             "code": 401000,
             "error": "Unauthorized",
@@ -59,6 +26,7 @@
         "error": {
           "code": "RequestRateTooHigh",
           "message": "User's request rate is too high",
+          "target": "Operation",
           "innerError": {
             "code": 429000,
             "error": "RateTooHigh",
@@ -73,6 +41,7 @@
         "error": {
           "code": "InternalServerError",
           "message": "Internal Server Error",
+          "target": "Operation",
           "innerError": {
             "code": 500000,
             "error": "Internal Server Error",
@@ -87,6 +56,7 @@
         "error": {
           "code": "ServiceUnavailable",
           "message": "Service is temporary unavailable",
+          "target": "Operation",
           "innerError": {
             "code": 503000,
             "error": "ServiceTemporaryUnavailable",
@@ -95,9 +65,27 @@
         }
       }
     },
-    "202": {
+    "200": {
       "headers": {
-        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "727bf148-f327-47a0-9481-abae6362f11e",
+            "createdDateTimeUtc": "2020-03-26T00:00:00Z",
+            "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
+            "status": "Succeeded",
+            "summary": {
+              "total": 10,
+              "failed": 1,
+              "success": 9,
+              "inProgress": 0,
+              "notYetStarted": 0
+            }
+          }
+        ]
       }
     },
     "400": {
@@ -106,6 +94,7 @@
         "error": {
           "code": "InvalidRequest",
           "message": "Some argument is incorrect",
+          "target": "Operation",
           "innerError": {
             "code": 400120,
             "error": "SASTokenInvalid",
