@@ -2124,7 +2124,8 @@
             "properties": {
               "$ref": "#/definitions/DataControllerProperties"
             }
-          }
+          },
+          "x-ms-azure-resource": true
         }
       ]
     },
@@ -2184,22 +2185,22 @@
     "DataControllerProperties": {
       "type": "object",
       "properties": {
-        "data_controller": {
+        "dataController": {
           "$ref": "#/definitions/DataController"
         },
-        "request_type": {
+        "requestType": {
           "$ref": "#/definitions/RequestType"
         },
-        "upload_request": {
+        "uploadRequest": {
           "$ref": "#/definitions/UsageUploadRequest"
         },
-        "upload_response": {
+        "uploadResponse": {
           "$ref": "#/definitions/UsageUploadResponse"
         },
-        "handshake_request": {
+        "handshakeRequest": {
           "$ref": "#/definitions/HandshakeRequest"
         },
-        "handshake_response": {
+        "handshakeResponse": {
           "$ref": "#/definitions/HandshakeResponse"
         }
       }
@@ -2214,14 +2215,14 @@
         "name": {
           "type": "string"
         },
-        "azure_resource_type": {
+        "azureResourceType": {
           "type": "string"
         },
         "subscription": {
           "type": "string",
           "format": "uuid"
         },
-        "resource_group": {
+        "resourceGroup": {
           "type": "string"
         },
         "location": {
@@ -2244,10 +2245,10 @@
     "UsageUploadRequest": {
       "type": "object",
       "properties": {
-        "export_type": {
+        "exportType": {
           "type": "string"
         },
-        "data_timestamp": {
+        "dataTimestamp": {
           "type": "string",
           "format": "date-time"
         },
@@ -2269,11 +2270,11 @@
           "type": "string",
           "format": "uuid"
         },
-        "event_seq": {
+        "eventSeq": {
           "type": "integer",
           "format": "int64"
         },
-        "event_id": {
+        "eventId": {
           "type": "string",
           "format": "uuid"
         },
@@ -2283,11 +2284,11 @@
         "type": {
           "type": "string"
         },
-        "subscription_id": {
+        "subscriptionId": {
           "type": "string",
           "format": "uuid"
         },
-        "resource_group": {
+        "resourceGroup": {
           "type": "string"
         },
         "name": {
@@ -2296,11 +2297,11 @@
         "location": {
           "type": "string"
         },
-        "start_time": {
+        "startTime": {
           "type": "string",
           "format": "date-time"
         },
-        "end_time": {
+        "endTime": {
           "type": "string",
           "format": "date-time"
         },
@@ -2316,10 +2317,10 @@
     "UsageUploadResponse": {
       "type": "object",
       "properties": {
-        "usage_upload_status": {
+        "usageUploadStatus": {
           "$ref": "#/definitions/UsageUploadStatus"
         },
-        "usage_water_mark": {
+        "usageWaterMark": {
           "type": "integer",
           "format": "int64"
         }
@@ -2344,10 +2345,10 @@
     "HandshakeResponse": {
       "type": "object",
       "properties": {
-        "usage_upload_url": {
+        "usageUploadUrl": {
           "type": "string"
         },
-        "usage_result_url": {
+        "usageResultUrl": {
           "type": "string"
         }
       }
