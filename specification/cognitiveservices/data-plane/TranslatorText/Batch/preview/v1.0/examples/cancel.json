@@ -6,12 +6,78 @@
     "id": "727BF148-F327-47A0-9481-ABAE6362F11E"
   },
   "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "User is not authorized",
+          "target": "Operation",
+          "innerError": {
+            "code": 401000,
+            "error": "Unauthorized",
+            "message": "Operation is not authorized"
+          }
+        }
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "target": "Operation",
+          "innerError": {
+            "code": 429000,
+            "error": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "target": "Operation",
+          "innerError": {
+            "code": 500000,
+            "error": "Internal Server Error",
+            "message": "Unexpected internal server error has occured"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "target": "Operation",
+          "innerError": {
+            "code": 503000,
+            "error": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
     "404": {
       "headers": {},
       "body": {
         "error": {
-          "code": "InvalidArgument",
-          "message": "id not found"
+          "code": "ResourceNotFound",
+          "message": "id not found",
+          "target": "Operation",
+          "innerError": {
+            "code": 404000,
+            "error": "ResourceNotFound",
+            "message": "Resource requested is not found"
+          }
         }
       }
     },
@@ -23,11 +89,11 @@
         "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
         "status": "Succeeded",
         "summary": {
-          "totalDocuments": 10,
-          "failedDocuments": 1,
-          "succeedDocuments": 9,
-          "inProgressDocuments": 0,
-          "notYetStartedDocuments": 0
+          "total": 10,
+          "failed": 1,
+          "success": 9,
+          "inProgress": 0,
+          "notYetStarted": 0
         }
       }
     }
