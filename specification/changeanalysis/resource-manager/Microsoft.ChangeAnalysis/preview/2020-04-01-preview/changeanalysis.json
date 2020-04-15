@@ -330,21 +330,42 @@
       "properties": {
         "notifications": {
           "$ref": "#/definitions/NotificationSettings"
+        }
+      }
+    },
+    "SystemData": {
+      "description": "Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources",
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity, key",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)",
+          "type": "string",
+          "readOnly": true
         },
         "lastModifiedBy": {
-          "description": "The principal that last modified the configuration profile.",
+          "description": "A string identifier for the identity that last modified the resource",
           "type": "string",
           "readOnly": true
         },
-        "lastModifiedTime": {
-          "format": "date-time",
-          "description": "The last modification time of the configuration profile.",
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key",
           "type": "string",
           "readOnly": true
         },
-        "createdTime": {
+        "lastModifiedAt": {
           "format": "date-time",
-          "description": "The creation date of configuration profile.",
+          "description": "The timestamp of resource last modification (UTC)",
           "type": "string",
           "readOnly": true
         }
@@ -449,6 +470,9 @@
           "description": "The type of the resource.",
           "type": "string",
           "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
       },
       "x-ms-azure-resource": true
