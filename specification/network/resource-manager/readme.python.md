@@ -5,6 +5,7 @@ These settings apply only when `--python` is specified on the command line.
 ``` yaml !$(track2)
 python:
   azure-arm: true
+  payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
   package-name: azure-mgmt-network
   clear-output-folder: true
