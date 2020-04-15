@@ -3702,7 +3702,7 @@
                 "description": "The number of tags associated with the blob"
               },
               "x-ms-expiry-time": {
-                "x-ms-client-name": "ExpiryTime",
+                "x-ms-client-name": "ExpiresOn",
                 "type": "string",
                 "format": "date-time-rfc1123",
                 "description": "The time this blob will expire."
@@ -9381,6 +9381,7 @@
           "format": "date-time-rfc1123"
         },
         "Expiry-Time": {
+          "x-ms-client-name": "ExpiresOn",
           "type": "string",
           "format": "date-time-rfc1123"
         }
@@ -10768,11 +10769,10 @@
     },
     "BlobExpiryTime": {
       "name": "x-ms-expiry-time",
-      "x-ms-client-name": "ExpiryTime",
+      "x-ms-client-name": "ExpiresOn",
       "in": "header",
       "required": false,
       "type": "string",
-      "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method",
       "description": "The time to set the blob to expiry"
     },
