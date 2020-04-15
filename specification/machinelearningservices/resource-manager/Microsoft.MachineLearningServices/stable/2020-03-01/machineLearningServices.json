@@ -305,32 +305,19 @@
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "ListResourcePreparationErrors",
-        "consumes": [],
-        "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
+        "operationId": "ResourcePreparationErrors_List",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -338,6 +325,12 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/ListResourcePreparationErrorsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         }
@@ -349,27 +342,18 @@
           "ProxyOperations"
         ],
         "operationId": "PrepareNotebook",
-        "consumes": [],
-        "produces": [],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/APIVersionParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
           }
         ],
         "responses": {
@@ -378,6 +362,12 @@
           },
           "202": {
             "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
           }
         }
       }
