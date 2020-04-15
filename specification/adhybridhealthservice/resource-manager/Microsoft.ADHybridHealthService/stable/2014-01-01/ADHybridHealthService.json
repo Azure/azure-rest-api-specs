@@ -3612,6 +3612,47 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Configuration"
+        ],
+        "description": "Updates the ipAddressAggregateSettings alert thresholds.",
+        "x-ms-examples": {
+          "configuration_updateIpAddressAggregateSettings": {
+            "$ref": "./examples/IpAddressAggregateSettingsUpdate.json"
+          }
+        },
+        "operationId": "configuration_updateIpAddressAggregateSettings",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipAddressAggregateSetting",
+            "in": "body",
+            "description": "The ipAddressAggregateSetting object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IpAddressAggregateSetting"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ip AddressAggregate Settings.",
+            "schema": {
+              "$ref": "#/definitions/IpAddressAggregateSetting"
+            }
+          }
+        }
       }
     }
   },
