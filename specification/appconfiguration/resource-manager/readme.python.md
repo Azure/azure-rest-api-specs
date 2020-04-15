@@ -24,13 +24,11 @@ no-namespace-folders: true
 package-version: 0.1.0
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
+``` yaml $(python-mode) == 'update'
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration/azure/mgmt/appconfiguration
 ```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
+``` yaml $(python-mode) == 'create'
+basic-setup-py: true
+output-folder: $(python-sdks-folder)/appconfiguration/azure-mgmt-appconfiguration
 ```
