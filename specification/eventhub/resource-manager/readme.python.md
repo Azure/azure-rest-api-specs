@@ -3,11 +3,12 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml !$(track2)
-azure-arm: true
-license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-eventhub
-clear-output-folder: true
-no-namespace-folders: true
+python:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  package-name: azure-mgmt-eventhub
+  clear-output-folder: true
+  no-namespace-folders: true
 ```
 
 These settings apply only when `--track2` is specified on the command line.
@@ -53,6 +54,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-01-preview'
 namespace: azure.mgmt.eventhub.v2018_01_01_preview
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2018_01_01_preview
+python:
+  namespace: azure.mgmt.eventhub.v2018_01_01_preview
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2018_01_01_preview
 ```
 
 ### Tag: package-2017-04 and python
@@ -63,6 +67,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2017-04'
 namespace: azure.mgmt.eventhub.v2017_04_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2017_04_01
+python:
+  namespace: azure.mgmt.eventhub.v2017_04_01
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2017_04_01
 ```
 
 ### Tag: package-2015-08 and python
@@ -73,4 +80,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-08'
 namespace: azure.mgmt.eventhub.v2015_08_01
 output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2015_08_01
+python:
+  namespace: azure.mgmt.eventhub.v2015_08_01
+  output-folder: $(python-sdks-folder)/eventhub/azure-mgmt-eventhub/azure/mgmt/eventhub/v2015_08_01
 ```
