@@ -36,6 +36,8 @@ These settings apply only when `--tag=package-2020-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
   - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/changeanalysis.json
+  - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/examples/ConfigurationProfileCreateWithIdentity.json
+  - Microsoft.ChangeAnalysis/preview/2020-04-01-preview/examples/ConfigurationProfileUpdateWithIdentity.json
 ```
 
 ---
@@ -78,7 +80,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
-## Additional usage examples 
- 
-Create configuration profile with enabled managed identity - [ConfigurationProfileCreateWithIdentity.json](./examples/ConfigurationProfileCreateWithIdentity.json) 
-Uodate configuraiton profile with enabled managed identity - [ConfigurationProfileUpdateWithIdentity.json](./examples/ConfigurationProfileUpdateWithIdentity.json)
