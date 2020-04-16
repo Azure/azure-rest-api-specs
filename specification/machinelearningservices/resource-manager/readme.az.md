@@ -10,4 +10,11 @@ az:
 az-output-folder: $(azure-cli-extension-folder)/src/machinelearningservices
 python-sdk-output-folder: "$(az-output-folder)/azext_machinelearningservices/vendored_sdks/machinelearningservices"
   
+cli:
+    cli-directive:
+      - where:
+            group: MachineLearningCompute
+            op: CreateOrUpdate
+            param: properties
+        poly-resource: true
 ```
