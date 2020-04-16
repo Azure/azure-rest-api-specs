@@ -64,26 +64,6 @@ directive:
     where:
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions"].post.operationId
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions"].post.operationId
-
-```
-
-### Tag: package-2015-11-01
-
-These settings apply only when `--tag=package-2015-11-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-11-01'
-input-file:
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Subscriptions.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/AcquiredPlan.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/DelegatedProvider.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/DelegatedProviderOffer.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/DirectoryTenant.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Location.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Manifest.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Offer.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/OfferDelegation.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Plan.json
-    - Microsoft.Subscriptions.Admin/preview/2015-11-01/Quota.json
 ```
 
 ---
@@ -100,7 +80,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/Generated
   clear-output-folder: true
 ```
-
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
@@ -130,6 +109,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file:
+#exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
