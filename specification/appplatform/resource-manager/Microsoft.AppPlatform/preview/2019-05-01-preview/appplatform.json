@@ -2175,6 +2175,10 @@
           "$ref": "#/definitions/ClusterResourceProperties",
           "description": "Properties of the Service resource",
           "x-ms-client-flatten": false
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the Service resource"
         }
       }
     },
@@ -2263,6 +2267,28 @@
         "serviceId": {
           "description": "ServiceInstanceEntity GUID which uniquely identifies a created resource",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "description": "Sku of Azure Spring Cloud",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Sku",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "Tier of the Sku",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Current capacity of the target resource",
+          "type": "integer",
           "readOnly": true
         }
       }
