@@ -27,7 +27,7 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2019-12
+tag: package-2020-03
 ```
 
 ### Tag: package-2020-03
@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
 - Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -48,6 +49,7 @@ These settings apply only when `--tag=package-2019-12` is specified on the comma
 ``` yaml $(tag) == 'package-2019-12'
 input-file:
 - Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -59,6 +61,7 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -68,6 +71,7 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/notebook.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -180,6 +184,18 @@ directive:
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P99
     reason: The Metrics API has percentile metrics property names with leading capital letters
+  - suppress: PathResourceProviderNamePascalCase
+    from: cosmos-db.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: notebook.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateEndpointConnection.json
+    reason: The name of the provider is Microsoft.DocumentDB
+  - suppress: PathResourceProviderNamePascalCase
+    from: privateLinkResources.json
+    reason: The name of the provider is Microsoft.DocumentDB
 ```
 
 ---
@@ -236,6 +252,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.DocumentDB/stable/2020-03-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/notebook.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json
