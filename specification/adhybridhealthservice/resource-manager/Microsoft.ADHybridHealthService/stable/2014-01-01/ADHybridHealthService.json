@@ -3543,11 +3543,11 @@
         ],
         "description": "Gets the ipAddressAggregates for a given service.",
         "x-ms-examples": {
-          "services_listIpAddressAggregates": {
+          "list_ipAddressAggregatesByService": {
             "$ref": "./examples/IpAddressAggregates.json"
           }
         },
-        "operationId": "services_listIpAddressAggregates",
+        "operationId": "list_ipAddressAggregatesByService",
         "parameters": [
           {
             "name": "serviceName",
@@ -3559,7 +3559,7 @@
           {
             "name": "skiptoken",
             "in": "query",
-            "description": "Used to paginate results",
+            "description": "A continuationtoken value returned in paginated result to load different pages.",
             "required": false,
             "type": "string"
           },
@@ -3587,11 +3587,11 @@
         ],
         "description": "Gets the ipAddressAggregateSettings.",
         "x-ms-examples": {
-          "services_getIpAddressAggregateSettings": {
+          "get_ipAddressAggregateSettings": {
             "$ref": "./examples/IpAddressAggregateSettings.json"
           }
         },
-        "operationId": "services_getIpAddressAggregateSettings",
+        "operationId": "get_ipAddressAggregateSettings",
         "parameters": [
           {
             "name": "serviceName",
@@ -3619,11 +3619,11 @@
         ],
         "description": "Updates the ipAddressAggregateSettings alert thresholds.",
         "x-ms-examples": {
-          "configuration_updateIpAddressAggregateSettings": {
+          "update_ipAddressAggregateSettings": {
             "$ref": "./examples/IpAddressAggregateSettingsUpdate.json"
           }
         },
-        "operationId": "configuration_updateIpAddressAggregateSettings",
+        "operationId": "update_ipAddressAggregateSettings",
         "parameters": [
           {
             "name": "serviceName",
@@ -5467,7 +5467,7 @@
           "type": "string"
         },
         "ipAddress": {
-          "description": "The Bad Ip Address",
+          "description": "The IP address from where the attempted login originated from.",
           "type": "string"
         },
         "timestamp": {
@@ -5495,15 +5495,15 @@
           "type": "integer"
         },
         "attemptCountThresholdIsExceeded": {
-          "description": "Has the attempt count threshold been exceeded",
+          "description": "A value indicating whether the attempt count threshold been exceeded",
           "type": "boolean"
         },
         "timeSpan": {
-          "description": "The timespan of the event",
+          "description": "The duration of the event",
           "type": "string"
         },
         "isWhitelistedIpAddress": {
-          "description": "Is the address a whitelisted IP address?",
+          "description": "A value indicating whether the IP address has been whitelisted.",
           "type": "boolean"
         },
         "networkLocation": {
@@ -5515,7 +5515,7 @@
           "type": "integer"
         },
         "attemptThresholdTypeOnTrigger": {
-          "description": "The attempt threshold type on trigger.",
+          "description": "The attempted threshold type on trigger.",
           "type": "string"
         },
         "geographicLocation": {
@@ -5525,7 +5525,7 @@
       }
     },
     "IpAddressAggregates": {
-      "description": "The list of Risky IP Aggregates.",
+      "description": "IP address aggregates.",
       "type": "object",
       "properties": {
         "value": {
@@ -5536,7 +5536,7 @@
           }
         },
         "nextLink": {
-          "description": "The next link if the page is paginized.",
+          "description": "URL to get the next set of IP Aggregate list results if there are any.",
           "type": "string"
         },
         "totalCount": {
@@ -5544,7 +5544,7 @@
           "type": "integer"
         },
         "continuationToken": {
-          "description": "The key for the property.",
+          "description": "The continuation token for paginated calls.",
           "type": "string"
         }
       }
@@ -5558,23 +5558,23 @@
           "type": "string"
         },
         "badPasswordAndExtranetLockoutCombinedDailyThreshold": {
-          "description": "The tenant ID",
+          "description": "This threshold setting defines the per day trigger for a new event to be generated in the report.",
           "type": "integer"
         },
         "badPasswordAndExtranetLockoutCombinedHourlyThreshold": {
-          "description": "The service ID",
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
           "type": "integer"
         },
         "extranetLockoutDailyThreshold": {
-          "description": "The Bad Ip Address",
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
           "type": "integer"
         },
         "extranetLockoutHourlyThreshold": {
-          "description": "When the event occurred",
+          "description": "This threshold setting defines the per hour trigger for a new event to be generated in the report.",
           "type": "integer"
         },
         "emailNotificationEnabled": {
-          "description": "The first audit timestamp",
+          "description": "A value indicating whether email notification has been enabled.",
           "type": "boolean"
         }
       }
