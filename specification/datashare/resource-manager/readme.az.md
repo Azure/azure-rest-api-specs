@@ -7,7 +7,8 @@ az:
   extensions: datashare
   namespace: azure.mgmt.datashare
   package-name: azure-mgmt-datashare
-python-sdk-output-folder: "$(output-folder)/src/datashare/azext_datashare/vendored_sdks/datashare"
+az-output-folder: $(azure-cli-extension-folder)/src/datashare
+python-sdk-output-folder: "$(az-output-folder)/azext_datashare/vendored_sdks/datashare"
   
 #cli:
 #    cli-directive:
