@@ -9720,32 +9720,6 @@
         }
       }
     },
-    "BlobTagList": {
-      "description": "a collection of blob tags",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/BlobTag"
-      },
-      "xml": {
-        "wrapped": true,
-        "name": "TagSet"
-      }
-    },
-    "BlobTagSet": {
-      "description": "a collection of blob tags",
-      "type": "object",
-      "required": [
-        "BlobTagList"
-      ],
-      "properties": {
-        "BlobTagList": {
-          "$ref": "#/definitions/BlobTagList"
-        }
-      },
-      "xml": {
-        "name": "TagSet"
-      }
-    },
     "BlobTags": {
       "type": "object",
       "xml": {
@@ -9757,9 +9731,13 @@
       ],
       "properties": {
         "BlobTagSet": {
-          "$ref": "#/definitions/BlobTagSet",
           "xml": {
+            "wrapped": true,
             "name": "TagSet"
+          },
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobTag"
           }
         }
       }
