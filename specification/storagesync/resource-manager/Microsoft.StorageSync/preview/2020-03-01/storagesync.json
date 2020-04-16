@@ -644,6 +644,31 @@
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -684,6 +709,31 @@
         "responses": {
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "202": {
+            "description": "Asynchronous Operation Status Location",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Location": {
+                "description": "Operation Status Location URI",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Retry After",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "Request id",
+                "type": "string"
+              },
+              "x-ms-correlation-request-id": {
+                "description": "correlation request id",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
