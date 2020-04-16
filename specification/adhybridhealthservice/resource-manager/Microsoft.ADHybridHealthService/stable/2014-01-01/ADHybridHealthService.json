@@ -3585,13 +3585,13 @@
         "tags": [
           "Reports"
         ],
-        "description": "Gets the ipAddressAggregateSettings.",
+        "description": "Gets the IP address aggregate settings.",
         "x-ms-examples": {
-          "get_ipAddressAggregateSettings": {
+          "list_IPAddressAggregateSettings": {
             "$ref": "./examples/IpAddressAggregateSettings.json"
           }
         },
-        "operationId": "get_ipAddressAggregateSettings",
+        "operationId": "list_IPAddressAggregateSettings",
         "parameters": [
           {
             "name": "serviceName",
@@ -3608,7 +3608,7 @@
           "200": {
             "description": "Ip AddressAggregate Settings.",
             "schema": {
-              "$ref": "#/definitions/IpAddressAggregateSetting"
+              "$ref": "#/definitions/IPAddressAggregateSetting"
             }
           }
         }
@@ -3617,13 +3617,13 @@
         "tags": [
           "Configuration"
         ],
-        "description": "Updates the ipAddressAggregateSettings alert thresholds.",
+        "description": "Updates the IP address aggregate settings alert thresholds.",
         "x-ms-examples": {
-          "update_ipAddressAggregateSettings": {
+          "update_IPAddressAggregateSettings": {
             "$ref": "./examples/IpAddressAggregateSettingsUpdate.json"
           }
         },
-        "operationId": "update_ipAddressAggregateSettings",
+        "operationId": "update_IPAddressAggregateSettings",
         "parameters": [
           {
             "name": "serviceName",
@@ -3633,12 +3633,12 @@
             "type": "string"
           },
           {
-            "name": "ipAddressAggregateSetting",
+            "name": "IPAddressAggregateSetting",
             "in": "body",
-            "description": "The ipAddressAggregateSetting object.",
+            "description": "The IP address aggregate setting object.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IpAddressAggregateSetting"
+              "$ref": "#/definitions/IPAddressAggregateSetting"
             }
           },
           {
@@ -3649,7 +3649,7 @@
           "200": {
             "description": "Ip AddressAggregate Settings.",
             "schema": {
-              "$ref": "#/definitions/IpAddressAggregateSetting"
+              "$ref": "#/definitions/IPAddressAggregateSetting"
             }
           }
         }
@@ -5549,8 +5549,8 @@
         }
       }
     },
-    "IpAddressAggregateSetting": {
-      "description": "The key value pair for IP Aggregate Thresholds.",
+    "IPAddressAggregateSetting": {
+      "description": "The key value pair for IP aggregate thresholds.",
       "type": "object",
       "properties": {
         "id": {
