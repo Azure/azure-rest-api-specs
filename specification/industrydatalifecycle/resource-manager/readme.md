@@ -6,7 +6,7 @@ This is the AutoRest configuration file for industrydatalifecycle.
 
 ## Getting Started
 
-To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+To build the SDKs for IndustryDataLifecycle, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
 
 > `autorest readme.md`
 

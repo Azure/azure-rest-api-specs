@@ -8,9 +8,9 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.IndustryDataLifecycle
-  package-name: industrydatalifecycle
-  package-version: 2020-01-12-preview
+  namespace: azure.mgmt.industrydatalifecycle
+  package-name: azure-mgmt-industrydatalifecycle
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 
