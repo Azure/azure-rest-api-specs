@@ -2959,6 +2959,17 @@
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
               },
+              "x-ms-or-policy-id": {
+                "x-ms-client-name": "ObjectReplicationPolicyId",
+                "type": "string",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-header-collection-prefix": "x-ms-or-",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
+              },
               "Content-Length": {
                 "type": "integer",
                 "format": "int64",
@@ -3185,6 +3196,17 @@
                 "type": "string",
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or-policy-id": {
+                "x-ms-client-name": "ObjectReplicationPolicyId",
+                "type": "string",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-header-collection-prefix": "x-ms-or-",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
               },
               "Content-Length": {
                 "type": "integer",
@@ -3481,6 +3503,17 @@
                 "type": "string",
                 "x-ms-client-name": "Metadata",
                 "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-or-policy-id": {
+                "x-ms-client-name": "ObjectReplicationPolicyId",
+                "type": "string",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+              },
+              "x-ms-or": {
+                "type": "string",
+                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-header-collection-prefix": "x-ms-or-",
+                "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
               },
               "x-ms-blob-type": {
                 "x-ms-client-name": "BlobType",
@@ -9386,6 +9419,12 @@
         },
         "BlobTags": {
           "$ref": "#/definitions/BlobTags"
+        },
+        "ObjectReplicationPolicyId": {
+          "type": "string"
+        },
+        "ObjectReplicationRuleStatus": {
+          "$ref": "#/definitions/BlobObjectReplicationRuleStatus"
         }
       }
     },
@@ -10285,6 +10324,15 @@
             "attribute": true
           }
         }
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "BlobObjectReplicationRuleStatus": {
+      "type": "object",
+      "xml": {
+        "name": "BlobObjectReplicationRuleStatus"
       },
       "additionalProperties": {
         "type": "string"
@@ -11461,6 +11509,25 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID>"
+    },
+    "ObjectReplicationPolicyId": {
+      "name": "x-ms-or-policy-id",
+      "x-ms-client-name": "objectReplicationPolicyId",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
+    },
+    "ObjectReplicationRuleStatus": {
+      "name": "x-ms-or",
+      "x-ms-client-name": "ObjectReplicationRuleStatus",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed).",
+      "x-ms-header-collection-prefix": "x-ms-or-"
     },
     "PathRenameMode": {
       "name": "mode",
