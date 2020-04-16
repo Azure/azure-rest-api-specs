@@ -300,12 +300,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{resourceName}/listresourcepreparationerrors": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listresourcepreparationerrors": {
       "get": {
         "tags": [
           "ProxyOperations"
         ],
         "operationId": "ResourcePreparationErrors_List",
+        "x-ms-examples": {
+          "List Resource Preparation Errors": {
+            "$ref": "./examples/listResourcePreparationErrors.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -336,12 +341,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{resourceName}/preparenotebook": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/preparenotebook": {
       "post": {
         "tags": [
           "ProxyOperations"
         ],
-        "operationId": "PrepareNotebook",
+        "operationId": "Notebooks_Prepare",
+        "x-ms-examples": {
+          "Prepare Notebook": {
+            "$ref": "./examples/workspacePrepareNotebook.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/APIVersionParameter"
