@@ -710,16 +710,6 @@
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
           },
-          "204": {
-            "description": "No Content -- The private endpoint connection does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/StorageSyncError"
-            }
-          }
-        },
           "202": {
             "description": "Asynchronous Operation Status Location",
             "headers": {
@@ -745,6 +735,16 @@
               }
             }
           },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/StorageSyncError"
+            }
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
