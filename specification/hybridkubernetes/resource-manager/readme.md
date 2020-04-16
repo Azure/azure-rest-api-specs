@@ -91,7 +91,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-- Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
+  - $(this-folder)/Microsoft.Kubernetes/preview/2020-01-01-preview/connectedClusters.json
 
 ```
 
