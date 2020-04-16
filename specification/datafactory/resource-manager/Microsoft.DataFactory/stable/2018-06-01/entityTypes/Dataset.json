@@ -3070,6 +3070,65 @@
           "$ref": "#/definitions/GenericDatasetTypeProperties"
         }
       }
+    },
+    "SnowflakeDataset": {
+      "x-ms-discriminator-value": "SnowflakeTable",
+      "description": "The snowflake dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Snowflake dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SnowflakeDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SnowflakeDatasetTypeProperties": {
+      "description": "Snowflake dataset properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Snowflake database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Snowflake database. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SharePointOnlineListResourceDataset": {
+      "x-ms-discriminator-value": "SharePointOnlineListResource",
+      "description": "The sharepoint online list resource dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sharepoint online list dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharePointOnlineListDatasetTypeProperties"
+        }
+      }
+    },
+    "SharePointOnlineListDatasetTypeProperties": {
+      "description": "Sharepoint online list dataset properties.",
+      "properties": {
+        "listName": {
+          "type": "object",
+          "description": "The name of the SharePoint Online list. Type: string (or Expression with resultType string)."
+        }
+      }
     }
   }
 }
