@@ -160,6 +160,7 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/allowedConnections.json
 - Microsoft.Security/stable/2020-01-01/topologies.json
 - Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+- Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
 
 # Needed when there is more than one input file
 override-info:
@@ -376,6 +377,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/allowedConnections.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/topologies.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/jitNetworkAccessPolicies.json
+  - $(this-folder)/Microsoft.Security/stable/2020-01-01/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
