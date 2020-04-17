@@ -7,5 +7,6 @@ az:
   extensions: blockchain
   namespace: azure.mgmt.blockchain
   package-name: azure-mgmt-blockchain
-python-sdk-output-folder: "$(output-folder)/azext_blockchain/vendored_sdks/blockchain"
+az-output-folder: $(azure-cli-extension-folder)/src/blockchain
+python-sdk-output-folder: "$(az-output-folder)/azext_blockchain/vendored_sdks/blockchain"
 ```
