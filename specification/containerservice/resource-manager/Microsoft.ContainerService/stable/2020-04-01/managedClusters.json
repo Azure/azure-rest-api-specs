@@ -193,12 +193,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/accessProfiles/{roleName}/listCredential": {
       "post": {
+        "deprecated": true,
         "tags": [
           "ManagedClusters"
         ],
         "operationId": "ManagedClusters_GetAccessProfile",
         "summary": "Gets an access profile of a managed cluster.",
-        "description": "Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name.",
+        "description": "Gets the accessProfile for the specified role name of the managed cluster with a specified resource group and name. **WARNING**: This API will be deprecated. Instead use [ListClusterUserCredentials](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/listclusterusercredentials) or [ListClusterAdminCredentials](https://docs.microsoft.com/en-us/rest/api/aks/managedclusters/listclusteradmincredentials) .",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
