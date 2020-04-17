@@ -2290,6 +2290,8 @@
             "UrlPath",
             "UrlFileExtension",
             "UrlFileName",
+            "HttpVersion",
+            "Cookies",
             "IsDevice"
           ],
           "x-ms-enum": {
@@ -2494,6 +2496,42 @@
         "parameters": {
           "description": "Defines the parameters for the condition.",
           "$ref": "#/definitions/UrlFileNameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleHttpVersionCondition": {
+      "description": "Defines the HttpVersion condition for the delivery rule.",
+      "x-ms-discriminator-value": "HttpVersion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/HttpVersionMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleCookiesCondition": {
+      "description": "Defines the Cookies condition for the delivery rule.",
+      "x-ms-discriminator-value": "Cookies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/CookiesMatchConditionParameters"
         }
       }
     },
@@ -3082,6 +3120,102 @@
         }
       }
     },
+    "HttpVersionMatchConditionParameters": {
+      "description": "Defines the parameters for HttpVersion match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "HttpVersionOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CookiesMatchConditionParameters": {
+      "description": "Defines the parameters for Cookies match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "selector",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters"
+          ]
+        },
+        "selector": {
+          "description": "Name of Cookies to be matched",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "CookiesOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
@@ -3265,15 +3399,15 @@
           ]
         },
         "sourcePattern": {
-          "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
+          "description": "define a request URI pattern that identifies the type of requests that may be rewritten. Currently, source pattern uses a prefix-based match. To match all URL paths, use \"/\" as the source pattern value. To match only the root directory and re-write this path, use the origin path field",
           "type": "string"
         },
         "destination": {
-          "description": "Define the relative URL to which the above requests will be rewritten by.",
+          "description": "Define the destination path for be used in the rewrite. This will overwrite the source pattern ",
           "type": "string"
         },
         "preserveUnmatchedPath": {
-          "description": "Whether to preserve unmatched path. Default value is true.",
+          "description": "If True, the remaining path after the source pattern will be appended to the new destination path.  ",
           "type": "boolean"
         }
       }
@@ -3783,6 +3917,10 @@
             "modelAsString": true
           }
         },
+        "customHttpsParameters": {
+          "description": "Certificate parameters for securing custom HTTPS",
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
           "type": "string"
@@ -3846,6 +3984,19 @@
           "x-ms-enum": {
             "name": "ProtocolType",
             "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "TLS protocol version that will be used for Https",
+          "enum": [
+            "None",
+            "TLS10",
+            "TLS12"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "minimumTlsVersion",
+            "modelAsString": false
           }
         }
       }

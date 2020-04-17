@@ -9,6 +9,6 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Blockchain
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Blockchain/Management.Blockchain/Generated
+  output-folder: $(csharp-sdks-folder)/blockchain/Microsoft.Azure.Management.Blockchain/src/Generated
   clear-output-folder: true
 ```

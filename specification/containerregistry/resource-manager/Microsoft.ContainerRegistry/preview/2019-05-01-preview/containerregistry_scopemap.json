@@ -137,7 +137,7 @@
             "description": "The request was successful; the operation will complete asynchronously."
           },
           "204": {
-            "description": "The scope map does not exist in the subscription."
+            "description": "The scopemap does not exist in the subscription."
           }
         },
         "x-ms-examples": {
@@ -572,7 +572,7 @@
           }
         },
         "actions": {
-          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/pull, \r\nrepositories/repository-name/delete",
+          "description": "The list of scoped permissions for registry artifacts.\r\nE.g. repositories/repository-name/content/read,\r\nrepositories/repository-name/metadata/write",
           "type": "array",
           "items": {
             "type": "string"
@@ -672,10 +672,6 @@
           "description": "The resource ID of the scope map to which the token will be associated with.",
           "type": "string"
         },
-        "objectId": {
-          "description": "The user/group/application object ID for which the token has to be created.",
-          "type": "string"
-        },
         "credentials": {
           "$ref": "#/definitions/TokenCredentialsProperties",
           "description": "The credentials that can be used for authenticating the token."
@@ -688,7 +684,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Status",
+            "name": "TokenStatus",
             "modelAsString": true
           }
         }
@@ -698,6 +694,9 @@
       "description": "The properties of the credentials that can be used for authenticating the token.",
       "type": "object",
       "properties": {
+        "activeDirectoryObject": {
+          "$ref": "#/definitions/ActiveDirectoryObject"
+        },
         "certificates": {
           "type": "array",
           "items": {
@@ -709,6 +708,20 @@
           "items": {
             "$ref": "#/definitions/TokenPassword"
           }
+        }
+      }
+    },
+    "ActiveDirectoryObject": {
+      "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
         }
       }
     },
@@ -748,7 +761,7 @@
       "properties": {
         "creationTime": {
           "format": "date-time",
-          "description": "The password created datetime of the password.",
+          "description": "The creation datetime of the password.",
           "type": "string"
         },
         "expiry": {
@@ -757,7 +770,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The password name \"password\" or \"password2\"",
+          "description": "The password name \"password1\" or \"password2\"",
           "enum": [
             "password1",
             "password2"
@@ -802,7 +815,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "Status",
+            "name": "TokenStatus",
             "modelAsString": true
           }
         },
@@ -840,11 +853,10 @@
         "expiry": {
           "format": "date-time",
           "description": "The expiry date of the generated credentials after which the credentials become invalid.",
-          "default": "9999-12-31T15:59:59.9999999-08:00",
           "type": "string"
         },
         "name": {
-          "description": "Specifies name of the password which should be regenerated if any -- password or password2.",
+          "description": "Specifies name of the password which should be regenerated if any -- password1 or password2.",
           "enum": [
             "password1",
             "password2"
@@ -939,7 +951,7 @@
       "type": "string",
       "maxLength": 50,
       "minLength": 5,
-      "pattern": "^[a-zA-Z0-9-]*$",
+      "pattern": "^[a-zA-Z0-9-_]*$",
       "x-ms-parameter-location": "method"
     },
     "TokenNameParameter": {

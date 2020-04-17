@@ -5,7 +5,7 @@
     "title": "FabricAdminClient",
     "version": "2019-05-01"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -141,36 +141,44 @@
         "totalCapacityGB": {
           "description": "Total capacity in GB of the volume.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "remainingCapacityGB": {
           "description": "Remaining capacity in GB of the volume.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "healthStatus": {
           "description": "Health status of the volume.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "operationalStatus": {
           "description": "Operational status of the volume.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "repairStatus": {
           "description": "Repair status of the volume. Empty if no repair job running, something like 'Running, 90%' when repairing.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "description": {
           "description": "Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "action": {
           "description": "Detailed recommended action for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "volumeLabel": {
           "description": "Volume label.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },

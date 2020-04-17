@@ -19,7 +19,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Network
-output-folder: $(csharp-sdks-folder)/Network/Management.Network/Generated
+output-folder: $(csharp-sdks-folder)/network/Microsoft.Azure.Management.Network/src/Generated
 ```
 
 ## MultiApi settings

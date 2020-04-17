@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-imagebuilder"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-imagebuilder"
+  clear-output-folder: true
   generate-metadata: true
 ```

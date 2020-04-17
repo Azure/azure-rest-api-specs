@@ -272,10 +272,12 @@
         },
         "resultType": {
           "description": "Result type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateOracleAzureDbPostgreSqlSyncTaskOutputMigrationLevel": {
@@ -547,6 +549,10 @@
       "type": "object",
       "description": "Database specific information for Oracle to Azure Database for PostgreSQL migration task inputs",
       "properties": {
+        "caseManipulation": {
+          "type": "string",
+          "description": "How to handle object name casing: either Preserve or ToLower"
+        },
         "name": {
           "type": "string",
           "description": "Name of the migration pipeline"

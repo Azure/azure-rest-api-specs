@@ -627,6 +627,16 @@
               "$ref": "#/definitions/UpdateKbContentsDTO"
             }
           ]
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. The value set during KB creation will be used if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
@@ -828,18 +838,6 @@
         }
       }
     },
-    "KnowledgebaseEnvironment": {
-      "type": "string",
-      "description": "Enumeration of knowledgebase environments.",
-      "x-ms-enum": {
-        "name": "KnowledgebaseEnvironmentType",
-        "modelAsString": true
-      },
-      "enum": [
-        "Prod",
-        "Test"
-      ]
-    },
     "QnADocumentsDTO": {
       "type": "object",
       "description": "List of QnADTO",
@@ -891,6 +889,22 @@
           "items": {
             "$ref": "#/definitions/FileDTO"
           }
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. Value to be considered False if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the knowledgebase.",
+          "maxLength": 100,
+          "minLength": 1
         }
       }
     },
@@ -1336,6 +1350,10 @@
         "lastStableVersion": {
           "type": "string",
           "description": "Latest version of runtime."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language setting of runtime."
         }
       }
     }
@@ -1346,9 +1364,6 @@
       "name": "environment",
       "in": "path",
       "required": true,
-      "x-schema": {
-        "$ref": "#/definitions/KnowledgebaseEnvironment"
-      },
       "x-nullable": false,
       "description": "Specifies whether environment is Test or Prod.",
       "x-ms-enum": {

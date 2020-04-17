@@ -1,0 +1,250 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=",
+    "parameters": {
+      "aggregateSeries": {
+        "searchSpan": {
+          "from": "2019-10-10T23:41:04.021Z",
+          "to": "2019-10-10T23:42:22.846Z"
+        },
+        "timeSeriesId": [
+          "Sensor_58"
+        ],
+        "interval": "PT2S",
+        "inlineVariables": {
+          "Status_String": {
+            "kind": "categorical",
+            "value": {
+              "tsx": "$event.[Status].String"
+            },
+            "interpolation": {
+              "kind": "Step",
+              "boundary": {
+                "span": "PT5S"
+              }
+            },
+            "categories": [
+              {
+                "label": "Good",
+                "values": [
+                  "Good",
+                  "Very Good",
+                  "Excellent"
+                ]
+              },
+              {
+                "label": "Bad",
+                "values": [
+                  "Bad",
+                  "OK"
+                ]
+              },
+              {
+                "label": "Other",
+                "values": [
+                  "Other"
+                ]
+              }
+            ],
+            "defaultCategory": {
+              "label": "Unknown"
+            }
+          },
+          "Status_Long": {
+            "kind": "categorical",
+            "value": {
+              "tsx": "tolong($event.[Status].Double)"
+            },
+            "interpolation": {
+              "kind": "Step",
+              "boundary": {
+                "span": "PT5S"
+              }
+            },
+            "categories": [
+              {
+                "label": "Good",
+                "values": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "label": "Bad",
+                "values": [
+                  3,
+                  4
+                ]
+              },
+              {
+                "label": "Other",
+                "values": [
+                  5
+                ]
+              }
+            ],
+            "defaultCategory": {
+              "label": "Unknown"
+            }
+          }
+        },
+        "projectedVariables": [
+          "Status_String",
+          "Status_Long"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [
+          "2019-10-10T23:41:04Z",
+          "2019-10-10T23:41:06Z",
+          "2019-10-10T23:41:08Z",
+          "2019-10-10T23:41:10Z",
+          "2019-10-10T23:41:12Z",
+          "2019-10-10T23:41:14Z",
+          "2019-10-10T23:41:16Z",
+          "2019-10-10T23:41:18Z",
+          "2019-10-10T23:41:20Z",
+          "2019-10-10T23:41:22Z"
+        ],
+        "properties": [
+          {
+            "values": [
+              0.203,
+              0.141,
+              0.268,
+              0.398,
+              0.402,
+              0.047,
+              0.1245,
+              0.75,
+              0.206,
+              0.2635
+            ],
+            "name": "Status_String[Good]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.266,
+              0.1955,
+              0.242,
+              0.148,
+              0.25,
+              0.055,
+              0.6295,
+              0.109,
+              0.41,
+              0.2125
+            ],
+            "name": "Status_String[Bad]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.5205,
+              0.6635,
+              0.49,
+              0.454,
+              0.348,
+              0.898,
+              0.246,
+              0.141,
+              0.384,
+              0.524
+            ],
+            "name": "Status_String[Other]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "name": "Status_String[Unknown]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.203,
+              0.141,
+              0.268,
+              0.398,
+              0.402,
+              0.047,
+              0.1245,
+              0.75,
+              0.206,
+              0.2635
+            ],
+            "name": "Status_Long[Good]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.266,
+              0.1955,
+              0.242,
+              0.148,
+              0.25,
+              0.055,
+              0.6295,
+              0.109,
+              0.41,
+              0.2125
+            ],
+            "name": "Status_Long[Bad]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.5205,
+              0.6635,
+              0.49,
+              0.454,
+              0.348,
+              0.898,
+              0.246,
+              0.141,
+              0.384,
+              0.524
+            ],
+            "name": "Status_Long[Other]",
+            "type": "Double"
+          },
+          {
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "name": "Status_Long[Unknown]",
+            "type": "Double"
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}

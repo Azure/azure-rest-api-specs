@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "invoiceSectionName": "{invoiceSectionName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/products/00000000-0000-0000-0000-000000000000",
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections/products",
+            "properties": {
+              "productTypeId": "A12345",
+              "productType": "Reservation",
+              "displayName": "Eng Reservation (1a13s21awe)",
+              "status": "Active",
+              "purchaseDate": "2018-05-01T17:32:28Z",
+              "lastCharge": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "lastChargeDate": "2018-06-15T17:32:28Z",
+              "billingFrequency": "OneTime",
+              "quantity": 4,
+              "skuId": "0001",
+              "skuDescription": "Enterprise Agreement Development",
+              "tenantId": "515a6d36-aaf8-4ca2-a5e8-c45deb0c5cce",
+              "availabilityId": "AvailabilityId1",
+              "parentProductId": "45000000-0000-0000-0000-0000000001242",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}",
+              "invoiceSectionDisplayName": "Contoso operations invoiceSection",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileDisplayName": "Contoso operations billing"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/products/10000000-0000-0000-0000-000000000001",
+            "name": "10000000-0000-0000-0000-000000000001",
+            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections/products",
+            "properties": {
+              "productTypeId": "A12345",
+              "productType": "Azure subscription",
+              "displayName": "Engineering Email",
+              "status": "Active",
+              "purchaseDate": "2018-04-01T17:32:28Z",
+              "lastCharge": {
+                "currency": "USD",
+                "value": 500.00
+              },
+              "lastChargeDate": "2018-06-15T17:32:28Z",
+              "billingFrequency": "Monthly",
+              "quantity": 4,
+              "skuId": "0001",
+              "skuDescription": "Enterprise Agreement Development",
+              "availabilityId": "AvailabilityId1",
+              "parentProductId": "45000000-0000-0000-0000-0000000001242",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}",
+              "invoiceSectionDisplayName": "Contoso operations invoiceSection",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileDisplayName": "Contoso operations billing"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

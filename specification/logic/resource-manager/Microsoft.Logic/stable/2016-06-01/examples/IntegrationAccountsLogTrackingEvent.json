@@ -6,45 +6,11 @@
     "integrationAccountName": "testIntegrationAccount",
     "logTrackingEvents": {
       "sourceType": "Microsoft.Logic/workflows",
-      "source": {
-        "workflow": {
-          "systemId": "/locations/westus/scaleunits/test-01/workflows/bf501b3fceaa4a858a166aa64768ced5"
-        },
-        "runInstance": {
-          "runId": "08586772141809790618914792486CU03"
-        },
-        "operation": {
-          "operationName": "httpgetaction"
-        }
-      },
       "events": [
         {
           "eventLevel": "Informational",
           "eventTime": "2016-08-05T01:54:49.505567Z",
           "recordType": "AS2Message",
-          "record": {
-            "agreementProperties": {
-              "senderPartnerName": "testPartner1",
-              "receiverPartnerName": "testPartner2",
-              "as2To": "testas2to",
-              "as2From": "testas2from",
-              "agreementName": "testAgreement"
-            },
-            "messageProperties": {
-              "direction": "Receive",
-              "messageId": "12345",
-              "dispositionType": "received-success",
-              "fileName": "test",
-              "isMessageFailed": false,
-              "IsMessageEncrypted": false,
-              "IsMessageSigned": false,
-              "correlationMessageId": "Unique message identifier",
-              "isMessageCompressed": false,
-              "isNrrEnabled": true,
-              "isMdnExpected": true,
-              "mdnType": "Async"
-            }
-          },
           "error": {
             "message": "Some error occurred",
             "code": "NotFound"

@@ -186,6 +186,9 @@
           },
           "Create Azure Firewall With Zones": {
             "$ref": "./examples/AzureFirewallPutWithZones.json"
+          },
+          "Create Azure Firewall in virtual Hub": {
+            "$ref": "./examples/AzureFirewallPutInHub.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -366,6 +369,31 @@
       ],
       "description": "IP configuration of an Azure Firewall."
     },
+    "AzureFirewallPublicIPAddress": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Public IP Address value."
+        }
+      },
+      "description": "Public IP Address associated with azure firewall."
+    },
+    "HubIPAddresses": {
+      "properties": {
+        "publicIPAddresses": {
+          "type": "array",
+          "description": "List of Public IP addresses associated with azure firewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPublicIPAddress"
+          }
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Private IP Address associated with azure firewall."
+        }
+      },
+      "description": "IP addresses associated with azure firewall."
+    },
     "AzureFirewallPropertiesFormat": {
       "properties": {
         "applicationRuleCollections": {
@@ -403,6 +431,19 @@
         "threatIntelMode": {
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "#/definitions/AzureFirewallThreatIntelMode"
+        },
+        "virtualHub": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The virtualHub to which the firewall belongs."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The firewallPolicy associated with this azure firewall."
+        },
+        "hubIpAddresses": {
+          "readOnly": true,
+          "description": "IP addresses associated with AzureFirewall.",
+          "$ref": "#/definitions/HubIPAddresses"
         }
       },
       "description": "Properties of the Azure Firewall."

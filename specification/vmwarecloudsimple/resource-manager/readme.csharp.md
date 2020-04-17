@@ -10,5 +10,5 @@ csharp:
   payload-flattening-threshold: 2
   clear-output-folder: true
   namespace: Microsoft.Azure.Management.VMwareCloudSimple
-  output-folder: $(csharp-sdks-folder)/VMwareCloudSimple/Management.VMwareCloudSimple/Generated
+  output-folder: $(csharp-sdks-folder)/vmwarecloudsimple/Microsoft.Azure.Management.VMwareCloudSimple/src/Generated
 ```
