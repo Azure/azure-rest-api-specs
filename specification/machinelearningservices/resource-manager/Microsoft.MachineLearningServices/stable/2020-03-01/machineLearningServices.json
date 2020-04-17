@@ -1461,12 +1461,19 @@
         }
       }
     },
-    "ListResourcePreparationErrorsResult": {
+    "NotebookResourceInfo": {
       "type": "object",
       "properties": {
-        "notebookPreparationError": {
-          "$ref": "#/definitions/NotebookPreparationError"
-        }
+        "fqdn": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "encryption": {
+          "$ref": "#/definitions/NotebookPreparationError",
+          "description": "The error that occurs when preparing notebook."
+        },
       }
     },
     "NotebookPreparationError": {
@@ -1613,6 +1620,11 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources in this workspace."
+        },
+        "notebookInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The notebook info of Azure ML workspace."
         }
       }
     },
