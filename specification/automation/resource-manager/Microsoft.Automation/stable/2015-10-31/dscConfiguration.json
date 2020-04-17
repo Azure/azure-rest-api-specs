@@ -12,12 +12,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/plain; charset=utf-8"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/plain; charset=utf-8"
+    "application/json"
   ],
   "security": [
     {
@@ -403,52 +401,6 @@
     }
   },
   "definitions": {
-    "ContentHash": {
-      "properties": {
-        "algorithm": {
-          "type": "string",
-          "description": "Gets or sets the content hash algorithm used to hash the content."
-        },
-        "value": {
-          "type": "string",
-          "description": "Gets or sets expected hash value of the content."
-        }
-      },
-      "required": [
-        "algorithm",
-        "value"
-      ],
-      "description": "Definition of the runbook property type."
-    },
-    "ContentSource": {
-      "properties": {
-        "hash": {
-          "$ref": "#/definitions/ContentHash",
-          "description": "Gets or sets the hash."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the content source type.",
-          "enum": [
-            "embeddedContent",
-            "uri"
-          ],
-          "x-ms-enum": {
-            "name": "ContentSourceType",
-            "modelAsString": true
-          }
-        },
-        "value": {
-          "type": "string",
-          "description": "Gets or sets the value of the content. This is based on the content source type."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the content."
-        }
-      },
-      "description": "Definition of the content source."
-    },
     "DscConfigurationCreateOrUpdateParameters": {
       "properties": {
         "properties": {
@@ -508,7 +460,7 @@
           "description": "Gets or sets progress log option."
         },
         "source": {
-          "$ref": "#/definitions/ContentSource",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentSource",
           "description": "Gets or sets the source."
         },
         "parameters": {
@@ -597,7 +549,7 @@
           "description": "Gets or sets the configuration parameters."
         },
         "source": {
-          "$ref": "#/definitions/ContentSource",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentSource",
           "description": "Gets or sets the source."
         },
         "state": {

@@ -245,7 +245,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./job.json#/definitions/JobStreamListResult"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStreamListResult"
             }
           },
           "default": {
@@ -305,7 +305,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./job.json#/definitions/JobStream"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStream"
             }
           },
           "default": {
@@ -347,19 +347,10 @@
       ],
       "description": "The parameters supplied to the create compilation job operation."
     },
-    "DscConfigurationAssociationProperty": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the Dsc configuration."
-        }
-      },
-      "description": "The Dsc configuration property associated with the entity."
-    },
     "DscCompilationJobCreateProperties": {
       "properties": {
         "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
+          "$ref": "../../common/v1/schemas.json#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration."
         },
         "parameters": {
@@ -382,7 +373,7 @@
     "DscCompilationJobProperties": {
       "properties": {
         "configuration": {
-          "$ref": "#/definitions/DscConfigurationAssociationProperty",
+          "$ref": "../../common/v1/schemas.json#/definitions/DscConfigurationAssociationProperty",
           "description": "Gets or sets the configuration."
         },
         "startedBy": {

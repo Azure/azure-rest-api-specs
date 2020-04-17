@@ -490,7 +490,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/JobStream"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStream"
             }
           },
           "default": {
@@ -544,7 +544,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/JobStreamListResult"
+              "$ref": "../../common/v1/schemas.json#/definitions/JobStreamListResult"
             }
           },
           "default": {
@@ -594,7 +594,7 @@
     "JobProperties": {
       "properties": {
         "runbook": {
-          "$ref": "#/definitions/RunbookAssociationProperty",
+          "$ref": "../../common/v1/schemas.json#/definitions/RunbookAssociationProperty",
           "description": "Gets or sets the runbook."
         },
         "startedBy": {
@@ -703,15 +703,6 @@
       },
       "description": "The schedule property associated with the entity."
     },
-    "RunbookAssociationProperty": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the runbook."
-        }
-      },
-      "description": "The runbook property associated with the entity."
-    },
     "JobProvisioningStateProperty": {
       "readOnly": true,
       "type": "string",
@@ -743,7 +734,7 @@
     "JobCreateProperties": {
       "properties": {
         "runbook": {
-          "$ref": "#/definitions/RunbookAssociationProperty",
+          "$ref": "../../common/v1/schemas.json#/definitions/RunbookAssociationProperty",
           "description": "Gets or sets the runbook."
         },
         "parameters": {
@@ -762,84 +753,6 @@
         "runbook"
       ],
       "description": "The parameters supplied to the create job operation."
-    },
-    "JobStream": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/JobStreamProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the id of the job stream."
-        }
-      },
-      "description": "Definition of the job stream."
-    },
-    "JobStreamProperties": {
-      "properties": {
-        "jobStreamId": {
-          "type": "string",
-          "description": "Gets or sets the id of the job stream."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time of the job.",
-          "x-nullable": false
-        },
-        "streamType": {
-          "type": "string",
-          "description": "Gets or sets the stream type.",
-          "enum": [
-            "Progress",
-            "Output",
-            "Warning",
-            "Error",
-            "Debug",
-            "Verbose",
-            "Any"
-          ],
-          "x-ms-enum": {
-            "name": "JobStreamType",
-            "modelAsString": true
-          }
-        },
-        "streamText": {
-          "type": "string",
-          "description": "Gets or sets the stream text."
-        },
-        "summary": {
-          "type": "string",
-          "description": "Gets or sets the summary."
-        },
-        "value": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "Gets or sets the values of the job stream."
-        }
-      },
-      "x-ms-client-flatten": true,
-      "description": "Definition of the job stream."
-    },
-    "JobStreamListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/JobStream"
-          },
-          "description": "A list of job streams."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list job stream operation."
     }
   },
   "parameters": {}

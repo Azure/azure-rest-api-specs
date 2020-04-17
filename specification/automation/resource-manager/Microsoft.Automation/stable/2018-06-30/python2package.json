@@ -123,7 +123,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Module"
+              "$ref": "../../common/v1/schemas.json#/definitions/Module"
             }
           },
           "default": {
@@ -182,13 +182,13 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Module"
+              "$ref": "../../common/v1/schemas.json#/definitions/Module"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Module"
+              "$ref": "../../common/v1/schemas.json#/definitions/Module"
             }
           },
           "default": {
@@ -247,7 +247,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Module"
+              "$ref": "../../common/v1/schemas.json#/definitions/Module"
             }
           },
           "default": {
@@ -292,7 +292,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ModuleListResult"
+              "$ref": "../../common/v1/schemas.json#/definitions/ModuleListResult"
             }
           },
           "default": {
@@ -309,234 +309,10 @@
     }
   },
   "definitions": {
-    "ActivityParameter": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the activity parameter."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the activity parameter."
-        },
-        "isMandatory": {
-          "type": "boolean",
-          "description": "Gets or sets a Boolean value that indicates true if the parameter is required. If the value is false, the parameter is optional."
-        },
-        "isDynamic": {
-          "type": "boolean",
-          "description": "Gets or sets a Boolean value that indicates true if the parameter is dynamic."
-        },
-        "position": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the position of the activity parameter."
-        },
-        "valueFromPipeline": {
-          "type": "boolean",
-          "description": "Gets or sets a Boolean value that indicates true if the parameter can take values from the incoming pipeline objects. This setting is used if the cmdlet must access the complete input object. false indicates that the parameter cannot take values from the complete input object."
-        },
-        "valueFromPipelineByPropertyName": {
-          "type": "boolean",
-          "description": "Gets or sets a Boolean value that indicates true if the parameter can be filled from a property of the incoming pipeline object that has the same name as this parameter. false indicates that the parameter cannot be filled from the incoming pipeline object property with the same name. "
-        },
-        "valueFromRemainingArguments": {
-          "type": "boolean",
-          "description": "Gets or sets a Boolean value that indicates true if the cmdlet parameter accepts all the remaining command-line arguments that are associated with this parameter in the form of an array. false if the cmdlet parameter does not accept all the remaining argument values."
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description of the activity parameter."
-        },
-        "validationSet": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivityParameterValidationSet"
-          },
-          "description": "Gets or sets the validation set of activity parameter."
-        }
-      },
-      "description": "Definition of the activity parameter."
-    },
-    "ActivityParameterSet": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the activity parameter set."
-        },
-        "parameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivityParameter"
-          },
-          "description": "Gets or sets the parameters of the activity parameter set."
-        }
-      },
-      "description": "Definition of the activity parameter set."
-    },
-    "ActivityParameterValidationSet": {
-      "properties": {
-        "memberValue": {
-          "type": "string",
-          "description": "Gets or sets the name of the activity parameter validation set member."
-        }
-      },
-      "description": "Definition of the activity parameter validation set."
-    },
-    "ActivityOutputType": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the activity output type."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the activity output type."
-        }
-      },
-      "description": "Definition of the activity output type."
-    },
-    "ActivityProperties": {
-      "properties": {
-        "definition": {
-          "type": "string",
-          "description": "Gets or sets the user name of the activity."
-        },
-        "parameterSets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivityParameterSet"
-          },
-          "description": "Gets or sets the parameter sets of the activity."
-        },
-        "outputTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ActivityOutputType"
-          },
-          "description": "Gets or sets the output types of the activity."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time.",
-          "x-nullable": false
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last modified time.",
-          "x-nullable": false
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description."
-        }
-      },
-      "description": "Properties of the activity."
-    },
-    "Activity": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets or sets the id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Gets the name of the activity."
-        },
-        "properties": {
-          "$ref": "#/definitions/ActivityProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the properties of the activity."
-        }
-      },
-      "description": "Definition of the activity."
-    },
-    "ActivityListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Activity"
-          },
-          "description": "Gets or sets a list of activities."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list activity operation."
-    },
-    "ModuleErrorInfo": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Gets or sets the error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Gets or sets the error message."
-        }
-      },
-      "description": "Definition of the module error info type."
-    },
-    "ModuleListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Module"
-          },
-          "description": "Gets or sets a list of modules."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Gets or sets the next link."
-        }
-      },
-      "description": "The response model for the list module operation."
-    },
-    "ContentHash": {
-      "properties": {
-        "algorithm": {
-          "type": "string",
-          "description": "Gets or sets the content hash algorithm used to hash the content."
-        },
-        "value": {
-          "type": "string",
-          "description": "Gets or sets expected hash value of the content."
-        }
-      },
-      "required": [
-        "algorithm",
-        "value"
-      ],
-      "description": "Definition of the runbook property type."
-    },
-    "ContentLink": {
-      "properties": {
-        "uri": {
-          "type": "string",
-          "description": "Gets or sets the uri of the runbook content."
-        },
-        "contentHash": {
-          "$ref": "#/definitions/ContentHash",
-          "description": "Gets or sets the hash."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the content."
-        }
-      },
-      "description": "Definition of the content link."
-    },
     "PythonPackageCreateProperties": {
       "properties": {
         "contentLink": {
-          "$ref": "#/definitions/ContentLink",
+          "$ref": "../../common/v1/schemas.json#/definitions/ContentLink",
           "description": "Gets or sets the module content link."
         }
       },
@@ -565,83 +341,6 @@
       ],
       "description": "The parameters supplied to the create or update module operation."
     },
-    "ModuleProperties": {
-      "properties": {
-        "isGlobal": {
-          "type": "boolean",
-          "description": "Gets or sets the isGlobal flag of the module."
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets the version of the module."
-        },
-        "sizeInBytes": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets the size in bytes of the module."
-        },
-        "activityCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the activity count of the module."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Gets or sets the provisioning state of the module.",
-          "enum": [
-            "Created",
-            "Creating",
-            "StartingImportModuleRunbook",
-            "RunningImportModuleRunbook",
-            "ContentRetrieved",
-            "ContentDownloaded",
-            "ContentValidated",
-            "ConnectionTypeImported",
-            "ContentStored",
-            "ModuleDataStored",
-            "ActivitiesStored",
-            "ModuleImportRunbookComplete",
-            "Succeeded",
-            "Failed",
-            "Cancelled",
-            "Updating"
-          ],
-          "x-ms-enum": {
-            "name": "ModuleProvisioningState",
-            "modelAsString": false
-          }
-        },
-        "contentLink": {
-          "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the contentLink of the module."
-        },
-        "error": {
-          "$ref": "#/definitions/ModuleErrorInfo",
-          "description": "Gets or sets the error info of the module."
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the creation time.",
-          "x-nullable": false
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets or sets the last modified time.",
-          "x-nullable": false
-        },
-        "description": {
-          "type": "string",
-          "description": "Gets or sets the description."
-        },
-        "isComposite": {
-          "type": "boolean",
-          "description": "Gets or sets type of module, if its composite or not."
-        }
-      },
-      "description": "Definition of the module property type."
-    },
     "PythonPackageUpdateParameters": {
       "properties": {
         "tags": {
@@ -653,50 +352,6 @@
         }
       },
       "description": "The parameters supplied to the update module operation."
-    },
-    "Module": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ModuleProperties",
-          "x-ms-client-flatten": true,
-          "description": "Gets or sets the module properties."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Gets or sets the etag of the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
-        }
-      ],
-      "description": "Definition of the module type."
-    },
-    "TypeField": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the field."
-        },
-        "type": {
-          "type": "string",
-          "description": "Gets or sets the type of the field."
-        }
-      },
-      "description": "Information about a field of a type."
-    },
-    "TypeFieldListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TypeField"
-          },
-          "description": "Gets or sets a list of fields."
-        }
-      },
-      "description": "The response model for the list fields operation."
     }
   },
   "parameters": {}
