@@ -1,0 +1,565 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Relay API",
+    "description": "Use these API to manage Azure Relay resources through Azure Resource Manager.",
+    "version": "2017-04-01",
+    "x-ms-code-generation-settings": {
+      "name": "RelayManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Relay/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_List",
+        "x-ms-examples": {
+          "RelayNameSpaceListBySubscription": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceListBySubscription.json"
+          }
+        },
+        "description": "Lists all the available namespaces within the subscription regardless of the resourceGroups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "RelayNameSpaceListByResourceGroup": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the available namespaces within the ResourceGroup.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces by resource group returned successfully",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "RelayNamespaceCreate": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceCreate.json"
+          }
+        },
+        "description": "Create Azure Relay namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            },
+            "description": "Parameters supplied to create a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace create request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace create request accepted.",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "RelayNameSpaceDelete": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceDelete.json"
+          }
+        },
+        "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace delete request succeeded."
+          },
+          "202": {
+            "description": "Namespace delete request has been accepted for processing and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Namespace delete request has been accepted, but the namespace was not found."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+          "RelayNameSpaceGet": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceGet.json"
+          }
+        },
+        "description": "Returns the description for the specified namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace description returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "RelayNameSpaceUpdate": {
+            "$ref": "./examples/NameSpaces/RelayNameSpaceUpdate.json"
+          }
+        },
+        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelayUpdateParameters"
+            },
+            "description": "Parameters for updating a namespace resource."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfuly updated.",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/RelayNamespace"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TrackedResource": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "location"
+      ],
+      "description": "Definition of resource."
+    },
+    "ResourceNamespacePatch": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Definition of resource."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "RelayNamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelayNamespace"
+          },
+          "description": "Result of the list namespace operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of namespaces."
+        }
+      },
+      "description": "The response from the list namespace operation."
+    },
+    "RelayNamespace": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the namespace."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RelayNamespaceProperties",
+          "description": "Description of Relay namespace"
+        }
+      },
+      "description": "Description of a namespace resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RelayUpdateParameters": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU of the namespace."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RelayNamespaceProperties",
+          "description": "Description of Relay namespace."
+        }
+      },
+      "description": "Description of a namespace resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceNamespacePatch"
+        }
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "RelayNamespaceProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Created",
+            "Succeeded",
+            "Deleted",
+            "Failed",
+            "Updating",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningStateEnum",
+            "modelAsString": false
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time the namespace was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time the namespace was updated."
+        },
+        "serviceBusEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Endpoint you can use to perform Service Bus operations."
+        },
+        "metricId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier for Azure Insights metrics."
+        }
+      },
+      "description": "Properties of the namespace."
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this SKU.",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": false
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of this SKU.",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "SKU of the namespace.",
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The namespace name"
+    }
+  }
+}

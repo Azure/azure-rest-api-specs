@@ -1,0 +1,392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Relay API",
+    "description": "Use these API to manage Azure Relay resources through Azure Resource Manager.",
+    "version": "2017-04-01",
+    "x-ms-code-generation-settings": {
+      "name": "RelayManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays": {
+      "get": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_ListByNamespace",
+        "x-ms-examples": {
+          "RelayListAll": {
+            "$ref": "./examples/Relay/RelayListAll.json"
+          }
+        },
+        "description": "Lists the WCF relays within the namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WCF relays returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/WcfRelaysListResult"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Relay/namespaces/{namespaceName}/wcfRelays/{relayName}": {
+      "put": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_CreateOrUpdate",
+        "x-ms-examples": {
+          "RelayCreate": {
+            "$ref": "./examples/Relay/RelayCreate.json"
+          }
+        },
+        "description": "Creates or updates a WCF relay. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/relayNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WcfRelay"
+            },
+            "description": "Parameters supplied to create a WCF relay."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request to create WCF relay succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WcfRelay"
+            }
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_Delete",
+        "x-ms-examples": {
+          "RelayDelete": {
+            "$ref": "./examples/Relay/RelayDelete.json"
+          }
+        },
+        "description": "Deletes a WCF relay.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/relayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WCF relay deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WCFRelays"
+        ],
+        "operationId": "WCFRelays_Get",
+        "x-ms-examples": {
+          "RelayGet": {
+            "$ref": "./examples/Relay/RelayGet.json"
+          }
+        },
+        "description": "Returns the description for the specified WCF relay.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/namespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/relayNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved WCF relay description.",
+            "schema": {
+              "$ref": "#/definitions/WcfRelay"
+            }
+          },
+          "204": {
+            "description": "WCF relay not found"
+          },
+          "default": {
+            "description": "Relay error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "description": "The resource definition.",
+      "x-ms-azure-resource": true
+    },
+    "WcfRelaysListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WcfRelay"
+          },
+          "description": "Result of the list WCF relay operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if value contains incomplete list of WCF relays."
+        }
+      },
+      "description": "The response of the list WCF relay operation."
+    },
+    "WcfRelay": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "isDynamic": {
+              "readOnly": true,
+              "type": "boolean",
+              "description": "Returns true if the relay is dynamic; otherwise, false."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the WCF relay was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the namespace was updated."
+            },
+            "listenerCount": {
+              "readOnly": true,
+              "format": "int32",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 25,
+              "description": "The number of listeners for this relay. Note that min :1 and max:25 are supported."
+            },
+            "relayType": {
+              "type": "string",
+              "description": "WCF relay type.",
+              "enum": [
+                "NetTcp",
+                "Http"
+              ],
+              "x-ms-enum": {
+                "name": "Relaytype",
+                "modelAsString": false
+              }
+            },
+            "requiresClientAuthorization": {
+              "type": "boolean",
+              "description": "Returns true if client authorization is needed for this relay; otherwise, false."
+            },
+            "requiresTransportSecurity": {
+              "type": "boolean",
+              "description": "Returns true if transport security is needed for this relay; otherwise, false."
+            },
+            "userMetadata": {
+              "type": "string",
+              "description": "The usermetadata is a placeholder to store user-defined string data for the WCF Relay endpoint. For example, it can be used to store descriptive data, such as list of teams and their contact information. Also, user-defined configuration settings can be stored."
+            }
+          },
+          "description": "Properties of the WCF relay."
+        }
+      },
+      "description": "Description of the WCF relay resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error reponse indicates Relay service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client API version."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of the Resource group within the Azure subscription."
+    },
+    "namespaceNameParameter": {
+      "name": "namespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50,
+      "x-ms-parameter-location": "method",
+      "description": "The namespace name"
+    },
+    "relayNameParameter": {
+      "name": "relayName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "description": "The relay name."
+    }
+  }
+}
