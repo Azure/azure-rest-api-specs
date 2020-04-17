@@ -808,6 +808,59 @@
         }
       }
     },
+    "/keys/{key-name}/{key-version}/export": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "operationId": "exportKey",
+        "summary": "Exports a key.",
+        "description": "The export key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/export permission.",
+        "parameters": [
+          {
+            "name": "key-name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the key to get."
+          },
+          {
+            "name": "key-version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Adding the version parameter retrieves a specific version of a key."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/KeyExportParameters"
+            },
+            "description": "The parameters for the key export operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A key bundle containing the key and its attributes.",
+            "schema": {
+              "$ref": "#/definitions/KeyBundle"
+            }
+          },
+          "default": {
+            "description": "Key Vault error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common.json#/definitions/KeyVaultError"
+            }
+          }
+        }
+      }
+    },
     "/deletedkeys": {
       "get": {
         "tags": [
@@ -975,6 +1028,120 @@
     }
   },
   "definitions": {
+    "KeyReleaseCondition": {
+      "properties": {
+        "claim": {
+          "x-ms-client-name": "claim name",
+          "type": "string",
+          "minLength": 1,
+          "description": "claim name"
+        },
+        "condition": {
+          "x-ms-client-name": "condition to test",
+          "type": "string",
+          "minLength": 1,
+          "description": "condition to test",
+          "enum": [
+            "equals"
+          ],
+          "x-ms-enum": {
+            "name": "KeyReleaseCondition",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "equals",
+                "description": "equals comparison."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyReleaseAuthority": {
+      "properties": {
+        "authority": {
+          "x-ms-client-name": "authority name",
+          "type": "string",
+          "minLength": 1,
+          "description": "authority name"
+        },
+        "allOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyReleaseCondition",
+            "description": "Required conditions."
+          }
+        }
+      }
+    },
+    "KeyReleasePolicy": {
+      "properties": {
+        "version": {
+          "x-ms-client-name": "version",
+          "description": "authority name",
+          "type": "string",
+          "enum": [
+            "0.2"
+          ]
+        },
+        "anyOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyReleaseAuthority",
+            "description": "Authorities."
+          }
+        }
+      }
+    },
+    "ProtectedKey": {
+      "properties": {
+        "alg": {
+          "x-ms-client-name": "key wrapping algorithm",
+          "type": "string",
+          "minLength": 1,
+          "description": "key wrapping algorithm identifier",
+          "enum": [
+            "dir"
+          ],
+          "x-ms-enum": {
+            "name": "ProtectedKeyWrappingAlgorithm",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "dir",
+                "description": "Direct mode."
+              }
+            ]
+          }
+        },
+        "enc": {
+          "x-ms-client-name": "encryption algorithm",
+          "type": "string",
+          "minLength": 1,
+          "description": "encryption algorithm identifier",
+          "enum": [
+            "CKM_RSA_AES_KEY_WRAP"
+          ],
+          "x-ms-enum": {
+            "name": "ProtectedKeyEncryptionAlgorithm",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CKM_RSA_AES_KEY_WRAP",
+                "description": "RSA AES Key Wrap."
+              }
+            ]
+          }
+        },
+        "ciphertext": {
+          "type": "string",
+          "format": "base64url"
+        }
+      }
+    },
     "JsonWebKey": {
       "properties": {
         "kid": {
@@ -1084,6 +1251,10 @@
           "format": "base64url",
           "description": "HSM Token, used with 'Bring Your Own Key'."
         },
+        "protected_key": {
+          "$ref": "#/definitions/ProtectedKey",
+          "description": "Protected key material for secure import/export."
+        },
         "crv": {
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
@@ -1160,6 +1331,10 @@
           },
           "readOnly": true,
           "x-nullable": false
+        },
+        "exportable": {
+          "type": "boolean",
+          "description": "Indicates if the private key can be exported."
         }
       },
       "description": "The attributes of a key managed by the key vault service."
@@ -1185,6 +1360,10 @@
           "type": "boolean",
           "readOnly": true,
           "description": "True if the key's lifetime is managed by key vault. If this is a key backing a certificate, then managed will be true."
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1340,6 +1519,11 @@
           "format": "int32",
           "description": "The key size in bits. For example: 2048, 3072, or 4096 for RSA."
         },
+        "public_exponent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The public exponent for a RSA key."
+        },
         "key_ops": {
           "type": "array",
           "items": {
@@ -1352,7 +1536,8 @@
               "verify",
               "wrapKey",
               "unwrapKey",
-              "import"
+              "import",
+              "export"
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
@@ -1385,6 +1570,10 @@
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
           }
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy."
         }
       },
       "description": "The key create parameters.",
@@ -1413,11 +1602,29 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "Key release policy."
         }
       },
       "description": "The key import parameters.",
       "required": [
         "key"
+      ]
+    },
+    "KeyExportParameters": {
+      "properties": {
+        "env": {
+          "x-ms-client-name": "environment",
+          "type": "string",
+          "minLength": 1,
+          "description": "The target environment assertion"
+        }
+      },
+      "description": "The export key parameters.",
+      "required": [
+        "env"
       ]
     },
     "KeyOperationsParameters": {
@@ -1609,7 +1816,8 @@
               "verify",
               "wrapKey",
               "unwrapKey",
-              "import"
+              "import",
+              "export"
             ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
