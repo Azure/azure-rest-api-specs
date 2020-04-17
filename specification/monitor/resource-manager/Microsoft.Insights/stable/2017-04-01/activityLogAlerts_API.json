@@ -84,7 +84,7 @@
           "default": {
             "description": "An error occurred and the activity log alert could not be created or updated.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -121,7 +121,7 @@
           "default": {
             "description": "An error occurred and the activity log alert could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -158,7 +158,7 @@
           "default": {
             "description": "An error occurred and the activity log alert could not be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -193,7 +193,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -240,7 +240,7 @@
           "default": {
             "description": "An error occurred and the list of activity log alerts could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -279,7 +279,7 @@
           "default": {
             "description": "An error occurred and the list of activity log alerts could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -287,49 +287,11 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "ActivityLogAlertResource": {
       "description": "An activity log alert resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./actionGroups_API.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -451,20 +413,6 @@
       "required": [
         "actionGroupId"
       ]
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     },
     "ActivityLogAlertPatchBody": {
       "description": "An activity log alert object for the body of patch operations.",

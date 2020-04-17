@@ -62,7 +62,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -104,7 +104,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,7 +149,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -216,7 +216,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -283,7 +283,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -359,7 +359,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -404,7 +404,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "../../stable/2016-03-01/alertRules_API.json#/definitions/ErrorResponse"
+              "$ref": "./actionGroups_API.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -417,44 +417,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
-    },
     "MetricAlertAction": {
       "description": "An alert action.",
       "properties": {
@@ -547,7 +509,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./actionGroups_API.json#/definitions/Resource"
         }
       ],
       "required": [
@@ -827,6 +789,7 @@
           "description": "Namespace of the metric."
         },
         "timeAggregation": {
+          "type": "string",
           "enum": [
             "Average",
             "Count",

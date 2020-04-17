@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./diagnosticsSettings_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -94,7 +94,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./diagnosticsSettings_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -113,27 +113,6 @@
     }
   },
   "definitions": {
-    "ProxyOnlyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "A proxy only azure resource object"
-    },
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
@@ -155,7 +134,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "./diagnosticsSettings_API.json#/definitions/ProxyOnlyResource"
         }
       ],
       "properties": {
@@ -178,20 +157,6 @@
         }
       },
       "description": "Represents a collection of diagnostic setting category resources."
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {

@@ -90,7 +90,7 @@
           "default": {
             "description": "An error occurred and the guest diagnostic settings association could not be created or updated.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -132,7 +132,7 @@
           "default": {
             "description": "An error occurred and the diagnostic settings association could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -174,7 +174,7 @@
           "default": {
             "description": "An error occurred and the diagnostic settings association could not be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -211,7 +211,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -253,7 +253,7 @@
           "default": {
             "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -287,7 +287,7 @@
           "default": {
             "description": "An error occurred and the list of guest diagnostic settings association could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./guestDiagnosticSettings_API.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -295,20 +295,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
-    },
     "GuestDiagnosticSettingsAssociationList": {
       "description": "A list of guest diagnostic settings association.",
       "properties": {
@@ -357,7 +343,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./guestDiagnosticSettings_API.json#/definitions/Resource"
         }
       ],
       "required": [
@@ -371,44 +357,6 @@
         }
       },
       "description": "Virtual machine guest diagnostic settings resource."
-    },
-    "Resource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object"
     }
   },
   "parameters": {
