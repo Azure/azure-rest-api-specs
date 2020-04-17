@@ -4331,23 +4331,27 @@
           "type": "object"
         },
         "companyId": {
-          "description": "The company ID of the QuickBooks company to authorize.",
+          "description": "The company ID associated with your QuickBooks account.",
           "type": "object"
         },
         "consumerKey": {
-          "description": "The consumer key for OAuth 1.0 authentication.",
+          "description": "The client ID associated with your QuickBooks application.",
           "type": "object"
         },
         "consumerSecret": {
-          "description": "The consumer secret for OAuth 1.0 authentication.",
+          "description": "The client secret associated with your QuickBooks application.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessToken": {
-          "description": "The access token for OAuth 1.0 authentication.",
+          "description": "The accesstoken for OAuth 2.0 authentication. This is deprecated from OAuth 2.0.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "accessTokenSecret": {
-          "description": "The access token secret for OAuth 1.0 authentication.",
+          "description": "The access token secret for OAuth 1.0 authentication. This is deprecated from OAuth 2.0.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The OAuth 2.0 refreshtoken associated with your QuickBooks application,used to refresh the accesstoken when it expires.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "useEncryptedEndpoints": {
@@ -4364,8 +4368,7 @@
         "companyId",
         "consumerKey",
         "consumerSecret",
-        "accessToken",
-        "accessTokenSecret"
+        "refreshToken"
       ]
     },
     "ServiceNowLinkedService": {
