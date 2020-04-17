@@ -7,7 +7,8 @@ az:
   extensions: automation
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
-python-sdk-output-folder: "$(output-folder)/azext_automation/vendored_sdks/automation"
+az-output-folder: $(azure-cli-extension-folder)/src/automation
+python-sdk-output-folder: "$(az-output-folder)/azext_automation/vendored_sdks/automation"
 
 
 ```
