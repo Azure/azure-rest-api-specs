@@ -326,7 +326,7 @@ input-file:
 
 ### Tag: package-2020-04
 
-These settings apply only when `--tag=package-2020-04` is specified on the command line.
+These settings apply only when `--tag=package-2020-04` is specified on the command line. For Dotnet SDK generation.
 
 ``` yaml $(tag) == 'package-2020-04'
 input-file:
