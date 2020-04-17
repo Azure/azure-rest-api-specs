@@ -4,7 +4,7 @@ These settings apply only when `--trenton` is specified on the command line.
 
 ``` yaml $(trenton)
 trenton:
-  cli_name: customproviders
+  cli_name: CustomProviders
   azure_arm: true
   license_header: MICROSOFT_MIT_NO_VERSION
   payload_flattening_threshold: 2
