@@ -1,11 +1,20 @@
 # marketplace
 
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for marketplace.
+
+This is the AutoRest configuration file for Marketplace.
+
+---
 
 ## Getting Started
 
-There is no SDK for this endpoint, this is used internaly for calling markeplaceRP from Ibiza.
+To build the SDK for Marketplace, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
 
 ---
 
