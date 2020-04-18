@@ -2101,15 +2101,15 @@
           "type": "string",
           "readOnly": true
         },
-        "memReservationGB": {
+        "memReservationMB": {
           "format": "int64",
-          "description": "Gets or sets MemReservationGB which specifies the guaranteed available memory in\r\ngigabytes.",
+          "description": "Gets or sets MemReservationMB which specifies the guaranteed available memory in\r\nmegabytes.",
           "type": "integer",
           "readOnly": true
         },
-        "memLimitGB": {
+        "memLimitMB": {
           "format": "int64",
-          "description": "Gets or sets MemLimitGB specifies a memory usage limit in gigabytes.\r\nUtilization will not exceed the specified limit even if there are available resources.",
+          "description": "Gets or sets MemLimitMB specifies a memory usage limit in megabytes.\r\nUtilization will not exceed the specified limit even if there are available resources.",
           "type": "integer",
           "readOnly": true
         },
@@ -2159,7 +2159,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2261,7 +2261,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2306,13 +2306,20 @@
         }
       }
     },
+    "KubernetesAuthenticationType": {
+      "enum": [
+        "KubeConfig",
+        "ListCredential"
+      ],
+      "type": "string"
+    },
     "KubernetesAuthentication": {
       "description": "Defines the kubernetes authentication class.",
       "type": "object",
       "properties": {
         "type": {
           "description": "Gets or sets kubernetes authentication type.",
-          "type": "string"
+          "$ref": "#/definitions/KubernetesAuthenticationType"
         },
         "value": {
           "description": "Gets or sets kubernetes authentication value.",
@@ -2324,7 +2331,7 @@
       "description": "Defines the resource properties.",
       "required": [
         "fqdn",
-		"arcZoneId"
+        "arcZoneId"
       ],
       "type": "object",
       "properties": {
@@ -2434,7 +2441,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2482,7 +2489,7 @@
           "type": "string",
           "readOnly": true
         },
-        "adminUserName": {
+        "adminUsername": {
           "description": "Gets or sets administrator username.",
           "type": "string"
         },
@@ -2515,9 +2522,14 @@
           "description": "Gets or sets memory size in MBs for the vm.",
           "type": "integer"
         },
-        "numberOfCores": {
+        "numCPUs": {
           "format": "int32",
-          "description": "Gets or sets the number of cores for the vm.",
+          "description": "Gets or sets the number of vCPUs for the vm.",
+          "type": "integer"
+        },
+        "numCoresPerSocket": {
+          "format": "int32",
+          "description": "Gets or sets the number of cores per socket for the vm. Defaults to 1 if unspecified.",
           "type": "integer"
         }
       }
@@ -2598,7 +2610,8 @@
         },
         "moRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "moName": {
           "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
@@ -2661,7 +2674,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2724,9 +2737,15 @@
           "type": "integer",
           "readOnly": true
         },
-        "numberOfCores": {
+        "numCPUs": {
           "format": "int32",
-          "description": "Gets or sets the number of cores for the template.",
+          "description": "Gets or sets the number of vCPUs for the template.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numCoresPerSocket": {
+          "format": "int32",
+          "description": "Gets or sets the number of cores per socket for the template.\r\nDefaults to 1 if unspecified.",
           "type": "integer",
           "readOnly": true
         },
@@ -2816,7 +2835,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2924,7 +2943,7 @@
           "type": "string",
           "readOnly": true
         },
-		"identity": {
+        "identity": {
           "description": "Gets or sets the identity.",
           "type": "string",
           "readOnly": true
@@ -2979,12 +2998,12 @@
           "description": "NIC type",
           "type": "string",
           "enum": [
-            "E1000",
-            "E1000E",
-            "PCNET32",
-            "VMXNET",
-            "VMXNET2",
-            "VMXNET3"
+            "vmxnet3",
+            "vmxnet2",
+            "vmxnet",
+            "e1000",
+            "e1000e",
+            "pcnet32"
           ],
           "x-ms-enum": {
             "modelAsString": false,
@@ -3005,27 +3024,35 @@
           "description": "Gets or sets the power on boot.",
           "$ref": "#/definitions/PowerOnBootOption"
         },
-        "customization": {
-          "description": "Gets or sets the customization.",
-          "$ref": "#/definitions/NicCustomization"
+        "ipSettings": {
+          "description": "Gets or sets the ipsettings.",
+          "$ref": "#/definitions/NicIPSettings"
         }
       }
     },
     "PowerOnBootOption": {
       "description": "Defines the options for power on boot.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "enabled",
+        "disabled"
       ],
       "type": "string"
     },
-    "NicCustomization": {
-      "description": "Defines the network interface customizations.",
+    "IPAddressAllocationMethod": {
+      "description": "IP address allocation method.",
+      "enum": [
+        "dynamic",
+        "static"
+      ],
+      "type": "string"
+    },
+    "NicIPSettings": {
+      "description": "Defines the network interface ip settings.",
       "type": "object",
       "properties": {
         "allocationMethod": {
           "description": "Gets or sets the nic allocation method.",
-          "type": "string"
+          "$ref": "#/definitions/IPAddressAllocationMethod"
         },
         "dnsServers": {
           "description": "Gets or sets the dns servers.",
@@ -3046,7 +3073,7 @@
           "description": "Gets or sets the ip address for the nic.",
           "type": "string"
         },
-        "mask": {
+        "subnetMask": {
           "description": "Gets or sets the mask.",
           "type": "string"
         },
