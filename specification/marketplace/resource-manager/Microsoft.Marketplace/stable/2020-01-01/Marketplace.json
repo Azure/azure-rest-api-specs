@@ -565,6 +565,27 @@
           "readOnly": true
         }
       }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "securityDefinitions": {
@@ -577,26 +598,5 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  },
-  "Resource": {
-    "description": "An Azure resource.",
-    "properties": {
-      "id": {
-        "description": "The resource ID.",
-        "type": "string",
-        "readOnly": true
-      },
-      "name": {
-        "description": "The name of the resource.",
-        "type": "string",
-        "readOnly": true
-      },
-      "type": {
-        "description": "The type of the resource.",
-        "type": "string",
-        "readOnly": true
-      }
-    },
-    "x-ms-azure-resource": true
   }
 }
