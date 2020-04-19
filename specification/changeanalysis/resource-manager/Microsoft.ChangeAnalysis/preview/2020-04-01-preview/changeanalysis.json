@@ -14,8 +14,7 @@
         "tags": [
           "ConfigurationProfile"
         ],
-        "summary": "Get the configuration profile for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent.",
-        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "summary": "Gets the configuration profile for the Microsoft.ChangeAnalysis resource provider. The profile name should be always set to 'default'.",
         "operationId": "ConfigurationProfile_Get",
         "produces": [
           "application/json",
@@ -56,8 +55,7 @@
         "tags": [
           "ConfigurationProfile"
         ],
-        "summary": "Updates configuration profile for for the Microsoft.ChangeAnalysis resource provider.\r\nThis operation is expected to be idempotent. In current version of API name of the profile is ignored.",
-        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "summary": "Updates configuration profile for for the Microsoft.ChangeAnalysis resource provider. The profile name should be always set to 'default'.",
         "operationId": "ConfigurationProfile_Create",
         "consumes": [
           "application/json"
@@ -112,8 +110,7 @@
         "tags": [
           "ConfigurationProfile"
         ],
-        "summary": "Updates a configuration profile with the specified parameters.",
-        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "summary": "Updates a configuration profile with the specified parameters. The profile name should be always set to 'default'",
         "operationId": "ConfigurationProfile_Update",
         "consumes": [
           "application/json"
@@ -168,8 +165,7 @@
         "tags": [
           "ConfigurationProfile"
         ],
-        "summary": "Deletes existing configuration profile.",
-        "description": "This operation is expected to be idempotent. In current version of API name of the profile is ignored.",
+        "summary": "Deletes existing configuration profile. The profile name should be always set to 'default'",
         "operationId": "ConfigurationProfile_Delete",
         "produces": [
           "default"
@@ -211,8 +207,7 @@
         "tags": [
           "Operations"
         ],
-        "summary": "Lists operations for the resource provider.",
-        "description": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their description.",
+        "summary": "Lists all the supported operations by the Microsoft.ChangeAnalysis resource provider along with their descriptions.",
         "operationId": "Operations_List",
         "produces": [
           "application/json",
@@ -286,7 +281,7 @@
       }
     },
     "AzureMonitorWorkspaceProperties": {
-      "description": "Azure Monitor workspace configuration to receive change notifications.",
+      "description": "Configuration properties of an Azure Monitor workspace that receives change notifications.",
       "type": "object",
       "properties": {
         "workspaceId": {
@@ -294,7 +289,7 @@
           "type": "string"
         },
         "workspaceResourceId": {
-          "description": "The Azure Monitor workspace ARM Resource ID.\r\nThe resource ID should be in the following format:\r\n/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}",
+          "description": "The Azure Monitor workspace ARM Resource ID. The resource ID should be in the following format: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}",
           "type": "string"
         }
       }
@@ -313,7 +308,7 @@
       }
     },
     "NotificationSettings": {
-      "description": "Notifications model to configure notification settings for subscription.",
+      "description": "Settings of change notification configuration for a subscription.",
       "type": "object",
       "properties": {
         "azureMonitorWorkspaceProperties": {
@@ -372,7 +367,7 @@
       }
     },
     "ConfigurationProfileResource": {
-      "description": "The configuration profile along with all resource properties.",
+      "description": "A profile object that contains change analysis configuration, such as notification settings, for this subscription",
       "type": "object",
       "allOf": [
         {
@@ -428,7 +423,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Resource provider operation name.",
+          "description": "The resource provider operation name.",
           "type": "string"
         },
         "display": {
