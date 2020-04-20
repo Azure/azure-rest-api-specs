@@ -78,7 +78,6 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
-- Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkTargets.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
@@ -203,7 +202,6 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
-  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/LinkTargets.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
