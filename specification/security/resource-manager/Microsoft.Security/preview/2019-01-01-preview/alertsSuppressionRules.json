@@ -34,21 +34,21 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules": {
       "get": {
         "x-ms-examples": {
-          "Get auto dismiss rules for subscription": {
-            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRules_example.json"
+          "Get suppression rules for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRules_example.json"
           },
-          "Get auto dismiss alert rule for subscription, filtered by AlertType": {
-            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRulesWithAlertType_example.json"
+          "Get suppression alert rule for subscription, filtered by AlertType": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRulesWithAlertType_example.json"
           }
         },
         "tags": [
-          "AutoDismissAlertsRules"
+          "AlertsSuppressionRules"
         ],
         "description": "List of all the dismiss rules for the given subscription",
-        "operationId": "AutoDismissAlertsRules_List",
+        "operationId": "AlertsSuppressionRules_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -64,7 +64,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissAlertsRulesList"
+              "$ref": "#/definitions/AlertsSuppressionRulesList"
             }
           },
           "default": {
@@ -79,18 +79,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules/{autoDismissAlertsRuleName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/alertsSuppressionRules/{alertsSuppressionRuleName}": {
       "get": {
         "x-ms-examples": {
-          "Get auto dismiss alert rule for subscription": {
-            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRule_example.json"
+          "Get suppression alert rule for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/GetAlertsSuppressionRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissAlertsRules"
+          "AlertsSuppressionRules"
         ],
-        "description": "Get dismiss rule, with name: {autoDismissAlertsRuleName}, for the given subscription",
-        "operationId": "AutoDismissAlertsRules_Get",
+        "description": "Get dismiss rule, with name: {alertsSuppressionRuleName}, for the given subscription",
+        "operationId": "AlertsSuppressionRules_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -99,14 +99,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissAlertsRule"
+              "$ref": "#/definitions/AlertsSuppressionRule"
             }
           },
           "default": {
@@ -119,15 +119,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Update or create auto dismiss rule for subscription": {
-            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRule_example.json"
+          "Update or create suppression rule for subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/PutAlertsSuppressionRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissAlertsRules"
+          "AlertsSuppressionRules"
         ],
         "description": "Update existing rule or create new rule if it doesn't exist",
-        "operationId": "AutoDismissAlertsRules_Update",
+        "operationId": "AlertsSuppressionRules_Update",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -136,17 +136,17 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
           },
           {
-            "$ref": "#/parameters/AutoDismissAlertsRule"
+            "$ref": "#/parameters/AlertsSuppressionRule"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoDismissAlertsRule"
+              "$ref": "#/definitions/AlertsSuppressionRule"
             }
           },
           "default": {
@@ -159,15 +159,15 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete auto dismiss rule data for a subscription": {
-            "$ref": "./examples/AutoDismissAlertsRules/DeleteAutoDismissAlertsRule_example.json"
+          "Delete suppression rule data for a subscription": {
+            "$ref": "./examples/AlertsSuppressionRules/DeleteAlertsSuppressionRule_example.json"
           }
         },
         "tags": [
-          "AutoDismissAlertsRules"
+          "AlertsSuppressionRules"
         ],
         "description": "Delete dismiss alert rule for this subscription.",
-        "operationId": "AutoDismissAlertsRules_Delete",
+        "operationId": "AlertsSuppressionRules_Delete",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -176,7 +176,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+            "$ref": "#/parameters/AlertsSuppressionRuleName"
           }
         ],
         "responses": {
@@ -194,14 +194,14 @@
     }
   },
   "definitions": {
-    "AutoDismissAlertsRulesList": {
+    "AlertsSuppressionRulesList": {
       "type": "object",
-      "description": "Auto dismiss rules list for subscription.",
+      "description": "Suppression rules list for subscription.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AutoDismissAlertsRule"
+            "$ref": "#/definitions/AlertsSuppressionRule"
           }
         },
         "nextLink": {
@@ -214,13 +214,13 @@
         "value"
       ]
     },
-    "AutoDismissAlertsRule": {
+    "AlertsSuppressionRule": {
       "type": "object",
-      "description": "Describes the auto dismiss rule",
+      "description": "Describes the suppression rule",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AutoDismissAlertsRuleProperties"
+          "$ref": "#/definitions/AlertsSuppressionRuleProperties"
         }
       },
       "allOf": [
@@ -229,13 +229,13 @@
         }
       ]
     },
-    "AutoDismissAlertsRuleProperties": {
+    "AlertsSuppressionRuleProperties": {
       "type": "object",
-      "description": "describes AutoDismissAlertsRule properties",
+      "description": "describes AlertsSuppressionRule properties",
       "properties": {
         "alertType": {
           "type": "string",
-          "description": "Type of the auto dismissed alert. For all alert types, use '*'"
+          "description": "Type of the alert to automatically suppress. For all alert types, use '*'"
         },
         "lastModifiedUTC": {
           "readOnly": true,
@@ -268,10 +268,10 @@
           "type": "string",
           "description": "Any comment regarding the rule"
         },
-        "autoDismissAlertsScope": {
+        "suppressionAlertsScope": {
           "type": "object",
-          "description": "The auto dismiss conditions",
-          "$ref": "#/definitions/AutoDismissAlertsScope"
+          "description": "The suppression conditions",
+          "$ref": "#/definitions/SuppressionAlertsScope"
         }
       },
       "required": [
@@ -280,12 +280,12 @@
         "state"
       ]
     },
-    "AutoDismissAlertsScope": {
+    "SuppressionAlertsScope": {
       "type": "object",
       "properties": {
         "allOf": {
           "type": "array",
-          "description": "All the conditions inside need to be true in order to auto dismiss the alert",
+          "description": "All the conditions inside need to be true in order to suppress the alert",
           "items": {}
         }
       },
@@ -302,22 +302,22 @@
       "description": "Type of the alert to get rules for",
       "x-ms-parameter-location": "method"
     },
-    "AutoDismissAlertsRule": {
-      "name": "autoDismissAlertsRule",
+    "AlertsSuppressionRule": {
+      "name": "alertsSuppressionRule",
       "in": "body",
       "required": true,
-      "description": "Auto dismiss rule object",
+      "description": "Suppression rule object",
       "schema": {
-        "$ref": "#/definitions/AutoDismissAlertsRule"
+        "$ref": "#/definitions/AlertsSuppressionRule"
       },
       "x-ms-parameter-location": "method"
     },
-    "AutoDismissAlertsRuleName": {
-      "name": "autoDismissAlertsRuleName",
+    "AlertsSuppressionRuleName": {
+      "name": "alertsSuppressionRuleName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The unique name of the auto dismiss alert rule",
+      "description": "The unique name of the suppression alert rule",
       "x-ms-parameter-location": "method"
     }
   }
