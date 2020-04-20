@@ -1544,6 +1544,7 @@
         },
         "partitionKeyProperties": {
           "type": "array",
+          "maxLength": 1,
           "items": {
             "$ref": "#/definitions/TimeSeriesIdProperty"
           },
@@ -1569,7 +1570,7 @@
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
         "warmStoreConfiguration": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/WarmStoreConfigurationProperties",
           "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
@@ -1636,7 +1637,7 @@
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
         "warmStoreConfiguration": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/WarmStoreConfigurationProperties",
           "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
@@ -1687,7 +1688,7 @@
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
         },
         "warmStoreConfiguration": {
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/WarmStoreConfigurationProperties",
           "description": "The warm store configuration provides the details to create a warm store cache that will retain a copy of the environment's data available for faster query."
         }
