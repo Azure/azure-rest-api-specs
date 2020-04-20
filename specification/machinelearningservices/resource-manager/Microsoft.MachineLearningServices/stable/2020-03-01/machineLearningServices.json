@@ -327,7 +327,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Workspace"
+            }
           },
           "202": {
             "description": "The request was successful; the request was well-formed and received properly."
@@ -1429,7 +1432,7 @@
         "resourceId": {
           "type": "string"
         },
-        "encryption": {
+        "notebookPreparationError": {
           "$ref": "#/definitions/NotebookPreparationError",
           "description": "The error that occurs when preparing notebook."
         }
