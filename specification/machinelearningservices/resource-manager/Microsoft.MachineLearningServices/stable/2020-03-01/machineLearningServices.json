@@ -300,47 +300,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listResourcePreparationErrors": {
-      "get": {
-        "tags": [
-          "ProxyOperations"
-        ],
-        "operationId": "ResourcePreparationErrors_List",
-        "x-ms-examples": {
-          "List Resource Preparation Errors": {
-            "$ref": "./examples/listResourcePreparationErrors.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ListResourcePreparationErrorsResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
       "post": {
         "tags": [
