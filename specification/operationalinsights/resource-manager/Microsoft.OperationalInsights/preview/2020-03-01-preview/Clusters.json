@@ -224,7 +224,8 @@
               "$ref": "#/definitions/ClusterErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -347,10 +348,11 @@
             "Failed",
             "Canceled",
             "Deleting",
-            "ProvisioningAccount"
+            "ProvisioningAccount",
+            "Updating"
           ],
           "x-ms-enum": {
-            "name": "EntityStatus",
+            "name": "ClusterEntityStatus",
             "modelAsString": true
           }
         },

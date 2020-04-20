@@ -82,6 +82,11 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 ```
 
 ---
@@ -201,7 +206,11 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
-
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
