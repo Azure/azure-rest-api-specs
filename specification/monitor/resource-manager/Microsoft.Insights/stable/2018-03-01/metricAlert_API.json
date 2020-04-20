@@ -693,6 +693,11 @@
     "WebtestLocationAvailabilityCriteria": {
       "x-ms-discriminator-value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
       "properties": {
         "webTestId": {
           "type": "string",
