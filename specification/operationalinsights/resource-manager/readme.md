@@ -209,8 +209,8 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
-  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
