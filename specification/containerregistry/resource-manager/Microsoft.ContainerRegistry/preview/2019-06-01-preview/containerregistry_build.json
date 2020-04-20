@@ -16,6 +16,306 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Gets the detailed information for a given agent pool.",
+        "operationId": "AgentPools_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/agentpool doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_Get": {
+            "$ref": "./examples/AgentPoolsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Creates an agent pool for a container registry with the specified parameters.",
+        "operationId": "AgentPools_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "name": "agentPool",
+            "in": "body",
+            "description": "The parameters of an agent pool that needs to scheduled.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgentPools_Create": {
+            "$ref": "./examples/AgentPoolsCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Deletes a specified agent pool resource.",
+        "operationId": "AgentPools_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgentPools_Delete": {
+            "$ref": "./examples/AgentPoolsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Updates an agent pool with the specified parameters.",
+        "operationId": "AgentPools_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "description": "The parameters for updating an agent pool.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPoolUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/AgentPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AgentPools_Update": {
+            "$ref": "./examples/AgentPoolsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Lists all the agent pools for a specified container registry.",
+        "operationId": "AgentPools_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AgentPools_List": {
+            "$ref": "./examples/AgentPoolsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/agentPools/{agentPoolName}/listQueueStatus": {
+      "post": {
+        "tags": [
+          "AgentPools"
+        ],
+        "description": "Gets the count of queued runs for a given agent pool.",
+        "operationId": "AgentPools_GetQueueStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AgentPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolQueueStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/agentpool doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentPools_GetQueueStatus": {
+            "$ref": "./examples/AgentPoolsGetQueueStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/scheduleRun": {
       "post": {
         "tags": [
@@ -59,7 +359,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -117,7 +417,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -174,7 +474,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -227,7 +527,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -289,7 +589,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/build doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -339,7 +639,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -388,7 +688,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -438,7 +738,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -500,7 +800,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -551,7 +851,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -614,7 +914,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -622,6 +922,55 @@
         "x-ms-examples": {
           "TaskRuns_Update": {
             "$ref": "./examples/TaskRunsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}/listDetails": {
+      "post": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Gets the detailed information for a given task run that includes all secrets.",
+        "operationId": "TaskRuns_GetDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The run request name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_GetDetails": {
+            "$ref": "./examples/TaskRunsGetDetails.json"
           }
         }
       }
@@ -657,7 +1006,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -702,7 +1051,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -750,7 +1099,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -808,7 +1157,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -864,7 +1213,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -923,7 +1272,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -978,7 +1327,7 @@
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned.",
             "schema": {
-              "$ref": "#/definitions/ErrorSchema"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -991,6 +1340,126 @@
     }
   },
   "definitions": {
+    "AgentPool": {
+      "description": "The agentpool that has the ARM resource and properties. \r\nThe agentpool will have all information to create an agent pool.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentPoolProperties",
+          "description": "The properties associated with the agent pool",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AgentPoolProperties": {
+      "description": "The properties of agent pool.",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The count of agent machine",
+          "type": "integer"
+        },
+        "tier": {
+          "description": "The Tier of agent machine",
+          "type": "string"
+        },
+        "os": {
+          "description": "The OS of agent machine",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OS",
+            "modelAsString": true
+          }
+        },
+        "virtualNetworkSubnetResourceId": {
+          "description": "The Virtual Network Subnet Resource Id of the agent machine",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of this agent pool",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AgentPoolUpdateParameters": {
+      "description": "The parameters for updating an agent pool.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentPoolPropertiesUpdateParameters",
+          "description": "The properties associated with the agent pool",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AgentPoolPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The count of agent machine",
+          "type": "integer"
+        }
+      }
+    },
+    "AgentPoolListResult": {
+      "description": "The collection of agent pools.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentPool"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "AgentPoolQueueStatus": {
+      "description": "The QueueStatus of Agent Pool",
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "The number of pending runs in the queue",
+          "type": "integer"
+        }
+      }
+    },
     "RunRequest": {
       "description": "The request parameters for scheduling a run.",
       "required": [
@@ -1006,6 +1475,10 @@
           "description": "The value that indicates whether archiving is enabled for the run or not.",
           "default": false,
           "type": "boolean"
+        },
+        "agentPoolName": {
+          "description": "The dedicated agent pool for the run.",
+          "type": "string"
         }
       },
       "discriminator": "type"
@@ -1070,6 +1543,10 @@
             "name": "RunType",
             "modelAsString": true
           }
+        },
+        "agentPoolName": {
+          "description": "The dedicated agent pool for the run.",
+          "type": "string"
         },
         "createTime": {
           "format": "date-time",
@@ -1403,6 +1880,10 @@
         "taskName": {
           "description": "The name of the task that the run corresponds to.",
           "type": "string"
+        },
+        "agentPoolName": {
+          "description": "The name of the agent pool that the run corresponds to.",
+          "type": "string"
         }
       }
     },
@@ -1670,6 +2151,10 @@
         "agentConfiguration": {
           "$ref": "#/definitions/AgentProperties",
           "description": "The machine configuration of the run agent."
+        },
+        "agentPoolName": {
+          "description": "The dedicated agent pool for the task.",
+          "type": "string"
         },
         "timeout": {
           "format": "int32",
@@ -2117,6 +2602,10 @@
           "$ref": "#/definitions/AgentProperties",
           "description": "The machine configuration of the run agent."
         },
+        "agentPoolName": {
+          "description": "The dedicated agent pool for the task.",
+          "type": "string"
+        },
         "timeout": {
           "format": "int32",
           "description": "Run timeout in seconds.",
@@ -2491,7 +2980,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "Error": {
+    "ErrorResponseBody": {
       "description": "An error response from the Azure Container Registry service.",
       "required": [
         "code",
@@ -2508,11 +2997,11 @@
         }
       }
     },
-    "ErrorSchema": {
+    "ErrorResponse": {
       "description": "An error response from the Azure Container Registry service.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error",
+          "$ref": "#/definitions/ErrorResponseBody",
           "description": "Azure container registry build API error body."
         }
       }
@@ -3067,6 +3556,17 @@
       "maxLength": 50,
       "minLength": 5,
       "pattern": "^[a-zA-Z0-9-_]*$",
+      "x-ms-parameter-location": "method"
+    },
+    "AgentPoolNameParameter": {
+      "name": "agentPoolName",
+      "in": "path",
+      "description": "The name of the agent pool.",
+      "required": true,
+      "type": "string",
+      "maxLength": 20,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     }
   },

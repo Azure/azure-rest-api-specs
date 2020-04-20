@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "SearchManagementClient",
-    "description": "Client that can be used to manage Azure Search services and API keys.",
+    "description": "Client that can be used to manage Azure Cognitive Search services and API keys.",
     "version": "2015-08-19"
   },
   "host": "management.azure.com",
@@ -70,7 +70,7 @@
             "$ref": "./examples/SearchGetAdminKeys.json"
           }
         },
-        "description": "Gets the primary and secondary admin API keys for the specified Azure Search service.",
+        "description": "Gets the primary and secondary admin API keys for the specified Azure Cognitive Search service.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -93,7 +93,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
+            "description": "The admin keys were successfully retrieved and are in the response. You can use either the primary or secondary key as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform any operations on your Search service, including privileged operations. Privileged operations include managing resources like indexes and data sources as well as uploading, modifying, or deleting data in your indexes.",
             "schema": {
               "$ref": "#/definitions/AdminKeyResult"
             }
@@ -211,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "The query key was successfully created and is in the response. You can use the query key as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/QueryKey"
             }
@@ -233,13 +233,14 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "operationId": "QueryKeys_ListBySearchService",
+        "operationId": "QueryKeys_ListBySearchServiceGet",
         "x-ms-examples": {
           "SearchListQueryKeysBySearchService": {
             "$ref": "./examples/SearchListQueryKeysBySearchService.json"
           }
         },
-        "description": "Returns the list of query API keys for the given Azure Search service.",
+        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
+        "deprecated": true,
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
         },
@@ -262,13 +263,62 @@
         ],
         "responses": {
           "200": {
-            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in the Azure Cognitive Search Service REST API or SDK to perform read-only operations on your Search indexes such as querying and looking up documents by ID.",
             "schema": {
               "$ref": "#/definitions/ListQueryKeysResult"
             }
           },
           "default": {
             "description": "HTTP 404 (Not Found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "QueryKeys"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "QueryKeys_ListBySearchService",
+        "x-ms-examples": {
+          "SearchListQueryKeysBySearchService": {
+            "$ref": "./examples/SearchListQueryKeysBySearchService.json"
+          }
+        },
+        "description": "Returns the list of query API keys for the given Azure Cognitive Search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All query keys for the given Search service were successfully retrieved and are in the response. You can use any of the query keys as the value of the 'api-key' parameter in teh Azure Cognitive Search Service REST API or SDK to perform read-only operations on you Search indexes such as querying and looking up documents by ID.",
+            "schema": {
+              "$ref": "#/definitions/ListQueryKeysResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not found): The subscription, resource group, or Search service could not be found. HTTP 409 (Conflict): The specified subscription is disabled",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -361,7 +411,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
+            "description": "The name of the Azure Cognitive Search service to create or update. Search service names must only contain lowercase letters, digits or dashes, cannot use dash as the first two or last one characters, cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net). You cannot change the service name after the service is created."
           },
           {
             "name": "service",
@@ -430,7 +480,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the Azure Search service to update."
+            "description": "The name of the Azure Cognitive Search service to update."
           },
           {
             "name": "service",
@@ -777,7 +827,7 @@
           "description": "The secondary admin API key of the Search service."
         }
       },
-      "description": "Response containing the primary and secondary admin API keys for a given Azure Search service."
+      "description": "Response containing the primary and secondary admin API keys for a given Azure Cognitive Search service."
     },
     "QueryKey": {
       "properties": {
@@ -792,7 +842,7 @@
           "description": "The value of the query API key."
         }
       },
-      "description": "Describes an API key for a given Azure Search service that has permissions for query operations only."
+      "description": "Describes an API key for a given Azure Cognitive Search service that has permissions for query operations only."
     },
     "ListQueryKeysResult": {
       "properties": {
@@ -802,10 +852,10 @@
           "items": {
             "$ref": "#/definitions/QueryKey"
           },
-          "description": "The query keys for the Azure Search service."
+          "description": "The query keys for the Azure Cognitive Search service."
         }
       },
-      "description": "Response containing the query API keys for a given Azure Search service.",
+      "description": "Response containing the query API keys for a given Azure Cognitive Search service.",
       "x-ms-external": true
     },
     "Sku": {
@@ -828,7 +878,7 @@
           }
         }
       },
-      "description": "Defines the SKU of an Azure Search Service, which determines price tier and capacity limits.",
+      "description": "Defines the SKU of an Azure Cognitive Search Service, which determines price tier and capacity limits.",
       "externalDocs": {
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
@@ -853,7 +903,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Describes an Azure Search service and its current state."
+      "description": "Describes an Azure Cognitive Search service and its current state."
     },
     "SearchServiceProperties": {
       "properties": {
@@ -889,7 +939,7 @@
         "status": {
           "readOnly": true,
           "type": "string",
-          "description": "The status of the Search service. Possible values include: 'running': The Search service is running and no provisioning operations are underway. 'provisioning': The Search service is being provisioned or scaled up or down. 'deleting': The Search service is being deleted. 'degraded': The Search service is degraded. This can occur when the underlying search units are not healthy. The Search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The Search service is disabled. In this state, the service will reject all API requests. 'error': The Search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
+          "description": "The status of the Search service. Possible values include: 'running': The Search service is running and no provisioning operations are underway. 'provisioning': The Search service is being provisioned or scaled up or down. 'deleting': The Search service is being deleted. 'degraded': The Search service is degraded. This can occur when the underlying search units are not healthy. The Search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The Search service is disabled. In this state, the service will reject all API requests. 'error': The Search service is in an error state. If your service is in the degraded, disabled, or error states, it means the Azure Cognitive Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.",
           "enum": [
             "running",
             "provisioning",
@@ -936,7 +986,7 @@
           "description": "The list of Search services."
         }
       },
-      "description": "Response containing a list of Azure Search services.",
+      "description": "Response containing a list of Azure Cognitive Search services.",
       "x-ms-external": true
     },
     "Resource": {
@@ -1125,7 +1175,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the Azure Search service associated with the specified resource group.",
+      "description": "The name of the Azure Cognitive Search service associated with the specified resource group.",
       "x-ms-parameter-location": "method"
     },
     "ClientRequestIdParameter": {
