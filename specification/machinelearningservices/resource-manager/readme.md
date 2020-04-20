@@ -26,15 +26,23 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03-01
+tag: package-2020-05
 ```
 
 
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-05'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-05-01/machineLearningServices.json
+```
 ### Tag: package-2020-03-01
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-03-01'
+``` yaml $(tag) == 'package-2020-03-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
 ```
@@ -43,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01-01'
+``` yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
 ```
@@ -52,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-11-01'
+``` yaml $(tag) == 'package-2019-11-01'
 input-file:
   - Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
 ```
