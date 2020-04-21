@@ -462,14 +462,28 @@
       },
       "description": "IpGroups associated with azure firewall."
     },
-    "HubIPAddresses": {
+    "HubPublicIPAddresses": {
       "properties": {
-        "publicIPAddresses": {
+        "addresses": {
           "type": "array",
           "description": "List of Public IP addresses associated with azure firewall.",
           "items": {
             "$ref": "#/definitions/AzureFirewallPublicIPAddress"
           }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of Public IP addresses to be associated with the firewall."
+        }
+      },
+      "description": "Public IP addresses associated with azure firewall."
+    },
+    "HubIPAddresses": {
+      "properties": {
+        "publicIPs": {
+          "description": "Public IP addresses associated with AzureFirewall.",
+          "$ref": "#/definitions/HubPublicIPAddresses"
         },
         "privateIPAddress": {
           "type": "string",
@@ -537,7 +551,6 @@
           "description": "The firewallPolicy associated with this azure firewall."
         },
         "hubIpAddresses": {
-          "readOnly": true,
           "description": "IP addresses associated with AzureFirewall.",
           "$ref": "#/definitions/HubIPAddresses"
         },
