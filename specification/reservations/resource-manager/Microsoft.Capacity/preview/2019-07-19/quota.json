@@ -125,9 +125,6 @@
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
-          },
-          {
-            "$ref": "#/parameters/IfMatchRequiredParameter"
           }
         ],
         "responses": {
@@ -191,9 +188,6 @@
             "schema": {
               "$ref": "#/definitions/CurrentQuotaLimitBase"
             }
-          },
-          {
-            "$ref": "#/parameters/IfMatchRequiredParameter"
           }
         ],
         "responses": {
@@ -851,8 +845,10 @@
       "enum": [
         "standard",
         "dedicated",
+        "lowPriority",
         "shared",
         "serviceSpecific"
+
       ],
       "x-ms-enum": {
         "name": "ResourceType",
@@ -896,11 +892,11 @@
         },
         "onFailure": {
           "description": "The on failure Actions.",
-          "$ref": "#/definitions/OnFailure"
+          "$ref": "#/definitions/Actions"
         },
         "onSuccess": {
           "description": "The on success Actions.",
-          "$ref": "#/definitions/OnSuccess"
+          "$ref": "#/definitions/Actions"
         },
         "supportTicketAction": {
           "description": "The support ticket action.",
@@ -1020,7 +1016,8 @@
       "description": "The Auto quota increase state.",
       "enum": [
         "enabled",
-        "disabled"
+        "disabled",
+        "previewEnabled"
       ],
       "x-ms-enum": {
         "name": "AqiStateType",
@@ -1050,14 +1047,6 @@
         }
       }
     },
-    "OnFailure": {
-      "description": "The on failure action for auto quota increase.",
-      "$ref": "#/definitions/Actions"
-    },
-    "OnSuccess": {
-      "description": "The on success action for auto quota increase.",
-      "$ref": "#/definitions/Actions"
-    },
     "Actions": {
       "description": "The actions for auto quota increase.",
       "type": "object",
@@ -1065,7 +1054,7 @@
         "emailActions": {
           "description": "The email actions for auto quota increase.",
           "properties": {
-            "value": {
+            "emailAddresses": {
               "description": "The list of email actions.",
               "type": "array",
               "items": {
@@ -1078,11 +1067,11 @@
         "phoneActions": {
           "description": "The phone actions for auto quota increase.",
           "properties": {
-            "value": {
+            "phoneNumbers": {
               "description": "The list of phone actions.",
               "type": "array",
               "items": {
-                "description": "The email recipients.",
+                "description": "The phone recipients.",
                 "$ref": "#/definitions/PhoneAction"
               }
             }
