@@ -7,7 +7,8 @@ az:
   extensions: operationsmanagement
   namespace: azure.mgmt.operationsmanagement
   package-name: azure-mgmt-operationsmanagement
-python-sdk-output-folder: "$(output-folder)/src/operationsmanagement/azext_operationsmanagement/vendored_sdks/operationsmanagement"
+az-output-folder: $(azure-cli-extension-folder)/src/operationsmanagement
+python-sdk-output-folder: "$(az-output-folder)/azext_operationsmanagement/vendored_sdks/operationsmanagement"
 directive:
   - from: OperationsManagement.json
     where: $.parameters.ProviderNameParameter
