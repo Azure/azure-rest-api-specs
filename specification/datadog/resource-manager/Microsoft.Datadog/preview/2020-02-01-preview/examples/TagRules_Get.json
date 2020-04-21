@@ -13,11 +13,26 @@
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor/tagRules/default",
                 "type": "Microsoft.Datadog/monitors/tagRules",
                 "properties": {
-                    "logTags": {
-                        "Environment": "Dev"
+                    "logRules": {
+                        "sendAadLogs": false,
+                        "sendSubscriptionLogs": true,
+                        "sendActivityLogs": true,
+                        "filteringTags": [
+                            {
+                                "name": "Environment",
+                                "value": "Prod",
+                                "action": "Include"
+                            },
+                            {
+                                "name": "Environment",
+                                "value": "Dev",
+                                "action": "Exclude"
+                            }
+                        ]
                     },
-                    "metricTags": {
-                        "Environment": "Prod"
+                    "metricRules": {
+                        "filteringTags": [
+                        ]
                     }
                 }
             }

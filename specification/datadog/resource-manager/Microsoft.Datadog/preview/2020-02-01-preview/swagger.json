@@ -523,185 +523,37 @@
                     }
                 }
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/resourceRules": {
-            "get": {
-                "tags": [
-                    "Rules"
-                ],
-                "summary": "List the resource rules for a given monitor resource.",
-                "operationId": "ResourceRules_List",
-                "x-ms-examples": {
-                    "ResourceRules_List": {
-                        "$ref": "./examples/ResourceRules_List.json"
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "resourceGroupName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "monitorName",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringResourceRulesListResponse"
-                        }
-                    },
-                    "default": {
-                        "description": "Default error response.",
-                        "schema": {
-                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-                        }
-                    }
-                },
-                "x-ms-pageable": {
-                    "nextLinkName": "nextLink"
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/resourceRules/{ruleSetName}": {
-            "put": {
-                "tags": [
-                    "Rules"
-                ],
-                "summary": "Create or update a resource rule set for a given monitor resource.",
-                "operationId": "ResourceRules_CreateOrUpdate",
-                "x-ms-examples": {
-                    "ResourceRules_CreateOrUpdate": {
-                        "$ref": "./examples/ResourceRules_CreateOrUpdate.json"
-                    }
-                },
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "resourceGroupName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "monitorName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "ruleSetName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringResourceRules"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringResourceRules"
-                        }
-                    },
-                    "default": {
-                        "description": "Default error response.",
-                        "schema": {
-                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "Rules"
-                ],
-                "summary": "Get the resource rules for a given monitor resource.",
-                "operationId": "ResourceRules_Get",
-                "x-ms-examples": {
-                    "ResourceRules_Get": {
-                        "$ref": "./examples/ResourceRules_Get.json"
-                    }
-                },
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "subscriptionId",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "resourceGroupName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "monitorName",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "path",
-                        "name": "ruleSetName",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/MonitoringResourceRules"
-                        }
-                    },
-                    "default": {
-                        "description": "Default error response.",
-                        "schema": {
-                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-                        }
-                    }
-                }
-            }
         }
     },
     "definitions": {
+        "ErrorResponseBody": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "target": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ErrorResponseBody"
+                    }
+                }
+            }
+        },
+        "ResourceProviderDefaultErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/ErrorResponseBody"
+                }
+            }
+        },
         "OperationDisplay": {
             "description": "The object that represents the operation.",
             "type": "object",
@@ -751,34 +603,6 @@
                 "nextLink": {
                     "description": "URL to get the next set of operation list results if there are any.",
                     "type": "string"
-                }
-            }
-        },
-        "ErrorResponseBody": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                },
-                "target": {
-                    "type": "string"
-                },
-                "details": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ErrorResponseBody"
-                    }
-                }
-            }
-        },
-        "ResourceProviderDefaultErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/ErrorResponseBody"
                 }
             }
         },
@@ -911,23 +735,81 @@
                 }
             }
         },
-        "MonitoringTagRuleProperties": {
-            "description": "The properties of a tag rule set.",
+        "TagAction": {
+            "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
+            "enum": [
+                "Include",
+                "Exclude"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+                "modelAsString": true
+            }
+        },
+        "FilteringTag": {
+            "description": "The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.",
             "type": "object",
             "properties": {
-                "logTags": {
-                    "description": "Capture logs of resources containing one of these tags. If no tags are specified, logs will be disabled.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
-                    }
+                "name": {
+                    "description": "The name (also known as the key) of the tag.",
+                    "type": "string"
                 },
-                "metricTags": {
-                    "description": "Capture metrics of resources containing one of these tags. If no tags are specified, metrics will be disabled.",
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "string"
+                "value": {
+                    "description": "The value of the tag.",
+                    "type": "string"
+                },
+                "action": {
+                    "$ref": "#/definitions/TagAction"
+                }
+            }
+        },
+        "LogRules": {
+            "description": "Set of rules for sending logs for the Monitor resource.",
+            "type": "object",
+            "properties": {
+                "sendAadLogs": {
+                    "description": "Flag specifying if AAD logs should be sent for the Monitor resource.",
+                    "type": "boolean"
+                },
+                "sendSubscriptionLogs": {
+                    "description": "Flag specifying if subscription logs should be sent for the Monitor resource.",
+                    "type": "boolean"
+                },
+                "sendActivityLogs": {
+                    "description": "Flag specifying if activity logs from Azure resources should be sent for the Monitor resource.",
+                    "type": "boolean"
+                },
+                "filteringTags": {
+                    "description": "List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources.If Include actions are specified, the rules will only include resources with the associated tags.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilteringTag"
                     }
+                }
+            }
+        },
+        "MetricRules": {
+            "description": "Set of rules for sending metrics for the Monitor resource.",
+            "type": "object",
+            "properties": {
+                "filteringTags": {
+                    "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FilteringTag"
+                    }
+                }
+            }
+        },
+        "MonitoringTagRulesProperties": {
+            "description": "Definition of the properties for a TagRules resource.",
+            "type": "object",
+            "properties": {
+                "logRules": {
+                    "$ref": "#/definitions/LogRules"
+                },
+                "metricRules": {
+                    "$ref": "#/definitions/MetricRules"
                 }
             }
         },
@@ -948,7 +830,7 @@
                     "type": "string"
                 },
                 "properties": {
-                    "$ref": "#/definitions/MonitoringTagRuleProperties"
+                    "$ref": "#/definitions/MonitoringTagRulesProperties"
                 }
             }
         },
@@ -961,75 +843,6 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/MonitoringTagRules"
-                    }
-                },
-                "nextLink": {
-                    "description": "Link to the next set of results, if any.",
-                    "type": "string"
-                }
-            }
-        },
-        "ResourceRule": {
-            "description": "Rule specific to a resource, overriding the tag rules.",
-            "type": "object",
-            "properties": {
-                "resourceId": {
-                    "description": "The id of the resource targeted by the rule.",
-                    "type": "string"
-                },
-                "enableLogs": {
-                    "description": "Capture logs for the target resource.",
-                    "type": "boolean"
-                },
-                "enableMetrics": {
-                    "description": "Capture metrics for the target resource.",
-                    "type": "boolean"
-                }
-            }
-        },
-        "MonitoringResourceRuleProperties": {
-            "description": "The properties of a resource rule set.",
-            "type": "object",
-            "properties": {
-                "resourceRules": {
-                    "description": "The list of rules specific to resources, overriding the tag rules.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ResourceRule"
-                    }
-                }
-            }
-        },
-        "MonitoringResourceRules": {
-            "description": "Capture logs and metrics based on ARM resource identifiers.",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Name of the rule set.",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "The id of the rule set.",
-                    "type": "string"
-                },
-                "type": {
-                    "description": "The type of the rule set.",
-                    "type": "string"
-                },
-                "properties": {
-                    "$ref": "#/definitions/MonitoringResourceRuleProperties"
-                }
-            }
-        },
-        "MonitoringResourceRulesListResponse": {
-            "description": "Response of a list operation.",
-            "type": "object",
-            "properties": {
-                "value": {
-                    "description": "Results of a list operation.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MonitoringResourceRules"
                     }
                 },
                 "nextLink": {
