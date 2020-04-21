@@ -2147,6 +2147,83 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/resync": {
+      "post": {
+        "tags": [
+          "ReplicationMigrationItems"
+        ],
+        "summary": "Resynchronizes replication.",
+        "description": "The operation to resynchronize replication of an ASR migration item.",
+        "operationId": "ReplicationMigrationItems_Resync",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectionContainerName",
+            "in": "path",
+            "description": "Protection container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "migrationItemName",
+            "in": "path",
+            "description": "Migration item name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Resync input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResyncInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MigrationItem"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Resynchronizes replication.": {
+            "$ref": "./examples/ReplicationMigrationItems_Resync.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/testMigrate": {
       "post": {
         "tags": [
@@ -8781,6 +8858,11 @@
           "description": "The friendly name of the source of the event on which it is raised (for example, VM, VMM etc).",
           "type": "string"
         },
+        "affectedObjectCorrelationId": {
+          "description": "The affected object correlationId for the event.",
+          "type": "string",
+          "readOnly": true
+        },
         "severity": {
           "description": "The severity of the event.",
           "type": "string"
@@ -8846,6 +8928,11 @@
         "affectedObjectFriendlyName": {
           "description": "The affected object name of the events to be queried.",
           "type": "string"
+        },
+        "affectedObjectCorrelationId": {
+          "description": "The affected object correlationId for the events to be queried.",
+          "type": "string",
+          "readOnly": true
         },
         "startTime": {
           "format": "date-time",
@@ -9025,8 +9112,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the class type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -12332,11 +12418,6 @@
           "type": "string",
           "readOnly": true
         },
-        "recoveryServicesProviderId": {
-          "description": "The recovery services provider ARM Id.",
-          "type": "string",
-          "readOnly": true
-        },
         "migrationState": {
           "description": "The migration status.",
           "enum": [
@@ -12364,6 +12445,17 @@
           "type": "string",
           "readOnly": true
         },
+        "lastTestMigrationTime": {
+          "format": "date-time",
+          "description": "The last test migration time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastTestMigrationStatus": {
+          "description": "The status of the last test migration.",
+          "type": "string",
+          "readOnly": true
+        },
         "testMigrateState": {
           "description": "The test migrate state.",
           "enum": [
@@ -12387,8 +12479,18 @@
         },
         "health": {
           "description": "The consolidated health.",
+          "enum": [
+            "None",
+            "Normal",
+            "Warning",
+            "Critical"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProtectionHealth",
+            "modelAsString": true
+          }
         },
         "healthErrors": {
           "description": "The list of health errors.",
@@ -12406,7 +12508,8 @@
               "DisableMigration",
               "TestMigrate",
               "TestMigrateCleanup",
-              "Migrate"
+              "Migrate",
+              "StartResync"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -12419,6 +12522,11 @@
         "currentJob": {
           "$ref": "#/definitions/CurrentJobDetails",
           "description": "The current job details.",
+          "readOnly": true
+        },
+        "eventCorrelationId": {
+          "description": "The correlation Id for events associated with this migration item.",
+          "type": "string",
           "readOnly": true
         },
         "providerSpecificDetails": {
@@ -13673,9 +13781,6 @@
     },
     "RecoveryPlanHyperVReplicaAzureFailoverInput": {
       "description": "Recovery plan HVR Azure failover input.",
-      "required": [
-        "vaultLocation"
-      ],
       "type": "object",
       "allOf": [
         {
@@ -14590,6 +14695,14 @@
           "items": {
             "$ref": "#/definitions/HealthErrorSummary"
           }
+        },
+        "categorizedResourceCounts": {
+          "description": "The categorized resource counts.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -14612,6 +14725,46 @@
           "type": "string"
         }
       }
+    },
+    "ResyncInput": {
+      "description": "Resync input.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ResyncInputProperties",
+          "description": "Resync input properties."
+        }
+      }
+    },
+    "ResyncInputProperties": {
+      "description": "Resync input properties.",
+      "required": [
+        "providerSpecificDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "providerSpecificDetails": {
+          "$ref": "#/definitions/ResyncProviderSpecificInput",
+          "description": "The provider specific details."
+        }
+      }
+    },
+    "ResyncProviderSpecificInput": {
+      "description": "Resync provider specific input.",
+      "required": [
+        "instanceType"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The class type.",
+          "type": "string"
+        }
+      },
+      "discriminator": "instanceType"
     },
     "RetentionVolume": {
       "description": "The retention details of the MT.",
@@ -14949,8 +15102,7 @@
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -15167,6 +15319,7 @@
       "properties": {
         "comments": {
           "description": "Test migrate cleanup comments.",
+          "maxLength": 1024,
           "type": "string"
         }
       }
@@ -15939,7 +16092,7 @@
         }
       ],
       "properties": {},
-      "x-ms-discriminator-value": "6c7da455-506f-43ff-a16a-8eb101aebb70"
+      "x-ms-discriminator-value": "VMwareCbt"
     },
     "VMwareCbtContainerMappingInput": {
       "description": "VMwareCbt container mapping input.",
@@ -16023,6 +16176,10 @@
             "name": "DiskAccountType",
             "modelAsString": true
           }
+        },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
+          "type": "string"
         }
       }
     },
@@ -16050,6 +16207,7 @@
         },
         "disksToInclude": {
           "description": "The disks to include list.",
+          "minLength": 1,
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtDiskInput"
@@ -16103,6 +16261,27 @@
         "targetBootDiagnosticsStorageAccountId": {
           "description": "The target boot diagnostics storage account ARM Id.",
           "type": "string"
+        },
+        "performAutoResync": {
+          "description": "A value indicating whether auto resync is to be done.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtEventDetails": {
+      "description": "Event details for VMwareCbt provider.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EventProviderSpecificDetails"
+        }
+      ],
+      "properties": {
+        "migrationItemName": {
+          "description": "The migration item name.",
+          "type": "string",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -16128,7 +16307,7 @@
       "x-ms-discriminator-value": "VMwareCbt"
     },
     "VMwareCbtMigrationDetails": {
-      "description": "VMwareCbt provider specific settings",
+      "description": "VMwareCbt provider specific settings.",
       "type": "object",
       "allOf": [
         {
@@ -16213,6 +16392,52 @@
           "description": "The last recovery point received time.",
           "type": "string",
           "readOnly": true
+        },
+        "lastRecoveryPointId": {
+          "description": "The last recovery point Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialSeedingProgressPercentage": {
+          "format": "int32",
+          "description": "The initial seeding progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "migrationProgressPercentage": {
+          "format": "int32",
+          "description": "The migration progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncProgressPercentage": {
+          "format": "int32",
+          "description": "The resync progress percentage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "resyncRequired": {
+          "description": "A value indicating whether resync is required.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resyncState": {
+          "description": "The resync state.",
+          "enum": [
+            "None",
+            "PreparedForResynchronization",
+            "StartedResynchronization"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ResyncState",
+            "modelAsString": true
+          }
+        },
+        "performAutoResync": {
+          "description": "A value indicating whether auto resync is to be done.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -16403,6 +16628,11 @@
           "type": "string",
           "readOnly": true
         },
+        "diskEncryptionSetId": {
+          "description": "The DiskEncryptionSet ARM Id.",
+          "type": "string",
+          "readOnly": true
+        },
         "seedManagedDiskId": {
           "description": "The ARM Id of the seed managed disk.",
           "type": "string",
@@ -16422,7 +16652,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "DiskType",
+            "name": "DiskAccountType",
             "modelAsString": true
           }
         }
@@ -16466,6 +16696,26 @@
           "description": "The target location.",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "VMwareCbt"
+    },
+    "VMwareCbtResyncInput": {
+      "description": "VMwareCbt specific resync input.",
+      "required": [
+        "skipCbtReset",
+        "instanceType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResyncProviderSpecificInput"
+        }
+      ],
+      "properties": {
+        "skipCbtReset": {
+          "description": "A value indicating whether CBT is to be reset.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -16530,6 +16780,7 @@
         },
         "vmNics": {
           "description": "The list of NIC details.",
+          "minLength": 1,
           "type": "array",
           "items": {
             "$ref": "#/definitions/VMwareCbtNicInput"
@@ -16547,6 +16798,10 @@
             "name": "LicenseType",
             "modelAsString": true
           }
+        },
+        "performAutoResync": {
+          "description": "A value indicating whether auto resync is to be done.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "VMwareCbt"
@@ -16711,7 +16966,6 @@
     "VMwareV2FabricCreationInput": {
       "description": "VMwareV2 fabric provider specific settings.",
       "required": [
-        "vmwareSiteId",
         "migrationSolutionId"
       ],
       "type": "object",
@@ -16723,6 +16977,10 @@
       "properties": {
         "vmwareSiteId": {
           "description": "The ARM Id of the VMware site.",
+          "type": "string"
+        },
+        "physicalSiteId": {
+          "description": "The ARM Id of the physical site.",
           "type": "string"
         },
         "migrationSolutionId": {
@@ -16746,6 +17004,11 @@
           "type": "string",
           "readOnly": true
         },
+        "physicalSiteId": {
+          "description": "The ARM Id of the physical site.",
+          "type": "string",
+          "readOnly": true
+        },
         "migrationSolutionId": {
           "description": "The Migration solution ARM Id.",
           "type": "string",
@@ -16753,6 +17016,11 @@
         },
         "serviceEndpoint": {
           "description": "The service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceResourceId": {
+          "description": "The service resource Id.",
           "type": "string",
           "readOnly": true
         }

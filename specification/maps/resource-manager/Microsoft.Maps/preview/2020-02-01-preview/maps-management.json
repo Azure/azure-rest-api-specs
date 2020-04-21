@@ -1,0 +1,977 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Maps Resource Provider",
+    "description": "Resource Provider",
+    "version": "2020-02-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MapsManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.",
+        "operationId": "Accounts_CreateOrUpdate",
+        "x-ms-examples": {
+          "CreateAccount": {
+            "$ref": "./examples/CreateAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccountCreateParameters",
+            "in": "body",
+            "description": "The new or updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapsAccountCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "201": {
+            "description": "The Account was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku and Tags.",
+        "operationId": "Accounts_Update",
+        "x-ms-examples": {
+          "UpdateAccount": {
+            "$ref": "./examples/UpdateAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "MapsAccountUpdateParameters",
+            "in": "body",
+            "description": "The updated parameters for the Maps Account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapsAccountUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete a Maps Account.",
+        "operationId": "Accounts_Delete",
+        "x-ms-examples": {
+          "DeleteAccount": {
+            "$ref": "./examples/DeleteAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Account was deleted successfully."
+          },
+          "204": {
+            "description": "The specified Account was not found. Nothing was deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get a Maps Account.",
+        "operationId": "Accounts_Get",
+        "x-ms-examples": {
+          "GetAccount": {
+            "$ref": "./examples/GetAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccount"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get all Maps Accounts in a Resource Group",
+        "operationId": "Accounts_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListAccountsByResourceGroup": {
+            "$ref": "./examples/ListAccountsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccounts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get all Maps Accounts in a Subscription",
+        "operationId": "Accounts_ListBySubscription",
+        "x-ms-examples": {
+          "ListAccountsBySubscription": {
+            "$ref": "./examples/ListAccountsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccounts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/listKeys": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get the keys to use with the Maps APIs. A key is used to authenticate and authorize access to the Maps REST APIs. Only one key is needed at a time; two are given to provide seamless key regeneration.",
+        "operationId": "Accounts_ListKeys",
+        "x-ms-examples": {
+          "ListKeys": {
+            "$ref": "./examples/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Regenerate either the primary or secondary key for use with the Maps APIs. The old key will stop working immediately.",
+        "operationId": "Accounts_RegenerateKeys",
+        "x-ms-examples": {
+          "RegenerateKey": {
+            "$ref": "./examples/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "name": "keySpecification",
+            "in": "body",
+            "required": true,
+            "description": "Which key to regenerate:  primary or secondary.",
+            "schema": {
+              "$ref": "#/definitions/MapsKeySpecification"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsAccountKeys"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Maps/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "List operations available for the Maps Resource Provider",
+        "operationId": "Maps_ListOperations",
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/MapsOperations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlases/{privateAtlasName}": {
+      "put": {
+        "tags": [
+          "Private Atlases"
+        ],
+        "description": "Create or update a Private Atlas resource. Private Atlas resource will enable the usage of Azure resources to build a custom set of mapping data. It requires an account to exist before it can be created.",
+        "operationId": "PrivateAtlases_CreateOrUpdate",
+        "x-ms-examples": {
+          "CreatePrivateAtlas": {
+            "$ref": "./examples/CreatePrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          },
+          {
+            "name": "PrivateAtlasCreateParameters",
+            "in": "body",
+            "description": "The new or updated parameters for the Private Atlas resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasCreateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "201": {
+            "description": "The Private Atlas was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Private Atlases"
+        ],
+        "description": "Updates the Private Atlas resource. Only a subset of the parameters may be updated after creation, such as Tags.",
+        "operationId": "PrivateAtlases_Update",
+        "x-ms-examples": {
+          "UpdateAccount": {
+            "$ref": "./examples/UpdatePrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          },
+          {
+            "name": "PrivateAtlasUpdateParameters",
+            "in": "body",
+            "description": "The updated parameters for the Private Atlas.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Private Atlases"
+        ],
+        "description": "Delete a Private Atlas resource.",
+        "operationId": "PrivateAtlases_Delete",
+        "x-ms-examples": {
+          "DeletePrivateAtlas": {
+            "$ref": "./examples/DeletePrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Private Atlas was deleted successfully."
+          },
+          "204": {
+            "description": "The specified Private Atlas was not found. Nothing was deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Private Atlases"
+        ],
+        "description": "Get a Private Atlas resource.",
+        "operationId": "PrivateAtlases_Get",
+        "x-ms-examples": {
+          "GetPrivateAtlas": {
+            "$ref": "./examples/GetPrivateAtlas.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateAtlasNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlas"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateAtlases": {
+      "get": {
+        "tags": [
+          "Private Atlases"
+        ],
+        "description": "Get all Private Atlas instances for an Azure Map Account",
+        "operationId": "PrivateAtlases_ListByAccount",
+        "x-ms-examples": {
+          "ListPrivateAtlasByAccount": {
+            "$ref": "./examples/ListPrivateAtlasByAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "value"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful.",
+            "schema": {
+              "$ref": "#/definitions/PrivateAtlasList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AccountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "description": "The name of the Maps Account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateAtlasNameParameter": {
+      "name": "privateAtlasName",
+      "in": "path",
+      "description": "The name of the Private Atlas instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {
+    "PrivateAtlas": {
+      "description": "An Azure resource which represents which will provision the ability to create private location data.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "The Private Atlas resource properties.",
+          "$ref": "#/definitions/PrivateAtlasProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MapsAccount": {
+      "description": "An Azure resource which represents access to a suite of Maps REST APIs.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "readOnly": true,
+          "description": "The SKU of this account.",
+          "$ref": "#/definitions/Sku"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system meta data relating to this resource.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
+        "properties": {
+          "readOnly": true,
+          "description": "The map account properties.",
+          "$ref": "#/definitions/MapsAccountProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "MapsAccountCreateParameters": {
+      "description": "Parameters used to create a new Maps Account.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "sku": {
+          "description": "The SKU of this account.",
+          "$ref": "#/definitions/Sku"
+        }
+      },
+      "required": [
+        "location",
+        "sku"
+      ]
+    },
+    "PrivateAtlasCreateParameters": {
+      "description": "Parameters used to create a new Private Atlas resource.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location of the resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "MapsAccountUpdateParameters": {
+      "description": "Parameters used to update an existing Maps Account.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "sku": {
+          "description": "The SKU of this account.",
+          "$ref": "#/definitions/Sku"
+        }
+      }
+    },
+    "PrivateAtlasUpdateParameters": {
+      "description": "Parameters used to update an existing Private Atlas resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        }
+      }
+    },
+    "MapsAccounts": {
+      "description": "A list of Maps Accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "a Maps Account.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/MapsAccount"
+          }
+        }
+      }
+    },
+    "PrivateAtlasList": {
+      "description": "A list of Private Atlas resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "a Private Atlas.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/PrivateAtlas"
+          }
+        }
+      }
+    },
+    "Sku": {
+      "description": "The SKU of the Maps Account.",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU, in standard format (such as S0).",
+          "type": "string"
+        },
+        "tier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the sku tier. This is based on the SKU name."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "MapsKeySpecification": {
+      "description": "Whether the operation refers to the primary or secondary key.",
+      "type": "object",
+      "required": [
+        "keyType"
+      ],
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": true
+          },
+          "description": "Whether the operation refers to the primary or secondary key."
+        }
+      }
+    },
+    "MapsAccountKeys": {
+      "description": "The set of keys which can be used to access the Maps REST APIs. Two keys are provided for key rotation without interruption.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The full Azure resource identifier of the Maps Account."
+        },
+        "primaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The primary key for accessing the Maps REST APIs."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The secondary key for accessing the Maps REST APIs."
+        }
+      }
+    },
+    "MapsOperations": {
+      "description": "The set of operations available for Maps.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An operation available for Maps.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Operation name: {provider}/{resource}/{operation}."
+              },
+              "display": {
+                "description": "The human-readable description of the operation.",
+                "type": "object",
+                "properties": {
+                  "provider": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Service provider: Microsoft Maps."
+                  },
+                  "resource": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "Resource on which the operation is performed."
+                  },
+                  "operation": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The action that users can perform, based on their permission level."
+                  },
+                  "description": {
+                    "type": "string",
+                    "readOnly": true,
+                    "description": "The description of the operation."
+                  }
+                }
+              },
+              "origin": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The origin of the operation."
+              }
+            }
+          }
+        }
+      }
+    },
+    "MapsAccountProperties": {
+      "description": "Additional Map account properties",
+      "properties": {
+        "x-ms-client-id": {
+          "description": "A unique identifier for the maps account",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateAtlasProperties": {
+      "description": "Private Atlas resource properties",
+      "properties": {
+        "provisioningState": {
+          "description": "The state of the resource provisioning, terminal states: Succeeded, Failed, Canceled",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

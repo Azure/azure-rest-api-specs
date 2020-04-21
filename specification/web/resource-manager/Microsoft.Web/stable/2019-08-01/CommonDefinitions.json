@@ -1921,6 +1921,10 @@
           "description": "Version of Node.js.",
           "type": "string"
         },
+        "powerShellVersion": {
+          "description": "Version of PowerShell.",
+          "type": "string"
+        },
         "linuxFxVersion": {
           "description": "Linux App Framework and version",
           "type": "string"
@@ -2483,6 +2487,25 @@
         "timeInterval": {
           "description": "Time interval.",
           "type": "string"
+        }
+      }
+    },
+    "StringDictionary": {
+      "description": "String dictionary resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Settings.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-client-flatten": true
         }
       }
     },

@@ -236,77 +236,10 @@
           "description": "The date and time the sub-assessment was generated"
         },
         "resourceDetails": {
-          "$ref": "#/definitions/ResourceDetails"
+          "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
         },
         "additionalData": {
           "$ref": "#/definitions/AdditionalData"
-        }
-      }
-    },
-    "ResourceDetails": {
-      "type": "object",
-      "description": "Details of the resource that was assessed",
-      "discriminator": "source",
-      "properties": {
-        "source": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The platform where the assessed resource resides",
-          "enum": [
-            "Azure",
-            "Aws"
-          ],
-          "x-ms-enum": {
-            "name": "Source",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Azure"
-              },
-              {
-                "value": "Aws"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "AzureResourceDetails": {
-      "type": "object",
-      "description": "Details of the resource that was assessed",
-      "x-ms-discriminator-value": "Azure",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceDetails"
-        }
-      ],
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Azure resource ID of the assessed resource"
-        }
-      }
-    },
-    "AwsResourceDetails": {
-      "type": "object",
-      "description": "Details of the resource that was assessed",
-      "x-ms-discriminator-value": "Aws",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceDetails"
-        }
-      ],
-      "properties": {
-        "accountId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "AWS account ID"
-        },
-        "awsResourceId": {
-          "readOnly": true,
-          "type": "string",
-          "description": "AWS resource ID. can be ARN or other"
         }
       }
     },
@@ -316,7 +249,6 @@
       "discriminator": "assessedResourceType",
       "properties": {
         "assessedResourceType": {
-          "readOnly": true,
           "type": "string",
           "description": "Sub-assessment resource type",
           "enum": [
@@ -340,7 +272,10 @@
             ]
           }
         }
-      }
+      },
+      "required": [
+        "assessedResourceType"
+      ]
     },
     "SubAssessmentStatus": {
       "type": "object",
