@@ -66,9 +66,7 @@ input-file:
 - Microsoft.Relay/preview/2018-01-01-preview/PrivateEndpointConnection-preview.json
 - Microsoft.Relay/preview/2018-01-01-preview/PrivateLinkResources-preview.json
 - Microsoft.Relay/stable/2017-04-01/authorizationRules.json
-- Microsoft.Relay/stable/2017-04-01/checkNameAvailability.json
 - Microsoft.Relay/stable/2017-04-01/hybridConnectionName.json
-- Microsoft.Relay/stable/2017-04-01/operations.json
 - Microsoft.Relay/stable/2017-04-01/wcfRelays.json
 ```
 
