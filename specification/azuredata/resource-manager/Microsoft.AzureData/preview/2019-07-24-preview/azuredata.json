@@ -568,6 +568,294 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_List",
+        "summary": "List sqlManagedInstance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_ListByResourceGroup",
+        "description": "Gets all sqlManagedInstances in a resource group.",
+        "summary": "List sqlManagedInstance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureData/sqlManagedInstances/{sqlManagedInstanceName}": {
+      "get": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Get",
+        "description": "Retrieves a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of SQL Managed Instance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Instance tags.": {
+            "$ref": "./examples/GetSqlManagedInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Create",
+        "description": "Creates or replaces a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of SQL Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Managed Instance tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlManagedInstance.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Delete",
+        "description": "Deletes a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "The name of Sql Managed Instances",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Managed Instance."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Managed Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Instance.": {
+            "$ref": "./examples/DeleteSqlManagedInstance.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlManagedInstances"
+        ],
+        "operationId": "SqlManagedInstances_Update",
+        "description": "Updates a SQL Managed Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlManagedInstanceName",
+            "description": "Name of sqlManagedInstance",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Managed Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlManagedInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a sql Instance tags.": {
+            "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureData/sqlInstances": {
       "get": {
         "tags": [
@@ -2426,6 +2714,16 @@
         }
       }
     },
+    "SqlManagedInstanceProperties": {
+      "description": "Properties of sqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "dataControllerId": {
+          "type": "string",
+          "description": "null"
+        }
+      }
+    },
     "SqlInstance": {
       "description": "A SqlInstance.",
       "type": "object",
@@ -2442,8 +2740,37 @@
         }
       }
     },
+    "SqlManagedInstance": {
+      "description": "A SqlManagedInstance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlManagedInstanceProperties",
+          "description": "null",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "SqlInstanceUpdate": {
       "description": "An update to a SQL Instance.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SqlManagedInstanceUpdate": {
+      "description": "An update to a SQL Managed Instance.",
       "type": "object",
       "properties": {
         "tags": {
@@ -2464,6 +2791,25 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SqlInstance"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlManagedInstanceListResult": {
+      "description": "A list of SqlManagedInstance.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlManagedInstance"
           },
           "readOnly": true
         },
@@ -2669,6 +3015,14 @@
     "SqlInstanceNameParameter": {
       "in": "path",
       "name": "sqlInstanceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SqlManagedInstanceNameParameter": {
+      "in": "path",
+      "name": "sqlManagedInstanceName",
       "description": "The name of the resource.",
       "required": true,
       "type": "string",
