@@ -929,15 +929,11 @@
     "EmailActions": {
       "description": "The email actions.",
       "properties": {
-        "value": {
-          "description": "The list of email actions based on the success or failure of automatic quota increase action.",
-          "type": "array",
-          "items": {
-            "description": "The email recipients for the specific action types.",
-            "$ref": "#/definitions/EmailAction"
+        "emailActions": {
+          "description": "The email actions for auto quota increase.",
+          "$ref": "#/definitions/EmailActions"
+            }
           }
-        }
-      }
     },
     "SupportRequestAction": {
       "description": "The SupportRequest action.",
@@ -1017,7 +1013,7 @@
       "enum": [
         "enabled",
         "disabled",
-        "previewEnabled"
+        "enabledForPreview"
       ],
       "x-ms-enum": {
         "name": "AqiStateType",
@@ -1053,14 +1049,7 @@
       "properties": {
         "emailActions": {
           "description": "The email actions for auto quota increase.",
-          "properties": {
-            "emailAddresses": {
-              "description": "The list of email actions.",
-              "type": "array",
-              "items": {
-                "description": "The email recipients.",
-                "$ref": "#/definitions/EmailAction"
-              }
+          "$ref": "#/definitions/EmailActions"
             }
           }
         },
@@ -1076,8 +1065,6 @@
               }
             }
           }
-        }
-      }
     },
     "ExceptionResponse": {
       "type": "object",
