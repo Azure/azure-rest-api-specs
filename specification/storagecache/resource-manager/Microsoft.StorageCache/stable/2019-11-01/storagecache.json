@@ -532,6 +532,10 @@
             "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
             "schema": {}
           },
+          "204": {
+            "description": "Cache flushed.",
+            "schema": {}
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -589,6 +593,10 @@
             "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
             "schema": {}
           },
+          "204": {
+            "description": "Restarted VMs associated with the cache.",
+            "schema": {}
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -644,6 +652,10 @@
           },
           "202": {
             "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
+            "schema": {}
+          },
+          "204": {
+            "description": "Stopped VMs associated with the cache.",
             "schema": {}
           },
           "default": {
@@ -967,6 +979,10 @@
             "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
             "schema": {}
           },
+          "204": {
+            "description": "Cache firmware is up to date.",
+            "schema": {}
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1034,6 +1050,7 @@
       "type": "object"
     },
     "CloudError": {
+      "x-ms-external": true,
       "description": "An error response.",
       "properties": {
         "error": {

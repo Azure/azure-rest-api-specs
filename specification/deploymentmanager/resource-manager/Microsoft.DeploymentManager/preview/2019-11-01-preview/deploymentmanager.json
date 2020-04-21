@@ -1,0 +1,2498 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-11-01-preview",
+    "title": "AzureDeploymentManager",
+    "description": "REST APIs for orchestrating deployments using the Azure Deployment Manager (ADM). See https://docs.microsoft.com/en-us/azure/azure-resource-manager/deployment-manager-overview for more information."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/serviceTopologyName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "put": {
+        "tags": [
+          "ServiceTopologies"
+        ],
+        "operationId": "ServiceTopologies_CreateOrUpdate",
+        "summary": "Creates or updates a service topology.",
+        "description": "Synchronously creates a new service topology or updates an existing service topology.",
+        "x-ms-examples": {
+          "Create a topology with Artifact Source": {
+            "$ref": "./examples/servicetopology_createorupdate.json"
+          },
+          "Create a topology without Artifact Source": {
+            "$ref": "./examples/servicetopology_createorupdate_noartifactsource.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "serviceTopologyInfo",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceTopologyResource"
+            },
+            "description": "Source topology object defines the resource."
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceTopologyResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard Error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServiceTopologies"
+        ],
+        "operationId": "ServiceTopologies_Get",
+        "summary": "Gets the service topology.",
+        "x-ms-examples": {
+          "Get topology": {
+            "$ref": "./examples/servicetopology_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceTopologyResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServiceTopologies"
+        ],
+        "operationId": "ServiceTopologies_Delete",
+        "summary": "Deletes the service topology.",
+        "x-ms-examples": {
+          "Delete topology": {
+            "$ref": "./examples/servicetopology_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The topology was successfully deleted."
+          },
+          "204": {
+            "description": "The topology was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ServiceTopologies"
+        ],
+        "operationId": "ServiceTopologies_List",
+        "summary": "Lists the service topologies in the resource group.",
+        "x-ms-examples": {
+          "List topologies": {
+            "$ref": "./examples/servicetopologies_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceTopologiesListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services/{serviceName}": {
+      "put": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_CreateOrUpdate",
+        "summary": "Creates or updates a service in the service topology.",
+        "description": "Synchronously creates a new service or updates an existing service.",
+        "x-ms-examples": {
+          "Create service": {
+            "$ref": "./examples/service_createorupdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "serviceInfo",
+            "description": "The service object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Get",
+        "summary": "Gets the service.",
+        "x-ms-examples": {
+          "Get service": {
+            "$ref": "./examples/service_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_Delete",
+        "summary": "Deletes the service.",
+        "x-ms-examples": {
+          "Delete service": {
+            "$ref": "./examples/service_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service was successfully deleted."
+          },
+          "204": {
+            "description": "The service was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/serviceTopologyName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "operationId": "Services_List",
+        "summary": "Lists the services in the service topology.",
+        "x-ms-examples": {
+          "List services": {
+            "$ref": "./examples/services_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services/{serviceName}/serviceUnits/{serviceUnitName}": {
+      "put": {
+        "tags": [
+          "ServiceUnits"
+        ],
+        "operationId": "ServiceUnits_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "summary": "Creates or updates a service unit under the service in the service topology.",
+        "description": "This is an asynchronous operation and can be polled to completion using the operation resource returned by this operation.",
+        "x-ms-examples": {
+          "Create service unit using relative paths into the artifact source": {
+            "$ref": "./examples/serviceunit_createorupdate.json"
+          },
+          "Create service unit using SAS URIs": {
+            "$ref": "./examples/serviceunit_createorupdate_noartifactsource.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/serviceUnitName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "serviceUnitInfo",
+            "description": "The service unit resource object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceUnitResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This is a long running operation. The operation returns a 201 if the validation is complete. The response includes an Azure-AsyncOperation header that contains a status URL. Clients are expected to poll the status URL for the status of the operation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServiceUnitResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ServiceUnits"
+        ],
+        "operationId": "ServiceUnits_Get",
+        "summary": "Gets the service unit.",
+        "x-ms-examples": {
+          "Get service unit": {
+            "$ref": "./examples/serviceunit_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/serviceUnitName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnitResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServiceUnits"
+        ],
+        "operationId": "ServiceUnits_Delete",
+        "summary": "Deletes the service unit.",
+        "x-ms-examples": {
+          "Delete service unit": {
+            "$ref": "./examples/serviceunit_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/serviceUnitName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The service unit was successfully deleted."
+          },
+          "204": {
+            "description": "The service unit was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/serviceTopologies/{serviceTopologyName}/services/{serviceName}/serviceUnits": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/serviceTopologyName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ServiceUnits"
+        ],
+        "operationId": "ServiceUnits_List",
+        "summary": "Lists the service units under a service in the service topology.",
+        "x-ms-examples": {
+          "List service units": {
+            "$ref": "./examples/serviceunits_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/serviceTopologyName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnitListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/steps/{stepName}": {
+      "put": {
+        "tags": [
+          "Steps"
+        ],
+        "operationId": "Steps_CreateOrUpdate",
+        "summary": "Creates or updates a rollout step with the given step properties.",
+        "description": "Synchronously creates a new step or updates an existing step.",
+        "x-ms-examples": {
+          "Create wait step": {
+            "$ref": "./examples/step_wait_createorupdate.json"
+          },
+          "Create health check step": {
+            "$ref": "./examples/step_health_check_createorupdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/stepName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "stepInfo",
+            "description": "The step object.",
+            "schema": {
+              "$ref": "#/definitions/StepResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StepResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Steps"
+        ],
+        "operationId": "Steps_Get",
+        "summary": "Gets the step.",
+        "x-ms-examples": {
+          "Get deployment step": {
+            "$ref": "./examples/step_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/stepName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StepResource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Steps"
+        ],
+        "operationId": "Steps_Delete",
+        "summary": "Deletes the step.",
+        "x-ms-examples": {
+          "Delete deployment step": {
+            "$ref": "./examples/step_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/stepName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The step was successfully deleted."
+          },
+          "204": {
+            "description": "The step was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/steps": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Steps"
+        ],
+        "operationId": "Steps_List",
+        "summary": "Lists the steps in a resource group.",
+        "x-ms-examples": {
+          "List steps": {
+            "$ref": "./examples/steps_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StepResourceListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/rollouts/{rolloutName}": {
+      "put": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "summary": "Creates or updates a rollout.",
+        "description": "This is an asynchronous operation and can be polled to completion using the location header returned by this operation.",
+        "x-ms-examples": {
+          "Create or update rollout": {
+            "$ref": "./examples/rollout_createorupdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/rolloutName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "rolloutRequest",
+            "description": "Source rollout request object that defines the rollout.",
+            "schema": {
+              "$ref": "#/definitions/RolloutRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This is a long running operation. The operation returns a 201 if the request was successfully registered and basic validation is successful. The response includes an Azure-AsyncOperation header that contains the operation status URL. Clients are expected to poll the status URL for the status of the operation.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Contains the status URL on which clients are expected to poll the status of the operation."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RolloutRequest"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_Get",
+        "summary": "Gets detailed information of a rollout.",
+        "x-ms-examples": {
+          "Get rollout": {
+            "$ref": "./examples/rollout_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/rolloutName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/retryAttempt"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_Delete",
+        "summary": "Deletes a rollout resource.",
+        "description": "Only rollouts in terminal state can be deleted.",
+        "x-ms-examples": {
+          "Delete rollout": {
+            "$ref": "./examples/rollout_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/rolloutName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The rollout was successfully deleted."
+          },
+          "204": {
+            "description": "The rollout was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/rollouts/{rolloutName}/cancel": {
+      "post": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_Cancel",
+        "summary": "Stops a running rollout.",
+        "description": "Only running rollouts can be canceled.",
+        "x-ms-examples": {
+          "Cancel rollout": {
+            "$ref": "./examples/rollout_post_cancel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/rolloutName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/rollouts/{rolloutName}/restart": {
+      "post": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_Restart",
+        "summary": "Restarts a failed rollout and optionally skips all succeeded steps.",
+        "description": "Only failed rollouts can be restarted.",
+        "x-ms-examples": {
+          "Restart rollout": {
+            "$ref": "./examples/rollout_post_restart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/rolloutName"
+          },
+          {
+            "name": "skipSucceeded",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "If true, will skip all succeeded steps so far in the rollout. If false, will execute the entire rollout again regardless of the current state of individual resources. Defaults to false if not specified."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Rollout"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/rollouts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Rollouts"
+        ],
+        "operationId": "Rollouts_List",
+        "summary": "Lists the rollouts in a resource group.",
+        "x-ms-examples": {
+          "List rollouts by resource group": {
+            "$ref": "./examples/rollouts_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RolloutListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/artifactSources/{artifactSourceName}": {
+      "put": {
+        "tags": [
+          "ArtifactSources"
+        ],
+        "operationId": "ArtifactSources_CreateOrUpdate",
+        "summary": "Creates or updates an artifact source.",
+        "description": "Synchronously creates a new artifact source or updates an existing artifact source.",
+        "x-ms-examples": {
+          "Create artifact source": {
+            "$ref": "./examples/artifactsource_createorupdate.json"
+          },
+          "Create artifact source with artifact root, an offset into the storage container": {
+            "$ref": "./examples/artifactsource_createorupdate_artifactroot.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/artifactSourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "artifactSourceInfo",
+            "description": "Source object that defines the resource.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ArtifactSources"
+        ],
+        "operationId": "ArtifactSources_Get",
+        "summary": "Gets an artifact source.",
+        "x-ms-examples": {
+          "Get artifact source": {
+            "$ref": "./examples/artifactsource_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/artifactSourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSource"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArtifactSources"
+        ],
+        "operationId": "ArtifactSources_Delete",
+        "summary": "Deletes an artifact source.",
+        "x-ms-examples": {
+          "Delete artifact source": {
+            "$ref": "./examples/artifactsource_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/artifactSourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The artifact source was successfully deleted."
+          },
+          "204": {
+            "description": "The artifact source was not found and the operation is considered success."
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeploymentManager/artifactSources": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/resourceGroupName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ArtifactSources"
+        ],
+        "operationId": "ArtifactSources_List",
+        "summary": "Lists the artifact sources in a resource group.",
+        "x-ms-examples": {
+          "List steps": {
+            "$ref": "./examples/artifactsources_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArtifactSourceListResult"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DeploymentManager/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "summary": "Lists the supported operations.",
+        "x-ms-examples": {
+          "Get operations": {
+            "$ref": "./examples/operations_list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operations are successfully returned. The response code does not determine if the request which this operation corresponds to is successful. Check the response content for the status and any error information on failures.",
+            "schema": {
+              "$ref": "#/definitions/OperationsList"
+            }
+          },
+          "default": {
+            "description": "All non-success conditions are handled using the standard error contract.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Identity": {
+      "description": "Identity for the resource.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "example": "userAssigned"
+        },
+        "identityIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "/subscriptions/mySubId/resourcegroups/myRG/providers/Microsoft.ManagedIdentity/userassignedidentities/myIdentity"
+          },
+          "description": "The list of identities."
+        }
+      },
+      "required": [
+        "type",
+        "identityIds"
+      ]
+    },
+    "RolloutRequest": {
+      "description": "Defines the PUT rollout request body.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Identity for the resource.",
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "description": "Defines the properties that make up a rollout request.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RolloutRequestProperties"
+        }
+      },
+      "required": [
+        "identity",
+        "properties"
+      ]
+    },
+    "RolloutRequestProperties": {
+      "description": "The properties for defining a rollout.",
+      "properties": {
+        "buildVersion": {
+          "type": "string",
+          "description": "The version of the build being deployed.",
+          "example": "1.0.0.1"
+        },
+        "artifactSourceId": {
+          "type": "string",
+          "description": "The reference to the artifact source resource Id where the payload is located.",
+          "example": "Microsoft.DeploymentManager/artifactSources/payloadStore1"
+        },
+        "targetServiceTopologyId": {
+          "type": "string",
+          "description": "The resource Id of the service topology from which service units are being referenced in step groups to be deployed.",
+          "example": "Microsoft.DeploymentManager/serviceTopologies/myServiceTopology"
+        },
+        "stepGroups": {
+          "description": "The list of step groups that define the orchestration.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StepGroup"
+          }
+        }
+      },
+      "required": [
+        "stepGroups",
+        "targetServiceTopologyId",
+        "buildVersion"
+      ]
+    },
+    "StepGroup": {
+      "description": "The properties that define a Step group in a rollout.",
+      "properties": {
+        "name": {
+          "description": "The name of the step group.",
+          "type": "string"
+        },
+        "dependsOnStepGroups": {
+          "description": "The list of step group names on which this step group depends on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "stepGroup1",
+            "stepGroup2"
+          ]
+        },
+        "preDeploymentSteps": {
+          "description": "The list of steps to be run before deploying the target.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrePostStep"
+          }
+        },
+        "deploymentTargetId": {
+          "description": "The resource Id of service unit to be deployed. The service unit should be from the service topology referenced in targetServiceTopologyId",
+          "type": "string",
+          "example": "Microsoft.DeploymentManager/serviceTopologies/myServiceTopology/services/myService/serviceUnits/database"
+        },
+        "postDeploymentSteps": {
+          "description": "The list of steps to be run after deploying the target.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrePostStep"
+          }
+        }
+      },
+      "required": [
+        "deploymentTargetId",
+        "name"
+      ]
+    },
+    "PrePostStep": {
+      "description": "The properties that define a step.",
+      "properties": {
+        "stepId": {
+          "type": "string",
+          "description": "The resource Id of the step to be run.",
+          "example": "Microsoft.DeploymentManager/steps/healthCheckStep1"
+        }
+      },
+      "required": [
+        "stepId"
+      ]
+    },
+    "ArtifactSource": {
+      "description": "The resource that defines the source location where the artifacts are located.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define the artifact source.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ArtifactSourceProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ArtifactSourceProperties": {
+      "description": "The properties that define the source location where the artifacts are located.",
+      "properties": {
+        "sourceType": {
+          "type": "string",
+          "description": "The type of artifact source used.",
+          "example": "AzureStorage"
+        },
+        "artifactRoot": {
+          "type": "string",
+          "description": "The path from the location that the 'authentication' property [say, a SAS URI to the blob container] refers to, to the location of the artifacts. This can be used to differentiate different versions of the artifacts. Or, different types of artifacts like binaries or templates. The location referenced by the authentication property concatenated with this optional artifactRoot path forms the artifact source location where the artifacts are expected to be found.",
+          "example": "binaries/2018.09.24"
+        },
+        "authentication": {
+          "description": "The authentication method to use to access the artifact source.",
+          "$ref": "#/definitions/Authentication"
+        }
+      },
+      "required": [
+        "sourceType",
+        "authentication"
+      ]
+    },
+    "Authentication": {
+      "description": "Defines the authentication method and properties to access the artifacts.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The authentication type"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SasAuthentication": {
+      "x-ms-discriminator-value": "Sas",
+      "type": "object",
+      "description": "Defines the properties to access the artifacts using an Azure Storage SAS URI.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Authentication"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The SAS properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SasProperties"
+        }
+      }
+    },
+    "SasProperties": {
+      "description": "The properties that define SAS authentication.",
+      "properties": {
+        "sasUri": {
+          "type": "string",
+          "description": "The SAS URI to the Azure Storage blob container. Any offset from the root of the container to where the artifacts are located can be defined in the artifactRoot."
+        }
+      },
+      "required": [
+        "sasUri"
+      ]
+    },
+    "Rollout": {
+      "description": "Defines the rollout.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "Identity for the resource.",
+          "$ref": "#/definitions/Identity"
+        },
+        "properties": {
+          "description": "The properties that define a rollout.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/RolloutRequestProperties"
+            },
+            {
+              "$ref": "#/definitions/RolloutProperties"
+            }
+          ]
+        }
+      }
+    },
+    "RolloutProperties": {
+      "description": "Defines the properties of a rollout.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current status of the rollout."
+        },
+        "totalRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The cardinal count of total number of retries performed on the rollout at a given time."
+        },
+        "operationInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/RolloutOperationInfo",
+          "description": "Operational information of the rollout."
+        },
+        "services": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Service"
+          },
+          "description": "The detailed information on the services being deployed."
+        }
+      }
+    },
+    "RolloutOperationInfo": {
+      "description": "Detailed runtime information of the rollout.",
+      "properties": {
+        "retryAttempt": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The ordinal count of the number of retry attempts on a rollout. 0 if no retries of the rollout have been performed. If the rollout is updated with a PUT, this count is reset to 0."
+        },
+        "skipSucceededOnRetry": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "True, if all steps that succeeded on the previous run/attempt were chosen to be skipped in this retry attempt. False, otherwise."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The start time of the rollout in UTC."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The start time of the rollout in UTC. This property will not be set if the rollout has not completed yet."
+        },
+        "error": {
+          "description": "The detailed error information for any failure.",
+          "readOnly": true,
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "ServiceTopologyResource": {
+      "description": "The resource representation of a service topology.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define the service topology.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceTopologyProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ServiceTopologyProperties": {
+      "description": "The properties of a service topology.",
+      "properties": {
+        "artifactSourceId": {
+          "type": "string",
+          "description": "The resource Id of the artifact source that contains the artifacts that can be referenced in the service units."
+        }
+      }
+    },
+    "ServiceResource": {
+      "description": "The resource representation of a service in a service topology.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define a service in a service topology.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "Service": {
+      "description": "Defines a service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the service."
+        },
+        "serviceUnits": {
+          "description": "The detailed information about the units that make up the service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceUnit"
+          }
+        }
+      }
+    },
+    "ServiceProperties": {
+      "description": "The properties of a service.",
+      "properties": {
+        "targetLocation": {
+          "type": "string",
+          "description": "The Azure location to which the resources in the service belong to or should be deployed to."
+        },
+        "targetSubscriptionId": {
+          "type": "string",
+          "description": "The subscription to which the resources in the service belong to or should be deployed to."
+        }
+      },
+      "required": [
+        "targetLocation",
+        "targetSubscriptionId"
+      ]
+    },
+    "ServiceUnitResource": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents the response of a service unit resource.",
+      "properties": {
+        "properties": {
+          "description": "The properties that define the service unit.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceUnitProperties"
+            }
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ServiceUnit": {
+      "description": "Defines a service unit.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceUnitProperties"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the service unit."
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RolloutStep"
+          },
+          "description": "Detailed step information, if present."
+        }
+      }
+    },
+    "ServiceUnitProperties": {
+      "description": "Defines the properties of a service unit.",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The Azure Resource Group to which the resources in the service unit belong to or should be deployed to."
+        },
+        "deploymentMode": {
+          "type": "string",
+          "enum": [
+            "Incremental",
+            "Complete"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": false
+          },
+          "description": "Describes the type of ARM deployment to be performed on the resource."
+        },
+        "artifacts": {
+          "type": "object",
+          "description": "The artifacts for the service unit.",
+          "$ref": "#/definitions/ServiceUnitArtifacts"
+        }
+      },
+      "required": [
+        "targetResourceGroup",
+        "deploymentMode"
+      ]
+    },
+    "ServiceUnitArtifacts": {
+      "description": "Defines the artifacts of a service unit.",
+      "properties": {
+        "templateUri": {
+          "type": "string",
+          "description": "The full URI of the ARM template file with the SAS token.",
+          "example": "https://teststore.blob.core.windows.net/payloadcontainer/template.json?sasUri"
+        },
+        "parametersUri": {
+          "type": "string",
+          "description": "The full URI of the ARM parameters file with the SAS token.",
+          "example": "https://teststore.blob.core.windows.net/payloadcontainer/parameters.json?sasUri"
+        },
+        "templateArtifactSourceRelativePath": {
+          "type": "string",
+          "description": "The path to the ARM template file relative to the artifact source.",
+          "example": "/templates/resource1.template.json"
+        },
+        "parametersArtifactSourceRelativePath": {
+          "type": "string",
+          "description": "The path to the ARM parameters file relative to the artifact source.",
+          "example": "/parameters/resource1.parameters.json"
+        }
+      }
+    },
+    "RolloutStep": {
+      "description": "Defines a specific step on a target service unit.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the step."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current state of the step."
+        },
+        "stepGroup": {
+          "type": "string",
+          "description": "The step group the current step is part of."
+        },
+        "operationInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/StepOperationInfo",
+          "description": "Detailed information of specific action execution."
+        },
+        "resourceOperations": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "description": "Set of resource operations that were performed, if any, on an Azure resource."
+        },
+        "messages": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Message"
+          },
+          "description": "Supplementary informative messages during rollout."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "StepOperationInfo": {
+      "description": "Detailed information of a specific step run.",
+      "properties": {
+        "deploymentName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the ARM deployment initiated as part of the step."
+        },
+        "correlationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier to track the request for ARM-based resources."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start time of the action in UTC."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End time of the action in UTC."
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Last time in UTC this operation was updated."
+        },
+        "error": {
+          "description": "The errors, if any, for the action.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "ResourceOperation": {
+      "description": "Individual resource operation information.",
+      "properties": {
+        "resourceName": {
+          "type": "string",
+          "description": "Name of the resource as specified in the artifacts. For ARM resources, this is the name of the resource specified in the template."
+        },
+        "operationId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique identifier of the operation. For ARM resources, this is the operationId obtained from ARM service."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Type of the resource as specified in the artifacts. For ARM resources, this is the type of the resource specified in the template."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "State of the resource deployment. For ARM resources, this is the current provisioning state of the resource."
+        },
+        "statusMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Descriptive information of the resource operation."
+        },
+        "statusCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Http status code of the operation."
+        }
+      }
+    },
+    "Message": {
+      "description": "Supplementary contextual messages during a rollout.",
+      "properties": {
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Time in UTC this message was provided."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The actual message text."
+        }
+      }
+    },
+    "CloudError": {
+      "description": "The error information object.",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "description": "The properties that define the error.",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      }
+    },
+    "CloudErrorBody": {
+      "description": "Detailed error information of any failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Error code string."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Descriptive error information."
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "More detailed error information."
+        }
+      }
+    },
+    "OperationsList": {
+      "description": "The operations response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of supported operations",
+          "$ref": "#/definitions/Operation"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Represents an operation that can be performed on the service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "description": "The display name of the operation.",
+          "$ref": "#/definitions/OperationDetail"
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of the operation."
+        },
+        "properties": {
+          "description": "The properties of the operation.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationDetail": {
+      "description": "The detail about an operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The name of the provider that supports the operation."
+        },
+        "resource": {
+          "type": "string",
+          "description": "The resource type on which this operation can be performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the operation."
+        }
+      }
+    },
+    "StepResource": {
+      "description": "The resource representation of a rollout step.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties that define the step.",
+          "$ref": "#/definitions/StepProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "StepProperties": {
+      "description": "The properties of a step resource.",
+      "type": "object",
+      "discriminator": "stepType",
+      "properties": {
+        "stepType": {
+          "type": "string",
+          "description": "The type of step.",
+          "enum": [
+            "Wait",
+            "HealthCheck"
+          ],
+          "x-ms-enum": {
+            "name": "StepType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "stepType"
+      ]
+    },
+    "HealthCheckStepProperties": {
+      "x-ms-discriminator-value": "HealthCheck",
+      "type": "object",
+      "description": "Defines the properties of a health check step.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepProperties"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "description": "The health check step attributes",
+          "$ref": "#/definitions/HealthCheckStepAttributes"
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    },
+    "HealthCheckStepAttributes": {
+      "type": "object",
+      "description": "The attributes for the health check step.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of health check.",
+          "example": "REST"
+        },
+        "waitDuration": {
+          "type": "string",
+          "description": "The duration in ISO 8601 format for which health check waits idly without any checks.",
+          "example": "PT15M"
+        },
+        "maxElasticDuration": {
+          "type": "string",
+          "description": "The duration in ISO 8601 format for which the health check waits for the resource to become healthy. Health check fails if it doesn't. Health check starts to enforce healthyStateDuration once resource becomes healthy.",
+          "example": "PT30M"
+        },
+        "healthyStateDuration": {
+          "type": "string",
+          "description": "The duration in ISO 8601 format for which the resource is expected to be continuously healthy. If maxElasticDuration is specified, healthy state duration is enforced after the detection of first healthy signal.",
+          "example": "PT60M"
+        }
+      },
+      "required": [
+        "type",
+        "healthyStateDuration"
+      ]
+    },
+    "RestHealthCheckStepAttributes": {
+      "x-ms-discriminator-value": "REST",
+      "type": "object",
+      "description": "Defines the REST health check step properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthCheckStepAttributes"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The REST health check parameters.",
+          "$ref": "#/definitions/RestParameters"
+        }
+      }
+    },
+    "RestParameters": {
+      "type": "object",
+      "description": "The parameters for the REST health check.",
+      "properties": {
+        "healthChecks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestHealthCheck"
+          },
+          "description": "The list of checks that form the health check step."
+        }
+      },
+      "required": [
+        "healthChecks"
+      ]
+    },
+    "RestHealthCheck": {
+      "type": "object",
+      "description": "A REST based health check",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A unique name for this check."
+        },
+        "request": {
+          "description": "The request to the health provider.",
+          "$ref": "#/definitions/RestRequest"
+        },
+        "response": {
+          "description": "The expected response from the health provider. If no expected response is provided, the default is to expect the received response to have an HTTP status code of 200 OK.",
+          "$ref": "#/definitions/RestResponse"
+        }
+      },
+      "required": [
+        "name",
+        "request"
+      ]
+    },
+    "RestRequest": {
+      "type": "object",
+      "description": "The properties that make up a REST request",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "The HTTP method to use for the request.",
+          "enum": [
+            "GET",
+            "POST"
+          ],
+          "x-ms-enum": {
+            "name": "RestRequestMethod",
+            "modelAsString": false
+          }
+        },
+        "uri": {
+          "type": "string",
+          "description": "The HTTP URI to use for the request."
+        },
+        "authentication": {
+          "description": "The authentication information required in the request to the health provider.",
+          "$ref": "#/definitions/RestRequestAuthentication"
+        }
+      },
+      "required": [
+        "method",
+        "uri",
+        "authentication"
+      ]
+    },
+    "RestRequestAuthentication": {
+      "type": "object",
+      "description": "The authentication information required in the REST health check request to the health provider.",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The authentication type.",
+          "example": "ApiKey",
+          "enum": [
+            "ApiKey",
+            "RolloutIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "RestAuthType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "RolloutIdentityAuthentication": {
+      "x-ms-discriminator-value": "RolloutIdentity",
+      "description": "RolloutIdentity uses the user-assigned managed identity authentication context specified in the Identity property during rollout creation.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestRequestAuthentication"
+        }
+      ]
+    },
+    "ApiKeyAuthentication": {
+      "x-ms-discriminator-value": "ApiKey",
+      "description": "ApiKey authentication gives a name and a value that can be included in either the request header or query parameters.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestRequestAuthentication"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The key name of the authentication key/value pair."
+        },
+        "in": {
+          "type": "string",
+          "description": "The location of the authentication key/value pair in the request.",
+          "enum": [
+            "Query",
+            "Header"
+          ],
+          "x-ms-enum": {
+            "name": "RestAuthLocation",
+            "modelAsString": false
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the authentication key/value pair."
+        }
+      },
+      "required": [
+        "name",
+        "in",
+        "value"
+      ]
+    },
+    "RestResponse": {
+      "type": "object",
+      "description": "The properties that make up the expected REST response",
+      "properties": {
+        "successStatusCodes": {
+          "type": "array",
+          "description": "The HTTP status codes expected in a successful health check response. The response is expected to match one of the given status codes. If no expected status codes are provided, default expected status code is 200 OK.",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "Ok",
+            "No Content"
+          ]
+        },
+        "regex": {
+          "type": "object",
+          "description": "The regular expressions to match the response content with.",
+          "properties": {
+            "matches": {
+              "type": "array",
+              "description": "The list of regular expressions.",
+              "items": {
+                "type": "string"
+              },
+              "example": [
+                "Contoso-Service-EndToEnd",
+                "(?i)\"health_status\":((.|\n)*)\"(green|yellow)\"",
+                "(?mi)^(\"application_host\": 94781052)$"
+              ]
+            },
+            "matchQuantifier": {
+              "type": "string",
+              "description": "Indicates whether any or all of the expressions should match with the response content.",
+              "enum": [
+                "All",
+                "Any"
+              ],
+              "x-ms-enum": {
+                "name": "RestMatchQuantifier",
+                "modelAsString": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "WaitStepProperties": {
+      "x-ms-discriminator-value": "Wait",
+      "type": "object",
+      "description": "Defines the properties of a Wait step.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepProperties"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "description": "The Wait attributes",
+          "$ref": "#/definitions/WaitStepAttributes"
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    },
+    "WaitStepAttributes": {
+      "type": "object",
+      "description": "The parameters for the wait step.",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "The duration in ISO 8601 format of how long the wait should be.",
+          "example": "PT30M"
+        }
+      },
+      "required": [
+        "duration"
+      ]
+    },
+    "ServiceTopologiesListResult": {
+      "description": "The list of service topologies.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceTopologyResource"
+      }
+    },
+    "ServiceListResult": {
+      "description": "The list of services.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceResource"
+      }
+    },
+    "ServiceUnitListResult": {
+      "description": "The list of service units.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServiceUnitResource"
+      }
+    },
+    "StepResourceListResult": {
+      "description": "The list of steps.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/StepResource"
+      }
+    },
+    "ArtifactSourceListResult": {
+      "description": "The list of artifact sources.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ArtifactSource"
+      }
+    },
+    "RolloutListResult": {
+      "description": "The list of rollouts.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Rollout"
+      }
+    }
+  },
+  "parameters": {
+    "artifactSourceName": {
+      "description": "The name of the artifact source.",
+      "name": "artifactSourceName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "serviceTopologyName": {
+      "name": "serviceTopologyName",
+      "in": "path",
+      "description": "The name of the service topology .",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "serviceName": {
+      "name": "serviceName",
+      "in": "path",
+      "description": "The name of the service resource.",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "serviceUnitName": {
+      "name": "serviceUnitName",
+      "in": "path",
+      "description": "The name of the service unit resource.",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "stepName": {
+      "name": "stepName",
+      "in": "path",
+      "description": "The name of the deployment step.",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "description": "The name of the resource group. The name is case insensitive.",
+      "name": "resourceGroupName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90
+    },
+    "rolloutName": {
+      "description": "The rollout name.",
+      "name": "rolloutName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "retryAttempt": {
+      "name": "retryAttempt",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "description": "Rollout retry attempt ordinal to get the result of. If not specified, result of the latest attempt will be returned.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation.",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

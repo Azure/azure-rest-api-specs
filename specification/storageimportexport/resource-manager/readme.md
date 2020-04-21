@@ -53,6 +53,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-cli-extensions
 ```
 
 ## Go
@@ -88,7 +89,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-11' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storageimportexport.v2016_11_01
-  output-folder: $(azure-libraries-for-java-folder)/storageimportexport/resource-manager/v2016_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/storageimportexport/mgmt-v2016_11_01
 regenerate-manager: true
 generate-interface: true
 ```

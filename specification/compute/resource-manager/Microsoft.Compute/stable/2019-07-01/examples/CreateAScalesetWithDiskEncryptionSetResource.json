@@ -22,24 +22,24 @@
               "managedDisk": {
                 "storageAccountType": "Standard_LRS",
                 "diskEncryptionSet": {
-                    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
                 }
               },
               "createOption": "FromImage"
             },
             "dataDisks": [
-                {
-                  "caching": "ReadWrite",
-                  "managedDisk": {
-                    "storageAccountType": "Standard_LRS",
-                    "diskEncryptionSet": {
-                      "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
-                    }
-                  },
-                  "diskSizeGB": 1023,
-                  "createOption": "Empty",
-                  "lun": 0
-                }
+              {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS",
+                  "diskEncryptionSet": {
+                    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/diskEncryptionSets/{existing-diskEncryptionSet-name}"
+                  }
+                },
+                "diskSizeGB": 1023,
+                "createOption": "Empty",
+                "lun": 0
+              }
             ]
           },
           "osProfile": {

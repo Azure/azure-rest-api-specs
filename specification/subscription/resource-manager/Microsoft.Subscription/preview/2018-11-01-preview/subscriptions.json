@@ -60,80 +60,13 @@
         ]
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new WebDirect or EA Azure subscription.",
-        "operationId": "Subscriptions_CreateSubscription",
+        "operationId": "SubscriptionFactory_CreateSubscription",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createSubscription.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "responses": {
-          "200": {
-            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
-            "schema": {
-              "$ref": "#/definitions/SubscriptionCreationResult"
-            }
-          },
-          "202": {
-            "description": "Accepted. Subscription creation is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "integer"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "The name of the Microsoft Customer Agreement billing account for which you want to create the subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "invoiceSectionName",
-            "in": "path",
-            "description": "The name of the invoice section in the billing account for which you want to create the subscription.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The subscription creation parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModernSubscriptionCreationParameters"
-            }
-          }
-        ]
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
-      "post": {
-        "description": "The operation to create a new WebDirect or EA Azure subscription (under billingProfiles).",
-        "operationId": "Subscriptions_CreateSubscriptionUnderBillingProfile",
-        "x-ms-examples": {
-          "createSubscription": {
-            "$ref": "./examples/createSubscriptionUnderBillingProfile.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -204,7 +137,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new CSP subscription.",
-        "operationId": "Subscriptions_CreateCspSubscription",
+        "operationId": "SubscriptionFactory_CreateCspSubscription",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createCspSubscription.json"

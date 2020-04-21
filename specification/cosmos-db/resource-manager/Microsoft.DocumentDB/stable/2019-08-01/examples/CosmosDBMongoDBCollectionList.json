@@ -17,22 +17,24 @@
             "location": "West US",
             "tags": {},
             "properties": {
-              "id": "testcoll",
-              "indexes": [
-                {
-                  "key": {
-                    "keys": [
-                      "testKey"
-                    ]
-                  },
-                  "options": {
-                    "expireAfterSeconds": 100,
-                    "unique": true
+              "resource": {
+                "id": "testcoll",
+                "indexes": [
+                  {
+                    "key": {
+                      "keys": [
+                        "testKey"
+                      ]
+                    },
+                    "options": {
+                      "expireAfterSeconds": 100,
+                      "unique": true
+                    }
                   }
+                ],
+                "shardKey": {
+                  "testKey": "Hash"
                 }
-              ],
-              "shardKey": {
-                "testKey": "Hash"
               }
             }
           }

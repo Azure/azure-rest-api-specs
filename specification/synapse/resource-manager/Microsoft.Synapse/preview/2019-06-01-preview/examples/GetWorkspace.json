@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "resourceGroup1",
+    "workspaceName": "workspace1",
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup1/providers/Microsoft.Synapse/workspaces/workspace1",
+        "name": "workspace1",
+        "type": "Microsoft.Synapse/workspaces",
+        "location": "East US",
+        "properties": {
+          "defaultDataLakeStorage": {
+            "accountUrl": "https://accountname.dfs.core.windows.net",
+            "filesystem": "default"
+          },
+          "connectivityEndpoints": {
+            "dev": "workspace1.dev.projectarcadia.net",
+            "sql": "workspace1.sql.projectarcadia.net"
+          },
+          "sqlAdministratorLogin": "login",
+          "sqlAdministratorLoginPassword": "password",
+          "managedResourceGroupName": "resourceGroup2",
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/privateEndpointConnections/ExamplePrivateEndpointConnection",
+              "name": "sql",
+              "type": "Microsoft.Synapse/workspaces/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Network/privateEndpoints/ExamplePrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ]
+        },
+        "tags": {
+          "key": "value"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

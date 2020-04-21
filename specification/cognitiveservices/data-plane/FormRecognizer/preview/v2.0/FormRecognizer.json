@@ -38,6 +38,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "trainRequest",
@@ -72,52 +75,6 @@
           },
           "Train custom model with subfolder filter options": {
             "$ref": "./examples/TrainBatchWithSubFolders.json"
-          }
-        }
-      },
-      "get": {
-        "summary": "List Custom Models",
-        "description": "Get information about all custom models",
-        "operationId": "GetCustomModels",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "op",
-            "in": "query",
-            "description": "Specify whether to return summary or full list of models.",
-            "required": false,
-            "default": "full",
-            "type": "string",
-            "enum": [
-              "full",
-              "summary"
-            ]
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Models"
-            }
-          },
-          "default": {
-            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink",
-          "itemName": "modelList"
-        },
-        "x-ms-examples": {
-          "List custom models": {
-            "$ref": "./examples/GetModels.json"
           }
         }
       }
@@ -189,8 +146,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully marked model for deletion. Model artifacts will be removed within predefined time period."
+          "204": {
+            "description": "Successfully marked model for deletion. Model artifacts will be removed within a predefined time period."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -217,6 +174,9 @@
           "image/jpeg",
           "image/png",
           "image/tiff"
+        ],
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -261,7 +221,8 @@
           "Analyze form with custom model": {
             "$ref": "./examples/AnalyzeBatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/custom/models/{modelId}/analyzeResults/{resultId}": {
@@ -329,6 +290,15 @@
         ],
         "parameters": [
           {
+            "name": "includeTextDetails",
+            "in": "query",
+            "description": "Include text lines and element references in the result.",
+            "required": false,
+            "default": false,
+            "type": "boolean",
+            "x-nullable": false
+          },
+          {
             "$ref": "#/parameters/FileStream"
           }
         ],
@@ -353,7 +323,8 @@
           "Analyze receipt": {
             "$ref": "./examples/ReceiptsBatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/prebuilt/receipt/analyzeResults/{resultId}": {
@@ -395,6 +366,181 @@
           }
         }
       }
+    },
+    "/layout/analyze": {
+      "post": {
+        "summary": "Analyze Layout",
+        "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "operationId": "AnalyzeLayoutAsync",
+        "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/FileStream"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "URL containing the resultId used to track the progress and obtain the result of the analyze operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze layout": {
+            "$ref": "./examples/LayoutBatch.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/layout/analyzeResults/{resultId}": {
+      "get": {
+        "summary": "Get Analyze Layout Result",
+        "description": "Track the progress and obtain the result of the analyze layout operation",
+        "operationId": "GetAnalyzeLayoutResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get analyze layout result": {
+            "$ref": "./examples/LayoutBatchResult.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/custom/models?op=full": {
+      "get": {
+        "summary": "List Custom Models",
+        "description": "Get information about all custom models",
+        "operationId": "ListCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "Specify whether to return summary or full list of models.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "full"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "modelList"
+        },
+        "x-ms-examples": {
+          "List custom models": {
+            "$ref": "./examples/GetModels.json"
+          }
+        }
+      }
+    },
+    "/custom/models?op=summary": {
+      "get": {
+        "summary": "Get Custom Models",
+        "description": "Get information about all custom models",
+        "operationId": "GetCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "Specify whether to return summary or full list of models.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "summary"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get models summary": {
+            "$ref": "./examples/GetModelsSummary.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -428,13 +574,13 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) the analyze operation was submitted.",
+          "description": "Date and time (UTC) when the analyze operation was submitted.",
           "type": "string",
           "x-nullable": false
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
+          "description": "Date and time (UTC) when the status was last updated.",
           "type": "string",
           "x-nullable": false
         },
@@ -516,7 +662,7 @@
           "description": "Errors returned during the training operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FormOperationError"
+            "$ref": "#/definitions/ErrorInformation"
           }
         }
       }
@@ -533,11 +679,7 @@
         }
       }
     },
-    "SourceDataStream": {
-      "description": "A pdf document or image (jpg,png,tiff) file to analyze.",
-      "type": "object"
-    },
-    "ModelInfo":{
+    "ModelInfo": {
       "description": "Basic custom model information.",
       "type": "object",
       "required": [
@@ -575,7 +717,7 @@
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
+          "description": "Date and time (UTC) when the status was last updated.",
           "type": "string",
           "x-nullable": false
         }
@@ -600,13 +742,13 @@
               "x-nullable": false
             },
             "limit": {
-              "description": "Max number of models that can be trained for this subscription.",
+              "description": "Max number of models that can be trained for this account.",
               "type": "integer",
               "x-nullable": false
             },
             "lastUpdatedDateTime": {
               "format": "date-time",
-              "description": "Date and time (UTC) when the summary is last updated.",
+              "description": "Date and time (UTC) when the summary was last updated.",
               "type": "string",
               "x-nullable": false
             }
@@ -632,16 +774,13 @@
         "modelInfo"
       ],
       "properties": {
-        "modelInfo":{
-          "$ref": "#/definitions/ModelInfo",
-          "description": "Basic custom model information."
+        "modelInfo": {
+          "$ref": "#/definitions/ModelInfo"
         },
         "keys": {
-          "$ref": "#/definitions/KeysResult",
-          "description": "Keys extracted by the custom model."
+          "$ref": "#/definitions/KeysResult"
         },
         "trainResult": {
-          "description": "Custom model training result.",
           "$ref": "#/definitions/TrainResult"
         }
       }
@@ -690,7 +829,7 @@
           "description": "List of errors.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ErrorInformation"
           }
         },
         "status": {
@@ -725,19 +864,6 @@
           "description": "Estimated extraction accuracy for this field.",
           "type": "number",
           "x-nullable": false
-        }
-      }
-    },
-    "FormOperationError": {
-      "description": "Error reported during an operation.",
-      "type": "object",
-      "required": [
-        "message"
-      ],
-      "properties": {
-        "message": {
-          "description": "Error message.",
-          "type": "string"
         }
       }
     },
@@ -804,7 +930,7 @@
           "description": "List of errors reported during the analyze operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FormOperationError"
+            "$ref": "#/definitions/ErrorInformation"
           }
         }
       }
@@ -920,8 +1046,7 @@
       "type": "object",
       "required": [
         "boundingBox",
-        "text",
-        "confidence"
+        "text"
       ],
       "properties": {
         "text": {
@@ -1142,6 +1267,7 @@
     },
     "DocumentResult": {
       "description": "A set of extracted fields corresponding to the input document.",
+      "type": "object",
       "required": [
         "docType",
         "pageRange",
@@ -1189,14 +1315,14 @@
         },
         "valueDate": {
           "description": "Date value.",
+          "format": "date",
           "type": "string",
-          "format": "date-time",
           "x-nullable": false
         },
         "valueTime": {
           "description": "Time value.",
+          "format": "time",
           "type": "string",
-          "format": "date-time",
           "x-nullable": false
         },
         "valuePhoneNumber": {
@@ -1297,7 +1423,7 @@
       "x-ms-parameter-location": "method",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/SourceDataStream"
+        "$ref": "#/definitions/SourcePath"
       }
     }
   }

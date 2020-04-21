@@ -1,0 +1,2722 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft NetApp",
+    "description": "Microsoft NetApp Azure Resource Provider specification",
+    "version": "2019-10-01",
+    "x-ms-code-generation-settings": {
+      "name": "AzureNetAppFilesManagementClient"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.NetApp/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Describes the Resource Provider",
+        "description": "Lists all of the available Microsoft.NetApp Rest API operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Check resource name availability",
+        "description": "Check if a resource name is available.",
+        "operationId": "NetAppResource_CheckNameAvailability",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Name availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "CheckNameAvailability": {
+            "$ref": "examples/CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkFilePathAvailability": {
+      "post": {
+        "tags": [
+          "NetApp Resource"
+        ],
+        "summary": "Check file path availability",
+        "description": "Check if a file path is available.",
+        "operationId": "NetAppResource_CheckFilePathAvailability",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "File path availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+            },
+            "x-ms-client-flatten": true
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/location"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceNameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "CheckFilePathAvailability": {
+            "$ref": "examples/CheckFilePathAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts": {
+      "get": {
+        "summary": "Describe all NetApp Accounts in a resource group",
+        "description": "List and describe all NetApp accounts in the resource group.",
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/netAppAccountList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_List": {
+            "$ref": "examples/Accounts_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}": {
+      "get": {
+        "summary": "Describe a NetApp Account",
+        "description": "Get the NetApp account",
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Get": {
+            "$ref": "examples/Accounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_CreateOrUpdate",
+        "summary": "Create or update a NetApp account",
+        "description": "Create or update the specified NetApp account within the resource group",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "NetApp Account object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          "201": {
+            "description": "Account created",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Accounts_CreateOrUpdate": {
+            "$ref": "examples/Accounts_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_Delete",
+        "summary": "Delete a NetApp account",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "Delete the specified NetApp account",
+        "responses": {
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Accounts_Delete": {
+            "$ref": "examples/Accounts_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetApp Accounts"
+        ],
+        "operationId": "Accounts_Update",
+        "summary": "Update a NetApp account",
+        "description": "Patch the specified NetApp account",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "NetApp Account object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/netAppAccountPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Accounts_Update": {
+            "$ref": "examples/Accounts_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
+      "get": {
+        "summary": "Describe all Capacity Pools",
+        "description": "List all capacity pools in the NetApp Account",
+        "tags": [
+          "Capacity Pools"
+        ],
+        "operationId": "Pools_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/capacityPoolList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Pools_List": {
+            "$ref": "examples/Pools_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}": {
+      "get": {
+        "summary": "Describe a Capacity Pool",
+        "description": "Get details of the specified capacity pool",
+        "tags": [
+          "Capacity Pools"
+        ],
+        "operationId": "Pools_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Get": {
+            "$ref": "examples/Pools_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Capacity Pools"
+        ],
+        "operationId": "Pools_CreateOrUpdate",
+        "summary": "Create or Update the specified capacity pool within the resource group",
+        "description": "Create or Update a capacity pool",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Capacity pool object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - pool updated",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          "201": {
+            "description": "Pool created",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pools_CreateOrUpdate": {
+            "$ref": "examples/Pools_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Capacity Pools"
+        ],
+        "operationId": "Pools_Update",
+        "summary": "Update a capacity pool",
+        "description": "Patch the specified capacity pool",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Capacity pool object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/capacityPoolPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Pools_Update": {
+            "$ref": "examples/Pools_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Capacity Pools"
+        ],
+        "operationId": "Pools_Delete",
+        "summary": "Delete a capacity pool",
+        "description": "Delete the specified capacity pool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Pools_Delete": {
+            "$ref": "examples/Pools_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes": {
+      "get": {
+        "summary": "Describe all volumes",
+        "description": "List all volumes within the capacity pool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volumeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_List": {
+            "$ref": "examples/Volumes_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}": {
+      "get": {
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_Get",
+        "summary": "Describe a volume",
+        "description": "Get the details of the specified volume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Get": {
+            "$ref": "examples/Volumes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_CreateOrUpdate",
+        "summary": "Create or Update a volume",
+        "description": "Create or update the specified volume within the capacity pool",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Volume object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - volume updated",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "201": {
+            "description": "Volume created",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_CreateOrUpdate": {
+            "$ref": "examples/Volumes_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_Update",
+        "summary": "Update a volume",
+        "description": "Patch the specified volume",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Volume object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/volumePatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_Update": {
+            "$ref": "examples/Volumes_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Volumes"
+        ],
+        "operationId": "Volumes_Delete",
+        "summary": "Delete a volume",
+        "description": "Delete the specified volume",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Volumes_Delete": {
+            "$ref": "examples/Volumes_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/breakReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Break volume replication",
+        "description": "Break the replication connection on the destination volume",
+        "operationId": "Volumes_BreakReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_BreakReplication": {
+            "$ref": "examples/Volumes_BreakReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/replicationStatus": {
+      "get": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Get volume replication status",
+        "description": "Get the status of the replication",
+        "operationId": "Volumes_ReplicationStatus",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/replicationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ReplicationStatus": {
+            "$ref": "examples/Volumes_ReplicationStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/resyncReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Resync volume replication",
+        "description": "Resync the connection on the destination volume. If the operation is ran on the source volume it will reverse-resync the connection and sync from source to destination.",
+        "operationId": "Volumes_ResyncReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_ResyncReplication": {
+            "$ref": "examples/Volumes_ResyncReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/deleteReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Delete volume replication",
+        "description": "Delete the replication connection on the destination volume, and send release to the source replication",
+        "operationId": "Volumes_DeleteReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_DeleteReplication": {
+            "$ref": "examples/Volumes_DeleteReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/authorizeReplication": {
+      "post": {
+        "tags": [
+          "Volumes Replication"
+        ],
+        "summary": "Authorize source volume replication",
+        "description": "Authorize the replication connection on the source volume",
+        "operationId": "Volumes_AuthorizeReplication",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "authorize request object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authorizeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_AuthorizeReplication": {
+            "$ref": "examples/Volumes_AuthorizeReplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
+      "get": {
+        "tags": [
+          "MountTargets"
+        ],
+        "operationId": "MountTargets_List",
+        "summary": "Describe all mount targets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "List all mount targets associated with the volume",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/mountTargetList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "MountTargets_List": {
+            "$ref": "examples/MountTargets_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_List",
+        "summary": "Describe all snapshots",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "description": "List all snapshots associated with the volume",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshotsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_List": {
+            "$ref": "examples/Snapshots_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
+      "get": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Get",
+        "summary": "Describe a snapshot",
+        "description": "Get details of the specified snapshot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Get": {
+            "$ref": "examples/Snapshots_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Create",
+        "summary": "Create a snapshot",
+        "description": "Create the specified snapshot within the given volume",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Snapshot created",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Snapshots_Create": {
+            "$ref": "examples/Snapshots_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "summary": "Update a snapshot",
+        "description": "Patch a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshotPatch"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Update": {
+            "$ref": "examples/Snapshots_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Delete",
+        "summary": "Delete a snapshot",
+        "description": "Delete snapshot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroup"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "#/parameters/SnapshotName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Snapshots_Delete": {
+            "$ref": "examples/Snapshots_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Result of the request to list Cloud Volume operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Storage operations supported by the Storage resource provider."
+        }
+      }
+    },
+    "Operation": {
+      "description": "Microsoft.NetApp REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "display": {
+          "description": "Display metadata associated with the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft NetApp.",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Type of operation: get, read, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Operation description.",
+              "type": "string"
+            }
+          }
+        },
+        "origin": {
+          "type": "string",
+          "description": "The origin of operations."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "Properties of operation, include metric specifications.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of operation, include metric specifications.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification",
+          "description": "One property of operation, include metric specifications."
+        }
+      }
+    },
+    "ServiceSpecification": {
+      "description": "One property of operation, include metric specifications.",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          }
+        }
+      }
+    },
+    "MetricSpecification": {
+      "description": "Metric specification of operation.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of metric specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of metric specification."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "Display description of metric specification."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit could be Bytes or Count."
+        },
+        "dimensions": {
+          "description": "Dimensions of blobs, including blob type and access tier.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "Aggregation type could be Average."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "The property to decide fill gap with zero or not."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category this metric specification belong to, could be Capacity."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "Account Resource Id."
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of dimension."
+        }
+      }
+    },
+    "ResourceNameAvailability": {
+      "description": "Information regarding availability of a resource name.",
+      "type": "object",
+      "properties": {
+        "isAvailable": {
+          "description": "<code>true</code> indicates name is valid and available. <code>false</code> indicates the name is invalid, unavailable, or both.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "<code>Invalid</code> indicates the name provided does not match Azure App Service naming requirements. <code>AlreadyExists</code> indicates that the name is already in use and is therefore unavailable.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InAvailabilityReasonType",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceNameAvailabilityRequest": {
+      "description": "Resource name availability request content.",
+      "required": [
+        "name",
+        "type",
+        "resourceGroup"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Resource name to verify.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type used for verification.",
+          "enum": [
+            "Microsoft.NetApp/netAppAccounts",
+            "Microsoft.NetApp/netAppAccounts/capacityPools",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CheckNameResourceTypes",
+            "modelAsString": true
+          }
+        },
+        "resourceGroup": {
+          "description": "Resource group name.",
+          "type": "string"
+        }
+      }
+    },
+    "netAppAccountList": {
+      "description": "List of NetApp account resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Multiple NetApp accounts",
+          "items": {
+            "$ref": "#/definitions/netAppAccount"
+          }
+        }
+      }
+    },
+    "netAppAccount": {
+      "description": "NetApp account resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "NetApp Account properties",
+          "$ref": "#/definitions/accountProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "netAppAccountPatch": {
+      "description": "NetApp account patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "NetApp Account properties",
+          "$ref": "#/definitions/accountProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "accountProperties": {
+      "description": "NetApp account properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        },
+        "activeDirectories": {
+          "description": "Active Directories",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/activeDirectory"
+          }
+        }
+      }
+    },
+    "activeDirectory": {
+      "description": "Active Directory",
+      "type": "object",
+      "properties": {
+        "activeDirectoryId": {
+          "type": "string",
+          "description": "Id of the Active Directory"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username of Active Directory domain administrator"
+        },
+        "password": {
+          "type": "string",
+          "description": "Plain text password of Active Directory domain administrator"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Name of the Active Directory domain"
+        },
+        "dns": {
+          "type": "string",
+          "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the Active Directory"
+        },
+        "smbServerName": {
+          "type": "string",
+          "description": "NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes"
+        },
+        "organizationalUnit": {
+          "type": "string",
+          "description": "The Organizational Unit (OU) within the Windows Active Directory"
+        }
+      }
+    },
+    "capacityPoolList": {
+      "description": "List of capacity pool resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of Capacity pools",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/capacityPool"
+          }
+        }
+      }
+    },
+    "capacityPool": {
+      "description": "Capacity pool resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "properties"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Capacity pool properties",
+          "$ref": "#/definitions/poolProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "poolProperties": {
+      "description": "Pool properties",
+      "type": "object",
+      "required": [
+        "size",
+        "serviceLevel"
+      ],
+      "properties": {
+        "poolId": {
+          "title": "poolId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the Pool",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
+        },
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "capacityPoolPatch": {
+      "description": "Capacity pool patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Capacity pool properties",
+          "$ref": "#/definitions/poolPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "poolPatchProperties": {
+      "description": "Patchable pool properties",
+      "type": "object",
+      "properties": {
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000,
+          "default": 4398046511104
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
+        }
+      }
+    },
+    "volumeList": {
+      "description": "List of volume resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of volumes",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/volume"
+          }
+        }
+      }
+    },
+    "volume": {
+      "description": "Volume resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location",
+        "properties"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Volume properties",
+          "$ref": "#/definitions/volumeProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "resourceTags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Tags are a list of key-value pairs that describe the resource"
+    },
+    "volumeProperties": {
+      "description": "Volume properties",
+      "type": "object",
+      "required": [
+        "creationToken",
+        "usageThreshold",
+        "subnetId"
+      ],
+      "properties": {
+        "fileSystemId": {
+          "title": "FileSystem ID",
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique FileSystem Identifier.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
+        },
+        "creationToken": {
+          "title": "Creation Token or File Path",
+          "type": "string",
+          "description": "A unique file path for the volume. Used when creating mount targets",
+          "minimum": 16,
+          "maximum": 40,
+          "example": "some-amazing-filepath"
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
+        },
+        "usageThreshold": {
+          "title": "usageThreshold",
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
+          "minimum": 107374182400,
+          "maximum": 109951162777600,
+          "default": 107374182400,
+          "example": 107374182400
+        },
+        "exportPolicy": {
+          "title": "exportPolicy",
+          "description": "Set of export policy rules",
+          "properties": {
+            "rules": {
+              "title": "Export policy rule",
+              "description": "Export policy rule",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
+        },
+        "protocolTypes": {
+          "title": "protocolTypes",
+          "description": "Set of protocol types",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "NFSv4.1"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        },
+        "snapshotId": {
+          "title": "Snapshot ID",
+          "type": "string",
+          "description": "UUID v4 or resource identifier used to identify the Snapshot.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}|(\\\\?([^\\/]*[\\/])*)([^\\/]+)$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "baremetalTenantId": {
+          "title": "Baremetal Tenant ID",
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Baremetal Tenant Identifier.",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9560acf5-4e3a-12e7-9bdb-02007cca7779"
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "mountTargets": {
+          "title": "mountTargets",
+          "type": "array",
+          "description": "List of mount targets",
+          "items": {
+            "$ref": "#/definitions/mountTargetProperties"
+          }
+        },
+        "volumeType": {
+          "type": "string",
+          "description": "What type of volume is this",
+          "example": "DataProtection"
+        },
+        "dataProtection": {
+          "title": "DataProtection",
+          "description": "DataProtection type volumes include an object containing details of the replication",
+          "properties": {
+            "replication": {
+              "title": "Replication",
+              "description": "Replication properties",
+              "type": "object",
+              "$ref": "#/definitions/replicationObject"
+            }
+          }
+        },
+        "isRestoring": {
+          "type": "boolean",
+          "description": "Restoring"
+        }
+      }
+    },
+    "exportPolicyRule": {
+      "description": "Volume Export Policy Rule",
+      "type": "object",
+      "properties": {
+        "ruleIndex": {
+          "type": "integer",
+          "description": "Order index"
+        },
+        "unixReadOnly": {
+          "type": "boolean",
+          "description": "Read only access"
+        },
+        "unixReadWrite": {
+          "type": "boolean",
+          "description": "Read and write access"
+        },
+        "cifs": {
+          "type": "boolean",
+          "description": "Allows CIFS protocol"
+        },
+        "nfsv3": {
+          "type": "boolean",
+          "description": "Allows NFSv3 protocol"
+        },
+        "nfsv41": {
+          "type": "boolean",
+          "description": "Allows NFSv4.1 protocol"
+        },
+        "allowedClients": {
+          "type": "string",
+          "description": "Client ingress specification as comma separated string with IPv4 CIDRs, IPv4 host addresses and host names"
+        }
+      }
+    },
+    "replicationObject": {
+      "description": "Replication properties",
+      "type": "object",
+      "required": [
+        "replicationSchedule",
+        "remoteVolumeResourceId"
+      ],
+      "properties": {
+        "replicationId": {
+          "type": "string",
+          "description": "Id"
+        },
+        "endpointType": {
+          "type": "string",
+          "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
+          "enum": [
+            "src",
+            "dst"
+          ],
+          "x-ms-enum": {
+            "name": "EndpointType",
+            "modelAsString": true
+          }
+        },
+        "replicationSchedule": {
+          "type": "string",
+          "description": "Schedule",
+          "enum": [
+            "_10minutely",
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly"
+          ],
+          "x-ms-enum": {
+            "name": "ReplicationSchedule",
+            "modelAsString": true
+          }
+        },
+        "remoteVolumeResourceId": {
+          "type": "string",
+          "description": "The resource ID of the remote volume."
+        },
+        "remoteVolumeRegion": {
+          "type": "string",
+          "description": "The remote region for the other end of the Volume Replication."
+        }
+      }
+    },
+    "replicationStatus": {
+      "description": "Replication status",
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "type": "boolean",
+          "description": "Replication health check"
+        },
+        "relationshipStatus": {
+          "type": "string",
+          "description": "Status of the mirror relationship",
+          "enum": [
+            "Idle",
+            "Transferring"
+          ],
+          "x-ms-enum": {
+            "name": "RelationshipStatus",
+            "modelAsString": true
+          }
+        },
+        "mirrorState": {
+          "type": "string",
+          "description": "The status of the replication",
+          "enum": [
+            "Uninitialized",
+            "Mirrored",
+            "Broken"
+          ],
+          "x-ms-enum": {
+            "name": "MirrorState",
+            "modelAsString": true
+          }
+        },
+        "totalProgress": {
+          "type": "string",
+          "description": "The progress of the replication"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Displays error message if the replication is in an error state"
+        }
+      }
+    },
+    "volumePatch": {
+      "description": "Volume patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Patchable volume properties",
+          "$ref": "#/definitions/volumePatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "volumePatchProperties": {
+      "description": "Patchable volume properties",
+      "type": "object",
+      "properties": {
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
+        },
+        "usageThreshold": {
+          "title": "usageThreshold",
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
+          "minimum": 107374182400,
+          "maximum": 109951162777600,
+          "default": 107374182400,
+          "example": 107374182400
+        },
+        "exportPolicy": {
+          "title": "exportPolicy",
+          "description": "Set of export policy rules",
+          "properties": {
+            "rules": {
+              "title": "Export policy rule",
+              "description": "Export policy rule",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mountTargetList": {
+      "description": "List of Mount Targets",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Mount targets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mountTarget"
+          }
+        }
+      }
+    },
+    "mountTarget": {
+      "description": "Mount Target",
+      "type": "object",
+      "required": [
+        "location",
+        "properties"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags",
+          "x-ms-client-flatten": true
+        },
+        "properties": {
+          "description": "Mount Target Properties",
+          "$ref": "#/definitions/mountTargetProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "mountTargetProperties": {
+      "description": "Mount target properties",
+      "type": "object",
+      "required": [
+        "fileSystemId"
+      ],
+      "properties": {
+        "mountTargetId": {
+          "title": "mountTargetId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the MountTarget",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "fileSystemId": {
+          "title": "fileSystemId",
+          "type": "string",
+          "description": "UUID v4 used to identify the MountTarget",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "ipAddress": {
+          "title": "ipAddress",
+          "description": "The mount target's IPv4 address",
+          "type": "string",
+          "readOnly": true,
+          "example": "1.2.3.4"
+        },
+        "subnet": {
+          "title": "subnet",
+          "type": "string",
+          "description": "The subnet",
+          "example": "1.2.3.4"
+        },
+        "startIp": {
+          "title": "startIp",
+          "description": "The start of IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "endIp": {
+          "title": "endIp",
+          "description": "The end of IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "gateway": {
+          "title": "gateway",
+          "description": "The gateway of the IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "1.2.3.4"
+        },
+        "netmask": {
+          "title": "netmask",
+          "description": "The netmask of the IPv4 address range to use when creating a new mount target",
+          "type": "string",
+          "example": "255.255.255.0"
+        },
+        "smbServerFqdn": {
+          "title": "smbServerFQDN",
+          "description": "The SMB server's Fully Qualified Domain Name, FQDN",
+          "type": "string",
+          "example": "fullyqualified.domainname.com"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "snapshotsList": {
+      "description": "List of Snapshots",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Snapshots",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/snapshot"
+          }
+        }
+      }
+    },
+    "snapshot": {
+      "description": "Snapshot of a Volume",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags",
+          "x-ms-client-flatten": true
+        },
+        "properties": {
+          "description": "Snapshot Properties",
+          "$ref": "#/definitions/snapshotProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "snapshotPatch": {
+      "description": "Snapshot patch",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "snapshotProperties": {
+      "description": "Snapshot properties",
+      "type": "object",
+      "properties": {
+        "snapshotId": {
+          "title": "snapshotId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the Snapshot",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "fileSystemId": {
+          "title": "fileSystemId",
+          "type": "string",
+          "description": "UUID v4 used to identify the FileSystem",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "created": {
+          "title": "name",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation date of the snapshot",
+          "example": "2017-08-15 13:23:33"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "authorizeRequest": {
+      "description": "Authorize request",
+      "type": "object",
+      "properties": {
+        "remoteVolumeResourceId": {
+          "type": "string",
+          "description": "Resource id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "location": {
+      "name": "location",
+      "description": "The location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceGroup": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "AccountName": {
+      "name": "accountName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the NetApp account",
+      "x-ms-parameter-location": "method"
+    },
+    "PoolName": {
+      "name": "poolName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the capacity pool",
+      "x-ms-parameter-location": "method"
+    },
+    "VolumeName": {
+      "name": "volumeName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the volume",
+      "x-ms-parameter-location": "method"
+    },
+    "MountTargetName": {
+      "name": "mountTargetName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the mount target",
+      "x-ms-parameter-location": "method"
+    },
+    "SnapshotName": {
+      "name": "snapshotName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "description": "The name of the mount target",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "description": "Version of the API to be used with the client request.",
+      "in": "query",
+      "type": "string",
+      "required": true,
+      "default": "2019-10-01"
+    }
+  }
+}

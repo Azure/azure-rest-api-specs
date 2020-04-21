@@ -26,9 +26,17 @@ These are the global settings for the Azure Maintenance API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-2020-04
 ```
 
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
+```
 
 ### Tag: package-2018-06-preview
 
@@ -84,20 +92,20 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.Maintenance
-  package-name: azure-mgmt-Maintenance
-  package-version: 1.0.0
+  namespace: azure.mgmt.maintenance
+  package-name: azure-mgmt-maintenance
+  package-version: 1.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance/azure/mgmt/Maintenance
+  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance/azure/mgmt/maintenance
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-Maintenance
+  output-folder: $(python-sdks-folder)/maintenance/azure-mgmt-maintenance
 ```
 
 ## Go
@@ -106,18 +114,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-java:
-  azure-arm: true
-  fluent: true
-  namespace: com.microsoft.azure.management.Maintenance
-  license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-Maintenance
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -131,6 +128,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Maintenance/stable/2020-04-01/Maintenance.json
   - $(this-folder)/Microsoft.Maintenance/preview/2018-06-01-preview/Maintenance.json
 
 ```

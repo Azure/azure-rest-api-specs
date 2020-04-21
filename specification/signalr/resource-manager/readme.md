@@ -41,6 +41,10 @@ directive:
     from: signalr.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
     reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+  - suppress: PutRequestResponseScheme
+    from: signalr.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}"].put
+    reason:  The schema of the PUT request body is a superset of the GET response body, we have a PATCH operation to make the resource updatable
 ```
 
 ### Tag: package-2018-10-01
