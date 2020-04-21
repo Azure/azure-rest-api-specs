@@ -41,7 +41,7 @@
         ],
         "summary": "Gets the current quota limit and usages for the resource provider for the specified location for the specific resource in the parameter.",
         "description": "This API gets the current quota limit and usages for the specific resource for resource provider for the specified location. This response can be used to submit quotaRequests.",
-        "operationId": "Quota_listStatus",
+        "operationId": "Quota_Get",
         "x-ms-examples": {
           "Quotas_Request_ForCompute": {
             "$ref": "./examples/getComputeOneSkuUsages.json"
@@ -87,11 +87,11 @@
       },
       "put": {
         "tags": [
-          "QuotaRequests"
+          "QuotaRequest"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
         "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
-        "operationId": "QuotaRequest_Create",
+        "operationId": "Quota_Create",
         "x-ms-examples": {
           "Quotas_Request_listForCompute": {
             "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
@@ -153,11 +153,11 @@
       },
       "patch": {
         "tags": [
-          "QuotaRequests"
+          "QuotaRequest"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
         "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
-        "operationId": "QuotaRequest_Update",
+        "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
             "$ref": "./examples/patchComputeQuotaRequest.json"
@@ -225,7 +225,7 @@
         ],
         "summary": "Gets the current quota limit and usages for all the resources by the resource provider at the specified location.",
         "description": "This API gets the current quota limits and usages for the resource provider for the specified location. This response can be used to submit quotaRequests.",
-        "operationId": "Quotas_listStatus",
+        "operationId": "Quota_List",
         "x-ms-examples": {
           "Quotas_listUsagesForCompute": {
             "$ref": "./examples/getComputeUsages.json"
@@ -294,7 +294,7 @@
         },
         "summary": "Gets the Quota request status by requestId, for the specified resource provider at specified location.",
         "description": "Gets the QuotaRequest details and status by the quota request Id for the resources for the resource provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
-        "operationId": "QuotaRequests_GetStatus",
+        "operationId": "QuotaRequestStatus_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdInParameters"
@@ -340,7 +340,7 @@
         },
         "summary": "For the specified location and resource Provider, gets the quota requests under the subscription over the time\n period of one year ago from now to one year back, based on the filter specified.",
         "description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
-        "operationId": "QuotaRequests_ListStatus",
+        "operationId": "QuotaRequestStatus_List",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdInParameters"
