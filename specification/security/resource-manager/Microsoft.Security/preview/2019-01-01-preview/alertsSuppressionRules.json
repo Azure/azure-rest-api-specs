@@ -280,13 +280,26 @@
         "state"
       ]
     },
+    "ScopeElement": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "A more specific scope used to identify the alerts to suppress.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The alert entity type to suppress by."
+        }
+      }
+    },
     "SuppressionAlertsScope": {
       "type": "object",
       "properties": {
         "allOf": {
           "type": "array",
           "description": "All the conditions inside need to be true in order to suppress the alert",
-          "items": {}
+          "items": {
+            "$ref": "#/definitions/ScopeElement"
+          }
         }
       },
       "required": [
