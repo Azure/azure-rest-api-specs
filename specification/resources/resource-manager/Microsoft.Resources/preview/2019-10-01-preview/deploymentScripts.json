@@ -614,6 +614,11 @@
           "description": "Container settings.",
           "$ref": "#/definitions/ContainerConfiguration"
         },
+        "storageAccountSettings": {
+          "type": "object",
+          "description": "Storage Account settings.",
+          "$ref": "#/definitions/StorageAccountConfiguration"
+        },
         "cleanupPreference": {
           "type": "string",
           "description": "The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.",
@@ -670,6 +675,32 @@
           "description": "Container group name, if not specified then the name will get auto-generated. Not specifying a 'containerGroupName' indicates the system to generate a unique name which might end up flagging an Azure Policy as non-compliant. Use 'containerGroupName' when you have an Azure Policy that expects a specific naming convention or when you want to fully control the name. 'containerGroupName' property must be between 1 and 63 characters long, must contain only lowercase letters, numbers, and dashes and it cannot start or end with a dash and consecutive dashes are not allowed. To specify a 'containerGroupName', add the following object to properties: { \"containerSettings\": { \"containerGroupName\": \"contoso-container\" } }. If you do not want to specify a 'containerGroupName' then do not add 'containerSettings' property.",
           "minLength": 1,
           "maxLength": 63
+        },
+        "restartPolicy": {
+          "type": "string",
+          "description": "Restart policy for all containers within the container group. This value is read-only and set to 'Never'",
+          "readOnly": true,
+          "enum": [
+            "Never"
+          ],
+          "x-ms-enum": {
+            "name": "RestartPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "StorageAccountConfiguration": {
+      "type": "object",
+      "description": "Settings to use an existing storage account. Valid storage account kinds are: Storage, StorageV2 and FileStorage",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The storage account name."
+        },
+        "storageAccountKey": {
+          "type": "string",
+          "description": "The storage account access key."
         }
       }
     },
