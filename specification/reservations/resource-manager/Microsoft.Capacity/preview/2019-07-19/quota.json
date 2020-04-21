@@ -848,7 +848,6 @@
         "lowPriority",
         "shared",
         "serviceSpecific"
-
       ],
       "x-ms-enum": {
         "name": "ResourceType",
@@ -929,11 +928,15 @@
     "EmailActions": {
       "description": "The email actions.",
       "properties": {
-        "emailActions": {
-          "description": "The email actions for auto quota increase.",
-          "$ref": "#/definitions/EmailActions"
-            }
+        "emailAddresses": {
+          "description": "The email address of the recipient.",
+          "type": "array",
+          "items": {
+            "description": "The email recipients.",
+            "type": "string"
           }
+        }
+      }
     },
     "SupportRequestAction": {
       "description": "The SupportRequest action.",
@@ -1050,21 +1053,21 @@
         "emailActions": {
           "description": "The email actions for auto quota increase.",
           "$ref": "#/definitions/EmailActions"
-            }
+        }
+      }
+    },
+    "phoneActions": {
+      "description": "The phone actions for auto quota increase.",
+      "properties": {
+        "phoneNumbers": {
+          "description": "The list of phone actions.",
+          "type": "array",
+          "items": {
+            "description": "The phone recipients.",
+            "$ref": "#/definitions/PhoneAction"
           }
-        },
-        "phoneActions": {
-          "description": "The phone actions for auto quota increase.",
-          "properties": {
-            "phoneNumbers": {
-              "description": "The list of phone actions.",
-              "type": "array",
-              "items": {
-                "description": "The phone recipients.",
-                "$ref": "#/definitions/PhoneAction"
-              }
-            }
-          }
+        }
+      }
     },
     "ExceptionResponse": {
       "type": "object",
@@ -1179,14 +1182,6 @@
       "type": "string",
       "required": false,
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls",
-      "x-ms-parameter-location": "method"
-    },
-    "IfMatchRequiredParameter": {
-      "name": "If-Match",
-      "in": "header",
-      "required": true,
-      "description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
