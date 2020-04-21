@@ -925,8 +925,8 @@
         "modelAsString": true
       }
     },
-    "EmailActions": {
-      "description": "The email actions.",
+    "EmailAction": {
+      "description": "The email action.",
       "type": "object",
       "properties": {
         "emailAddresses": {
@@ -936,6 +936,17 @@
             "description": "The email recipients.",
             "type": "string"
           }
+        }
+      }
+    },
+    "EmailActions": {
+      "description": "The email actions.",
+      "type": "object",
+      "properties": {
+        "type": "array",
+        "items": {
+          "description": "The email recipients.",
+          "$ref": "#/definitions/EmailAction"
         }
       }
     },
