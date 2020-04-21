@@ -858,7 +858,13 @@
               "$ref": "common.json#/definitions/KeyVaultError"
             }
           }
+        },
+        "x-ms-examples": {
+          "Export key": {
+            "$ref": "./examples/ExportKey-example.json"
+          }
         }
+
       }
     },
     "/deletedkeys": {
@@ -1031,13 +1037,13 @@
     "KeyReleaseCondition": {
       "properties": {
         "claim": {
-          "x-ms-client-name": "claim name",
+          "x-ms-client-name": "claimtype",
           "type": "string",
           "minLength": 1,
-          "description": "claim name"
+          "description": "claim type name"
         },
         "condition": {
-          "x-ms-client-name": "condition to test",
+          "x-ms-client-name": "condition",
           "type": "string",
           "minLength": 1,
           "description": "condition to test",
@@ -1045,7 +1051,7 @@
             "equals"
           ],
           "x-ms-enum": {
-            "name": "KeyReleaseCondition",
+            "name": "KeyReleaseConditionCondition",
             "modelAsString": true,
             "values": [
               {
@@ -1063,16 +1069,16 @@
     "KeyReleaseAuthority": {
       "properties": {
         "authority": {
-          "x-ms-client-name": "authority name",
+          "x-ms-client-name": "authority",
           "type": "string",
           "minLength": 1,
-          "description": "authority name"
+          "description": "Base URL of the token provider."
         },
         "allOf": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/KeyReleaseCondition",
-            "description": "Required conditions."
+            "description": "The set of claim conditions that must be met."
           }
         }
       }
@@ -1080,8 +1086,8 @@
     "KeyReleasePolicy": {
       "properties": {
         "version": {
-          "x-ms-client-name": "version",
-          "description": "authority name",
+          "x-ms-client-name": "schemaVersion",
+          "description": "key release policy version",
           "type": "string",
           "enum": [
             "0.2"
@@ -1096,13 +1102,13 @@
         }
       }
     },
-    "ProtectedKey": {
+    "ProtectedKeyHeader": {
       "properties": {
         "alg": {
-          "x-ms-client-name": "key wrapping algorithm",
+          "x-ms-client-name": "keyWrappingAlgorithm",
           "type": "string",
           "minLength": 1,
-          "description": "key wrapping algorithm identifier",
+          "description": "The cryptographic algorithm used to encrypt or determine the value of the content encryption key.",
           "enum": [
             "dir"
           ],
@@ -1118,10 +1124,10 @@
           }
         },
         "enc": {
-          "x-ms-client-name": "encryption algorithm",
+          "x-ms-client-name": "ProtectedKeyEncryptionAlgorithm",
           "type": "string",
           "minLength": 1,
-          "description": "encryption algorithm identifier",
+          "description": "The encryption algorithm used to protect the key material.",
           "enum": [
             "CKM_RSA_AES_KEY_WRAP"
           ],
@@ -1136,9 +1142,35 @@
             ]
           }
         },
+        "kid": {
+          "type": "string",
+          "description": "Key Encryption Key identifier."
+        }
+      }
+    },
+    "ProtectedKey": {
+      "properties": {
+        "schema_version": {
+          "x-ms-client-name": "schemaVersion",
+          "description": "protected key schema version",
+          "type": "string",
+          "enum": [
+            "1.0"
+          ]
+        },
+        "header": {
+          "$ref": "#/definitions/ProtectedKeyHeader",
+          "description": "Protected key header."
+
+        },
         "ciphertext": {
           "type": "string",
-          "format": "base64url"
+          "format": "base64url",
+          "description": "The encrypted key material.",
+        },
+        "generator": {
+          "type": "string",
+          "description": "Generator information, e.g. tool name, version.",
         }
       }
     },
@@ -1363,7 +1395,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy."
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "A KeyBundle consisting of a WebKey plus its attributes."
@@ -1573,7 +1605,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy."
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key create parameters.",
@@ -1605,7 +1637,7 @@
         },
         "release_policy": {
           "$ref": "#/definitions/KeyReleasePolicy",
-          "description": "Key release policy."
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key import parameters.",
@@ -1619,7 +1651,7 @@
           "x-ms-client-name": "environment",
           "type": "string",
           "minLength": 1,
-          "description": "The target environment assertion"
+          "description": "The target environment assertion."
         }
       },
       "description": "The export key parameters.",
