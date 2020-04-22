@@ -1036,12 +1036,14 @@
     },
     "EmailActions": {
       "description": "The email actions.",
-      "type": "object",
       "properties": {
-        "type": "array",
-        "items": {
-          "description": "The email recipients.",
-          "$ref": "#/definitions/EmailAction"
+        "emailAddresses": {
+          "description": "The list of email actions.",
+          "type": "array",
+          "items": {
+            "description": "The email recipients.",
+            "$ref": "#/definitions/EmailAction"
+          }
         }
       }
     },
