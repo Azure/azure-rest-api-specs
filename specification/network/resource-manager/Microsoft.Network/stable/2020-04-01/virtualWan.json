@@ -3986,7 +3986,23 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
-        }
+        },
+        "virtualRouterAsn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "VirtualRouter ASN."
+        },
+        "virtualRouterIps": {
+          "type": "array",
+          "readOnly": false,
+          "description": "VirtualRouter IPs.",
+          "items": {
+            "type": "string"
+          }		
+		}
       },
       "description": "Parameters for VirtualHub."
     },
