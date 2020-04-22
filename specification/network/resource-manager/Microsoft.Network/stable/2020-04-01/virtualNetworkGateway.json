@@ -2624,6 +2624,8 @@
         "asn": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,		  
           "description": "The BGP speaker's ASN."
         },
         "bgpPeeringAddress": {
@@ -2659,8 +2661,10 @@
         },
         "asn": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "readOnly": true,
+          "minimum": 0,
+          "maximum": 4294967295,		  
           "description": "The autonomous system number of the remote BGP peer."
         },
         "state": {
