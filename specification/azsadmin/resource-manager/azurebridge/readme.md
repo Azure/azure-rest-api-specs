@@ -33,10 +33,10 @@ These settings apply only when `--tag=package-2015-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2015-06-01-preview'
 input-file:
-    - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/AzureBridge.json
-    - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
-    - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
-    - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
+    - Microsoft.AzureBridge.Admin/preview/2016-01-01/AzureBridge.json
+    - Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
+    - Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
+    - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
 ```
 
 ---
@@ -60,8 +60,8 @@ csharp:
 
 ``` yaml
 input-file:
-  - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/AzureBridge.json
-  - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
-  - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
-  - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/AzureBridge.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
+  - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
 ```
