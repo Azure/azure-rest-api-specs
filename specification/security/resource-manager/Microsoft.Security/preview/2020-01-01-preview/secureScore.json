@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Security/secureScores": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScores": {
       "get": {
         "x-ms-examples": {
           "List secure scores": {
@@ -51,7 +51,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           }
         ],
         "responses": {
@@ -73,7 +73,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScores/{secureScoreName}": {
       "get": {
         "x-ms-examples": {
           "Get single secure score": {
@@ -90,7 +90,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/secureScoreName"
@@ -112,7 +112,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScores/{secureScoreName}/secureScoreControls": {
       "get": {
         "x-ms-examples": {
           "List secure score's controls level for the specified name": {
@@ -132,7 +132,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/secureScoreName"
@@ -160,7 +160,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/secureScoreControls": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/secureScoreControls": {
       "get": {
         "x-ms-examples": {
           "List all secure scores controls": {
@@ -177,7 +177,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
             "$ref": "#/parameters/ExpandControlsDefinition"
@@ -540,6 +540,10 @@
               {
                 "value": "BuiltIn",
                 "description": "Azure Security Center managed assessments"
+              },
+              {
+                "value": "Custom",
+                "description": "Non Azure Security Center managed assessments"
               }
             ]
           }
