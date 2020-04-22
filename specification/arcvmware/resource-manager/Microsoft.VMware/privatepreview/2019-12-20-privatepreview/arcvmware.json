@@ -2399,6 +2399,12 @@
           "description": "Gets or sets the disk name.",
           "type": "string",
           "readOnly": true
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -2625,6 +2631,11 @@
         },
         "status": {
           "description": "Gets or sets the status of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "Gets or sets the instance uuid of the vm.",
           "type": "string",
           "readOnly": true
         },
@@ -3023,6 +3034,17 @@
         "powerOnBoot": {
           "description": "Gets or sets the power on boot.",
           "$ref": "#/definitions/PowerOnBootOption"
+        },
+        "networkMoRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network\r\nthat the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer",
+          "readOnly": true
         },
         "ipSettings": {
           "description": "Gets or sets the ipsettings.",
