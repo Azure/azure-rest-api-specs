@@ -4414,7 +4414,7 @@
       },
       "description": "An error response for a resource management request."
     },
-    "AliasPathType": {
+    "AliasPath": {
       "properties": {
         "path": {
           "type": "string",
@@ -4428,13 +4428,13 @@
           "description": "The API versions."
         },
         "pattern": {
-          "$ref": "#/definitions/AliasPatternType",
+          "$ref": "#/definitions/AliasPattern",
           "description": "The pattern for an alias path."
         }
       },
       "description": "The type of the paths for alias."
     },
-    "AliasPatternType": {
+    "AliasPattern": {
       "properties": {
         "phrase": {
           "type": "string",
@@ -4469,7 +4469,7 @@
       },
       "description": "The type of the pattern for an alias path."
     },
-    "AliasType": {
+    "Alias": {
       "properties": {
         "name": {
           "type": "string",
@@ -4478,7 +4478,7 @@
         "paths": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AliasPathType"
+            "$ref": "#/definitions/AliasPath"
           },
           "description": "The paths for an alias."
         },
@@ -4514,7 +4514,7 @@
           "description": "The default path for an alias."
         },
         "defaultPattern": {
-          "$ref": "#/definitions/AliasPatternType",
+          "$ref": "#/definitions/AliasPattern",
           "description": "The default pattern for an alias."
         }
       },
@@ -4536,7 +4536,7 @@
         "aliases": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AliasType"
+            "$ref": "#/definitions/Alias"
           },
           "description": "The aliases that are supported by this resource type."
         },
