@@ -43,6 +43,9 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/operations.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+- Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 ```
 
 ## Suppressions
@@ -122,6 +125,9 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 
 ```
 

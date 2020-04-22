@@ -200,6 +200,9 @@
         "x-ms-examples": {
           "PutContainers": {
             "$ref": "./examples/BlobContainersPut.json"
+          },
+          "PutContainerWithDefaultEncryptionScope": {
+            "$ref": "./examples/BlobContainersPutDefaultEncryptionScope.json"
           }
         },
         "description": "Creates a new container under the specified account as described by request body. The container resource includes metadata and properties for that container. It does not include a list of the blobs contained by the container. ",
@@ -797,6 +800,14 @@
   "definitions": {
     "ContainerProperties": {
       "properties": {
+        "defaultEncryptionScope": {
+          "type": "string",
+          "description": "Default the container to use specified encryption scope for all writes."
+        },
+        "denyEncryptionScopeOverride": {
+          "type": "boolean",
+          "description": "Block override of encryption scope from the container default."
+        },
         "publicAccess": {
           "type": "string",
           "enum": [
@@ -1206,6 +1217,12 @@
           "minimum": 1,
           "maximum": 365,
           "description": "how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days."
+        },
+        "lastEnabledTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Returns the date and time the restore policy was last enabled."
         }
       },
       "required": [
