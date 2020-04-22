@@ -355,6 +355,252 @@
         }
       }
     }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/virtualApplianceSites/{siteName}": {
+      "delete": {
+        "tags": [
+          "VirtualApplianceSites"
+        ],
+        "operationId": "VirtualApplianceSites_Delete",
+        "description": "Deletes the specified site from a Virtual Appliance.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Request successful. Resource with the specified name does not exist."
+          },
+          "200": {
+            "description": "Delete successful."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Virtual Appliance Site": {
+            "$ref": "./examples/NetworkVirtualApplianceSiteDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualApplianceSites"
+        ],
+        "operationId": "VirtualApplianceSites_Get",
+        "description": "Gets the specified Virtual Appliance Site.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a Network Virtual Appliance Site resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualApplianceSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetNetwork Virtual Appliance Site": {
+            "$ref": "./examples/NetworkVirtualApplianceSiteGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VirtualApplianceSites"
+        ],
+        "operationId": "VirtualApplianceSites_CreateOrUpdate",
+        "description": "Creates or updates the specified Network Virtual Appliance Site.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the site."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualApplianceSite"
+            },
+            "description": "Parameters supplied to the create or update Network Virtual Appliance Site operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance Site resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualApplianceSite"
+            }
+          },
+          "200": {
+            "description": "Request successful. The operation returns the resulting Network Virtual Appliance Site resource.",
+            "schema": {
+              "$ref": "#/definitions/VirtualApplianceSite"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Network Virtual Appliance Site": {
+            "$ref": "./examples/NetworkVirtualApplianceSitePut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/virtualAppliancesites": {
+      "get": {
+        "tags": [
+          "VirtualApplianceSites"
+        ],
+        "operationId": "VirtualApplianceSites_List",
+        "description": "Lists all Network Virtual Appliance Sites in a Network Virtual Appliance resource.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The operation returns a list of Network Virtual Appliance site resources.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceSiteListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Network Virtual Appliance sites for a given Network Virtual Appliance": {
+            "$ref": "./examples/NetworkVirtualApplianceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }	
   },
   "definitions": {
     "NetworkVirtualAppliance": {
@@ -388,10 +634,10 @@
     },
     "NetworkVirtualAppliancePropertiesFormat": {
       "properties": {
-        "bootStrapConfigurationBlob": {
+        "bootStrapConfigurationBlobs": {
           "type": "array",
           "readOnly": false,
-          "description": "BootStrapConfigurationBlob storage URLs.",
+          "description": "BootStrapConfigurationBlobs storage URLs.",
           "items": {
             "type": "string"
           }
@@ -401,13 +647,18 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
         },
-        "cloudInitConfigurationBlob": {
+        "cloudInitConfigurationBlobs": {
           "type": "array",
           "readOnly": false,
           "description": "CloudInitConfigurationBlob storage URLs.",
           "items": {
             "type": "string"
           }
+        },
+		"cloudInitConfiguration": {
+          "type": "string",
+          "readOnly": false,
+          "description": "CloudInitConfiguration string in plain text"
         },
         "virtualApplianceAsn": {
           "type": "integer",
@@ -425,6 +676,14 @@
             "$ref": "#/definitions/VirtualApplianceNicProperties"
           }
         },
+        "virtualApplianceSites": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to VirtualApplianceSite.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },		
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "readOnly": true,
@@ -473,6 +732,90 @@
       },
       "description": "Network Virtual Appliance NIC properties."
     },
+    "VirtualApplianceSite": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualApplianceSiteProperties",
+          "description": "The properties of the Virtual Appliance Sites."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the virtual appliance site."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Site type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Virtual Appliance Site resource."
+    },
+    "VirtualApplianceSiteProperties": {
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Address Prefix."
+        },
+        "o365Policy": {
+          "readOnly": false,
+          "description": "Office 365 Policy.",
+          "$ref": "#/definitions/Office365PolicyProperties"
+        },		
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        }
+      },
+      "description": "Properties of the rule group."
+    },
+    "Office365PolicyProperties": {
+      "properties": {
+        "telemetryBlobUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Telemetry Blob URL."
+        },
+        "breakOutCategories": {
+          "readOnly": false,
+          "description": "Office 365 breakout categories.",
+          "$ref": "#/definitions/BreakOutCategoryPolicies"
+        }
+      },
+      "description": "Network Virtual Appliance Sku Properties."
+    },
+    "BreakOutCategoryPolicies": {
+      "properties": {
+        "allow": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Allow."
+        },
+        "optimize": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Optimize."
+        },
+        "default": {
+          "type": "boolean",
+          "readOnly": false,
+          "description": "Default."
+        }		
+      },
+      "description": "Network Virtual Appliance Sku Properties."
+    },	
     "NetworkVirtualApplianceListResult": {
       "properties": {
         "value": {
@@ -488,6 +831,22 @@
         }
       },
       "description": "Response for ListNetworkVirtualAppliances API service call."
-    }
+    },
+    "NetworkVirtualApplianceSiteListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceSite"
+          },
+          "description": "List of Network Virtual Appliance sites."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListNetworkVirtualApplianceSites API service call."
+    }	
   }
 }

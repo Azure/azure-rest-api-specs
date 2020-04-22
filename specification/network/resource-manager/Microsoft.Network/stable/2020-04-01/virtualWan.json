@@ -3970,10 +3970,149 @@
         "sku": {
           "type": "string",
           "description": "The sku of this VirtualHub."
+        },
+        "bgpConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to Bgp Connections.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to IpConfigurations.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
         }
       },
       "description": "Parameters for VirtualHub."
     },
+    "BgpConnections": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BgpConnectionProperties",
+          "description": "The properties of the Bgp connections."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the connection."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": connection type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Virtual Appliance Site resource."
+    },
+    "BgpConnectionProperties": {
+      "properties": {
+        "peerAsn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "Peer ASN."
+        },
+        "peerIp": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Peer IP."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        },
+		"connectionState": {
+		  "type": "string",
+		  "description": "The current state of the VirtualHub to Peer",
+		  "readOnly": true,
+		  "enum": [
+			"Unknown",
+			"Connecting",
+			"Connected",
+			"NotConnected"
+		  ],
+		  "x-ms-enum": {
+			"name": "HubBgpConnectionStatus",
+			"modelAsString": true
+		  }		  
+		}
+      },
+      "description": "Properties of the bgp connection."
+    },	
+    "IpConfigurations": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IpConfigurationProperties",
+          "description": "The properties of the Virtual Hub IPConfigurations."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Ip Configuration"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Ipconfiguration type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "IpConfigurations"
+    },
+    "IpConfigurationProperties": {
+      "properties": {
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the public IP resource."
+        },
+        "privateIPAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Private IP Address for this gateway."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the virtual hub IP configuration resource."
+        }
+      },
+      "description": "Properties of Virtual Hub IPConfiguration."
+    },	
     "VirtualHubRouteTable": {
       "properties": {
         "routes": {
