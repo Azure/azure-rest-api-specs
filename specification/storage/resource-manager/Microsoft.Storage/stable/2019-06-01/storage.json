@@ -3193,12 +3193,45 @@
             "type": "string"
           },
           "description": "An array of predefined enum values. Only blockBlob is supported."
+        },
+        "blobIndexMatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagFilter"
+          },
+          "description": "An array of blob index tag based filters, there can be at most 10 tag filters"
         }
       },
       "required": [
         "blobTypes"
       ],
       "description": "Filters limit rule actions to a subset of blobs within the storage account. If multiple filters are defined, a logical AND is performed on all filters. "
+    },
+    "TagFilter": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "description": "This is the filter tag name, it can have 1 - 128 characters"
+        },
+        "op": {
+          "type": "string",
+          "description": "This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "description": "This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters"
+        }
+      },
+      "required": [
+        "name",
+        "op",
+        "value"
+      ],
+      "description": "Blob index tag based filtering for blob objects"
     },
     "ManagementPolicyAction": {
       "properties": {
