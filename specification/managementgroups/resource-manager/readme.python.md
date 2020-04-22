@@ -9,7 +9,7 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: azure.mgmt.managementgroup
   package-name: azure-mgmt-managementgroup
-  package-version: 2019-05-01
+  package-version: 2020-02-01
   clear-output-folder: true
 ```
 
