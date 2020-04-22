@@ -182,6 +182,53 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/checkResourceName": {
+      "post": {
+        "tags": [
+          "Tenants"
+        ],
+        "operationId": "checkResourceName",
+        "description": "Checks if the resource name is valid or not",
+        "summary": "Checks resource name validity",
+        "consumes": [ "application/json" ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "",
+            "schema": {
+              "required": [
+                "name",
+                "type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns status as allowed or not.",
+            "schema": {
+              "$ref": "#/definitions/CheckResourceNameResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check validity for a resource name.": {
+            "$ref": "./examples/CheckResourceName.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -517,6 +564,23 @@
         "nextLink"
       ],
       "description": "Tenant Ids information."
+    },
+    "CheckResourceNameResult": {
+      "properties": {
+        "name": {
+          "description": "Name of Resource",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of Resource",
+          "type": "string"
+        },
+        "status": {
+          "description": "Is ther resource name allowed or not",
+          "type": "string"
+        }
+      },
+      "description": "Validity of Resource name for the given type"
     },
     "Operation": {
       "description": "Microsoft.Resources operation",
