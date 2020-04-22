@@ -4031,9 +4031,18 @@
           "type": "boolean",
           "description": "Value that indicates whether the subscription has an affinity to the client id."
         },
+        "clientAffineProperties" : {
+          "$ref": "#/definitions/SBClientAffineProperties",
+          "description": "Properties specific to client affine subscriptions."
+        }
+      },
+      "description": "Description of Subscription Resource."
+    },
+    "SBClientAffineProperties": {
+      "properties":{
         "clientId": {
           "type": "string",
-          "description": "Indicates the Client ID of the application that created the Subscription."
+          "description": "Indicates the Client ID of the application that created the client-affine subscription."
         },
         "durable": {
           "type": "boolean",
@@ -4043,8 +4052,7 @@
           "type": "boolean",
           "description": "For client-affine subscriptions, this value indicates whether the subscription is shared or not."
         }
-      },
-      "description": "Description of Subscription Resource."
+      }
     },
     "EntityStatus": {
       "type": "string",
