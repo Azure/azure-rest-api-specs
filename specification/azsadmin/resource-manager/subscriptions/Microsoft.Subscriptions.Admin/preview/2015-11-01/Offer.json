@@ -49,7 +49,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers": {
       "get": {
         "x-ms-examples": {
           "Get the list of offers under a resource group.": {
@@ -85,7 +85,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}": {
       "get": {
         "x-ms-examples": {
           "Get the specified offer.": {
@@ -145,7 +145,7 @@
             "$ref": "Subscriptions.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NewOfferParameter"
+            "$ref": "#/parameters/OfferDefinitionParameter"
           }
         ],
         "responses": {
@@ -198,7 +198,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metrics": {
       "get": {
         "x-ms-examples": {
           "Get the offer metrics.": {
@@ -234,7 +234,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/metricDefinitions": {
       "get": {
         "x-ms-examples": {
           "Get the metric definitions.": {
@@ -270,7 +270,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/link": {
       "post": {
         "x-ms-examples": {
           "Links a plan to an offer.": {
@@ -309,7 +309,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Subscriptions.Admin/offers/{offer}/unlink": {
       "post": {
         "x-ms-examples": {
           "Unlink a plan from an offer.": {
@@ -508,9 +508,9 @@
     }
   },
   "parameters": {
-    "NewOfferParameter": {
+    "OfferDefinitionParameter": {
       "description": "New offer.",
-      "name": "newOffer",
+      "name": "offerDefinition",
       "in": "body",
       "required": true,
       "schema": {
