@@ -6,14 +6,17 @@
     "api-version": "2020-04-01-preview",
     "parameters": {
       "properties": {
-        "deleteRetentionPolicy": {
-          "contentPurge": "AllowedByDefault",
-          "retentionInDays": 14
-        }
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "initialAdminObjectIds":{
+            "00000000-0000-0000-0000-000000000000"
+        },
+        "enableSoftDelete": true,
+        "softDeleteRetentionInDays": 90,
+        "enablePurgeProtection": true
       },
       "location": "westus",
       "sku": {
-        "family": "A",
+        "family": "B",
         "name": "Standard_B1"
       },
       "tags": {
@@ -26,10 +29,15 @@
     "202": {
       "body": {
         "properties": {
-          "deleteRetentionPolicy": {
-            "contentPurge": "AllowedByDefault",
-            "retentionInDays": 14
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "initialAdminObjectIds":{
+            "00000000-0000-0000-0000-000000000000"
           },
+          "securityDomainId": null,
+          "enableSoftDelete": true,
+          "softDeleteRetentionInDays": 90,
+          "enablePurgeProtection": true,
+          "hsmPooltUri": null,
           "provisioningState": "Allocating",
           "statusMessage": "Allocating hardware"
         },
@@ -38,7 +46,7 @@
         "type": "Microsoft.KeyVault/managedHSMs",
         "location": "westus",
         "sku": {
-          "family": "A",
+          "family": "B",
           "name": "Standard_B1"
         },
         "tags": {
@@ -50,10 +58,15 @@
     "200": {
       "body": {
         "properties": {
-          "deleteRetentionPolicy": {
-            "contentPurge": "AllowedByDefault",
-            "retentionInDays": 14
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "initialAdminObjectIds":{
+            "00000000-0000-0000-0000-000000000000"
           },
+          "securityDomainId": "00000000-0000-0000-0000-000000000000",
+          "enableSoftDelete": true,
+          "softDeleteRetentionInDays": 90,
+          "enablePurgeProtection": true,
+          "hsmPooltUri": "https://sample-mhsm.managedhsm.azure.net",
           "provisioningState": "Succeeded",
           "statusMessage": "ManagedHsm is functional."
         },
@@ -62,7 +75,7 @@
         "type": "Microsoft.KeyVault/managedHSMs",
         "location": "westus",
         "sku": {
-          "family": "A",
+          "family": "B",
           "name": "Standard_B1"
         },
         "tags": {
