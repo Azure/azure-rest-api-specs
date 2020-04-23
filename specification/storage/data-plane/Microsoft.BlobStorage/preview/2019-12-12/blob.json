@@ -2966,7 +2966,7 @@
               },
               "x-ms-or": {
                 "type": "string",
-                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-client-name": "ObjectReplicationRules",
                 "x-ms-header-collection-prefix": "x-ms-or-",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
               },
@@ -3204,7 +3204,7 @@
               },
               "x-ms-or": {
                 "type": "string",
-                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-client-name": "ObjectReplicationRules",
                 "x-ms-header-collection-prefix": "x-ms-or-",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
               },
@@ -3511,7 +3511,7 @@
               },
               "x-ms-or": {
                 "type": "string",
-                "x-ms-client-name": "ObjectReplicationRuleStatus",
+                "x-ms-client-name": "ObjectReplicationRules",
                 "x-ms-header-collection-prefix": "x-ms-or-",
                 "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the source blob of the replication. When retrieving this header, it will return the header with the policy id and rule id (e.g. x-ms-or-policyid_ruleid), and the value will be the status of the replication (e.g. complete, failed)."
               },
@@ -9423,8 +9423,8 @@
         "ObjectReplicationPolicyId": {
           "type": "string"
         },
-        "ObjectReplicationRuleStatus": {
-          "$ref": "#/definitions/BlobObjectReplicationRuleStatus"
+        "ObjectReplicationRules": {
+          "$ref": "#/definitions/BlobObjectReplicationRules"
         }
       }
     },
@@ -10310,10 +10310,10 @@
         "type": "string"
       }
     },
-    "BlobObjectReplicationRuleStatus": {
+    "BlobObjectReplicationRules": {
       "type": "object",
       "xml": {
-        "name": "BlobObjectReplicationRuleStatus"
+        "name": "BlobObjectReplicationRules"
       },
       "additionalProperties": {
         "type": "string"
@@ -11500,9 +11500,9 @@
       "x-ms-parameter-location": "method",
       "description": "Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication."
     },
-    "ObjectReplicationRuleStatus": {
+    "ObjectReplicationRules": {
       "name": "x-ms-or",
-      "x-ms-client-name": "ObjectReplicationRuleStatus",
+      "x-ms-client-name": "ObjectReplicationRules",
       "in": "header",
       "required": false,
       "type": "string",
