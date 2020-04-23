@@ -342,7 +342,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
 - Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
-- Microsoft.Insights/preview/2020-02-02-preview/components_API.json
+- Microsoft.Insights/preview/2018-05-01/components_API.json
 - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
