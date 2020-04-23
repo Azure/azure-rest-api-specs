@@ -1,0 +1,529 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_List",
+        "x-ms-examples": {
+          "NamespacesListBySubscription": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceList.json"
+          }
+        },
+        "description": "Lists all the available Namespaces within a subscription, irrespective of the resource groups.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListByResourceGroup",
+        "x-ms-examples": {
+          "NamespaceListByResourceGroup": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceListByResourceGroup.json"
+          }
+        },
+        "description": "Lists the available Namespaces within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespaces returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdate",
+        "x-ms-examples": {
+          "NamespaceCreate": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceCreate.json"
+          }
+        },
+        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EHNamespace",
+              "required": [
+                "location"
+              ]
+            },
+            "description": "Parameters for creating a namespace resource."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfully created.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace create request accepted.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Delete",
+        "x-ms-examples": {
+          "NameSpaceDelete": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceDelete.json"
+          }
+        },
+        "description": "Deletes an existing namespace. This operation also removes all associated resources under the namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfully deleted."
+          },
+          "202": {
+            "description": "Namespace delete request accepted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Get",
+        "x-ms-examples": {
+          "NameSpaceGet": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceGet.json"
+          }
+        },
+        "description": "Gets the description of the specified namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_Update",
+        "x-ms-examples": {
+          "NamespacesUpdate": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceUpdate.json"
+          }
+        },
+        "description": "Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            },
+            "description": "Parameters for updating a namespace resource."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "201": {
+            "description": "Namespace update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
+            }
+          },
+          "202": {
+            "description": "Namespace create or update request accepted."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EHNamespaceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EHNamespace"
+          },
+          "description": "Result of the List Namespace operation"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of namespaces."
+        }
+      },
+      "description": "The response of the List Namespace operation"
+    },
+    "EHNamespace": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Properties of sku resource"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "provisioningState": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Provisioning state of the Namespace."
+            },
+            "createdAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the Namespace was created."
+            },
+            "updatedAt": {
+              "readOnly": true,
+              "format": "date-time",
+              "type": "string",
+              "description": "The time the Namespace was updated."
+            },
+            "serviceBusEndpoint": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Endpoint you can use to perform Service Bus operations."
+            },
+            "clusterArmId": {
+              "type": "string",
+              "description": "Cluster ARM ID of the Namespace."
+            },
+            "metricId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Identifier for Azure Insights metrics."
+            },
+            "isAutoInflateEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether AutoInflate is enabled for eventhub namespace."
+            },
+            "maximumThroughputUnits": {
+              "format": "int32",
+              "type": "integer",
+              "maximum": 20,
+              "minimum": 0,
+              "description": "Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( '0' if AutoInflateEnabled = true)"
+            },
+            "kafkaEnabled": {
+              "type": "boolean",
+              "description": "Value that indicates whether Kafka is enabled for eventhub namespace."
+            },
+            "zoneRedundant": {
+              "type": "boolean",
+              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones."
+            },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "Properties of BYOK Encryption description"
+            }
+          },
+          "description": "Namespace properties supplied for create namespace operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Single Namespace item in List or Get Operation"
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of this SKU.",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The billing tier of this particular SKU.",
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "format": "int32",
+          "maximum": 20,
+          "minimum": 0,
+          "type": "integer",
+          "description": "The Event Hubs throughput units, value should be 0 to 20 throughput units."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "SKU parameters supplied to the create namespace operation"
+    },
+    "Identity": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault"
+        },
+        "type": {
+          "type": "string",
+          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "Encryption": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
+    }
+  },
+  "parameters": {}
+}
