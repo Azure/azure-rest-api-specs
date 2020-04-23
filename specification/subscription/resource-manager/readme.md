@@ -52,7 +52,6 @@ These settings apply only when `--tag=package-2019-10-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-10-preview'
 input-file:
 - Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
