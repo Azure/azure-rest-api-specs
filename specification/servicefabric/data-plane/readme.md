@@ -115,6 +115,16 @@ input-file:
 
 ```
 
+### Tag: 7.1
+
+These settings apply only when `--tag=7.0` is specified on the command line.
+
+``` yaml $(tag) == '7.1'
+input-file:
+- Microsoft.ServiceFabric/stable/7.0/servicefabric.json
+
+```
+
 ---
 # Code Generation
 
