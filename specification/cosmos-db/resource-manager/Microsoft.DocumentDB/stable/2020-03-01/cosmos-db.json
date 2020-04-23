@@ -5156,6 +5156,14 @@
             "$ref": "#/definitions/VirtualNetworkRule"
           }
         },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Private Endpoint Connections configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
         "enableMultipleWriteLocations": {
           "description": "Enables the account to write in multiple locations",
           "type": "boolean"
@@ -6713,6 +6721,61 @@
         "ignoreMissingVNetServiceEndpoint": {
           "type": "boolean",
           "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "description": "Connection State of the Private Endpoint Connection.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
+          "readOnly": true
         }
       }
     },
