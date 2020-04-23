@@ -43,6 +43,15 @@ input-file:
 - Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
 ```
 
+### Tag: package-2020-03-01
+
+These settings apply only when `--tag=package-2020-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-03-01'
+input-file:
+- Microsoft.IoTCentral/stable/2020-03-01/iotcentral.json
+```
+
 ---
 # Code Generation
 
@@ -101,8 +110,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-iotcentral
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-03-01
   - tag: package-2018-09-01
   - tag: package-2017-07-01-privatepreview
+```
+
+### Tag: package-2020-03-01 and java
+
+These settings apply only when `--tag=package-2020-03-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag)=='package-2020-03-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.iotcentral.v2020_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/iotcentral/mgmt-v2020_03_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-09-01 and java
@@ -172,6 +195,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.IoTCentral/stable/2020-03-01/iotcentral.json
   - $(this-folder)/Microsoft.IoTCentral/stable/2018-09-01/iotcentral.json
   - $(this-folder)/Microsoft.IoTCentral/preview/2017-07-01-privatepreview/iotcentral.json
 
