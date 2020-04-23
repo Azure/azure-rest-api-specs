@@ -52,6 +52,9 @@
                 "privateIPAllocationMethod": "Dynamic",
                 "publicIPAddress": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
+                },
+                "privateLinkResource": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkResources/privateLink1"
                 }
               }
             }
@@ -251,7 +254,22 @@
               }
             }
           ],
-          "probes": []
+          "probes": [],
+          "privateLinkResources": [
+            {
+              "name": "privateLink1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/privateLinkResources/privateLink1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/virtualNetwork1/subnets/appgwsubnet"
+                },
+                "groupId": "privatelink1",
+                "ipAddressesToAllocate": 1
+              }
+            }
+          ],
+          "privateEndpointConnections": []
         }
       }
     }
