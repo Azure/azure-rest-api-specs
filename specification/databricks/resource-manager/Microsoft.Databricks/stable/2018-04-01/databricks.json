@@ -70,9 +70,6 @@
               "$ref": "#/definitions/Workspace"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -112,6 +109,9 @@
           },
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "200": {
+            "description": "OK. The request has succeeded."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -401,6 +401,28 @@
           "items": {
             "$ref": "#/definitions/WorkspaceProviderAuthorization"
           }
+        },
+        "createdBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that created the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "updatedBy": {
+          "description": "Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.",
+          "$ref": "#/definitions/CreatedBy"
+        },
+        "createdDateTime": {
+          "description": "Specifies the date and time when the workspace is created.",
+          "$ref": "#/definitions/CreatedDateTime"
+        },
+        "workspaceId": {
+          "readOnly": true,
+          "description": "The unique identifier of the databricks workspace in databricks control plane.",
+          "type": "string"
+        },
+        "workspaceUrl": {
+          "readOnly": true,
+          "description": "The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'",
+          "type": "string"
         }
       },
       "required": [
@@ -564,10 +586,6 @@
     },
     "WorkspaceCustomParameters": {
       "properties": {
-        "amlWorkspaceId": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The Workspace ID of an Azure Machine Learning Workspace"
-        },
         "customVirtualNetworkId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
@@ -579,41 +597,37 @@
         "customPrivateSubnetName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The name of the Private Subnet within the Virtual Network"
-        },
-        "enableNoPublicIp": {
-          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
-          "description": "Should the Public IP be Disabled?"
-        },
-        "loadBalancerBackendPoolName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of a Backend Address Pool within an Azure Load Balancer"
-        },
-        "loadBalancerId": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The Resource ID of an Azure Load Balancer"
-        },
-        "relayNamespaceName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of an Azure Relay Namespace"
-        },
-        "storageAccountName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name which should be used for the Storage Account"
-        },
-        "storageAccountSkuName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The SKU which should be used for this Storage Account"
-        },
-        "resourceTags": {
-          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
-          "description": "A map of Tags which should be applied to the resources used by this Databricks Cluster."
-        },
-        "vnetAddressPrefix": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The first 2 octets of the virtual network /16 address range (e.g., '10.139' for the address range 10.139.0.0/16)."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."
+    },
+    "CreatedDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time stamp when the workspace was created.",
+      "readOnly": true
+    },
+    "CreatedBy": {
+      "properties": {
+        "oid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Object ID that created the workspace.",
+          "readOnly": true
+        },
+        "puid": {
+          "type": "string",
+          "description": "The Personal Object ID corresponding to the object ID above",
+          "readOnly": true
+        },
+        "applicationId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.",
+          "readOnly": true
+        }
+      },
+      "description": "Provides details of the entity that created/updated the workspace."
     },
     "WorkspaceProviderAuthorization": {
       "properties": {
