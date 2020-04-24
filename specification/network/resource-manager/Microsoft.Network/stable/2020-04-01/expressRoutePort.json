@@ -542,6 +542,65 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/generateLOA": {
+      "post": {
+        "tags": [
+          "GenerateExpressRoutePortsLOA"
+        ],
+        "operationId": "ExpressRoutePortsLOA_Generation",
+        "description": "Generate LOA for the requested ExpressRoutePort resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of ExpressRoutePort."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOARequest"
+            },
+            "description": "Request parameters supplied to generate LOA."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the pdf as a base64 encoded string",
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOAResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateExpressRoutePortLOA": {
+            "$ref": "./examples/GenerateExpressRoutePortsLOA.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -862,6 +921,27 @@
         "nextLink": {
           "type": "string",
           "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "GenerateExpressRoutePortsLOARequest": {
+      "description": "The customer name to be printed on LOA.",
+      "properties": {
+        "customerName": {
+          "type": "string",
+          "description": "The customer name."
+        }
+      },
+      "required": [
+        "customerName"
+      ]
+    },
+    "GenerateExpressRoutePortsLOAResult": {
+      "description": "Response for GenerateExpressRoutePortsLOA API service call.",
+      "properties": {
+        "encodedPdf": {
+          "type": "string",
+          "description": "The pdf as a base64 encoded string."
         }
       }
     }
