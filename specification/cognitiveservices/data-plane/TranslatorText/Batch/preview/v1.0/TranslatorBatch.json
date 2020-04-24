@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/v1.0-preview.1/documents": {
+    "/v1.0-preview.1/batches": {
       "post": {
         "tags": [
           "Translation"
@@ -103,9 +103,9 @@
         "tags": [
           "Translation"
         ],
-        "summary": "Returns the status of the documents of a translation batch operation",
-        "description": "Returns the status of the list of documents translation operation status in the subscription\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get Detailed Document Status",
+        "summary": "Returns the list of operations submitted and their summary status",
+        "description": "Returns the list of status of the translation batch operation.\r\nThe list will consist only of the batch request submitted by the user (based on their subscription)\r\n            \r\nThe operation status are sorted by the operation Id\r\n            \r\nIf the number of operations exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get status of operation list",
         "produces": [
           "application/json"
         ],
@@ -133,9 +133,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request and returns the status of the documents",
+            "description": "Successful request and returns the status of the all the operations",
             "schema": {
-              "$ref": "#/definitions/DocumentStatusResponse"
+              "$ref": "#/definitions/OperationStatusResponse"
             },
             "headers": {
               "Retry-After": {
@@ -156,7 +156,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
             }
           },
           "401": {
@@ -165,16 +165,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "404": {
-            "description": "Resource is not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
             }
           },
           "429": {
@@ -183,7 +174,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
             }
           },
           "500": {
@@ -192,7 +183,7 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
             }
           },
           "503": {
@@ -201,18 +192,18 @@
               "$ref": "#/definitions/ErrorResponseV2"
             },
             "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
             }
           }
         },
         "x-ms-examples": {
-          "Get Documents Status": {
-            "$ref": "./examples/documents.json"
+          "Get status for operation list": {
+            "$ref": "./examples/operations.json"
           }
         }
       }
     },
-    "/v1.0-preview.1/documents/upload": {
+    "/v1.0-preview.1/batches/upload": {
       "post": {
         "tags": [
           "Translation"
@@ -411,7 +402,121 @@
         }
       }
     },
-    "/v1.0-preview.1/operations/{id}": {
+    "/v1.0-preview.1/documents": {
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "summary": "Returns the status of the documents of a translation batch operation",
+        "description": "Returns the status of the list of documents translation operation status in the subscription\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
+        "operationId": "Get Detailed Document Status",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 50,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
+            "type": "integer",
+            "format": "int32",
+            "default": 0,
+            "maximum": 2147483647,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request and returns the status of the documents",
+            "schema": {
+              "$ref": "#/definitions/DocumentStatusResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Indicates how long to wait before making a new request.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "ETag": {
+                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
+                "type": "string",
+                "format": ""
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request.  Check input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.  Please check your credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "404": {
+            "description": "Resource is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
+            }
+          },
+          "503": {
+            "description": "Server temporary unavailable",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseV2"
+            },
+            "examples": {
+              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Documents Status": {
+            "$ref": "./examples/documents.json"
+          }
+        }
+      }
+    },
+    "/v1.0-preview.1/batches/{id}": {
       "get": {
         "tags": [
           "Translation"
@@ -509,7 +614,7 @@
         ],
         "summary": "Cancel a currently processing or queued operation.",
         "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling.  A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
-        "operationId": "cancel operation",
+        "operationId": "cancel batch operation",
         "produces": [
           "application/json"
         ],
@@ -583,7 +688,7 @@
         }
       }
     },
-    "/v1.0-preview.1/operations/{id}/documents": {
+    "/v1.0-preview.1/batches/{id}/documents": {
       "get": {
         "tags": [
           "Translation"
@@ -701,111 +806,6 @@
         "x-ms-examples": {
           "Get Documents Status for the operation id": {
             "$ref": "./examples/documents.json"
-          }
-        }
-      }
-    },
-    "/v1.0-preview.1/operations": {
-      "get": {
-        "tags": [
-          "Translation"
-        ],
-        "summary": "Returns the list of operations submitted and their summary status",
-        "description": "Returns the list of status of the translation batch operation.\r\nThe list will consist only of the batch request submitted by the user (based on their subscription)\r\n            \r\nThe operation status are sorted by the operation Id\r\n            \r\nIf the number of operations exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get status of operation list",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "maximum": 100,
-            "minimum": 1
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "maximum": 2147483647,
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request and returns the status of the all the operations",
-            "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "Indicates how long to wait before making a new request.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "ETag": {
-                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
-                "type": "string",
-                "format": ""
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.  Check input parameters",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "401": {
-            "description": "Unauthorized.  Please check your credentials",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "503": {
-            "description": "Server temporary unavailable",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"operation\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get status for operation list": {
-            "$ref": "./examples/operations.json"
           }
         }
       }
@@ -1125,6 +1125,119 @@
       ],
       "type": "string"
     },
+    "StatusSummary": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "format": "int32",
+          "description": "Total count",
+          "type": "integer",
+          "example": 1
+        },
+        "failed": {
+          "format": "int32",
+          "description": "Failed count",
+          "type": "integer",
+          "example": 0
+        },
+        "success": {
+          "format": "int32",
+          "description": "Number of Success",
+          "type": "integer",
+          "example": 1
+        },
+        "inProgress": {
+          "format": "int32",
+          "description": "Number of in progress",
+          "type": "integer",
+          "example": 0
+        },
+        "notYetStarted": {
+          "format": "int32",
+          "description": "Count of not yet started",
+          "type": "integer",
+          "example": 0
+        },
+        "cancelled": {
+          "format": "int32",
+          "description": "Number of cancelled",
+          "type": "integer",
+          "example": 0
+        }
+      }
+    },
+    "OperationStatusSummary": {
+      "description": "Job status response",
+      "required": [
+        "createdDateTimeUtc",
+        "id",
+        "lastActionDateTimeUtc",
+        "summary"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "Id of the operation.",
+          "type": "string",
+          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
+        },
+        "createdDateTimeUtc": {
+          "format": "date-time",
+          "description": "Operation created date time",
+          "type": "string",
+          "example": "2020-01-20T11:40:07.7010000-08:00"
+        },
+        "lastActionDateTimeUtc": {
+          "format": "date-time",
+          "description": "Date time in which the operation's status has been updated",
+          "type": "string",
+          "example": "2020-01-20T11:41:07.7010000-08:00"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "summary": {
+          "$ref": "#/definitions/StatusSummary"
+        }
+      }
+    },
+    "OperationStatusResponse": {
+      "description": "Document Status Response",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The summary status of individual operation",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationStatusSummary"
+          }
+        },
+        "@nextLink": {
+          "description": "Url for the next page.  Null if no more pages available",
+          "type": "string",
+          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operations?$top=5&$skip=15"
+        }
+      }
+    },
+    "DocumentSubmissionResponse": {
+      "description": "The response for a document submission",
+      "type": "object",
+      "properties": {
+        "job": {
+          "$ref": "#/definitions/OperationStatusSummary"
+        },
+        "documentDownloadUrl": {
+          "description": "Document download link",
+          "type": "string"
+        },
+        "documentExpirationDateTimeUtc": {
+          "format": "date-time",
+          "description": "Datetime in Utc when the document will no longer be available",
+          "type": "string"
+        }
+      }
+    },
     "DocumentStatusDetail": {
       "required": [
         "createdDateTimeUtc",
@@ -1205,113 +1318,6 @@
           "description": "Url for the next page.  Null if no more pages available",
           "type": "string",
           "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operations/727BF148-F327-47A0-9481-ABAE6362F11E/documents?$top=5&$skip=15"
-        }
-      }
-    },
-    "StatusSummary": {
-      "type": "object",
-      "properties": {
-        "total": {
-          "format": "int32",
-          "description": "Total count",
-          "type": "integer",
-          "example": 1
-        },
-        "failed": {
-          "format": "int32",
-          "description": "Failed count",
-          "type": "integer",
-          "example": 0
-        },
-        "success": {
-          "format": "int32",
-          "description": "Number of Success",
-          "type": "integer",
-          "example": 1
-        },
-        "inProgress": {
-          "format": "int32",
-          "description": "Number of in progress",
-          "type": "integer",
-          "example": 0
-        },
-        "notYetStarted": {
-          "format": "int32",
-          "description": "Count of not yet started",
-          "type": "integer",
-          "example": 0
-        }
-      }
-    },
-    "OperationStatusSummary": {
-      "description": "Job status response",
-      "required": [
-        "createdDateTimeUtc",
-        "id",
-        "lastActionDateTimeUtc",
-        "summary"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "uuid",
-          "description": "Id of the operation.",
-          "type": "string",
-          "example": "36724748-f7a0-4db7-b7fd-f041ddc75033"
-        },
-        "createdDateTimeUtc": {
-          "format": "date-time",
-          "description": "Operation created date time",
-          "type": "string",
-          "example": "2020-01-20T11:40:07.7010000-08:00"
-        },
-        "lastActionDateTimeUtc": {
-          "format": "date-time",
-          "description": "Date time in which the operation's status has been updated",
-          "type": "string",
-          "example": "2020-01-20T11:41:07.7010000-08:00"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "summary": {
-          "$ref": "#/definitions/StatusSummary"
-        }
-      }
-    },
-    "DocumentSubmissionResponse": {
-      "description": "The response for a document submission",
-      "type": "object",
-      "properties": {
-        "job": {
-          "$ref": "#/definitions/OperationStatusSummary"
-        },
-        "documentDownloadUrl": {
-          "description": "Document download link",
-          "type": "string"
-        },
-        "documentExpirationDateTimeUtc": {
-          "format": "date-time",
-          "description": "Datetime in Utc when the document will no longer be available",
-          "type": "string"
-        }
-      }
-    },
-    "OperationStatusResponse": {
-      "description": "Document Status Response",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The summary status of individual operation",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationStatusSummary"
-          }
-        },
-        "@nextLink": {
-          "description": "Url for the next page.  Null if no more pages available",
-          "type": "string",
-          "example": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operations?$top=5&$skip=15"
         }
       }
     },
