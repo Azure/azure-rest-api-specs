@@ -4187,7 +4187,7 @@
         },
         "HubRouteTables": {
           "type": "array",
-          "description": "List of all virtual hub route table v2s associated with this VirtualHub.",
+          "description": "List of all HubRouteTables associated with this VirtualHub.",
           "items": {
             "$ref": "#/definitions/HubRouteTables"
           }
@@ -4434,6 +4434,10 @@
           "items": {
             "$ref": "#/definitions/VpnSiteLinkConnection"
           }
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "TODO"
         }
       },
       "description": "Parameters for VpnConnection."
@@ -4612,6 +4616,10 @@
           "type": "boolean",
           "description": "Enable internet security."
         },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "TODO"
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -4685,7 +4693,7 @@
         },
         "propagatingConnections": {
           "type": "array",
-          "description": "List of all connections that this route table propagates to.",
+          "description": "List of all connections that advertise to this route table.",
           "items": {
             "type": "string"
           }
@@ -4693,7 +4701,7 @@
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "The provisioning state of the virtual hub route table resource."
+          "description": "The provisioning state of the HubRouteTable resource."
         }
       },
       "description": "Parameters for HubRouteTable."
@@ -4703,7 +4711,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/HubRouteTableProperties",
-          "description": "Properties of the virtual hub route table."
+          "description": "Properties of the HubRouteTable resource."
         },
         "name": {
           "type": "string",
@@ -5329,6 +5337,10 @@
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
         },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "TODO"
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -5592,6 +5604,10 @@
         "enableInternetSecurity": {
           "type": "boolean",
           "description": "Enable internet security."
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "TODO"
         }
       },
       "description": "Properties of the ExpressRouteConnection subresource."
@@ -5629,6 +5645,70 @@
         }
       },
       "description": "ExpressRouteConnection list."
+    },
+    "RoutingConfiguration": {
+      "properties": {
+        "associatedRouteTable": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "TODO The HubRouteTable associated with this RoutingConfiguration."
+        },
+        "propagatedRouteTables": {
+          "$ref": "#/definitions/PropagatedRouteTable",
+          "description": "TODO List of HubRouteTables to advertise the routes to."
+        },
+        "vnetRoutes": {
+          "$ref" : "#/definitions/VnetRoute",
+          "description": "TODO"
+        }
+      }
+    },
+    "PropagatedRouteTable": {
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "TODO",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "TODO The list of all the HubRouteTables.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "VnetRoute": {
+      "properties": {
+        "staticRoutes": {
+          "type": "array",
+          "description": "List of all Static Routes",
+          "items": {
+            "$ref": "#/definitions/StaticRoute"
+          }
+        }
+      }
+    },
+    "StaticRoute": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the StaticRoute that is unique within a VnetRoute."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "List of all address prefixes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "description": "The ip address of the next hop."
+        }        
+      }
     }
   }
 }
