@@ -3490,6 +3490,156 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwarePatches/{softwarePatchId}": {
+      "get": {
+        "tags": [
+          "VirtualMachineSoftwarePatches"
+         ],
+        "operationId": "VirtualMachineSoftwarePatches_Get",
+        "description": "The operation to get a software patch.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the software patches."
+          },
+          {
+            "name": "softwarePatchId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The identifier of the virtual machine software patch."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+            "$ref": "#/definitions/VirtualMachineSoftwarePatch"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/softwarePatches": {
+      "get": {
+        "tags": [
+          "VirtualMachineSoftwarePatches"
+        ],
+        "operationId": "VirtualMachineSoftwarePatches_List",
+        "description": "The operation to get all software patches of a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the software patches."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineSoftwarePatchesListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/assessPatches": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_AssessPatches",
+        "x-ms-examples": {
+          "VirtualMachineRunCommand": {
+            "$ref": "./examples/VirtualMachineAssessPatches.json"
+          }
+        },
+        "description": "Assess patches on the VM.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}": {
       "put": {
         "tags": [
@@ -7055,6 +7205,160 @@
         }
       },
       "description": "The List Extension operation response"
+    },
+    "VirtualMachineSoftwarePatchProperties": {
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "description": "A unique identifier for the patch."
+        },
+        "name": {
+          "type": "string",
+          "description": "The friendly name of the patch."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version number of the patch. This property applies only to Linux patches."
+        },
+        "kbid": {
+          "type": "string",
+          "description": "The KBID of the patch. Only applies to Windows patches."
+        },
+        "classifications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The classification(s) of the patch as provided by the patch publisher."
+        },
+        "rebootBehavior": {
+          "type": "string",
+          "description": "Describes the reboot requirements of the patch.",
+          "enum": [
+            "NeverReboots",
+            "AlwaysRequiresReboot",
+            "CanRequestReboot"
+          ],
+          "x-ms-enum": {
+            "name": "SoftwareUpdateRebootBehavior",
+            "modelAsString": true
+          }
+        },
+        "activityId": {
+          "type": "string",
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "publishedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the repository published this patch."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp of the last update to this patch record."
+        },
+        "installationState": {
+          "type": "string",
+          "description": "Describes the outcome of an install operation for a given patch.",
+          "enum": [
+            "Installed",
+            "Failed",
+            "Excluded",
+            "NotSelected",
+            "Pending",
+            "Available"
+          ],
+          "x-ms-enum": {
+           "name": "PatchInstallationState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Extension."
+    },
+    "VirtualMachineSoftwarePatch": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Virtual Machine SoftwarePatch."
+    },
+    "VirtualMachineSoftwarePatchesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSoftwarePatch"
+          },
+          "description": "The list of software patches"
+        }
+      },
+      "description": "The List SoftwarePatches operation response"
+    },
+    "VirtualMachineAssessPatchesResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+           "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootPending": {
+          "type": "bool",
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "criticalAndSecurityPatchCount": {
+          "type": "int",
+          "description": "The number of critical or security patches that have been detected as available and not yet installed."
+        },
+        "otherPatchCount": {
+          "type": "int",
+          "description": "The number of all available patches excluding critical and security."
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC timestamp of the last update of this result object."
+        },
+        "patches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineSoftwarePatch"
+          },
+          "description": "The list of patches that have been detected as available for installation."
+        },
+        "error": {
+          "$ref": "#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Extension."
     },
     "PurchasePlan": {
       "properties": {
