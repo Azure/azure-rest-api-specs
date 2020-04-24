@@ -801,6 +801,10 @@
           "description": "Name of the operation with format: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "If the opreration is a data action. (for data plane rbac)",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "The object that describes the operation."
@@ -1055,6 +1059,19 @@
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
         },
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "id": {
           "description": "Fully qualified resource Id for the resource.",
           "type": "string",
@@ -1068,19 +1085,6 @@
         "type": {
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          },
           "readOnly": true
         }
       }
@@ -1133,19 +1137,6 @@
         "type": {
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          },
           "readOnly": true
         }
       },
@@ -1296,7 +1287,8 @@
           "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
           "enum": [
             "ServiceMode",
-            "EnableConnectivityLogs"
+            "EnableConnectivityLogs",
+            "EnableMessagingLogs"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1474,19 +1466,6 @@
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
           "readOnly": true
-        },
-        "kind": {
-          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          },
-          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
@@ -1617,19 +1596,6 @@
         "type": {
           "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/SignalR/PrivateEndpointConnections\"",
           "type": "string",
-          "readOnly": true
-        },
-        "kind": {
-          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          },
           "readOnly": true
         }
       },
