@@ -87,10 +87,10 @@
       },
       "put": {
         "tags": [
-          "QuotaRequest"
+          "Quota_CreateOrUpdate"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response. The Patch operation can be used also to update the quota.",
         "operationId": "Quota_Create",
         "x-ms-examples": {
           "Quotas_Request_listForCompute": {
@@ -150,10 +150,10 @@
       },
       "patch": {
         "tags": [
-          "QuotaRequest"
+          "Quota_CreateOrUpdate"
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response.",
+        "description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information for the specific resource. This information consists of information regarding that specific resources. For the specific resource, if it requires an update to the quota, update the limit field in the response from the Get request to the new value of quota. Then, submit this updated JSON object to this quota request API. This will update the quota to the value specified. The location header in the response will be used to track the status of the quota request. Please check the provisioningState field in the response. The Put operation can be used also to update the quota.",
         "operationId": "Quota_Update",
         "x-ms-examples": {
           "Quotas_Request_PatchForCompute": {
@@ -1054,19 +1054,6 @@
         "emailActions": {
           "description": "The email actions for auto quota increase.",
           "$ref": "#/definitions/EmailActions"
-        }
-      }
-    },
-    "phoneActions": {
-      "description": "The phone actions for auto quota increase.",
-      "properties": {
-        "phoneNumbers": {
-          "description": "The list of phone actions.",
-          "type": "array",
-          "items": {
-            "description": "The phone recipients.",
-            "$ref": "#/definitions/PhoneAction"
-          }
         }
       }
     },
