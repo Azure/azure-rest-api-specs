@@ -1102,78 +1102,6 @@
         }
       }
     },
-    "ProtectedKeyHeader": {
-      "properties": {
-        "alg": {
-          "x-ms-client-name": "keyWrappingAlgorithm",
-          "type": "string",
-          "minLength": 1,
-          "description": "The cryptographic algorithm used to encrypt or determine the value of the content encryption key.",
-          "enum": [
-            "dir"
-          ],
-          "x-ms-enum": {
-            "name": "ProtectedKeyWrappingAlgorithm",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "dir",
-                "description": "Direct mode."
-              }
-            ]
-          }
-        },
-        "enc": {
-          "x-ms-client-name": "ProtectedKeyEncryptionAlgorithm",
-          "type": "string",
-          "minLength": 1,
-          "description": "The encryption algorithm used to protect the key material.",
-          "enum": [
-            "CKM_RSA_AES_KEY_WRAP"
-          ],
-          "x-ms-enum": {
-            "name": "ProtectedKeyEncryptionAlgorithm",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CKM_RSA_AES_KEY_WRAP",
-                "description": "RSA AES Key Wrap."
-              }
-            ]
-          }
-        },
-        "kid": {
-          "type": "string",
-          "description": "Key Encryption Key identifier."
-        }
-      }
-    },
-    "ProtectedKey": {
-      "properties": {
-        "schema_version": {
-          "x-ms-client-name": "schemaVersion",
-          "description": "protected key schema version",
-          "type": "string",
-          "enum": [
-            "1.0"
-          ]
-        },
-        "header": {
-          "$ref": "#/definitions/ProtectedKeyHeader",
-          "description": "Protected key header."
-
-        },
-        "ciphertext": {
-          "type": "string",
-          "format": "base64url",
-          "description": "The encrypted key material.",
-        },
-        "generator": {
-          "type": "string",
-          "description": "Generator information, e.g. tool name, version.",
-        }
-      }
-    },
     "JsonWebKey": {
       "properties": {
         "kid": {
@@ -1281,11 +1209,7 @@
           "x-ms-client-name": "t",
           "type": "string",
           "format": "base64url",
-          "description": "HSM Token, used with 'Bring Your Own Key'."
-        },
-        "protected_key": {
-          "$ref": "#/definitions/ProtectedKey",
-          "description": "Protected key material for secure import/export."
+          "description": "Protected Key, used with 'Bring Your Own Key'."
         },
         "crv": {
           "type": "string",
