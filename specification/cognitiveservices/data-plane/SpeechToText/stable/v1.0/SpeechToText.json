@@ -1,0 +1,2061 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Speech To Text Cognitive Services API",
+    "description": "Speech To Text Cognitive Services API\nhttps://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/rest-speech-to-text",
+    "version": "v1"
+  },
+  "paths": {
+    "/cris/speech/query": {
+      "post": {
+        "tags": [
+          "HttpMls"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "3.0",
+              "nullable": true
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "nullable": true
+            }
+          },
+          {
+            "name": "scenarios",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "ulm",
+              "nullable": true
+            }
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "result.profanitymarkup",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.0/languages/recognition": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.0/languages/translation/from": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1.0/languages/translation/to": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/management/version": {
+      "get": {
+        "tags": [
+          "Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/management/shutdown": {
+      "post": {
+        "tags": [
+          "Management"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/probes/liveness": {
+      "get": {
+        "tags": [
+          "Probes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v1/probes/readiness": {
+      "get": {
+        "tags": [
+          "Probes"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/speech/translation/cognitiveservices/v2": {
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "parameters": [
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "features",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "voice",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "speechOutputFormat",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "profanityAction",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityAction"
+            }
+          },
+          {
+            "name": "profanityMarker",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityMarker"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "speech",
+              "nullable": true
+            }
+          },
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "stableIntermediateThreshold",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "stableTranslation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "secondPassRescoring",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SecondPassRescoringMode"
+            }
+          },
+          {
+            "name": "dppconfigvnext",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "lidEnabled",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "X-CapitoToken",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "X-CapitoToken",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/speech/translation/cognitiveservices/v1": {
+      "get": {
+        "tags": [
+          "Translation"
+        ],
+        "parameters": [
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "features",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          {
+            "name": "voice",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "speechOutputFormat",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "profanityAction",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityAction"
+            }
+          },
+          {
+            "name": "profanityMarker",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityMarker"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "speech",
+              "nullable": true
+            }
+          },
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "stableIntermediateThreshold",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "stableTranslation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "secondPassRescoring",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SecondPassRescoringMode"
+            }
+          },
+          {
+            "name": "dppconfigvnext",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "X-CapitoToken",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "X-CapitoToken",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/speech/recognition/interactive/cognitiveservices/v1": {
+      "get": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "clientConnectionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "stableIntermediateThreshold",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "postprocessing",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "secondPassRescoring",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SecondPassRescoringMode"
+            }
+          },
+          {
+            "name": "dppconfigvnext",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "lidEnabled",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "pronunciationScoreParams",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/speech/recognition/conversation/cognitiveservices/v1": {
+      "get": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "clientConnectionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "stableIntermediateThreshold",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "postprocessing",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "secondPassRescoring",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SecondPassRescoringMode"
+            }
+          },
+          {
+            "name": "dppconfigvnext",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "lidEnabled",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/speech/recognition/dictation/cognitiveservices/v1": {
+      "get": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "clientConnectionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "stableIntermediateThreshold",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "postprocessing",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "secondPassRescoring",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SecondPassRescoringMode"
+            }
+          },
+          {
+            "name": "dppconfigvnext",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "lidEnabled",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UniversalProtocol"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/CultureInfo"
+            }
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "nullable": true
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UniversalResponseFormat"
+            }
+          },
+          {
+            "name": "profanity",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ProfanityOptions"
+            }
+          },
+          {
+            "name": "storeAudio",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelTimestamps",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "wordLevelConfidence",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ws/cris/speech/recognize": {
+      "get": {
+        "tags": [
+          "WebSocketSdk"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "punctuationMode",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PunctuationMode"
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ws/cris/speech/recognize/continuous": {
+      "get": {
+        "tags": [
+          "WebSocketSdk"
+        ],
+        "parameters": [
+          {
+            "name": "cid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "audioSegmentation",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ContinuousRecognition"
+            }
+          },
+          {
+            "name": "punctuationMode",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/PunctuationMode"
+            }
+          },
+          {
+            "name": "initialSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "endSilenceTimeoutMs",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SortVersion": {
+        "type": "object",
+        "properties": {
+          "fullVersion": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "sortId": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompareInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "version": {
+            "$ref": "#/components/schemas/SortVersion"
+          },
+          "lcid": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TextInfo": {
+        "type": "object",
+        "properties": {
+          "ansiCodePage": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "oemCodePage": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "macCodePage": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "ebcdicCodePage": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "lcid": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "cultureName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isReadOnly": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "listSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "isRightToLeft": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CultureTypes": {
+        "enum": [
+          1,
+          2,
+          4,
+          7,
+          8,
+          16,
+          32,
+          64
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "DigitShapes": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "NumberFormatInfo": {
+        "type": "object",
+        "properties": {
+          "currencyDecimalDigits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currencyDecimalSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "isReadOnly": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "currencyGroupSizes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "numberGroupSizes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "percentGroupSizes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "currencyGroupSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "naNSymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyNegativePattern": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberNegativePattern": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentPositivePattern": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentNegativePattern": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negativeInfinitySymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "negativeSign": {
+            "type": "string",
+            "nullable": true
+          },
+          "numberDecimalDigits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberDecimalSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "numberGroupSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyPositivePattern": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "positiveInfinitySymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "positiveSign": {
+            "type": "string",
+            "nullable": true
+          },
+          "percentDecimalDigits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentDecimalSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "percentGroupSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "percentSymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "perMilleSymbol": {
+            "type": "string",
+            "nullable": true
+          },
+          "nativeDigits": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "digitSubstitution": {
+            "$ref": "#/components/schemas/DigitShapes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CalendarAlgorithmType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Calendar": {
+        "type": "object",
+        "properties": {
+          "minSupportedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "maxSupportedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "algorithmType": {
+            "$ref": "#/components/schemas/CalendarAlgorithmType"
+          },
+          "isReadOnly": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "eras": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "twoDigitYearMax": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DayOfWeek": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CalendarWeekRule": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "DateTimeFormatInfo": {
+        "type": "object",
+        "properties": {
+          "amDesignator": {
+            "type": "string",
+            "nullable": true
+          },
+          "calendar": {
+            "$ref": "#/components/schemas/Calendar"
+          },
+          "dateSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstDayOfWeek": {
+            "$ref": "#/components/schemas/DayOfWeek"
+          },
+          "calendarWeekRule": {
+            "$ref": "#/components/schemas/CalendarWeekRule"
+          },
+          "fullDateTimePattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "longDatePattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "longTimePattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "monthDayPattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "pmDesignator": {
+            "type": "string",
+            "nullable": true
+          },
+          "rfC1123Pattern": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "shortDatePattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortTimePattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortableDateTimePattern": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "timeSeparator": {
+            "type": "string",
+            "nullable": true
+          },
+          "universalSortableDateTimePattern": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "yearMonthPattern": {
+            "type": "string",
+            "nullable": true
+          },
+          "abbreviatedDayNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "shortestDayNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "dayNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "abbreviatedMonthNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "monthNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isReadOnly": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "nativeCalendarName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "abbreviatedMonthGenitiveNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "monthGenitiveNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CultureInfo": {
+        "type": "object",
+        "properties": {
+          "parent": {
+            "$ref": "#/components/schemas/CultureInfo"
+          },
+          "lcid": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "keyboardLayoutId": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ietfLanguageTag": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "displayName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "nativeName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "englishName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "twoLetterISOLanguageName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "threeLetterISOLanguageName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "threeLetterWindowsLanguageName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "compareInfo": {
+            "$ref": "#/components/schemas/CompareInfo"
+          },
+          "textInfo": {
+            "$ref": "#/components/schemas/TextInfo"
+          },
+          "isNeutralCulture": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "cultureTypes": {
+            "$ref": "#/components/schemas/CultureTypes"
+          },
+          "numberFormat": {
+            "$ref": "#/components/schemas/NumberFormatInfo"
+          },
+          "dateTimeFormat": {
+            "$ref": "#/components/schemas/DateTimeFormatInfo"
+          },
+          "calendar": {
+            "$ref": "#/components/schemas/Calendar"
+          },
+          "optionalCalendars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Calendar"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "useUserOverride": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isReadOnly": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProfanityAction": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProfanityMarker": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UniversalResponseFormat": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SecondPassRescoringMode": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProfanityOptions": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PunctuationMode": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ContinuousRecognition": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}
