@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "v1.0-preview.1",
+    "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
+    "resourceGroupName": "TestResourceGroup",
+    "TargetLanguage": "fr",
+    "Category": "general",
+    "SourceLanguage": "es",
+    "body": "ZG9jdW1lbnQgYmluYXJ5IGJvZHk="
+  },
+  "responses": {
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "Unauthorized",
+          "message": "User is not authorized",
+          "target": "document",
+          "innerError": {
+            "code": 401000,
+            "error": "Unauthorized",
+            "message": "Operation is not authorized"
+          }
+        }
+      }
+    },
+    "429": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "RequestRateTooHigh",
+          "message": "User's request rate is too high",
+          "target": "document",
+          "innerError": {
+            "code": 429000,
+            "error": "RateTooHigh",
+            "message": "Request rate is too high"
+          }
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "Internal Server Error",
+          "target": "document",
+          "innerError": {
+            "code": 500000,
+            "error": "Internal Server Error",
+            "message": "Unexpected internal server error has occurred"
+          }
+        }
+      }
+    },
+    "503": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "Service is temporary unavailable",
+          "target": "document",
+          "innerError": {
+            "code": 503000,
+            "error": "ServiceTemporaryUnavailable",
+            "message": "Service is currently unavailable.  Please try again later"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/documents/12345",
+        "Operation-Location": "https://westus.cognitiveservices.azure.com/translator/text/batch/v1.0.preview.1/operation/0FA2822F-4C2A-4317-9C20-658C801E0E55"
+      },
+      "body": {
+        "job": {
+          "id": "727bf148-f327-47a0-9481-abae6362f11e",
+          "createdDateTimeUtc": "2020-03-26T00:00:00Z",
+          "lastActionDateTimeUtc": "2020-03-26T01:00:00Z",
+          "status": "NotStarted",
+          "summary": {
+            "total": 1,
+            "failed": 0,
+            "success": 0,
+            "inProgress": 0,
+            "notYetStarted": 1,
+            "cancelled": 0
+          }
+        },
+        "documentDownloadUrl": "https://myblob.blob.core.windows.net/container/file.txt?[SasToken]",
+        "documentExpirationDateTimeUtc": "2020-03-27T00:00:00Z"
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "Some argument is incorrect",
+          "target": "document",
+          "innerError": {
+            "code": 400125,
+            "error": "InvalidTargetLanguage",
+            "message": "Target Language is invalid or not supported"
+          }
+        }
+      }
+    }
+  }
+}
