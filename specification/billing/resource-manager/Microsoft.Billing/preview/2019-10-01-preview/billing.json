@@ -6572,6 +6572,11 @@
           "description": "The ID of the subscription for which the invoice is generated.",
           "type": "string",
           "readOnly": true
+        },
+        "rebillDetails": {
+          "description": "Details of an Enterprise Agreement invoice's rebill relationship to other invoices.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InvoiceRebillDetails"
         }
       }
     },
@@ -6615,6 +6620,34 @@
         }
       }
     },
+    "InvoiceRebillDetails": {
+      "description": "The properties of a payment.",
+      "properties": {
+        "rebillDocumentType": {
+          "description": "The document type of the invoice in a Enterprise Agreement rebilled invoice relationship.",
+          "type": "string",
+          "enum": [
+            "Credit",
+            "Rebill",
+            "Original"
+          ],
+          "x-ms-enum": {
+            "name": "rebillDocumentType",
+            "modelAsString": true
+          }
+        },
+        "rebilledInvoiceId": {
+          "description": "The ID of the rebilled invoice in a Enterprise Agreement rebilled invoice relationship",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestInvoiceId": {
+          "description": "The ID of the latest, active invoice generated in a Enterprise Agreement rebilled invoice relationship.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Document": {
       "description": "The properties of a document.",
       "properties": {
@@ -6638,10 +6671,13 @@
           "type": "string",
           "readOnly": true
         },
-        "documentNumber": {
-          "description": "Document number for an Enterprise Agreement invoice.",
-          "type": "number",
-          "readOnly": true
+        "documentNumbers": {
+          "description": "Generated document numbers for an Enterprise Agreement invoice.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
