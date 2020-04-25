@@ -7281,12 +7281,13 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
+          "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties",
+          "description": "The properties of the software patch."
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/SubResourceReadOnly"
         }
       ],
       "description": "Describes a Virtual Machine SoftwarePatch."
@@ -7324,15 +7325,25 @@
           "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
         },
         "rebootPending": {
-          "type": "bool",
-          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+          "type": "string",
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+           "name": "RebootPending",
+            "modelAsString": true
+          }
         },
         "criticalAndSecurityPatchCount": {
-          "type": "int",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of critical or security patches that have been detected as available and not yet installed."
         },
         "otherPatchCount": {
-          "type": "int",
+          "type": "integer",
+          "format": "int32",
           "description": "The number of all available patches excluding critical and security."
         },
         "startDateTime": {
