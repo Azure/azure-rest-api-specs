@@ -779,8 +779,8 @@
         "tags": [
           "StaticSites"
         ],
-        "summary": "Gets the application settings of a static site.",
-        "description": "Description for Gets the application settings of a static site.",
+        "summary": "Gets the application settings of a static site build.",
+        "description": "Description for Gets the application settings of a static site build.",
         "operationId": "StaticSites_ListStaticSiteBuildFunctionAppSettings",
         "parameters": [
           {
@@ -1449,6 +1449,13 @@
         "buildProperties": {
           "$ref": "#/definitions/StaticSiteBuildProperties",
           "description": "Build properties to configure on the repository."
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections referencing this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+          }
         }
       }
     },
