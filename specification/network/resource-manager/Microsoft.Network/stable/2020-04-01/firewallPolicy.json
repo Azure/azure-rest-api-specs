@@ -615,6 +615,10 @@
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode"
         },
+        "threatIntelWhitelist": {
+          "description": "ThreatIntel Whitelist for Firewall Policy.",
+          "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
+        },
         "intrusionSystemMode": {
           "description": "The operation mode for Intrusion system.",
           "$ref": "#/definitions/FirewallPolicyIntrusionSystemMode"
@@ -1069,6 +1073,26 @@
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionSystemMode",
         "modelAsString": true
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "description": "ThreatIntel Whitelist for Firewall Policy",
+      "x-ms-discriminator-value": "FirewallPolicyThreatIntelWhitelist",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP addresses for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }
