@@ -10,7 +10,11 @@
       },
       "location": "West US",
       "properties": {
-        "threatIntelMode": "Alert"
+        "threatIntelMode": "Alert",
+        "threatIntelWhitelist":{
+            "ipAddresses":["20.3.4.5","50.20.3.7"],
+            "fqdns":["*.microsoft.com"]
+          }
       }
     }
   },
@@ -28,6 +32,14 @@
         "properties": {
           "provisioningState": "Succeeded",
           "threatIntelMode": "Alert",
+          "threatIntelWhitelist":{
+            "ipAddresses": [
+              "20.3.4.5","50.20.3.7"
+            ],
+            "fqdns": [
+              "*.microsoft.com"
+            ]
+          },
           "ruleGroups": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/rulegroup1"
@@ -53,6 +65,14 @@
         "properties": {
           "provisioningState": "Succeeded",
           "threatIntelMode": "Alert",
+          "threatIntelWhitelist":{
+            "ipAddresses": [
+              "20.3.4.5","50.20.3.7"
+            ],
+            "fqdns": [
+              "*.microsoft.com"
+            ]
+          },
           "ruleGroups": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/ruleGroup1"
