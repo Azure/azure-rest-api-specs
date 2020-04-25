@@ -14918,7 +14918,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -14963,7 +14963,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
             }
           },
           {
@@ -14977,13 +14977,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "202": {
             "description": "Asynchronous operation in progress.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -15095,7 +15095,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
             }
           },
           "default": {
@@ -21870,133 +21870,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateAccessSubnet"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionResource": {
-      "description": "Private Endpoint Connection ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequest": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint Connection Approval ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionState": {
-      "description": "The state of a private link connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of a private link connection",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of a private link connection",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "ActionsRequired for a private link connection",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "required": [
-        "id",
-        "name",
-        "type",
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of a private link resource",
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of a private link resource"
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "GroupId of a private link resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "RequiredMembers of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "description": "RequiredZoneNames of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkResourcesWrapper": {
-      "description": "Wrapper for a collection of private link resources",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
           }
         }
       }
