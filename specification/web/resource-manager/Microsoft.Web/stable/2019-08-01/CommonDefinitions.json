@@ -1691,6 +1691,23 @@
         }
       }
     },
+    "RemotePrivateEndpointConnection": {
+      "description": "A remote private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ArmIdWrapper",
+          "description": "PrivateEndpoint of a remote private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkConnectionState"
+        }
+      }
+    },
     "RequestsBasedTrigger": {
       "description": "Trigger based on total requests.",
       "type": "object",

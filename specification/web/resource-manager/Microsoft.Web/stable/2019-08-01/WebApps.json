@@ -14904,6 +14904,7 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
+            "description": "Name of the private endpoint connection.",
             "required": true,
             "type": "string"
           },
@@ -22359,23 +22360,6 @@
             }
           },
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "RemotePrivateEndpointConnection": {
-      "description": "A remote private endpoint connection",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint of a remote private endpoint connection"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
         }
       }
     },
