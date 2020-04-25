@@ -25,9 +25,4 @@ cli:
             group: Pipelines
             parameter: pipeline
         json: true
-      - where:
-            group: IntegrationRuntimes
-            op: CreateOrUpdate
-            param: properties
-        poly-resource: true
 ```
