@@ -3,20 +3,21 @@
     "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
     "resourceGroupName": "resourceGroup1",
     "hostPoolName": "hostPool1",
-    "api-version": "2019-01-23",
-    "parameters": {
-      "Tags": {
+    "api-version": "2019-01-23-preview",
+    "hostPool": {
+      "tags": {
         "tag1": "value1",
         "tag2": "value2"
       },
-      "Properties": {
+      "properties": {
         "friendlyName": "friendly",
         "description": "des1",
         "customRdpProperty": null,
         "maxSessionLimit": 999999,
         "loadBalancerType": "BreadthFirst",
+        "personalDesktopAssignmentType": "Automatic",
         "registrationInfo": {
-          "resetToken": true
+          "resetToken": false
         },
         "ssoContext": "KeyVaultPath"
       }
@@ -37,6 +38,7 @@
           "friendlyName": "friendly",
           "description": "des1",
           "hostPoolType": "Shared",
+          "personalDesktopAssignmentType": "Automatic",
           "customRdpProperty": null,
           "maxSessionLimit": 999999,
           "loadBalancerType": "BreadthFirst",
@@ -45,7 +47,7 @@
           "registrationInfo": {
             "expirationTime": "2008-09-22T14:01:54.9571247Z",
             "token": "token",
-            "resetToken": true
+            "resetToken": false
           },
           "ssoContext": "KeyVaultPath"
         }
