@@ -36,7 +36,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved operations.",
             "schema": {
               "$ref": "#/definitions/ResourceProviderOperationList"
             }
@@ -50,7 +50,7 @@
           "Workspace"
         ],
         "operationId": "Workspaces_Get",
-        "description": "Get an workspace.",
+        "description": "Get a workspace.",
         "x-ms-examples": {
           "Workspace_Get": {
             "$ref": "./examples/Workspace_Get.json"
@@ -72,7 +72,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved workspace.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -80,7 +80,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -90,7 +90,7 @@
           "Workspace"
         ],
         "operationId": "Workspaces_CreateOrUpdate",
-        "description": "Create or update an workspace.",
+        "description": "Create or update a workspace.",
         "x-ms-examples": {
           "Workspace_Create": {
             "$ref": "./examples/Workspace_Create.json"
@@ -110,10 +110,10 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "name": "workspaceIn",
+            "name": "workspace",
             "description": "Object containing Workspace definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -121,13 +121,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated workspace.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully created workspace.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -135,7 +135,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -145,7 +145,7 @@
           "Workspace"
         ],
         "operationId": "Workspaces_Delete",
-        "description": "Remove an workspace.",
+        "description": "Remove a workspace.",
         "x-ms-examples": {
           "Workspace_Delete": {
             "$ref": "./examples/Workspace_Delete.json"
@@ -167,15 +167,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully deleted workspace."
           },
           "204": {
-            "description": "No Content"
+            "description": "Workspace had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -185,7 +185,7 @@
           "Workspace"
         ],
         "operationId": "Workspaces_Update",
-        "description": "Update an workspace.",
+        "description": "Update a workspace.",
         "x-ms-examples": {
           "Workspace_Update": {
             "$ref": "./examples/Workspace_Update.json"
@@ -205,7 +205,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "name": "workspaceIn",
+            "name": "workspace",
             "description": "Object containing Workspace definitions.",
             "in": "body",
             "required": false,
@@ -216,7 +216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated workspace.",
             "schema": {
               "$ref": "#/definitions/Workspace"
             }
@@ -224,7 +224,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -255,7 +255,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved workspaces in resource group.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -263,7 +263,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -277,11 +277,11 @@
         "tags": [
           "Workspace"
         ],
-        "operationId": "Workspaces_List",
+        "operationId": "Workspaces_ListBySubscription",
         "description": "List workspaces in subscription.",
         "x-ms-examples": {
-          "Workspace_List": {
-            "$ref": "./examples/Workspace_List.json"
+          "Workspace_ListBySubscription": {
+            "$ref": "./examples/Workspace_ListBySubscription.json"
           }
         },
         "parameters": [
@@ -294,7 +294,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved workspaces in subscription.",
             "schema": {
               "$ref": "#/definitions/WorkspaceList"
             }
@@ -302,7 +302,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -316,11 +316,11 @@
         "tags": [
           "ApplicationGroup"
         ],
-        "operationId": "UserApplicationGroupAssignments_WorkspaceLevelList",
+        "operationId": "ApplicationGroupAssignments_WorkspaceLevelList",
         "description": "List application group that user can use.",
         "x-ms-examples": {
-          "UserApplicationGroupAssignments_List": {
-            "$ref": "./examples/UserApplicationGroupAssignments_WorkspaceLevelList.json"
+          "ApplicationGroupAssignment_WorkspaceLevelList": {
+            "$ref": "./examples/ApplicationGroupAssignment_WorkspaceLevelList.json"
           }
         },
         "parameters": [
@@ -346,7 +346,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved user application group assignments in workspace.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroupList"
             }
@@ -354,7 +354,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -369,7 +369,7 @@
           "ApplicationGroup"
         ],
         "operationId": "ApplicationGroups_Get",
-        "description": "Get an applicationGroup.",
+        "description": "Get an application group.",
         "x-ms-examples": {
           "ApplicationGroup_Get": {
             "$ref": "./examples/ApplicationGroup_Get.json"
@@ -391,7 +391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved application group.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroup"
             }
@@ -399,7 +399,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -429,10 +429,10 @@
             "$ref": "#/parameters/ApplicationGroupNameParameter"
           },
           {
-            "name": "applicationGroupIn",
+            "name": "applicationGroup",
             "description": "Object containing ApplicationGroup definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationGroup"
             }
@@ -440,13 +440,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated application group.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroup"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully created application group.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroup"
             }
@@ -454,7 +454,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -486,15 +486,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully removed application group."
           },
           "204": {
-            "description": "No Content"
+            "description": "Application group had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -506,7 +506,7 @@
         "operationId": "ApplicationGroups_Update",
         "description": "Update an applicationGroup.",
         "x-ms-examples": {
-          "ApplicationGroup_Update": {
+          "ApplicationGroups_Update": {
             "$ref": "./examples/ApplicationGroup_Update.json"
           }
         },
@@ -524,7 +524,7 @@
             "$ref": "#/parameters/ApplicationGroupNameParameter"
           },
           {
-            "name": "applicationGroupIn",
+            "name": "applicationGroup",
             "description": "Object containing ApplicationGroup definitions.",
             "in": "body",
             "required": false,
@@ -535,7 +535,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated application group.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroup"
             }
@@ -543,7 +543,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -581,7 +581,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved application groups in resource group.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroupList"
             }
@@ -589,7 +589,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -603,11 +603,11 @@
         "tags": [
           "ApplicationGroup"
         ],
-        "operationId": "ApplicationGroups_List",
+        "operationId": "ApplicationGroups_ListBySubscription",
         "description": "List applicationGroups in subscription.",
         "x-ms-examples": {
           "ApplicationGroup_List": {
-            "$ref": "./examples/ApplicationGroup_List.json"
+            "$ref": "./examples/ApplicationGroup_ListBySubscription.json"
           }
         },
         "parameters": [
@@ -627,7 +627,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved application groups in subscription.",
             "schema": {
               "$ref": "#/definitions/ApplicationGroupList"
             }
@@ -635,7 +635,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -650,7 +650,7 @@
           "StartMenuItem"
         ],
         "operationId": "StartMenuItems_List",
-        "description": "List startMenuItems.",
+        "description": "List start menu items in the given application group.",
         "x-ms-examples": {
           "StartMenuItem_List": {
             "$ref": "./examples/StartMenuItem_List.json"
@@ -672,7 +672,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved start menu items in application group.",
             "schema": {
               "$ref": "#/definitions/StartMenuItemList"
             }
@@ -680,7 +680,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -720,7 +720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved application.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -728,7 +728,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -761,10 +761,10 @@
             "$ref": "#/parameters/ApplicationNameParameter"
           },
           {
-            "name": "applicationIn",
+            "name": "application",
             "description": "Object containing Application definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -772,13 +772,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated application.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully created application.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -786,7 +786,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -821,15 +821,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully removed application."
           },
           "204": {
-            "description": "No Content"
+            "description": "Application had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -862,7 +862,7 @@
             "$ref": "#/parameters/ApplicationNameParameter"
           },
           {
-            "name": "applicationIn",
+            "name": "application",
             "description": "Object containing Application definitions.",
             "in": "body",
             "required": false,
@@ -873,7 +873,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated application.",
             "schema": {
               "$ref": "#/definitions/Application"
             }
@@ -881,7 +881,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -915,7 +915,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved applications in application group.",
             "schema": {
               "$ref": "#/definitions/ApplicationList"
             }
@@ -923,7 +923,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -963,7 +963,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved desktop.",
             "schema": {
               "$ref": "#/definitions/Desktop"
             }
@@ -971,7 +971,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1004,7 +1004,7 @@
             "$ref": "#/parameters/DesktopNameParameter"
           },
           {
-            "name": "desktopIn",
+            "name": "desktop",
             "description": "Object containing Desktop definitions.",
             "in": "body",
             "required": false,
@@ -1015,7 +1015,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated desktop.",
             "schema": {
               "$ref": "#/definitions/Desktop"
             }
@@ -1023,7 +1023,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1057,7 +1057,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved desktops in application group.",
             "schema": {
               "$ref": "#/definitions/DesktopList"
             }
@@ -1065,7 +1065,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1077,7 +1077,7 @@
           "HostPool"
         ],
         "operationId": "HostPools_Get",
-        "description": "Get a hostPool.",
+        "description": "Get a host pool.",
         "x-ms-examples": {
           "HostPool_Get": {
             "$ref": "./examples/HostPool_Get.json"
@@ -1099,7 +1099,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved host pool.",
             "schema": {
               "$ref": "#/definitions/HostPool"
             }
@@ -1107,7 +1107,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1117,7 +1117,7 @@
           "HostPool"
         ],
         "operationId": "HostPools_CreateOrUpdate",
-        "description": "Create or update a hostPool.",
+        "description": "Create or update a host pool.",
         "x-ms-examples": {
           "HostPool_Create": {
             "$ref": "./examples/HostPool_Create.json"
@@ -1137,10 +1137,10 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "name": "hostPoolCreate",
+            "name": "hostPool",
             "description": "Object containing HostPool definitions.",
             "in": "body",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/HostPool"
             }
@@ -1155,13 +1155,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated host pool.",
             "schema": {
               "$ref": "#/definitions/HostPool"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Successfully created host pool.",
             "schema": {
               "$ref": "#/definitions/HostPool"
             }
@@ -1169,7 +1169,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1179,7 +1179,7 @@
           "HostPool"
         ],
         "operationId": "HostPools_Delete",
-        "description": "Remove a hostPool.",
+        "description": "Remove a host pool.",
         "x-ms-examples": {
           "HostPool_Delete": {
             "$ref": "./examples/HostPool_Delete.json"
@@ -1208,15 +1208,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully removed host pool."
           },
           "204": {
-            "description": "No Content"
+            "description": "Host pool had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1226,7 +1226,7 @@
           "HostPool"
         ],
         "operationId": "HostPools_Update",
-        "description": "Update a hostPool.",
+        "description": "Update a host pool.",
         "x-ms-examples": {
           "HostPool_Update": {
             "$ref": "./examples/HostPool_Update.json"
@@ -1246,7 +1246,7 @@
             "$ref": "#/parameters/HostPoolNameParameter"
           },
           {
-            "name": "hostPoolIn",
+            "name": "hostPool",
             "description": "Object containing HostPool definitions.",
             "in": "body",
             "required": false,
@@ -1257,7 +1257,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated host pool.",
             "schema": {
               "$ref": "#/definitions/HostPool"
             }
@@ -1265,7 +1265,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1296,7 +1296,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved host pool in resource group.",
             "schema": {
               "$ref": "#/definitions/HostPoolList"
             }
@@ -1304,7 +1304,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1335,7 +1335,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved host pool in subscription.",
             "schema": {
               "$ref": "#/definitions/HostPoolList"
             }
@@ -1343,7 +1343,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1357,11 +1357,11 @@
         "tags": [
           "UserSession"
         ],
-        "operationId": "UserSessions_ListHostPoolLevel",
+        "operationId": "UserSessions_ListByHostPool",
         "description": "List userSessions.",
         "x-ms-examples": {
-          "UserSession_List": {
-            "$ref": "./examples/UserSession_HostPoolLevelList.json"
+          "UserSession_ListByHostPool": {
+            "$ref": "./examples/UserSession_ListByHostPool.json"
           }
         },
         "parameters": [
@@ -1387,7 +1387,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved user sessions in host pool.",
             "schema": {
               "$ref": "#/definitions/UserSessionList"
             }
@@ -1395,7 +1395,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1410,7 +1410,7 @@
           "SessionHost"
         ],
         "operationId": "SessionHosts_Get",
-        "description": "Get a sessionHosts.",
+        "description": "Get a session host.",
         "x-ms-examples": {
           "SessionHost_Get": {
             "$ref": "./examples/SessionHost_Get.json"
@@ -1435,7 +1435,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved session host.",
             "schema": {
               "$ref": "#/definitions/SessionHost"
             }
@@ -1443,7 +1443,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1485,15 +1485,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully removed session host."
           },
           "204": {
-            "description": "No Content"
+            "description": "Session host had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1503,7 +1503,7 @@
           "SessionHost"
         ],
         "operationId": "SessionHosts_Update",
-        "description": "Update a sessionHosts.",
+        "description": "Update a session host.",
         "x-ms-examples": {
           "SessionHost_Update": {
             "$ref": "./examples/SessionHost_Update.json"
@@ -1526,7 +1526,7 @@
             "$ref": "#/parameters/SessionHostNameParameter"
           },
           {
-            "name": "sessionHostIn",
+            "name": "sessionHost",
             "description": "Object containing SessionHost definitions.",
             "in": "body",
             "required": false,
@@ -1537,7 +1537,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully updated session host.",
             "schema": {
               "$ref": "#/definitions/SessionHost"
             }
@@ -1545,7 +1545,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1579,7 +1579,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved session hosts in host pool.",
             "schema": {
               "$ref": "#/definitions/SessionHostList"
             }
@@ -1587,7 +1587,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1601,11 +1601,11 @@
         "tags": [
           "Application"
         ],
-        "operationId": "ActiveApplicationsListSessionHostLevel",
-        "description": "List applications.",
+        "operationId": "ActiveApplications_ListBySessionHost",
+        "description": "List applications for the given session host.",
         "x-ms-examples": {
           "ActiveApplications_List": {
-            "$ref": "./examples/ActiveApplicationsListSessionHostLevel.json"
+            "$ref": "./examples/ActiveApplication_ListBySessionHost.json"
           }
         },
         "parameters": [
@@ -1634,7 +1634,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved active applications in session host.",
             "schema": {
               "$ref": "#/definitions/ApplicationList"
             }
@@ -1642,7 +1642,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1685,7 +1685,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved user session.",
             "schema": {
               "$ref": "#/definitions/UserSession"
             }
@@ -1693,7 +1693,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1738,15 +1738,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully removed user session."
           },
           "204": {
-            "description": "No Content"
+            "description": "User session had no content."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1783,7 +1783,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Successfully retrieved user sessions in session host.",
             "schema": {
               "$ref": "#/definitions/UserSessionList"
             }
@@ -1791,7 +1791,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1834,12 +1834,12 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully disconnected user session."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1877,23 +1877,23 @@
             "$ref": "#/parameters/UserSessionIdParameter"
           },
           {
-            "name": "sendMessageIn",
+            "name": "sendMessage",
             "description": "Object containing message includes title and message body",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SendMessageIn"
+              "$ref": "#/definitions/SendMessage"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully sent message to user session."
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1901,7 +1901,7 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "CloudError": {
       "type": "object",
       "properties": {
         "code": {
@@ -2040,7 +2040,7 @@
         },
         "applicationGroupReferences": {
           "type": "array",
-          "description": "List of applicationGroup links.",
+          "description": "List of applicationGroup resource Ids.",
           "items": {
             "type": "string"
           }
@@ -2132,11 +2132,13 @@
         },
         "hostPoolArmPath": {
           "type": "string",
-          "description": "HostPool arm path of ApplicationGroup."
+          "description": "HostPool arm path of ApplicationGroup.",
+          "x-nullable": false
         },
         "workspaceArmPath": {
           "type": "string",
-          "description": "Workspace arm path of ApplicationGroup."
+          "description": "Workspace arm path of ApplicationGroup.",
+          "readOnly": true
         },
         "applicationGroupType": {
           "enum": [
@@ -2148,7 +2150,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "Resource Type of ApplicationGroup."
+          "description": "Resource Type of ApplicationGroup.",
+          "x-nullable": false
         }
       }
     },
@@ -2243,7 +2246,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "HostPool type for desktop."
+          "description": "HostPool type for desktop.",
+          "x-nullable": false
         },
         "personalDesktopAssignmentType": {
           "enum": [
@@ -2255,7 +2259,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "PersonalDesktopAssignment type for HostPool."
+          "description": "PersonalDesktopAssignment type for HostPool.",
+          "x-nullable": false
         },
         "customRdpProperty": {
           "type": "string",
@@ -2276,7 +2281,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of the load balancer."
+          "description": "The type of the load balancer.",
+          "x-nullable": false
         },
         "ring": {
           "type": "integer",
@@ -2292,7 +2298,7 @@
         },
         "vmTemplate": {
           "type": "string",
-          "description": "VM template for sessionhosts within hostpool."
+          "description": "VM template for sessionhosts configuration within hostpool."
         },
         "applicationGroupReferences": {
           "readOnly": true,
@@ -2402,7 +2408,8 @@
         },
         "token": {
           "type": "string",
-          "description": "The registration token."
+          "description": "The registration token base64 encoded string.",
+          "readOnly": true
         },
         "registrationTokenOperation": {
           "enum": [
@@ -2415,7 +2422,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of resetting the token."
+          "description": "The type of resetting the token.",
+          "x-nullable": false
         }
       }
     },
@@ -2438,7 +2446,7 @@
         }
       }
     },
-    "SendMessageIn": {
+    "SendMessage": {
       "description": "Represents message sent to a UserSession.",
       "type": "object",
       "properties": {
@@ -2504,8 +2512,18 @@
           "description": "Specifies a path for the executable file for the application."
         },
         "commandLineSetting": {
+          "enum": [
+            "DoNotAllow",
+            "Allow",
+            "Require"
+          ],
+          "x-ms-enum": {
+            "name": "CommandLineSetting",
+            "modelAsString": true
+          },
           "type": "string",
-          "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all."
+          "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.",
+          "x-nullable": false
         },
         "commandLineArguments": {
           "type": "string",
@@ -2587,6 +2605,15 @@
           "description": "Specifies a path for the executable file for the application."
         },
         "commandLineSetting": {
+          "enum": [
+            "DoNotAllow",
+            "Allow",
+            "Require"
+          ],
+          "x-ms-enum": {
+            "name": "CommandLineSetting",
+            "modelAsString": true
+          },
           "type": "string",
           "description": "Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all."
         },
@@ -2822,7 +2849,8 @@
         "statusTimestamp": {
           "format": "date-time",
           "type": "string",
-          "description": "The timestamp of the status."
+          "description": "The timestamp of the status.",
+          "readOnly": true
         },
         "osVersion": {
           "type": "string",
@@ -2850,7 +2878,8 @@
         "lastUpdateTime": {
           "format": "date-time",
           "type": "string",
-          "description": "The timestamp of the last update."
+          "description": "The timestamp of the last update.",
+          "readOnly": true
         },
         "updateErrorMessage": {
           "type": "string",
