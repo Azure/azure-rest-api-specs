@@ -18,7 +18,7 @@ You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/
 ## How to fix validation failure?<a name="validation"></a>
 | Validation | Description | How to fix |
 | --- | --- | --- |
-| [Modal Validation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) | Validates models defined for body parameters and responses, and matches them against the expected input and output of an operation. | [Here](https://aka.ms/ci-fix#model-validation) |
+| [Model Validation](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md) | Model validation enforces correctness between example and swagger. It checks whether definitions for request parameters and responses, match an expected input/output payload of the service. | [Here](https://aka.ms/ci-fix#model-validation) |
 | [Lint diff](https://github.com/Azure/azure-openapi-validator) | A tool to check whether changes in PR are satisfied with certain kind of rules outlined in the [automated rules checklist](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) |  [Here](https://aka.ms/ci-fix#linter-validation) |
 | [Breaking Change](https://github.com/Azure/openapi-diff) | A tool to check what a swagger PR has changed and whether these changes violate [breaking changes rules](https://github.com/Azure/openapi-diff/blob/master/docs/README.md).| [Here](https://aka.ms/ci-fix#breaking-change-check)|
 | [Avocado](https://github.com/Azure/avocado/blob/master/README.md) | Avocado validates folder structure and configuration.  | [Here](https://aka.ms/ci-fix#avocado) |
