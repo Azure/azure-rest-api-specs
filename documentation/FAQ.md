@@ -26,7 +26,7 @@ You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/
 | Prettier  | Code formatter for Swagger | [Here](https://aka.ms/ci-fix#prettier-check) |
 | BranchProtectionForPrivateRepo | BranchProtectionForPrivateRepo is designed to always fail to prevent from merging PR into master which is not allow in private swagger repo as it will cause issue to sync up from public repo.  | You can ignore this failure |
 
-Refer to [Document](ci-fix) for how to run these tools locally
+Refer to [Document](https://aka.ms/ci-fix) for how to run these tools locally
 
 ## How to generate SDK from Swagger?<a name="SDK"></a>
 SDK generation is triggered as soon as your OpenAPI specification (a.k.a swagger) PR is created/committed/merged in to the azure-rest-api-specs repository.
