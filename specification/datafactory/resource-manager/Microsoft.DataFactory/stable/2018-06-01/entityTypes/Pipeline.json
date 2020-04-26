@@ -5212,7 +5212,7 @@
         },
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
-          "description": "Delete activity binary store settings."
+          "description": "Delete activity store settings."
         }
       },
       "required": [
@@ -5428,10 +5428,6 @@
           "description": "GetMetadata activity dataset reference.",
           "$ref": "../datafactory.json#/definitions/DatasetReference"
         },
-        "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
-          "description": "GetMetadata activity binary store settings."
-        },
         "fieldList": {
           "description": "Fields of metadata to get from dataset.",
           "type": "array",
@@ -5439,6 +5435,14 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "GetMetadata activity store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/FormatReadSettings",
+          "description": "GetMetadata activity format settings."
         }
       },
       "required": [
