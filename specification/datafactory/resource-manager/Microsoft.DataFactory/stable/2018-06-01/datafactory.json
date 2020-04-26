@@ -1314,60 +1314,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/linkedIntegrationRuntime": {
-      "post": {
-        "tags": [
-          "integrationRuntimes"
-        ],
-        "operationId": "IntegrationRuntimes_CreateLinkedIntegrationRuntime",
-        "x-ms-examples": {
-          "IntegrationRuntimes_CreateLinkedIntegrationRuntime": {
-            "$ref": "./examples/IntegrationRuntimes_CreateLinkedIntegrationRuntime.json"
-          }
-        },
-        "description": "Create a linked integration runtime entry in a shared integration runtime.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/integrationRuntimeName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "createLinkedIntegrationRuntimeRequest",
-            "description": "The linked integration runtime properties.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateLinkedIntegrationRuntimeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/IntegrationRuntimeStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata": {
       "post": {
         "tags": [

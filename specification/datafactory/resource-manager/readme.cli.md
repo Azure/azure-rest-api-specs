@@ -40,7 +40,6 @@ cli:
     #- name: Factories_List
     #- name: Operations_List
     #- name: IntegrationRuntimeNodes_GetIpAddress
-    #- name: IntegrationRuntimes_CreateLinkedIntegrationRuntime
     #- name: RerunTriggers_Cancel
     #- name: RerunTriggers_Start
     #- name: IntegrationRuntimeNodes_Update
