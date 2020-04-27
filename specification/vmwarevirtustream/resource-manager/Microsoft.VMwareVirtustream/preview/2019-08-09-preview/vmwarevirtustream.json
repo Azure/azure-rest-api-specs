@@ -750,26 +750,17 @@
     }
   },
   "definitions": {
-    "HostQuota": {
-      "description": "Host quotas",
-      "properties": {
-        "gp": {
-          "description": "Quota for general purpose hosts (VS20)",
-          "type": "integer",
-          "readOnly": true
-        },
-        "he": {
-          "description": "Quota for high end hosts (VS36)",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
     "QuotaGet": {
       "description": "Subscription quotas",
       "properties": {
         "hostsRemaining": {
-          "$ref": "#/definitions/HostQuota"
+          "description": "Remaining hosts quota by sku type",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "integer",
+            "readOnly": true
+          }
         },
         "quotaEnabled": {
           "description": "Host quota is active for current subscription",
