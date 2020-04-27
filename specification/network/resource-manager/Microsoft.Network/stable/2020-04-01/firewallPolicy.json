@@ -717,17 +717,12 @@
           "$ref": "#/definitions/FirewallPolicyNatRuleCollectionAction",
           "description": "The action type of a Nat rule collection."
         },
-        "translatedAddress": {
-          "type": "string",
-          "description": "The translated address for this NAT rule collection."
-        },
-        "translatedPort": {
-          "type": "string",
-          "description": "The translated port for this NAT rule collection."
-        },
-        "rule": {
-          "$ref": "#/definitions/FirewallPolicyRule",
-          "description": "The match rule for incoming traffic."
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyRule"
+          },
+          "description": "List of rules included in a rule collection."
         }
       },
       "allOf": [
@@ -879,6 +874,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "translatedAddress": {
+          "type": "string",
+          "description": "The translated address for this NAT rule."
+        },
+        "translatedPort": {
+          "type": "string",
+          "description": "The translated port for this NAT rule."
         },
         "sourceIpGroups": {
           "type": "array",
