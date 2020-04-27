@@ -60,6 +60,15 @@ tag: package-managedapplications-2018-06
 tag: package-deploymentscripts-2019-10-preview
 ```
 
+### Tag: package-subscriptions-2020-01
+
+These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
+
+```yaml $(tag) == 'package-subscriptions-2020-01'
+input-file:
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
+```
+
 ### Tag: package-deploymentscripts-2019-10-preview
 
 These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
@@ -535,6 +544,13 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - from: deploymentScripts.json
+    suppress: R3006 #BodyTopLevelProperties
+    where: 
+    - $.definitions.DeploymentScript.properties
+    - $.definitions.AzureCliScript.properties
+    - $.definitions.AzurePowerShellScript.properties
+    reason: Currently systemData is not allowed
 ```
 
 ---
@@ -614,6 +630,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
