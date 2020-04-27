@@ -4437,7 +4437,7 @@
         },
         "routingConfiguration": {
           "$ref": "#/definitions/RoutingConfiguration",
-          "description": "TODO"
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       },
       "description": "Parameters for VpnConnection."
@@ -4618,7 +4618,7 @@
         },
         "routingConfiguration": {
           "$ref": "#/definitions/RoutingConfiguration",
-          "description": "TODO"
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         },
         "provisioningState": {
           "readOnly": true,
@@ -4687,15 +4687,17 @@
         "associatedConnections": {
           "type": "array",
           "description": "List of all connections associated with this route table.",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/HubVirtualNetworkConnection"
+            "$ref": "./network.json#/definitions/SubResource"
           }
         },
         "propagatingConnections": {
           "type": "array",
           "description": "List of all connections that advertise to this route table.",
+          "readOnly": true,
           "items": {
-            "$ref": "#/defintions/HubVirtualNetworkConnection"
+            "$ref": "./network.json#/definitions/SubResource"
           }
         },
         "provisioningState": {
@@ -5336,7 +5338,7 @@
         },
         "routingConfiguration": {
           "$ref": "#/definitions/RoutingConfiguration",
-          "description": "TODO"
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         },
         "provisioningState": {
           "readOnly": true,
@@ -5604,7 +5606,7 @@
         },
         "routingConfiguration": {
           "$ref": "#/definitions/RoutingConfiguration",
-          "description": "TODO"
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       },
       "description": "Properties of the ExpressRouteConnection subresource."
@@ -5644,19 +5646,19 @@
       "description": "ExpressRouteConnection list."
     },
     "RoutingConfiguration": {
-      "description":  "Routing Configuration indicating the associated and propagated route tables on this connection.",
+      "description":  "Routing Configuration indicating the associated and propagated route tables for this connection.",
       "properties": {
         "associatedRouteTable": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "TODO The RouteTable associated with this RoutingConfiguration."
+          "description": "The resource id RouteTable associated with this RoutingConfiguration."
         },
         "propagatedRouteTables": {
           "$ref": "#/definitions/PropagatedRouteTable",
-          "description": "TODO List of RouteTables to advertise the routes to."
+          "description": "The list of RouteTables to advertise the routes to."
         },
         "vnetRoutes": {
           "$ref" : "#/definitions/VnetRoute",
-          "description": "TODO"
+          "description": "List of routes that control routing from VirtualHub into a virtual network connection."
         }
       }
     },
@@ -5664,14 +5666,14 @@
       "properties": {
         "labels": {
           "type": "array",
-          "description": "TODO",
+          "description": "The list of labels.",
           "items": {
             "type": "string"
           }
         },
         "ids": {
           "type": "array",
-          "description": "TODO The list of all the RouteTables.",
+          "description": "The list of resource ids of all the RouteTables.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
