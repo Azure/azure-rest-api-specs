@@ -4621,6 +4621,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4651,6 +4658,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4781,6 +4795,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4811,6 +4832,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4845,6 +4873,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4875,6 +4910,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -4909,6 +4951,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4941,6 +4990,13 @@
               "$ref": "#/definitions/ExtendedResourceProperties"
             }
           ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
+            }
+          ]
         }
       }
     },
@@ -4971,6 +5027,13 @@
             },
             {
               "$ref": "#/definitions/ExtendedResourceProperties"
+            }
+          ]
+        },
+        "options": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OptionsResource"
             }
           ]
         }
@@ -5091,6 +5154,14 @@
           "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of Private Endpoint Connections configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
           }
         },
         "enableMultipleWriteLocations": {
@@ -5952,6 +6023,16 @@
         }
       }
     },
+    "OptionsResource": {
+      "type": "object",
+      "description": "Cosmos DB options resource object",
+      "properties": {
+        "throughput": {
+          "type": "integer",
+          "description": "Value of the Cosmos DB resource throughput. Use the ThroughputSetting resource when retrieving offer details."
+        }
+      }
+    },
     "SqlDatabaseResource": {
       "type": "object",
       "description": "Cosmos DB SQL database resource object",
@@ -6623,7 +6704,7 @@
     "ProvisioningState": {
       "type": "string",
       "readOnly": true,
-      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation."
+      "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation. 'DeletionFailed' – the Cosmos DB account deletion failed."
     },
     "IPRangeFilter": {
       "type": "string",
@@ -6640,6 +6721,61 @@
         "ignoreMissingVNetServiceEndpoint": {
           "type": "boolean",
           "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Properties of a private endpoint connection.",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
+          "description": "Connection State of the Private Endpoint Connection."
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStateProperty": {
+      "type": "object",
+      "description": "Connection State of the Private Endpoint Connection.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The private link service connection status."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
+          "readOnly": true
         }
       }
     },
