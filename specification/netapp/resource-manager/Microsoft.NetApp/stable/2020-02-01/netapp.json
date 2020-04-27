@@ -1554,7 +1554,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - account updated",
+            "description": "OK - snapshot Policy updated",
             "schema": {
               "$ref": "#/definitions/snapshotPolicy"
             }
@@ -2975,44 +2975,6 @@
           "items": {
             "$ref": "#/definitions/snapshotPolicy"
           }
-        }
-      }
-    },
-    "snapshotPolicyDetails": {
-      "description": "Snapshot policy properties",
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        },
-        "properties": {
-          "description": "Snapshot policy Properties",
-          "$ref": "#/definitions/snapshotPolicyProperties",
-          "x-ms-client-flatten": true
         }
       }
     },
