@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Batch Text Translation API",
+    "title": "Batch Document Translation API",
     "version": "v1.0-preview.1"
   },
   "host": "westus2.cognitiveservices.azure.com",
-  "basePath": "/translator/text/batch",
+  "basePath": "/translator/text/document",
   "schemes": [
     "https"
   ],
@@ -32,7 +32,7 @@
             "name": "body",
             "description": "request details",
             "schema": {
-              "$ref": "#/definitions/JobSubmissionBatchRequest"
+              "$ref": "#/definitions/BatchSubmissionRequest"
             }
           }
         ],
@@ -135,7 +135,7 @@
           "200": {
             "description": "Successful request and returns the status of the all the operations",
             "schema": {
-              "$ref": "#/definitions/OperationStatusResponse"
+              "$ref": "#/definitions/BatchStatusResponse"
             },
             "headers": {
               "Retry-After": {
@@ -203,13 +203,13 @@
         }
       }
     },
-    "/v1.0-preview.1/batches/upload": {
+    "/v1.0-preview.1/batches/single/binary": {
       "post": {
         "tags": [
           "Translation"
         ],
         "summary": "Submit a binary document in the POST body to the translation service.",
-        "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/pdf for .pdf files",
+        "description": "Use content-type header to denote the file format type\r\n            \r\nExample:\r\ntext/plain for .txt files\r\napplication/vnd.openxmlformats-officedocument.wordprocessingml.document for .docx files\r\napplication/xliff+xml\" for .xlf files",
         "operationId": "Single Document Upload",
         "produces": [
           "text/plain",
@@ -309,7 +309,7 @@
         }
       }
     },
-    "/v1.0-preview.1/documents/{documentId}": {
+    "/v1.0-preview.1/batches/{id}/documents/{documentId}": {
       "get": {
         "tags": [
           "Translation"
@@ -323,11 +323,19 @@
         "parameters": [
           {
             "in": "path",
-            "name": "documentId",
-            "description": "Format - int64.  The document id",
+            "name": "id",
+            "description": "Format - uuid.  The batch id",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "documentId",
+            "description": "Format - uuid.  The document id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -402,120 +410,6 @@
         }
       }
     },
-    "/v1.0-preview.1/documents": {
-      "get": {
-        "tags": [
-          "Translation"
-        ],
-        "summary": "Returns the status of the documents of a translation batch operation",
-        "description": "Returns the status of the list of documents translation operation status in the subscription\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get Detailed Document Status",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "$top",
-            "description": "Take the $top entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 50,
-            "maximum": 100,
-            "minimum": 1
-          },
-          {
-            "in": "query",
-            "name": "$skip",
-            "description": "Skip the $skip entries in the collection\r\nWhen both $top and $skip are supplied, $skip is applied first",
-            "type": "integer",
-            "format": "int32",
-            "default": 0,
-            "maximum": 2147483647,
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request and returns the status of the documents",
-            "schema": {
-              "$ref": "#/definitions/DocumentStatusResponse"
-            },
-            "headers": {
-              "Retry-After": {
-                "description": "Indicates how long to wait before making a new request.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "ETag": {
-                "description": "The ETag response-header field provides the current value of the entity tag for the requested variant. Used with If-Match, If-None-Match and If-Range to implement optimistic concurrency control.",
-                "type": "string",
-                "format": ""
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid request.  Check input parameters",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InvalidRequest\",\r\n    \"message\": \"Some argument is incorrect\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 400120,\r\n      \"error\": \"SASTokenInvalid\",\r\n      \"message\": \"SAS token for storage is invalid\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "401": {
-            "description": "Unauthorized.  Please check your credentials",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"Unauthorized\",\r\n    \"message\": \"User is not authorized\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 401000,\r\n      \"error\": \"Unauthorized\",\r\n      \"message\": \"Operation is not authorized\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "404": {
-            "description": "Resource is not found",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ResourceNotFound\",\r\n    \"message\": \"id not found\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 404000,\r\n      \"error\": \"ResourceNotFound\",\r\n      \"message\": \"Resource requested is not found\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"RequestRateTooHigh\",\r\n    \"message\": \"User\\u0027s request rate is too high\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 429000,\r\n      \"error\": \"RateTooHigh\",\r\n      \"message\": \"Request rate is too high\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"InternalServerError\",\r\n    \"message\": \"Internal Server Error\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 500000,\r\n      \"error\": \"Internal Server Error\",\r\n      \"message\": \"Unexpected internal server error has occurred\"\r\n    }\r\n  }\r\n}"
-            }
-          },
-          "503": {
-            "description": "Server temporary unavailable",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseV2"
-            },
-            "examples": {
-              "application/json": "{\r\n  \"error\": {\r\n    \"code\": \"ServiceUnavailable\",\r\n    \"message\": \"Service is temporary unavailable\",\r\n    \"target\": \"document\",\r\n    \"innerError\": {\r\n      \"code\": 503000,\r\n      \"error\": \"ServiceTemporaryUnavailable\",\r\n      \"message\": \"Service is currently unavailable.  Please try again later\"\r\n    }\r\n  }\r\n}"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Documents Status": {
-            "$ref": "./examples/documents.json"
-          }
-        }
-      }
-    },
     "/v1.0-preview.1/batches/{id}": {
       "get": {
         "tags": [
@@ -541,7 +435,7 @@
           "200": {
             "description": "Successful request and returns the status of the batch translation operation",
             "schema": {
-              "$ref": "#/definitions/OperationStatusSummary"
+              "$ref": "#/definitions/BatchStatusDetail"
             },
             "headers": {
               "Retry-After": {
@@ -632,7 +526,7 @@
           "200": {
             "description": "Cancel request has been submitted",
             "schema": {
-              "$ref": "#/definitions/OperationStatusSummary"
+              "$ref": "#/definitions/BatchStatusDetail"
             }
           },
           "401": {
@@ -1097,7 +991,7 @@
         }
       }
     },
-    "JobSubmissionBatchRequest": {
+    "BatchSubmissionRequest": {
       "description": "Job submission batch request",
       "required": [
         "inputs"
@@ -1166,7 +1060,7 @@
         }
       }
     },
-    "OperationStatusSummary": {
+    "BatchStatusDetail": {
       "description": "Job status response",
       "required": [
         "createdDateTimeUtc",
@@ -1202,7 +1096,7 @@
         }
       }
     },
-    "OperationStatusResponse": {
+    "BatchStatusResponse": {
       "description": "Document Status Response",
       "type": "object",
       "properties": {
@@ -1210,7 +1104,7 @@
           "description": "The summary status of individual operation",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/OperationStatusSummary"
+            "$ref": "#/definitions/BatchStatusDetail"
           }
         },
         "@nextLink": {
@@ -1224,9 +1118,6 @@
       "description": "The response for a document submission",
       "type": "object",
       "properties": {
-        "job": {
-          "$ref": "#/definitions/OperationStatusSummary"
-        },
         "documentDownloadUrl": {
           "description": "Document download link",
           "type": "string"
@@ -1235,6 +1126,71 @@
           "format": "date-time",
           "description": "Datetime in Utc when the document will no longer be available",
           "type": "string"
+        }
+      }
+    },
+    "ErrorCodeV2": {
+      "description": "Enums containing high level error codes.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "ResourceNotFound",
+        "Unauthorized",
+        "RequestRateTooHigh"
+      ],
+      "type": "string"
+    },
+    "InnerErrorV2": {
+      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
+      "type": "object",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "description": "Gets detailed error code.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Gets detailed error string.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorV2"
+        }
+      }
+    },
+    "ErrorV2": {
+      "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCodeV2"
+        },
+        "message": {
+          "description": "Gets high level error message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorV2"
         }
       }
     },
@@ -1277,16 +1233,8 @@
           "description": "To language",
           "type": "string"
         },
-        "errorMessage": {
-          "description": "Error message if any",
-          "type": "string",
-          "example": "document is malformed"
-        },
-        "errorCode": {
-          "format": "int32",
-          "description": "Error code if any",
-          "type": "integer",
-          "example": 400052
+        "error": {
+          "$ref": "#/definitions/ErrorV2"
         },
         "progress": {
           "format": "float",
@@ -1297,9 +1245,10 @@
           "example": 0.5
         },
         "id": {
-          "format": "int64",
+          "format": "uuid",
           "description": "Document Id",
-          "type": "integer"
+          "type": "string",
+          "example": "1c7399a7-6913-4f20-bb43-e2fe2ba1a67d"
         }
       }
     },
@@ -1375,71 +1324,6 @@
           "items": {
             "$ref": "#/definitions/StorageSource"
           }
-        }
-      }
-    },
-    "ErrorCodeV2": {
-      "description": "Enums containing high level error codes.",
-      "enum": [
-        "InvalidRequest",
-        "InvalidArgument",
-        "InternalServerError",
-        "ServiceUnavailable",
-        "ResourceNotFound",
-        "Unauthorized",
-        "RequestRateTooHigh"
-      ],
-      "type": "string"
-    },
-    "InnerErrorV2": {
-      "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
-      "type": "object",
-      "properties": {
-        "code": {
-          "format": "int32",
-          "description": "Gets detailed error code.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "error": {
-          "description": "Gets detailed error string.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
-        }
-      }
-    },
-    "ErrorV2": {
-      "description": "This contains an outer error with error code, message, details, target and an inner error with more descriptive details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "$ref": "#/definitions/ErrorCodeV2"
-        },
-        "message": {
-          "description": "Gets high level error message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document.",
-          "type": "string",
-          "readOnly": true
-        },
-        "innerError": {
-          "$ref": "#/definitions/InnerErrorV2"
         }
       }
     },
