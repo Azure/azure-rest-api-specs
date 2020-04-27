@@ -245,7 +245,49 @@
       "properties": {
         "error": {
           "description": "The error details.",
-          "$ref": "./workspaceAcl.json#/definitions/ErrorResponse"
+          "$ref": "#/definitions/ErrorResponse"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        }
+      }
+    },
+    "ErrorDetail": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
         }
       }
     },
