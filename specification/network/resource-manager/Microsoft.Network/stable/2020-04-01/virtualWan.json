@@ -3649,15 +3649,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{hubRouteTableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}": {
       "put": {
-        "operationId": "HubRouteTables_CreateOrUpdate",
+        "operationId": "RouteTables_CreateOrUpdate",
         "x-ms-examples": {
-          "HubRouteTablePut": {
-            "$ref": "./examples/HubRouteTablePut.json"
+          "RouteTablePut": {
+            "$ref": "./examples/RouteTablePut.json"
           }
         },
-        "description": "Creates a HubRouteTable resource if it doesn't exist else updates the existing HubRouteTable.",
+        "description": "Creates a RouteTable resource if it doesn't exist else updates the existing RouteTable.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3677,36 +3677,36 @@
             "description": "The name of the VirtualHub."
           },
           {
-            "name": "hubRouteTableName",
+            "name": "routeTableName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the HubRouteTable."
+            "description": "The name of the RouteTable."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "HubRouteTableParameters",
+            "name": "RouteTableParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HubRouteTable"
+              "$ref": "#/definitions/RouteTable"
             },
-            "description": "Parameters supplied to create or update HubRouteTable."
+            "description": "Parameters supplied to create or update RouteTable."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the details of the HubRouteTable created or updated.",
+            "description": "Request successful. Returns the details of the RouteTable created or updated.",
             "schema": {
-              "$ref": "#/definitions/HubRouteTable"
+              "$ref": "#/definitions/RouteTable"
             }
           },
           "201": {
-            "description": "Request received successfully. Returns the details of the HubRouteTable created or updated.",
+            "description": "Request received successfully. Returns the details of the RouteTable created or updated.",
             "schema": {
-              "$ref": "#/definitions/HubRouteTable"
+              "$ref": "#/definitions/RouteTable"
             }
           },
           "default": {
@@ -3722,13 +3722,13 @@
         }
       },
       "get": {
-        "operationId": "HubRouteTables_Get",
+        "operationId": "RouteTables_Get",
         "x-ms-examples": {
-          "HubRouteTableGet": {
-            "$ref": "./examples/HubRouteTableGet.json"
+          "RouteTableGet": {
+            "$ref": "./examples/RouteTableGet.json"
           }
         },
-        "description": "Retrieves the details of a HubRouteTable.",
+        "description": "Retrieves the details of a RouteTable.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3748,11 +3748,11 @@
             "description": "The name of the VirtualHub."
           },
           {
-            "name": "hubRouteTableName",
+            "name": "routeTableName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the hubRouteTable."
+            "description": "The name of the RouteTable."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3760,9 +3760,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the details of the HubRouteTable retrieved.",
+            "description": "Request successful. Returns the details of the RouteTable retrieved.",
             "schema": {
-              "$ref": "#/definitions/HubRouteTable"
+              "$ref": "#/definitions/RouteTable"
             }
           },
           "default": {
@@ -3774,13 +3774,13 @@
         }
       },
       "delete": {
-        "operationId": "HubRouteTables_Delete",
+        "operationId": "RouteTables_Delete",
         "x-ms-examples": {
-          "HubRouteTableDelete": {
-            "$ref": "./examples/HubRouteTableDelete.json"
+          "RouteTableDelete": {
+            "$ref": "./examples/RouteTableDelete.json"
           }
         },
-        "description": "Deletes a HubRouteTable.",
+        "description": "Deletes a RouteTable.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3790,7 +3790,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the HubRouteTable."
+            "description": "The resource group name of the RouteTable."
           },
           {
             "name": "virtualHubName",
@@ -3800,11 +3800,11 @@
             "description": "The name of the VirtualHub."
           },
           {
-            "name": "hubRouteTableName",
+            "name": "routeTableName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the HubRouteTable."
+            "description": "The name of the RouteTable."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3812,13 +3812,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. HubRouteTable deleted."
+            "description": "Request successful. RouteTable deleted."
           },
           "202": {
-            "description": "Request received successfully. HubRouteTable deletion is in progress; follow the Location header to poll for final outcome."
+            "description": "Request received successfully. RouteTable deletion is in progress; follow the Location header to poll for final outcome."
           },
           "204": {
-            "description": "No HubRouteTables exist by the name provided."
+            "description": "No RouteTables exist by the name provided."
           },
           "default": {
             "description": "Error.",
@@ -3835,13 +3835,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables":{
       "get": {
-        "operationId": "HubRouteTables_List",
+        "operationId": "RouteTables_List",
         "x-ms-examples": {
-          "HubRouteTableList": {
-            "$ref": "./examples/HubRouteTableList.json"
+          "RouteTableList": {
+            "$ref": "./examples/RouteTableList.json"
           }
         },
-        "description": "Retrieves the details of all HubRouteTables.",
+        "description": "Retrieves the details of all RouteTables.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3866,9 +3866,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns the details of all the HubRouteTables for the VirtualHub.",
+            "description": "Request successful. Returns the details of all the RouteTables for the VirtualHub.",
             "schema": {
-              "$ref": "#/definitions/ListHubRouteTablesResult"
+              "$ref": "#/definitions/ListRouteTablesResult"
             }
           },
           "default": {
@@ -4185,11 +4185,11 @@
           "$ref": "#/definitions/VirtualHubRouteTable",
           "description": "The routeTable associated with this virtual hub."
         },
-        "HubRouteTables": {
+        "RouteTables": {
           "type": "array",
-          "description": "List of all HubRouteTables associated with this VirtualHub.",
+          "description": "List of all RouteTables associated with this VirtualHub.",
           "items": {
-            "$ref": "#/definitions/HubRouteTables"
+            "$ref": "#/definitions/RouteTables"
           }
         },
         "provisioningState": {
@@ -4668,13 +4668,13 @@
         }
       }
     },
-    "HubRouteTableProperties": {
+    "RouteTableProperties": {
       "properties": {
         "routes": {
           "type": "array",
           "description": "List of all routes.",
           "items": {
-            "$ref": "#/definitions/HubRoute"
+            "$ref": "#/definitions/Route"
           }
         },
         "labels": {
@@ -4688,30 +4688,30 @@
           "type": "array",
           "description": "List of all connections associated with this route table.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/HubVirtualNetworkConnection"
           }
         },
         "propagatingConnections": {
           "type": "array",
           "description": "List of all connections that advertise to this route table.",
           "items": {
-            "type": "string"
+            "$ref": "#/defintions/HubVirtualNetworkConnection"
           }
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "readOnly": true,
-          "description": "The provisioning state of the HubRouteTable resource."
+          "description": "The provisioning state of the RouteTable resource."
         }
       },
-      "description": "Parameters for HubRouteTable."
+      "description": "Parameters for RouteTable."
     },
-    "HubRouteTable": {
+    "RouteTable": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/HubRouteTableProperties",
-          "description": "Properties of the HubRouteTable resource."
+          "$ref": "#/definitions/RouteTableProperties",
+          "description": "Properties of the RouteTable resource."
         },
         "name": {
           "type": "string",
@@ -4728,13 +4728,13 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "HubRouteTable Resource."
+      "description": "RouteTable Resource."
     },
-    "HubRoute": {
+    "Route": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the HubRoute that is unique within a HubRouteTable. This name can be used to access this route."
+          "description": "The name of the Route that is unique within a RouteTable. This name can be used to access this route."
         },
         "destinationType": {
           "type": "string",
@@ -4752,24 +4752,21 @@
           "description": "The type of next hops."
         },
         "nextHop": {
-          "type": "array",
-          "description": "NextHop resource ID.",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "NextHop resource ID."
         }
       },
-      "description": "HubRouteTable route."
+      "description": "RouteTable route."
     },
-    "ListHubRouteTablesResult": {
-      "description": "List of HubRouteTables and a URL nextLink to get the next set of results.",
+    "ListRouteTablesResult": {
+      "description": "List of RouteTables and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HubRouteTable"
+            "$ref": "#/definitions/RouteTable"
           },
-          "description": "List of HubRouteTables."
+          "description": "List of RouteTables."
         },
         "nextLink": {
           "type": "string",
@@ -5647,14 +5644,15 @@
       "description": "ExpressRouteConnection list."
     },
     "RoutingConfiguration": {
+      "description":  "Routing Configuration indicating the associated and propagated route tables on this connection.",
       "properties": {
         "associatedRouteTable": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "TODO The HubRouteTable associated with this RoutingConfiguration."
+          "description": "TODO The RouteTable associated with this RoutingConfiguration."
         },
         "propagatedRouteTables": {
           "$ref": "#/definitions/PropagatedRouteTable",
-          "description": "TODO List of HubRouteTables to advertise the routes to."
+          "description": "TODO List of RouteTables to advertise the routes to."
         },
         "vnetRoutes": {
           "$ref" : "#/definitions/VnetRoute",
@@ -5673,7 +5671,7 @@
         },
         "ids": {
           "type": "array",
-          "description": "TODO The list of all the HubRouteTables.",
+          "description": "TODO The list of all the RouteTables.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
