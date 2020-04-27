@@ -4459,6 +4459,26 @@
           "readOnly": true,
           "description": "Provisioning status of the origin.",
           "type": "string"
+        },
+        "privateEndpointStatus": {
+          "description": "The Approval status for the connection to the Private Link",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected",
+            "Timeout"
+          ],
+          "x-ms-enum": {
+            "name": "PrivateEndpointStatus",
+            "modelAsString": false
+          }
+        },
+        "privateLinkApprovalMessage": {
+          "description": "A custom message to be included in the approval request to connect to the Private Link",
+          "type": "string"
         }
       }
     },
@@ -4522,6 +4542,18 @@
         "enabled": {
           "description": "Origin is enabled for load balancing or not",
           "type": "boolean"
+        },
+        "privateLinkAlias": {
+          "description": "The Alias of the Private Link resource. Populating this optional field indicates that this origin is 'Private'",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
+          "type": "string"
+        },
+        "privateLinkLocation": {
+          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
+          "type": "string"
         }
       }
     },
