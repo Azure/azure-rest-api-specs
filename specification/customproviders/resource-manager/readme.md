@@ -58,6 +58,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_customproviders']
+  - repo: azure-cli-extensions
 ```
 
 ## Go
@@ -83,6 +84,10 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## NodeJS
 
 See configuration in [readme.nodejs.md](./readme.nodejs.md)
+
+## Trenton
+
+See configuration in [readme.trenton.md](./readme.trenton.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
