@@ -120,6 +120,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/checkQuotaAvailability": {
+      "post": {
+        "tags": [
+          "checkQuotaAvailability"
+        ],
+        "description": "Return quota for subscription by region",
+        "operationId": "Quota_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "region",
+            "description": "Region request for quota availability",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaRegion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaGet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quota_Get": {
+            "$ref": "./examples/Quota_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
       "get": {
         "operationId": "PrivateClouds_List",
@@ -702,6 +747,40 @@
     }
   },
   "definitions": {
+    "HostQuota": {
+      "description": "Host quotas",
+      "properties": {
+        "gp": {
+          "description": "VS20 host quota",
+          "type": ""
+        },
+        "he": {
+          "description": "VS36 host quota",
+          "type": ""
+        }
+      }
+    },
+    "QuotaGet": {
+      "description": "Subscription quotas",
+      "properties": {
+        "hostsRemaining": {
+          "$ref": "#/definitions/HostQuota"
+        },
+        "quotaEnabled": {
+          "description": "Subscription has a valid quota",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuotaRegion": {
+      "description": "Quota region request",
+      "properties": {
+        "region": {
+          "description": "Azure region",
+          "type": "string"
+        }
+      }
+    },
     "Resource": {
       "description": "The core properties of ARM resources",
       "properties": {
