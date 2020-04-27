@@ -53,6 +53,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs |
 | [R3021](#r3021) | [PathResouceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs |
 | [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs |
+| [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs |
 
 #### ARM Warnings
 
@@ -97,6 +98,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs |
 | [R4005](#r4005) | [UniqueXmsEnumName](#r4005) | ARM and Data plane OpenAPI(swagger) specs |
+| [R4008](#r4008) | [AvoidEmptyResponseSchema](#r4008) | ARM OpenAPI(swagger) specs |
 
 #### SDK Warnings
 
@@ -2315,4 +2317,80 @@ The following would be invalid:
 
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
 
+### <a name="r4007" ></a>R4007 DefaultErrorResponseSchema
 
+**Category** : ARM Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : The default error response schema SHOULD correspond to the schema documented at https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#error-response-content.
+
+**Description** : The default error response schema SHOULD correspond to the schema documented at [common-api-details](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-details.md#error-response-content).
+
+**CreatedAt**: April 2, 2020
+
+**LastModifiedAt**: April 2, 2020
+
+**How to fix the violation**: Following the ARM specification to modify the schema in the swagger file.
+
+The following would be invalid:
+
+```json
+ "responese":{
+   "default": {
+     "schema":{
+         "error":"error msg",
+         "code": 404,
+         "message":"some details"
+     }
+  }
+ }
+
+```
+
+the correct schema:
+
+```json
+ "responese":{
+   "default": {
+     "error":
+     {
+        "code": 404,
+        "message":"some details"
+         ...
+     }
+  }
+ }
+
+```
+
+Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
+
+### <a name="r4008" ></a>R4008 AvoidEmptyResponseSchema
+
+**Category** : SDK Error
+
+**Applies to** : ARM OpenAPI(swagger) specs
+
+**Output Message** : Response schema must not be empty.
+
+**Description** : Response schema must not be empty, or it will block code genaration.
+
+**CreatedAt**: April 2, 2020
+
+**LastModifiedAt**: April 2, 2020
+
+**How to fix the violation**: Add the correct definition of the schema in the response or remove it if don't need.
+
+The following would be invalid:
+
+```json
+...
+ "responese":{
+   "default": {
+     "schema":{
+     }
+  }
+ }
+...
+```
