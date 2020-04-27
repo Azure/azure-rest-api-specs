@@ -51,7 +51,7 @@
               "schema": {
                 "$ref": "#/definitions/QueueServiceProperties"
               },
-              "description": "The properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+              "description": "The properties of a storage account’s Queue service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
             }
           ],
           "responses": {
@@ -142,7 +142,7 @@
               "$ref": "#/parameters/QueueName"
             },
             {
-              "name": "QueueResource",
+              "name": "queue",
               "in": "body",
               "required": true,
               "schema": {
@@ -194,7 +194,7 @@
               "$ref": "#/parameters/QueueName"
             },
             {
-              "name": "QueueResource",
+              "name": "queue",
               "in": "body",
               "required": true,
               "schema": {
@@ -290,7 +290,7 @@
             }
           ],
           "responses": {
-            "202": {
+            "204": {
               "description": "No Content - Successfully deleted the queue with the sepcified queue name"
             },
             "default": {
@@ -331,7 +331,7 @@
               "name": "$maxpagesize",
               "in": "query",
               "type": "string",
-              "description": "Optional, Specified maximum number of queues that should be included for each list queue response"
+              "description": "Optional, a maximum number of queues that should be included in a list queue response"
             },
             {
               "name": "$filter",
@@ -382,9 +382,17 @@
       "Queue": {
         "properties": {
           "properties": {
-            "$ref": "#/definitions/QueueProperties"
+            "$ref": "#/definitions/QueueProperties",
+            "x-ms-client-flatten": true,
+            "x-ms-client-name": "QueueProperties",
+            "description": "Queue resource properties."
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          }
+        ]
       },
       "QueueProperties": {
         "properties": {
@@ -405,9 +413,17 @@
       "ListQueue": {
         "properties": {
           "properties": {
-            "$ref": "#/definitions/ListQueueProperties"
+            "$ref": "#/definitions/ListQueueProperties",
+            "x-ms-client-flatten": true,
+            "x-ms-client-name": "QueueProperties",
+            "description": "List Queue resource properties."
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          }
+        ]
       },
       "ListQueueProperties": {
         "properties": {
@@ -469,7 +485,7 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase aplanumeric and dash(-) characters only, it should begin and end with an alphanumeric chracter and it cannot have two consecutive dash(-) characters.",
+        "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase alphanumeric and dash(-) characters only, it should begin and end with an alphanumeric character and it cannot have two consecutive dash(-) characters.",
         "maxLength": 63,
         "minLength": 3,
         "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$",

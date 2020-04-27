@@ -51,7 +51,7 @@
               "schema": {
                 "$ref": "#/definitions/TableServiceProperties"
               },
-              "description": "The properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+              "description": "The properties of a storage account’s Table service, only properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules can be specified."
             }
           ],
           "responses": {
@@ -272,7 +272,7 @@
             }
           ],
           "responses": {
-            "202": {
+            "204": {
               "description": "No Content - Successfully deleted the table with the sepcified table name"
             },
             "default": {
@@ -352,9 +352,18 @@
       "Table": {
         "properties": {
           "properties": {
-            "$ref": "#/definitions/TableProperties"
+            "$ref": "#/definitions/TableProperties",
+            "x-ms-client-flatten": true,
+            "x-ms-client-name": "TableProperties",
+            "description": "Table resource properties."
           }
-        }
+        },
+        "allOf": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          }
+        ],
+        "description": "Properties of the table, including Id, resource name, resource type."
       },
       "TableProperties": {
         "properties": {
