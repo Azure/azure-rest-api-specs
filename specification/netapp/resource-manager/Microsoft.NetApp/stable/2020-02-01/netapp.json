@@ -1553,6 +1553,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/snapshotPolicy"
+            }
+          },                
           "201": {
             "description": "Snapshot Policy created",
             "schema": {
@@ -2878,17 +2884,12 @@
       "description": "Snapshot policy properties",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
         "hourlySchedule": {
           "title": "hourlySchedule",
           "description": "Schedule for hourly snapshots",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/hourlyScheduleObject"
+            "$ref": "#/definitions/hourlySchedule"
           }
         },
         "dailySchedule": {
@@ -2896,7 +2897,7 @@
           "description": "Schedule for daily snapshots",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/dailyScheduleObject"
+            "$ref": "#/definitions/dailySchedule"
           }
         },
         "weeklySchedule": {
@@ -2904,7 +2905,7 @@
           "description": "Schedule for weekly snapshots",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/weeklyScheduleObject"
+            "$ref": "#/definitions/weeklySchedule"
           }
         },
         "monthlySchedule": {
@@ -2912,7 +2913,7 @@
           "description": "Schedule for monthly snapshots",
           "type": "object",
           "items": {
-            "$ref": "#/definitions/monthlyScheduleObject"
+            "$ref": "#/definitions/monthlySchedule"
           }
         },
         "enabled": {
@@ -3064,7 +3065,7 @@
         }
       }
     },
-    "hourlyScheduleObject": {
+    "hourlySchedule": {
       "description": "Hourly Schedule properties",
       "type": "object",
       "properties": {
@@ -3083,7 +3084,7 @@
         }
       }
     },
-    "dailyScheduleObject": {
+    "dailySchedule": {
       "description": "Daily Schedule properties",
       "type": "object",
       "properties": {
@@ -3107,8 +3108,8 @@
         }
       }
     },
-    "weeklyScheduleObject": {
-      "description": "Weekly Schedule properties",
+    "weeklySchedule": {
+      "description": "Weekly Schedule properties, make a snapshot every week at a specific day or days",
       "type": "object",
       "properties": {
         "snapshotsToKeep": {
@@ -3117,7 +3118,7 @@
         },
         "day": {
           "type": "string",
-          "description": "Indicates which weekdays snapshot should be taken",
+          "description": "Indicates which weekdays snapshot should be taken, accepts a comma separated list of week day names in english",
           "example": "Sunday,Monday"
         },
         "hour": {
@@ -3136,7 +3137,7 @@
         }
       }
     },
-    "monthlyScheduleObject": {
+    "monthlySchedule": {
       "description": "Monthly Schedule properties",
       "type": "object",
       "properties": {
