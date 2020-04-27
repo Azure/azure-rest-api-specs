@@ -3687,11 +3687,11 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "RouteTableParameters",
+            "name": "routeTableParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouteTable"
+              "$ref": "#/definitions/HubRouteTable"
             },
             "description": "Parameters supplied to create or update RouteTable."
           }
@@ -3700,13 +3700,13 @@
           "200": {
             "description": "Request successful. Returns the details of the RouteTable created or updated.",
             "schema": {
-              "$ref": "#/definitions/RouteTable"
+              "$ref": "#/definitions/HubRouteTable"
             }
           },
           "201": {
             "description": "Request received successfully. Returns the details of the RouteTable created or updated.",
             "schema": {
-              "$ref": "#/definitions/RouteTable"
+              "$ref": "#/definitions/HubRouteTable"
             }
           },
           "default": {
@@ -3725,7 +3725,7 @@
         "operationId": "RouteTables_Get",
         "x-ms-examples": {
           "RouteTableGet": {
-            "$ref": "./examples/RouteTableGet.json"
+            "$ref": "./examples/HubRouteTableGet.json"
           }
         },
         "description": "Retrieves the details of a RouteTable.",
@@ -3762,7 +3762,7 @@
           "200": {
             "description": "Request successful. Returns the details of the RouteTable retrieved.",
             "schema": {
-              "$ref": "#/definitions/RouteTable"
+              "$ref": "#/definitions/HubRouteTable"
             }
           },
           "default": {
@@ -3777,7 +3777,7 @@
         "operationId": "RouteTables_Delete",
         "x-ms-examples": {
           "RouteTableDelete": {
-            "$ref": "./examples/RouteTableDelete.json"
+            "$ref": "./examples/HubRouteTableDelete.json"
           }
         },
         "description": "Deletes a RouteTable.",
@@ -3838,7 +3838,7 @@
         "operationId": "RouteTables_List",
         "x-ms-examples": {
           "RouteTableList": {
-            "$ref": "./examples/RouteTableList.json"
+            "$ref": "./examples/HubRouteTableList.json"
           }
         },
         "description": "Retrieves the details of all RouteTables.",
@@ -4189,7 +4189,7 @@
           "type": "array",
           "description": "List of all RouteTables associated with this VirtualHub.",
           "items": {
-            "$ref": "#/definitions/RouteTable"
+            "$ref": "#/definitions/HubRouteTable"
           }
         },
         "provisioningState": {
@@ -4668,13 +4668,13 @@
         }
       }
     },
-    "RouteTableProperties": {
+    "HubRouteTableProperties": {
       "properties": {
         "routes": {
           "type": "array",
           "description": "List of all routes.",
           "items": {
-            "$ref": "#/definitions/Route"
+            "$ref": "#/definitions/HubRoute"
           }
         },
         "labels": {
@@ -4708,11 +4708,11 @@
       },
       "description": "Parameters for RouteTable."
     },
-    "RouteTable": {
+    "HubRouteTable": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RouteTableProperties",
+          "$ref": "#/definitions/HubRouteTableProperties",
           "description": "Properties of the RouteTable resource."
         },
         "name": {
@@ -4732,7 +4732,7 @@
       ],
       "description": "RouteTable Resource."
     },
-    "Route": {
+    "HubRoute": {
       "properties": {
         "name": {
           "type": "string",
@@ -4766,7 +4766,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RouteTable"
+            "$ref": "#/definitions/HubRouteTable"
           },
           "description": "List of RouteTables."
         },
