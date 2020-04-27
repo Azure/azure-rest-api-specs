@@ -16,6 +16,48 @@
       "application/json"
     ],
     "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices":{
+        "get": {
+          "tags": [
+            "TableServiceProperties"
+          ],
+          "operationId": "ListTableService",
+          "x-ms-examples": {
+            "TableServicesList": {
+              "$ref": "./examples/TableServicesList.json"
+            }
+          },
+          "description": "List all table services for the storage account.",
+          "parameters": [
+            {
+              "$ref": "./storage.json#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "./storage.json#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- returned the properties of a storage account’s Table service.",
+              "schema": {
+                "$ref": "#/definitions/ListTableServices"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/{TableServicesName}": {
         "put": {
           "tags": [
@@ -328,6 +370,18 @@
       }
     },
     "definitions": {
+      "ListTableServices": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/TableServiceProperties"
+            },
+            "description": "List of table services returned.",
+            "readOnly": true
+          }
+        }
+      },
       "TableServiceProperties": {
         "properties": {
           "properties": {

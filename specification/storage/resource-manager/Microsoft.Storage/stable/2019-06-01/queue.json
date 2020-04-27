@@ -16,6 +16,48 @@
       "application/json"
     ],
     "paths": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices": {
+        "get": {
+          "tags": [
+            "QueueServiceProperties"
+          ],
+          "operationId": "ListQueueService",
+          "x-ms-examples": {
+            "GetQueueServices": {
+              "$ref": "./examples/QueueServicesList.json"
+            }
+          },
+          "description": "List all queue services for the storage account",
+          "parameters": [
+            {
+              "$ref": "./storage.json#/parameters/ResourceGroupName"
+            },
+            {
+              "$ref": "./storage.json#/parameters/StorageAccountName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK -- returned the properties of a storage account’s Queue service.",
+              "schema": {
+                "$ref": "#/definitions/ListQueueServices"
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          }
+        }
+      },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/{QueueServicesName}": {
         "put": {
           "tags": [
@@ -358,6 +400,18 @@
       }
     },
     "definitions": {
+      "ListQueueServices": {
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/QueueServiceProperties"
+            },
+            "description": "List of queue services returned.",
+            "readOnly": true
+          }
+        }
+      },
       "QueueServiceProperties": {
         "properties": {
           "properties": {
