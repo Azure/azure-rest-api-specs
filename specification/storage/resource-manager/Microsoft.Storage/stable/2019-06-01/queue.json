@@ -16,18 +16,18 @@
       "application/json"
     ],
     "paths": {
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/{TableServicesName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/{QueueServicesName}": {
         "put": {
           "tags": [
-            "TableServiceProperties"
+            "QueueServiceProperties"
           ],
-          "operationId": "TableServices_SetServiceProperties",
+          "operationId": "QueueServices_SetServiceProperties",
           "x-ms-examples": {
-            "PutTableServices": {
-              "$ref": "./examples/TableServicesPut.json"
+            "PutQueueServices": {
+              "$ref": "./examples/QueueServicesPut.json"
             }
           },
-          "description": "Sets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
+          "description": "Sets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. ",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -42,23 +42,23 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableServicesName"
+              "$ref": "#/parameters/QueueServicesName"
             },
             {
               "name": "parameters",
               "in": "body",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/TableServiceProperties"
+                "$ref": "#/definitions/QueueServiceProperties"
               },
-              "description": "The properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
+              "description": "The properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules."
             }
           ],
           "responses": {
             "200": {
-              "description": "OK -- Sets The properties of a storage account’s Table service successfully.",
+              "description": "OK -- Sets The properties of a storage account’s Queue service successfully.",
               "schema": {
-                "$ref": "#/definitions/TableServiceProperties"
+                "$ref": "#/definitions/QueueServiceProperties"
               }
             },
             "default": {
@@ -71,15 +71,15 @@
         },
         "get": {
           "tags": [
-            "TableServiceProperties"
+            "QueueServiceProperties"
           ],
-          "operationId": "TableServices_GetServiceProperties",
+          "operationId": "QueueServices_GetServiceProperties",
           "x-ms-examples": {
-            "GetTableServices": {
-              "$ref": "./examples/TableServicesGet.json"
+            "GetQueueServices": {
+              "$ref": "./examples/QueueServicesGet.json"
             }
           },
-          "description": "Gets the properties of a storage account’s Table service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+          "description": "Gets the properties of a storage account’s Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -94,14 +94,14 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableServicesName"
+              "$ref": "#/parameters/QueueServicesName"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK -- returned the properties of a storage account’s Table service.",
+              "description": "OK -- returned the properties of a storage account’s Queue service.",
               "schema": {
-                "$ref": "#/definitions/TableServiceProperties"
+                "$ref": "#/definitions/QueueServiceProperties"
               }
             },
             "default": {
@@ -113,18 +113,18 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables/{tableName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues/{queueName}": {
         "put": {
           "tags": [
-            "TableService"
+            "QueueService"
           ],
-          "operationId": "PutTable",
+          "operationId": "PutQueue",
           "x-ms-examples": {
-            "PutTable": {
-              "$ref": "./examples/PutTable.json"
+            "PutQueue": {
+              "$ref": "./examples/PutQueue.json"
             }
           },
-          "description": "Creates a new table with the specified table name, under the specified account.",
+          "description": "Creates a new queue with the specified queue name, under the specified account.",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -139,14 +139,23 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableName"
+              "$ref": "#/parameters/QueueName"
+            },
+            {
+              "name": "QueueResource",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Queue"
+              },
+              "description": "Queue properties and metadata to be created with"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK -- Creates a table with the given table name successfully.",
+              "description": "OK -- Creates a queue with the given queue name successfully.",
               "schema": {
-                "$ref": "#/definitions/Table"
+                "$ref": "#/definitions/Queue"
               }
             },
             "default": {
@@ -159,15 +168,15 @@
         },
         "patch": {
           "tags": [
-            "TableService"
+            "QueueService"
           ],
-          "operationId": "PatchTable",
+          "operationId": "PatchQueue",
           "x-ms-examples": {
-            "PatchTable": {
-              "$ref": "./examples/PatchTable.json"
+            "PatchQueue": {
+              "$ref": "./examples/PatchQueue.json"
             }
           },
-          "description": "Creates a new table with the specified table name, under the specified account.",
+          "description": "Creates a new queue with the specified queue name, under the specified account.",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -182,14 +191,23 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableName"
+              "$ref": "#/parameters/QueueName"
+            },
+            {
+              "name": "QueueResource",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Queue"
+              },
+              "description": "Queue properties and metadata to be created with"
             }
           ],
           "responses": {
             "200": {
-              "description": "OK -- Creates a table with the given table name successfully.",
+              "description": "OK -- Creates a queue with the given queue name successfully.",
               "schema": {
-                "$ref": "#/definitions/Table"
+                "$ref": "#/definitions/Queue"
               }
             },
             "default": {
@@ -202,15 +220,15 @@
         },
         "get": {
           "tags": [
-            "TableService"
+            "QueueService"
           ],
-          "operationId": "GetTable",
+          "operationId": "GetQueue",
           "x-ms-examples": {
-            "GetTable": {
-              "$ref": "./examples/GetTable.json"
+            "GetQueue": {
+              "$ref": "./examples/GetQueue.json"
             }
           },
-          "description": "Gets the table with the specified table name, under the specified account if it exists.",
+          "description": "Gets the queue with the specified queue name, under the specified account if it exists.",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -225,14 +243,14 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableName"
+              "$ref": "#/parameters/QueueName"
             }
           ],
           "responses": {
             "200": {
               "description": "OK -- returned table with the specified table name successfully.",
               "schema": {
-                "$ref": "#/definitions/Table"
+                "$ref": "#/definitions/Queue"
               }
             },
             "default": {
@@ -245,15 +263,15 @@
         },
         "delete": {
           "tags": [
-            "TableService"
+            "QueueService"
           ],
-          "operationId": "DeleteTable",
+          "operationId": "DeleteQueue",
           "x-ms-examples": {
-            "DeleteTable": {
-              "$ref": "./examples/DeleteTable.json"
+            "DeleteQueue": {
+              "$ref": "./examples/DeleteQueue.json"
             }
           },
-          "description": "Deletes the table with the specified table name, under the specified account if it exists.",
+          "description": "Deletes the queue with the specified queue name, under the specified account if it exists.",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -268,12 +286,12 @@
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
             },
             {
-              "$ref": "#/parameters/TableName"
+              "$ref": "#/parameters/QueueName"
             }
           ],
           "responses": {
             "202": {
-              "description": "No Content - Successfully deleted the table with the sepcified table name"
+              "description": "No Content - Successfully deleted the queue with the sepcified queue name"
             },
             "default": {
               "description": "Error response describing why the operation failed.",
@@ -284,18 +302,18 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/default/tables": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/default/queues": {
         "get": {
           "tags": [
-            "TableService"
+            "QueueService"
           ],
-          "operationId": "QueryTable",
+          "operationId": "ListQueue",
           "x-ms-examples": {
-            "QueryTable": {
-              "$ref": "./examples/QueryTable.json"
+            "ListQueue": {
+              "$ref": "./examples/ListQueue.json"
             }
           },
-          "description": "Gets a list of all the tables under the specified storage account",
+          "description": "Gets a list of all the queues under the specified storage account",
           "parameters": [
             {
               "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -308,13 +326,25 @@
             },
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "name": "$maxpagesize",
+              "in": "query",
+              "type": "string",
+              "description": "Optional, Specified maximum number of queues that should be included for each list queue response"
+            },
+            {
+              "name": "$filter",
+              "in": "query",
+              "type": "string",
+              "description": "Optional, When specified, only the queues with a name starting with the given filter will be listed."
             }
           ],
           "responses": {
             "200": {
-              "description": "OK -- returned a list of tables successfully.",
+              "description": "OK -- returned a list of queues successfully.",
               "schema": {
-                "$ref": "#/definitions/ListTableResource"
+                "$ref": "#/definitions/ListQueueResource"
               }
             },
             "default": {
@@ -328,18 +358,18 @@
       }
     },
     "definitions": {
-      "TableServiceProperties": {
+      "QueueServiceProperties": {
         "properties": {
           "properties": {
             "properties": {
               "cors": {
                 "$ref": "./common.json#/definitions/CorsRules",
-                "description": "Specifies CORS rules for the Table service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Table service."
+                "description": "Specifies CORS rules for the Queue service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Queue service."
               }
             },
             "x-ms-client-flatten": true,
-            "x-ms-client-name": "TableServiceProperties",
-            "description": "The properties of a storage account’s Table service."
+            "x-ms-client-name": "QueueServiceProperties",
+            "description": "The properties of a storage account’s Queue service."
           }
         },
         "allOf": [
@@ -347,41 +377,66 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
           }
         ],
-        "description": "The properties of a storage account’s Table service."
+        "description": "The properties of a storage account’s Queue service."
       },
-      "Table": {
+      "Queue": {
         "properties": {
           "properties": {
-            "$ref": "#/definitions/TableProperties"
+            "$ref": "#/definitions/QueueProperties"
           }
         }
       },
-      "TableProperties": {
+      "QueueProperties": {
         "properties": {
-          "TableName": {
-            "type": "string",
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A name-value pair that represents queue metadata."
+          },
+          "approximateMessageCount": {
+            "type": "integer",
             "readOnly": true,
-            "description": "Table name under the specified account"
+            "description": "Integer indicating an approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher."
           }
         }
       },
-      "ListTableResource": {
+      "ListQueue": {
+        "properties": {
+          "properties": {
+            "$ref": "#/definitions/ListQueueProperties"
+          }
+        }
+      },
+      "ListQueueProperties": {
+        "properties": {
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A name-value pair that represents queue metadata."
+          }
+        }
+      },
+      "ListQueueResource": {
         "properties": {
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Table"
+              "$ref": "#/definitions/ListQueue"
             },
-            "description": "List of tables returned.",
+            "description": "List of queues returned.",
             "readOnly": true
           },
           "nextLink": {
             "type": "string",
-            "description": "Request URL that can be used to query next page of tables",
+            "description": "Request URL that can be used to list next page of queues",
             "readOnly": true
           }
         },
-        "description": "Response schema. Contains list of tables returned"
+        "description": "Response schema. Contains list of queues returned"
       },
       "ErrorResponse": {
         "properties": {
@@ -398,26 +453,26 @@
       }
     },
     "parameters": {
-      "TableServicesName": {
-        "name": "TableServicesName",
+      "QueueServicesName": {
+        "name": "QueueServicesName",
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "The name of the Table Service within the specified storage account. Table Service Name must be 'default'",
+        "description": "The name of the Queue Service within the specified storage account. Queue Service Name must be 'default'",
         "enum": [
           "default"
         ],
         "x-ms-parameter-location": "method"
       },
-      "TableName": {
-        "name": "tableName",
+      "QueueName": {
+        "name": "queueName",
         "in": "path",
         "required": true,
         "type": "string",
-        "description": "A table name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of only aplanumeric characters and it cannot begin with a numeric character.",
+        "description": "A queue name must be unique within a storage account and must be between 3 and 63 characters.The name must comprise of lowercase aplanumeric and dash(-) characters only, it should begin and end with an alphanumeric chracter and it cannot have two consecutive dash(-) characters.",
         "maxLength": 63,
         "minLength": 3,
-        "pattern": "^[A-Za-z][A-Za-z0-9]{2,62}$",
+        "pattern": "^[a-z0-9]([a-z0-9]|(-(?!-))){1,61}[a-z0-9]$",
         "x-ms-parameter-location": "method"
       }
     }
