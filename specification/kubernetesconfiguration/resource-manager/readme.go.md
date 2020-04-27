@@ -8,12 +8,12 @@ go:
   clear-output-folder: true
 ```
 
-### Go multi-api
+### Go multi-api 
 
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2019-11-01-preview
-```
+``` yaml $(go) && $(multiapi) 
+batch: 
+  - tag: package-2019-11-01-preview 
+``` 
 
 ### Tag: package-2019-11-01-preview and go
 
