@@ -113,8 +113,7 @@
             "description": "Parameters for creating or updating a resource link."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter",
-            "x-ms-api-version": false
+            "$ref": "#/parameters/ApiVersionParameterExplicit"
           }
         ],
         "responses": {
@@ -387,6 +386,14 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for the operation."
+    },
+    "ApiVersionParameterExplicit": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the operation.",
+      "x-ms-api-version": false
     }
   }
 }
