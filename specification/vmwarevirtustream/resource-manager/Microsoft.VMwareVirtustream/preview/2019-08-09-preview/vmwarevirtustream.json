@@ -128,7 +128,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/checkQuotaAvailability": {
+    "/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
       "post": {
         "tags": [
           "Quota"
@@ -137,19 +137,14 @@
         "operationId": "Quota_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/subscriptionId"
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Azure region"
           },
           {
             "$ref": "#/parameters/apiVersion"
-          },
-          {
-            "name": "region",
-            "description": "Region request for quota availability",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QuotaRegion"
-            }
           }
         ],
         "responses": {
@@ -760,11 +755,13 @@
       "properties": {
         "gp": {
           "description": "VS20 host quota",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "he": {
           "description": "VS36 host quota",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -775,17 +772,9 @@
           "$ref": "#/definitions/HostQuota"
         },
         "quotaEnabled": {
-          "description": "Subscription has a valid quota",
-          "type": "boolean"
-        }
-      }
-    },
-    "QuotaRegion": {
-      "description": "Quota region request",
-      "properties": {
-        "region": {
-          "description": "Azure region",
-          "type": "string"
+          "description": "Host quota is active for current subscription",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
