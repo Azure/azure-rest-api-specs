@@ -30,31 +30,31 @@
           "authorizationKey": "authorizationKey",
           "routingWeight": 2,
           "enableInternetSecurity": false,
-              "routingConfiguration": {
-                "associatedRouteTable": {
+          "routingConfiguration": {
+            "associatedRouteTable": {
+              "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable1"
+            },
+            "propagatedRouteTables": {
+              "labels": [
+                "label1",
+                "label2"
+              ],
+              "ids": [
+                {
                   "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable1"
                 },
-                "propagatedRouteTables": {
-                  "labels": [
-                    "label1",
-                    "label2"
-                  ],
-                  "ids": [
-                    {
-                      "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable1"
-                    },
-                    {
-                      "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable2"
-                    },
-                    {
-                      "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable3"
-                    }
-                  ]
+                {
+                  "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable2"
                 },
-                "vnetRoutes": {
-                  "staticRoutes": []
+                {
+                  "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hub1/hubRouteTables/hubRouteTable3"
                 }
-              }
+              ]
+            },
+            "vnetRoutes": {
+              "staticRoutes": []
+            }
+          }
         }
       }
     },
