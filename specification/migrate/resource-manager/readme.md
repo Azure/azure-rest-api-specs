@@ -59,33 +59,38 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+```
+``` yaml $(package-migrate)
+tag: package-migrate-2019-10
 ```
 
+``` yaml $(package-offazure)
+tag: package-offazure-2020-01
+```
 
 ### Tag: package-2018-02
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-migrate-2018-02'
 input-file:
 - Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
 ### Tag: package-2019-10
 
-These settings apply only when `--tag=package-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10'
+``` yaml $(tag) == 'package-migrate-2019-10'
 input-file:
 - Microsoft.Migrate/stable/2019-10-01/migrate.json
 ```
 
 ### Tag: package-2020-01
 
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-offazure-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+``` yaml $(tag) == 'package-offazure-2020-01'
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
 ```
@@ -102,6 +107,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-python
+  - repo: azure-cli-extensions
 ```
 
 ## Go
@@ -133,3 +139,8 @@ uncomment the  `exclude-file` section below and add the file paths.
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
+``` yaml $(validation)
+batch:
+  - package-migrate: true
+  - package-offazure: true
+```
