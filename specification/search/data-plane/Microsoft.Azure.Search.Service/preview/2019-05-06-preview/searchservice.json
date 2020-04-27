@@ -3676,6 +3676,54 @@
         "url": "https://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternReplaceCharFilter.html"
       }
     },
+    "Similarity": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string"
+        },
+      },
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Abstract base class for character filters.",
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/index-ranking-similarity"
+      }
+    },
+    "ClassicSimilarity": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.ClassicSimilarity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Similarity"
+        }
+      ],
+      "properties": {},
+      "required": [],
+      "description": "",
+    },
+    "BM25Similarity": {
+      "x-ms-discriminator-value": "#Microsoft.Azure.Search.BM25Similarity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Similarity"
+        }
+      ],
+      "properties": {
+        "k1": {
+          "type": "number",
+          "format": "double",
+          "description": "The k1 parameter controls the scaling function between the term frequency of each matching terms to the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency."
+        },
+        "b": {
+          "type": "number",
+          "format": "double",
+          "description": "The b parameter controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document."
+        }
+      },
+      "required": [],
+      "description": "",
+    },
     "DataSourceCredentials": {
       "properties": {
         "connectionString": {
@@ -4758,6 +4806,13 @@
         },
         "encryptionKey": {
           "$ref": "#/definitions/EncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
+        },
+        "similarity": {
+          "$ref": "#/definitions/Similarity",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
