@@ -119,7 +119,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteProviderPorts/{providerPortDescription}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteProviderPorts/{portPairDescriptor}": {
       "get": {
         "tags": [
           "ExpressRouteProviderPorts"
@@ -135,7 +135,7 @@
             "description": "The name of the resource group (peering location of the port)."
           },
           {
-            "name": "providerPortDescription",
+            "name": "portPairDescriptor",
             "in": "path",
             "required": true,
             "type": "string",
@@ -173,7 +173,7 @@
 	"definitions": {
     "ExpressRouteProviderPortProperties": {
       "properties": {
-        "portPairDescription": {
+        "portPairDescriptor": {
           "readOnly": true,
           "type": "string",
           "description": "The name of the port pair."
