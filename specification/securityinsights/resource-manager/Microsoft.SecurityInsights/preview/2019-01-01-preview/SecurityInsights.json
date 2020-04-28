@@ -1443,6 +1443,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an bookmark": {
+            "$ref": "./examples/bookmarks/expand/PostExpandBookmark.json"
+          }
+        },
+        "description": "Expand an bookmark",
+        "operationId": "Bookmark_Expand",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/BookmarkExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "tags": [
+          "Bookmark"
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}": {
       "get": {
         "x-ms-examples": {
@@ -1854,7 +1905,7 @@
           "Check Data Connector Requirements"
         ],
         "description": "Get requirements state for a data connector type.",
-        "operationId": "listDataConnectorRequirements",
+        "operationId": "DataConnectorsCheckRequirements_Post",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3217,17 +3268,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents AAD (Azure Active Directory) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AADCheckRequirementsProperties",
+          "description": "AAD (Azure Active Directory) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "AADCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "AAD (Azure Active Directory) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "AATPDataConnector": {
       "allOf": [
@@ -3262,17 +3323,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents AATP (Azure Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AATPCheckRequirementsProperties",
+          "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection"
+    },
+    "AATPCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "AATP (Azure Advanced Threat Protection) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "ASCDataConnector": {
       "allOf": [
@@ -3307,23 +3378,31 @@
       "type": "object"
     },
     "ASCCheckRequirements": {
-      "description": "ASC (Azure Security Center) requirements check properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
+      "description": "Represents ASC (Azure Security Center) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ASCCheckRequirementsProperties",
+          "description": "ASC (Azure Security Center) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "AzureSecurityCenter"
+    },
+    "ASCCheckRequirementsProperties": {
+      "description": "ASC (Azure Security Center) requirements check properties.",
       "properties": {
         "subscriptionId": {
           "description": "The subscription id to connect to, and get the data from.",
           "type": "string"
         }
       },
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "AccountEntity": {
       "allOf": [
@@ -3403,6 +3482,11 @@
         },
         "upnSuffix": {
           "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "dnsDomain": {
+          "description": "The fully qualified domain DNS name.",
           "readOnly": true,
           "type": "string"
         }
@@ -3856,12 +3940,9 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Amazon Web Services CloudTrail requirements check properties.",
+      "description": "Amazon Web Services CloudTrail requirements check request.",
       "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail"
     },
     "AzureResourceEntity": {
       "allOf": [
@@ -4236,6 +4317,48 @@
       ],
       "type": "object"
     },
+    "BookmarkExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "properties": {
+        "endTime": {
+          "description": "The end date filter, so the only expansion results returned are before this date.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expansionId": {
+          "description": "The Id of the expansion to perform.",
+          "format": "uuid",
+          "type": "string"
+        },
+        "startTime": {
+          "description": "The start date filter, so the only expansion results returned are after this date.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "BookmarkExpandResponse": {
+      "description": "The entity expansion result operation response.",
+      "properties": {
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        },
+        "value": {
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "description": "Array of the expansion result entities.",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      }
+    },
     "Case": {
       "allOf": [
         {
@@ -4425,6 +4548,14 @@
           "items": {
             "description": "related alert id",
             "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with case",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
           },
           "readOnly": true,
           "type": "array"
@@ -4721,12 +4852,18 @@
       ]
     },
     "DataConnectorsCheckRequirements": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataConnectorKind"
+      "description": "Data connector requirements properties.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DataConnectorKind",
+          "description": "Describes the kind of connector to be checked."
         }
-      ],
-      "description": "Data connector requirements properties."
+      },
+      "discriminator": "kind",
+      "type": "object",
+      "required": [
+        "kind"
+      ]
     },
     "DataConnectorAuthorizationState": {
       "description": "Describes the state of user's authorization for a connector kind.",
@@ -5788,6 +5925,14 @@
           },
           "readOnly": true,
           "type": "array"
+        },
+        "tactics": {
+          "description": "The tactics associated with incident",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "readOnly": true,
+          "type": "array"
         }
       },
       "type": "object"
@@ -5944,8 +6089,9 @@
         "classification": {
           "description": "The reason the incident was closed",
           "enum": [
-            "Unknown",
+            "Undetermined",
             "TruePositive",
+            "BenignPositive",
             "FalsePositive"
           ],
           "type": "string",
@@ -5954,16 +6100,56 @@
             "name": "IncidentClassification",
             "values": [
               {
-                "description": "Incident classification was not set",
-                "value": "Unknown"
+                "description": "Incident classification was undetermined",
+                "value": "Undetermined"
               },
               {
                 "description": "Incident was true positive",
                 "value": "TruePositive"
               },
               {
+                "description": "Incident was benign positive",
+                "value": "BenignPositive"
+              },
+              {
                 "description": "Incident was false positive",
                 "value": "FalsePositive"
+              }
+            ]
+          }
+        },
+        "classificationComment": {
+          "description": "Describes the reason the incident was closed",
+          "type": "string"
+        },
+        "classificationReason": {
+          "description": "The classification reason the incident was closed with",
+          "enum": [
+            "SuspiciousActivity",
+            "SuspiciousButExpected",
+            "IncorrectAlertLogic",
+            "InaccurateData"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "IncidentClassificationReason",
+            "values": [
+              {
+                "description": "Classification reason was suspicious activity",
+                "value": "SuspiciousActivity"
+              },
+              {
+                "description": "Classification reason was suspicious but expected",
+                "value": "SuspiciousButExpected"
+              },
+              {
+                "description": "Classification reason was incorrect alert logic",
+                "value": "IncorrectAlertLogic"
+              },
+              {
+                "description": "Classification reason was inaccurate data",
+                "value": "InaccurateData"
               }
             ]
           }
@@ -5981,6 +6167,11 @@
         "firstActivityTimeUtc": {
           "description": "The time of the first activity in the incident",
           "format": "date-time",
+          "type": "string"
+        },
+        "incidentUrl": {
+          "description": "The deep-link url to the incident in Azure portal",
+          "readOnly": true,
           "type": "string"
         },
         "incidentNumber": {
@@ -6010,6 +6201,15 @@
           "$ref": "#/definitions/IncidentOwnerInfo",
           "description": "Describes a user that the incident is assigned to",
           "type": "object"
+        },
+        "relatedAnalyticRuleIds": {
+          "description": "List of resource ids of Analytic rules related to the incident",
+          "items": {
+            "description": "Related Analytic rule resource id",
+            "type": "string"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "severity": {
           "description": "The severity of the incident",
@@ -6187,17 +6387,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents MCAS (Microsoft Cloud App Security) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MCASCheckRequirementsProperties",
+          "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftCloudAppSecurity"
+    },
+    "MCASCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "MCAS (Microsoft Cloud App Security) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "MDATPDataConnector": {
       "allOf": [
@@ -6232,17 +6442,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MDATPCheckRequirementsProperties",
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection"
+    },
+    "MDATPCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "MDATP (Microsoft Defender Advanced Threat Protection) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "MalwareEntity": {
       "allOf": [
@@ -6322,6 +6542,13 @@
       "properties": {
         "displayNamesFilter": {
           "description": "the alerts' displayNames on which the cases will be generated",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "displayNamesExcludeFilter": {
+          "description": "the alerts' displayNames on which the cases will not be generated",
           "items": {
             "type": "string"
           },
@@ -7073,6 +7300,10 @@
             "$ref": "#/definitions/AttackTactic"
           },
           "type": "array"
+        },
+        "incidentConfiguration": {
+          "$ref": "#/definitions/IncidentConfiguration",
+          "description": "The settings of the incidents that created from alerts triggered by this analytics rule"
         }
       },
       "required": [
@@ -7133,6 +7364,111 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
+    },
+    "IncidentConfiguration": {
+      "description": "Incident Configuration property bag.",
+      "properties": {
+        "createIncident": {
+          "description": "Create incidents from alerts triggered by this analytics rule",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/GroupingConfiguration",
+          "description": "Set how the alerts that are triggered by this analytics rule, are grouped into incidents"
+        }
+      },
+      "type": "object",
+      "required": [
+        "createIncident"
+      ]
+    },
+    "GroupingConfiguration": {
+      "description": "Grouping configuration property bag.",
+      "properties": {
+        "enabled": {
+          "description": "Grouping enabled",
+          "type": "boolean"
+        },
+        "reopenClosedIncident": {
+          "description": "Re-open closed matching incidents",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "description": "Limit the group to alerts created within the lookback duration (in ISO 8601 duration format)",
+          "format": "duration",
+          "type": "string"
+        },
+        "entitiesMatchingMethod": {
+          "description": "Grouping matching method",
+          "enum": [
+            "All",
+            "None",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "EntitiesMatchingMethod",
+            "values": [
+              {
+                "description": "Grouping alerts into a single incident if all the entities match",
+                "value": "All"
+              },
+              {
+                "description": "Grouping all alerts triggered by this rule into a single incident",
+                "value": "None"
+              },
+              {
+                "description": "Grouping alerts into a single incident if the selected entities match",
+                "value": "Custom"
+              }
+            ]
+          }
+        },
+        "groupByEntities": {
+          "description": "A list of entity types to group by (when entitiesMatchingMethod is Custom)",
+          "items": {
+            "description": "Grouping entity type",
+            "enum": [
+              "Account",
+              "Host",
+              "Ip",
+              "Url"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "GroupingEntityType",
+              "values": [
+                {
+                  "description": "Account entity",
+                  "value": "Account"
+                },
+                {
+                  "description": "Host entity",
+                  "value": "Host"
+                },
+                {
+                  "description": "Ip entity",
+                  "value": "Ip"
+                },
+                {
+                  "description": "Url entity",
+                  "value": "Url"
+                }
+              ]
+            }
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "enabled",
+        "reopenClosedIncident",
+        "lookbackDuration",
+        "entitiesMatchingMethod"
+      ]
     },
     "SecurityAlert": {
       "allOf": [
@@ -7597,17 +7933,28 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents threat intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TICheckRequirementsProperties",
+          "description": "TI (Threat Intelligence) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligence"
+    },
+    "TICheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
       "description": "TI (Threat Intelligence) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "properties": {},
+      "type": "object"
     },
     "TiTaxiiDataConnector": {
       "allOf": [
@@ -7684,17 +8031,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
-        },
+        }
+      ],
+      "description": "Represents threat intelligence requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TiTaxiiCheckRequirementsProperties",
+          "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "ThreatIntelligenceTaxii"
+    },
+    "TiTaxiiCheckRequirementsProperties": {
+      "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "Ti Taxii (Threat Intelligence Taxii) requirements check properties.",
-      "type": "object",
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ]
+      "description": "Threat Intelligence taxii client data connector properties.",
+      "type": "object"
     },
     "ThreatIntelligence": {
       "description": "ThreatIntelligence property bag.",
@@ -8172,6 +8529,16 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/EntityExpandParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "BookmarkExpandRequestBody": {
+      "description": "The parameters required to execute an expand operation on the given bookmark.",
+      "in": "body",
+      "name": "parameters",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/BookmarkExpandParameters"
       },
       "x-ms-parameter-location": "method"
     },

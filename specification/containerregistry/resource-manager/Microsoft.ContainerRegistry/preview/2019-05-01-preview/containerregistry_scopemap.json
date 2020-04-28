@@ -672,10 +672,6 @@
           "description": "The resource ID of the scope map to which the token will be associated with.",
           "type": "string"
         },
-        "objectId": {
-          "description": "The user/group/application object ID for which the token has to be created.",
-          "type": "string"
-        },
         "credentials": {
           "$ref": "#/definitions/TokenCredentialsProperties",
           "description": "The credentials that can be used for authenticating the token."
@@ -698,6 +694,9 @@
       "description": "The properties of the credentials that can be used for authenticating the token.",
       "type": "object",
       "properties": {
+        "activeDirectoryObject": {
+          "$ref": "#/definitions/ActiveDirectoryObject"
+        },
         "certificates": {
           "type": "array",
           "items": {
@@ -709,6 +708,20 @@
           "items": {
             "$ref": "#/definitions/TokenPassword"
           }
+        }
+      }
+    },
+    "ActiveDirectoryObject": {
+      "description": "The Active Directory Object that will be used for authenticating the token of a container registry.",
+      "type": "object",
+      "properties": {
+        "objectId": {
+          "description": "The user/group/application object ID for Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of user/group/application object Active Directory Object that will be used for authenticating the token of a container registry.",
+          "type": "string"
         }
       }
     },

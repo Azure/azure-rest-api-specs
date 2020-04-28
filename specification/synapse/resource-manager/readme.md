@@ -27,6 +27,7 @@ These are the global settings for the Azure Synapse Analytics API.
 title: SynapseManagementClient
 description: Azure Synapse Analytics Management Client
 openapi-type: arm
+azure-arm: true
 tag: package-2019-06-01-preview
 ```
 
@@ -42,6 +43,9 @@ input-file:
 - Microsoft.Synapse/preview/2019-06-01-preview/operations.json
 - Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
 - Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+- Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+- Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 ```
 
 ## Suppressions
@@ -73,11 +77,18 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-go
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
 
 ## C#
 
@@ -91,6 +102,10 @@ csharp:
   output-folder: $(csharp-sdks-folder)/synapse/Microsoft.Azure.Management.Synapse/src/Generated
   clear-output-folder: true
 ```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Multi-API/Profile support for AutoRest v3 generators 
 
@@ -110,6 +125,9 @@ input-file:
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/operations.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/sqlPool.json
   - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/workspace.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/integrationRuntime.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.Synapse/preview/2019-06-01-preview/privateEndpointConnections.json
 
 ```
 

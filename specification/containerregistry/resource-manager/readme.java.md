@@ -12,6 +12,15 @@ payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-containerregistry
 ```
 
+These settings apply only when `--multiapi` is not specified on the command line.
+
+``` yaml $(java) && !$(multiapi)
+directive:
+  - rename-model:
+      from: DockerBuildStep
+      to: DockerTaskStep
+```
+
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
