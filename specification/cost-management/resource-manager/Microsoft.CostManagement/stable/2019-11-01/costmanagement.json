@@ -260,6 +260,146 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_List",
+        "description": "Lists the forecast charges for scope defined.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "BillingAccountForecast": {
+            "$ref": "./examples/BillingAccountForecast.json"
+          },
+          "BillingProfileForecast": {
+            "$ref": "./examples/BillingProfileForecast.json"
+          },
+          "InvoiceSectionForecast": {
+            "$ref": "./examples/InvoiceSectionForecast.json"
+          },
+          "EnrollmentAccountForecast": {
+            "$ref": "./examples/EnrollmentAccountForecast.json"
+          },
+          "DepartmentForecast": {
+            "$ref": "./examples/DepartmentForecast.json"
+          },
+          "SubscriptionForecast": {
+            "$ref": "./examples/SubscriptionForecast.json"
+          },
+          "ResourceGroupForecast": {
+            "$ref": "./examples/ResourceGroupForecast.json"
+          },
+          "ExternalSubscriptionForecast": {
+            "$ref": "./examples/ExternalSubscriptionForecast.json"
+          },
+          "ExternalresourceGroupForecast": {
+            "$ref": "./examples/ExternalBillingAccountForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeForecastParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForecastDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Forecast Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }        
+      }
+    },
+    "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_ListExternal",
+        "description": "Lists the forecast charges for external cloud provider type defined.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountForecast": {
+            "$ref": "./examples/ExternalBillingAccountForecast.json"
+          },
+          "ExternalSubscriptionForecast": {
+            "$ref": "./examples/ExternalSubscriptionForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter forecasts by properties/usageDate (Utc time), properties/chargeType or properties/grain. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalCloudProviderTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/externalCloudProviderIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ForecastDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Forecast Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.CostManagement/query": {
       "post": {
         "tags": [
@@ -1037,6 +1177,60 @@
         }
       }
     },
+    "ForecastDefinition": {
+      "description": "The definition of a forecast.",
+      "properties": {
+        "type": {
+          "description": "The type of the forecast.",
+          "type": "string",
+          "enum": [
+            "Usage",
+            "ActualCost",
+            "AmortizedCost"
+          ],
+          "x-ms-enum": {
+            "name": "ExportType",
+            "modelAsString": true
+          }
+        },
+        "timeframe": {
+          "description": "The time frame for pulling data for the forecast. If custom, then a specific time period must be provided.",
+          "type": "string",
+          "enum": [
+            "MonthToDate",
+            "BillingMonthToDate",
+            "TheLastMonth",
+            "TheLastBillingMonth",
+            "WeekToDate",
+            "Custom"
+          ],
+          "x-ms-enum": {
+            "name": "TimeframeType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has time period for pulling data for the forecast.",
+          "$ref": "#/definitions/QueryTimePeriod"
+        },
+        "dataset": {
+          "description": "Has definition for data in this forecast.",
+          "$ref": "#/definitions/QueryDataset"
+        },
+        "includeActualCost":{
+          "description": "a boolean determining if actualCost will be included",
+          "type": "boolean"
+        },
+        "includeFreshPartialCost":{
+          "description": "a boolean determining if FreshPartialCost will be included",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "timeframe"
+      ]
+    },
     "QueryDefinition": {
       "description": "The definition of a query.",
       "properties": {
@@ -1533,6 +1727,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeForecastParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with Forecast operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
