@@ -3651,7 +3651,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}": {
       "put": {
-        "operationId": "RouteTables_CreateOrUpdate",
+        "operationId": "HubRouteTables_CreateOrUpdate",
         "x-ms-examples": {
           "RouteTablePut": {
             "$ref": "./examples/HubRouteTablePut.json"
@@ -3722,7 +3722,7 @@
         }
       },
       "get": {
-        "operationId": "RouteTables_Get",
+        "operationId": "HubRouteTables_Get",
         "x-ms-examples": {
           "RouteTableGet": {
             "$ref": "./examples/HubRouteTableGet.json"
@@ -3774,7 +3774,7 @@
         }
       },
       "delete": {
-        "operationId": "RouteTables_Delete",
+        "operationId": "HubRouteTables_Delete",
         "x-ms-examples": {
           "RouteTableDelete": {
             "$ref": "./examples/HubRouteTableDelete.json"
@@ -3835,7 +3835,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables": {
       "get": {
-        "operationId": "RouteTables_List",
+        "operationId": "HubRouteTables_List",
         "x-ms-examples": {
           "RouteTableList": {
             "$ref": "./examples/HubRouteTableList.json"
@@ -3868,7 +3868,7 @@
           "200": {
             "description": "Request successful. Returns the details of all the RouteTables for the VirtualHub.",
             "schema": {
-              "$ref": "#/definitions/ListRouteTablesResult"
+              "$ref": "#/definitions/ListHubRouteTablesResult"
             }
           },
           "default": {
@@ -4760,7 +4760,7 @@
       },
       "description": "RouteTable route."
     },
-    "ListRouteTablesResult": {
+    "ListHubRouteTablesResult": {
       "description": "List of RouteTables and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
@@ -5663,6 +5663,7 @@
       }
     },
     "PropagatedRouteTable": {
+      "description": "The list of RouteTables to advertise the routes to.",
       "properties": {
         "labels": {
           "type": "array",
@@ -5681,10 +5682,11 @@
       }
     },
     "VnetRoute": {
+      "description": "List of routes that control routing from VirtualHub into a virtual network connection.",
       "properties": {
         "staticRoutes": {
           "type": "array",
-          "description": "List of all Static Routes",
+          "description": "List of all Static Routes.",
           "items": {
             "$ref": "#/definitions/StaticRoute"
           }
@@ -5692,6 +5694,7 @@
       }
     },
     "StaticRoute": {
+      "description": "List of all Static Routes",
       "properties": {
         "name": {
           "type": "string",
