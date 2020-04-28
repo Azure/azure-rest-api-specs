@@ -128,7 +128,7 @@
         }
       }
     },
-    "/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
       "post": {
         "tags": [
           "Quota"
@@ -136,6 +136,9 @@
         "description": "Return quota for subscription by region",
         "operationId": "Quota_Get",
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
           {
             "name": "location",
             "in": "path",
