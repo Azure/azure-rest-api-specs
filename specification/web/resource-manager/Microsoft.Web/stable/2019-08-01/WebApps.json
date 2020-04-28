@@ -710,7 +710,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicpublishingcredentialspolicies": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies": {
       "get": {
         "tags": [
           "WebApps"
@@ -752,7 +752,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicpublishingcredentialspolicies/ftp": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/ftp": {
       "get": {
         "tags": [
           "WebApps"
@@ -842,7 +842,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicpublishingcredentialspolicies/scm": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/basicPublishingCredentialsPolicies/scm": {
       "get": {
         "tags": [
           "WebApps"
@@ -889,7 +889,7 @@
         ],
         "summary": "Updates whether user publishing credentials are allowed on the site or not.",
         "description": "Description for Updates whether user publishing credentials are allowed on the site or not.",
-        "operationId": "WebApps_UpdateUserCredsAllowed",
+        "operationId": "WebApps_UpdateScmAllowed",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -20805,55 +20805,54 @@
     },
     "CsmPublishingCredentialsPoliciesCollection": {
       "description": "Publishing Credentials Policies collection.",
-      "required": [
-        "ftp",
-        "scm"
-      ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
-        "ftp": {
-          "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
-          "description": "Whether FTP is allowed."
-        },
-        "scm": {
-          "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
-          "description": "Whether Scm Basic Auth is allowed."
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesCollection resource specific properties",
+          "required": [
+            "ftp",
+            "scm"
+          ],
+          "properties": {
+            "ftp": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether FTP is allowed."
+            },
+            "scm": {
+              "$ref": "#/definitions/CsmPublishingCredentialsPoliciesEntity",
+              "description": "Whether Scm Basic Auth is allowed."
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
     "CsmPublishingCredentialsPoliciesEntity": {
       "description": "Publishing Credentials Policies parameters.",
-      "required": [
-        "allow"
-      ],
       "type": "object",
-      "properties": {
-        "allow": {
-          "description": "<code>true</code> to allow access to a publishing method; otherwise, <code>false</code>.",
-          "type": "boolean"
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
-      }
-    },
-    "CsmPublishingProfileOptions": {
-      "description": "Publishing options for requested profile.",
-      "type": "object",
+      ],
       "properties": {
-        "format": {
-          "description": "Name of the format. Valid values are: \nFileZilla3\nWebDeploy -- default\nFtp",
-          "enum": [
-            "FileZilla3",
-            "WebDeploy",
-            "Ftp"
+        "properties": {
+          "description": "CsmPublishingCredentialsPoliciesEntity resource specific properties",
+          "required": [
+            "allow"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublishingProfileFormat",
-            "modelAsString": true
-          }
-        },
-        "includeDisasterRecoveryEndpoints": {
-          "description": "Include the DisasterRecover endpoint if true",
-          "type": "boolean"
+          "properties": {
+            "allow": {
+              "description": "<code>true</code> to allow access to a publishing method; otherwise, <code>false</code>.",
+              "type": "boolean"
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
