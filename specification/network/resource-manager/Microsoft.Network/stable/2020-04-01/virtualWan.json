@@ -3651,13 +3651,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
       "post": {
-        "operationId": "VirtualHubEffectiveRoutes",
+        "operationId": "EffectiveVirtualHubRoutes",
         "x-ms-examples": {
-          "VirtualHubEffectiveRoutes": {
-            "$ref": "./examples/VirtualHubEffectiveRoutes.json"
+          "EffectiveVirtualHubRouteList": {
+            "$ref": "./examples/EffectiveVirtualHubRouteList.json"
           }
         },
-        "description": "Gets the effective routes for the Virtual Hub resource.",
+        "description": "Gets the effective routes for the Virtual Hub resource or the specified resource .",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -3680,11 +3680,11 @@
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "virtualHubEffectiveRoutesParameters",
+            "name": "effectiveRoutesParameters",
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/VirtualHubEffectiveRoutesParameters"
+              "$ref": "#/definitions/EffectiveRoutesParameters"
             },
             "description": "Parameters supplied to get the effective routes."
           }
@@ -3693,7 +3693,7 @@
           "200": {
             "description": "The effective routes.",
             "schema": {
-              "$ref": "#/definitions/VirtualHubEffectiveRoutes"
+              "$ref": "#/definitions/EffectiveVirtualHubRouteList"
             }
           },
           "202": {
@@ -5342,6 +5342,62 @@
         }
       },
       "description": "ExpressRouteConnection list."
+    },
+    "EffectiveVirtualHubRouteList": {
+      "description": "EffectiveVirtualHubRoute List",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveVirtualHubRoute"
+          },
+          "description": "The list of effective virtualhub routes."
+        }
+      }
+    },
+    "EffectiveVirtualHubRoute": {
+      "description": "The effective virtualhub route.",
+      "properties": {
+        "addressPrefixes": {
+          "description": "The list of address prefixes in this route.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHops": {
+          "description": "The list of next hops in this route.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "description": "The type of the next hop.",
+          "type": "string"
+        },
+        "aSPath": {
+          "description": "The ASPath of this route.",
+          "type": "string" 
+        },
+        "routeOrigin": {
+          "description": "The origin of this route.",
+          "type": "string"
+        }
+      }
+    },
+    "EffectiveRoutesParameters": {
+      "description": "The parameters specifying the resource whose effective routes we need.",
+      "properties": {
+        "resourceId": {
+          "$ref": "./network.json#/definitions/Resource",
+          "description": "The resource."
+        },
+        "virtualWanResourceType": {
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      }
     }
   }
 }
