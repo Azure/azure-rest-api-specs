@@ -29,8 +29,10 @@ You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/
 Refer to [Document](https://aka.ms/ci-fix) for how to run these tools locally
 
 ## How to generate SDK from Swagger?<a name="SDK"></a>
-SDK generation is triggered as soon as your OpenAPI specification (a.k.a swagger) PR is created/committed/merged in to the azure-rest-api-specs repository.
-You can refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/81/Management-Plane-SDK-generation) for different scenarios for generating SDK 
+If you are working in the public repository,SDK generation is triggered as soon as your OpenAPI specification (a.k.a swagger) PR is created/committed/merged in to the azure-rest-api-specs repository.
+
+If you are working in the private repository, please refer to this [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/81/Management-Plane-SDK-generation) to manually generate SDKs of different languages, including Python, Java, Go, C#, Js etc.
+
 
 ## How to generate Document from Swagger?<a name="doc"></a>
 Refer to [document](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/79/Generation-of-docs-on-docs.microsoft.com)
