@@ -138,9 +138,9 @@ directive:
     - from: swagger-document
       where: $.info
       transform: >
-          $.title = 'LogAnalyticsManagementClient'
-          $.description = 'The Log Analytics Client.'
-          return $
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
          
 python-mode: create
 python:
