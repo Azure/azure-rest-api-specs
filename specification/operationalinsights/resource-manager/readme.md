@@ -134,6 +134,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+directive:
+    - from: swagger-document
+      where: $.info
+      transform: >
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
+         
 python-mode: create
 python:
   azure-arm: true
@@ -141,8 +149,6 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.loganalytics
   package-name: azure-mgmt-loganalytics
-  title: LogAnalyticsManagementClient
-  description: The Log Analytics Client.
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
