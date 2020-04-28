@@ -134,14 +134,9 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
-directive:
-    - from: swagger-document
-      where: $.info
-      transform: >
-          $.title = 'LogAnalyticsManagementClient';
-          $.description = 'The Log Analytics Client.';
-          return $;
-         
+override-info:
+  title: LogAnalyticsManagementClient
+  description: The Log Analytics Client.
 python-mode: create
 python:
   azure-arm: true
