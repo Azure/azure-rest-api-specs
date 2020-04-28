@@ -3627,7 +3627,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AssessPatchesResult"
+              "$ref": "#/definitions/VirtualMachineAssessPatchesResult"
             }
           },
           "202": {
@@ -7308,6 +7308,7 @@
       "properties": {
         "status": {
           "type": "string",
+          "readOnly": true,
           "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
           "enum": [
             "InProgress",
@@ -7322,10 +7323,12 @@
         },
         "assessmentActivityId": {
           "type": "string",
+          "readOnly": true,
           "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
         },
         "rebootPending": {
           "type": "string",
+          "readOnly": true,
           "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.",
           "enum": [
             "true",
@@ -7338,26 +7341,31 @@
         },
         "criticalAndSecurityPatchCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "The number of critical or security patches that have been detected as available and not yet installed."
         },
         "otherPatchCount": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "The number of all available patches excluding critical and security."
         },
         "startDateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp when the operation began."
         },
         "lastModifiedDateTime": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The UTC timestamp of the last update of this result object."
         },
         "patches": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/VirtualMachineSoftwarePatch"
           },
@@ -7369,7 +7377,7 @@
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
       },
-      "description": "Describes the properties of a Virtual Machine Extension."
+      "description": "Describes the properties of an AssessPatches result."
     },
     "PurchasePlan": {
       "properties": {
