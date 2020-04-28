@@ -3648,6 +3648,69 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
+      "post": {
+        "operationId": "VirtualHubEffectiveRoutes",
+        "x-ms-examples": {
+          "VirtualHubEffectiveRoutes": {
+            "$ref": "./examples/VirtualHubEffectiveRoutes.json"
+          }
+        },
+        "description": "Gets the effective routes for the Virtual Hub resource.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualHubEffectiveRoutesParameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualHubEffectiveRoutesParameters"
+            },
+            "description": "Parameters supplied to get the effective routes."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The effective routes.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubEffectiveRoutes"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
