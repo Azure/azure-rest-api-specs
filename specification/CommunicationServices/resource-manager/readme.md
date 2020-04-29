@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2019-10-10-preview` is specified o
 ```yaml $(tag) == 'package-2019-10-10-preview'
 input-file:
   - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService.json
+  - Microsoft.Communication/preview/2019-10-10-preview/CommunicationService-private.json
 ```
 
 ---
