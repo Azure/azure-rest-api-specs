@@ -41,6 +41,14 @@
     {
       "name": "Clusters",
       "description": ""
+    },
+    {
+      "name": "Operations",
+      "description": ""
+    },
+    {
+      "name": "Quota",
+      "description": ""
     }
   ],
   "parameters": {
@@ -116,6 +124,49 @@
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
+      "post": {
+        "tags": [
+          "Quota"
+        ],
+        "description": "Return quota for subscription by region",
+        "operationId": "Quota_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Azure region"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request has succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaGet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Quota_Get": {
+            "$ref": "./examples/Quota_Get.json"
           }
         }
       }
@@ -702,6 +753,25 @@
     }
   },
   "definitions": {
+    "QuotaGet": {
+      "description": "Subscription quotas",
+      "properties": {
+        "hostsRemaining": {
+          "description": "Remaining hosts quota by sku type",
+          "type": "object",
+          "readOnly": true,
+          "additionalProperties": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "quotaEnabled": {
+          "description": "Host quota is active for current subscription",
+          "type": "boolean",
+          "readOnly": true
+        }
+      }
+    },
     "Resource": {
       "description": "The core properties of ARM resources",
       "properties": {
