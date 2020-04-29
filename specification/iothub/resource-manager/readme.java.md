@@ -33,6 +33,10 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/sdk/iothub/mgmt-v2020_03_01
 regenerate-manager: true
 generate-interface: true
+directive:
+  - rename-model:
+      from: PrivateLinkResources
+      to: PrivateLinkResource
 ```
 
 ### Tag: package-preview-2019-03
