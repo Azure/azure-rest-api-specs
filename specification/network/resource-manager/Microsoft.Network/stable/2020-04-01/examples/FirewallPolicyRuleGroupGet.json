@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
+    "ruleGroupName": "ruleGroup1",
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
     "api-version": "2020-04-01",
@@ -9,24 +9,24 @@
   "responses": {
     "200": {
       "body": {
-        "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
+        "name": "ruleGroup1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleGroups/ruleGroup1",
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
         "properties": {
           "provisioningState": "Succeeded",
           "priority": 110,
-          "ruleCollections": [
+          "rules": [
             {
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
-              "name": "Example-Filter-Rule-Collection",
+              "ruleType": "FirewallPolicyFilterRule",
+              "name": "Example-Filter-Rule",
               "priority": 200,
               "action": {
                 "type": "Deny"
               },
-              "rules": [
+              "ruleConditions": [
                 {
-                  "ruleType": "NetworkRule",
-                  "name": "network-rule1",
+                  "ruleConditionType": "NetworkRuleCondition",
+                  "name": "network-condition1",
                   "sourceAddresses": [
                     "10.1.25.0/24"
                   ],
