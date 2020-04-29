@@ -20049,9 +20049,10 @@
         },
         "identityType": {
           "enum": [
-            "None",
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -20856,6 +20857,29 @@
         }
       }
     },
+    "CsmPublishingProfileOptions": {
+      "description": "Publishing options for requested profile.",
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "Name of the format. Valid values are: \nFileZilla3\nWebDeploy -- default\nFtp",
+          "enum": [
+            "FileZilla3",
+            "WebDeploy",
+            "Ftp"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublishingProfileFormat",
+            "modelAsString": true
+          }
+        },
+        "includeDisasterRecoveryEndpoints": {
+          "description": "Include the DisasterRecover endpoint if true",
+          "type": "boolean"
+        }
+      }
+    },
     "CsmSlotEntity": {
       "description": "Deployment slot parameters.",
       "required": [
@@ -21541,9 +21565,10 @@
             },
             "identityType": {
               "enum": [
-                "None",
                 "SystemAssigned",
-                "UserAssigned"
+                "UserAssigned",
+                "SystemAssigned, UserAssigned",
+                "None"
               ],
               "type": "string",
               "x-ms-enum": {
