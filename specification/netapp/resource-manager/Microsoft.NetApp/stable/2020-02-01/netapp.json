@@ -2924,39 +2924,21 @@
     },
     "snapshotPolicy": {
       "description": "Snapshot policy information",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],      
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
-        "location",
         "properties"
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "id": {
           "type": "string",
           "readOnly": true,
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource type"
-        },
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
         },
         "properties": {
           "description": "Snapshot policy Properties",
@@ -3037,7 +3019,7 @@
         },
         "hour": {
           "type": "integer",
-          "description": "Indicates which hour snapshot should be taken",
+          "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "example": "11"
         },
         "minute": {
@@ -3066,7 +3048,7 @@
         },
         "hour": {
           "type": "integer",
-          "description": "Indicates which hour snapshot should be taken",
+          "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "example": "11"
         },
         "minute": {
@@ -3095,7 +3077,7 @@
         },
         "hour": {
           "type": "integer",
-          "description": "Indicates which hour snapshot should be taken",
+          "description": "Indicates which hour in UTC timezone a snapshot should be taken",
           "example": "11"
         },
         "minute": {
