@@ -556,6 +556,34 @@
         }
       ]
     },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of HANA operations"
+        }
+      },
+      "description": "List of HANA operations"
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Displayed HANA operation information"
+        }
+      },
+      "description": "HANA operation information"
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
