@@ -27,6 +27,48 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HanaOnAzure/operations": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of SAP HANA management operations.",
+        "x-ms-examples": {
+          "List all HANA management operations supported by HANA RP": {
+            "$ref": "./examples/HanaOperations_List.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
         "tags": [
@@ -648,24 +690,6 @@
           "$ref": "#/definitions/ProviderInstanceProperties",
           "description": "Provider Instance properties"
         },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ],
-          "x-ms-enum": {
-            "name": "HanaProvisioningStatesEnum",
-            "modelAsString": true
-          },
-          "description": "State of provisioning of the provider instance"
-        }
       },
       "allOf": [
         {
@@ -687,6 +711,24 @@
         "metadata": {
           "type": "string",
           "description": "A JSON string containing metadata of the provider instance."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the provider instance"
         }
       },
       "description": "Describes the properties of a provider instance."
