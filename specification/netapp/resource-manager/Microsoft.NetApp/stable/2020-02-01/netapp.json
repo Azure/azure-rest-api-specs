@@ -2963,11 +2963,7 @@
     "snapshotPolicyPatch": {
       "description": "Snapshot policy Details for create and update",
       "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location"
-        },
+      "properties": {        
         "properties": {
           "description": "Snapshot Policy properties",
           "$ref": "#/definitions/snapshotPolicyProperties",
@@ -3005,7 +3001,7 @@
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes"
         }
       }
     },
@@ -3029,7 +3025,7 @@
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes"
         }
       }
     },
@@ -3058,7 +3054,7 @@
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes, Current storage usage for the volume in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes"
         }
       }
     },
@@ -3072,7 +3068,7 @@
         },
         "daysOfMonth": {
           "type": "string",
-          "description": "Indicates which days of the month snapshot should be taken",
+          "description": "Indicates which days of the month snapshot should be taken. A comma delimited string.",
           "example": "1,11,21"
         },
         "hour": {
@@ -3087,7 +3083,7 @@
         },
         "usedBytes": {
           "type": "integer",
-          "description": "Resource size in bytes"
+          "description": "Resource size in bytes, current storage usage for the volume in bytes"
         }
       }
     },
