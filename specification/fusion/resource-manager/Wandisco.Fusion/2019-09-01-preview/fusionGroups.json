@@ -373,7 +373,7 @@
           "200": {
             "description": "azureZone details.",
             "schema": {
-              "$ref": "#/definitions/AzureZoneResponse"
+              "$ref": "#/definitions/AzureZone"
             }
           },
           "default": {
@@ -425,13 +425,13 @@
           "200": {
             "description": "Updating Fusion Azure Zone.",
             "schema": {
-              "$ref": "#/definitions/AzureZoneResponse"
+              "$ref": "#/definitions/AzureZone"
             }
           },
           "201": {
             "description": "Installing Fusion Azure Zone.",
             "schema": {
-              "$ref": "#/definitions/AzureZoneResponse"
+              "$ref": "#/definitions/AzureZone"
             }
           },
           "default": {
@@ -489,7 +489,7 @@
           "200": {
             "description": "Updating Fusion Azure Zone.",
             "schema": {
-              "$ref": "#/definitions/AzureZoneResponse"
+              "$ref": "#/definitions/AzureZone"
             }
           },
           "default": {
@@ -1031,7 +1031,7 @@
         "tags": [
           "replicationRule"
         ],
-        "description": "Update a replicationRule",
+        "description": "Delete a replicationRule",
         "operationId": "ReplicationRules_Delete",
         "parameters": [
           {
@@ -1084,7 +1084,7 @@
           "Consistency Check"
         ],
         "description": "Trigger a consistency check on a Replication Rule",
-        "operationId": "ConsistencyCheck_Start",
+        "operationId": "ReplicationRules_ConsistencyCheck",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1157,260 +1157,6 @@
           "List Wandisco.Fusion Operations": {
             "$ref": "./examples/WandiscoFusionListOperations.json"
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/onPremZones": {
-      "get": {
-        "tags": [
-          "onPremZone"
-        ],
-        "description": "Returns list of OnPremZones.",
-        "operationId": "OnPremZones_ListByFusionGroup",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FusionGroupParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "onPremZone details.",
-            "schema": {
-              "$ref": "#/definitions/OnPremZoneList"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "deprecated": false,
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Get On Prem Zone list": {
-            "$ref": "./examples/FusionGroup/OnPremZoneList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Wandisco.Fusion/fusionGroups/{fusionGroupName}/onPremZones/{onPremZoneName}": {
-      "get": {
-        "tags": [
-          "onPremZone"
-        ],
-        "description": "Returns a given OnPremZone.",
-        "operationId": "OnPremZones_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FusionGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/OnPremZoneParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "onPremZone details.",
-            "schema": {
-              "$ref": "#/definitions/OnPremZoneResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get On Prem Zone by name": {
-            "$ref": "./examples/FusionGroup/OnPremZoneGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "onPremZone"
-        ],
-        "description": "Creates a given OnPremZone.",
-        "operationId": "OnPremZones_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FusionGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/OnPremZoneParameter"
-          },
-          {
-            "name": "OnPremZone",
-            "description": "onPremZone details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OnPremZone"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updating OnPrem Zone.",
-            "schema": {
-              "$ref": "#/definitions/OnPremZoneResponse"
-            }
-          },
-          "201": {
-            "description": "Creating Fusion OnPrem Zone.",
-            "schema": {
-              "$ref": "#/definitions/OnPremZoneResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create On Prem Zone": {
-            "$ref": "./examples/FusionGroup/OnPremZoneCreate.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "tags": [
-          "onPremZone"
-        ],
-        "description": "Updates a given OnPremZone.",
-        "operationId": "OnPremZones_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FusionGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/OnPremZoneParameter"
-          },
-          {
-            "name": "OnPremZone",
-            "description": "onPremZone update details.",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/TagsUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updating OnPrem Zone.",
-            "schema": {
-              "$ref": "#/definitions/OnPremZoneResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Patch": {
-            "$ref": "./examples/FusionGroup/OnPremZonePatch.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "onPremZone"
-        ],
-        "description": "Deletes a given onPremZone.",
-        "operationId": "OnPremZones_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/FusionGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/OnPremZoneParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The OnPrem Zone was successfully deleted"
-          },
-          "202": {
-            "description": "The OnPrem Zone was accepted for deletion"
-          },
-          "204": {
-            "description": "The OnPrem Zone was not found"
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful delete": {
-            "$ref": "./examples/FusionGroup/OnPremZoneDelete.json"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
@@ -1488,7 +1234,7 @@
           "200": {
             "description": "managedOnPremZone details.",
             "schema": {
-              "$ref": "#/definitions/ManagedOnPremZoneResponse"
+              "$ref": "#/definitions/ManagedOnPremZone"
             }
           },
           "default": {
@@ -1545,13 +1291,13 @@
           "200": {
             "description": "Updating OnPrem Zone.",
             "schema": {
-              "$ref": "#/definitions/ManagedOnPremZoneResponse"
+              "$ref": "#/definitions/ManagedOnPremZone"
             }
           },
           "201": {
             "description": "Creating Managed OnPrem Zone.",
             "schema": {
-              "$ref": "#/definitions/ManagedOnPremZoneResponse"
+              "$ref": "#/definitions/ManagedOnPremZone"
             }
           },
           "default": {
@@ -1601,7 +1347,7 @@
           "200": {
             "description": "Updating ManagedOnPrem Zone.",
             "schema": {
-              "$ref": "#/definitions/ManagedOnPremZoneResponse"
+              "$ref": "#/definitions/ManagedOnPremZone"
             }
           },
           "default": {
@@ -2353,7 +2099,7 @@
           "Hive Consistency Check"
         ],
         "description": "Trigger a consistency check on a Hive Replication Rule",
-        "operationId": "HiveConsistencyCheck_Start",
+        "operationId": "HiveReplicationRules_ConsistencyCheck",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -2550,38 +2296,7 @@
         "properties": {
           "description": "azure zone resource properties",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureZoneInputProperties"
-        }
-      }
-    },
-    "AzureZoneResponse": {
-      "description": "Azure Zone Response",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "azure zone resource properties",
-          "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureZoneProperties"
-        }
-      }
-    },
-    "AzureZoneInputProperties": {
-      "description": "Azure Zone",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureZoneProperties"
-        }
-      ],
-      "properties": {
-        "storageAccessKey": {
-          "description": "Access Key for storage (use either key or identity)",
-          "type": "string"
         }
       }
     },
@@ -2635,6 +2350,10 @@
         "storageManagedIdentity": {
           "$ref": "#/definitions/VirtualMachineIdentity",
           "description": "Managed identity of storage account (use either key or identity)"
+        },
+        "storageAccessKey": {
+          "description": "Access Key for storage (use either key or identity)",
+          "type": "string"
         },
         "nodeCount": {
           "description": "The number of nodes in the zone",
@@ -2704,6 +2423,7 @@
       "properties": {
         "vm": {
           "x-ms-azure-resource": true,
+          "description": "The VirtualMachine resource associated with this node",
           "properties": {
             "id": {
               "type": "string",
@@ -2725,6 +2445,7 @@
       "properties": {
         "properties": {
           "description": "Plugin Representation",
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/PluginRepresentation"
         }
       },
@@ -2758,7 +2479,8 @@
         "provisioningState": {
           "title": "ProvisioningState",
           "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         }
       },
       "required": [
@@ -2846,83 +2568,7 @@
           "description": "The list of zones.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AzureZoneResponse"
-          }
-        }
-      }
-    },
-    "OnPremZone": {
-      "description": "OnPrem Zone",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "on prem zone resource properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OnPremZoneInputProperties"
-        }
-      }
-    },
-    "OnPremZoneResponse": {
-      "description": "OnPrem Zone Response",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "on prem zone resource response properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OnPremZoneProperties"
-        }
-      }
-    },
-    "OnPremZoneInputProperties": {
-      "description": "on prem zone properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OnPremZoneProperties"
-        }
-      ],
-      "properties": {
-        "inductionToken": {
-          "description": "induction token for on prem zone",
-          "type": "string"
-        }
-      },
-      "required": [
-        "inductionToken"
-      ]
-    },
-    "OnPremZoneProperties": {
-      "description": "on prem zone response properties",
-      "properties": {
-        "provisioningState": {
-          "title": "ProvisioningState",
-          "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
-        }
-      }
-    },
-    "OnPremZoneList": {
-      "description": "The list of On Prem Zones.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of on prem zones list.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of zones.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OnPremZoneResponse"
+            "$ref": "#/definitions/AzureZone"
           }
         }
       }
@@ -2947,16 +2593,12 @@
       "description": "Managed OnPrem zone properties",
       "type": "object",
       "properties": {
-        "provisioningState": {
-          "title": "ProvisioningState",
-          "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
-        },
         "deploymentType": {
           "type": "string",
           "description": "The deployment type of the Managed OnPrem zone",
           "enum": [
-            "HDPSandbox"
+            "HDPSandbox",
+            "ExistingOnPrem"
           ],
           "x-ms-enum": {
             "name": "ManagedOnPremDeploymentType",
@@ -2964,6 +2606,9 @@
             "values": [
               {
                 "value": "HDPSandbox"
+              },
+              {
+                "value": "ExistingOnPrem"
               }
             ]
           },
@@ -2972,40 +2617,11 @@
         "externalIp" : {
           "description": "The external IP of the managed OnPrem fusion server",
           "type": "string"
-        }
-      },
-      "required": [
-        "deploymentType",
-        "externalIp"
-      ]
-    },
-    "ManagedOnPremZoneResponse": {
-      "description": "Managed OnPrem Zone Response",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Managed OnPrem zone resource response properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ManagedOnPremZoneResponseProperties"
-        }
-      }
-    },
-    "ManagedOnPremZoneResponseProperties": {
-      "description": "Managed OnPrem zone properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedOnPremZoneProperties"
-        }
-      ],
-      "properties": {
+        },
         "downloadLocation": {
           "description": "The location for downloading deployment files",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "nodes": {
           "title": "NodeDetailsList",
@@ -3015,8 +2631,18 @@
             "$ref": "#/definitions/NodeDetails"
           },
           "readOnly": true
+        },
+        "provisioningState": {
+          "title": "ProvisioningState",
+          "description": "Provisioning State of resource",
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "deploymentType",
+        "externalIp"
+      ]
     },
     "PathMapping": {
       "description": "Replication Rule Mapping of a specific Zone",
@@ -3044,7 +2670,7 @@
           "description": "The list of zones.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ManagedOnPremZoneResponse"
+            "$ref": "#/definitions/ManagedOnPremZone"
           }
         }
       }
@@ -3076,7 +2702,8 @@
         "provisioningState": {
           "title": "ProvisioningState",
           "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "priorityZone": {
           "type": "string",
@@ -3147,6 +2774,7 @@
       "type": "object",
       "properties": {
         "type": {
+          "description": "The type of check, blocking will prevent client requests while running",
           "enum": [
             "NonBlocking",
             "Blocking"
@@ -3582,7 +3210,8 @@
         "provisioningState": {
           "title": "ProvisioningState",
           "description": "Provisioning State of resource",
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "recentConsistencyReport": {
           "description": "A report of the most recent consistency check completed for this rule",
@@ -3653,14 +3282,6 @@
       "description": "The name of the azureZone resource.",
       "x-ms-parameter-location": "method",
       "maxLength": 48
-    },
-    "OnPremZoneParameter": {
-      "name": "onPremZoneName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the onPremZone resource.",
-      "x-ms-parameter-location": "method"
     },
     "ManagedOnPremZoneParameter": {
       "name": "managedOnPremZoneName",
