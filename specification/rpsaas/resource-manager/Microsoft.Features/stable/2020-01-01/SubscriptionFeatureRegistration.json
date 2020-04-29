@@ -187,6 +187,42 @@
           }
         }
       },
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Features/subscriptionFeatureRegistrations": {
+        "get": {
+          "description": "Returns subscription feature registrations for given subscription.",
+          "operationId": "SubscriptionFeatureRegistrations_ListAllBySubscription",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Subscription Feature Registrations.",
+              "schema": {
+                "$ref": "#/definitions/SubscriptionFeatureRegistrationList"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          },
+          "x-ms-examples": {
+            "Gets a list of feature registrations": {
+              "$ref": "./examples/FeatureRegistration/SubscriptionFeatureRegistrationLISTALL.json"
+            }
+          }
+        }
+      },
       "/providers/microsoft.features/operations": {
         "get": {
           "description": "Returns list of operations.",
