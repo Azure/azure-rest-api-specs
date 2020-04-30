@@ -588,6 +588,9 @@
           },
           "DataSets_SqlDBTable_Create": {
             "$ref": "./examples/DataSets_SqlDBTable_Create.json"
+          },
+          "DataSets_StorageAccount_Create": {
+            "$ref": "./examples/DataSets_StorageAccount_Create.json"
           }
         }
       },
@@ -843,6 +846,9 @@
           },
           "DataSetMappings_SqlDWDataSetToAdlsGen2File_Create": {
             "$ref": "./examples/DataSetMappings_SqlDWDataSetToAdlsGen2File_Create.json"
+          },
+          "DataSetMappings_StorageAccount_Create": {
+            "$ref": "./examples/DataSetMappings_StorageAccount_Create.json"
           }
         }
       },
@@ -3299,6 +3305,7 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
@@ -3355,6 +3362,7 @@
             "AdlsGen2FileSystem",
             "AdlsGen2Folder",
             "AdlsGen2File",
+            "StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
@@ -3894,6 +3902,7 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
@@ -4303,6 +4312,7 @@
             "AdlsGen2File",
             "AdlsGen1Folder",
             "AdlsGen1File",
+            "StorageAccount",
             "KustoCluster",
             "KustoDatabase",
             "SqlDBTable",
@@ -5405,6 +5415,80 @@
         }
       }
     },
+    "StorageAccountDataSet": {
+      "description": "An Azure storage account data set.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountDataSetProperties",
+          "description": "Storage account data set properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "StorageAccount"
+    },
+    "StorageAccountDataSetProperties": {
+      "description": "Properties of the storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "paths"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Location of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of storage account paths.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountPath"
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageAccountPath": {
+      "description": "Defines a single storage account path.",
+      "required": [
+        "containerName"
+      ],
+      "type": "object",
+      "properties": {
+        "consumerPath": {
+          "description": "Gets or sets the path on the consumer side where the dataset is to be mapped.",
+          "type": "string"
+        },
+        "containerName": {
+          "description": "Gets or sets the container name to share.",
+          "type": "string"
+        },
+        "providerPath": {
+          "description": "Gets or sets the path to file/folder within the container.",
+          "type": "string"
+        }
+      }
+    },
     "BlobDataSetMapping": {
       "description": "A Blob data set mapping.",
       "required": [
@@ -6255,6 +6339,84 @@
         },
         "tableName": {
           "description": "SQL DB table name.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageAccountDataSetMapping": {
+      "description": "A storage account data set mapping.",
+      "required": [
+        "properties",
+        "kind"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageAccountDataSetMappingProperties",
+          "description": "Storage account data set mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "StorageAccount"
+    },
+    "StorageAccountDataSetMappingProperties": {
+      "description": "Properties of the storage account data set.",
+      "required": [
+        "storageAccountResourceId",
+        "containerName",
+        "dataSetId"
+      ],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Container that has the file path.",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "The id of the source data set.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the data set mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "location": {
+          "description": "Location of the sink storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the data set mapping.",
+          "enum": [
+            "Succeeded",
+            "Creating",
+            "Deleting",
+            "Moving",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          }
+        },
+        "storageAccountResourceId": {
+          "description": "Resource id of the sink storage account",
           "type": "string"
         }
       }
