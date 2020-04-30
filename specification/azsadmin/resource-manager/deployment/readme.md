@@ -72,10 +72,12 @@ input-file:
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/Deployment.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlan.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperation.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperationAttempt.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/FileContainer.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductDeployment.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/OperationResults.json
 
 ```
 
