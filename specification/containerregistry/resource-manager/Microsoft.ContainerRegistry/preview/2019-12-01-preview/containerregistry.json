@@ -1804,6 +1804,19 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the container registry.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2130,6 +2143,18 @@
         "dataEndpointEnabled": {
           "description": "Enable a single data endpoint per region for serving data.",
           "type": "boolean"
+        },
+        "publicNetworkAccess": {
+          "description": "Whether or not public network access is allowed for the container registry.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true
+          }
         }
       }
     },
