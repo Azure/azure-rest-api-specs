@@ -181,6 +181,85 @@
         }
       }
     },
+    "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/dimensions": {
+      "get": {
+        "tags": [
+          "Dimensions"
+        ],
+        "x-ms-odata": "#/definitions/Dimension",
+        "operationId": "Dimensions_ByExternalCloudProviderType",
+        "description": "Lists the dimensions by the external cloud provider type.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountDimensionList": {
+            "$ref": "./examples/ExternalBillingAccountsDimensions.json"
+          },
+          "ExternalSubscriptionDimensionList": {
+            "$ref": "./examples/ExternalSubscriptionsDimensions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalCloudProviderTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/externalCloudProviderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "description": "May be used to limit the number of results to the most recent N dimension data.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DimensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.CostManagement/query": {
       "post": {
         "tags": [
@@ -256,6 +335,60 @@
         "parameters": [
           {
             "$ref": "#/parameters/scopeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Query Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/query": {
+      "post": {
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_UsageByExternalCloudProviderType",
+        "description": "Query the usage data for external cloud provider type defined.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountQueryList": {
+            "$ref": "./examples/ExternalBillingAccountsQuery.json"
+          },
+          "ExternalSubscriptionsQuery": {
+            "$ref": "./examples/ExternalSubscriptionsQuery.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalCloudProviderTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/externalCloudProviderIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1472,6 +1605,30 @@
       "description": "Export Name.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "externalCloudProviderTypeParameter": {
+      "name": "externalCloudProviderType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "externalSubscriptions",
+        "externalBillingAccounts"
+      ],
+      "x-ms-enum": {
+        "name": "externalCloudProviderType",
+        "modelAsString": true
+      },
+      "description": "The external cloud provider type associated with dimension/query operations. This includes 'externalSubscriptions' for linked account and 'externalBillingAccounts' for consolidated account.",
+      "x-ms-parameter-location": "method"
+    },
+    "externalCloudProviderIdParameter": {
+      "name": "externalCloudProviderId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "This can be '{externalSubscriptionId}' for linked account or '{externalBillingAccountId}' for consolidated account used with dimension/query operations.",
       "x-ms-parameter-location": "method"
     }
   }
