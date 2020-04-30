@@ -4679,7 +4679,7 @@
         },
         "labels": {
           "type": "array",
-          "description": "List of all connections attached to this route table.",
+          "description": "List of labels associated with this route table.",
           "items": {
             "type": "string"
           }
@@ -4709,6 +4709,9 @@
       "description": "Parameters for RouteTable."
     },
     "HubRouteTable": {
+      "required": [
+        "name"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4733,6 +4736,9 @@
       "description": "RouteTable Resource."
     },
     "HubRoute": {
+      "required": [
+        "name"
+      ],
       "properties": {
         "name": {
           "type": "string",
