@@ -47,7 +47,7 @@
       "description": ""
     },
     {
-      "name": "Quota",
+      "name": "Quotas",
       "description": ""
     }
   ],
@@ -131,10 +131,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
       "post": {
         "tags": [
-          "Quota"
+          "Quotas"
         ],
         "description": "Return quota for subscription by region",
-        "operationId": "Quota_Get",
+        "operationId": "CheckQuotaAvailability",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -154,7 +154,7 @@
           "200": {
             "description": "Request has succeeded",
             "schema": {
-              "$ref": "#/definitions/QuotaGet"
+              "$ref": "#/definitions/Quota"
             }
           },
           "default": {
@@ -165,8 +165,8 @@
           }
         },
         "x-ms-examples": {
-          "Quota_Get": {
-            "$ref": "./examples/Quota_Get.json"
+          "CheckQuotaAvailability": {
+            "$ref": "./examples/CheckQuotaAvailability.json"
           }
         }
       }
@@ -753,7 +753,7 @@
     }
   },
   "definitions": {
-    "QuotaGet": {
+    "Quota": {
       "description": "Subscription quotas",
       "properties": {
         "hostsRemaining": {
@@ -767,8 +767,15 @@
         },
         "quotaEnabled": {
           "description": "Host quota is active for current subscription",
-          "type": "boolean",
-          "readOnly": true
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaEnabled",
+            "modelAsString": true
+          }
         }
       }
     },
