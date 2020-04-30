@@ -298,13 +298,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups/{ruleCollectionGroupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleGroups/{ruleGroupName}": {
       "delete": {
         "tags": [
-          "FirewallPolicyRuleCollectionGroups"
+          "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleCollectionGroups_Delete",
-        "description": "Deletes the specified FirewallPolicyRuleCollectionGroup.",
+        "operationId": "FirewallPolicyRuleGroups_Delete",
+        "description": "Deletes the specified FirewallPolicyRuleGroup.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -321,11 +321,11 @@
             "description": "The name of the Firewall Policy."
           },
           {
-            "name": "ruleCollectionGroupName",
+            "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleGroup."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -352,8 +352,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete FirewallPolicyRuleCollectionGroup": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupDelete.json"
+          "Delete FirewallPolicyRuleGroup": {
+            "$ref": "./examples/FirewallPolicyRuleGroupDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -363,10 +363,10 @@
       },
       "get": {
         "tags": [
-          "FirewallPolicyRuleCollectionGroups"
+          "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleCollectionGroups_Get",
-        "description": "Gets the specified FirewallPolicyRuleCollectionGroup.",
+        "operationId": "FirewallPolicyRuleGroups_Get",
+        "description": "Gets the specified FirewallPolicyRuleGroup.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -383,11 +383,11 @@
             "description": "The name of the Firewall Policy."
           },
           {
-            "name": "ruleCollectionGroupName",
+            "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleGroup."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -398,9 +398,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a FirewallPolicyRuleCollectionGroup resource.",
+            "description": "Request successful. The operation returns a FirewallPolicyRuleGroup resource.",
             "schema": {
-              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+              "$ref": "#/definitions/FirewallPolicyRuleGroup"
             }
           },
           "default": {
@@ -411,20 +411,20 @@
           }
         },
         "x-ms-examples": {
-          "Get FirewallPolicyRuleCollectionGroup": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupGet.json"
+          "Get FirewallPolicyRuleGroup": {
+            "$ref": "./examples/FirewallPolicyRuleGroupGet.json"
           },
-          "Get FirewallPolicyRuleCollectionGroup With IpGroups": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json"
+          "Get FirewallPolicyRuleGroup With IpGroups": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "FirewallPolicyRuleCollectionGroups"
+          "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleCollectionGroups_CreateOrUpdate",
-        "description": "Creates or updates the specified FirewallPolicyRuleCollectionGroup.",
+        "operationId": "FirewallPolicyRuleGroups_CreateOrUpdate",
+        "description": "Creates or updates the specified FirewallPolicyRuleGroup.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -441,20 +441,20 @@
             "description": "The name of the Firewall Policy."
           },
           {
-            "name": "ruleCollectionGroupName",
+            "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the FirewallPolicyRuleCollectionGroup."
+            "description": "The name of the FirewallPolicyRuleGroup."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+              "$ref": "#/definitions/FirewallPolicyRuleGroup"
             },
-            "description": "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
+            "description": "Parameters supplied to the create or update FirewallPolicyRuleGroup operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -465,15 +465,15 @@
         ],
         "responses": {
           "201": {
-            "description": "Request received successfully. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "description": "Request received successfully. The operation returns the resulting FirewallPolicyRuleGroup resource.",
             "schema": {
-              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+              "$ref": "#/definitions/FirewallPolicyRuleGroup"
             }
           },
           "200": {
-            "description": "Request successful. The operation returns the resulting FirewallPolicyRuleCollectionGroup resource.",
+            "description": "Request successful. The operation returns the resulting FirewallPolicyRuleGroup resource.",
             "schema": {
-              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+              "$ref": "#/definitions/FirewallPolicyRuleGroup"
             }
           },
           "default": {
@@ -484,11 +484,11 @@
           }
         },
         "x-ms-examples": {
-          "Create FirewallPolicyRuleCollectionGroup": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupPut.json"
+          "Create FirewallPolicyRuleGroup": {
+            "$ref": "./examples/FirewallPolicyRuleGroupPut.json"
           },
-          "Create FirewallPolicyRuleCollectionGroup With IpGroups": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json"
+          "Create FirewallPolicyRuleGroup With IpGroups": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsPut.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -497,13 +497,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleCollectionGroups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleGroups": {
       "get": {
         "tags": [
-          "FirewallPolicyRuleCollectionGroups"
+          "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleCollectionGroups_List",
-        "description": "Lists all FirewallPolicyRuleCollectionGroups in a FirewallPolicy resource.",
+        "operationId": "FirewallPolicyRuleGroups_List",
+        "description": "Lists all FirewallPolicyRuleGroups in a FirewallPolicy resource.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -528,9 +528,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The operation returns a list of FirewallPolicyRuleCollectionGroup resources.",
+            "description": "Success. The operation returns a list of FirewallPolicyRuleGroup resources.",
             "schema": {
-              "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupListResult"
+              "$ref": "#/definitions/FirewallPolicyRuleGroupListResult"
             }
           },
           "default": {
@@ -541,11 +541,11 @@
           }
         },
         "x-ms-examples": {
-          "List all FirewallPolicyRuleCollectionGroups for a given FirewallPolicy": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupList.json"
+          "List all FirewallPolicyRuleGroups for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyRuleGroupList.json"
           },
-          "List all FirewallPolicyRuleCollectionGroups with IpGroups for a given FirewallPolicy": {
-            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json"
+          "List all FirewallPolicyRuleGroups with IpGroups for a given FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyRuleGroupWithIpGroupsList.json"
           }
         },
         "x-ms-pageable": {
@@ -577,10 +577,10 @@
     },
     "FirewallPolicyPropertiesFormat": {
       "properties": {
-        "ruleCollectionGroups": {
+        "ruleGroups": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to FirewallPolicyRuleCollectionGroups.",
+          "description": "List of references to FirewallPolicyRuleGroups.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -615,6 +615,10 @@
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode"
         },
+        "threatIntelWhitelist": {
+          "description": "ThreatIntel Whitelist for Firewall Policy.",
+          "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
+        },
         "intrusionSystemMode": {
           "description": "The operation mode for Intrusion system.",
           "$ref": "#/definitions/FirewallPolicyIntrusionSystemMode"
@@ -622,12 +626,12 @@
       },
       "description": "Firewall Policy definition."
     },
-    "FirewallPolicyRuleCollectionGroup": {
+    "FirewallPolicyRuleGroup": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupProperties",
-          "description": "The properties of the firewall policy rule collection group."
+          "$ref": "#/definitions/FirewallPolicyRuleGroupProperties",
+          "description": "The properties of the firewall policy rule group."
         },
         "name": {
           "type": "string",
@@ -649,9 +653,9 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Rule Collection Group resource."
+      "description": "Rule Group resource."
     },
-    "FirewallPolicyRuleCollectionGroupProperties": {
+    "FirewallPolicyRuleGroupProperties": {
       "properties": {
         "priority": {
           "type": "integer",
@@ -660,141 +664,141 @@
           "exclusiveMaximum": false,
           "minimum": 100,
           "exclusiveMinimum": false,
-          "description": "Priority of the Firewall Policy Rule Collection Group resource."
-        },
-        "ruleCollections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FirewallPolicyRuleCollection"
-          },
-          "description": "Group of Firewall Policy rule collections."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the firewall policy rule collection group resource."
-        }
-      },
-      "description": "Properties of the rule collection group."
-    },
-    "FirewallPolicyRuleCollection": {
-      "description": "Properties of the rule collection.",
-      "discriminator": "ruleCollectionType",
-      "required": [
-        "ruleCollectionType"
-      ],
-      "properties": {
-        "ruleCollectionType": {
-          "type": "string",
-          "description": "The type of the rule collection.",
-          "enum": [
-            "FirewallPolicyNatRuleCollection",
-            "FirewallPolicyFilterRuleCollection"
-          ],
-          "x-ms-enum": {
-            "name": "FirewallPolicyRuleCollectionType",
-            "modelAsString": true
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the rule collection."
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "maximum": 65000,
-          "exclusiveMaximum": false,
-          "minimum": 100,
-          "exclusiveMinimum": false,
-          "description": "Priority of the Firewall Policy Rule Collection resource."
-        }
-      }
-    },
-    "FirewallPolicyNatRuleCollection": {
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/FirewallPolicyNatRuleCollectionAction",
-          "description": "The action type of a Nat rule collection."
-        },
-        "translatedAddress": {
-          "type": "string",
-          "description": "The translated address for this NAT rule collection."
-        },
-        "translatedPort": {
-          "type": "string",
-          "description": "The translated port for this NAT rule collection."
-        },
-        "rule": {
-          "$ref": "#/definitions/FirewallPolicyRule",
-          "description": "The match rule for incoming traffic."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/FirewallPolicyRuleCollection"
-        }
-      ],
-      "x-ms-discriminator-value": "FirewallPolicyNatRuleCollection",
-      "description": "Firewall Policy NAT Rule Collection."
-    },
-    "FirewallPolicyFilterRuleCollection": {
-      "properties": {
-        "action": {
-          "$ref": "#/definitions/FirewallPolicyFilterRuleCollectionAction",
-          "description": "The action type of a Filter rule collection."
+          "description": "Priority of the Firewall Policy Rule Group resource."
         },
         "rules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FirewallPolicyRule"
           },
-          "description": "List of rules included in a rule collection."
+          "description": "Group of Firewall Policy rules."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall policy rule group resource."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/FirewallPolicyRuleCollection"
-        }
-      ],
-      "x-ms-discriminator-value": "FirewallPolicyFilterRuleCollection",
-      "description": "Firewall Policy Filter Rule Collection."
+      "description": "Properties of the rule group."
     },
     "FirewallPolicyRule": {
-      "description": "Properties of a rule.",
+      "description": "Properties of the rule.",
       "discriminator": "ruleType",
       "required": [
         "ruleType"
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the rule."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the rule."
-        },
         "ruleType": {
           "type": "string",
-          "description": "Rule Type.",
+          "description": "The type of the rule.",
           "enum": [
-            "ApplicationRule",
-            "NetworkRule",
-            "NatRule"
+            "FirewallPolicyNatRule",
+            "FirewallPolicyFilterRule"
           ],
           "x-ms-enum": {
             "name": "FirewallPolicyRuleType",
             "modelAsString": true
           }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the rule."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 65000,
+          "exclusiveMaximum": false,
+          "minimum": 100,
+          "exclusiveMinimum": false,
+          "description": "Priority of the Firewall Policy Rule resource."
         }
       }
     },
-    "ApplicationRule": {
-      "x-ms-discriminator-value": "ApplicationRule",
+    "FirewallPolicyNatRule": {
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/FirewallPolicyNatRuleAction",
+          "description": "The action type of a Nat rule."
+        },
+        "translatedAddress": {
+          "type": "string",
+          "description": "The translated address for this NAT rule."
+        },
+        "translatedPort": {
+          "type": "string",
+          "description": "The translated port for this NAT rule."
+        },
+        "ruleCondition": {
+          "$ref": "#/definitions/FirewallPolicyRuleCondition",
+          "description": "The match conditions for incoming traffic."
+        }
+      },
       "allOf": [
         {
           "$ref": "#/definitions/FirewallPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FirewallPolicyNatRule",
+      "description": "Firewall Policy NAT Rule."
+    },
+    "FirewallPolicyFilterRule": {
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/FirewallPolicyFilterRuleAction",
+          "description": "The action type of a Filter rule."
+        },
+        "ruleConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyRuleCondition"
+          },
+          "description": "Collection of rule conditions used by a rule."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicyRule"
+        }
+      ],
+      "x-ms-discriminator-value": "FirewallPolicyFilterRule",
+      "description": "Firewall Policy Filter Rule."
+    },
+    "FirewallPolicyRuleCondition": {
+      "description": "Properties of a rule.",
+      "discriminator": "ruleConditionType",
+      "required": [
+        "ruleConditionType"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule condition."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule condition."
+        },
+        "ruleConditionType": {
+          "type": "string",
+          "description": "Rule Condition Type.",
+          "enum": [
+            "ApplicationRuleCondition",
+            "NetworkRuleCondition",
+            "NatRuleCondition"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallPolicyRuleConditionType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationRuleCondition": {
+      "x-ms-discriminator-value": "ApplicationRuleCondition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FirewallPolicyRuleCondition"
         }
       ],
       "properties": {
@@ -815,20 +819,20 @@
         "protocols": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallPolicyRuleApplicationProtocol"
+            "$ref": "#/definitions/FirewallPolicyRuleConditionApplicationProtocol"
           },
           "description": "Array of Application Protocols."
         },
         "targetFqdns": {
           "type": "array",
-          "description": "List of FQDNs for this rule.",
+          "description": "List of FQDNs for this rule condition.",
           "items": {
             "type": "string"
           }
         },
         "fqdnTags": {
           "type": "array",
-          "description": "List of FQDN Tags for this rule.",
+          "description": "List of FQDN Tags for this rule condition.",
           "items": {
             "type": "string"
           }
@@ -841,23 +845,23 @@
           }
         }
       },
-      "description": "Rule of type application."
+      "description": "Rule condition of type application."
     },
-    "NatRule": {
-      "description": "Rule of type nat.",
-      "x-ms-discriminator-value": "NatRule",
+    "NatRuleCondition": {
+      "description": "Rule condition of type nat.",
+      "x-ms-discriminator-value": "NatRuleCondition",
       "allOf": [
         {
-          "$ref": "#/definitions/FirewallPolicyRule"
+          "$ref": "#/definitions/FirewallPolicyRuleCondition"
         }
       ],
       "properties": {
         "ipProtocols": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallPolicyRuleNetworkProtocol"
+            "$ref": "#/definitions/FirewallPolicyRuleConditionNetworkProtocol"
           },
-          "description": "Array of FirewallPolicyRuleNetworkProtocols."
+          "description": "Array of FirewallPolicyRuleConditionNetworkProtocols."
         },
         "sourceAddresses": {
           "type": "array",
@@ -889,21 +893,21 @@
         }
       }
     },
-    "NetworkRule": {
-      "description": "Rule of type network.",
-      "x-ms-discriminator-value": "NetworkRule",
+    "NetworkRuleCondition": {
+      "description": "Rule condition of type network.",
+      "x-ms-discriminator-value": "NetworkRuleCondition",
       "allOf": [
         {
-          "$ref": "#/definitions/FirewallPolicyRule"
+          "$ref": "#/definitions/FirewallPolicyRuleCondition"
         }
       ],
       "properties": {
         "ipProtocols": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallPolicyRuleNetworkProtocol"
+            "$ref": "#/definitions/FirewallPolicyRuleConditionNetworkProtocol"
           },
-          "description": "Array of FirewallPolicyRuleNetworkProtocols."
+          "description": "Array of FirewallPolicyRuleConditionNetworkProtocols."
         },
         "sourceAddresses": {
           "type": "array",
@@ -942,11 +946,11 @@
         }
       }
     },
-    "FirewallPolicyRuleApplicationProtocol": {
+    "FirewallPolicyRuleConditionApplicationProtocol": {
       "properties": {
         "protocolType": {
           "description": "Protocol type.",
-          "$ref": "#/definitions/FirewallPolicyRuleApplicationProtocolType"
+          "$ref": "#/definitions/FirewallPolicyRuleConditionApplicationProtocolType"
         },
         "port": {
           "type": "integer",
@@ -960,39 +964,39 @@
       },
       "description": "Properties of the application rule protocol."
     },
-    "FirewallPolicyRuleApplicationProtocolType": {
+    "FirewallPolicyRuleConditionApplicationProtocolType": {
       "type": "string",
-      "description": "The application protocol type of a Rule.",
+      "description": "The application protocol type of a Rule condition.",
       "enum": [
         "Http",
         "Https"
       ],
       "x-ms-enum": {
-        "name": "FirewallPolicyRuleApplicationProtocolType",
+        "name": "FirewallPolicyRuleConditionApplicationProtocolType",
         "modelAsString": true
       }
     },
-    "FirewallPolicyNatRuleCollectionActionType": {
+    "FirewallPolicyNatRuleActionType": {
       "type": "string",
       "description": "The action type of a rule.",
       "enum": [
         "DNAT"
       ],
       "x-ms-enum": {
-        "name": "FirewallPolicyNatRuleCollectionActionType",
+        "name": "FirewallPolicyNatRuleActionType",
         "modelAsString": true
       }
     },
-    "FirewallPolicyNatRuleCollectionAction": {
+    "FirewallPolicyNatRuleAction": {
       "properties": {
         "type": {
           "description": "The type of action.",
-          "$ref": "#/definitions/FirewallPolicyNatRuleCollectionActionType"
+          "$ref": "#/definitions/FirewallPolicyNatRuleActionType"
         }
       },
-      "description": "Properties of the FirewallPolicyNatRuleCollectionAction."
+      "description": "Properties of the FirewallPolicyNatRuleAction."
     },
-    "FirewallPolicyFilterRuleCollectionActionType": {
+    "FirewallPolicyFilterRuleActionType": {
       "type": "string",
       "description": "The action type of a rule.",
       "enum": [
@@ -1000,22 +1004,22 @@
         "Deny"
       ],
       "x-ms-enum": {
-        "name": "FirewallPolicyFilterRuleCollectionActionType",
+        "name": "FirewallPolicyFilterRuleActionType",
         "modelAsString": true
       }
     },
-    "FirewallPolicyFilterRuleCollectionAction": {
+    "FirewallPolicyFilterRuleAction": {
       "properties": {
         "type": {
           "description": "The type of action.",
-          "$ref": "#/definitions/FirewallPolicyFilterRuleCollectionActionType"
+          "$ref": "#/definitions/FirewallPolicyFilterRuleActionType"
         }
       },
-      "description": "Properties of the FirewallPolicyFilterRuleCollectionAction."
+      "description": "Properties of the FirewallPolicyFilterRuleAction."
     },
-    "FirewallPolicyRuleNetworkProtocol": {
+    "FirewallPolicyRuleConditionNetworkProtocol": {
       "type": "string",
-      "description": "The Network protocol of a Rule.",
+      "description": "The Network protocol of a Rule condition.",
       "enum": [
         "TCP",
         "UDP",
@@ -1023,7 +1027,7 @@
         "ICMP"
       ],
       "x-ms-enum": {
-        "name": "FirewallPolicyRuleNetworkProtocol",
+        "name": "FirewallPolicyRuleConditionNetworkProtocol",
         "modelAsString": true
       }
     },
@@ -1043,21 +1047,21 @@
       },
       "description": "Response for ListFirewallPolicies API service call."
     },
-    "FirewallPolicyRuleCollectionGroupListResult": {
+    "FirewallPolicyRuleGroupListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FirewallPolicyRuleCollectionGroup"
+            "$ref": "#/definitions/FirewallPolicyRuleGroup"
           },
-          "description": "List of FirewallPolicyRuleCollectionGroups in a FirewallPolicy."
+          "description": "List of FirewallPolicyRuleGroups in a FirewallPolicy."
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results."
         }
       },
-      "description": "Response for ListFirewallPolicyRuleCollectionGroups API service call."
+      "description": "Response for ListFirewallPolicyRuleGroups API service call."
     },
     "FirewallPolicyIntrusionSystemMode": {
       "type": "string",
@@ -1069,6 +1073,26 @@
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionSystemMode",
         "modelAsString": true
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "description": "ThreatIntel Whitelist for Firewall Policy.",
+      "x-ms-discriminator-value": "FirewallPolicyThreatIntelWhitelist",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP addresses for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }
