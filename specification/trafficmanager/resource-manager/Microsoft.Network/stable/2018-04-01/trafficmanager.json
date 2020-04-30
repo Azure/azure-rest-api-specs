@@ -56,7 +56,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             },
             "description": "The Traffic Manager endpoint parameters supplied to the Update operation."
           },
@@ -71,7 +71,7 @@
           "200": {
             "description": "The updated Traffic Manager endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             }
           },
           "default": {
@@ -133,7 +133,7 @@
           "200": {
             "description": "The Traffic Manager endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             }
           },
           "default": {
@@ -195,7 +195,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             },
             "description": "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation."
           },
@@ -210,13 +210,13 @@
           "200": {
             "description": "The created or updated Endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             }
           },
           "201": {
             "description": "The created or updated Endpoint.",
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointResource"
             }
           },
           "default": {
@@ -1137,7 +1137,7 @@
       },
       "description": "Class which is a sparse representation of a Traffic Manager endpoint."
     },
-    "Endpoint": {
+    "EndpointResource": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1150,6 +1150,20 @@
           "$ref": "#/definitions/ProxyResource"
         }
       ],
+      "description": "Class representing a Traffic Manager endpoint."
+    },
+    "Endpoint": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      },
       "description": "Class representing a Traffic Manager endpoint."
     },
     "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
