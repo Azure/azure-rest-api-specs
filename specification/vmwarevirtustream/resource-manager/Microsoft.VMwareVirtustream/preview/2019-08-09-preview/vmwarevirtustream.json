@@ -1030,6 +1030,10 @@
         }
       ],
       "properties": {
+        "sku": {
+          "description": "The private cloud SKU",
+          "$ref": "#/definitions/Sku"
+        },
         "properties": {
           "description": "The properties of a private cloud resource",
           "$ref": "#/definitions/PrivateCloudProperties"
@@ -1246,6 +1250,18 @@
           "readOnly": true
         }
       }
+    },
+    "Sku": {
+      "description": "The resource model definition representing SKU",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU."
+        }
+      },
+      "required": [
+        "name"
+      ]
     }
   }
 }
