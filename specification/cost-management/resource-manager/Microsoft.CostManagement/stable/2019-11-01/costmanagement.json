@@ -314,7 +314,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }        
+        }
       }
     },
     "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/alerts": {
@@ -432,7 +432,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }        
+        }
       }
     },
     "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/forecast": {
@@ -1171,7 +1171,7 @@
         }
       }
     },
-    "AlertsResult":{
+    "AlertsResult": {
       "description": "Result of alerts.",
       "type": "object",
       "properties": {
@@ -1195,11 +1195,11 @@
       "type": "object",
       "allOf": [
         {
-        "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-        "properties":{
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AlertProperties",
           "title": "Alert properties"
@@ -1208,8 +1208,8 @@
     },
     "AlertProperties": {
       "type": "object",
-      "properties":{
-        "definition":{
+      "properties": {
+        "definition": {
           "description": "defines the type of alert",
           "type": "object",
           "properties": {
@@ -1218,7 +1218,7 @@
               "type": "string"
             },
             "category": {
-              "description" :"Alert category",
+              "description": "Alert category",
               "type": "string"
             },
             "criteria": {
@@ -1271,7 +1271,7 @@
               "type": "object",
               "properties": {}
             },
-            "threshold":{
+            "threshold": {
               "description": "notification threshold percentage as a decimal which activated this alert",
               "type": "number",
               "format": "decimal"
@@ -1315,7 +1315,7 @@
                 "type": "string"
               }
             },
-            "overridingAlert":{
+            "overridingAlert": {
               "description": "overriding alert",
               "type": "string"
             }
@@ -1493,11 +1493,11 @@
           "description": "Has definition for data in this forecast.",
           "$ref": "#/definitions/QueryDataset"
         },
-        "includeActualCost":{
+        "includeActualCost": {
           "description": "a boolean determining if actualCost will be included",
           "type": "boolean"
         },
-        "includeFreshPartialCost":{
+        "includeFreshPartialCost": {
           "description": "a boolean determining if FreshPartialCost will be included",
           "type": "boolean"
         }
