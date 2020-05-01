@@ -5,6 +5,169 @@
         "version": "2020-02-01-preview"
     },
     "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listApiKeys": {
+            "post": {
+                "tags": [
+                    "ApiKey"
+                ],
+                "summary": "List the api keys for a given monitor resource.",
+                "operationId": "ApiKeys_List",
+                "x-ms-examples": {
+                    "ApiKeys_List": {
+                        "$ref": "./examples/ApiKeys_List.json"
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogApiKeyListResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/getDefaultKey": {
+            "post": {
+                "tags": [
+                    "ApiKey"
+                ],
+                "summary": "Get the default api key.",
+                "operationId": "ApiKeys_GetDefaultKey",
+                "x-ms-examples": {
+                    "ApiKeys_GetDefaultKey": {
+                        "$ref": "./examples/ApiKeys_GetDefaultKey.json"
+                    }
+                },
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogApiKey"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/setDefaultKey": {
+            "post": {
+                "tags": [
+                    "ApiKey"
+                ],
+                "summary": "Set the default api key.",
+                "operationId": "ApiKeys_SetDefaultKey",
+                "x-ms-examples": {
+                    "ApiKeys_SetDefaultKey": {
+                        "$ref": "./examples/ApiKeys_SetDefaultKey.json"
+                    }
+                },
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/DatadogApiKey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.Datadog/operations": {
             "get": {
                 "tags": [
@@ -526,6 +689,47 @@
         }
     },
     "definitions": {
+        "DatadogApiKey": {
+            "required": [
+                "key"
+            ],
+            "type": "object",
+            "properties": {
+                "created_by": {
+                    "description": "The user that created the API key.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The name of the API key.",
+                    "type": "string"
+                },
+                "key": {
+                    "description": "The value of the API key.",
+                    "type": "string"
+                },
+                "created": {
+                    "description": "The time of creation of the API key.",
+                    "type": "string"
+                }
+            }
+        },
+        "DatadogApiKeyListResponse": {
+            "description": "Response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of a list operation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DatadogApiKey"
+                    }
+                },
+                "nextLink": {
+                    "description": "Link to the next set of results, if any.",
+                    "type": "string"
+                }
+            }
+        },
         "ErrorResponseBody": {
             "type": "object",
             "properties": {
@@ -672,6 +876,33 @@
                 }
             }
         },
+        "ManagedIdentityTypes": {
+            "enum": [
+                "SystemAssigned"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+                "modelAsString": true
+            }
+        },
+        "IdentityProperties": {
+            "type": "object",
+            "properties": {
+                "principalId": {
+                    "description": "The identity Id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "tenantId": {
+                    "description": "The tenant ID of resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "$ref": "#/definitions/ManagedIdentityTypes"
+                }
+            }
+        },
         "DatadogMonitorResource": {
             "required": [
                 "location"
@@ -695,6 +926,9 @@
                 },
                 "properties": {
                     "$ref": "#/definitions/MonitorProperties"
+                },
+                "identity": {
+                    "$ref": "#/definitions/IdentityProperties"
                 },
                 "tags": {
                     "type": "object",
