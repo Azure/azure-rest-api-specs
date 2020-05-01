@@ -1,11 +1,11 @@
-# VMware Solution by Virtustream
+# VMware Solution
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for VMware Solution by Virtustream.
+This is the AutoRest configuration file for VMware Solution.
 
 ## Getting Started
-To build the SDK for VMware Solution by Virtustream, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for VMware Solution, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -17,7 +17,7 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information
-These are the global settings for the VMware Solution by Virtustream API.
+These are the global settings for the VMware Solution API.
 
 ``` yaml
 openapi-type: arm
@@ -30,7 +30,7 @@ These settings apply only when `--tag=package-2019-08-09-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-08-09-preview'
 input-file:
-- Microsoft.VMwareVirtustream/preview/2019-08-09-preview/vmwarevirtustream.json
+- Microsoft.AVS/preview/2019-08-09-preview/vmware.json
 ```
 
 ---
@@ -71,7 +71,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.VMwareVirtustream/preview/2019-08-09-preview/vmwarevirtustream.json
+  - $(this-folder)/Microsoft.AVS/preview/2019-08-09-preview/vmware.json
 
 ```
 

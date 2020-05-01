@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure VMware Solution by Virtustream API",
-    "description": "Azure VMware Solution by Virtustream API",
+    "title": "Azure VMware Solution API",
+    "description": "Azure VMware Solution API",
     "version": "2019-08-09-preview"
   },
   "host": "management.azure.com",
@@ -72,7 +72,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of Azure VMware Solution by Virtustream API to be used with the client request"
+      "description": "Version of Azure VMware Solution API to be used with the client request"
     },
     "privateCloudName": {
       "name": "privateCloudName",
@@ -92,7 +92,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.VMwareVirtustream/operations": {
+    "/providers/Microsoft.AVS/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/locations/{location}/checkQuotaAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/locations/{location}/checkQuotaAvailability": {
       "post": {
         "tags": [
           "Quotas"
@@ -171,7 +171,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds": {
       "get": {
         "operationId": "PrivateClouds_List",
         "x-ms-pageable": {
@@ -213,7 +213,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AVS/privateClouds": {
       "get": {
         "operationId": "PrivateClouds_ListInSubscription",
         "x-ms-pageable": {
@@ -252,7 +252,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}": {
       "get": {
         "operationId": "PrivateClouds_Get",
         "tags": [
@@ -450,7 +450,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters": {
       "get": {
         "operationId": "Clusters_List",
         "x-ms-pageable": {
@@ -495,7 +495,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}": {
       "get": {
         "operationId": "Clusters_Get",
         "tags": [
@@ -709,7 +709,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/listAdminCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/listAdminCredentials": {
       "post": {
         "operationId": "PrivateClouds_ListAdminCredentials",
         "tags": [

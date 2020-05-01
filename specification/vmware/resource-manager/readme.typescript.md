@@ -5,10 +5,10 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ```yaml $(typescript)
 typescript:
-  package-version: 0.2.0
+  package-version: 0.3.0
   azure-arm: true
-  package-name: "@azure/arm-vmwarevirtustream"
-  output-folder: "$(typescript-sdks-folder)/sdk/vmwarevirtustream/arm-vmwarevirtustream"
+  package-name: "@azure/arm-vmware"
+  output-folder: "$(typescript-sdks-folder)/sdk/vmware/arm-vmware"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```

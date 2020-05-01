@@ -7,21 +7,21 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 ```yaml $(python)
 python-mode: create
 python:
-  package-version: 0.2.0
+  package-version: 0.3.0
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.vmwarevirtustream
-  package-name: azure-mgmt-vmwarevirtustream
+  namespace: azure.mgmt.vmware
+  package-name: azure-mgmt-vmware
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmwarevirtustream/azure/mgmt/vmwarevirtustream
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmware/azure/mgmt/vmware
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmwarevirtustream
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmware
 ```
