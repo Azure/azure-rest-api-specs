@@ -2278,33 +2278,42 @@
       "properties": {
         "version": {
           "type": "string",
-          "description": "null"
+          "description": "SQL Server version."
         },
         "edition": {
           "type": "string",
-          "description": "null"
+          "description": "SQL Server edition."
         },
         "containerResourceId": {
           "type": "string",
-          "description": "null"
+          "description": "ARM Resource id of the container resource (Azure Arc for Servers)"
         },
         "createTime": {
           "type": "string",
-          "description": "null"
+          "description": "The time when the resource was created."
         },
         "updateTime": {
           "type": "string",
-          "description": "null"
+          "description": "The time when the resource was last updated."
         },
         "vCore": {
           "type": "string",
-          "description": "null"
+          "description": "The number of logical processors used by the SQL Server instance."
         },
         "status": {
           "type": "string",
-          "description": "null"
+          "description": "The cloud connectivity status."
         }
-      }
+      },
+      "required": [
+        "version",
+        "edition",
+        "containerResourceId",
+        "createTime",
+        "updateTime",
+        "vCore",
+        "status"
+      ]
     },
     "SqlServerInstance": {
       "description": "A SqlServerInstance.",
