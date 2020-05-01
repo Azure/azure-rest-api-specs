@@ -4185,13 +4185,6 @@
           "$ref": "#/definitions/VirtualHubRouteTable",
           "description": "The routeTable associated with this virtual hub."
         },
-        "routeTables": {
-          "type": "array",
-          "description": "List of all RouteTables associated with this VirtualHub.",
-          "items": {
-            "$ref": "#/definitions/HubRouteTable"
-          }
-        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -4733,11 +4726,15 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "RouteTable Resource."
+      "description": "RouteTable resource in a virtual hub."
     },
     "HubRoute": {
       "required": [
-        "name"
+        "name",
+        "destinationType",
+        "destinations",
+        "nextHopType",
+        "nextHop"
       ],
       "properties": {
         "name": {
@@ -4746,7 +4743,7 @@
         },
         "destinationType": {
           "type": "string",
-          "description": "The type of destinations."
+          "description": "The type of destinations (eg: CIDR, ResourceId, Service)."
         },
         "destinations": {
           "type": "array",
@@ -4757,7 +4754,7 @@
         },
         "nextHopType": {
           "type": "string",
-          "description": "The type of next hops."
+          "description": "The type of next hop (eg: ResourceId)."
         },
         "nextHop": {
           "type": "string",
