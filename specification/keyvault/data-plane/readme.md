@@ -283,8 +283,16 @@ directive:
     reason: Merely refactored existing definitions into new files.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
+    where: $.definitions.KeyBundle.properties.release_policy
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
     where: $.definitions.KeyCreateParameters.properties.key_size
     reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.public_exponent
+    reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
     where: $.definitions.KeyCreateParameters.properties.key_ops
