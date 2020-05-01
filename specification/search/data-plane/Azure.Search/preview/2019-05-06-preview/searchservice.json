@@ -52,7 +52,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             },
             "description": "The definition of the datasource to create or update."
           },
@@ -77,13 +77,13 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           },
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           },
           "default": {
@@ -179,7 +179,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           },
           "default": {
@@ -257,7 +257,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             },
             "description": "The definition of the datasource to create."
           },
@@ -273,7 +273,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/DataSource"
+              "$ref": "#/definitions/SearchIndexerDataSource"
             }
           },
           "default": {
@@ -401,7 +401,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             },
             "description": "The definition of the indexer to create or update."
           },
@@ -426,13 +426,13 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             }
           },
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             }
           },
           "default": {
@@ -528,7 +528,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             }
           },
           "default": {
@@ -606,7 +606,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             },
             "description": "The definition of the indexer to create."
           },
@@ -622,7 +622,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Indexer"
+              "$ref": "#/definitions/SearchIndexer"
             }
           },
           "default": {
@@ -669,7 +669,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/IndexerExecutionInfo"
+              "$ref": "#/definitions/SearchIndexerStatus"
             }
           },
           "default": {
@@ -709,7 +709,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             },
             "description": "The skillset containing one or more skills to create or update in a search service."
           },
@@ -734,13 +734,13 @@
           "200": {
             "description": "The skillset is successfully updated.",
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           },
           "201": {
             "description": "The skillset is successfully created.",
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           },
           "default": {
@@ -836,7 +836,7 @@
           "200": {
             "description": "The skillset is successfully returned.",
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           },
           "default": {
@@ -914,7 +914,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             },
             "description": "The skillset containing one or more skills to create in a search service."
           },
@@ -930,7 +930,7 @@
           "201": {
             "description": "The skillset is successfully created.",
             "schema": {
-              "$ref": "#/definitions/Skillset"
+              "$ref": "#/definitions/SearchIndexerSkillset"
             }
           },
           "default": {
@@ -1224,7 +1224,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             },
             "description": "The definition of the index to create."
           },
@@ -1240,7 +1240,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             }
           },
           "default": {
@@ -1328,7 +1328,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             },
             "description": "The definition of the index to create or update."
           },
@@ -1360,13 +1360,13 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             }
           },
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             }
           },
           "default": {
@@ -1462,7 +1462,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Index"
+              "$ref": "#/definitions/SearchIndex"
             }
           },
           "default": {
@@ -1623,11 +1623,11 @@
           "description": "The text to break into tokens."
         },
         "analyzer": {
-          "$ref": "#/definitions/AnalyzerName",
+          "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer to use to break the given text. If this parameter is not specified, you must specify a tokenizer instead. The tokenizer and analyzer parameters are mutually exclusive."
         },
         "tokenizer": {
-          "$ref": "#/definitions/TokenizerName",
+          "$ref": "#/definitions/LexicalTokenizerName",
           "description": "The name of the tokenizer to use to break the given text. If this parameter is not specified, you must specify an analyzer instead. The tokenizer and analyzer parameters are mutually exclusive."
         },
         "tokenFilters": {
@@ -1657,7 +1657,7 @@
         "tokens": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TokenInfo"
+            "$ref": "#/definitions/AnalyzedTokenInfo"
           },
           "description": "The list of tokens returned by the analyzer specified in the request."
         }
@@ -1667,7 +1667,7 @@
       ],
       "description": "The result of testing an analyzer on text."
     },
-    "TokenInfo": {
+    "AnalyzedTokenInfo": {
       "properties": {
         "token": {
           "type": "string",
@@ -1704,7 +1704,7 @@
       ],
       "description": "Information about a token returned by an analyzer."
     },
-    "AnalyzerName": {
+    "LexicalAnalyzerName": {
       "type": "string",
       "enum": [
         "ar.microsoft",
@@ -1802,7 +1802,7 @@
         "whitespace"
       ],
       "x-ms-enum": {
-        "name": "AnalyzerName",
+        "name": "LexicalAnalyzerName",
         "modelAsString": true,
         "values": [
           {
@@ -2277,7 +2277,7 @@
         "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
       }
     },
-    "TokenizerName": {
+    "LexicalTokenizerName": {
       "type": "string",
       "enum": [
         "classic",
@@ -2295,7 +2295,7 @@
         "whitespace"
       ],
       "x-ms-enum": {
-        "name": "TokenizerName",
+        "name": "LexicalTokenizerName",
         "modelAsString": true,
         "values": [
           {
@@ -2430,7 +2430,7 @@
           {
             "value": "cjk_bigram",
             "name": "CjkBigram",
-            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
+            "description": "Forms bigrams of CJK terms that are generated from the standard tokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
           },
           {
             "value": "cjk_width",
@@ -2673,7 +2673,7 @@
         "url": "http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary"
       }
     },
-    "DataType": {
+    "SearchFieldDataType": {
       "type": "string",
       "enum": [
         "Edm.String",
@@ -2686,7 +2686,7 @@
         "Edm.ComplexType"
       ],
       "x-ms-enum": {
-        "name": "DataType",
+        "name": "SearchFieldDataType",
         "modelAsString": true,
         "values": [
           {
@@ -2733,7 +2733,7 @@
       },
       "description": "Defines the data type of a field in a search index."
     },
-    "Analyzer": {
+    "LexicalAnalyzer": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -2758,12 +2758,12 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.CustomAnalyzer",
       "allOf": [
         {
-          "$ref": "#/definitions/Analyzer"
+          "$ref": "#/definitions/LexicalAnalyzer"
         }
       ],
       "properties": {
         "tokenizer": {
-          "$ref": "#/definitions/TokenizerName",
+          "$ref": "#/definitions/LexicalTokenizerName",
           "description": "The name of the tokenizer to use to divide continuous text into a sequence of tokens, such as breaking a sentence into words."
         },
         "tokenFilters": {
@@ -2792,7 +2792,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternAnalyzer",
       "allOf": [
         {
-          "$ref": "#/definitions/Analyzer"
+          "$ref": "#/definitions/LexicalAnalyzer"
         }
       ],
       "properties": {
@@ -2824,11 +2824,11 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/miscellaneous/PatternAnalyzer.html"
       }
     },
-    "StandardAnalyzer": {
+    "LuceneStandardAnalyzer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardAnalyzer",
       "allOf": [
         {
-          "$ref": "#/definitions/Analyzer"
+          "$ref": "#/definitions/LexicalAnalyzer"
         }
       ],
       "properties": {
@@ -2856,7 +2856,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StopAnalyzer",
       "allOf": [
         {
-          "$ref": "#/definitions/Analyzer"
+          "$ref": "#/definitions/LexicalAnalyzer"
         }
       ],
       "properties": {
@@ -2873,7 +2873,7 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/StopAnalyzer.html"
       }
     },
-    "Tokenizer": {
+    "LexicalTokenizer": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -2901,7 +2901,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.ClassicTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -2964,7 +2964,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.EdgeNGramTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3000,7 +3000,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3021,7 +3021,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.KeywordTokenizerV2",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3306,7 +3306,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3615,7 +3615,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3642,7 +3642,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.NGramTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3678,7 +3678,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PathHierarchyTokenizerV2",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3724,7 +3724,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.PatternTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3749,11 +3749,11 @@
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/pattern/PatternTokenizer.html"
       }
     },
-    "StandardTokenizer": {
+    "LuceneStandardTokenizer": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3770,11 +3770,11 @@
       },
       "x-az-search-deprecated": true
     },
-    "StandardTokenizerV2": {
+    "LuceneStandardTokenizerV2": {
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.StandardTokenizerV2",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3795,7 +3795,7 @@
       "x-ms-discriminator-value": "#Microsoft.Azure.Search.UaxUrlEmailTokenizer",
       "allOf": [
         {
-          "$ref": "#/definitions/Tokenizer"
+          "$ref": "#/definitions/LexicalTokenizer"
         }
       ],
       "properties": {
@@ -3913,7 +3913,7 @@
           "description": "A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false."
         }
       },
-      "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer. This token filter is implemented using Apache Lucene.",
+      "description": "Forms bigrams of CJK terms that are generated from the standard tokenizer. This token filter is implemented using Apache Lucene.",
       "externalDocs": {
         "url": "http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/cjk/CJKBigramFilter.html"
       }
@@ -4181,6 +4181,7 @@
       ],
       "properties": {
         "min": {
+          "x-ms-client-name": "minLength",
           "type": "integer",
           "format": "int32",
           "default": 0,
@@ -4188,6 +4189,7 @@
           "description": "The minimum length in characters. Default is 0. Maximum is 300. Must be less than the value of max."
         },
         "max": {
+          "x-ms-client-name": "maxLength",
           "type": "integer",
           "format": "int32",
           "default": 300,
@@ -5538,7 +5540,7 @@
       },
       "description": "Represents credentials that can be used to connect to a datasource."
     },
-    "DataContainer": {
+    "SearchIndexerDataContainer": {
       "properties": {
         "name": {
           "type": "string",
@@ -5626,7 +5628,7 @@
         }
       }
     },
-    "DataSourceType": {
+    "SearchIndexerDataSourceType": {
       "type": "string",
       "enum": [
         "azuresql",
@@ -5636,7 +5638,7 @@
         "mysql"
       ],
       "x-ms-enum": {
-        "name": "DataSourceType",
+        "name": "SearchIndexerDataSourceType",
         "modelAsString": true,
         "values": [
           {
@@ -5668,7 +5670,7 @@
       },
       "description": "Defines the type of a datasource."
     },
-    "DataSource": {
+    "SearchIndexerDataSource": {
       "properties": {
         "name": {
           "externalDocs": {
@@ -5682,7 +5684,7 @@
           "description": "The description of the datasource."
         },
         "type": {
-          "$ref": "#/definitions/DataSourceType",
+          "$ref": "#/definitions/SearchIndexerDataSourceType",
           "description": "The type of the datasource."
         },
         "credentials": {
@@ -5690,7 +5692,7 @@
           "description": "Credentials for the datasource."
         },
         "container": {
-          "$ref": "#/definitions/DataContainer",
+          "$ref": "#/definitions/SearchIndexerDataContainer",
           "description": "The data container for the datasource."
         },
         "dataChangeDetectionPolicy": {
@@ -5704,7 +5706,7 @@
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
-          "description": "The ETag of the DataSource."
+          "description": "The ETag of the data source."
         }
       },
       "required": [
@@ -5722,7 +5724,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/DataSource"
+            "$ref": "#/definitions/SearchIndexerDataSource"
           },
           "description": "The datasources in the Search service."
         }
@@ -5824,7 +5826,7 @@
         "url": "https://docs.microsoft.com/azure/search/search-indexer-field-mappings"
       }
     },
-    "Indexer": {
+    "SearchIndexer": {
       "properties": {
         "name": {
           "externalDocs": {
@@ -5886,7 +5888,7 @@
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
-          "description": "The ETag of the Indexer."
+          "description": "The ETag of the indexer."
         }
       },
       "required": [
@@ -5906,7 +5908,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Indexer"
+            "$ref": "#/definitions/SearchIndexer"
           },
           "description": "The indexers in the Search service."
         }
@@ -5916,7 +5918,7 @@
       ],
       "description": "Response from a List Indexers request. If successful, it includes the full definitions of all indexers."
     },
-    "ItemError": {
+    "SearchIndexerError": {
       "properties": {
         "key": {
           "type": "string",
@@ -5957,7 +5959,7 @@
       ],
       "description": "Represents an item- or document-level indexing error."
     },
-    "ItemWarning": {
+    "SearchIndexerWarning": {
       "properties": {
         "key": {
           "type": "string",
@@ -6018,7 +6020,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ItemError"
+            "$ref": "#/definitions/SearchIndexerError"
           },
           "description": "The item-level indexing errors."
         },
@@ -6026,7 +6028,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/ItemWarning"
+            "$ref": "#/definitions/SearchIndexerWarning"
           },
           "description": "The item-level indexing warnings."
         },
@@ -6103,7 +6105,7 @@
       "x-nullable": false,
       "description": "Represents the status of an individual indexer execution."
     },
-    "IndexerExecutionInfo": {
+    "SearchIndexerStatus": {
       "properties": {
         "status": {
           "$ref": "#/definitions/IndexerStatus",
@@ -6124,7 +6126,7 @@
           "description": "History of the recent indexer executions, sorted in reverse chronological order."
         },
         "limits": {
-          "$ref": "#/definitions/IndexerLimits",
+          "$ref": "#/definitions/SearchIndexerLimits",
           "readOnly": true,
           "description": "The execution limits for the indexer."
         }
@@ -6167,7 +6169,7 @@
       "x-nullable": false,
       "description": "Represents the overall indexer status."
     },
-    "IndexerLimits": {
+    "SearchIndexerLimits": {
       "properties": {
         "maxRunTime": {
           "type": "string",
@@ -6189,7 +6191,7 @@
         }
       }
     },
-    "Field": {
+    "SearchField": {
       "properties": {
         "name": {
           "type": "string",
@@ -6199,7 +6201,7 @@
           }
         },
         "type": {
-          "$ref": "#/definitions/DataType",
+          "$ref": "#/definitions/SearchFieldDataType",
           "description": "The data type of the field.",
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/supported-data-types"
@@ -6233,21 +6235,21 @@
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
-          "$ref": "#/definitions/AnalyzerName",
+          "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
         },
         "searchAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
-          "$ref": "#/definitions/AnalyzerName",
+          "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. This analyzer can be updated on an existing field. Must be null for complex fields."
         },
         "indexAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
-          "$ref": "#/definitions/AnalyzerName",
+          "$ref": "#/definitions/LexicalAnalyzerName",
           "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option.  This property cannot be set to the name of a language analyzer; use the analyzer property instead if you need a language analyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
         },
         "synonymMaps": {
@@ -6263,7 +6265,7 @@
         "fields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Field"
+            "$ref": "#/definitions/SearchField"
           },
           "description": "A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields."
         }
@@ -6654,7 +6656,7 @@
       ],
       "description": "Defines how the Suggest API should apply to a group of fields in the index."
     },
-    "Index": {
+    "SearchIndex": {
       "properties": {
         "name": {
           "externalDocs": {
@@ -6666,7 +6668,7 @@
         "fields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Field"
+            "$ref": "#/definitions/SearchField"
           },
           "description": "The fields of the index."
         },
@@ -6695,7 +6697,7 @@
         "analyzers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Analyzer"
+            "$ref": "#/definitions/LexicalAnalyzer"
           },
           "description": "The analyzers for the index.",
           "externalDocs": {
@@ -6705,7 +6707,7 @@
         "tokenizers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Tokenizer"
+            "$ref": "#/definitions/LexicalTokenizer"
           },
           "description": "The tokenizers for the index.",
           "externalDocs": {
@@ -6733,7 +6735,7 @@
           }
         },
         "encryptionKey": {
-          "$ref": "#/definitions/EncryptionKey",
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
@@ -6788,7 +6790,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Index"
+            "$ref": "#/definitions/SearchIndex"
           },
           "description": "The indexes in the Search service."
         }
@@ -6798,7 +6800,7 @@
       ],
       "description": "Response from a List Indexes request. If successful, it includes the full definitions of all indexes."
     },
-    "Skillset": {
+    "SearchIndexerSkillset": {
       "properties": {
         "name": {
           "type": "string",
@@ -6811,7 +6813,7 @@
         "skills": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Skill"
+            "$ref": "#/definitions/SearchIndexerSkill"
           },
           "description": "A list of skills in the skillset."
         },
@@ -6880,7 +6882,7 @@
         "key"
       ]
     },
-    "Skill": {
+    "SearchIndexerSkill": {
       "discriminator": "@odata.type",
       "properties": {
         "@odata.type": {
@@ -6974,7 +6976,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "externalDocs": {
@@ -6986,7 +6988,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7010,7 +7012,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Vision.OcrSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7038,7 +7040,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Vision.ImageAnalysisSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7072,7 +7074,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.LanguageDetectionSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "externalDocs": {
@@ -7084,7 +7086,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Util.ShaperSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "externalDocs": {
@@ -7096,7 +7098,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.MergeSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7120,7 +7122,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7157,7 +7159,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7175,7 +7177,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SplitSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7204,7 +7206,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.TranslationSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7233,7 +7235,7 @@
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
       "allOf": [
         {
-          "$ref": "#/definitions/Skill"
+          "$ref": "#/definitions/SearchIndexerSkill"
         }
       ],
       "properties": {
@@ -7289,7 +7291,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Skillset"
+            "$ref": "#/definitions/SearchIndexerSkillset"
           },
           "description": "The skillsets defined in the Search service."
         }
@@ -7297,7 +7299,7 @@
       "required": [
         "value"
       ],
-      "description": "Response from a list Skillset request. If successful, it includes the full definitions of all skillsets."
+      "description": "Response from a list skillset request. If successful, it includes the full definitions of all skillsets."
     },
     "TextExtractionAlgorithm": {
       "type": "string",
@@ -8383,7 +8385,7 @@
           }
         },
         "encryptionKey": {
-          "$ref": "#/definitions/EncryptionKey",
+          "$ref": "#/definitions/SearchResourceEncryptionKey",
           "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Cognitive Search. Once you have encrypted your data, it will always remain encrypted. Azure Cognitive Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
@@ -8419,17 +8421,20 @@
       ],
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
     },
-    "EncryptionKey": {
+    "SearchResourceEncryptionKey": {
       "properties": {
         "keyVaultKeyName": {
+          "x-ms-client-name": "keyName",
           "type": "string",
           "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultKeyVersion": {
+          "x-ms-client-name": "keyVersion",
           "type": "string",
           "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
         },
         "keyVaultUri": {
+          "x-ms-client-name": "vaultUri",
           "type": "string",
           "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
         },
