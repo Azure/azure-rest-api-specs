@@ -295,6 +295,10 @@ directive:
     reason: Consistency with other properties.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
+    where: $.definitions.KeyCreateParameters.properties.release_policy
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
     where: $.definitions.KeyCreateParameters.properties.key_ops
     reason: Merely refactored existing definitions into new files.
   - suppress: DefinitionsPropertiesNamesCamelCase
@@ -303,8 +307,16 @@ directive:
     reason: Merely refactored existing definitions into new files.
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: keys.json
+    where: $.definitions.KeyImportParameters.properties.release_policy
+    reason: Consistency with other properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
     where: $.definitions.KeyUpdateParameters.properties.key_ops
     reason: Merely refactored existing definitions into new files.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: keys.json
+    where: $.definitions.KeyUpdateParameters.properties.release_policy
+    reason: Consistency with other properties.
   - suppress: MISSING_REQUIRED_PARAMETER
     from: certificates.json
     where: $..parameters[?(@.name=='vaultBaseUrl')]

@@ -1086,12 +1086,21 @@
     "KeyReleasePolicy": {
       "properties": {
         "version": {
-          "x-ms-client-name": "schemaVersion",
           "description": "key release policy version",
           "type": "string",
           "enum": [
             "0.2"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "KeyReleasePolicyVersion",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "0.2",
+                "description": "Schema version 0.2"
+              }
+            ]
+          }
         },
         "anyOf": {
           "type": "array",
@@ -1792,6 +1801,10 @@
             "type": "string"
           },
           "description": "Application specific metadata in the form of key-value pairs."
+        },
+        "release_policy": {
+          "$ref": "#/definitions/KeyReleasePolicy",
+          "description": "The policy rules under which the key can be exported."
         }
       },
       "description": "The key update parameters."
