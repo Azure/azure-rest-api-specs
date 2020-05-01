@@ -392,7 +392,18 @@
     "ComplianceState": {
       "description": "The compliance state of the configuration.",
       "type": "string",
-      "readOnly": true
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "complianceState",
+        "modelAsString": true
+      },
+      "enum": [
+        "Pending",
+        "Compliant",
+        "Noncompliant",
+        "Installed",
+        "Failed"
+      ]
     },
     "ChartVersion": {
       "description": "Version of the operator Helm chart.",
