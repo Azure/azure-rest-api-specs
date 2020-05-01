@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "accountName": "ddb1-failover",
+    "resourceGroupName": "rg1",
+    "api-version": "2016-03-19",
+    "subscriptionId": "subid",
+    "failoverParameters": {
+      "failoverPolicies": [
+        {
+          "locationName": "eastus",
+          "failoverPriority": 0
+        },
+        {
+          "locationName": "westus",
+          "failoverPriority": 1
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {},
+    "204": {}
+  }
+}

@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-eventhub"
   output-folder: "$(typescript-sdks-folder)/sdk/eventhub/arm-eventhub"
+  clear-output-folder: true
   generate-metadata: true
 ```

@@ -5,7 +5,7 @@
     "title": "NetworkAdminManagementClient",
     "version": "2015-06-15"
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -75,6 +75,102 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Network.Admin/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported locations.": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of supported locations",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "OnPremLocations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationsList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/locations/{location}/operationResults": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of operation results for a location": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of operation results for a location",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "LocationsOperationResults_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Network.Admin/locations/{location}/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of support REST operations.": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Returns the list of support REST operations.",
+        "tags": [
+          "Network"
+        ],
+        "operationId": "LocationsOperations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -127,6 +223,26 @@
         }
       }
     },
+    "Location": {
+      "description": "Describes the supported Location",
+      "properties": {
+        "name": {
+          "description": "The name of the location the operation is being held.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "Describes results of a given operation",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Display": {
       "description": "Contains the localized display information for this particular operation / action.",
       "properties": {
@@ -152,6 +268,24 @@
         }
       }
     },
+    "LocationsList": {
+      "description": "List of Locations",
+      "properties": {
+        "value": {
+          "description": "Array of locations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Location"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of locations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "OperationList": {
       "description": "List of Operations",
       "properties": {
@@ -160,6 +294,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page of operations.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationResultList": {
+      "description": "List of Operation Results",
+      "properties": {
+        "value": {
+          "description": "Array of operation results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
           },
           "readOnly": true
         },

@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-03' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.loganalytics.v2015_03_20
-  output-folder: $(azure-libraries-for-java-folder)/loganalytics/resource-manager/v2015_03_20
+  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2015_03_20
 regenerate-manager: true
 generate-interface: true
 ```
@@ -43,7 +43,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.loganalytics.v2015_11_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/loganalytics/resource-manager/v2015_11_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/loganalytics/mgmt-v2015_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

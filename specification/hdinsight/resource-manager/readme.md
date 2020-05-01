@@ -33,45 +33,45 @@ tag: package-2018-06-preview
 ```
 
 ## Suppression
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+```
  
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+```
 
- ``` yaml
+``` yaml
 directive:
   - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
     from: cluster.json
@@ -95,6 +95,7 @@ input-file:
 - Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
 - Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
+- Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
 ```
 
 
@@ -186,7 +187,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-06-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hdinsight.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2018_06_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2018_06_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -200,7 +201,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-03-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.hdinsight.v2015_03_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/hdinsight/resource-manager/v2015_03_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/hdinsight/mgmt-v2015_03_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -226,6 +227,7 @@ input-file:
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/extensions.json
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/scriptActions.json
   - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/operations.json
+  - $(this-folder)/Microsoft.HDInsight/stable/2018-06-01-preview/virtualMachines.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/cluster.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/applications.json
   - $(this-folder)/Microsoft.HDInsight/preview/2015-03-01-preview/locations.json

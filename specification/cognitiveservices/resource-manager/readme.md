@@ -121,7 +121,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.cognitiveservices.v2017_04_18
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/resource-manager/v2017_04_18
+  output-folder: $(azure-libraries-for-java-folder)/sdk/cognitiveservices/mgmt-v2017_04_18
 regenerate-manager: true
 generate-interface: true
 ```
@@ -134,7 +134,7 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(tag) == 'package-2016-02-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.cognitiveservices.v2016_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/resource-manager/v2016_02_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/cognitiveservices/mgmt-v2016_02_01_preview
 regenerate-manager: true
 generate-interface: true
 ```

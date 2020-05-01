@@ -18,6 +18,15 @@ To see additional help and options, run:
 
 ---
 
+## Suppression
+
+``` yaml
+directive:
+  - from: service.json
+    suppress: OAV131 
+    reason: Testing purpose.
+```
+
 ## Configuration
 
 ### Basic Information
@@ -27,8 +36,14 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-07
-```
 
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - UniqueResourcePaths
+	  
+```
 
 ### Tag: package-2018-07
 

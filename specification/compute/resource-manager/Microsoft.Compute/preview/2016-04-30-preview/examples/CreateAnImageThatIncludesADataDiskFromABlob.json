@@ -24,6 +24,31 @@
     }
   },
   "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storageProfile": {
+            "osDisk": {
+              "osType": "Linux",
+              "osState": "Generalized",
+              "blobUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd",
+              "caching": "ReadWrite"
+            },
+            "dataDisks": [
+              {
+                "lun": 1,
+                "blobUri": "https://mystorageaccount.blob.core.windows.net/dataimages/dataimage.vhd"
+              }
+            ]
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.Compute/images",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/disk/providers/Microsoft.Compute/images/myImage",
+        "name": "myImage"
+      }
+    },
     "201": {
       "body": {
         "properties": {

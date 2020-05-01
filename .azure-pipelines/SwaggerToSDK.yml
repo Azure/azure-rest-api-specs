@@ -1,0 +1,31 @@
+jobs:
+- job: "SDK"
+  timeoutInMinutes: 180
+  strategy:
+    matrix:
+      java:
+        AZURE_SDK_REPO: azure-sdk-for-java
+        AZURE_SDK_PARAMS: ''
+      javascript:
+        AZURE_SDK_REPO: azure-sdk-for-js
+        AZURE_SDK_PARAMS: ''
+      python:
+        AZURE_SDK_REPO: azure-sdk-for-python
+        AZURE_SDK_PARAMS: ''
+      cliextension:
+        AZURE_SDK_REPO: azure-cli-extensions
+        AZURE_SDK_PARAMS: ''
+      trenton:
+        AZURE_SDK_REPO: azure-sdk-for-trenton
+        AZURE_SDK_PARAMS: ''
+      go:
+        AZURE_SDK_REPO: azure-sdk-for-go
+        AZURE_SDK_PARAMS: '-o latest'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
+  steps:
+  - script: echo $(NODE_OPTIONS)
+  - script: "scripts/swagger-to-sdk.sh Azure/$(AZURE_SDK_REPO) -v $(AZURE_SDK_PARAMS)"
+    displayName: "Swagger to SDK script"

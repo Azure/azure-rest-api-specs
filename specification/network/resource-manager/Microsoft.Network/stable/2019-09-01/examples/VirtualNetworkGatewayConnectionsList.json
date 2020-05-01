@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2019-09-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "conn1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/conn1",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "type": "Microsoft.Network/connections",
+            "location": "centralus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "virtualNetworkGateway1": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1",
+                "properties": {}
+              },
+              "localNetworkGateway2": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw1",
+                "properties": {}
+              },
+              "connectionType": "IPsec",
+              "connectionProtocol": "IKEv1",
+              "routingWeight": 0,
+              "enableBgp": false,
+              "usePolicyBasedTrafficSelectors": false,
+              "ipsecPolicies": [],
+              "trafficSelectorPolicies": [],
+              "ingressBytesTransferred": 0,
+              "egressBytesTransferred": 0
+            }
+          },
+          {
+            "name": "conn2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/connections/conn2",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "type": "Microsoft.Network/connections",
+            "location": "eastus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "virtualNetworkGateway1": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2",
+                "properties": {}
+              },
+              "localNetworkGateway2": {
+                "properties": {},
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/localNetworkGateways/localgw2"
+              },
+              "connectionType": "IPsec",
+              "connectionProtocol": "IKEv2",
+              "routingWeight": 0,
+              "enableBgp": false,
+              "usePolicyBasedTrafficSelectors": false,
+              "ipsecPolicies": [],
+              "trafficSelectorPolicies": [],
+              "ingressBytesTransferred": 0,
+              "egressBytesTransferred": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
