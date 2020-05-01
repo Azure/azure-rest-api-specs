@@ -173,6 +173,9 @@
           },
           "Create or update elastic pool with all parameter": {
             "$ref": "./examples/ElasticPoolCreateOrUpdateMax.json"
+          },
+          "Create or update elastic pool with maintenance configuration parameter": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateSetMaintenanceWindow.json"
           }
         }
       },
@@ -276,11 +279,14 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
+          "Update an elastic pool with minimum parameters": {
+            "$ref": "./examples/ElasticPoolUpdateMin.json"
+          },
           "Update an elastic pool with all parameter": {
             "$ref": "./examples/ElasticPoolUpdateMax.json"
           },
-          "Update an elastic pool with minimum parameters": {
-            "$ref": "./examples/ElasticPoolUpdateMin.json"
+          "Resets maintenance window of an elastic pool to default.": {
+            "$ref": "./examples/ElasticPoolUpdateResetMaintenanceWindow.json"
           }
         }
       }
@@ -354,6 +360,10 @@
             "name": "ElasticPoolLicenseType",
             "modelAsString": true
           }
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the elastic pool.",
+          "type": "string"
         }
       }
     },
@@ -450,6 +460,10 @@
             "name": "ElasticPoolLicenseType",
             "modelAsString": true
           }
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the elastic pool.",
+          "type": "string"
         }
       }
     }

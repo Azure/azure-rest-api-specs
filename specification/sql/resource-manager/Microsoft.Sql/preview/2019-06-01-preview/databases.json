@@ -185,6 +185,9 @@
           },
           "Creates a database from recoverableDatabaseId.": {
             "$ref": "./examples/CreateDatabaseRecoveryMode.json"
+          },
+          "Creates a database with preferred maintenance window.": {
+            "$ref": "./examples/CreateDatabaseMaintenanceConfiguration.json"
           }
         }
       },
@@ -282,6 +285,9 @@
         "x-ms-examples": {
           "Updates a database.": {
             "$ref": "./examples/PatchDatabase.json"
+          },
+          "Resets maintenance window of a database to default.": {
+            "$ref": "./examples/PatchVCoreDatabaseResetMaintenanceConfiguration.json"
           }
         }
       }
@@ -968,6 +974,10 @@
           "description": "The date when database was resumed by user action or database login (ISO8601 format). Null if the database is paused.",
           "type": "string",
           "readOnly": true
+        },
+        "maintenanceConfigurationId": {
+          "description": "Maintenance configuration id assigned to the database",
+          "type": "string"
         }
       }
     },

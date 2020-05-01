@@ -4,7 +4,10 @@
     "resourceGroupName": "sqlcrudtest-2369",
     "serverName": "sqlcrudtest-8069",
     "elasticPoolName": "sqlcrudtest-8102",
-    "api-version": "2017-10-01"
+    "api-version": "2017-10-01",
+    "parameters": {
+    "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/publicMaintenanceConfigurations/SQL_Default"
+    }
   },
   "responses": {
     "200": {
@@ -15,23 +18,21 @@
         "location": "Japan East",
         "kind": null,
         "sku": {
-          "name": "GP_Gen4_2",
-          "tier": "GeneralPurpose",
-          "capacity": 2
+        "name": "BasicPool",
+        "tier": "Basic",
+        "capacity": 50
         },
         "properties": {
-          "creationDate": "2017-10-10T01:25:25.033Z",
-          "state": "Ready",
-          "maxSizeBytes": 5242880000,
-          "perDatabaseSettings": {
-            "minCapacity": 0.25,
-            "maxCapacity": 1.0
-          },
-          "zoneRedundant": true,
-          "licenseType": "LicenseIncluded",
-          "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/publicMaintenanceConfigurations/SQL_TestConfiguration"
+        "creationDate": "2017-02-10T01:25:25.033Z",
+        "state": "Ready",
+        "maxSizeBytes": 5242880000,
+        "perDatabaseSettings": {
+          "minCapacity": 0,
+          "maxCapacity": 5
+        }
         }
       }
-    }
+    },
+    "202": {}
   }
 }
