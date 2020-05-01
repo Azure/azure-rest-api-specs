@@ -91,6 +91,9 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ignoreResourceCheckParameter"
           }
         ],
         "responses": {
@@ -617,6 +620,13 @@
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
       }
+    },
+    "ignoreResourceCheckParameter": {
+      "name": "IgnoreResourceCheck",
+      "in": "query",
+      "required": false,
+      "type": "bool",
+      "description": "Ignore existing resources in the subscription to be cancelled."
     }
   },
   "security": [
