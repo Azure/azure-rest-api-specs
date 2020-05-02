@@ -8,7 +8,7 @@ go:
   clear-output-folder: true
 ```
 
-### Go multi-api 
+### Go multi-api
 
 ``` yaml $(go) && $(multiapi) 
 batch: 
