@@ -3,10 +3,9 @@
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "environmentName": "env1",
-    "standardEnvironmentUpdateParameters": {
-      "sku": {
-        "name": "S1",
-        "capacity": 10
+    "environmentUpdateParameters": {
+      "tags": {
+        "someTag": "someTagValue"
       }
     },
     "api-version": "2018-08-15-preview"
@@ -19,7 +18,9 @@
         "name": "env1",
         "type": "Microsoft.TimeSeriesInsights/Environments",
         "kind": "Standard",
-        "tags": {},
+        "tags": {
+          "someTag": "someTagValue"
+        },
         "properties": {
           "dataRetentionTime": "P31D",
           "provisioningState": "Succeeded",
