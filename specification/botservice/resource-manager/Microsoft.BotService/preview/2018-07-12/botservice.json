@@ -312,6 +312,9 @@
           "Create Bot": {
             "$ref": "./examples/PutChannel.json"
           },
+          "Create Alexa Bot": {
+            "$ref": "./examples/PutAlexaChannel.json"
+          },
           "Create Line Bot": {
             "$ref": "./examples/PutLineChannel.json"
           }
@@ -372,6 +375,9 @@
         "x-ms-examples": {
           "Update Bot": {
             "$ref": "./examples/UpdateChannel.json"
+          },
+          "Update Alexa":{
+            "$ref": "./examples/UpdateAlexaChannel.json"
           },
           "Update Line":{
             "$ref": "./examples/UpdateLineChannel.json"
@@ -484,6 +490,9 @@
         "x-ms-examples": {
           "Get Bot": {
             "$ref": "./examples/GetChannel.json"
+          },
+          "Get Alexa Bot": {
+            "$ref": "./examples/GetAlexaChannel.json"
           },
           "Get Line Bot": {
             "$ref": "./examples/GetLineChannel.json"
@@ -1598,6 +1607,49 @@
       },
       "required": [
         "channelName"
+      ]
+    },
+    "AlexaChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "AlexaChannel",
+      "description": "Alexa channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlexaChannelProperties",
+          "description": "The set of properties specific to Alexa channel resource"
+        }
+      }
+    },
+    "AlexaChannelProperties": {
+      "properties": {
+        "alexaSkillId": {
+          "type": "string",
+          "description": "The Alexa skill Id"
+        },
+        "urlFragment": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Url fragment used in part of the Uri configured in Alexa"
+        },
+        "serviceEndpointUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Full Uri used to configured the skill in Alexa"
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether this channel is enabled for the bot"
+        }
+      },
+      "description": "The parameters to provide for the Alexa channel.",
+      "required": [
+        "alexaSkillId",
+        "isEnabled"
       ]
     },
     "FacebookChannel": {
@@ -2770,7 +2822,7 @@
       "type": "string",
       "maxLength": 64,
       "minLength": 2,
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "pattern": "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$",
       "description": "The name of the Bot Service Connection Setting resource"
     },
     "channelNameParameter": {
@@ -2780,6 +2832,7 @@
       "required": true,
       "type": "string",
       "enum": [
+        "AlexaChannel",
         "FacebookChannel",
         "EmailChannel",
         "KikChannel",
@@ -2796,6 +2849,9 @@
         "name": "channelName",
         "modelAsString": false,
         "values": [
+          {
+            "value": "AlexaChannel"
+          },
           {
             "value": "FacebookChannel"
           },
