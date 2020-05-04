@@ -46,16 +46,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           }
         ],
         "responses": {
@@ -82,16 +82,16 @@
         "operationId": "PrivateLinkResources_Get",
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
             "$ref": "#/parameters/GroupNameParameter"
@@ -159,11 +159,30 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     }
   },
   "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
     "GroupNameParameter": {
       "name": "groupName",
       "in": "path",
