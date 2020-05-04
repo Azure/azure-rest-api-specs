@@ -27,7 +27,19 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2020-03
+tag: package-2020-05
+```
+
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.DocumentDB/stable/2020-05-04/cosmos-db.json
+- Microsoft.DocumentDB/stable/2020-05-04/notebook.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2020-03
