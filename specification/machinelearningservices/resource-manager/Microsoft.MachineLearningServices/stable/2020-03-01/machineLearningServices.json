@@ -306,6 +306,10 @@
           "ProxyOperations"
         ],
         "operationId": "Notebooks_Prepare",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options" : {
+          "final-state-via" : "location"
+        },
         "x-ms-examples": {
           "Prepare Notebook": {
             "$ref": "./examples/workspacePrepareNotebook.json"
@@ -329,7 +333,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Workspace"
+              "$ref": "#/definitions/NotebookResourceInfo"
             }
           },
           "202": {
