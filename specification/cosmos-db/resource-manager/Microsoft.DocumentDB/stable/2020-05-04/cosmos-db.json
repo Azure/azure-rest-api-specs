@@ -5094,9 +5094,9 @@
           "readOnly": true,
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
-        "ipRangeFilter": {
-          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
-          "$ref": "#/definitions/IPRangeFilter"
+        "ipRules": {
+          "description": "List of IpRules.",
+          "$ref": "#/definitions/IPRules"
         },
         "isVirtualNetworkFilterEnabled": {
           "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
@@ -5212,9 +5212,9 @@
           "description": "The offer type for the database",
           "$ref": "#/definitions/DatabaseAccountOfferType"
         },
-        "ipRangeFilter": {
-          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
-          "$ref": "#/definitions/IPRangeFilter"
+        "ipRules": {
+          "description": "List of IpRules.",
+          "$ref": "#/definitions/IPRules"
         },
         "isVirtualNetworkFilterEnabled": {
           "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
@@ -5318,9 +5318,9 @@
             "$ref": "#/definitions/Location"
           }
         },
-        "ipRangeFilter": {
-          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
-          "$ref": "#/definitions/IPRangeFilter"
+        "ipRules": {
+          "description": "List of IpRules.",
+          "$ref": "#/definitions/IPRules"
         },
         "isVirtualNetworkFilterEnabled": {
           "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
@@ -6715,9 +6715,16 @@
       "readOnly": true,
       "description": "The status of the Cosmos DB account at the time the operation was called. The status can be one of following. 'Creating' – the Cosmos DB account is being created. When an account is in Creating state, only properties that are specified as input for the Create Cosmos DB account operation are returned. 'Succeeded' – the Cosmos DB account is active for use. 'Updating' – the Cosmos DB account is being updated. 'Deleting' – the Cosmos DB account is being deleted. 'Failed' – the Cosmos DB account failed creation. 'DeletionFailed' – the Cosmos DB account deletion failed."
     },
-    "IPRangeFilter": {
+    "IPRules": {
+      "type": "array",
+      "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account.",
+      "items": {
+        "$ref": "#/definitions/IpAddressOrRange"
+      }
+    },
+    "IpAddressOrRange": {
       "type": "string",
-      "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces."
+      "description": "A single IPv4 address or a single IPv4 address range in CIDR format. Provided IPs must be well-formatted and cannot be contained in one of the following ranges: 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, since these are not enforceable by the IP address filter. Example of valid inputs: “23.40.210.245” or “23.40.210.0/8”."
     },
     "VirtualNetworkRule": {
       "type": "object",
