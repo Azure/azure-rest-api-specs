@@ -72,7 +72,10 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.AVS/preview/2019-08-09-preview/vmware.json
-
+directive:
+  - suppress: R3020
+    from: vmware.json
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution 
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
