@@ -1604,7 +1604,7 @@
           }
         },
         "operationId": "Invoices_ListByBillingAccount",
-        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Lists the invoices for a billing account for a given start date and end date. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1654,7 +1654,7 @@
           }
         },
         "operationId": "Invoices_GetBillingAccountInvoice",
-        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement or Enterprise Agreement.",
+        "description": "Gets an invoice by billing account name and ID. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement, Microsoft Customer Agreement or Enterprise Agreement.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -6400,7 +6400,7 @@
           "readOnly": true
         },
         "rebillDetails": {
-          "description": "Details of an Enterprise Agreement invoice's rebill relationship to other invoices.",
+          "description": "Rebill details of an Enterprise Agreement invoice.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InvoiceRebillDetails"
         }
@@ -6447,10 +6447,10 @@
       }
     },
     "InvoiceRebillDetails": {
-      "description": "The properties of a payment.",
+      "description": "The rebill details of an invoice.",
       "properties": {
         "rebillDocumentType": {
-          "description": "The document type of the invoice in a Enterprise Agreement rebilled invoice relationship.",
+          "description": "The type of the document generated when an Enterprise Agreement invoice is rebilled.",
           "type": "string",
           "enum": [
             "Credit",
@@ -6463,12 +6463,12 @@
           }
         },
         "rebilledInvoiceId": {
-          "description": "The ID of the rebilled invoice in a Enterprise Agreement rebilled invoice relationship",
+          "description": "The ID of the invoice generated when an Enterprise Agreement invoice is rebilled.",
           "type": "string",
           "readOnly": true
         },
         "latestInvoiceId": {
-          "description": "The ID of the latest invoice in a Enterprise Agreement rebilled invoice relationship.",
+          "description": "The ID of the latest invoice generated when an Enterprise Agreement invoice is rebilled.",
           "type": "string",
           "readOnly": true
         }
