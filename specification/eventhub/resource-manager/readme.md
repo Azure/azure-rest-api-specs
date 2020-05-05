@@ -161,6 +161,9 @@ input-file:
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/consumergroups.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/namespaces.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/operations.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/sku.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
