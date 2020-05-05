@@ -46,6 +46,7 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2020-05-01/bastionHost.json
   - Microsoft.Network/stable/2020-05-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2020-05-01/customIPPrefix.json
   - Microsoft.Network/stable/2020-05-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2020-05-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2020-05-01/endpointService.json
@@ -56,6 +57,7 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/ipAllocation.json
   - Microsoft.Network/stable/2020-05-01/ipGroups.json
   - Microsoft.Network/stable/2020-05-01/loadBalancer.json
+  - Microsoft.Network/stable/2020-05-01/masterCustomIPPrefix.json
   - Microsoft.Network/stable/2020-05-01/natGateway.json
   - Microsoft.Network/stable/2020-05-01/network.json
   - Microsoft.Network/stable/2020-05-01/networkInterface.json
