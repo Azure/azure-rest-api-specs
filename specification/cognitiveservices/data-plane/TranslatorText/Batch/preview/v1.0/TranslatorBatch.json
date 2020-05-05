@@ -1,14 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Batch Document Translation API",
+    "title": "Batch Document Translation Client",
     "version": "v1.0-preview.1"
   },
-  "host": "westus2.cognitiveservices.azure.com",
-  "basePath": "/translator/text/document",
-  "schemes": [
-    "https"
-  ],
   "paths": {
     "/v1.0-preview.1/batches": {
       "post": {
@@ -17,7 +12,7 @@
         ],
         "summary": "Submit a batch document translation request to the translation service",
         "description": "Submit a batch request to the document translation service.\r\n            \r\nEach request can consists of multiple inputs.\r\nEach input will contains both a source and destination container for source and target language pair.\r\n            \r\nThe prefix and suffix filter (if supplied) will be used to filter the folders.\r\nThe prefix will be applied to the subpath after the container name\r\n            \r\nGlossaries / Translation memory can be supplied and will be applied when the document is being translated.\r\nIf the glossary is invalid or unreachable during translation time.  An error will be indicated in the document status.\r\n            \r\nIf the file with the same name already exists in the destination, it will be overwritten.\r\nTargetUrl for each target language needs to be unique.",
-        "operationId": "Batch Documents Submit",
+        "operationId": "Translation_SubmitBatchRequest",
         "consumes": [
           "application/json",
           "text/json",
@@ -110,7 +105,7 @@
         ],
         "summary": "Returns the list of operations submitted and their summary status",
         "description": "Returns the list of status of the translation batch operation.\r\nThe list will consist only of the batch request submitted by the user (based on their subscription)\r\n            \r\nThe operation status are sorted by the operation Id\r\n            \r\nIf the number of operations exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get status of operation list",
+        "operationId": "Translation_GetOperations",
         "produces": [
           "application/json"
         ],
@@ -220,7 +215,7 @@
         ],
         "summary": "Returns the status of the specific document",
         "description": "Returns the status of the translation of the document.",
-        "operationId": "Get Document Status",
+        "operationId": "Translation_GetDocumentStatus",
         "produces": [
           "application/json"
         ],
@@ -326,7 +321,7 @@
         ],
         "summary": "Returns the status of the batch translation operation",
         "description": "Returns the status of the translation batch operation.\r\nThe status will include the overall job status as well as a summary of the current progress of all the documents being translated.",
-        "operationId": "Get Operation Status",
+        "operationId": "Translation_GetOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -422,7 +417,7 @@
         ],
         "summary": "Cancel a currently processing or queued operation.",
         "description": "Cancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling.  A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible.",
-        "operationId": "cancel batch operation",
+        "operationId": "Translation_CancelOperation",
         "produces": [
           "application/json"
         ],
@@ -508,7 +503,7 @@
         ],
         "summary": "Returns the status of the documents of a translation batch operation",
         "description": "Returns the status of the list of documents translation operation by a given operation id.\r\n            \r\nThe documents are sorted by the document Id\r\n            \r\nIf the number of documents exceed our paging limit, server side paging will be used.\r\nPaginated responses will indicate a partial result by including a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\nClients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.\r\nThe server will honor the values specified by the client; however, clients MUST be prepared to handle responses that contain a different page size or contain a continuation token.\r\nWhen both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options. This will avoid the risk of the client making assumptions about the data returned.",
-        "operationId": "Get Detailed Document Status for a given operation id",
+        "operationId": "Translation_GetOperationDocumentsStatus",
         "produces": [
           "application/json"
         ],
@@ -636,7 +631,7 @@
         ],
         "summary": "Returns the list of supported document formats",
         "description": "The list of supported document formats supported by our service.\r\nThe list will include the common file extension used and supported as well as the content-type if using the upload API.",
-        "operationId": "Get Document Formats",
+        "operationId": "Translation_GetDocumentFormats",
         "produces": [
           "application/json"
         ],
@@ -692,7 +687,7 @@
         ],
         "summary": "Returns the list of supported document formats",
         "description": "The list of supported glossary formats supported by our service.\r\nThe list will include the common file extension used.",
-        "operationId": "Get Glossary Formats",
+        "operationId": "Translation_GetGlossaryFormats",
         "produces": [
           "application/json"
         ],
@@ -748,7 +743,7 @@
         ],
         "summary": "Returns the list of supported storage sources",
         "description": "The list of storage sources supported by our service.",
-        "operationId": "Get storage sources that we currently support",
+        "operationId": "Translation_GetDocumentStorageSource",
         "produces": [
           "application/json"
         ],
@@ -1268,5 +1263,19 @@
     {
       "subscription_key": []
     }
-  ]
+  ],
+  "x-ms-parameterized-host": {
+    "HostTemplate": "{Endpoint}/translator/text/document/v1.0-preview.1",
+    "UseSchemePrefix": false,
+    "Parameters": [
+      {
+        "in": "path",
+        "name": "Endpoint",
+        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+        "required": true,
+        "x-ms-parameter-location": "client",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  }
 }
