@@ -3648,6 +3648,240 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}": {
+      "put": {
+        "operationId": "HubRouteTables_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteTablePut": {
+            "$ref": "./examples/HubRouteTablePut.json"
+          }
+        },
+        "description": "Creates a RouteTable resource if it doesn't exist else updates the existing RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "routeTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            },
+            "description": "Parameters supplied to create or update RouteTable."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteTable created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the RouteTable created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "operationId": "HubRouteTables_Get",
+        "x-ms-examples": {
+          "RouteTableGet": {
+            "$ref": "./examples/HubRouteTableGet.json"
+          }
+        },
+        "description": "Retrieves the details of a RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteTable retrieved.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HubRouteTables_Delete",
+        "x-ms-examples": {
+          "RouteTableDelete": {
+            "$ref": "./examples/HubRouteTableDelete.json"
+          }
+        },
+        "description": "Deletes a RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteTable."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. RouteTable deleted."
+          },
+          "202": {
+            "description": "Request received successfully. RouteTable deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No RouteTables exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables": {
+      "get": {
+        "operationId": "HubRouteTables_List",
+        "x-ms-examples": {
+          "RouteTableList": {
+            "$ref": "./examples/HubRouteTableList.json"
+          }
+        },
+        "description": "Retrieves the details of all RouteTables.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the RouteTables for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListHubRouteTablesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -4193,6 +4427,10 @@
           "items": {
             "$ref": "#/definitions/VpnSiteLinkConnection"
           }
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       },
       "description": "Parameters for VpnConnection."
@@ -4371,6 +4609,10 @@
           "type": "boolean",
           "description": "Enable internet security."
         },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -4412,6 +4654,126 @@
             "$ref": "#/definitions/HubVirtualNetworkConnection"
           },
           "description": "List of HubVirtualNetworkConnections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "HubRouteTableProperties": {
+      "properties": {
+        "routes": {
+          "type": "array",
+          "description": "List of all routes.",
+          "items": {
+            "$ref": "#/definitions/HubRoute"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "description": "List of labels associated with this route table.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedConnections": {
+          "type": "array",
+          "description": "List of all connections associated with this route table.",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "propagatingConnections": {
+          "type": "array",
+          "description": "List of all connections that advertise to this route table.",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state of the RouteTable resource."
+        }
+      },
+      "description": "Parameters for RouteTable."
+    },
+    "HubRouteTable": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HubRouteTableProperties",
+          "description": "Properties of the RouteTable resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "RouteTable resource in a virtual hub."
+    },
+    "HubRoute": {
+      "required": [
+        "name",
+        "destinationType",
+        "destinations",
+        "nextHopType",
+        "nextHop"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Route that is unique within a RouteTable. This name can be used to access this route."
+        },
+        "destinationType": {
+          "type": "string",
+          "description": "The type of destinations (eg: CIDR, ResourceId, Service)."
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of all destinations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "type": "string",
+          "description": "The type of next hop (eg: ResourceId)."
+        },
+        "nextHop": {
+          "type": "string",
+          "description": "NextHop resource ID."
+        }
+      },
+      "description": "RouteTable route."
+    },
+    "ListHubRouteTablesResult": {
+      "description": "List of RouteTables and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HubRouteTable"
+          },
+          "description": "List of RouteTables."
         },
         "nextLink": {
           "type": "string",
@@ -4986,6 +5348,10 @@
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
         },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -5249,6 +5615,10 @@
         "enableInternetSecurity": {
           "type": "boolean",
           "description": "Enable internet security."
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
         }
       },
       "description": "Properties of the ExpressRouteConnection subresource."
@@ -5286,6 +5656,74 @@
         }
       },
       "description": "ExpressRouteConnection list."
+    },
+    "RoutingConfiguration": {
+      "description": "Routing Configuration indicating the associated and propagated route tables for this connection.",
+      "properties": {
+        "associatedRouteTable": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The resource id RouteTable associated with this RoutingConfiguration."
+        },
+        "propagatedRouteTables": {
+          "$ref": "#/definitions/PropagatedRouteTable",
+          "description": "The list of RouteTables to advertise the routes to."
+        },
+        "vnetRoutes": {
+          "$ref": "#/definitions/VnetRoute",
+          "description": "List of routes that control routing from VirtualHub into a virtual network connection."
+        }
+      }
+    },
+    "PropagatedRouteTable": {
+      "description": "The list of RouteTables to advertise the routes to.",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "The list of labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "The list of resource ids of all the RouteTables.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "VnetRoute": {
+      "description": "List of routes that control routing from VirtualHub into a virtual network connection.",
+      "properties": {
+        "staticRoutes": {
+          "type": "array",
+          "description": "List of all Static Routes.",
+          "items": {
+            "$ref": "#/definitions/StaticRoute"
+          }
+        }
+      }
+    },
+    "StaticRoute": {
+      "description": "List of all Static Routes.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the StaticRoute that is unique within a VnetRoute."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "description": "List of all address prefixes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopIpAddress": {
+          "type": "string",
+          "description": "The ip address of the next hop."
+        }
+      }
     }
   }
 }
