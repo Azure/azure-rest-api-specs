@@ -436,6 +436,103 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/alerts/{alertId}": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_Get",
+        "description": "Gets the alert for the scope by alert ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionAlerts": {
+            "$ref": "./examples/SingleSubscriptionAlert.json"
+          },
+          "ResourceGroupAlerts": {
+            "$ref": "./examples/SingleResourceGroupAlert.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeAlertParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Alerts"
+        ],
+        "operationId": "Alerts_Dismiss",
+        "description": "Dismisses the specified alert",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionAlerts": {
+            "$ref": "./examples/DismissSubscriptionAlerts.json"
+          },
+          "ResourceGroupAlerts": {
+            "$ref": "./examples/DismissResourceGroupAlerts.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeAlertParameter"
+          },
+          {
+            "$ref": "#/parameters/alertIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DismissAlertPayload"
+            },
+            "description": "Parameters supplied to the Dismiss Alert operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AlertsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/{externalCloudProviderType}/{externalCloudProviderId}/alerts": {
       "get": {
         "tags": [
@@ -2154,6 +2251,16 @@
         }
       }
     },
+    "DismissAlertPayload": {
+      "description": "The request payload to update an alert",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AlertProperties",
+          "title": "Alert properties"
+        }
+      }
+    },
     "QueryResult": {
       "description": "Result of query. It contains all columns listed under groupings and aggregation.",
       "type": "object",
@@ -2937,6 +3044,15 @@
       "type": "string",
       "description": "This can be '{externalSubscriptionId}' for linked account or '{externalBillingAccountId}' for consolidated account used with dimension/query operations.",
       "x-ms-parameter-location": "method"
+    },
+    "alertIdParameter": {
+      "name": "alertId",
+      "in": "path",
+      "description": "Alert ID",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
