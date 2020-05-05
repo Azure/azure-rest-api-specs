@@ -2060,7 +2060,7 @@
           "description": "The source properties of the import pipeline."
         },
         "trigger": {
-          "$ref": "#/definitions/TriggerProperties",
+          "$ref": "#/definitions/PipelineTriggerProperties",
           "description": "The properties that describe the trigger of the import pipeline."
         },
         "options": {
@@ -2110,7 +2110,6 @@
           "description": "The type of source for the import pipeline.",
           "default": "AzureStorageBlobContainer",
           "enum": [
-            "AzureStorageBlob",
             "AzureStorageBlobContainer"
           ],
           "type": "string",
@@ -2129,16 +2128,16 @@
         }
       }
     },
-    "TriggerProperties": {
+    "PipelineTriggerProperties": {
       "type": "object",
       "properties": {
         "sourceTrigger": {
-          "$ref": "#/definitions/SourceTriggerProperties",
-          "description": "The type of the trigger."
+          "$ref": "#/definitions/PipelineSourceTriggerProperties",
+          "description": "The source trigger properties of the pipeline."
         }
       }
     },
-    "SourceTriggerProperties": {
+    "PipelineSourceTriggerProperties": {
       "required": [
         "status"
       ],
@@ -2146,7 +2145,7 @@
       "properties": {
         "status": {
           "description": "The current status of the source trigger.",
-          "default": "Disabled",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -2426,8 +2425,8 @@
           "description": "The current status of the pipeline run.",
           "type": "string"
         },
-        "artifacts": {
-          "description": "The artifacts transferred in the pipeline run.",
+        "importedArtifacts": {
+          "description": "The artifacts imported in the pipeline run.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2460,7 +2459,7 @@
           "type": "string"
         },
         "trigger": {
-          "$ref": "#/definitions/TriggerDescriptor",
+          "$ref": "#/definitions/PipelineTriggerDescriptor",
           "description": "The trigger that caused the pipeline run."
         },
         "pipelineRunErrorMessage": {
@@ -2520,16 +2519,16 @@
         }
       }
     },
-    "TriggerDescriptor": {
+    "PipelineTriggerDescriptor": {
       "type": "object",
       "properties": {
         "sourceTrigger": {
-          "$ref": "#/definitions/SourceTriggerDescriptor",
+          "$ref": "#/definitions/PipelineSourceTriggerDescriptor",
           "description": "The source trigger that caused the pipeline run."
         }
       }
     },
-    "SourceTriggerDescriptor": {
+    "PipelineSourceTriggerDescriptor": {
       "type": "object",
       "properties": {
         "timestamp": {
