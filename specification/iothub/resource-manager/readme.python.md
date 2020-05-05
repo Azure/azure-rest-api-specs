@@ -22,6 +22,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2020-03
   - tag: package-2019-11
   - tag: package-2019-03
   - tag: package-2018-04
@@ -29,6 +30,17 @@ batch:
   - tag: package-2017-07
   - tag: package-2017-01
   - tag: package-2016-02
+```
+
+### Tag: package-2020-03 and python
+
+These settings apply only when `--tag=package-2020-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(python)
+python:
+  namespace: azure.mgmt.iothub.v2020_03_01
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2020_03_01
 ```
 
 ### Tag: package-2019-11 and python
