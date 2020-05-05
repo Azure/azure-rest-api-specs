@@ -193,58 +193,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
-      },
-      "patch": {
-        "tags": [
-          "CustomIPPrefixes"
-        ],
-        "operationId": "CustomIPPrefixes_UpdateTags",
-        "description": "Updates custom IP prefix tags.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "customIpPrefixName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the custom IP prefix."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update custom IP prefix tags."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting CustomIPPrefix resource.",
-            "schema": {
-              "$ref": "#/definitions/CustomIPPrefix"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update custom IP prefix tags": {
-            "$ref": "./examples/CustomIpPrefixUpdateTags.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/customIPPrefixes": {
@@ -332,7 +280,7 @@
 		{
           "type": "string",
           "description": "The name of the master custom IP Prefix parent."
-		}
+		},
         "commissionedState": {
           "readOnly": true,
           "type": "string",
@@ -341,9 +289,9 @@
 		    "Provisioning",
 			"Provisioned",
 			"Commissioning",
-			"Commissioned"
+			"Commissioned",
 			"Decommissioning",
-		    "Deprovisioning",
+		    "Deprovisioning"
 		  ],
 		  "x-ms-enum": {
 		  "name": "CommissionedState",
@@ -388,7 +336,7 @@
             "type": "string"
           },
           "description": "A list of availability zones denoting the IP allocated for the resource needs to come from."
-        },
+        }
       },
       "allOf": [
         {
@@ -412,6 +360,6 @@
         }
       },
       "description": "Response for ListCustomIpPrefixes API service call."
-    },
+    }
   }
 }

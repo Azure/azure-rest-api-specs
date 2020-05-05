@@ -193,58 +193,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
-      },
-      "patch": {
-        "tags": [
-          "MasterCustomIPPrefixes"
-        ],
-        "operationId": "MasterCustomIPPrefixes_UpdateTags",
-        "description": "Updates master custom IP prefix tags.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "MasterCustomIpPrefixName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the master custom IP prefix."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update master custom IP prefix tags."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting MasterCustomIPPrefix resource.",
-            "schema": {
-              "$ref": "#/definitions/MasterCustomIPPrefix"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update master custom IP prefix tags": {
-            "$ref": "./examples/MasterCustomIpPrefixUpdateTags.json"
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/MasterCustomIPPrefixes": {
@@ -357,6 +305,7 @@
 		  "x-ms-enum": {
 		  "name": "RIR",
 		  "modelAsString": true
+          }
         },
         "customIpPrefixes": {
           "readOnly": true,
@@ -409,7 +358,7 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
-        },
+        }
       },
       "allOf": [
         {
@@ -433,6 +382,6 @@
         }
       },
       "description": "Response for ListMasterCustomIpPrefixes API service call."
-    },
+    }
   }
 }
