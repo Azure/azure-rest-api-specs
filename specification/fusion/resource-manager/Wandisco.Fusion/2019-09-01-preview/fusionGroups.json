@@ -155,6 +155,9 @@
         "x-ms-examples": {
           "Get fusionGroup details.": {
             "$ref": "./examples/FusionGroup/FusionGroupGet.json"
+          },
+          "Get fusionGroup details including HealthStatus": {
+            "$ref": "./examples/FusionGroup/FusionGroupGetWithHealthStatus.json"
           }
         }
       },
@@ -194,6 +197,12 @@
               "$ref": "#/definitions/FusionGroup"
             }
           },
+          "201": {
+            "description": "Creating.",
+            "schema": {
+              "$ref": "#/definitions/FusionGroup"
+            }
+          },
           "default": {
             "description": "Error response describing the reason for operation failure.",
             "schema": {
@@ -208,6 +217,10 @@
           "Create fusionGroup with label": {
             "$ref": "./examples/FusionGroup/FusionGroupCreateWithLabel.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -341,6 +354,9 @@
         "x-ms-examples": {
           "Create Azure Zone": {
             "$ref": "./examples/FusionGroup/AzureZoneList.json"
+          },
+          "Get Azure Zone": {
+            "$ref": "./examples/FusionGroup/AzureZoneResourceList.json"
           }
         }
       }
@@ -444,6 +460,9 @@
         "x-ms-examples": {
           "Create Azure Zone": {
             "$ref": "./examples/FusionGroup/AzureZoneCreate.json"
+          },
+          "Create Azure Zone High Availability": {
+            "$ref": "./examples/FusionGroup/AzureZoneCreateHA.json"
           },
           "Create Azure Zone with Managed Identity": {
             "$ref": "./examples/FusionGroup/AzureZoneCreateManagedIdentity.json"
@@ -2228,9 +2247,21 @@
           }
         },
         "userAssignedIdentities": {
-          "type": "array",
-          "items": {
-            "type": "string"
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
           },
           "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         }
@@ -2262,8 +2293,18 @@
               "description": "Provisioning State of resource",
               "$ref": "#/definitions/ProvisioningState",
               "readOnly": true
+            },
+            "healthStatus": {
+              "title": "HealthStatus",
+              "description": "The health of the Fusion Group",
+              "$ref": "#/definitions/HealthStatus",
+              "readOnly": true
             }
           }
+        },
+        "plan": {
+          "description": "Plan to use for Store purchase",
+          "$ref": "#/definitions/Plan"
         }
       }
     },
@@ -2570,6 +2611,33 @@
           "items": {
             "$ref": "#/definitions/AzureZone"
           }
+        }
+      }
+    },
+    "HealthStatus": {
+      "description": "health status object",
+      "type": "object",
+      "properties": {
+        "details": {
+          "description": "An array indicating what errors, if any, occurred and what to do to resolve them",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          }
+        },
+        "status": {
+          "description": "Health Status",
+          "enum": [
+            "Healthy",
+            "AtRisk",
+            "Failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthStatusSummary",
+            "modelAsString": true
+          },
+          "default": "Healthy"
         }
       }
     },
@@ -3178,6 +3246,36 @@
         "name": "ProvisioningState",
         "modelAsString": false
       }
+    },
+    "Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding. "
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "description": "Plan for the resource.",
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
     },
     "HiveReplicationRule": {
       "description": "Hive Replication Rule",
