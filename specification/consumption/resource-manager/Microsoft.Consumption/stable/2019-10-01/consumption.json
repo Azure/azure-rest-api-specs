@@ -3339,10 +3339,10 @@
           "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
-        "filters": {
+        "filter": {
           "description": "May be used to filter budgets by resource group, resource, or meter.",
           "type": "object",
-          "$ref": "#/definitions/Filters"
+          "$ref": "#/definitions/BudgetFilter"
         },
         "currentSpend": {
           "description": "The current amount of cost which is being tracked for a budget.",
@@ -3384,50 +3384,71 @@
         "startDate"
       ]
     },
-    "Filters": {
-      "description": "May be used to filter budgets by resource group, resource, or meter.",
+    "BudgetFilter": {
+      "description": "May be used to BudgetFilter budgets by resource group, resource, or meter.",
       "properties": {
-        "resourceGroups": {
-          "description": "The list of filters on resource groups, allowed at subscription level only.",
+        "and": {
+          "description": "The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BudgetFilter"
           },
-          "minItems": 0,
-          "maxItems": 10
+          "minItems": 2
         },
-        "resources": {
-          "description": "The list of filters on resources.",
+        "or": {
+          "description": "The logical \"OR\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BudgetFilter"
           },
-          "minItems": 0,
-          "maxItems": 10
+          "minItems": 2
         },
-        "meters": {
-          "description": "The list of filters on meters (GUID), mandatory for budgets of usage category. ",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "minItems": 0,
-          "maxItems": 10
+        "not": {
+          "description": "The logical \"NOT\" expression.",
+          "$ref": "#/definitions/BudgetFilter"
         },
-        "tags": {
-          "type": "object",
-          "description": "The dictionary of filters on tags.",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "minItems": 0,
-          "maxItems": 10
+        "dimension": {
+          "description": "Has comparison expression for a dimension",
+          "$ref": "#/definitions/BudgetComparisonExpression"
+        },
+        "tag": {
+          "description": "Has comparison expression for a tag",
+          "$ref": "#/definitions/BudgetComparisonExpression"
         }
       }
+    },
+    "BudgetComparisonExpression": {
+      "description": "The comparison expression to be used in the budgets.",
+      "properties": {
+        "name": {
+          "description": "The name of the column to use in comparison.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The operator to use for comparison.",
+          "type": "string",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Array of values to use for comparison",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
@@ -3494,6 +3515,18 @@
           },
           "minItems": 0,
           "maxItems": 50
+        },
+        "thresholdType": {
+          "description": "The type of threshold",
+          "type": "string",
+          "enum": [
+            "Actual",
+            "Forecasted"
+          ],
+          "x-ms-enum": {
+            "name": "ThresholdType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
