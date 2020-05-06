@@ -1008,6 +1008,11 @@
           "description": "Use label file for training a model.",
           "type": "boolean",
           "default": false
+        },
+        "modelName": {
+          "description": "Optional user defined model name.",
+          "maxLength": 100,
+          "type": "string"
         }
       }
     },
@@ -1117,6 +1122,10 @@
           "description": "Date and time (UTC) when the status was last updated.",
           "type": "string",
           "x-nullable": false
+        },
+        "modelName": {
+          "type": "string",
+          "description": "Optional user defined model name."
         }
       }
     },
@@ -1310,6 +1319,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "modelName": {
+          "description": "Optional user-defined model name.",
+          "type": "string"
         }
       }
     },   
