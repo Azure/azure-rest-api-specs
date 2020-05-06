@@ -38,7 +38,6 @@ batch:
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
 ```
-```
 
 ### Tag: package-features-2015-12 and java
 
