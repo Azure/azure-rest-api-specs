@@ -1,0 +1,886 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client",
+    "version": "2017-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListAuthorizationRules",
+        "x-ms-examples": {
+          "ListAuthorizationRules": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets a list of authorization rules for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleCreate": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an AuthorizationRule for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            },
+            "description": "The shared access AuthorizationRule."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule created",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleDelete": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes an AuthorizationRule for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_GetAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleGet": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an AuthorizationRule for a Namespace by rule name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_ListKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the primary and secondary connection strings for the Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "Namespaces"
+        ],
+        "operationId": "Namespaces_RegenerateKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/NameSpaces/EHNameSpaceAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the primary or secondary connection strings for the specified Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters required to regenerate the connection string."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings regenerated successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "ListAuthorizationRules": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets a list of authorization rules for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Namespace AuthorizationRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}": {
+      "get": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_GetAuthorizationRule",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleGet": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an AuthorizationRule for a Namespace by rule name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alias Namespace AuthorizationRule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "DisasterRecoveryConfigs"
+        ],
+        "operationId": "DisasterRecoveryConfigs_ListKeys",
+        "x-ms-examples": {
+          "NameSpaceAuthorizationRuleListKey": {
+            "$ref": "./examples/disasterRecoveryConfigs/EHAliasAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the primary and secondary connection strings for the Namespace.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AliasNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules": {
+      "get": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_ListAuthorizationRules",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleListAll": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleListAll.json"
+          }
+        },
+        "description": "Gets the authorization rules for an Event Hub.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub AuthorizationRule returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}": {
+      "put": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_CreateOrUpdateAuthorizationRule",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleCreate": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleCreate.json"
+          }
+        },
+        "description": "Creates or updates an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            },
+            "description": "The shared access AuthorizationRule."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub AuthorizationRule successfully created.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_GetAuthorizationRule",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleGet": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleGet.json"
+          }
+        },
+        "description": "Gets an AuthorizationRule for an Event Hub by rule name.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub AuthorizationRule successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationRule"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_DeleteAuthorizationRule",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleDelete": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleDelete.json"
+          }
+        },
+        "description": "Deletes an Event Hub AuthorizationRule.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hub AuthorizationRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/listKeys": {
+      "post": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_ListKeys",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleListKey": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleListKey.json"
+          }
+        },
+        "description": "Gets the ACS and SAS connection strings for the Event Hub.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/eventhubs/{eventHubName}/authorizationRules/{authorizationRuleName}/regenerateKeys": {
+      "post": {
+        "tags": [
+          "EventHubs"
+        ],
+        "operationId": "EventHubs_RegenerateKeys",
+        "x-ms-examples": {
+          "EventHubAuthorizationRuleRegenerateKey": {
+            "$ref": "./examples/EventHubs/EHEventHubAuthorizationRuleRegenerateKey.json"
+          }
+        },
+        "description": "Regenerates the ACS and SAS connection strings for the Event Hub.",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/EventHubNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AuthorizationRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateAccessKeyParameters"
+            },
+            "description": "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection strings successfully regenerated.",
+            "schema": {
+              "$ref": "#/definitions/AccessKeys"
+            }
+          },
+          "default": {
+            "description": "Eventhub error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AuthorizationRuleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationRule"
+          },
+          "description": "Result of the List Authorization Rules operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains an incomplete list of Authorization Rules"
+        }
+      },
+      "description": "The response from the List namespace operation."
+    },
+    "AuthorizationRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "properties": {
+            "rights": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "Manage",
+                  "Send",
+                  "Listen"
+                ],
+                "x-ms-enum": {
+                  "name": "AccessRights",
+                  "modelAsString": true
+                }
+              },
+              "description": "The rights associated with the rule."
+            }
+          },
+          "required": [
+            "rights"
+          ],
+          "description": "Properties supplied to create or update AuthorizationRule"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../common/v1/definitions.json#/definitions/Resource"
+        }
+      ],
+      "description": "Single item in a List or Get AuthorizationRule operation"
+    },
+    "AccessKeys": {
+      "properties": {
+        "primaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Primary connection string of the created namespace AuthorizationRule."
+        },
+        "secondaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Secondary connection string of the created namespace AuthorizationRule."
+        },
+        "aliasPrimaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Primary connection string of the alias if GEO DR is enabled"
+        },
+        "aliasSecondaryConnectionString": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Secondary  connection string of the alias if GEO DR is enabled"
+        },
+        "primaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+        },
+        "secondaryKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A base64-encoded 256-bit primary key for signing and validating the SAS token."
+        },
+        "keyName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A string that describes the AuthorizationRule."
+        }
+      },
+      "description": "Namespace/EventHub Connection String"
+    },
+    "RegenerateAccessKeyParameters": {
+      "properties": {
+        "keyType": {
+          "type": "string",
+          "description": "The access key to regenerate.",
+          "enum": [
+            "PrimaryKey",
+            "SecondaryKey"
+          ],
+          "x-ms-enum": {
+            "name": "KeyType",
+            "modelAsString": false
+          }
+        },
+        "key": {
+          "type": "string",
+          "description": "Optional, if the key value provided, is set for KeyType or autogenerated Key value set for keyType"
+        }
+      },
+      "required": [
+        "keyType"
+      ],
+      "description": "Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset."
+    }
+  },
+  "parameters": {}
+}
