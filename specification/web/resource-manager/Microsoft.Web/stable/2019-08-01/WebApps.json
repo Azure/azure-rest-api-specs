@@ -5774,7 +5774,7 @@
           {
             "name": "view",
             "in": "path",
-            "description": "The type of view. Only \"summary\" is supported at this time.",
+            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
             "required": true,
             "type": "string"
           },
@@ -6713,14 +6713,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes": {
       "get": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Gets a private endpoint connection",
-        "description": "Description for Gets a private endpoint connection",
-        "operationId": "WebApps_GetPrivateEndpointConnection",
+        "summary": "Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.",
+        "description": "Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_ListProcesses",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -6728,14 +6728,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the site.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Name of the private endpoint connection.",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
