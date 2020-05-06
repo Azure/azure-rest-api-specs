@@ -566,6 +566,10 @@
           "type": "string",
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the firewall policy."
         }
       },
       "allOf": [
@@ -615,12 +619,90 @@
           "description": "The operation mode for Threat Intelligence.",
           "$ref": "./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode"
         },
+        "threatIntelWhitelist": {
+          "description": "ThreatIntel Whitelist for Firewall Policy.",
+          "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist"
+        },
         "intrusionSystemMode": {
           "description": "The operation mode for Intrusion system.",
           "$ref": "#/definitions/FirewallPolicyIntrusionSystemMode"
+        },
+        "transportSecurity": {
+          "description": "TLS Configuration definition.",
+          "$ref": "#/definitions/FirewallPolicyTransportSecurity"
         }
       },
       "description": "Firewall Policy definition."
+    },
+    "FirewallPolicyTransportSecurity": {
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/FirewallPolicyCertificateAuthority",
+          "description": "The CA used for intermediate CA generation."
+        },
+        "excludedDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of domains which are excluded from TLS termination."
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyTrustedRootCertificate",
+            "description": "A list of certificates which are to be trusted by the firewall."
+          },
+          "description": "Certificates which are to be trusted by the firewall."
+        }
+      },
+      "description": "Configuration needed to perform TLS termination & initiation."
+    },
+    "FirewallPolicyTrustedRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallPolicyTrustedRootCertificatePropertiesFormat",
+          "description": "Properties of the trusted root authorities."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the trusted root certificate that is unique within a firewall policy."
+        }
+      },
+      "description": "Trusted Root certificates of a firewall policy."
+    },
+    "FirewallPolicyTrustedRootCertificatePropertiesFormat": {
+      "properties": {
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) the public certificate data stored in KeyVault."
+        }
+      },
+      "description": "Trusted Root certificates properties for tls."
+    },
+    "FirewallPolicyCertificateAuthority": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FirewallPolicyCertificateAuthorityPropertiesFormat",
+          "description": "Properties of the certificate authority."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the CA certificate."
+        }
+      },
+      "description": "Trusted Root certificates properties for tls."
+    },
+    "FirewallPolicyCertificateAuthorityPropertiesFormat": {
+      "properties": {
+        "keyVaultSecretId": {
+          "type": "string",
+          "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
+        }
+      },
+      "description": "Trusted Root certificates properties for tls."
     },
     "FirewallPolicyRuleGroup": {
       "properties": {
@@ -819,6 +901,13 @@
           },
           "description": "Array of Application Protocols."
         },
+        "targetUrls": {
+          "type": "array",
+          "description": "List of Urls for this rule condition.",
+          "items": {
+            "type": "string"
+          }
+        },
         "targetFqdns": {
           "type": "array",
           "description": "List of FQDNs for this rule condition.",
@@ -886,6 +975,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "terminateTLS": {
+          "type": "boolean",
+          "description": "Terminate TLS connections for this rule."
         }
       }
     },
@@ -1069,6 +1162,26 @@
       "x-ms-enum": {
         "name": "FirewallPolicyIntrusionSystemMode",
         "modelAsString": true
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "description": "ThreatIntel Whitelist for Firewall Policy.",
+      "x-ms-discriminator-value": "FirewallPolicyThreatIntelWhitelist",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP addresses for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     }
   }
