@@ -2391,8 +2391,7 @@
         }
       }
     },
-       
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
       "get": {
         "x-ms-examples": {
           "Get EyesOn settings.": {
@@ -2436,8 +2435,8 @@
           }
         }
       }
-	},
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
       "get": {
         "x-ms-examples": {
           "Get EyesOn settings.": {
@@ -7934,6 +7933,21 @@
       },
       "type": "object"
     },
+    "SettingList": {
+      "description": "List of all the settings.",
+      "properties": {
+        "value": {
+          "description": "Array of settings.",
+          "items": {
+            "$ref": "#/definitions/Settings"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Settings": {
       "allOf": [
         {
@@ -7945,10 +7959,7 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "SettingsKind": {
       "description": "Describes an Azure resource with kind.",
@@ -8200,7 +8211,7 @@
       "properties": {
         "isEnabled": {
           "description": "Determines whether the setting is enable or disabled.",
-		  "readOnly": true,
+          "readOnly": true,
           "type": "boolean"
         }
       },
