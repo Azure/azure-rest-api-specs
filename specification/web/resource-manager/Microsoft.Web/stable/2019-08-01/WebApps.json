@@ -6759,14 +6759,16 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "put": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}": {
+      "get": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Approves or rejects a private endpoint connection",
-        "description": "Description for Approves or rejects a private endpoint connection",
-        "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnection",
+        "summary": "Get process information by its ID for a specific scaled-out instance in a web site.",
+        "description": "Description for Get process information by its ID for a specific scaled-out instance in a web site.",
+        "operationId": "WebApps_GetProcess",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -6774,23 +6776,16 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the site.",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "privateEndpointConnectionName",
+            "name": "processId",
             "in": "path",
+            "description": "PID.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "privateEndpointWrapper",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
-            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
