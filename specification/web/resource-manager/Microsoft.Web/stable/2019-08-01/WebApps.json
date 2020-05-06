@@ -780,7 +780,7 @@
             "description": "Application settings of the app.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           {
@@ -794,7 +794,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -836,7 +836,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -930,6 +930,99 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_UpdateAuthSettingsV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteAuthSettingsV2",
+            "in": "body",
+            "description": "Auth settings associated with web app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/authsettingsV2/list": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_GetAuthSettingsV2",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
             }
           },
           "default": {
@@ -1211,6 +1304,53 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/configreferences/appsettings/refresh": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Refreshes a web app's Key Vault References to the latest non-specified version and restarts the web app if needed",
+        "description": "Description for Refreshes a web app's Key Vault References to the latest non-specified version and restarts the web app if needed",
+        "operationId": "WebApps_RefreshKeyVaultReferencesForSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceRestart",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultReferenceCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/configreferences/appsettings/{appSettingKey}": {
       "get": {
         "tags": [
@@ -1474,7 +1614,7 @@
             "description": "Edited metadata of the app or deployment slot. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           {
@@ -1488,7 +1628,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -1530,7 +1670,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -3485,7 +3625,7 @@
           "200": {
             "description": "Function keys returned.",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -4546,7 +4686,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WebAppInstanceCollection"
+              "$ref": "#/definitions/WebAppInstanceStatusCollection"
             }
           },
           "default": {
@@ -5520,55 +5660,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "WebApps"
@@ -5608,55 +5699,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnection",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkFeatures/{view}": {
@@ -5681,7 +5723,7 @@
           {
             "name": "view",
             "in": "path",
-            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
+            "description": "The type of view. Only \"summary\" is supported at this time.",
             "required": true,
             "type": "string"
           },
@@ -6616,6 +6658,237 @@
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets a private endpoint connection",
+        "description": "Description for Gets a private endpoint connection",
+        "operationId": "WebApps_GetPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for a site.": {
+            "$ref": "./examples/GetSitePrivateEndpointConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Approves or rejects a private endpoint connection",
+        "description": "Description for Approves or rejects a private endpoint connection",
+        "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointWrapper",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approves or rejects a private endpoint connection for a site.": {
+            "$ref": "./examples/ApproveRejectSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes a private endpoint connection",
+        "description": "Description for Deletes a private endpoint connection",
+        "operationId": "WebApps_DeletePrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for a site.": {
+            "$ref": "./examples/DeleteSitePrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the private link resources",
+        "description": "Description for Gets the private link resources",
+        "operationId": "WebApps_GetPrivateLinkResources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private link resources of a site": {
+            "$ref": "./examples/GetSitePrivateLinkResources.json"
           }
         }
       }
@@ -7939,7 +8212,7 @@
           {
             "name": "deleteEmptyServerFarm",
             "in": "query",
-            "description": "Specify true if the App Service plan will be empty after app deletion and you want to delete the empty App Service plan. By default, the empty App Service plan is not deleted.",
+            "description": "Specify false if you want to keep empty App Service plan. By default, empty App Service plan is deleted.",
             "type": "boolean"
           },
           {
@@ -8568,7 +8841,7 @@
             "description": "Application settings of the app.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           {
@@ -8589,7 +8862,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -8638,7 +8911,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -8746,6 +9019,113 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SiteAuthSettings"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/authsettingsV2": {
+      "put": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Updates site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_UpdateAuthSettingsV2Slot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of web app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteAuthSettingsV2",
+            "in": "body",
+            "description": "Auth settings associated with web app.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of web app slot. If not specified then will default to production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/authsettingsV2/list": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "description": "Description for Gets site's Authentication / Authorization settings for apps via the V2 format",
+        "operationId": "WebApps_GetAuthSettingsV2Slot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. If a slot is not specified, the API will get the settings for the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SiteAuthSettingsV2"
             }
           },
           "default": {
@@ -9015,6 +9395,172 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/configreferences/appsettings": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the config reference app settings and status of an app",
+        "description": "Description for Gets the config reference app settings and status of an app",
+        "operationId": "WebApps_GetAppSettingsKeyVaultReferencesSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultReferenceCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Key Vault references for app settings": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSettings.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/configreferences/appsettings/refresh": {
+      "post": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Refreshes a web app's Key Vault References to the latest non-specified version and restarts the web app if needed",
+        "description": "Description for Refreshes a web app's Key Vault References to the latest non-specified version and restarts the web app if needed",
+        "operationId": "WebApps_RefreshKeyVaultReferencesForSiteSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceRestart",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultReferenceCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/configreferences/appsettings/{appSettingKey}": {
+      "get": {
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the config reference and status of an app",
+        "description": "Description for Gets the config reference and status of an app",
+        "operationId": "WebApps_GetAppSettingKeyVaultReferenceSlot",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "appSettingKey",
+            "in": "path",
+            "description": "App Setting key name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/KeyVaultReferenceResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Key Vault app setting reference": {
+            "$ref": "./examples/GetKeyVaultReferencesForAppSetting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/connectionstrings": {
       "put": {
         "tags": [
@@ -9252,7 +9798,7 @@
             "description": "Edited metadata of the app or deployment slot. See example.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           {
@@ -9273,7 +9819,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -9322,7 +9868,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -11452,7 +11998,7 @@
           "200": {
             "description": "Function keys returned.",
             "schema": {
-              "$ref": "#/definitions/StringDictionary"
+              "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
           "default": {
@@ -12660,7 +13206,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WebAppInstanceCollection"
+              "$ref": "#/definitions/WebAppInstanceStatusCollection"
             }
           },
           "default": {
@@ -13635,62 +14181,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_CreateOrUpdateSwiftVirtualNetworkConnectionSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      },
       "delete": {
         "tags": [
           "WebApps"
@@ -13737,62 +14227,6 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.",
-        "description": "Description for Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\nin use by another App Service Plan other than the one this App is in.",
-        "operationId": "WebApps_UpdateSwiftVirtualNetworkConnectionSlot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "connectionEnvelope",
-            "in": "body",
-            "description": "Properties of the Virtual Network connection. See example.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. If a slot is not specified, the API will add or update connections for the production slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SwiftVirtualNetwork"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/networkFeatures/{view}": {
@@ -13817,7 +14251,7 @@
           {
             "name": "view",
             "in": "path",
-            "description": "The type of view. This can either be \"summary\" or \"detailed\".",
+            "description": "The type of view. Only \"summary\" is supported at this time.",
             "required": true,
             "type": "string"
           },
@@ -14882,14 +15316,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "WebApps"
         ],
         "summary": "Gets a private endpoint connection",
         "description": "Description for Gets a private endpoint connection",
-        "operationId": "WebApps_GetPrivateEndpointConnection",
+        "operationId": "WebApps_GetPrivateEndpointConnectionSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -14904,6 +15338,14 @@
           {
             "name": "privateEndpointConnectionName",
             "in": "path",
+            "description": "Name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the site deployment slot.",
             "required": true,
             "type": "string"
           },
@@ -14918,7 +15360,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -14940,7 +15382,7 @@
         ],
         "summary": "Approves or rejects a private endpoint connection",
         "description": "Description for Approves or rejects a private endpoint connection",
-        "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnection",
+        "operationId": "WebApps_ApproveOrRejectPrivateEndpointConnectionSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -14963,8 +15405,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateLinkConnectionApprovalRequestResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkConnectionApprovalRequestResource"
             }
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -14977,13 +15425,13 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "202": {
             "description": "Asynchronous operation in progress.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
             }
           },
           "default": {
@@ -15006,7 +15454,7 @@
         ],
         "summary": "Deletes a private endpoint connection",
         "description": "Description for Deletes a private endpoint connection",
-        "operationId": "WebApps_DeletePrivateEndpointConnection",
+        "operationId": "WebApps_DeletePrivateEndpointConnectionSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -15020,6 +15468,12 @@
           },
           {
             "name": "privateEndpointConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
             "in": "path",
             "required": true,
             "type": "string"
@@ -15065,14 +15519,14 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/privateLinkResources": {
       "get": {
         "tags": [
           "WebApps"
         ],
         "summary": "Gets the private link resources",
         "description": "Description for Gets the private link resources",
-        "operationId": "WebApps_GetPrivateLinkResources",
+        "operationId": "WebApps_GetPrivateLinkResourcesSlot",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -15081,6 +15535,12 @@
             "name": "name",
             "in": "path",
             "description": "Name of the site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -15095,7 +15555,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesWrapper"
+              "$ref": "./CommonDefinitions.json#/definitions/PrivateLinkResourcesWrapper"
             }
           },
           "default": {
@@ -19791,6 +20251,17 @@
     }
   },
   "definitions": {
+    "AllowedAudiencesValidation": {
+      "type": "object",
+      "properties": {
+        "allowedAudiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ApiKVReference": {
       "description": "Description of site key vault references.",
       "type": "object",
@@ -19859,6 +20330,20 @@
             "name": "ConfigReferenceLocation",
             "modelAsString": false
           }
+        },
+        "activeVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "AppRegistration": {
+      "type": "object",
+      "properties": {
+        "appId": {
+          "type": "string"
+        },
+        "appSecretSettingName": {
+          "type": "string"
         }
       }
     },
@@ -19880,13 +20365,82 @@
         }
       }
     },
-    "ArmIdWrapper": {
-      "description": "A wrapper for an ARM resource id",
+    "AuthPlatform": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
+        "enabled": {
+          "type": "boolean"
+        },
+        "runtimeVersion": {
+          "type": "string"
+        },
+        "configFilePath": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureActiveDirectory": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AzureActiveDirectoryRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/AzureActiveDirectoryLogin"
+        },
+        "validation": {
+          "$ref": "#/definitions/AzureActiveDirectoryValidation"
+        },
+        "isAutoProvisioned": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AzureActiveDirectoryLogin": {
+      "type": "object",
+      "properties": {
+        "disableWWWAuthenticate": {
+          "type": "boolean"
+        },
+        "loginParameters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureActiveDirectoryRegistration": {
+      "type": "object",
+      "properties": {
+        "openIdIssuer": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "type": "string"
+        },
+        "clientSecretCertificateThumbprint": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureActiveDirectoryValidation": {
+      "type": "object",
+      "properties": {
+        "jwtClaimChecks": {
+          "$ref": "#/definitions/JwtClaimChecksV2"
+        },
+        "allowedAudiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -19939,54 +20493,6 @@
         }
       }
     },
-    "AzureStorageInfoValue": {
-      "description": "Azure Files or Blob Storage access information value for dictionary storage.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Type of storage.",
-          "enum": [
-            "AzureFiles",
-            "AzureBlob"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "AzureStorageType",
-            "modelAsString": false
-          }
-        },
-        "accountName": {
-          "description": "Name of the storage account.",
-          "type": "string"
-        },
-        "shareName": {
-          "description": "Name of the file share (container name, for Blob storage).",
-          "type": "string"
-        },
-        "accessKey": {
-          "description": "Access key for the storage account.",
-          "type": "string"
-        },
-        "mountPath": {
-          "description": "Path to mount the storage within the site's runtime environment.",
-          "type": "string"
-        },
-        "state": {
-          "description": "State of the storage account.",
-          "enum": [
-            "Ok",
-            "InvalidCredentials",
-            "InvalidShare"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "AzureStorageState",
-            "modelAsString": false
-          }
-        }
-      }
-    },
     "AzureStoragePropertyDictionaryResource": {
       "description": "AzureStorageInfo dictionary resource.",
       "type": "object",
@@ -20000,7 +20506,7 @@
           "description": "Azure storage accounts.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/AzureStorageInfoValue"
+            "$ref": "./CommonDefinitions.json#/definitions/AzureStorageInfoValue"
           },
           "x-ms-client-flatten": true
         }
@@ -20261,6 +20767,25 @@
           "description": "Last time when this schedule was triggered.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "BlobStorageTokenStore": {
+      "type": "object",
+      "properties": {
+        "sasUrlSettingName": {
+          "type": "string"
+        }
+      }
+    },
+    "ClientRegistration": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientSecretSettingName": {
+          "type": "string"
         }
       }
     },
@@ -20563,6 +21088,25 @@
         }
       }
     },
+    "CookieExpiration": {
+      "type": "object",
+      "properties": {
+        "convention": {
+          "enum": [
+            "FixedTime",
+            "IdentityProviderDerived"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CookieExpirationConvention",
+            "modelAsString": false
+          }
+        },
+        "timeToExpiration": {
+          "type": "string"
+        }
+      }
+    },
     "CsmCopySlotEntity": {
       "description": "Copy deployment slot parameters.",
       "required": [
@@ -20710,6 +21254,20 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CustomOpenIdConnectProvider": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/OpenIdConnectRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/OpenIdConnectLogin"
         }
       }
     },
@@ -20867,6 +21425,23 @@
         }
       }
     },
+    "Facebook": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/AppRegistration"
+        },
+        "graphApiVersion": {
+          "type": "string"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        }
+      }
+    },
     "FileSystemApplicationLogsConfig": {
       "description": "Application logs to file system configuration.",
       "type": "object",
@@ -20908,6 +21483,37 @@
         "enabled": {
           "description": "True if configuration is enabled, false if it is disabled and null if configuration is not set.",
           "type": "boolean"
+        }
+      }
+    },
+    "FileSystemTokenStore": {
+      "type": "object",
+      "properties": {
+        "directory": {
+          "type": "string"
+        }
+      }
+    },
+    "ForwardProxy": {
+      "type": "object",
+      "properties": {
+        "convention": {
+          "enum": [
+            "NoProxy",
+            "Standard",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ForwardProxyConvention",
+            "modelAsString": false
+          }
+        },
+        "customHostHeaderName": {
+          "type": "string"
+        },
+        "customProtoHeadername": {
+          "type": "string"
         }
       }
     },
@@ -21007,25 +21613,75 @@
     "FunctionSecrets": {
       "description": "Function secrets.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "FunctionSecrets resource specific properties",
-          "properties": {
-            "key": {
-              "description": "Secret key.",
-              "type": "string"
-            },
-            "trigger_url": {
-              "description": "Trigger URL.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
+        "key": {
+          "description": "Secret key.",
+          "type": "string"
+        },
+        "trigger_url": {
+          "description": "Trigger URL.",
+          "type": "string"
+        }
+      }
+    },
+    "GitHub": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        }
+      }
+    },
+    "GlobalValidation": {
+      "type": "object",
+      "properties": {
+        "requireAuthentication": {
+          "type": "boolean"
+        },
+        "unauthenticatedClientAction": {
+          "enum": [
+            "RedirectToLoginPage",
+            "AllowAnonymous",
+            "Return401",
+            "Return403"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UnauthenticatedClientActionV2",
+            "modelAsString": false
+          }
+        },
+        "redirectToProvider": {
+          "type": "string"
+        },
+        "excludedPaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Google": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/ClientRegistration"
+        },
+        "login": {
+          "$ref": "#/definitions/LoginScopes"
+        },
+        "validation": {
+          "$ref": "#/definitions/AllowedAudiencesValidation"
         }
       }
     },
@@ -21207,6 +21863,71 @@
         }
       }
     },
+    "HttpSettings": {
+      "type": "object",
+      "properties": {
+        "requireHttps": {
+          "type": "boolean"
+        },
+        "routes": {
+          "$ref": "#/definitions/HttpSettingsRoutes"
+        },
+        "forwardProxy": {
+          "$ref": "#/definitions/ForwardProxy"
+        }
+      }
+    },
+    "HttpSettingsRoutes": {
+      "type": "object",
+      "properties": {
+        "apiPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "IdentityProviders": {
+      "type": "object",
+      "properties": {
+        "azureActiveDirectory": {
+          "$ref": "#/definitions/AzureActiveDirectory"
+        },
+        "facebook": {
+          "$ref": "#/definitions/Facebook"
+        },
+        "gitHub": {
+          "$ref": "#/definitions/GitHub"
+        },
+        "google": {
+          "$ref": "#/definitions/Google"
+        },
+        "twitter": {
+          "$ref": "#/definitions/Twitter"
+        },
+        "customOpenIdConnectProviders": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/CustomOpenIdConnectProvider"
+          }
+        }
+      }
+    },
+    "JwtClaimChecksV2": {
+      "type": "object",
+      "properties": {
+        "allowedGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowedClientApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "KeyInfo": {
       "description": "Function key info.",
       "type": "object",
@@ -21321,9 +22042,57 @@
                 "name": "ConfigReferenceLocation",
                 "modelAsString": false
               }
+            },
+            "activeVersion": {
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "$ref": "#/definitions/LoginRoutes"
+        },
+        "tokenStore": {
+          "$ref": "#/definitions/TokenStore"
+        },
+        "preserveUrlFragmentsForLogins": {
+          "type": "boolean"
+        },
+        "allowedExternalRedirectUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cookieExpiration": {
+          "$ref": "#/definitions/CookieExpiration"
+        },
+        "nonce": {
+          "$ref": "#/definitions/Nonce"
+        }
+      }
+    },
+    "LoginRoutes": {
+      "type": "object",
+      "properties": {
+        "logoutEndpoint": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginScopes": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -21641,6 +22410,83 @@
         }
       }
     },
+    "Nonce": {
+      "type": "object",
+      "properties": {
+        "validateNonce": {
+          "type": "boolean"
+        },
+        "nonceExpirationInterval": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectClientCredential": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "enum": [
+            "ClientSecretPost"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientCredentialMethod",
+            "modelAsString": false
+          }
+        },
+        "clientSecretSettingName": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectConfig": {
+      "type": "object",
+      "properties": {
+        "authorizationEndpoint": {
+          "type": "string"
+        },
+        "tokenEndpoint": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "jwksUri": {
+          "type": "string"
+        },
+        "wellKnownOpenIdConfiguration": {
+          "type": "string"
+        }
+      }
+    },
+    "OpenIdConnectLogin": {
+      "type": "object",
+      "properties": {
+        "nameClaimType": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OpenIdConnectRegistration": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "clientCredential": {
+          "$ref": "#/definitions/OpenIdConnectClientCredential"
+        },
+        "openIdConnectConfiguration": {
+          "$ref": "#/definitions/OpenIdConnectConfig"
+        }
+      }
+    },
     "PerfMonCounterCollection": {
       "description": "Collection of performance monitor counters.",
       "required": [
@@ -21870,133 +22716,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateAccessSubnet"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnectionResource": {
-      "description": "Private Endpoint Connection ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RemotePrivateEndpointConnection",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequest": {
-      "description": "A request to approve or reject a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
-    "PrivateLinkConnectionApprovalRequestResource": {
-      "description": "Private Endpoint Connection Approval ARM resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkConnectionApprovalRequest",
-          "description": "Core resource properties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PrivateLinkConnectionState": {
-      "description": "The state of a private link connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of a private link connection",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of a private link connection",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "ActionsRequired for a private link connection",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "required": [
-        "id",
-        "name",
-        "type",
-        "properties"
-      ],
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of a private link resource",
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Properties of a private link resource"
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "description": "GroupId of a private link resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "description": "RequiredMembers of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "description": "RequiredZoneNames of a private link resource",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkResourcesWrapper": {
-      "description": "Wrapper for a collection of private link resources",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
           }
         }
       }
@@ -22489,23 +23208,6 @@
         }
       }
     },
-    "RemotePrivateEndpointConnection": {
-      "description": "A remote private endpoint connection",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/ArmIdWrapper",
-          "description": "PrivateEndpoint of a remote private endpoint connection"
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkConnectionState"
-        }
-      }
-    },
     "RestoreRequest": {
       "description": "Description of a restore request.",
       "type": "object",
@@ -22638,7 +23340,8 @@
                 "Facebook",
                 "Google",
                 "MicrosoftAccount",
-                "Twitter"
+                "Twitter",
+                "Github"
               ],
               "type": "string",
               "x-ms-enum": {
@@ -22657,6 +23360,10 @@
             },
             "clientSecret": {
               "description": "The Client Secret of this relying party application (in Azure Active Directory, this is also referred to as the Key).\nThis setting is optional. If no client secret is configured, the OpenID Connect implicit auth flow is used to authenticate end users.\nOtherwise, the OpenID Connect Authorization Code Flow is used to authenticate end users.\nMore information on OpenID Connect: http://openid.net/specs/openid-connect-core-1_0.html",
+              "type": "string"
+            },
+            "clientSecretSettingName": {
+              "description": "The app setting name that contains the client secret of the relying party application.",
               "type": "string"
             },
             "clientSecretCertificateThumbprint": {
@@ -22685,12 +23392,20 @@
                 "type": "string"
               }
             },
+            "aadClaimsAuthorization": {
+              "description": "Gets a JSON string containing the Azure AD Acl settings.",
+              "type": "string"
+            },
             "googleClientId": {
               "description": "The OpenID Connect Client ID for the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
               "type": "string"
             },
             "googleClientSecret": {
               "description": "The client secret associated with the Google web application.\nThis setting is required for enabling Google Sign-In.\nGoogle Sign-In documentation: https://developers.google.com/identity/sign-in/web/",
+              "type": "string"
+            },
+            "googleClientSecretSettingName": {
+              "description": "The app setting name that contains the client secret associated with \nthe Google web application.",
               "type": "string"
             },
             "googleOAuthScopes": {
@@ -22708,8 +23423,30 @@
               "description": "The App Secret of the Facebook app used for Facebook Login.\nThis setting is required for enabling Facebook Login.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
               "type": "string"
             },
+            "facebookAppSecretSettingName": {
+              "description": "The app setting name that contains the app secret used for Facebook Login.",
+              "type": "string"
+            },
             "facebookOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Facebook Login authentication.\nThis setting is optional.\nFacebook Login documentation: https://developers.facebook.com/docs/facebook-login",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "gitHubClientId": {
+              "description": "The Client Id of the GitHub app used for login.\nThis setting is required for enabling Github login",
+              "type": "string"
+            },
+            "gitHubClientSecret": {
+              "description": "The Client Secret of the GitHub app used for Github Login.\nThis setting is required for enabling Github login.",
+              "type": "string"
+            },
+            "gitHubClientSecretSettingName": {
+              "type": "string"
+            },
+            "gitHubOAuthScopes": {
+              "description": "THe OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.\nThis setting is optional",
               "type": "array",
               "items": {
                 "type": "string"
@@ -22723,6 +23460,10 @@
               "description": "The OAuth 1.0a consumer secret of the Twitter application used for sign-in.\nThis setting is required for enabling Twitter Sign-In.\nTwitter Sign-In documentation: https://dev.twitter.com/web/sign-in",
               "type": "string"
             },
+            "twitterConsumerSecretSettingName": {
+              "description": "The app setting name that contains the OAuth 1.0a consumer secret of the Twitter\napplication used for sign-in.",
+              "type": "string"
+            },
             "microsoftAccountClientId": {
               "description": "The OAuth 2.0 client ID that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
@@ -22731,15 +23472,47 @@
               "description": "The OAuth 2.0 client secret that was created for the app used for authentication.\nThis setting is required for enabling Microsoft Account authentication.\nMicrosoft Account OAuth documentation: https://dev.onedrive.com/auth/msa_oauth.htm",
               "type": "string"
             },
+            "microsoftAccountClientSecretSettingName": {
+              "description": "The app setting name containing the OAuth 2.0 client secret that was created for the\napp used for authentication.",
+              "type": "string"
+            },
             "microsoftAccountOAuthScopes": {
               "description": "The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication.\nThis setting is optional. If not specified, \"wl.basic\" is used as the default scope.\nMicrosoft Account Scopes and permissions documentation: https://msdn.microsoft.com/en-us/library/dn631845.aspx",
               "type": "array",
               "items": {
                 "type": "string"
               }
+            },
+            "isAuthFromFile": {
+              "description": "\"true\" if the auth config settings should be read from a file,\n\"false\" otherwise",
+              "type": "string"
+            },
+            "authFilePath": {
+              "description": "The path of the config file containing auth settings.\nIf the path is relative, base will be %HOME%\\site\\wwwroot\\",
+              "type": "string"
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SiteAuthSettingsV2": {
+      "type": "object",
+      "properties": {
+        "platform": {
+          "$ref": "#/definitions/AuthPlatform"
+        },
+        "globalValidation": {
+          "$ref": "#/definitions/GlobalValidation"
+        },
+        "identityProviders": {
+          "$ref": "#/definitions/IdentityProviders"
+        },
+        "login": {
+          "$ref": "#/definitions/Login"
+        },
+        "httpSettings": {
+          "$ref": "#/definitions/HttpSettings"
         }
       }
     },
@@ -23015,28 +23788,6 @@
         }
       }
     },
-    "SiteInstance": {
-      "description": "Instance of an app.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "SiteInstance resource specific properties",
-          "properties": {
-            "siteInstanceName": {
-              "description": "Name of instance.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SiteLogsConfig": {
       "description": "Configuration of App Service site logs.",
       "type": "object",
@@ -23221,6 +23972,18 @@
               "description": "<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.",
               "type": "boolean"
             },
+            "clientCertMode": {
+              "description": "This composes with ClientCertEnabled setting.\n- ClientCertEnabled: false means ClientCert is ignored.\n- ClientCertEnabled: true and ClientCertMode: Required means ClientCert is required.\n- ClientCertEnabled: true and ClientCertMode: Optional means ClientCert is optional or accepted.",
+              "enum": [
+                "Required",
+                "Optional"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "ClientCertMode",
+                "modelAsString": false
+              }
+            },
             "clientCertExclusionPaths": {
               "description": "client certificate authentication comma-separated exclusion paths",
               "type": "string"
@@ -23385,6 +24148,14 @@
             },
             "isManualIntegration": {
               "description": "<code>true</code> to limit to manual integration; <code>false</code> to enable continuous integration (which configures webhooks into online repos like GitHub).",
+              "type": "boolean",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            },
+            "isGitHubAction": {
+              "description": "<code>true</code> if this is deployed via GitHub action.",
               "type": "boolean",
               "x-ms-mutability": [
                 "create",
@@ -23680,25 +24451,6 @@
         }
       }
     },
-    "StringDictionary": {
-      "description": "String dictionary resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Settings.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "SwiftVirtualNetwork": {
       "description": "Swift Virtual Network Contract. This is used to enable the new Swift way of doing virtual network integration.",
       "type": "object",
@@ -23721,6 +24473,24 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TokenStore": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "tokenRefreshExtensionHours": {
+          "format": "double",
+          "type": "number"
+        },
+        "fileSystem": {
+          "$ref": "#/definitions/FileSystemTokenStore"
+        },
+        "azureBlobStorage": {
+          "$ref": "#/definitions/BlobStorageTokenStore"
         }
       }
     },
@@ -23930,7 +24700,29 @@
         }
       }
     },
-    "WebAppInstanceCollection": {
+    "Twitter": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "registration": {
+          "$ref": "#/definitions/TwitterRegistration"
+        }
+      }
+    },
+    "TwitterRegistration": {
+      "type": "object",
+      "properties": {
+        "consumerKey": {
+          "type": "string"
+        },
+        "consumerSecretSettingName": {
+          "type": "string"
+        }
+      }
+    },
+    "WebAppInstanceStatusCollection": {
       "description": "Collection of app instances.",
       "required": [
         "value"
@@ -23941,7 +24733,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SiteInstance"
+            "$ref": "#/definitions/WebSiteInstanceStatus"
           }
         },
         "nextLink": {
@@ -24060,7 +24852,7 @@
               "type": "string"
             },
             "consoleUrl": {
-              "description": "Link to the Diagnose and Solve Portal",
+              "description": "Link to the console to webapp instance",
               "type": "string"
             },
             "containers": {
