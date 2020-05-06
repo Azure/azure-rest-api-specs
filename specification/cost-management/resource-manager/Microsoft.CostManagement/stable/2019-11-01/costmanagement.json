@@ -1312,15 +1312,58 @@
           "properties": {
             "type": {
               "description": "type of alert",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Budget",
+                "Invoice",
+                "Credit",
+                "Quota",
+                "General",
+                "xCloud",
+                "BudgetForecast"
+              ],
+              "x-ms-enum": {
+                "name": "AlertType",
+                "modelAsString": true
+              }
             },
             "category": {
               "description": "Alert category",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Cost",
+                "Usage",
+                "Billing",
+                "System"
+              ],
+              "x-ms-enum": {
+                "name": "AlertCategory",
+                "modelAsString": true
+              }
             },
             "criteria": {
               "description": "Criteria that triggered alert",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "CostThresholdExceeded",
+                "UsageThresholdExceeded",
+                "CreditThresholdApproaching",
+                "CreditThresholdReached",
+                "QuotaThresholdApproaching",  
+                "QuotaThresholdReached",
+                "MultiCurrency",
+                "ForecastCostThresholdExceeded",
+                "ForecastUsageThresholdExceeded",
+                "InvoiceDueDateApproaching",
+                "InvoiceDueDateReached",
+                "CrossCloudNewDataAvailable",
+                "CrossCloudCollectionError",
+                "GeneralThresholdError"
+              ],
+              "x-ms-enum": {
+                "name": "AlertCriteria",
+                "modelAsString": true
+              }
             }
           }
         },
@@ -1330,7 +1373,15 @@
         },
         "source": {
           "description": "Source of alert",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Preset",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "AlertSource",
+            "modelAsString": true
+          }
         },
         "details": {
           "description": "Alert details",
@@ -1338,7 +1389,20 @@
           "properties": {
             "timeGrainType": {
               "description": "Type of timegrain cadence",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "None",
+                "Monthly",
+                "Quarterly",
+                "Annually",
+                "BillingMonth",
+                "BillingQuarter",
+                "BillingAnnual"
+              ],
+              "x-ms-enum": {
+                "name": "AlertTimeGrainType",
+                "modelAsString": true
+              }
             },
             "periodStartDate": {
               "description": "datetime of periodStartDate",
@@ -1375,7 +1439,19 @@
             },
             "operator": {
               "description": "operator used to compare currentSpend with amount",
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "None",
+                "EqualTo",
+                "GreaterThan",
+                "GreaterThanOrEqualTo",
+                "LessThan",
+                "LessThanOrEqualTo"
+              ],
+              "x-ms-enum": {
+                "name": "AlertOperator",
+                "modelAsString": true
+              }
             },
             "amount": {
               "description": "budget threshold amount",
@@ -1424,7 +1500,18 @@
         },
         "status": {
           "description": "alert status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "None",
+            "Active",
+            "Overridden",
+            "Resolved",
+            "Dismissed"
+          ],
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": true
+          }
         },
         "creationTime": {
           "description": "dateTime in which alert was created",
