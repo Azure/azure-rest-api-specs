@@ -6,10 +6,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 azure-arm: true
 fluent: true
-namespace: com.microsoft.azure.management.desktopVirtualization
+namespace: com.microsoft.azure.management.desktopvirtualization
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-desktopVirtualization
+output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-desktopvirtualization
 ```
 
 ### Java multi-api
@@ -26,8 +26,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2019-01-23-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.desktopVirtualization.v2019_01_23_preview
-  output-folder: $(azure-libraries-for-java-folder)/desktopVirtualization/resource-manager/v2019_01_23_preview
+  namespace: com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/desktopvirtualization/mgmt-v2019_01_23_preview
 regenerate-manager: true
 generate-interface: true
 ```
