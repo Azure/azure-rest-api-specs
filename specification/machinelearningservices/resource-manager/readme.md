@@ -26,9 +26,17 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-03-01
+tag: package-2020-04-01
 ```
 
+### Tag: package-2020-04-01
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-04-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
+```
 
 ### Tag: package-2020-03-01
 
@@ -157,6 +165,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/ser
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2020-04-01
   - tag: package-2020-03-01
   - tag: package-2020-01-01
   - tag: package-2019-11-01
@@ -165,6 +174,18 @@ batch:
   - tag: package-2018-11-19
   - tag: package-2020-02-18-preview
   - tag: package-2018-03-preview
+```
+### Tag: package-2020-04-01 and java
+
+These settings apply only when `--tag=package-2020-04-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-04-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2020_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/machinelearningservices/mgmt-v2020_04_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-03-01 and java
@@ -270,6 +291,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-04-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-03-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2020-01-01/machineLearningServices.json
   - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-11-01/machineLearningServices.json
