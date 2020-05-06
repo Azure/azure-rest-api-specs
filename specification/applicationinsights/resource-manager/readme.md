@@ -324,6 +324,28 @@ input-file:
 - Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
 ```
 
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line. For Dotnet SDK generation.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
+- Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
+- Microsoft.Insights/stable/2015-05-01/componentContinuousExport_API.json
+- Microsoft.Insights/stable/2015-05-01/componentFeaturesAndPricing_API.json
+- Microsoft.Insights/stable/2015-05-01/componentProactiveDetection_API.json
+- Microsoft.Insights/stable/2015-05-01/componentWorkItemConfigs_API.json
+- Microsoft.Insights/stable/2015-05-01/favorites_API.json
+- Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
+- Microsoft.Insights/stable/2015-05-01/webTests_API.json
+- Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
+- Microsoft.Insights/stable/2015-05-01/workbooks_API.json
+- Microsoft.Insights/preview/2018-05-01/components_API.json
+- Microsoft.Insights/preview/2020-03-01-preview/componentLinkedStorageAccounts_API.json
+```
+
 ---
 
 # Code Generation
@@ -337,6 +359,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py --default-api-version=2020-03-01-preview azure-mgmt-applicationinsights
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -346,6 +370,10 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C#
 

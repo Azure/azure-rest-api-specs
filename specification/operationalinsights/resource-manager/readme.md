@@ -62,6 +62,10 @@ input-file:
 - Microsoft.OperationalInsights/preview/2019-08-01-preview/OperationalInsights.json
 ```
 
+### Tag: package-2020-03-preview
+
+These settings apply only when `--tag=package-2020-03-preview` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2020-03-preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/DataExports.json
@@ -78,6 +82,11 @@ input-file:
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
 - Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/SharedKeys.json
+- Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 ```
 
 ---
@@ -125,6 +134,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ``` yaml $(python)
+directive:
+    - from: swagger-document
+      where: $.info
+      transform: >
+          $.title = 'LogAnalyticsManagementClient';
+          $.description = 'The Log Analytics Client.';
+          return $;
+         
 python-mode: create
 python:
   azure-arm: true
@@ -132,8 +149,6 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.loganalytics
   package-name: azure-mgmt-loganalytics
-  title: LogAnalyticsManagementClient
-  description: The Log Analytics Client.
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
@@ -197,6 +212,10 @@ input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Clusters.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/StorageInsightConfigs.json
   - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/SavedSearches.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/AvailableServiceTiers.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Gateways.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/Schema.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2020-03-01-preview/WorkspacePurge.json
 
 ```
 
