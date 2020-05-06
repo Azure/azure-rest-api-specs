@@ -6741,10 +6741,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Process terminated.",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "#/definitions/ProcessInfoCollection"
             }
+          },
+          "404": {
+            "description": "Process with the specified ID is not running."
           },
           "default": {
             "description": "App Service error response.",
@@ -6753,10 +6756,8 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Get a private endpoint connection for a site.": {
-            "$ref": "./examples/GetSitePrivateEndpointConnection.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "put": {
