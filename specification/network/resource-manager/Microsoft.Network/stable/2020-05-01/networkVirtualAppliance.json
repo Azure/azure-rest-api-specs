@@ -903,6 +903,11 @@
           "description": "NetworkVirtualApplianceSku properties."
         }
       },
+      "etag": {
+        "type": "string",
+        "readOnly": true,
+        "description": "A unique read-only string that changes whenever the resource is updated."
+      },      
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
@@ -918,7 +923,7 @@
           "readOnly": true,
           "description": "Network Virtual Appliance Sku vendor"
         },
-        "availableVersion": {
+        "availableVersions": {
           "type": "array",
           "readOnly": true,
           "description": "Available Network Virtual Appliance versions.",
