@@ -24,13 +24,37 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2020-02
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2020-02
+
+These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-02'
+input-file:
+  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceEncryptionProtectors.json
+  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceKeys.json
+  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceTdeCertificates.json
+  - Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
+  - Microsoft.Sql/preview/2020-02-02-preview/cancelOperations.json
+  - Microsoft.Sql/preview/2020-02-02-preview/cancelPoolOperations.json
+  - Microsoft.Sql/preview/2020-02-02-preview/capabilities.json
+  - Microsoft.Sql/preview/2020-02-02-preview/databaseVulnerabilityAssessmentScans.json
+  - Microsoft.Sql/preview/2020-02-02-preview/databases.json
+  - Microsoft.Sql/preview/2020-02-02-preview/elasticPools.json
+  - Microsoft.Sql/preview/2020-02-02-preview/instanceFailoverGroups.json
+  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
+  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssessmentScans.json
+  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2020-02-02-preview/recoverableManagedDatabases.json
+  - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
+```
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
@@ -505,7 +529,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
-  ```
+```
 
 ### Tag: package-pure-2018-06-preview
 
