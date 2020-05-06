@@ -1541,11 +1541,11 @@
             "$ref": "#/definitions/DataTable"
           }
         },
-        "checkboxes": {
-          "description": "List of checkboxes extracted from the page.",
+        "SelectionMarks": {
+          "description": "List of selection marks extracted from the page.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Checkbox"
+            "$ref": "#/definitions/SelectionMark"
           }
         }        
       }
@@ -1608,7 +1608,7 @@
       "type": "string",
       "description": "Semantic data type of the key value element.",
       "enum": [
-        "checkbox"
+        "selectionMark"
       ],
       "x-ms-enum": {
         "name": "KeyValueType",
@@ -1620,35 +1620,30 @@
       "description": "Reference to a line or word.",
       "type": "string"
     },
-    "Checkbox": {
-      "description": "Information about the extracted checkbox contained in a page.",
+    "SelectionMark": {
+      "description": "Information about the extracted selection mark.",
       "type": "object",
       "required": [
         "boundingBox",
         "confidence",
-        "checkboxState"
+        "state"
       ],
       "properties": {
         "boundingBox": {
-          "description": "Bounding box of the checkbox.",
+          "description": "Bounding box of the selection mark.",
           "$ref": "#/definitions/BoundingBox"
         },
         "confidence": {
           "description": "Confidence value.",
           "$ref": "#/definitions/Confidence"
         },
-        "checkboxState": {
+        "state": {
+          "description": "State of the selection mark.",
           "type": "string",
-          "description": "Is the current checkbox checked?",
           "enum": [
-            "checked",
-            "unchecked"
-          ],
-          "x-ms-enum": {
-            "name": "FieldValueType",
-            "modelAsString": false
-          },
-          "x-nullable": false
+            "selected",
+            "unselected"
+          ]
         }
       }
     },
@@ -1850,12 +1845,12 @@
             "$ref": "#/definitions/FieldValue"
           }
         },
-        "valueCheckbox": {
-          "description": "Checkbox value.",
+        "valueSelectionMark": {
+          "description": "Selection mark value.",
           "type": "string",
           "enum": [
-            "checked",
-            "unchecked"
+            "selected",
+            "unselected"
           ]
         },        
         "text": {
@@ -1897,7 +1892,7 @@
         "integer",
         "array",
         "object",
-        "checkbox"
+        "selectionMark"
       ],
       "x-ms-enum": {
         "name": "FieldValueType",
