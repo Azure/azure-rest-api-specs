@@ -154,19 +154,21 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.EventHub/stable/2015-08-01/EventHub.json
-  - $(this-folder)/Microsoft.EventHub/stable/2014-09-01/EventHub.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/AuthorizationRules.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/CheckNameAvailability.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/consumergroups.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/disasterRecoveryConfigs.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/eventhubs.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/namespaces.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/networkRuleSets.json
+  - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/operations.json
   - $(this-folder)/Microsoft.EventHub/stable/2017-04-01/sku.json
+  - $(this-folder)/Microsoft.EventHub/stable/2015-08-01/EventHub.json
+  - $(this-folder)/Microsoft.EventHub/stable/2014-09-01/EventHub.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/AvailableClusterRegions-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/Clusters-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/ipfilterrules-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/namespaces-preview.json
-  - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/operations-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/quotaConfiguration-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/virtualnetworkrules-preview.json
   - $(this-folder)/Microsoft.EventHub/preview/2018-01-01-preview/networkrulessets-preview.json
