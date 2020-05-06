@@ -4114,7 +4114,241 @@
           "nextLinkName": "nextLink"
         }
       }
-    }	
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}": {
+      "put": {
+        "operationId": "HubRouteTables_CreateOrUpdate",
+        "x-ms-examples": {
+          "RouteTablePut": {
+            "$ref": "./examples/HubRouteTablePut.json"
+          }
+        },
+        "description": "Creates a RouteTable resource if it doesn't exist else updates the existing RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "routeTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            },
+            "description": "Parameters supplied to create or update RouteTable."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteTable created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the RouteTable created or updated.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "operationId": "HubRouteTables_Get",
+        "x-ms-examples": {
+          "RouteTableGet": {
+            "$ref": "./examples/HubRouteTableGet.json"
+          }
+        },
+        "description": "Retrieves the details of a RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the RouteTable retrieved.",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HubRouteTables_Delete",
+        "x-ms-examples": {
+          "RouteTableDelete": {
+            "$ref": "./examples/HubRouteTableDelete.json"
+          }
+        },
+        "description": "Deletes a RouteTable.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the RouteTable."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the RouteTable."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. RouteTable deleted."
+          },
+          "202": {
+            "description": "Request received successfully. RouteTable deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No RouteTables exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables": {
+      "get": {
+        "operationId": "HubRouteTables_List",
+        "x-ms-examples": {
+          "RouteTableList": {
+            "$ref": "./examples/HubRouteTableList.json"
+          }
+        },
+        "description": "Retrieves the details of all RouteTables.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the RouteTables for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListHubRouteTablesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }    
   },
   "definitions": {
     "VirtualWanProperties": {
