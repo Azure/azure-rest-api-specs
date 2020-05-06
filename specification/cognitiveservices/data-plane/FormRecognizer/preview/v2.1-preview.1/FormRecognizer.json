@@ -1305,7 +1305,7 @@
         }
       }
     },
-    "ComposeRequest": {
+    "ComposeRequest": { 
       "description": "Request contract for compose operation.",
       "required": [
         "modelIds"
@@ -1765,6 +1765,12 @@
           "description": "Document type.",
           "type": "string"
         },
+        "modelId": {
+          "description": "Model identifier.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": false
+        },
         "pageRange": {
           "description": "First and last page number where the document is found.",
           "type": "array",
@@ -1775,6 +1781,10 @@
             "minimum": 1,
             "x-nullable": false
           }
+        },
+        "docTypeConfidence": {
+          "description": "Confidence score.",
+          "$ref": "#/definitions/Confidence"
         },
         "fields": {
           "description": "Dictionary of named field values.",
