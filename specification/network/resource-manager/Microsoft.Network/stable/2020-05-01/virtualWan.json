@@ -3648,7 +3648,473 @@
           }
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}": {
+      "get": {
+        "operationId": "VirtualHubBgpConnection_Get",
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubBgpConnectionGet.json"
+          }
+        },
+        "description": "Retrieves the details of a Virtual Hub Bgp Connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the Bgp Connection retrieved.",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubBgpConnection_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubBgpConnectionPut.json"
+          }
+        },
+        "description": "Creates a VirtualHubBgpConnection resource if it doesn't exist else updates the existing VirtualHubBgpConnection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the BgpConnection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the BgpConnection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "VirtualHubBgpConnection_Delete",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubBgpConnectionDelete.json"
+          }
+        },
+        "description": "Deletes a VirtualHubBgpConnection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHubBgpConnection."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connection"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VirtualHubBgpConnection deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VirtualHubBgpConnection deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No VirtualHubBgpConnection exist by the name provided."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections": {
+      "get": {
+        "operationId": "VirtualHubBgpConnections_List",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubBgpConnectionList.json"
+          }
+        },
+        "description": "Retrieves the details of all VirtualHubBgpConnections.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualHubBgpConnections for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubBgpConnectionResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}": {
+      "get": {
+        "operationId": "VirtualHubIpConfiguration_Get",
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubIpConfigurationGet.json"
+          }
+        },
+        "description": "Retrieves the details of a Virtual Hub Ip configuration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipconfig"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the Bgp Connection retrieved.",
+            "schema": {
+              "$ref": "#/definitions/IpConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubIpConfiguration_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubIpConfigurationPut.json"
+          }
+        },
+        "description": "Creates a VirtualHubIpConfiguration resource if it doesn't exist else updates the existing VirtualHubIpConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipconfig"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IpConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the IpConfiguration created or updated.",
+            "schema": {
+              "$ref": "#/definitions/IpConfiguration"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the IpConfiguration created or updated.",
+            "schema": {
+              "$ref": "#/definitions/IpConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "VirtualHubIpConfiguration_Delete",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubIpConfigurationDelete.json"
+          }
+        },
+        "description": "Deletes a VirtualHubIpConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHubBgpConnection."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipconfig"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VirtualHubIpConfiguration deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VirtualHubIpConfiguration deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No VirtualHubIpConfiguration exist by the name provided."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations": {
+      "get": {
+        "operationId": "VirtualHubIpConfiguration_List",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubIpConfigurationList.json"
+          }
+        },
+        "description": "Retrieves the details of all VirtualHubIpConfigurations.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualHubIpConfigurations for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubIpConfigurationResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }	
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -3970,9 +4436,137 @@
         "sku": {
           "type": "string",
           "description": "The sku of this VirtualHub."
-        }
+        },
+        "bgpConnections": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to Bgp Connections.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to IpConfigurations.",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "virtualRouterAsn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "VirtualRouter ASN."
+        },
+        "virtualRouterIps": {
+          "type": "array",
+          "readOnly": false,
+          "description": "VirtualRouter IPs.",
+          "items": {
+            "type": "string"
+          }		
+		}
       },
       "description": "Parameters for VirtualHub."
+    },
+    "BgpConnection": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BgpConnectionProperties",
+          "description": "The properties of the Bgp connections."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the connection."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "connection type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Virtual Appliance Site resource."
+    },
+    "BgpConnectionProperties": {
+      "properties": {
+        "peerAsn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "Peer ASN."
+        },
+        "peerIp": {
+          "type": "string",
+          "readOnly": false,
+          "description": "Peer IP."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState"
+        },
+		"connectionState": {
+		  "type": "string",
+		  "description": "The current state of the VirtualHub to Peer",
+		  "readOnly": true,
+		  "enum": [
+			"Unknown",
+			"Connecting",
+			"Connected",
+			"NotConnected"
+		  ],
+		  "x-ms-enum": {
+			"name": "HubBgpConnectionStatus",
+			"modelAsString": true
+		  }		  
+		}
+      },
+      "description": "Properties of the bgp connection."
+    },	
+    "IpConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IpConfigurationProperties",
+          "description": "The properties of the Virtual Hub IPConfigurations."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Ip Configuration"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Ipconfiguration type."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "IpConfigurations"
     },
     "VirtualHubRouteTable": {
       "properties": {
@@ -5279,6 +5873,30 @@
         }
       },
       "description": "ExpressRouteConnection list."
-    }
+    },
+	  "ListVirtualHubBgpConnectionResults": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BgpConnection"
+          },
+          "description": "The list of VirtualHubBgpConnections."
+        }
+      },
+      "description": "VirtualHubBgpConnections list."	
+	  },
+  	"ListVirtualHubIpConfigurationResults": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpConfiguration"
+          },
+          "description": "The list of VirtualHubIpConfigurations."
+        }
+      },
+      "description": "VirtualHubIpConfigurations list."	
+  	}
   }
 }
