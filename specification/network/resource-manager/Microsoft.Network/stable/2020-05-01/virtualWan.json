@@ -4777,7 +4777,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IpConfigurationProperties",
+          "$ref": "#/definitions/IPConfigurationPropertiesFormat",
           "description": "The properties of the Virtual Hub IPConfigurations."
         },
         "name": {
@@ -4801,6 +4801,32 @@
         }
       ],
       "description": "IpConfigurations"
+    },
+    "IPConfigurationPropertiesFormat": {
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private IP address of the IP configuration."
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The private IP address allocation method."
+        },
+        "subnet": {
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "description": "The reference to the subnet resource."
+        },
+        "publicIPAddress": {
+          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "description": "The reference to the public IP resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the IP configuration resource."
+        }
+      },
+      "description": "Properties of IP configuration."
     },
     "VirtualHubRouteTable": {
       "properties": {
