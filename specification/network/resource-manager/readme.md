@@ -84,8 +84,6 @@ input-file:
   - Microsoft.Network/stable/2020-05-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2020-05-01/webapplicationfirewall.json
 ```
-<<<<<<< HEAD
-=======
 ### Tag: package-2020-04
 
 These settings apply only when `--tag=package-2020-04` is specified on the command line.
@@ -139,7 +137,6 @@ input-file:
   - Microsoft.Network/stable/2020-04-01/webapplicationfirewall.json
 ```
 
->>>>>>> Azure/network-may-release
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.

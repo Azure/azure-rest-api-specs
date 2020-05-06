@@ -392,14 +392,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
             "description": "Request successful. Resource with the specified name does not exist."
-          },
-          "200": {
-            "description": "Delete successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -518,14 +518,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance Site resource.",
+          "200": {
+            "description": "Request successful. The operation returns the resulting Network Virtual Appliance Site resource.",
             "schema": {
               "$ref": "#/definitions/VirtualApplianceSite"
             }
           },
-          "200": {
-            "description": "Request successful. The operation returns the resulting Network Virtual Appliance Site resource.",
+          "201": {
+            "description": "Request received successfully. The operation returns the resulting Network Virtual Appliance Site resource.",
             "schema": {
               "$ref": "#/definitions/VirtualApplianceSite"
             }
@@ -682,7 +682,7 @@
           }
         }
       }
-    }	
+    }
   },
   "definitions": {
     "NetworkVirtualAppliance": {
@@ -737,7 +737,7 @@
             "type": "string"
           }
         },
-		"cloudInitConfiguration": {
+        "cloudInitConfiguration": {
           "type": "string",
           "readOnly": false,
           "description": "CloudInitConfiguration string in plain text"
@@ -765,7 +765,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
-        },		
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "readOnly": true,
@@ -854,7 +854,7 @@
           "readOnly": false,
           "description": "Office 365 Policy.",
           "$ref": "#/definitions/Office365PolicyProperties"
-        },		
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "readOnly": true,
@@ -889,11 +889,11 @@
           "type": "boolean",
           "readOnly": false,
           "description": "Default."
-        }		
+        }
       },
       "description": "Network Virtual Appliance Sku Properties."
-    },	
-	"NetworkVirtualApplianceSku": {
+    },
+    "NetworkVirtualApplianceSku": {
       "title": "Available NetworkVirtualApplianceSkus",
       "description": "Definition of the NetworkVirtualApplianceSkus resource.",
       "properties": {
@@ -950,7 +950,7 @@
           "description": "Instance Count."
         }
       }
-    },	
+    },
     "NetworkVirtualApplianceListResult": {
       "properties": {
         "value": {
@@ -983,7 +983,7 @@
       },
       "description": "Response for ListNetworkVirtualApplianceSites API service call."
     },
-	"NetworkVirtualApplianceSkuListResult": {
+    "NetworkVirtualApplianceSkuListResult": {
       "properties": {
         "value": {
           "type": "array",
