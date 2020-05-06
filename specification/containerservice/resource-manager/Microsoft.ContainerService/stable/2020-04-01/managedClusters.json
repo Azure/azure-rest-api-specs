@@ -1483,6 +1483,10 @@
           "type": "string",
           "description": "Version of node image"
         },
+        "upgradeSettings": {
+          "$ref": "#/definitions/AgentPoolUpgradeSettings",
+          "description": "Settings for upgrading the agentpool"
+        },
         "provisioningState": {
           "readOnly": true,
           "type": "string",
@@ -1599,6 +1603,15 @@
         }
       },
       "description": "The response from the List Agent Pools operation."
+    },
+    "AgentPoolUpgradeSettings": {
+      "properties": {
+        "maxSurge": {
+          "type": "string",
+          "description": "Count or Percentage of additional nodes to be added during upgrade. If empty uses AKS default"
+        }
+      },
+      "description": "Settings for upgrading an agentpool"
     },
     "AgentPool": {
       "allOf": [
