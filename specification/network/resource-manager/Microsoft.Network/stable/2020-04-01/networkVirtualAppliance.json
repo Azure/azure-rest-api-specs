@@ -600,6 +600,88 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVirtualApplianceSkus {
+      "get": {
+        "tags": [
+          "VirtualApplianceSkus"
+        ],
+        "operationId": "VirtualApplianceSkus_List",
+        "description": "List all SKUs available for a virtual appliance",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the list of all virtual appliance skus.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceSkuListResult": {
+            "$ref": "./examples/NetworkVirtualApplianceSkusList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkVirtualApplianceSkus/{skuName}": {
+      "get": {
+        "tags": [
+          "VirtualApplianceSkus"
+        ],
+        "operationId": "VirtualApplianceSkus_Get",
+        "description": "Retrieves a single available sku for network virtual appliance.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "skuName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the Sku"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the requested NetworkVirtualAppliance sku information.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceSku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceSkuGet": {
+            "$ref": "./examples/NetworkVirtualApplianceSkuGet.json"
+          }
+        }
+      }
     }	
   },
   "definitions": {
@@ -811,6 +893,64 @@
       },
       "description": "Network Virtual Appliance Sku Properties."
     },	
+	"NetworkVirtualApplianceSku": {
+      "title": "Available NetworkVirtualApplianceSkus",
+      "description": "Definition of the NetworkVirtualApplianceSkus resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkVirtualApplianceSkuPropertiesFormat",
+          "description": "NetworkVirtualApplianceSku properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkVirtualApplianceSkuPropertiesFormat": {
+      "title": "Network Virtual Appliance Sku Properties",
+      "description": "Properties specific to NetworkVirtualApplianceSkus.",
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Network Virtual Appliance Sku vendor"
+        },
+        "availableVersion": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Available Network Virtual Appliance versions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availableScaleUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkVirtualApplianceSkuInstances"
+          },
+          "description": "The list of scale units available."
+        }
+      }
+    },
+    "NetworkVirtualApplianceSkuInstances": {
+      "title": "Network Virtual Appliance Sku Instances",
+      "description": "List of available Sku and instances",
+      "properties": {
+        "scaleUnit": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Scale Unit."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Instance Count."
+        }
+      }
+    },	
     "NetworkVirtualApplianceListResult": {
       "properties": {
         "value": {
@@ -842,6 +982,22 @@
         }
       },
       "description": "Response for ListNetworkVirtualApplianceSites API service call."
-    }	
+    },
+	"NetworkVirtualApplianceSkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkVirtualApplianceSku"
+          },
+          "description": "List of Network Virtual Appliance Skus that are available."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListNetworkVirtualApplianceSkus API service call."
+    }
   }
 }
