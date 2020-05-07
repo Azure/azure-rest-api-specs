@@ -324,47 +324,47 @@
       }
     },
     "privateLinkPolicy": {
-    "description": "PrivateLink Policy configuration object.",
-    "type": "object",
-    "properties": {
-          "name": {
-            "description": "Name of the Private Link Azure AD Policy.",
+      "description": "PrivateLink Policy configuration object.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Private Link Azure AD Policy.",
+          "type": "string"
+        },
+        "ownerTenantId": {
+          "description": "Guid of the owner tenant",
+          "type": "string"
+        },
+        "allTenants": {
+          "description": "Flag indicating whether all tenants are allowed",
+          "type": "boolean"
+        },
+        "tenants": {
+          "description": "The list of tenantIds.",
+          "type": "array",
+          "items": {
             "type": "string"
-          },
-          "ownerTenantId": {
-            "description": "Guid of the owner tenant",
-            "type": "string"
-          },
-          "allTenants": {
-            "description": "Flag indicating whether all tenants are allowed",
-            "type": "boolean"
-          },
-          "tenants": {
-            "description": "The list of tenantIds.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "resourceName": {
-            "description": "Name of the private link policy resource",
-            "type": "string"
-          },
-          "subscriptionId": {
-            "description": "Subscription Identifier",
-            "type": "string"
-          },
-          "resourceGroup": {
-            "description": "Name of the resource group",
-            "type": "string"
-          },
-          "tags": {
-            "type": "object",
-            "description": "Resource tags.",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
+        },
+        "resourceName": {
+          "description": "Name of the private link policy resource",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription Identifier",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Name of the resource group",
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
       },
       "allOf": [
         {
@@ -441,40 +441,40 @@
     }
   },
   "parameters": {
-  "subscriptionIdParameter": {
-    "name": "subscriptionId",
-    "in": "path",
-    "description": "Azure subscription ID.",
-    "required": true,
-    "type": "string",
-    "x-ms-parameter-location": "client"
-  },
-  "apiVersionParameter": {
-    "name": "api-version",
-    "in": "query",
-    "required": true,
-    "type": "string",
-    "x-ms-parameter-location": "client",
-    "description": "Version of the API to be used with the client request."
-  },
-  "resourceGroupNameParameter": {
-    "name": "resourceGroupName",
-    "in": "path",
-    "required": true,
-    "type": "string",
-    "pattern": "^[-\\w\\._\\(\\)]+$",
-    "minLength": 1,
-    "maxLength": 90,
-    "x-ms-parameter-location": "method",
-    "description": "Name of an Azure resource group."
-  },
-  "policyNameParameter": {
-    "name": "policyName",
-    "in": "path",
-    "required": true,
-    "type": "string",
-    "x-ms-parameter-location": "method",
-    "description": "name of the private link policy."
-  }
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Azure subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "Version of the API to be used with the client request."
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "description": "Name of an Azure resource group."
+    },
+    "policyNameParameter": {
+      "name": "policyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "name of the private link policy."
+    }
   }
 }
