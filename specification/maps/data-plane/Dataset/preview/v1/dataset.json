@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Maps Tileset Service",
+    "title": "Azure Maps Dataset Service",
     "version": "1.0",
-    "description": "APIs for managing Tilesets."
+    "description": "APIs for managing datasets from uploaded data in Azure Maps."
   },
   "host": "atlas.microsoft.com",
   "schemes": [
@@ -11,7 +11,8 @@
   ],
   "consumes": [],
   "produces": [
-    "application/json"
+    "application/json",
+    "application/xml"
   ],
   "securityDefinitions": {
     "azure_auth": {
@@ -75,6 +76,18 @@
         "$ref": "#/definitions/ErrorResponse"
       }
     },
+    "200Async": {
+      "description": "The operation's status response.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
+        }
+      }
+    },
     "201Async": {
       "description": "The resource has been created successfully.",
       "schema": {
@@ -106,14 +119,6 @@
     }
   },
   "parameters": {
-    "ClientId": {
-      "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
-      "type": "string",
-      "in": "header",
-      "required": false,
-      "x-ms-parameter-location": "client"
-    },
     "SubscriptionKey": {
       "name": "subscription-key",
       "description": "One of the Azure Maps keys provided from an Azure Map Account. Please refer to this [article](https://docs.microsoft.com/azure/azure-maps/how-to-manage-authentication) for details on how to manage authentication.",
@@ -131,72 +136,112 @@
       "default": "1.0",
       "x-ms-parameter-location": "client"
     },
-    "JsonFormat": {
-      "name": "format",
-      "description": "Desired format of the response. Only `json` format is supported.",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "enum": [
-        "json"
-      ],
-      "x-ms-enum": {
-        "name": "JsonFormat",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "json",
-            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "DatasetId": {
-      "name": "datasetId",
-      "description": "The unique `datasetId` that the tileset create API uses to retrieve features to generate tiles. The `datasetId` must have been obtained from a successful [Dataset Create API](/en-us/rest/api/maps/dataset/createpreview) call.",
+    "ConversionId": {
+      "name": "conversionId",
+      "description": "The unique ID used to create the dataset. The `conversionId` must have been obtained from a successful call to the Conversion Service Convert API and must be provided with multiple query parameters with same name (if more than one is provided). May not be provided in conjunction with the `udid` query parameter.",
       "type": "string",
       "in": "query",
-      "required": true,
-      "x-ms-parameter-location": "client"
+      "required": false,
+      "x-ms-parameter-location": "method"
     },
-    "TilesetId": {
-      "name": "tilesetId",
-      "description": "The Tileset Id",
+    "Udid": {
+      "name": "udid",
+      "description": "The unique data ID used to create the dataset. The `udid` must have been obtained from a successful call to the Data Service Upload API and must be provided with multiple query parameters with the same name (if more than one is provided). May not be provided in conjunction with `conversionId` query parameter.",
       "type": "string",
-      "in": "path",
-      "required": true,
+      "in": "query",
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "Description": {
       "name": "description",
-      "description": "A description for the tileset.",
+      "description": "The description to be given to the dataset.",
       "type": "string",
       "in": "query",
       "required": false,
-      "x-ms-parameter-location": "client"
-    },
-    "MinZoom": {
-      "name": "minZoom",
-      "in": "query",
-      "description": "The lowest zoom level to create tiles. All features will be included in between the MinZoom and MaxZoom (inclusive).  MaxZoom must be provided if MinZoom is provided. This parameter is only supported for a Dataset created with 'outdoor' ontology. Value must be in the range: 0, 19 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
-      "required": false,
-      "type": "integer",
       "x-ms-parameter-location": "method"
     },
-    "MaxZoom": {
-      "name": "maxZoom",
+    "DatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "path",
+      "description": "The identifier for the dataset to query from.",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "Type": {
+      "name": "type",
+      "type": "string",
       "in": "query",
-      "description": "The highest zoom level to create tiles. All features will be included in between the MinZoom and MaxZoom (inclusive).  MinZoom must be provided if MaxZoom is provided. This parameter is only supported for a Dataset created with 'outdoor' ontology. Value must be in the range: 0, 19 (inclusive).\n\nPlease see [Zoom Levels and Tile Grid](https://docs.microsoft.com/en-us/azure/location-based-services/zoom-levels-and-tile-grid) for details.",
+      "description": "The type of data to create the dataset with.",
+      "enum": [
+        "facility",
+        "raster",
+        "outdoor"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "facility",
+            "description": "Facility Maps data type."
+          },
+          {
+            "value": "raster",
+            "description": "Raster image data."
+          },
+          {
+            "value": "outdoor",
+            "description": "Outdoor Maps data type."
+          }
+        ]
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "ImportType": {
+      "name": "type",
+      "type": "string",
+      "in": "query",
+      "description": "The type of data to import into the dataset with.",
+      "enum": [
+        "fixture"
+      ],
+      "x-ms-enum": {
+        "name": "type",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "fixture",
+            "description": "Area and point element data."
+          }
+        ]
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "AppendDatasetId": {
+      "name": "datasetId",
+      "type": "string",
+      "in": "query",
+      "description": "The ID for the dataset to append to.",
       "required": false,
-      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "StatusId": {
+      "name": "statusId",
+      "type": "string",
+      "in": "path",
+      "description": "The ID to query the status for the dataset create/import request.",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
   "paths": {
-    "/tileset/create/vector": {},
-    "/tileset": {},
-    "/tileset/{tilesetId}": {}
+    "/dataset/create": {},
+    "/dataset/import/{datasetId}": {},
+    "/dataset/{datasetId}": {},
+    "/dataset": {}
   },
   "definitions": {
     "ErrorResponse": {
@@ -221,6 +266,42 @@
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        }
+      }
+    },
+    "ODataErrorResponse": {
+      "type": "object",
+      "description": "This response object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ODataError"
+        }
+      }
+    },
+    "ODataError": {
+      "type": "object",
+      "description": "This object is returned when an error occurs in the Maps API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The ODataError code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },
@@ -276,93 +357,89 @@
           "readOnly": true
         },
         "error": {
-          "type": "object",
-          "description": "This object is returned when an error occurs in the Maps API.",
-          "properties": {
-            "code": {
-              "type": "string",
-              "readOnly": true,
-              "description": "The ODataError code."
-            },
-            "message": {
-              "type": "string",
-              "readOnly": true,
-              "description": "If available, a human readable description of the error."
-            },
-            "details": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/LongRunningOperationResult/properties/error"
-              }
-            },
-            "target": {
-              "type": "string",
-              "readOnly": true,
-              "description": "If available, the target causing the error."
-            }
-          }
+          "$ref": "#/definitions/ODataError"
         },
         "warning": {
-          "$ref": "#/definitions/LongRunningOperationResult/properties/error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "TilesetListResponse": {
-      "description": "The response model for the Tileset List API. Returns a list of all tilesets.",
+    "DatasetDeleteResponse": {
+      "description": "The response model for the Dataset Delete API. The response body will be empty signifying there's no content available for the `datasetId` anymore.",
+      "type": "object"
+    },
+    "DatasetListResponse": {
+      "description": "The response model for the Dataset List API. The response body will contain a list of all the previously created datasets.",
       "type": "object",
       "properties": {
-        "tilesets": {
-          "description": "A list of all tilesets.",
+        "datasets": {
+          "description": "A list of all the previously created datasets.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/TilesetDetailInfo"
+            "$ref": "#/definitions/DatasetDetailInfo"
           }
         }
       }
     },
-    "TilesetDetailInfo": {
-      "description": "Detail information for the data.",
+    "DatasetDetailInfo": {
+      "description": "Detail information for the dataset.",
       "type": "object",
       "properties": {
-        "tilesetId": {
-          "description": "The unique tileset id for the tileset.",
+        "created": {
+          "description": "The created timestamp for the dataset.",
           "type": "string",
           "readOnly": true
         },
         "datasetId": {
-          "description": "The unique dataset Id used to create the tileset.",
+          "description": "The id for the dataset.",
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "The description the caller provided when creating the tileset. Maximum length 1024 characters.",
+          "description": "The description for the dataset.",
           "type": "string",
           "readOnly": true
         },
-        "minZoom": {
-          "description": "The lowest tile zoom level tile generated for the tileset.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "maxZoom": {
-          "description": "The highest tile zoom level tile generated for the tileset.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "bbox": {
-          "description": "Bounding box which all features of the tileset lay within. Projection used - EPSG:3857. Format : 'minLon, minLat, maxLon, maxLat'.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "number"
-          }
+        "datasetSources": {
+          "$ref": "#/definitions/DatasetSources"
         }
       }
     },
-    "TilesetDeleteResponse": {
-      "description": "The response model for the Delete API. The response body will be empty signifying there's no content available for the `tilesetId` anymore.",
-      "type": "object"
+    "DatasetSources": {
+      "description": "Information about the details of the create request for the dataset.",
+      "type": "object",
+      "properties": {
+        "conversionIds": {
+          "description": "The list of `conversionId` that were used to create the dataset.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "udids": {
+          "description": "The list of `conversionId` that were used to create the dataset.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "appendDatasetId": {
+          "description": "The dataset that was appended to to create the current dataset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of data stored in the dataset.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatasetGetDetailsResponse": {
+      "$ref": "#/definitions/DatasetDetailInfo"
     }
   }
 }
