@@ -466,10 +466,14 @@
     },
     "AttestationProviderListResult": {
       "description": "Attestation Providers List.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/AttestationProvider"
-      }
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Attestation Provider array.",
+          "items": {
+            "$ref": "#/definitions/AttestationProvider"
+          }
+        }
     },
     "AttestationServicePatchParams": {
       "description": "Parameters for patching an attestation service instance",
