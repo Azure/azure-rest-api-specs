@@ -1,0 +1,104 @@
+{
+  "parameters": {
+    "searchServiceName": "mysearchservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2020-03-13",
+    "subscriptionId": "subid",
+    "service": {
+      "location": "westus",
+      "tags": {
+        "app-name": "My e-commerce app"
+      },
+      "sku": {
+        "name": "standard"
+      },
+      "properties": {
+        "replicaCount": 1,
+        "partitionCount": 1,
+        "networkRuleSet": {
+          "ipRules": [
+            {
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
+            }
+          ]
+        },
+        "hostingMode": "default"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 1,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "123.4.5.6"
+              },
+              {
+                "value": "123.4.6.0/18"
+              }
+            ]
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "name": "mysearchservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "properties": {
+          "replicaCount": 1,
+          "partitionCount": 1,
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [
+              {
+                "value": "123.4.5.6"
+              },
+              {
+                "value": "123.4.6.0/18"
+              }
+            ]
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": []
+        }
+      }
+    }
+  }
+}

@@ -344,6 +344,12 @@
           "SearchCreateOrUpdateService": {
             "$ref": "./examples/SearchCreateOrUpdateService.json"
           },
+          "SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPublicCustomIPs.json"
+          },
+          "SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints.json"
+          },
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
           }
@@ -416,8 +422,8 @@
           "SearchUpdateServiceToRemoveIdentity": {
             "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
           },
-          "searchUpdateServiceToAllowAccessFromCustomIPs": {
-            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromCustomIPs.json"
+          "searchUpdateServiceToAllowAccessFromPublicCustomIPs": {
+            "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPublicCustomIPs.json"
           },
           "searchUpdateServiceToAllowAccessFromPrivateEndpoints": {
             "$ref": "./examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json"
@@ -1350,7 +1356,7 @@
       "properties": {
         "ipRules": {
           "type": "array",
-          "description": "A list of IP restriction rules that defines the inbound network access to the search service endpoint. These restriction rules are applied only when the EndpointAccess of the search service is Public.",
+          "description": "A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.",
           "items": {
             "$ref": "#/definitions/IpRule"
           }
