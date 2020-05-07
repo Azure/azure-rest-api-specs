@@ -39,15 +39,6 @@ input-file:
 - Microsoft.TablesStorage/preview/2019-02-02/table.json
 ```
 
-### Tag: package-2018-10
-
-These settings apply only when `--tag=package-2018-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-10'
-input-file:
-- Microsoft.TablesStorage/preview/2018-10-10/table.json
-```
-
 ---
 # Suppressions
 
@@ -233,7 +224,6 @@ Generate all API versions currently shipped for this package
 ```yaml $(python) && $(multiapi)
 batch:
   - tag: package-2019-02
-  - tag: package-2018-10
 ```
 
 ### Tag: package-2019-02 and python
@@ -244,16 +234,6 @@ These settings apply only when `--tag=package-2019-02 --python` is specified on 
 python:
   namespace: azure.tables.storage.v2019_02_02
   output-folder: $(python-sdks-folder)/azure-tables-storage/azure/tables/storage/v2019_02_02
-```
-
-### Tag: package-2018-10 and python
-
-These settings apply only when `--tag=package-2018-10 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-10' && $(python)
-python:
-  namespace: azure.tables.storage.v2018_10_10
-  output-folder: $(python-sdks-folder)/azure-tables-storage/azure/tables/storage/v2018_10_10
 ```
 
 ## Go
