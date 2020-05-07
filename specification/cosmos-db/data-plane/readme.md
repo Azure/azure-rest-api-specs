@@ -217,15 +217,6 @@ python:
   no-namespace-folders: true
 ```
 
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2019-02
-```
-
 ### Tag: package-2019-02 and python
 
 These settings apply only when `--tag=package-2019-02 --python` is specified on the command line.
