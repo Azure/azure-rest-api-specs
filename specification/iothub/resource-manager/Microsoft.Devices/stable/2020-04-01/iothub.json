@@ -3352,6 +3352,7 @@
           "enum": [
             "unknown",
             "healthy",
+            "degraded",
             "unhealthy",
             "dead"
           ],
@@ -3360,6 +3361,25 @@
             "name": "EndpointHealthStatus",
             "modelAsString": true
           }
+        },
+        "lastknownerror": {
+          "description": "Last error obtained when a message failed to be delivered to iot hub",
+          "type": "string"
+        },
+        "lastKnownErrorTime": {
+          "description": "Timestamp of when the last known error ocurred",
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "lastSuccessfulSendAttemptTime": {
+          "description": "Last time iot hub successfully tried to send a message to the endpoint",
+          "type": "string",
+          "format": "date-time-rfc1123"
+        },
+        "lastSendAttemptTime": {
+          "description": "Last time iot hub tried to send a message to the endpoint",
+          "type": "string",
+          "format": "date-time-rfc1123"
         }
       }
     },
