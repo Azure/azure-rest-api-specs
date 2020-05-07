@@ -27,6 +27,16 @@ openapi-type: data-plane
 tag: package-2019-05
 ```
 
+### Tag: package-2019-05-preview
+
+These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview'
+opt-in-extensible-enums: true
+input-file:
+- preview/2019-05-06-preview/searchindex.json
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -44,6 +54,7 @@ These settings apply only when `--tag=package-2017-11-preview` is specified on t
 input-file:
 - preview/2017-11-11-preview/searchindex.json
 ```
+
 ### Tag: package-2017-11
 
 These settings apply only when `--tag=package-2017-11` is specified on the command line.
@@ -89,34 +100,12 @@ input-file:
 - preview/2015-02-28/searchindex.json
 ```
 
-### Tag: track1-package-2019-05
-
-These settings apply only when `--tag=track1-package-2019-05` is specified on the command line.
-It is meant to be used for generating Track 1 .NET SDK only!
-
-``` yaml $(tag) == 'track1-package-2019-05'
-input-file:
-- track1/stable/2019-05-06/searchindex.json
-```
-
-### Tag: track1-package-2019-05-preview
-
-These settings apply only when `--tag=track1-package-2019-05-preview` is specified on the command line.
-It is meant to be used for generating Track 1 .NET SDK only!
-
-``` yaml $(tag) == 'track1-package-2019-05-preview'
-opt-in-extensible-enums: true
-input-file:
-- track1/preview/2019-05-06-preview/searchindex.json
-```
-
 ---
 # Code Generation
 
 !!! READ THIS !!!
-This swagger is not yet ready for languages other than C#.
+This swagger is ready for C# only.
 !!! READ THIS !!!
-
 
 ## C# 
 
@@ -317,6 +306,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/2019-05-06-preview/searchindex.json
   - $(this-folder)/stable/2019-05-06/searchindex.json
   - $(this-folder)/preview/2017-11-11-preview/searchindex.json
   - $(this-folder)/preview/2017-11-11/searchindex.json
@@ -324,8 +314,6 @@ input-file:
   - $(this-folder)/preview/2016-09-01/searchindex.json
   - $(this-folder)/preview/2015-02-28-preview/searchindex.json
   - $(this-folder)/preview/2015-02-28/searchindex.json
-  - $(this-folder)/track1/stable/2019-05-06/searchindex.json
-  - $(this-folder)/track1/preview/2019-05-06-preview/searchindex.json
 
 ```
 
