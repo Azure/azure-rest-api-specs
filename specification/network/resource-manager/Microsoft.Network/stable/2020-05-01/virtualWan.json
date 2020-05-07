@@ -3681,7 +3681,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the connection"
+            "description": "The name of the connection."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3733,7 +3733,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the connection"
+            "description": "The name of the connection."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3744,7 +3744,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/BgpConnection"
-            }
+            },
+            "description": "Parameters of Bgp connection."
           }
         ],
         "responses": {
@@ -3803,7 +3804,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the connection"
+            "description": "The name of the connection."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3914,7 +3915,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipconfig"
+            "description": "The name of the ipconfig."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3924,7 +3925,7 @@
           "200": {
             "description": "Request successful. Returns the details of the Bgp Connection retrieved.",
             "schema": {
-              "$ref": "#/definitions/IpConfiguration"
+              "$ref": "#/definitions/HubIpConfiguration"
             }
           },
           "default": {
@@ -3966,7 +3967,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipconfig"
+            "description": "The name of the ipconfig."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3976,21 +3977,22 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IpConfiguration"
-            }
+              "$ref": "#/definitions/HubIpConfiguration"
+            },
+            "description": "Hub Ip Configuration parameters."
           }
         ],
         "responses": {
           "200": {
             "description": "Request successful. Returns the details of the IpConfiguration created or updated.",
             "schema": {
-              "$ref": "#/definitions/IpConfiguration"
+              "$ref": "#/definitions/HubIpConfiguration"
             }
           },
           "201": {
             "description": "Request received successfully. Returns the details of the IpConfiguration created or updated.",
             "schema": {
-              "$ref": "#/definitions/IpConfiguration"
+              "$ref": "#/definitions/HubIpConfiguration"
             }
           },
           "default": {
@@ -4036,7 +4038,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipconfig"
+            "description": "The name of the ipconfig."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -4757,7 +4759,7 @@
         },
         "connectionState": {
           "type": "string",
-          "description": "The current state of the VirtualHub to Peer",
+          "description": "The current state of the VirtualHub to Peer.",
           "readOnly": true,
           "enum": [
             "Unknown",
@@ -4773,16 +4775,16 @@
       },
       "description": "Properties of the bgp connection."
     },
-    "IpConfiguration": {
+    "HubIpConfiguration": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IPConfigurationPropertiesFormat",
+          "$ref": "#/definitions/HubIPConfigurationPropertiesFormat",
           "description": "The properties of the Virtual Hub IPConfigurations."
         },
         "name": {
           "type": "string",
-          "description": "Name of the Ip Configuration"
+          "description": "Name of the Ip Configuration."
         },
         "etag": {
           "type": "string",
@@ -4802,7 +4804,7 @@
       ],
       "description": "IpConfigurations"
     },
-    "IPConfigurationPropertiesFormat": {
+    "HubIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -6294,7 +6296,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpConfiguration"
+            "$ref": "#/definitions/HubIpConfiguration"
           },
           "description": "The list of VirtualHubIpConfigurations."
         }
