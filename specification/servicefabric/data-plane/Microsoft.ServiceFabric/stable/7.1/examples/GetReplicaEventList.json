@@ -1,0 +1,35 @@
+{
+  "operationId": "GetPartitionReplicaEventList",
+  "description": "This example shows how to get all replica-related events during a certain time window.",
+  "parameters": {
+    "partitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+    "replicaId": 131672608994209130,
+    "api-version": "6.4",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "StatefulReplicaNewHealthReport",
+          "ReplicaInstanceId": 131672608994209130,
+          "SourceId": "TestSource",
+          "Property": "",
+          "HealthState": "Error",
+          "TimeToLiveMs": 922337203685477,
+          "SequenceNumber": 131672654189677787,
+          "Description": "",
+          "RemoveWhenExpired": false,
+          "SourceUtcTimestamp": "2018-04-03T21:43:38Z",
+          "PartitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+          "ReplicaId": 131672608994209130,
+          "EventInstanceId": "b2684da3-df81-4add-8baa-201f73e9195d",
+          "TimeStamp": "2018-04-03T21:43:38.8904013Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}
