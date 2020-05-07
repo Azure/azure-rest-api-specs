@@ -4646,8 +4646,16 @@
           "description": "The client secret associated with your Square application.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "accessToken": {
+          "description": "The access token for OAuth 2.0 authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "refreshToken": {
+          "description": "The OAuth 2.0 refresh token associated with your Square application, used to refresh the access token when it expires.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "redirectUri": {
-          "description": "The redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500)",
+          "description": "The redirect URL assigned in the Square application dashboard. (i.e. http://localhost:2500) [Deprecated]",
           "type": "object"
         },
         "useEncryptedEndpoints": {
@@ -4668,9 +4676,7 @@
         }
       },
       "required": [
-        "host",
-        "clientId",
-        "redirectUri"
+        "host"
       ]
     },
     "XeroLinkedService": {
