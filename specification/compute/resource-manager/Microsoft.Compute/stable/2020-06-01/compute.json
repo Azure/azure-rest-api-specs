@@ -7178,21 +7178,6 @@
       },
       "description": "Describes the properties of a Virtual Machine software patch."
     },
-    "VirtualMachineSoftwarePatch": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties",
-          "description": "The properties of the software patch."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SubResourceReadOnly"
-        }
-      ],
-      "description": "Describes a Virtual Machine software patch."
-    },
     "VirtualMachineAssessPatchesResult": {
       "properties": {
         "status": {
@@ -7256,7 +7241,8 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/VirtualMachineSoftwarePatch"
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
           },
           "description": "The list of patches that have been detected as available for installation."
         },
