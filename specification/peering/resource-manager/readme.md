@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2020-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-04-01'
 input-file:
-- Microsoft.Peering/stable/package-2020-04-01/peering.json
+- Microsoft.Peering/stable/2020-04-01/peering.json
 ```
 
 ### Tag: package-2020-01-01-preview
