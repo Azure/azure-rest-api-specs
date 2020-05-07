@@ -1,0 +1,244 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "KeyVaultClient",
+        "description": "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
+        "version": "7.2-preview"
+    },
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{vaultBaseUrl}",
+        "useSchemePrefix": false,
+        "positionInOperation": "first",
+        "parameters": [
+            {
+                "name": "vaultBaseUrl",
+                "description": "The vault name, for example https://myvault.vault.azure.net.",
+                "required": true,
+                "type": "string",
+                "in": "path",
+                "x-ms-skip-url-encoding": true
+            }
+        ]
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/securitydomain/download": {
+            "post": {
+                "tags": [
+                    "HSMSecurityDomain"
+                ],
+                "operationId": "HSMSecurityDomainDownload",
+                "description": "Retrieves Security domain from HSM enclave",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "Certificates",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CertificateSet"
+                        },
+                        "description": "Security domain download operation requires customer to provide three certificates in PEM format"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Security domain backup response",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Key Vault error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "common.json#/definitions/KeyVaultError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Retrieve Security domain": {
+                        "$ref": "./examples/securitydomaindownloadpost-example.json"
+                    }
+                }
+            }
+        },
+        "/securitydomain/upload": {
+            "get": {
+                "tags": [
+                    "HSMSecurityDomain"
+                ],
+                "operationId": "HSMSecurityDomainUpload",
+                "description": "Retrieve security domain transfer key",
+                "responses": {
+                    "200": {
+                        "description": "Security domain transfer key",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "transfer_key": {
+                                    "type": "string"
+                                },
+                                "key_format": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Key Vault error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "common.json#/definitions/KeyVaultError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Retrieve security domain transfer key": {
+                        "$ref": "./examples/securitydomaintransferkey-example.json"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "HSMSecurityDomain"
+                ],
+                "operationId": "HSMSecurityDomainUpload",
+                "description": "Request Security domain restore operation",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "security_domain",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Security domain restore operation started",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                                "type": "integer"
+                            },
+                            "Azure-AsyncOperation": {
+                                "description": "The URI to poll for completion status.",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                },
+                                "status_details": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Key Vault error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "common.json#/definitions/KeyVaultError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Security domain restore operation": {
+                        "$ref": "./examples/securitydomainrestoreoperation-example.json"
+                    }
+                }
+            }
+        },
+        "/securitydomain/upload/pending": {
+            "get": {
+                "tags": [
+                    "HSMSecurityDomain"
+                ],
+                "operationId": "HSMSecurityDomainUploadPending",
+                "description": "Get Security domain restore operation status",
+                "responses": {
+                    "200": {
+                        "description": "Security domain restore operation status",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                                "type": "integer"
+                            },
+                            "Azure-AsyncOperation": {
+                                "description": "The URI to poll for completion status.",
+                                "type": "string"
+                            }
+                        },
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string"
+                                },
+                                "status_details": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Key Vault error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "common.json#/definitions/KeyVaultError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Find security domain restore operation status": {
+                        "$ref": "./examples/securitydomainoperationstatus-example.json"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CertificateSet": {
+            "properties": {
+                "certificates": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "description": "Three certificates needed from customer"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client API version."
+        }
+    }
+}
