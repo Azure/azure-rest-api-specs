@@ -455,6 +455,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/aiOperations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentAnnotations_API.json
   - $(this-folder)/Microsoft.Insights/stable/2015-05-01/componentApiKeys_API.json
