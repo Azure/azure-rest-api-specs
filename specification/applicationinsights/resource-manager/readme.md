@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ApplicationInsights.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,6 +15,7 @@ To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -27,7 +28,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-2015-05
+tag: package-preview-2020-02
 ```
 
 ## Suppression
@@ -237,6 +238,15 @@ directive:
     reason: There are a bug in this rule. "ExportConfigurations_Create" is a valid operation id.
 ```
 
+
+### Tag: package-preview-2020-02
+
+These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2020-02'
+input-file:
+  - Microsoft.Insights/preview/2020-02-10-preview/WebTestResults_API.json
+```
 ### Tag: package-2015-05
 
 These settings apply only when `--tag=package-2015-05` is specified on the command line.
@@ -281,7 +291,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-10-17-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-10-17-preview'
+``` yaml $(tag) == 'package-2019-10-17-preview'
 input-file:
   - Microsoft.Insights/preview/2019-10-17-preview/workbookTemplates_API.json
 ```
