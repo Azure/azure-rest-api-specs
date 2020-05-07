@@ -117,5 +117,5 @@ trenton:
     payload_flattening_threshold: 2
     namespace: devops
     package-name: devops
-    clear_output_folder: false
+    clear-output-folder: false
 ```
