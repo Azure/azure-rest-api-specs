@@ -36,6 +36,9 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries": {
       "get": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Get all graph queries defined within a specified subscription and resource group.",
         "operationId": "GraphQuery_List",
         "parameters": [
@@ -75,6 +78,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceGraph/queries/{resourceName}": {
       "get": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Get a single graph query by its resourceName.",
         "operationId": "GraphQuery_Get",
         "parameters": [
@@ -112,6 +118,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Delete a graph query.",
         "operationId": "GraphQuery_Delete",
         "parameters": [
@@ -149,6 +158,9 @@
         }
       },
       "put": {
+        "tags": [
+          "GraphQuery"
+        ],
         "description": "Create a new graph query.",
         "operationId": "GraphQuery_CreateOrUpdate",
         "parameters": [
@@ -254,6 +266,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the resource"
         },
         "type": {
           "type": "string",
