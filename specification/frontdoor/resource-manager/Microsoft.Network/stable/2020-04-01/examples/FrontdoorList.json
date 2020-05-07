@@ -1,7 +1,8 @@
 {
   "parameters": {
-    "api-version": "2020-05-01",
-    "subscriptionId": "subid"
+    "api-version": "2020-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
   },
   "responses": {
     "200": {
@@ -90,10 +91,6 @@
                         "priority": 2
                       },
                       {
-                        "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-                        "privateLinkLocation": "eastus",
-                        "privateEndpointStatus": "Approved",
-                        "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
                         "address": "contoso.com.website-us-west-2.othercloud.net",
                         "httpPort": 80,
                         "httpsPort": 443,
@@ -102,7 +99,7 @@
                         "priority": 1
                       },
                       {
-                        "privateLinkAlias": "APPSERVER.d84e61f0-0870-4d24-9746-7438fa0019d1.westus2.azure.privatelinkservice",
+                        "privateLinkAlias": "SQLSERVER.d84e61f0-0870-4d24-9746-7438fa0019d1.westus2.azure.privatelinkservice",
                         "privateEndpointStatus": "Approved",
                         "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
                         "address": "10.0.1.5",
@@ -204,7 +201,8 @@
                 }
               ],
               "backendPoolsSettings": {
-                "enforceCertificateNameCheck": "Enabled"
+                "enforceCertificateNameCheck": "Enabled",
+                "sendRecvTimeoutSeconds": 60
               },
               "enabledState": "Enabled",
               "resourceState": "Enabled",

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2020-05-01",
+    "version": "2020-01-01",
     "title": "FrontDoorManagementClient",
     "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -40,7 +40,7 @@
           "CheckFrontDoorNameAvailability"
         ],
         "description": "Check the availability of a Front Door resource name.",
-        "operationId": "FrontDoorNameAvailability_Check",
+        "operationId": "CheckFrontDoorNameAvailability",
         "x-ms-examples": {
           "CheckNameAvailability": {
             "$ref": "./examples/CheckFrontdoorNameAvailability.json"
@@ -62,7 +62,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
             }
@@ -82,7 +82,7 @@
           "CheckFrontDoorNameAvailabilityWithSubscription"
         ],
         "description": "Check the availability of a Front Door subdomain.",
-        "operationId": "FrontDoorNameAvailabilityWithSubscription_Check",
+        "operationId": "CheckFrontDoorNameAvailabilityWithSubscription",
         "x-ms-examples": {
           "CheckNameAvailabilityWithSubscription": {
             "$ref": "./examples/CheckFrontdoorNameAvailabilityWithSubscription.json"
@@ -107,7 +107,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
             }
@@ -138,7 +138,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoorListResult"
             }
@@ -180,7 +180,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoorListResult"
             }
@@ -225,7 +225,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoor"
             }
@@ -274,19 +274,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontDoor"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Created. The request has been fulfilled and a new Front Door has been created.",
             "schema": {
               "$ref": "#/definitions/FrontDoor"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/FrontDoor"
             }
@@ -330,10 +330,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The request has been accepted but the Front Door was not found."
           },
           "default": {
             "description": "Front Door error response describing why the operation failed.",
@@ -376,7 +376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontendEndpointsListResult"
             }
@@ -424,7 +424,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/FrontendEndpoint"
             }
@@ -475,10 +475,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "Front Door error response describing why the operation failed.",
@@ -538,10 +538,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "Front Door error response describing why the operation failed.",
@@ -587,10 +587,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK. The request has succeeded."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted and the operation will complete asynchronously."
           },
           "default": {
             "description": "Front Door error response describing why the operation failed.",
@@ -642,7 +642,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ValidateCustomDomainOutput"
             }
@@ -679,7 +679,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RulesEngineListResult"
             }
@@ -727,7 +727,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RulesEngine"
             }
@@ -779,19 +779,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RulesEngine"
             }
           },
           "201": {
-            "description": "Created",
+            "description": "Created. The request has been fulfilled and a new RulesEngine has been created.",
             "schema": {
               "$ref": "#/definitions/RulesEngine"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/RulesEngine"
             }
@@ -838,10 +838,10 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content. The request has been accepted but the Rules Engine Configuration was not found."
           },
           "default": {
             "description": "Front Door error response describing why the operation failed.",
@@ -1049,6 +1049,16 @@
         "resourceState": {
           "description": "Resource status.",
           "$ref": "#/definitions/ResourceState"
+        },
+        "webApplicationFirewallPolicyLink": {
+          "description": "Defines the Web Application Firewall policy for each routing rule (if applicable)",
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Resource ID."
+            }
+          }
         }
       }
     },
@@ -1124,16 +1134,6 @@
         "rulesEngine": {
           "description": "A reference to a specific Rules Engine Configuration to apply to this route.",
           "$ref": "./network.json#/definitions/SubResource"
-        },
-        "webApplicationFirewallPolicyLink": {
-          "description": "Defines the Web Application Firewall policy for each routing rule (if applicable)",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "Resource ID."
-            }
-          }
         }
       }
     },
@@ -1251,14 +1251,6 @@
           "description": "The Alias of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
           "type": "string"
         },
-        "privateLinkResourceId": {
-          "description": "The Resource Id of the Private Link resource. Populating this optional field indicates that this backend is 'Private'",
-          "type": "string"
-        },
-        "privateLinkLocation": {
-          "description": "The location of the Private Link resource. Required only if 'privateLinkResourceId' is populated",
-          "type": "string"
-        },
         "privateEndpointStatus": {
           "description": "The Approval status for the connection to the Private Link",
           "type": "string",
@@ -1272,7 +1264,7 @@
           ],
           "x-ms-enum": {
             "name": "PrivateEndpointStatus",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "privateLinkApprovalMessage": {
