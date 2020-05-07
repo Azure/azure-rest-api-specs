@@ -3882,6 +3882,66 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+      "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
+      "post": {
+        "operationId": "EffectiveVirtualHubRoutes",
+        "x-ms-examples": {
+          "EffectiveRouteList": {
+            "$ref": "./examples/EffectiveRouteList.json"
+          }
+        },
+        "description": "Gets the effective routes configured for the Virtual Hub resource or the specified resource .",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "effectiveRoutesParameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveRoutesParameters"
+            },
+            "description": "Parameters supplied to get the effective routes."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Follow the location header for the effective routes list."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
     }
   },
   "definitions": {
@@ -4204,9 +4264,28 @@
         "sku": {
           "type": "string",
           "description": "The sku of this VirtualHub."
+        },
+        "routingState": {
+          "$ref": "#/definitions/RoutingState",
+          "description": "The routing state."
         }
       },
       "description": "Parameters for VirtualHub."
+    },
+    "RoutingState": {
+      "type": "string",
+      "description": "The current routing state of the VirtualHub.",
+      "readOnly": true,
+      "enum": [
+        "None",
+        "Provisioned",
+        "Provisioning",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "RoutingState",
+        "modelAsString": true
+      }
     },
     "VirtualHubRouteTable": {
       "properties": {
@@ -5722,6 +5801,62 @@
         "nextHopIpAddress": {
           "type": "string",
           "description": "The ip address of the next hop."
+        }
+      }
+    },
+    "EffectiveRouteList": {
+      "description": "EffectiveRoutes List.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveRoute"
+          },
+          "description": "The list of effective routes configured on the virtual hub or the specified resource."
+        }
+      }
+    },
+    "EffectiveRoute": {
+      "description": "The effective route.",
+      "properties": {
+        "addressPrefixes": {
+          "description": "The list of address prefixes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHops": {
+          "description": "The list of next hops.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "description": "The type of the next hop.",
+          "type": "string"
+        },
+        "asPath": {
+          "description": "The ASPath of this route.",
+          "type": "string"
+        },
+        "routeOrigin": {
+          "description": "The origin of this route.",
+          "type": "string"
+        }
+      }
+    },
+    "EffectiveRoutesParameters": {
+      "description": "The parameters specifying the resource whose effective routes are being requested.",
+      "properties": {
+        "resourceId": {
+          "$ref": "./network.json#/definitions/Resource",
+          "description": "The resource."
+        },
+        "virtualWanResourceType": {
+          "type": "string",
+          "description": "The type of the specified resource like RouteTable, ExpressRouteConnection, HubVirtualNetworkConnection, VpnConnection and P2SConnection."
         }
       }
     }
