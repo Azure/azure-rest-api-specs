@@ -156,8 +156,8 @@
           "ConfigurationProfile_Update": {
             "$ref": "./examples/ConfigurationProfileUpdate.json"
           },
-          "ConfigurationProfile_UpdateWithIdentity": {
-            "$ref": "./examples/ConfigurationProfileUpdateWithIdentity.json"
+            "ConfigurationProfile_UpdateWithIdentity": {
+              "$ref": "./examples/ConfigurationProfileUpdateWithIdentity.json"
           }
         }
       },
@@ -383,18 +383,29 @@
         }
       }
     },
-    "Error": {
-      "description": "Unexpected Azure Change Analysis ProxyResource Provider Error.",
+    "ProxyResource": {
+      "description": "An Azure resource.",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
+        "id": {
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
+          "type": "string",
+          "readOnly": true
         },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ResourceProviderOperationDisplay": {
       "description": "The resource provider operation details.",
@@ -448,39 +459,21 @@
         }
       }
     },
-    "ProxyResource": {
-      "description": "An Azure resource.",
+    "Error": {
+      "description": "Unexpected Microsoft.ChangeAnalysis Resource Provider Error.",
       "properties": {
-        "id": {
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
-          "type": "string",
-          "readOnly": true
+        "code": {
+          "description": "Error code.",
+          "type": "string"
         },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData"
+        "message": {
+          "description": "Error message.",
+          "type": "string"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The Microsoft Azure subscription ID.",
-      "required": true,
-      "type": "string"
-    },
     "ProfileNameParameter": {
       "in": "path",
       "name": "profileName",
@@ -490,10 +483,17 @@
       "pattern": "^(?!.*-$)[^-][a-zA-Z0-9-]*$",
       "x-ms-parameter-location": "method"
     },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The Microsoft Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
     "ApiVersionParameter": {
       "in": "query",
       "name": "api-version",
-      "description": "The client API version.",
+      "description": "The resource provider API version.",
       "required": true,
       "type": "string"
     }
