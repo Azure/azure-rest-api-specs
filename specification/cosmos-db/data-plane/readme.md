@@ -1,14 +1,14 @@
-# Table Storage Dataplane
+# Table Dataplane
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Tables Storage.
+This is the AutoRest configuration file for Tables.
 
 
 
 ---
 ## Getting Started
-To build the SDK for Tables Storage, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for Tables, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the Tables Storage API.
+These are the global settings for the Tables API.
 
 ``` yaml
 azure-validator: true
@@ -36,16 +36,7 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- Microsoft.TablesStorage/preview/2019-02-02/table.json
-```
-
-### Tag: package-2018-10
-
-These settings apply only when `--tag=package-2018-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-10'
-input-file:
-- Microsoft.TablesStorage/preview/2018-10-10/table.json
+- Microsoft.Tables/preview/2019-02-02/table.json
 ```
 
 ---
@@ -69,19 +60,19 @@ directive:
     where: $.paths["/{table}"].put
     reason: The path only supports XML input/outputm which is not supported
   - suppress: R3016
-    where: $.definitions.StorageError.properties.Message
+    where: $.definitions.TableServiceError.properties.Message
     reason: Response from service is not camel case
   - suppress: R3016
-    where: $.definitions.StorageServiceProperties.properties.Logging
+    where: $.definitions.TableServiceProperties.properties.Logging
     reason: Response from service is not camel case
   - suppress: R3016
-    where: $.definitions.StorageServiceProperties.properties.HourMetrics
+    where: $.definitions.TableServiceProperties.properties.HourMetrics
     reason: Response from service is not camel case
   - suppress: R3016
-    where: $.definitions.StorageServiceProperties.properties.MinuteMetrics
+    where: $.definitions.TableServiceProperties.properties.MinuteMetrics
     reason: Response from service is not camel case
   - suppress: R3016
-    where: $.definitions.StorageServiceProperties.properties.Cors
+    where: $.definitions.TableServiceProperties.properties.Cors
     reason: Response from service is not camel case
   - suppress: R3016
     where: $.definitions.Logging.properties.Version
@@ -132,7 +123,7 @@ directive:
     where: $.definitions.RetentionPolicy.properties.Days
     reason: Response from service is not camel case
   - suppress: R3016
-    where: $.definitions.StorageServiceStats.properties.GeoReplication
+    where: $.definitions.TableServiceStats.properties.GeoReplication
     reason: Response from service is not camel case
   - suppress: R3016
     where: $.definitions.GeoReplication.properties.Status
@@ -220,20 +211,10 @@ python-mode: create
 python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.media
-  package-name: azure-tables-storage
+  namespace: azure.tables
+  package-name: azure-tables
   clear-output-folder: true
   no-namespace-folders: true
-```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2019-02
-  - tag: package-2018-10
 ```
 
 ### Tag: package-2019-02 and python
@@ -244,16 +225,6 @@ These settings apply only when `--tag=package-2019-02 --python` is specified on 
 python:
   namespace: azure.tables.storage.v2019_02_02
   output-folder: $(python-sdks-folder)/azure-tables-storage/azure/tables/storage/v2019_02_02
-```
-
-### Tag: package-2018-10 and python
-
-These settings apply only when `--tag=package-2018-10 --python` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-10' && $(python)
-python:
-  namespace: azure.tables.storage.v2018_10_10
-  output-folder: $(python-sdks-folder)/azure-tables-storage/azure/tables/storage/v2018_10_10
 ```
 
 ## Go
