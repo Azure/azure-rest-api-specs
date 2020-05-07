@@ -2476,6 +2476,13 @@
           "description": "The Autonomous System Number (ASN) of the peer.",
           "type": "integer"
         },
+        "peerContactDetail": {
+          "description": "The contact details of the peer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactDetail"
+          }
+        },
         "peerName": {
           "description": "The name of the peer.",
           "type": "string"
@@ -3109,6 +3116,10 @@
             "$ref": "#/definitions/PeeringServicePrefixEvent"
           },
           "readOnly": true
+        },
+        "peeringServicePrefixKey": {
+          "description": "The peering service prefix key",
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
