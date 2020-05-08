@@ -19,8 +19,6 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the DesktopVirtualizationClient API.
 
