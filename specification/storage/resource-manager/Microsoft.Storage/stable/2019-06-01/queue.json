@@ -58,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/{QueueServicesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/queueServices/{queueServiceName}": {
       "put": {
         "tags": [
           "QueueServiceProperties"
@@ -84,7 +84,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/QueueServicesName"
+            "$ref": "#/parameters/QueueServiceName"
           },
           {
             "name": "parameters",
@@ -136,7 +136,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/QueueServicesName"
+            "$ref": "#/parameters/QueueServiceName"
           }
         ],
         "responses": {
@@ -526,8 +526,8 @@
     }
   },
   "parameters": {
-    "QueueServicesName": {
-      "name": "QueueServicesName",
+    "QueueServiceName": {
+      "name": "queueServiceName",
       "in": "path",
       "required": true,
       "type": "string",

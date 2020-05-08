@@ -58,7 +58,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/{TableServicesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/tableServices/{tableServiceName}": {
       "put": {
         "tags": [
           "TableServiceProperties"
@@ -84,7 +84,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TableServicesName"
+            "$ref": "#/parameters/TableServiceName"
           },
           {
             "name": "parameters",
@@ -136,7 +136,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/TableServicesName"
+            "$ref": "#/parameters/TableServiceName"
           }
         ],
         "responses": {
@@ -461,8 +461,8 @@
     }
   },
   "parameters": {
-    "TableServicesName": {
-      "name": "TableServicesName",
+    "TableServiceName": {
+      "name": "tableServiceName",
       "in": "path",
       "required": true,
       "type": "string",
