@@ -26,8 +26,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2019-12-10-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.desktopvirtualization.v2019_01_23_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/desktopvirtualization/mgmt-v2019_01_23_preview
+  namespace: com.microsoft.azure.management.desktopvirtualization.v2019_12_10_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/desktopvirtualization/mgmt-v2019_12_10_preview
 regenerate-manager: true
 generate-interface: true
 ```
