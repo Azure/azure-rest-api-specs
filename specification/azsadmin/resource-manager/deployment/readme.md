@@ -41,7 +41,15 @@ input-file:
     - Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
     - Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
 ```
+### Tag: package-2018-07-01
 
+These settings apply only when `--tag=package-2018-07-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-07-01'
+input-file:
+    - Microsoft.Deployment.Admin/preview/2018-07-01/FileContainer.json
+    - Microsoft.Deployment.Admin/preview/2018-07-01/ProductPackage.json
+```
 ---
 # Code Generation
 
@@ -74,10 +82,13 @@ input-file:
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperation.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperationAttempt.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/FileContainer.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/Locations.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductDeployment.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/OperationResults.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2018-07-01/FileContainer.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2018-07-01/ProductPackage.json
 
 ```
 
