@@ -5280,6 +5280,10 @@
         "dataset": {
           "description": "Delete activity dataset reference.",
           "$ref": "../datafactory.json#/definitions/DatasetReference"
+        },
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Delete activity store settings."
         }
       },
       "required": [
@@ -5502,6 +5506,14 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "GetMetadata activity store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/FormatReadSettings",
+          "description": "GetMetadata activity format settings."
         }
       },
       "required": [
