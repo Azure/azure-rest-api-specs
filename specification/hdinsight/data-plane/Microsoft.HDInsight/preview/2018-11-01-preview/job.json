@@ -5,14 +5,14 @@
     "description": "The HDInsight Job Client.",
     "version": "2018-11-01-preview",
     "x-ms-code-generation-settings": {
-      "internalConstructors": true
+        "internalConstructors": true
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{clusterDnsName}",
+    "hostTemplate": "{endpoint}",
     "parameters": [
       {
-        "$ref": "#/parameters/clusterDnsNameParameter"
+        "$ref": "#/parameters/endpointParameter"
       }
     ]
   },
@@ -911,8 +911,8 @@
     }
   },
   "parameters": {
-    "clusterDnsNameParameter": {
-      "name": "clusterDnsName",
+    "endpointParameter": {
+      "name": "endpoint",
       "in": "path",
       "required": true,
       "type": "string",
