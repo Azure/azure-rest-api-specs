@@ -3335,6 +3335,30 @@
             "type": "string"
           }
         },
+        "previousHopIds": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of previous hop identifiers.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of hop links.",
+          "items": {
+            "$ref": "#/definitions/HopLink"
+          }
+        },
+        "previousLinks": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of previous hop links.",
+          "items": {
+            "$ref": "#/definitions/HopLink"
+          }
+        },
         "issues": {
           "readOnly": true,
           "type": "array",
@@ -3342,6 +3366,66 @@
           "items": {
             "$ref": "#/definitions/ConnectivityIssue"
           }
+        }
+      }
+    },
+    "HopLink": {
+      "description": "Hop link.",
+      "properties": {
+        "nextHopId": {
+          "description": "The ID of the next hop.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "linkType": {
+          "description": "Link type.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/HopLinkProperties",
+          "description": "Hop link properties."
+        },
+        "issues": {
+          "readOnly": true,
+          "type": "array",
+          "description": "List of issues.",
+          "items": {
+            "$ref": "#/definitions/ConnectivityIssue"
+          }
+        },
+        "context": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Provides additional context on the issue.",
+          "items": {
+            "$ref": "#/definitions/IssueContext"
+          }
+        },
+        "resourceId": {
+          "description": "Resource ID.",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
+    "HopLinkProperties": {
+      "description": "Hop link properties.",
+      "properties": {
+        "roundTripTimeMin": {
+          "description": "Minimum roundtrip time in miliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "roundTripTimeAvg": {
+          "description": "Average roundtrip time in miliseconds.",
+          "readOnly": true,
+          "type": "integer"
+        },
+        "roundTripTimeMax": {
+          "description": "Maximum roundtrip time in miliseconds.",
+          "readOnly": true,
+          "type": "integer"
         }
       }
     },
