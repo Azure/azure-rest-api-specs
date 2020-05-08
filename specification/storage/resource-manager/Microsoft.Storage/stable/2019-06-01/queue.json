@@ -52,7 +52,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -106,7 +106,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -149,7 +149,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -206,7 +206,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -258,7 +258,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -301,7 +301,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -341,7 +341,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -395,7 +395,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudErrorResponse"
             }
           }
         }
@@ -511,7 +511,17 @@
       },
       "description": "Response schema. Contains list of queues returned"
     },
-    "ErrorResponse": {
+    "CloudErrorResponse": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorResponseBody"
+        }
+      },
+      "description": "An error response from the storage resource provider."
+    },
+    "CloudErrorResponseBody": {
+      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
