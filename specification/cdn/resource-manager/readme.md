@@ -187,6 +187,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdn.json
+  - $(this-folder)/Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-12-31/cdn.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdn.json
   - $(this-folder)/Microsoft.Cdn/stable/2019-06-15/cdnwebapplicationfirewall.json
