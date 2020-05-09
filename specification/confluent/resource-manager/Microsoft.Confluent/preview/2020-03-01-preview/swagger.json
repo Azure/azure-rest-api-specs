@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Confluent",
@@ -13,9 +13,7 @@
         "summary": "List all operations provided by Microsoft.Confluent for the 2020-03-01-preview api version.",
         "operationId": "Operations_List",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -49,9 +47,7 @@
         "summary": "List all confluent under the specified subscription.",
         "operationId": "Confluent_List",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -94,9 +90,7 @@
         "summary": "List all confluent under the specified resource group.",
         "operationId": "Confluent_ListByResourceGroup",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -146,9 +140,7 @@
         "summary": "Get the properties of a specific confluent resource.",
         "operationId": "Confluent_Get",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -200,15 +192,10 @@
         "summary": "Create Confluent resource",
         "operationId": "Confluent_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -273,17 +260,12 @@
           "Confluent"
         ],
         "summary": "Update confluent resource",
-        "operationId": "confluent_Update",
+        "operationId": "Confluent_Update",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -329,6 +311,11 @@
               "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Confluent_Update": {
+            "$ref": "./examples/Confluent_Update.json"
+          }
         }
       },
       "delete": {
@@ -336,7 +323,7 @@
           "Confluent"
         ],
         "summary": "Delete Confluent resource",
-        "operationId": "confluent_Delete",
+        "operationId": "Confluent_Delete",
         "produces": [
           "application/json"
         ],
@@ -365,10 +352,16 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentResource"
+            }
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ConfluentResource"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -377,7 +370,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Confluent_Delete": {
+            "$ref": "./examples/Confluent_Delete.json"
+          }
+        }
       }
     }
   },
@@ -413,6 +411,7 @@
           "type": "string"
         },
         "display": {
+          "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
         }
       }
@@ -435,18 +434,24 @@
       }
     },
     "ErrorResponseBody": {
+      "description": "Response body of Error",
+      "title": "ErrorResponseBody",
       "type": "object",
       "properties": {
         "code": {
+          "description": "Error code",
           "type": "string"
         },
         "message": {
+          "description": "Error message",
           "type": "string"
         },
         "target": {
+          "description": "Error target",
           "type": "string"
         },
         "details": {
+          "description": "Error detail",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
@@ -456,8 +461,11 @@
     },
     "ResourceProviderDefaultErrorResponse": {
       "type": "object",
+      "description": "Default error response for resource provider",
+      "title": "ResourceProviderDefaultErrorResponse",
       "properties": {
         "error": {
+          "description": "Error response payload",
           "$ref": "#/definitions/ErrorResponseBody"
         }
       }
@@ -473,29 +481,39 @@
         "Canceled"
       ],
       "type": "string",
+      "description": "Provision states for confluent RP",
+      "title": "ProvisioningState",
       "x-ms-enum": {
+        "name": "ProvisionState",
         "modelAsString": true
       }
     },
     "MarketplaceSaasResource": {
       "type": "object",
+      "description": "Marketplace SaaS resource model",
+      "title": "MarketplaceSaaSResource",
       "properties": {
         "name": {
+          "description": "SaaS resource name",
           "type": "string",
           "readOnly": true
         },
         "marketplaceSubscription": {
+          "description": "SaaS subscription",
           "$ref": "#/definitions/MarketplaceSubscription"
         },
         "saasResourceId": {
+          "description": "SaaS resource id",
           "type": "string",
           "readOnly": true
         },
         "planId": {
+          "description": "Offer plan id",
           "type": "string",
           "readOnly": true
         },
         "quantity": {
+          "description": "Quantity of plan",
           "format": "int32",
           "type": "integer",
           "readOnly": true
@@ -509,12 +527,17 @@
         "pro"
       ],
       "type": "string",
+      "description": "Subscription types for Confluent offer",
+      "title": "ConfluentSubscriptionTypes",
       "x-ms-enum": {
+        "name": "ConfluentSubscriptionTypes",
         "modelAsString": true
       }
     },
     "ConfluentOrganizationProperties": {
       "type": "object",
+      "description": "Confluent organization properties",
+      "title": "ConfluentOrganizationProperties",
       "properties": {
         "name": {
           "description": "Name of the Confluent organization.",
@@ -527,6 +550,7 @@
           "readOnly": true
         },
         "confluentSubscriptionTypes": {
+          "description":"Subscription type of the Confluent organization.",
           "$ref": "#/definitions/ConfluentSubscriptionTypes"
         },
         "apiKey": {
@@ -546,6 +570,8 @@
     },
     "OfferDetail": {
       "type": "object",
+      "description": "Confluent offer detail",
+      "title": "OfferDetail",
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
@@ -563,6 +589,8 @@
     },
     "UserDetail": {
       "type": "object",
+      "description": "Subscriber detail",
+      "title": "UserDetail",
       "properties": {
         "firstName": {
           "description": "First name",
@@ -584,6 +612,8 @@
     },
     "ConfluentProperties": {
       "type": "object",
+      "description": "Confluent resource properties",
+      "title": "ConfluentProperties",
       "properties": {
         "createdTime": {
           "format": "date-time",
@@ -608,6 +638,7 @@
     "ConfluentResource": {
       "description": "An Confluent resource.",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "description": "The ARM id of the resource.",
