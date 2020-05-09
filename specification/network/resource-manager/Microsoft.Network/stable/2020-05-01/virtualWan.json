@@ -3885,10 +3885,16 @@
     },
       "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
       "post": {
-        "operationId": "EffectiveVirtualHubRoutes",
+        "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
         "x-ms-examples": {
-          "EffectiveRouteList": {
-            "$ref": "./examples/EffectiveRouteList.json"
+          "Effective Routes for the Virtual Hub": {
+            "$ref": "./examples/EffectiveRoutesListForVirtualHub.json"
+          },
+          "Effective Routes for a Route Table resource": {
+            "$ref": "./examples/EffectiveRoutesListForRouteTable.json"
+          },
+          "Effective Routes for a Connection resource": {
+            "$ref": "./examples/VirtualHubEffectiveRoutesListForConnection.json"
           }
         },
         "description": "Gets the effective routes configured for the Virtual Hub resource or the specified resource .",
@@ -3920,7 +3926,7 @@
             "schema": {
               "$ref": "#/definitions/EffectiveRoutesParameters"
             },
-            "description": "Parameters supplied to get the effective routes."
+            "description": "Parameters supplied to get the effective routes for a specific resource."
           }
         ],
         "responses": {
@@ -3940,6 +3946,9 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -5852,7 +5861,7 @@
       "properties": {
         "resourceId": {
           "$ref": "./network.json#/definitions/Resource",
-          "description": "The resource."
+          "description": "The resource whose effective routes are being requested."
         },
         "virtualWanResourceType": {
           "type": "string",
