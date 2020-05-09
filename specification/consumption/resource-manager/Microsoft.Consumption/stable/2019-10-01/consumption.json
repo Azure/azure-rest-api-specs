@@ -3320,7 +3320,7 @@
           "format": "decimal"
         },
         "timeGrain": {
-          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain. BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD customers",
           "type": "string",
           "enum": [
             "Monthly",
@@ -3336,7 +3336,7 @@
           }
         },
         "timePeriod": {
-          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
           "$ref": "#/definitions/BudgetTimePeriod"
         },
         "filter": {
@@ -3512,8 +3512,7 @@
           "description": "The type of threshold",
           "type": "string",
           "enum": [
-            "Actual",
-            "Forecasted"
+            "Actual"
           ],
           "x-ms-enum": {
             "name": "ThresholdType",
