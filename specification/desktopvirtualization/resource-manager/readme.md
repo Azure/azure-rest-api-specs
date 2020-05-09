@@ -19,14 +19,12 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-01-23-preview
+tag: package-2019-12-10-preview
 ```
 
 ### Tag: package-2019-01-23-preview
@@ -36,11 +34,6 @@ These settings apply only when `--tag=package-2019-01-23-preview` is specified o
 ``` yaml $(tag) == 'package-2019-01-23-preview'
 input-file:
 - Microsoft.DesktopVirtualization/preview/2019-01-23-preview/desktopvirtualization.json
-```
-
-``` yaml
-openapi-type: arm
-tag: package-2019-09-24-preview
 ```
 
 ### Tag: package-2019-09-24-preview
