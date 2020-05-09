@@ -1961,63 +1961,12 @@
         }
       }
     },
-    "Resource": {
-      "description": "ARM resource.",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "ARM tracked top level resource.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "Resource location."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
-    },
     "Workspace": {
       "type": "object",
       "description": "Represents a Workspace definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -2109,8 +2058,11 @@
       "description": "Represents a ApplicationGroup definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2123,6 +2075,10 @@
     "ApplicationGroupProperties": {
       "description": "Schema for ApplicationGroup properties.",
       "type": "object",
+      "required": [
+        "hostPoolArmPath",
+        "applicationGroupType"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -2162,7 +2118,7 @@
       "description": "ApplicationGroup properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2215,8 +2171,11 @@
       "description": "Represents a HostPool definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2229,6 +2188,11 @@
     "HostPoolProperties": {
       "description": "Properties of HostPool.",
       "type": "object",
+      "required": [
+        "hostPoolType",
+        "personalDesktopAssignmentType",
+        "loadBalancerType"
+      ],
       "properties": {
         "friendlyName": {
           "type": "string",
@@ -2321,7 +2285,7 @@
       "description": "HostPool properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2466,8 +2430,11 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
+      ],
+      "required": [
+        "properties"
       ],
       "properties": {
         "properties": {
@@ -2480,6 +2447,9 @@
     "ApplicationProperties": {
       "description": "Schema for Application properties.",
       "type": "object",
+      "required": [
+        "commandLineSetting"
+      ],
       "properties": {
         "description": {
           "type": "string",
@@ -2622,7 +2592,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2741,7 +2711,7 @@
       "description": "Represents a StartMenuItem definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2776,7 +2746,7 @@
       "description": "Represents a SessionHost definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2874,7 +2844,7 @@
       "description": "SessionHost properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -2923,7 +2893,7 @@
       "description": "Represents a UserSession definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
         }
       ],
       "properties": {
