@@ -31,6 +31,16 @@ openapi-type: arm
 tag: package-2019-06
 ```
 
+### Tag: package-2020-04
+
+These settings apply only when `--tag=package-2020-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04'
+input-file:
+- Microsoft.Cdn/stable/2020-04-15/cdn.json
+- Microsoft.Cdn/stable/2020-04-15/cdnwebapplicationfirewall.json
+```
+
 ### Tag: package-2019-12
 
 These settings apply only when `--tag=package-2019-12` is specified on the command line.
