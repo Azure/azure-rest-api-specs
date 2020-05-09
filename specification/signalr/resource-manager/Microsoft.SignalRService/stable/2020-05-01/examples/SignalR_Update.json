@@ -16,6 +16,16 @@
             "flag": "ServiceMode",
             "value": "Serverless",
             "properties": {}
+          },
+          {
+            "flag": "EnableConnectivityLogs",
+            "value": "True",
+            "properties": {}
+          },
+          {
+            "flag": "EnableMessagingLogs",
+            "value": "False",
+            "properties": {}
           }
         ],
         "cors": {
@@ -23,10 +33,29 @@
             "https://foo.com",
             "https://bar.com"
           ]
+        },
+        "upstream": null,
+        "networkACLs": {
+          "defaultAction": "Deny",
+          "publicNetwork": {
+            "allow": [
+              "ClientConnection"
+            ],
+            "deny": null
+          },
+          "privateEndpoints": [
+            {
+              "name": "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "allow": [
+                "ServerConnection"
+              ],
+              "deny": null
+            }
+          ]
         }
       }
     },
-    "api-version": "2018-10-01",
+    "api-version": "2020-05-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "resourceName": "mySignalRService"
@@ -47,11 +76,39 @@
           "publicPort": 443,
           "serverPort": 443,
           "version": "1.0",
+          "privateEndpointConnections": [
+            {
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": null,
+                  "actionsRequired": "None"
+                }
+              },
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "name": "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+              "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
+            }
+          ],
           "hostNamePrefix": null,
           "features": [
             {
               "flag": "ServiceMode",
               "value": "Serverless",
+              "properties": {}
+            },
+            {
+              "flag": "EnableConnectivityLogs",
+              "value": "True",
+              "properties": {}
+            },
+            {
+              "flag": "EnableMessagingLogs",
+              "value": "False",
               "properties": {}
             }
           ],
@@ -60,8 +117,37 @@
               "https://foo.com",
               "https://bar.com"
             ]
+          },
+          "upstream": {
+            "templates": [
+              {
+                "hubPattern": null,
+                "eventPattern": null,
+                "categoryPattern": null,
+                "urlTemplate": "http://foo.com"
+              }
+            ]
+          },
+          "networkACLs": {
+            "defaultAction": "Deny",
+            "publicNetwork": {
+              "allow": [
+                "ClientConnection"
+              ],
+              "deny": null
+            },
+            "privateEndpoints": [
+              {
+                "name": "mySignalRService.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                "allow": [
+                  "ServerConnection"
+                ],
+                "deny": null
+              }
+            ]
           }
         },
+        "kind": "SignalR",
         "location": "eastus",
         "tags": {
           "key1": "value1"
@@ -73,7 +159,8 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult..."
+        "Location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationStatus..."
       }
     }
   }

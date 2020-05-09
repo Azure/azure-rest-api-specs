@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-10-01",
+    "version": "2020-05-01",
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service"
   },
@@ -104,7 +104,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/SignalR": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/signalR": {
       "get": {
         "tags": [
           "SignalR"
@@ -143,7 +143,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR": {
       "get": {
         "tags": [
           "SignalR"
@@ -185,7 +185,212 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified private endpoint connection associated with a SignalR resource.",
+        "operationId": "SignalRPrivateEndpointConnections_Get",
+        "parameters": [
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Get": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Update the state of specified private endpoint connection associated with a SignalR resource.",
+        "operationId": "SignalRPrivateEndpointConnections_Create",
+        "parameters": [
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The resource of private endpoint and its properties.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the private endpoint connection is updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the private endpoint connection is now updating and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Create": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete the specified private endpoint connection associated with a SignalR resource.",
+        "operationId": "SignalRPrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection associated with the SignalR resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success. The response indicates the private endpoint connection is already deleted."
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Delete": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the private link resources that need to be created for a SignalR resource.",
+        "operationId": "SignalRPrivateLinkResources_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/listKeys": {
       "post": {
         "tags": [
           "SignalR"
@@ -227,7 +432,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/regenerateKey": {
       "post": {
         "tags": [
           "SignalR"
@@ -596,6 +801,10 @@
           "description": "Name of the operation with format: {provider}/{resource}/{operation}",
           "type": "string"
         },
+        "isDataAction": {
+          "description": "If the operation is a data action. (for data plane rbac)",
+          "type": "boolean"
+        },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
           "description": "The object that describes the operation."
@@ -850,19 +1059,17 @@
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
         },
-        "id": {
-          "description": "Fully qualified resource Id for the resource.",
+        "kind": {
+          "description": "The kind of the service - e.g. \"SignalR\", or \"RawWebSockets\" for \"Microsoft.SignalRService/SignalR\"",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
           "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the service - e.g. \"Microsoft.SignalRService/SignalR\"",
-          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
@@ -913,7 +1120,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "The type of the service - e.g. \"Microsoft.SignalRService/SignalR\"",
+          "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\"",
           "type": "string",
           "readOnly": true
         }
@@ -1014,6 +1221,13 @@
         "version": {
           "description": "Version of the SignalR resource. Probably you need the same or higher version of client SDKs.",
           "type": "string"
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections to the SignalR resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
         }
       }
     },
@@ -1035,6 +1249,14 @@
         "cors": {
           "$ref": "#/definitions/SignalRCorsSettings",
           "description": "Cross-Origin Resource Sharing (CORS) settings."
+        },
+        "upstream": {
+          "$ref": "#/definitions/ServerlessUpstreamSettings",
+          "description": "Upstream settings when the Azure SignalR is in server-less mode."
+        },
+        "networkACLs": {
+          "$ref": "#/definitions/SignalRNetworkACLs",
+          "description": "Network ACLs"
         }
       }
     },
@@ -1050,7 +1272,8 @@
           "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.",
           "enum": [
             "ServiceMode",
-            "EnableConnectivityLogs"
+            "EnableConnectivityLogs",
+            "EnableMessagingLogs"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1079,6 +1302,275 @@
       "properties": {
         "allowedOrigins": {
           "description": "Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use \"*\" to allow all. If omitted, allow all by default.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServerlessUpstreamSettings": {
+      "description": "The settings for the Upstream when the Azure SignalR is in server-less mode.",
+      "type": "object",
+      "properties": {
+        "templates": {
+          "description": "Gets or sets the list of Upstream URL templates. Order matters, and the first matching template takes effects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpstreamTemplate"
+          }
+        }
+      }
+    },
+    "SignalRNetworkACLs": {
+      "description": "Network ACLs for SignalR",
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "description": "Default action when no other rule matches",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ACLAction",
+            "modelAsString": true
+          }
+        },
+        "publicNetwork": {
+          "$ref": "#/definitions/NetworkACL",
+          "description": "ACL for requests from public network"
+        },
+        "privateEndpoints": {
+          "description": "ACLs for requests from private endpoints",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointACL"
+          }
+        }
+      }
+    },
+    "UpstreamTemplate": {
+      "description": "Upstream template item settings. It defines the Upstream URL of the incoming requests.\r\nThe template defines the pattern of the event, the hub or the category of the incoming request that matches current URL template.",
+      "required": [
+        "urlTemplate"
+      ],
+      "type": "object",
+      "properties": {
+        "hubPattern": {
+          "description": "Gets or sets the matching pattern for hub names. If not set, it matches any hub.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any hub name\r\n    2. Combine multiple hubs with \",\", for example \"hub1,hub2\", it matches \"hub1\" and \"hub2\"\r\n    3. The single hub name, for example, \"hub1\", it matches \"hub1\"",
+          "type": "string"
+        },
+        "eventPattern": {
+          "description": "Gets or sets the matching pattern for event names. If not set, it matches any event.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name\r\n    2. Combine multiple events with \",\", for example \"connect,disconnect\", it matches event \"connect\" and \"disconnect\"\r\n    3. The single event name, for example, \"connect\", it matches \"connect\"",
+          "type": "string"
+        },
+        "categoryPattern": {
+          "description": "Gets or sets the matching pattern for category names. If not set, it matches any category.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any category name\r\n    2. Combine multiple categories with \",\", for example \"connections,messages\", it matches category \"connections\" and \"messages\"\r\n    3. The single category name, for example, \"connections\", it matches the category \"connections\"",
+          "type": "string"
+        },
+        "urlTemplate": {
+          "description": "Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.\r\nFor example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkACL": {
+      "description": "Network ACL",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateEndpointACL": {
+      "description": "ACL for a private endpoint",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the private endpoint connection",
+          "type": "string"
+        },
+        "allow": {
+          "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deny": {
+          "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection to SignalR resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Properties of the private endpoint connection",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {}
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Private endpoint connection properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the private endpoint connection",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Running",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "Private endpoint associated with the private endpoint connection"
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "Connection state"
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Full qualified Id of the private endpoint",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Connection state of the private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected",
+            "Disconnected"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkServiceConnectionStatus",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "The reason for approval/rejection of the connection.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceList": {
+      "description": "Contains a list of AzSignalR.Models.Response.PrivateLink.PrivateLinkResource and a possible link to query more results",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of PrivateLinkResource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "Private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Properties of a private link resource",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Private link resource properties",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "Group Id of the private link resource",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "Required members of the private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredZoneNames": {
+          "description": "Required private DNS zone names",
           "type": "array",
           "items": {
             "type": "string"
@@ -1141,6 +1633,18 @@
         "location": {
           "description": "Azure GEO region: e.g. West US | East US | North Central US | South Central US | West Europe | North Europe | East Asia | Southeast Asia | etc. \r\nThe geo region of a resource never changes after it is created.",
           "type": "string"
+        },
+        "kind": {
+          "description": "The kind of the service. (e.g. signalr vs. rawwebsockets)",
+          "enum": [
+            "SignalR",
+            "RawWebSockets"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ServiceKind",
+            "modelAsString": true
+          }
         }
       }
     },
