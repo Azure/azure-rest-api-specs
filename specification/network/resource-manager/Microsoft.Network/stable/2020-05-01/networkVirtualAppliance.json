@@ -548,7 +548,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/virtualAppliancesites": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/virtualApplianceSites": {
       "get": {
         "tags": [
           "VirtualApplianceSites"
@@ -878,17 +878,17 @@
         "allow": {
           "type": "boolean",
           "readOnly": false,
-          "description": "Policy to allow."
+          "description": "Flag to control breakout of o365 allow category"
         },
         "optimize": {
           "type": "boolean",
           "readOnly": false,
-          "description": "Policy to Optimize."
+          "description": "Flag to control breakout of o365 optimize category"
         },
         "default": {
           "type": "boolean",
           "readOnly": false,
-          "description": "Default Policy."
+          "description": "Flag to control breakout of o365 default category"
         }
       },
       "description": "Network Virtual Appliance Sku Properties."
@@ -907,7 +907,7 @@
           "readOnly": true,
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
-      },      
+      },
       "allOf": [
         {
           "$ref": "./network.json#/definitions/Resource"
