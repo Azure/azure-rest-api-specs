@@ -351,7 +351,7 @@
         },
         "secret": {
           "type": "string",
-          "description": "A secret string that the application uses to prove its identity, also can be referred to as application password."
+          "description": "A secret string that the application uses to prove its identity, also can be referred to as application password (write only)."
         }
       }
     },
@@ -408,7 +408,7 @@
             "awsAssumeRole"
           ],
           "x-ms-enum": {
-            "name": "authenticationType",
+            "name": "authenticationConnectorType",
             "modelAsString": true,
             "values": [
               {
@@ -421,11 +421,6 @@
               }
             ]
           }
-        },
-        "accountId": {
-          "description": "The ID of the cloud account",
-          "type": "string",
-          "readOnly": true
         },
         "awsCreds": {
           "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
@@ -488,6 +483,11 @@
       "type": "object",
       "description": "AWS user credentials for the cloud account connector ",
       "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
         "awsAccessKeyId": {
           "type": "string",
           "description": "Public key element of the AWS credential object "
@@ -502,6 +502,11 @@
       "type": "object",
       "description": "AWS assume role setting for the cloud account connector ",
       "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
         "awsAssumeRoleArn": {
           "type": "string",
           "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
