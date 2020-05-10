@@ -3883,7 +3883,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
       "post": {
         "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
         "x-ms-examples": {
@@ -3945,10 +3945,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "final-state-via": "location"
         }
       }
     }
@@ -5813,20 +5810,20 @@
         }
       }
     },
-    "EffectiveRouteList": {
+    "VirtualHubEffectiveRouteEffectiveRouteList": {
       "description": "EffectiveRoutes List.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EffectiveRoute"
+            "$ref": "#/definitions/VirtualHubEffectiveRoute"
           },
           "description": "The list of effective routes configured on the virtual hub or the specified resource."
         }
       }
     },
-    "EffectiveRoute": {
-      "description": "The effective route.",
+    "VirtualHubEffectiveRoute": {
+      "description": "The effective route configured on the virtual hub or specified resource.",
       "properties": {
         "addressPrefixes": {
           "description": "The list of address prefixes.",
