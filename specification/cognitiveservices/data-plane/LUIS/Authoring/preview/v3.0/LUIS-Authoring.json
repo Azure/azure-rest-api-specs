@@ -304,6 +304,9 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
+            "$ref": "#/parameters/EnableNestedChildren"
+          },
+          {
             "name": "exampleLabelObject",
             "in": "body",
             "required": true,
@@ -350,6 +353,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           },
           {
             "name": "exampleLabelObjectArray",
@@ -408,6 +414,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -2342,6 +2351,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -2389,6 +2401,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -8149,6 +8164,22 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "description": "The identified entities within the example utterance.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabelObject"
+          },
+          "type": "array",
+          "example": [
+            {
+              "entityName": "child",
+              "startCharIndex": 0,
+              "endCharIndex": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -8319,6 +8350,21 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONEntity"
+          },
+          "example": [
+            {
+              "entity": "child1",
+              "startPos": 0,
+              "endPos": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -9278,6 +9324,21 @@
           "type": "string",
           "format": "uuid",
           "description": "The role id for the predicted entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabel"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "children": []
+            }
+          ]
         }
       },
       "required": [
@@ -9325,6 +9386,21 @@
         "phrase": {
           "type": "string",
           "description": "The actual token(s) that comprise the entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityPrediction"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "phrase": "string"
+            }
+          ]
         }
       }
     },
@@ -10604,6 +10680,9 @@
         "featureName": {
           "type": "string",
           "description": "The name of the feature used."
+        },
+        "isRequired": {
+          "type": "boolean"
         }
       }
     },
@@ -10847,6 +10926,15 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "EnableNestedChildren":
+    {
+      "name": "enableNestedChildren",
+      "in": "query",
+      "type": "boolean",
+      "description": "Toggles nested/flat format",
+      "required": true,
+      "x-ms-parameter-location": "method"
     }
   }
 }
