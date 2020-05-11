@@ -4,6 +4,34 @@
     "title": "Microsoft.Confluent",
     "version": "2020-03-01-preview"
   },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
   "paths": {
     "/providers/Microsoft.Confluent/operations": {
       "get": {
@@ -411,7 +439,6 @@
           "type": "string"
         },
         "display": {
-          "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
         }
       }
@@ -465,7 +492,6 @@
       "title": "ResourceProviderDefaultErrorResponse",
       "properties": {
         "error": {
-          "description": "Error response payload",
           "$ref": "#/definitions/ErrorResponseBody"
         }
       }
@@ -486,38 +512,6 @@
       "x-ms-enum": {
         "name": "ProvisionState",
         "modelAsString": true
-      }
-    },
-    "MarketplaceSaasResource": {
-      "type": "object",
-      "description": "Marketplace SaaS resource model",
-      "title": "MarketplaceSaaSResource",
-      "properties": {
-        "name": {
-          "description": "SaaS resource name",
-          "type": "string",
-          "readOnly": true
-        },
-        "marketplaceSubscription": {
-          "description": "SaaS subscription",
-          "$ref": "#/definitions/MarketplaceSubscription"
-        },
-        "saasResourceId": {
-          "description": "SaaS resource id",
-          "type": "string",
-          "readOnly": true
-        },
-        "planId": {
-          "description": "Offer plan id",
-          "type": "string",
-          "readOnly": true
-        },
-        "quantity": {
-          "description": "Quantity of plan",
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
       }
     },
     "ConfluentSubscriptionTypes": {
@@ -550,7 +544,6 @@
           "readOnly": true
         },
         "confluentSubscriptionTypes": {
-          "description":"Subscription type of the Confluent organization.",
           "$ref": "#/definitions/ConfluentSubscriptionTypes"
         },
         "apiKey": {
@@ -656,6 +649,7 @@
           "readOnly": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ConfluentProperties"
         },
         "tags": {
