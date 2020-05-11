@@ -40,7 +40,7 @@ directive:
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
     where: $.definitions.Dimension.properties.toBeExportedForShoebox
-    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics.
   - suppress: EnumInsteadOfBoolean
     from: signalr.json
     where: $.definitions.Operation.properties.isDataAction
