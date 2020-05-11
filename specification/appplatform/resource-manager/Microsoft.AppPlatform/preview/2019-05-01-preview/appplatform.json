@@ -2273,6 +2273,9 @@
     },
     "Sku": {
       "description": "Sku of Azure Spring Cloud",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -2286,8 +2289,7 @@
         "capacity": {
           "format": "int32",
           "description": "Current capacity of the target resource",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         }
       }
     },
@@ -3265,7 +3267,7 @@
           "description": "Name of the operation",
           "type": "string"
         },
-        "dataAction": {
+        "isDataAction": {
           "description": "Indicates whether the operation is a data action",
           "type": "boolean"
         },
