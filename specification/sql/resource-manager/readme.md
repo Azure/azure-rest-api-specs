@@ -54,6 +54,11 @@ input-file:
   - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssessments.json
   - Microsoft.Sql/preview/2020-02-02-preview/recoverableManagedDatabases.json
   - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
+  - Microsoft.Sql/preview/2020-02-02-preview/examples/ExportDatabase.json
+  - Microsoft.Sql/preview/2020-02-02-preview/examples/GetDatabase.json
+  - Microsoft.Sql/preview/2020-02-02-preview/examples/ListDatabasesByServer.json
+  - Microsoft.Sql/preview/2020-02-02-preview/examples/PatchVCoreDatabase.json
+  - Microsoft.Sql/preview/2020-02-02-preview/operations.json
 ```
 ### Tag: package-composite-v3
 
