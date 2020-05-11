@@ -12,14 +12,6 @@ python-sdk-output-folder: "$(output-folder)/azext_datafactory/vendored_sdks/data
 cli:
     cli-directive:
     # directive on operationGroup
-      - select: 'operationGroup'
-        where:
-            operationGroup: 'Operations'
-            operation: 'List'
-        hidden: true
-      - where:
-            parameter: location
-        required: true
       - where:
             group: Pipelines
             parameter: pipeline
