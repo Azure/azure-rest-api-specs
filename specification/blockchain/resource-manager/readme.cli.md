@@ -29,18 +29,18 @@ cli:
             operationGroup: 'locations'
             operation: 'listConsortiums'
         name: 'list'
-      - select: 'operationGroup'
-        where:
-            operationGroup: 'blockchainMemberOperationResults'
-        hidden: true
-      - select: 'operation'
-        where:
-            operationGroup: 'blockchainMembers'
-            operation: '(create|update)'
-        hidden: true
-      - select: 'operation'
-        where:
-            operationGroup: 'transactionNodes'
-            operation: '(create|update)'
-        hidden: true
+      # - select: 'operationGroup'
+      #   where:
+      #       operationGroup: 'blockchainMemberOperationResults'
+      #   hidden: true
+      # - select: 'operation'
+      #   where:
+      #       operationGroup: 'blockchainMembers'
+      #       operation: '(create|update)'
+      #   hidden: true
+      # - select: 'operation'
+      #   where:
+      #       operationGroup: 'transactionNodes'
+      #       operation: '(create|update)'
+      #   hidden: true
 ```
