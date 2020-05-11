@@ -1,9 +1,6 @@
 {
   "parameters": {
     "parameters": {
-      "tags": {
-        "key1": "value1"
-      },
       "sku": {
         "name": "Standard_S1",
         "tier": "Standard",
@@ -34,7 +31,16 @@
             "https://bar.com"
           ]
         },
-        "upstream": null,
+        "upstream": {
+          "templates": [
+            {
+              "hubPattern": "*",
+              "eventPattern": "connect,disconnect",
+              "categoryPattern": "*",
+              "urlTemplate": "https://example.com/chat/api/connect"
+            }
+          ]
+        },
         "networkACLs": {
           "defaultAction": "Deny",
           "publicNetwork": {
@@ -53,6 +59,11 @@
             }
           ]
         }
+      },
+      "kind": "SignalR",
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
       }
     },
     "api-version": "2020-05-01",
@@ -94,7 +105,7 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
-          "hostNamePrefix": null,
+          "hostNamePrefix": "mysignalrservice",
           "features": [
             {
               "flag": "ServiceMode",

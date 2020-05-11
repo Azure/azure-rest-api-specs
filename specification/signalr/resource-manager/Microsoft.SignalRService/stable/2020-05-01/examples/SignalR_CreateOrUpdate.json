@@ -1,11 +1,6 @@
 {
   "parameters": {
     "parameters": {
-      "location": "eastus",
-      "kind": "SignalR",
-      "tags": {
-        "key1": "value1"
-      },
       "sku": {
         "name": "Standard_S1",
         "tier": "Standard",
@@ -64,6 +59,11 @@
             }
           ]
         }
+      },
+      "kind": "SignalR",
+      "location": "eastus",
+      "tags": {
+        "key1": "value1"
       }
     },
     "api-version": "2020-05-01",
@@ -105,7 +105,7 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
-          "hostNamePrefix": null,
+          "hostNamePrefix": "mysignalrservice",
           "features": [
             {
               "flag": "ServiceMode",
@@ -201,7 +201,7 @@
               "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections"
             }
           ],
-          "hostNamePrefix": null,
+          "hostNamePrefix": "mysignalrservice",
           "features": [
             {
               "flag": "ServiceMode",

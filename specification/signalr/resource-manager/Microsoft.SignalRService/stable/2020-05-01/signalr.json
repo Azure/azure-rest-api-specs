@@ -541,7 +541,7 @@
             "description": "Parameters for the create or update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SignalRCreateParameters"
+              "$ref": "#/definitions/SignalRResource"
             }
           },
           {
@@ -641,7 +641,7 @@
             "description": "Parameters for the update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SignalRUpdateParameters"
+              "$ref": "#/definitions/SignalRResource"
             }
           },
           {
@@ -1052,11 +1052,11 @@
       "properties": {
         "sku": {
           "$ref": "#/definitions/ResourceSku",
-          "description": "SKU of the service."
+          "description": "The billing information of the resource.(e.g. Free, Standard)"
         },
         "properties": {
           "$ref": "#/definitions/SignalRProperties",
-          "description": "The properties of the service.",
+          "description": "Settings used to provision or configure the resource",
           "x-ms-client-flatten": true
         },
         "kind": {
@@ -1070,7 +1070,10 @@
             "name": "ServiceKind",
             "modelAsString": true
           },
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -1096,12 +1099,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
+          }
         }
       }
     },
@@ -1220,14 +1218,16 @@
         },
         "version": {
           "description": "Version of the SignalR resource. Probably you need the same or higher version of client SDKs.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "privateEndpointConnections": {
           "description": "Private endpoint connections to the SignalR resource.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1615,58 +1615,6 @@
             "name": "KeyType",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "SignalRCreateParameters": {
-      "description": "Parameters for SignalR service create/update operation.\r\n\r\nKeep the same schema as AzSignalR.Models.SignalRResource",
-      "required": [
-        "location"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SignalRUpdateParameters"
-        }
-      ],
-      "properties": {
-        "location": {
-          "description": "Azure GEO region: e.g. West US | East US | North Central US | South Central US | West Europe | North Europe | East Asia | Southeast Asia | etc. \r\nThe geo region of a resource never changes after it is created.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "The kind of the service. (e.g. signalr vs. rawwebsockets)",
-          "enum": [
-            "SignalR",
-            "RawWebSockets"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ServiceKind",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "SignalRUpdateParameters": {
-      "description": "Parameters for SignalR service update operation",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "A list of key value pairs that describe the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sku": {
-          "$ref": "#/definitions/ResourceSku",
-          "description": "The billing information of the resource.(e.g. basic vs. standard)"
-        },
-        "properties": {
-          "$ref": "#/definitions/SignalRCreateOrUpdateProperties",
-          "description": "Settings used to provision or configure the resource",
-          "x-ms-client-flatten": false
         }
       }
     },

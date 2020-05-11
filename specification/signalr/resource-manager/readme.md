@@ -45,10 +45,6 @@ directive:
     from: signalr.json
     where: $.definitions.Operation.properties.isDataAction
     reason:  The boolean properties 'isDataAction' is a standard property for Azuer Operatoins.
-  - suppress: PutRequestResponseScheme
-    from: signalr.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}"].put
-    reason:  The schema of the PUT request body is a superset of the GET response body, we have a PATCH operation to make the resource updatable
   - suppress: TrackedResourceListByImmediateParent
     reason: Another list APIs naming approach is used over the specs
   - suppress: AvoidNestedProperties
