@@ -25,14 +25,34 @@ These are the global settings for the Mixed Reality Azure Resource Management Cl
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2019-12-preview
+tag: package-2020-05-01
+```
+
+### Tag: package-2020-05-01
+
+These settings apply only when `--tag=package-2020-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05-01'
+input-file:
+- Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+```
+
+### Tag: package-2020-04-06-preview
+
+These settings apply only when `--tag=package-2020-04-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-04-06-preview'
+input-file:
+- Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
+- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
 ```
 
 ### Tag: package-2019-12-preview
 
-These settings apply only when `--tag=package-2019-12-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-12-02-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-12-preview'
+``` yaml $(tag) == 'package-2019-12-02-preview'
 input-file:
 - Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
 - Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
@@ -123,6 +143,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MixedReality/stable/2020-05-01/proxy.json
+  - $(this-folder)/Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+  - $(this-folder)/Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
+  - $(this-folder)/Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
