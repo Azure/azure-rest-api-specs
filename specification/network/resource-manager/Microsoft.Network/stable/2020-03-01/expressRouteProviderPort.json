@@ -56,7 +56,7 @@
               "$ref": "#/definitions/ExpressRouteProviderPortListResult"
             }
           },
-          "default": {
+          "default": { 
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -73,36 +73,36 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteProviderPorts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ExpressRoutePortsLocations/{locationName}": {
       "get": {
         "tags": [
           "ExpressRouteProviderPorts"
         ],
-        "operationId": "ExpressRouteProviderPorts_ListByResourceGroup",
-        "description": "Retrieves all the ExpressRouteProviderPorts in a resource group.",
+        "operationId": "ExpressRouteProviderPortsLocation_List",
+        "description": "Retrieves all the ExpressRouteProviderPorts in a subscription.",
         "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the requested ExpressRoutePort peering location."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful.The operation returns a list of ExpressRouteProviderPort resources. If there are no ports for the provider, an empty list is returned.",
+            "description": "Request successful. The operation returns a list of ExpressRouteProviderPort resources at a location. If there are no ports for the provider, an empty list is returned.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteProviderPortListResult"
             }
           },
-          "default": {
+          "default": { 
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./network.json#/definitions/CloudError"
@@ -110,65 +110,15 @@
           }
         },
         "x-ms-examples": {
-          "ExpressRouteProviderPortListByResourceGroup": {
-            "$ref": "./examples/ExpressRouteProviderPortListByResourceGroup.json"
+          "ExpressRouteProviderPortList": {
+            "$ref": "./examples/ExpressRouteProviderPortLocationList.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteProviderPorts/{portPairDescriptor}": {
-      "get": {
-        "tags": [
-          "ExpressRouteProviderPorts"
-        ],
-        "operationId": "ExpressRouteProviderPorts_Get",
-        "description": "Gets details about the specified ExpressRouteProviderPort.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group (peering location of the port)."
-          },
-          {
-            "name": "portPairDescriptor",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The description of the ExpressRouteProviderPort."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns the resulting ExpressRouteProviderPort resource.",
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteProviderPort"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetExpressRouteCrossConnection": {
-            "$ref": "./examples/ExpressRouteProviderPortGet.json"
-          }
-        }
-      }
-    }
+    }    
   },
 	"definitions": {
     "ExpressRouteProviderPortProperties": {
