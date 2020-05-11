@@ -38,6 +38,8 @@ input-file:
 - Microsoft.Storage/stable/2019-06-01/storage.json
 - Microsoft.Storage/stable/2019-06-01/blob.json
 - Microsoft.Storage/stable/2019-06-01/file.json
+- Microsoft.Storage/stable/2019-06-01/queue.json
+- Microsoft.Storage/stable/2019-06-01/table.json
 
 directive:
   - suppress: R3018
@@ -297,6 +299,8 @@ input-file:
   - $(this-folder)/Microsoft.Storage/stable/2019-06-01/storage.json
   - $(this-folder)/Microsoft.Storage/stable/2019-06-01/blob.json
   - $(this-folder)/Microsoft.Storage/stable/2019-06-01/file.json
+  - $(this-folder)/Microsoft.Storage/stable/2019-06-01/queue.json
+  - $(this-folder)/Microsoft.Storage/stable/2019-06-01/table.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/storage.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/blob.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/file.json
