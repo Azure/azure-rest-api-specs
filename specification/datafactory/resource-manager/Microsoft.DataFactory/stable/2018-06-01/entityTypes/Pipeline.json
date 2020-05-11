@@ -267,6 +267,10 @@
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
         },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -306,6 +310,10 @@
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
         },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -344,6 +352,10 @@
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -388,6 +400,10 @@
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
         },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -427,6 +443,10 @@
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
         },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -434,6 +454,10 @@
         "modifiedDatetimeEnd": {
           "type": "object",
           "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "fileFilter": {
+          "type": "object",
+          "description": "Specify a filter to be used to select a subset of files in the folderPath rather than all files. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -458,6 +482,10 @@
           "type": "object",
           "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Azure File name starting from root path. Type: string (or Expression with resultType string)."
+        },
         "fileListPath": {
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
@@ -465,6 +493,10 @@
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -528,6 +560,10 @@
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
         },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "modifiedDatetimeStart": {
           "type": "object",
           "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
@@ -559,6 +595,14 @@
           "type": "object",
           "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
         },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
+        },
         "fileListPath": {
           "type": "object",
           "description": "Point to a text file that lists each file (relative path to the path configured in the dataset) that you want to copy. Type: string (or Expression with resultType string)."
@@ -589,6 +633,14 @@
         "wildcardFileName": {
           "type": "object",
           "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "fileListPath": {
           "type": "object",
@@ -628,6 +680,14 @@
         "requestTimeout": {
           "type": "object",
           "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -659,6 +719,10 @@
         "enablePartitionDiscovery": {
           "type": "boolean",
           "description": "Indicates whether to enable partition discovery."
+        },
+        "partitionRootPath": {
+          "type": "object",
+          "description": "Specify the root path where partition discovery starts from. Type: string (or Expression with resultType string)."
         },
         "modifiedDatetimeStart": {
           "type": "object",
@@ -770,6 +834,38 @@
         "type"
       ]
     },
+    "CompressionReadSettings": {
+      "description": "Compression read settings.",
+      "discriminator": "type",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The Compression setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ZipDeflateReadSettings": {
+      "description": "The ZipDeflate compression read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CompressionReadSettings"
+        }
+      ],
+      "properties": {
+        "preserveZipFileNameAsFolder": {
+          "description": "Preserve the zip file name as folder path. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      }
+    },
     "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -782,6 +878,40 @@
         "skipLineCount": {
           "type": "object",
           "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
+        },
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
+    "JsonReadSettings": {
+      "description": "Json read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
+        }
+      }
+    },
+    "BinaryReadSettings": {
+      "description": "Binary read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSettings"
+        }
+      ],
+      "properties": {
+        "compressionProperties": {
+          "$ref": "#/definitions/CompressionReadSettings",
+          "description": "Compression settings."
         }
       }
     },
@@ -948,6 +1078,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonReadSettings",
+          "description": "Json format settings."
         },
         "additionalColumns": {
           "type": "array",
@@ -1180,6 +1314,10 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreReadSettings",
           "description": "Binary store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/BinaryReadSettings",
+          "description": "Binary format settings."
         }
       }
     },
@@ -1535,6 +1673,10 @@
           "type": "object",
           "description": "OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
         "additionalColumns": {
           "type": "array",
           "description": "Specifies the additional columns to be added to source data. Type: array of objects (or Expression with resultType array of objects).",
@@ -1617,6 +1759,10 @@
         "query": {
           "type": "object",
           "description": "SAP Cloud for Customer OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1632,6 +1778,10 @@
         "query": {
           "type": "object",
           "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1846,6 +1996,14 @@
         "isolationLevel": {
           "description": "Specifies the transaction locking behavior for the SQL source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -1876,6 +2034,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -1906,6 +2072,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -1936,6 +2110,14 @@
         "produceAdditionalTypes": {
           "description": "Which additional types to produce.",
           "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
       }
     },
@@ -1959,7 +2141,46 @@
         "storedProcedureParameters": {
           "type": "object",
           "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel.",
+          "$ref": "#/definitions/SqlPartitionOption"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
         }
+      }
+    },
+    "SqlPartitionSettings": {
+      "description": "The settings that will be leveraged for Sql source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer or datetime type that will be used for proceeding partitioning. If not specified, the primary key of the table is auto-detected and used as the partition column. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SqlPartitionOption": {
+      "description": "The partition mechanism that will be used for Sql read in parallel.",
+      "type": "string",
+      "enum": [
+        "None",
+        "PhysicalPartitionsOfTable",
+        "DynamicRange"
+      ],
+      "x-ms-enum": {
+        "name": "SqlPartitionOption",
+        "modelAsString": true
       }
     },
     "FileSystemSource": {
@@ -2990,6 +3211,10 @@
         "query": {
           "type": "object",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -3209,6 +3434,10 @@
             "name": "SapCloudForCustomerSinkWriteBehavior",
             "modelAsString": true
           }
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:05:00. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -4647,7 +4876,8 @@
           "enum": [
             "SSISDB",
             "File",
-            "InlinePackage"
+            "InlinePackage",
+            "PackageStore"
           ],
           "x-ms-enum": {
             "name": "SsisPackageLocationType",
@@ -4676,6 +4906,10 @@
         "configurationPath": {
           "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "configurationAccessCredential": {
+          "description": "The configuration file access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
         },
         "packageName": {
           "description": "The package name.",
@@ -5046,6 +5280,10 @@
         "dataset": {
           "description": "Delete activity dataset reference.",
           "$ref": "../datafactory.json#/definitions/DatasetReference"
+        },
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Delete activity store settings."
         }
       },
       "required": [
@@ -5268,6 +5506,14 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           }
+        },
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "GetMetadata activity store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/FormatReadSettings",
+          "description": "GetMetadata activity format settings."
         }
       },
       "required": [
@@ -6209,6 +6455,25 @@
       "required": [
         "dataFlow"
       ]
+    },
+    "SharePointOnlineListSource": {
+      "description": "A copy activity source for sharePoint online list source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "The OData query to filter the data in SharePoint Online list. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        },
+        "httpRequestTimeout": {
+          "type": "object",
+          "description": "The wait time to get a response from SharePoint Online. Default value is 5 minutes (00:05:00). Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
     }
   }
 }
