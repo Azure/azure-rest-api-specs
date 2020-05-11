@@ -7,7 +7,8 @@ az:
   extensions: datafactory
   namespace: azure.mgmt.datafactory
   package-name: azure-mgmt-datafactory
-python-sdk-output-folder: "$(output-folder)/azext_datafactory/vendored_sdks/datafactory"
+az-output-folder:  $(azure-cli-extension-folder)/src/datafactory
+python-sdk-output-folder: "$(az-output-folder)/azext_datafactory/vendored_sdks/datafactory"
 
 cli:
     cli-directive:
