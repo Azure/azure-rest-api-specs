@@ -2159,6 +2159,60 @@
           }
         }
       }
+    },
+    "/skus/Spring": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "operationId": "Sku_ListServiceSku",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSkuCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/skus/Spring/apps/deployments": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "operationId": "Sku_ListDeploymentSku",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ResourceTypeSkuCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3426,6 +3480,112 @@
         "displayName": {
           "description": "Localized friendly display name of the dimension",
           "type": "string"
+        }
+      }
+    },
+    "ResourceTypeSkuCollection": {
+      "description": "Collection of supported Skus of Azure Spring Cloud resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of supported Skus",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceTypeSku"
+          }
+        }
+      }
+    },
+    "ResourceTypeSku": {
+      "description": "Supported Skus of Azure Spring Cloud resources",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "Resource type",
+          "type": "string"
+        },
+        "skus": {
+          "description": "Supported Skus",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuSetting"
+          }
+        }
+      }
+    },
+    "SkuSetting": {
+      "description": "Supported Sku settings of Azure Spring Cloud",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the Sku",
+          "type": "string"
+        },
+        "tier": {
+          "description": "Tier of the Sku",
+          "type": "string"
+        },
+        "locations": {
+          "description": "Locations of the Sku",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requiredFeatures": {
+          "description": "Required features of the Sku",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacity": {
+          "$ref": "#/definitions/SkuCapacity",
+          "description": "Capacity of the SKU"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "description": "The SKU capacity",
+      "required": [
+        "minimum"
+      ],
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "Gets or sets the minimum.",
+          "type": "integer"
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "Gets or sets the maximum.",
+          "type": "integer"
+        },
+        "default": {
+          "format": "int32",
+          "description": "Gets or sets the default.",
+          "type": "integer"
+        },
+        "scaleType": {
+          "description": "Gets or sets the type of the scale.",
+          "enum": [
+            "None",
+            "Manual",
+            "Automatic"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true
+          }
         }
       }
     },
