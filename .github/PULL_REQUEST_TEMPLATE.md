@@ -5,6 +5,8 @@
 - [ ] I have reviewed the [documentation](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/202/Overall-Process-of-AME-Onboarding) for the workflow.
 - [ ] [Validation tools](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/84/Swagger-Validation-tools) were run on swagger spec(s) and have all been fixed in this PR. [How to fix?](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md)
 
+If any further question about AME onboarding or validation tools, please view the [FAQ](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/FAQ.md).
+
 ### ARM API Review Checklist
 - [ ] Service team MUST add the "**WaitForARMFeedback**" label if the management plane API changes fall into one of the below categories. 
   - adding/removing APIs.
