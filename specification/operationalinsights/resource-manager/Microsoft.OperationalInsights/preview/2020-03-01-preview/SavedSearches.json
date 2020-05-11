@@ -205,41 +205,41 @@
   "definitions": {
     "Tag": {
       "properties": {
-        "name": {
+        "Name": {
           "type": "string",
           "description": "The tag name."
         },
-        "value": {
+        "Value": {
           "type": "string",
           "description": "The tag value."
         }
       },
       "required": [
-        "name",
-        "value"
+        "Name",
+        "Value"
       ],
       "description": "A tag of a saved search."
     },
     "SavedSearchProperties": {
       "properties": {
-        "category": {
+        "Category": {
           "type": "string",
           "description": "The category of the saved search. This helps the user to find a saved search faster. "
         },
-        "displayName": {
+        "DisplayName": {
           "type": "string",
           "description": "Saved search display name."
         },
-        "query": {
+        "Query": {
           "type": "string",
           "description": "The query expression for the saved search. Please see https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-search-reference for reference."
         },
-        "version": {
+        "Version": {
           "type": "integer",
           "format": "int64",
           "description": "The version number of the query language. The current version is 2 and is the default."
         },
-        "tags": {
+        "Tags": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Tag"
@@ -248,9 +248,9 @@
         }
       },
       "required": [
-        "category",
-        "displayName",
-        "query"
+        "Category",
+        "DisplayName",
+        "Query"
       ],
       "description": "Value object for saved search results."
     },
