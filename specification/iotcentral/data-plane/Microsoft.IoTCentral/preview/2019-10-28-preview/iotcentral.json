@@ -575,6 +575,7 @@
     },
     "DeviceCloudProperties": {
       "description": "Cloud property values associated with the device.",
+      "additionalProperties": true,
       "type": "object"
     },
     "DeviceCommand": {
@@ -1765,7 +1766,7 @@
       ],
       "get": {
         "operationId": "Devices_GetComponentCommandHistory",
-        "summary": "Get device command history",
+        "summary": "Get command history for a component of the device",
         "x-ms-examples": {
           "Get command history": {
             "$ref": "./examples/devices_commandshistory_get.json"
@@ -1785,7 +1786,7 @@
       },
       "post": {
         "operationId": "Devices_ExecuteComponentCommand",
-        "summary": "Execute a device command",
+        "summary": "Execute a command on a component of a device",
         "description": "Execute a command on a device.",
         "parameters": [
           {
