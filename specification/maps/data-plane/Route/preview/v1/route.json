@@ -98,7 +98,7 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -348,7 +348,7 @@
     "TravelMode": {
       "name": "travelMode",
       "in": "query",
-      "description": "The mode of travel for the requested route. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be other. Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas. In **calculateReachableRange** requests, the values bicycle and pedestrian must not be used",
+      "description": "The mode of travel for the requested route. If not defined, default is 'car'. Note that the requested travelMode may not be available for the entire route. Where the requested travelMode is not available for a particular section, the travelMode element of the response for that section will be \"other\". Note that travel modes bus, motorcycle, taxi and van are BETA functionality. Full restriction data is not available in all areas. In **calculateReachableRange** requests, the values bicycle and pedestrian must not be used.",
       "required": false,
       "type": "string",
       "default": "car",
@@ -368,35 +368,35 @@
         "values": [
           {
             "value": "car",
-            "description": "car"
+            "description": "The returned routes are optimized for cars."
           },
           {
             "value": "truck",
-            "description": "truck"
+            "description": "The returned routes are optimized for commercial vehicles, like for trucks."
           },
           {
             "value": "taxi",
-            "description": "taxi"
+            "description": "The returned routes are optimized for taxis. BETA functionality."
           },
           {
             "value": "bus",
-            "description": "bus"
+            "description": "The returned routes are optimized for buses, including the use of bus only lanes. BETA functionality."
           },
           {
             "value": "van",
-            "description": "van"
+            "description": "The returned routes are optimized for vans. BETA functionality."
           },
           {
             "value": "motorcycle",
-            "description": "motorcycle"
+            "description": "The returned routes are optimized for motorcycles. BETA functionality."
           },
           {
             "value": "bicycle",
-            "description": "bicycle"
+            "description": "The returned routes are optimized for bicycles, including use of bicycle lanes."
           },
           {
             "value": "pedestrian",
-            "description": "pedestrian"
+            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
           }
         ]
       },
@@ -891,7 +891,7 @@
           },
           {
             "value": "tagged",
-            "description": "Returns raw instruction data with tagged human-readable messages to permit formatting."
+            "description": "Returns raw instruction data with tagged human-readable messages to permit formatting. A human-readable message is built up from repeatable identified elements. These are tagged to allow client applications to format them correctly. The following message components are tagged when instructionsType=tagged: street, roadNumber, signpostText, exitNumber, roundaboutExitNumber.\nExample of tagged 'Turn left' message:​ ``` Turn left onto <roadNumber>A4</roadNumber>/<roadNumber>E19</roadNumber> towards <signpostText>Den Haag</signpostText> ```"
           }
         ]
       },
@@ -2198,7 +2198,7 @@
           "readOnly": true
         },
         "magnitudeOfDelay": {
-          "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field <ty> of the Get Traffic Incident Detail API. ",
+          "description": "The magnitude of delay caused by the incident. These values correspond to the values of the response field ty of the [Get Traffic Incident Detail API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentdetail). ",
           "readOnly": true,
           "type": "string",
           "enum": [
@@ -2241,16 +2241,16 @@
       }
     },
     "RouteResultSectionTec": {
-      "description": "Details of the traffic event, using definitions in the TPEG2-TEC standard. Can contain <effectCode> and <causes> elements.",
+      "description": "Details of the traffic event, using definitions in the [TPEG2-TEC](https://www.iso.org/standard/63116.html) standard. Can contain effectCode and causes elements.",
       "type": "object",
       "properties": {
         "effectCode": {
-          "description": "The effect on the traffic flow. Contains a value in the tec001:EffectCode table, as defined in the TPEG2-TEC standard. Can be used to color-code traffic events according to severity.",
+          "description": "The effect on the traffic flow. Contains a value in the tec001:EffectCode table, as defined in the [TPEG2-TEC](https://www.iso.org/standard/63116.html) standard. Can be used to color-code traffic events according to severity.",
           "type": "integer",
           "readOnly": true
         },
         "causes": {
-          "description": "List of <cause> elements.",
+          "description": "Causes array",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RouteResultSectionTecCause"
@@ -2259,16 +2259,16 @@
       }
     },
     "RouteResultSectionTecCause": {
-      "description": "The cause of the traffic event. Can contain <mainCauseCode> and <subCauseCode> elements. Can be used to define iconography and descriptions.",
+      "description": "The cause of the traffic event. Can contain mainCauseCode and subCauseCode elements. Can be used to define iconography and descriptions.",
       "type": "object",
       "properties": {
         "mainCauseCode": {
-          "description": "The main cause of the traffic event. Contains a value in the tec002:CauseCode table, as defined in the TPEG2-TEC standard.",
+          "description": "The main cause of the traffic event. Contains a value in the tec002:CauseCode table, as defined in the [TPEG2-TEC](https://www.iso.org/standard/63116.html) standard.",
           "type": "integer",
           "readOnly": true
         },
         "subCauseCode": {
-          "description": "The subcause of the traffic event. Contains a value in the sub cause table defined by the mainCauseCode, as defined in the TPEG2-TEC standard.",
+          "description": "The subcause of the traffic event. Contains a value in the sub cause table defined by the mainCauseCode, as defined in the [TPEG2-TEC](https://www.iso.org/standard/63116.html) standard.",
           "type": "integer",
           "readOnly": true
         }
@@ -2290,6 +2290,11 @@
         },
         "point": {
           "$ref": "#/definitions/Coordinate"
+        },
+        "pointIndex": {
+          "description": "The index of the point in the list of polyline \"points\" corresponding to the point of the instruction.",
+          "type": "integer",
+          "readOnly": true
         },
         "instructionType": {
           "description": "Type of the instruction, e.g., turn or change of road form.",
@@ -2333,13 +2338,75 @@
             ]
           }
         },
+        "roadNumbers": {
+          "description": "The road number(s) of the next significant road segment(s) after the maneuver, or of the road(s) to be followed. Example: [\"E34\", \"N205\"]",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        },
+        "exitNumber": {
+          "description": "The number(s) of a highway exit taken by the current maneuver. If an exit has multiple exit numbers, they will be separated by \",\" and possibly aggregated by \"-\", e.g., \"10, 13-15\".",
+          "type": "string",
+          "readOnly": true
+        },
         "street": {
           "description": "Street name of the next significant road segment after the maneuver, or of the street that should be followed.",
           "type": "string",
           "readOnly": true
         },
+        "signpostText": {
+          "description": "The text on a signpost which is most relevant to the maneuver, or to the direction that should be followed.",
+          "type": "string",
+          "readOnly": true
+        },
         "countryCode": {
           "description": "3-character [ISO 3166-1](https://www.iso.org/iso-3166-country-codes.html) alpha-3 country code. E.g. USA.",
+          "type": "string",
+          "readOnly": true
+        },
+        "stateCode": {
+          "description": "A subdivision (e.g., state) of the country, represented by the second part of an [ISO 3166-2](https://www.iso.org/standard/63546.html) code. This is only available for some countries like the US, Canada, and Mexico.",
+          "type": "string",
+          "readOnly": true
+        },
+        "junctionType": {
+          "description": "The type of the junction where the maneuver takes place. For larger roundabouts, two separate instructions are generated for entering and leaving the roundabout.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "REGULAR",
+            "ROUNDABOUT",
+            "BIFURCATION"
+          ],
+          "x-ms-enum": {
+            "name": "JunctionType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "REGULAR",
+                "description": "regular"
+              },
+              {
+                "value": "ROUNDABOUT",
+                "description": "roundabout"
+              },
+              {
+                "value": "BIFURCATION",
+                "description": "bifurcation"
+              }
+            ]
+          }
+        },
+        "turnAngleInDecimalDegrees": {
+          "description": "Indicates the direction of an instruction. If junctionType indicates a turn instruction:\n\n  * 180 = U-turn\n  * [-179, -1] = Left turn\n  * 0 = Straight on (a '0 degree' turn)\n  * [1, 179] = Right turn\n\nIf junctionType indicates a bifurcation instruction:\n\n  * <0 - keep left\n  * >0 - keep right",
+          "type": "integer",
+          "readOnly": true
+        },
+        "roundaboutExitNumber": {
+          "description": "This indicates which exit to take at a roundabout.",
           "type": "string",
           "readOnly": true
         },
@@ -2551,6 +2618,11 @@
         },
         "message": {
           "description": "A human-readable message for the maneuver.",
+          "type": "string",
+          "readOnly": true
+        },
+        "combinedMessage": {
+          "description": "A human-readable message for the maneuver combined with the message from the next instruction. Sometimes it is possible to combine two successive instructions into a single instruction making it easier to follow. When this is the case the possibleCombineWithNext flag will be true. For example:\n``` 10. Turn left onto Einsteinweg/A10/E22 towards Ring Amsterdam 11. Follow Einsteinweg/A10/E22 towards Ring Amsterdam ```\nThe possibleCombineWithNext flag on instruction 10 is true. This indicates to the clients of coded guidance that it can be combined with instruction 11. The instructions will be combined automatically for clients requesting human-readable guidance. The combinedMessage field contains the combined message:\n``` Turn left onto Einsteinweg/A10/E22 towards Ring Amsterdam then follow Einsteinweg/A10/E22 towards Ring Amsterdam. ```",
           "type": "string",
           "readOnly": true
         }

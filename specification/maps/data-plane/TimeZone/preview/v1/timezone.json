@@ -40,19 +40,6 @@
     }
   ],
   "responses": {
-    "202": {
-      "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
-      "schema": {
-        "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
-      },
-      "headers": {
-        "Location": {
-          "type": "string",
-          "description": "New URL to check for the results of the long running process."
-        }
-      }
-    },
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
@@ -93,7 +80,7 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -673,11 +660,6 @@
         },
         "TimeZones": {
           "$ref": "#/definitions/TimeZonesById"
-        },
-        "Count": {
-          "description": "Count property",
-          "type": "number",
-          "readOnly": true
         }
       }
     },
@@ -698,11 +680,6 @@
         },
         "TimeZones": {
           "$ref": "#/definitions/TimeZonesByCoordinates"
-        },
-        "Count": {
-          "description": "Count property",
-          "type": "number",
-          "readOnly": true
         }
       }
     },
