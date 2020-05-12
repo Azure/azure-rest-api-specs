@@ -78,9 +78,6 @@
         "x-ms-examples": {
           "Details of a specific cloud account connector": {
             "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
-          },
-          "Second": {
-            "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
           }
         },
         "tags": [
@@ -116,7 +113,10 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create a cloud account connector for a subscription": {
+          "AwsCred -  Create a cloud account connector for a subscription": {
+            "$ref": "./examples/Connectors/CreateUpdateConnectorSubscription_example.json"
+          },
+          "AwsAssumeRole - Create a cloud account connector for a subscription": {
             "$ref": "./examples/Connectors/CreateUpdateConnectorSubscription_example.json"
           }
         },
@@ -301,10 +301,6 @@
             ]
           }
         },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant Id."
-        },
         "resourceGroupName": {
           "type": "string",
           "description": "The name of the resource group."
@@ -349,6 +345,7 @@
     "AuthenticationDetailsProperties": {
       "type": "object",
       "description": "Settings for cloud authentication management",
+      "discriminator": "source",
       "properties": {
         "provisioningState": {
           "description": "State of the multi-cloud connector",
@@ -412,21 +409,61 @@
               }
             ]
           }
-        },
-        "awsCreds": {
-          "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
-          "type": "object",
-          "$ref": "#/definitions/AwsCredentialsSettingProperties"
-        },
-        "awsAssumeRole": {
-          "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
-          "type": "object",
-          "$ref": "#/definitions/AwsAssumeRolesSettingProperties"
         }
       },
       "required": [
         "authenticationType"
       ]
+    },
+    "AwsCredsAuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "AWS cloud account connector based credentials, the credentials is composed of access key id and secret key, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html\">Creating an IAM User in Your AWS Account (write only)</a>",
+      "x-ms-discriminator-value": "awsCreds",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
+        "awsAccessKeyId": {
+          "type": "string",
+          "description": "Public key element of the AWS credential object "
+        },
+        "awsSecretAccessKey": {
+          "type": "string",
+          "description": "Secret key element of the AWS credential object"
+        }
+      }
+    },
+    "AwAssumeRoleAuthenticationDetailsProperties": {
+      "type": "object",
+      "description": "AWS cloud account connector based assume role, the role enables delegating access to your AWS resources. The role is composed of role arn and external id, for more details, refer to <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html\">Creating a Role to Delegate Permissions to an IAM User (write only)</a>",
+      "x-ms-discriminator-value": "awsAssumeRole",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationDetailsProperties"
+        }
+      ],
+      "properties": {
+        "accountId": {
+          "description": "The ID of the cloud account",
+          "type": "string",
+          "readOnly": true
+        },
+        "awsAssumeRoleArn": {
+          "type": "string",
+          "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
+        },
+        "awsExternalId": {
+          "type": "string",
+          "description": "A unique identifier that is required when you assume a role in another account."
+        }
+      }
     },
     "PermissionProperty": {
       "description": "A permission detected in the cloud account.",
@@ -467,44 +504,6 @@
         "port": {
           "type": "string",
           "description": "Proxy server port"
-        }
-      }
-    },
-    "AwsCredentialsSettingProperties": {
-      "type": "object",
-      "description": "AWS user credentials for the cloud account connector ",
-      "properties": {
-        "accountId": {
-          "description": "The ID of the cloud account",
-          "type": "string",
-          "readOnly": true
-        },
-        "awsAccessKeyId": {
-          "type": "string",
-          "description": "Public key element of the AWS credential object "
-        },
-        "awsSecretAccessKey": {
-          "type": "string",
-          "description": "Secret key element of the AWS credential object"
-        }
-      }
-    },
-    "AwsAssumeRolesSettingProperties": {
-      "type": "object",
-      "description": "AWS assume role setting for the cloud account connector ",
-      "properties": {
-        "accountId": {
-          "description": "The ID of the cloud account",
-          "type": "string",
-          "readOnly": true
-        },
-        "awsAssumeRoleArn": {
-          "type": "string",
-          "description": "Assumed role ID is an identifier that you can use to create temporary security credentials."
-        },
-        "awsExternalId": {
-          "type": "string",
-          "description": "A unique identifier that is required when you assume a role in another account."
         }
       }
     }
