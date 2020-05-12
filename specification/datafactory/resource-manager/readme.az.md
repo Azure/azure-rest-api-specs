@@ -30,4 +30,10 @@ cli:
             op: CreateOrUpdate
             param: properties
         poly-resource: true
+      - where:
+            group: ExposureControl
+        hidden: true
+      - where:
+            group: integrationRuntimeObjectMetadata
+        hidden: true
 ```
