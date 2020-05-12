@@ -38,27 +38,7 @@ These settings apply only when `--tag=package-preview-2020-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2020-02'
 input-file:
-  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceEncryptionProtectors.json
-  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceKeys.json
-  - Microsoft.Sql/preview/2020-02-02-preview/ManagedInstanceTdeCertificates.json
-  - Microsoft.Sql/preview/2020-02-02-preview/TdeCertificates.json
-  - Microsoft.Sql/preview/2020-02-02-preview/cancelOperations.json
-  - Microsoft.Sql/preview/2020-02-02-preview/cancelPoolOperations.json
-  - Microsoft.Sql/preview/2020-02-02-preview/capabilities.json
-  - Microsoft.Sql/preview/2020-02-02-preview/databaseVulnerabilityAssessmentScans.json
-  - Microsoft.Sql/preview/2020-02-02-preview/databases.json
-  - Microsoft.Sql/preview/2020-02-02-preview/elasticPools.json
-  - Microsoft.Sql/preview/2020-02-02-preview/instanceFailoverGroups.json
-  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssesmentRuleBaselines.json
-  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssessmentScans.json
-  - Microsoft.Sql/preview/2020-02-02-preview/managedDatabaseVulnerabilityAssessments.json
-  - Microsoft.Sql/preview/2020-02-02-preview/recoverableManagedDatabases.json
   - Microsoft.Sql/preview/2020-02-02-preview/shortTermRetentionPolicies.json
-  - Microsoft.Sql/preview/2020-02-02-preview/examples/ExportDatabase.json
-  - Microsoft.Sql/preview/2020-02-02-preview/examples/GetDatabase.json
-  - Microsoft.Sql/preview/2020-02-02-preview/examples/ListDatabasesByServer.json
-  - Microsoft.Sql/preview/2020-02-02-preview/examples/PatchVCoreDatabase.json
-  - Microsoft.Sql/preview/2020-02-02-preview/operations.json
 ```
 ### Tag: package-composite-v3
 
