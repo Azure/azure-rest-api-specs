@@ -119,18 +119,17 @@ cli:
   package-name: azure-mgmt-devops
   clear-output-folder: false
 ```
-
 ## trenton
 
 These settings apply only when `--trenton` is specified on the command line.
 
 ``` yaml $(trenton)
 trenton:
-  cli_name: devops
-  azure_arm: true
-  license_header: MICROSOFT_MIT_NO_VERSION
-  payload_flattening_threshold: 2
-  namespace: azure.mgmt.devops
-  package_name: azure-mgmt-devops
-  clear_output_folder: false
+    cli-name: devops
+    azure_arm: true
+    license_header: MICROSOFT_MIT_NO_VERSION
+    payload_flattening_threshold: 2
+    namespace: devops
+    package-name: devops
+    clear-output-folder: false
 ```
