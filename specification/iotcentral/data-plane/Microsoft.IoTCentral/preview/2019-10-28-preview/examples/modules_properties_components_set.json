@@ -1,0 +1,31 @@
+{
+  "title": "Update properties of a module within a component",
+  "description": "Update the values of read-write properties of a module within a single component",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "mx1",
+    "module_name": "module_env",
+    "component_name": "componentA",
+    "body": {
+      "SensitivityDial": 300
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "SensitivityDial": 50,
+        "$metadata": {
+          "SensitivityDial": {
+            "desiredValue": 300,
+            "desiredVersion": 3,
+            "ackVersion": 1,
+            "ackDescription": "Ok",
+            "ackCode": 200,
+            "lastUpdateTime": "2020-04-27T22:08:55.1149957Z"
+          }
+        }
+      }
+    }
+  }
+}

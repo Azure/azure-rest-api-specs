@@ -135,6 +135,112 @@
         }
       ]
     },
+    "ObjectSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "description": "The property fields of this object type.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SchemaField"
+              }
+            }
+          },
+          "required": [
+            "fields"
+          ]
+        }
+      ]
+    },
+    "EnumSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "valueSchema": {
+              "description": "The schema for values of this enum type."
+            },
+            "enumValues": {
+              "description": "The discreet named values of this enum type.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnumValue"
+              }
+            }
+          },
+          "required": [
+            "valueSchema",
+            "enumValues"
+          ]
+        }
+      ]
+    },
+    "EnumValue": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "enumValue": {
+              "description": "The resolved value of this enum entry."
+            }
+          },
+          "required": [
+            "enumValue"
+          ]
+        }
+      ]
+    },
+    "MapSchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mapKey": {
+              "description": "The schema for keys of this map type."
+            },
+            "mapValue": {
+              "description": "The schema for values of this map type."
+            }
+          },
+          "required": [
+            "mapKey",
+            "mapValue"
+          ]
+        }
+      ]
+    },
+    "ArraySchema": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "elementSchema": {
+              "description": "The schema for values of this array type."
+            }
+          },
+          "required": [
+            "elementSchema"
+          ]
+        }
+      ]
+    },
     "SchemaField": {
       "allOf": [
         {
@@ -222,9 +328,7 @@
             "target": {
               "description": "The target capability models for this relationship.",
               "type": "array",
-              "items": {
-                "type": "string"
-              },
+              "items": {},
               "minItems": 1
             },
             "maxMultiplicity": {
@@ -266,14 +370,17 @@
               "description": "The interface used by this component.",
               "$ref": "#/definitions/Interface"
             }
-          }
+          },
+          "required": [
+            "schema"
+          ]
         }
       ]
     },
     "CapabilityModel": {
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "#/definitions/Interface"
         },
         {
           "type": "object",
@@ -283,13 +390,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Component"
-              }
-            },
-            "contents": {
-              "description": "The relationships contained by the capability model.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Capability"
               }
             }
           }
@@ -452,10 +552,7 @@
           "type": "boolean",
           "readOnly": true
         }
-      },
-      "required": [
-        "instanceOf"
-      ]
+      }
     },
     "DeviceCollection": {
       "type": "object",
@@ -478,8 +575,8 @@
     },
     "DeviceCloudProperties": {
       "description": "Cloud property values associated with the device.",
-      "type": "object",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "type": "object"
     },
     "DeviceCommand": {
       "type": "object",
@@ -548,8 +645,7 @@
     },
     "DeviceProperties": {
       "description": "Property values associated with the device.",
-      "type": "object",
-      "additionalProperties": true
+      "type": "object"
     },
     "DeviceTelemetry": {
       "type": "object",
@@ -859,7 +955,11 @@
             "value": {
               "description": "The initial value of the capability."
             }
-          }
+          },
+          "required": [
+            "capability",
+            "value"
+          ]
         }
       ]
     },
@@ -891,7 +991,10 @@
               "description": "Visualization details for the referenced capability.",
               "$ref": "#/definitions/ValueDetail"
             }
-          }
+          },
+          "required": [
+            "capability"
+          ]
         }
       ]
     },
@@ -992,7 +1095,11 @@
               "description": "The name of the capability being referenced.",
               "type": "string"
             }
-          }
+          },
+          "required": [
+            "component",
+            "reference"
+          ]
         }
       ]
     }
@@ -1654,17 +1761,12 @@
           "$ref": "#/parameters/ComponentName"
         },
         {
-          "in": "path",
-          "name": "command_name",
-          "description": "Name of this device command.",
-          "x-ms-parameter-location": "method",
-          "type": "string",
-          "required": true
+          "$ref": "#/parameters/CommandName"
         }
       ],
       "get": {
-        "operationId": "Devices_GetCommandHistory",
-        "summary": "Get device command history",
+        "operationId": "Devices_GetComponentCommandHistory",
+        "summary": "Get command history for a component of the device",
         "x-ms-examples": {
           "Get command history": {
             "$ref": "./examples/devices_commandshistory_get.json"
@@ -1683,14 +1785,9 @@
         }
       },
       "post": {
-        "operationId": "Devices_ExecuteCommand",
-        "summary": "Execute a device command",
+        "operationId": "Devices_ExecuteComponentCommand",
+        "summary": "Execute a command on a component of a device",
         "description": "Execute a command on a device.",
-        "x-ms-examples": {
-          "Send command": {
-            "$ref": "./examples/devices_commands_send.json"
-          }
-        },
         "parameters": [
           {
             "name": "body",
@@ -1702,6 +1799,73 @@
             }
           }
         ],
+        "x-ms-examples": {
+          "Send command": {
+            "$ref": "./examples/devices_commands_send.json"
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{device_id}/modules/{module_name}/components/{component_name}/commands/{command_name}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/DeviceId"
+        },
+        {
+          "$ref": "#/parameters/ModuleName"
+        },
+        {
+          "$ref": "#/parameters/ComponentName"
+        },
+        {
+          "$ref": "#/parameters/CommandName"
+        }
+      ],
+      "get": {
+        "operationId": "Devices_GetModuleComponentCommandHistory",
+        "summary": "Get module command history",
+        "x-ms-examples": {
+          "Get command history within module": {
+            "$ref": "./examples/modules_commandshistory_get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceCommandCollection"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Devices_ExecuteModuleComponentCommand",
+        "summary": "Execute a module command",
+        "description": "Execute a command on a module.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Device command body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCommand"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Send command to module": {
+            "$ref": "./examples/modules_commands_send.json"
+          }
+        },
         "responses": {
           "201": {
             "description": "Success",
@@ -1845,6 +2009,121 @@
         }
       }
     },
+    "/devices/{device_id}/modules/{module_name}/properties": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/DeviceId"
+        },
+        {
+          "$ref": "#/parameters/ModuleName"
+        }
+      ],
+      "get": {
+        "operationId": "Devices_GetModuleProperties",
+        "summary": "Get module properties",
+        "description": "Get all property values of a module.",
+        "x-ms-examples": {
+          "Get properties of a module": {
+            "$ref": "./examples/modules_properties_get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_UpdateModuleProperties",
+        "summary": "Update module properties",
+        "description": "Update all property values of a module.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Module properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Update properties of a module": {
+            "$ref": "./examples/modules_properties_update.json"
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{device_id}/modules/{module_name}/components/{component_name}/properties": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/DeviceId"
+        },
+        {
+          "$ref": "#/parameters/ModuleName"
+        },
+        {
+          "$ref": "#/parameters/ComponentName"
+        }
+      ],
+      "get": {
+        "operationId": "Devices_GetModuleComponentProperties",
+        "summary": "Get module properties for a specific component",
+        "x-ms-examples": {
+          "Get properties of a module": {
+            "$ref": "./examples/modules_properties_components_get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Devices_UpdateModuleComponentProperties",
+        "summary": "Update module properties for a specific component",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Module properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Update properties of a module within a component": {
+            "$ref": "./examples/modules_properties_components_set.json"
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceProperties"
+            }
+          }
+        }
+      }
+    },
     "/devices/{device_id}/components/{component_name}/telemetry/{telemetry_name}": {
       "parameters": [
         {
@@ -1854,20 +2133,48 @@
           "$ref": "#/parameters/ComponentName"
         },
         {
-          "in": "path",
-          "name": "telemetry_name",
-          "description": "Name of this device telemetry.",
-          "x-ms-parameter-location": "method",
-          "type": "string",
-          "required": true
+          "$ref": "#/parameters/TelemetryName"
         }
       ],
       "get": {
-        "operationId": "Devices_GetTelemetryValue",
+        "operationId": "Devices_GetComponentTelemetryValue",
         "summary": "Get device telemetry value",
         "x-ms-examples": {
           "Get telemetry": {
             "$ref": "./examples/devices_telemetry_get.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeviceTelemetry"
+            }
+          }
+        }
+      }
+    },
+    "/devices/{device_id}/modules/{module_name}/components/{component_name}/telemetry/{telemetry_name}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/DeviceId"
+        },
+        {
+          "$ref": "#/parameters/ModuleName"
+        },
+        {
+          "$ref": "#/parameters/ComponentName"
+        },
+        {
+          "$ref": "#/parameters/TelemetryName"
+        }
+      ],
+      "get": {
+        "operationId": "Devices_GetModuleComponentTelemetryValue",
+        "summary": "Get module telemetry value",
+        "x-ms-examples": {
+          "Get telemetry from module": {
+            "$ref": "./examples/modules_telemetry_get.json"
           }
         },
         "responses": {
@@ -1898,10 +2205,34 @@
       "type": "string",
       "required": true
     },
+    "ModuleName": {
+      "in": "path",
+      "name": "module_name",
+      "description": "Name of the device module.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
     "ComponentName": {
       "in": "path",
       "name": "component_name",
       "description": "Name of the component. In the device template editor in your app, this is the interface instance name.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
+    "CommandName": {
+      "in": "path",
+      "name": "command_name",
+      "description": "Name of this device command.",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true
+    },
+    "TelemetryName": {
+      "in": "path",
+      "name": "telemetry_name",
+      "description": "Name of this device telemetry.",
       "x-ms-parameter-location": "method",
       "type": "string",
       "required": true
