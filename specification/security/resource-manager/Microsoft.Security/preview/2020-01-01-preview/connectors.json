@@ -114,10 +114,10 @@
       "put": {
         "x-ms-examples": {
           "AwsCred -  Create a cloud account connector for a subscription": {
-            "$ref": "./examples/Connectors/CreateUpdateConnectorSubscription_example.json"
+            "$ref": "./examples/Connectors/CreateUpdateAwsCredConnectorSubscription_example.json"
           },
           "AwsAssumeRole - Create a cloud account connector for a subscription": {
-            "$ref": "./examples/Connectors/CreateUpdateConnectorSubscription_example.json"
+            "$ref": "./examples/Connectors/CreateUpdateAwsAssumeRoleConnectorSubscription_example.json"
           }
         },
         "tags": [
@@ -178,10 +178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ConnectorSetting"
-            }
+            "description": "OK"
           },
           "201": {
             "description": "The connector is not found"
@@ -389,7 +386,7 @@
           }
         },
         "authenticationType": {
-          "description": "Connect to your AWS cloud account using either account credentials or role-based authentication.",
+          "description": "Connect to your cloud account, for AWS use either account credentials or role-based authentication.",
           "type": "string",
           "enum": [
             "awsCreds",
@@ -438,7 +435,11 @@
           "type": "string",
           "description": "Secret key element of the AWS credential object"
         }
-      }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey"
+      ]
     },
     "AwAssumeRoleAuthenticationDetailsProperties": {
       "type": "object",
@@ -463,7 +464,11 @@
           "type": "string",
           "description": "A unique identifier that is required when you assume a role in another account."
         }
-      }
+      },
+      "required": [
+        "awsAssumeRoleArn",
+        "awsExternalId"
+      ]
     },
     "PermissionProperty": {
       "description": "A permission detected in the cloud account.",
