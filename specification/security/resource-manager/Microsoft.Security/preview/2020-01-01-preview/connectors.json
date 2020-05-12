@@ -78,6 +78,9 @@
         "x-ms-examples": {
           "Details of a specific cloud account connector": {
             "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
+          },
+          "Second": {
+            "$ref": "./examples/Connectors/GetConnectorSubscription_example.json"
           }
         },
         "tags": [
@@ -249,7 +252,7 @@
       "description": "Settings for hybrid compute management",
       "properties": {
         "provisioningState": {
-          "description": "State of the connection",
+          "description": "State of the service principal and its secret",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -258,7 +261,7 @@
             "Expired"
           ],
           "x-ms-enum": {
-            "name": "state",
+            "name": "provisioningState",
             "modelAsString": true,
             "values": [
               {
@@ -284,7 +287,7 @@
             "Off"
           ],
           "x-ms-enum": {
-            "name": "hybridComputeAutoProvision",
+            "name": "autoProvision",
             "modelAsString": true,
             "values": [
               {
@@ -337,18 +340,6 @@
           "type": "string",
           "description": "Application id of service principal."
         },
-        "servicePrincipalNames": {
-          "type": "string",
-          "description": "Service principal names."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the Service principal."
-        },
-        "id": {
-          "type": "string",
-          "description": "Id of the Service principal."
-        },
         "secret": {
           "type": "string",
           "description": "A secret string that the application uses to prove its identity, also can be referred to as application password (write only)."
@@ -360,7 +351,7 @@
       "description": "Settings for cloud authentication management",
       "properties": {
         "provisioningState": {
-          "description": "State of the connection",
+          "description": "State of the multi-cloud connector",
           "type": "string",
           "readOnly": true,
           "enum": [
@@ -370,7 +361,7 @@
             "IncorrectPolicy"
           ],
           "x-ms-enum": {
-            "name": "state",
+            "name": "provisioningState",
             "modelAsString": true,
             "values": [
               {
@@ -408,7 +399,7 @@
             "awsAssumeRole"
           ],
           "x-ms-enum": {
-            "name": "authenticationConnectorType",
+            "name": "authenticationType",
             "modelAsString": true,
             "values": [
               {
@@ -447,7 +438,7 @@
         "AmazonSSMAutomationRole"
       ],
       "x-ms-enum": {
-        "name": "permission",
+        "name": "PermissionProperty",
         "modelAsString": true,
         "values": [
           {

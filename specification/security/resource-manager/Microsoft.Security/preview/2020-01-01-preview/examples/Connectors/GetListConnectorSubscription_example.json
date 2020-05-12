@@ -8,8 +8,8 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev",
-            "name": "aws_dev",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev1",
+            "name": "aws_dev1",
             "type": "Microsoft.Security/connectors",
             "properties": {
               "hybridComputeSettings": {
@@ -26,8 +26,7 @@
                   "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1",
                   "servicePrincipalNames": "{ad9bcd79-be9c-45ab-abd8-80ca1654a7d1, https://Arc-for-servers}",
                   "displayName": "Hybrid-RP",
-                  "id": "5be92c87-01c4-42f5-bade-c1c10af87758",
-                  "secret": null
+                  "id": "5be92c87-01c4-42f5-bade-c1c10af87758"
                 }
               },
               "authenticationDetails": {
@@ -38,14 +37,46 @@
                   "AWS::AmazonSSMAutomationRole"
                 ],
                 "authenticationType": "awsCreds",
-                "accountId": "922315681122",
                 "awsCreds": {
-                  "awsAccessKeyId": null,
-                  "awsSecretKey": null
+                  "accountId": "922315681122"
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/connectors/aws_dev2",
+            "name": "aws_dev2",
+            "type": "Microsoft.Security/connectors",
+            "properties": {
+              "hybridComputeSettings": {
+                "provisioningState": "Valid",
+                "autoProvision": "On",
+                "tenantId": "72f977ff-8bf1-41af-91ab-2d7cd011db47",
+                "resourceGroupName": "AwsConnectorRG",
+                "region": "West US 2",
+                "proxyServer": {
+                  "ip": "167.210.187.160",
+                  "port": "34"
                 },
+                "servicePrincipal": {
+                  "applicationId": "ad9bcd79-be9c-45ab-abd8-80ca1654a7d1",
+                  "servicePrincipalNames": "{ad9bcd79-be9c-45ab-abd8-80ca1654a7d1, https://Arc-for-servers}",
+                  "displayName": "Hybrid-RP",
+                  "id": "5be92c87-01c4-42f5-bade-c1c10af87758"
+                }
+              },
+              "authenticationDetails": {
+                "provisioningState": "Valid",
+                "grantedPermissions": [
+                  "AWS::AWSSecurityHubReadOnlyAccess",
+                  "AWS::SecurityAudit",
+                  "AWS::AmazonSSMAutomationRole"
+                ],
+                "authenticationType": "awsCreds",
                 "awsAssumeRole": {
-                  "awsAssumeRoleArn": null,
-                  "awsExternalId": null
+                  "accountId": "81231569658",
+                  "awsAssumeRoleArn": "arn:aws:iam::102614528198:role/AscConnector",
+                  "awsExternalId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
                 }
               }
             }
