@@ -10,6 +10,14 @@ az:
 az-output-folder:  $(azure-cli-extension-folder)/src/datafactory
 python-sdk-output-folder: "$(az-output-folder)/azext_datafactory/vendored_sdks/datafactory"
 
+input-file:
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/DataFlow.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Dataset.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/LinkedService.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json
+- Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json
+
 cli:
     cli-directive:
     # directive on operationGroup
