@@ -1,0 +1,34 @@
+{
+  "title": "Update properties of a module",
+  "description": "Update the values of read-write properties of a module",
+  "parameters": {
+    "centralDnsSuffixInPath": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "device_id": "mx1",
+    "module_name": "module_env",
+    "body": {
+      "componentA": {
+        "SensitivityDial": 200
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "componentA": {
+          "SensitivityDial": 75,
+          "$metadata": {
+            "SensitivityDial": {
+              "desiredValue": 200,
+              "desiredVersion": 3,
+              "ackVersion": 1,
+              "ackDescription": "Ok",
+              "ackCode": 200,
+              "lastUpdateTime": "2020-04-27T22:08:55.1149957Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}
