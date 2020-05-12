@@ -46,6 +46,10 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
+        },
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
         }
       }
     },
@@ -89,7 +93,7 @@
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -126,10 +130,10 @@
         "modelAsString": false,
         "values": [
           {
-          "value": "json",
-          "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
-        }
-      ]
+            "value": "json",
+            "description": "[The JavaScript Object Notation Data Interchange Format](https://tools.ietf.org/html/rfc8259)"
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     },
@@ -207,10 +211,10 @@
         "modelAsString": false,
         "values": [
           {
-          "value": "geojson",
-          "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
-        }
-      ]
+            "value": "geojson",
+            "description": "[GeoJSON](https://tools.ietf.org/html/rfc7946) is a JSON based geospatial data interchange format."
+          }
+        ]
       },
       "x-ms-parameter-location": "method"
     }
@@ -265,6 +269,13 @@
             "in": "query",
             "description": "The longitude of the location being passed.  Example: -124.63.",
             "required": true,
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "in": "query",
+            "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion is used. Example: 200.",
+            "required": false,
             "type": "number"
           },
           {
@@ -331,7 +342,7 @@
       },
       "post": {
         "x-publish": true,
-        "description": "**Search Geofence Post API**\n\n\n**Applies to:** S1 Pricing tier.\n\nThe Geofence Post API allows you to retrieve the proximity of a coordinate to a  provided geofence or set of fences. With POST call, you do not have to upload the fence data in advance, instead you supply the location of the object you are tracking in query parameters as well as the fence or set of fences data in post request body. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) for more details on the geofence data format. The response will contain information about the distance from the outer edge of the geofence. A negative value signifies that the  coordinate is inside of the fence while a positive value means that it is outside of the fence.<br><br>This API can be used for a variety of scenarios that include things like asset  tracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration).  The isAsync parameter is used to enable integration with Event Grid (disabled by default).",
+        "description": "**Search Geofence Post API**\n**Applies to:** S1 Pricing tier.\nThe Geofence Post API allows you to retrieve the proximity of a coordinate to a  provided geofence or set of fences. With POST call, you do not have to upload the fence data in advance, instead you supply the location of the object you are tracking in query parameters as well as the fence or set of fences data in post request body. See [Geofencing GeoJSON data](https://docs.microsoft.com/en-us/azure/azure-maps/geofence-geojson) for more details on the geofence data format. The response will contain information about the distance from the outer edge of the geofence. A negative value signifies that the  coordinate is inside of the fence while a positive value means that it is outside of the fence.<br><br>This API can be used for a variety of scenarios that include things like asset  tracking, fleet management, or setting up alerts for moving objects.\n\nThe API supports [integration with Event Grid](https://docs.microsoft.com/azure/azure-maps/azure-maps-event-grid-integration).  The isAsync parameter is used to enable integration with Event Grid (disabled by default).",
         "operationId": "Spatial_PostGeofence",
         "x-ms-examples": {
           "Geofence": {
@@ -370,6 +381,13 @@
             "in": "query",
             "description": "The longitude of the location being passed.  Example: -124.63.",
             "required": true,
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "in": "query",
+            "description": "The sea level in meter of the location being passed. If this parameter is presented, 2D extrusion geofencing is applied. Example: 200.",
+            "required": false,
             "type": "number"
           },
           {
@@ -565,6 +583,7 @@
         }
       }
     },
+    "/spatial/boundingBox/{format}": {},
     "/spatial/closestPoint/{format}": {
       "post": {
         "x-publish": true,
@@ -1113,7 +1132,7 @@
       ]
     },
     "Polygon": {
-      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.    ",
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
       "type": "object",
       "allOf": [
         {
@@ -1218,6 +1237,11 @@
           "description": "Longitude of the nearest point of the geometry.",
           "type": "number",
           "readOnly": true
+        },
+        "nearestZ": {
+          "description": "Sea level in meter of the nearest point on the 2D extrusion geometry. This will only be presented in response when value is provided for 'zInMeter' in the request.",
+          "type": "number",
+          "readOnly": true
         }
       }
     },
@@ -1250,7 +1274,7 @@
           }
         },
         "isEventPublished": {
-          "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber.",
+          "description": "True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber. This will only be presented in response when 'isAsync' query parameter is set to true.",
           "type": "boolean",
           "readOnly": true
         }
@@ -1296,6 +1320,41 @@
         "result": {
           "description": "The FeatureCollection of buffers for the input.",
           "$ref": "#/definitions/GeoJSONFeatureCollection"
+        }
+      }
+    },
+    "BoundingBoxResponse": {
+      "description": "This object is returned from a successful Spatial BoundingBox call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary of the call.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "udid": {
+              "description": "The udid for the user data if one exists",
+              "type": "string",
+              "readOnly": true
+            },
+            "information": {
+              "description": "The information about what happened during the call.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        },
+        "result": {
+          "description": "The bounding box of the input feature collection.",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "feature": {
+              "description": "The resulting feature with bounding box geometry",
+              "type": "object",
+              "readOnly": true
+            }
+          }
         }
       }
     },
