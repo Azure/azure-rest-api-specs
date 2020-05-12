@@ -124,10 +124,10 @@
     },
     "MetroId": {
       "name": "metroId",
-      "description": "The unique id of the metro area. Required parameter specifying the required metro area to search in. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
+      "description": "The unique id of the metro area. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
       "type": "integer",
       "in": "query",
-      "required": true,
+      "required": false,
       "x-ms-parameter-location": "method"
     },
     "MobilityLanguage": {
@@ -572,7 +572,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
             },
@@ -704,7 +704,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
             },
@@ -743,7 +743,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
             },
@@ -874,7 +874,7 @@
                 },
                 {
                   "value": "agencyKey",
-                  "description": "The agency’s GTFS Id."
+                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
                 },
                 {
                   "value": "agencyName",
@@ -1169,7 +1169,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
                 }
               ]
             },
@@ -1280,7 +1280,7 @@
                 },
                 {
                   "value": "agencyKey",
-                  "description": "The agency’s GTFS Id."
+                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
                 },
                 {
                   "value": "agencyName",
