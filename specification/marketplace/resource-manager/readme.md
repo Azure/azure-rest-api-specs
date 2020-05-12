@@ -1,11 +1,20 @@
 # marketplace
 
 > see https://aka.ms/autorest
-This is the AutoRest configuration file for marketplace.
+
+This is the AutoRest configuration file for Marketplace.
+
+---
 
 ## Getting Started
 
-There is no SDK for this endpoint, this is used internaly for calling markeplaceRP from Ibiza.
+To build the SDK for Marketplace, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+
+> `autorest`
+
+To see additional help and options, run:
+
+> `autorest --help`
 
 ---
 
@@ -13,14 +22,19 @@ There is no SDK for this endpoint, this is used internaly for calling markeplace
 
 ### Basic Information
 
-Make an HTTPs request from Ibiza to the endpoint in order to get the check if user is private or not
+These are the global settings for the Marketplace API.
+
+``` yaml
+openapi-type: arm
+tag: package-2020-01-01
+```
 
 
 ### Tag: package-2019-12-01
 
 These settings apply only when `--tag=package-2019-12-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-12-01'
+``` yaml $(tag) == 'package-2019-12-01'
 input-file:
   - Microsoft.Marketplace/stable/2019-12-01/Marketplace.json
 ```
@@ -29,7 +43,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-01-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-01-01'
+``` yaml $(tag) == 'package-2020-01-01'
 input-file:
   - Microsoft.Marketplace/stable/2020-01-01/Marketplace.json
 ```
