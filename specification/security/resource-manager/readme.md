@@ -148,7 +148,6 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
@@ -220,7 +219,6 @@ These settings apply only when `--tag=package-2019-01-preview-only` is specified
 ``` yaml $(tag) == 'package-2019-01-preview-only'
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
-- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 - Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2019-01-01-preview/assessments.json
 
