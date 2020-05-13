@@ -1,0 +1,428 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mixed Reality",
+    "description": "Mixed Reality Resource Provider Remote Rendering Resource API",
+    "version": "2020-04-06-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
+      "get": {
+        "operationId": "RemoteRenderingAccounts_ListBySubscription",
+        "tags": [
+          "Resource",
+          "Proxy"
+        ],
+        "description": "List Remote Rendering Accounts by Subscription",
+        "x-ms-examples": {
+          "List remote rendering accounts by subscription": {
+            "$ref": "./examples/remote-rendering/GetBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccountPage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
+      "get": {
+        "operationId": "RemoteRenderingAccounts_ListByResourceGroup",
+        "tags": [
+          "Resource"
+        ],
+        "description": "List Resources by Resource Group",
+        "x-ms-examples": {
+          "List remote rendering accounts by resource group": {
+            "$ref": "./examples/remote-rendering/GetByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccountPage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}": {
+      "delete": {
+        "operationId": "RemoteRenderingAccounts_Delete",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Delete a Remote Rendering Account.",
+        "x-ms-examples": {
+          "Delete remote rendering account": {
+            "$ref": "./examples/remote-rendering/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "RemoteRenderingAccounts_Get",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Retrieve a Remote Rendering Account.",
+        "x-ms-examples": {
+          "Get remote rendering account": {
+            "$ref": "./examples/remote-rendering/Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "RemoteRenderingAccounts_Update",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Updating a Remote Rendering Account",
+        "x-ms-examples": {
+          "Update remote rendering account": {
+            "$ref": "./examples/remote-rendering/Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remoteRenderingAccountParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RemoteRenderingAccounts_Create",
+        "tags": [
+          "Resource"
+        ],
+        "description": "Creating or Updating a Remote Rendering Account.",
+        "x-ms-examples": {
+          "Create remote rendering account": {
+            "$ref": "./examples/remote-rendering/Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/remoteRenderingAccountParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/RemoteRenderingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/listKeys": {
+      "post": {
+        "operationId": "RemoteRenderingAccounts_ListKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "List Both of the 2 Keys of a Remote Rendering Account",
+        "x-ms-examples": {
+          "List remote rendering account key": {
+            "$ref": "./examples/remote-rendering/ListKeys.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/regenerateKeys": {
+      "post": {
+        "operationId": "RemoteRenderingAccounts_RegenerateKeys",
+        "tags": [
+          "Key"
+        ],
+        "description": "Regenerate specified Key of a Remote Rendering Account",
+        "x-ms-examples": {
+          "Regenerate remote rendering account keys": {
+            "$ref": "./examples/remote-rendering/RegenerateKey.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./common.json#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/accountKeyRegenerateParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./common.json#/definitions/AccountKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RemoteRenderingAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "RemoteRenderingAccount Response.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Property bag.",
+          "$ref": "./common.json#/definitions/MixedRealityAccountProperties"
+        }
+      }
+    },
+    "RemoteRenderingAccountPage": {
+      "description": "Result of the request to get resource collection. It contains a list of resources and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RemoteRenderingAccount"
+          },
+          "description": "List of resources supported by the Resource Provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of resource list results if there are any."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "remoteRenderingAccountParameter": {
+      "name": "remoteRenderingAccount",
+      "description": "Remote Rendering Account parameter.",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/RemoteRenderingAccount"
+      },
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

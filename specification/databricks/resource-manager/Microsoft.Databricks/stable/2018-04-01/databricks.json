@@ -586,10 +586,6 @@
     },
     "WorkspaceCustomParameters": {
       "properties": {
-        "amlWorkspaceId": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The Workspace ID of an Azure Machine Learning Workspace"
-        },
         "customVirtualNetworkId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
@@ -605,34 +601,6 @@
         "enableNoPublicIp": {
           "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
           "description": "Should the Public IP be Disabled?"
-        },
-        "loadBalancerBackendPoolName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of a Backend Address Pool within an Azure Load Balancer"
-        },
-        "loadBalancerId": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The Resource ID of an Azure Load Balancer"
-        },
-        "relayNamespaceName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of an Azure Relay Namespace"
-        },
-        "storageAccountName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name which should be used for the Storage Account"
-        },
-        "storageAccountSkuName": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The SKU which should be used for this Storage Account"
-        },
-        "resourceTags": {
-          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
-          "description": "A map of Tags which should be applied to the resources used by this Databricks Cluster."
-        },
-        "vnetAddressPrefix": {
-          "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The first 2 octets of the virtual network /16 address range (e.g., '10.139' for the address range 10.139.0.0/16)."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."
