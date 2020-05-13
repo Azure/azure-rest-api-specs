@@ -36,4 +36,9 @@ cli:
       - where:
             group: integrationRuntimeObjectMetadata
         hidden: true
+directive:
+    - where:
+          command: datafactory integration-runtime create-linked-integration-runtime
+      set:
+          command: datafactory integration-runtime linked-integration-runtime create
 ```
