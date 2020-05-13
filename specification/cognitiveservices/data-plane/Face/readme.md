@@ -4,11 +4,11 @@
 
 Configuration for generating Face SDK.
 
-The current release is `release_1_0`.
+The current release is `release_1_1`.
 
 ``` yaml
 
-tag: release_1_0
+tag: release_1_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -19,6 +19,13 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 
 ``` yaml $(tag) == 'release_1_0'
 input-file: stable/v1.0/Face.json
+```
+
+### Release 1.1
+These settings apply only when `--tag=release_1_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1'
+input-file: preview/v1.1-preview1/Face.json
 ```
 
 ## Swagger to SDK
@@ -84,6 +91,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v1.0/Face.json
+  - $(this-folder)/preview/v1.1-preview1/Face.json
 
 ```
 
