@@ -276,21 +276,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
-        },
-        "eTag": {
-          "type": "string",
-          "description": "This will be used to handle Optimistic Concurrency."
         }
       },
       "x-ms-azure-resource": true,
@@ -325,6 +310,21 @@
           "x-ms-client-flatten": true,
           "description": "Metadata describing a graph query for an Azure resource.",
           "$ref": "#/definitions/GraphQueryProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "This will be used to handle Optimistic Concurrency."
         }
       }
     },
