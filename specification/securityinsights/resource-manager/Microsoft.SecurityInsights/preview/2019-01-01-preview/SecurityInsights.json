@@ -1427,7 +1427,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelationList"
+              "$ref": "#/definitions/RelationList"
             }
           },
           "default": {
@@ -1437,7 +1437,7 @@
             }
           }
         },
-        "x-ms-odata": "#/definitions/BookmarkRelation",
+        "x-ms-odata": "#/definitions/Relation",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1533,7 +1533,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "default": {
@@ -1578,20 +1578,20 @@
             "$ref": "#/parameters/RelationName"
           },
           {
-            "$ref": "#/parameters/RelationInputModel"
+            "$ref": "#/parameters/Relation"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/BookmarkRelation"
+              "$ref": "#/definitions/Relation"
             }
           },
           "default": {
@@ -4068,73 +4068,6 @@
         "bookmarkName": {
           "type": "string",
           "description": "The case related bookmark name"
-        }
-      },
-      "required": [
-        "relationName",
-        "caseIdentifier",
-        "bookmarkId"
-      ]
-    },
-    "BookmarkRelationList": {
-      "description": "List of bookmark relations.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of relations.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of relations.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BookmarkRelation"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "BookmarkRelation": {
-      "type": "object",
-      "description": "Represents a bookmark relation",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RelationBase"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Bookmark relation properties",
-          "$ref": "#/definitions/BookmarkRelationProperties"
-        }
-      }
-    },
-    "BookmarkRelationProperties": {
-      "type": "object",
-      "description": "Bookmark relation properties",
-      "properties": {
-        "relationName": {
-          "type": "string",
-          "description": "Name of relation"
-        },
-        "bookmarkId": {
-          "type": "string",
-          "description": "The case related bookmark id"
-        },
-        "caseIdentifier": {
-          "type": "string",
-          "description": "The case identifier"
-        },
-        "caseTitle": {
-          "type": "string",
-          "description": "The case title"
-        },
-        "caseSeverity": {
-          "type": "string",
-          "description": "The case severity"
         }
       },
       "required": [
@@ -7142,6 +7075,7 @@
         },
         "relatedResourceName": {
           "description": "The name of the related resource",
+          "readOnly": true,
           "type": "string"
         },
         "relatedResourceType": {
