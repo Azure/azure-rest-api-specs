@@ -145,6 +145,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
+- Microsoft.Security/preview/2015-06-01-preview/jitPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
 - Microsoft.Security/preview/2017-08-01-preview/compliances.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
@@ -183,6 +184,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
+- Microsoft.Security/preview/2015-06-01-preview/jitPolicies.json
 
 # Needed when there is more than one input file
 override-info:
@@ -354,6 +356,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/alerts.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+  - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/jitPolicies.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/topologies.json
