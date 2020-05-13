@@ -155,8 +155,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.MixedReality/stable/2020-05-01/proxy.json
   - $(this-folder)/Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
-  - $(this-folder)/Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
   - $(this-folder)/Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
+  - $(this-folder)/Microsoft.MixedReality/preview/2020-04-06-preview/proxy.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
   - $(this-folder)/Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
