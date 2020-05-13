@@ -45,7 +45,7 @@ tag: package-resources-2019-10
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2019-06
+tag: package-subscriptions-2019-11
 ```
 
 ``` yaml $(package-links)
@@ -57,19 +57,19 @@ tag: package-managedapplications-2018-06
 ```
 
 ``` yaml $(package-deploymentscripts)
-tag: package-2019-11
+tag: package-deploymentscripts-2019-10-preview
 ```
 
+### Tag: package-subscriptions-2020-01
 
-### Tag: package-2019-11
+These settings apply only when `--tag=package-subscriptions-2020-01` is specified on the command line.
 
-These settings apply only when `--tag=package-2019-11` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-11'
+```yaml $(tag) == 'package-subscriptions-2020-01'
 input-file:
-  - Microsoft.Resources/stable/2019-11-01/subscriptions.json
+  - Microsoft.Resources/stable/2020-01-01/subscriptions.json
 ```
-### Tag: package-resources-2019-10-preview
+
+### Tag: package-deploymentscripts-2019-10-preview
 
 These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
 
@@ -358,6 +358,15 @@ input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
 ```
 
+### Tag: package-subscriptions-2019-11
+
+These settings apply only when `--tag=package-subscriptions-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2019-11'
+input-file:
+- Microsoft.Resources/stable/2019-11-01/subscriptions.json
+```
+
 ### Tag: package-subscriptions-2019-06
 
 These settings apply only when `--tag=package-subscriptions-2019-06` is specified on the command line.
@@ -477,6 +486,10 @@ directive:
     reason: managedBy is a top level property
   - suppress: BodyTopLevelProperties
     from: resources.json
+    where: $.definitions.GenericResourceExpanded.properties
+    reason: createdTime,changedTime & provisioningState are top-level properties
+  - suppress: BodyTopLevelProperties
+    from: resources.json
     where: $.definitions.TagDetails.properties
     reason: TagDetails is a top level property
   - suppress: BodyTopLevelProperties
@@ -531,6 +544,13 @@ directive:
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI will come from Resources
+  - from: deploymentScripts.json
+    suppress: R3006 #BodyTopLevelProperties
+    where: 
+    - $.definitions.DeploymentScript.properties
+    - $.definitions.AzureCliScript.properties
+    - $.definitions.AzurePowerShellScript.properties
+    reason: Currently systemData is not allowed
 ```
 
 ---
@@ -553,6 +573,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#deploymentscripts
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
@@ -580,6 +601,7 @@ batch:
   - package-subscriptions: true
   - package-links: true
   - package-managedapplications: true
+  - package-deploymentscripts: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -608,7 +630,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Resources/stable/2019-11-01/subscriptions.json
+  - $(this-folder)/Microsoft.Resources/stable/2020-01-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
@@ -647,6 +669,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-11-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json

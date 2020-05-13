@@ -168,6 +168,49 @@
             }
           }
         }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete an application control VM/server group": {
+            "$ref": "./examples/ApplicationWhitelistings/DeleteApplicationWhitelistings_example.json"
+          }
+        },
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "description": "Delete an application control VM/server group",
+        "operationId": "AdaptiveApplicationControls_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/GroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The response indicates that the delete operation completed successfully"
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "No Content. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
       }
     }
   },
@@ -272,6 +315,15 @@
         "Audit",
         "Enforce",
         "None"
+      ]
+    },
+    "EnforcementSupport": {
+      "type": "string",
+      "description": "The VM/server supportability of Enforce feature",
+      "enum": [
+        "Supported",
+        "NotSupported",
+        "Unknown"
       ]
     },
     "ProtectionMode": {
@@ -395,6 +447,9 @@
         },
         "resourceId": {
           "$ref": "#/definitions/VmResourceId"
+        },
+        "enforcementSupport": {
+          "$ref": "#/definitions/EnforcementSupport"
         }
       }
     },

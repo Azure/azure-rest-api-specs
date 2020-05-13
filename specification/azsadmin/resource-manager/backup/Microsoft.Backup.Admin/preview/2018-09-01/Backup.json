@@ -5,7 +5,7 @@
     "title": "BackupManagementClient",
     "description": "The Admin Backup Management Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
@@ -179,6 +179,20 @@
       "in": "path",
       "description": "Name of the resource group.",
       "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TopParameter": {
+      "description": "OData top parameter.",
+      "name": "$top",
+      "in": "query",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SkipParameter": {
+      "description": "OData skip parameter.",
+      "name": "$skip",
+      "in": "query",
       "type": "string",
       "x-ms-parameter-location": "method"
     }

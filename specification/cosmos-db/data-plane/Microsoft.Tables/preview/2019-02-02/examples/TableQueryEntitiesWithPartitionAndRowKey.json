@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "x-ms-version": "2019-02-02",
+    "DataServiceVersion": "3.0",
+    "url": "myaccount.table.core.windows.net",
+    "table": "Customers",
+    "partitionKey": "Customer",
+    "rowKey": "Name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "odata.metadata": " https://myaccount.table.core.windows.net/metadata#Customers",
+        "value": [
+          {
+            "odata.type": "myaccount.Customers",
+            "odata.id": "https://myaccount.table.core.windows.net/Customers(PartitionKey=Customer',RowKey='Name')",
+            "odata.etag": "W/\"0x5B168C7B6E589D2\"",
+            "odata.editLink": "Customers(PartitionKey=Customer',RowKey='Name')",
+            "PartitionKey": "Customer",
+            "RowKey": "Name",
+            "Timestamp@odata.type": "Edm.DateTime",
+            "Timestamp": "2013-08-22T00:20:16.3134645Z",
+            "CustomerSince@odata.type": "Edm.DateTime",
+            "CustomerSince": "2008-10-01T15:25:05.2852025Z"
+          }
+        ]
+      }
+    }
+  }
+}
