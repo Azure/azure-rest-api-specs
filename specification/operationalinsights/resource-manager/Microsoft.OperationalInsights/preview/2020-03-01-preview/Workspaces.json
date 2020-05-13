@@ -272,6 +272,75 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-examples": {
+          "WorkspacesSubscriptionList": {
+            "$ref": "./examples/WorkspacesSubscriptionList.json"
+          }
+        },
+        "operationId": "DeletedWorkspaces_List",
+        "description": "Gets recently deleted workspaces in a subscription, available for recovery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/deletedWorkspaces": {
+      "get": {
+        "tags": [
+          "DeletedWorkspaces"
+        ],
+        "x-ms-examples": {
+          "WorkspacesGet": {
+            "$ref": "./examples/WorkspacesListByResourceGroup.json"
+          }
+        },
+        "operationId": "DeletedWorkspaces_ListByResourceGroup",
+        "description": "Gets recently deleted workspaces in a resource group, available for recovery.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
