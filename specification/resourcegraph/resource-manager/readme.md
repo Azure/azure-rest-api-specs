@@ -144,6 +144,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
   - $(this-folder)/Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
   - $(this-folder)/Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
+  - $(this-folder)/Microsoft.ResourceGraph/preview/2020-04-01-preview/graphquery.json
 
 ```
 
