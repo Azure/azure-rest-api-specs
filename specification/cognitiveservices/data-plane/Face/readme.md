@@ -25,7 +25,7 @@ input-file: stable/v1.0/Face.json
 These settings apply only when `--tag=release_1_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_1'
-input-file: preview/v1.1-preview1/Face.json
+input-file: preview/v1.1-preview.1/Face.json
 ```
 
 ## Swagger to SDK
@@ -91,7 +91,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v1.0/Face.json
-  - $(this-folder)/preview/v1.1-preview1/Face.json
+  - $(this-folder)/preview/v1.1-preview.1/Face.json
 
 ```
 
