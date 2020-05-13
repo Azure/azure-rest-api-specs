@@ -1,16 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "resourceGroupName": "{resource-group-name}",
-    "accountName": "{account-name}",
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "resource-group-name",
+    "accountName": "account-name",
     "api-version": "2020-12-01-preview",
     "parameters": {
       "properties": {
         "cosmosDb": {
-          "id": "{cosmos-db-id}"
+          "id": "cosmos-db-id"
         },
         "extensions": {
-          "id": "{extensions-id}"
+          "id": "extensions-id"
+        },
+        "networking": {
+          "endpoints": {
+            "mqtt": {
+              "enabled": true
+            },
+            "iotHub": {
+              "enabled": true
+            }
+          }
         }
       }
     }
@@ -18,20 +28,31 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Vehicle/mcvpAccounts/{account-name}",
+        "id": "/subscriptions/subscription-id/resourceGroups/resource-group-name/providers/Microsoft.Vehicle/mcvpAccounts/account-name",
         "location": "eastus2",
-        "name": "{account-name}",
+        "name": "account-name",
         "properties": {
           "cosmosDb": {
-            "id": "{cosmos-db-id}"
+            "id": "cosmos-db-id"
           },
           "extensions": {
-            "id": "{extensions-id}"
+            "id": "extensions-id"
+          },
+          "networking": {
+            "endpoints": {
+              "mqtt": {
+                "enabled": true
+              },
+              "iotHub": {
+                "enabled": true
+              }
+            }
           }
         },
         "sku": {
           "name": "Standard_A",
-          "tier": "Standard"
+          "tier": "Standard",
+          "capacity": 1
         },
         "tags": {
           "key1": "value1",
