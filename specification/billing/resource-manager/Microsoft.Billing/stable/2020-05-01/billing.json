@@ -5072,7 +5072,7 @@
     "BillingPropertyProperties": {
       "description": "The billing property.",
       "properties": {
-        "AccountAdminNotificationEmailAddress": {
+        "accountAdminNotificationEmailAddress": {
           "description": "The email address on which the account admin gets all Azure notifications.",
           "type": "string",
           "readOnly": true
@@ -5123,6 +5123,7 @@
             "SpendingLimitReached",
             "SpendingLimitExpired"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatusReasonCode",
@@ -5135,6 +5136,7 @@
             "Off",
             "On"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileSpendingLimit",
@@ -5564,6 +5566,7 @@
             "Disabled",
             "Warned"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatus",
@@ -5775,6 +5778,7 @@
             "Disabled",
             "Warned"
           ],
+          "type": "string",
           "readOnly": true,
           "x-ms-enum": {
             "name": "BillingProfileStatus",
@@ -5791,7 +5795,7 @@
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
-            "name": "BillingProfileStatusReasonCode",
+            "name": "StatusReasonCodeForBillingProfile",
             "modelAsString": true
           }
         },
@@ -5804,7 +5808,7 @@
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
-            "name": "BillingProfileSpendingLimit",
+            "name": "SpendingLimitForBillingProfile",
             "modelAsString": true
           }
         },
@@ -6991,6 +6995,11 @@
           "items": {
             "$ref": "#/definitions/BillingRoleAssignment"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7060,6 +7069,11 @@
           "items": {
             "$ref": "#/definitions/BillingRoleDefinition"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -7111,6 +7125,11 @@
           "items": {
             "$ref": "#/definitions/BillingPermissionsProperties"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
