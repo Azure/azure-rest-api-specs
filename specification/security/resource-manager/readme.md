@@ -281,6 +281,20 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2020-01-only
+
+These settings apply only when `--tag=package-2020-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-01-only'
+input-file:
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/stable/2019-01-01/connectors.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
@@ -370,6 +384,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
 
 ```
 
