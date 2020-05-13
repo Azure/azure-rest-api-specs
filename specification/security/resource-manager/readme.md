@@ -394,7 +394,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/externalSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/assessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/connectors.json
+  - $(this-folder)/Microsoft.Security/preview/2020-01-01-preview/connectors.json
 
 ```
 
