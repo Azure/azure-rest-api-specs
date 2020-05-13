@@ -167,7 +167,7 @@
           }
         },
         "operationId": "Workspaces_Delete",
-        "description": "Deletes a workspace instance.",
+        "description": "Deletes a workspace resource. To recover the workspace, create it again with the same name, in the same subscription, resource group and location. The name is kept for 14 days and cannot be used for another workspace. To remove the workspace completely and release the name, use the force flag.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
@@ -180,6 +180,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Deletes the workspace without the recovery option. A workspace that was deleted with this flag cannot be recovered."
           }
         ],
         "responses": {
