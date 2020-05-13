@@ -1,7 +1,7 @@
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>` as well as `--python-mode=update`.
 
 ```yaml $(python)
 python:
@@ -19,6 +19,7 @@ python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/spool/azure-mgmt-spool/azure/mgmt/spool
 ```
+
 ```yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
