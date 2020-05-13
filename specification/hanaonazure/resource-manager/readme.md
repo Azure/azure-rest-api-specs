@@ -28,7 +28,7 @@ These are the global settings for the HANA on Azure API.
 title: HanaManagementClient
 description: HANA on Azure Client
 openapi-type: arm
-tag: package-2017-11
+tag: package-2020-02-07-preview
 azure-arm: true
 ```
 
