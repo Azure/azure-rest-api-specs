@@ -9,12 +9,10 @@
       "properties": {
         "autoStorage": {
           "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
-        },
-        "keyVaultReference": {
-          "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
-          "url": "http://sample.vault.azure.net/"
-        },
-        "publicNetworkAccess": "Disabled"
+        }
+      },
+      "identity": {
+        "type": "SystemAssigned"
       }
     }
   },
@@ -27,7 +25,7 @@
         "properties": {
           "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
           "provisioningState": "Succeeded",
-          "poolAllocationMode": "UserSubscription",
+          "poolAllocationMode": "BatchService",
           "dedicatedCoreQuota": 20,
           "lowPriorityCoreQuota": 20,
           "poolQuota": 20,
@@ -36,14 +34,12 @@
             "storageAccountId": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage",
             "lastKeySync": "2016-03-10T23:48:38.9878479Z"
           },
-          "keyVaultReference": {
-            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
-            "url": "http://sample.vault.azure.net/"
-          },
-          "publicNetworkAccess": "Disabled"
+          "publicNetworkAccess": "Enabled"
         },
         "identity": {
-          "type": "None"
+          "principalId": "1a2e532b-9900-414c-8600-cfc6126628d7",
+          "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd",
+          "type": "SystemAssigned"
         },
         "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
         "type": "Microsoft.Batch/batchAccounts"

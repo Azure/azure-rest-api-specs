@@ -51,6 +51,9 @@
           },
           "PrivateBatchAccountCreate": {
             "$ref": "./examples/PrivateBatchAccountCreate.json"
+          },
+          "BatchAccountCreate_SystemAssignedIdentity": {
+            "$ref": "./examples/BatchAccountCreate_SystemAssignedIdentity.json"
           }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
@@ -2217,6 +2220,7 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
+          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "$ref": "#/definitions/EncryptionProperties"
         }
       },
@@ -2244,6 +2248,7 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
+          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "$ref": "#/definitions/EncryptionProperties"
         }
       },
@@ -2266,6 +2271,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountCreateProperties",
           "description": "The properties of the Batch account."
+        },
+        "identity": {
+          "$ref": "#/definitions/BatchAccountIdentity",
+          "description": "The identity of the Batch account."
         }
       },
       "required": [
@@ -2325,6 +2334,46 @@
         }
       },
       "description": "A VM Family and its associated core quota for the Batch account."
+    },
+    "BatchAccountIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of the Batch account. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the Batch account. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the Batch account.",
+          "enum": [
+            "SystemAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "SystemAssigned",
+                "description": "Batch account has a system assigned identity with it."
+              },
+              {
+                "value": "None",
+                "description": "Batch account has no identity associated with it. Setting `None` in update account will remove existing identities."
+              }
+            ]
+          }
+        }
+      },
+      "description": "The identity of the Batch account, if configured. This is only used when the user specifies 'Azure.KeyVault' as their Batch account encryption configuration.",
+      "required": [
+        "type"
+      ]
     },
     "BatchAccountProperties": {
       "properties": {
@@ -2411,6 +2460,7 @@
         },
         "encryption": {
           "title": "The encryption configuration for the Batch account.",
+          "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead.",
           "readOnly": true,
           "$ref": "#/definitions/EncryptionProperties"
         },
@@ -2469,6 +2519,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountProperties",
           "description": "The properties associated with the account."
+        },
+        "identity": {
+          "$ref": "#/definitions/BatchAccountIdentity",
+          "description": "The identity of the Batch account."
         }
       },
       "allOf": [
@@ -2491,6 +2545,10 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BatchAccountUpdateProperties",
           "description": "The properties of the account."
+        },
+        "identity": {
+          "$ref": "#/definitions/BatchAccountIdentity",
+          "description": "The identity of the Batch account."
         }
       },
       "description": "Parameters for updating an Azure Batch account."
@@ -2530,7 +2588,7 @@
               },
               {
                 "value": "Microsoft.KeyVault",
-                "description": "The encryption keys used to protect the account data are stored in an external key vault."
+                "description": "The encryption keys used to protect the account data are stored in an external key vault. If this is set then the Batch Account identity must be set to `SystemAssigned` and a valid Key Identifier must also be supplied under the keyVaultProperties."
               }
             ]
           }
@@ -2539,15 +2597,17 @@
           "$ref": "#/definitions/KeyVaultProperties",
           "description": "Additional details when using Microsoft.KeyVault"
         }
-      }
+      },
+      "description": "Configures how customer data is encrypted inside the Batch account. By default, accounts are encrypted using a Microsoft managed key. For additional control, a customer-managed key can be used instead."
     },
     "KeyVaultProperties": {
       "properties": {
         "keyIdentifier": {
           "type": "string",
-          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053"
+          "description": "Full path to the versioned secret. Example https://mykeyvault.vault.azure.net/keys/testkey/6e34a81fef704045975661e297a4c053. To be usable the following prerequisites must be met:\n\n The Batch Account has a System Assigned identity\n The account identity has been granted Key/Get, Key/Unwrap and Key/Wrap permissions\n The KeyVault has soft-delete and purge protection enabled"
         }
-      }
+      },
+      "description": "KeyVault configuration when using an encryption KeySource of Microsoft.KeyVault."
     },
     "BatchAccountRegenerateKeyParameters": {
       "properties": {
