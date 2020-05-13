@@ -280,17 +280,6 @@
         "eTag": {
           "type": "string",
           "description": "This will be used to handle Optimistic Concurrency. If not present, it will always overwrite the existing resource without checking conflict."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
         }
       },
       "x-ms-azure-resource": true,
@@ -326,6 +315,17 @@
           "description": "Metadata describing a graph query for an Azure resource.",
           "$ref": "#/definitions/GraphQueryProperties"
         }
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Resource tags"
+      },
+      "systemData": {
+        "readOnly": true,
+        "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
       }
     },
     "GraphQueryProperties": {
