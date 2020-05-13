@@ -4407,9 +4407,14 @@
       "type": "object",
       "description": "Request parameters to initiate transfer.",
       "properties": {
-        "description": "Request parameters to initiate transfer.",
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/InitiateTransferProperties"
+        "recipientEmailId": {
+          "type": "string",
+          "description": "The email ID of the recipient to whom the transfer request is sent."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account."
+        }
       }
     },
     "ValidateAddressResponse": {
@@ -4443,20 +4448,6 @@
       "x-ms-enum": {
         "name": "addressValidationStatus",
         "modelAsString": true
-      }
-    },
-    "InitiateTransferProperties": {
-      "type": "object",
-      "description": "Request parameters to initiate transfer.",
-      "properties": {
-        "recipientEmailId": {
-          "type": "string",
-          "description": "The email ID of the recipient to whom the transfer request is sent."
-        },
-        "resellerId": {
-          "type": "string",
-          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account."
-        }
       }
     },
     "AcceptTransferRequest": {
