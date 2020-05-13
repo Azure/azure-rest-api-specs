@@ -25,7 +25,17 @@ These are the global settings for the Mixed Reality Azure Resource Management Cl
 title: MixedRealityClient
 description: Mixed Reality Client
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-2020-05
+```
+### Tag: package-2020-05
+
+These settings apply only when `--tag=package-2020-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2020-05'
+input-file:
+- Microsoft.MixedReality/stable/2020-05-01/proxy.json
+- Microsoft.MixedReality/stable/2020-05-01/spatial-anchors.json
+- Microsoft.MixedReality/preview/2020-04-06-preview/remote-rendering.json
 ```
 
 ### Tag: package-2020-05-01
