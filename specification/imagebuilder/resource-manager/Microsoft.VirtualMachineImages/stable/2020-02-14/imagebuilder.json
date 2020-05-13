@@ -233,7 +233,7 @@
             "$ref": "./examples/UpdateImageTemplateTags.json"
           },
           "Remove identities for an Image Template.": {
-            "$ref": "./examples/UpdateImageTemplateToRemoveIdentities.json"
+            "$ref": "./examples/UpdateImageTemplateToUpdateIdentity.json"
           }
         }
       },
@@ -879,7 +879,7 @@
           ],
           "x-ms-enum": {
             "name": "SharedImageStorageAccountType",
-            "modelAsString": false
+            "modelAsString": true
           },
           "description": "Storage account type to be used to store the shared image. Omit to use the default (Standard_LRS)."
         }
@@ -1098,10 +1098,9 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of identity used for the image template. The type 'None' will remove any identities from the image template.",
+          "description": "The type of identity used for the image template.",
           "enum": [
-            "UserAssigned",
-            "None"
+            "UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
