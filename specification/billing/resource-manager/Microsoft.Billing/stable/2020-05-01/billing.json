@@ -223,7 +223,7 @@
           }
         },
         "operationId": "Address_Validate",
-        "description": "Validates an address. Use the operation to validate an address before using it as a billing account or a billing profile address.",
+        "description": "Validates an address. Use the operation to validate an address before using it as soldTo or a billTo address.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1891,7 +1891,7 @@
         "tags": [
           "BillingSubscriptions"
         ],
-        "operationId": "BillingSubscriptions_Update",        
+        "operationId": "BillingSubscriptions_Update",
         "description": "Updates the properties of a billing subscription. Currently, cost center can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "x-ms-examples": {
           "UpdateBillingProperty": {
@@ -1968,7 +1968,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TransferBillingSubscriptionResult"
+              "$ref": "#/definitions/BillingSubscription"
             }
           },
           "202": {
@@ -2108,6 +2108,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2611,7 +2614,7 @@
         "tags": [
           "BillingProperties"
         ],
-        "operationId": "BillingProperty_Update",        
+        "operationId": "BillingProperty_Update",
         "description": "Updates the billing property of a subscription. Currently, cost center can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
         "x-ms-examples": {
           "UpdateBillingProperty": {
@@ -4369,7 +4372,7 @@
     },
     "CustomerProperties": {
       "description": "The properties of a customer.",
-      "properties": {        
+      "properties": {
         "billingProfileId": {
           "description": "The ID of the billing profile for the invoice section.",
           "type": "string",
@@ -4820,27 +4823,6 @@
         }
       }
     },
-    "TransferBillingSubscriptionResult": {
-      "type": "object",
-      "description": "Result of the transfer billing subscription operation.",
-      "properties": {
-        "properties": {
-          "description": "Properties of the transfer billing subscription operation result.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransferBillingSubscriptionResultProperties"
-        }
-      }
-    },
-    "TransferBillingSubscriptionResultProperties": {
-      "type": "object",
-      "description": "Properties of the transfer billing subscription operation result.",
-      "properties": {
-        "billingSubscriptionName": {
-          "type": "string",
-          "description": "The destination billing subscription id."
-        }
-      }
-    },
     "TransferBillingSubscriptionRequest": {
       "type": "object",
       "description": "Request parameters to transfer billing subscription.",
@@ -5164,8 +5146,7 @@
         },
         "costCenter": {
           "description": "The cost center applied to the subscription.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "invoiceSectionId": {
           "description": "The ID of the invoice section to which the subscription is billed.",
@@ -6493,10 +6474,9 @@
           "type": "string",
           "readOnly": true
         },
-        "costCenter": {          
+        "costCenter": {
           "description": "The cost center applied to the subscription.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "customerId": {
           "description": "The ID of the customer for whom the subscription was created. The field is applicable only for Microsoft Partner Agreement billing account.",
@@ -6713,7 +6693,7 @@
           "description": "The name of the subscription that was used for the transaction. The field is only applicable for transaction of kind reservation.",
           "type": "string",
           "readOnly": true
-        },        
+        },
         "azurePlan": {
           "description": "The type of azure plan of the subscription that was used for the transaction.",
           "type": "string",
