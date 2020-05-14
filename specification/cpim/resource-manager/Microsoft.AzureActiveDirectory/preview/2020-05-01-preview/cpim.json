@@ -228,7 +228,7 @@
   },
   "definitions": {
     "Operation": {
-      "description": "A Guest Usages REST API operation.",
+      "description": "Microsoft.AzureActiveDirectory REST API operation.",
       "type": "object",
       "properties": {
         "name": {
@@ -240,12 +240,12 @@
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
-              "description": "Service provider: Microsoft.Consumption.",
+              "description": "Service provider: Microsoft.AzureActiveDirectory.",
               "type": "string",
               "readOnly": true
             },
             "resource": {
-              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "description": "Resource on which the operation is performed: GuestUsages, etc.",
               "type": "string",
               "readOnly": true
             },
@@ -266,7 +266,7 @@
       "description": "Result of listing operations for the resourceProvider",
       "properties": {
         "value": {
-          "description": "List of analysis services operations supported by the Microsoft.AzureActiveDirectory resource provider.",
+          "description": "List of cpim service operations supported by the Microsoft.AzureActiveDirectory resource provider.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -276,12 +276,12 @@
       }
     },
     "GuestUsagesResourceProperties": {
-      "description": "Guest Usages Resource",
+      "description": "Guest Usages Resource Properties",
       "type": "object",
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "An identifier that represents the Analysis Services resource."
+          "description": "An identifier that represents the Guest Usages Resource Properties."
         }
       }
     },
@@ -291,19 +291,19 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "An identifier that represents the Analysis Services resource."
+          "description": "An identifier that represents the Guest Usages resource."
         },
         "name": {
           "type": "string",
-          "description": "The name of the Analysis Services resource."
+          "description": "The name of the Guest Usages resource."
         },
         "type": {
           "type": "string",
-          "description": "The type of the Analysis Services resource."
+          "description": "The type of the Guest Usages resource."
         },
         "location": {
           "type": "string",
-          "description": "Location of the Analysis Services resource.",
+          "description": "Location of the Guest Usages resource.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -320,7 +320,8 @@
           "$ref": "#/definitions/GuestUsagesResourceProperties",
           "description": "The Guest Usages Resource Properties"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
