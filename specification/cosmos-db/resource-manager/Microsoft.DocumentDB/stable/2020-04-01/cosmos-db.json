@@ -5196,6 +5196,10 @@
           "description": "API specific properties. Currently, supported only for MongoDB API.",
           "type": "object",
           "$ref": "#/definitions/MongoProperties"
+        },
+        "enableAnalyticalStorage": {
+          "description": "Flag to indicate whether to enable storage analytics.",
+          "type": "boolean"
         }
       }
     },
@@ -5276,6 +5280,10 @@
           "description": "API specific properties. Currently, supported only for MongoDB API.",
           "type": "object",
           "$ref": "#/definitions/MongoProperties"
+        },
+        "enableAnalyticalStorage": {
+          "description": "Flag to indicate whether to enable storage analytics.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -5388,6 +5396,10 @@
           "description": "API specific properties. Currently, supported only for MongoDB API.",
           "type": "object",
           "$ref": "#/definitions/MongoProperties"
+        },
+        "enableAnalyticalStorage": {
+          "description": "Flag to indicate whether to enable storage analytics.",
+          "type": "boolean"
         }
       }
     },
@@ -6487,6 +6499,10 @@
           "items": {
             "$ref": "#/definitions/MongoIndex"
           }
+        },
+        "analyticalStorageTimeToLive": {
+          "type": "integer",
+          "description": "Analytical TTL."
         }
       },
       "required": [
@@ -6586,6 +6602,10 @@
         "schema": {
           "description": "Schema of the Cosmos DB Cassandra table",
           "$ref": "#/definitions/CassandraSchema"
+        },
+        "analyticalStorageTimeToLive": {
+          "type": "integer",
+          "description": "Analytical TTL."
         }
       },
       "required": [
