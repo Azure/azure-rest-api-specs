@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Vehicle
-  package-name: vehicle
+  namespace: Microsoft.Mobility
+  package-name: mobility
   package-version: 2020-12-01-preview
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/vehicle
+  output-folder: $(python-sdks-folder)/azure-mgmt/mobility
 ```

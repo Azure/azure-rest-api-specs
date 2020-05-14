@@ -1,8 +1,8 @@
-# vehicle
+# mobility
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for vehicle.
+This is the AutoRest configuration file for mobility.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the vehicle.
+These are the global settings for the mobility.
 
 ```yaml
 openapi-type: arm
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-  - Microsoft.Vehicle/preview/2020-12-01-preview/vehicle.json
+  - Microsoft.Mobility/preview/2020-12-01-preview/mobility.json
 ```
 
 ---
@@ -55,7 +55,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_vehicle']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_mobility']
 ```
 
 ## Go

@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_vehicle
+package-name: azure_mgmt_mobility
 package-version: 2020-12-01-preview
 azure-arm: true
 ```
@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2020-12-01-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2020-12-01-preview' && $(ruby)
-namespace: Microsoft.Vehicle
-output-folder: $(ruby-sdks-folder)/vehicle
+namespace: Microsoft.Mobility
+output-folder: $(ruby-sdks-folder)/mobility
 ```

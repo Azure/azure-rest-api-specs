@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-12-01-preview",
-    "title": "vehicle",
+    "title": "mobility",
     "description": "Resource Provider for the Microsoft Connected Vehicle Platform",
     "x-ms-code-generation-settings": {
-      "name": "vehicleClient"
+      "name": "mobilityClient"
     }
   },
   "host": "management.azure.com",
@@ -29,7 +29,7 @@
     }
   },
   "paths": {
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Vehicle/checkNameAvailability": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/checkNameAvailability": {
         "post": {
           "tags": [
             "MCVPAccounts"
@@ -68,7 +68,7 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Vehicle/mcvpAccounts/{accountName}": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts/{accountName}": {
         "put": {
           "tags": [
             "MCVPAccounts"
@@ -228,7 +228,7 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/providers/Microsoft.Vehicle/mcvpAccounts": {
+      "/subscriptions/{subscriptionId}/providers/Microsoft.Mobility/mcvpAccounts": {
         "get": {
           "tags": [
             "MCVPAccounts"
@@ -261,7 +261,7 @@
           }
         }
       },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Vehicle/mcvpAccounts": {
+      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Mobility/mcvpAccounts": {
         "get": {
           "tags": [
             "MCVPAccounts"
@@ -297,7 +297,7 @@
           }
         }
       },
-      "/providers/Microsoft.Vehicle/operations": {
+      "/providers/Microsoft.Mobility/operations": {
         "get": {
           "tags": [
             "Operations"
@@ -333,13 +333,13 @@
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Vehicle/mcvpAccounts"
+            "Microsoft.Mobility/mcvpAccounts"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false
           },
-          "description": "The type of the resource to validate, e.g. Microsoft.Vehicle/mcvpAccounts"
+          "description": "The type of the resource to validate, e.g. Microsoft.Mobility/mcvpAccounts"
         }
       },
       "required": [
@@ -658,4 +658,3 @@
     }
   }
 }
-  
