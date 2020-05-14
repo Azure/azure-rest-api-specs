@@ -304,6 +304,9 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
+            "$ref": "#/parameters/EnableNestedChildren"
+          },
+          {
             "name": "exampleLabelObject",
             "in": "body",
             "required": true,
@@ -350,6 +353,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           },
           {
             "name": "exampleLabelObjectArray",
@@ -408,6 +414,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -2342,6 +2351,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -2389,6 +2401,9 @@
           },
           {
             "$ref": "#/parameters/TakeInPath"
+          },
+          {
+            "$ref": "#/parameters/EnableNestedChildren"
           }
         ],
         "responses": {
@@ -3409,168 +3424,6 @@
         "x-ms-examples": {
           "Successful Delete Unlabelled Utterance": {
             "$ref": "./examples/versions/SuccessfulDeleteUnlabelledUtteranceRequest.json"
-          }
-        }
-      }
-    },
-    "/apps/{appId}/permissions": {
-      "get": {
-        "description": "Gets the list of user emails that have permissions to access your application.",
-        "operationId": "Permissions_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list includes a single owner. All collaborators are listed in the emails array.",
-            "schema": {
-              "$ref": "#/definitions/UserAccessList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Application User Access List": {
-            "$ref": "./examples/permissions/SuccessfulGetApplicationUserAccessListRequest.json"
-          }
-        }
-      },
-      "post": {
-        "description": "Adds a user to the allowed list of users to access this LUIS application. Users are added using their email address.",
-        "operationId": "Permissions_Add",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "userToAdd",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserCollaborator"
-            },
-            "description": "A model containing the user's email address."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Add User To Access List": {
-            "$ref": "./examples/permissions/SuccessfulAddUserToAccessListRequest.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "Removes a user from the allowed list of users to access this LUIS application. Users are removed using their email address.",
-        "operationId": "Permissions_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "userToDelete",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserCollaborator"
-            },
-            "description": "A model containing the user's email address."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Remove User From Access List": {
-            "$ref": "./examples/permissions/SuccessfulRemoveUserFromAccessListRequest.json"
-          }
-        }
-      },
-      "put": {
-        "description": "Replaces the current user access list with the new list sent in the body. If an empty list is sent, all access to other users will be removed.",
-        "operationId": "Permissions_Update",
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "name": "collaborators",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CollaboratorsArray"
-            },
-            "description": "A model containing a list of user email addresses."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Replaces Users From Access List": {
-            "$ref": "./examples/permissions/SuccessfulReplacesUsersFromAccessListRequest.json"
           }
         }
       }
@@ -8149,6 +8002,22 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "description": "The identified entities within the example utterance.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabelObject"
+          },
+          "type": "array",
+          "example": [
+            {
+              "entityName": "child",
+              "startCharIndex": 0,
+              "endCharIndex": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -8319,6 +8188,21 @@
         "role": {
           "description": "The role the entity plays in the utterance.",
           "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JSONEntity"
+          },
+          "example": [
+            {
+              "entity": "child1",
+              "startPos": 0,
+              "endPos": 0,
+              "children": []
+            }
+          ]
         }
       }
     },
@@ -9278,6 +9162,21 @@
           "type": "string",
           "format": "uuid",
           "description": "The role id for the predicted entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityLabel"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "children": []
+            }
+          ]
         }
       },
       "required": [
@@ -9325,6 +9224,21 @@
         "phrase": {
           "type": "string",
           "description": "The actual token(s) that comprise the entity."
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EntityPrediction"
+          },
+          "example": [
+            {
+              "entityName": "child",
+              "startTokenIndex": 0,
+              "endTokenIndex": 0,
+              "phrase": "string"
+            }
+          ]
         }
       }
     },
@@ -10604,6 +10518,9 @@
         "featureName": {
           "type": "string",
           "description": "The name of the feature used."
+        },
+        "isRequired": {
+          "type": "boolean"
         }
       }
     },
@@ -10847,6 +10764,14 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "EnableNestedChildren": {
+      "name": "enableNestedChildren",
+      "in": "query",
+      "type": "boolean",
+      "default": false,
+      "description": "Toggles nested/flat format",
+      "x-ms-parameter-location": "method"
     }
   }
 }
