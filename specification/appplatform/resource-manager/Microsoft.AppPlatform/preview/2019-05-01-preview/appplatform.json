@@ -2160,15 +2160,18 @@
         }
       }
     },
-    "/skus/Spring": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppPlatform/skus": {
       "get": {
         "tags": [
           "AppPlatform"
         ],
-        "operationId": "Sku_ListServiceSku",
+        "operationId": "Sku_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -2184,32 +2187,10 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
-      }
-    },
-    "/skus/Spring/apps/deployments": {
-      "get": {
-        "tags": [
-          "AppPlatform"
-        ],
-        "operationId": "Sku_ListDeploymentSku",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ResourceTypeSkuCollection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
+        },
+        "x-ms-examples": {
+          "Sku_List": {
+            "$ref": "./examples/Sku_List.json"
           }
         }
       }
