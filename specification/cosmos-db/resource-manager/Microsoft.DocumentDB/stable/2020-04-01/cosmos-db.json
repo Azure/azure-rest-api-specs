@@ -5191,6 +5191,11 @@
         "enableFreeTier": {
           "description": "Flag to indicate whether Free Tier is enabled.",
           "type": "boolean"
+        },
+        "apiProperties": {
+          "description": "API specific properties. Currently, supported only for MongoDB API.",
+          "type": "object",
+          "$ref": "#/definitions/MongoProperties"
         }
       }
     },
@@ -5266,6 +5271,11 @@
         "enableFreeTier": {
           "description": "Flag to indicate whether Free Tier is enabled.",
           "type": "boolean"
+        },
+        "apiProperties": {
+          "description": "API specific properties. Currently, supported only for MongoDB API.",
+          "type": "object",
+          "$ref": "#/definitions/MongoProperties"
         }
       },
       "required": [
@@ -5373,6 +5383,11 @@
         "enableFreeTier": {
           "description": "Flag to indicate whether Free Tier is enabled.",
           "type": "boolean"
+        },
+        "apiProperties": {
+          "description": "API specific properties. Currently, supported only for MongoDB API.",
+          "type": "object",
+          "$ref": "#/definitions/MongoProperties"
         }
       }
     },
@@ -7285,6 +7300,22 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "PublicNetworkAccess"
+      }
+    },
+    "MongoProperties": {
+      "type":"object",
+      "properties":{
+        "serverVersion":{
+          "type": "string",
+          "enum":[
+            "3.2",
+            "3.6"
+          ],
+          "x-ms-enum":{
+            "modelAsString": true,
+            "name": "ServerVersion"
+          }
+        }
       }
     }
   },

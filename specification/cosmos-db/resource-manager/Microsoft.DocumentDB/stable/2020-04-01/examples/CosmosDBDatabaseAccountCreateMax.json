@@ -7,7 +7,7 @@
     "createUpdateParameters": {
       "location": "westus",
       "tags": {},
-      "kind": "GlobalDocumentDB",
+      "kind": "MongoDB",
       "properties": {
         "databaseAccountOfferType": "Standard",
         "ipRules": [
@@ -43,7 +43,10 @@
           "maxStalenessPrefix": 200
         },
         "keyVaultKeyUri": "https://myKeyVault.vault.azure.net",
-        "enableFreeTier": false
+        "enableFreeTier": false,
+        "apiProperties":{
+          "serverVersion" : "3.2"
+        }
       }
     }
   },
@@ -54,7 +57,7 @@
         "name": "ddb1",
         "location": "West US",
         "type": "Microsoft.DocumentDB/databaseAccounts",
-        "kind": "GlobalDocumentDB",
+        "kind": "MongoDB",
         "tags": {},
         "properties": {
           "provisioningState": "Initializing",
@@ -133,7 +136,10 @@
             {
               "value": "110.12.240.0/12"
             }
-          ]
+          ],
+          "apiProperties":{
+            "serverVersion" : "3.2"
+          }
         }
       }
     }
