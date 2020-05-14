@@ -44,14 +44,14 @@
         "description": "Create or update a managed HSM Pool in the specified subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
           },
           {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "pattern": "^[a-zA-Z0-9]{3,24}$",
             "description": "Name of the managed HSM Pool"
           },
           {
@@ -105,14 +105,14 @@
         "description": "Update a managed HSM Pool in the specified subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
           },
           {
             "name": "name",
             "in": "path",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "pattern": "^[a-zA-Z0-9]{3,24}$",
             "description": "Name of the managed HSM Pool"
           },
           {
@@ -165,7 +165,7 @@
         "description": "Deletes the specified managed HSM Pool.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
           },
           {
             "name": "name",
@@ -213,7 +213,7 @@
         "description": "Gets the specified managed HSM Pool.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
           },
           {
             "name": "name",
@@ -259,7 +259,7 @@
         "description": "The List operation gets information about the managed HSM Pools associated with the subscription and within the specified resource group.",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupName"
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
           },
           {
             "name": "$top",
@@ -400,7 +400,7 @@
         },
         "hsmPoolUri": {
           "type": "string",
-          "description": "The URI of the managed hsm pool for performing operations on keys and secrets."
+          "description": "The URI of the managed hsm pool for performing operations on keys."
         },
         "enableSoftDelete": {
           "type": "boolean",
@@ -415,7 +415,7 @@
         },
         "enablePurgeProtection": {
           "type": "boolean",
-          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value."
+          "description": "Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible."
         },
         "createMode": {
           "type": "string",
@@ -452,6 +452,7 @@
             "Succeeded",
             "Provisioning",
             "Failed",
+            "Updating"
             "Deleting",
             "Activated",
             "SecurityDomainRestore",
@@ -472,6 +473,10 @@
               {
                 "value": "Failed",
                 "description": "Provisioning of the managed HSM Pool has failed."
+              },
+              {
+                "value": "Updating",
+                "description": "The managed HSM Pool is currently being updated."
               },
               {
                 "value": "Deleting",
@@ -612,12 +617,12 @@
       "type": "string",
       "description": "Client Api Version."
     },
-    "ResourceGroupName": {
+    "ManagedHsmResourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the resource group that contains the key vault.",
+      "description": "Name of the resource group that contains the managed HSM pool.",
       "x-ms-parameter-location": "method"
     }
   }
