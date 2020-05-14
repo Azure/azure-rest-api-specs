@@ -3441,7 +3441,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5999,7 +6002,7 @@
         "x-ms-long-running-operation": true
       }
     },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/retrieveBootDiagnosticsData": {
       "post": {
         "tags": [
           "VirtualMachineScaleSetVMs"
@@ -6045,7 +6048,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
           }
         },
         "x-ms-long-running-operation": false,
@@ -6318,6 +6324,20 @@
         }
       },
       "description": "Describes the properties of a Compute Operation Value Display."
+    },
+    "RetrieveBootDiagnosticsDataResult": {
+      "properties": {
+        "consoleScreenshotBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The console screenshot blob URI"
+        },
+        "serialConsoleLogBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The serial console log blob URI."
+        }
+      }
     },
     "DisallowedConfiguration": {
       "properties": {
