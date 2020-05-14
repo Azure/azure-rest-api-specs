@@ -41,13 +41,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -59,26 +59,26 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     }
   },
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -194,7 +194,7 @@
           },
           {
             "name": "duration",
-            "description": "Time frame of the returned weather forecast. By default, the forecast data for next hour will be returned. Available values are\n  * `1` - Return forecast data for the next hour. Default value.\n  * `12` - Return hourly forecast for next 12 hours.\n  * `24` - Return hourly forecast for next 24 hours.\n  * `72` - Return hourly forecast for next 72 hours (3 days).\n  * `120` - Return hourly forecast for next 120 hours (5 days). Only available in S1 SKU. \n  * `240` - Return hourly forecast for next 240 hours (10 days). Only available in S1 SKU. ",
+            "description": "Time frame of the returned weather forecast. By default, the forecast data for next hour will be returned. Available values are\n  * `1` - Return forecast data for the next hour. Default value.\n  * `12` - Return hourly forecast for next 12 hours.\n  * `24` - Return hourly forecast for next 24 hours.\n  * `72` - Return hourly forecast for next 72 hours (3 days).\n  * `120` - Return hourly forecast for next 120 hours (5 days). Only available in S1 SKU. \n  * `240` - Return hourly forecast for next 240 hours (10 days). Only available in S1 SKU.",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -398,7 +398,7 @@
           },
           {
             "name": "details",
-            "description": "Return full details for the current conditions. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the current condition data, which includes observation date time, weather phrase, icon code, precipitation indicator flag, and temperature. ",
+            "description": "Return full details for the current conditions. Available values are\n  * `true` - Returns full details. By default all details are returned.\n  * `false` - Returns a truncated version of the current condition data, which includes observation date time, weather phrase, icon code, precipitation indicator flag, and temperature.",
             "default": "true",
             "in": "query",
             "type": "string"
@@ -474,7 +474,7 @@
           },
           {
             "name": "duration",
-            "description": "Specifies for how many days the daily forecast responses are returned. Available values are\n  * `1` - Return forecast data for the next day. Returned by default.\n  * `5` - Return forecast data for the next 5 days.\n  * `10` - Return forecast data for the next 10 days.\n  * `25` - Return forecast data for the next 25 days. Only available in S1 SKU.\n  * `45` - Return forecast data for the next 45 days. Only available in S1 SKU. ",
+            "description": "Specifies for how many days the daily forecast responses are returned. Available values are\n  * `1` - Return forecast data for the next day. Returned by default.\n  * `5` - Return forecast data for the next 5 days.\n  * `10` - Return forecast data for the next 10 days.\n  * `25` - Return forecast data for the next 25 days. Only available in S1 SKU.\n  * `45` - Return forecast data for the next 45 days. Only available in S1 SKU.",
             "default": 1,
             "in": "query",
             "type": "integer"
@@ -511,7 +511,7 @@
     "/weather/route/{format}": {
       "get": {
         "x-publish": true,
-        "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.\n ",
+        "description": "**Get Weather along route**\n   \n   \n **Applies to**: S1 pricing tier.\n\n Weather along a route API returns hyper local (one kilometer or less), up-to-the-minute weather nowcasts, weather hazard assessments, and notifications along a route described as a sequence of waypoints. \n This includes a list of weather hazards affecting the waypoint or route, and the aggregated hazard index for each waypoint might be used to paint each portion of a route according to how safe it is for the driver. Data is updated every five minutes. \n \n The service supplements Azure Maps [Route Service](https://docs.microsoft.com/rest/api/maps/route) that allows you to first request a route between an origin and a destination and use that as an input for Weather Along Route endpoint.\n \n In addition, the service supports scenarios to generate weather notifications for waypoints that experience an increase in intensity of a weather hazard. For example, if the vehicle is expected to begin experiencing heavy rain as it reaches a waypoint, a weather notification for heavy rain will be generated for that waypoint allowing the end product to display a heavy rain notification before the driver reaches that waypoint. \n The trigger for when to display the notification for a waypoint could be based, for example, on a [geofence](https://docs.microsoft.com/azure/azure-maps/tutorial-iot-hub-maps), or selectable distance to the waypoint.\n\n The API covers all regions of the planet except latitudes above Greenland and Antarctica.",
         "operationId": "Weather_GetWeatherAlongRoutePreview",
         "x-ms-examples": {
           "WeatherAlongRoute": {
@@ -569,28 +569,39 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },

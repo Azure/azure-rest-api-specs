@@ -42,13 +42,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -60,25 +60,25 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "409": {
       "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     }
   },
@@ -303,7 +303,7 @@
         }
       }
     },
-    "/stateset": {
+    "/featureState/stateset": {
       "post": {
         "x-publish": true,
         "description": "**Applies to:** S1 pricing tier.\n<br>\n\nThis POST API allows the user to create a new Stateset and define stateset style using request body.\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. The Feature State API is part of Creator. \n\nThe Feature State service allows the user to update the states of a feature and query them to be used in other services. The dynamic properties of a feature that don't belong to the dataset are referred to as *states* here.\n\nThis Feature State service pivot on the Stateset. Like Tileset, Stateset encapsulates the storage mechanism for feature states for a dataset.\n\nOnce the stateset is created, users can use that statesetId to post feature state updates and retrieve the current feature states. A feature can have any number of states. \n\nFeature state is defined by the key name, value and the timestamp. When a feature state update is posted to Azure Maps, the state value gets updated only if the provided state’s timestamp is later than the stored timestamp. \n\nAzure Maps MapControl provides a way to use these feature states to style the features. Please refer to the State Tile documentation for more information.",
@@ -503,7 +503,7 @@
       "delete": {
         "x-publish": true,
         "operationId": "FeatureState_DeleteStatePreview",
-        "description": "**Applies to:** S1 pricing tier. <br> This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset. ",
+        "description": "**Applies to:** S1 pricing tier. <br> This API deletes the state information identified by the StateKeyName parameter for the feature identified by the FeatureId parameter in the the stateset.",
         "x-ms-examples": {
           "Delete the given feature state": {
             "$ref": "./examples/DeleteFeatureState.json"
@@ -553,31 +553,6 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
-      "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The HTTP status code."
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true,
-          "description": "If available, a human readable description of the error."
-        }
-      }
-    },
     "ODataErrorResponse": {
       "type": "object",
       "description": "This response object is returned when an error occurs in the Maps API.",

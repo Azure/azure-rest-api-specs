@@ -42,13 +42,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -60,26 +60,55 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
+      }
+    },
+    "201Async": {
+      "description": "The resource has been created successfully.",
+      "schema": {
+        "$ref": "#/definitions/LongRunningOperationResult"
+      },
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "A URI where details on the newly created resource can be found."
+        },
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
+        }
+      }
+    },
+    "202Async": {
+      "description": "**Supported only for async request.**\nRequest Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
+      "headers": {
+        "Location": {
+          "type": "string",
+          "description": "New URL to check for the results of the long running process."
+        },
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
+        }
       }
     }
   },
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -125,7 +154,7 @@
     },
     "UploadDataFormat": {
       "name": "dataFormat",
-      "description": "Data format of the content being uploaded. Currently, only `geojson` format is supported.",
+      "description": "Data format of the content being uploaded.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -162,7 +191,7 @@
     "/mapData/upload": {
       "post": {
         "x-publish": true,
-        "description": "**Data Upload API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to upload data content to the Azure Maps service.<br>    \nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` format for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). \n\n### Submit Upload Request\n\nTo upload your content you will use a `POST` request where the request body will contain the data to upload, the `dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter can contain the sharing level for the data and the `Content-Type` header will be set to the content type of the data. <br>    \nFor example, to upload a collection of geofences in `GeoJSON` format, set the request body to the geofence content, set the `dataFormat` query parameter to _geojson_ and set the `Content-Type` header to either one of the following media types: \n    \n  - `application/json`\n  - `application/vnd.geo+json`\n  - `application/octet-stream`    \n\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry in `GeoJSON` using a center point and a radius:\n\n<br>\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```   \n\n<br>The Data Upload API is a long-running request with the following sequence of operations:\n<br>\n#### Send the upload request\n\n1. Client sends a Data Upload `POST` request to Azure Maps\n\n2. The server will respond with one of the following:\n \n   > HTTP `202 Accepted` - Upload request has been accepted (but not completed yet).\n\n   > HTTP `Error` - There was an error processing your Upload request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the Upload request was accepted successfully, the `Location` header in the response contains the _status URI_ to check the current status of the long-running upload request. This _status URI_ looks like the following:    \n    \n```\nhttps://atlas.microsoft.com/mapData/operations/{uploadOperationStatusId}?api-version=1.0\n```\n\n<br> Note: Please remember to add AUTH information (subscription-key/azure_auth - See [Security](#security)) to the _status URI_ before running it.\n\n<br>\n\n#### Upload request \"Accepted\" but still \"In Progress\"\n\n1. Client issues a `GET` request on the _status URI_ obtained above to check the current status of the upload request.\n\n2. At this point, if the upload request is still being _processed_ by Azure Maps, the client receives a HTTP `200 OK` with the response body containing the current status for the request:\n\n\n```json\n{\n    \"operationId\": \"{operationId}\",\n    \"status\": \"Running\"\n}\n```\n\n<br>\n\n#### Upload request \"Completed\" successfully\n\n1. Client issues another `GET` request on the _status URI_ to check the current upload status.\n\n2. At this point, if the upload request has been processed and completed successfully, the client receives a HTTP `201 Created` response.\n\n3. The upload request was successful and the data has been created. The response body (and the `Location` header) contains the `resourceLocation` of the uploaded content and looks like the following: \n\n\n```json\n{\n    \"operationId\": \"{operationId}\",\n    \"status\": \"Succeeded\",\n    \"resourceLocation\": \"https://atlas.microsoft.com/mapData/metadata/{resourceId}?api-version=1.0\"\n}  \n```\n\n\n4. At this point, the client can issue another `GET` request on the `resourceLocation` URI to access the content metadata. The response body contains a unique data id `udid` for the uploaded content, the `location` to access/download the content in the future and some other metadata about the content like `created`/`updated` date, `size` etc. This looks something like:\n\n\n```json\n{\n    \"udid\": \"{udid}\",\n    \"location\": \"https://atlas.microsoft.com/mapData/{udid}?api-version=1.0\",\n    \"created\": \"2020-02-03T02:32:25.0509366+00:00,\n    \"updated\": \"2020-02-11T06:12:13.0309351+00:00,\n    \"sizeInBytes\": 766,\n    \"uploadStatus\": \"Completed\"\n}\n```\n\n<br>\n\n#### Upload request \"Failed\"\n\n1. Client issues another `GET` request on the _status URI_ to check the current upload status.\n\n2. At this point, if the upload request processing has failed, the client receives a HTTP `200 OK` response with the response body containing a list of errors.\n\n3. The request has failed and the data has not been created. The response body will contain a list of errors encountered while processing the upload request:\n\n\n```json\n{\n    \"error\": \n    {\n      \"code\": \"400 Bad Request\",\n      \"message\": \"Upload request failed. Your data has been removed as we encountered the following problems with it: Map data is not a valid GeoJSON geometry.\"\n    }         \n}\n```\n\n<br>\n\n### Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account gets a free storage limit of 50 MB. This means that you can either upload 1 document of size 50 MB or 5 documents, each of size 10 MB or 100 documents, each of size 500 KB and so on. Once the free storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.\n\n<br>",
+        "description": "**Data Upload API**\n\n**Applies to:** S1 pricing tier.\n\nThe Data Upload API allows the caller to upload data content to the Azure Maps service.\nYou can use this API in a scenario like uploading a collection of Geofences in `GeoJSON` \nformat, for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\n## Submit Upload Request\n\nTo upload your content you will use a `POST` request. The request body will contain the data to upload. The \n`dataFormat` query parameter will contain the format for the data, the `dataSharingLevel` query parameter \ncan contain the sharing level for the data. The `Content-Type` header will be set to the content type of the \ndata.\n\nFor example, to upload a collection of geofences  in `GeoJSON` format, set the request body to the geofence \ncontent. Set the `dataFormat` query parameter to _geojson_, and set the `Content-Type` header to either one \nof the following media types:\n\n- `application/json`\n- `application/vnd.geo+json`\n- `application/octet-stream`\n\nHere's a sample request body for uploading a simple Geofence represented as a circle geometry using a center \npoint and a radius. The sample below is in `GeoJSON`:\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\nThe Data Upload API performs a \n[long-running request](https://docs.microsoft.com/azure/azure-maps/private-atlas-long-running-operation).\n\n## Data Upload Limits\n\nPlease, be aware that currently every Azure Maps account has a [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits). \nOnce the storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. \nYou can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data/deletepreview) to \ndelete old/unused content and create space for new uploads.",
         "operationId": "Data_UploadPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -200,40 +229,14 @@
           "200": {
             "description": "Data upload failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ODataErrorResponse"
             }
           },
           "201": {
-            "description": "Content created/uploaded successfully.             The response body (and the `Location` header) contains the `resourceLocation` of the uploaded content.",
-            "schema": {
-              "$ref": "#/definitions/MapDataUploadResponse"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI for reading/downloading the data resource."
-              },
-              "Access-Control-Expose-Headers": {
-                "type": "string",
-                "description": "The list of response headers that can be read by the client."
-              }
-            }
+            "$ref": "#/responses/201Async"
           },
           "202": {
-            "description": "Upload data request has been `Accepted`. The upload operation has not completed yet. The `Location` header in the response contains the uri for checking the status of the upload, for example - `https://atlas.microsoft.com/mapData/operations/{uploadOperationStatusId}?api-version=1.0`.            ",
-            "schema": {
-              "$ref": "#/definitions/MapDataUploadRequestAcceptedResponse"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI for checking the status of the uploaded data resource."
-              },
-              "Access-Control-Expose-Headers": {
-                "type": "string",
-                "description": "The list of response headers that can be read by the client."
-              }
-            }
+            "$ref": "#/responses/202Async"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -256,7 +259,7 @@
     "/mapData/{udid}": {
       "put": {
         "x-publish": true,
-        "description": "**Data Update API**\n\n**Applies to:** S1 pricing tier.\n<br>\n\nThis API allows the caller to update a previously uploaded data content.<br>    \nYou can use this API in a scenario like adding/removing geofences to/from an existing collection of geofences uploaded previously using the [Data Upload API](https://docs.microsoft.com/en-us/rest/api/maps/data/uploadpreview) for use in our [Azure Maps Geofencing Service](https://docs.microsoft.com/en-us/rest/api/maps/spatial). <br>\nPlease note that the Update API will *replace/override* the existing data content. \n\n### Submit Update Request\n\nTo update your content you will use a `PUT` request where the request body will contain the new data that will replace the existing data, the `Content-Type` header will be set to the content type of the data and the path will contain the `udid` of the data to update. <br>    \nFor example, to update a collection of geofences previously uploaded using the Upload API, set the request body to the new geofence content, set the `udid` parameter in the path to the `udid` of the data received previously in the upload API response and set the `Content-Type` header to either one of the following media types: \n    \n  - `application/json`\n  - `application/vnd.geo+json`\n  - `application/octet-stream`\n\n\nHere's a sample request body for updating a simple Geofence represented as a circle geometry in `GeoJSON` using a center point and a radius:\n\n<br>\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\n<br>The previously uploaded geofence had a radius of 100m. This request will update it to 500m.<br>\nThe Data Update API is a long-running request with the following sequence of operations:\n<br>\n#### Send the update request\n\n1. Client sends a Data Update `PUT` request to Azure Maps\n\n2. The server will respond with one of the following:\n \n   > HTTP `202 Accepted` - Update request has been accepted (but not completed yet).\n\n   > HTTP `Error` - There was an error processing your Update request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the Update request was accepted successfully, the `Location` header in the response contains the _status URI_ to check the current status of the long-running update request. This _status URI_ looks like the following:    \n    \n```\nhttps://atlas.microsoft.com/mapData/operations/{updateOperationStatusId}?api-version=1.0    \n```\n\n<br> Note: Please remember to add AUTH information (subscription-key/azure_auth - See [Security](#security)) to the _status URI_ before running it.\n\n<br>\n\n#### Update request \"Accepted\" but still \"In Progress\"\n\n1. Client issues a `GET` request on the _status URI_ obtained above to check the current status of the update request.\n\n2. At this point, if the update request is still being _processed_ by Azure Maps, the client receives a HTTP `200 OK` with the response body containing the current status for the request:\n\n\n```json\n{\n    \"operationId\": \"{operationId}\",\n    \"status\": \"Running\"\n}\n```\n\n<br>\n\n#### Update request \"Completed\" successfully\n\n1. Client issues another `GET` request on the _status URI_ to check the current update status.\n\n2. At this point, if the update request processing has completed successfully, the client receives a HTTP `201 Created` response.\n\n3. The update request was successful and the data has been updated. The response body(and the `Location` header) contains the `resourceLocation` of the updated content and looks like the following: \n\n\n```json\n{\n    \"operationId\": \"{operationId}\",\n    \"status\": \"Succeeded\",\n    \"resourceLocation\": \"https://atlas.microsoft.com/mapData/metadata/{resourceId}?api-version=1.0\"\n}\n```\n\n4. At this point, the client can issue another `GET` request on the `resourceLocation` URI to access the content metadata. The response body contains a unique data id `udid` for the updated content, the `location` to access/download the content in the future and some other metadata about the content like `created`/`updated` date, `size` etc. This looks something like:\n\n\n```json\n{\n    \"udid\": \"{udid}\",\n    \"location\": \"https://atlas.microsoft.com/mapData/{udid}?api-version=1.0\",\n    \"created\": \"2020-02-03T02:32:25.0509366+00:00,\n    \"updated\": \"2020-02-11T06:12:13.0309351+00:00,\n    \"sizeInBytes\": 766,\n    \"uploadStatus\": \"Completed\"\n}\n```\n\n<br>\n\n#### Update request \"Failed\"\n\n1. Client issues another `GET` request on the _status URI_ to check the current update status.\n\n2. At this point, if the upload request processing has failed, the client receives a HTTP `200 OK` response with the response body containing a list of errors.\n\n3. The request has failed and the data has not been created. The response body will contain a list of errors encountered while processing the update request:\n\n\n```json\n{\n    \"error\": \n    {\n      \"code\": \"400 Bad Request\",\n      \"message\": \"Upload request failed. Your data has been removed as we encountered the following problems with it: Map data is not a valid GeoJSON geometry.\"\n    }         \n}\n```\n\n<br>\n\n### Data Update Limits\n\nPlease, be aware that currently every Azure Maps account gets a free storage limit of 50 MB. This means that you can either upload 1 document of size 50 MB or 5 documents, each of size 10 MB or 100 documents, each of size 500 KB and so on. Once the free storage limit is reached, all the new Update API calls will return a `409 Conflict` http error response. You can always use the [Data Delete API](https://docs.microsoft.com/en-us/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads/updates.\n\n<br>",
+        "description": "**Data Update API**\n\n**Applies to:** S1 pricing tier.\n\nThe Data Update API allows the caller to update a previously uploaded data content.\n\nYou can use this API in a scenario like adding or removing geofences to or from an existing collection of geofences. \nGeofences are uploaded using the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data/uploadpreview), for \nuse in the [Azure Maps Geofencing Service](https://docs.microsoft.com/rest/api/maps/spatial).\n\nPlease note that the Update API will *replace* and *override* the existing data content.\n\n## Submit Update Request\n\nTo update your content you will use a `PUT` request. The request body will contain the new data that will replace \nthe existing data. The `Content-Type` header will be set to the content type of the data, and the path will contain \nthe `udid` of the data to be update.\n\nFor example, to update a collection of geofences that were previously uploaded using the Upload API, place the new \ngeofence content in the request body. Set the `udid` parameter in the path to the `udid` of the data received \npreviously in the upload API response. And set the `Content-Type` header to one of the following media types:\n\n- `application/json`\n- `application/vnd.geo+json`\n- `application/octet-stream`\n\nHere's a sample request body for updating a simple Geofence. It's represented as a circle geometry using a center \npoint and a radius. The sample below is in `GeoJSON`:\n\n```json\n{\n    \"type\": \"FeatureCollection\",\n    \"features\": [{\n        \"type\": \"Feature\",\n        \"geometry\": {\n            \"type\": \"Point\",\n            \"coordinates\": [-122.126986, 47.639754]\n        },\n        \"properties\": {\n            \"geometryId\": \"001\",\n            \"radius\": 500\n        }\n    }]\n}\n```\n\nThe previously uploaded geofence had a radius of 100m. The above request will update it to 500m.\n\nThe Data Update API performs a \n[long-running request](https://docs.microsoft.com/azure/azure-maps/private-atlas-long-running-operation).\n\n## Data Update Limits\n\nPlease, be aware that currently every Azure Maps account has a [data storage limit](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits). \nOnce the storage limit is reached, all the new upload API calls will return a `409 Conflict` http error response. \nYou can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data/deletepreview) to \ndelete old/unused content and create space for new uploads.",
         "operationId": "Data_UpdatePreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -294,40 +297,14 @@
           "200": {
             "description": "Data update failed. The uploaded content did not satisfy all the validation checks. The response body contains all the errors that were encountered.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ODataErrorResponse"
             }
           },
           "201": {
-            "description": "Content updated successfully.             The response body (and the `Location` header) contains the `resourceLocation` of the updated content.",
-            "schema": {
-              "$ref": "#/definitions/MapDataUpdateResponse"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI for reading/downloading the data resource."
-              },
-              "Access-Control-Expose-Headers": {
-                "type": "string",
-                "description": "The list of response headers that can be read by the client."
-              }
-            }
+            "$ref": "#/responses/201Async"
           },
           "202": {
-            "description": "Update data request has been `Accepted`. The update operation has not completed yet. The `Location` header in the response contains the uri for checking the status of the update operation, for example - `https://atlas.microsoft.com/mapData/operations/{updateOperationStatusId}?api-version=1.0`.            ",
-            "schema": {
-              "$ref": "#/definitions/MapDataUpdateRequestAcceptedResponse"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The URI for checking the status of the uploaded data resource."
-              },
-              "Access-Control-Expose-Headers": {
-                "type": "string",
-                "description": "The list of response headers that can be read by the client."
-              }
-            }
+            "$ref": "#/responses/202Async"
           },
           "400": {
             "$ref": "#/responses/400"
@@ -501,80 +478,100 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },
-    "MapDataUploadResponse": {
-      "description": "The response model for the Data Upload API for the case when the content was successfully uploaded.",
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
       "type": "object",
       "properties": {
         "operationId": {
-          "description": "An id for the upload operation.",
-          "type": "string",
-          "readOnly": true
+          "description": "The Id for this long-running operation.",
+          "type": "string"
         },
         "status": {
-          "description": "The current status of the upload operation.",
+          "description": "The status state of the request.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "NotStarted",
+                "description": "The request has not started processing yet."
+              },
+              {
+                "value": "Running",
+                "description": "The request has started processing."
+              },
+              {
+                "value": "Failed",
+                "description": "The request has one or more failures."
+              },
+              {
+                "value": "Succeeded",
+                "description": "The request has successfully completed."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "created": {
+          "description": "The created timestamp.",
           "type": "string",
           "readOnly": true
         },
         "resourceLocation": {
-          "description": "The location of the uploaded content.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "MapDataUploadRequestAcceptedResponse": {
-      "description": "The response model for the Data Upload API for the case when the upload request was accepted, but the content wasn't created yet. This contains the current `status` of the long running upload operation.",
-      "type": "object"
-    },
-    "MapDataUpdateResponse": {
-      "description": "The response model for the Data Update API for the case when the content was successfully updated. This contains the `udid` for the updated content.",
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "description": "An id for the update operation.",
+          "description": "The location URI for details about the created resource. This is only provided when the request was successfully completed.",
           "type": "string",
           "readOnly": true
         },
-        "status": {
-          "description": "The current status of the update operation.",
-          "type": "string",
-          "readOnly": true
+        "error": {
+          "$ref": "#/definitions/ODataError"
         },
-        "resourceLocation": {
-          "description": "The location of the updated content.",
-          "type": "string",
-          "readOnly": true
+        "warning": {
+          "$ref": "#/definitions/ODataError"
         }
       }
-    },
-    "MapDataUpdateRequestAcceptedResponse": {
-      "description": "The response model for the Data Update API for the case when the update request was accepted, but the content wasn't updated/replaced yet. This contains the current `status` of the long running update operation.",
-      "type": "object"
     },
     "MapDataDownloadResponse": {
       "description": "The response model for the Data Download API. The response body will contain the content for the passed in `udid`.",

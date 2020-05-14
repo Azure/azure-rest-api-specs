@@ -56,13 +56,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -74,19 +74,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     }
   },
@@ -176,28 +176,39 @@
     "/wfs/datasets/{datasetid}/collections/{collectionId}/items/{featureId}": {}
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },
