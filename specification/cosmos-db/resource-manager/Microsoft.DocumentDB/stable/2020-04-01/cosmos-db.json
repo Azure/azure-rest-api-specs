@@ -5193,9 +5193,9 @@
           "type": "boolean"
         },
         "apiProperties": {
-          "description": "API specific properties. Currently, supported only for MongoDB API.",
+          "description": "API specific properties.",
           "type": "object",
-          "$ref": "#/definitions/MongoProperties"
+          "$ref": "#/definitions/ApiProperties"
         },
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
@@ -5279,7 +5279,7 @@
         "apiProperties": {
           "description": "API specific properties. Currently, supported only for MongoDB API.",
           "type": "object",
-          "$ref": "#/definitions/MongoProperties"
+          "$ref": "#/definitions/ApiProperties"
         },
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
@@ -5395,7 +5395,7 @@
         "apiProperties": {
           "description": "API specific properties. Currently, supported only for MongoDB API.",
           "type": "object",
-          "$ref": "#/definitions/MongoProperties"
+          "$ref": "#/definitions/ApiProperties"
         },
         "enableAnalyticalStorage": {
           "description": "Flag to indicate whether to enable storage analytics.",
@@ -6500,7 +6500,7 @@
             "$ref": "#/definitions/MongoIndex"
           }
         },
-        "analyticalStorageTimeToLive": {
+        "analyticalStorageTtl": {
           "type": "integer",
           "description": "Analytical TTL."
         }
@@ -6603,7 +6603,7 @@
           "description": "Schema of the Cosmos DB Cassandra table",
           "$ref": "#/definitions/CassandraSchema"
         },
-        "analyticalStorageTimeToLive": {
+        "analyticalStorageTtl": {
           "type": "integer",
           "description": "Analytical TTL."
         }
@@ -6727,7 +6727,7 @@
       "type": "object",
       "properties": {
         "throughput": {
-          "type": "string",
+          "type": "integer",
           "description": "Request Units per second. For example, \"throughput\": \"10000\"."
         },
         "autoscaleSettings": {
@@ -6741,7 +6741,7 @@
       "type": "object",
       "properties": {
         "maxThroughput": {
-          "type": "string",
+          "type": "integer",
           "description": "Represents maximum throughput, the resource can scale up to."
         }
       }
@@ -7337,7 +7337,7 @@
         "name": "PublicNetworkAccess"
       }
     },
-    "MongoProperties": {
+    "ApiProperties": {
       "type": "object",
       "properties": {
         "serverVersion": {
@@ -7346,6 +7346,7 @@
             "3.2",
             "3.6"
           ],
+          "description": "Describes the ServerVersion of an a MongoDB account.",
           "x-ms-enum": {
             "modelAsString": true,
             "name": "ServerVersion"
