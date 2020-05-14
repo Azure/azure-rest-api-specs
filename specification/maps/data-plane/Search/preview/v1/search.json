@@ -46,19 +46,23 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
+        },
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
         }
       }
     },
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -70,19 +74,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "202Async": {
@@ -91,6 +95,10 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
+        },
+        "Access-Control-Expose-Headers": {
+          "type": "string",
+          "description": "The list of response headers that can be read by the client."
         }
       }
     }
@@ -464,7 +472,7 @@
     },
     "OpeningHours": {
       "name": "openingHours",
-      "description": "Hours of operation for a POI (Points of Interest). The availability of hours of operation will vary based on the data available.\nSupported value: nextSevenDays",
+      "description": "Opening hours for a POI (Points of Interest). The availability of opening hours will vary based on the data available.",
       "type": "string",
       "in": "query",
       "required": false,
@@ -477,7 +485,7 @@
         "values": [
           {
             "value": "nextSevenDays",
-            "description": "Shows the hours of operation for the next week, starting with the current day in the local time of the POI."
+            "description": "Shows the opening hours for next week, starting with the current day in the local time of the POI."
           }
         ]
       },
@@ -612,7 +620,7 @@
           {
             "name": "minFuzzyLevel",
             "in": "query",
-            "description": "Minimum fuzzyness level to be used. Default: 1, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel. ",
+            "description": "Minimum fuzzyness level to be used. Default: 1, minimum: 1 and maximum: 4\n\n* Level 1 has no spell checking.\n\n* Level 2 uses normal n-gram spell checking. For example, query \"restrant\" can be matched to \"restaurant.\"\n\n* Level 3 uses sound-like spell checking, and shingle spell checking. Sound-like spell checking is for \"rstrnt\" to \"restaurant\" matching. Shingle spell checking is for \"mountainview\" to \"mountain view\" matching.\n\n* Level 4 doesn’t add any more spell checking functions.\n\n\n\nThe search engine will start looking for a match on the level defined by minFuzzyLevel, and will stop searching at the level specified by maxFuzzyLevel.",
             "required": false,
             "type": "integer",
             "default": 1,
@@ -1812,28 +1820,39 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },
@@ -3048,9 +3067,6 @@
           "items": {
             "$ref": "#/definitions/SearchResultPoiBrand"
           }
-        },
-        "openingHours": {
-          "$ref": "#/definitions/SearchResultPoiOpeningHours"
         }
       }
     },
@@ -3085,60 +3101,6 @@
         "name": {
           "description": "Name property",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "SearchResultPoiOpeningHours": {
-      "description": "Opening hours for a POI (Points of Interest).",
-      "type": "object",
-      "properties": {
-        "mode": {
-          "description": "Value used in the Request",
-          "type": "string",
-          "readOnly": true
-        },
-        "timeRanges": {
-          "description": "List of time ranges for the next 7 days",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRange"
-          }
-        }
-      }
-    },
-    "SearchResultPoiOpeningHoursTimeRange": {
-      "description": "Open time range for a day",
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "description": "The point in the next 7 days range when a given POI is being opened. (or the beginning of the range if it was opened before the range)<br> inclusive",
-          "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRangeTime"
-        },
-        "endTime": {
-          "description": "The point in the next 7 days range when a given POI is being opened. (or the beginning of the range if it was opened before the range)<br> exclusive",
-          "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRangeTime"
-        }
-      }
-    },
-    "SearchResultPoiOpeningHoursTimeRangeTime": {
-      "description": "Represents a date and time",
-      "type": "object",
-      "properties": {
-        "date": {
-          "description": "Represents current day in calendar year in POI time zone.",
-          "type": "string",
-          "readOnly": true
-        },
-        "hour": {
-          "description": "Hours are in the 24 hour format in the local time of a POI; possible values are 0 - 23.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "minute": {
-          "description": "Minutes are in the local time of a POI; possible values are 0 - 59.",
-          "type": "integer",
           "readOnly": true
         }
       }

@@ -41,13 +41,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -59,19 +59,19 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     }
   },
@@ -124,10 +124,10 @@
     },
     "MetroId": {
       "name": "metroId",
-      "description": "The unique id of the metro area. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
+      "description": "The unique id of the metro area. Required parameter specifying the required metro area to search in. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityMetro).",
       "type": "integer",
       "in": "query",
-      "required": false,
+      "required": true,
       "x-ms-parameter-location": "method"
     },
     "MobilityLanguage": {
@@ -165,7 +165,7 @@
           },
           {
             "name": "query",
-            "description": "The applicable location input. Can be position (specified as a comma  separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\") or  countryCode (2-character ISO country code). ",
+            "description": "The applicable location input. Can be position (specified as a comma  separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\") or  countryCode (2-character ISO country code).",
             "in": "query",
             "required": true,
             "type": "string"
@@ -328,7 +328,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetNearbyTransitPreview",
-        "description": "**Find Nearby Transit API**\n\n**Applies to**: S1 pricing tier.\n\nGet Nearby Transit service allows you to search public transit stops around a given location  returning the transit object details. Service allows users to search for public transit stops within a given radius returning a set of stops with stop details. Additional  information such as transit operator information is returned depending on the options selected. The returned information can be used for further processing such as requesting [real-time arrivals](https://aka.ms/AzureMapsMobilityRealTimeArrivals) for the stop or [transit stop details](https://aka.ms/AzureMapsMobilityTransitStop) such as main transit type of most lines stopping for a given public, active service alerts or main transport agency. ",
+        "description": "**Find Nearby Transit API**\n\n**Applies to**: S1 pricing tier.\n\nGet Nearby Transit service allows you to search public transit stops around a given location  returning the transit object details. Service allows users to search for public transit stops within a given radius returning a set of stops with stop details. Additional  information such as transit operator information is returned depending on the options selected. The returned information can be used for further processing such as requesting [real-time arrivals](https://aka.ms/AzureMapsMobilityRealTimeArrivals) for the stop or [transit stop details](https://aka.ms/AzureMapsMobilityTransitStop) such as main transit type of most lines stopping for a given public, active service alerts or main transport agency.",
         "x-ms-examples": {
           "NearbyTransit": {
             "$ref": "./examples/GetNearbyTransit.json"
@@ -352,7 +352,7 @@
           },
           {
             "name": "query",
-            "description": "Location input from user. The applicable location query specified as a comma separated string  composed by latitude followed by longitude e.g. \"47.641268,-122.125679\". ",
+            "description": "Location input from user. The applicable location query specified as a comma separated string  composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
             "in": "query",
             "required": true,
             "type": "string"
@@ -572,7 +572,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
                 }
               ]
             },
@@ -649,7 +649,7 @@
       "get": {
         "x-publish": true,
         "operationId": "Mobility_GetTransitRoutePreview",
-        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time. ",
+        "description": "**Transit Route API**\n\n**Applies to**: S1 pricing tier.\n\nGet Transit Route API will allow trip planning returning the best possible route options between an origin and destination by using multi-modal search. Service provides a variety of travel modes, including walk, bike, and public transit.  The API supports parameters to request one or multiple public transit types such as bus, tram and subway, and prefer a specific transit agency operating in the area. Also, service provides options to choose optimal route with least walk or transfers and specify arrival or departure times when user need to be at a specific destination by a certain time.",
         "x-ms-examples": {
           "TransitRoute": {
             "$ref": "./examples/GetTransitRoute.json"
@@ -704,7 +704,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
                 }
               ]
             },
@@ -743,7 +743,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
                 }
               ]
             },
@@ -874,7 +874,7 @@
                 },
                 {
                   "value": "agencyKey",
-                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The agency’s GTFS Id."
                 },
                 {
                   "value": "agencyName",
@@ -1169,7 +1169,7 @@
                 },
                 {
                   "value": "stopKey",
-                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The GTFS stop Id. GTFS stop Ids are provided by the transit authority and are subject to change."
                 }
               ]
             },
@@ -1280,7 +1280,7 @@
                 },
                 {
                   "value": "agencyKey",
-                  "description": "The agency’s GTFS Id.<br> **Note**: When this value is used, the metroId parameter is required."
+                  "description": "The agency’s GTFS Id."
                 },
                 {
                   "value": "agencyName",
@@ -1328,28 +1328,39 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },

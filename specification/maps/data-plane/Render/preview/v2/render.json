@@ -43,13 +43,13 @@
     "400": {
       "description": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "401": {
       "description": "Access denied due to invalid subscription key or invalid Azure Active Directory bearer token.  Make sure to provide a valid key for an active Azure subscription and Maps resource.  Otherwise, verify the [WWW-Authenticate](https://tools.ietf.org/html/rfc6750#section-3.1) header for error code and description of the provided AAD bearer token.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       },
       "headers": {
         "WWW-Authenticate": {
@@ -61,26 +61,26 @@
     "403": {
       "description": "Permission, capacity, or authentication issues.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "404": {
       "description": "Not Found: the requested resource could not be found, but it may be available again in the future.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     },
     "500": {
       "description": "An error occurred while processing the request. Please try again later.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "#/definitions/ODataErrorResponse"
       }
     }
   },
   "parameters": {
     "ClientId": {
       "name": "x-ms-client-id",
-      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.",
       "type": "string",
       "in": "header",
       "required": false,
@@ -105,7 +105,7 @@
     },
     "TilesetId": {
       "name": "tilesetId",
-      "description": "A **tileset** is a collection of raster or vector data broken up into a collection of raster or vector data which are further broken up into a uniform grid of square tiles at preset zoom levels. Every **tileset** has a **tilesetId** to request specific tileset. For example, microsoft.base.",
+      "description": "A tileset is a collection of raster or vector data broken up into a uniform grid of square tiles at preset  zoom levels. Every tileset has a **tilesetId** to use when making requests. The **tilesetId** for tilesets created using [Azure Maps Creator](https://aka.ms/amcreator) are generated through the  [Tileset Create API](https://docs.microsoft.com/en-us/rest/api/maps/tileset). The ready-to-use tilesets supplied  by Azure Maps are listed below. For example, microsoft.base.",
       "type": "string",
       "in": "query",
       "required": true,
@@ -160,7 +160,7 @@
           },
           {
             "value": "microsoft.imagery",
-            "description": "A combination of satellite and aerial imagery.<br>\n\nSupports zoom levels 1 through 19. Format: raster (png)."
+            "description": "A combination of satellite and aerial imagery. Only available in S1 pricing SKU.<br>\n\nSupports zoom levels 1 through 19. Format: raster (jpeg)."
           },
           {
             "value": "microsoft.weather.radar.main",
@@ -234,7 +234,7 @@
     "/map/tile": {
       "get": {
         "x-publish": true,
-        "description": "**Applies to**: S0 and S1 pricing tiers.\n\nGet Map Tiles API allows users to request map tiles in vector or raster format typically to be integrated into a map control or SDK. The service allows to request various map tiles, such as Azure Maps road tiles or real-time Weather Radar tiles. By default, Azure Maps uses vector map tiles for its web map control (Web SDK) and Android SDK.",
+        "description": "**Applies to**: S0 and S1 pricing tiers.\n\nThe Get Map Tiles API allows users to request map tiles in vector or raster formats typically to be integrated  into a map control or SDK. Some example tiles that can be requested are Azure Maps road tiles, real-time  Weather Radar tiles or the map tiles created using [Azure Maps Creator](https://aka.ms/amcreator). By default,  Azure Maps uses vector tiles for its web map control (Web SDK) and Android SDK.",
         "operationId": "RenderV2_GetMapTilePreview",
         "x-ms-examples": {
           "GetMapTile": {
@@ -262,6 +262,13 @@
           },
           {
             "$ref": "#/parameters/yTileIndex"
+          },
+          {
+            "name": "timeStamp",
+            "in": "query",
+            "description": "The desired date and time of the requested tile. This parameter must be specified in the standard date-time format (e.g. 2019-11-14T16:03:00-08:00), as defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601). This parameter is only supported when tilesetId parameter is set to one of the values below.\n  \n* microsoft.weather.infrared.main: We provide tiles up to 3 hours in the past. Tiles are available in 10-minute intervals. We round the timeStamp value to the nearest 10-minute time frame.\n* microsoft.weather.radar.main: We provide tiles up to 1.5 hours in the past and up to 2 hours in the future. Tiles are available in 5-minute intervals. We round the timeStamp value to the nearest 5-minute time frame.",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "tileSize",
@@ -326,28 +333,39 @@
     }
   },
   "definitions": {
-    "ErrorResponse": {
+    "ODataErrorResponse": {
       "type": "object",
-      "description": "This response object is returned when an error occurs in the Maps API",
+      "description": "This response object is returned when an error occurs in the Maps API.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ODataError"
         }
       }
     },
-    "Error": {
+    "ODataError": {
       "type": "object",
-      "description": "This object is returned when an error occurs in the Maps API",
+      "description": "This object is returned when an error occurs in the Maps API.",
       "properties": {
         "code": {
           "type": "string",
           "readOnly": true,
-          "description": "The HTTP status code."
+          "description": "The ODataError code."
         },
         "message": {
           "type": "string",
           "readOnly": true,
           "description": "If available, a human readable description of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataError"
+          }
+        },
+        "target": {
+          "type": "string",
+          "readOnly": true,
+          "description": "If available, the target causing the error."
         }
       }
     },
