@@ -75,8 +75,16 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages/{resourceName}": {
       "put": {
         "operationId": "GuestUsages_Create",
-        "x-ms-examples": {},
-        "description": "Creates a Guest Usages Resource",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Create": {
+            "$ref": "./examples/GuestUsagesCreate.json"
+          }
+        },
+        "summary": "Creates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "description": "Creates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -91,7 +99,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "CreateGuestUsagesResourceRequests",
+            "name": "Resource",
             "in": "body",
             "required": true,
             "schema": {
@@ -101,7 +109,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "The request was successful and the resource was created successfully",
             "schema": {
               "$ref": "#/definitions/GuestUsagesResource"
             }
@@ -110,7 +118,16 @@
       },
       "patch": {
         "operationId": "GuestUsages_Update",
-        "description": "Updates a Guest Usages Resource",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Update": {
+            "$ref": "./examples/GuestUsagesUpdate.json"
+          }
+        },
+        "summary": "Updates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "description": "Updates a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -125,7 +142,7 @@
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "CreateGuestUsagesResourceRequests",
+            "name": "Resource",
             "in": "body",
             "required": true,
             "schema": {
@@ -144,7 +161,16 @@
       },
       "delete": {
         "operationId": "GuestUsages_Delete",
-        "description": "Deletes a Guest Usages Resource",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Delete": {
+            "$ref": "./examples/GuestUsagesDelete.json"
+          }
+        },
+        "summary": "Deletes a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "description": "Deletes a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -173,7 +199,16 @@
       },
       "get": {
         "operationId": "GuestUsages_Get",
-        "description": "Gets a Guest Usages Resource",
+        "tags": [
+          "GuestUsages"
+        ],
+        "x-ms-examples": {
+          "GuestUsages_Get": {
+            "$ref": "./examples/GuestUsagesGet.json"
+          }
+        },
+        "summary": "Gets a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
+        "description": "Gets a Guest Usages resource for the Microsoft.AzureActiveDirectory resource provider",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -325,8 +360,7 @@
           "$ref": "#/definitions/GuestUsagesResourceProperties",
           "description": "The Guest Usages Resource Properties"
         }
-      },
-      "x-ms-azure-resource": true
+      }
     }
   },
   "parameters": {
