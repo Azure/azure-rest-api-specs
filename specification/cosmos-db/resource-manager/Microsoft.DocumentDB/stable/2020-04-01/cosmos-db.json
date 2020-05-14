@@ -5982,15 +5982,15 @@
     },
     "ThroughputSettingsResource": {
       "type": "object",
-      "description": "Cosmos DB resource throughput object. Either throughput is required or provisionedThroughputSettings is required, but not both.",
+      "description": "Cosmos DB resource throughput object. Either throughput is required or autoscaleSettings is required, but not both.",
       "properties": {
         "throughput": {
           "type": "integer",
-          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or provisionedThroughputSettings is required, but not both."
+          "description": "Value of the Cosmos DB resource throughput. Either throughput is required or autoscaleSettings is required, but not both."
         },
-        "provisionedThroughputSettings": {
-          "description": "Cosmos DB resource for provisioned throughput settings. Either throughput is required or provisionedThroughputSettings is required, but not both.",
-          "$ref": "#/definitions/ProvisionedThroughputSettingsResource"
+        "autoscaleSettings": {
+          "description": "Cosmos DB resource for autoscale settings. Either throughput is required or autoscaleSettings is required, but not both.",
+          "$ref": "#/definitions/AutoscaleSettingsResource"
         },
         "minimumThroughput": {
           "type": "string",
@@ -6004,7 +6004,7 @@
         }
       }
     },
-    "ProvisionedThroughputSettingsResource": {
+    "AutoscaleSettingsResource": {
       "type": "object",
       "description": "Cosmos DB provisioned throughput settings object",
       "properties": {
@@ -6056,7 +6056,12 @@
       "properties": {
         "throughput": {
           "type": "integer",
-          "description": "Value of the Cosmos DB resource throughput. Use the ThroughputSetting resource when retrieving offer details."
+          "description": "Value of the Cosmos DB resource throughput or autoscaleSettings. Use the ThroughputSetting resource when retrieving offer details."
+        },
+        "autoscaleSettings": {
+          "type": "object",
+          "$ref": "#/definitions/AutoscaleSettings",
+          "description": "Specifies the Autoscale settings."
         }
       }
     },
@@ -6704,12 +6709,22 @@
         "throughput": {
           "type": "string",
           "description": "Request Units per second. For example, \"throughput\": \"10000\"."
+        },
+        "autoscaleSettings": {
+          "$ref": "#/definitions/AutoscaleSettings",
+          "description": "Specifies the Autoscale settings."
         }
       },
-      "additionalProperties": {
-        "type": "string"
-      },
       "description": "CreateUpdateOptions are a list of key-value pairs that describe the resource. Supported keys are \"If-Match\", \"If-None-Match\", \"Session-Token\" and \"Throughput\""
+    },
+    "AutoscaleSettings": {
+      "type": "object",
+      "properties": {
+        "maxThroughput": {
+          "type": "string",
+          "description": "Represents maximum throughput, the resource can scale up to."
+        }
+      }
     },
     "Capability": {
       "type": "object",
@@ -7303,15 +7318,15 @@
       }
     },
     "MongoProperties": {
-      "type":"object",
-      "properties":{
-        "serverVersion":{
+      "type": "object",
+      "properties": {
+        "serverVersion": {
           "type": "string",
-          "enum":[
+          "enum": [
             "3.2",
             "3.6"
           ],
-          "x-ms-enum":{
+          "x-ms-enum": {
             "modelAsString": true,
             "name": "ServerVersion"
           }
