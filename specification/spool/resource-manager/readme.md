@@ -79,3 +79,11 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Typescript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## Cli
+
+See configuration in [readme.cli.md](./readme.cli.md)
