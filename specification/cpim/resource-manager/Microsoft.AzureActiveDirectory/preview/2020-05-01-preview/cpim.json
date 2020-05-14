@@ -3,18 +3,26 @@
   "info": {
     "version": "2020-05-01-preview",
     "title": "cpim",
-    "description": "Description of the new service",
+    "description": "CPIM Service Client ",
     "x-ms-code-generation-settings": {
       "name": "cpimClient"
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,13 +39,16 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/operations": {
       "get": {
-        "tags": ["Tag1"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
-        },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-examples": {},
+        "description": "Lists the operations available from this provider.",
         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
@@ -49,7 +60,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -60,15 +71,183 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureActiveDirectory/guestUsages/{resourceName}": {
+      "put": {
+        "operationId": "GuestUsages_Create",
+        "x-ms-examples": {},
+        "description": "Creates a Guest Usages Resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "CreateGuestUsagesResourceRequests",
+            "in": "body",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GuestUsages_Update",
+        "description": "Updates a Guest Usages Resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "CreateGuestUsagesResourceRequests",
+            "in": "body",
+            "required": true,
+            "schema":{
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GuestUsages_Delete",
+        "description": "Deletes a Guest Usages Resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      },
+      "get": {
+        "operationId": "GuestUsages_Get",
+        "description": "Gets a Guest Usages Resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/definitions/GuestUsagesResource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GuestUsagesResource"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "Operation": {
+      "description": "A Guest Usages REST API operation.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
           "type": "string",
-          "description": "Sample property of type string"
+          "readOnly": true
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Consumption.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: UsageDetail, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "Friendly name of the operation",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of listing operations for the resourceProvider",
+      "properties": {
+        "value": {
+          "description": "List of analysis services operations supported by the Microsoft.AzureActiveDirectory resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
         }
       }
     },
@@ -103,6 +282,54 @@
           "readOnly": true
         }
       }
+    },
+    "GuestUsagesResource":{
+      "description": "Guest Usages Resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "An identifier that represents the Analysis Services resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Analysis Services resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the Analysis Services resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the Analysis Services resource.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs of additional resource provisioning properties."
+        },
+        "properties": {
+          "$ref": "#definitions/GuestUsagesResourceProperties",
+          "description": "The Guest Usages Rsource Properties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "GuestUsagesResourceProperties":{
+      "description": "Guest Usages Resource",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "An identifier that represents the Analysis Services resource."
+        }
+      }
     }
   },
   "parameters": {
@@ -127,6 +354,14 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
+    },
+    "ResourceNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The initial domain name of the AAD tenant.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
