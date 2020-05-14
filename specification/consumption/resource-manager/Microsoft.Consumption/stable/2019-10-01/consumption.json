@@ -1070,6 +1070,54 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Consumption/reservationRecommendationDetails": {
+      "get": {
+        "tags": [
+          "ReservationRecommendationDetails"
+        ],
+        "operationId": "ReservationRecommendationDetails_Get",
+        "description": "Details of a reservation recommendation for what-if analysis of reserved instances.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationRecommendationsBySubscription-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsBySubscription.json"
+          },
+          "ReservationRecommendationsByBillingAccount-Legacy": {
+            "$ref": "./examples/ReservationRecommendationDetailsByBillingAccount.json"
+          },
+          "ReservationRecommendationsByBillingProfile-Modern": {
+            "$ref": "./examples/ReservationRecommendationDetailsByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/scopeReservationRecommendationDetailsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRecommendationDetailsModel"
+            }
+          },
+          "204": {
+            "description": "An empty response is sent when there are no recommendation details."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationTransactions": {
       "get": {
         "tags": [
@@ -2817,6 +2865,200 @@
         }
       }
     },
+    "ReservationRecommendationDetailsModel": {
+      "description": "Reservation recommendation details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
+          "title": "Reservation Recommendation details properties"
+        }
+      }
+    },
+    "ReservationRecommendationDetailsProperties": {
+      "description": "The properties of the reservation recommendation.",
+      "properties": {
+        "currency": {
+          "description": "An ISO 4217 currency code identifier for the costs and savings ",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Resource specific properties.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsResourceProperties",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource Group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "savings": {
+          "description": "Savings information for the recommendation.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsSavingsProperties",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "Scope of the reservation, ex: Single or Shared.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usage": {
+          "description": "Historical usage details used to calculate the estimated savings.",
+          "$ref": "#/definitions/ReservationRecommendationDetailsUsageProperties",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsCalculatedSavingsProperties": {
+      "description": "Details of estimated savings.",
+      "properties": {
+        "onDemandCost": {
+          "description": "The cost without reservation.",
+          "type": "number",
+          "readOnly": true
+        },
+        "overageCost": {
+          "description": "The difference between total reservation cost and reservation cost.",
+          "type": "number",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity for calculated savings.",
+          "type": "number",
+          "readOnly": true
+        },
+        "reservationCost": {
+          "description": "The exact cost of the estimated usage using reservation.",
+          "type": "number",
+          "readOnly": true
+        },
+        "totalReservationCost": {
+          "description": "The cost of the suggested quantity.",
+          "type": "number",
+          "readOnly": true
+        },
+        "savings": {
+          "description": "The amount saved by purchasing the recommended quantity of reservation.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsResourceProperties": {
+      "description": "Details of the resource.",
+      "properties": {
+        "appliedScopes": {
+          "description": "List of subscriptions for which the reservation is applied.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "onDemandRate": {
+          "description": "On demand rate of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Azure product ex: Standard_E8s_v3 etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "Azure resource region ex:EastUS, WestUS etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationRate": {
+          "description": "Reservation rate of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "resourceType": {
+          "description": "The azure resource type.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsSavingsProperties": {
+      "description": "Details of the estimated savings.",
+      "properties": {
+        "calculatedSavings": {
+          "description": "List of calculated savings.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationRecommendationDetailsCalculatedSavingsProperties"
+          }
+        },
+        "lookBackPeriod": {
+          "description": "Number of days of usage to look back used for computing the recommendation.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "recommendedQuantity": {
+          "description": "Number of recommended units of the resource.",
+          "type": "number",
+          "readOnly": true
+        },
+        "reservationOrderTerm": {
+          "description": "Term period of the reservation, ex: P1Y or P3Y.",
+          "type": "string",
+          "readOnly": true
+        },
+        "savingsType": {
+          "description": "Type of savings, ex: instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Measurement unit ex: hour etc.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationRecommendationDetailsUsageProperties": {
+      "description": "Details about historical usage data that has been used for computing the recommendation.",
+      "properties": {
+        "firstConsumptionDate": {
+          "description": "The first usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastConsumptionDate": {
+          "description": "The last usage date used for looking back for computing the recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lookBackUnitType": {
+          "description": "What the usage data values represent ex: virtual machine instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "usageData": {
+          "description": "The breakdown of historical resource usage.  The values are in the order of usage between the firstConsumptionDate and the lastConsumptionDate.",
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "readOnly": true
+        },
+        "usageGrain": {
+          "description": "The grain of the values represented in the usage data ex: hourly.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ReservationRecommendationsListResult": {
       "description": "Result of listing reservation recommendations.",
       "properties": {
@@ -4462,6 +4704,15 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "scopeReservationRecommendationDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}', /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
