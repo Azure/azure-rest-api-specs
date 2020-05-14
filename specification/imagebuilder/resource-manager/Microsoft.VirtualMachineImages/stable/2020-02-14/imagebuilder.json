@@ -233,7 +233,7 @@
             "$ref": "./examples/UpdateImageTemplateTags.json"
           },
           "Remove identities for an Image Template.": {
-            "$ref": "./examples/UpdateImageTemplateToUpdateIdentity.json"
+            "$ref": "./examples/UpdateImageTemplateToRemoveIdentities.json"
           }
         }
       },
@@ -1098,9 +1098,10 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of identity used for the image template.",
+          "description": "The type of identity used for the image template. The type 'None' will remove any identities from the image template.",
           "enum": [
-            "UserAssigned"
+            "UserAssigned",
+            "None"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
