@@ -38,10 +38,15 @@
         "tags": [
           "Confluent"
         ],
-        "summary": "List all operations provided by Microsoft.Confluent for the 2020-03-01-preview api version.",
+        "summary": "List all operations provided by Microsoft.Confluent.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
         ],
         "responses": {
           "200": {
@@ -73,17 +78,16 @@
           "Confluent"
         ],
         "summary": "List all confluent under the specified subscription.",
-        "operationId": "Confluent_List",
+        "operationId": "Confluent_ListBySubscription",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "Azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -105,7 +109,7 @@
         },
         "x-ms-examples": {
           "Confluent_List": {
-            "$ref": "./examples/Confluent_List.json"
+            "$ref": "./examples/Confluent_ListBySubscription.json"
           }
         }
       }
@@ -122,18 +126,13 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "Azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "Resource group name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
           }
         ],
         "responses": {
@@ -172,25 +171,16 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "resource group name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "confluentName",
-            "description": "confluent resource name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentResourceNameParameter"
           }
         ],
         "responses": {
@@ -227,25 +217,16 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "resource group name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "confluentName",
-            "description": "confluent resource name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentResourceNameParameter"
           },
           {
             "in": "body",
@@ -277,6 +258,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Confluent_Create": {
             "$ref": "./examples/Confluent_Create.json"
@@ -297,25 +281,16 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "resource group name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "confluentName",
-            "description": "confluent resource name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentResourceNameParameter"
           },
           {
             "in": "body",
@@ -357,39 +332,24 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subscriptionId",
-            "description": "azure subscription id",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroupName",
-            "description": "resource group name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "confluentName",
-            "description": "confluent resource name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfluentResourceNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConfluentResource"
-            }
+            "description": "Success"
           },
           "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConfluentResource"
-            }
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -399,6 +359,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Confluent_Delete": {
             "$ref": "./examples/Confluent_Delete.json"
@@ -439,6 +402,7 @@
           "type": "string"
         },
         "display": {
+          "description": "The object that represents the operation.",
           "$ref": "#/definitions/OperationDisplay"
         }
       }
@@ -467,19 +431,23 @@
       "properties": {
         "code": {
           "description": "Error code",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Error message",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "target": {
           "description": "Error target",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "details": {
           "description": "Error detail",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ErrorResponseBody"
           }
@@ -492,6 +460,8 @@
       "title": "ResourceProviderDefaultErrorResponse",
       "properties": {
         "error": {
+          "description": "Response body of Error",
+          "readOnly": true,
           "$ref": "#/definitions/ErrorResponseBody"
         }
       }
@@ -514,20 +484,6 @@
         "modelAsString": true
       }
     },
-    "ConfluentSubscriptionTypes": {
-      "enum": [
-        "trial",
-        "free",
-        "pro"
-      ],
-      "type": "string",
-      "description": "Subscription types for Confluent offer",
-      "title": "ConfluentSubscriptionTypes",
-      "x-ms-enum": {
-        "name": "ConfluentSubscriptionTypes",
-        "modelAsString": true
-      }
-    },
     "ConfluentOrganizationProperties": {
       "type": "object",
       "description": "Confluent organization properties",
@@ -543,21 +499,10 @@
           "type": "string",
           "readOnly": true
         },
-        "confluentSubscriptionTypes": {
-          "$ref": "#/definitions/ConfluentSubscriptionTypes"
-        },
-        "apiKey": {
-          "description": "Api key associated to the Confluent organization.",
-          "type": "string"
-        },
-        "applicationKey": {
-          "description": "Application key associated to the Confluent organization.",
-          "type": "string"
-        },
         "ssOurl": {
-          "format": "uri",
           "description": "SSO url for the Confluent organization.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -568,14 +513,22 @@
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
+          "maxLength": 50,
           "type": "string"
         },
         "id": {
           "description": "Offer Id",
+          "maxLength": 50,
           "type": "string"
         },
         "planId": {
           "description": "Offer Plan Id",
+          "maxLength": 50,
+          "type": "string"
+        },
+        "termUnit": {
+          "description": "Offer Plan Term unit",
+          "maxLength": 25,
           "type": "string"
         }
       }
@@ -587,18 +540,22 @@
       "properties": {
         "firstName": {
           "description": "First name",
+          "maxLength": 50,
           "type": "string"
         },
         "lastName": {
           "description": "Last name",
+          "maxLength": 50,
           "type": "string"
         },
         "emailAddress": {
           "description": "Email address",
+          "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
           "type": "string"
         },
         "phoneNumber": {
           "description": "Phone number",
+          "pattern": "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$",
           "type": "string"
         }
       }
@@ -615,21 +572,37 @@
           "readOnly": true
         },
         "provisioningState": {
+          "description": "Provision states for confluent RP",
           "$ref": "#/definitions/ProvisioningState"
         },
         "organizationProperties": {
-          "$ref": "#/definitions/ConfluentOrganizationProperties"
+          "description": "Confluent organization properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConfluentOrganizationProperties"
+            }
+          ]
         },
         "offerDetail": {
-          "$ref": "#/definitions/OfferDetail"
+          "description": "Confluent offer detail",
+          "allOf": [
+            {
+              "$ref": "#/definitions/OfferDetail"
+            }
+          ]
         },
         "userDetail": {
-          "$ref": "#/definitions/UserDetail"
+          "description": "Subscriber detail",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserDetail"
+            }
+          ]
         }
       }
     },
     "ConfluentResource": {
-      "description": "An Confluent resource.",
+      "description": "Confluent resource.",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -650,15 +623,22 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConfluentProperties"
+          "description": "Confluent resource properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ConfluentProperties"
+            }
+          ]
         },
         "tags": {
           "type": "object",
+          "description": "Confluent resource tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
+          "description": "Location of confluent resource",
           "type": "string"
         }
       }
@@ -679,6 +659,41 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2020-03-01-preview"
+      ]
+    },
+    "SubscriptionIdParameter": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "Microsoft Azure subscription id",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupParameter": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "Resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfluentResourceNameParameter": {
+      "in": "path",
+      "name": "confluentName",
+      "description": "confluent resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
