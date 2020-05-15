@@ -166,6 +166,7 @@ input-file:
   - $(this-folder)/preview/v3.0-preview/Ocr.json
   - $(this-folder)/stable/v3.0/ComputerVision.json
   - $(this-folder)/stable/v3.0/Ocr.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
