@@ -3937,6 +3937,10 @@
       "type": "object",
       "description": "Storage Sync Service Properties object.",
       "properties": {
+        "incomingTrafficPolicy": {
+          "$ref": "#/definitions/IncomingTrafficPolicy",
+          "description": "Incoming Traffic Policy"
+        },
         "storageSyncServiceStatus": {
           "type": "integer",
           "description": "Storage Sync service status.",
@@ -3947,19 +3951,18 @@
           "description": "Storage Sync service Uid",
           "readOnly": true
         },
-        "incomingTrafficPolicy": {
-          "$ref": "#/definitions/IncomingTrafficPolicy",
-          "description": "Incoming Traffic Policy"
-        },
         "provisioningState": {
+          "readOnly": true,
           "type": "string",
           "description": "StorageSyncService Provisioning State"
         },
         "lastWorkflowId": {
+          "readOnly": true,
           "type": "string",
           "description": "StorageSyncService lastWorkflowId"
         },
         "lastOperationName": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource Last Operation Name"
         },
@@ -4479,7 +4482,11 @@
       "enum": [
         "on",
         "off"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "FeatureStatus",
+        "modelAsString": true
+      }
     },
     "IncomingTrafficPolicy": {
       "type": "string",
@@ -4487,7 +4494,11 @@
       "enum": [
         "AllowAllTraffic",
         "AllowVirtualNetworksOnly"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "IncomingTrafficPolicy",
+        "modelAsString": true
+      }
     },
     "LocalCacheMode": {
       "type": "string",
@@ -4523,7 +4534,11 @@
         "SyncBlockedForRestore",
         "SyncBlockedForChangeDetectionPostRestore",
         "NoActivity"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointSyncHealthState",
+        "modelAsString": true
+      }
     },
     "ServerEndpointSyncActivityState": {
       "type": "string",
@@ -4532,7 +4547,11 @@
         "Upload",
         "Download",
         "UploadAndDownload"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointSyncActivityState",
+        "modelAsString": true
+      }
     },
     "ServerEndpointOfflineDataTransferState": {
       "type": "string",
@@ -4542,7 +4561,11 @@
         "Stopping",
         "NotRunning",
         "Complete"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointOfflineDataTransferState",
+        "modelAsString": true
+      }
     },
     "WorkflowStatus": {
       "type": "string",
@@ -4553,7 +4576,11 @@
         "succeeded",
         "aborted",
         "failed"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowStatus",
+        "modelAsString": true
+      }
     },
     "OperationDirection": {
       "type": "string",
@@ -4562,7 +4589,11 @@
         "do",
         "undo",
         "cancel"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "OperationDirection",
+        "modelAsString": true
+      }
     },
     "ProgressType": {
       "type": "string",
@@ -4573,7 +4604,11 @@
         "download",
         "upload",
         "recall"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ProgressType",
+        "modelAsString": true
+      }
     },
     "OperationStatus": {
       "type": "object",
@@ -4674,7 +4709,11 @@
       "enum": [
         "Healthy",
         "Error"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ServerEndpointCloudTieringHealthState",
+        "modelAsString": true
+      }
     },
     "CloudTieringSpaceSavings": {
       "type": "object",
