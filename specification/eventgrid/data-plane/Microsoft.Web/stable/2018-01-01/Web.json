@@ -505,7 +505,8 @@
                 "description": "The job has failed to complete."
               }
             ]
-          }
+          },
+          "modelAsExtensible": true
         }
       }
     },
@@ -537,7 +538,8 @@
                 "description": "App Service Plan is running on an App Service Environment V2."
               }
             ]
-          }
+          },
+          "modelAsExtensible": true
         },
         "action": {
           "description": "Type of action on the app service plan.",
@@ -553,7 +555,8 @@
                 "description": "App Service plan is being updated."
               }
             ]
-          }
+          },
+          "modelAsExtensible": true
         },
         "status": {
           "$ref": "#/definitions/AsyncStatus"
@@ -567,7 +570,25 @@
         "Started",
         "Completed",
         "Failed"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AsyncStatus",
+        "values": [
+          {
+            "value": "Started",
+            "description": "Async operation has started."
+          },
+          {
+            "value": "Completed",
+            "description": "Async operation has completed."
+          },
+          {
+            "value": "Failed",
+            "description": "Async operation failed to complete."
+          }
+        ]
+      },
+      "modelAsExtensible": true
     }
   }
 }
