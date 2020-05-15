@@ -2178,7 +2178,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ResourceTypeSkuCollection"
+              "$ref": "#/definitions/ResourceSkuCollection"
             }
           },
           "default": {
@@ -2187,6 +2187,9 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Sku_List": {
@@ -3464,72 +3467,66 @@
         }
       }
     },
-    "ResourceTypeSkuCollection": {
-      "description": "Collection of supported Skus of Azure Spring Cloud resources",
+    "ResourceSkuCollection": {
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of supported Skus",
+          "description": "Collection of resource SKU",
           "uniqueItems": false,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ResourceTypeSku"
+            "$ref": "#/definitions/ResourceSku"
           }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
         }
       }
     },
-    "ResourceTypeSku": {
-      "description": "Supported Skus of Azure Spring Cloud resources",
+    "ResourceSku": {
+      "description": "Describes an available Azure Spring Cloud SKU.",
       "type": "object",
       "properties": {
         "resourceType": {
-          "description": "Resource type",
+          "description": "Gets the type of resource the SKU applies to.",
           "type": "string"
         },
-        "skus": {
-          "description": "Supported Skus",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SkuSetting"
-          }
-        }
-      }
-    },
-    "SkuSetting": {
-      "description": "Supported Sku settings of Azure Spring Cloud",
-      "required": [
-        "name"
-      ],
-      "type": "object",
-      "properties": {
         "name": {
-          "description": "Name of the Sku",
+          "description": "Gets the name of SKU.",
           "type": "string"
         },
         "tier": {
-          "description": "Tier of the Sku",
+          "description": "Gets the tier of SKU.",
           "type": "string"
-        },
-        "locations": {
-          "description": "Locations of the Sku",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredFeatures": {
-          "description": "Required features of the Sku",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "capacity": {
           "$ref": "#/definitions/SkuCapacity",
-          "description": "Capacity of the SKU"
+          "description": "Gets the capacity of SKU."
+        },
+        "locations": {
+          "description": "Gets the set of locations that the SKU is available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locationInfo": {
+          "description": "Gets a list of locations and availability zones in those locations where the SKU is available.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          }
+        },
+        "restrictions": {
+          "description": "Gets the restrictions because of which SKU cannot be used. This is\r\nempty if there are no restrictions.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuRestrictions"
+          }
         }
       }
     },
@@ -3567,6 +3564,127 @@
             "name": "SkuScaleType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Gets location of the SKU",
+          "type": "string"
+        },
+        "zones": {
+          "description": "Gets list of availability zones where the SKU is supported.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zoneDetails": {
+          "description": "Gets details of capabilities available to a SKU in specific zones.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          }
+        }
+      }
+    },
+    "ResourceSkuRestrictions": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Gets the type of restrictions. Possible values include: 'Location', 'Zone'",
+          "enum": [
+            "Location",
+            "Zone"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsType",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "description": "Gets the value of restrictions. If the restriction type is set to\r\nlocation. This would be different locations where the SKU is restricted.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/ResourceSkuRestrictionInfo",
+          "description": "Gets the information about the restriction where the SKU cannot be used."
+        },
+        "reasonCode": {
+          "description": "Gets the reason for restriction. Possible values include: 'QuotaId', 'NotAvailableForSubscription'",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceSkuRestrictionsReasonCode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets the set of zones that the SKU is available in with the\r\nspecified capabilities.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "description": "Gets a list of capabilities that are available for the SKU in the\r\nspecified list of zones.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          }
+        }
+      }
+    },
+    "ResourceSkuRestrictionInfo": {
+      "type": "object",
+      "properties": {
+        "locations": {
+          "description": "Gets locations where the SKU is restricted",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zones": {
+          "description": "Gets list of availability zones where the SKU is restricted.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceSkuCapabilities": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets an invariant to describe the feature.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets an invariant if the feature is measured by quantity.",
+          "type": "string"
         }
       }
     },
