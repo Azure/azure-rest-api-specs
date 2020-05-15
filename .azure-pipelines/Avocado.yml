@@ -9,3 +9,4 @@ jobs:
       verbose: false
   - script: './node_modules/.bin/avocado'
     displayName: 'Avocado'
+    condition: ne(variables['Build.SourceBranch'], 'refs/heads/master')

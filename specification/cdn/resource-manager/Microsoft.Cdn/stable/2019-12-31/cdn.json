@@ -3921,12 +3921,13 @@
         "@odata.type": {
           "type": "string",
           "enum": [
-            "#Microsoft.Azure.Cdn.Models.OriginGroupOverrideActionParameters"
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleOriginGroupOverrideActionParameters"
           ]
         },
         "originGroup": {
-          "description": "Origin Group from where the content will be fetched from when CDN does not have it",
-          "type": "string"
+          "description": "A reference to the origin group from where the content will be fetched from when CDN does not have it",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
         }
       }
     },
