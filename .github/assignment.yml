@@ -1,7 +1,7 @@
 ---
 - rule:
     # data-plane PR
-    paths: 
+    paths:
       - "specification/**/data-plane/**"
     reviewers:
       - anuchandy
@@ -10,15 +10,14 @@
       - tjprescott
 
 - rule:
-    paths: 
+    paths:
       - "specification/network/**"
     reviewers:
       - lirenhe
-      - zikalino
       - MyronFanQiu
 
 - rule:
-    paths: 
+    paths:
       - "specification/@(applicationinsights|operationalinsights)/**"
     reviewers:
       - MyronFanQiu
@@ -31,13 +30,24 @@
       - yungezz
 
 - rule:
-    paths: 
-      - "specification/machinelearningservices/**"
+    paths: "specification/resources/**"
     reviewers:
-      - ArcturusZhang 
+      - raych1
 
 - rule:
-    paths: 
+    paths:
+      - "specification/machinelearningservices/**"
+    reviewers:
+      - ArcturusZhang
+
+- rule:
+    paths:
+      - "specification/@(azureactivedirectory|appplatform)/**"
+    reviewers:
+      - njuCZ
+
+- rule:
+    paths:
       - "specification/authorization/**"
     reviewers:
       - qianwens
@@ -53,7 +63,7 @@
     paths:
       - "specification/monitor/**"
     reviewers:
-      - weidongxu-microsoft 
+      - weidongxu-microsoft
       - MyronFanQiu
 
 - rule:
@@ -69,7 +79,7 @@
       - allenjzhang
 
 - rule:
-    paths: 
+    paths:
       - "specification/@(keyvault|notificationhubs)/**"
       - "specification/@(databricks|containerregistry)/**"
     reviewers:
@@ -80,7 +90,7 @@
       - "specification/@(containerservice|containerinstance)/**"
     reviewers:
       - NullMDR
-      - fengzhou-msft 
+      - fengzhou-msft
       - yungezz
 
 - rule:
@@ -102,14 +112,14 @@
       - weidongxu-microsoft
 
 - rule:
-    paths: 
+    paths:
       - "documentation/**"
     reviewers:
       - josefree
       - akning-ms
 
 - rule:
-    paths: 
+    paths:
       - "**/package.json"
       - ".github/**"
       - "**/azure-pipelines.yml"
@@ -117,17 +127,16 @@
       - ".azure-pipelines-preproduction/**"
     reviewers:
       - akning-ms
-      - ruowan
       - NullMDR
+      - raych1
 
 - rule:
     # manager-plane PR
-    paths: 
+    paths:
       - "**"
     reviewers:
       - yungezz
       - zikalino
-      - yaohaizh
       - erich-wang
       - NullMDR
       - raych1
@@ -142,4 +151,4 @@
       - markcowl
       - leni-msft
       - qianwens
-      - allenjzhang
+      - ruowan
