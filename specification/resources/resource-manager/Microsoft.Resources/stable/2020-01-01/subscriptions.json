@@ -189,29 +189,12 @@
           "Tenants"
         ],
         "operationId": "checkResourceName",
-        "description": "Checks if the resource name is valid or not",
+        "description": "A resource name is valid if it is not a reserved word, does not contains a reserved word and does not start with a reserved word",
         "summary": "Checks resource name validity",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": [ "application/json" ],
         "parameters": [
           {
-            "in": "body",
-            "name": "",
-            "schema": {
-              "required": [
-                "name",
-                "type"
-              ],
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string"
-                }
-              }
-            }
+            "$ref": "#/parameters/CheckResourceNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -578,11 +561,14 @@
           "type": "string"
         },
         "status": {
-          "description": "Is the resource name allowed or not",
-          "type": "string"
+          "description": "Is the resource name Allowed or Reserved",
+          "type": "string",
+          "enum": [
+            "Allowed", 
+            "Reserved"]
         }
       },
-      "description": "Validity of Resource name for the given type"
+      "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
     },
     "Operation": {
       "description": "Microsoft.Resources operation",
@@ -640,6 +626,26 @@
       "type": "string",
       "description": "The ID of the target subscription.",
       "x-ms-parameter-location": "method"
+    },
+    "CheckResourceNameParameter": {
+      "in": "body",
+      "name": "Resource Name Definition",
+      "schema": {
+        "required": [
+          "name",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the resource",
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the resource"
+          }
+        }
+      }
     },
     "ApiVersionParameter": {
       "name": "api-version",
