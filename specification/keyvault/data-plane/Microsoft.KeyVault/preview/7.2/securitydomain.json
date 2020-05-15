@@ -50,7 +50,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Security domain backup response",
+                        "description": "Security domain download response",
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -74,16 +74,16 @@
                 }
             }
         },
-        "/securitydomain/upload": {
-            "get": {
+        "/securitydomain/transfer_key": {
+            "/get": {
                 "tags": [
                     "HSMSecurityDomain"
                 ],
-                "operationId": "HSMSecurityDomainUpload",
+                "operationId": "HSMSecurityDomainTransferKey",
                 "description": "Retrieve security domain transfer key",
                 "responses": {
                     "200": {
-                        "description": "Security domain transfer key",
+                        "description": "Security domain transfer key operation",
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -108,13 +108,15 @@
                         "$ref": "./examples/securitydomaintransferkey-example.json"
                     }
                 }
-            },
+            }
+        },
+        "/securitydomain/upload": {
             "post": {
                 "tags": [
                     "HSMSecurityDomain"
                 ],
                 "operationId": "HSMSecurityDomainUpload",
-                "description": "Request Security domain restore operation",
+                "description": "Request Security domain upload operation",
                 "parameters": [
                     {
                         "in": "body",
@@ -132,7 +134,7 @@
                 ],
                 "responses": {
                     "202": {
-                        "description": "Security domain restore operation started",
+                        "description": "Security domain upload operation started",
                         "headers": {
                             "Retry-After": {
                                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -163,8 +165,8 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Security domain restore operation": {
-                        "$ref": "./examples/securitydomainrestoreoperation-example.json"
+                    "Security domain upload operation": {
+                        "$ref": "./examples/securitydomainuploadoperation-example.json"
                     }
                 }
             }
@@ -175,10 +177,10 @@
                     "HSMSecurityDomain"
                 ],
                 "operationId": "HSMSecurityDomainUploadPending",
-                "description": "Get Security domain restore operation status",
+                "description": "Get Security domain upload operation status",
                 "responses": {
                     "200": {
-                        "description": "Security domain restore operation status",
+                        "description": "Security domain upload operation status",
                         "headers": {
                             "Retry-After": {
                                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -209,7 +211,7 @@
                     }
                 },
                 "x-ms-examples": {
-                    "Find security domain restore operation status": {
+                    "Find security domain upload operation status": {
                         "$ref": "./examples/securitydomainoperationstatus-example.json"
                     }
                 }
