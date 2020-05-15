@@ -7,7 +7,8 @@ az:
   extensions: portal
   namespace: azure.mgmt.portal
   package-name: azure-mgmt-portal
-python-sdk-output-folder: "$(output-folder)/src/portal/azext_portal/vendored_sdks/portal"
+az-output-folder: $(azure-cli-extension-folder)/src/portal
+python-sdk-output-folder: "$(az-output-folder)/azext_portal/vendored_sdks/portal"
   
 #cli:
 #    cli-directive:

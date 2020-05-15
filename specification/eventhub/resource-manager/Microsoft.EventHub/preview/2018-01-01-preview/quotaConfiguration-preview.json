@@ -1,0 +1,156 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "version": "2018-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default": {
+      "patch": {
+        "tags": [
+          "Event Hubs Cluster Configuration"
+        ],
+        "operationId": "Configuration_Patch",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties",
+              "required": [
+                "settings"
+              ]
+            },
+            "description": "Parameters for creating an Event Hubs Cluster resource."
+          }
+        ],
+        "x-ms-examples": {
+          "ClustersQuotasConfigurationPatch": {
+            "$ref": "./examples/Clusters/ClusterQuotaConfigurationPatch.json"
+          }
+        },
+        "description": "Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster settings configuration returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
+            }
+          },
+          "201": {
+            "description": "Event Hubs Cluster setting configuration request successfully accepted.",
+            "schema": {
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
+            }
+          },
+          "202": {
+            "description": "Event Hubs Cluster update request accepted."
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the get cluster quotas and settings operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Event Hubs Cluster Configuration"
+        ],
+        "operationId": "Configuration_Get",
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "ClustersQuotasConfigurationGet": {
+            "$ref": "./examples/Clusters/ClusterQuotaConfigurationGet.json"
+          }
+        },
+        "description": "Get all Event Hubs Cluster settings - a collection of key/value pairs which represent the quotas and settings imposed on the cluster.",
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster settings configuration returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterQuotaConfigurationProperties"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response describing why the get cluster quotas and settings operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClusterQuotaConfigurationProperties": {
+      "properties": {
+        "settings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "All possible Cluster settings - a collection of key/value paired settings which apply to quotas and configurations imposed on the cluster."
+        }
+      },
+      "description": "Contains all settings for the cluster."
+    }
+  },
+  "parameters": {}
+}
