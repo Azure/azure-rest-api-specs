@@ -191,7 +191,9 @@
         "operationId": "checkResourceName",
         "description": "A resource name is valid if it is not a reserved word, does not contains a reserved word and does not start with a reserved word",
         "summary": "Checks resource name validity",
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/CheckResourceNameParameter"
@@ -564,8 +566,13 @@
           "description": "Is the resource name Allowed or Reserved",
           "type": "string",
           "enum": [
-            "Allowed", 
-            "Reserved"]
+            "Allowed",
+            "Reserved"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceNameStatus",
+            "modelAsString": true
+          }
         }
       },
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
@@ -628,6 +635,7 @@
       "x-ms-parameter-location": "method"
     },
     "CheckResourceNameParameter": {
+      "description": "Resource object with values for resource name and resource type",
       "in": "body",
       "name": "Resource Name Definition",
       "schema": {
@@ -645,7 +653,8 @@
             "description": "The type of the resource"
           }
         }
-      }
+      },
+      "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
       "name": "api-version",
