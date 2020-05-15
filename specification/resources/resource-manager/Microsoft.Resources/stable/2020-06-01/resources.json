@@ -4638,9 +4638,27 @@
     "DeploymentPropertiesExtended": {
       "properties": {
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
-          "description": "The state of the provisioning."
+          "readOnly": true,
+          "description": "Denotes the state of the provisioning. The value can be different than what's listed depending on the provisioning state the resource provider uses.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "correlationId": {
           "readOnly": true,
