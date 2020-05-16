@@ -32,7 +32,7 @@
                 "tags": [
                     "HSMSecurityDomain"
                 ],
-                "operationId": "HSMSecurityDomainDownload",
+                "operationId": "HSMSecurityDomain_Download",
                 "description": "Retrieves Security domain from HSM enclave",
                 "parameters": [
                     {
@@ -42,7 +42,7 @@
                         "schema": {
                             "$ref": "#/definitions/CertificateSet"
                         },
-                        "description": "Security domain download operation requires customer to provide three certificates in PEM format"
+                        "description": "Security domain download operation requires customer to provide three public keys of RSA certificates in PEM format."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -75,25 +75,17 @@
             }
         },
         "/securitydomain/transfer_key": {
-            "/get": {
+            "get": {
                 "tags": [
                     "HSMSecurityDomain"
                 ],
-                "operationId": "HSMSecurityDomainTransferKey",
+                "operationId": "HSMSecurityDomain_TransferKey",
                 "description": "Retrieve security domain transfer key",
                 "responses": {
                     "200": {
                         "description": "Security domain transfer key operation",
                         "schema": {
-                            "type": "object",
-                            "properties": {
-                                "transfer_key": {
-                                    "type": "string"
-                                },
-                                "key_format": {
-                                    "type": "string"
-                                }
-                            }
+                            "$ref": "#/definitions/TransferKey"
                         }
                     },
                     "default": {
@@ -115,7 +107,7 @@
                 "tags": [
                     "HSMSecurityDomain"
                 ],
-                "operationId": "HSMSecurityDomainUpload",
+                "operationId": "HSMSecurityDomain_Upload",
                 "description": "Request Security domain upload operation",
                 "parameters": [
                     {
@@ -176,7 +168,7 @@
                 "tags": [
                     "HSMSecurityDomain"
                 ],
-                "operationId": "HSMSecurityDomainUploadPending",
+                "operationId": "HSMSecurityDomain_UploadPending",
                 "description": "Get Security domain upload operation status",
                 "responses": {
                     "200": {
@@ -224,7 +216,7 @@
                 "certificates": {
                     "type": "array",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/definitions/CertificateItem"
                     },
                     "minItems": 3,
                     "maxItems": 3,
@@ -232,6 +224,25 @@
                     "description": "Three certificates needed from customer"
                 }
             }
+        },
+        "CertificateItem": {
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "format": "base64url",
+                    "description": "Public key of customer generated RSA certificate in PEM format"
+                }
+            }
+        },
+        "TransferKey": {
+            "properties": {
+                "transfer_key": {
+                    "$ref": "keys.json#/definitions/JsonWebKey"
+                }
+            },
+            "required": [
+                "transfer_key"
+            ]
         }
     },
     "parameters": {

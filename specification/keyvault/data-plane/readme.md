@@ -42,6 +42,7 @@ input-file:
 - Microsoft.KeyVault/preview/7.2/secrets.json
 - Microsoft.KeyVault/preview/7.2/storage.json
 - Microsoft.KeyVault/preview/7.2/backuprestore.json
+- Microsoft.KeyVault/preview/7.2/securitydomain.json
 ```
 
 ### Tag: package-7.1-preview
