@@ -108,6 +108,68 @@
           }
         }
       },
+      "patch": {
+        "operationId": "PrivateLinkHubs_Update",
+        "description": "Updates a privateLinkHub",
+        "tags": [
+          "PrivateLinkHubs"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/privateLinkHubNameParameter"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHubPatchInfo"
+            },
+            "in": "body",
+            "name": "privateLinkHubPatchInfo",
+            "required": true,
+            "description": "PrivateLinkHub patch request properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkHub"
+            },
+            "description": "PrivateLinkHub resource details"
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            },
+            "description": "*** Error Responses: ***\n\n * 400 BadRequest - Invalid request to create a PrivateLinkHub.\n\n * 500 InternalServerError- Some error occurred while creating PrivateLinkHub."
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Update a privateLinkHub": {
+            "$ref": "./examples/UpdatePrivateLinkHub.json"
+          }
+        }
+      },
       "put": {
         "operationId": "PrivateLinkHubs_CreateOrUpdate",
         "description": "Creates or updates a privateLinkHub",
@@ -315,6 +377,19 @@
           "description": "PrivateLinkHub resource properties",
           "$ref": "#/definitions/PrivateLinkHubProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PrivateLinkHubPatchInfo": {
+      "description": "PrivateLinkHub patch details",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
         }
       }
     },
