@@ -8529,8 +8529,8 @@
         "tags": [
           "blob"
         ],
-        "operationId": "Blob_QuickQuery",
-        "description": "The QuickQuery operation enables users to select/project on blob data by providing simple query expressions.",
+        "operationId": "Blob_Query",
+        "description": "The Query operation enables users to select/project on blob data by providing simple query expressions.",
         "parameters": [
           {
             "$ref": "#/parameters/QueryRequest"
@@ -10435,13 +10435,13 @@
           }
         },
         "InputSerialization": {
-          "$ref": "#/definitions/QuickQuerySerialization",
+          "$ref": "#/definitions/QuerySerialization",
           "xml": {
             "name": "InputSerialization"
           }      
         },
         "OutputSerialization": {
-          "$ref": "#/definitions/QuickQuerySerialization",
+          "$ref": "#/definitions/QuerySerialization",
           "xml": {
             "name": "OutputSerialization"
           }
@@ -10451,14 +10451,14 @@
         "name": "QueryRequest"
       }
     },
-    "QuickQueryFormat": {
+    "QueryFormat": {
       "type": "object",
       "required": [
-        "QuickQueryType"
+        "QueryType"
       ],
       "properties": {
         "Type": {
-          "$ref": "#/definitions/QuickQueryType"
+          "$ref": "#/definitions/QueryType"
         },
         "DelimitedTextConfiguration": {
           "$ref": "#/definitions/DelimitedTextConfiguration"
@@ -10468,21 +10468,21 @@
         }
       }
     },
-    "QuickQuerySerialization": {
+    "QuerySerialization": {
       "type": "object",
       "required": [
         "Format"
       ],
       "properties": {
         "Format": {
-          "$ref": "#/definitions/QuickQueryFormat",
+          "$ref": "#/definitions/QueryFormat",
           "xml": {
             "name": "Format"
           }
         }
       }
     },
-    "QuickQueryType": {
+    "QueryType": {
       "type": "string",
       "description": "The quick query format type.",
       "enum": [
@@ -10490,7 +10490,7 @@
         "json"
       ],
       "x-ms-enum": {
-        "name": "QuickQueryFormatType",
+        "name": "QueryFormatType",
         "modelAsString": false
       },
       "xml": {
