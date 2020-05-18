@@ -250,7 +250,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AddressErrorResponse"
             }
           }
         }
@@ -1056,242 +1056,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments": {
-      "get": {
-        "tags": [
-          "Departments"
-        ],
-        "x-ms-examples": {
-          "DepartmentsListByBillingAccount": {
-            "$ref": "./examples/DepartmentsListByBillingAccount.json"
-          },
-          "DepartmentsListByBillingAccountWithExpand": {
-            "$ref": "./examples/DepartmentsListByBillingAccountWithExpand.json"
-          }
-        },
-        "operationId": "Departments_ListByBillingAccountName",
-        "description": "Lists the departments that a user has access to. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the enrollment accounts.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by department name. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DepartmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/departments/{departmentName}": {
-      "get": {
-        "tags": [
-          "Departments"
-        ],
-        "x-ms-examples": {
-          "Department": {
-            "$ref": "./examples/Department.json"
-          },
-          "DepartmentWithExpand": {
-            "$ref": "./examples/DepartmentWithExpand.json"
-          }
-        },
-        "operationId": "Departments_Get",
-        "description": "Gets a department by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the enrollment accounts.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by department name. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Department"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts": {
-      "get": {
-        "tags": [
-          "EnrollmentAccounts"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccountsListByBillingAccount": {
-            "$ref": "./examples/EnrollmentAccountsListByBillingAccount.json"
-          },
-          "EnrollmentAccountsListByBillingAccountWithExpand": {
-            "$ref": "./examples/EnrollmentAccountsListByBillingAccountWithExpand.json"
-          }
-        },
-        "operationId": "EnrollmentAccounts_ListByBillingAccountName",
-        "description": "Lists the enrollment accounts for a billing account. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the department.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by account name. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentAccountListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/enrollmentAccounts/{enrollmentAccountName}": {
-      "get": {
-        "tags": [
-          "EnrollmentAccounts"
-        ],
-        "x-ms-examples": {
-          "EnrollmentAccount": {
-            "$ref": "./examples/EnrollmentAccount.json"
-          },
-          "EnrollmentAccountWithExpand": {
-            "$ref": "./examples/EnrollmentAccountWithExpand.json"
-          }
-        },
-        "operationId": "EnrollmentAccounts_Get",
-        "description": "Gets an enrollment account by ID. The operation is supported only for billing accounts with agreement type Enterprise Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the department.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter by account name. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value are separated by a colon (:).",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnrollmentAccount"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices": {
       "get": {
         "tags": [
@@ -1846,7 +1610,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}": {
       "get": {
         "tags": [
           "BillingSubscriptions"
@@ -1866,7 +1630,7 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/billingSubscriptionNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1903,7 +1667,7 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/billingSubscriptionNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -1934,7 +1698,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/move": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/move": {
       "post": {
         "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
@@ -1952,7 +1716,7 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/billingSubscriptionNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -1993,7 +1757,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{billingSubscriptionName}/validateMoveEligibility": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/validateMoveEligibility": {
       "post": {
         "x-ms-examples": {
           "SubscriptionMoveValidateSuccess": {
@@ -2013,7 +1777,7 @@
             "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/billingSubscriptionNameParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -2651,609 +2415,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/updateAutoRenew": {
-      "post": {
-        "tags": [
-          "Products"
-        ],
-        "operationId": "Products_UpdateAutoRenew",
-        "description": "Cancel auto renew for product by product id.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "x-ms-examples": {
-          "ProductCancelAutoRenew": {
-            "$ref": "./examples/ProductCancelAutoRenew.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/productNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/updateAutoRenewRequestParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UpdateAutoRenewOperation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/initiateTransfer": {
-      "post": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Sends a request to a user in another billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Transfers_Initiate",
-        "x-ms-examples": {
-          "InitiateTransfer": {
-            "$ref": "./examples/InitiateTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InitiateTransferRequest"
-            },
-            "description": "Request parameters that are provided to the initiate transfer operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initiated transfer details.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers/{transferName}": {
-      "get": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Transfers_Get",
-        "x-ms-examples": {
-          "TransferGet": {
-            "$ref": "./examples/GetTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of transfer.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "operationId": "Transfers_Cancel",
-        "x-ms-examples": {
-          "TransferCancel": {
-            "$ref": "./examples/CancelTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
-          },
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of canceled transfer.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transfers": {
-      "get": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Lists the transfer requests for an invoice section. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Transfers_List",
-        "x-ms-examples": {
-          "TransfersList": {
-            "$ref": "./examples/ListTransfers.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of transfers initiated from this invoice section.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetailsListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/initiateTransfer": {
-      "post": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Sends a request to a user in a customer's billing account to transfer billing ownership of their subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "PartnerTransfers_Initiate",
-        "x-ms-examples": {
-          "InitiatePartnerTransfer": {
-            "$ref": "./examples/PartnerInitiateTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customerNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InitiateTransferRequest"
-            },
-            "description": "Request parameters that are provided to the initiate transfer operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Initiated transfer details.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}": {
-      "get": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Gets a transfer request by ID. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "PartnerTransfers_Get",
-        "x-ms-examples": {
-          "TransferGet": {
-            "$ref": "./examples/PartnerGetTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of transfer.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Cancels a transfer request. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "operationId": "PartnerTransfers_Cancel",
-        "x-ms-examples": {
-          "TransferCancel": {
-            "$ref": "./examples/PartnerCancelTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of canceled transfer.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers": {
-      "get": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Lists the transfer requests sent to a customer. The operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "PartnerTransfers_List",
-        "x-ms-examples": {
-          "TransfersList": {
-            "$ref": "./examples/PartnerListTransfers.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customerNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List of transfers initiated from this invoice section.",
-            "schema": {
-              "$ref": "#/definitions/TransferDetailsListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/transfers/{transferName}/acceptTransfer": {
-      "post": {
-        "tags": [
-          "RecipientTransfers"
-        ],
-        "summary": "Accepts a transfer request.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "RecipientTransfers_Accept",
-        "x-ms-examples": {
-          "AcceptTransfer": {
-            "$ref": "./examples/AcceptTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcceptTransferRequest"
-            },
-            "description": "Request parameters that are provided to the accept transfer operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of the accepted transfer.",
-            "schema": {
-              "$ref": "#/definitions/RecipientTransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/transfers/{transferName}/validateTransfer": {
-      "post": {
-        "tags": [
-          "RecipientTransfers"
-        ],
-        "summary": "Validates if a subscription or a reservation can be transferred. Use this operation to validate your subscriptions or reservation before using the accept transfer operation.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "RecipientTransfers_Validate",
-        "x-ms-examples": {
-          "ValidateTransfer": {
-            "$ref": "./examples/ValidateTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AcceptTransferRequest"
-            },
-            "description": "Request parameters that are provided to the validate transfer operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Results of the transfer validation.",
-            "schema": {
-              "$ref": "#/definitions/ValidateTransferListResponse"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/transfers/{transferName}/declineTransfer": {
-      "post": {
-        "tags": [
-          "RecipientTransfers"
-        ],
-        "summary": "Declines a transfer request.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "RecipientTransfers_Decline",
-        "x-ms-examples": {
-          "DeclineTransfer": {
-            "$ref": "./examples/DeclineTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of the declined transfer.",
-            "schema": {
-              "$ref": "#/definitions/RecipientTransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/transfers/{transferName}": {
-      "get": {
-        "tags": [
-          "RecipientTransfers"
-        ],
-        "summary": "Gets a transfer request by ID. The caller must be the recipient of the transfer request.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "RecipientTransfers_Get",
-        "x-ms-examples": {
-          "RecipientTransferGet": {
-            "$ref": "./examples/GetRecipientTransfer.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/transferNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of the transfers with given Id.",
-            "schema": {
-              "$ref": "#/definitions/RecipientTransferDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/transfers": {
-      "get": {
-        "tags": [
-          "RecipientTransfers"
-        ],
-        "summary": "Lists the transfer requests received by the caller.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "RecipientTransfers_List",
-        "x-ms-examples": {
-          "RecipientTransfersList": {
-            "$ref": "./examples/ListRecipientTransfers.json"
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "List of transfers received by caller.",
-            "schema": {
-              "$ref": "#/definitions/RecipientTransferDetailsListResult"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3993,54 +3154,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/createBillingRoleAssignment": {
-      "post": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "BillingRoleAssignments_AddByBillingAccount",
-        "description": "Adds a role assignment on a billing account. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "x-ms-examples": {
-          "AddRoleAssignmentToBillingAccount": {
-            "$ref": "./examples/AddRoleAssignmentToBillingAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentPayload"
-            },
-            "description": "Request parameters that are provided to the create billing role assignment operation."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Role assignment is successfully created",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingRoleAssignments": {
       "get": {
         "tags": [
@@ -4089,60 +3202,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/createBillingRoleAssignment": {
-      "post": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "BillingRoleAssignments_AddByInvoiceSection",
-        "description": "Adds a role assignment on an invoice section. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "x-ms-examples": {
-          "AddRoleAssignmentToInvoiceSection": {
-            "$ref": "./examples/AddRoleAssignmentToInvoiceSection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentPayload"
-            },
-            "description": "Request parameters that are provided to the create billing role assignment operation."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Role assignment is successfully created",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/billingRoleAssignments": {
       "get": {
         "tags": [
@@ -4185,54 +3244,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/createBillingRoleAssignment": {
-      "post": {
-        "tags": [
-          "BillingRoleAssignments"
-        ],
-        "operationId": "BillingRoleAssignments_AddByBillingProfile",
-        "description": "Adds a role assignment on a billing profile. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
-        "x-ms-examples": {
-          "AddRoleAssignmentToBillingProfile": {
-            "$ref": "./examples/AddRoleAssignmentToBillingProfile.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentPayload"
-            },
-            "description": "Request parameters that are provided to the create billing role assignment operation."
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Role assignment is successfully created",
-            "schema": {
-              "$ref": "#/definitions/BillingRoleAssignmentListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -4403,20 +3414,6 @@
         }
       }
     },
-    "InitiateTransferRequest": {
-      "type": "object",
-      "description": "Request parameters to initiate transfer.",
-      "properties": {
-        "recipientEmailId": {
-          "type": "string",
-          "description": "The email ID of the recipient to whom the transfer request is sent."
-        },
-        "resellerId": {
-          "type": "string",
-          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account."
-        }
-      }
-    },
     "ValidateAddressResponse": {
       "type": "object",
       "description": "Result of the address validation",
@@ -4450,365 +3447,12 @@
         "modelAsString": true
       }
     },
-    "AcceptTransferRequest": {
-      "type": "object",
-      "description": "Request parameters to accept transfer.",
-      "properties": {
-        "productDetails": {
-          "description": "Request parameters to accept transfer.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProductDetails"
-          }
-        }
-      }
-    },
-    "ProductDetails": {
-      "type": "object",
-      "description": "Details of the product that is transferred.",
-      "properties": {
-        "productType": {
-          "description": "Type of the product that is transferred.",
-          "$ref": "#/definitions/ProductType"
-        },
-        "productId": {
-          "type": "string",
-          "description": "The ID of the product that is transferred."
-        }
-      }
-    },
-    "ProductType": {
-      "type": "string",
-      "description": "The type of product that is transferred.",
-      "enum": [
-        "AzureSubscription",
-        "AzureReservation"
-      ],
-      "x-ms-enum": {
-        "name": "productType",
-        "modelAsString": true
-      }
-    },
-    "TransferDetails": {
-      "type": "object",
-      "description": "Details of the transfer.",
-      "properties": {
-        "properties": {
-          "description": "Details of the transfer.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransferProperties"
-        }
-      }
-    },
-    "RecipientTransferDetails": {
-      "type": "object",
-      "description": "Details of the transfer.",
-      "properties": {
-        "properties": {
-          "description": "Details of the transfer.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RecipientTransferProperties"
-        }
-      }
-    },
-    "DetailedTransferStatus": {
-      "type": "object",
-      "description": "Detailed transfer status.",
-      "properties": {
-        "productType": {
-          "type": "string",
-          "$ref": "#/definitions/ProductType",
-          "readOnly": true,
-          "description": "Type of product that is transferred."
-        },
-        "productId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The ID of the product that is transferred."
-        },
-        "transferStatus": {
-          "type": "string",
-          "$ref": "#/definitions/ProductTransferStatus",
-          "readOnly": true,
-          "description": "Transfer status."
-        },
-        "errorDetails": {
-          "description": "Error details for transfer execution.",
-          "$ref": "#/definitions/Error"
-        }
-      }
-    },
-    "Error": {
-      "description": "Error details for transfer execution.",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Error code."
-        },
-        "errorMessage": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Error message."
-        }
-      }
-    },
-    "EligibleProductType": {
-      "type": "string",
-      "description": "Type of the products that can be transferred.",
-      "enum": [
-        "DevTestAzureSubscription",
-        "StandardAzureSubscription",
-        "AzureReservation"
-      ],
-      "x-ms-enum": {
-        "name": "eligibleProductType",
-        "modelAsString": true
-      }
-    },
-    "TransferProperties": {
-      "description": "Transfer details",
-      "type": "object",
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the transfer request was created.",
-          "readOnly": true
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time at which the transfer request expires."
-        },
-        "invoiceSectionId": {
-          "type": "string",
-          "description": "The ID of the invoice section to which the product is billed after the transfer request is completed.",
-          "readOnly": true
-        },
-        "billingAccountId": {
-          "type": "string",
-          "description": "The ID of the billing account to which the product is billed after the transfer request is completed.",
-          "readOnly": true
-        },
-        "resellerId": {
-          "type": "string",
-          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.",
-          "readOnly": true
-        },
-        "resellerName": {
-          "type": "string",
-          "description": "Optional name of the reseller for transfer requests that are sent from Microsoft Partner Agreement billing account.",
-          "readOnly": true
-        },
-        "initiatorCustomerType": {
-          "type": "string",
-          "description": "The type of customer who sent the transfer request.",
-          "readOnly": true
-        },
-        "billingProfileId": {
-          "type": "string",
-          "description": "The ID of the billing profile to which the product will be billed after the transfer.",
-          "readOnly": true
-        },
-        "transferStatus": {
-          "type": "string",
-          "$ref": "#/definitions/TransferStatus",
-          "description": "Overall transfer status.",
-          "readOnly": true
-        },
-        "recipientEmailId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user to whom the transfer request was sent."
-        },
-        "initiatorEmailId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user who sent the transfer request."
-        },
-        "canceledBy": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user who canceled the transfer request."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time at which the transfer request was last modified."
-        },
-        "detailedTransferStatus": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Detailed transfer status.",
-          "items": {
-            "$ref": "#/definitions/DetailedTransferStatus"
-          }
-        }
-      }
-    },
-    "RecipientTransferProperties": {
-      "description": "Transfer Details.",
-      "type": "object",
-      "properties": {
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the transfer request was created.",
-          "readOnly": true
-        },
-        "expirationTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time at which the transfer request expires."
-        },
-        "allowedProductType": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Type of subscriptions that can be transferred.",
-          "items": {
-            "$ref": "#/definitions/EligibleProductType"
-          }
-        },
-        "transferStatus": {
-          "type": "string",
-          "$ref": "#/definitions/TransferStatus",
-          "description": "Overall transfer status.",
-          "readOnly": true
-        },
-        "recipientEmailId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user to whom the transfer request was sent."
-        },
-        "initiatorEmailId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user who sent the transfer request."
-        },
-        "resellerId": {
-          "type": "string",
-          "description": "Optional MPN ID of the reseller for transfer requests that are sent from a Microsoft Partner Agreement billing account.",
-          "readOnly": true
-        },
-        "resellerName": {
-          "type": "string",
-          "description": "Optional name of the reseller for transfer requests that are sent from Microsoft Partner Agreement billing account.",
-          "readOnly": true
-        },
-        "initiatorCustomerType": {
-          "type": "string",
-          "description": "The type of customer who sent the transfer request.",
-          "readOnly": true
-        },
-        "canceledBy": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The email ID of the user who canceled the transfer request."
-        },
-        "lastModifiedTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The time at which the transfer request was last modified."
-        },
-        "detailedTransferStatus": {
-          "type": "array",
-          "readOnly": true,
-          "description": "Detailed transfer status.",
-          "items": {
-            "$ref": "#/definitions/DetailedTransferStatus"
-          }
-        }
-      }
-    },
-    "TransferStatus": {
-      "type": "string",
-      "description": "The status of a transfer.",
-      "enum": [
-        "Pending",
-        "InProgress",
-        "Completed",
-        "CompletedWithErrors",
-        "Failed",
-        "Canceled",
-        "Declined"
-      ],
-      "x-ms-enum": {
-        "name": "transferStatus",
-        "modelAsString": true
-      }
-    },
-    "ProductTransferStatus": {
-      "type": "string",
-      "description": "The status of a transfer.",
-      "enum": [
-        "NotStarted",
-        "InProgress",
-        "Completed",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "productTransferStatus",
-        "modelAsString": true
-      }
-    },
-    "RecipientTransferDetailsListResult": {
-      "description": "The list of transfers received by caller.",
-      "properties": {
-        "value": {
-          "description": "The list of transfers received by caller.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/RecipientTransferDetails"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "TransferDetailsListResult": {
-      "description": "The list of transfers initiated by caller.",
-      "properties": {
-        "value": {
-          "description": "The list of transfers initiated by caller.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/TransferDetails"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "TransferProductRequestProperties": {
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
         "destinationInvoiceSectionId": {
           "type": "string",
           "description": "The destination invoice section id."
-        }
-      }
-    },
-    "TransferBillingSubscriptionRequest": {
-      "type": "object",
-      "description": "Request parameters to transfer billing subscription.",
-      "properties": {
-        "properties": {
-          "description": "Request parameters to transfer billing subscription.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
         }
       }
     },
@@ -4874,28 +3518,6 @@
       "x-ms-enum": {
         "name": "subscriptionTransferValidationErrorCode",
         "modelAsString": true
-      }
-    },
-    "UpdateAutoRenewOperation": {
-      "type": "object",
-      "description": "Result of the update auto renew operation",
-      "properties": {
-        "properties": {
-          "description": "Summary of update auto renew operation properties",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UpdateAutoRenewOperationProperties"
-        }
-      }
-    },
-    "UpdateAutoRenewOperationProperties": {
-      "type": "object",
-      "description": "Summary of update auto renew operation properties",
-      "properties": {
-        "endDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date at which the product will be canceled."
-        }
       }
     },
     "BillingAccountListResult": {
@@ -5137,6 +3759,11 @@
           "type": "string",
           "readOnly": true
         },
+        "isAccountAdmin": {
+          "description": "Indicates whether user is the account admin.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "productId": {
           "description": "The product ID of the Azure plan.",
           "type": "string",
@@ -5234,24 +3861,6 @@
         }
       }
     },
-    "DepartmentListResult": {
-      "description": "The list of departments.",
-      "properties": {
-        "value": {
-          "description": "The list of departments.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Department"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Department": {
       "description": "A department.",
       "type": "object",
@@ -5289,24 +3898,6 @@
           "items": {
             "$ref": "#/definitions/EnrollmentAccount"
           }
-        }
-      }
-    },
-    "EnrollmentAccountListResult": {
-      "description": "The list of enrollment accounts.",
-      "properties": {
-        "value": {
-          "description": "The list of enrollment accounts.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/EnrollmentAccount"
-          }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -5696,6 +4287,9 @@
         "labels": {
           "type": "object",
           "description": "Dictionary of metadata associated with the invoice section.",
+          "additionalProperties": {
+            "type": "string"
+          },
           "maxItems": 1000
         },
         "systemId": {
@@ -5831,6 +4425,32 @@
         },
         "url": {
           "description": "The URL to the PDF file.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AddressErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "errors": {
+          "description": "The Dictionary of the errors encountered.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "title": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status code.",
           "type": "string",
           "readOnly": true
         }
@@ -6885,24 +5505,6 @@
         }
       }
     },
-    "UpdateAutoRenewRequest": {
-      "type": "object",
-      "description": "Request parameters to update auto renew settings for a product.",
-      "properties": {
-        "autoRenew": {
-          "description": "The flag that determines the auto-renew settings for a product.",
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "UpdateAutoRenew",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "Operation": {
       "description": "A Billing REST API operation.",
       "type": "object",
@@ -6949,19 +5551,6 @@
           "description": "URL to get the next set of operation list results if there are any.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "BillingRoleAssignmentPayload": {
-      "description": "The payload use to update role assignment on a scope",
-      "properties": {
-        "principalId": {
-          "description": "The user's principal id that the role gets assigned to",
-          "type": "string"
-        },
-        "roleDefinitionId": {
-          "description": "The role definition id",
-          "type": "string"
         }
       }
     },
@@ -7017,8 +5606,8 @@
           "type": "string",
           "readOnly": true
         },
-        "name": {
-          "description": "The name of the role assignment.",
+        "createdByUserEmailAddress": {
+          "description": "The email address of the user who created the role assignment.",
           "type": "string",
           "readOnly": true
         },
@@ -7027,13 +5616,28 @@
           "type": "string",
           "readOnly": true
         },
-        "roleDefinitionName": {
+        "principalTenantId": {
+          "description": "The principal tenant id of the user to whom the role was assigned.",
+          "type": "string",
+          "readOnly": true
+        },
+        "roleDefinitionId": {
           "description": "The ID of the role definition.",
           "type": "string",
           "readOnly": true
         },
         "scope": {
           "description": "The scope at which the role was assigned.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userAuthenticationType": {
+          "description": "The authentication type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "userEmailAddress": {
+          "description": "The email address of the user.",
           "type": "string",
           "readOnly": true
         }
@@ -7231,73 +5835,6 @@
         }
       }
     },
-    "ValidateTransferListResponse": {
-      "description": "Result of transfer validation.",
-      "properties": {
-        "value": {
-          "description": "The list of transfer validation results.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ValidateTransferResponse"
-          }
-        }
-      }
-    },
-    "ValidateTransferResponse": {
-      "type": "object",
-      "description": "Transfer validation response.",
-      "properties": {
-        "properties": {
-          "description": "The properties of transfer validation response.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ValidateTransferResponseProperties"
-        }
-      }
-    },
-    "ValidateTransferResponseProperties": {
-      "type": "object",
-      "description": "The properties of transfer validation response.",
-      "properties": {
-        "status": {
-          "description": "The status of validation",
-          "type": "string",
-          "readOnly": true
-        },
-        "productId": {
-          "description": "The product id for which this result applies.",
-          "type": "string",
-          "readOnly": true
-        },
-        "results": {
-          "description": "The array of validation results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationResultProperties"
-          }
-        }
-      }
-    },
-    "ValidationResultProperties": {
-      "description": "The properties of the validation result.",
-      "properties": {
-        "level": {
-          "description": "Result Level.",
-          "type": "string",
-          "readOnly": true
-        },
-        "code": {
-          "description": "Result Code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The validation message.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "Participants": {
       "description": "The details about a participant.",
       "properties": {
@@ -7433,22 +5970,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "billingSubscriptionNameParameter": {
-      "name": "billingSubscriptionName",
-      "in": "path",
-      "description": "The ID that uniquely identifies a subscription.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "transferNameParameter": {
-      "name": "transferName",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID that uniquely identifies a transfer request."
-    },
     "agreementNameParameter": {
       "name": "agreementName",
       "in": "path",
@@ -7464,16 +5985,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "updateAutoRenewRequestParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Request parameters that are provided to the update auto renew operation.",
-      "schema": {
-        "$ref": "#/definitions/UpdateAutoRenewRequest"
-      }
     },
     "customerNameParameter": {
       "name": "customerName",
