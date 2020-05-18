@@ -4388,6 +4388,44 @@
         "mappings": {
           "type": "object",
           "description": "Column mappings with logical types. Tabular->tabular example: [{\"source\":{\"name\":\"CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"name\":\"CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}].  Hierarchical->tabular example: [{\"source\":{\"path\":\"$.CustomerName\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientName\",\"type\":\"String\"}},{\"source\":{\"path\":\"$.CustomerAddress\",\"type\":\"String\"},\"sink\":{\"name\":\"ClientAddress\",\"type\":\"String\"}}]. Type: object (or Expression with resultType object)."
+        },
+        "typeConversion": {
+          "type": "object",
+          "description": "Whether to enable the advanced type conversion feature in the Copy activity. Type: boolean (or Expression with resultType boolean)."
+        },
+        "typeConversionSettings": {
+          "description": "Type conversion settings",
+          "$ref": "#/definitions/TypeConversionSettings"
+        }
+      }
+    },
+    "TypeConversionSettings": {
+      "description": "Type conversion settings",
+      "type": "object",
+      "properties": {
+        "allowDataTruncation": {
+          "type": "object",
+          "description": "Whether to allow data truncation when converting the data. Type: boolean (or Expression with resultType boolean)."
+        },
+        "treatBooleanAsNumber": {
+          "type": "object",
+          "description": "Whether to treat boolean values as numbers. Type: boolean (or Expression with resultType boolean)."
+        },
+        "dateTimeFormat": {
+          "type": "object",
+          "description": "The format for DateTime values. Type: string (or Expression with resultType string)."
+        },
+        "dateTimeOffsetFormat": {
+          "type": "object",
+          "description": "The format for DateTimeOffset values. Type: string (or Expression with resultType string)."
+        },
+        "timeSpanFormat": {
+          "type": "object",
+          "description": "The format for TimeSpan values. Type: string (or Expression with resultType string)."
+        },
+        "culture": {
+          "type": "object",
+          "description": "The culture used to convert data from/to string. Type: string (or Expression with resultType string)."
         }
       }
     },
