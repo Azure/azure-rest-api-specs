@@ -44,7 +44,7 @@
             "$ref": "./examples/TablesList.json"
           }
         },
-        "operationId": Tables_List",
+        "operationId": "Tables_List",
         "description": "Gets all the tables for the specified Log Analytics workspace.",
         "parameters": [
           {
@@ -144,10 +144,9 @@
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
-          
           {
             "$ref": "#/parameters/TableNameParameter"
-          },
+          }
         ],
         "responses": {
           "200": {
@@ -179,7 +178,7 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/TableProperties",
           "description": "Table properties."
-        }        
+        }
       },
       "required": [
         "properties"
@@ -192,20 +191,20 @@
       "description": "Workspace data table definition."
     },
     "TablesListResult": {
-          "properties": {
-            "value": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Table"
-              },
-              "description": "A list of data tables."
-            }
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Table"
           },
-          "description": "The list tables operation response."
-        },
+          "description": "A list of data tables."
+        }
+      },
+      "description": "The list tables operation response."
+    }
   },
   "parameters": {
-      "TableNameParameter": {
+    "TableNameParameter": {
       "name": "tableName",
       "in": "path",
       "required": true,
