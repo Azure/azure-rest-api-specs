@@ -7,11 +7,12 @@ cli:
   cli-name: attestation
   package-name: azure-mgmt-attestation
   namespace: azure.mgmt.attestation
-  test-setup:
-    - name: Operations_List
-    - name: AttestationProviders_Create
-    - name: AttestationProviders_Get
-    - name: AttestationProviders_List
-    - name: AttestationProviders_ListByResourceGroup
-    - name: AttestationProviders_Delete
+  test-scenario:
+    - name: /AttestationProviders/put/AttestationProviders_Create
+    - name: /AttestationProviders/get/AttestationProviders_Get
+    - name: /AttestationProviders/get/AttestationProviders_ListByResourceGroup
+    - name: /AttestationProviders/get/AttestationProviders_List
+    - name: /Operations/get/Operations_List
+    - name: /AttestationProviders/patch/AttestationProviders_Update
+    - name: /AttestationProviders/delete/AttestationProviders_Delete
 ```

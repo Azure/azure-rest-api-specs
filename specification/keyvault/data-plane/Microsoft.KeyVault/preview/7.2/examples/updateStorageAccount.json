@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "vaultBaseUrl": "https://myvault.vault.azure.net/",
+    "storage-account-name": "patchStrg01",
+    "api-version": "7.2-preview",
+    "parameters": {
+      "activeKeyName": "key1",
+      "regenerationPeriod": "P10D"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "https://myvault.vault.azure.net/storage/patchStrg01",
+        "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+        "activeKeyName": "key1",
+        "autoRegenerateKey": true,
+        "regenerationPeriod": "P10D",
+        "attributes": {
+          "enabled": true,
+          "created": 1490738386,
+          "updated": 1490738386,
+          "recoveryLevel": "Recoverable+Purgeable"
+        },
+        "tags": {
+          "tag1": "val1",
+          "tag2": "val2"
+        }
+      }
+    }
+  }
+}

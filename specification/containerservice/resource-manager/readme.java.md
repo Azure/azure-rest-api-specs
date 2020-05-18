@@ -22,6 +22,20 @@ batch:
   - tag: package-2019-11
   - tag: package-2020-01
   - tag: package-2020-02
+  - tag: package-2020-03
+```
+
+### Tag: package-2020-03 and java
+
+These settings apply only when `--tag=package-2020-03` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2020-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2020_03_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2020_03_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2020-02 and java
