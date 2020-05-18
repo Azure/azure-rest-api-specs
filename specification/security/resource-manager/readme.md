@@ -380,6 +380,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/topologies.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
   - $(this-folder)/Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
