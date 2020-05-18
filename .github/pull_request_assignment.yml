@@ -1,154 +1,45 @@
 ---
 - rule:
-    # data-plane PR
-    paths:
-      - "specification/**/data-plane/**"
+    paths: "documentation/**"
     reviewers:
-      - anuchandy
-      - jhendrixMSFT
-      - lmazuel
-      - tjprescott
-
-- rule:
-    paths:
-      - "specification/network/**"
-    reviewers:
-      - lirenhe
-      - MyronFanQiu
-
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - MyronFanQiu
-
-- rule:
-    paths: "specification/compute/**"
-    reviewers:
-      - ArcturusZhang
-      - fengzhou-msft
-      - yungezz
-
-- rule:
-    paths: "specification/resources/**"
-    reviewers:
+      - ruowan
       - raych1
 
 - rule:
-    paths:
-      - "specification/machinelearningservices/**"
+    paths: "specification/**/Microsoft.Network/**"
     reviewers:
-      - ArcturusZhang
+      - ruowan
+      - NullMDR
+      - Dreamgoing
 
 - rule:
-    paths:
-      - "specification/@(azureactivedirectory|appplatform)/**"
+    paths: 
+      - "specification/@(containerservice|databricks|containerregistry|compute)/**"
+      - "specification/@(docker)/**"
     reviewers:
-      - njuCZ
+      - ruowan
+      - Dreamgoing
 
 - rule:
-    paths:
-      - "specification/authorization/**"
+    paths: "specification/**/date-plane/**"
     reviewers:
-      - qianwens
-      - yungezz
+      - Dreamgoing
 
 - rule:
-    paths:
-      - "specification/datafactory/**"
-    reviewers:
-      - qianwens
-
-- rule:
-    paths:
-      - "specification/monitor/**"
-    reviewers:
-      - weidongxu-microsoft
-      - MyronFanQiu
-
-- rule:
-    paths:
-      - "specification/storage/**"
-    reviewers:
-      - qianwens
-      - Juliehzl
-
-- rule:
-    paths: "specification/mediaservices/**"
-    reviewers:
-      - allenjzhang
-
-- rule:
-    paths:
-      - "specification/@(keyvault|notificationhubs)/**"
-      - "specification/@(databricks|containerregistry)/**"
-    reviewers:
-      - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/@(containerservice|containerinstance)/**"
+    paths: 
+      - "specification/**/resource-manager/**"
     reviewers:
       - NullMDR
-      - fengzhou-msft
-      - yungezz
+      - ruowan
 
 - rule:
-    paths:
-      - "specification/mixedreality/**"
+    paths: 
+     - "**/package.json"
+     - "package.json"
     reviewers:
-      - leni-msft
+      - ruowan
 
 - rule:
-    paths:
-      - "specification/portal/**"
+    paths: "**"
     reviewers:
-      - NullMDR
-
-- rule:
-    paths:
-      - "specification/web/**"
-    reviewers:
-      - weidongxu-microsoft
-
-- rule:
-    paths:
-      - "documentation/**"
-    reviewers:
-      - josefree
-      - akning-ms
-
-- rule:
-    paths:
-      - "**/package.json"
-      - ".github/**"
-      - "**/azure-pipelines.yml"
-      - ".azure-pipelines/**"
-      - ".azure-pipelines-preproduction/**"
-    reviewers:
-      - akning-ms
-      - NullMDR
-      - raych1
-
-- rule:
-    # manager-plane PR
-    paths:
-      - "**"
-    reviewers:
-      - yungezz
-      - zikalino
-      - erich-wang
-      - NullMDR
-      - raych1
-      - lirenhe
-      - weidongxu-microsoft
-      - ArcturusZhang
-      - xccc-msft
-      - ChenTanyi
-      - fengzhou-msft
-      - njuCZ
-      - akning-ms
-      - markcowl
-      - leni-msft
-      - qianwens
       - ruowan
