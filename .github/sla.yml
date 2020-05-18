@@ -20,7 +20,7 @@
     trigger:
       - time
     args:
-      booleanFilterExpression: "!(NotReadyForReview||WaitForARMFeedback||WaitForARMRevisit||Approved-OkToMerge||(DoNotMerge&&(ARMSignedOff||Approved)))"
+      booleanFilterExpression: "!(NotReadyForReview||Reviewed-ChangesRequired||WaitForARMFeedback||WaitForARMRevisit||Approved-OkToMerge||(DoNotMerge&&(ARMSignedOff||Approved)))"
       limit: 48h
       message: '<p>Dear Swagger reviewer,</p><p>The PR ${URL} requires your attention. You receive the email either because PR author put on the label "WaitForReviewVisit", or because the PR has not been updated for over 48 hours.</p><p>The PR labeled with ${LABELS}</p><p>Quick info.</p><ul><li>If it requires responses from ARM review board, please send email to <a href="mailto:armapireview@microsoft.com">armapireview@microsoft.com</a>.</li><li>If it requires immediate ARM review, please get ARM review oncall contact point from ICM <a href="https://icm.ad.msft.net/imp/v3/oncall/current">https://icm.ad.msft.net/imp/v3/oncall/current</a> under Service "Azure Resource Manager" and Team "RP Manifest Approvers".</li><li>If it is data plane API and requires responses from &nbsp;Azure API review board, please send email to <a href="mailto:azureapirbcore@microsoft.com">azureapirbcore@microsoft.com</a>.</li><li>Pls refer to <a href="https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/212/Swagger-PR-Review">https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/212/Swagger-PR-Review</a>&nbsp;for more about Swagger review process.</li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
       subject: "Action Required: Please respond to the PR ${URL}"
@@ -64,7 +64,9 @@
     name: "send email to PR author"
     trigger:
       - label
+      - time
     args:
+      limit: 72h
       booleanFilterExpression: (Reviewed-ChangesRequired||ARMChangeRequest)
       message: '<p>Dear PR author,</p><p>The PR Reviewer has commented on your PR ${URL} , putting on the label "Reviewed-ChangesRequired" or "ARMChangeRequest". Please check out the comment by clicking the PR link attached previously, and update your commits accordingly.</p><p>Please ensure to remove "Reviewed-ChangesRequired" or "ARMChangeRequest" label, after you complete updates and comment back. If you need ARM board or swagger reviewer revisit your PR, please label the PR with "WaitForARMRevisit" and "WaitForReviewRevisit" respectively.</p><p>Quick info.</p><ul><li>How to fix CI error:&nbsp;<a href="https://aka.ms/ci-fix">https://aka.ms/ci-fix</a></li></ul><p><em>DO NOT REPLY: This is an automated email. If you have any questions, please send an email to the Swagger and Tools Team (vscswagger@microsoft.com).</em></p><p>Best regards,</p><p>Swagger and Tools Team, Azure Management Experience</p>'
       subject: "Action Required: Please update your PR ${URL}"
