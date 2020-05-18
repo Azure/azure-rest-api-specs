@@ -297,7 +297,7 @@
             "name": "body",
             "description": "Updated confluent resource",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/ConfluentResourceUpdate"
             }
           }
         ],
@@ -656,6 +656,19 @@
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
+        }
+      }
+    },
+    "ConfluentResourceUpdate": {
+      "description": "Confluent Resource update",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "ARM resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
