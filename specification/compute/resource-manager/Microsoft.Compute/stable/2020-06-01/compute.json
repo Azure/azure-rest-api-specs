@@ -6339,23 +6339,6 @@
         }
       }
     },
-    "DisallowedConfiguration": {
-      "properties": {
-        "vmDiskType": {
-          "type": "string",
-          "description": "VM disk types which are disallowed.",
-          "enum": [
-            "None",
-            "Unmanaged"
-          ],
-          "x-ms-enum": {
-            "name": "VmDiskTypes",
-            "modelAsString": true
-          }
-        }
-      },
-      "description": "Specifies the disallowed configuration for a virtual machine image."
-    },
     "HyperVGenerationType": {
       "type": "string",
       "description": "Specifies the HyperVGeneration Type",
@@ -8384,7 +8367,7 @@
         "serialConsoleLogBlobUri": {
           "readOnly": true,
           "type": "string",
-          "description": "The Linux serial console log blob Uri. <br><br>NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage."
+          "description": "The serial console log blob Uri. <br><br>NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage."
         },
         "status": {
           "readOnly": true,
@@ -8981,10 +8964,6 @@
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGenerationType",
           "description": "Gets the HyperVGenerationType of the VirtualMachine created from the image"
-        },
-        "disallowed": {
-          "$ref": "#/definitions/DisallowedConfiguration",
-          "description": "Specifies disallowed configuration for the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of an Image."

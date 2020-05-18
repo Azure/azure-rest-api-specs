@@ -9,6 +9,12 @@
   "schemes": [
     "https"
   ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "security": [
     {
       "azure_auth": [
@@ -28,6 +34,42 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HardwareSecurityModules/operations": {
+      "get": {
+        "tags": [
+          "DedicatedHsmOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Get a list of Dedicated HSM operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHsmOperationListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of Dedicated HSM operations": {
+            "$ref": "./examples//DedicatedHsm_OperationsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/{name}": {
       "put": {
         "tags": [
@@ -92,13 +134,7 @@
           "Create a new or update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_CreateOrUpdate.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "patch": {
         "tags": [
@@ -158,13 +194,7 @@
           "Update an existing dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Update.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "delete": {
         "tags": [
@@ -216,13 +246,7 @@
           "Delete a dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Delete.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       },
       "get": {
         "tags": [
@@ -270,13 +294,7 @@
           "Get a dedicated HSM": {
             "$ref": "./examples//DedicatedHsm_Get.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs": {
@@ -329,13 +347,7 @@
           "List dedicated HSM devices in a resource group": {
             "$ref": "./examples//DedicatedHsm_ListByResourceGroup.json"
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs": {
@@ -381,17 +393,58 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ]
+        }
       }
     }
   },
   "definitions": {
+    "DedicatedHsmOperation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Dedicated HSM Resource Provider Operation.",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether it is a data plane action",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "properties": {
+            "provider": {
+              "description": "The Resource Provider of the operation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The object that represents the operation.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DedicatedHsmOperationListResult": {
+      "description": "Result of the request to list Dedicated HSM Provider operations. It contains a list of operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHsmOperation"
+          },
+          "description": "List of Dedicated HSM Resource Provider operations."
+        }
+      }
+    },
     "ApiEntityReference": {
       "properties": {
         "id": {
