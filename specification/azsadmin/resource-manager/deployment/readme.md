@@ -87,8 +87,6 @@ input-file:
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/OperationResults.json
-  - $(this-folder)/Microsoft.Deployment.Admin/preview/2018-07-01/FileContainer.json
-  - $(this-folder)/Microsoft.Deployment.Admin/preview/2018-07-01/ProductPackage.json
 
 ```
 

@@ -16,6 +16,36 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.Deployment.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Returns the list of supported REST operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Returns the list of supported REST operations.",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/OperationList"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages": {
       "get": {
         "x-ms-examples": {
@@ -30,10 +60,10 @@
         "operationId": "ProductPackages_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -42,6 +72,12 @@
             "schema": {
               "$ref": "#/definitions/ProductPackagesList"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-pageable": {
@@ -49,7 +85,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages/{productId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/productPackages/{packageId}": {
       "get": {
         "x-ms-examples": {
           "Return the product package details.": {
@@ -63,13 +99,13 @@
         "operationId": "ProductPackages_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -79,8 +115,11 @@
               "$ref": "#/definitions/ProductPackage"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -97,13 +136,16 @@
         "operationId": "ProductPackages_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ProductPackageParameters"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -115,6 +157,12 @@
           },
           "202": {
             "description": "Accepted"
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -132,21 +180,24 @@
         "operationId": "ProductPackages_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ProductIdParameter"
+            "$ref": "Deployment.json#/parameters/PackageIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -154,32 +205,6 @@
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Object model of azure resource manager base.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "description": "ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "readOnly": true,
-          "description": "Name of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "readOnly": true,
-          "description": "Type of Resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "ProductPackage": {
       "description": "Properties for a product package.",
       "type": "object",
@@ -192,7 +217,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "Deployment.json#/definitions/Resource"
         }
       ]
     },
@@ -272,30 +297,37 @@
       "items": {
         "$ref": "#/definitions/ProductLink"
       }
+    },
+    "ProductPackageParameters": {
+      "description": "Parameters for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Specifies the product package",
+          "$ref": "#/definitions/ProductPackageBody"
+        }
+      }
+    },
+    "ProductPackageBody": {
+      "description": "Body for creating a new product package.",
+      "type": "object",
+      "properties": {
+        "fileContainerId": {
+          "description": "Specifies the file container.",
+          "$ref": "#/definitions/FileContainerId"
+        }
+      }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+    "ProductPackageParameters": {
+      "description": "The parameters required to create a new product package.",
+      "name": "ProductPackageParameters",
+      "in": "body",
       "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2018-07-01"
-    },
-    "ProductIdParameter": {
-      "name": "productId",
-      "in": "path",
-      "description": "The product identifier.",
-      "required": true,
-      "type": "string",
+      "schema": {
+        "$ref": "#/definitions/ProductPackageParameters"
+      },
       "x-ms-parameter-location": "method"
     }
   },

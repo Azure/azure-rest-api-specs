@@ -42,19 +42,85 @@
             "schema": {
               "$ref": "#/definitions/LocationsResourceEntity"
             }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations": {
+      "get": {
+        "x-ms-examples": {
+          "Gets the list of locations": {
+            "$ref": "./examples/Locations/List.json"
+          }
+        },
+        "description": "Gets the list of locations",
+        "tags": [
+          "Locations"
+        ],
+        "operationId": "Locations_List",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LocationList"
+            }
+          },
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
+    "LocationList": {
+      "description": "List of locations",
+      "properties": {
+        "value": {
+          "description": "Array of locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationsResourceEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Continuation token"
+        }
+      }
+    },
     "LocationsResourceEntity": {
-      "description": "Get the location",
+      "type": "object",
+      "description": "Location Resource Entity",
       "properties": {
         "properties": {
           "description": "Location Properties",
           "$ref": "#/definitions/LocationAdminProperties",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "description": "Entity tag of the resource",
+          "type": "string"
         }
       },
       "allOf": [
@@ -67,11 +133,6 @@
       "description": "Location Admin Properties",
       "type": "object",
       "properties": {
-        "subscriptionId": {
-          "description": "the subscription id",
-          "title": "subscriptionId",
-          "type": "string"
-        },
         "location": {
           "description": "the location name",
           "title": "location",

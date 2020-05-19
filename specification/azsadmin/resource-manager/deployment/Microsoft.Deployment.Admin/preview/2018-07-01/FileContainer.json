@@ -30,10 +30,10 @@
         "operationId": "FileContainers_List",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -63,13 +63,13 @@
         "operationId": "FileContainers_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/FileContainerIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -79,8 +79,11 @@
               "$ref": "#/definitions/FileContainer"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       },
@@ -97,13 +100,13 @@
         "operationId": "FileContainers_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/FileContainerParameters"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/FileContainerIdParameter"
@@ -142,53 +145,30 @@
         "operationId": "FileContainers_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/FileContainerIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not found"
+          "default": {
+            "description": "Default Response.",
+            "schema": {
+              "$ref": "Deployment.json#/definitions/ExtendedErrorInfo"
+            }
           }
         }
       }
     }
   },
   "definitions": {
-    "Resource": {
-      "description": "Object model of azure resource manager base.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "description": "ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "readOnly": true,
-          "description": "Name of the resource.",
-          "type": "string"
-        },
-        "type": {
-          "readOnly": true,
-          "description": "Type of Resource.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Location of the resource.",
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "FileContainer": {
       "type": "object",
       "description": "File container entity.",
@@ -201,7 +181,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "Deployment.json#/definitions/Resource"
         }
       ]
     },
@@ -296,6 +276,16 @@
       "description": "Parameters for creating a new file container.",
       "type": "object",
       "properties": {
+        "properties": {
+          "description": "Specifies the file container body",
+          "$ref": "#/definitions/FileContainerBody"
+        }
+      }
+    },
+    "FileContainerBody": {
+      "description": "Body for creating a new file container.",
+      "type": "object",
+      "properties": {
         "postCopyAction": {
           "description": "Specifies the file post copy action.",
           "$ref": "#/definitions/PostCopyAction"
@@ -308,21 +298,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "required": true,
-      "type": "string"
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client API Version.",
-      "required": true,
-      "type": "string",
-      "default": "2018-07-01"
-    },
     "FileContainerIdParameter": {
       "description": "The file container identifier.",
       "name": "fileContainerId",
