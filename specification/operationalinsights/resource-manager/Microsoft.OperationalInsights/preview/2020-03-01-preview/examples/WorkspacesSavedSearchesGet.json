@@ -15,7 +15,9 @@
         "properties": {
           "category": " Saved Search Test Category",
           "displayName": "Create or Update Saved Search Test",
-          "query": "* | measure Count() by Computer",
+          "functionAlias": "heartbeat_func",
+          "functionParameters": "a:int=1",
+          "query": "* | measure Count() by Computer | take a",
           "version": 1
         }
       }
