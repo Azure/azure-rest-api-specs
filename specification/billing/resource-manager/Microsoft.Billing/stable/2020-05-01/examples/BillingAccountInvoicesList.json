@@ -3,17 +3,16 @@
     "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
     "periodStartDate": "2018-01-01",
-    "periodEndDate": "2018-06-30",
-    "$filter": "invoicePeriodStartDate le 2018-06-01"
+    "periodEndDate": "2018-06-30"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoices/1383723",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/1383723",
             "name": "1383723",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "type": "Microsoft.Billing/billingAccounts/invoices",
             "properties": {
               "dueDate": "2018-01-16T17:32:28Z",
               "invoiceDate": "2018-01-01T17:32:28Z",
@@ -59,7 +58,8 @@
               "documents": [
                 {
                   "kind": "Invoice",
-                  "url": "https://microsoft.com/invoice.pdf"
+                  "url": "https://microsoft.com/invoice.pdf",
+                  "source": "DRS"
                 }
               ],
               "payments": [
@@ -77,9 +77,9 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoices/1383724",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/1383724",
             "name": "1383724",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "type": "Microsoft.Billing/billingAccounts/invoices",
             "properties": {
               "dueDate": "2018-03-01T17:32:28Z",
               "invoiceDate": "2018-02-01T17:32:28Z",
@@ -124,8 +124,9 @@
               "purchaseOrderNumber": "123456",
               "documents": [
                 {
-                  "kind": "VoidNote",
-                  "url": "https://microsoft.com/voidNote.pdf"
+                  "kind": "TaxReceipt",
+                  "url": "https://microsoft.com/taxreceipt.pdf",
+                  "source": "DRS"
                 }
               ],
               "payments": [

@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2020-05-01",
-    "$expand": "properties/enrollmentDetails, properties/departments, properties/enrollmentAccounts"
+    "$expand": "enrollmentDetails,departments,enrollmentAccounts"
   },
   "responses": {
     "200": {
@@ -13,7 +13,7 @@
             "type": "Microsoft.Billing/billingAccounts",
             "properties": {
               "agreementType": "EnterpriseAgreement",
-              "address": {
+              "soldTo": {
                 "addressLine1": "Test Address",
                 "addressLine2": "Test Address",
                 "addressLine3": "Test Address",

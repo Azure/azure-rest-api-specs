@@ -4,17 +4,16 @@
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "periodStartDate": "2018-01-01",
-    "periodEndDate": "2018-06-30",
-    "$filter": "invoicePeriodStartDate le 2018-06-01"
+    "periodEndDate": "2018-06-30"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/1383723",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/1383723",
             "name": "1383723",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "type": "Microsoft.Billing/billingAccounts/invoices",
             "properties": {
               "dueDate": "2018-01-16T17:32:28Z",
               "invoiceDate": "2018-01-01T17:32:28Z",
@@ -60,15 +59,13 @@
               "documents": [
                 {
                   "kind": "Invoice",
-                  "url": "https://microsoft.com/invoice.pdf"
+                  "url": "https://microsoft.com/invoice.pdf",
+                  "source": "DRS"
                 },
                 {
-                  "kind": "Receipt",
-                  "url": "https://microsoft.com/taxDoc.pdf"
-                },
-                {
-                  "kind": "CreditNote",
-                  "url": "https://microsoft.com/creditNote.pdf"
+                  "kind": "TaxReceipt",
+                  "url": "https://microsoft.com/taxDoc.pdf",
+                  "source": "DRS"
                 }
               ],
               "payments": [
@@ -86,9 +83,9 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/1383724",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/1383724",
             "name": "1383724",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoices",
+            "type": "Microsoft.Billing/billingAccounts/invoices",
             "properties": {
               "dueDate": "2018-03-01T17:32:28Z",
               "invoiceDate": "2018-01-01T17:32:28Z",
@@ -134,15 +131,13 @@
               "documents": [
                 {
                   "kind": "Invoice",
-                  "url": "https://microsoft.com/invoice.pdf"
+                  "url": "https://microsoft.com/invoice.pdf",
+                  "source": "DRS"
                 },
                 {
-                  "kind": "Receipt",
-                  "url": "https://microsoft.com/taxDoc.pdf"
-                },
-                {
-                  "kind": "CreditNote",
-                  "url": "https://microsoft.com/creditNote.pdf"
+                  "kind": "TaxReceipt",
+                  "url": "https://microsoft.com/taxDoc.pdf",
+                  "source": "DRS"
                 }
               ],
               "payments": [
