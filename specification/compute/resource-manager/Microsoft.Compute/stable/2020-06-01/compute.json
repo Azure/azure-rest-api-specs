@@ -6200,6 +6200,23 @@
       },
       "description": "Describes the properties of a Compute Operation Value Display."
     },
+    "DisallowedConfiguration": {
+      "properties": {
+        "vmDiskType": {
+          "type": "string",
+          "description": "VM disk types which are disallowed.",
+          "enum": [
+            "None",
+            "Unmanaged"
+          ],
+          "x-ms-enum": {
+            "name": "VmDiskTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Specifies the disallowed configuration for a virtual machine image."
+    },
     "HyperVGenerationType": {
       "type": "string",
       "description": "Specifies the HyperVGeneration Type",
@@ -7128,6 +7145,10 @@
         },
         "hyperVGeneration": {
           "$ref": "#/definitions/HyperVGenerationType"
+        },
+        "disallowed": {
+          "$ref": "#/definitions/DisallowedConfiguration",
+          "description": "Specifies disallowed configuration for the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
