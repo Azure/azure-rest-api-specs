@@ -250,7 +250,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/AddressErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -4430,32 +4430,6 @@
         }
       }
     },
-    "AddressErrorResponse": {
-      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "errors": {
-          "description": "The Dictionary of the errors encountered.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "title": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The status code.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "ErrorDetails": {
       "description": "The details of the error.",
       "properties": {
@@ -4988,7 +4962,7 @@
         "OneTimePurchaseProductTransferNotAllowed"
       ],
       "x-ms-enum": {
-        "name": "productTransferValidationErrorCode",
+        "name": "ProductTransferValidationErrorCode",
         "modelAsString": true
       }
     },
