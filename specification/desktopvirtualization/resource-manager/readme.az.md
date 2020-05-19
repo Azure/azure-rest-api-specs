@@ -15,13 +15,8 @@ directive:
       group: windows-virtual-desktop host-pool
     set:
       group: windows-virtual-desktop hostpool
-  # - where:
-  #     group: windows-virtual-desktop application-group
-  #   set:
-  #     group: windows-virtual-desktop applicationgroup
-  - where: 
-      command: windows-virtual-desktop application-group list
-      parameter-name: resource-group-name
+  - where:
+      group: windows-virtual-desktop application-group
     set:
-      name: ss
+      group: windows-virtual-desktop applicationgroup
 ```

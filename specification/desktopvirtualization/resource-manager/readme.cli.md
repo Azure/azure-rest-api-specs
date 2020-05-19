@@ -10,8 +10,8 @@ cli:
         group: (ActiveApplications|Applications|ApplicationgroupAssignments|Desktops|SessionHosts|StartMenuItems|UserSessions)
       hidden: true
     - where:
-        group: HostPools
-        op: CreateOrUpdate
-        param: hostPool
-      name: sssss
+        group: ApplicationGroups
+        op: ListByResourceGroup
+        param: \$filter
+      name: list-filter
 ```
