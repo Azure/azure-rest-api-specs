@@ -51,6 +51,22 @@
     "LocationsResourceEntity": {
       "description": "Get the location",
       "properties": {
+        "properties": {
+          "description": "Location Properties",
+          "$ref": "#/definitions/LocationAdminProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LocationAdminProperties": {
+      "description": "Location Admin Properties",
+      "type": "object",
+      "properties": {
         "subscriptionId": {
           "description": "the subscription id",
           "title": "subscriptionId",
