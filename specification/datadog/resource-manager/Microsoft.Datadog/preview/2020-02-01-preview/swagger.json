@@ -12,11 +12,6 @@
                 ],
                 "summary": "List the api keys for a given monitor resource.",
                 "operationId": "ApiKeys_List",
-                "x-ms-examples": {
-                    "ApiKeys_List": {
-                        "$ref": "./examples/ApiKeys_List.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -56,6 +51,11 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "ApiKeys_List": {
+                        "$ref": "./examples/ApiKeys_List.json"
+                    }
                 }
             }
         },
@@ -66,11 +66,6 @@
                 ],
                 "summary": "Get the default api key.",
                 "operationId": "ApiKeys_GetDefaultKey",
-                "x-ms-examples": {
-                    "ApiKeys_GetDefaultKey": {
-                        "$ref": "./examples/ApiKeys_GetDefaultKey.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -107,6 +102,11 @@
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
+                },
+                "x-ms-examples": {
+                    "ApiKeys_GetDefaultKey": {
+                        "$ref": "./examples/ApiKeys_GetDefaultKey.json"
+                    }
                 }
             }
         },
@@ -117,11 +117,6 @@
                 ],
                 "summary": "Set the default api key.",
                 "operationId": "ApiKeys_SetDefaultKey",
-                "x-ms-examples": {
-                    "ApiKeys_SetDefaultKey": {
-                        "$ref": "./examples/ApiKeys_SetDefaultKey.json"
-                    }
-                },
                 "consumes": [
                     "application/json"
                 ],
@@ -165,6 +160,64 @@
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
+                },
+                "x-ms-examples": {
+                    "ApiKeys_SetDefaultKey": {
+                        "$ref": "./examples/ApiKeys_SetDefaultKey.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Datadog/monitors/{monitorName}/listMonitoredResources": {
+            "get": {
+                "tags": [
+                    "MonitoredResources"
+                ],
+                "operationId": "MonitoredResources_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subscriptionId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "resourceGroupName",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "monitorName",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/MonitoredResourceListResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "Default error response.",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "MonitoredResources_List": {
+                        "$ref": "./examples/MonitoredResources_List.json"
+                    }
                 }
             }
         },
@@ -175,11 +228,6 @@
                 ],
                 "summary": "List all operations provided by Microsoft.Datadog for the 2020-02-01-preview api version.",
                 "operationId": "Operations_List",
-                "x-ms-examples": {
-                    "Operations_List": {
-                        "$ref": "./examples/Operations_List.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -199,6 +247,11 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "Operations_List": {
+                        "$ref": "./examples/Operations_List.json"
+                    }
                 }
             }
         },
@@ -209,11 +262,6 @@
                 ],
                 "summary": "List all monitors under the specified subscription.",
                 "operationId": "Monitors_List",
-                "x-ms-examples": {
-                    "Monitors_List": {
-                        "$ref": "./examples/Monitors_List.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -241,6 +289,11 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "Monitors_List": {
+                        "$ref": "./examples/Monitors_List.json"
+                    }
                 }
             }
         },
@@ -251,11 +304,6 @@
                 ],
                 "summary": "List all monitors under the specified resource group.",
                 "operationId": "Monitors_ListByResourceGroup",
-                "x-ms-examples": {
-                    "Monitors_ListByResourceGroup": {
-                        "$ref": "./examples/Monitors_ListByResourceGroup.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -289,6 +337,11 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "Monitors_ListByResourceGroup": {
+                        "$ref": "./examples/Monitors_ListByResourceGroup.json"
+                    }
                 }
             }
         },
@@ -299,11 +352,6 @@
                 ],
                 "summary": "Get the properties of a specific monitor resource.",
                 "operationId": "Monitors_Get",
-                "x-ms-examples": {
-                    "Monitors_Get": {
-                        "$ref": "./examples/Monitors_Get.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -340,6 +388,11 @@
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
+                },
+                "x-ms-examples": {
+                    "Monitors_Get": {
+                        "$ref": "./examples/Monitors_Get.json"
+                    }
                 }
             },
             "put": {
@@ -348,11 +401,6 @@
                 ],
                 "summary": "Create a monitor resource.",
                 "operationId": "Monitors_Create",
-                "x-ms-examples": {
-                    "Monitors_Create": {
-                        "$ref": "./examples/Monitors_Create.json"
-                    }
-                },
                 "consumes": [
                     "application/json"
                 ],
@@ -406,7 +454,12 @@
                         }
                     }
                 },
-                "x-ms-long-running-operation": true
+                "x-ms-long-running-operation": true,
+                "x-ms-examples": {
+                    "Monitors_Create": {
+                        "$ref": "./examples/Monitors_Create.json"
+                    }
+                }
             },
             "patch": {
                 "tags": [
@@ -518,11 +571,6 @@
                 ],
                 "summary": "List the tag rules for a given monitor resource.",
                 "operationId": "TagRules_List",
-                "x-ms-examples": {
-                    "TagRules_List": {
-                        "$ref": "./examples/TagRules_List.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -562,6 +610,11 @@
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "TagRules_List": {
+                        "$ref": "./examples/TagRules_List.json"
+                    }
                 }
             }
         },
@@ -572,11 +625,6 @@
                 ],
                 "summary": "Create or update a tag rule set for a given monitor resource.",
                 "operationId": "TagRules_CreateOrUpdate",
-                "x-ms-examples": {
-                    "TagRules_CreateOrUpdate": {
-                        "$ref": "./examples/TagRules_CreateOrUpdate.json"
-                    }
-                },
                 "consumes": [
                     "application/json"
                 ],
@@ -629,6 +677,11 @@
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
                     }
+                },
+                "x-ms-examples": {
+                    "TagRules_CreateOrUpdate": {
+                        "$ref": "./examples/TagRules_CreateOrUpdate.json"
+                    }
                 }
             },
             "get": {
@@ -637,11 +690,6 @@
                 ],
                 "summary": "Get a tag rule set for a given monitor resource.",
                 "operationId": "TagRules_Get",
-                "x-ms-examples": {
-                    "TagRules_Get": {
-                        "$ref": "./examples/TagRules_Get.json"
-                    }
-                },
                 "produces": [
                     "application/json"
                 ],
@@ -683,6 +731,11 @@
                         "schema": {
                             "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
                         }
+                    }
+                },
+                "x-ms-examples": {
+                    "TagRules_Get": {
+                        "$ref": "./examples/TagRules_Get.json"
                     }
                 }
             }
@@ -755,6 +808,37 @@
             "properties": {
                 "error": {
                     "$ref": "#/definitions/ErrorResponseBody"
+                }
+            }
+        },
+        "MonitoredResource": {
+            "description": "The properties of a resource currently being monitored by the Datadog monitor resource.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The ARM id of the resource.",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "The location of the resource.",
+                    "type": "string"
+                }
+            }
+        },
+        "MonitoredResourceListResponse": {
+            "description": "Response of a list operation.",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "Results of a list operation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MonitoredResource"
+                    }
+                },
+                "nextLink": {
+                    "description": "Link to the next set of results, if any.",
+                    "type": "string"
                 }
             }
         },
@@ -855,12 +939,16 @@
                 "apiKey": {
                     "description": "Api key associated to the Datadog organization.",
                     "type": "string",
-                    "x-ms-mutability": ["create"]
+                    "x-ms-mutability": [
+                        "create"
+                    ]
                 },
                 "applicationKey": {
                     "description": "Application key associated to the Datadog organization.",
                     "type": "string",
-                    "x-ms-mutability": ["create"]
+                    "x-ms-mutability": [
+                        "create"
+                    ]
                 }
             }
         },
@@ -878,7 +966,8 @@
         },
         "ManagedIdentityTypes": {
             "enum": [
-                "SystemAssigned"
+                "SystemAssigned",
+                "UserAssigned"
             ],
             "type": "string",
             "x-ms-enum": {
