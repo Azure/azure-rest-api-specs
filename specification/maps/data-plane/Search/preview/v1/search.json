@@ -46,10 +46,6 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     },
@@ -95,10 +91,6 @@
         "Location": {
           "type": "string",
           "description": "New URL to check for the results of the long running process."
-        },
-        "Access-Control-Expose-Headers": {
-          "type": "string",
-          "description": "The list of response headers that can be read by the client."
         }
       }
     }
@@ -472,7 +464,7 @@
     },
     "OpeningHours": {
       "name": "openingHours",
-      "description": "Opening hours for a POI (Points of Interest). The availability of opening hours will vary based on the data available.",
+      "description": "Hours of operation for a POI (Points of Interest). The availability of hours of operation will vary based on the data available.\nSupported value: nextSevenDays",
       "type": "string",
       "in": "query",
       "required": false,
@@ -485,7 +477,7 @@
         "values": [
           {
             "value": "nextSevenDays",
-            "description": "Shows the opening hours for next week, starting with the current day in the local time of the POI."
+            "description": "Shows the hours of operation for the next week, starting with the current day in the local time of the POI."
           }
         ]
       },
@@ -3067,6 +3059,9 @@
           "items": {
             "$ref": "#/definitions/SearchResultPoiBrand"
           }
+        },
+        "openingHours": {
+          "$ref": "#/definitions/SearchResultPoiOpeningHours"
         }
       }
     },
@@ -3101,6 +3096,60 @@
         "name": {
           "description": "Name property",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchResultPoiOpeningHours": {
+      "description": "Opening hours for a POI (Points of Interest).",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Value used in the Request",
+          "type": "string",
+          "readOnly": true
+        },
+        "timeRanges": {
+          "description": "List of time ranges for the next 7 days",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRange"
+          }
+        }
+      }
+    },
+    "SearchResultPoiOpeningHoursTimeRange": {
+      "description": "Open time range for a day",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "description": "The point in the next 7 days range when a given POI is being opened. (or the beginning of the range if it was opened before the range)<br> inclusive",
+          "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRangeTime"
+        },
+        "endTime": {
+          "description": "The point in the next 7 days range when a given POI is being opened. (or the beginning of the range if it was opened before the range)<br> exclusive",
+          "$ref": "#/definitions/SearchResultPoiOpeningHoursTimeRangeTime"
+        }
+      }
+    },
+    "SearchResultPoiOpeningHoursTimeRangeTime": {
+      "description": "Represents a date and time",
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "Represents current day in calendar year in POI time zone.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hour": {
+          "description": "Hours are in the 24 hour format in the local time of a POI; possible values are 0 - 23.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minute": {
+          "description": "Minutes are in the local time of a POI; possible values are 0 - 59.",
+          "type": "integer",
           "readOnly": true
         }
       }
