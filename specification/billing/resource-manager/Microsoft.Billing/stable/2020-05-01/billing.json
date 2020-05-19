@@ -1700,7 +1700,7 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}/move": {
       "post": {
-        "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Moves a subscription's charges to a new invoice section. The new invoice section must belong to the same billing profile as the existing invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1725,7 +1725,7 @@
             "schema": {
               "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
             },
-            "description": "Request parameters that are provided to the transfer product operation."
+            "description": "Request parameters that are provided to the move subscription operation."
           }
         ],
         "responses": {
@@ -1768,7 +1768,7 @@
           }
         },
         "operationId": "BillingSubscriptions_ValidateMove",
-        "description": "Validates if a subscription's charges can be moved to a new invoice section. This operation is supported only for products that are purchased with a recurring charge and for billing accounts with agreement type Microsoft Customer Agreement.",
+        "description": "Validates if a subscription's charges can be moved to a new invoice section. This operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -1786,7 +1786,7 @@
             "schema": {
               "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
             },
-            "description": "Request parameters that are provided to the validate transfer eligibility operation."
+            "description": "Request parameters that are provided to the validate move eligibility operation."
           }
         ],
         "responses": {
@@ -2035,7 +2035,7 @@
             "schema": {
               "$ref": "#/definitions/TransferProductRequestProperties"
             },
-            "description": "Request parameters that are provided to the transfer product operation."
+            "description": "Request parameters that are provided to the move product operation."
           }
         ],
         "responses": {
@@ -2096,7 +2096,7 @@
             "schema": {
               "$ref": "#/definitions/TransferProductRequestProperties"
             },
-            "description": "Request parameters that are provided to the validate transfer eligibility operation."
+            "description": "Request parameters that are provided to the validate move eligibility operation."
           }
         ],
         "responses": {
