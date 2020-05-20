@@ -6,7 +6,7 @@ Configuration for generating Translator Text SDK.
 
 The current release is `release_3_0`.
 
-The current document batch preview release is `release_1_0_preview.1'`
+The current document batch preview release is `release_1_0_preview.1'`.
 
 ``` yaml
 
