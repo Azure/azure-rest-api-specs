@@ -1176,23 +1176,8 @@
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the resource.",
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Running",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Moving"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
         },
         "externalIP": {
           "description": "The publicly accessible IP of the SignalR service.",
@@ -1449,28 +1434,32 @@
       ],
       "properties": {}
     },
+    "ProvisioningState": {
+      "description": "Provisioning state of Azure Resource",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
     "PrivateEndpointConnectionProperties": {
       "description": "Private endpoint connection properties",
       "type": "object",
       "properties": {
         "provisioningState": {
           "description": "Provisioning state of the private endpoint connection",
-          "enum": [
-            "Unknown",
-            "Succeeded",
-            "Failed",
-            "Canceled",
-            "Running",
-            "Creating",
-            "Updating",
-            "Deleting",
-            "Moving"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          },
+          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
         },
         "privateEndpoint": {
