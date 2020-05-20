@@ -525,7 +525,7 @@
         },
         "autoMitigate": {
           "type": "boolean",
-          "description": "the flag that indicates whether the alert should be auto resolved or not."
+          "description": "the flag that indicates whether the alert should be auto resolved or not. The default is true."
         },
         "actions": {
           "type": "array",
@@ -693,6 +693,11 @@
     "WebtestLocationAvailabilityCriteria": {
       "x-ms-discriminator-value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricAlertCriteria"
+        }
+      ],
       "properties": {
         "webTestId": {
           "type": "string",

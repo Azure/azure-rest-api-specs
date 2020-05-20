@@ -5,20 +5,75 @@
     "Ocp-Apim-Subscription-Key": "{API key}",
     "kbId": "9d091697-fb8c-4ed5-9ac0-35bf8273bfff",
     "replaceKb": {
-      "qnAList": [
+      "qnaList": [
         {
           "id": 0,
-          "answer": "string",
-          "source": "string",
+          "answer": "You can change the default message if you use the QnAMakerDialog. See this for details: https://docs.botframework.com/en-us/azure-bot-service/templates/qnamaker/#navtitle",
+          "source": "Custom Editorial",
           "questions": [
-            "string"
+            "How can I change the default message from QnA Maker?"
+          ],
+          "metadata": []
+        },
+        {
+          "id": 0,
+          "answer": "You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create",
+          "source": "Custom Editorial",
+          "questions": [
+            "How do I programmatically create a KB?"
           ],
           "metadata": [
             {
-              "name": "string",
-              "value": "string"
+              "name": "category",
+              "value": "api"
             }
-          ]
+          ],
+          "context": {
+            "isContextOnly": false,
+            "prompts": [
+              {
+                "displayOrder": 1,
+                "displayText": "Update KB",
+                "qna": {
+                  "answer": "You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update",
+                  "questions": [
+                    "How do I programmatically update my KB?"
+                  ],
+                  "metadata": [
+                    {
+                      "name": "category",
+                      "value": "api"
+                    }
+                  ],
+                  "context": {
+                    "isContextOnly": false,
+                    "prompts": [
+                      {
+                        "displayOrder": 1,
+                        "displayText": "Refresh Endpoint Keys",
+                        "qna": {
+                          "answer": "You can use our REST apis to refresh endpoint keys. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/endpointkeys/refreshkeys",
+                          "questions": [
+                            "How do I programmatically refresh endpoint keys?"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "urls": [
+        "https://docs.microsoft.com/en-in/azure/cognitive-services/qnamaker/faqs",
+        "https://docs.microsoft.com/en-us/bot-framework/resources-bot-framework-faq"
+      ],
+      "files": [
+        {
+          "fileName": "SurfaceManual.pdf",
+          "fileUri": "https://download.microsoft.com/download/2/9/B/29B20383-302C-4517-A006-B0186F04BE28/surface-pro-4-user-guide-EN.pdf"
         }
       ]
     }

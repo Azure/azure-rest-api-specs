@@ -248,6 +248,9 @@
           },
           "ApiManagementCreateServiceWithSystemCertificates": {
             "$ref": "./examples/ApiManagementCreateServiceWithSystemCertificates.json"
+          },
+          "ApiManagementCreateServiceWithUserAssignedIdentity": {
+            "$ref": "./examples/ApiManagementCreateServiceWithUserAssignedIdentity.json"
           }
         },
         "parameters": [
@@ -1250,11 +1253,12 @@
         "capacity": {
           "type": "integer",
           "format": "int32",
-          "description": "Capacity of the SKU (number of deployed units of the SKU)."
+          "description": "Capacity of the SKU (number of deployed units of the SKU). For Consumption SKU capacity must be specified as 0."
         }
       },
       "required": [
-        "name"
+        "name",
+        "capacity"
       ],
       "description": "API Management service resource SKU properties."
     },
