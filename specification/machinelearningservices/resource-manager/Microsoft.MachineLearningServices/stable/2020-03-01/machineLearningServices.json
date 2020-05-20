@@ -300,6 +300,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
+      "post": {
+        "tags": [
+          "ProxyOperations"
+        ],
+        "operationId": "Notebooks_Prepare",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Prepare Notebook": {
+            "$ref": "./examples/workspacePrepareNotebook.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NotebookResourceInfo"
+            }
+          },
+          "202": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -1368,6 +1416,45 @@
         }
       }
     },
+    "NotebookListCredentialsResult": {
+      "type": "object",
+      "properties": {
+        "primaryAccessKey": {
+          "type": "string"
+        },
+        "secondaryAccessKey": {
+          "type": "string"
+        }
+      }
+    },
+    "NotebookResourceInfo": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "the data plane resourceId that used to initialize notebook component"
+        },
+        "notebookPreparationError": {
+          "$ref": "#/definitions/NotebookPreparationError",
+          "description": "The error that occurs when preparing notebook."
+        }
+      }
+    },
+    "NotebookPreparationError": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        },
+        "statusCode": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "OperationListResult": {
       "description": "An array of operations supported by the resource provider.",
       "properties": {
@@ -1500,6 +1587,11 @@
             "$ref": "#/definitions/SharedPrivateLinkResource"
           },
           "description": "The list of shared private link resources in this workspace."
+        },
+        "notebookInfo": {
+          "readOnly": true,
+          "$ref": "#/definitions/NotebookResourceInfo",
+          "description": "The notebook info of Azure ML workspace."
         }
       }
     },
@@ -2025,6 +2117,9 @@
         "containerRegistryCredentials": {
           "readOnly": true,
           "$ref": "#/definitions/RegistryListCredentialsResult"
+        },
+        "notebookAccessKeys": {
+          "$ref": "#/definitions/NotebookListCredentialsResult"
         }
       }
     },
