@@ -141,6 +141,13 @@
           },
           {
             "$ref": "#/parameters/AssignmentNameParameter"
+          },
+          {
+            "name": "deleteBehavior",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "When deleteBehavior=all, the resources that were created by the blueprint assignment will be deleted."
           }
         ],
         "responses": {
@@ -153,7 +160,8 @@
           "204": {
             "description": "No Content"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{resourceScope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
