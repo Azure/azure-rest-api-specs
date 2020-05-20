@@ -1,0 +1,238 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [{
+    "azure_auth": [
+      "user_impersonation"
+    ]
+  }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/iotAlertTypes": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Alert Types": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlertTypeList.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solution Analytics"
+        ],
+        "description": "List IoT alert types",
+        "operationId": "IotAlertTypes_List",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IotAlertTypeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/iotAlertTypes/{iotAlertTypeName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get IoT Alert Type": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlertType.json"
+          }
+        },
+        "operationId": "IotAlertTypes_Get",
+        "description": "Get IoT alert type",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "in": "path",
+            "name": "iotAlertTypeName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "IoT alert type",
+            "schema": {
+              "$ref": "#/definitions/IotAlertType"
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IotAlertTypeList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotAlertType"
+          }
+        }
+      }
+    },
+    "IotAlertType": {
+      "type": "object",
+      "description": "IoT alert type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IotAlertTypeProperties"
+        }
+      },
+      "allOf": [{
+        "$ref": "../../../common/v1/types.json#/definitions/Resource"
+      }]
+    },
+    "IotAlertTypeProperties": {
+      "type": "object",
+      "description": "IoT alert type information.",
+      "properties": {
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Privileged container detected",
+          "description": "Display name of the alert type."
+        },
+        "alertSeverity": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Medium",
+          "description": "Assessed alert severity.",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "alertSeverity",
+            "modelAsString": true,
+            "values": [{
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          }
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the suspected vulnerability and meaning.",
+          "example": "Machine logs indicate that a privileged Docker container is running. A privileged container has full access to host  resources. If compromised, a malicious actor can use the privileged container to gain access to the host machine."
+        },
+        "providerName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "IoTSecurity",
+          "description": "Name of the alert type provider."
+        },
+        "vendorName": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Microsoft",
+          "description": "Name of the alert type vendor."
+        },
+        "remediationSteps": {
+          "readOnly": true,
+          "description": "Recommended steps for remediation.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "If the container doesn't need to run in privileged mode, remove the privileges from the container."
+          }
+        },
+        "sourceSystem": {
+          "readOnly": true,
+          "type": "string",
+          "example": "Detection",
+          "description": "Name of the source system."
+        },
+        "productName": {
+          "readOnly": true,
+          "description": "Product name",
+          "type": "string",
+          "example": "Azure Security Center for IoT"
+        },
+        "type": {
+          "readOnly": true,
+          "description": "Type of the alert",
+          "type": "string",
+          "example": "SecurityAlert"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SolutionName": {
+      "name": "solutionName",
+      "in": "path",
+      "required": true,
+      "description": "The name of the IoT security solution.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
