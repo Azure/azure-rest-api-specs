@@ -1,35 +1,37 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "parameters": {
-      "displayName": "Finance",
-      "address": {
-        "firstName": "Test",
-        "lastName": "User",
-        "addressLine1": "1 Microsoft Way",
-        "city": "Redmond",
-        "postalCode": "98052",
-        "region": "WA",
-        "country": "US"
-      },
-      "enabledAzurePlans": [
-        {
-          "skuId": "0001"
+      "properties": {
+        "displayName": "Finance",
+        "billTo": {
+          "firstName": "Test",
+          "lastName": "User",
+          "addressLine1": "Test Address 1",
+          "city": "Redmond",
+          "postalCode": "12345",
+          "region": "WA",
+          "country": "US"
         },
-        {
-          "skuId": "0002"
-        }
-      ],
-      "invoiceEmailOptIn": true,
-      "poNumber": "ABC12345"
+        "enabledAzurePlans": [
+          {
+            "skuId": "0001"
+          },
+          {
+            "skuId": "0002"
+          }
+        ],
+        "invoiceEmailOptIn": true,
+        "poNumber": "ABC12345"
+      }
     }
   },
   "responses": {
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/operationResults/ed2975a8-8f77-43bb-a717-ace54326b14b?api-version=2018-07-31",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/operationResults/putBillingProfile_00000000-0000-0000-0000-000000000000?api-version=2020-05-01",
         "Retry-After": "60"
       }
     },
@@ -40,12 +42,12 @@
         "type": "Microsoft.Billing/billingAccounts/billingProfiles",
         "properties": {
           "displayName": "Finance",
-          "address": {
+          "billTo": {
             "firstName": "Test",
             "lastName": "User",
-            "addressLine1": "1 Microsoft Way",
+            "addressLine1": "Test Address 1",
             "city": "Redmond",
-            "postalCode": "98052",
+            "postalCode": "12345",
             "region": "WA",
             "country": "US"
           },
@@ -53,16 +55,18 @@
           "enabledAzurePlans": [
             {
               "skuId": "0001",
-              "skuDescription": "Microsoft Azure Dev/Test"
+              "skuDescription": "Microsoft Azure Plan"
             },
             {
               "skuId": "0002",
-              "skuDescription": "Microsoft Azure Standard"
+              "skuDescription": "Microsoft Azure Plan for DevTest"
             }
           ],
           "invoiceDay": 5,
           "invoiceEmailOptIn": true,
           "poNumber": "ABC12345",
+          "hasReadAccess": true,
+          "systemId": "1XXX-11XX-XX1-XXXX-XXX",
           "status": "Active",
           "spendingLimit": "Off"
         }

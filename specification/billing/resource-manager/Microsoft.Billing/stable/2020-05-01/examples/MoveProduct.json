@@ -1,21 +1,18 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "{billingProfileName}",
-    "invoiceSectionName": "{invoiceSectionName}",
     "productName": "{productName}",
     "parameters": {
-      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}/invoiceSections/{newInvoiceSectionName}",
-      "destinationBillingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}"
+      "destinationInvoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}"
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}/invoiceSections/{newInvoiceSectionName}/products/{productName}",
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{newInvoiceSectionName}/products/{productName}",
         "name": "{productName}",
-        "type": "Microsoft.Billing/products",
+        "type": "Microsoft.Billing/billingAccounts/products",
         "properties": {
           "productTypeId": "A12345",
           "productType": "Subscription",
@@ -33,7 +30,6 @@
           "skuDescription": "Enterprise Agreement Development",
           "tenantId": "515a6d36-aaf8-4ca2-a5e8-c45deb0c5cce",
           "availabilityId": "AvailabilityId1",
-          "parentProductId": "45000000-0000-0000-0000-0000000001242",
           "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{newBillingProfileName}/invoiceSections/{newInvoiceSectionName}",
           "invoiceSectionDisplayName": "Contoso operations invoiceSection",
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
@@ -43,7 +39,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/providers/Microsoft.Billing/operationResults/44000000-0000-0000-0000-000000000000?api-version=2019-10-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/operationResults/44000000-0000-0000-0000-000000000000?api-version=2020-05-01",
         "Retry-After": "60",
         "OData-EntityId": "44000000-0000-0000-0000-000000000000"
       }
