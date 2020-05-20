@@ -33,7 +33,7 @@
       "get": {
         "tags": ["defaultrollout"],
         "operationId": "DefaultRollouts_Get",
-        "description": "Gets the rollout details.",
+        "description": "Gets the default rollout details.",
         "x-ms-examples": {
           "DefaultRollouts_Get": {
             "$ref": "./examples/DefaultRollouts_Get.json"
@@ -235,43 +235,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/defaultRollouts": {
-      "get": {
-        "tags": ["defaultrollout"],
-        "operationId": "DefaultRollouts_ListBySubscription",
-        "description": "Gets the list of the rollouts by subscription.",
-        "x-ms-examples": {
-          "DefaultRollouts_ListBySubscription": {
-            "$ref": "./examples/DefaultRollouts_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Gets list of rollouts by subscription.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRolloutsList"
-            }
-          },
-          "default": {
-            "description": "Failed to get rollout list.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{hostedResourceProvider}/customRollouts/{rolloutName}": {
       "get": {
         "tags": ["customrollout"],
@@ -431,43 +394,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/customRollouts": {
-      "get": {
-        "tags": ["customrollout"],
-        "operationId": "CustomRollouts_ListBySubscription",
-        "description": "Gets the list of the rollouts by subscription.",
-        "x-ms-examples": {
-          "CustomRollouts_ListBySubscription": {
-            "$ref": "./examples/CustomRollouts_ListBySubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Gets list of rollouts by subscription.",
-            "schema": {
-              "$ref": "#/definitions/CustomRolloutsList"
-            }
-          },
-          "default": {
-            "description": "Failed to get rollout.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/providers/Microsoft.ProviderHub/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -477,7 +403,7 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -581,8 +507,7 @@
       "x-ms-enum": {
         "name": "AzureRegions",
         "modelAsString": true
-      },
-      "readOnly": true
+      }
     },
     "ProvisioningState": {
       "type": "string",
