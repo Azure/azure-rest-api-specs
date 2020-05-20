@@ -2,14 +2,15 @@
   "swagger": "2.0",
   "info": {
     "version": "2020-01-01",
-    "title": "Marketplace RP Service"
+    "title": "MarketplaceManagementClient",
+    "description": "REST APIs for Azure Marketplace"
   },
   "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/offers": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -51,13 +52,13 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}/offers/{OfferId}": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/offers/{offerId}": {
       "parameters": [
         {
-          "$ref": "#/parameters/OfferIdPathParameter"
+          "$ref": "#/parameters/PrivateStoreIdParameter"
         },
         {
-          "$ref": "#/parameters/PrivateStoreIdParameter"
+          "$ref": "#/parameters/OfferIdPathParameter"
         },
         {
           "$ref": "#/parameters/ApiVersionParameter"
@@ -190,7 +191,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/privateStores/{PrivateStoreId}": {
+    "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}": {
       "parameters": [
         {
           "$ref": "#/parameters/PrivateStoreIdParameter"
@@ -212,7 +213,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreProperties"
+              "$ref": "#/definitions/PrivateStore"
             }
           },
           "default": {
@@ -223,8 +224,8 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreByName": {
-            "$ref": "./examples/GetPrivateStoreByName.json"
+          "GetPrivateStore": {
+            "$ref": "./examples/GetPrivateStore.json"
           }
         }
       },
@@ -271,16 +272,13 @@
             "in": "body",
             "name": "payload",
             "schema": {
-              "$ref": "#/definitions/PrivateStoreProperties"
+              "$ref": "#/definitions/PrivateStore"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Change successful",
-            "schema": {
-              "$ref": "#/definitions/PrivateStoreProperties"
-            }
+            "description": "Change successful"
           },
           "default": {
             "description": "Microsoft.Marketplace error response describing why the operation failed.",
@@ -327,10 +325,11 @@
   },
   "parameters": {
     "PrivateStoreIdParameter": {
-      "name": "PrivateStoreId",
+      "name": "privateStoreId",
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method",
       "description": "The store ID - must use the tenant ID"
     },
     "ApiVersionParameter": {
@@ -342,42 +341,14 @@
     },
     "OfferIdPathParameter": {
       "in": "path",
-      "name": "OfferId",
+      "name": "offerId",
       "type": "string",
+      "x-ms-parameter-location": "method",
       "required": true,
       "description": "The offer ID to update or delete"
-    },
-    "offerObjectParameter": {
-      "in": "body",
-      "name": "offerObject",
-      "schema": {
-        "$ref": "#/definitions/offerSkuObject"
-      }
     }
   },
   "definitions": {
-    "offerSkuObject": {
-      "type": "object",
-      "required": [
-        "isAvailable"
-      ],
-      "properties": {
-        "isAvailable": {
-          "type": "boolean"
-        }
-      }
-    },
-    "offerObject": {
-      "type": "object",
-      "required": [
-        "isAvailable"
-      ],
-      "properties": {
-        "isAvailable": {
-          "type": "boolean"
-        }
-      }
-    },
     "ErrorResponse": {
       "description": "Error response indicates Microsoft.Marketplace service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
@@ -406,12 +377,28 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateStoreProperties"
+            "$ref": "#/definitions/PrivateStore"
           }
         },
         "nextLink": {
           "description": "URL to get the next set of PrivateStore list results if there are any.",
           "type": "string"
+        }
+      }
+    },
+    "PrivateStore": {
+      "description": "The PrivateStore data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateStoreProperties",
+          "description": "The PrivateStore data structure.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -431,8 +418,12 @@
             "modelAsString": true
           }
         },
-        "name": {
-          "description": "Private Store name",
+        "privateStoreId": {
+          "description": "Private Store id",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "Identifier for purposes of race condition",
           "type": "string"
         }
       }
@@ -453,14 +444,30 @@
       }
     },
     "Offer": {
+      "description": "The privateStore offer data structure.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfferProperties",
+          "description": "The privateStore offer data structure.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OfferProperties": {
       "type": "object",
       "properties": {
-        "id": {
+        "uniqueOfferId": {
           "description": "Offers unique id",
           "type": "string",
           "readOnly": true
         },
-        "displayName": {
+        "offerDisplayName": {
           "description": "It will be displayed prominently in the marketplace",
           "type": "string",
           "readOnly": true
@@ -470,30 +477,30 @@
           "type": "string",
           "readOnly": true
         },
-        "summary": {
-          "description": "Brief purpose or function of offer",
-          "type": "string",
-          "readOnly": true
-        },
-        "longSummary": {
-          "description": "Purpose or function of offer",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Description of offer",
-          "type": "string",
-          "readOnly": true
-        },
         "eTag": {
           "description": "Identifier for purposes of race condition",
           "type": "string"
         },
-        "plans": {
-          "type": "array",
+        "privateStoreId": {
           "readOnly": true,
+          "description": "Private store unique id",
+          "type": "string"
+        },
+        "createdBy": {
+          "readOnly": true,
+          "description": "Private store offer creator name",
+          "type": "string"
+        },
+        "createdDate": {
+          "readOnly": true,
+          "description": "Private store offer created date",
+          "type": "string"
+        },
+        "specificPlanIdsLimitation": {
+          "description": "Plan ids limitation for this offer",
+          "type": "array",
           "items": {
-            "$ref": "#/definitions/Plan"
+            "type": "string"
           }
         }
       }
@@ -501,12 +508,17 @@
     "Plan": {
       "type": "object",
       "properties": {
-        "planId": {
+        "skuId": {
           "description": "Identifier for this plan",
           "type": "string",
           "readOnly": true
         },
-        "displayName": {
+        "planId": {
+          "description": "Text identifier for this plan",
+          "type": "string",
+          "readOnly": true
+        },
+        "planDisplayName": {
           "description": "Friendly name for the plan for display in the marketplace",
           "type": "string",
           "readOnly": true
@@ -556,6 +568,27 @@
           "readOnly": true
         }
       }
+    },
+    "Resource": {
+      "description": "An Azure resource.",
+      "properties": {
+        "id": {
+          "description": "The resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "securityDefinitions": {

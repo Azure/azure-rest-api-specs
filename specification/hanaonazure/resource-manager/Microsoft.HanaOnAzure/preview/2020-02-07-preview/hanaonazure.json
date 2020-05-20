@@ -27,6 +27,48 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HanaOnAzure/operations": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of SAP HANA management operations.",
+        "x-ms-examples": {
+          "List all HANA management operations supported by HANA RP": {
+            "$ref": "./examples/HanaOperations_List.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
         "tags": [
@@ -514,6 +556,65 @@
         }
       ]
     },
+    "OperationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of HANA operations"
+        }
+      },
+      "description": "List of HANA operations"
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the operation being performed on this particular object. This name should match the action name that appears in RBAC / the event service."
+        },
+        "display": {
+          "$ref": "#/definitions/Display",
+          "description": "Displayed HANA operation information"
+        }
+      },
+      "description": "HANA operation information"
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with \"Microsoft\" for 1st party services."
+        },
+        "resource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section."
+        },
+        "operation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly name for the operation as shown to the user. This name should be concise (to fit in drop downs), but clear (self-documenting). Use Title Casing and include the entity/resource to which it applies."
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized friendly description for the operation as shown to the user. This description should be thorough, yet concise. It will be used in tool-tips and detailed views."
+        },
+        "origin": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is 'user,system'"
+        }
+      },
+      "description": "Detailed HANA operation information"
+    },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
       "type": "object",
@@ -647,24 +748,6 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ProviderInstanceProperties",
           "description": "Provider Instance properties"
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Updating",
-            "Failed",
-            "Succeeded",
-            "Deleting",
-            "Migrating"
-          ],
-          "x-ms-enum": {
-            "name": "HanaProvisioningStatesEnum",
-            "modelAsString": true
-          },
-          "description": "State of provisioning of the provider instance"
         }
       },
       "allOf": [
@@ -687,6 +770,24 @@
         "metadata": {
           "type": "string",
           "description": "A JSON string containing metadata of the provider instance."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the provider instance"
         }
       },
       "description": "Describes the properties of a provider instance."
