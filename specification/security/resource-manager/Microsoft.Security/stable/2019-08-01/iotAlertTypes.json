@@ -98,7 +98,8 @@
             "in": "path",
             "name": "iotAlertTypeName",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the alert type"
           }
         ],
         "responses": {
@@ -106,6 +107,7 @@
             "description": "IoT alert type",
             "schema": {
               "$ref": "#/definitions/IotAlertType"
+              }
             },
             "default": {
               "description": "Error response describing why the operation failed.",
@@ -115,15 +117,16 @@
             }
           }
         }
-      }
     }
   },
   "definitions": {
     "IotAlertTypeList": {
       "type": "object",
+      "description": "List of alert types",
       "properties": {
         "value": {
           "type": "array",
+          "description": "List data",
           "items": {
             "$ref": "#/definitions/IotAlertType"
           }
@@ -135,6 +138,8 @@
       "description": "IoT alert type.",
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Alert type properties",
           "$ref": "#/definitions/IotAlertTypeProperties"
         }
       },
