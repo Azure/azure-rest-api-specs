@@ -9,9 +9,9 @@ cli:
     - where:
         group: (ActiveApplications|Applications|ApplicationgroupAssignments|Desktops|SessionHosts|StartMenuItems|UserSessions)
       hidden: true
-    - where:
-        group: ApplicationGroups
-        op: ListByResourceGroup
-        param: \$filter
-      name: list-filter
+    # - where:
+    #     group: ApplicationGroups
+    #     op: ListByResourceGroup
+    #     param: \$filter
+    #   name: list-filter
 ```
