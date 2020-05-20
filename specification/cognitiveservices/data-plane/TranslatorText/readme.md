@@ -6,7 +6,7 @@ Configuration for generating Translator Text SDK.
 
 The current release is `release_3_0`.
 
-The current document batch preview release is `preview_1_0`
+The current document batch preview release is `release_1_0_preview.1'`
 
 ``` yaml
 
@@ -17,7 +17,7 @@ openapi-type: data-plane
 
 ``` yaml
 
-tag: preview_1_0
+tag: release_1_0_preview.1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -25,8 +25,8 @@ openapi-type: data-plane
 # Releases
 
 ### Preview 1.0
-This setting is for batch document translator and only applied when `--tag=preview_1_0` is specified on the command line.
-``` yaml $(tag) == 'preview_1_0'
+This setting is for batch document translator and only applied when `--tag=release_1_0_preview.1` is specified on the command line.
+``` yaml $(tag) == 'release_1_0_preview.1'
 input-file: preview/v1.0/TranslatorBatch.json
 ```
 
@@ -105,15 +105,15 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: release_3_0
-  - tag: preview_1_0
+  - tag: release_1_0_preview.1
 ```
-### Tag: preview_1_0 and go
+### Tag: release_1_0_preview.1 and go
 
-These settings apply only when `--tag=preview_1_0 --go` is specified on the command line.
+These settings apply only when `--tag=release_1_0_preview.1 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'preview_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/$(namespace)
+``` yaml $(tag) == 'release_1_0_preview.1' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0_preview.1/$(namespace)
 ```
 
 ### Tag: release_3_0 and go
@@ -152,12 +152,12 @@ nodejs:
   generate-readme-md: false
 ```
 
-### Tag: preview_1_0 and nodejs
+### Tag: release_1_0_preview.1 and nodejs
 
-These settings apply only when `--tag=preview_1_0 --nodejs` is specified on the command line.
+These settings apply only when `--tag=release_1_0_preview.1 --nodejs` is specified on the command line.
 
-``` yaml $(tag) == 'preview_1_0' && $(nodejs)
-  package-version: 1.0.0
+``` yaml $(tag) == 'release_1_0_preview.1' && $(nodejs)
+  package-version: 1.0.1
 ```
 
 ### Tag: release_3_0 and go
@@ -181,7 +181,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v3.0/TranslatorText.json
-  - $(this-folder)/preview/v1.0/TranslatorBatch.json
+  - $(this-folder)/preview/v1.0-preview.1/TranslatorBatch.json
 
 ```
 
