@@ -12,6 +12,8 @@ python:
   namespace: azure.mgmt.databox
   package-name: azure-mgmt-databox
   package-version: 0.1.0
+  title: DataBoxManagementClient
+  description: The DataBox Client.
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
