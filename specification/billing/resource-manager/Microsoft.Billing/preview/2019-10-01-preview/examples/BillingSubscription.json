@@ -1,17 +1,15 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "{billingProfileName}",
-    "invoiceSectionName": "{invoiceSectionName}",
-    "billingSubscriptionName": "{billingSubscriptionName}"
+    "subscriptionId": "{subscriptionId}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}",
-        "name": "{billingSubscriptionName}",
-        "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections/billingSubscriptions",
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/{subscriptionId}",
+        "name": "{subscriptionId}",
+        "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
         "properties": {
           "displayName": "My Subscription",
           "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
@@ -24,12 +22,13 @@
             "currency": "USD",
             "value": 600
           },
-          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}",
+          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000/invoiceSections/22000000-0000-0000-0000-000000000000",
           "invoiceSectionDisplayName": "Contoso operations invoiceSection",
           "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
           "billingProfileDisplayName": "Contoso operations billing",
+          "costCenter": "ABC1234",
           "skuId": "0001",
-          "skuDescription": "Microsoft Azure Dev/Test"
+          "skuDescription": "Microsoft Azure Plan"
         }
       }
     }

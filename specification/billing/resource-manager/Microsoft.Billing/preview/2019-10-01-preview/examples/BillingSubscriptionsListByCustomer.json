@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2018-11-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
     "customerName": "{customerName}"
   },
@@ -9,9 +9,9 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/billinSubscriptionId1",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/billinSubscriptionId1",
             "name": "billingSubscriptionId1",
-            "type": "Microsoft.Billing/billingSubscriptions",
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
             "properties": {
               "displayName": "My subscription",
               "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
@@ -24,6 +24,7 @@
                 "currency": "USD",
                 "value": 600.00
               },
+              "costCenter": "ABC1234",
               "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
               "customerDisplayName": "Customer1",
               "reseller": {
@@ -31,13 +32,13 @@
                 "description": "Reseller1"
               },
               "skuId": "0002",
-              "skuDescription": "Microsoft Azure Standard"
+              "skuDescription": "Microsoft Azure Plan for DevTest"
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/billinSubscriptionId2",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingSubscriptions/billinSubscriptionId2",
             "name": "billingSubscriptionId2",
-            "type": "Microsoft.Billing/billingSubscriptions",
+            "type": "Microsoft.Billing/billingAccounts/billingSubscriptions",
             "properties": {
               "displayName": "Test subscription",
               "subscriptionId": "6b96d3f2-9008-4a9d-912f-6b96d3f2",
@@ -50,6 +51,7 @@
                 "currency": "USD",
                 "value": 400
               },
+              "costCenter": "ABC1234",
               "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
               "customerDisplayName": "Customer1",
               "reseller": {
@@ -57,7 +59,7 @@
                 "description": "Reseller3"
               },
               "skuId": "0002",
-              "skuDescription": "Microsoft Azure Standard"
+              "skuDescription": "Microsoft Azure Plan for DevTest"
             }
           }
         ]

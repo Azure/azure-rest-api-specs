@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}"
   },
   "responses": {
@@ -13,7 +13,7 @@
             "type": "Microsoft.Billing/billingAccounts/billingProfiles",
             "properties": {
               "displayName": "BillingProfile1",
-              "address": {
+              "billTo": {
                 "companyName": "Contoso",
                 "firstName": "Test",
                 "lastName": "User",
@@ -23,22 +23,26 @@
                 "city": "City",
                 "postalCode": "00000",
                 "region": "WA",
-                "country": "US"
+                "country": "US",
+                "email": "abc@contoso.com",
+                "phoneNumber": "000-000-0000"
               },
               "currency": "USD",
               "enabledAzurePlans": [
                 {
                   "skuId": "0001",
-                  "skuDescription": "Microsoft Azure Dev/Test"
+                  "skuDescription": "Microsoft Azure Plan"
                 },
                 {
                   "skuId": "0002",
-                  "skuDescription": "Microsoft Azure Standard"
+                  "skuDescription": "Microsoft Azure Plan for DevTest"
                 }
               ],
               "invoiceDay": 5,
               "invoiceEmailOptIn": true,
               "poNumber": "ABC12345",
+              "hasReadAccess": true,
+              "systemId": "1XXX-11XX-XX1-XXXX-XXX",
               "status": "Warned",
               "statusReasonCode": "PastDue",
               "spendingLimit": "On"
@@ -50,7 +54,7 @@
             "type": "Microsoft.Billing/billingAccounts/billingProfiles",
             "properties": {
               "displayName": "BillingProfile2",
-              "address": {
+              "billTo": {
                 "companyName": "Contoso",
                 "firstName": "Test",
                 "lastName": "User",
@@ -60,22 +64,26 @@
                 "city": "City",
                 "postalCode": "00000",
                 "region": "WA",
-                "country": "US"
+                "country": "US",
+                "email": "abc@contoso.com",
+                "phoneNumber": "000-000-0000"
               },
               "currency": "USD",
               "enabledAzurePlans": [
                 {
                   "skuId": "0001",
-                  "skuDescription": "Microsoft Azure Dev/Test"
+                  "skuDescription": "Microsoft Azure Plan"
                 },
                 {
                   "skuId": "0002",
-                  "skuDescription": "Microsoft Azure Standard"
+                  "skuDescription": "Microsoft Azure Plan for DevTest"
                 }
               ],
               "invoiceDay": 5,
               "invoiceEmailOptIn": true,
               "poNumber": "ABC12345",
+              "hasReadAccess": true,
+              "systemId": "2XXX-22XX-XX1-XXXX-XXX",
               "status": "Active",
               "spendingLimit": "Off"
             }

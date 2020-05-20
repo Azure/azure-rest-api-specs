@@ -1,8 +1,7 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "{billingProfileName}",
     "invoiceName": "{invoiceName}"
   },
   "responses": {
@@ -10,13 +9,14 @@
       "body": {
         "value": [
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/BillingProfiles/{billingProfileName}/transactions/41000000-0000-0000-0000-000000000000",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/transactions/41000000-0000-0000-0000-000000000000",
             "name": "41000000-0000-0000-0000-000000000000",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/transactions",
+            "type": "Microsoft.Billing/billingAccounts/transactions",
             "properties": {
               "kind": "all",
               "date": "2018-05-01T00:00:00Z",
               "invoice": "2344233",
+              "invoiceId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/2344233",
               "productFamily": "Storage",
               "productTypeId": "A12345",
               "productType": "VM Instance",
@@ -30,6 +30,7 @@
               "invoiceSectionDisplayName": "Contoso operations invoiceSection",
               "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
               "billingProfileDisplayName": "Contoso operations billing",
+              "azurePlan": "Microsoft Azure Plan for DevTest",
               "azureCreditApplied": {
                 "currency": "USD",
                 "value": 2000.00
@@ -63,9 +64,9 @@
             }
           },
           {
-            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/BillingProfiles/{billingProfileName}/transactions/51000000-0000-0000-0000-000000000000",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/transactions/51000000-0000-0000-0000-000000000000",
             "name": "51000000-0000-0000-0000-000000000000",
-            "type": "Microsoft.Billing/billingAccounts/billingProfiles/transactions",
+            "type": "Microsoft.Billing/billingAccounts/transactions",
             "properties": {
               "kind": "all",
               "date": "2018-04-01T00:00:00Z",
@@ -83,6 +84,7 @@
               "invoiceSectionDisplayName": "Contoso operations invoiceSection",
               "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
               "billingProfileDisplayName": "Contoso operations billing",
+              "azurePlan": "Microsoft Azure Plan for DevTest",
               "azureCreditApplied": {
                 "currency": "USD",
                 "value": 20.00

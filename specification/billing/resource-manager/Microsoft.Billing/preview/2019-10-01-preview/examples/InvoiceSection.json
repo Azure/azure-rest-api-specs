@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-10-01-preview",
+    "api-version": "2020-05-01",
     "billingAccountName": "{billingAccountName}",
     "billingProfileName": "{billingProfileName}",
     "invoiceSectionName": "{invoiceSectionName}"
@@ -12,7 +12,12 @@
         "name": "{invoiceSectionName}",
         "type": "Microsoft.Billing/billingAccounts/billingProfiles/invoiceSections",
         "properties": {
-          "displayName": "invoiceSection1"
+          "displayName": "invoiceSection1",
+          "labels": {
+            "pcCode": "A123456",
+            "costCategory": "Support"
+          },
+          "systemId": "XX1X-XXAA-XXX-ZZZ"
         }
       }
     }
