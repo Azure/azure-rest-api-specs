@@ -27,7 +27,7 @@ openapi-type: data-plane
 ### Preview 1.0
 This setting is for batch document translator and only applied when `--tag=release_1_0_preview.1` is specified on the command line.
 ``` yaml $(tag) == 'release_1_0_preview.1'
-input-file: preview/v1.0/TranslatorBatch.json
+input-file: preview/v1.0-preview.1/TranslatorBatch.json
 ```
 
 ### Release 3.0
