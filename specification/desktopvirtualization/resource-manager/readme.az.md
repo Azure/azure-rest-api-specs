@@ -4,19 +4,19 @@ These settings apply only when `--az` is specified on the command line.
 
 ``` yaml $(az)
 az:
-  extensions: windows-virtual-desktop
+  extensions: desktopvirtualization
   package-name: azure-mgmt-desktopvirtualization
   namespace: azure.mgmt.desktopvirtualization
-az-output-folder: $(azure-cli-extension-folder)/src/windowsvirtualdesktop
-python-sdk-output-folder: "$(az-output-folder)/azext_windows_virtual_desktop/vendored_sdks/desktopvirtualization"
+az-output-folder: $(azure-cli-extension-folder)/src/desktopvirtualization
+python-sdk-output-folder: "$(az-output-folder)/azext_desktopvirtualization/vendored_sdks/desktopvirtualization"
 
 directive:
   - where:
-      group: windows-virtual-desktop host-pool
+      group: desktopvirtualization host-pool
     set:
-      group: windows-virtual-desktop hostpool
+      group: desktopvirtualization hostpool
   - where:
-      group: windows-virtual-desktop application-group
+      group: desktopvirtualization application-group
     set:
-      group: windows-virtual-desktop applicationgroup
+      group: desktopvirtualization applicationgroup
 ```
