@@ -52,12 +52,7 @@
           "200": {
             "description": "Security domain download response",
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/SecurityDomainObject"
             }
           },
           "default": {
@@ -74,7 +69,7 @@
         }
       }
     },
-    "/securitydomain/transfer_key": {
+    "/securitydomain/transferkey": {
       "get": {
         "tags": [
           "HSMSecurityDomain"
@@ -113,14 +108,10 @@
           {
             "in": "body",
             "name": "security_domain",
+            "description": "security domain",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "value": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/SecurityDomainObject"
             }
           }
         ],
@@ -184,25 +175,7 @@
               }
             },
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "description": "operation status",
-                  "enum": [
-                    "Success",
-                    "Inprogress",
-                    "Failed"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": true,
-                    "name": "OperationStatus"
-                  },
-                  "type": "string"
-                },
-                "status_details": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/definitions/UploadPendingResponse"
             }
           },
           "default": {
@@ -258,6 +231,33 @@
       "required": [
         "transfer_key"
       ]
+    },
+    "SecurityDomainObject": {
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "UploadPendingResponse": {
+      "properties": {
+        "status": {
+          "description": "operation status",
+          "enum": [
+            "Success",
+            "Inprogress",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OperationStatus"
+          },
+          "type": "string"
+        },
+        "status_details": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
