@@ -36,10 +36,10 @@
     "/providers/Microsoft.Confluent/operations": {
       "get": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
         "summary": "List all operations provided by Microsoft.Confluent.",
-        "operationId": "Operations_List",
+        "operationId": "OrganizationOperations_List",
         "produces": [
           "application/json"
         ],
@@ -66,19 +66,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
+          "OrganizationOperations_List": {
+            "$ref": "./examples/OrganizationOperations_List.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/confluent": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Confluent/organizations": {
       "get": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "List all confluent under the specified subscription.",
-        "operationId": "Confluent_ListBySubscription",
+        "summary": "List all organizations under the specified subscription.",
+        "operationId": "Organization_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -94,7 +94,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConfluentResourceListResult"
+              "$ref": "#/definitions/OrganizationResourceListResult"
             }
           },
           "default": {
@@ -108,19 +108,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Confluent_List": {
-            "$ref": "./examples/Confluent_ListBySubscription.json"
+          "Organization_ListBySubscription": {
+            "$ref": "./examples/Organization_ListBySubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/confluent": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations": {
       "get": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "List all confluent under the specified resource group.",
-        "operationId": "Confluent_ListByResourceGroup",
+        "summary": "List all Organizations under the specified resource group.",
+        "operationId": "Organization_ListByResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -139,7 +139,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConfluentResourceListResult"
+              "$ref": "#/definitions/OrganizationResourceListResult"
             }
           },
           "default": {
@@ -153,19 +153,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "Confluent_ListByResourceGroup": {
-            "$ref": "./examples/Confluent_ListByResourceGroup.json"
+          "Organization_ListByResourceGroup": {
+            "$ref": "./examples/Organization_ListByResourceGroup.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/confluent/{confluentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Confluent/organizations/{organizationName}": {
       "get": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "Get the properties of a specific confluent resource.",
-        "operationId": "Confluent_Get",
+        "summary": "Get the properties of a specific Organization resource.",
+        "operationId": "Organization_Get",
         "produces": [
           "application/json"
         ],
@@ -180,14 +180,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ConfluentResourceNameParameter"
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "default": {
@@ -198,17 +198,17 @@
           }
         },
         "x-ms-examples": {
-          "Confluent_Get": {
-            "$ref": "./examples/Confluent_Get.json"
+          "Organization_Get": {
+            "$ref": "./examples/Organization_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "Create Confluent resource",
-        "operationId": "Confluent_Create",
+        "summary": "Create Organization resource",
+        "operationId": "Organization_Create",
         "consumes": [
           "application/json"
         ],
@@ -226,14 +226,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ConfluentResourceNameParameter"
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "confluent resource model",
+            "description": "Organization resource model",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           }
         ],
@@ -241,13 +241,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "default": {
@@ -262,17 +262,17 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Confluent_Create": {
-            "$ref": "./examples/Confluent_Create.json"
+          "Organization_Create": {
+            "$ref": "./examples/Organization_Create.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "Update confluent resource",
-        "operationId": "Confluent_Update",
+        "summary": "Update Organization resource",
+        "operationId": "Organization_Update",
         "consumes": [
           "application/json"
         ],
@@ -290,14 +290,14 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ConfluentResourceNameParameter"
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Updated confluent resource",
+            "description": "Updated Organization resource",
             "schema": {
-              "$ref": "#/definitions/ConfluentResourceUpdate"
+              "$ref": "#/definitions/OrganizationResourceUpdate"
             }
           }
         ],
@@ -305,7 +305,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ConfluentResource"
+              "$ref": "#/definitions/OrganizationResource"
             }
           },
           "default": {
@@ -317,16 +317,16 @@
         },
         "x-ms-examples": {
           "Confluent_Update": {
-            "$ref": "./examples/Confluent_Update.json"
+            "$ref": "./examples/Organization_Update.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Confluent"
+          "Organization"
         ],
-        "summary": "Delete Confluent resource",
-        "operationId": "Confluent_Delete",
+        "summary": "Delete Organization resource",
+        "operationId": "Organization_Delete",
         "produces": [
           "application/json"
         ],
@@ -341,7 +341,7 @@
             "$ref": "#/parameters/ResourceGroupParameter"
           },
           {
-            "$ref": "#/parameters/ConfluentResourceNameParameter"
+            "$ref": "#/parameters/OrganizationResourceNameParameter"
           }
         ],
         "responses": {
@@ -364,7 +364,7 @@
         },
         "x-ms-examples": {
           "Confluent_Delete": {
-            "$ref": "./examples/Confluent_Delete.json"
+            "$ref": "./examples/Organization_Delete.json"
           }
         }
       }
@@ -485,9 +485,8 @@
       }
     },
     "ConfluentOrganizationProperties": {
+      "description": "Confluent organization property",
       "type": "object",
-      "description": "Confluent organization properties",
-      "title": "ConfluentOrganizationProperties",
       "properties": {
         "name": {
           "description": "Name of the Confluent organization.",
@@ -506,9 +505,8 @@
       }
     },
     "OfferDetail": {
+      "description": "Confluent Offer detail",
       "type": "object",
-      "description": "Confluent offer detail",
-      "title": "OfferDetail",
       "properties": {
         "publisherId": {
           "description": "Publisher Id",
@@ -533,9 +531,8 @@
       }
     },
     "UserDetail": {
-      "type": "object",
       "description": "Subscriber detail",
-      "title": "UserDetail",
+      "type": "object",
       "properties": {
         "firstName": {
           "description": "First name",
@@ -559,10 +556,9 @@
         }
       }
     },
-    "ConfluentProperties": {
+    "OrganizationResourceProperties": {
+      "description": "Organization resource property",
       "type": "object",
-      "description": "Confluent resource properties",
-      "title": "ConfluentProperties",
       "properties": {
         "createdTime": {
           "format": "date-time",
@@ -600,8 +596,8 @@
         }
       }
     },
-    "ConfluentResource": {
-      "description": "Confluent resource.",
+    "OrganizationResource": {
+      "description": "Organization resource.",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -622,27 +618,27 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Confluent resource properties",
+          "description": "Organization resource properties",
           "allOf": [
             {
-              "$ref": "#/definitions/ConfluentProperties"
+              "$ref": "#/definitions/OrganizationResourceProperties"
             }
           ]
         },
         "tags": {
           "type": "object",
-          "description": "Confluent resource tags",
+          "description": "Organization resource tags",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
-          "description": "Location of confluent resource",
+          "description": "Location of Organization resource",
           "type": "string"
         }
       }
     },
-    "ConfluentResourceListResult": {
+    "OrganizationResourceListResult": {
       "description": "The response of a list operation.",
       "type": "object",
       "properties": {
@@ -650,7 +646,7 @@
           "description": "Result of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConfluentResource"
+            "$ref": "#/definitions/OrganizationResource"
           }
         },
         "nextLink": {
@@ -659,8 +655,8 @@
         }
       }
     },
-    "ConfluentResourceUpdate": {
-      "description": "Confluent Resource update",
+    "OrganizationResourceUpdate": {
+      "description": "Organization Resource update",
       "type": "object",
       "properties": {
         "tags": {
@@ -699,10 +695,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ConfluentResourceNameParameter": {
+    "OrganizationResourceNameParameter": {
       "in": "path",
-      "name": "confluentName",
-      "description": "confluent resource name",
+      "name": "organizationName",
+      "description": "Organization resource name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

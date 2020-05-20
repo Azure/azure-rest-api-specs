@@ -3,17 +3,23 @@
     "api-version": "2020-03-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "confluentName": "myConfluent"
+    "organizationName": "myOrganization",
+    "body": {
+      "tags": {
+        "env": "dev",
+        "client": "dev-client"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/confluent/myConfluent",
-        "name": "myConfluent",
-        "type": "Microsoft.Confluent/confluent",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.Confluent/organizations",
         "properties": {
           "createdTime": "2020-05-09T14:28:47.284Z",
-          "provisioningState": "Accepted",
+          "provisioningState": "Succeeded",
           "organizationProperties": {
             "name": "string",
             "id": "string",
