@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetUserSettingsResponse"
+              "$ref": "#/definitions/UserSettingsResponse"
             },
             "headers": {
               "x-ms-console-required-location-code": {
@@ -110,7 +110,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -186,7 +189,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -363,7 +369,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/GetUserSettingsResponse"
+              "$ref": "#/definitions/UserSettingsResponse"
             },
             "headers": {
               "x-ms-console-required-location-code": {
@@ -412,7 +418,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserSettingsResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -734,7 +743,7 @@
         }
       }
     },
-    "GetUserSettingsResponse": {
+    "UserSettingsResponse": {
       "description": "Response to get user settings",
       "type": "object",
       "required": [
@@ -742,11 +751,11 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/GetUserSettingsResponseContent"
+          "$ref": "#/definitions/UserSettingsResponseContent"
         }
       }
     },
-    "GetUserSettingsResponseContent": {
+    "UserSettingsResponseContent": {
       "description": "The user settings response content",
       "type": "object",
       "required": [
