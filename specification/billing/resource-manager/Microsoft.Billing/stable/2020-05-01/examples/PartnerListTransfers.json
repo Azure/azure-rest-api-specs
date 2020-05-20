@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "customerName": "{customerName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "creationTime": "2018-10-10T17:32:28Z",
+              "expirationTime": "2018-11-05T17:32:28Z",
+              "billingAccountId": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}",
+              "billingProfileId": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+              "invoiceSectionId": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}",
+              "transferStatus": "InProgress",
+              "recipientEmailId": "user@contoso.com",
+              "initiatorEmailId": "xyz@contoso.com",
+              "lastModifiedTime": "2018-10-10T17:32:28Z",
+              "detailedTransferStatus": [
+                {
+                  "productType": "AzureSubscription",
+                  "productId": "subscriptionId",
+                  "transferStatus": "InProgress"
+                },
+                {
+                  "productType": "AzureReservation",
+                  "productId": "reservedInstanceId",
+                  "transferStatus": "InProgress"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
