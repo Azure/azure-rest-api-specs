@@ -2391,14 +2391,56 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings": {
+      "get": {
+        "x-ms-examples": {
+          "Get EyesOn settings.": {
+            "$ref": "./examples/settings/GetAllSettings.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "List of all the settings",
+        "operationId": "ProductSettings_GetAll",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}": {
       "get": {
         "x-ms-examples": {
-          "Get UEBA settings.": {
-            "$ref": "./examples/settings/GetUebaSettings.json"
-          },
-          "Get Fusion settings.": {
-            "$ref": "./examples/settings/GetFusionSettings.json"
+          "Get EyesOn settings.": {
+            "$ref": "./examples/settings/GetEyesOnSetting.json"
           }
         },
         "tags": [
@@ -2441,16 +2483,62 @@
           }
         }
       },
-      "put": {
+      "delete": {
         "x-ms-examples": {
-          "Update UEBA settings.": {
-            "$ref": "./examples/settings/UpdateUebaSettings.json"
+          "Delete EyesOn settings.": {
+            "$ref": "./examples/settings/DeleteEyesOnSetting.json"
           }
         },
         "tags": [
           "Settings"
         ],
-        "description": "Updates the setting.",
+        "description": "Delete setting of the product.",
+        "operationId": "ProductSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SettingsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update EyesOn settings.": {
+            "$ref": "./examples/settings/UpdateEyesOnSetting.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Updates setting.",
         "operationId": "ProductSettings_Update",
         "parameters": [
           {
@@ -7779,6 +7867,21 @@
       },
       "type": "object"
     },
+    "SettingList": {
+      "description": "List of all the settings.",
+      "properties": {
+        "value": {
+          "description": "Array of settings.",
+          "items": {
+            "$ref": "#/definitions/Settings"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "Settings": {
       "allOf": [
         {
@@ -7790,10 +7893,7 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "SettingsKind": {
       "description": "Describes an Azure resource with kind.",
@@ -7801,8 +7901,7 @@
         "kind": {
           "description": "The kind of the setting",
           "enum": [
-            "UebaSettings",
-            "ToggleSettings"
+            "EyesOn"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -8024,7 +8123,7 @@
       },
       "type": "object"
     },
-    "ToggleSettings": {
+    "EyesOn": {
       "allOf": [
         {
           "$ref": "#/definitions/Settings"
@@ -8033,73 +8132,21 @@
       "description": "Settings with single toggle.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ToggleSettingsProperties",
-          "description": "toggle properties",
+          "$ref": "#/definitions/EyesOnSettingsProperties",
+          "description": "EyesOn properties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "ToggleSettings"
+      "x-ms-discriminator-value": "EyesOn"
     },
-    "ToggleSettingsProperties": {
-      "description": "toggle property bag.",
+    "EyesOnSettingsProperties": {
+      "description": "EyesOn property bag.",
       "properties": {
         "isEnabled": {
           "description": "Determines whether the setting is enable or disabled.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "UebaSettings": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "description": "Represents settings for User and Entity Behavior Analytics enablement.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/UebaSettingsProperties",
-          "description": "User and Entity Behavior Analytics settings properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object",
-      "x-ms-discriminator-value": "UebaSettings"
-    },
-    "UebaSettingsProperties": {
-      "description": "User and Entity Behavior Analytics settings property bag.",
-      "properties": {
-        "atpLicenseStatus": {
-          "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
           "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "LicenseStatus"
-          }
-        },
-        "isEnabled": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace.",
           "type": "boolean"
-        },
-        "statusInMcas": {
-          "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "readOnly": true,
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "StatusInMcas"
-          }
         }
       },
       "type": "object"
@@ -8609,7 +8656,7 @@
       "x-ms-parameter-location": "method"
     },
     "SettingsName": {
-      "description": "The setting name. Supports- Fusion, UEBA",
+      "description": "The setting name. Supports- EyesOn",
       "in": "path",
       "name": "settingsName",
       "required": true,
