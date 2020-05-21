@@ -36,14 +36,14 @@
       "get": {
         "x-ms-examples": {
           "Get IoT Alert Types": {
-            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlerts.json"
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlertList.json"
           }
         },
         "tags": [
           "IoT Security Solution Analytics"
         ],
         "description": "List IoT alerts",
-        "operationId": "IotAlert_List",
+        "operationId": "IotAlerts_List",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -111,7 +111,7 @@
             "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTAlert.json"
           }
         },
-        "operationId": "IotAlert_Get",
+        "operationId": "IotAlerts_Get",
         "description": "Get IoT alert",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -152,12 +152,11 @@
   },
   "definitions": {
     "CompactIotAlertPropertiesList": {
+      "description": "List of alerts",
       "type": "object",
-      "required": [
-        "value"
-      ],
       "properties": {
         "value": {
+          "description": "List data",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -173,34 +172,34 @@
     },
     "CompactIotAlertProperties": {
       "type": "object",
-      "required": [
-        "systemAlertId",
-        "compromisedEntity",
-        "alertType",
-        "startTimeUtc"
-      ],
+      "description": "Compact version of IoT alert properties",
       "properties": {
         "systemAlertId": {
-          "readonly": true,
+          "description": "Holds the product canonical identifier of the alert within the scope of a product",
+          "readOnly": true,
           "type": "string",
           "example": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8"
         },
         "compromisedEntity": {
+          "description": "Display name of the main entity being reported on",
           "readOnly": true,
           "type": "string",
           "example": "device-1"
         },
         "alertType": {
+          "description": "The type name of the alert",
           "readOnly": true,
           "type": "string",
           "example": "IoT_PrivilegedContainer"
         },
         "startTimeUtc": {
+          "description": "The impact start time of the alert (the time of the first event or activity included in the alert)",
           "readOnly": true,
           "type": "string",
           "example": "2020-05-13T06:32:25Z"
         },
         "extendedProperties": {
+          "description": "A bag of fields which extends the general alert properties",
           "readOnly": true,
           "type": "object",
           "example": {
@@ -215,10 +214,12 @@
     },
     "IotAlert": {
       "type": "object",
+      "description": "Iot alert",
       "properties": {
         "properties": {
           "readOnly": true,
           "x-ms-client-flatten": true,
+          "description": "Iot alert properties",
           "$ref": "#/definitions/IotAlertProperties"
         }
       },
@@ -228,6 +229,7 @@
     },
     "IotAlertProperties": {
       "type": "object",
+      "description": "IoT alert properties",
       "properties": {},
       "allOf": [{
         "$ref": "#/definitions/CompactIotAlertProperties"

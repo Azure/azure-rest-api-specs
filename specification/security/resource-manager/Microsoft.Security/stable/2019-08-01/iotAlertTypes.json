@@ -123,9 +123,6 @@
     "IotAlertTypeList": {
       "type": "object",
       "description": "List of alert types",
-      "required": [
-        "value"
-      ],
       "properties": {
         "value": {
           "type": "array",
@@ -152,31 +149,21 @@
     },
     "IotAlertTypeProperties": {
       "type": "object",
-      "required": [
-        "displayName",
-        "alertSeverity",
-        "description",
-        "providerName",
-        "vendorName",
-        "remediationSteps",
-        "sourceSystem",
-        "productName",
-        "type"
-      ],
       "description": "IoT alert type information.",
       "properties": {
-        "displayName": {
+        "alertDisplayName": {
           "readOnly": true,
           "type": "string",
           "example": "Privileged container detected",
-          "description": "Display name of the alert type."
+          "description": "The display name of the alert"
         },
-        "alertSeverity": {
+        "severity": {
           "readOnly": true,
           "type": "string",
           "example": "Medium",
-          "description": "Assessed alert severity.",
+          "description": "The severity of the alert",
           "enum": [
+            "Informational",
             "Low",
             "Medium",
             "High"
@@ -185,6 +172,9 @@
             "name": "alertSeverity",
             "modelAsString": true,
             "values": [{
+                "value": "Informational"
+              },
+              {
                 "value": "Low"
               },
               {
@@ -206,40 +196,22 @@
           "readOnly": true,
           "type": "string",
           "example": "IoTSecurity",
-          "description": "Name of the alert type provider."
+          "description": "The name of the alert provider or internal partner"
         },
         "vendorName": {
           "readOnly": true,
           "type": "string",
           "example": "Microsoft",
-          "description": "Name of the alert type vendor."
+          "description": "The name of the vendor that raise the alert"
         },
         "remediationSteps": {
           "readOnly": true,
-          "description": "Recommended steps for remediation.",
+          "description": "Manual action items to take to remediate the alert",
           "type": "array",
           "items": {
             "type": "string",
             "example": "If the container doesn't need to run in privileged mode, remove the privileges from the container."
           }
-        },
-        "sourceSystem": {
-          "readOnly": true,
-          "type": "string",
-          "example": "Detection",
-          "description": "Name of the source system."
-        },
-        "productName": {
-          "readOnly": true,
-          "description": "Product name",
-          "type": "string",
-          "example": "Azure Security Center for IoT"
-        },
-        "type": {
-          "readOnly": true,
-          "description": "Type of the alert",
-          "type": "string",
-          "example": "SecurityAlert"
         }
       }
     }
