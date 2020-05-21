@@ -123,6 +123,9 @@
     "IotAlertTypeList": {
       "type": "object",
       "description": "List of alert types",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -149,6 +152,17 @@
     },
     "IotAlertTypeProperties": {
       "type": "object",
+      "required": [
+        "displayName",
+        "alertSeverity",
+        "description",
+        "providerName",
+        "vendorName",
+        "remediationSteps",
+        "sourceSystem",
+        "productName",
+        "type"
+      ],
       "description": "IoT alert type information.",
       "properties": {
         "displayName": {
