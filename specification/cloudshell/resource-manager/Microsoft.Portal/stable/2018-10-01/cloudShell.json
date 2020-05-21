@@ -759,11 +759,11 @@
       "description": "The user settings response content",
       "type": "object",
       "required": [
-        "userSettings"
+        "properties"
       ],
       "properties": {
-        "userSettings": {
-          "$ref": "#/definitions/CloudShellUserSettings"
+        "properties": {
+          "$ref": "#/definitions/UserProperties"
         }
       }
     },
@@ -787,25 +787,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/PatchProperties"
-        }
-      }
-    },
-    "PatchProperties": {
-      "description": "The cloud shell user settings patch properties.",
-      "type": "object",
-      "required": [
-        "preferredShellType"
-      ],
-      "properties": {
-        "preferredShellType": {
-          "description": "The shell type of the cloud shell.",
-          "type": "string",
-          "enum": [
-            "bash",
-            "pwsh",
-            "powershell"
-          ]
+          "$ref": "#/definitions/UserProperties"
         }
       }
     },
