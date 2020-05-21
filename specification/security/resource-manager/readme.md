@@ -384,7 +384,6 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2018-06-01/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
-  - $(this-folder)/Microsoft.Security/stable/2019-01-01/alerts.json
   - $(this-folder)/Microsoft.Security/stable/2017-08-01/complianceResults.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/settings.json
   - $(this-folder)/Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
