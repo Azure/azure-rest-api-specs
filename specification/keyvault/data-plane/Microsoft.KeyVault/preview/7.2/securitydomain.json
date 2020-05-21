@@ -211,7 +211,7 @@
     "SecurityDomainCertificateItem": {
       "properties": {
         "value": {
-          "$ref": "keys.json#/definitions/JsonWebKey",
+          "$ref": "#/definitions/SecurityDomainJsonWebKey",
           "description": "Customer generated certificate containing public key in JWK format"
         }
       },
@@ -222,7 +222,7 @@
     "TransferKey": {
       "properties": {
         "transfer_key": {
-          "$ref": "keys.json#/definitions/JsonWebKey"
+          "$ref": "#/definitions/SecurityDomainJsonWebKey"
         }
       },
       "required": [
@@ -255,6 +255,69 @@
           "type": "string"
         }
       }
+    },
+    "SecurityDomainJsonWebKey": {
+      "properties": {
+        "kid": {
+          "type": "string",
+          "description": "Key identifier."
+        },
+        "kty": {
+          "type": "string",
+          "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40. For security domain this value must be RSA",
+          "enum": [
+            "RSA",
+            "RSA-HSM"
+          ],
+          "x-ms-enum": {
+            "name": "JsonWebKeyType",
+            "modelAsString": true
+          }
+        },
+        "key_ops": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Supported key operations."
+          }
+        },
+        "n": {
+          "type": "string",
+          "description": "RSA modulus."
+        },
+        "e": {
+          "type": "string",
+          "description": "RSA public exponent."
+        },
+        "x5c": {
+          "description": "X509 certificate chain parameter",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "use": {
+          "description": "Public Key Use Parameter. This is optional and if present must be enc.",
+          "type": "string"
+        },
+        "x5t": {
+          "description": "X509 certificate SHA1 thumbprint. This is optional.",
+          "type": "string"
+        },
+        "x5t#S256": {
+          "description": "X509 certificate SHA256 thumbprint.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kty",
+        "key_ops",
+        "kid",
+        "x5c",
+        "x5t#S256",
+        "n",
+        "e"
+      ]
     }
   },
   "parameters": {
