@@ -1,26 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
+    "subscriptionId": "5d04a672-05ce-492b-958f-d225b6a67926",
     "resourceGroupName": "testRG",
     "accountName": "Contoso",
     "api-version": "2020-03-01-preview",
-    "Account": {
-      "properties": {}
+    "tagUpdatePayload": {
+      "tags": {
+        "tagKey": "tagValue"
+      }
     }
   },
   "responses": {
     "200": {
       "body": {
         "name": "Contoso",
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/testRG/providers/Microsoft.DeviceUpdate/accounts/Contoso",
+        "id": "/subscriptions/5d04a672-05ce-492b-958f-d225b6a67926/resourceGroups/testRG/providers/Microsoft.DeviceUpdate/accounts/Contoso",
         "type": "Microsoft.DeviceUpdate/accounts",
         "location": "West US 2",
+        "tags": {
+          "tagKey": "tagValue"
+        },
         "properties": {
-          "writeRegion": "West US 2",
-          "readRegions": [
-            "East US",
-            "West US 2"
-          ]
         }
       }
     }
