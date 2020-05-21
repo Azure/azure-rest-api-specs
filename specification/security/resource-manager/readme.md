@@ -148,6 +148,7 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+- Microsoft.Security/stable/2019-08-01/iotAlerts.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -302,6 +303,7 @@ input-file:
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
 - Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+- Microsoft.Security/stable/2019-08-01/iotAlerts.json
 
 # Needed when there is more than one input file
 override-info:
@@ -398,6 +400,7 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlertTypes.json
+  - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotAlerts.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessmentMetadata.json
   - $(this-folder)/Microsoft.Security/stable/2020-01-01/assessments.json
