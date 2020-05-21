@@ -725,8 +725,8 @@
               "$ref": "#/definitions/DiskEncryptionSet"
             }
           },
-          "201": {
-            "description": "Created",
+          "202": {
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/DiskEncryptionSet"
             }
@@ -964,6 +964,316 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}": {
+      "put": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_CreateOrUpdate",
+        "description": "Creates or updates a disk access resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskAccess",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            },
+            "description": "disk access object supplied in the body of the Put disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a disk encryption set.": {
+            "$ref": "./examples/CreateADiskAccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_Update",
+        "description": "Updates (patches) a disk access resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "diskAccess",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskAccessUpdate"
+            },
+            "description": "disk access object supplied in the body of the Patch disk access operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a disk encryption set.": {
+            "$ref": "./examples/UpdateADiskAccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_Get",
+        "description": "Gets information about a disk access resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccess"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a disk encryption set.": {
+            "$ref": "./examples/GetInformationAboutADiskAccess.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_Delete",
+        "description": "Deletes a disk access resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "If the disk access resource is already deleted, this is an expected error code."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a disk encryption set.": {
+            "$ref": "./examples/DeleteADiskAccess.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses": {
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_ListByResourceGroup",
+        "description": "Lists all the disk access resources under a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all disk encryption sets in a resource group.": {
+            "$ref": "./examples/ListDiskAccessesInAResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/diskAccesses": {
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_List",
+        "description": "Lists all the disk access resources under a subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DiskAccessList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all disk encryption sets in a subscription.": {
+            "$ref": "./examples/ListDiskAccessesInASubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskAccesses/{diskAccessName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "DiskAccesses"
+        ],
+        "operationId": "DiskAccesses_GetPrivateLinkResources",
+        "description": "Gets the private link resources possible under disk access resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiskAccessNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          }
         }
       }
     }
@@ -1298,6 +1608,37 @@
             "$ref": "#/definitions/ShareInfoElement"
           },
           "description": "Details of the list of all VMs that have the disk attached. maxShares should be set to a value greater than one for disks to allow attaching them to multiple VMs."
+        },
+        "networkAccessPolicy": {
+          "type": "string",
+          "description": "Policy for accessing the disk via network.",
+          "enum": [
+            "AllowAll",
+            "AllowPrivate",
+            "DenyAll"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkAccessPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AllowAll",
+                "description": "The disk can be exported or uploaded to from any network."
+              },
+              {
+                "value": "AllowPrivate",
+                "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
+              },
+              {
+                "value": "DenyAll",
+                "description": "The disk cannot be exported."
+              }
+            ]
+          }
+        },
+        "diskAccessId": {
+          "type": "string",
+          "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
         }
       },
       "required": [
@@ -1311,7 +1652,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The time when the disk was created."
+          "description": "The time when the snapshot was created."
         },
         "osType": {
           "type": "string",
@@ -1391,6 +1732,33 @@
     },
     "EncryptionSetProperties": {
       "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "The type of key used to encrypt the data of the disk. EncryptionType can't be changed once the disk encryption set has been created",
+          "enum": [
+            "EncryptionAtRestWithPlatformKey",
+            "EncryptionAtRestWithCustomerKey",
+            "EncryptionAtRestWithPlatformAndCustomerKeys"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EncryptionAtRestWithPlatformKey",
+                "description": "Disk is encrypted with XStore managed key at rest. It is the default encryption type."
+              },
+              {
+                "value": "EncryptionAtRestWithCustomerKey",
+                "description": "Disk is encrypted with Customer managed key at rest."
+              },
+              {
+                "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+                "description": ""
+              }
+            ]
+          }
+        },
         "activeKey": {
           "$ref": "#/definitions/KeyVaultAndKeyReference",
           "description": "The key vault key which is currently used by this disk encryption set."
@@ -1475,8 +1843,7 @@
         }
       },
       "required": [
-        "keyUrl",
-        "sourceVault"
+        "keyUrl"
       ],
       "description": "Key Vault Key Url and vault id of KeK, KeK is optional and when provided is used to unwrap the encryptionKey"
     },
@@ -1889,6 +2256,74 @@
       ],
       "description": "The List disk encryption set operation response."
     },
+    "DiskAccessProperties": {
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "A readonly collection of private endpoint connections created on the disk."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The disk access resource provisioning state."
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the disk access was created."
+        }
+      }
+    },
+    "DiskAccess": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiskAccessProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "disk access resource."
+    },
+    "DiskAccessList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskAccess"
+          },
+          "description": "A list of disk access resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The uri to fetch the next page of disk access resources. Call ListNext() with this to fetch the next page of disk access resources."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List disk access operation response."
+    },
+    "DiskAccessUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "disk access update resource."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -2002,6 +2437,14 @@
       "required": true,
       "type": "string",
       "description": "The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiskAccessNameParameter": {
+      "name": "diskAccessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the disk access resource that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9 and _. The maximum name length is 80 characters.",
       "x-ms-parameter-location": "method"
     }
   }
