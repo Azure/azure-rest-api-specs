@@ -3475,13 +3475,13 @@
             "description": "*** Error Responses: ***\n\n * 400 Bad Request.\n\n * 500 Internal Server Error."
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        },
         "x-ms-examples": {
           "PartnerRegistrations_List": {
             "$ref": "./examples/PartnerRegistrations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -3888,7 +3888,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -3954,7 +3958,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4034,7 +4042,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
@@ -4101,7 +4113,11 @@
             "in": "path",
             "description": "The type of the parent resource. This can be either \\'topics\\' or \\'domains\\'.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ]
           },
           {
             "name": "parentName",
