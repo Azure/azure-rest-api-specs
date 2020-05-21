@@ -572,7 +572,6 @@
   "definitions": {
     "Alert": {
       "type": "object",
-      "additionalProperties": true,
       "description": "Security alert",
       "properties": {
         "properties": {
@@ -589,7 +588,9 @@
     },
     "AlertEntity": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": {
+        "type": "object"
+      },
       "description": "Changing set of properties depending on the entity type.",
       "properties": {
         "type": {
@@ -601,12 +602,16 @@
     },
     "AlertExtendedLinks": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": {
+        "type": "string"
+      },
       "description": "Links related to the alert"
     },
     "AlertExtendedProperties": {
       "type": "object",
-      "additionalProperties": true,
+      "additionalProperties": {
+        "type": "string"
+      },
       "description": "Custom properties for the alert."
     },
     "AlertList": {
@@ -687,7 +692,7 @@
               }
             ]
           },
-          "description": "The risk level of the threat that was detected. Possible Values: Informational, Low, Medium, and High. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-overview#how-are-alerts-classified."
+          "description": "The risk level of the threat that was detected. Learn more: https://docs.microsoft.com/en-us/azure/security-center/security-center-alerts-overview#how-are-alerts-classified."
         },
         "intent": {
           "readOnly": true,
@@ -842,7 +847,7 @@
               }
             ]
           },
-          "description": "The life cycle status of the alert. Supported statuses are: Active, Resolved, Dismissed."
+          "description": "The life cycle status of the alert."
         },
         "extendedLinks": {
           "readOnly": true,
@@ -955,7 +960,6 @@
     },
     "ResourceIdentifier": {
       "type": "object",
-      "additionalProperties": true,
       "description": "A resource identifier for an alert which can be used to direct the alert to the right product exposure group (tenant, workspace, subscription etc.).",
       "discriminator": "type",
       "required": [
