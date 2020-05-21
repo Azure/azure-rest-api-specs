@@ -2460,21 +2460,45 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply to the operation."
+            "description": "The filter to apply to the operation.",
+            "enum": [
+              "startswith(instanceView/statuses/code, 'PowerState') eq true",
+              "properties/latestModelApplied eq true",
+              "properties/latestModelApplied eq false"
+            ],
+            "x-ms-enum": {
+              "name": "FilterQueryOptions",
+              "modelAsString": false
+            }
           },
           {
             "name": "$select",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The list parameters."
+            "description": "The list parameters.",
+            "enum": [
+              "instanceView",
+              "instanceView/statuses"
+            ],
+            "x-ms-enum": {
+              "name": "SelectQueryOptions",
+              "modelAsString": false
+            }
           },
           {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The expand expression to apply to the operation."
+            "description": "The expand expression to apply to the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
