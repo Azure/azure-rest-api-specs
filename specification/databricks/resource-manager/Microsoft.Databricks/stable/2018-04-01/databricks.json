@@ -395,6 +395,9 @@
           "202": {
             "description": "Accepted - Returns this status until the asynchronous operation has completed."
           },
+          "204":{
+            "description": "NoContent"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -950,7 +953,8 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat",
+          "description": "List of properties for vNet Peering"
         },
         "name": {
           "type": "string",
@@ -1068,9 +1072,11 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SubResource"
+          "$ref": "#/definitions/SubResource",
+          "description":"Resource ID."
         }
-      }
+      },
+      "description": "Databricks virtual network."
     }
   },
   "parameters": {
