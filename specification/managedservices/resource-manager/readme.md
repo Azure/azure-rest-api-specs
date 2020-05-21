@@ -30,11 +30,11 @@ tag: package-preview-2020-02
 ```
 
 
-### Tag: package-preview-2020-02
+### Tag: package-2020-02-preview
 
-These settings apply only when `--tag=package-preview-2020-02` is specified on the command line.
+These settings apply only when `--tag=package-2020-02-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2020-02'
+```yaml $(tag) == 'package-2020-02-preview'
 input-file:
   - Microsoft.ManagedServices/preview/2020-02-01-preview/managedservices.json
 ```
