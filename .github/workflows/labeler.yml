@@ -9,7 +9,7 @@ name: Compute_Labeler
 on: [pull_request]
 
 jobs:
-  triage:
+  label:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,3 +17,6 @@ jobs:
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
         configuration-path: .github/labeler.yml
+    
+    - name: echo
+      run: echo Here
