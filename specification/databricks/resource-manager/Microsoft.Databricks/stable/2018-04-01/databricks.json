@@ -316,6 +316,148 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Databricks/workspaces/{workspaceName}/virtualNetworkPeerings/{peeringName}": {
+      "get": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_Get",
+        "description": "Gets the workspace vNet Peering.",
+        "x-ms-examples": {
+          "Get a workspace with ": {
+            "$ref": "./examples/WorkspaceVirtualNetPeeringGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "204": {
+            "description": "OK - NoContent"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_Delete",
+        "description": "Deletes the workspace vNetPeering.",
+        "x-ms-examples": {
+          "Delete a workspace": {
+            "$ref": "./examples/WorkspacevNetPeeringDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "vNetPeering"
+        ],
+        "operationId": "vNetPeering_CreateOrUpdate",
+        "description": "Creates vNet Peering for workspace.",
+        "x-ms-examples": {
+          "Create or update workspace": {
+            "$ref": "./examples/WorkspacevNetPeeringCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "VirtualNetworkPeeringParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            },
+            "description": "Parameters supplied to the create workspace vNet Peering."
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PeeringNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created - Returns information about the workspace vNet peering, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkPeering"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Databricks/operations": {
       "get": {
         "tags": [
@@ -788,6 +930,134 @@
           "description": "URL to get the next set of operation list results if there are any."
         }
       }
+    },
+    "VirtualNetworkPeering": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkPeeringPropertiesFormat"
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Name of the virtual network peering resource"
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated"
+        },
+        "location": {
+          "type": "string",
+          "required": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the virtual network peering resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "description": "Peerings in a VirtualNetwork resource"
+    },
+    "VirtualNetworkPeeringPropertiesFormat": {
+      "properties": {
+        "allowVirtualNetworkAccess": {
+          "type": "boolean",
+          "description": "Whether the VMs in the local virtual network space would be able to access the VMs in remote virtual network space."
+        },
+        "allowForwardedTraffic": {
+          "type": "boolean",
+          "description": "Whether the forwarded traffic from the VMs in the local virtual network will be allowed/disallowed in remote virtual network."
+        },
+        "allowGatewayTransit": {
+          "type": "boolean",
+          "description": "If gateway links can be used in remote virtual networking to link to this virtual network."
+        },
+        "useRemoteGateways": {
+          "type": "boolean",
+          "description": "If remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway."
+        },
+        "databricksVirtualNetwork": {
+          "$ref": "#/definitions/DatabricksVirtualNetwork",
+          "description": "The reference to the databricks virtual network. The remote virtual network can be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+        },
+        "remoteVirtualNetwork": {
+          "$ref": "#/definitions/SubResource",
+          "description": "The reference to the remote virtual network. The remote virtual network should be in the same region. See here to learn more (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering)."
+        },
+        "remoteAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference to the remote virtual network address space."
+        },
+        "databricksAddressSpace": {
+          "$ref": "#/definitions/AddressSpace",
+          "description": "The reference to the remote virtual network address space."
+        },
+        "peeringState": {
+          "type": "string",
+          "description": "The status of the virtual network peering.",
+          "enum": [
+            "Initiated",
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualNetworkPeeringState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the virtual network peering resource."
+        }
+      },
+      "description": "Properties of the virtual network peering."
+    },
+    "SubResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another subresource.",
+      "x-ms-azure-resource": true
+    },
+    "AddressSpace": {
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of address blocks reserved for this virtual network in CIDR notation."
+        }
+      },
+      "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
+    },
+    "DatabricksVirtualNetwork": {
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of address blocks reserved for this virtual network in CIDR notation."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SubResource"
+        }
+      }
     }
   },
   "parameters": {
@@ -824,6 +1094,14 @@
       "description": "The name of the workspace.",
       "minLength": 3,
       "maxLength": 64,
+      "x-ms-parameter-location": "method"
+    },
+    "PeeringNameParameter": {
+      "name": "peeringName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the workspace vNet peering.",
       "x-ms-parameter-location": "method"
     }
   }
