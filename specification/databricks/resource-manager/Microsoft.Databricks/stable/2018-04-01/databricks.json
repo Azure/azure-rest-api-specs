@@ -664,6 +664,21 @@
         "modelAsString": true
       }
     },
+    "PeeringProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "PeeringProvisioningState",
+        "modelAsString": true
+      }
+    },
     "WorkspaceCustomParameterType": {
       "description": "Provisioning status of the workspace.",
       "readOnly": true,
@@ -1016,7 +1031,7 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
+          "$ref": "#/definitions/PeeringProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
         }
       },
