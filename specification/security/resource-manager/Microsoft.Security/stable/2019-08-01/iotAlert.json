@@ -138,16 +138,16 @@
             "description": "IoT alert",
             "schema": {
               "$ref": "#/definitions/IotAlert"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
         }
+      }
     }
   },
   "definitions": {
@@ -174,11 +174,17 @@
     "CompactIotAlertProperties": {
       "type": "object",
       "required": [
+        "systemAlertId",
         "compromisedEntity",
         "alertType",
         "startTimeUtc"
       ],
       "properties": {
+        "systemAlertId": {
+          "readonly": true,
+          "type": "string",
+          "example": "903e76ff-17eb-4bac-ac8a-2bc31ab68fd8"
+        },
         "compromisedEntity": {
           "readOnly": true,
           "type": "string",
@@ -222,8 +228,7 @@
     },
     "IotAlertProperties": {
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [{
         "$ref": "#/definitions/CompactIotAlertProperties"
       }]
